@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suwanee Gamers — The World of Myrdae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <main>
+    <div class="card">
+      <div class="sigil">⚔</div>
+
+      <p class="tagline">The World of Myrdae · Year 1246 AF</p>
+      <h1>Suwanee Gamers</h1>
+      <p class="subtitle">
+        Eight campaigns. Four Dungeon Masters. One living world.<br />
+        Step into <em>Myrdae</em> — The Awakening has begun.
+      </p>
+
+      <!-- CLOUDFLARE_URL_PLACEHOLDER is replaced by GitHub Actions -->
+      <a href="CLOUDFLARE_URL_PLACEHOLDER" class="cta" id="enter-btn">
+        Enter the Realm →
+      </a>
+
+      <p class="note">
+        Hosted locally via Cloudflare Tunnel · Calendar powered by Google Calendar
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <span>⚔️</span>
+          <span>8 Active Campaigns</span>
+        </div>
+        <div class="feature">
+          <span>⚗️</span>
+          <span>28-God Pantheon</span>
+        </div>
+        <div class="feature">
+          <span>🗺️</span>
+          <span>40+ Territories</span>
+        </div>
+        <div class="feature">
+          <span>🔮</span>
+          <span>Shared Calendar</span>
+        </div>
+        <div class="feature">
+          <span>📜</span>
+          <span>Legends &amp; Lore</span>
+        </div>
+        <div class="feature">
+          <span>📅</span>
+          <span>Full History Timeline</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Generate star field
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      container.appendChild(star);
+    }
+
+    // Fallback if Cloudflare URL is not set
+    const btn = document.getElementById('enter-btn');
+    if (btn && btn.href.includes('CLOUDFLARE_URL_PLACEHOLDER')) {
+      btn.href = '#';
+      btn.textContent = 'Site launching soon...';
+      btn.style.opacity = '0.5';
+      btn.style.cursor = 'default';
+    }
+  </script>
+</body>
+</html>

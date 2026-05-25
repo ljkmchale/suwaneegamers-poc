@@ -1,0 +1,17 @@
+{
+  "name": "suwaneegamers-poc",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "images:prepare": "node scripts/prepare-images.mjs",
+    "lint": "pnpm --filter web lint",
+    "typecheck": "pnpm --filter web typecheck",
+    "test": "pnpm --filter web test"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

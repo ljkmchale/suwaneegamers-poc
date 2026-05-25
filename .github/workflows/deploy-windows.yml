@@ -1,0 +1,25 @@
+name: Deploy to Windows
+
+on:
+  push:
+    branches: [main]
+
+# Only run after CI passes
+jobs:
+  deploy:
+    name: SSH Deploy to Windows Machine
+    runs-on: ubuntu-latest
+    needs: []  # Remove this when ci.yml is wired as a workflow dependency
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.WINDOWS_HOST }}
+          username: ${{ secrets.WINDOWS_USER }}
+          key: ${{ secrets.WINDOWS_SSH_KEY }}
+          port: ${{ secrets.WINDOWS_SSH_PORT || 22 }}
+          script_stop: true
+          script: |
+            cd C:/apps/suwaneegamers
+            powershell -NoProfile -ExecutionPolicy Bypass -File scripts/deploy-windows.ps1
