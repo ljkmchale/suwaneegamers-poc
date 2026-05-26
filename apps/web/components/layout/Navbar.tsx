@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Shield } from "lucide-react";
 import type { NavItem } from "@/lib/nav";
 
 interface NavProps {
@@ -141,6 +142,19 @@ export function Navbar({ primaryNav, worldNav, toolsNav }: NavProps) {
               </Link>
             );
           })}
+
+          <Link
+            href="/admin/login"
+            aria-label="Admin login"
+            title="Admin login"
+            className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
+            style={{
+              borderColor: isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-bg-border)",
+              color: isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
+            }}
+          >
+            <Shield size={17} strokeWidth={2} aria-hidden="true" />
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -204,6 +218,19 @@ export function Navbar({ primaryNav, worldNav, toolsNav }: NavProps) {
                 </Link>
               );
             })}
+            <Link
+              href="/admin/login"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2.5 rounded font-cinzel text-xs tracking-wider uppercase"
+              style={{
+                color: isActive("/admin")
+                  ? "var(--color-accent-gold)"
+                  : "var(--color-text-secondary)",
+              }}
+            >
+              <Shield size={16} strokeWidth={2} aria-hidden="true" />
+              Admin
+            </Link>
           </div>
         </div>
       )}
