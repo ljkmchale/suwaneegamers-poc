@@ -1,0 +1,21 @@
+{
+  "colors": {
+    "--color-bg-deep": "#08050f",
+    "--color-bg-surface": "#0f0a1a",
+    "--color-bg-card": "#16161e",
+    "--color-bg-border": "#2a2a35",
+    "--color-text-primary": "#e8dfc8",
+    "--color-text-secondary": "#a89880",
+    "--color-text-muted": "#5a5060",
+    "--color-accent-arcane": "#8b5cf6",
+    "--color-accent-gold": "#f59e0b",
+    "--color-accent-blood": "#ef4444",
+    "--color-accent-ice": "#93c5fd"
+  },
+  "fonts": {
+    "heading": "Cinzel",
+    "body": "Lora"
+  },
+  "siteName": "Suwanee Gamers",
+  "siteTagline": "The World of Myrdae"
+}

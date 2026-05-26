@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
 import { findNextCampaignEvent, listedCampaigns, sideCampaigns } from "@/lib/campaigns";
+// listedCampaigns and sideCampaigns are now functions — call them inside the component
 
 export const metadata: Metadata = {
   title: "Campaigns",
@@ -33,6 +34,8 @@ function formatEventDate(event: ReturnType<typeof findNextCampaignEvent>) {
 
 export default async function CampaignsPage() {
   const events = await fetchUpcomingCalendarEvents(50).catch(() => []);
+  const listed = listedCampaigns();
+  const side = sideCampaigns();
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
@@ -52,7 +55,7 @@ export default async function CampaignsPage() {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-        {listedCampaigns.map((campaign) => {
+        {listed.map((campaign) => {
           const nextEvent = findNextCampaignEvent(campaign, events);
           const nextDate = formatEventDate(nextEvent);
 
@@ -120,7 +123,7 @@ export default async function CampaignsPage() {
         })}
       </div>
 
-      {sideCampaigns.length > 0 && (
+      {side.length > 0 && (
         <section className="mt-10">
           <p
             className="font-cinzel text-xs tracking-[0.35em] uppercase mb-4"
@@ -129,7 +132,7 @@ export default async function CampaignsPage() {
             Other Campaign Tools
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {sideCampaigns.map((campaign) => (
+            {side.map((campaign) => (
               <Link key={campaign.id} href={`/campaigns/${campaign.id}`} className="fantasy-card block group overflow-hidden">
                 {campaign.headerImage && (
                   <div

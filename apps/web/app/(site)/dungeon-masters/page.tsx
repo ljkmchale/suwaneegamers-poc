@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import {
   campaignsForDm,
-  dungeonMasters,
+  getDungeonMasters,
   dungeonMastersReferenceUrl,
 } from "@/lib/dungeonMasters";
 import { PORTAL_URLS } from "@/lib/portal";
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function DungeonMastersPage() {
+  const dungeonMasters = getDungeonMasters();
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
       <div className="art-bg-copper fixed inset-0 z-0" aria-hidden="true" />

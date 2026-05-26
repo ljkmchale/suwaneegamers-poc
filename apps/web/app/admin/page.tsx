@@ -1,0 +1,34 @@
+import Link from "next/link";
+
+const SECTIONS = [
+  { href: "/admin/campaigns", title: "Campaigns", desc: "Add, edit, reorder, or delete campaigns." },
+  { href: "/admin/players", title: "Players", desc: "Manage player profiles and portraits." },
+  { href: "/admin/dungeon-masters", title: "Dungeon Masters", desc: "Edit DM bios and campaign assignments." },
+  { href: "/admin/bestiary", title: "Bestiary", desc: "Add or remove creatures." },
+  { href: "/admin/appearance", title: "Appearance", desc: "Change colors, fonts, and site name." },
+  { href: "/admin/media", title: "Media", desc: "Upload images and browse the media library." },
+];
+
+export default function AdminDashboard() {
+  return (
+    <div>
+      <h1 className="font-cinzel text-3xl tracking-widest uppercase mb-2">Dashboard</h1>
+      <p className="text-sm text-[#a89880] mb-10">What would you like to update?</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {SECTIONS.map((s) => (
+          <Link
+            key={s.href}
+            href={s.href}
+            className="block p-6 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] hover:border-[#8b5cf6] transition-colors group"
+          >
+            <h2 className="font-cinzel text-lg tracking-widest uppercase mb-2 group-hover:text-[#f59e0b] transition-colors">
+              {s.title}
+            </h2>
+            <p className="text-sm text-[#a89880]">{s.desc}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}

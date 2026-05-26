@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 export const PORTAL_URLS = {
   knowledgeBase: "http://kb.suwaneegamers.net",
   referenceSite: "https://sites.google.com/view/suwanee-gamers/",
@@ -13,32 +16,17 @@ export interface PortalLink {
   label?: string;
 }
 
-export const primaryPortalLinks: PortalLink[] = [
-  {
-    title: "Knowledge Base",
-    description: "Canonical Myrdae lore, campaign notes, world reference, and table knowledge.",
-    href: PORTAL_URLS.knowledgeBase,
-    label: "Open KB",
-  },
-  {
-    title: "Calendar",
-    description: "Live shared Google Calendar for upcoming sessions and table events.",
-    href: PORTAL_URLS.calendar,
-    label: "View Calendar",
-  },
-  {
-    title: "D&D Beyond",
-    description: "Campaign tools, character sheets, rules, and player resources.",
-    href: PORTAL_URLS.dndBeyond,
-    label: "Open D&D Beyond",
-  },
-  {
-    title: "Original Google Site",
-    description: "The legacy Suwanee Gamers site this portal is modeled after.",
-    href: PORTAL_URLS.referenceSite,
-    label: "Open Reference",
-  },
-];
+function contentPath(filename: string) {
+  return path.join(process.cwd(), "../../content", filename);
+}
+
+export function getPortalLinks(): PortalLink[] {
+  const raw = fs.readFileSync(contentPath("portal-links.json"), "utf-8");
+  return JSON.parse(raw) as PortalLink[];
+}
+
+// backward-compat
+export const primaryPortalLinks: PortalLink[] = getPortalLinks();
 
 export function kbLink(description: string): PortalLink {
   return {

@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { HeroSection } from "@/components/fantasy/HeroSection";
 import { ScrollReveal } from "@/components/fantasy/ScrollReveal";
-import { primaryPortalLinks } from "@/lib/portal";
+import { getPortalLinks } from "@/lib/portal";
 
 export default function HomePage() {
+  const primaryPortalLinks = getPortalLinks();
   return (
     <>
       <HeroSection />
@@ -72,9 +74,11 @@ export default function HomePage() {
                     { name: "Sean Poole", role: "Co-Founder", img: "/images/sean-poole.png" },
                   ].map((founder) => (
                     <div key={founder.name} className="flex flex-col items-center gap-2">
-                      <img
+                      <Image
                         src={founder.img}
                         alt={founder.name}
+                        width={80}
+                        height={80}
                         className="w-20 h-20 rounded-full object-cover object-top"
                         style={{ border: "2px solid var(--color-accent-gold)" }}
                       />

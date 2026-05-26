@@ -1,0 +1,73 @@
+[
+  {
+    "id": "chip-poole",
+    "name": "Chip Poole",
+    "focus": "Long-form Myrdae campaigns and classic table adventure.",
+    "description": "Chip is one of the main active DMs for the table, currently carrying multiple Myrdae campaigns and several older arcs from the archive.",
+    "portrait": "/images/generated/chip-poole-card.webp",
+    "activeCampaignIds": ["a-new-adventure", "heroes-of-emberstran"],
+    "previousCampaigns": [
+      { "name": "Beer & Dice", "status": "Completed" },
+      { "name": "Imminent Domain", "status": "On Hiatus" },
+      { "name": "Obliged Corpses", "status": "On Hiatus" }
+    ]
+  },
+  {
+    "id": "sean-poole",
+    "name": "Sean Poole",
+    "focus": "High-stakes active campaigns with sharp danger and momentum.",
+    "description": "Sean currently runs two active campaigns on the reference site, with one completed campaign in the older archive.",
+    "portrait": "/images/generated/sean-poole-card.webp",
+    "activeCampaignIds": ["bloody-endeavor", "souls-of-destiny"],
+    "previousCampaigns": [
+      { "name": "Call for Heroes", "status": "Completed" }
+    ]
+  },
+  {
+    "id": "lesley-poole",
+    "name": "Lesley Poole",
+    "focus": "Dungeon-forward play, society stories, and completed table arcs.",
+    "description": "Lesley runs an active Monday campaign and has several completed campaigns listed in the previous-campaign archive.",
+    "portrait": "/images/generated/lesley-poole-card.webp",
+    "activeCampaignIds": ["dungeons-iii"],
+    "previousCampaigns": [
+      { "name": "Legends of Larch", "status": "Completed" },
+      { "name": "MEAD Society", "status": "Completed" },
+      { "name": "The Company", "status": "Completed" }
+    ]
+  },
+  {
+    "id": "michael-hewson",
+    "name": "Michael Hewson",
+    "focus": "Arcane mysteries, covert operations, and strange threats.",
+    "description": "Michael currently hosts two active campaigns and has a Middle Earth campaign listed in the archive.",
+    "portrait": "/images/generated/michael-hewson-card.webp",
+    "activeCampaignIds": ["mad-mage", "the-silent-vanguard"],
+    "previousCampaigns": [
+      { "name": "Middle Earth", "status": "On Hiatus" }
+    ]
+  },
+  {
+    "id": "larry-mchale",
+    "name": "Larry McHale",
+    "focus": "Archived campaign work and portal stewardship.",
+    "description": "Larry is represented in the previous-campaign archive and helps steer this portal toward the shared table resources.",
+    "portrait": "/images/generated/larry-mchale-card.webp",
+    "activeCampaignIds": [],
+    "previousCampaigns": [
+      { "name": "Crystal Bottle", "status": "On Hiatus" }
+    ]
+  },
+  {
+    "id": "chris-glynn",
+    "name": "Chris Glynn",
+    "focus": "Completed published-adventure campaigns.",
+    "description": "Chris has completed campaign history on the reference site, including major D&D adventure paths from the archive.",
+    "portrait": "/images/generated/chris-glynn-card.webp",
+    "activeCampaignIds": [],
+    "previousCampaigns": [
+      { "name": "Strahd / Avernus", "status": "Completed" },
+      { "name": "Storm King's Thunder", "status": "Completed" }
+    ]
+  }
+]

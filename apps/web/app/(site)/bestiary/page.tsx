@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
@@ -9,81 +11,20 @@ export const metadata: Metadata = {
 
 const legacyBestiaryUrl = "https://sites.google.com/view/suwanee-gamers/bestiary";
 
-const creatures = [
-  {
-    name: "Bulas",
-    type: "Beast",
-    image: "/images/bestiary/bulas.webp",
-    href: "https://www.dndbeyond.com/monsters/3189649-bulas",
-  },
-  {
-    name: "Chalyth",
-    type: "Monstrosity",
-    image: "/images/bestiary/chalyth.webp",
-  },
-  {
-    name: "Dralg",
-    type: "Beast",
-    image: "/images/bestiary/dralg.webp",
-    href: "https://www.dndbeyond.com/monsters/5643480-dralg",
-  },
-  {
-    name: "Genling",
-    type: "Fey",
-    image: "/images/bestiary/genling.webp",
-    href: "https://www.dndbeyond.com/monsters/6091146-genling-minion",
-  },
-  {
-    name: "Gertot",
-    type: "Beast",
-    image: "/images/bestiary/gertot.webp",
-    href: "https://www.dndbeyond.com/monsters/5643255-gertot",
-  },
-  {
-    name: "Giant Solifugid",
-    type: "Beast",
-    image: "/images/bestiary/giant-solifugid.webp",
-    href: "https://www.dndbeyond.com/monsters/786433-giant-solifugid",
-  },
-  {
-    name: "Kahlbit",
-    type: "Beast",
-    image: "/images/bestiary/kahlbit.webp",
-    href: "https://www.dndbeyond.com/monsters/5644021-kahlbit",
-  },
-  {
-    name: "Leatherback",
-    type: "Beast",
-    image: "/images/bestiary/leatherback.webp",
-    href: "https://www.dndbeyond.com/monsters/5643954-leatherback",
-  },
-  {
-    name: "Narūn",
-    type: "Monstrosity",
-    image: "/images/bestiary/narun.webp",
-    href: "https://www.dndbeyond.com/monsters/5643577-nahrun",
-  },
-  {
-    name: "Rongri",
-    type: "Beast",
-    image: "/images/bestiary/rongri.webp",
-    href: "https://www.dndbeyond.com/monsters/5643304-rongri",
-  },
-  {
-    name: "Saber",
-    type: "Beast",
-    image: "/images/bestiary/saber.webp",
-    href: "https://www.dndbeyond.com/monsters/442843-saber",
-  },
-  {
-    name: "Thall Mound",
-    type: "Beast",
-    image: "/images/bestiary/thall-mound.webp",
-    href: "https://www.dndbeyond.com/monsters/6216332-thall-mound",
-  },
-];
+interface Creature {
+  name: string;
+  type: string;
+  image: string;
+  href?: string;
+}
+
+function getCreatures(): Creature[] {
+  const filePath = path.join(process.cwd(), "../../content/bestiary.json");
+  return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Creature[];
+}
 
 export default function BestiaryPage() {
+  const creatures = getCreatures();
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
       <header className="mb-14 text-center">
