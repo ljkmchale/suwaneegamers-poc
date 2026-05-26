@@ -8,6 +8,7 @@ const PRIMARY_NAV = [
   { href: "/calendar", label: "Calendar" },
   { href: "/campaigns", label: "Campaigns" },
   { href: "/dungeon-masters", label: "DMs" },
+  { href: "/players", label: "Players" },
 ];
 
 const WORLD_NAV = [

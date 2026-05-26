@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
@@ -122,14 +123,14 @@ export default async function CampaignDetailPage({ params }: Props) {
           <div className="flex flex-wrap gap-3">
             {(campaign.resources ?? []).map((resource) => (
               <a
-                key={resource}
-                href={campaign.referenceUrl}
+                key={resource.url}
+                href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-md border font-cinzel text-xs tracking-widest uppercase transition-colors hover:border-amber-400"
                 style={{ borderColor: "var(--color-bg-border)", color: "var(--color-accent-gold)" }}
               >
-                {resource}
+                {resource.label}
               </a>
             ))}
             <a
@@ -154,16 +155,36 @@ export default async function CampaignDetailPage({ params }: Props) {
           {campaign.party && campaign.party.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {campaign.party.map((member) => (
-                <a
-                  key={member}
-                  href={campaign.referenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-md border px-3 py-2 text-sm transition-colors hover:border-amber-400"
-                  style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
-                >
-                  {member}
-                </a>
+                member.url ? (
+                  <a
+                    key={member.name}
+                    href={member.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md border px-3 py-2 text-sm transition-colors hover:border-amber-400"
+                    style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
+                  >
+                    <span className="block">{member.name}</span>
+                    {member.player && (
+                      <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>
+                        {member.player}
+                      </span>
+                    )}
+                  </a>
+                ) : (
+                  <span
+                    key={member.name}
+                    className="rounded-md border px-3 py-2 text-sm"
+                    style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-muted)" }}
+                  >
+                    <span className="block">{member.name}</span>
+                    {member.player && (
+                      <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>
+                        {member.player}
+                      </span>
+                    )}
+                  </span>
+                )
               ))}
             </div>
           )}
@@ -186,6 +207,33 @@ export default async function CampaignDetailPage({ params }: Props) {
                   <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                     {session.summary}
                   </p>
+                  {session.audioLinks && session.audioLinks.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {session.audioLinks.map((audioLink) => (
+                        <a
+                          key={audioLink.url}
+                          href={audioLink.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${audioLink.label} for ${session.title}`}
+                          title={audioLink.label}
+                          className="inline-flex h-14 w-14 items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400"
+                          style={{
+                            borderColor: "var(--color-bg-border)",
+                            boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)",
+                          }}
+                        >
+                          <Image
+                            src="/images/dragon-ears.png"
+                            alt=""
+                            width={44}
+                            height={44}
+                            className="h-full w-full rounded-full object-contain"
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </article>
               ))}
             </div>

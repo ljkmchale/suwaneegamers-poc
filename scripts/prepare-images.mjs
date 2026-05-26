@@ -24,6 +24,11 @@ const jobs = [
     presets: backgroundPresets,
   },
   {
+    name: "copper-dragon",
+    source: "copper-dragon.png",
+    presets: backgroundPresets,
+  },
+  {
     name: "chip-poole",
     source: "chip-poole.png",
     presets: [{ suffix: "card", width: 1440, height: 720, mode: "cover-crop", focusY: 0.36 }],

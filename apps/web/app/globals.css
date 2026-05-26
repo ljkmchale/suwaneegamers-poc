@@ -182,7 +182,8 @@ body {
 /* ── Responsive Art Backgrounds ─────────────────────────── */
 
 .art-bg-bronze,
-.art-bg-silver {
+.art-bg-silver,
+.art-bg-copper {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -196,6 +197,12 @@ body {
   background-image: url("/images/generated/silver-dragon-desktop.webp");
 }
 
+.art-bg-copper {
+  background-image: url("/images/generated/copper-dragon-desktop.webp");
+  background-color: #05030a;
+  background-size: contain;
+}
+
 @media (min-aspect-ratio: 2 / 1) {
   .art-bg-bronze {
     background-image: url("/images/generated/bronze-dragon-wide.webp");
@@ -203,6 +210,10 @@ body {
 
   .art-bg-silver {
     background-image: url("/images/generated/silver-dragon-wide.webp");
+  }
+
+  .art-bg-copper {
+    background-image: url("/images/generated/copper-dragon-wide.webp");
   }
 }
 
@@ -213,6 +224,10 @@ body {
 
   .art-bg-silver {
     background-image: url("/images/generated/silver-dragon-portrait.webp");
+  }
+
+  .art-bg-copper {
+    background-image: url("/images/generated/copper-dragon-portrait.webp");
   }
 }
 

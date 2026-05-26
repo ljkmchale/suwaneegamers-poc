@@ -14,8 +14,17 @@ export const metadata: Metadata = {
 
 export default function DungeonMastersPage() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      <header className="mb-14 text-center">
+    <div className="relative min-h-screen overflow-hidden bg-black">
+      <div className="art-bg-copper fixed inset-0 z-0" aria-hidden="true" />
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(8,5,15,0.78) 0%, rgba(8,5,15,0.68) 36%, rgba(8,5,15,0.92) 100%), linear-gradient(90deg, rgba(8,5,15,0.42), rgba(8,5,15,0.2), rgba(8,5,15,0.52))",
+        }}
+      />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+        <header className="mb-14 text-center">
         <p
           className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
           style={{ color: "var(--color-accent-arcane)" }}
@@ -49,9 +58,9 @@ export default function DungeonMastersPage() {
             Knowledge Base
           </a>
         </div>
-      </header>
+        </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {dungeonMasters.map((profile) => {
           const active = campaignsForDm(profile);
 
@@ -166,6 +175,7 @@ export default function DungeonMastersPage() {
             </article>
           );
         })}
+        </div>
       </div>
     </div>
   );
