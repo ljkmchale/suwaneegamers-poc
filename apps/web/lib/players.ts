@@ -5,6 +5,7 @@ export interface PlayerProfileSeed {
   id: string;
   name: string;
   description: string;
+  portrait?: string;
 }
 
 export interface PlayerCharacterAssignment {
@@ -35,19 +36,74 @@ export const playerProfileSeeds: PlayerProfileSeed[] = [
     description: "Suwanee Gamers player and Dungeon Master with a focus on active table play and campaign continuity.",
   },
   {
-    id: "josh",
-    name: "Josh",
+    id: "joshua-john",
+    name: "Joshua John",
     description: "Suwanee Gamers player with an active character in the Heroes of Emberstran campaign.",
   },
   {
-    id: "emma",
-    name: "Emma",
+    id: "emma-cooper",
+    name: "Emma Cooper",
     description: "Suwanee Gamers player with an active character in the Heroes of Emberstran campaign.",
+    portrait: "/images/emma-cooper-clean.webp",
   },
   {
-    id: "ty",
-    name: "Ty",
+    id: "ty-cooper",
+    name: "Ty Cooper",
     description: "Suwanee Gamers player with an active character in the Heroes of Emberstran campaign.",
+    portrait: "/images/ty-cooper-clean.webp",
+  },
+  {
+    id: "chip-poole",
+    name: "Chip Poole",
+    description: "Suwanee Gamers player and Dungeon Master with active stories on both sides of the screen.",
+  },
+  {
+    id: "brian",
+    name: "Brian",
+    description: "Suwanee Gamers player with active character information in the portal.",
+  },
+  {
+    id: "cooper",
+    name: "Cooper",
+    description: "Suwanee Gamers player with active character information in the portal.",
+  },
+  {
+    id: "chuck",
+    name: "Chuck",
+    description: "Suwanee Gamers player with active character information in the portal.",
+  },
+  {
+    id: "suzanne-chernetsky",
+    name: "Suzanne Chernetsky",
+    description: "Suwanee Gamers player with active character information in the portal.",
+  },
+  {
+    id: "jenny-mchale",
+    name: "Jenny McHale",
+    description: "Suwanee Gamers player with active character information in the portal.",
+    portrait: "/images/jenny-mchale-profile-v2.webp",
+  },
+  {
+    id: "mike-brown",
+    name: "Mike Brown",
+    description: "Suwanee Gamers player with active character information in the portal.",
+    portrait: "/images/mike-brown-clean.webp",
+  },
+  {
+    id: "michael-hewson",
+    name: "Michael Hewson",
+    description: "Suwanee Gamers player and Dungeon Master with active stories on both sides of the screen.",
+  },
+  {
+    id: "tom-chernetsky",
+    name: "Tom Chernetsky",
+    description: "Suwanee Gamers player with an active character in the Dungeons III campaign.",
+    portrait: "/images/tom-chernetsky-profile-v3.webp",
+  },
+  {
+    id: "tiffany-mulvihill",
+    name: "Tiffany Mulvihill",
+    description: "Suwanee Gamers player with active character information in the portal.",
   },
 ];
 
@@ -74,7 +130,7 @@ export function getPlayerProfiles(): PlayerProfile[] {
       return {
         ...seed,
         dmProfileId: dmProfile?.id,
-        portrait: dmProfile?.portrait,
+        portrait: seed.portrait ?? dmProfile?.portrait,
         assignments: assignmentsForPlayer(seed.name),
       };
     })

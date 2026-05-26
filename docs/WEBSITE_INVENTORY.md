@@ -1,10 +1,10 @@
 # Suwanee Gamers Website Inventory
 
-Last reviewed: 2026-05-24
+Last reviewed: 2026-05-26
 
 ## What This Website Is
 
-Suwanee Gamers is now a lightweight portal for the table. It does not own campaign canon, lore, characters, sessions, or world data. The Google Site at `https://sites.google.com/view/suwanee-gamers/` is the reference source for portal structure and campaign roster details. The Knowledge Base at `http://kb.suwaneegamers.net` is the destination for deeper table material.
+Suwanee Gamers is now a lightweight portal for the table. It does not own campaign canon, lore, characters, sessions, or world data. The old Google Site at `https://sites.google.com/view/suwanee-gamers/home` is the migration/reference source for portal structure, campaign roster details, and any remaining information that still needs to be carried forward. The Knowledge Base at `http://kb.suwaneegamers.net` is the destination for deeper table material.
 
 The portal should focus on:
 
@@ -15,10 +15,16 @@ The portal should focus on:
 
 ## Source Rules
 
-- Reference site for portal structure and campaign information: `https://sites.google.com/view/suwanee-gamers/`.
+- Old Google Site source for portal structure and campaign information: `https://sites.google.com/view/suwanee-gamers/home`.
 - Knowledge Base destination for deeper Myrdae and campaign material: `http://kb.suwaneegamers.net`.
 - Calendar source: `g3kgagicusaol82fqhjc62o47o@group.calendar.google.com`.
 - If these disagree, verify with the user or the reference site before changing campaign-facing copy.
+
+## Migration Source Tracker
+
+- Legacy site home: `https://sites.google.com/view/suwanee-gamers/home`
+- Use this as the first stop when continuing migration of public-facing table information into the new portal or the Knowledge Base.
+- Preserve the old site's campaign names, DM labels, schedules, resource links, and page relationships unless a newer source supersedes them.
 
 ## Technology Stack
 

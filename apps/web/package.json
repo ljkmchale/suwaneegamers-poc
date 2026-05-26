@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4652",
     "build": "next build",
-    "start": "node .next/standalone/apps/web/server.js",
+    "start": "next start -p 4652",
     "lint": "eslint app components lib __tests__",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

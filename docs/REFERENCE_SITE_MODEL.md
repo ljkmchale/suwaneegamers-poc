@@ -1,12 +1,12 @@
 # Reference Site Model
 
-Reference: https://sites.google.com/view/suwanee-gamers/
+Reference: https://sites.google.com/view/suwanee-gamers/home
 
-Reviewed: 2026-05-24
+Reviewed: 2026-05-26
 
 ## Source Rules
 
-Use the Google Site as the reference source for portal structure, campaign roster details, campaign page links, DM/schedule labels, and public-facing campaign summaries. Do not invent local campaign facts when they can be checked against the reference site.
+Use the old Google Site as the reference source for portal structure, campaign roster details, campaign page links, DM/schedule labels, and public-facing campaign summaries. Do not invent local campaign facts when they can be checked against the reference site.
 
 The Knowledge Base at `http://kb.suwaneegamers.net` remains the destination for deeper table material, but this repo should model portal pages from the Google Site unless the user gives a newer source.
 

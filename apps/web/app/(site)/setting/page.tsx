@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import { PortalPage } from "@/components/portal/PortalPage";
-import { kbLink, PORTAL_URLS } from "@/lib/portal";
 
 export const metadata: Metadata = {
   title: "Setting",
-  description: "Portal link to the canonical Myrdae setting in the Knowledge Base.",
+  description: "Portal link to the canonical Myrdae setting guide.",
 };
+
+const settingGuideUrl =
+  "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.xpbfs6nn72lr";
 
 export default function SettingPage() {
   return (
     <PortalPage
-      eyebrow="Knowledge Base"
+      eyebrow="Setting Guide"
       title="Myrdae Setting"
-      description="The setting guide, campaign canon, and world rules belong in the Knowledge Base so this portal stays current by linking out."
+      description="The setting guide, campaign canon, and world rules are maintained in the shared Google Doc."
       links={[
-        kbLink("Open the canonical Myrdae setting guide and campaign world information."),
         {
-          title: "Original Google Site",
-          description: "Open the legacy setting pages for reference while the portal is modeled after it.",
-          href: PORTAL_URLS.referenceSite,
-          label: "Open Reference",
+          title: "Myrdae Setting Guide",
+          description: "Open the canonical setting guide at the linked Google Doc heading.",
+          href: settingGuideUrl,
+          label: "Open Setting",
         },
       ]}
     />

@@ -55,26 +55,32 @@ export const activeCampaigns: PortalCampaign[] = [
     party: [
       {
         name: "Az'efal",
+        player: "Lesley Poole",
         url: "https://docs.google.com/document/d/1kburKCjnLS6VlsVC5XFofHz9R0-Y4R8fMz2jLYm0BkY/edit?usp=sharing",
       },
       {
         name: "Cerul",
+        player: "Ty Cooper",
         url: "https://docs.google.com/document/d/18FBABoectfjBxQe_6K8MiZcsCXGZh813t0OgmQcbKNA/edit?usp=sharing",
       },
       {
         name: "Fungus",
+        player: "Michael Hewson",
         url: "https://docs.google.com/document/d/1NDSp93C2swjcV6Rpv2ZSKHoAZ4J-eK1u-tczKZenxTA/edit?usp=sharing",
       },
       {
         name: "Kaizo",
+        player: "Mike Brown",
         url: "https://docs.google.com/document/d/1kozh5hOYRd5ApSPB1DFp7gEFYZLrGsjSHLq4omFtmJY/edit?usp=sharing",
       },
       {
         name: "Relys",
+        player: "Emma Cooper",
         url: "https://docs.google.com/document/d/1YM-U02s7UbpzayjDBhqQB457UGJa3ZE9tdYjLozW1RI/edit?usp=sharing",
       },
       {
         name: "Ridley",
+        player: "Sean Poole",
         url: "https://docs.google.com/document/d/1e3QV4PMuvHoRmekDrxHoK3Mtb2Pn9CuadgbqYYIdRpo/edit?usp=sharing",
       },
     ],
@@ -111,22 +117,27 @@ export const activeCampaigns: PortalCampaign[] = [
     party: [
       {
         name: "Albross",
+        player: "Cooper",
         url: "https://docs.google.com/document/d/1xqtDhGCfYguIbyshrq4hSeWWAXyJ0Wn97HZN8XB98H8/edit?usp=sharing",
       },
       {
         name: "Caelion",
+        player: "Chuck",
         url: "https://docs.google.com/document/d/12twa_3rl1OwfHDRRLnyM-sz7ORIrYaKh_QFl7X4KmSU/edit?usp=sharing",
       },
       {
         name: "Lucerion",
+        player: "Chip Poole",
         url: "https://docs.google.com/document/d/17KDAa35lIJwZC0oa6sdeMdxlYX5LHJtP3SSALaCCHbU/edit?usp=sharing",
       },
       {
         name: "Pagern",
+        player: "Tom Chernetsky",
         url: "https://docs.google.com/document/d/1VqlRScjSZSjP3C6v3p0QbOoDomv5I40Am_wiDU9NRgY/edit?usp=sharing",
       },
       {
         name: "Rhody",
+        player: "Joshua John",
         url: "https://docs.google.com/document/d/1mCHEm2bJKCON2p9dyHFfzha71KQJFCBgUURIJCMhcA0/edit?usp=sharing",
       },
     ],
@@ -192,26 +203,32 @@ export const activeCampaigns: PortalCampaign[] = [
     party: [
       {
         name: "Æon",
+        player: "Tom Chernetsky",
         url: "https://docs.google.com/document/d/16U0_RGIBSInZw2uU4O8KYKK5hPEb1iYrf4aHuCsCEPA/edit?usp=sharing",
       },
       {
         name: "Draelith",
+        player: "Chip Poole",
         url: "https://docs.google.com/document/d/13F8xXVrT9aN8jpxkZpaCQnkj3Iq3GwBDAlGPzwk9N3E/edit?usp=sharing",
       },
       {
         name: "Meles",
+        player: "Brian",
         url: "https://docs.google.com/document/d/142gB5WN2RIngcBlkmMek7I8RE0BeCdx_LFigikr2w1g/edit?usp=sharing",
       },
       {
         name: "Nixie",
+        player: "Chuck",
         url: "https://docs.google.com/document/d/1qozqNlJ3G2WD2IMmqVu7G-0Yd4rDgUT9R_97gi0YeRk/edit?usp=sharing",
       },
       {
         name: "Nova",
+        player: "Tiffany Mulvihill",
         url: "https://docs.google.com/document/d/17vSLJWvhIfpVY5NUt7Uj74WOytEexALbrfg-wxcUGRo/edit?usp=sharing",
       },
       {
         name: "Seraphine",
+        player: "Suzanne Chernetsky",
         url: "https://docs.google.com/document/d/1ZJjqP1e1GR_x9ZrSQ-wwcz0Hfg068Bdfdewr57Ud6pg/edit?usp=sharing",
       },
     ],
@@ -258,7 +275,7 @@ export const activeCampaigns: PortalCampaign[] = [
       },
       {
         name: "Hap",
-        player: "Ty",
+        player: "Ty Cooper",
         url: "https://docs.google.com/document/d/14vp5ODlvd9dJ-wpwRg5QYxgClq1wjp5TcEXGg4yytvs/edit?usp=sharing",
       },
       {
@@ -268,12 +285,12 @@ export const activeCampaigns: PortalCampaign[] = [
       },
       {
         name: "Og",
-        player: "Josh",
+        player: "Joshua John",
         url: "https://docs.google.com/document/d/1tnPfOKPbgomZqJoHRQwJaMO4lqknMVvWq6enxJMJoNw/edit?usp=sharing",
       },
       {
         name: "Zymve",
-        player: "Emma",
+        player: "Emma Cooper",
         url: "https://docs.google.com/document/d/1vmNQB0KDk1wdz_wiPTdqPyjaDIKMLmJM1x7urwJZlSU/edit?usp=sharing",
       },
     ],
@@ -336,26 +353,32 @@ export const activeCampaigns: PortalCampaign[] = [
     party: [
       {
         name: "Escanor",
+        player: "Brian",
         url: "https://docs.google.com/document/d/10QDbe0u0oDsCw0FmQuasZQqhyYzhurIZ7gPfmoeaL3s/edit?usp=sharing",
       },
       {
         name: "Therric",
+        player: "Chip Poole",
         url: "https://docs.google.com/document/d/1RuMwE9EGAeeub_cX68CJxDQJyZS7Ii7A0D-KK6Rm-8I/edit?usp=sharing",
       },
       {
         name: "Zephyra",
+        player: "Jenny McHale",
         url: "https://docs.google.com/document/d/1WT_YH4B-vifhEie6ZC-XiqqWK_fZEj-RCFVWa8L1c54/edit?usp=sharing",
       },
       {
-        name: "Lawrence",
+        name: "Kenton",
+        player: "Larry McHale",
         url: "https://docs.google.com/document/d/1lBxNnDUY7TMbMdP_8p5A2U53T0V6JUSmGRQ8wuI8iIs/edit?usp=sharing",
       },
       {
         name: "Esylla",
+        player: "Lesley Poole",
         url: "https://docs.google.com/document/d/1NzosnUBovb6tplRPiZM125WQ6XS2LnUc-238idEVxR4/edit?usp=sharing",
       },
       {
         name: "Lila",
+        player: "Tiffany Mulvihill",
         url: "https://docs.google.com/document/d/1TSVxau1zHwSq_-8qyP44965FK0ft-O3UnX7PcgLGdlU/edit?usp=sharing",
       },
     ],
@@ -390,15 +413,15 @@ export const activeCampaigns: PortalCampaign[] = [
       },
     ],
     party: [
-      { name: "Jett Blackwood" },
-      { name: "Bedet'Tul" },
-      { name: "Lensworth Fistlemuch" },
-      { name: "Dax Whirren" },
-      { name: "Fosslenob Gripefoot" },
-      { name: "Axel Blackwood" },
-      { name: "Cletus Rashgut" },
-      { name: "Kern" },
-      { name: "Ivy Blackthorn" },
+      { name: "Jett Blackwood", player: "Larry McHale" },
+      { name: "Bedet'Tul", player: "Brian" },
+      { name: "Lensworth Fistlemuch", player: "Tom Chernetsky" },
+      { name: "Dax Whirren", player: "Suzanne Chernetsky" },
+      { name: "Fosslenob Gripefoot", player: "Michael Hewson" },
+      { name: "Axel Blackwood", player: "Larry McHale" },
+      { name: "Cletus Rashgut", player: "Brian" },
+      { name: "Kern", player: "Tom Chernetsky" },
+      { name: "Ivy Blackthorn", player: "Suzanne Chernetsky" },
     ],
     description:
       "Secret agents assembled by Master Thorne investigate outbreaks, conspiracies, and the ominous phrase The Long Night.",
