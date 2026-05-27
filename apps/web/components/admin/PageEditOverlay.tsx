@@ -256,8 +256,8 @@ function DraftPagePreview({ items, pathname }: { items: PageItem[]; pathname: st
   return (
     <div
       data-editor-preview="true"
-      className="fixed left-0 right-[288px] top-16 bottom-0 z-[39] overflow-y-auto"
-      style={{ background: "var(--color-bg-primary)" }}
+      className="fixed left-0 right-[288px] top-0 bottom-0 z-[39] overflow-y-auto"
+      style={{ background: "var(--color-bg-deep)" }}
     >
       <div className="min-h-full pb-28 pointer-events-none">
         {items.map((item) => (
