@@ -113,7 +113,7 @@ function BlockHandle({
         position: "fixed",
         top: measured.top,
         left: measured.left,
-        width: measured.width,
+        right: 288, // stay clear of the 288px-wide edit panel
         height: HANDLE_H,
         transform: CSS.Translate.toString(transform),
         zIndex: 41,
