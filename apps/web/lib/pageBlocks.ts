@@ -33,6 +33,7 @@ export type BlockType =
   | "creature-card"
   // ── Composable profile card & grid ──
   | "profile-card"
+  | "layout-card"
   | "card-grid";
 
 // ── Unified page item types ───────────────────────────────────────────────────
@@ -87,6 +88,35 @@ export interface ProfileCardItemDef {
   label: string;
   icon: string;
   fields: ProfileCardItemField[];
+}
+
+export type CardLayoutItemType =
+  | "grid"
+  | "header"
+  | "text"
+  | "inner-card"
+  | "image"
+  | "divider";
+
+export interface CardLayoutItem {
+  id: string;
+  type: CardLayoutItemType;
+  props: Record<string, unknown>;
+}
+
+export interface CardLayoutItemField {
+  key: string;
+  label: string;
+  type: "text" | "textarea" | "image" | "select" | "card-layout-items";
+  options?: { value: string; label: string }[];
+  hint?: string;
+}
+
+export interface CardLayoutItemDef {
+  type: CardLayoutItemType;
+  label: string;
+  icon: string;
+  fields: CardLayoutItemField[];
 }
 
 export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
@@ -243,12 +273,99 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
   },
 ];
 
+const GRID_PLACEMENT_FIELDS: CardLayoutItemField[] = [
+  { key: "col", label: "Column start", type: "text", hint: "1 to 6" },
+  { key: "row", label: "Row start", type: "text", hint: "1 to 10" },
+  { key: "colSpan", label: "Column span", type: "text", hint: "1 to 6" },
+  { key: "rowSpan", label: "Row span", type: "text", hint: "1 to 10" },
+];
+
+export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
+  {
+    type: "grid",
+    label: "Card Grid",
+    icon: "#",
+    fields: [
+      { key: "columns", label: "Columns", type: "text", hint: "Up to 6 columns" },
+      { key: "rows", label: "Rows", type: "text", hint: "Up to 10 rows" },
+      {
+        key: "gap", label: "Gap", type: "select",
+        options: [
+          { value: "sm", label: "Small" },
+          { value: "md", label: "Medium" },
+          { value: "lg", label: "Large" },
+        ],
+      },
+      { key: "items", label: "Grid contents", type: "card-layout-items" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "header",
+    label: "Header",
+    icon: "H",
+    fields: [
+      { key: "eyebrow", label: "Eyebrow", type: "text" },
+      { key: "title", label: "Title", type: "text" },
+      {
+        key: "size", label: "Size", type: "select",
+        options: [
+          { value: "md", label: "Medium" },
+          { value: "lg", label: "Large" },
+        ],
+      },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "text",
+    label: "Text",
+    icon: "T",
+    fields: [
+      { key: "content", label: "Text", type: "textarea" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "inner-card",
+    label: "Inner Card",
+    icon: "[]",
+    fields: [
+      { key: "items", label: "Inner contents", type: "card-layout-items" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "image",
+    label: "Image",
+    icon: "I",
+    fields: [
+      { key: "src", label: "Image", type: "image" },
+      { key: "alt", label: "Alt text", type: "text" },
+      {
+        key: "fit", label: "Fit", type: "select",
+        options: [
+          { value: "cover", label: "Cover" },
+          { value: "contain", label: "Contain" },
+        ],
+      },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "divider",
+    label: "Divider",
+    icon: "--",
+    fields: GRID_PLACEMENT_FIELDS,
+  },
+];
+
 // ── Asset field definitions ───────────────────────────────────────────────────
 
 export interface AssetField {
   key: string;
   label: string;
-  type: "text" | "textarea" | "url" | "image" | "select" | "json" | "items";
+  type: "text" | "textarea" | "url" | "image" | "select" | "json" | "items" | "card-layout-items";
   placeholder?: string;
   hint?: string;
   options?: { value: string; label: string }[];
@@ -588,6 +705,44 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         ],
       },
       { key: "items", label: "Card elements", type: "items", hint: "Add and reorder portrait, heading, text, badge, link, and more." },
+    ],
+  },
+
+  {
+    type: "layout-card",
+    label: "Card Layout",
+    description: "Composable card with an internal grid, nested grids, headers, text, images, inner cards, and dividers",
+    icon: "[]",
+    category: "content",
+    defaultProps: {
+      width: "wide",
+      items: JSON.stringify([
+        {
+          id: "grid_root",
+          type: "grid",
+          props: {
+            columns: "3",
+            rows: "2",
+            gap: "md",
+            items: JSON.stringify([
+              { id: "header_1", type: "header", props: { title: "Card Layout", eyebrow: "Test Asset", col: "1", row: "1", colSpan: "3", rowSpan: "1", size: "lg" } },
+              { id: "text_1", type: "text", props: { content: "Use the grid controls to arrange card internals up to 6 columns by 10 rows.", col: "1", row: "2", colSpan: "2", rowSpan: "1" } },
+              { id: "inner_1", type: "inner-card", props: { col: "3", row: "2", colSpan: "1", rowSpan: "1", items: JSON.stringify([{ id: "inner_text_1", type: "text", props: { content: "Inner card" } }]) } },
+            ]),
+          },
+        },
+      ]),
+    },
+    fields: [
+      {
+        key: "width", label: "Card width", type: "select",
+        options: [
+          { value: "wide", label: "Wide" },
+          { value: "medium", label: "Medium" },
+          { value: "full", label: "Full" },
+        ],
+      },
+      { key: "items", label: "Card layout elements", type: "card-layout-items", hint: "Add grids, nested grids, headers, text, inner cards, images, and dividers." },
     ],
   },
 

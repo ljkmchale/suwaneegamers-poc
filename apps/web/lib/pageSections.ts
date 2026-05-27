@@ -39,4 +39,5 @@ export const PAGE_SECTIONS: Record<string, SectionMeta[]> = {
   "/territories":        [],
   "/maps-of-myrdae":     [],
   "/previous-campaigns": [],
+  "/test-page":          [],
 };

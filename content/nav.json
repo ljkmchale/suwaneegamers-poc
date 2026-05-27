@@ -30,7 +30,8 @@
       "label": "Tools",
       "items": [
         { "id": "knowledge-base", "href": "http://kb.suwaneegamers.net", "label": "Knowledge Base" },
-        { "id": "previous-campaigns", "href": "/previous-campaigns", "label": "Previous Campaigns" }
+        { "id": "previous-campaigns", "href": "/previous-campaigns", "label": "Previous Campaigns" },
+        { "id": "test-page", "href": "/test-page", "label": "Test Page" }
       ]
     }
   ]

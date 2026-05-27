@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { HeroSection } from "@/components/fantasy/HeroSection";
 import {
   listedCampaigns,
@@ -13,7 +13,7 @@ import {
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
-import type { BlockItem, ProfileCardItem } from "@/lib/pageBlocks";
+import type { BlockItem, CardLayoutItem, ProfileCardItem } from "@/lib/pageBlocks";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -1079,6 +1079,161 @@ function CreatureCardBlock({
 
 // ── Profile card ─────────────────────────────────────────────────────────────
 
+function numberProp(value: unknown, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(String(value ?? ""), 10);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(Math.max(parsed, min), max);
+}
+
+function cardLayoutPlacementStyle(item: CardLayoutItem): CSSProperties {
+  const col = numberProp(item.props.col, 1, 1, 6);
+  const row = numberProp(item.props.row, 1, 1, 10);
+  const colSpan = numberProp(item.props.colSpan, 1, 1, 6);
+  const rowSpan = numberProp(item.props.rowSpan, 1, 1, 10);
+  const hasPlacement = item.props.col || item.props.row || item.props.colSpan || item.props.rowSpan;
+  if (!hasPlacement) return {};
+  return {
+    gridColumn: `${col} / span ${colSpan}`,
+    gridRow: `${row} / span ${rowSpan}`,
+  };
+}
+
+function parseCardLayoutItems(raw: unknown): CardLayoutItem[] {
+  if (Array.isArray(raw)) return raw as CardLayoutItem[];
+  if (typeof raw !== "string") return [];
+  try {
+    const parsed = JSON.parse(raw || "[]");
+    return Array.isArray(parsed) ? (parsed as CardLayoutItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function CardLayoutGrid({ item }: { item: CardLayoutItem }) {
+  const columns = numberProp(item.props.columns, 2, 1, 6);
+  const rows = numberProp(item.props.rows, 1, 1, 10);
+  const gap = (item.props.gap as string | undefined) ?? "md";
+  const gapClass = gap === "sm" ? "gap-2" : gap === "lg" ? "gap-5" : "gap-3";
+  const children = parseCardLayoutItems(item.props.items);
+
+  return (
+    <div
+      className={`grid ${gapClass}`}
+      style={{
+        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+        gridTemplateRows: `repeat(${rows}, minmax(0, auto))`,
+      }}
+    >
+      {children.map((child) => (
+        <CardLayoutItemRenderer key={child.id} item={child} />
+      ))}
+    </div>
+  );
+}
+
+function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
+  const style = cardLayoutPlacementStyle(item);
+
+  switch (item.type) {
+    case "grid":
+      return (
+        <div style={style}>
+          <CardLayoutGrid item={item} />
+        </div>
+      );
+    case "header": {
+      const eyebrow = item.props.eyebrow as string | undefined;
+      const title = item.props.title as string | undefined;
+      const size = item.props.size as string | undefined;
+      if (!eyebrow && !title) return null;
+      return (
+        <header style={style} className="min-w-0">
+          {eyebrow && (
+            <p className="font-cinzel text-[0.65rem] tracking-[0.3em] uppercase mb-1"
+              style={{ color: "var(--color-accent-arcane)" }}>
+              {eyebrow}
+            </p>
+          )}
+          {title && (
+            <h2 className={`font-cinzel leading-tight ${size === "lg" ? "text-2xl" : "text-lg"}`}
+              style={{ color: "var(--color-text-primary)" }}>
+              {title}
+            </h2>
+          )}
+        </header>
+      );
+    }
+    case "text": {
+      const content = item.props.content as string | undefined;
+      if (!content) return null;
+      return (
+        <p className="min-w-0 whitespace-pre-wrap text-sm leading-relaxed"
+          style={{ ...style, color: "var(--color-text-secondary)" }}>
+          {content}
+        </p>
+      );
+    }
+    case "inner-card": {
+      const children = parseCardLayoutItems(item.props.items);
+      return (
+        <div className="rounded-md border p-4 min-w-0 h-full"
+          style={{ ...style, borderColor: "var(--color-bg-border)", background: "rgba(15,10,26,.58)" }}>
+          <div className="space-y-3">
+            {children.map((child) => (
+              <CardLayoutItemRenderer key={child.id} item={child} />
+            ))}
+          </div>
+        </div>
+      );
+    }
+    case "image": {
+      const src = item.props.src as string | undefined;
+      const alt = (item.props.alt as string | undefined) ?? "";
+      const fit = (item.props.fit as string | undefined) ?? "cover";
+      if (!src) return null;
+      return (
+        <div className="relative min-h-36 overflow-hidden rounded-md border"
+          style={{ ...style, borderColor: "var(--color-bg-border)" }}>
+          <Image src={src} alt={alt} fill className={fit === "contain" ? "object-contain p-3" : "object-cover"}
+            sizes="(min-width: 1024px) 50vw, 100vw" />
+        </div>
+      );
+    }
+    case "divider":
+      return <div className="h-px self-center" style={{ ...style, background: "var(--color-bg-border)" }} />;
+    default:
+      return null;
+  }
+}
+
+function CardLayoutBlock({
+  props,
+  variant = "standalone",
+}: {
+  props: Record<string, unknown>;
+  variant?: "standalone" | "grid-item";
+}) {
+  const width = (props.width as string | undefined) ?? "wide";
+  const items = parseCardLayoutItems(props.items);
+  const widthClass =
+    width === "full" ? "w-full px-0" :
+    width === "medium" ? "max-w-3xl mx-auto px-6" :
+    "max-w-6xl mx-auto px-6";
+
+  const card = (
+    <article className="fantasy-card p-5 md:p-6 h-full">
+      <div className="space-y-4">
+        {items.map((item) => (
+          <CardLayoutItemRenderer key={item.id} item={item} />
+        ))}
+      </div>
+    </article>
+  );
+
+  if (variant === "grid-item") return card;
+  return <section className={`${widthClass} py-6`}>{card}</section>;
+}
+
 function ProfileCardItemRenderer({
   item,
   characters,
@@ -1548,6 +1703,7 @@ function BlockContent({
     case "player-card":     return <PlayerCardBlock    props={block.props} variant={variant} />;
     case "creature-card":   return <CreatureCardBlock  props={block.props} variant={variant} />;
     case "profile-card":    return <ProfileCardBlock   props={block.props} variant={variant} />;
+    case "layout-card":     return <CardLayoutBlock    props={block.props} variant={variant} />;
     default:                return null;
   }
 }

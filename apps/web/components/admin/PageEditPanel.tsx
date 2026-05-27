@@ -7,10 +7,13 @@ import {
 import { uploadFilesAction } from "@/app/admin/media/actions";
 import {
   ASSET_TYPES,
+  CARD_LAYOUT_ITEM_TYPES,
   PROFILE_CARD_ITEM_TYPES,
   getAssetDef,
   type AssetTypeDef,
   type BlockItem,
+  type CardLayoutItem,
+  type CardLayoutItemType,
   type ProfileCardItem,
   type ProfileCardItemType,
 } from "@/lib/pageBlocks";
@@ -747,6 +750,203 @@ function ItemsEditor({
 
 // ── Prop editor ───────────────────────────────────────────────────────────────
 
+function CardLayoutItemsEditor({
+  value,
+  onChange,
+  depth = 0,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  depth?: number;
+}) {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [draggingItemId, setDraggingItemId] = useState<string | null>(null);
+
+  let items: CardLayoutItem[] = [];
+  try {
+    const parsed = JSON.parse(value || "[]");
+    if (Array.isArray(parsed)) items = parsed;
+  } catch {
+    items = [];
+  }
+
+  function save(next: CardLayoutItem[]) {
+    onChange(JSON.stringify(next, null, 2));
+  }
+
+  function moveItem(draggedId: string, targetId: string) {
+    if (draggedId === targetId) return;
+    const from = items.findIndex((item) => item.id === draggedId);
+    const to = items.findIndex((item) => item.id === targetId);
+    if (from === -1 || to === -1) return;
+    save(moveListItem(items, from, to));
+  }
+
+  function addItem(type: CardLayoutItemType) {
+    const id = `${type}_${Math.random().toString(36).slice(2, 8)}`;
+    const defaults: Record<string, unknown> = {};
+    const def = CARD_LAYOUT_ITEM_TYPES.find((d) => d.type === type);
+    if (def) {
+      for (const f of def.fields) defaults[f.key] = "";
+      if (type === "grid") {
+        defaults.columns = "2";
+        defaults.rows = "2";
+        defaults.gap = "md";
+        defaults.items = "[]";
+      }
+      if (type === "header") defaults.size = "md";
+      if (type === "image") defaults.fit = "cover";
+      if (type === "inner-card") defaults.items = "[]";
+    }
+    save([...items, { id, type, props: defaults }]);
+    setExpandedId(id);
+  }
+
+  function setProp(id: string, key: string, val: string) {
+    save(items.map((item) => item.id === id ? { ...item, props: { ...item.props, [key]: val } } : item));
+  }
+
+  const INPUT =
+    "w-full px-2 py-1 rounded border text-xs bg-[#08050f] text-[#e8dfc8] " +
+    "placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]";
+  const LABEL = "block mb-0.5 text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060]";
+
+  return (
+    <div className={`space-y-1.5 ${depth > 0 ? "rounded border border-[#2a2a35] bg-[#08050f] p-2" : ""}`}>
+      {items.length === 0 && (
+        <p className="text-[10px] text-[#5a5060] py-1">No card layout elements yet.</p>
+      )}
+
+      {items.map((item, idx) => {
+        const def = CARD_LAYOUT_ITEM_TYPES.find((d) => d.type === item.type);
+        const isExpanded = expandedId === item.id;
+        const preview =
+          (item.props.title as string | undefined) ||
+          (item.props.eyebrow as string | undefined) ||
+          (item.props.content as string | undefined) ||
+          (item.props.alt as string | undefined) || "";
+
+        return (
+          <div
+            key={item.id}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              const draggedId = e.dataTransfer.getData("text/card-layout-item") || draggingItemId;
+              if (draggedId) moveItem(draggedId, item.id);
+              setDraggingItemId(null);
+            }}
+            className={`rounded border bg-[#0f0a1a] overflow-hidden transition-colors ${
+              draggingItemId === item.id ? "border-[#8b5cf6] opacity-60" : "border-[#2a2a35]"
+            }`}
+          >
+            <div className="flex items-center gap-1.5 px-2 py-1.5">
+              <button
+                type="button"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.effectAllowed = "move";
+                  e.dataTransfer.setData("text/card-layout-item", item.id);
+                  setDraggingItemId(item.id);
+                }}
+                onDragEnd={() => setDraggingItemId(null)}
+                className="text-[12px] w-4 text-center shrink-0 cursor-grab active:cursor-grabbing select-none text-[#5a5060] hover:text-[#a89880]"
+                aria-label={`Drag ${def?.label ?? item.type}`}
+                title="Drag to reorder"
+              >
+                ::
+              </button>
+              <span className="text-[11px] w-5 text-center shrink-0 select-none">{def?.icon}</span>
+              <span className="text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] flex-1 truncate min-w-0">
+                {def?.label}{preview ? ` - ${preview.slice(0, 22)}` : ""}
+              </span>
+              <button type="button" onClick={() => setExpandedId(isExpanded ? null : item.id)}
+                className="text-[10px] text-[#5a5060] hover:text-[#a89880] px-1 transition-colors shrink-0">
+                {isExpanded ? "Hide" : "Edit"}
+              </button>
+              <button type="button" onClick={() => save(moveListItem(items, idx, idx - 1))} disabled={idx === 0}
+                className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5 transition-colors shrink-0">Up</button>
+              <button type="button" onClick={() => save(moveListItem(items, idx, idx + 1))} disabled={idx === items.length - 1}
+                className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5 transition-colors shrink-0">Down</button>
+              <button type="button" onClick={() => save(items.filter((i) => i.id !== item.id))}
+                className="text-[11px] text-[#5a5060] hover:text-red-400 px-0.5 transition-colors shrink-0">X</button>
+            </div>
+
+            {isExpanded && def && (
+              <div className="px-2 pb-2 space-y-1.5 border-t border-[#2a2a35] pt-1.5">
+                {def.fields.map((field) => {
+                  const val = (item.props[field.key] as string) ?? "";
+                  if (field.type === "select") {
+                    return (
+                      <div key={field.key}>
+                        <label className={LABEL}>{field.label}</label>
+                        <select value={val} onChange={(e) => setProp(item.id, field.key, e.target.value)}
+                          className={INPUT}>
+                          {field.options?.map((o) => (
+                            <option key={o.value} value={o.value}>{o.label}</option>
+                          ))}
+                        </select>
+                      </div>
+                    );
+                  }
+                  if (field.type === "textarea") {
+                    return (
+                      <div key={field.key}>
+                        <label className={LABEL}>{field.label}</label>
+                        <textarea rows={3} value={val}
+                          onChange={(e) => setProp(item.id, field.key, e.target.value)}
+                          className={`${INPUT} resize-y`} />
+                      </div>
+                    );
+                  }
+                  if (field.type === "image") {
+                    return (
+                      <div key={field.key}>
+                        <label className={LABEL}>{field.label}</label>
+                        <ImagePathField value={val} onChange={(next) => setProp(item.id, field.key, next)} />
+                      </div>
+                    );
+                  }
+                  if (field.type === "card-layout-items") {
+                    return (
+                      <div key={field.key}>
+                        <label className={LABEL}>{field.label}</label>
+                        <CardLayoutItemsEditor value={val} onChange={(next) => setProp(item.id, field.key, next)} depth={depth + 1} />
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={field.key}>
+                      <label className={LABEL}>{field.label}</label>
+                      <input value={val}
+                        onChange={(e) => setProp(item.id, field.key, e.target.value)}
+                        className={INPUT} />
+                      {field.hint && <p className="mt-0.5 text-[10px] text-[#5a5060]">{field.hint}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <div className="pt-0.5">
+        <p className="text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-1">Add card element</p>
+        <div className="flex flex-wrap gap-1">
+          {CARD_LAYOUT_ITEM_TYPES.map((def) => (
+            <button key={def.type} type="button" onClick={() => addItem(def.type)}
+              className="flex items-center gap-1 text-[10px] px-2 py-1 rounded border border-[#2a2a35] text-[#5a5060] hover:text-[#e8dfc8] hover:border-[#8b5cf6] transition-colors">
+              <span>{def.icon}</span>
+              <span className="font-cinzel tracking-widest uppercase">{def.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function PropsForm({
   block,
   onChange,
@@ -801,6 +1001,15 @@ function PropsForm({
               <label className={LABEL}>{field.label}</label>
               {field.hint && <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>}
               <ItemsEditor value={val} onChange={(v) => set(field.key, v)} />
+            </div>
+          );
+        }
+        if (field.type === "card-layout-items") {
+          return (
+            <div key={field.key}>
+              <label className={LABEL}>{field.label}</label>
+              {field.hint && <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>}
+              <CardLayoutItemsEditor value={val} onChange={(v) => set(field.key, v)} />
             </div>
           );
         }

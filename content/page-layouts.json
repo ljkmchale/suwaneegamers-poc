@@ -266,6 +266,28 @@
     }
   ],
 
+  "/test-page": [
+    {
+      "kind": "block", "id": "test-page-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Internal Lab",
+        "title": "Test Page",
+        "description": "A working space for trying layout editor features and composable card assets before they move into public pages.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "test-single-card", "type": "card",
+      "props": {
+        "eyebrow": "Test Card",
+        "title": "Single Card Test",
+        "description": "This is the first simple card on the test page. Once the route is confirmed live, this page can be used to test the more flexible Card Layout asset.",
+        "href": "",
+        "linkLabel": ""
+      }
+    }
+  ],
+
   "/setting": [
     {
       "kind": "block", "id": "setting-header", "type": "page-header",
