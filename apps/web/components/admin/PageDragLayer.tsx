@@ -123,16 +123,23 @@ function BlockHandle({
 
   const HANDLE_H = 32;
   const accentColor = isSection ? "#8b5cf6" : "#f59e0b";
+  const showToolbar = isEditing ? "opacity-100" : "opacity-0 group-hover:opacity-100";
+  const showAccent = isEditing ? "opacity-80" : "opacity-0 group-hover:opacity-60";
 
   return (
     <div
       ref={setNodeRef}
+      onClick={(e) => {
+        if (isSection) return;
+        e.stopPropagation();
+        onEditToggle();
+      }}
       style={{
         position: "fixed",
         top: measured.top,
         left: measured.left,
         width: measured.width,
-        height: HANDLE_H,
+        height: Math.max(measured.height, HANDLE_H),
         transform: CSS.Translate.toString(transform),
         zIndex: 41,
         pointerEvents: "auto",
@@ -143,13 +150,13 @@ function BlockHandle({
     >
       {/* Always-visible top accent line */}
       <div
-        className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-60 transition-opacity"
+        className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity ${showAccent}`}
         style={{ background: accentColor }}
       />
 
       {/* Handle bar — appears on hover */}
       <div
-        className="absolute inset-0 flex items-center gap-2 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+        className={`absolute left-0 right-0 top-0 flex h-8 items-center gap-2 px-3 transition-opacity duration-150 ${showToolbar}`}
         style={{
           background: `linear-gradient(to bottom, rgba(8,5,15,0.88) 0%, rgba(8,5,15,0.5) 70%, transparent 100%)`,
         }}

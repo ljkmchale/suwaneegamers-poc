@@ -435,9 +435,7 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
             pathname={pathname}
             anyDragging={!!activeItem}
             editingId={editingId}
-            onEditToggle={(id) =>
-              setEditingId((prev) => (prev === id ? null : id))
-            }
+            onEditToggle={(id) => setEditingId(id)}
             onDeleteBlock={handleDeleteBlock}
           />
 

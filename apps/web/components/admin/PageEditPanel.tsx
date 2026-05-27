@@ -754,10 +754,12 @@ function CardLayoutItemsEditor({
   value,
   onChange,
   depth = 0,
+  quickAdd,
 }: {
   value: string;
   onChange: (v: string) => void;
   depth?: number;
+  quickAdd?: { type: CardLayoutItemType; nonce: number } | null;
 }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [draggingItemId, setDraggingItemId] = useState<string | null>(null);
@@ -801,6 +803,12 @@ function CardLayoutItemsEditor({
     save([...items, { id, type, props: defaults }]);
     setExpandedId(id);
   }
+
+  useEffect(() => {
+    if (!quickAdd) return;
+    addItem(quickAdd.type);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quickAdd]);
 
   function setProp(id: string, key: string, val: string) {
     save(items.map((item) => item.id === id ? { ...item, props: { ...item.props, [key]: val } } : item));
@@ -950,9 +958,11 @@ function CardLayoutItemsEditor({
 function PropsForm({
   block,
   onChange,
+  quickAdd,
 }: {
   block: BlockItem;
   onChange: (props: Record<string, unknown>) => void;
+  quickAdd?: { type: CardLayoutItemType; nonce: number } | null;
 }) {
   const def = getAssetDef(block.type);
   if (!def)
@@ -1009,7 +1019,7 @@ function PropsForm({
             <div key={field.key}>
               <label className={LABEL}>{field.label}</label>
               {field.hint && <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>}
-              <CardLayoutItemsEditor value={val} onChange={(v) => set(field.key, v)} />
+              <CardLayoutItemsEditor value={val} onChange={(v) => set(field.key, v)} quickAdd={quickAdd} />
             </div>
           );
         }
@@ -1147,6 +1157,8 @@ export function PageEditPanel({
   hasChanges,
   onClose,
 }: PageEditPanelProps) {
+  const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
+  const editingCardLayout = editingBlock?.type === "layout-card";
   const categories: { label: string; key: "layout" | "content" }[] = [
     { label: "Layout", key: "layout" },
     { label: "Content", key: "content" },
@@ -1221,7 +1233,7 @@ export function PageEditPanel({
                 {getAssetDef(editingBlock.type)?.label ?? editingBlock.type}
               </span>
             </div>
-            <PropsForm block={editingBlock} onChange={onPropsChange} />
+            <PropsForm block={editingBlock} onChange={onPropsChange} quickAdd={quickAdd} />
           </div>
         )}
 
@@ -1253,14 +1265,21 @@ export function PageEditPanel({
             </p>
             <div className="grid grid-cols-2 gap-1.5">
               {CARD_LAYOUT_ITEM_TYPES.map((def) => (
-                <div
+                <button
                   key={def.type}
-                  className="flex items-center gap-1.5 rounded border border-[#2a2a35] bg-[#08050f] px-2 py-1.5 text-[10px] text-[#5a5060]"
-                  title="Add these while editing a Card Layout block"
+                  type="button"
+                  disabled={!editingCardLayout}
+                  onClick={() => setQuickAdd({ type: def.type, nonce: Date.now() })}
+                  className={`flex items-center gap-1.5 rounded border px-2 py-1.5 text-[10px] transition-colors ${
+                    editingCardLayout
+                      ? "border-[#2a2a35] bg-[#08050f] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8]"
+                      : "border-[#1b1724] bg-[#08050f] text-[#3a3345] cursor-not-allowed"
+                  }`}
+                  title={editingCardLayout ? "Add to selected Card Layout block" : "Select a Card Layout block first"}
                 >
                   <span className="w-4 shrink-0 text-center text-[#a89880]">{def.icon}</span>
                   <span className="truncate font-cinzel tracking-widest uppercase">{def.label}</span>
-                </div>
+                </button>
               ))}
             </div>
           </div>
