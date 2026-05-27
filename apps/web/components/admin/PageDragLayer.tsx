@@ -228,8 +228,12 @@ export function PageDragLayer({
         const blockId = el.getAttribute("data-block-id");
         const sectionId = el.getAttribute("data-section-id");
         const blockType = el.getAttribute("data-block-type");
-        const rect = el.getBoundingClientRect();
+        const child = el.firstElementChild;
+        const measureEl = child instanceof HTMLElement ? child : el;
+        const rect = measureEl.getBoundingClientRect();
         if (rect.width === 0 && rect.height === 0) return; // skip invisible
+        const visibleRight = Math.min(rect.right, window.innerWidth - 304);
+        const visibleWidth = Math.max(48, visibleRight - rect.left);
         const bottom =
           blockType === "card-grid" ? rect.top + Math.min(rect.height, 32) : rect.bottom;
         result.push({
@@ -238,7 +242,7 @@ export function PageDragLayer({
           top: rect.top,
           bottom,
           left: rect.left,
-          width: rect.width,
+          width: visibleWidth,
           height: rect.height,
         });
       });
