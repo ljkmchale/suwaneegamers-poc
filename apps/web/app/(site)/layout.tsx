@@ -4,6 +4,8 @@ import { ParticleField } from "@/components/fantasy/ParticleField";
 import { getNavConfig, getNavSection } from "@/lib/nav";
 import { getAdminSession } from "@/lib/adminSession";
 import { PageEditOverlay } from "@/components/admin/PageEditOverlay";
+import { getActiveCustomPages } from "@/lib/customPages";
+import { PAGE_SECTIONS } from "@/lib/pageSections";
 
 export default async function SiteLayout({
   children,
@@ -17,6 +19,11 @@ export default async function SiteLayout({
 
   const session = await getAdminSession();
   const isAdmin = session.isAdmin === true;
+
+  // Paths where the Edit Layout overlay should be available
+  const builtInPaths = Object.keys(PAGE_SECTIONS);
+  const customPaths = getActiveCustomPages().map((p) => `/${p.slug}`);
+  const managedPaths = [...builtInPaths, ...customPaths];
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -33,7 +40,7 @@ export default async function SiteLayout({
       <Footer />
 
       {/* Page layout editor — only rendered when admin is logged in */}
-      {isAdmin && <PageEditOverlay />}
+      {isAdmin && <PageEditOverlay managedPaths={managedPaths} />}
     </div>
   );
 }

@@ -1,24 +1,69 @@
 {
   "/": [
-    { "kind": "section", "id": "hero" },
-    { "kind": "section", "id": "portal" }
+    {
+      "kind": "section",
+      "id": "hero"
+    },
+    {
+      "kind": "section",
+      "id": "portal"
+    }
   ],
   "/campaigns": [
-    { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "campaigns" },
-    { "kind": "section", "id": "side-campaigns" }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "section",
+      "id": "campaigns"
+    },
+    {
+      "kind": "section",
+      "id": "side-campaigns"
+    }
   ],
   "/players": [
-    { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "players" },
-    { "kind": "section", "id": "unassigned" }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "section",
+      "id": "players"
+    },
+    {
+      "kind": "section",
+      "id": "unassigned"
+    }
   ],
   "/dungeon-masters": [
-    { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "dms" }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "section",
+      "id": "dms"
+    }
   ],
   "/bestiary": [
-    { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "creatures" }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "section",
+      "id": "creatures"
+    },
+    {
+      "kind": "block",
+      "id": "blk_1779840770863_odpe",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "testing"
+      }
+    }
   ]
 }

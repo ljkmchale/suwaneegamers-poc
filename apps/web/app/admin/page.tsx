@@ -5,6 +5,7 @@ const SECTIONS = [
   { href: "/admin/players", title: "Players", desc: "Manage player profiles and portraits." },
   { href: "/admin/dungeon-masters", title: "Dungeon Masters", desc: "Edit DM bios and campaign assignments." },
   { href: "/admin/bestiary", title: "Bestiary", desc: "Add or remove creatures." },
+  { href: "/admin/pages", title: "Pages", desc: "Create custom pages and build them with blocks." },
   { href: "/admin/page-layout", title: "Page Layout", desc: "Drag and drop to reorder navigation links." },
   { href: "/admin/appearance", title: "Appearance", desc: "Change colors, fonts, and site name." },
   { href: "/admin/media", title: "Media", desc: "Upload images and browse the media library." },

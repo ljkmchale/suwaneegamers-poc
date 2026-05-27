@@ -83,19 +83,21 @@ function LayoutRow({
   onEdit,
   onDelete,
   onPropsChange,
+  pathname,
 }: {
   item: PageItem;
   isEditing: boolean;
   onEdit: () => void;
   onDelete: () => void;
   onPropsChange: (props: Record<string, unknown>) => void;
+  pathname: string;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: item.kind === "section" ? `section::${item.id}` : item.id });
 
   const isSection = item.kind === "section";
   const sectionMeta = isSection
-    ? (PAGE_SECTIONS[usePathname()]?.find((s) => s.id === item.id))
+    ? (PAGE_SECTIONS[pathname]?.find((s) => s.id === item.id))
     : null;
   const assetDef = !isSection ? getAssetDef((item as BlockItem).type) : null;
 
@@ -188,7 +190,7 @@ function AssetLibrary({ onAdd }: { onAdd: (def: AssetTypeDef) => void }) {
 
 // ── Main overlay ──────────────────────────────────────────────────────────────
 
-export function PageEditOverlay() {
+export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState<"layout" | "assets">("layout");
@@ -197,7 +199,7 @@ export function PageEditOverlay() {
   const [pending, startTransition] = useTransition();
   const [saved, setSaved] = useState(false);
 
-  const hasLayout = !!(PAGE_SECTIONS[pathname]?.length);
+  const hasLayout = managedPaths.includes(pathname);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -213,7 +215,7 @@ export function PageEditOverlay() {
         setItems(fetched ?? []);
       })
       .catch(() => {
-        const defaults = PAGE_SECTIONS[pathname]?.map((s) => ({ kind: "section" as const, id: s.id })) ?? [];
+        const defaults = (PAGE_SECTIONS[pathname] ?? []).map((s) => ({ kind: "section" as const, id: s.id }));
         setItems(defaults);
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -353,6 +355,7 @@ export function PageEditOverlay() {
                           onEdit={() => setEditingId(editingId === blockId ? null : blockId)}
                           onDelete={() => blockId && handleDeleteBlock(blockId)}
                           onPropsChange={(props) => blockId && handlePropsChange(blockId, props)}
+                          pathname={pathname}
                         />
                       );
                     })}
