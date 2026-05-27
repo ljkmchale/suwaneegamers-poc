@@ -1246,6 +1246,24 @@ export function PageEditPanel({
               </div>
             </div>
           ))}
+
+          <div className="mb-5">
+            <p className="text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-2">
+              Card Layout Internals
+            </p>
+            <div className="grid grid-cols-2 gap-1.5">
+              {CARD_LAYOUT_ITEM_TYPES.map((def) => (
+                <div
+                  key={def.type}
+                  className="flex items-center gap-1.5 rounded border border-[#2a2a35] bg-[#08050f] px-2 py-1.5 text-[10px] text-[#5a5060]"
+                  title="Add these while editing a Card Layout block"
+                >
+                  <span className="w-4 shrink-0 text-center text-[#a89880]">{def.icon}</span>
+                  <span className="truncate font-cinzel tracking-widest uppercase">{def.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@ import {
   type PageItem,
   type BlockItem,
   type BlockType,
+  type CardLayoutItem,
 } from "@/lib/pageBlocks";
 import { PageDragLayer } from "./PageDragLayer";
 import { PageEditPanel } from "./PageEditPanel";
@@ -50,6 +51,222 @@ function makeBlock(assetType: BlockType): BlockItem {
 }
 
 // ── Main overlay entry point ──────────────────────────────────────────────────
+
+function parseDraftItems(raw: unknown): CardLayoutItem[] {
+  if (Array.isArray(raw)) return raw as CardLayoutItem[];
+  if (typeof raw !== "string") return [];
+  try {
+    const parsed = JSON.parse(raw || "[]");
+    return Array.isArray(parsed) ? (parsed as CardLayoutItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function clampNumber(value: unknown, fallback: number, min: number, max: number) {
+  const parsed = Number.parseInt(String(value ?? ""), 10);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(Math.max(parsed, min), max);
+}
+
+function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
+  const col = clampNumber(item.props.col, 1, 1, 6);
+  const row = clampNumber(item.props.row, 1, 1, 10);
+  const colSpan = clampNumber(item.props.colSpan, 1, 1, 6);
+  const rowSpan = clampNumber(item.props.rowSpan, 1, 1, 10);
+  const hasPlacement = item.props.col || item.props.row || item.props.colSpan || item.props.rowSpan;
+  const placement = hasPlacement ? {
+    gridColumn: `${col} / span ${colSpan}`,
+    gridRow: `${row} / span ${rowSpan}`,
+  } : undefined;
+
+  if (item.type === "grid") {
+    const columns = clampNumber(item.props.columns, 2, 1, 6);
+    const rows = clampNumber(item.props.rows, 1, 1, 10);
+    const gap = item.props.gap === "sm" ? "0.5rem" : item.props.gap === "lg" ? "1.25rem" : "0.75rem";
+    return (
+      <div style={placement}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${rows}, minmax(0, auto))`,
+          gap,
+        }}>
+          {parseDraftItems(item.props.items).map((child) => (
+            <DraftCardLayoutItem key={child.id} item={child} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (item.type === "header") {
+    return (
+      <header style={placement}>
+        {item.props.eyebrow ? (
+          <p className="font-cinzel text-[0.65rem] tracking-[0.3em] uppercase mb-1"
+            style={{ color: "var(--color-accent-arcane)" }}>
+            {item.props.eyebrow as string}
+          </p>
+        ) : null}
+        {item.props.title ? (
+          <h2 className={`font-cinzel leading-tight ${item.props.size === "lg" ? "text-2xl" : "text-lg"}`}
+            style={{ color: "var(--color-text-primary)" }}>
+            {item.props.title as string}
+          </h2>
+        ) : null}
+      </header>
+    );
+  }
+
+  if (item.type === "text") {
+    return (
+      <p className="whitespace-pre-wrap text-sm leading-relaxed" style={{ ...placement, color: "var(--color-text-secondary)" }}>
+        {(item.props.content as string | undefined) ?? ""}
+      </p>
+    );
+  }
+
+  if (item.type === "inner-card") {
+    return (
+      <div className="rounded-md border p-4 h-full"
+        style={{ ...placement, borderColor: "var(--color-bg-border)", background: "rgba(15,10,26,.58)" }}>
+        <div className="space-y-3">
+          {parseDraftItems(item.props.items).map((child) => (
+            <DraftCardLayoutItem key={child.id} item={child} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (item.type === "image") {
+    const src = item.props.src as string | undefined;
+    if (!src) return null;
+    return (
+      <div className="min-h-36 overflow-hidden rounded-md border" style={{ ...placement, borderColor: "var(--color-bg-border)" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={(item.props.alt as string | undefined) ?? ""} className={`h-full min-h-36 w-full ${item.props.fit === "contain" ? "object-contain p-3" : "object-cover"}`} />
+      </div>
+    );
+  }
+
+  if (item.type === "divider") {
+    return <div className="h-px self-center" style={{ ...placement, background: "var(--color-bg-border)" }} />;
+  }
+
+  return null;
+}
+
+function DraftBlock({ item, pathname }: { item: PageItem; pathname: string }) {
+  if (item.kind === "section") {
+    const meta = PAGE_SECTIONS[pathname]?.find((section) => section.id === item.id);
+    return (
+      <div data-section-id={item.id} className="max-w-6xl mx-auto px-6 py-4">
+        <div className="rounded border border-dashed border-[#2a2a35] px-4 py-3 text-xs text-[#5a5060]">
+          {meta?.label ?? item.id}
+        </div>
+      </div>
+    );
+  }
+
+  const props = item.props;
+
+  if (item.type === "page-header") {
+    const align = props.align === "left" ? "text-left" : "text-center";
+    return (
+      <header data-block-id={item.id} data-block-type={item.type} className={`mb-14 max-w-6xl mx-auto px-6 pt-16 ${align}`}>
+        {props.eyebrow ? (
+          <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3" style={{ color: "var(--color-accent-arcane)" }}>
+            {props.eyebrow as string}
+          </p>
+        ) : null}
+        {props.title ? (
+          <h1 className="font-cinzel text-4xl tracking-widest uppercase mb-4 shimmer-text">{props.title as string}</h1>
+        ) : null}
+        {props.description ? (
+          <p className={props.align === "left" ? "max-w-3xl" : "max-w-2xl mx-auto"} style={{ color: "var(--color-text-secondary)" }}>
+            {props.description as string}
+          </p>
+        ) : null}
+      </header>
+    );
+  }
+
+  if (item.type === "card") {
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-4">
+        <div className="fantasy-card p-6">
+          {props.eyebrow ? (
+            <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-2" style={{ color: "var(--color-accent-arcane)" }}>
+              {props.eyebrow as string}
+            </p>
+          ) : null}
+          <h3 className="font-cinzel text-xl tracking-wider" style={{ color: "var(--color-text-primary)" }}>
+            {(props.title as string | undefined) ?? "New Card"}
+          </h3>
+          {props.description ? (
+            <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              {props.description as string}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
+  if (item.type === "layout-card") {
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
+        <article className="fantasy-card p-5 md:p-6">
+          <div className="space-y-4">
+            {parseDraftItems(props.items).map((child) => (
+              <DraftCardLayoutItem key={child.id} item={child} />
+            ))}
+          </div>
+        </article>
+      </section>
+    );
+  }
+
+  if (item.type === "text") {
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className={`max-w-3xl mx-auto px-6 py-6 ${props.align === "center" ? "text-center" : ""}`}>
+        <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ color: "var(--color-text-secondary)" }}>
+          {(props.content as string | undefined) ?? ""}
+        </p>
+      </div>
+    );
+  }
+
+  const def = getAssetDef(item.type);
+  return (
+    <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-4">
+      <div className="fantasy-card p-5">
+        <p className="font-cinzel text-sm tracking-widest uppercase" style={{ color: "var(--color-accent-gold)" }}>
+          {def?.label ?? item.type}
+        </p>
+        <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>Unsaved draft block</p>
+      </div>
+    </div>
+  );
+}
+
+function DraftPagePreview({ items, pathname }: { items: PageItem[]; pathname: string }) {
+  return (
+    <div
+      data-editor-preview="true"
+      className="fixed left-0 right-[288px] top-16 bottom-0 z-[39] overflow-y-auto"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
+      <div className="min-h-full pb-28 pointer-events-none">
+        {items.map((item) => (
+          <DraftBlock key={item.id} item={item} pathname={pathname} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const pathname = usePathname();
@@ -210,6 +427,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
+          <DraftPagePreview items={items} pathname={pathname} />
+
           {/* Transparent overlay — drag handles + drop zones on the live page */}
           <PageDragLayer
             items={items}

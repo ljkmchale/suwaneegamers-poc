@@ -222,7 +222,9 @@ export function PageDragLayer({
 
   const remeasure = useCallback(() => {
     const result: MeasuredEl[] = [];
-    document
+    const previewRoot = document.querySelector<HTMLElement>("[data-editor-preview='true']");
+    const root = previewRoot ?? document;
+    root
       .querySelectorAll<HTMLElement>("[data-block-id], [data-section-id]")
       .forEach((el) => {
         const blockId = el.getAttribute("data-block-id");
