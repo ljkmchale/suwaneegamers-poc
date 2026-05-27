@@ -1,41 +1,17 @@
 {
   "/": [
-    {
-      "kind": "section",
-      "id": "hero"
-    },
-    {
-      "kind": "section",
-      "id": "portal"
-    }
+    { "kind": "section", "id": "hero" },
+    { "kind": "section", "id": "portal" }
   ],
   "/campaigns": [
-    {
-      "kind": "section",
-      "id": "header"
-    },
-    {
-      "kind": "section",
-      "id": "campaigns"
-    },
-    {
-      "kind": "section",
-      "id": "side-campaigns"
-    }
+    { "kind": "section", "id": "header" },
+    { "kind": "section", "id": "campaigns" },
+    { "kind": "section", "id": "side-campaigns" }
   ],
   "/players": [
-    {
-      "kind": "section",
-      "id": "header"
-    },
-    {
-      "kind": "section",
-      "id": "players"
-    },
-    {
-      "kind": "section",
-      "id": "unassigned"
-    }
+    { "kind": "section", "id": "header" },
+    { "kind": "section", "id": "players" },
+    { "kind": "section", "id": "unassigned" }
   ],
   "/dungeon-masters": [
     {
@@ -43,18 +19,68 @@
       "id": "header"
     },
     {
-      "kind": "section",
-      "id": "dms"
+      "kind": "block",
+      "id": "dm-grid-1",
+      "type": "card-grid",
+      "props": { "columns": "2", "gap": "md" }
+    },
+    {
+      "kind": "block",
+      "id": "dm-chip-poole",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"cp-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/chip-poole-card.webp\",\"name\":\"Chip Poole\"}},{\"id\":\"cp-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Chip Poole\"}},{\"id\":\"cp-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Long-form Myrdae campaigns and classic table adventure.\",\"variant\":\"subtitle\"}},{\"id\":\"cp-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Active DM\",\"color\":\"arcane\"}},{\"id\":\"cp-desc\",\"type\":\"description\",\"props\":{\"value\":\"Chip is one of the main active DMs for the table, currently carrying multiple Myrdae campaigns and several older arcs from the archive.\"}},{\"id\":\"cp-active\",\"type\":\"item-list\",\"props\":{\"title\":\"Active Campaigns\",\"entries\":\"[{\\\"title\\\":\\\"A New Adventure\\\",\\\"subtitle\\\":\\\"1st & 3rd Thursday\\\"},{\\\"title\\\":\\\"Heroes of Emberstran\\\",\\\"subtitle\\\":\\\"No cadence\\\"}]\"}},{\"id\":\"cp-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Beer & Dice\\\",\\\"status\\\":\\\"Completed\\\"},{\\\"title\\\":\\\"Imminent Domain\\\",\\\"status\\\":\\\"On Hiatus\\\"},{\\\"title\\\":\\\"Obliged Corpses\\\",\\\"status\\\":\\\"On Hiatus\\\"}]\"}}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "dm-sean-poole",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"sp-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/sean-poole-card.webp\",\"name\":\"Sean Poole\"}},{\"id\":\"sp-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Sean Poole\"}},{\"id\":\"sp-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"High-stakes active campaigns with sharp danger and momentum.\",\"variant\":\"subtitle\"}},{\"id\":\"sp-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Active DM\",\"color\":\"arcane\"}},{\"id\":\"sp-desc\",\"type\":\"description\",\"props\":{\"value\":\"Sean currently runs two active campaigns on the reference site, with one completed campaign in the older archive.\"}},{\"id\":\"sp-active\",\"type\":\"item-list\",\"props\":{\"title\":\"Active Campaigns\",\"entries\":\"[{\\\"title\\\":\\\"Bloody Endeavor\\\",\\\"subtitle\\\":\\\"Mondays\\\"},{\\\"title\\\":\\\"Souls of Destiny\\\",\\\"subtitle\\\":\\\"Last Saturday\\\"}]\"}},{\"id\":\"sp-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Call for Heroes\\\",\\\"status\\\":\\\"Completed\\\"}]\"}}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "dm-lesley-poole",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"lp-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/lesley-poole-card.webp\",\"name\":\"Lesley Poole\"}},{\"id\":\"lp-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Lesley Poole\"}},{\"id\":\"lp-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Dungeon-forward play, society stories, and completed table arcs.\",\"variant\":\"subtitle\"}},{\"id\":\"lp-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Active DM\",\"color\":\"arcane\"}},{\"id\":\"lp-desc\",\"type\":\"description\",\"props\":{\"value\":\"Lesley runs an active Monday campaign and has several completed campaigns listed in the previous-campaign archive.\"}},{\"id\":\"lp-active\",\"type\":\"item-list\",\"props\":{\"title\":\"Active Campaigns\",\"entries\":\"[{\\\"title\\\":\\\"Dungeons III\\\",\\\"subtitle\\\":\\\"Mondays\\\"}]\"}},{\"id\":\"lp-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Legends of Larch\\\",\\\"status\\\":\\\"Completed\\\"},{\\\"title\\\":\\\"MEAD Society\\\",\\\"status\\\":\\\"Completed\\\"},{\\\"title\\\":\\\"The Company\\\",\\\"status\\\":\\\"Completed\\\"}]\"}}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "dm-michael-hewson",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"mh-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/michael-hewson-card.webp\",\"name\":\"Michael Hewson\"}},{\"id\":\"mh-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Michael Hewson\"}},{\"id\":\"mh-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Arcane mysteries, covert operations, and strange threats.\",\"variant\":\"subtitle\"}},{\"id\":\"mh-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Active DM\",\"color\":\"arcane\"}},{\"id\":\"mh-desc\",\"type\":\"description\",\"props\":{\"value\":\"Michael currently hosts two active campaigns and has a Middle Earth campaign listed in the archive.\"}},{\"id\":\"mh-active\",\"type\":\"item-list\",\"props\":{\"title\":\"Active Campaigns\",\"entries\":\"[{\\\"title\\\":\\\"Mad Mage\\\",\\\"subtitle\\\":\\\"2nd Saturday\\\"},{\\\"title\\\":\\\"The Silent Vanguard\\\",\\\"subtitle\\\":\\\"1st & 3rd Wednesday\\\"}]\"}},{\"id\":\"mh-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Middle Earth\\\",\\\"status\\\":\\\"On Hiatus\\\"}]\"}}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "dm-larry-mchale",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"lm-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/larry-mchale-card.webp\",\"name\":\"Larry McHale\"}},{\"id\":\"lm-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Larry McHale\"}},{\"id\":\"lm-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Archived campaign work and portal stewardship.\",\"variant\":\"subtitle\"}},{\"id\":\"lm-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Archive\",\"color\":\"muted\"}},{\"id\":\"lm-desc\",\"type\":\"description\",\"props\":{\"value\":\"Larry is represented in the previous-campaign archive and helps steer this portal toward the shared table resources.\"}},{\"id\":\"lm-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Crystal Bottle\\\",\\\"status\\\":\\\"On Hiatus\\\"}]\"}}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "dm-chris-glynn",
+      "type": "profile-card",
+      "props": {
+        "layout": "top",
+        "items": "[{\"id\":\"cg-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/chris-glynn-card.webp\",\"name\":\"Chris Glynn\"}},{\"id\":\"cg-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Chris Glynn\"}},{\"id\":\"cg-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Completed published-adventure campaigns.\",\"variant\":\"subtitle\"}},{\"id\":\"cg-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Archive\",\"color\":\"muted\"}},{\"id\":\"cg-desc\",\"type\":\"description\",\"props\":{\"value\":\"Chris has completed campaign history on the reference site, including major D&D adventure paths from the archive.\"}},{\"id\":\"cg-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Strahd / Avernus\\\",\\\"status\\\":\\\"Completed\\\"},{\\\"title\\\":\\\"Storm King's Thunder\\\",\\\"status\\\":\\\"Completed\\\"}]\"}}]"
+      }
     }
   ],
   "/bestiary": [
-    {
-      "kind": "section",
-      "id": "header"
-    },
-    {
-      "kind": "section",
-      "id": "creatures"
-    }
+    { "kind": "section", "id": "header" },
+    { "kind": "section", "id": "creatures" }
   ]
 }

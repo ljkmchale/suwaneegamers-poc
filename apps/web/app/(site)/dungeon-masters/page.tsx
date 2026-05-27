@@ -1,23 +1,19 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { campaignsForDm, getDungeonMasters, dungeonMastersReferenceUrl } from "@/lib/dungeonMasters";
+import { dungeonMastersReferenceUrl } from "@/lib/dungeonMasters";
 import { PORTAL_URLS } from "@/lib/portal";
 import { getPageLayout } from "@/lib/pageLayouts";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
-import type { PageItem } from "@/lib/pageBlocks";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Dungeon Masters",
   description: "Suwanee Gamers Dungeon Master cards with active and archived campaign history.",
 };
 
-type DmProfile = ReturnType<typeof getDungeonMasters>[number];
-
-// ── Sections ──────────────────────────────────────────────────────────────────
+// ── Header section ────────────────────────────────────────────────────────────
 
 function HeaderSection() {
   return (
-    <header className="mb-14 text-center">
+    <header className="max-w-6xl mx-auto px-6 pt-20 mb-14 text-center">
       <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
         style={{ color: "var(--color-accent-arcane)" }}>
         DM Roster
@@ -45,113 +41,10 @@ function HeaderSection() {
   );
 }
 
-function DmsSection({ dungeonMasters }: { dungeonMasters: DmProfile[] }) {
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-      {dungeonMasters.map((profile) => {
-        const active = campaignsForDm(profile);
-        return (
-          <article key={profile.id} className="fantasy-card overflow-hidden">
-            {profile.portrait && (
-              <div className="h-72 border-b" style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(8, 5, 15, 0.02), rgba(8, 5, 15, 0.62)), url("${profile.portrait}")`,
-                backgroundPosition: "center center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                borderColor: "var(--color-bg-border)",
-              }} role="img" aria-label={`${profile.name} portrait`} />
-            )}
-            <div className="p-6">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
-                <div>
-                  <h2 className="font-cinzel text-2xl leading-tight" style={{ color: "var(--color-text-primary)" }}>
-                    {profile.name}
-                  </h2>
-                  <p className="text-sm mt-2" style={{ color: "var(--color-accent-gold)" }}>
-                    {profile.focus}
-                  </p>
-                </div>
-                <span className="shrink-0 text-xs font-cinzel tracking-widest uppercase px-2.5 py-1 rounded-full border self-start"
-                  style={{
-                    color: active.length ? "var(--color-accent-arcane)" : "var(--color-text-muted)",
-                    borderColor: active.length ? "var(--color-accent-arcane)" : "var(--color-bg-border)",
-                  }}>
-                  {active.length ? "Active DM" : "Archive"}
-                </span>
-              </div>
-
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
-                {profile.description}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <section>
-                  <h3 className="font-cinzel text-xs tracking-widest uppercase mb-3"
-                    style={{ color: "var(--color-text-muted)" }}>
-                    Active Campaigns
-                  </h3>
-                  {active.length ? (
-                    <div className="space-y-3">
-                      {active.map((campaign) => (
-                        <Link key={campaign.id} href={`/campaigns/${campaign.id}`}
-                          className="block rounded-md border px-3 py-3 transition-colors hover:border-amber-400"
-                          style={{ borderColor: "var(--color-bg-border)" }}>
-                          <span className="block text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
-                            {campaign.name}
-                          </span>
-                          <span className="block text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
-                            {campaign.schedule}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                      No active campaign listed on the reference site.
-                    </p>
-                  )}
-                </section>
-
-                <section>
-                  <h3 className="font-cinzel text-xs tracking-widest uppercase mb-3"
-                    style={{ color: "var(--color-text-muted)" }}>
-                    Campaign History
-                  </h3>
-                  <div className="space-y-2">
-                    {profile.previousCampaigns.map((campaign) => (
-                      <div key={campaign.name}
-                        className="flex items-center justify-between gap-3 rounded-md border px-3 py-2"
-                        style={{ borderColor: "var(--color-bg-border)" }}>
-                        <span className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-                          {campaign.name}
-                        </span>
-                        <span className="text-[0.68rem] font-cinzel tracking-widest uppercase"
-                          style={{ color: campaign.status === "Completed" ? "var(--color-accent-gold)" : "var(--color-accent-ice)" }}>
-                          {campaign.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  );
-}
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function DungeonMastersPage() {
-  const dungeonMasters = getDungeonMasters();
   const order = getPageLayout("/dungeon-masters");
-
-  const sectionMap: Record<string, React.ReactNode> = {
-    "header": <HeaderSection key="header" />,
-    "dms":    <DmsSection key="dms" dungeonMasters={dungeonMasters} />,
-  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -159,12 +52,8 @@ export default function DungeonMastersPage() {
       <div className="absolute inset-0 z-0" style={{
         background: "linear-gradient(180deg, rgba(8,5,15,0.78) 0%, rgba(8,5,15,0.68) 36%, rgba(8,5,15,0.92) 100%), linear-gradient(90deg, rgba(8,5,15,0.42), rgba(8,5,15,0.2), rgba(8,5,15,0.52))",
       }} />
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        {order.map((item: PageItem) =>
-          item.kind === "section"
-            ? <div key={item.id} data-section-id={item.id}>{sectionMap[item.id] ?? null}</div>
-            : <BlockRenderer key={item.id} block={item} />
-        )}
+      <div className="relative z-10 pb-20">
+        <PageBlockList items={order} sections={{ header: <HeaderSection /> }} />
       </div>
     </div>
   );

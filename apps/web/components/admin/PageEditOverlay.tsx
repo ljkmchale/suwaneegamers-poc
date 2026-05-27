@@ -158,8 +158,7 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   // ── Computed ─────────────────────────────────────────────────────────────
 
   const hasChanges =
-    JSON.stringify(items.map(itemDndId)) !==
-    JSON.stringify(originalItems.map(itemDndId));
+    JSON.stringify(items) !== JSON.stringify(originalItems);
 
   const editingBlock =
     editingId != null

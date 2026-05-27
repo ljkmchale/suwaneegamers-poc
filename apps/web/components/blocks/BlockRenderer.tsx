@@ -2,11 +2,12 @@ import fs from "fs";
 import path from "path";
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { HeroSection } from "@/components/fantasy/HeroSection";
 import { listedCampaigns, sideCampaigns } from "@/lib/campaigns";
-import { getPlayerProfiles } from "@/lib/players";
+import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
-import type { BlockItem } from "@/lib/pageBlocks";
+import type { BlockItem, ProfileCardItem } from "@/lib/pageBlocks";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -163,6 +164,27 @@ function SpacerBlock({ props }: { props: Record<string, unknown> }) {
   return <div className={h} aria-hidden="true" />;
 }
 
+function CardGridBlock({
+  props,
+  children,
+}: {
+  props: Record<string, unknown>;
+  children?: ReactNode;
+}) {
+  const columns = (props.columns as string | undefined) ?? "2";
+  const gap = (props.gap as string | undefined) ?? "md";
+  const columnClass = columns === "3" ? "xl:grid-cols-3" : "lg:grid-cols-2";
+  const gapClass = gap === "sm" ? "gap-3" : gap === "lg" ? "gap-8" : "gap-5";
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-8">
+      <div className={`grid grid-cols-1 ${columnClass} ${gapClass}`}>
+        {children}
+      </div>
+    </section>
+  );
+}
+
 // ── Layout blocks ─────────────────────────────────────────────────────────────
 
 function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
@@ -173,7 +195,7 @@ function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
   const cls = align === "center" ? "text-center" : "";
 
   return (
-    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-20 ${cls}`}>
+    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-16 ${cls}`}>
       {eyebrow && (
         <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
           style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
@@ -189,11 +211,115 @@ function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
   );
 }
 
+interface FounderData { name: string; role: string; img: string; }
+
+function FoundersBlock({ props }: { props: Record<string, unknown> }) {
+  const heading = (props.heading as string | undefined) ?? "Founded By";
+  const bio     = props.bio as string | undefined;
+  const raw     = props.founders as string | undefined;
+
+  let founders: FounderData[] = [];
+  try { founders = raw ? JSON.parse(raw) : []; } catch { /* malformed JSON */ }
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-12">
+      <div className="fantasy-card p-8 text-center">
+        {heading && (
+          <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-8"
+            style={{ color: "var(--color-text-muted)" }}>
+            {heading}
+          </p>
+        )}
+        <div className="flex flex-wrap justify-center gap-10">
+          {founders.map((founder) => (
+            <div key={founder.name} className="flex flex-col items-center gap-2">
+              <Image
+                src={founder.img}
+                alt={founder.name}
+                width={80}
+                height={80}
+                className="w-20 h-20 rounded-full object-cover object-top"
+                style={{ border: "2px solid var(--color-accent-gold)" }}
+              />
+              <p className="font-cinzel text-base" style={{ color: "var(--color-accent-gold)" }}>
+                {founder.name}
+              </p>
+              <p className="text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>
+                {founder.role}
+              </p>
+            </div>
+          ))}
+        </div>
+        {bio && (
+          <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--color-bg-border)" }}>
+            <p className="text-sm leading-relaxed italic max-w-md mx-auto"
+              style={{ color: "var(--color-text-muted)" }}>
+              {bio}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 interface PortalLinkData {
   title: string;
   description?: string;
   href: string;
   label?: string;
+}
+
+interface ListLinkData {
+  label: string;
+  href: string;
+  description?: string;
+}
+
+interface GalleryImageData {
+  src: string;
+  alt?: string;
+  caption?: string;
+}
+
+interface SavedCharacterData {
+  name?: string;
+  campaign?: string;
+  dm?: string;
+  url?: string;
+}
+
+interface SavedEntryData {
+  title?: string;
+  subtitle?: string;
+  meta?: string;
+  status?: string;
+  url?: string;
+}
+
+function parseJsonArray<T>(raw: unknown): T[] {
+  if (typeof raw !== "string") return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as T[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function savedCharactersFromItem(item: ProfileCardItem): SavedCharacterData[] {
+  const saved = parseJsonArray<SavedCharacterData>(item.props.characters);
+  if (saved.length > 0) return saved;
+
+  const playerName = (item.props.playerName as string) ?? "";
+  if (!playerName) return [];
+
+  return assignmentsForPlayer(playerName).map(({ character, campaign }) => ({
+    name: character.name,
+    campaign: campaign.name,
+    dm: campaign.dm,
+    url: character.url,
+  }));
 }
 
 function PortalLinksBlock({ props }: { props: Record<string, unknown> }) {
@@ -202,7 +328,7 @@ function PortalLinksBlock({ props }: { props: Record<string, unknown> }) {
   const description = props.description as string | undefined;
   const raw         = props.links       as string | undefined;
 
-  let links: PortalLinkData[] = [];
+  let links = parseJsonArray<PortalLinkData>(raw);
   try { links = raw ? JSON.parse(raw) : []; } catch { /* malformed JSON — skip */ }
 
   return (
@@ -249,6 +375,159 @@ function PortalLinksBlock({ props }: { props: Record<string, unknown> }) {
             ? <a key={i} href={link.href} target="_blank" rel="noopener noreferrer">{inner}</a>
             : <Link key={i} href={link.href}>{inner}</Link>;
         })}
+      </div>
+    </section>
+  );
+}
+
+function SectionHeadingBlock({ props }: { props: Record<string, unknown> }) {
+  const eyebrow = props.eyebrow as string | undefined;
+  const title = props.title as string | undefined;
+  const description = props.description as string | undefined;
+  const align = (props.align as string | undefined) ?? "left";
+  const centered = align === "center";
+
+  return (
+    <section className={`max-w-6xl mx-auto px-6 py-10 ${centered ? "text-center" : ""}`}>
+      {eyebrow && (
+        <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-2"
+          style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
+      )}
+      {title && (
+        <h2 className="font-cinzel text-3xl tracking-widest uppercase mb-3 shimmer-text">{title}</h2>
+      )}
+      {description && (
+        <p className={`text-sm leading-relaxed ${centered ? "max-w-2xl mx-auto" : "max-w-3xl"}`}
+          style={{ color: "var(--color-text-secondary)" }}>{description}</p>
+      )}
+    </section>
+  );
+}
+
+function ButtonLinkBlock({ props }: { props: Record<string, unknown> }) {
+  const label = (props.label as string | undefined) ?? "Open Link";
+  const href = (props.href as string | undefined) ?? "";
+  const align = (props.align as string | undefined) ?? "left";
+  const variant = (props.variant as string | undefined) ?? "primary";
+  const justify =
+    align === "center" ? "justify-center" :
+    align === "right" ? "justify-end" :
+    "justify-start";
+  const className =
+    variant === "secondary"
+      ? "inline-flex items-center rounded-md border px-4 py-2 text-xs font-cinzel tracking-widest uppercase transition-colors hover:text-amber-400"
+      : "inline-flex items-center rounded-md px-4 py-2 text-xs font-cinzel tracking-widest uppercase transition-colors hover:brightness-110";
+  const style =
+    variant === "secondary"
+      ? { borderColor: "var(--color-bg-border)", color: "var(--color-text-primary)" }
+      : { background: "var(--color-accent-arcane)", color: "#fff" };
+
+  if (!href) return null;
+
+  const inner = `${label} ${isExternal(href) ? "↗" : "→"}`;
+
+  return (
+    <div className={`max-w-6xl mx-auto px-6 py-4 flex ${justify}`}>
+      {isExternal(href) ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={style}>
+          {inner}
+        </a>
+      ) : (
+        <Link href={href} className={className} style={style}>
+          {inner}
+        </Link>
+      )}
+    </div>
+  );
+}
+
+function LinkListBlock({ props }: { props: Record<string, unknown> }) {
+  const title = props.title as string | undefined;
+  const links = parseJsonArray<ListLinkData>(props.links);
+  if (links.length === 0) return null;
+
+  return (
+    <section className="max-w-3xl mx-auto px-6 py-6">
+      <div className="fantasy-card p-5">
+        {title && (
+          <h2 className="font-cinzel text-xl tracking-widest uppercase mb-4"
+            style={{ color: "var(--color-text-primary)" }}>{title}</h2>
+        )}
+        <div className="space-y-3">
+          {links.map((link, index) => {
+            if (!link.href || !link.label) return null;
+            const ext = isExternal(link.href);
+            const content = (
+              <div className="rounded-md border px-3 py-3 transition-colors hover:border-amber-400"
+                style={{ borderColor: "var(--color-bg-border)" }}>
+                <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                  {link.label} {ext ? "↗" : "→"}
+                </p>
+                {link.description && (
+                  <p className="mt-1 text-xs" style={{ color: "var(--color-text-muted)" }}>{link.description}</p>
+                )}
+              </div>
+            );
+            return ext ? (
+              <a key={`${link.href}-${index}`} href={link.href} target="_blank" rel="noopener noreferrer" className="block">
+                {content}
+              </a>
+            ) : (
+              <Link key={`${link.href}-${index}`} href={link.href} className="block">
+                {content}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GalleryBlock({ props }: { props: Record<string, unknown> }) {
+  const images = parseJsonArray<GalleryImageData>(props.images);
+  const columns = (props.columns as string | undefined) ?? "3";
+  const columnClass =
+    columns === "4" ? "xl:grid-cols-4" :
+    columns === "2" ? "lg:grid-cols-2" :
+    "lg:grid-cols-3";
+  if (images.length === 0) return null;
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-8">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${columnClass} gap-4`}>
+        {images.map((image, index) => {
+          if (!image.src) return null;
+          return (
+            <figure key={`${image.src}-${index}`} className="fantasy-card overflow-hidden">
+              <div className="relative aspect-[4/3]">
+                <Image src={image.src} alt={image.alt ?? ""} fill className="object-cover"
+                  sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw" />
+              </div>
+              {image.caption && (
+                <figcaption className="p-3 text-xs" style={{ color: "var(--color-text-muted)" }}>
+                  {image.caption}
+                </figcaption>
+              )}
+            </figure>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function EmbedBlock({ props }: { props: Record<string, unknown> }) {
+  const src = props.src as string | undefined;
+  const title = (props.title as string | undefined) ?? "Embedded content";
+  const heightRaw = Number.parseInt((props.height as string | undefined) ?? "520", 10);
+  const height = Number.isFinite(heightRaw) ? Math.min(Math.max(heightRaw, 220), 1200) : 520;
+  if (!src) return null;
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-8">
+      <div className="rounded-lg overflow-hidden border" style={{ borderColor: "var(--color-bg-border)" }}>
+        <iframe src={src} title={title} className="w-full" style={{ height, border: "none" }} />
       </div>
     </section>
   );
@@ -450,9 +729,421 @@ function BestiaryGridBlock() {
   );
 }
 
+// ── Profile card ─────────────────────────────────────────────────────────────
+
+function ProfileCardItemRenderer({
+  item,
+  characters,
+}: {
+  item: ProfileCardItem;
+  characters?: SavedCharacterData[];
+}) {
+  switch (item.type) {
+    case "portrait": {
+      const src = item.props.src as string | undefined;
+      const name = item.props.name as string | undefined;
+      const initials = name
+        ? name.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()
+        : "?";
+      if (src) {
+        return (
+          <div className="relative mb-3 aspect-video overflow-hidden rounded-md border"
+            style={{ borderColor: "var(--color-bg-border)" }}>
+            <Image src={src} alt={name ? `${name} profile image` : ""} fill className="object-cover"
+              sizes="(min-width: 1024px) 33vw, 100vw" />
+          </div>
+        );
+      }
+      return (
+        <div className="mb-3 flex aspect-video items-center justify-center rounded-md border"
+          style={{
+            borderColor: "var(--color-bg-border)",
+            background: "linear-gradient(135deg,rgba(139,92,246,.28),rgba(245,158,11,.14))",
+          }}>
+          <span className="font-cinzel text-4xl" style={{ color: "var(--color-text-primary)" }}>
+            {initials}
+          </span>
+        </div>
+      );
+    }
+    case "image": {
+      const src = item.props.src as string | undefined;
+      const alt = (item.props.alt as string | undefined) ?? "";
+      const shape = (item.props.shape as string | undefined) ?? "wide";
+      const aspect = shape === "square" ? "aspect-square" : "aspect-video";
+      const fit = shape === "contain" ? "object-contain p-3" : "object-cover";
+      if (!src) return null;
+      return (
+        <div className={`relative ${aspect} overflow-hidden rounded-md border mb-3`}
+          style={{ borderColor: "var(--color-bg-border)" }}>
+          <Image src={src} alt={alt} fill className={fit}
+            sizes="(min-width: 1024px) 33vw, 100vw" />
+        </div>
+      );
+    }
+    case "heading":
+      return (
+        <h2 className="font-cinzel text-xl" style={{ color: "var(--color-text-primary)" }}>
+          {item.props.value as string}
+        </h2>
+      );
+    case "eyebrow": {
+      const eyebrowVariant = item.props.variant as string | undefined;
+      if (eyebrowVariant === "subtitle") {
+        // Matches the original DM / player card focus-text style: plain text-sm in gold.
+        return (
+          <p className="text-sm mt-1" style={{ color: "var(--color-accent-gold)" }}>
+            {item.props.value as string}
+          </p>
+        );
+      }
+      return (
+        <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-1"
+          style={{ color: "var(--color-accent-arcane)" }}>
+          {item.props.value as string}
+        </p>
+      );
+    }
+    case "description":
+      return (
+        <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          {item.props.value as string}
+        </p>
+      );
+    case "stat":
+      return (
+        <div className="mb-2 rounded-md border px-3 py-2"
+          style={{ borderColor: "var(--color-bg-border)" }}>
+          <p className="text-[0.65rem] font-cinzel tracking-widest uppercase"
+            style={{ color: "var(--color-text-muted)" }}>{item.props.label as string}</p>
+          <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            {item.props.value as string}
+          </p>
+        </div>
+      );
+    case "character-count": {
+      const count = characters?.length ?? 0;
+      return (
+        <span
+          className="shrink-0 text-xs font-cinzel tracking-widest uppercase px-2.5 py-1 rounded-full border self-start"
+          style={{
+            color: count ? "var(--color-accent-arcane)" : "var(--color-text-muted)",
+            borderColor: count ? "var(--color-accent-arcane)" : "var(--color-bg-border)",
+          }}>
+          {count} Character{count === 1 ? "" : "s"}
+        </span>
+      );
+    }
+    case "badge": {
+      const color = (item.props.color as string | undefined) ?? "arcane";
+      const colorVar =
+        color === "gold"  ? "var(--color-accent-gold)"   :
+        color === "muted" ? "var(--color-text-muted)"    :
+                            "var(--color-accent-arcane)";
+      // Border uses a softer bg-border for muted/archive badges, matching the original card style.
+      const borderVar = color === "muted" ? "var(--color-bg-border)" : colorVar;
+      return (
+        <span className="text-xs font-cinzel tracking-widest uppercase px-2 py-1 rounded-full border"
+          style={{ color: colorVar, borderColor: borderVar }}>
+          {item.props.value as string}
+        </span>
+      );
+    }
+    case "link": {
+      const href  = (item.props.href  as string) ?? "#";
+      const label = (item.props.label as string) ?? href;
+      const ext   = isExternal(href);
+      const cls   = "inline-block text-xs font-cinzel tracking-widest uppercase transition-colors hover:text-amber-400 mb-2";
+      const style = { color: "var(--color-accent-gold)" };
+      return ext
+        ? <a href={href} target="_blank" rel="noopener noreferrer" className={cls} style={style}>{label} ↗</a>
+        : <Link href={href} className={cls} style={style}>{label} →</Link>;
+    }
+    case "divider":
+      return <div className="my-3 h-px" style={{ background: "var(--color-bg-border)" }} />;
+    case "item-list": {
+      const title = item.props.title as string | undefined;
+      const entries = parseJsonArray<SavedEntryData>(item.props.entries);
+      if (entries.length === 0) return null;
+      return (
+        <section className="mt-4">
+          {title && (
+            <h3 className="font-cinzel text-xs tracking-widest uppercase mb-3"
+              style={{ color: "var(--color-text-muted)" }}>
+              {title}
+            </h3>
+          )}
+          <div className="space-y-2">
+            {entries.map((entry, index) => {
+              const inner = (
+                <div className="rounded-md border px-3 py-3 transition-colors hover:border-amber-400"
+                  style={{ borderColor: "var(--color-bg-border)" }}>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      {entry.title && (
+                        <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                          {entry.title}
+                        </p>
+                      )}
+                      {entry.subtitle && (
+                        <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
+                          {entry.subtitle}
+                        </p>
+                      )}
+                      {entry.meta && (
+                        <p className="text-xs mt-1" style={{ color: "var(--color-accent-gold)" }}>
+                          {entry.meta}
+                        </p>
+                      )}
+                    </div>
+                    {entry.status && (
+                      <span className="text-[0.68rem] font-cinzel tracking-widest uppercase shrink-0"
+                        style={{ color: "var(--color-accent-gold)" }}>
+                        {entry.status}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+              return entry.url ? (
+                <a key={`${entry.title}-${index}`} href={entry.url} target="_blank" rel="noopener noreferrer" className="block">
+                  {inner}
+                </a>
+              ) : (
+                <div key={`${entry.title}-${index}`}>{inner}</div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+    case "character-list": {
+      const characterRows = savedCharactersFromItem(item);
+      if (characterRows.length === 0) return null;
+      return (
+        <div className="space-y-2 mt-1">
+          {characterRows.map((character, index) => (
+            <div key={`${character.campaign}-${character.name}-${index}`}
+              className="rounded-md border px-3 py-3"
+              style={{ borderColor: "var(--color-bg-border)" }}>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                <div>
+                  {character.url ? (
+                    <a href={character.url} target="_blank" rel="noopener noreferrer"
+                      className="text-sm font-semibold transition-colors hover:text-amber-400"
+                      style={{ color: "var(--color-text-primary)" }}>
+                      {character.name}
+                    </a>
+                  ) : (
+                    <span className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                      {character.name}
+                    </span>
+                  )}
+                  {character.campaign && (
+                    <span className="block text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
+                      {character.campaign}
+                    </span>
+                  )}
+                </div>
+                {character.dm && (
+                  <span className="text-xs shrink-0" style={{ color: "var(--color-accent-gold)" }}>
+                    DM: {character.dm}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    default:
+      return null;
+  }
+}
+
+function ProfileCardBlock({
+  props,
+  variant = "standalone",
+}: {
+  props: Record<string, unknown>;
+  variant?: "standalone" | "grid-item";
+}) {
+  const layout = (props.layout as string | undefined) ?? "side";
+  const inGrid = variant === "grid-item";
+
+  function wrapCard(card: ReactNode) {
+    if (inGrid) return card;
+    return <div className="max-w-6xl mx-auto px-6 py-2.5">{card}</div>;
+  }
+
+  let items: ProfileCardItem[] = [];
+  try {
+    const parsed = JSON.parse((props.items as string) ?? "[]");
+    if (Array.isArray(parsed)) items = parsed;
+  } catch { /* malformed JSON */ }
+
+  const portraitItem = items.find((i) => i.type === "portrait" && i.props.position !== "inline");
+  const contentItems = items.filter((i) => i !== portraitItem);
+  const headingItem = contentItems.find((i) => i.type === "heading");
+  const countItem = contentItems.find((i) => i.type === "character-count");
+  const badgeItem = contentItems.find((i) => i.type === "badge");
+  const characterListItem = contentItems.find((i) => i.type === "character-list");
+  const cardCharacters = characterListItem ? savedCharactersFromItem(characterListItem) : [];
+  const headerLinkItems = contentItems.filter((i) => i.type === "link");
+  // Badge joins the heading row (right-aligned) when there is a heading — matches the
+  // name / status-pill layout used by DM and player cards.
+  // Eyebrow / subtitle items sit inside the left column of the header row (under the name),
+  // matching the original gold focus-text placement in DM and player grid cards.
+  const eyebrowItems = contentItems.filter((i) => i.type === "eyebrow");
+  const headerItems = new Set([
+    headingItem?.id,
+    countItem?.id,
+    ...(headingItem && badgeItem ? [badgeItem.id] : []),
+    ...eyebrowItems.map((i) => i.id),
+    ...headerLinkItems.map((item) => item.id),
+  ].filter(Boolean));
+  const bodyItems = contentItems.filter((item) => !headerItems.has(item.id));
+
+  const portraitSrc  = portraitItem?.props.src  as string | undefined;
+  const portraitName = portraitItem?.props.name as string | undefined;
+  const nameInitials = portraitName
+    ? portraitName.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()
+    : "?";
+
+  const portraitBg = portraitSrc
+    ? `linear-gradient(to bottom,rgba(8,5,15,.04),rgba(8,5,15,.64)),url("${portraitSrc}") center/cover no-repeat`
+    : "linear-gradient(135deg,rgba(139,92,246,.28),rgba(245,158,11,.14))";
+
+  /** Renders body items, pairing consecutive item-lists side-by-side in a 2-column grid. */
+  function renderBodyItems(items: ProfileCardItem[]) {
+    const out: ReactNode[] = [];
+    let i = 0;
+    while (i < items.length) {
+      const cur = items[i];
+      const next = items[i + 1];
+      if (cur.type === "item-list" && next?.type === "item-list") {
+        out.push(
+          <div key={`pair-${cur.id}`} className="grid grid-cols-2 gap-3 mt-4">
+            <ProfileCardItemRenderer item={cur} />
+            <ProfileCardItemRenderer item={next} />
+          </div>
+        );
+        i += 2;
+      } else {
+        out.push(<ProfileCardItemRenderer key={cur.id} item={cur} />);
+        i += 1;
+      }
+    }
+    return out;
+  }
+
+  function renderContent() {
+    if (!headingItem && !countItem) {
+      return renderBodyItems(contentItems);
+    }
+
+    const hasRightCol = !!(countItem || (headingItem && badgeItem));
+    return (
+      <>
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            {headingItem && <ProfileCardItemRenderer item={headingItem} />}
+            {eyebrowItems.map((item) => (
+              <ProfileCardItemRenderer key={item.id} item={item} />
+            ))}
+            {headerLinkItems.map((item) => (
+              <ProfileCardItemRenderer key={item.id} item={item} />
+            ))}
+          </div>
+          {hasRightCol && (
+            <div className="shrink-0 flex flex-col items-end gap-1">
+              {countItem && <ProfileCardItemRenderer item={countItem} characters={cardCharacters} />}
+              {headingItem && badgeItem && <ProfileCardItemRenderer item={badgeItem} />}
+            </div>
+          )}
+        </div>
+        {renderBodyItems(bodyItems)}
+      </>
+    );
+  }
+
+  if (layout === "top") {
+    return wrapCard(
+        <article className="fantasy-card overflow-hidden h-full">
+          <div
+            className="h-56 border-b"
+            style={{
+              borderColor: "var(--color-bg-border)",
+              background: portraitBg,
+            }}
+            role="img"
+            aria-label={portraitName ? `${portraitName} profile image` : undefined}
+          >
+            {!portraitSrc && portraitName && (
+              <div className="flex h-full items-center justify-center">
+                <span className="font-cinzel text-5xl" style={{ color: "var(--color-text-primary)" }}>
+                  {nameInitials}
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="p-5">
+            {renderContent()}
+          </div>
+        </article>
+    );
+  }
+
+  if (layout === "none") {
+    return wrapCard(
+        <article className="fantasy-card p-6 overflow-hidden h-full">
+          {items.map((item) => (
+            <ProfileCardItemRenderer key={item.id} item={item} />
+          ))}
+        </article>
+    );
+  }
+
+  // layout === "side" (default)
+  return wrapCard(
+      <article className="fantasy-card overflow-hidden h-full">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] min-h-64">
+          <div
+            className="min-h-56 border-b sm:border-b-0 sm:border-r"
+            style={{
+              borderColor: "var(--color-bg-border)",
+              background: portraitBg,
+            }}
+            role="img"
+            aria-label={portraitName ? `${portraitName} profile image` : undefined}
+          >
+            {!portraitSrc && (
+              <div className="flex h-full min-h-56 items-center justify-center">
+                <span className="font-cinzel text-5xl" style={{ color: "var(--color-text-primary)" }}>
+                  {nameInitials}
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="p-5">
+            {renderContent()}
+          </div>
+        </div>
+      </article>
+  );
+}
+
 // ── Public export ─────────────────────────────────────────────────────────────
 
-function BlockContent({ block }: { block: BlockItem }) {
+function BlockContent({
+  block,
+  variant,
+  children,
+}: {
+  block: BlockItem;
+  variant?: "standalone" | "grid-item";
+  children?: ReactNode;
+}) {
   switch (block.type) {
     // Generic content
     case "divider":         return <DividerBlock       props={block.props} />;
@@ -460,26 +1151,44 @@ function BlockContent({ block }: { block: BlockItem }) {
     case "image":           return <ImageBlock         props={block.props} />;
     case "text":            return <TextBlock          props={block.props} />;
     case "callout":         return <CalloutBlock       props={block.props} />;
+    case "section-heading": return <SectionHeadingBlock props={block.props} />;
+    case "button-link":     return <ButtonLinkBlock    props={block.props} />;
+    case "link-list":       return <LinkListBlock      props={block.props} />;
+    case "gallery":         return <GalleryBlock       props={block.props} />;
+    case "embed":           return <EmbedBlock         props={block.props} />;
     case "spacer":          return <SpacerBlock        props={block.props} />;
+    case "card-grid":       return <CardGridBlock      props={block.props}>{children}</CardGridBlock>;
     // Layout
     case "page-header":     return <PageHeaderBlock    props={block.props} />;
     case "hero-banner":     return <HeroSection />;
     case "portal-links":    return <PortalLinksBlock   props={block.props} />;
+    case "founders":        return <FoundersBlock      props={block.props} />;
     case "calendar-embed":  return <CalendarEmbedBlock />;
     // Live data
     case "campaigns-grid":  return <CampaignsGridBlock />;
     case "players-grid":    return <PlayersGridBlock />;
     case "dms-grid":        return <DmsGridBlock />;
     case "bestiary-grid":   return <BestiaryGridBlock />;
+    case "profile-card":    return <ProfileCardBlock   props={block.props} variant={variant} />;
     default:                return null;
   }
 }
 
 /** Wrapper adds data-block-id so the live page editor can locate each block. */
-export function BlockRenderer({ block }: { block: BlockItem }) {
+export function BlockRenderer({
+  block,
+  variant = "standalone",
+  children,
+}: {
+  block: BlockItem;
+  variant?: "standalone" | "grid-item";
+  children?: ReactNode;
+}) {
   return (
-    <div data-block-id={block.id}>
-      <BlockContent block={block} />
+    <div data-block-id={block.id} data-block-type={block.type}>
+      <BlockContent block={block} variant={variant}>
+        {children}
+      </BlockContent>
     </div>
   );
 }

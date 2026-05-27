@@ -16,6 +16,7 @@ interface MeasuredEl {
   bottom: number;
   left: number;
   width: number;
+  height: number;
 }
 
 // ── Drop zone strip (between elements) ───────────────────────────────────────
@@ -23,49 +24,66 @@ interface MeasuredEl {
 function DropZone({
   id,
   top,
+  bottom,
+  lineY,
+  left = 0,
+  right = 288,
   anyDragging,
 }: {
   id: string;
   top: number;
+  bottom: number;
+  lineY: number;
+  left?: number;
+  right?: number;
   anyDragging: boolean;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id });
+  const lineOffset = lineY - top;
 
   return (
     <div
       ref={setNodeRef}
       style={{
         position: "fixed",
-        left: 0,
-        right: 288, // leave room for the panel
-        top: top - (anyDragging ? 18 : 3),
-        height: anyDragging ? 36 : 6,
-        pointerEvents: "auto",
+        left,
+        right,
+        top,
+        height: anyDragging ? Math.max(bottom - top, 4) : 0,
+        pointerEvents: anyDragging ? "auto" : "none",
         zIndex: 42,
-        transition: "height 0.12s, top 0.12s",
+        background: isOver ? "rgba(139,92,246,0.06)" : "transparent",
+        transition: "background 0.1s",
       }}
-      className="flex items-center justify-center"
     >
-      {/* The visible rule */}
-      <div
-        className={`absolute inset-x-0 transition-all duration-150 ${
-          isOver
-            ? "h-0.5 opacity-100"
-            : anyDragging
-            ? "h-px opacity-20"
-            : "h-px opacity-0"
-        }`}
-        style={{ background: isOver ? "#8b5cf6" : "rgba(255,255,255,0.3)" }}
-      />
+      {anyDragging && (
+        <>
+          {/* Insertion line */}
+          <div
+            className="absolute inset-x-0 pointer-events-none transition-all duration-100"
+            style={{
+              top: Math.max(lineOffset, 0),
+              height: isOver ? 2 : 1,
+              background: isOver ? "#8b5cf6" : "rgba(255,255,255,0.15)",
+              opacity: isOver ? 1 : 0.3,
+              boxShadow: isOver ? "0 0 10px rgba(139,92,246,0.6)" : "none",
+            }}
+          />
 
-      {/* "Drop here" pill */}
-      {isOver && (
-        <div
-          className="relative z-10 px-3 py-1 rounded-full font-cinzel text-[10px] tracking-widest uppercase text-white pointer-events-none"
-          style={{ background: "#8b5cf6", boxShadow: "0 0 20px rgba(139,92,246,0.6)" }}
-        >
-          Drop here
-        </div>
+          {/* "Drop here" pill */}
+          {isOver && (
+            <div
+              className="absolute left-1/2 -translate-x-1/2 px-3 py-1 rounded-full font-cinzel text-[10px] tracking-widest uppercase text-white pointer-events-none z-10"
+              style={{
+                top: Math.max(lineOffset - 14, 2),
+                background: "#8b5cf6",
+                boxShadow: "0 0 20px rgba(139,92,246,0.6)",
+              }}
+            >
+              Drop here
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -113,7 +131,7 @@ function BlockHandle({
         position: "fixed",
         top: measured.top,
         left: measured.left,
-        right: 288, // stay clear of the 288px-wide edit panel
+        width: measured.width,
         height: HANDLE_H,
         transform: CSS.Translate.toString(transform),
         zIndex: 41,
@@ -209,15 +227,19 @@ export function PageDragLayer({
       .forEach((el) => {
         const blockId = el.getAttribute("data-block-id");
         const sectionId = el.getAttribute("data-section-id");
+        const blockType = el.getAttribute("data-block-type");
         const rect = el.getBoundingClientRect();
         if (rect.width === 0 && rect.height === 0) return; // skip invisible
+        const bottom =
+          blockType === "card-grid" ? rect.top + Math.min(rect.height, 32) : rect.bottom;
         result.push({
           rawId: blockId ?? sectionId!,
           kind: blockId ? "block" : "section",
           top: rect.top,
-          bottom: rect.bottom,
+          bottom,
           left: rect.left,
           width: rect.width,
+          height: rect.height,
         });
       });
     setMeasured(result);
@@ -250,41 +272,76 @@ export function PageDragLayer({
 
   if (measured.length === 0) return null;
 
+  // Compute full-coverage drop zones. Zone i → insert at index i (before element i).
+  // Each zone spans from the midpoint of the element above it to the midpoint of the
+  // element below it, so the entire page height is covered with no dead spots.
+  const viewportH = window.innerHeight;
+  const midOf = (el: MeasuredEl) => (el.top + el.bottom) / 2;
+
+  const measuredItems = measured
+    .map((el) => ({ el, itemIndex: items.findIndex((item) => item.id === el.rawId) }))
+    .filter(({ itemIndex }) => itemIndex >= 0);
+
+  const zones = measuredItems.map(({ el }, i) => {
+    const previous = measuredItems[i - 1]?.el;
+    const isGridCard = el.kind === "block" && el.width < window.innerWidth - 360;
+    const bandTop = i === 0 || !previous ? 0 : midOf(previous);
+    return {
+      id: `dz::${items.findIndex((item) => item.id === el.rawId)}`,
+      top: isGridCard ? el.top : bandTop,
+      bottom: isGridCard ? el.bottom : midOf(el),
+      lineY: el.top, // insertion line drawn at the top edge of element i
+      left: isGridCard ? el.left : 0,
+      right: isGridCard ? Math.max(window.innerWidth - el.left - el.width, 288) : 288,
+    };
+  });
+  // Final zone: insert after the last element
+  const lastEl = measuredItems[measuredItems.length - 1]?.el;
+  if (!lastEl) return null;
+  zones.push({
+    id: `dz::${items.length}`,
+    top: midOf(lastEl),
+    bottom: viewportH,
+    lineY: lastEl.bottom,
+    left: 0,
+    right: 288,
+  });
+
   return (
     <div
       style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 40 }}
       aria-hidden="true"
     >
-      {/* Drop zone above the first element */}
-      <DropZone
-        id="dz::0"
-        top={measured[0].top}
-        anyDragging={anyDragging}
-      />
-
-      {measured.map((el, i) => {
+      {/* Block drag handles */}
+      {measured.map((el) => {
         const item = itemById.get(el.rawId);
         if (!item) return null;
-
         return (
-          <div key={el.rawId}>
-            <BlockHandle
-              item={item}
-              measured={el}
-              pathname={pathname}
-              editingId={editingId}
-              onEditToggle={() => onEditToggle(item.id)}
-              onDelete={() => onDeleteBlock(item.id)}
-            />
-            {/* Drop zone below this element */}
-            <DropZone
-              id={`dz::${i + 1}`}
-              top={el.bottom}
-              anyDragging={anyDragging}
-            />
-          </div>
+          <BlockHandle
+            key={el.rawId}
+            item={item}
+            measured={el}
+            pathname={pathname}
+            editingId={editingId}
+            onEditToggle={() => onEditToggle(item.id)}
+            onDelete={() => onDeleteBlock(item.id)}
+          />
         );
       })}
+
+      {/* Full-coverage drop zones */}
+      {zones.map((zone) => (
+        <DropZone
+          key={zone.id}
+          id={zone.id}
+          top={zone.top}
+          bottom={zone.bottom}
+          lineY={zone.lineY}
+          left={zone.left}
+          right={zone.right}
+          anyDragging={anyDragging}
+        />
+      ))}
     </div>
   );
 }

@@ -10,17 +10,26 @@ export type BlockType =
   | "image"
   | "text"
   | "callout"
+  | "section-heading"
+  | "button-link"
+  | "link-list"
+  | "gallery"
+  | "embed"
   | "spacer"
   // ── Site-specific layout blocks ──
   | "page-header"
   | "hero-banner"
   | "portal-links"
+  | "founders"
   | "calendar-embed"
   // ── Live data blocks (render from content/*.json) ──
   | "campaigns-grid"
   | "players-grid"
   | "dms-grid"
-  | "bestiary-grid";
+  | "bestiary-grid"
+  // ── Composable profile card & grid ──
+  | "profile-card"
+  | "card-grid";
 
 // ── Unified page item types ───────────────────────────────────────────────────
 
@@ -38,12 +47,174 @@ export interface BlockItem {
 
 export type PageItem = SectionItem | BlockItem;
 
+// ── Profile card inner elements ───────────────────────────────────────────────
+
+export type ProfileCardItemType =
+  | "portrait"
+  | "image"
+  | "heading"
+  | "eyebrow"
+  | "description"
+  | "stat"
+  | "character-count"
+  | "badge"
+  | "link"
+  | "divider"
+  | "item-list"
+  | "character-list";
+
+export interface ProfileCardItem {
+  id: string;
+  type: ProfileCardItemType;
+  props: Record<string, unknown>;
+}
+
+export interface ProfileCardItemField {
+  key: string;
+  label: string;
+  type: "text" | "textarea" | "url" | "image" | "select" | "characters" | "entries";
+  options?: { value: string; label: string }[];
+}
+
+export interface ProfileCardItemDef {
+  type: ProfileCardItemType;
+  label: string;
+  icon: string;
+  fields: ProfileCardItemField[];
+}
+
+export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
+  {
+    type: "portrait",
+    label: "Portrait",
+    icon: "🖼",
+    fields: [
+      { key: "src",  label: "Image",                        type: "image" },
+      { key: "name", label: "Fallback name (for initials)", type: "text" },
+      {
+        key: "position", label: "Position", type: "select",
+        options: [
+          { value: "fixed", label: "Use card portrait zone" },
+          { value: "inline", label: "Inline with card elements" },
+        ],
+      },
+    ],
+  },
+  {
+    type: "image",
+    label: "Image",
+    icon: "▧",
+    fields: [
+      { key: "src", label: "Image", type: "image" },
+      { key: "alt", label: "Alt text", type: "text" },
+      {
+        key: "shape", label: "Shape", type: "select",
+        options: [
+          { value: "wide", label: "Wide" },
+          { value: "square", label: "Square" },
+          { value: "contain", label: "Contain" },
+        ],
+      },
+    ],
+  },
+  {
+    type: "heading",
+    label: "Heading",
+    icon: "H",
+    fields: [{ key: "value", label: "Text", type: "text" }],
+  },
+  {
+    type: "eyebrow",
+    label: "Eyebrow",
+    icon: "¶",
+    fields: [
+      { key: "value", label: "Text", type: "text" },
+      {
+        key: "variant", label: "Style", type: "select",
+        options: [
+          { value: "",         label: "Label (uppercase, arcane)" },
+          { value: "subtitle", label: "Subtitle (gold text, plain)" },
+        ],
+      },
+    ],
+  },
+  {
+    type: "description",
+    label: "Description",
+    icon: "≡",
+    fields: [{ key: "value", label: "Text", type: "textarea" }],
+  },
+  {
+    type: "stat",
+    label: "Stat",
+    icon: "#",
+    fields: [
+      { key: "label", label: "Label", type: "text" },
+      { key: "value", label: "Value", type: "text" },
+    ],
+  },
+  {
+    type: "character-count",
+    label: "Character Count",
+    icon: "#",
+    fields: [],
+  },
+  {
+    type: "badge",
+    label: "Badge",
+    icon: "◉",
+    fields: [
+      { key: "value", label: "Text", type: "text" },
+      {
+        key: "color", label: "Color", type: "select",
+        options: [
+          { value: "arcane", label: "Arcane (purple)" },
+          { value: "gold",   label: "Gold" },
+          { value: "muted",  label: "Muted (gray)" },
+        ],
+      },
+    ],
+  },
+  {
+    type: "link",
+    label: "Link",
+    icon: "↗",
+    fields: [
+      { key: "href",  label: "URL",   type: "url" },
+      { key: "label", label: "Label", type: "text" },
+    ],
+  },
+  {
+    type: "divider",
+    label: "Divider",
+    icon: "—",
+    fields: [],
+  },
+  {
+    type: "item-list",
+    label: "Item List",
+    icon: "☰",
+    fields: [
+      { key: "title", label: "List title", type: "text" },
+      { key: "entries", label: "Entries", type: "entries" },
+    ],
+  },
+  {
+    type: "character-list",
+    label: "Character List",
+    icon: "⚔",
+    fields: [
+      { key: "characters", label: "Characters", type: "characters" },
+    ],
+  },
+];
+
 // ── Asset field definitions ───────────────────────────────────────────────────
 
 export interface AssetField {
   key: string;
   label: string;
-  type: "text" | "textarea" | "url" | "select" | "json";
+  type: "text" | "textarea" | "url" | "image" | "select" | "json" | "items";
   placeholder?: string;
   hint?: string;
   options?: { value: string; label: string }[];
@@ -122,6 +293,32 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   {
+    type: "founders",
+    label: "Founders",
+    description: "Founder profile cards with portraits, names, roles, and an optional bio blurb",
+    icon: "👑",
+    category: "layout",
+    defaultProps: {
+      heading: "Founded By",
+      bio: "",
+      founders: JSON.stringify([
+        { name: "Founder Name", role: "Co-Founder", img: "/images/placeholder.png" },
+      ], null, 2),
+    },
+    fields: [
+      { key: "heading",  label: "Section heading",  type: "text",     placeholder: "e.g. Founded By" },
+      { key: "bio",      label: "Bio blurb (optional)", type: "textarea", placeholder: "A short story about the founders." },
+      {
+        key: "founders",
+        label: "Founders (JSON array)",
+        type: "json",
+        hint: 'Each item: { "name": "", "role": "", "img": "/images/..." }',
+        placeholder: '[{"name":"...","role":"...","img":"/images/..."}]',
+      },
+    ],
+  },
+
+  {
     type: "divider",
     label: "Divider",
     description: "Decorative horizontal separator",
@@ -164,7 +361,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     category: "content",
     defaultProps: { src: "", alt: "", caption: "", size: "large" },
     fields: [
-      { key: "src",     label: "Image URL",          type: "url",  placeholder: "/images/my-image.webp" },
+      { key: "src",     label: "Image",              type: "image", placeholder: "/images/my-image.webp" },
       { key: "alt",     label: "Alt text",           type: "text", placeholder: "Describe the image" },
       { key: "caption", label: "Caption (optional)", type: "text", placeholder: "Image caption" },
       {
@@ -175,6 +372,104 @@ export const ASSET_TYPES: AssetTypeDef[] = [
           { value: "medium", label: "Medium (centred)" },
         ],
       },
+    ],
+  },
+
+  {
+    type: "section-heading",
+    label: "Section Heading",
+    description: "Eyebrow, heading, and intro copy for a page section",
+    icon: "H",
+    category: "content",
+    defaultProps: { eyebrow: "", title: "Section Title", description: "", align: "left" },
+    fields: [
+      { key: "eyebrow", label: "Eyebrow", type: "text" },
+      { key: "title", label: "Title", type: "text" },
+      { key: "description", label: "Description", type: "textarea" },
+      {
+        key: "align", label: "Alignment", type: "select",
+        options: [{ value: "left", label: "Left" }, { value: "center", label: "Center" }],
+      },
+    ],
+  },
+
+  {
+    type: "button-link",
+    label: "Button Link",
+    description: "One prominent call-to-action button",
+    icon: "↗",
+    category: "content",
+    defaultProps: { label: "Open Link", href: "", align: "left", variant: "primary" },
+    fields: [
+      { key: "label", label: "Button label", type: "text" },
+      { key: "href", label: "URL", type: "url" },
+      {
+        key: "align", label: "Alignment", type: "select",
+        options: [{ value: "left", label: "Left" }, { value: "center", label: "Center" }, { value: "right", label: "Right" }],
+      },
+      {
+        key: "variant", label: "Style", type: "select",
+        options: [{ value: "primary", label: "Primary" }, { value: "secondary", label: "Secondary" }],
+      },
+    ],
+  },
+
+  {
+    type: "link-list",
+    label: "Link List",
+    description: "A compact list of editable links",
+    icon: "☰",
+    category: "content",
+    defaultProps: {
+      title: "",
+      links: JSON.stringify([{ label: "Link label", href: "https://example.com", description: "" }], null, 2),
+    },
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      {
+        key: "links",
+        label: "Links (JSON array)",
+        type: "json",
+        hint: 'Each item: { "label": "", "href": "", "description": "" }',
+      },
+    ],
+  },
+
+  {
+    type: "gallery",
+    label: "Gallery",
+    description: "A responsive image gallery",
+    icon: "▦",
+    category: "content",
+    defaultProps: {
+      columns: "3",
+      images: JSON.stringify([{ src: "/images/placeholder.png", alt: "", caption: "" }], null, 2),
+    },
+    fields: [
+      {
+        key: "columns", label: "Desktop columns", type: "select",
+        options: [{ value: "2", label: "2 columns" }, { value: "3", label: "3 columns" }, { value: "4", label: "4 columns" }],
+      },
+      {
+        key: "images",
+        label: "Images (JSON array)",
+        type: "json",
+        hint: 'Each item: { "src": "/images/...", "alt": "", "caption": "" }',
+      },
+    ],
+  },
+
+  {
+    type: "embed",
+    label: "Embed",
+    description: "Embed an iframe by URL",
+    icon: "<>",
+    category: "content",
+    defaultProps: { src: "", title: "Embedded content", height: "520" },
+    fields: [
+      { key: "src", label: "Embed URL", type: "url" },
+      { key: "title", label: "Title", type: "text" },
+      { key: "height", label: "Height in pixels", type: "text" },
     ],
   },
 
@@ -235,6 +530,61 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   // ── Live data blocks ──────────────────────────────────────────────────────────
+
+  {
+    type: "profile-card",
+    label: "Profile Card",
+    description: "Composable profile card — add portrait, heading, text, badges, links, and more",
+    icon: "🪪",
+    category: "content",
+    defaultProps: {
+      layout: "side",
+      items: JSON.stringify([
+        { id: "heading_1", type: "heading",     props: { value: "Name" } },
+        { id: "desc_1",    type: "description", props: { value: "Description" } },
+      ]),
+    },
+    fields: [
+      {
+        key: "layout", label: "Portrait position", type: "select",
+        options: [
+          { value: "side",   label: "Side panel (left column)" },
+          { value: "top",    label: "Top banner (full width)" },
+          { value: "none",   label: "No portrait zone" },
+        ],
+      },
+      { key: "items", label: "Card elements", type: "items", hint: "Add and reorder portrait, heading, text, badge, link, and more." },
+    ],
+  },
+
+  {
+    type: "card-grid",
+    label: "Card Grid",
+    description: "Groups the following profile cards into a responsive card grid",
+    icon: "▦",
+    category: "layout",
+    defaultProps: {
+      columns: "2",
+      gap: "md",
+    },
+    fields: [
+      {
+        key: "columns", label: "Desktop columns", type: "select",
+        options: [
+          { value: "2", label: "2 columns" },
+          { value: "3", label: "3 columns" },
+        ],
+      },
+      {
+        key: "gap", label: "Card spacing", type: "select",
+        options: [
+          { value: "sm", label: "Small" },
+          { value: "md", label: "Medium" },
+          { value: "lg", label: "Large" },
+        ],
+      },
+    ],
+  },
 
   {
     type: "campaigns-grid",
