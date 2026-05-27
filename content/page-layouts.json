@@ -1,0 +1,7 @@
+{
+  "/": ["hero", "portal"],
+  "/campaigns": ["header", "campaigns", "side-campaigns"],
+  "/players": ["header", "players", "unassigned"],
+  "/dungeon-masters": ["header", "dms"],
+  "/bestiary": ["header", "creatures"]
+}
