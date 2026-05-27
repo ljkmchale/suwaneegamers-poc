@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/adminAuth";
 import { readContent, writeContent } from "@/lib/contentFiles";
 import type { DungeonMasterProfile } from "@/lib/dungeonMasters";
 
@@ -17,6 +18,8 @@ function parsePrevious(raw: string): DungeonMasterProfile["previousCampaigns"] {
 }
 
 export async function saveDmAction(formData: FormData) {
+  await requireAdmin();
+
   const dms = readContent<DungeonMasterProfile[]>("dungeon-masters.json");
   const updated: DungeonMasterProfile = {
     id: (formData.get("id") as string).trim(),
@@ -42,6 +45,8 @@ export async function saveDmAction(formData: FormData) {
 }
 
 export async function deleteDmAction(formData: FormData) {
+  await requireAdmin();
+
   const id = formData.get("id") as string;
   const dms = readContent<DungeonMasterProfile[]>("dungeon-masters.json");
   writeContent("dungeon-masters.json", dms.filter((d) => d.id !== id));

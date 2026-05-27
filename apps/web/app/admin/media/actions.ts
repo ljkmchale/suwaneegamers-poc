@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import path from "path";
+import { requireAdmin } from "@/lib/adminAuth";
 
 const PUBLIC_IMAGES = path.join(process.cwd(), "public/images");
 
@@ -17,6 +18,8 @@ function sanitizeFilename(name: string): string {
 }
 
 export async function uploadFilesAction(formData: FormData): Promise<{ uploaded: string[]; errors: string[] }> {
+  await requireAdmin();
+
   const files = formData.getAll("files") as File[];
   const subfolder = (formData.get("subfolder") as string | null) ?? "";
   const uploaded: string[] = [];
@@ -51,6 +54,8 @@ export async function uploadFilesAction(formData: FormData): Promise<{ uploaded:
 }
 
 export async function deleteMediaAction(formData: FormData): Promise<void> {
+  await requireAdmin();
+
   const filePath = formData.get("filePath") as string;
   if (!filePath || !filePath.startsWith("/images/")) return;
 
@@ -64,4 +69,3 @@ export async function deleteMediaAction(formData: FormData): Promise<void> {
     // ignore if already gone
   }
 }
-

@@ -5,13 +5,21 @@ import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow login page through
-  if (pathname === "/admin/login") return NextResponse.next();
+  // Allow password entry through
+  if (pathname === "/admin/login") {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-admin-login-page", "1");
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
 
   const response = NextResponse.next();
   const session = await getIronSession<AdminSessionData>(request, response, SESSION_OPTIONS);
 
-  if (!session.isAdmin) {
+  if (session.isAdmin !== true) {
     const loginUrl = new URL("/admin/login", request.url);
     loginUrl.searchParams.set("from", pathname);
     return NextResponse.redirect(loginUrl);

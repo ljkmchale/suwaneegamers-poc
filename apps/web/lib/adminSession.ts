@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 export interface AdminSessionData {
   isAdmin?: boolean;
+  editMode?: boolean;
 }
 
 export const SESSION_OPTIONS: SessionOptions = {

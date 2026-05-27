@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/adminAuth";
 import { readContent, writeContent } from "@/lib/contentFiles";
 
 interface Theme {
@@ -25,6 +26,8 @@ const COLOR_KEYS = [
 ];
 
 export async function saveAppearanceAction(formData: FormData) {
+  await requireAdmin();
+
   const theme = readContent<Theme>("theme.json");
 
   const colors: Record<string, string> = {};
@@ -51,6 +54,8 @@ export async function saveAppearanceAction(formData: FormData) {
 }
 
 export async function resetColorsAction() {
+  await requireAdmin();
+
   const theme = readContent<Theme>("theme.json");
   theme.colors = {
     "--color-bg-deep": "#08050f",

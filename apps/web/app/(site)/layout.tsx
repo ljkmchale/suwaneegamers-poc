@@ -19,6 +19,7 @@ export default async function SiteLayout({
 
   const session = await getAdminSession();
   const isAdmin = session.isAdmin === true;
+  const editMode = isAdmin && session.editMode === true;
 
   // Paths where the Edit Layout overlay should be available
   const builtInPaths = Object.keys(PAGE_SECTIONS);
@@ -31,7 +32,13 @@ export default async function SiteLayout({
       <ParticleField />
 
       {/* Navigation */}
-      <Navbar primaryNav={primaryNav} worldNav={worldNav} toolsNav={toolsNav} />
+      <Navbar
+        primaryNav={primaryNav}
+        worldNav={worldNav}
+        toolsNav={toolsNav}
+        isAdmin={isAdmin}
+        editMode={editMode}
+      />
 
       {/* Page content */}
       <main className="flex-1 relative z-10">{children}</main>
@@ -40,7 +47,7 @@ export default async function SiteLayout({
       <Footer />
 
       {/* Page layout editor — only rendered when admin is logged in */}
-      {isAdmin && <PageEditOverlay managedPaths={managedPaths} />}
+      {editMode && <PageEditOverlay managedPaths={managedPaths} />}
     </div>
   );
 }

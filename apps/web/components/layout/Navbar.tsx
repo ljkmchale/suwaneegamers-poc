@@ -3,16 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Shield } from "lucide-react";
+import { PencilLine, Shield } from "lucide-react";
+import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/actions";
 import type { NavItem } from "@/lib/nav";
 
 interface NavProps {
   primaryNav: NavItem[];
   worldNav: NavItem[];
   toolsNav: NavItem[];
+  isAdmin?: boolean;
+  editMode?: boolean;
 }
 
-export function Navbar({ primaryNav, worldNav, toolsNav }: NavProps) {
+export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMode = false }: NavProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [worldOpen, setWorldOpen] = useState(false);
@@ -143,14 +146,30 @@ export function Navbar({ primaryNav, worldNav, toolsNav }: NavProps) {
             );
           })}
 
+          <form action={editMode ? disableEditModeAction : enableEditModeAction} className="ml-auto">
+            <input type="hidden" name="from" value={pathname} />
+            <button
+              type="submit"
+              aria-label={editMode ? "Disable edit mode" : "Enable edit mode"}
+              title={editMode ? "Disable edit mode" : "Enable edit mode"}
+              className="inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
+              style={{
+                borderColor: editMode ? "var(--color-accent-gold)" : "var(--color-bg-border)",
+                color: editMode ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
+              }}
+            >
+              <PencilLine size={17} strokeWidth={2} aria-hidden="true" />
+            </button>
+          </form>
+
           <Link
-            href="/admin/login"
-            aria-label="Admin login"
-            title="Admin login"
-            className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
+            href={isAdmin ? "/admin" : "/admin/login"}
+            aria-label={isAdmin ? "Admin dashboard" : "Admin login"}
+            title={isAdmin ? "Admin dashboard" : "Admin login"}
+            className="inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
             style={{
-              borderColor: isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-bg-border)",
-              color: isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
+              borderColor: isAdmin || isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-bg-border)",
+              color: isAdmin || isActive("/admin") ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
             }}
           >
             <Shield size={17} strokeWidth={2} aria-hidden="true" />
@@ -218,8 +237,23 @@ export function Navbar({ primaryNav, worldNav, toolsNav }: NavProps) {
                 </Link>
               );
             })}
+            <form action={editMode ? disableEditModeAction : enableEditModeAction}>
+              <input type="hidden" name="from" value={pathname} />
+              <button
+                type="submit"
+                className="flex w-full items-center gap-2 px-3 py-2.5 rounded font-cinzel text-xs tracking-wider uppercase"
+                style={{
+                  color: editMode
+                    ? "var(--color-accent-gold)"
+                    : "var(--color-text-secondary)",
+                }}
+              >
+                <PencilLine size={16} strokeWidth={2} aria-hidden="true" />
+                {editMode ? "Disable Edit Mode" : "Enable Edit Mode"}
+              </button>
+            </form>
             <Link
-              href="/admin/login"
+              href={isAdmin ? "/admin" : "/admin/login"}
               onClick={() => setMenuOpen(false)}
               className="flex items-center gap-2 px-3 py-2.5 rounded font-cinzel text-xs tracking-wider uppercase"
               style={{

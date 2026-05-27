@@ -4,11 +4,12 @@ import { loginAction } from "./actions";
 export const metadata: Metadata = { title: "Admin Login" };
 
 interface Props {
-  searchParams: Promise<{ error?: string; from?: string }>;
+  searchParams: Promise<{ error?: string; from?: string; editMode?: string }>;
 }
 
 export default async function AdminLoginPage({ searchParams }: Props) {
-  const { error, from } = await searchParams;
+  const { error, from, editMode } = await searchParams;
+  const wantsEditMode = editMode === "1";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#08050f]">
@@ -17,19 +18,20 @@ export default async function AdminLoginPage({ searchParams }: Props) {
           Admin
         </h1>
         <p className="text-xs text-center tracking-widest uppercase mb-8 text-[#5a5060]">
-          Suwanee Gamers Portal
+          {wantsEditMode ? "Enable Page Editing" : "Suwanee Gamers Portal"}
         </p>
 
         {error && (
           <p className="text-sm text-center mb-4 text-red-400">
-            Incorrect password.
+            Incorrect admin password.
           </p>
         )}
 
         <form action={loginAction}>
-          <input type="hidden" name="from" value={from ?? "/admin"} />
+          <input type="hidden" name="from" value={from ?? (wantsEditMode ? "/" : "/admin")} />
+          {wantsEditMode && <input type="hidden" name="editMode" value="1" />}
           <label className="block mb-1 text-xs font-cinzel tracking-widest uppercase text-[#a89880]">
-            Password
+            Admin Password
           </label>
           <input
             type="password"

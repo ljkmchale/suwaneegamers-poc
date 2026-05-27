@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Home } from "lucide-react";
+import { headers } from "next/headers";
 import { logoutAction } from "./login/actions";
 
 const NAV_LINKS = [
@@ -14,7 +15,12 @@ const NAV_LINKS = [
   { href: "/admin/media", label: "Media" },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const requestHeaders = await headers();
+  const isLoginPage = requestHeaders.get("x-admin-login-page") === "1";
+
+  if (isLoginPage) return children;
+
   return (
     <div className="min-h-screen flex bg-[#08050f] text-[#e8dfc8]">
       {/* Sidebar */}

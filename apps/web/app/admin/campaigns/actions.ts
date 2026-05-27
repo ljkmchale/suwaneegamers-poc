@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/adminAuth";
 import { readContent, writeContent } from "@/lib/contentFiles";
 import type { PortalCampaign, CampaignPartyMember, CampaignResourceLink, CampaignSessionSummary } from "@/lib/campaigns";
 
@@ -65,6 +66,8 @@ function buildCampaignFromForm(formData: FormData): PortalCampaign {
 }
 
 export async function saveCampaignAction(formData: FormData) {
+  await requireAdmin();
+
   const campaigns = readContent<PortalCampaign[]>("campaigns.json");
   const updated = buildCampaignFromForm(formData);
   const idx = campaigns.findIndex((c) => c.id === updated.id);
@@ -83,6 +86,8 @@ export async function saveCampaignAction(formData: FormData) {
 }
 
 export async function deleteCampaignAction(formData: FormData) {
+  await requireAdmin();
+
   const id = formData.get("id") as string;
   const campaigns = readContent<PortalCampaign[]>("campaigns.json");
   writeContent("campaigns.json", campaigns.filter((c) => c.id !== id));
@@ -92,6 +97,8 @@ export async function deleteCampaignAction(formData: FormData) {
 }
 
 export async function reorderCampaignsAction(ids: string[]) {
+  await requireAdmin();
+
   const campaigns = readContent<PortalCampaign[]>("campaigns.json");
   const ordered = ids
     .map((id) => campaigns.find((c) => c.id === id))

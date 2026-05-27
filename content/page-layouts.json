@@ -55,15 +55,6 @@
     {
       "kind": "section",
       "id": "creatures"
-    },
-    {
-      "kind": "block",
-      "id": "blk_1779840770863_odpe",
-      "type": "divider",
-      "props": {
-        "variant": "ornate",
-        "label": "testing"
-      }
     }
   ]
 }

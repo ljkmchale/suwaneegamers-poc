@@ -2,10 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/adminAuth";
 import { readContent, writeContent } from "@/lib/contentFiles";
 import type { PlayerProfileSeed } from "@/lib/players";
 
 export async function savePlayerAction(formData: FormData) {
+  await requireAdmin();
+
   const players = readContent<PlayerProfileSeed[]>("players.json");
   const updated: PlayerProfileSeed = {
     id: (formData.get("id") as string).trim(),
@@ -27,6 +30,8 @@ export async function savePlayerAction(formData: FormData) {
 }
 
 export async function deletePlayerAction(formData: FormData) {
+  await requireAdmin();
+
   const id = formData.get("id") as string;
   const players = readContent<PlayerProfileSeed[]>("players.json");
   writeContent("players.json", players.filter((p) => p.id !== id));
@@ -35,6 +40,8 @@ export async function deletePlayerAction(formData: FormData) {
 }
 
 export async function reorderPlayersAction(ids: string[]) {
+  await requireAdmin();
+
   const players = readContent<PlayerProfileSeed[]>("players.json");
   const ordered = ids
     .map((id) => players.find((p) => p.id === id))

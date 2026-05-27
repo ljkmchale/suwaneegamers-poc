@@ -225,12 +225,13 @@ export function PageDragLayer({
 
   // Initial measure + track scroll / resize
   useEffect(() => {
-    remeasure();
+    const initialMeasure = window.setTimeout(remeasure, 0);
     window.addEventListener("scroll", remeasure, { passive: true });
     window.addEventListener("resize", remeasure);
     const ro = new ResizeObserver(remeasure);
     ro.observe(document.documentElement);
     return () => {
+      window.clearTimeout(initialMeasure);
       window.removeEventListener("scroll", remeasure);
       window.removeEventListener("resize", remeasure);
       ro.disconnect();
