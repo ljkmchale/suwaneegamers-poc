@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PortalPage } from "@/components/portal/PortalPage";
-import { kbLink } from "@/lib/portal";
+import { getPageLayout } from "@/lib/pageLayouts";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "History",
@@ -8,12 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function HistoryPage() {
+  const order = getPageLayout("/history");
   return (
-    <PortalPage
-      eyebrow="Knowledge Base"
-      title="History"
-      description="The canonical timeline, eras, and historical notes are maintained in the Knowledge Base."
-      links={[kbLink("Open the Myrdae timeline and history references.")]}
-    />
+    <div className="min-h-screen pb-20">
+      <PageBlockList items={order} />
+    </div>
   );
 }

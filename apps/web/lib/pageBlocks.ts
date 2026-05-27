@@ -27,6 +27,10 @@ export type BlockType =
   | "players-grid"
   | "dms-grid"
   | "bestiary-grid"
+  // ── Single-item live data blocks ──
+  | "campaign-card"
+  | "player-card"
+  | "creature-card"
   // ── Composable profile card & grid ──
   | "profile-card"
   | "card-grid";
@@ -61,7 +65,9 @@ export type ProfileCardItemType =
   | "link"
   | "divider"
   | "item-list"
-  | "character-list";
+  | "character-list"
+  | "next-session"
+  | "campaign-info";
 
 export interface ProfileCardItem {
   id: string;
@@ -110,9 +116,10 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
       {
         key: "shape", label: "Shape", type: "select",
         options: [
-          { value: "wide", label: "Wide" },
-          { value: "square", label: "Square" },
-          { value: "contain", label: "Contain" },
+          { value: "wide",     label: "Wide (16:9)" },
+          { value: "square",   label: "Square (1:1)" },
+          { value: "contain",  label: "Contain (16:9, object-contain)" },
+          { value: "creature", label: "Creature (4:3, object-contain)" },
         ],
       },
     ],
@@ -121,7 +128,16 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
     type: "heading",
     label: "Heading",
     icon: "H",
-    fields: [{ key: "value", label: "Text", type: "text" }],
+    fields: [
+      { key: "value", label: "Text", type: "text" },
+      {
+        key: "size", label: "Size", type: "select",
+        options: [
+          { value: "",       label: "Normal (xl)" },
+          { value: "large",  label: "Large (2xl)" },
+        ],
+      },
+    ],
   },
   {
     type: "eyebrow",
@@ -205,6 +221,24 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
     icon: "⚔",
     fields: [
       { key: "characters", label: "Characters", type: "characters" },
+    ],
+  },
+  {
+    type: "next-session",
+    label: "Next Session Date",
+    icon: "📅",
+    fields: [
+      { key: "campaignName", label: "Campaign name (for calendar match)", type: "text" },
+    ],
+  },
+  {
+    type: "campaign-info",
+    label: "Campaign Info",
+    icon: "⚔",
+    fields: [
+      { key: "schedule",     label: "Schedule / cadence",                  type: "text" },
+      { key: "dm",           label: "Dungeon Master",                       type: "text" },
+      { key: "campaignName", label: "Campaign name (for live date lookup)", type: "text" },
     ],
   },
 ];
@@ -624,6 +658,42 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     category: "data",
     defaultProps: {},
     fields: [],
+  },
+
+  {
+    type: "campaign-card",
+    label: "Campaign Card",
+    description: "Single campaign card pulled live from campaigns.json — place inside a Card Grid",
+    icon: "⚔",
+    category: "data",
+    defaultProps: { id: "" },
+    fields: [
+      { key: "id", label: "Campaign ID", type: "text", hint: "e.g. a-new-adventure" },
+    ],
+  },
+
+  {
+    type: "player-card",
+    label: "Player Card",
+    description: "Single player profile card pulled live from players.json — place inside a Card Grid",
+    icon: "👤",
+    category: "data",
+    defaultProps: { id: "" },
+    fields: [
+      { key: "id", label: "Player ID", type: "text", hint: "e.g. sean-poole" },
+    ],
+  },
+
+  {
+    type: "creature-card",
+    label: "Creature Card",
+    description: "Single creature card pulled live from bestiary.json — place inside a Card Grid",
+    icon: "🐉",
+    category: "data",
+    defaultProps: { name: "" },
+    fields: [
+      { key: "name", label: "Creature name", type: "text", hint: "e.g. Bulas" },
+    ],
   },
 
   {

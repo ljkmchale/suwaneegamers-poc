@@ -3,21 +3,46 @@
     { "kind": "section", "id": "hero" },
     { "kind": "section", "id": "portal" }
   ],
+
   "/campaigns": [
     { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "campaigns" },
-    { "kind": "section", "id": "side-campaigns" }
+    { "kind": "block", "id": "campaigns-grid", "type": "card-grid", "props": { "columns": "3", "gap": "md" } },
+    { "kind": "block", "id": "cc-a-new-adventure",      "type": "campaign-card", "props": { "id": "a-new-adventure" } },
+    { "kind": "block", "id": "cc-bloody-endeavor",      "type": "campaign-card", "props": { "id": "bloody-endeavor" } },
+    { "kind": "block", "id": "cc-dungeons-iii",         "type": "campaign-card", "props": { "id": "dungeons-iii" } },
+    { "kind": "block", "id": "cc-heroes-of-emberstran", "type": "campaign-card", "props": { "id": "heroes-of-emberstran" } },
+    { "kind": "block", "id": "cc-mad-mage",             "type": "campaign-card", "props": { "id": "mad-mage" } },
+    { "kind": "block", "id": "cc-souls-of-destiny",     "type": "campaign-card", "props": { "id": "souls-of-destiny" } },
+    { "kind": "block", "id": "cc-the-silent-vanguard",  "type": "campaign-card", "props": { "id": "the-silent-vanguard" } },
+    { "kind": "section", "id": "side-label" },
+    { "kind": "block", "id": "side-campaigns-grid", "type": "card-grid", "props": { "columns": "2", "gap": "md" } },
+    { "kind": "block", "id": "cc-collective-of-myrdae", "type": "campaign-card", "props": { "id": "collective-of-myrdae" } }
   ],
+
   "/players": [
     { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "players" },
+    { "kind": "block", "id": "players-grid", "type": "card-grid", "props": { "columns": "2", "gap": "md" } },
+    { "kind": "block", "id": "pc-brian",              "type": "player-card", "props": { "id": "brian" } },
+    { "kind": "block", "id": "pc-chip-poole",         "type": "player-card", "props": { "id": "chip-poole" } },
+    { "kind": "block", "id": "pc-chuck",              "type": "player-card", "props": { "id": "chuck" } },
+    { "kind": "block", "id": "pc-cooper",             "type": "player-card", "props": { "id": "cooper" } },
+    { "kind": "block", "id": "pc-emma-cooper",        "type": "player-card", "props": { "id": "emma-cooper" } },
+    { "kind": "block", "id": "pc-jenny-mchale",       "type": "player-card", "props": { "id": "jenny-mchale" } },
+    { "kind": "block", "id": "pc-joshua-john",        "type": "player-card", "props": { "id": "joshua-john" } },
+    { "kind": "block", "id": "pc-larry-mchale",       "type": "player-card", "props": { "id": "larry-mchale" } },
+    { "kind": "block", "id": "pc-lesley-poole",       "type": "player-card", "props": { "id": "lesley-poole" } },
+    { "kind": "block", "id": "pc-michael-hewson",     "type": "player-card", "props": { "id": "michael-hewson" } },
+    { "kind": "block", "id": "pc-mike-brown",         "type": "player-card", "props": { "id": "mike-brown" } },
+    { "kind": "block", "id": "pc-sean-poole",         "type": "player-card", "props": { "id": "sean-poole" } },
+    { "kind": "block", "id": "pc-suzanne-chernetsky", "type": "player-card", "props": { "id": "suzanne-chernetsky" } },
+    { "kind": "block", "id": "pc-tiffany-mulvihill",  "type": "player-card", "props": { "id": "tiffany-mulvihill" } },
+    { "kind": "block", "id": "pc-tom-chernetsky",     "type": "player-card", "props": { "id": "tom-chernetsky" } },
+    { "kind": "block", "id": "pc-ty-cooper",          "type": "player-card", "props": { "id": "ty-cooper" } },
     { "kind": "section", "id": "unassigned" }
   ],
+
   "/dungeon-masters": [
-    {
-      "kind": "section",
-      "id": "header"
-    },
+    { "kind": "section", "id": "header" },
     {
       "kind": "block",
       "id": "dm-grid-1",
@@ -79,8 +104,183 @@
       }
     }
   ],
+
   "/bestiary": [
     { "kind": "section", "id": "header" },
-    { "kind": "section", "id": "creatures" }
+    { "kind": "block", "id": "bestiary-grid", "type": "card-grid", "props": { "columns": "3", "gap": "md" } },
+    { "kind": "block", "id": "bc-bulas",          "type": "creature-card", "props": { "name": "Bulas" } },
+    { "kind": "block", "id": "bc-chalyth",        "type": "creature-card", "props": { "name": "Chalyth" } },
+    { "kind": "block", "id": "bc-dralg",          "type": "creature-card", "props": { "name": "Dralg" } },
+    { "kind": "block", "id": "bc-genling",        "type": "creature-card", "props": { "name": "Genling" } },
+    { "kind": "block", "id": "bc-gertot",         "type": "creature-card", "props": { "name": "Gertot" } },
+    { "kind": "block", "id": "bc-giant-solifugid","type": "creature-card", "props": { "name": "Giant Solifugid" } },
+    { "kind": "block", "id": "bc-kahlbit",        "type": "creature-card", "props": { "name": "Kahlbit" } },
+    { "kind": "block", "id": "bc-leatherback",    "type": "creature-card", "props": { "name": "Leatherback" } },
+    { "kind": "block", "id": "bc-narun",          "type": "creature-card", "props": { "name": "Narūn" } },
+    { "kind": "block", "id": "bc-rongri",         "type": "creature-card", "props": { "name": "Rongri" } },
+    { "kind": "block", "id": "bc-saber",          "type": "creature-card", "props": { "name": "Saber" } },
+    { "kind": "block", "id": "bc-thall-mound",    "type": "creature-card", "props": { "name": "Thall Mound" } }
+  ],
+
+  "/lore": [
+    {
+      "kind": "block", "id": "lore-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Knowledge Base",
+        "title": "Legends & Lore",
+        "description": "Myrdae canon belongs in the Knowledge Base. This portal should not duplicate or drift from it.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "lore-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the canonical lore, histories, myths, factions, and world notes.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Original Google Site\",\"description\":\"Reference the legacy lore pages while the Knowledge Base remains the source of truth.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Reference\"}]"
+      }
+    }
+  ],
+
+  "/gazetteer": [
+    {
+      "kind": "block", "id": "gazetteer-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Knowledge Base",
+        "title": "Gazetteer",
+        "description": "Cities, ruins, taverns, wilderness sites, and other locations are maintained in the Knowledge Base.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "gazetteer-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical Myrdae locations and place notes.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+      }
+    }
+  ],
+
+  "/world": [
+    {
+      "kind": "block", "id": "world-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Map Portal",
+        "title": "The World of Myrdae",
+        "description": "Map and location truth should live outside this app. Use the portal to reach the Knowledge Base and map resources.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "world-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical Myrdae map notes, locations, and territory references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Maps of Myrdae\",\"description\":\"Open the local map doorway for interactive and reference map links.\",\"href\":\"/maps-of-myrdae\",\"label\":\"View Maps\"}]"
+      }
+    }
+  ],
+
+  "/history": [
+    {
+      "kind": "block", "id": "history-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Knowledge Base",
+        "title": "History",
+        "description": "The canonical timeline, eras, and historical notes are maintained in the Knowledge Base.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "history-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the Myrdae timeline and history references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+      }
+    }
+  ],
+
+  "/pantheon": [
+    {
+      "kind": "block", "id": "pantheon-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Knowledge Base",
+        "title": "Pantheon",
+        "description": "The gods, divine factions, and religious history of Myrdae are canonical in the Knowledge Base.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "pantheon-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the canonical pantheon and religion references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+      }
+    }
+  ],
+
+  "/territories": [
+    {
+      "kind": "block", "id": "territories-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Knowledge Base",
+        "title": "Territories",
+        "description": "Political regions, settlements, factions, and territory notes are maintained in the Knowledge Base.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "territories-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical territory and region references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+      }
+    }
+  ],
+
+  "/maps-of-myrdae": [
+    {
+      "kind": "block", "id": "maps-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Map Portal",
+        "title": "Maps of Myrdae",
+        "description": "This page is the doorway for map resources. The Knowledge Base should remain the canonical location index.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "maps-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical map notes, locations, territories, and table handouts.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Legacy Map Pages\",\"description\":\"Open the original Google Site map pages for comparison and reference.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Legacy Site\"}]"
+      }
+    }
+  ],
+
+  "/previous-campaigns": [
+    {
+      "kind": "block", "id": "prev-campaigns-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Campaign Archive",
+        "title": "Previous Campaigns",
+        "description": "Completed and archived campaigns should be maintained in the Knowledge Base so the portal stays lightweight.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "prev-campaigns-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open archived campaigns, old recaps, and legacy table lore.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Original Google Site\",\"description\":\"Open the original campaign pages for reference while archives are consolidated.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Legacy Site\"}]"
+      }
+    }
+  ],
+
+  "/setting": [
+    {
+      "kind": "block", "id": "setting-header", "type": "page-header",
+      "props": {
+        "eyebrow": "Setting Guide",
+        "title": "Myrdae Setting",
+        "description": "The setting guide, campaign canon, and world rules are maintained in the shared Google Doc.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block", "id": "setting-links", "type": "portal-links",
+      "props": {
+        "links": "[{\"title\":\"Myrdae Setting Guide\",\"description\":\"Open the canonical setting guide at the linked Google Doc heading.\",\"href\":\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.xpbfs6nn72lr\",\"label\":\"Open Setting\"}]"
+      }
+    }
   ]
 }

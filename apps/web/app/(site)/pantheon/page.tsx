@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PortalPage } from "@/components/portal/PortalPage";
-import { kbLink } from "@/lib/portal";
+import { getPageLayout } from "@/lib/pageLayouts";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Pantheon",
@@ -8,12 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function PantheonPage() {
+  const order = getPageLayout("/pantheon");
   return (
-    <PortalPage
-      eyebrow="Knowledge Base"
-      title="Pantheon"
-      description="The gods, divine factions, and religious history of Myrdae are canonical in the Knowledge Base."
-      links={[kbLink("Open the canonical pantheon and religion references.")]}
-    />
+    <div className="min-h-screen pb-20">
+      <PageBlockList items={order} />
+    </div>
   );
 }

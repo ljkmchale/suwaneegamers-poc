@@ -4,9 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { HeroSection } from "@/components/fantasy/HeroSection";
-import { listedCampaigns, sideCampaigns } from "@/lib/campaigns";
+import {
+  listedCampaigns,
+  sideCampaigns,
+  findCampaign,
+  normalizeCampaignTitle,
+} from "@/lib/campaigns";
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
+import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
 import type { BlockItem, ProfileCardItem } from "@/lib/pageBlocks";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -173,7 +179,7 @@ function CardGridBlock({
 }) {
   const columns = (props.columns as string | undefined) ?? "2";
   const gap = (props.gap as string | undefined) ?? "md";
-  const columnClass = columns === "3" ? "xl:grid-cols-3" : "lg:grid-cols-2";
+  const columnClass = columns === "3" ? "sm:grid-cols-2 xl:grid-cols-3" : "lg:grid-cols-2";
   const gapClass = gap === "sm" ? "gap-3" : gap === "lg" ? "gap-8" : "gap-5";
 
   return (
@@ -690,8 +696,6 @@ function DmsGridBlock() {
   );
 }
 
-interface Creature { name: string; type: string; image: string; href?: string; }
-
 function BestiaryGridBlock() {
   let creatures: Creature[] = [];
   try {
@@ -727,6 +731,350 @@ function BestiaryGridBlock() {
       </div>
     </div>
   );
+}
+
+// ── Live calendar helpers ─────────────────────────────────────────────────────
+
+const _dateFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "short", month: "short", day: "numeric",
+  timeZone: GOOGLE_CALENDAR_TIMEZONE,
+});
+const _timeFormatter = new Intl.DateTimeFormat("en-US", {
+  hour: "numeric", minute: "2-digit",
+  timeZone: GOOGLE_CALENDAR_TIMEZONE,
+});
+
+async function resolveNextDate(campaignName: string): Promise<string | null> {
+  try {
+    const events = await fetchUpcomingCalendarEvents(50);
+    const name = normalizeCampaignTitle(campaignName);
+    const match = events.find((event) => {
+      const title = normalizeCampaignTitle(event.title);
+      return title === name || title.includes(name) || name.includes(title);
+    });
+    if (!match) return null;
+    const start = new Date(match.start);
+    return match.allDay
+      ? _dateFormatter.format(start)
+      : `${_dateFormatter.format(start)} at ${_timeFormatter.format(start)}`;
+  } catch {
+    return null;
+  }
+}
+
+/** Standalone "Next Session Date" profile-card item — async RSC. */
+async function NextSessionItem({ campaignName }: { campaignName: string }) {
+  const dateStr = await resolveNextDate(campaignName);
+  return (
+    <div>
+      <p className="font-cinzel tracking-widest uppercase mb-1"
+        style={{ color: "var(--color-text-muted)" }}>
+        Next Date
+      </p>
+      <p style={{ color: dateStr ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+        {dateStr ?? "See calendar"}
+      </p>
+    </div>
+  );
+}
+
+/** Campaign info section (schedule + DM + live date) — async RSC. */
+async function CampaignInfoItem({
+  schedule, dm, campaignName,
+}: {
+  schedule?: string;
+  dm?: string;
+  campaignName?: string;
+}) {
+  const dateStr = campaignName ? await resolveNextDate(campaignName) : null;
+  return (
+    <div className="space-y-4 pt-4 border-t text-sm" style={{ borderColor: "var(--color-bg-border)" }}>
+      {(schedule || dm) && (
+        <div>
+          {schedule && (
+            <p className="font-cinzel tracking-widest uppercase mb-1"
+              style={{ color: "var(--color-text-muted)" }}>
+              {schedule}
+            </p>
+          )}
+          {dm && (
+            <p style={{ color: "var(--color-accent-gold)" }}>DM: {dm}</p>
+          )}
+        </div>
+      )}
+      {campaignName && (
+        <div>
+          <p className="font-cinzel tracking-widest uppercase mb-1"
+            style={{ color: "var(--color-text-muted)" }}>
+            Next Date
+          </p>
+          <p style={{ color: dateStr ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+            {dateStr ?? "See calendar"}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Single-item live data blocks ──────────────────────────────────────────────
+
+/** Single campaign card — reads from campaigns.json, fetches live next date. */
+async function CampaignCardBlock({
+  props,
+  variant = "standalone",
+}: {
+  props: Record<string, unknown>;
+  variant?: "standalone" | "grid-item";
+}) {
+  const id = props.id as string;
+  const campaign = findCampaign(id);
+  if (!campaign) return null;
+
+  const inGrid = variant === "grid-item";
+  const dateStr = campaign.schedule !== "No cadence"
+    ? await resolveNextDate(campaign.name)
+    : null;
+
+  const inner = (
+    <article className="fantasy-card overflow-hidden h-full">
+      {campaign.headerImage && (
+        <div
+          className="h-36 border-b"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(8, 5, 15, 0.08), rgba(8, 5, 15, 0.62)), url("${campaign.headerImage}")`,
+            backgroundPosition: campaign.headerImagePosition ?? "center",
+            backgroundSize: "cover",
+            borderColor: "var(--color-bg-border)",
+          }}
+        />
+      )}
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <h2
+            className="font-cinzel text-2xl leading-tight group-hover:text-amber-400 transition-colors"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {campaign.name}
+          </h2>
+          <span
+            className="shrink-0 text-xs font-cinzel tracking-widest uppercase px-2.5 py-1 rounded-full border"
+            style={{ color: "var(--color-accent-arcane)", borderColor: "var(--color-accent-arcane)" }}
+          >
+            Active
+          </span>
+        </div>
+        <div className="space-y-4 pt-4 border-t text-sm" style={{ borderColor: "var(--color-bg-border)" }}>
+          <div>
+            <p className="font-cinzel tracking-widest uppercase mb-1"
+              style={{ color: "var(--color-text-muted)" }}>
+              {campaign.schedule}
+            </p>
+            <p style={{ color: "var(--color-accent-gold)" }}>DM: {campaign.dm}</p>
+          </div>
+          <div>
+            <p className="font-cinzel tracking-widest uppercase mb-1"
+              style={{ color: "var(--color-text-muted)" }}>
+              Next Date
+            </p>
+            <p style={{ color: dateStr ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+              {dateStr ?? "See calendar"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+
+  const linked = (
+    <Link href={`/campaigns/${campaign.id}`} className="block group h-full">
+      {inner}
+    </Link>
+  );
+
+  return inGrid ? linked : <div className="max-w-6xl mx-auto px-6 py-2.5">{linked}</div>;
+}
+
+/** Single player card — reads from players.json with live character assignments. */
+function PlayerCardBlock({
+  props,
+  variant = "standalone",
+}: {
+  props: Record<string, unknown>;
+  variant?: "standalone" | "grid-item";
+}) {
+  const id = props.id as string;
+  const players = getPlayerProfiles();
+  const player = players.find((p) => p.id === id);
+  if (!player) return null;
+
+  const inGrid = variant === "grid-item";
+  const initials = player.name.split(" ").map((p: string) => p[0]).join("").slice(0, 2).toUpperCase();
+
+  const inner = (
+    <article className="fantasy-card overflow-hidden h-full">
+      <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] min-h-64">
+        <div
+          className="min-h-56 border-b sm:border-b-0 sm:border-r"
+          style={{
+            borderColor: "var(--color-bg-border)",
+            background: player.portrait
+              ? `linear-gradient(to bottom, rgba(8, 5, 15, 0.04), rgba(8, 5, 15, 0.64)), url("${player.portrait}") center / cover no-repeat`
+              : "linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(245, 158, 11, 0.14))",
+          }}
+          role="img"
+          aria-label={`${player.name} profile image`}
+        >
+          {!player.portrait && (
+            <div className="flex h-full min-h-56 items-center justify-center">
+              <span className="font-cinzel text-5xl" style={{ color: "var(--color-text-primary)" }}>
+                {initials}
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="p-6">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+            <div>
+              <h2 className="font-cinzel text-2xl leading-tight" style={{ color: "var(--color-text-primary)" }}>
+                {player.name}
+              </h2>
+              {player.dmProfileId && (
+                <Link
+                  href="/dungeon-masters"
+                  className="mt-2 inline-block text-xs font-cinzel tracking-widest uppercase transition-colors hover:text-amber-400"
+                  style={{ color: "var(--color-accent-gold)" }}
+                >
+                  Dungeon Master
+                </Link>
+              )}
+            </div>
+            <span
+              className="shrink-0 text-xs font-cinzel tracking-widest uppercase px-2.5 py-1 rounded-full border self-start"
+              style={{
+                color: player.assignments.length ? "var(--color-accent-arcane)" : "var(--color-text-muted)",
+                borderColor: player.assignments.length ? "var(--color-accent-arcane)" : "var(--color-bg-border)",
+              }}
+            >
+              {player.assignments.length} Character{player.assignments.length === 1 ? "" : "s"}
+            </span>
+          </div>
+          <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
+            {player.description}
+          </p>
+          <div className="space-y-3">
+            {player.assignments.map(({ character, campaign }) => (
+              <div
+                key={`${campaign.id}-${character.name}`}
+                className="rounded-md border px-3 py-3"
+                style={{ borderColor: "var(--color-bg-border)" }}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                  <div>
+                    {character.url ? (
+                      <a
+                        href={character.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-semibold transition-colors hover:text-amber-400"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
+                        {character.name}
+                      </a>
+                    ) : (
+                      <span className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                        {character.name}
+                      </span>
+                    )}
+                    <Link
+                      href={`/campaigns/${campaign.id}`}
+                      className="block text-xs mt-1 transition-colors hover:text-amber-400"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
+                      {campaign.name}
+                    </Link>
+                  </div>
+                  <span className="text-xs shrink-0" style={{ color: "var(--color-accent-gold)" }}>
+                    DM: {campaign.dm}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+
+  return inGrid ? inner : <div className="max-w-6xl mx-auto px-6 py-2.5">{inner}</div>;
+}
+
+interface Creature { name: string; type: string; image: string; href?: string; }
+
+/** Single creature card — reads from bestiary.json. */
+function CreatureCardBlock({
+  props,
+  variant = "standalone",
+}: {
+  props: Record<string, unknown>;
+  variant?: "standalone" | "grid-item";
+}) {
+  const name = props.name as string;
+  let creatures: Creature[] = [];
+  try {
+    creatures = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), "../../content/bestiary.json"), "utf-8")
+    ) as Creature[];
+  } catch { /* ignore */ }
+
+  const creature = creatures.find((c) => c.name === name);
+  if (!creature) return null;
+
+  const inGrid = variant === "grid-item";
+
+  const inner = (
+    <article className="fantasy-card overflow-hidden h-full">
+      <div className="relative aspect-[4/3] border-b" style={{ borderColor: "var(--color-bg-border)" }}>
+        <Image
+          src={creature.image}
+          alt={`${creature.name} bestiary illustration`}
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-contain p-6"
+        />
+      </div>
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="font-cinzel text-2xl leading-tight" style={{ color: "var(--color-text-primary)" }}>
+              {creature.name}
+            </h2>
+            <p className="mt-2 text-xs font-cinzel tracking-[0.3em] uppercase"
+              style={{ color: "var(--color-accent-arcane)" }}>
+              {creature.type}
+            </p>
+          </div>
+        </div>
+        {creature.href ? (
+          <a
+            href={creature.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs font-cinzel tracking-widest uppercase transition-colors hover:text-amber-400"
+            style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-primary)" }}
+          >
+            Stat Block ↗
+          </a>
+        ) : (
+          <p className="mt-6 text-sm" style={{ color: "var(--color-text-muted)" }}>
+            No stat block link on the legacy source page.
+          </p>
+        )}
+      </div>
+    </article>
+  );
+
+  return inGrid ? inner : <div className="max-w-6xl mx-auto px-6 py-2.5">{inner}</div>;
 }
 
 // ── Profile card ─────────────────────────────────────────────────────────────
@@ -770,8 +1118,8 @@ function ProfileCardItemRenderer({
       const src = item.props.src as string | undefined;
       const alt = (item.props.alt as string | undefined) ?? "";
       const shape = (item.props.shape as string | undefined) ?? "wide";
-      const aspect = shape === "square" ? "aspect-square" : "aspect-video";
-      const fit = shape === "contain" ? "object-contain p-3" : "object-cover";
+      const aspect = shape === "square" ? "aspect-square" : shape === "creature" ? "aspect-[4/3]" : "aspect-video";
+      const fit = (shape === "contain" || shape === "creature") ? "object-contain p-6" : "object-cover";
       if (!src) return null;
       return (
         <div className={`relative ${aspect} overflow-hidden rounded-md border mb-3`}
@@ -781,12 +1129,24 @@ function ProfileCardItemRenderer({
         </div>
       );
     }
-    case "heading":
+    case "heading": {
+      const headingSize = item.props.size as string | undefined;
+      if (headingSize === "large") {
+        return (
+          <h2
+            className="font-cinzel text-2xl leading-tight group-hover:text-amber-400 transition-colors"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {item.props.value as string}
+          </h2>
+        );
+      }
       return (
         <h2 className="font-cinzel text-xl" style={{ color: "var(--color-text-primary)" }}>
           {item.props.value as string}
         </h2>
       );
+    }
     case "eyebrow": {
       const eyebrowVariant = item.props.variant as string | undefined;
       if (eyebrowVariant === "subtitle") {
@@ -956,6 +1316,20 @@ function ProfileCardItemRenderer({
         </div>
       );
     }
+    case "next-session": {
+      const campaignName = (item.props.campaignName as string | undefined) ?? "";
+      if (!campaignName) return null;
+      // NextSessionItem is an async RSC — safe to render from a sync RSC
+      return <NextSessionItem campaignName={campaignName} />;
+    }
+    case "campaign-info":
+      return (
+        <CampaignInfoItem
+          schedule={item.props.schedule as string | undefined}
+          dm={item.props.dm as string | undefined}
+          campaignName={item.props.campaignName as string | undefined}
+        />
+      );
     default:
       return null;
   }
@@ -1169,6 +1543,10 @@ function BlockContent({
     case "players-grid":    return <PlayersGridBlock />;
     case "dms-grid":        return <DmsGridBlock />;
     case "bestiary-grid":   return <BestiaryGridBlock />;
+    // Single-item live data
+    case "campaign-card":   return <CampaignCardBlock  props={block.props} variant={variant} />;
+    case "player-card":     return <PlayerCardBlock    props={block.props} variant={variant} />;
+    case "creature-card":   return <CreatureCardBlock  props={block.props} variant={variant} />;
     case "profile-card":    return <ProfileCardBlock   props={block.props} variant={variant} />;
     default:                return null;
   }

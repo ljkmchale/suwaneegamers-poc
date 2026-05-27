@@ -1,11 +1,7 @@
-import fs from "fs";
-import path from "path";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 import { getPageLayout } from "@/lib/pageLayouts";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
-import type { PageItem } from "@/lib/pageBlocks";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Bestiary",
@@ -14,23 +10,11 @@ export const metadata: Metadata = {
 
 const legacyBestiaryUrl = "https://sites.google.com/view/suwanee-gamers/bestiary";
 
-interface Creature {
-  name: string;
-  type: string;
-  image: string;
-  href?: string;
-}
-
-function getCreatures(): Creature[] {
-  const filePath = path.join(process.cwd(), "../../content/bestiary.json");
-  return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Creature[];
-}
-
 // ── Sections ──────────────────────────────────────────────────────────────────
 
 function HeaderSection() {
   return (
-    <header className="mb-14 text-center">
+    <header className="mb-14 text-center max-w-6xl mx-auto px-6 pt-20">
       <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
         style={{ color: "var(--color-accent-arcane)" }}>
         Creature Archive
@@ -51,69 +35,16 @@ function HeaderSection() {
   );
 }
 
-function CreaturesSection({ creatures }: { creatures: Creature[] }) {
-  return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-      {creatures.map((creature) => (
-        <article key={creature.name} className="fantasy-card overflow-hidden">
-          <div className="relative aspect-[4/3] border-b" style={{ borderColor: "var(--color-bg-border)" }}>
-            <Image
-              src={creature.image}
-              alt={`${creature.name} bestiary illustration`}
-              fill
-              sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-              className="object-contain p-6"
-            />
-          </div>
-          <div className="p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h2 className="font-cinzel text-2xl leading-tight" style={{ color: "var(--color-text-primary)" }}>
-                  {creature.name}
-                </h2>
-                <p className="mt-2 text-xs font-cinzel tracking-[0.3em] uppercase"
-                  style={{ color: "var(--color-accent-arcane)" }}>
-                  {creature.type}
-                </p>
-              </div>
-            </div>
-            {creature.href ? (
-              <a href={creature.href} target="_blank" rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs font-cinzel tracking-widest uppercase transition-colors hover:text-amber-400"
-                style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-primary)" }}>
-                Stat Block
-                <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
-              </a>
-            ) : (
-              <p className="mt-6 text-sm" style={{ color: "var(--color-text-muted)" }}>
-                No stat block link was present on the legacy source page.
-              </p>
-            )}
-          </div>
-        </article>
-      ))}
-    </section>
-  );
-}
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function BestiaryPage() {
-  const creatures = getCreatures();
   const order = getPageLayout("/bestiary");
-
-  const sectionMap: Record<string, React.ReactNode> = {
-    "header":    <HeaderSection key="header" />,
-    "creatures": <CreaturesSection key="creatures" creatures={creatures} />,
-  };
-
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      {order.map((item: PageItem) =>
-        item.kind === "section"
-          ? <div key={item.id} data-section-id={item.id}>{sectionMap[item.id] ?? null}</div>
-          : <BlockRenderer key={item.id} block={item} />
-      )}
+    <div className="relative min-h-screen pb-20">
+      <PageBlockList
+        items={order}
+        sections={{ header: <HeaderSection /> }}
+      />
     </div>
   );
 }

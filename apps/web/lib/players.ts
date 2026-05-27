@@ -40,7 +40,7 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-function assignmentsForPlayer(playerName: string): PlayerCharacterAssignment[] {
+export function assignmentsForPlayer(playerName: string): PlayerCharacterAssignment[] {
   return getActiveCampaigns().flatMap((campaign) =>
     (campaign.party ?? [])
       .filter((character) => character.player === playerName)

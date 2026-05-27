@@ -3,7 +3,13 @@ import { BlockRenderer } from "@/components/blocks/BlockRenderer";
 import type { BlockItem, PageItem } from "@/lib/pageBlocks";
 
 function isGridChild(item: PageItem): item is BlockItem {
-  return item.kind === "block" && (item.type === "profile-card" || item.type === "card");
+  return item.kind === "block" && (
+    item.type === "profile-card" ||
+    item.type === "card" ||
+    item.type === "campaign-card" ||
+    item.type === "player-card" ||
+    item.type === "creature-card"
+  );
 }
 
 export function PageBlockList({

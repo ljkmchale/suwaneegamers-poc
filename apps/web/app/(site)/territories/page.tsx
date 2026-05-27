@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PortalPage } from "@/components/portal/PortalPage";
-import { kbLink } from "@/lib/portal";
+import { getPageLayout } from "@/lib/pageLayouts";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Territories",
@@ -8,12 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function TerritoriesPage() {
+  const order = getPageLayout("/territories");
   return (
-    <PortalPage
-      eyebrow="Knowledge Base"
-      title="Territories"
-      description="Political regions, settlements, factions, and territory notes are maintained in the Knowledge Base."
-      links={[kbLink("Open canonical territory and region references.")]}
-    />
+    <div className="min-h-screen pb-20">
+      <PageBlockList items={order} />
+    </div>
   );
 }
