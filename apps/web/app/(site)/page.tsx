@@ -127,7 +127,7 @@ export default function HomePage() {
     <>
       {order.map((item: PageItem) =>
         item.kind === "section"
-          ? (sectionMap[item.id] ?? null)
+          ? <div key={item.id} data-section-id={item.id}>{sectionMap[item.id] ?? null}</div>
           : <BlockRenderer key={item.id} block={item} />
       )}
     </>

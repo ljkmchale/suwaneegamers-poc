@@ -452,7 +452,7 @@ function BestiaryGridBlock() {
 
 // ── Public export ─────────────────────────────────────────────────────────────
 
-export function BlockRenderer({ block }: { block: BlockItem }) {
+function BlockContent({ block }: { block: BlockItem }) {
   switch (block.type) {
     // Generic content
     case "divider":         return <DividerBlock       props={block.props} />;
@@ -473,4 +473,13 @@ export function BlockRenderer({ block }: { block: BlockItem }) {
     case "bestiary-grid":   return <BestiaryGridBlock />;
     default:                return null;
   }
+}
+
+/** Wrapper adds data-block-id so the live page editor can locate each block. */
+export function BlockRenderer({ block }: { block: BlockItem }) {
+  return (
+    <div data-block-id={block.id}>
+      <BlockContent block={block} />
+    </div>
+  );
 }

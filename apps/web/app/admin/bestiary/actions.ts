@@ -2,15 +2,19 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/adminAuth";
 import { readContent, writeContent } from "@/lib/contentFiles";
 
 interface Creature { name: string; type: string; image: string; href?: string; }
 
-function slugifyName(name: string) {
+// Helper — async to satisfy Turbopack's "use server" requirement
+async function slugifyName(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
 export async function saveCreatureAction(formData: FormData) {
+  await requireAdmin();
+
   const creatures = readContent<Creature[]>("bestiary.json");
   const originalName = (formData.get("originalName") as string)?.trim();
   const updated: Creature = {
@@ -33,6 +37,8 @@ export async function saveCreatureAction(formData: FormData) {
 }
 
 export async function deleteCreatureAction(formData: FormData) {
+  await requireAdmin();
+
   const name = formData.get("name") as string;
   const creatures = readContent<Creature[]>("bestiary.json");
   writeContent("bestiary.json", creatures.filter((c) => c.name !== name));
@@ -41,6 +47,8 @@ export async function deleteCreatureAction(formData: FormData) {
 }
 
 export async function reorderCreaturesAction(names: string[]) {
+  await requireAdmin();
+
   const creatures = readContent<Creature[]>("bestiary.json");
   const ordered = names
     .map((n) => creatures.find((c) => c.name === n))
