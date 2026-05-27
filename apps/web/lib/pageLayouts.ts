@@ -1,30 +1,45 @@
 import fs from "fs";
 import path from "path";
 import { PAGE_SECTIONS } from "./pageSections";
+import type { PageItem } from "./pageBlocks";
 
-type PageLayouts = Record<string, string[]>;
+type RawLayouts = Record<string, unknown[]>;
 
 function layoutPath() {
   return path.join(process.cwd(), "../../content/page-layouts.json");
 }
 
-export function getAllPageLayouts(): PageLayouts {
+function readRaw(): RawLayouts {
   try {
-    return JSON.parse(fs.readFileSync(layoutPath(), "utf-8")) as PageLayouts;
+    return JSON.parse(fs.readFileSync(layoutPath(), "utf-8")) as RawLayouts;
   } catch {
     return {};
   }
 }
 
-/** Returns the stored section order for a page, falling back to default order. */
-export function getPageLayout(pageId: string): string[] {
-  const all = getAllPageLayouts();
-  if (all[pageId]?.length) return all[pageId];
-  return (PAGE_SECTIONS[pageId] ?? []).map((s) => s.id);
+/** Returns the stored section + block order for a page. */
+export function getPageLayout(pageId: string): PageItem[] {
+  const raw = readRaw();
+  const stored = raw[pageId];
+
+  if (!stored?.length) {
+    // Default: all sections in declared order, no blocks
+    return (PAGE_SECTIONS[pageId] ?? []).map((s) => ({
+      kind: "section" as const,
+      id: s.id,
+    }));
+  }
+
+  // Migrate old format (plain string array) transparently
+  if (typeof stored[0] === "string") {
+    return (stored as string[]).map((id) => ({ kind: "section" as const, id }));
+  }
+
+  return stored as PageItem[];
 }
 
-export function setPageLayout(pageId: string, sectionIds: string[]): void {
-  const all = getAllPageLayouts();
-  all[pageId] = sectionIds;
+export function setPageLayout(pageId: string, items: PageItem[]): void {
+  const all = readRaw();
+  all[pageId] = items as unknown[];
   fs.writeFileSync(layoutPath(), JSON.stringify(all, null, 2) + "\n", "utf-8");
 }

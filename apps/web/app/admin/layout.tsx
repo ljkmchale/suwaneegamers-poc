@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Home } from "lucide-react";
 import { logoutAction } from "./login/actions";
 
 const NAV_LINKS = [
@@ -22,6 +23,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             Admin
           </p>
           <p className="text-xs text-[#5a5060] mt-0.5">Suwanee Gamers</p>
+        </div>
+
+        <div className="px-4 py-4 border-b border-[#2a2a35]">
+          <Link
+            href="/"
+            className="flex items-center gap-2 rounded px-2 py-2 text-sm text-[#a89880] hover:bg-[#16161e] hover:text-[#f59e0b] transition-colors"
+          >
+            <Home size={16} strokeWidth={2} aria-hidden="true" />
+            Main Site
+          </Link>
         </div>
 
         <nav className="flex-1 py-4">

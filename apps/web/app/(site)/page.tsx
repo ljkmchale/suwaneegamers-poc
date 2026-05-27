@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/fantasy/HeroSection";
 import { ScrollReveal } from "@/components/fantasy/ScrollReveal";
 import { getPortalLinks } from "@/lib/portal";
 import { getPageLayout } from "@/lib/pageLayouts";
+import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import type { PageItem } from "@/lib/pageBlocks";
 
 // ── Sections ──────────────────────────────────────────────────────────────────
 
@@ -121,5 +123,13 @@ export default function HomePage() {
     portal: <PortalBlock key="portal" portalLinks={portalLinks} />,
   };
 
-  return <>{order.map((id) => sectionMap[id] ?? null)}</>;
+  return (
+    <>
+      {order.map((item: PageItem) =>
+        item.kind === "section"
+          ? (sectionMap[item.id] ?? null)
+          : <BlockRenderer key={item.id} block={item} />
+      )}
+    </>
+  );
 }

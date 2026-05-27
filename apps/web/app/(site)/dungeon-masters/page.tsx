@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { campaignsForDm, getDungeonMasters, dungeonMastersReferenceUrl } from "@/lib/dungeonMasters";
 import { PORTAL_URLS } from "@/lib/portal";
 import { getPageLayout } from "@/lib/pageLayouts";
+import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import type { PageItem } from "@/lib/pageBlocks";
 
 export const metadata: Metadata = {
   title: "Dungeon Masters",
@@ -158,7 +160,11 @@ export default function DungeonMastersPage() {
         background: "linear-gradient(180deg, rgba(8,5,15,0.78) 0%, rgba(8,5,15,0.68) 36%, rgba(8,5,15,0.92) 100%), linear-gradient(90deg, rgba(8,5,15,0.42), rgba(8,5,15,0.2), rgba(8,5,15,0.52))",
       }} />
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        {order.map((id) => sectionMap[id] ?? null)}
+        {order.map((item: PageItem) =>
+          item.kind === "section"
+            ? (sectionMap[item.id] ?? null)
+            : <BlockRenderer key={item.id} block={item} />
+        )}
       </div>
     </div>
   );

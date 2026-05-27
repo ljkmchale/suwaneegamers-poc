@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getPlayerProfiles, getUnassignedCharacters } from "@/lib/players";
 import { getPageLayout } from "@/lib/pageLayouts";
+import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import type { PageItem } from "@/lib/pageBlocks";
 
 export const metadata: Metadata = {
   title: "Players",
@@ -177,7 +179,11 @@ export default function PlayersPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
-      {order.map((id) => sectionMap[id] ?? null)}
+      {order.map((item: PageItem) =>
+        item.kind === "section"
+          ? (sectionMap[item.id] ?? null)
+          : <BlockRenderer key={item.id} block={item} />
+      )}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
 import { findNextCampaignEvent, listedCampaigns, sideCampaigns } from "@/lib/campaigns";
 import { getPageLayout } from "@/lib/pageLayouts";
+import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import type { PageItem } from "@/lib/pageBlocks";
 
 export const metadata: Metadata = {
   title: "Campaigns",
@@ -157,7 +159,11 @@ export default async function CampaignsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
-      {order.map((id) => sectionMap[id] ?? null)}
+      {order.map((item: PageItem) =>
+        item.kind === "section"
+          ? (sectionMap[item.id] ?? null)
+          : <BlockRenderer key={item.id} block={item} />
+      )}
     </div>
   );
 }
