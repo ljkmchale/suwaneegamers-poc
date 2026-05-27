@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   DndContext,
   DragOverlay,
@@ -53,6 +53,7 @@ function makeBlock(assetType: BlockType): BlockItem {
 
 export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<PageItem[]>([]);
   const [originalItems, setOriginalItems] = useState<PageItem[]>([]);
@@ -146,7 +147,11 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
       await savePageLayoutAction(pathname, items);
       setOriginalItems([...items]);
       setSaved(true);
-      setTimeout(() => setSaved(false), 2500);
+      // Re-render the RSC subtree so the page immediately reflects the new
+      // layout without a full browser reload. Client state (panel open,
+      // editingId, etc.) is preserved by router.refresh().
+      router.refresh();
+      setTimeout(() => setSaved(false), 2000);
     });
   }
 

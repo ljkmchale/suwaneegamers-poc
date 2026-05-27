@@ -190,7 +190,7 @@ export function PageEditPanel({
 
         {hasChanges && !saved && !pending && (
           <p className="text-[10px] text-center text-[#f59e0b] -mt-1">
-            Unsaved changes — reload page after saving to see the new order
+            Unsaved changes
           </p>
         )}
       </div>
