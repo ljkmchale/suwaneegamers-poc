@@ -1,38 +1,42 @@
 import { describe, expect, it } from "vitest";
-import { activeCampaigns, parseLegacyCampaignSessionSummariesFromHtml } from "@/lib/campaigns";
+import {
+  activeCampaigns,
+  findCampaign,
+  listedCampaigns,
+  sideCampaigns,
+  normalizeCampaignTitle,
+  findNextCampaignEvent,
+  parseLegacyCampaignSessionSummariesFromHtml,
+  type PortalCampaign,
+} from "@/lib/campaigns";
+import type { CalendarEvent } from "@/lib/calendar";
 
-describe("parseLegacyCampaignSessionSummariesFromHtml", () => {
-  it("keeps Google Drive audio links attached to matching session summaries", () => {
-    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
-      <section>
-        <p><span>Session Summaries</span></p>
-      </section>
-      <section>
-        <a href="https://drive.google.com/file/d/audio-27/view?usp=sharing">
-          <img src="play.png" alt="Session audio" />
-        </a>
-        <p><span>Session 27 - Don't Threaten Us</span></p>
-        <p><span>The caravan was confronted by an elvish wizard.</span></p>
-      </section>
-      <section>
-        <a href="https://docs.google.com/document/d/not-audio/edit">Notes</a>
-        <p><span>Session 26 - To Caelora and Beyond</span></p>
-        <p><span>The party escorted wagons toward Shademoor.</span></p>
-      </section>
-    `);
+// ── Data shape ────────────────────────────────────────────────────────────────
 
-    expect(summaries).toHaveLength(2);
-    expect(summaries[0]).toMatchObject({
-      title: "Session 27 - Don't Threaten Us",
-      summary: "The caravan was confronted by an elvish wizard.",
-      audioLinks: [
-        {
-          label: "Session Audio",
-          url: "https://drive.google.com/file/d/audio-27/view?usp=sharing",
-        },
-      ],
-    });
-    expect(summaries[1]?.audioLinks).toBeUndefined();
+describe("activeCampaigns — data shape", () => {
+  it("is a non-empty array", () => {
+    expect(activeCampaigns.length).toBeGreaterThan(0);
+  });
+
+  it("every campaign has required fields", () => {
+    for (const c of activeCampaigns) {
+      expect(c.id,          `${c.name} missing id`).toBeTruthy();
+      expect(c.name,        `${c.id} missing name`).toBeTruthy();
+      expect(c.dm,          `${c.id} missing dm`).toBeTruthy();
+      expect(c.schedule,    `${c.id} missing schedule`).toBeTruthy();
+      expect(c.referenceUrl, `${c.id} missing referenceUrl`).toBeTruthy();
+    }
+  });
+
+  it("campaign IDs are unique", () => {
+    const ids = activeCampaigns.map((c) => c.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("all referenceUrls are absolute https links", () => {
+    for (const c of activeCampaigns) {
+      expect(c.referenceUrl, `${c.id} bad referenceUrl`).toMatch(/^https?:\/\//);
+    }
   });
 });
 
@@ -42,6 +46,15 @@ describe("activeCampaigns resources", () => {
       for (const resource of campaign.resources ?? []) {
         expect(resource.url).toMatch(/^https:\/\//);
         expect(resource.url).not.toBe(campaign.referenceUrl);
+      }
+    }
+  });
+
+  it("every resource has a label and url", () => {
+    for (const campaign of activeCampaigns) {
+      for (const resource of campaign.resources ?? []) {
+        expect(resource.label).toBeTruthy();
+        expect(resource.url).toBeTruthy();
       }
     }
   });
@@ -151,5 +164,220 @@ describe("activeCampaigns party links", () => {
       ]),
     );
     expect(vanguard?.party?.some((member) => member.name === "Kenton")).toBe(false);
+  });
+});
+
+// ── findCampaign ──────────────────────────────────────────────────────────────
+
+describe("findCampaign", () => {
+  it("returns the campaign for a known id", () => {
+    const c = findCampaign("heroes-of-emberstran");
+    expect(c?.name).toBeTruthy();
+    expect(c?.id).toBe("heroes-of-emberstran");
+  });
+
+  it("returns undefined for an unknown id", () => {
+    expect(findCampaign("not-a-real-campaign")).toBeUndefined();
+  });
+});
+
+// ── listedCampaigns / sideCampaigns ───────────────────────────────────────────
+
+describe("listedCampaigns", () => {
+  it("excludes campaigns with official === false", () => {
+    const listed = listedCampaigns();
+    expect(listed.every((c) => c.official !== false)).toBe(true);
+  });
+
+  it("includes campaigns with official === true or official undefined", () => {
+    const listed = listedCampaigns();
+    expect(listed.length).toBeGreaterThan(0);
+  });
+});
+
+describe("sideCampaigns", () => {
+  it("only returns campaigns where official is explicitly false", () => {
+    const side = sideCampaigns();
+    expect(side.every((c) => c.official === false)).toBe(true);
+  });
+});
+
+// ── normalizeCampaignTitle ─────────────────────────────────────────────────────
+
+describe("normalizeCampaignTitle", () => {
+  it("lowercases the title", () => {
+    expect(normalizeCampaignTitle("Heroes of Emberstran")).toBe("heroes of emberstran");
+  });
+
+  it("strips leading 'the '", () => {
+    expect(normalizeCampaignTitle("The Silent Vanguard")).toBe("silent vanguard");
+    expect(normalizeCampaignTitle("the silent vanguard")).toBe("silent vanguard");
+  });
+
+  it("does not strip 'the' mid-title", () => {
+    expect(normalizeCampaignTitle("Into the Dark")).toBe("into the dark");
+  });
+
+  it("replaces non-alphanumeric sequences with spaces", () => {
+    expect(normalizeCampaignTitle("Dungeons III")).toBe("dungeons iii");
+    expect(normalizeCampaignTitle("A New Adventure!")).toBe("a new adventure");
+  });
+
+  it("trims surrounding whitespace", () => {
+    expect(normalizeCampaignTitle("  heroes  ")).toBe("heroes");
+  });
+});
+
+// ── findNextCampaignEvent ──────────────────────────────────────────────────────
+
+function makeEvent(title: string, start: string): CalendarEvent {
+  return { uid: title, title, start, allDay: false };
+}
+
+describe("findNextCampaignEvent", () => {
+  const campaign: PortalCampaign = {
+    id: "heroes-of-emberstran",
+    name: "Heroes of Emberstran",
+    dm: "Larry McHale",
+    schedule: "Biweekly",
+    description: "",
+    referenceUrl: "https://example.com",
+  };
+
+  it("matches an event by exact normalized title", () => {
+    const events = [makeEvent("Heroes of Emberstran", "2026-06-01T18:00:00Z")];
+    const found = findNextCampaignEvent(campaign, events);
+    expect(found?.title).toBe("Heroes of Emberstran");
+  });
+
+  it("returns the earliest matching event when multiple match", () => {
+    const events = [
+      makeEvent("Heroes of Emberstran", "2026-06-15T18:00:00Z"),
+      makeEvent("Heroes of Emberstran", "2026-06-01T18:00:00Z"),
+    ];
+    const found = findNextCampaignEvent(campaign, events);
+    expect(found?.start).toBe("2026-06-01T18:00:00Z");
+  });
+
+  it("matches via alias", () => {
+    const campaignWithAlias: PortalCampaign = {
+      ...campaign,
+      aliases: ["HoE"],
+    };
+    const events = [makeEvent("HoE", "2026-06-01T18:00:00Z")];
+    const found = findNextCampaignEvent(campaignWithAlias, events);
+    expect(found?.title).toBe("HoE");
+  });
+
+  it("returns undefined when no events match", () => {
+    const events = [makeEvent("Completely Different Campaign", "2026-06-01T18:00:00Z")];
+    expect(findNextCampaignEvent(campaign, events)).toBeUndefined();
+  });
+
+  it("returns undefined for an empty event list", () => {
+    expect(findNextCampaignEvent(campaign, [])).toBeUndefined();
+  });
+
+  it("strips 'the' prefix from event title when matching", () => {
+    const silentVanguard: PortalCampaign = {
+      ...campaign,
+      id: "the-silent-vanguard",
+      name: "The Silent Vanguard",
+    };
+    const events = [makeEvent("The Silent Vanguard", "2026-06-01T18:00:00Z")];
+    const found = findNextCampaignEvent(silentVanguard, events);
+    expect(found).toBeDefined();
+  });
+});
+
+// ── parseLegacyCampaignSessionSummariesFromHtml ────────────────────────────────
+
+describe("parseLegacyCampaignSessionSummariesFromHtml", () => {
+  it("keeps Google Drive audio links attached to matching session summaries", () => {
+    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section>
+        <p><span>Session Summaries</span></p>
+      </section>
+      <section>
+        <a href="https://drive.google.com/file/d/audio-27/view?usp=sharing">
+          <img src="play.png" alt="Session audio" />
+        </a>
+        <p><span>Session 27 - Don't Threaten Us</span></p>
+        <p><span>The caravan was confronted by an elvish wizard.</span></p>
+      </section>
+      <section>
+        <a href="https://docs.google.com/document/d/not-audio/edit">Notes</a>
+        <p><span>Session 26 - To Caelora and Beyond</span></p>
+        <p><span>The party escorted wagons toward Shademoor.</span></p>
+      </section>
+    `);
+
+    expect(summaries).toHaveLength(2);
+    expect(summaries[0]).toMatchObject({
+      title: "Session 27 - Don't Threaten Us",
+      summary: "The caravan was confronted by an elvish wizard.",
+      audioLinks: [
+        {
+          label: "Session Audio",
+          url: "https://drive.google.com/file/d/audio-27/view?usp=sharing",
+        },
+      ],
+    });
+    expect(summaries[1]?.audioLinks).toBeUndefined();
+  });
+
+  it("returns empty array for HTML with no sessions", () => {
+    const result = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section><p>No sessions here</p></section>
+    `);
+    expect(result).toEqual([]);
+  });
+
+  it("decodes HTML entities in session text", () => {
+    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section>
+        <p>Session 1 - Goblin&#39;s Den</p>
+        <p>The party entered the goblin&amp;s lair.</p>
+      </section>
+    `);
+    expect(summaries.length).toBeGreaterThan(0);
+    expect(summaries[0].title).toContain("Goblin");
+  });
+
+  it("stops at a legacy stop marker", () => {
+    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section>
+        <p>Session 1 - The Beginning</p>
+        <p>The party set out.</p>
+        <p>Old Notes</p>
+        <p>Session 2 - Should Not Appear</p>
+        <p>This should be excluded.</p>
+      </section>
+    `);
+    expect(summaries.some((s) => s.title.includes("Should Not Appear"))).toBe(false);
+  });
+
+  it("parses sessions using 'Session N - Title' format", () => {
+    // isSessionStart matches /^session\s*\d/i
+    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section>
+        <p>Session 1 - The First Adventure</p>
+        <p>The heroes began their quest into the mountains.</p>
+      </section>
+    `);
+    expect(summaries.length).toBeGreaterThan(0);
+    expect(summaries[0].title).toContain("Session 1");
+  });
+
+  it("ignores non-Drive audio links", () => {
+    const summaries = parseLegacyCampaignSessionSummariesFromHtml(`
+      <section>
+        <a href="https://docs.google.com/document/d/some-doc/edit">Notes</a>
+        <p>Session 5 - Side Quest</p>
+        <p>The party went exploring.</p>
+      </section>
+    `);
+    expect(summaries.length).toBeGreaterThan(0);
+    expect(summaries[0].audioLinks).toBeUndefined();
   });
 });
