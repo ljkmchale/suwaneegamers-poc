@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
@@ -39,10 +39,12 @@ function HeaderSection() {
 
 export default function BestiaryPage() {
   const order = getPageLayout("/bestiary");
+  const grid = getPageGrid("/bestiary");
   return (
     <div className="relative min-h-screen pb-20">
       <PageBlockList
         items={order}
+        grid={grid}
         sections={{ header: <HeaderSection /> }}
       />
     </div>

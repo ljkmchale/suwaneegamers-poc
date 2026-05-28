@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
@@ -9,9 +9,10 @@ export const metadata: Metadata = {
 
 export default function TestPage() {
   const order = getPageLayout("/test-page");
+  const grid = getPageGrid("/test-page");
   return (
     <div className="min-h-screen pb-20">
-      <PageBlockList items={order} />
+      <PageBlockList items={order} grid={grid} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
@@ -43,10 +43,12 @@ function SideLabelSection() {
 
 export default function CampaignsPage() {
   const order = getPageLayout("/campaigns");
+  const grid = getPageGrid("/campaigns");
   return (
     <div className="relative min-h-screen pb-20">
       <PageBlockList
         items={order}
+        grid={grid}
         sections={{
           header:     <HeaderSection />,
           "side-label": <SideLabelSection />,

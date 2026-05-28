@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/adminAuth";
 import { writeNavConfig, type NavSection } from "@/lib/nav";
 import { setPageLayout } from "@/lib/pageLayouts";
-import type { PageItem } from "@/lib/pageBlocks";
+import type { PageItem, PageGridMeta } from "@/lib/pageBlocks";
 
 export async function saveNavLayoutAction(sections: NavSection[]) {
   await requireAdmin();
@@ -13,9 +13,9 @@ export async function saveNavLayoutAction(sections: NavSection[]) {
   revalidatePath("/", "layout");
 }
 
-export async function savePageLayoutAction(pageId: string, items: PageItem[]) {
+export async function savePageLayoutAction(pageId: string, items: PageItem[], grid?: PageGridMeta | null) {
   await requireAdmin();
 
-  setPageLayout(pageId, items);
+  setPageLayout(pageId, items, grid);
   revalidatePath(pageId);
 }

@@ -2,6 +2,12 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition, type ChangeEvent, type DragEvent } from "react";
 import {
+  parseCardLayoutProps,
+  saveCardLayoutItems,
+  findFreeCell,
+  GRID_TYPE_META,
+} from "./CardLayoutGridEditor";
+import {
   useDraggable,
 } from "@dnd-kit/core";
 import { uploadFilesAction } from "@/app/admin/media/actions";
@@ -16,6 +22,7 @@ import {
   type CardLayoutItemType,
   type ProfileCardItem,
   type ProfileCardItemType,
+  type PageGridMeta,
 } from "@/lib/pageBlocks";
 
 interface EditorMediaFile {
@@ -955,6 +962,275 @@ function CardLayoutItemsEditor({
   );
 }
 
+// ── Card layout visual panel ──────────────────────────────────────────────────
+
+function CardLayoutPanelSection({
+  block,
+  onPropsChange,
+  selectedGridItemId,
+  onGridItemSelect,
+}: {
+  block: BlockItem;
+  onPropsChange: (props: Record<string, unknown>) => void;
+  selectedGridItemId: string | null;
+  onGridItemSelect: (id: string | null) => void;
+}) {
+  const parsed = parseCardLayoutProps(block.props);
+  if (!parsed) return null;
+  const { gridRoot, columns, rows, gridItems } = parsed;
+
+  const INPUT =
+    "w-full px-2.5 py-1.5 rounded border text-xs bg-[#08050f] text-[#e8dfc8] " +
+    "placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]";
+  const LABEL = "block mb-1 text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060]";
+  const SECTION = "mb-4 pb-4 border-b border-[#1e1828]";
+
+  function updateGridProp(key: string, value: string) {
+    onPropsChange(saveCardLayoutItems(block.props, gridRoot, gridItems, { [key]: value }));
+  }
+
+  function updateItemProp(itemId: string, key: string, value: unknown) {
+    const newItems = gridItems.map((item) =>
+      item.id === itemId ? { ...item, props: { ...item.props, [key]: value } } : item
+    );
+    onPropsChange(saveCardLayoutItems(block.props, gridRoot, newItems));
+  }
+
+  function deleteSelectedItem() {
+    if (!selectedGridItemId) return;
+    const newItems = gridItems.filter((i) => i.id !== selectedGridItemId);
+    onPropsChange(saveCardLayoutItems(block.props, gridRoot, newItems));
+    onGridItemSelect(null);
+  }
+
+  function addItem(type: CardLayoutItemType) {
+    const { col, row, needsNewRow } = findFreeCell(gridItems, columns, rows);
+    const defaults: Record<string, unknown> = {
+      col: String(col), row: String(row), colSpan: "1", rowSpan: "1",
+    };
+    if (type === "header")     { defaults.title = "New Header"; defaults.size = "md"; }
+    if (type === "text")       { defaults.content = "New text block"; }
+    if (type === "inner-card") { defaults.items = "[]"; }
+    if (type === "image")      { defaults.src = ""; defaults.fit = "cover"; }
+    const newItem: CardLayoutItem = {
+      id: `${type}_${Date.now()}`,
+      type,
+      props: defaults,
+    };
+    const newItems = [...gridItems, newItem];
+    const gridOverrides = needsNewRow ? { rows: String(rows + 1) } : undefined;
+    onPropsChange(saveCardLayoutItems(block.props, gridRoot, newItems, gridOverrides));
+    onGridItemSelect(newItem.id);
+  }
+
+  const selectedItem = selectedGridItemId
+    ? gridItems.find((i) => i.id === selectedGridItemId)
+    : null;
+  const selectedMeta = selectedItem ? GRID_TYPE_META[selectedItem.type] : null;
+
+  return (
+    <div className="space-y-0">
+      {/* ── Card width ── */}
+      <div className={SECTION}>
+        <label className={LABEL}>Card Width</label>
+        <select
+          value={(block.props.width as string) ?? "wide"}
+          onChange={(e) => onPropsChange({ ...block.props, width: e.target.value })}
+          className={INPUT}
+        >
+          <option value="wide">Wide</option>
+          <option value="medium">Medium</option>
+          <option value="full">Full</option>
+        </select>
+      </div>
+
+      {/* ── Grid dimensions ── */}
+      <div className={SECTION}>
+        <p className={LABEL}>Grid Size</p>
+        <div className="flex items-center gap-2">
+          <div className="flex-1">
+            <p className="text-[9px] text-[#5a5060] mb-1">Columns</p>
+            <div className="flex items-center gap-1">
+              <button type="button" onClick={() => columns > 1 && updateGridProp("columns", String(columns - 1))}
+                className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">−</button>
+              <span className="w-6 text-center text-xs text-[#e8dfc8]">{columns}</span>
+              <button type="button" onClick={() => columns < 6 && updateGridProp("columns", String(columns + 1))}
+                className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">+</button>
+            </div>
+          </div>
+          <div className="flex-1">
+            <p className="text-[9px] text-[#5a5060] mb-1">Rows</p>
+            <div className="flex items-center gap-1">
+              <button type="button" onClick={() => rows > 1 && updateGridProp("rows", String(rows - 1))}
+                className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">−</button>
+              <span className="w-6 text-center text-xs text-[#e8dfc8]">{rows}</span>
+              <button type="button" onClick={() => rows < 10 && updateGridProp("rows", String(rows + 1))}
+                className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">+</button>
+            </div>
+          </div>
+          <div className="flex-1">
+            <p className="text-[9px] text-[#5a5060] mb-1">Gap</p>
+            <select
+              value={(gridRoot.props.gap as string) ?? "md"}
+              onChange={(e) => updateGridProp("gap", e.target.value)}
+              className="w-full px-1.5 py-1.5 rounded border text-xs bg-[#08050f] text-[#e8dfc8] focus:outline-none focus:border-[#8b5cf6] border-[#2a2a35]"
+            >
+              <option value="sm">Sm</option>
+              <option value="md">Md</option>
+              <option value="lg">Lg</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Selected item editor ── */}
+      {selectedItem && selectedMeta ? (
+        <div className={SECTION}>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[10px] font-cinzel tracking-widest uppercase" style={{ color: selectedMeta.color }}>
+              {selectedMeta.icon} {selectedMeta.label}
+            </p>
+            <button type="button" onClick={deleteSelectedItem}
+              className="text-[10px] text-[#5a5060] hover:text-[#f87171] transition-colors">
+              ✕ Remove
+            </button>
+          </div>
+
+          {/* Content fields */}
+          {selectedItem.type === "header" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Eyebrow</label>
+                <input type="text" value={(selectedItem.props.eyebrow as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "eyebrow", e.target.value)}
+                  className={INPUT} placeholder="e.g. Test Asset" />
+              </div>
+              <div>
+                <label className={LABEL}>Title</label>
+                <input type="text" value={(selectedItem.props.title as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "title", e.target.value)}
+                  className={INPUT} placeholder="Header title" />
+              </div>
+              <div>
+                <label className={LABEL}>Size</label>
+                <select value={(selectedItem.props.size as string) ?? "md"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "size", e.target.value)}
+                  className={INPUT}>
+                  <option value="md">Medium</option>
+                  <option value="lg">Large</option>
+                </select>
+              </div>
+            </div>
+          )}
+
+          {selectedItem.type === "text" && (
+            <div>
+              <label className={LABEL}>Text</label>
+              <textarea rows={4} value={(selectedItem.props.content as string) ?? ""}
+                onChange={(e) => updateItemProp(selectedItem.id, "content", e.target.value)}
+                className={`${INPUT} resize-y`} placeholder="Enter text…" />
+            </div>
+          )}
+
+          {selectedItem.type === "image" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Image</label>
+                <ImagePathField
+                  value={(selectedItem.props.src as string) ?? ""}
+                  onChange={(v) => updateItemProp(selectedItem.id, "src", v)}
+                />
+              </div>
+              <div>
+                <label className={LABEL}>Alt text</label>
+                <input type="text" value={(selectedItem.props.alt as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "alt", e.target.value)}
+                  className={INPUT} placeholder="Describe the image" />
+              </div>
+              <div>
+                <label className={LABEL}>Fit</label>
+                <select value={(selectedItem.props.fit as string) ?? "cover"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "fit", e.target.value)}
+                  className={INPUT}>
+                  <option value="cover">Cover</option>
+                  <option value="contain">Contain</option>
+                </select>
+              </div>
+            </div>
+          )}
+
+          {selectedItem.type === "divider" && (
+            <p className="text-[11px] text-[#5a5060] py-1">No content to edit for a divider.</p>
+          )}
+
+          {selectedItem.type === "inner-card" && (
+            <div>
+              <label className={LABEL}>Inner contents</label>
+              <CardLayoutItemsEditor
+                value={(selectedItem.props.items as string) ?? "[]"}
+                onChange={(v) => updateItemProp(selectedItem.id, "items", v)}
+              />
+            </div>
+          )}
+
+          {/* Span controls */}
+          <div className="mt-3 pt-3 border-t border-[#1e1828]">
+            <p className="text-[9px] text-[#5a5060] mb-2 font-cinzel tracking-widest uppercase">Size in Grid</p>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { label: "Col span", key: "colSpan", max: columns },
+                { label: "Row span", key: "rowSpan", max: rows },
+              ].map(({ label, key, max }) => {
+                const current = parseInt(String(selectedItem.props[key] ?? "1"), 10) || 1;
+                return (
+                  <div key={key}>
+                    <p className="text-[9px] text-[#5a5060] mb-1">{label}</p>
+                    <div className="flex items-center gap-1">
+                      <button type="button"
+                        onClick={() => current > 1 && updateItemProp(selectedItem.id, key, String(current - 1))}
+                        className="w-6 h-6 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] text-xs transition-colors">−</button>
+                      <span className="w-5 text-center text-xs text-[#e8dfc8]">{current}</span>
+                      <button type="button"
+                        onClick={() => current < max && updateItemProp(selectedItem.id, key, String(current + 1))}
+                        className="w-6 h-6 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] text-xs transition-colors">+</button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={SECTION}>
+          <p className="text-[11px] text-[#5a5060] text-center py-2">
+            Click an element in the grid to edit it
+          </p>
+        </div>
+      )}
+
+      {/* ── Add element buttons ── */}
+      <div>
+        <p className={LABEL}>Add Element</p>
+        <div className="grid grid-cols-2 gap-1.5">
+          {CARD_LAYOUT_ITEM_TYPES.filter((d) => d.type !== "grid").map((def) => (
+            <button
+              key={def.type}
+              type="button"
+              onClick={() => addItem(def.type as CardLayoutItemType)}
+              className="flex items-center gap-1.5 rounded border border-[#2a2a35] bg-[#08050f] px-2 py-1.5 text-[10px] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] transition-colors"
+            >
+              <span className="w-4 shrink-0 text-center" style={{ color: GRID_TYPE_META[def.type]?.color }}>
+                {def.icon}
+              </span>
+              <span className="truncate font-cinzel tracking-widest uppercase">{def.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function PropsForm({
   block,
   onChange,
@@ -1134,6 +1410,81 @@ function AssetTile({ def }: { def: AssetTypeDef }) {
   );
 }
 
+// ── Column placement picker ───────────────────────────────────────────────────
+
+function ColumnPicker({
+  columns,
+  col,
+  colSpan,
+  onChange,
+}: {
+  columns: number;
+  col?: number;
+  colSpan?: number;
+  onChange: (col?: number, colSpan?: number) => void;
+}) {
+  const [dragStart, setDragStart] = useState<number | null>(null);
+
+  const isFullWidth = !col;
+  const startIdx = col ? col - 1 : 0;
+  const endIdx = col ? Math.min(startIdx + (colSpan ?? 1) - 1, columns - 1) : columns - 1;
+
+  return (
+    <div className="space-y-2">
+      <div
+        className="flex gap-1 select-none"
+        onMouseLeave={() => setDragStart(null)}
+        onMouseUp={() => setDragStart(null)}
+      >
+        {Array.from({ length: columns }, (_, i) => {
+          const isSelected = !isFullWidth && i >= startIdx && i <= endIdx;
+          return (
+            <div
+              key={i}
+              className={`flex-1 h-10 rounded cursor-pointer flex items-center justify-center transition-colors border ${
+                isSelected
+                  ? "bg-[#2a1050] border-[#8b5cf6]"
+                  : "bg-[#0f0a1a] border-[#2a2a35] hover:border-[#8b5cf6]/60"
+              }`}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                setDragStart(i);
+                onChange(i + 1, 1);
+              }}
+              onMouseEnter={() => {
+                if (dragStart === null) return;
+                const from = Math.min(dragStart, i);
+                const to = Math.max(dragStart, i);
+                onChange(from + 1, to - from + 1);
+              }}
+            >
+              <span className={`text-[9px] font-cinzel tracking-widest ${isSelected ? "text-[#a78bfa]" : "text-[#3a3a50]"}`}>
+                {i + 1}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <button
+        type="button"
+        onClick={() => onChange(undefined, undefined)}
+        className={`w-full py-1.5 rounded border text-[9px] font-cinzel tracking-widest uppercase transition-colors ${
+          isFullWidth
+            ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+            : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+        }`}
+      >
+        ◀▶ Full Width
+      </button>
+      {!isFullWidth && col && (
+        <p className="text-[9px] text-[#5a5060]">
+          Column {col}{(colSpan ?? 1) > 1 ? ` · spanning ${colSpan ?? 1} of ${columns}` : ` of ${columns}`}
+        </p>
+      )}
+    </div>
+  );
+}
+
 // ── Main panel ────────────────────────────────────────────────────────────────
 
 interface PageEditPanelProps {
@@ -1145,6 +1496,11 @@ interface PageEditPanelProps {
   saved: boolean;
   hasChanges: boolean;
   onClose: () => void;
+  selectedGridItemId: string | null;
+  onGridItemSelect: (id: string | null) => void;
+  grid: PageGridMeta | null;
+  onGridChange: (grid: PageGridMeta | null) => void;
+  onBlockPlacementChange: (id: string, col?: number, colSpan?: number) => void;
 }
 
 export function PageEditPanel({
@@ -1156,6 +1512,11 @@ export function PageEditPanel({
   saved,
   hasChanges,
   onClose,
+  selectedGridItemId,
+  onGridItemSelect,
+  grid,
+  onGridChange,
+  onBlockPlacementChange,
 }: PageEditPanelProps) {
   const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
   const editingCardLayout = editingBlock?.type === "layout-card";
@@ -1233,9 +1594,94 @@ export function PageEditPanel({
                 {getAssetDef(editingBlock.type)?.label ?? editingBlock.type}
               </span>
             </div>
-            <PropsForm block={editingBlock} onChange={onPropsChange} quickAdd={quickAdd} />
+            {editingBlock.type === "layout-card" ? (
+              <CardLayoutPanelSection
+                block={editingBlock}
+                onPropsChange={onPropsChange}
+                selectedGridItemId={selectedGridItemId}
+                onGridItemSelect={onGridItemSelect}
+              />
+            ) : (
+              <PropsForm block={editingBlock} onChange={onPropsChange} quickAdd={quickAdd} />
+            )}
+
+            {/* ── Page-grid column placement (shown when grid is active) ── */}
+            {grid && grid.columns > 1 && (
+              <div className="mt-4 pt-4 border-t border-[#1e1828]">
+                <p className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-2">
+                  Column Placement
+                </p>
+                <ColumnPicker
+                  columns={grid.columns}
+                  col={editingBlock.col}
+                  colSpan={editingBlock.colSpan}
+                  onChange={(col, colSpan) => onBlockPlacementChange(editingBlock.id, col, colSpan)}
+                />
+              </div>
+            )}
           </div>
         )}
+
+        {/* ── Page Grid controls ── */}
+        <div className="px-4 py-4 border-b border-[#2a2a35]">
+          <p className="text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] mb-2">
+            Page Columns
+          </p>
+          <div className="flex gap-1 mb-2">
+            {/* Off */}
+            <button
+              type="button"
+              onClick={() => onGridChange(null)}
+              className={`flex-1 py-2 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                !grid || grid.columns <= 1
+                  ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                  : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+              }`}
+            >
+              Off
+            </button>
+            {([2, 3, 4, 5, 6] as const).map((n) => (
+              <button
+                key={n}
+                type="button"
+                onClick={() => onGridChange({ columns: n, gap: grid?.gap ?? "md" })}
+                className={`flex-1 py-2 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                  grid?.columns === n
+                    ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                    : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          {grid && grid.columns > 1 && (
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] shrink-0">Gap</span>
+              <div className="flex gap-1 flex-1">
+                {(["sm", "md", "lg"] as const).map((g) => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => onGridChange({ ...grid, gap: g })}
+                    className={`flex-1 py-1 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                      grid.gap === g
+                        ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                        : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60"
+                    }`}
+                  >
+                    {g === "sm" ? "Sm" : g === "md" ? "Md" : "Lg"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {(!grid || grid.columns <= 1) && (
+            <p className="text-[10px] text-[#5a5060] mt-1">
+              Click a number to divide the page into columns. Select a block to set its column position.
+            </p>
+          )}
+        </div>
 
         {/* Asset library */}
         <div className="px-4 py-4">

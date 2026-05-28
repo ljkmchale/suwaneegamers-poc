@@ -24,9 +24,12 @@ import {
   type BlockItem,
   type BlockType,
   type CardLayoutItem,
+  type PageGridMeta,
 } from "@/lib/pageBlocks";
 import { PageDragLayer } from "./PageDragLayer";
 import { PageEditPanel } from "./PageEditPanel";
+import { CardLayoutGridEditor } from "./CardLayoutGridEditor";
+import { BlockPicker } from "./BlockPicker";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -158,7 +161,21 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
   return null;
 }
 
-function DraftBlock({ item, pathname }: { item: PageItem; pathname: string }) {
+function DraftBlock({
+  item,
+  pathname,
+  editingId,
+  selectedGridItemId,
+  onGridPropsChange,
+  onSelectGridItem,
+}: {
+  item: PageItem;
+  pathname: string;
+  editingId: string | null;
+  selectedGridItemId: string | null;
+  onGridPropsChange: (newProps: Record<string, unknown>) => void;
+  onSelectGridItem: (id: string | null) => void;
+}) {
   if (item.kind === "section") {
     const meta = PAGE_SECTIONS[pathname]?.find((section) => section.id === item.id);
     return (
@@ -216,6 +233,23 @@ function DraftBlock({ item, pathname }: { item: PageItem; pathname: string }) {
   }
 
   if (item.type === "layout-card") {
+    if (editingId === item.id) {
+      return (
+        <section
+          data-block-id={item.id}
+          data-block-type={item.type}
+          className="max-w-6xl mx-auto px-6 py-6"
+          style={{ pointerEvents: "auto" }}
+        >
+          <CardLayoutGridEditor
+            props={item.props}
+            onPropsChange={onGridPropsChange}
+            selectedId={selectedGridItemId}
+            onSelect={onSelectGridItem}
+          />
+        </section>
+      );
+    }
     return (
       <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
         <article className="fantasy-card p-5 md:p-6">
@@ -239,6 +273,300 @@ function DraftBlock({ item, pathname }: { item: PageItem; pathname: string }) {
     );
   }
 
+  if (item.type === "divider") {
+    const label   = props.label as string | undefined;
+    const variant = (props.variant as string | undefined) ?? "ornate";
+    if (label) {
+      return (
+        <div data-block-id={item.id} data-block-type={item.type} className="flex items-center gap-4 py-8 max-w-6xl mx-auto px-6">
+          <div className="flex-1 h-px" style={{ background: "var(--color-bg-border)" }} />
+          <span className="font-cinzel text-xs tracking-[0.35em] uppercase shrink-0" style={{ color: "var(--color-text-muted)" }}>{label}</span>
+          <div className="flex-1 h-px" style={{ background: "var(--color-bg-border)" }} />
+        </div>
+      );
+    }
+    if (variant === "ornate") {
+      return (
+        <div data-block-id={item.id} data-block-type={item.type} className="py-6 max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-4">
+            <div className="flex-1 h-px" style={{ background: "var(--color-bg-border)" }} />
+            <span style={{ color: "var(--color-bg-border)", fontSize: "0.7rem" }}>✦</span>
+            <div className="flex-1 h-px" style={{ background: "var(--color-bg-border)" }} />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="py-6 max-w-6xl mx-auto px-6">
+        <hr style={{ borderColor: "var(--color-bg-border)" }} />
+      </div>
+    );
+  }
+
+  if (item.type === "section-heading") {
+    const eyebrow     = props.eyebrow     as string | undefined;
+    const title       = props.title       as string | undefined;
+    const description = props.description as string | undefined;
+    const centered    = props.align === "center";
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className={`max-w-6xl mx-auto px-6 py-10 ${centered ? "text-center" : ""}`}>
+        {eyebrow && <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-2" style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>}
+        {title && <h2 className="font-cinzel text-3xl tracking-widest uppercase mb-3 shimmer-text">{title}</h2>}
+        {description && <p className={`text-sm leading-relaxed ${centered ? "max-w-2xl mx-auto" : "max-w-3xl"}`} style={{ color: "var(--color-text-secondary)" }}>{description}</p>}
+      </section>
+    );
+  }
+
+  if (item.type === "callout") {
+    const title   = props.title   as string | undefined;
+    const content = (props.content as string | undefined) ?? "";
+    const variant = (props.variant as string | undefined) ?? "gold";
+    const colorVar = variant === "arcane" ? "var(--color-accent-arcane)" : variant === "blood" ? "var(--color-accent-blood)" : "var(--color-accent-gold)";
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-3xl mx-auto px-6 py-4">
+        <div className="rounded-lg border-l-4 p-5" style={{ borderColor: colorVar, background: "var(--color-bg-card)" }}>
+          {title && <p className="font-cinzel text-sm tracking-widest uppercase mb-2" style={{ color: colorVar }}>{title}</p>}
+          <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{content}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (item.type === "button-link") {
+    const label   = (props.label as string | undefined) ?? "Button";
+    const href    = (props.href as string | undefined) ?? "";
+    const align   = (props.align as string | undefined) ?? "left";
+    const variant = (props.variant as string | undefined) ?? "primary";
+    const justify = align === "center" ? "justify-center" : align === "right" ? "justify-end" : "justify-start";
+    const cls   = variant === "secondary"
+      ? "inline-flex items-center rounded-md border px-4 py-2 text-xs font-cinzel tracking-widest uppercase"
+      : "inline-flex items-center rounded-md px-4 py-2 text-xs font-cinzel tracking-widest uppercase";
+    const style = variant === "secondary"
+      ? { borderColor: "var(--color-bg-border)", color: "var(--color-text-primary)" }
+      : { background: "var(--color-accent-arcane)", color: "#fff" };
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className={`max-w-6xl mx-auto px-6 py-4 flex ${justify}`}>
+        <span className={cls} style={style}>{label} {href ? "→" : ""}</span>
+      </div>
+    );
+  }
+
+  if (item.type === "link-list") {
+    const title = props.title as string | undefined;
+    let links: Array<{ label?: string; href?: string; description?: string }> = [];
+    try { links = JSON.parse((props.links as string | undefined) ?? "[]"); } catch { /* */ }
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-3xl mx-auto px-6 py-6">
+        <div className="fantasy-card p-5">
+          {title && <h2 className="font-cinzel text-xl tracking-widest uppercase mb-4" style={{ color: "var(--color-text-primary)" }}>{title}</h2>}
+          <div className="space-y-3">
+            {links.map((link, i) => (
+              <div key={i} className="rounded-md border px-3 py-3" style={{ borderColor: "var(--color-bg-border)" }}>
+                <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>{link.label ?? ""} →</p>
+                {link.description && <p className="mt-1 text-xs" style={{ color: "var(--color-text-muted)" }}>{link.description}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (item.type === "spacer") {
+    const size = (props.size as string | undefined) ?? "md";
+    const h = size === "sm" ? "h-8" : size === "lg" ? "h-24" : "h-16";
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className={`${h} max-w-6xl mx-auto px-6 flex items-center justify-center`}>
+        <div className="w-full h-px border-t border-dashed" style={{ borderColor: "var(--color-bg-border)", opacity: 0.4 }} />
+      </div>
+    );
+  }
+
+  if (item.type === "image") {
+    const src     = props.src     as string | undefined;
+    const caption = props.caption as string | undefined;
+    const size    = (props.size   as string | undefined) ?? "large";
+    const wrapClass = size === "full" ? "w-full px-0" : size === "medium" ? "max-w-xl mx-auto px-6" : "max-w-3xl mx-auto px-6";
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className={`${wrapClass} py-6`}>
+        {src ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={src} alt={(props.alt as string | undefined) ?? ""} className="w-full rounded-lg object-cover border" style={{ borderColor: "var(--color-bg-border)" }} />
+        ) : (
+          <div className="w-full aspect-video rounded-lg border flex items-center justify-center" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+            <p className="font-cinzel text-xs tracking-widest" style={{ color: "var(--color-text-muted)" }}>No image selected</p>
+          </div>
+        )}
+        {caption && <p className="mt-3 text-xs text-center font-cinzel tracking-wider" style={{ color: "var(--color-text-muted)" }}>{caption}</p>}
+      </div>
+    );
+  }
+
+  if (item.type === "gallery") {
+    let images: Array<{ src?: string; alt?: string; caption?: string }> = [];
+    try { images = JSON.parse((props.images as string | undefined) ?? "[]"); } catch { /* */ }
+    const columns = (props.columns as string | undefined) ?? "3";
+    const columnClass = columns === "4" ? "xl:grid-cols-4" : columns === "2" ? "lg:grid-cols-2" : "lg:grid-cols-3";
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-8">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${columnClass} gap-4`}>
+          {images.map((img, i) => (
+            <div key={i} className="fantasy-card overflow-hidden">
+              {img.src ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={img.src} alt={img.alt ?? ""} className="w-full aspect-[4/3] object-cover" />
+              ) : (
+                <div className="w-full aspect-[4/3] flex items-center justify-center" style={{ background: "var(--color-bg-card)" }}>
+                  <p className="font-cinzel text-[10px]" style={{ color: "var(--color-text-muted)" }}>Slot {i + 1}</p>
+                </div>
+              )}
+              {img.caption && <p className="p-3 text-xs" style={{ color: "var(--color-text-muted)" }}>{img.caption}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (item.type === "embed") {
+    const src   = props.src   as string | undefined;
+    const title = (props.title as string | undefined) ?? "Embedded content";
+    const h     = Math.min(Math.max(parseInt((props.height as string | undefined) ?? "400", 10), 100), 800);
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
+        {src ? (
+          <iframe src={src} title={title} width="100%" height={h} className="rounded-lg border" style={{ borderColor: "var(--color-bg-border)" }} />
+        ) : (
+          <div className="rounded-lg border flex items-center justify-center" style={{ height: h, borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+            <p className="font-cinzel text-xs tracking-widest" style={{ color: "var(--color-text-muted)" }}>Embed — paste a URL in the props panel</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (item.type === "portal-links") {
+    const eyebrow     = props.eyebrow     as string | undefined;
+    const title       = props.title       as string | undefined;
+    const description = props.description as string | undefined;
+    let links: Array<{ title?: string; description?: string; href?: string; label?: string }> = [];
+    try { links = JSON.parse((props.links as string | undefined) ?? "[]"); } catch { /* */ }
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-12">
+        {(eyebrow || title || description) && (
+          <div className="text-center mb-10">
+            {eyebrow && <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-2" style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>}
+            {title && <h2 className="font-cinzel text-2xl tracking-widest uppercase mb-3 shimmer-text">{title}</h2>}
+            {description && <p className="max-w-xl mx-auto text-sm" style={{ color: "var(--color-text-secondary)" }}>{description}</p>}
+          </div>
+        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {links.map((link, i) => (
+            <div key={i} className="fantasy-card p-5 h-full">
+              <h3 className="font-cinzel text-base mb-3" style={{ color: "var(--color-accent-gold)" }}>{link.title ?? "Link"}</h3>
+              {link.description && <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>{link.description}</p>}
+              {link.label && <span className="text-xs font-cinzel tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>{link.label} →</span>}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (item.type === "founders") {
+    const heading = (props.heading as string | undefined) ?? "Founded By";
+    const bio = props.bio as string | undefined;
+    let founders: Array<{ name?: string; role?: string; img?: string }> = [];
+    try { founders = JSON.parse((props.founders as string | undefined) ?? "[]"); } catch { /* */ }
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-12">
+        <div className="fantasy-card p-8 text-center">
+          {heading && <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-8" style={{ color: "var(--color-text-muted)" }}>{heading}</p>}
+          <div className="flex flex-wrap justify-center gap-10">
+            {founders.map((f, i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                {f.img
+                  // eslint-disable-next-line @next/next/no-img-element
+                  ? <img src={f.img} alt={f.name ?? ""} className="w-20 h-20 rounded-full object-cover object-top" style={{ border: "2px solid var(--color-accent-gold)" }} />
+                  : <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ border: "2px solid var(--color-accent-gold)", background: "var(--color-bg-card)" }}>
+                      <span className="font-cinzel text-lg" style={{ color: "var(--color-accent-gold)" }}>{(f.name ?? "?")[0]}</span>
+                    </div>
+                }
+                <p className="font-cinzel text-base" style={{ color: "var(--color-accent-gold)" }}>{f.name ?? ""}</p>
+                <p className="text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>{f.role ?? ""}</p>
+              </div>
+            ))}
+          </div>
+          {bio && <p className="mt-8 pt-6 text-sm leading-relaxed italic max-w-md mx-auto" style={{ borderTop: "1px solid var(--color-bg-border)", color: "var(--color-text-muted)" }}>{bio}</p>}
+        </div>
+      </section>
+    );
+  }
+
+  if (item.type === "profile-card") {
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
+        <article className="fantasy-card p-5 md:p-6">
+          <div className="space-y-3">
+            {parseDraftItems(props.items).map((child) => (
+              <DraftCardLayoutItem key={child.id} item={child} />
+            ))}
+          </div>
+        </article>
+      </section>
+    );
+  }
+
+  if (item.type === "card-grid") {
+    const columns = (props.columns as string | undefined) ?? "2";
+    const columnClass = columns === "3" ? "sm:grid-cols-2 xl:grid-cols-3" : "lg:grid-cols-2";
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-2">
+        <div className={`grid grid-cols-1 ${columnClass} gap-5 rounded-lg border border-dashed px-4 py-3`} style={{ borderColor: "#2a2a35" }}>
+          <p className="font-cinzel text-[10px] tracking-widest uppercase col-span-full" style={{ color: "var(--color-text-muted)" }}>
+            Card Grid ({columns} columns) — place cards below
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  if (item.type === "hero-banner") {
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
+        <div className="rounded-lg border flex items-center justify-center py-16" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+          <p className="font-cinzel text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>⬛ Hero Banner — full-screen on published page</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Data blocks — can't render live data in the editor; show a clear informational placeholder
+  const DATA_BLOCK_LABELS: Partial<Record<string, string>> = {
+    "campaigns-grid":  "⚔  Campaigns Grid",
+    "players-grid":    "👤  Players Grid",
+    "dms-grid":        "🎲  Dungeon Masters Grid",
+    "bestiary-grid":   "🐉  Bestiary Grid",
+    "calendar-embed":  "📅  Calendar Embed",
+    "campaign-card":   `⚔  Campaign Card${props.id ? ` — ${props.id}` : ""}`,
+    "player-card":     `👤  Player Card${props.id ? ` — ${props.id}` : ""}`,
+    "creature-card":   `🐉  Creature Card${props.name ? ` — ${props.name}` : ""}`,
+  };
+
+  const dataLabel = DATA_BLOCK_LABELS[item.type];
+  if (dataLabel) {
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-3">
+        <div className="rounded-lg border border-dashed px-5 py-4 flex items-center gap-3" style={{ borderColor: "#2a2a35" }}>
+          <div>
+            <p className="font-cinzel text-sm tracking-wide" style={{ color: "var(--color-accent-gold)" }}>{dataLabel}</p>
+            <p className="mt-0.5 text-xs" style={{ color: "var(--color-text-muted)" }}>Live data — renders from content files on published page</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const def = getAssetDef(item.type);
   return (
     <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-4">
@@ -246,23 +574,71 @@ function DraftBlock({ item, pathname }: { item: PageItem; pathname: string }) {
         <p className="font-cinzel text-sm tracking-widest uppercase" style={{ color: "var(--color-accent-gold)" }}>
           {def?.label ?? item.type}
         </p>
-        <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>Unsaved draft block</p>
       </div>
     </div>
   );
 }
 
-function DraftPagePreview({ items, pathname }: { items: PageItem[]; pathname: string }) {
+function DraftPagePreview({
+  items,
+  pathname,
+  editingId,
+  selectedGridItemId,
+  onGridPropsChange,
+  onSelectGridItem,
+  grid,
+}: {
+  items: PageItem[];
+  pathname: string;
+  editingId: string | null;
+  selectedGridItemId: string | null;
+  onGridPropsChange: (newProps: Record<string, unknown>) => void;
+  onSelectGridItem: (id: string | null) => void;
+  grid: PageGridMeta | null;
+}) {
+  const useGrid = grid && grid.columns > 1;
+  const gapCss = !grid ? "0" : grid.gap === "sm" ? "0.75rem" : grid.gap === "lg" ? "1.5rem" : "1.125rem";
+
   return (
     <div
       data-editor-preview="true"
       className="fixed left-0 right-[288px] top-0 bottom-0 z-[39] overflow-y-auto"
       style={{ background: "var(--color-bg-deep)" }}
     >
-      <div className="min-h-full pb-28 pointer-events-none">
-        {items.map((item) => (
-          <DraftBlock key={item.id} item={item} pathname={pathname} />
-        ))}
+      <div
+        className="min-h-full pb-28 pointer-events-none"
+        style={useGrid ? {
+          display: "grid",
+          gridTemplateColumns: `repeat(${grid.columns}, minmax(0, 1fr))`,
+          gap: gapCss,
+          padding: "1.5rem 1.5rem 7rem",
+          alignContent: "start",
+        } : {}}
+      >
+        {items.map((item) => {
+          const block = item.kind === "block" ? (item as BlockItem) : null;
+          const isEditing = item.kind === "block" && item.id === editingId;
+          return (
+            <div
+              key={item.id}
+              style={useGrid ? {
+                gridColumn: block?.col
+                  ? `${block.col} / span ${block.colSpan ?? 1}`
+                  : `1 / span ${grid.columns}`,
+              } : {}}
+              className={isEditing ? "outline outline-2 outline-[#8b5cf6] outline-offset-[-2px] rounded" : ""}
+            >
+              <DraftBlock
+                item={item}
+                pathname={pathname}
+                editingId={editingId}
+                selectedGridItemId={selectedGridItemId}
+                onGridPropsChange={onGridPropsChange}
+                onSelectGridItem={onSelectGridItem}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -274,8 +650,12 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<PageItem[]>([]);
   const [originalItems, setOriginalItems] = useState<PageItem[]>([]);
+  const [grid, setGrid] = useState<PageGridMeta | null>(null);
+  const [originalGrid, setOriginalGrid] = useState<PageGridMeta | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [selectedGridItemId, setSelectedGridItemId] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<Active | null>(null);
+  const [insertAtIndex, setInsertAtIndex] = useState<number | null>(null);
   const [pending, startTransition] = useTransition();
   const [saved, setSaved] = useState(false);
 
@@ -291,9 +671,11 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
     if (!hasLayout || !open) return;
     fetch(`/api/page-layout?page=${encodeURIComponent(pathname)}`)
       .then((r) => r.json())
-      .then(({ items: fetched }: { items: PageItem[] }) => {
+      .then(({ items: fetched, grid: fetchedGrid }: { items: PageItem[]; grid: PageGridMeta | null }) => {
         setItems(fetched ?? []);
         setOriginalItems(fetched ?? []);
+        setGrid(fetchedGrid ?? null);
+        setOriginalGrid(fetchedGrid ?? null);
       })
       .catch(() => {
         const defaults = (PAGE_SECTIONS[pathname] ?? []).map((s) => ({
@@ -302,6 +684,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
         }));
         setItems(defaults);
         setOriginalItems(defaults);
+        setGrid(null);
+        setOriginalGrid(null);
       });
   }, [pathname, open, hasLayout]);
 
@@ -349,6 +733,19 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
     setSaved(false);
   }
 
+  function handleInsertBlock(type: BlockType) {
+    if (insertAtIndex === null) return;
+    const newBlock = makeBlock(type);
+    setItems((prev) => {
+      const next = [...prev];
+      next.splice(insertAtIndex, 0, newBlock);
+      return next;
+    });
+    setEditingId(newBlock.id);
+    setInsertAtIndex(null);
+    setSaved(false);
+  }
+
   function handlePropsChange(props: Record<string, unknown>) {
     if (!editingId) return;
     setItems((prev) =>
@@ -359,10 +756,20 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
     setSaved(false);
   }
 
+  function handlePlacementChange(id: string, col?: number, colSpan?: number) {
+    setItems((prev) =>
+      prev.map((i) =>
+        i.kind === "block" && i.id === id ? { ...i, col, colSpan } : i
+      )
+    );
+    setSaved(false);
+  }
+
   function handleSave() {
     startTransition(async () => {
-      await savePageLayoutAction(pathname, items);
+      await savePageLayoutAction(pathname, items, grid);
       setOriginalItems([...items]);
+      setOriginalGrid(grid);
       setSaved(true);
       // Re-render the RSC subtree so the page immediately reflects the new
       // layout without a full browser reload. Client state (panel open,
@@ -375,7 +782,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   // ── Computed ─────────────────────────────────────────────────────────────
 
   const hasChanges =
-    JSON.stringify(items) !== JSON.stringify(originalItems);
+    JSON.stringify(items) !== JSON.stringify(originalItems) ||
+    JSON.stringify(grid) !== JSON.stringify(originalGrid);
 
   const editingBlock =
     editingId != null
@@ -427,7 +835,15 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <DraftPagePreview items={items} pathname={pathname} />
+          <DraftPagePreview
+            items={items}
+            pathname={pathname}
+            editingId={editingId}
+            selectedGridItemId={selectedGridItemId}
+            onGridPropsChange={handlePropsChange}
+            onSelectGridItem={setSelectedGridItemId}
+            grid={grid}
+          />
 
           {/* Transparent overlay — drag handles + drop zones on the live page */}
           <PageDragLayer
@@ -435,20 +851,27 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
             pathname={pathname}
             anyDragging={!!activeItem}
             editingId={editingId}
-            onEditToggle={(id) => setEditingId(id)}
+            onEditToggle={(id) => { setEditingId(id); setSelectedGridItemId(null); }}
             onDeleteBlock={handleDeleteBlock}
+            onInsertAt={setInsertAtIndex}
+            grid={grid}
           />
 
           {/* Right panel — asset library + props editor */}
           <PageEditPanel
             editingBlock={editingBlock}
             onPropsChange={handlePropsChange}
-            onClearEdit={() => setEditingId(null)}
+            onClearEdit={() => { setEditingId(null); setSelectedGridItemId(null); }}
             onSave={handleSave}
             pending={pending}
             saved={saved}
             hasChanges={hasChanges}
             onClose={() => setOpen(false)}
+            selectedGridItemId={selectedGridItemId}
+            onGridItemSelect={setSelectedGridItemId}
+            grid={grid}
+            onGridChange={setGrid}
+            onBlockPlacementChange={handlePlacementChange}
           />
 
           {/* Drag preview that follows the cursor */}
@@ -508,6 +931,13 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
               : null}
           </DragOverlay>
         </DndContext>
+      )}
+
+      {insertAtIndex !== null && (
+        <BlockPicker
+          onPick={handleInsertBlock}
+          onClose={() => setInsertAtIndex(null)}
+        />
       )}
     </>
   );

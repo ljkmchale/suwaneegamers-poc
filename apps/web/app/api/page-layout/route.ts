@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 
 export async function GET(req: NextRequest) {
   const pageId = req.nextUrl.searchParams.get("page") ?? "/";
   const items = getPageLayout(pageId);
-  return NextResponse.json({ items });
+  const grid = getPageGrid(pageId);
+  return NextResponse.json({ items, grid: grid ?? null });
 }

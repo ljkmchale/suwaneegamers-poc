@@ -38,6 +38,11 @@ export type BlockType =
 
 // ── Unified page item types ───────────────────────────────────────────────────
 
+export interface PageGridMeta {
+  columns: number;        // 1–6
+  gap: "sm" | "md" | "lg";
+}
+
 export interface SectionItem {
   kind: "section";
   id: string;
@@ -48,6 +53,8 @@ export interface BlockItem {
   id: string;
   type: BlockType;
   props: Record<string, unknown>;
+  col?: number;           // page-level grid column start (1-based)
+  colSpan?: number;       // page-level grid column span
 }
 
 export type PageItem = SectionItem | BlockItem;

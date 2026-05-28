@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { getAssetDef } from "@/lib/pageBlocks";
-import type { PageItem } from "@/lib/pageBlocks";
+import type { PageItem, PageGridMeta } from "@/lib/pageBlocks";
 
 // ── Measured position of a DOM element ───────────────────────────────────────
 
@@ -29,6 +29,7 @@ function DropZone({
   left = 0,
   right = 288,
   anyDragging,
+  onInsertAt,
 }: {
   id: string;
   top: number;
@@ -37,59 +38,93 @@ function DropZone({
   left?: number;
   right?: number;
   anyDragging: boolean;
+  onInsertAt?: (index: number) => void;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id });
+  const [hovered, setHovered] = useState(false);
+
+  function handleClick() {
+    if (anyDragging || !onInsertAt) return;
+    const idx = parseInt(id.split("::")[1] ?? "0", 10);
+    onInsertAt(idx);
+  }
   const lineOffset = lineY - top;
+
+  // Always occupy a thin strip around the insertion line so it's hoverable
+  const idleHeight = 20;
+  const activeHeight = Math.max(bottom - top, 4);
+  const zoneHeight = anyDragging ? activeHeight : idleHeight;
+  const zoneTop = anyDragging ? top : lineY - idleHeight / 2;
 
   return (
     <div
       ref={setNodeRef}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={handleClick}
       style={{
         position: "fixed",
         left,
         right,
-        top,
-        height: anyDragging ? Math.max(bottom - top, 4) : 0,
-        pointerEvents: anyDragging ? "auto" : "none",
+        top: zoneTop,
+        height: zoneHeight,
+        pointerEvents: "auto",
         zIndex: 42,
         background: isOver ? "rgba(139,92,246,0.06)" : "transparent",
         transition: "background 0.1s",
+        cursor: anyDragging ? "default" : "pointer",
       }}
     >
-      {anyDragging && (
-        <>
-          {/* Insertion line */}
-          <div
-            className="absolute inset-x-0 pointer-events-none transition-all duration-100"
-            style={{
-              top: Math.max(lineOffset, 0),
-              height: isOver ? 2 : 1,
-              background: isOver ? "#8b5cf6" : "rgba(255,255,255,0.15)",
-              opacity: isOver ? 1 : 0.3,
-              boxShadow: isOver ? "0 0 10px rgba(139,92,246,0.6)" : "none",
-            }}
-          />
+      {/* Persistent insertion line — always visible */}
+      <div
+        className="absolute inset-x-0 pointer-events-none transition-all duration-100"
+        style={{
+          top: anyDragging ? Math.max(lineOffset, 0) : idleHeight / 2 - 1,
+          height: isOver ? 2 : 1,
+          background: isOver
+            ? "#8b5cf6"
+            : hovered
+            ? "rgba(245,158,11,0.6)"
+            : "rgba(255,255,255,0.12)",
+          boxShadow: isOver ? "0 0 10px rgba(139,92,246,0.6)" : "none",
+          transition: "background 0.12s, box-shadow 0.12s",
+        }}
+      />
 
-          {/* "Drop here" pill */}
-          {isOver && (
-            <div
-              className="absolute left-1/2 -translate-x-1/2 px-3 py-1 rounded-full font-cinzel text-[10px] tracking-widest uppercase text-white pointer-events-none z-10"
-              style={{
-                top: Math.max(lineOffset - 14, 2),
-                background: "#8b5cf6",
-                boxShadow: "0 0 20px rgba(139,92,246,0.6)",
-              }}
-            >
-              Drop here
-            </div>
-          )}
-        </>
+      {/* "+" pill — shown on hover when not dragging */}
+      {!anyDragging && hovered && (
+        <div
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-0.5 rounded-full font-cinzel text-[9px] tracking-widest uppercase pointer-events-none"
+          style={{
+            top: idleHeight / 2,
+            background: "rgba(15,10,26,0.92)",
+            border: "1px solid rgba(245,158,11,0.5)",
+            color: "#f59e0b",
+            whiteSpace: "nowrap",
+          }}
+        >
+          + insert block
+        </div>
+      )}
+
+      {/* "Drop here" pill — shown during drag when over */}
+      {anyDragging && isOver && (
+        <div
+          className="absolute left-1/2 -translate-x-1/2 px-3 py-1 rounded-full font-cinzel text-[10px] tracking-widest uppercase text-white pointer-events-none z-10"
+          style={{
+            top: Math.max(lineOffset - 14, 2),
+            background: "#8b5cf6",
+            boxShadow: "0 0 20px rgba(139,92,246,0.6)",
+          }}
+        >
+          Drop here
+        </div>
       )}
     </div>
   );
 }
 
-// ── Drag handle bar (overlaid at the top of each element) ─────────────────────
+// ── Block handle — Google Sites-style selection outline + floating toolbar ──────
 
 function BlockHandle({
   item,
@@ -106,6 +141,9 @@ function BlockHandle({
   editingId: string | null;
   onEditToggle: () => void;
 }) {
+  const [isHovering, setIsHovering] = useState(false);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const dndId = item.kind === "section" ? `section::${item.id}` : item.id;
   const isSection = item.kind === "section";
 
@@ -121,89 +159,159 @@ function BlockHandle({
     data: { kind: "existing", dndId },
   });
 
-  const HANDLE_H = 32;
-  const accentColor = isSection ? "#8b5cf6" : "#f59e0b";
-  const showToolbar = isEditing ? "opacity-100" : "opacity-0 group-hover:opacity-100";
-  const showAccent = isEditing ? "opacity-80" : "opacity-0 group-hover:opacity-60";
+  const isActive = isEditing || isHovering || isDragging;
+  const borderColor = isEditing ? "#8b5cf6" : "#f59e0b";
+  const TOOLBAR_H = 34;
+  // Show toolbar above the block when there's room; otherwise inside at the top
+  const toolbarAbove = measured.top > TOOLBAR_H + 8;
+
+  function enter() {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+    setIsHovering(true);
+  }
+
+  function leave() {
+    hoverTimerRef.current = setTimeout(() => {
+      setIsHovering(false);
+      hoverTimerRef.current = null;
+    }, 120);
+  }
 
   return (
     <div
       ref={setNodeRef}
-      onClick={(e) => {
-        if (isSection) return;
-        e.stopPropagation();
-        onEditToggle();
-      }}
+      {...(isSection ? {} : attributes)}
+      {...(isSection ? {} : listeners)}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
       style={{
         position: "fixed",
         top: measured.top,
         left: measured.left,
         width: measured.width,
-        height: Math.max(measured.height, HANDLE_H),
+        height: Math.max(measured.height, 32),
         transform: CSS.Translate.toString(transform),
         zIndex: 41,
-        pointerEvents: "auto",
+        pointerEvents: isEditing ? "none" : "auto",
         opacity: isDragging ? 0.15 : 1,
-        transition: isDragging ? undefined : "opacity 0.15s",
+        // Selection outline — amber on hover, arcane when editing
+        outline: isActive && !isSection ? `2px solid ${borderColor}` : "2px solid transparent",
+        outlineOffset: "-1px",
+        borderRadius: "4px",
+        cursor: isSection ? "default" : isDragging ? "grabbing" : "grab",
+        transition: "outline-color 0.12s",
+        background: isEditing ? "rgba(139,92,246,0.04)" : "transparent",
       }}
-      className="group"
     >
-      {/* Always-visible top accent line */}
-      <div
-        className={`absolute top-0 left-0 right-0 h-0.5 transition-opacity ${showAccent}`}
-        style={{ background: accentColor }}
-      />
-
-      {/* Handle bar — appears on hover */}
-      <div
-        className={`absolute left-0 right-0 top-0 flex h-8 items-center gap-2 px-3 transition-opacity duration-150 ${showToolbar}`}
-        style={{
-          background: `linear-gradient(to bottom, rgba(8,5,15,0.88) 0%, rgba(8,5,15,0.5) 70%, transparent 100%)`,
-        }}
-      >
-        {/* Drag grip */}
-        <span
-          {...attributes}
-          {...listeners}
-          className="cursor-grab active:cursor-grabbing select-none text-base leading-none transition-colors"
-          style={{ color: "rgba(255,255,255,0.5)" }}
-          title="Drag to reorder"
+      {/* ── Floating toolbar for blocks ── */}
+      {!isSection && (
+        <div
+          onMouseEnter={enter}
+          onMouseLeave={leave}
+          style={{
+            position: "absolute",
+            top: toolbarAbove ? -(TOOLBAR_H + 6) : 4,
+            left: 0,
+            zIndex: 2,
+            display: "flex",
+            alignItems: "center",
+            gap: "2px",
+            padding: "2px 6px",
+            borderRadius: "6px",
+            border: "1px solid #2a2a35",
+            background: "#08050f",
+            boxShadow: "0 4px 16px rgba(0,0,0,0.5)",
+            whiteSpace: "nowrap",
+            opacity: isActive ? 1 : 0,
+            pointerEvents: isActive ? "auto" : "none",
+            transition: "opacity 0.12s",
+          }}
         >
-          ⠿
-        </span>
+          {/* Drag grip indicator (decorative — entire block is draggable) */}
+          <span
+            style={{ fontSize: "14px", color: "#5a5060", padding: "2px 3px", lineHeight: 1, cursor: "grab" }}
+            title="Drag to reorder"
+          >
+            ⠿
+          </span>
 
-        {/* Icon + label */}
-        <span className="text-sm leading-none" style={{ color: accentColor }}>
-          {icon}
-        </span>
-        <span className="text-xs font-medium truncate" style={{ color: "rgba(255,255,255,0.75)" }}>
-          {label}
-        </span>
+          <div style={{ width: 1, height: 14, background: "#2a2a35", margin: "0 3px" }} />
 
-        {/* Block actions */}
-        {!isSection && (
-          <div className="ml-auto flex items-center gap-1 shrink-0">
-            <button
-              onPointerDown={(e) => e.stopPropagation()}
-              onClick={(e) => { e.stopPropagation(); onEditToggle(); }}
-              className="w-6 h-6 flex items-center justify-center rounded transition-colors text-sm leading-none"
-              style={{ color: isEditing ? "#8b5cf6" : "rgba(255,255,255,0.4)" }}
-              title="Edit properties"
-            >
-              ✎
-            </button>
-            <button
-              onPointerDown={(e) => e.stopPropagation()}
-              onClick={(e) => { e.stopPropagation(); onDelete(); }}
-              className="w-6 h-6 flex items-center justify-center rounded text-base leading-none transition-colors hover:text-red-400"
-              style={{ color: "rgba(255,255,255,0.4)" }}
-              title="Remove block"
-            >
-              ×
-            </button>
-          </div>
-        )}
-      </div>
+          {/* Icon + label */}
+          <span style={{ fontSize: "12px", color: borderColor, lineHeight: 1 }}>{icon}</span>
+          <span style={{ fontSize: "11px", fontWeight: 500, color: "#e8dfc8", maxWidth: 130, overflow: "hidden", textOverflow: "ellipsis", margin: "0 2px" }}>
+            {label}
+          </span>
+
+          <div style={{ width: 1, height: 14, background: "#2a2a35", margin: "0 3px" }} />
+
+          {/* Edit */}
+          <button
+            type="button"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onEditToggle(); }}
+            style={{
+              width: 26, height: 26,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              borderRadius: 4, fontSize: 14, lineHeight: 1,
+              color: isEditing ? "#8b5cf6" : "rgba(255,255,255,0.45)",
+              background: "transparent", border: "none", cursor: "pointer",
+            }}
+            title="Edit block"
+          >
+            ✎
+          </button>
+
+          {/* Delete */}
+          <button
+            type="button"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onDelete(); }}
+            style={{
+              width: 26, height: 26,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              borderRadius: 4, fontSize: 16, lineHeight: 1,
+              color: "rgba(255,255,255,0.35)",
+              background: "transparent", border: "none", cursor: "pointer",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#f87171")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+            title="Remove block"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      {/* ── Section hover label ── */}
+      {isSection && (isHovering || isDragging) && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            padding: "0 12px",
+            background: "rgba(139,92,246,0.06)",
+            borderRadius: 4,
+          }}
+        >
+          <span
+            {...attributes}
+            {...listeners}
+            style={{ cursor: "grab", fontSize: 14, color: "#8b5cf6" }}
+          >
+            ⠿
+          </span>
+          <span style={{ fontSize: 10, fontFamily: "var(--font-cinzel, serif)", letterSpacing: "0.3em", textTransform: "uppercase", color: "#8b5cf6" }}>
+            {label}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
@@ -217,6 +325,8 @@ export function PageDragLayer({
   editingId,
   onEditToggle,
   onDeleteBlock,
+  onInsertAt,
+  grid,
 }: {
   items: PageItem[];
   pathname: string;
@@ -224,6 +334,8 @@ export function PageDragLayer({
   editingId: string | null;
   onEditToggle: (id: string) => void;
   onDeleteBlock: (id: string) => void;
+  onInsertAt?: (index: number) => void;
+  grid?: PageGridMeta | null;
 }) {
   const [measured, setMeasured] = useState<MeasuredEl[]>([]);
 
@@ -320,11 +432,95 @@ export function PageDragLayer({
     right: 288,
   });
 
+  const contentW = typeof window !== "undefined" ? window.innerWidth - 288 : 0;
+  const useGrid = grid && grid.columns > 1;
+
   return (
     <div
       style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 40 }}
       aria-hidden="true"
     >
+      {/* ── Column guide lines ── */}
+      {useGrid && (
+        <>
+          {/* Column label bar */}
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 288,
+              height: 22,
+              display: "flex",
+              zIndex: 43,
+              background: "rgba(8,5,15,0.88)",
+              borderBottom: "1px solid rgba(139,92,246,0.28)",
+              pointerEvents: "none",
+            }}
+          >
+            {Array.from({ length: grid.columns }, (_, i) => (
+              <div
+                key={i}
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 9,
+                  fontFamily: "var(--font-cinzel, serif)",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  color: "rgba(139,92,246,0.75)",
+                  borderRight: i < grid.columns - 1 ? "1px dashed rgba(139,92,246,0.35)" : undefined,
+                }}
+              >
+                Col {i + 1}
+              </div>
+            ))}
+          </div>
+
+          {/* Alternating column band tints */}
+          {Array.from({ length: grid.columns }, (_, i) => {
+            const colW = contentW / grid.columns;
+            return (
+              <div
+                key={`band-${i}`}
+                style={{
+                  position: "fixed",
+                  left: i * colW,
+                  width: colW,
+                  top: 22,
+                  bottom: 0,
+                  background: i % 2 === 0 ? "rgba(139,92,246,0.025)" : "transparent",
+                  zIndex: 37,
+                  pointerEvents: "none",
+                }}
+              />
+            );
+          })}
+
+          {/* Column separator lines */}
+          {Array.from({ length: grid.columns - 1 }, (_, i) => {
+            const colW = contentW / grid.columns;
+            return (
+              <div
+                key={`sep-${i}`}
+                style={{
+                  position: "fixed",
+                  left: (i + 1) * colW,
+                  top: 22,
+                  bottom: 0,
+                  width: 1,
+                  borderLeft: "1px dashed rgba(139,92,246,0.38)",
+                  zIndex: 38,
+                  pointerEvents: "none",
+                }}
+              />
+            );
+          })}
+        </>
+      )}
+
       {/* Block drag handles */}
       {measured.map((el) => {
         const item = itemById.get(el.rawId);
@@ -353,6 +549,7 @@ export function PageDragLayer({
           left={zone.left}
           right={zone.right}
           anyDragging={anyDragging}
+          onInsertAt={onInsertAt}
         />
       ))}
     </div>

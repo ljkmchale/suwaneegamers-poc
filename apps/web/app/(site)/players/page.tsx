@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getUnassignedCharacters } from "@/lib/players";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
@@ -72,10 +72,12 @@ function UnassignedSection({ unassigned }: { unassigned: ReturnType<typeof getUn
 export default function PlayersPage() {
   const unassigned = getUnassignedCharacters();
   const order = getPageLayout("/players");
+  const grid = getPageGrid("/players");
   return (
     <div className="relative min-h-screen pb-20">
       <PageBlockList
         items={order}
+        grid={grid}
         sections={{
           header:     <HeaderSection />,
           unassigned: <UnassignedSection unassigned={unassigned} />,

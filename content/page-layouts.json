@@ -1,53 +1,266 @@
 {
   "/": [
-    { "kind": "section", "id": "hero" },
-    { "kind": "section", "id": "portal" }
+    {
+      "kind": "section",
+      "id": "hero"
+    },
+    {
+      "kind": "section",
+      "id": "portal"
+    }
   ],
-
   "/campaigns": [
-    { "kind": "section", "id": "header" },
-    { "kind": "block", "id": "campaigns-grid", "type": "card-grid", "props": { "columns": "3", "gap": "md" } },
-    { "kind": "block", "id": "cc-a-new-adventure",      "type": "campaign-card", "props": { "id": "a-new-adventure" } },
-    { "kind": "block", "id": "cc-bloody-endeavor",      "type": "campaign-card", "props": { "id": "bloody-endeavor" } },
-    { "kind": "block", "id": "cc-dungeons-iii",         "type": "campaign-card", "props": { "id": "dungeons-iii" } },
-    { "kind": "block", "id": "cc-heroes-of-emberstran", "type": "campaign-card", "props": { "id": "heroes-of-emberstran" } },
-    { "kind": "block", "id": "cc-mad-mage",             "type": "campaign-card", "props": { "id": "mad-mage" } },
-    { "kind": "block", "id": "cc-souls-of-destiny",     "type": "campaign-card", "props": { "id": "souls-of-destiny" } },
-    { "kind": "block", "id": "cc-the-silent-vanguard",  "type": "campaign-card", "props": { "id": "the-silent-vanguard" } },
-    { "kind": "section", "id": "side-label" },
-    { "kind": "block", "id": "side-campaigns-grid", "type": "card-grid", "props": { "columns": "2", "gap": "md" } },
-    { "kind": "block", "id": "cc-collective-of-myrdae", "type": "campaign-card", "props": { "id": "collective-of-myrdae" } }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "block",
+      "id": "campaigns-grid",
+      "type": "card-grid",
+      "props": {
+        "columns": "3",
+        "gap": "md"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-a-new-adventure",
+      "type": "campaign-card",
+      "props": {
+        "id": "a-new-adventure"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-bloody-endeavor",
+      "type": "campaign-card",
+      "props": {
+        "id": "bloody-endeavor"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-dungeons-iii",
+      "type": "campaign-card",
+      "props": {
+        "id": "dungeons-iii"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-heroes-of-emberstran",
+      "type": "campaign-card",
+      "props": {
+        "id": "heroes-of-emberstran"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-mad-mage",
+      "type": "campaign-card",
+      "props": {
+        "id": "mad-mage"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-souls-of-destiny",
+      "type": "campaign-card",
+      "props": {
+        "id": "souls-of-destiny"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-the-silent-vanguard",
+      "type": "campaign-card",
+      "props": {
+        "id": "the-silent-vanguard"
+      }
+    },
+    {
+      "kind": "section",
+      "id": "side-label"
+    },
+    {
+      "kind": "block",
+      "id": "side-campaigns-grid",
+      "type": "card-grid",
+      "props": {
+        "columns": "2",
+        "gap": "md"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "cc-collective-of-myrdae",
+      "type": "campaign-card",
+      "props": {
+        "id": "collective-of-myrdae"
+      }
+    }
   ],
-
   "/players": [
-    { "kind": "section", "id": "header" },
-    { "kind": "block", "id": "players-grid", "type": "card-grid", "props": { "columns": "2", "gap": "md" } },
-    { "kind": "block", "id": "pc-brian",              "type": "player-card", "props": { "id": "brian" } },
-    { "kind": "block", "id": "pc-chip-poole",         "type": "player-card", "props": { "id": "chip-poole" } },
-    { "kind": "block", "id": "pc-chuck",              "type": "player-card", "props": { "id": "chuck" } },
-    { "kind": "block", "id": "pc-cooper",             "type": "player-card", "props": { "id": "cooper" } },
-    { "kind": "block", "id": "pc-emma-cooper",        "type": "player-card", "props": { "id": "emma-cooper" } },
-    { "kind": "block", "id": "pc-jenny-mchale",       "type": "player-card", "props": { "id": "jenny-mchale" } },
-    { "kind": "block", "id": "pc-joshua-john",        "type": "player-card", "props": { "id": "joshua-john" } },
-    { "kind": "block", "id": "pc-larry-mchale",       "type": "player-card", "props": { "id": "larry-mchale" } },
-    { "kind": "block", "id": "pc-lesley-poole",       "type": "player-card", "props": { "id": "lesley-poole" } },
-    { "kind": "block", "id": "pc-michael-hewson",     "type": "player-card", "props": { "id": "michael-hewson" } },
-    { "kind": "block", "id": "pc-mike-brown",         "type": "player-card", "props": { "id": "mike-brown" } },
-    { "kind": "block", "id": "pc-sean-poole",         "type": "player-card", "props": { "id": "sean-poole" } },
-    { "kind": "block", "id": "pc-suzanne-chernetsky", "type": "player-card", "props": { "id": "suzanne-chernetsky" } },
-    { "kind": "block", "id": "pc-tiffany-mulvihill",  "type": "player-card", "props": { "id": "tiffany-mulvihill" } },
-    { "kind": "block", "id": "pc-tom-chernetsky",     "type": "player-card", "props": { "id": "tom-chernetsky" } },
-    { "kind": "block", "id": "pc-ty-cooper",          "type": "player-card", "props": { "id": "ty-cooper" } },
-    { "kind": "section", "id": "unassigned" }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "block",
+      "id": "players-grid",
+      "type": "card-grid",
+      "props": {
+        "columns": "2",
+        "gap": "md"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-brian",
+      "type": "player-card",
+      "props": {
+        "id": "brian"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-chip-poole",
+      "type": "player-card",
+      "props": {
+        "id": "chip-poole"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-chuck",
+      "type": "player-card",
+      "props": {
+        "id": "chuck"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-cooper",
+      "type": "player-card",
+      "props": {
+        "id": "cooper"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-emma-cooper",
+      "type": "player-card",
+      "props": {
+        "id": "emma-cooper"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-jenny-mchale",
+      "type": "player-card",
+      "props": {
+        "id": "jenny-mchale"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-joshua-john",
+      "type": "player-card",
+      "props": {
+        "id": "joshua-john"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-larry-mchale",
+      "type": "player-card",
+      "props": {
+        "id": "larry-mchale"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-lesley-poole",
+      "type": "player-card",
+      "props": {
+        "id": "lesley-poole"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-michael-hewson",
+      "type": "player-card",
+      "props": {
+        "id": "michael-hewson"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-mike-brown",
+      "type": "player-card",
+      "props": {
+        "id": "mike-brown"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-sean-poole",
+      "type": "player-card",
+      "props": {
+        "id": "sean-poole"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-suzanne-chernetsky",
+      "type": "player-card",
+      "props": {
+        "id": "suzanne-chernetsky"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-tiffany-mulvihill",
+      "type": "player-card",
+      "props": {
+        "id": "tiffany-mulvihill"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-tom-chernetsky",
+      "type": "player-card",
+      "props": {
+        "id": "tom-chernetsky"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "pc-ty-cooper",
+      "type": "player-card",
+      "props": {
+        "id": "ty-cooper"
+      }
+    },
+    {
+      "kind": "section",
+      "id": "unassigned"
+    }
   ],
-
   "/dungeon-masters": [
-    { "kind": "section", "id": "header" },
+    {
+      "kind": "section",
+      "id": "header"
+    },
     {
       "kind": "block",
       "id": "dm-grid-1",
       "type": "card-grid",
-      "props": { "columns": "2", "gap": "md" }
+      "props": {
+        "columns": "2",
+        "gap": "md"
+      }
     },
     {
       "kind": "block",
@@ -104,27 +317,122 @@
       }
     }
   ],
-
   "/bestiary": [
-    { "kind": "section", "id": "header" },
-    { "kind": "block", "id": "bestiary-grid", "type": "card-grid", "props": { "columns": "3", "gap": "md" } },
-    { "kind": "block", "id": "bc-bulas",          "type": "creature-card", "props": { "name": "Bulas" } },
-    { "kind": "block", "id": "bc-chalyth",        "type": "creature-card", "props": { "name": "Chalyth" } },
-    { "kind": "block", "id": "bc-dralg",          "type": "creature-card", "props": { "name": "Dralg" } },
-    { "kind": "block", "id": "bc-genling",        "type": "creature-card", "props": { "name": "Genling" } },
-    { "kind": "block", "id": "bc-gertot",         "type": "creature-card", "props": { "name": "Gertot" } },
-    { "kind": "block", "id": "bc-giant-solifugid","type": "creature-card", "props": { "name": "Giant Solifugid" } },
-    { "kind": "block", "id": "bc-kahlbit",        "type": "creature-card", "props": { "name": "Kahlbit" } },
-    { "kind": "block", "id": "bc-leatherback",    "type": "creature-card", "props": { "name": "Leatherback" } },
-    { "kind": "block", "id": "bc-narun",          "type": "creature-card", "props": { "name": "Narūn" } },
-    { "kind": "block", "id": "bc-rongri",         "type": "creature-card", "props": { "name": "Rongri" } },
-    { "kind": "block", "id": "bc-saber",          "type": "creature-card", "props": { "name": "Saber" } },
-    { "kind": "block", "id": "bc-thall-mound",    "type": "creature-card", "props": { "name": "Thall Mound" } }
+    {
+      "kind": "section",
+      "id": "header"
+    },
+    {
+      "kind": "block",
+      "id": "bestiary-grid",
+      "type": "card-grid",
+      "props": {
+        "columns": "3",
+        "gap": "md"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-bulas",
+      "type": "creature-card",
+      "props": {
+        "name": "Bulas"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-chalyth",
+      "type": "creature-card",
+      "props": {
+        "name": "Chalyth"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-dralg",
+      "type": "creature-card",
+      "props": {
+        "name": "Dralg"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-genling",
+      "type": "creature-card",
+      "props": {
+        "name": "Genling"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-gertot",
+      "type": "creature-card",
+      "props": {
+        "name": "Gertot"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-giant-solifugid",
+      "type": "creature-card",
+      "props": {
+        "name": "Giant Solifugid"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-kahlbit",
+      "type": "creature-card",
+      "props": {
+        "name": "Kahlbit"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-leatherback",
+      "type": "creature-card",
+      "props": {
+        "name": "Leatherback"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-narun",
+      "type": "creature-card",
+      "props": {
+        "name": "Narūn"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-rongri",
+      "type": "creature-card",
+      "props": {
+        "name": "Rongri"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-saber",
+      "type": "creature-card",
+      "props": {
+        "name": "Saber"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "bc-thall-mound",
+      "type": "creature-card",
+      "props": {
+        "name": "Thall Mound"
+      }
+    }
   ],
-
   "/lore": [
     {
-      "kind": "block", "id": "lore-header", "type": "page-header",
+      "kind": "block",
+      "id": "lore-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Knowledge Base",
         "title": "Legends & Lore",
@@ -133,16 +441,19 @@
       }
     },
     {
-      "kind": "block", "id": "lore-links", "type": "portal-links",
+      "kind": "block",
+      "id": "lore-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the canonical lore, histories, myths, factions, and world notes.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Original Google Site\",\"description\":\"Reference the legacy lore pages while the Knowledge Base remains the source of truth.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Reference\"}]"
       }
     }
   ],
-
   "/gazetteer": [
     {
-      "kind": "block", "id": "gazetteer-header", "type": "page-header",
+      "kind": "block",
+      "id": "gazetteer-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Knowledge Base",
         "title": "Gazetteer",
@@ -151,16 +462,19 @@
       }
     },
     {
-      "kind": "block", "id": "gazetteer-links", "type": "portal-links",
+      "kind": "block",
+      "id": "gazetteer-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical Myrdae locations and place notes.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
       }
     }
   ],
-
   "/world": [
     {
-      "kind": "block", "id": "world-header", "type": "page-header",
+      "kind": "block",
+      "id": "world-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Map Portal",
         "title": "The World of Myrdae",
@@ -169,16 +483,19 @@
       }
     },
     {
-      "kind": "block", "id": "world-links", "type": "portal-links",
+      "kind": "block",
+      "id": "world-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical Myrdae map notes, locations, and territory references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Maps of Myrdae\",\"description\":\"Open the local map doorway for interactive and reference map links.\",\"href\":\"/maps-of-myrdae\",\"label\":\"View Maps\"}]"
       }
     }
   ],
-
   "/history": [
     {
-      "kind": "block", "id": "history-header", "type": "page-header",
+      "kind": "block",
+      "id": "history-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Knowledge Base",
         "title": "History",
@@ -187,16 +504,19 @@
       }
     },
     {
-      "kind": "block", "id": "history-links", "type": "portal-links",
+      "kind": "block",
+      "id": "history-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the Myrdae timeline and history references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
       }
     }
   ],
-
   "/pantheon": [
     {
-      "kind": "block", "id": "pantheon-header", "type": "page-header",
+      "kind": "block",
+      "id": "pantheon-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Knowledge Base",
         "title": "Pantheon",
@@ -205,16 +525,19 @@
       }
     },
     {
-      "kind": "block", "id": "pantheon-links", "type": "portal-links",
+      "kind": "block",
+      "id": "pantheon-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open the canonical pantheon and religion references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
       }
     }
   ],
-
   "/territories": [
     {
-      "kind": "block", "id": "territories-header", "type": "page-header",
+      "kind": "block",
+      "id": "territories-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Knowledge Base",
         "title": "Territories",
@@ -223,16 +546,19 @@
       }
     },
     {
-      "kind": "block", "id": "territories-links", "type": "portal-links",
+      "kind": "block",
+      "id": "territories-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical territory and region references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
       }
     }
   ],
-
   "/maps-of-myrdae": [
     {
-      "kind": "block", "id": "maps-header", "type": "page-header",
+      "kind": "block",
+      "id": "maps-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Map Portal",
         "title": "Maps of Myrdae",
@@ -241,16 +567,19 @@
       }
     },
     {
-      "kind": "block", "id": "maps-links", "type": "portal-links",
+      "kind": "block",
+      "id": "maps-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical map notes, locations, territories, and table handouts.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Legacy Map Pages\",\"description\":\"Open the original Google Site map pages for comparison and reference.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Legacy Site\"}]"
       }
     }
   ],
-
   "/previous-campaigns": [
     {
-      "kind": "block", "id": "prev-campaigns-header", "type": "page-header",
+      "kind": "block",
+      "id": "prev-campaigns-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Campaign Archive",
         "title": "Previous Campaigns",
@@ -259,38 +588,346 @@
       }
     },
     {
-      "kind": "block", "id": "prev-campaigns-links", "type": "portal-links",
+      "kind": "block",
+      "id": "prev-campaigns-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open archived campaigns, old recaps, and legacy table lore.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Original Google Site\",\"description\":\"Open the original campaign pages for reference while archives are consolidated.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Legacy Site\"}]"
       }
     }
   ],
-
-  "/test-page": [
-    {
-      "kind": "block", "id": "test-page-header", "type": "page-header",
-      "props": {
-        "eyebrow": "Internal Lab",
-        "title": "Test Page",
-        "description": "A working space for trying layout editor features and composable card assets before they move into public pages.",
-        "align": "center"
-      }
+  "/test-page": {
+    "grid": {
+      "columns": 2,
+      "gap": "md"
     },
-    {
-      "kind": "block", "id": "test-single-card", "type": "card",
-      "props": {
-        "eyebrow": "Test Card",
-        "title": "Single Card Test",
-        "description": "This is the first simple card on the test page. Once the route is confirmed live, this page can be used to test the more flexible Card Layout asset.",
-        "href": "",
-        "linkLabel": ""
+    "items": [
+      {
+        "kind": "block",
+        "id": "test-page-header",
+        "type": "page-header",
+        "props": {
+          "eyebrow": "Internal Lab",
+          "title": "Test Page",
+          "description": "A working space for testing every asset type and layout feature before it moves into production pages.",
+          "align": "center"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_ne16yy",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Content Blocks"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "sec_akwmso",
+        "type": "section-heading",
+        "props": {
+          "eyebrow": "Test",
+          "title": "Section Heading Block",
+          "description": "Eyebrow, heading, and intro copy for any page section.",
+          "align": "left"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "text_xwtc4d",
+        "type": "text",
+        "props": {
+          "content": "This is a Text Block. It renders a styled paragraph of body text. You can set alignment to left or center and type as much content as needed. This block is great for lore entries, announcements, or any descriptive copy.",
+          "align": "left"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "callout_gold_kud1gm",
+        "type": "callout",
+        "props": {
+          "title": "Gold Callout",
+          "content": "This is a highlighted callout in Gold. Try switching the accent to Arcane or Blood in the props panel.",
+          "variant": "gold"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "callout_arc_e3r9ej",
+        "type": "callout",
+        "props": {
+          "title": "Arcane Callout",
+          "content": "This callout uses the Arcane purple accent.",
+          "variant": "arcane"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "btn_primary_5rtqr6",
+        "type": "button-link",
+        "props": {
+          "label": "Primary Button Link",
+          "href": "/",
+          "align": "left",
+          "variant": "primary"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "btn_secondary_arh7l7",
+        "type": "button-link",
+        "props": {
+          "label": "Secondary Button Link",
+          "href": "/campaigns",
+          "align": "center",
+          "variant": "secondary"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "linklist_zybr9v",
+        "type": "link-list",
+        "props": {
+          "title": "Link List Block",
+          "links": "[{\"label\":\"Home\",\"href\":\"/\",\"description\":\"Site home\"},{\"label\":\"Campaigns\",\"href\":\"/campaigns\",\"description\":\"Active campaigns\"},{\"label\":\"Knowledge Base\",\"href\":\"http://kb.suwaneegamers.net\",\"description\":\"External lore reference\"}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "spacer_dtblpo",
+        "type": "spacer",
+        "props": {
+          "size": "md"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_30kzmj",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Cards"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "test-single-card",
+        "type": "card",
+        "props": {
+          "eyebrow": "Test Card",
+          "title": "Card — Column 1",
+          "description": "This card is assigned to column 1 of the 2-column page grid. Use the Column Placement picker in Edit Block to move it.",
+          "href": "",
+          "linkLabel": ""
+        },
+        "col": 1,
+        "colSpan": 1
+      },
+      {
+        "kind": "block",
+        "id": "card2_wwz68j",
+        "type": "card",
+        "props": {
+          "eyebrow": "Test Card",
+          "title": "Card — Column 2",
+          "description": "This card is assigned to column 2. Both cards demonstrate side-by-side placement using the page grid.",
+          "href": "",
+          "linkLabel": ""
+        },
+        "col": 2,
+        "colSpan": 1
+      },
+      {
+        "kind": "block",
+        "id": "test-single-card-layout",
+        "type": "layout-card",
+        "props": {
+          "width": "wide",
+          "items": "[{\"id\":\"grid_root\",\"type\":\"grid\",\"props\":{\"columns\":\"3\",\"rows\":\"2\",\"gap\":\"md\",\"items\":\"[{\\\"id\\\":\\\"header_1\\\",\\\"type\\\":\\\"header\\\",\\\"props\\\":{\\\"title\\\":\\\"Card Layout\\\",\\\"eyebrow\\\":\\\"Test Asset\\\",\\\"col\\\":\\\"1\\\",\\\"row\\\":\\\"1\\\",\\\"colSpan\\\":\\\"3\\\",\\\"rowSpan\\\":\\\"1\\\",\\\"size\\\":\\\"lg\\\"}},{\\\"id\\\":\\\"text_1\\\",\\\"type\\\":\\\"text\\\",\\\"props\\\":{\\\"content\\\":\\\"Use the grid controls to arrange card internals up to 6 columns by 10 rows.\\\",\\\"col\\\":\\\"1\\\",\\\"row\\\":\\\"2\\\",\\\"colSpan\\\":\\\"2\\\",\\\"rowSpan\\\":\\\"1\\\"}},{\\\"id\\\":\\\"inner_1\\\",\\\"type\\\":\\\"inner-card\\\",\\\"props\\\":{\\\"col\\\":\\\"3\\\",\\\"row\\\":\\\"2\\\",\\\"colSpan\\\":\\\"1\\\",\\\"rowSpan\\\":\\\"1\\\",\\\"items\\\":\\\"[{\\\\\\\"id\\\\\\\":\\\\\\\"inner_text_1\\\\\\\",\\\\\\\"type\\\\\\\":\\\\\\\"text\\\\\\\",\\\\\\\"props\\\\\\\":{\\\\\\\"content\\\\\\\":\\\\\\\"Inner card\\\\\\\"}}]\\\"}}]\"}}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "profile_ajqh0e",
+        "type": "profile-card",
+        "props": {
+          "layout": "side",
+          "items": "[{\"id\":\"heading_1\",\"type\":\"heading\",\"props\":{\"value\":\"Test Profile\"}},{\"id\":\"role_1\",\"type\":\"description\",\"props\":{\"value\":\"Role or character class\"}},{\"id\":\"badge_1\",\"type\":\"badge\",\"props\":{\"label\":\"Active\",\"color\":\"arcane\"}},{\"id\":\"link_1\",\"type\":\"link\",\"props\":{\"label\":\"Character Sheet\",\"href\":\"/\"}}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_5xrqkz",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Media"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "image_gqsnqo",
+        "type": "image",
+        "props": {
+          "src": "",
+          "alt": "Test image — pick one from the media library in the Edit Block panel",
+          "caption": "Image caption (optional)",
+          "size": "large"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "gallery_fg8k3u",
+        "type": "gallery",
+        "props": {
+          "columns": "3",
+          "images": "[{\"src\":\"\",\"alt\":\"Gallery slot 1 — add an image from the media library\",\"caption\":\"Caption 1\"},{\"src\":\"\",\"alt\":\"Gallery slot 2\",\"caption\":\"Caption 2\"},{\"src\":\"\",\"alt\":\"Gallery slot 3\",\"caption\":\"Caption 3\"}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "embed_er5fhj",
+        "type": "embed",
+        "props": {
+          "src": "",
+          "title": "Embed Block — paste an iframe URL to test",
+          "height": "400"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_c8tl0x",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Layout Blocks"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "portal_ix8sxt",
+        "type": "portal-links",
+        "props": {
+          "eyebrow": "Quick Links",
+          "title": "Portal Links Grid",
+          "description": "A 1–4 column grid of link cards with title, description, and a call-to-action button.",
+          "links": "[{\"title\":\"Campaigns\",\"description\":\"Active campaigns list.\",\"href\":\"/campaigns\",\"label\":\"View\"},{\"title\":\"Players\",\"description\":\"Player roster and characters.\",\"href\":\"/players\",\"label\":\"Browse\"},{\"title\":\"Knowledge Base\",\"description\":\"Lore and setting reference.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open\"}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "founders_0up18i",
+        "type": "founders",
+        "props": {
+          "heading": "Founded By",
+          "bio": "A short story about the founders goes here. This block supports a heading, optional bio paragraph, and a list of founder cards with name, role, and portrait.",
+          "founders": "[{\"name\":\"Chip Poole\",\"role\":\"Co-Founder\",\"img\":\"\"},{\"name\":\"Larry McHale\",\"role\":\"Co-Founder\",\"img\":\"\"}]"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_ay21yq",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Card Grids"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "cg_x4ljs3",
+        "type": "card-grid",
+        "props": {
+          "columns": "3",
+          "gap": "md"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "cc1_kmhlcw",
+        "type": "campaign-card",
+        "props": {
+          "id": "a-new-adventure"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "cc2_ji9sir",
+        "type": "campaign-card",
+        "props": {
+          "id": "bloody-endeavor"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "pc1_791m0d",
+        "type": "player-card",
+        "props": {
+          "id": "sean-poole"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "divider_75gdu7",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Live Data Grids"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "campaigns_91jr44",
+        "type": "campaigns-grid",
+        "props": {}
+      },
+      {
+        "kind": "block",
+        "id": "players_97f5ac",
+        "type": "players-grid",
+        "props": {}
+      },
+      {
+        "kind": "block",
+        "id": "dms_xw4oaa",
+        "type": "dms-grid",
+        "props": {}
+      },
+      {
+        "kind": "block",
+        "id": "bestiary_nkac6m",
+        "type": "bestiary-grid",
+        "props": {}
+      },
+      {
+        "kind": "block",
+        "id": "cal_b0eful",
+        "type": "calendar-embed",
+        "props": {}
+      },
+      {
+        "kind": "block",
+        "id": "divider_o488d6",
+        "type": "divider",
+        "props": {
+          "variant": "ornate",
+          "label": "Hero Banner"
+        }
+      },
+      {
+        "kind": "block",
+        "id": "hero_jszzw7",
+        "type": "hero-banner",
+        "props": {}
       }
-    }
-  ],
-
+    ]
+  },
   "/setting": [
     {
-      "kind": "block", "id": "setting-header", "type": "page-header",
+      "kind": "block",
+      "id": "setting-header",
+      "type": "page-header",
       "props": {
         "eyebrow": "Setting Guide",
         "title": "Myrdae Setting",
@@ -299,7 +936,9 @@
       }
     },
     {
-      "kind": "block", "id": "setting-links", "type": "portal-links",
+      "kind": "block",
+      "id": "setting-links",
+      "type": "portal-links",
       "props": {
         "links": "[{\"title\":\"Myrdae Setting Guide\",\"description\":\"Open the canonical setting guide at the linked Google Doc heading.\",\"href\":\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.xpbfs6nn72lr\",\"label\":\"Open Setting\"}]"
       }

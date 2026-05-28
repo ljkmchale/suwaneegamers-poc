@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { dungeonMastersReferenceUrl } from "@/lib/dungeonMasters";
 import { PORTAL_URLS } from "@/lib/portal";
-import { getPageLayout } from "@/lib/pageLayouts";
+import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
@@ -45,6 +45,7 @@ function HeaderSection() {
 
 export default function DungeonMastersPage() {
   const order = getPageLayout("/dungeon-masters");
+  const grid = getPageGrid("/dungeon-masters");
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -53,7 +54,7 @@ export default function DungeonMastersPage() {
         background: "linear-gradient(180deg, rgba(8,5,15,0.78) 0%, rgba(8,5,15,0.68) 36%, rgba(8,5,15,0.92) 100%), linear-gradient(90deg, rgba(8,5,15,0.42), rgba(8,5,15,0.2), rgba(8,5,15,0.52))",
       }} />
       <div className="relative z-10 pb-20">
-        <PageBlockList items={order} sections={{ header: <HeaderSection /> }} />
+        <PageBlockList items={order} grid={grid} sections={{ header: <HeaderSection /> }} />
       </div>
     </div>
   );
