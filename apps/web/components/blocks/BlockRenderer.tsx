@@ -239,14 +239,23 @@ function FoundersBlock({ props }: { props: Record<string, unknown> }) {
         <div className="flex flex-wrap justify-center gap-10">
           {founders.map((founder) => (
             <div key={founder.name} className="flex flex-col items-center gap-2">
-              <Image
-                src={founder.img}
-                alt={founder.name}
-                width={80}
-                height={80}
-                className="w-20 h-20 rounded-full object-cover object-top"
-                style={{ border: "2px solid var(--color-accent-gold)" }}
-              />
+              {founder.img ? (
+                <Image
+                  src={founder.img}
+                  alt={founder.name}
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 rounded-full object-cover object-top"
+                  style={{ border: "2px solid var(--color-accent-gold)" }}
+                />
+              ) : (
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center font-cinzel text-lg"
+                  style={{ border: "2px solid var(--color-accent-gold)", background: "var(--color-bg-card)", color: "var(--color-accent-gold)" }}
+                >
+                  {(founder.name ?? "?")[0]}
+                </div>
+              )}
               <p className="font-cinzel text-base" style={{ color: "var(--color-accent-gold)" }}>
                 {founder.name}
               </p>
