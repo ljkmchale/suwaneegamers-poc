@@ -208,6 +208,22 @@ function BlockHandle({
     >
       {/* ── Floating toolbar for blocks ── */}
       {!isSection && (
+        <>
+          {/* Transparent bridge fills the gap between toolbar and block top so hover doesn't drop */}
+          {toolbarAbove && (
+            <div
+              onMouseEnter={enter}
+              onMouseLeave={leave}
+              style={{
+                position: "absolute",
+                top: -(TOOLBAR_H + 6),
+                left: 0,
+                right: 0,
+                height: TOOLBAR_H + 8,
+                pointerEvents: "auto",
+              }}
+            />
+          )}
         <div
           onMouseEnter={enter}
           onMouseLeave={leave}
@@ -284,6 +300,7 @@ function BlockHandle({
             ×
           </button>
         </div>
+        </>
       )}
 
       {/* ── Section hover label ── */}
