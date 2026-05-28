@@ -16,6 +16,7 @@ export type BlockType =
   | "gallery"
   | "embed"
   | "spacer"
+  | "quote"
   // ── Site-specific layout blocks ──
   | "page-header"
   | "hero-banner"
@@ -682,6 +683,27 @@ export const ASSET_TYPES: AssetTypeDef[] = [
           { value: "sm", label: "Small  (32px)" },
           { value: "md", label: "Medium (64px)" },
           { value: "lg", label: "Large  (96px)" },
+        ],
+      },
+    ],
+  },
+
+  {
+    type: "quote",
+    label: "Quote",
+    description: "Pull-quote or flavor text — styled citation with optional attribution and accent colour",
+    icon: "❝",
+    category: "content",
+    defaultProps: { text: "", attribution: "", variant: "gold" },
+    fields: [
+      { key: "text",          label: "Quote text",              type: "textarea", placeholder: "The words of the ancient scroll…" },
+      { key: "attribution",   label: "Attribution (optional)",  type: "text",     placeholder: "— Source or character name" },
+      {
+        key: "variant", label: "Accent colour", type: "select",
+        options: [
+          { value: "gold",   label: "Gold" },
+          { value: "arcane", label: "Arcane (purple)" },
+          { value: "muted",  label: "Muted (dim)" },
         ],
       },
     ],

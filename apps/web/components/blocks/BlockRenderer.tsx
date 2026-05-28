@@ -170,6 +170,36 @@ function SpacerBlock({ props }: { props: Record<string, unknown> }) {
   return <div className={h} aria-hidden="true" />;
 }
 
+function QuoteBlock({ props }: { props: Record<string, unknown> }) {
+  const text        = (props.text          as string | undefined) ?? "";
+  const attribution = props.attribution   as string | undefined;
+  const variant     = (props.variant       as string | undefined) ?? "gold";
+  const colorVar =
+    variant === "arcane" ? "var(--color-accent-arcane)" :
+    variant === "muted"  ? "var(--color-text-muted)"    :
+                           "var(--color-accent-gold)";
+
+  if (!text) return null;
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-8">
+      <blockquote className="relative pl-6 border-l-4" style={{ borderColor: colorVar }}>
+        <p
+          className="font-cinzel text-xl leading-relaxed italic"
+          style={{ color: "var(--color-text-primary)", textShadow: "0 1px 12px rgba(0,0,0,0.5)" }}
+        >
+          ❝{text}❞
+        </p>
+        {attribution && (
+          <footer className="mt-3 text-sm font-cinzel tracking-widest" style={{ color: colorVar }}>
+            {attribution}
+          </footer>
+        )}
+      </blockquote>
+    </div>
+  );
+}
+
 function CardGridBlock({
   props,
   children,
@@ -1695,6 +1725,7 @@ function BlockContent({
     case "gallery":         return <GalleryBlock       props={block.props} />;
     case "embed":           return <EmbedBlock         props={block.props} />;
     case "spacer":          return <SpacerBlock        props={block.props} />;
+    case "quote":           return <QuoteBlock         props={block.props} />;
     case "card-grid":       return <CardGridBlock      props={block.props}>{children}</CardGridBlock>;
     // Layout
     case "page-header":     return <PageHeaderBlock    props={block.props} />;

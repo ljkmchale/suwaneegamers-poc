@@ -414,6 +414,73 @@ function GalleryImagesField({
   );
 }
 
+interface EditableFounder {
+  name?: string;
+  role?: string;
+  img?: string;
+}
+
+function FoundersField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const founders = parseJsonList<EditableFounder>(value);
+
+  function save(next: EditableFounder[]) {
+    saveJsonList(onChange, next);
+  }
+
+  function setFounder(index: number, key: keyof EditableFounder, nextValue: string) {
+    save(founders.map((f, i) => i === index ? { ...f, [key]: nextValue } : f));
+  }
+
+  const INPUT =
+    "w-full px-2 py-1 rounded border text-xs bg-[#08050f] text-[#e8dfc8] " +
+    "placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]";
+  const LABEL = "block mb-0.5 text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060]";
+
+  return (
+    <div className="space-y-2">
+      {founders.map((founder, index) => (
+        <div key={index} className="rounded border border-[#2a2a35] bg-[#0f0a1a] p-2 space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <span className="flex-1 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880]">
+              Founder {index + 1}
+            </span>
+            <button type="button" onClick={() => save(moveListItem(founders, index, index - 1))} disabled={index === 0}
+              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Up</button>
+            <button type="button" onClick={() => save(moveListItem(founders, index, index + 1))} disabled={index === founders.length - 1}
+              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Down</button>
+            <button type="button" onClick={() => save(founders.filter((_, i) => i !== index))}
+              className="text-[11px] text-[#5a5060] hover:text-red-400 px-0.5">Remove</button>
+          </div>
+          <div>
+            <label className={LABEL}>Name</label>
+            <input value={founder.name ?? ""} onChange={(e) => setFounder(index, "name", e.target.value)}
+              className={INPUT} placeholder="Founder name" />
+          </div>
+          <div>
+            <label className={LABEL}>Role / Title</label>
+            <input value={founder.role ?? ""} onChange={(e) => setFounder(index, "role", e.target.value)}
+              className={INPUT} placeholder="Guild Master, Lorekeeper, etc." />
+          </div>
+          <div>
+            <label className={LABEL}>Photo</label>
+            <ImagePathField value={founder.img ?? ""} onChange={(next) => setFounder(index, "img", next)} />
+          </div>
+        </div>
+      ))}
+      <button type="button" onClick={() => save([...founders, { name: "New Founder", role: "", img: "" }])}
+        className="w-full rounded border border-[#2a2a35] px-2 py-1.5 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]">
+        Add Founder
+      </button>
+    </div>
+  );
+}
+
 function CharactersField({
   value,
   onChange,
@@ -1347,6 +1414,17 @@ function PropsForm({
             </div>
           );
         }
+        if (field.type === "json" && field.key === "founders" && block.type === "founders") {
+          return (
+            <div key={field.key}>
+              <label className={LABEL}>{field.label}</label>
+              {field.hint && (
+                <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>
+              )}
+              <FoundersField value={val} onChange={(next) => set(field.key, next)} />
+            </div>
+          );
+        }
         if (field.type === "textarea" || field.type === "json") {
           return (
             <div key={field.key}>
@@ -1520,13 +1598,15 @@ export function PageEditPanel({
 }: PageEditPanelProps) {
   const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
   const editingCardLayout = editingBlock?.type === "layout-card";
-  const categories: { label: string; key: "layout" | "content" }[] = [
+  const categories: { label: string; key: "layout" | "content" | "data" }[] = [
     { label: "Layout", key: "layout" },
     { label: "Content", key: "content" },
+    { label: "Live Data", key: "data" },
   ];
   const byCategory = {
     layout: ASSET_TYPES.filter((a) => a.category === "layout"),
     content: ASSET_TYPES.filter((a) => a.category === "content"),
+    data: ASSET_TYPES.filter((a) => a.category === "data"),
   };
 
   return (

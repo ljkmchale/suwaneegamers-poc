@@ -624,6 +624,20 @@
       },
       {
         "kind": "block",
+        "id": "blk_1780006857859_czlk",
+        "type": "card",
+        "props": {
+          "eyebrow": "",
+          "title": "New Card",
+          "description": "",
+          "href": "",
+          "linkLabel": ""
+        },
+        "col": 1,
+        "colSpan": 1
+      },
+      {
+        "kind": "block",
         "id": "sec_akwmso",
         "type": "section-heading",
         "props": {

@@ -382,6 +382,28 @@ function DraftBlock({
     );
   }
 
+  if (item.type === "quote") {
+    const text        = (props.text          as string | undefined) ?? "";
+    const attribution = props.attribution   as string | undefined;
+    const variant     = (props.variant       as string | undefined) ?? "gold";
+    const colorVar =
+      variant === "arcane" ? "var(--color-accent-arcane)" :
+      variant === "muted"  ? "var(--color-text-muted)"    :
+                             "var(--color-accent-gold)";
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-3xl mx-auto px-6 py-8">
+        <blockquote className="relative pl-6 border-l-4" style={{ borderColor: colorVar }}>
+          <p className="font-cinzel text-xl leading-relaxed italic" style={{ color: "var(--color-text-primary)" }}>
+            ❝{text || "Enter your quote text…"}❞
+          </p>
+          {attribution && (
+            <footer className="mt-3 text-sm font-cinzel tracking-widest" style={{ color: colorVar }}>{attribution}</footer>
+          )}
+        </blockquote>
+      </div>
+    );
+  }
+
   if (item.type === "image") {
     const src     = props.src     as string | undefined;
     const caption = props.caption as string | undefined;
