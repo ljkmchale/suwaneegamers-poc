@@ -5,24 +5,27 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { PencilLine, Shield } from "lucide-react";
 import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/actions";
-import type { NavItem } from "@/lib/nav";
+import type { NavSection } from "@/lib/nav";
 
 interface NavProps {
-  primaryNav: NavItem[];
-  worldNav: NavItem[];
-  toolsNav: NavItem[];
+  sections: NavSection[];
   isAdmin?: boolean;
   editMode?: boolean;
 }
 
-export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMode = false }: NavProps) {
+export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [worldOpen, setWorldOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const isExternal = (href: string) => href.startsWith("http://") || href.startsWith("https://");
   const isActive = (href: string) =>
     !isExternal(href) && (pathname === href || pathname.startsWith(href + "/"));
+
+  // Convention: "primary" = flat links left, "tools" = flat links right, everything else = dropdown
+  const primaryNav = sections.find((s) => s.id === "primary")?.items ?? [];
+  const toolsNav = sections.find((s) => s.id === "tools")?.items ?? [];
+  const dropdownSections = sections.filter((s) => s.id !== "primary" && s.id !== "tools");
 
   return (
     <nav
@@ -64,28 +67,29 @@ export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMo
             );
           })}
 
-          {/* World dropdown */}
-          {worldNav.length > 0 && (
+          {/* Dropdown sections (everything except primary and tools) */}
+          {dropdownSections.map((section) => (
             <div
+              key={section.id}
               className="relative"
-              onMouseEnter={() => setWorldOpen(true)}
-              onMouseLeave={() => setWorldOpen(false)}
+              onMouseEnter={() => setOpenDropdown(section.id)}
+              onMouseLeave={() => setOpenDropdown(null)}
             >
               <button
                 className="px-3 py-2 rounded text-xs font-cinzel tracking-wider uppercase transition-colors flex items-center gap-1"
                 style={{
-                  color: worldNav.some((l) => isActive(l.href))
+                  color: section.items.some((l) => isActive(l.href))
                     ? "var(--color-accent-gold)"
                     : "var(--color-text-secondary)",
                 }}
               >
-                Myrdae
+                {section.label}
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
 
-              {worldOpen && (
+              {openDropdown === section.id && section.items.length > 0 && (
                 <div className="absolute top-full left-0 pt-1 min-w-48 z-50">
                   <div
                     className="rounded-lg border py-1 shadow-2xl"
@@ -95,27 +99,15 @@ export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMo
                       backdropFilter: "blur(12px)",
                     }}
                   >
-                    {worldNav.map((link) => {
-                      const className = "block px-4 py-2 text-xs font-cinzel tracking-wider uppercase transition-colors";
-                      const style = {
-                        color: isActive(link.href)
-                          ? "var(--color-accent-gold)"
-                          : "var(--color-text-secondary)",
-                      };
-
+                    {section.items.map((link) => {
+                      const cls = "block px-4 py-2 text-xs font-cinzel tracking-wider uppercase transition-colors";
+                      const style = { color: isActive(link.href) ? "var(--color-accent-gold)" : "var(--color-text-secondary)" };
                       return isExternal(link.href) ? (
-                        <a
-                          key={link.id}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={className}
-                          style={style}
-                        >
+                        <a key={link.id} href={link.href} target="_blank" rel="noopener noreferrer" className={cls} style={style}>
                           {link.label}
                         </a>
                       ) : (
-                        <Link key={link.id} href={link.href} className={className} style={style}>
+                        <Link key={link.id} href={link.href} className={cls} style={style}>
                           {link.label}
                         </Link>
                       );
@@ -124,17 +116,12 @@ export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMo
                 </div>
               )}
             </div>
-          )}
+          ))}
 
-          {/* Tools */}
+          {/* Tools — flat links on the right */}
           {toolsNav.map((link) => {
             const className = "px-3 py-2 rounded text-xs font-cinzel tracking-wider uppercase transition-colors";
-            const style = {
-              color: isActive(link.href)
-                ? "var(--color-accent-arcane)"
-                : "var(--color-text-secondary)",
-            };
-
+            const style = { color: isActive(link.href) ? "var(--color-accent-arcane)" : "var(--color-text-secondary)" };
             return isExternal(link.href) ? (
               <a key={link.id} href={link.href} target="_blank" rel="noopener noreferrer" className={className} style={style}>
                 {link.label}
@@ -205,7 +192,7 @@ export function Navbar({ primaryNav, worldNav, toolsNav, isAdmin = false, editMo
           }}
         >
           <div className="px-4 py-4 space-y-1">
-            {[...primaryNav, ...worldNav, ...toolsNav].map((link) => {
+            {sections.flatMap((s) => s.items).map((link) => {
               const className = "block px-3 py-2.5 rounded font-cinzel text-xs tracking-wider uppercase";
               const style = {
                 color: isActive(link.href)

@@ -452,21 +452,63 @@
   "/gazetteer": [
     {
       "kind": "block",
-      "id": "gazetteer-header",
+      "id": "gaz-header",
       "type": "page-header",
       "props": {
-        "eyebrow": "Knowledge Base",
+        "eyebrow": "World Reference",
         "title": "Gazetteer",
-        "description": "Cities, ruins, taverns, wilderness sites, and other locations are maintained in the Knowledge Base.",
-        "align": "center"
+        "description": "A geographic and cultural reference for the known settlements, ruins, and landmarks of Myrdae. Each entry links to its Google Doc in the shared reference archive. Completed entries have full write-ups; in-progress entries are stubs awaiting documentation.",
+        "align": "left"
       }
     },
     {
       "kind": "block",
-      "id": "gazetteer-links",
-      "type": "portal-links",
+      "id": "gaz-minor-ref",
+      "type": "button-link",
       "props": {
-        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical Myrdae locations and place notes.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+        "label": "Minor Locations Reference ↗",
+        "href": "https://docs.google.com/document/d/1qY82tYJ_K6VMwEhfBZ-NvuX6WMKdSOpga3E40UzFUdE/edit?usp=sharing",
+        "variant": "secondary",
+        "align": "left"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "gaz-divider-completed",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "Completed Locations" }
+    },
+    {
+      "kind": "block",
+      "id": "gaz-completed",
+      "type": "link-list",
+      "props": {
+        "title": "Fully Documented",
+        "links": "[{\"label\":\"Abbey of Light\",\"href\":\"https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"Adsuren\",\"href\":\"https://docs.google.com/document/d/13vD63-iUc9eMgQz0Ycoi-n7LMDfw_I6NWImY6N_fqNA/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"Emberstran\",\"href\":\"https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"Nunglthil\",\"href\":\"https://docs.google.com/document/d/1Uow9Y0-_llBAp4meZsA-QEFTmMslbMV_IlgYV3UjNxg/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"O'naren\",\"href\":\"https://docs.google.com/document/d/1ot7DXOzqFjYKucVqVu-tqmTRflrfBKSAwRZjNZtGLXU/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"Scarwatch Hold\",\"href\":\"https://docs.google.com/document/d/1U1YgTimFZtG1VsC4fjWoh1wVCxGGdokU4peu8hh6jx8/edit?usp=sharing\",\"description\":\"Full documentation available\"},{\"label\":\"Shademoor\",\"href\":\"https://docs.google.com/document/d/1Bq6DDjHDkgMwH6-rko5hITz-hCnT5MmcbPIOwCavM-E/edit?usp=sharing\",\"description\":\"Full documentation available\"}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "gaz-divider-inprogress",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "In Progress" }
+    },
+    {
+      "kind": "block",
+      "id": "gaz-inprogress-al",
+      "type": "link-list",
+      "props": {
+        "title": "A – L",
+        "links": "[{\"label\":\"Ahndashere\",\"href\":\"https://docs.google.com/document/d/1tfgzGJK9ZZcaoiva1lfVAgR0xmbe_2Mn0uFoVj9bFLQ/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Basctdelm\",\"href\":\"https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Climbor\",\"href\":\"https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Dhá Chaomhnóir\",\"href\":\"https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Everlight\",\"href\":\"https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M\",\"description\":\"In progress\"},{\"label\":\"Fal'thalor\",\"href\":\"https://docs.google.com/document/d/1aQKMo8RG-aJv9jBCyjUbTEipla2pOyFuZ3eZp_cl1ME/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Felden\",\"href\":\"https://docs.google.com/document/d/1nEhjK8vRHVzFz5AiEdOYg0Mw5ddtWQviJ5wL9AnDAaI/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Ferndale\",\"href\":\"https://docs.google.com/document/d/192oU58p1whha66amF0iTja93XU9DIp2ixKKz7_q97jo/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Gevakaln\",\"href\":\"https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Gibuldon\",\"href\":\"https://docs.google.com/document/d/1KNei0mo4Zq-_AsEOWJo9N7Zb6AKMS-bfZORK-UxixZ4/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Habadin\",\"href\":\"https://docs.google.com/document/d/1wWiqKYGWl0s-SN8lLOpmZqqmHJ57Xz4E55vl8MKhYpU/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Harbok\",\"href\":\"https://docs.google.com/document/d/1xhJPvlBJ5FD9gdiFtGG5CwVVGn8p29nqTlm5BhSOeJE/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Hesfal\",\"href\":\"https://docs.google.com/document/d/17NYd6qTASw18WSgO4XxuKzAfQ-dZKM9TtNrQuRsS0wg/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Kelaad (Featherwell)\",\"href\":\"https://docs.google.com/document/d/1QK_cl7Na8KiYsnh7kDrzGQMH_F4vNQvfyShrcOUgaDY/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Khagdaruhl\",\"href\":\"https://docs.google.com/document/d/1nBs8h7cQ6ZgcXKMv2BdOjdtFhDEXAKmDk9KK2kl2G60/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Kilgrenny\",\"href\":\"https://docs.google.com/document/d/1ZdIbbdOqUqHRhZX5ot7BFX03pXicuulcFSUTGQvhnQY/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Lehnthru'akk\",\"href\":\"https://docs.google.com/document/d/1OMJ-Jq5iTfG6oabmr79bWLPphvwfWL_xM2qEPPPjamE/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Leterboun\",\"href\":\"https://docs.google.com/document/d/1LjzafsrfqoB7hjgT8zwHQpQejeE0g2uhg1qEQQsFyDs/edit?usp=sharing\",\"description\":\"In progress\"}]"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "gaz-inprogress-mz",
+      "type": "link-list",
+      "props": {
+        "title": "M – Z",
+        "links": "[{\"label\":\"Mistforge\",\"href\":\"https://docs.google.com/document/d/1oTR5U1f7f1P6lmtWRw4PYJm5NTG4S1QsnHBH7XwxFMU/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Mossholde\",\"href\":\"https://docs.google.com/document/d/1Et_utO4UDP9ceCpy8xnVqHSv-1qX-M6N0M-X15cSY84/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Nauldeaus\",\"href\":\"https://docs.google.com/document/d/1_XxM72n6qRRSLPAAJPMNywy_L489vQic6gvFTGYP-A4/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Nurador\",\"href\":\"https://docs.google.com/document/d/1gd4aJP_DPjNu98vI5JvFCWzeQDmPYeZePkiRxesckQs/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Ol'Morrey\",\"href\":\"https://docs.google.com/document/d/1iW2YEMSoqAU0fbzv1sp74_gFYPICj-sFoYLCA6tP2DE/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Oldport\",\"href\":\"https://docs.google.com/document/d/1Z-DN4Ikhl6MRHgON--7xNvOrY8ARy-c3hO-AOwW-Blo/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Palason\",\"href\":\"https://docs.google.com/document/d/1utRALomM9JEn48WX_shle1395BnSPj4bu_wdOHzAB70/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Riverside\",\"href\":\"https://docs.google.com/document/d/1FhmTiPpgM8g5aiCpXwfB8-vdbw7ZMGlHiiD3AS_8oP4/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Staghaven\",\"href\":\"https://docs.google.com/document/d/1FMOC144tn_b6XubbZyLXmE9zH415WFFoDGzXf_NurRM/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Stoneshore\",\"href\":\"https://docs.google.com/document/d/1Krz-9jcD87_dAlPcjW2Wglyv2obMjvyt5iqZvZl9K7Q/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Strolsworth\",\"href\":\"https://docs.google.com/document/d/1c-All1cPsge6wH1X06-6Sxv2sk6r97mg48d51yaAQso/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Tal'basar\",\"href\":\"https://docs.google.com/document/d/1DiuIO2qtBG5l-wQECq-OqyMS2hc44vLnqJmNPQFi1AA/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Tarnsport\",\"href\":\"https://docs.google.com/document/d/1P5e-ekXM8o-J1wQ9cuJC6RKhb9H572UsLvjZWnDazvM/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Tratta\",\"href\":\"https://docs.google.com/document/d/1nbv3ZA-BTR3i1qT535PrR0A3sFHzOuxeYAmXDD83TwY/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Trailpoint\",\"href\":\"https://docs.google.com/document/d/1fhbQ8CwQYQ7D055Y0pOuxjnBlbhu3zEqUR4rVGeRHuo/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Tyne'valé\",\"href\":\"https://docs.google.com/document/d/1J553Gt1bLDE58Cfx2Lt2zUh4pT6XlRj__qlzz2GMyXg/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Tyrynder\",\"href\":\"https://docs.google.com/document/d/1koau5X6jpocl28spf8DXbNHJw3ml-zrMzbmIpnlUXJ8/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Ulkef\",\"href\":\"https://docs.google.com/document/d/1KKG8JYeIkRQPQB_K5mejstFeX2Pq7eDKkdwhBNJ81vs/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Valenlun\",\"href\":\"https://docs.google.com/document/d/1jMqigW9edaI6ksFZx5gCmVZ_8VMoltCDuMkGtx2LBEc/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Waypoint\",\"href\":\"https://docs.google.com/document/d/15jI0tR6DjY6rb1sozx82_-F5E1XK9RY3fnUNmXPnIbE/edit?usp=sharing\",\"description\":\"In progress\"},{\"label\":\"Witguard\",\"href\":\"https://docs.google.com/document/d/11P-7-I7QkaTmpCvM0qqkpN2-7CYrPadZGub565O7D8o/edit?usp=sharing\",\"description\":\"In progress\"}]"
       }
     }
   ],
@@ -536,21 +578,527 @@
   "/territories": [
     {
       "kind": "block",
-      "id": "territories-header",
+      "id": "ter-header",
       "type": "page-header",
       "props": {
-        "eyebrow": "Knowledge Base",
+        "eyebrow": "World Reference",
         "title": "Territories",
-        "description": "Political regions, settlements, factions, and territory notes are maintained in the Knowledge Base.",
-        "align": "center"
+        "description": "The political regions, kingdoms, and wilderness areas of Myrdae. Each entry lists the capital and primary languages. Linked titles open the capital's full entry in the location archive.",
+        "align": "left"
       }
     },
     {
       "kind": "block",
-      "id": "territories-links",
-      "type": "portal-links",
+      "id": "ter-map",
+      "type": "button-link",
       "props": {
-        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open canonical territory and region references.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"}]"
+        "label": "View Myrdae Map",
+        "href": "https://drive.google.com/file/d/144TkmJ94UyZRUTw7iyYTJyVIrpyXJtgk/view?usp=sharing",
+        "variant": "secondary",
+        "align": "left"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-a",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "A – B" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-aelbon",
+      "type": "callout",
+      "props": {
+        "title": "Aelbon — Capital: Dhá Chaomhnóir",
+        "href": "https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?usp=sharing",
+        "content": "Languages: Common\nLush territory nestled in southern Inverland, known for its rich natural resources, fertile fields, and thriving wildlife.",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-aikshaw",
+      "type": "callout",
+      "props": {
+        "title": "Aikshaw Descent",
+        "content": "Capital: Bonfaduhr · Languages: Common, Dwarven",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-aravae",
+      "type": "callout",
+      "props": {
+        "title": "Aravae",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-arbescar",
+      "type": "callout",
+      "props": {
+        "title": "Arbescar",
+        "content": "Capital: Marrowdale · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-baltwood",
+      "type": "callout",
+      "props": {
+        "title": "Baltwood — Capital: Emberstran",
+        "href": "https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit?usp=sharing",
+        "content": "Languages: Common, Elvish, Dwarven",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-barrford",
+      "type": "callout",
+      "props": {
+        "title": "Barrford",
+        "content": "Capital: Stinson · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-blisterfel",
+      "type": "callout",
+      "props": {
+        "title": "Blisterfel",
+        "content": "Capital: Avelvein · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-borealian",
+      "type": "callout",
+      "props": {
+        "title": "Borealian Sway",
+        "content": "Capital: Qal'dynn · Languages: Common, Elvish",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-c",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "C – D" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-camburne",
+      "type": "callout",
+      "props": {
+        "title": "Camburne",
+        "content": "Capital: Leoning · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-caristone",
+      "type": "callout",
+      "props": {
+        "title": "Caristone",
+        "content": "Capital: Edgewind · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-corse",
+      "type": "callout",
+      "props": {
+        "title": "Corse of Veinspear",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-crimson",
+      "type": "callout",
+      "props": {
+        "title": "Crimson March",
+        "content": "Capital: Stouhg · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-dalasor",
+      "type": "callout",
+      "props": {
+        "title": "Dalasor Coast",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-dunmoore",
+      "type": "callout",
+      "props": {
+        "title": "Dunmoore",
+        "content": "Capital: Oldport · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-e",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "E – G" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-esgaar",
+      "type": "callout",
+      "props": {
+        "title": "Esgaar",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-flarebane",
+      "type": "callout",
+      "props": {
+        "title": "Flarebane Isles",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-frystarian",
+      "type": "callout",
+      "props": {
+        "title": "Frystarian Strand",
+        "content": "Capital: Palason · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-gaelscape",
+      "type": "callout",
+      "props": {
+        "title": "Gaelscape",
+        "content": "Capital: Ulkef · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-glenleah",
+      "type": "callout",
+      "props": {
+        "title": "Glenleah",
+        "content": "Capital: Gibuldon · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-graelaug",
+      "type": "callout",
+      "props": {
+        "title": "Graelaug",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-h",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "H – K" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-halesworth",
+      "type": "callout",
+      "props": {
+        "title": "Halesworth — Capital: Basctdelm",
+        "href": "https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit?usp=sharing",
+        "content": "Languages: Common, Elvish, Dwarven, Halfling",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-hillock",
+      "type": "callout",
+      "props": {
+        "title": "Hillock Torn",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-khasvadia",
+      "type": "callout",
+      "props": {
+        "title": "Khasvadia",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-kholdur",
+      "type": "callout",
+      "props": {
+        "title": "Kholdur",
+        "content": "Capital: Thel Kholdur · Languages: Common, Dwarven",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-l",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "L – N" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-lyewell",
+      "type": "callout",
+      "props": {
+        "title": "Lyewell Stretch",
+        "content": "Capital: Porpen · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-mahruud",
+      "type": "callout",
+      "props": {
+        "title": "Mahruud",
+        "content": "Capital: Thrargael · Languages: Common, Orcish",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-matahal",
+      "type": "callout",
+      "props": {
+        "title": "Matahal Valley",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-mulshear",
+      "type": "callout",
+      "props": {
+        "title": "Mulshear",
+        "content": "Capital: Mulshear · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-nandahere",
+      "type": "callout",
+      "props": {
+        "title": "Nandahere",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-o",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "O – R" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-okodia",
+      "type": "callout",
+      "props": {
+        "title": "Okodia",
+        "content": "Capital: Skrettel · Languages: Common, Gnomish, Halfling",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-qaethesvorin",
+      "type": "callout",
+      "props": {
+        "title": "Qae'thesvorin",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-range",
+      "type": "callout",
+      "props": {
+        "title": "Range of Otesurr",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-roaring",
+      "type": "callout",
+      "props": {
+        "title": "Roaring Hollow",
+        "content": "Capital: Fjord'nahl · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-rostiena",
+      "type": "callout",
+      "props": {
+        "title": "Rostiena Foothills — Capital: Stoneshore",
+        "href": "https://docs.google.com/document/d/1Krz-9jcD87_dAlPcjW2Wglyv2obMjvyt5iqZvZl9K7Q/edit?usp=sharing",
+        "content": "Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-s",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "S – T" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-sarbaugh",
+      "type": "callout",
+      "props": {
+        "title": "Sarbaugh",
+        "content": "No established capital · Languages: Orcish",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-serriveil",
+      "type": "callout",
+      "props": {
+        "title": "Serriveil",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-severed",
+      "type": "callout",
+      "props": {
+        "title": "Severed Bend",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-sutherford",
+      "type": "callout",
+      "props": {
+        "title": "Sutherford",
+        "content": "Capital: Morrey · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-tegenwald",
+      "type": "callout",
+      "props": {
+        "title": "Tegenwald",
+        "content": "Capital: A'erley · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-theamis",
+      "type": "callout",
+      "props": {
+        "title": "Theamis",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-tundra",
+      "type": "callout",
+      "props": {
+        "title": "Tundra of Nalscour",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-div-u",
+      "type": "divider",
+      "props": { "variant": "ornate", "label": "U – Y" }
+    },
+    {
+      "kind": "block",
+      "id": "ter-uldrea",
+      "type": "callout",
+      "props": {
+        "title": "Uldrea",
+        "content": "Capital: Sulura · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-wheldrake",
+      "type": "callout",
+      "props": {
+        "title": "Wheldrake",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-yagvur",
+      "type": "callout",
+      "props": {
+        "title": "Yag'vur",
+        "content": "No established capital · Languages: Common",
+        "variant": "gold"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "ter-yearning",
+      "type": "callout",
+      "props": {
+        "title": "Yearning Vale — Capital: Tratta",
+        "href": "https://docs.google.com/document/d/1nbv3ZA-BTR3i1qT535PrR0A3sFHzOuxeYAmXDD83TwY/edit?usp=sharing",
+        "content": "Languages: Common",
+        "variant": "gold"
       }
     }
   ],
@@ -589,10 +1137,10 @@
     },
     {
       "kind": "block",
-      "id": "prev-campaigns-links",
-      "type": "portal-links",
+      "id": "blk_1780057000278_lrje",
+      "type": "campaign-card",
       "props": {
-        "links": "[{\"title\":\"Suwanee Gamers Knowledge Base\",\"description\":\"Open archived campaigns, old recaps, and legacy table lore.\",\"href\":\"http://kb.suwaneegamers.net\",\"label\":\"Open KB\"},{\"title\":\"Original Google Site\",\"description\":\"Open the original campaign pages for reference while archives are consolidated.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Legacy Site\"}]"
+        "id": ""
       }
     }
   ],

@@ -35,7 +35,8 @@ export type BlockType =
   // ── Composable profile card & grid ──
   | "profile-card"
   | "layout-card"
-  | "card-grid";
+  | "card-grid"
+  | "grid-section";
 
 // ── Unified page item types ───────────────────────────────────────────────────
 
@@ -59,6 +60,16 @@ export interface BlockItem {
 }
 
 export type PageItem = SectionItem | BlockItem;
+
+export interface GridSectionChild {
+  id: string;
+  type: BlockType;
+  props: Record<string, unknown>;
+  col: number;
+  row: number;
+  colSpan: number;
+  rowSpan: number;
+}
 
 // ── Profile card inner elements ───────────────────────────────────────────────
 
@@ -373,7 +384,7 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
 export interface AssetField {
   key: string;
   label: string;
-  type: "text" | "textarea" | "url" | "image" | "select" | "json" | "items" | "card-layout-items";
+  type: "text" | "textarea" | "url" | "image" | "select" | "json" | "items" | "card-layout-items" | "grid-section-items";
   placeholder?: string;
   hint?: string;
   options?: { value: string; label: string }[];
@@ -654,9 +665,10 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     description: "Highlighted announcement or note with accent colour",
     icon: "◈",
     category: "content",
-    defaultProps: { title: "", content: "Add your callout message here.", variant: "gold" },
+    defaultProps: { title: "", content: "Add your callout message here.", variant: "gold", href: "" },
     fields: [
       { key: "title",   label: "Title (optional)", type: "text",     placeholder: "Callout heading" },
+      { key: "href",    label: "Title link (optional)", type: "text", placeholder: "/path or https://..." },
       { key: "content", label: "Content",          type: "textarea", placeholder: "Your message…" },
       {
         key: "variant", label: "Accent colour", type: "select",
@@ -805,6 +817,48 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   {
+    type: "grid-section",
+    label: "Grid Section",
+    description: "Transparent layout grid — place any block into specific columns and rows",
+    icon: "⊞",
+    category: "layout",
+    defaultProps: {
+      columns: "2",
+      rows: "2",
+      gap: "md",
+      items: "[]",
+    },
+    fields: [
+      {
+        key: "columns", label: "Columns", type: "select",
+        options: [
+          { value: "1", label: "1 column" },
+          { value: "2", label: "2 columns" },
+          { value: "3", label: "3 columns" },
+          { value: "4", label: "4 columns" },
+          { value: "5", label: "5 columns" },
+          { value: "6", label: "6 columns" },
+        ],
+      },
+      { key: "rows", label: "Rows", type: "text", hint: "Number of rows (1–20)" },
+      {
+        key: "gap", label: "Gap", type: "select",
+        options: [
+          { value: "sm", label: "Small" },
+          { value: "md", label: "Medium" },
+          { value: "lg", label: "Large" },
+        ],
+      },
+      {
+        key: "items",
+        label: "Grid cells",
+        type: "grid-section-items",
+        hint: "Click cells in the page preview to add or edit blocks.",
+      },
+    ],
+  },
+
+  {
     type: "campaigns-grid",
     label: "Campaigns Grid",
     description: "Live grid of all active campaigns (reads from campaigns.json)",
@@ -893,4 +947,15 @@ export const ASSET_TYPES: AssetTypeDef[] = [
 
 export function getAssetDef(type: BlockType): AssetTypeDef | undefined {
   return ASSET_TYPES.find((a) => a.type === type);
+}
+
+export function parseGridSectionItems(raw: unknown): GridSectionChild[] {
+  if (Array.isArray(raw)) return raw as GridSectionChild[];
+  if (typeof raw !== "string") return [];
+  try {
+    const parsed = JSON.parse(raw || "[]");
+    return Array.isArray(parsed) ? (parsed as GridSectionChild[]) : [];
+  } catch {
+    return [];
+  }
 }

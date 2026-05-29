@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "/admin/dungeon-masters", label: "Dungeon Masters" },
   { href: "/admin/bestiary", label: "Bestiary" },
   { href: "/admin/pages", label: "Pages" },
-  { href: "/admin/page-layout", label: "Page Layout" },
+  { href: "/admin/page-layout", label: "Navigation Layout" },
   { href: "/admin/appearance", label: "Appearance" },
   { href: "/admin/media", label: "Media" },
 ];

@@ -13,7 +13,8 @@ import {
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
-import type { BlockItem, CardLayoutItem, ProfileCardItem } from "@/lib/pageBlocks";
+import type { BlockItem, CardLayoutItem, ProfileCardItem, GridSectionChild } from "@/lib/pageBlocks";
+import { parseGridSectionItems } from "@/lib/pageBlocks";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -144,22 +145,36 @@ function TextBlock({ props }: { props: Record<string, unknown> }) {
 function CalloutBlock({ props }: { props: Record<string, unknown> }) {
   const title   = props.title   as string | undefined;
   const content = props.content as string;
+  const href    = props.href    as string | undefined;
   const variant = (props.variant as string | undefined) ?? "gold";
   const colorVar =
     variant === "arcane" ? "var(--color-accent-arcane)" :
     variant === "blood"  ? "var(--color-accent-blood)"  :
                            "var(--color-accent-gold)";
+  const isExternal = href?.startsWith("http://") || href?.startsWith("https://");
+
+  const inner = (
+    <div className="rounded-lg border-l-4 p-5 transition-opacity"
+      style={{ borderColor: colorVar, background: "var(--color-bg-card)" }}>
+      {title && (
+        <p className="font-cinzel text-sm tracking-widest uppercase mb-2 inline-flex items-center gap-1.5"
+          style={{ color: colorVar }}>
+          {title}
+          {href && <span className="opacity-50 text-xs">{isExternal ? "↗" : "→"}</span>}
+        </p>
+      )}
+      <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{content}</p>
+    </div>
+  );
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-4">
-      <div className="rounded-lg border-l-4 p-5"
-        style={{ borderColor: colorVar, background: "var(--color-bg-card)" }}>
-        {title && (
-          <p className="font-cinzel text-sm tracking-widest uppercase mb-2" style={{ color: colorVar }}>
-            {title}
-          </p>
-        )}
-        <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{content}</p>
-      </div>
+      {href
+        ? isExternal
+          ? <a href={href} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity cursor-pointer">{inner}</a>
+          : <Link href={href} className="block hover:opacity-80 transition-opacity">{inner}</Link>
+        : inner
+      }
     </div>
   );
 }
@@ -231,7 +246,7 @@ function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
   const cls = align === "center" ? "text-center" : "";
 
   return (
-    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-16 ${cls}`}>
+    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-24 ${cls}`}>
       {eyebrow && (
         <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
           style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
@@ -1245,6 +1260,39 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
   }
 }
 
+function GridSectionBlock({ props }: { props: Record<string, unknown> }) {
+  const columns = Math.min(Math.max(parseInt(String(props.columns ?? "2"), 10) || 2, 1), 6);
+  const gap = (props.gap as string | undefined) ?? "md";
+  const gapCss = gap === "sm" ? "0.75rem" : gap === "lg" ? "1.5rem" : "1.125rem";
+  const children = parseGridSectionItems(props.items);
+
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+        gap: gapCss,
+      }}
+    >
+      {children.map((child) => (
+        <div
+          key={child.id}
+          style={{
+            gridColumn: `${child.col} / span ${child.colSpan}`,
+            gridRow: `${child.row} / span ${child.rowSpan}`,
+            minWidth: 0,
+          }}
+        >
+          <BlockRenderer
+            block={{ kind: "block", id: child.id, type: child.type, props: child.props }}
+            variant="grid-item"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function CardLayoutBlock({
   props,
   variant = "standalone",
@@ -1744,6 +1792,7 @@ function BlockContent({
     case "creature-card":   return <CreatureCardBlock  props={block.props} variant={variant} />;
     case "profile-card":    return <ProfileCardBlock   props={block.props} variant={variant} />;
     case "layout-card":     return <CardLayoutBlock    props={block.props} variant={variant} />;
+    case "grid-section":    return <GridSectionBlock   props={block.props} />;
     default:                return null;
   }
 }

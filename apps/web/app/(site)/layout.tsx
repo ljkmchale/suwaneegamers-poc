@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ParticleField } from "@/components/fantasy/ParticleField";
-import { getNavConfig, getNavSection } from "@/lib/nav";
+import { getNavConfig } from "@/lib/nav";
 import { getAdminSession } from "@/lib/adminSession";
 import { PageEditOverlay } from "@/components/admin/PageEditOverlay";
 import { getActiveCustomPages } from "@/lib/customPages";
@@ -13,9 +13,6 @@ export default async function SiteLayout({
   children: React.ReactNode;
 }) {
   const navConfig = getNavConfig();
-  const primaryNav = getNavSection(navConfig, "primary");
-  const worldNav = getNavSection(navConfig, "world");
-  const toolsNav = getNavSection(navConfig, "tools");
 
   const session = await getAdminSession();
   const isAdmin = session.isAdmin === true;
@@ -33,9 +30,7 @@ export default async function SiteLayout({
 
       {/* Navigation */}
       <Navbar
-        primaryNav={primaryNav}
-        worldNav={worldNav}
-        toolsNav={toolsNav}
+        sections={navConfig.sections}
         isAdmin={isAdmin}
         editMode={editMode}
       />

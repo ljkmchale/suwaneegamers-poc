@@ -7,7 +7,7 @@ export default function PageLayoutPage() {
   return (
     <div>
       <h1 className="font-cinzel text-3xl tracking-widest uppercase mb-2">
-        Page Layout
+        Navigation Layout
       </h1>
       <p className="text-sm text-[#a89880] mb-10">
         Drag items within each section to reorder them. The order here is
