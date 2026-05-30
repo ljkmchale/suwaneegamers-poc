@@ -14,7 +14,7 @@ import {
 const ALL_BLOCK_TYPES: BlockType[] = [
   "divider", "card", "image", "text", "callout", "section-heading",
   "button-link", "link-list", "gallery", "embed", "spacer", "quote",
-  "page-header", "page-banner", "portal-links", "founders",
+  "page-header", "page-banner", "portal-links",
   "profile-card", "layout-card", "card-grid", "grid-section",
 ];
 
@@ -130,7 +130,6 @@ describe("ASSET_TYPES — category membership", () => {
     expect(layout).toContain("page-header");
     expect(layout).toContain("page-banner");
     expect(layout).toContain("portal-links");
-    expect(layout).toContain("founders");
     expect(layout).toContain("card-grid");
   });
 
@@ -191,14 +190,6 @@ describe("defaultProps correctness", () => {
     const links = JSON.parse(def.defaultProps.links as string);
     expect(Array.isArray(links)).toBe(true);
     expect(links[0]).toHaveProperty("href");
-  });
-
-  it("founders default founders prop is valid JSON", () => {
-    const def = getAssetDef("founders")!;
-    const founders = JSON.parse(def.defaultProps.founders as string);
-    expect(Array.isArray(founders)).toBe(true);
-    expect(founders[0]).toHaveProperty("name");
-    expect(founders[0]).toHaveProperty("role");
   });
 
   it("profile-card default items prop is valid JSON", () => {

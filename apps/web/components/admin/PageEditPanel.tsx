@@ -18,6 +18,7 @@ import {
   getAssetDef,
   type AssetTypeDef,
   type BlockItem,
+  type BlockType,
   type CardLayoutItem,
   type CardLayoutItemType,
   type ProfileCardItem,
@@ -414,72 +415,6 @@ function GalleryImagesField({
   );
 }
 
-interface EditableFounder {
-  name?: string;
-  role?: string;
-  img?: string;
-}
-
-function FoundersField({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  const founders = parseJsonList<EditableFounder>(value);
-
-  function save(next: EditableFounder[]) {
-    saveJsonList(onChange, next);
-  }
-
-  function setFounder(index: number, key: keyof EditableFounder, nextValue: string) {
-    save(founders.map((f, i) => i === index ? { ...f, [key]: nextValue } : f));
-  }
-
-  const INPUT =
-    "w-full px-2 py-1 rounded border text-xs bg-[#08050f] text-[#e8dfc8] " +
-    "placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]";
-  const LABEL = "block mb-0.5 text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060]";
-
-  return (
-    <div className="space-y-2">
-      {founders.map((founder, index) => (
-        <div key={index} className="rounded border border-[#2a2a35] bg-[#0f0a1a] p-2 space-y-1.5">
-          <div className="flex items-center gap-1.5">
-            <span className="flex-1 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880]">
-              Founder {index + 1}
-            </span>
-            <button type="button" onClick={() => save(moveListItem(founders, index, index - 1))} disabled={index === 0}
-              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Up</button>
-            <button type="button" onClick={() => save(moveListItem(founders, index, index + 1))} disabled={index === founders.length - 1}
-              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Down</button>
-            <button type="button" onClick={() => save(founders.filter((_, i) => i !== index))}
-              className="text-[11px] text-[#5a5060] hover:text-red-400 px-0.5">Remove</button>
-          </div>
-          <div>
-            <label className={LABEL}>Name</label>
-            <input value={founder.name ?? ""} onChange={(e) => setFounder(index, "name", e.target.value)}
-              className={INPUT} placeholder="Founder name" />
-          </div>
-          <div>
-            <label className={LABEL}>Role / Title</label>
-            <input value={founder.role ?? ""} onChange={(e) => setFounder(index, "role", e.target.value)}
-              className={INPUT} placeholder="Guild Master, Lorekeeper, etc." />
-          </div>
-          <div>
-            <label className={LABEL}>Photo</label>
-            <ImagePathField value={founder.img ?? ""} onChange={(next) => setFounder(index, "img", next)} />
-          </div>
-        </div>
-      ))}
-      <button type="button" onClick={() => save([...founders, { name: "New Founder", role: "", img: "" }])}
-        className="w-full rounded border border-[#2a2a35] px-2 py-1.5 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]">
-        Add Founder
-      </button>
-    </div>
-  );
-}
 
 function CharactersField({
   value,
@@ -873,6 +808,7 @@ function CardLayoutItemsEditor({
       if (type === "header") defaults.size = "md";
       if (type === "image") defaults.fit = "cover";
       if (type === "inner-card") defaults.items = "[]";
+      if (type === "person") { defaults.name = "New Person"; defaults.role = ""; defaults.img = ""; }
     }
     save([...items, { id, type, props: defaults }]);
     setExpandedId(id);
@@ -1079,6 +1015,7 @@ function CardLayoutPanelSection({
     if (type === "text")       { defaults.content = "New text block"; }
     if (type === "inner-card") { defaults.items = "[]"; }
     if (type === "image")      { defaults.src = ""; defaults.fit = "cover"; }
+    if (type === "person")     { defaults.name = "New Person"; defaults.role = ""; defaults.img = ""; }
     const newItem: CardLayoutItem = {
       id: `${type}_${Date.now()}`,
       type,
@@ -1237,6 +1174,30 @@ function CardLayoutPanelSection({
                 value={(selectedItem.props.items as string) ?? "[]"}
                 onChange={(v) => updateItemProp(selectedItem.id, "items", v)}
               />
+            </div>
+          )}
+
+          {selectedItem.type === "person" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Name</label>
+                <input type="text" value={(selectedItem.props.name as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "name", e.target.value)}
+                  className={INPUT} placeholder="Person's name" />
+              </div>
+              <div>
+                <label className={LABEL}>Role / Title</label>
+                <input type="text" value={(selectedItem.props.role as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "role", e.target.value)}
+                  className={INPUT} placeholder="e.g. Co-Founder, Guild Master" />
+              </div>
+              <div>
+                <label className={LABEL}>Portrait</label>
+                <ImagePathField
+                  value={(selectedItem.props.img as string) ?? ""}
+                  onChange={(v) => updateItemProp(selectedItem.id, "img", v)}
+                />
+              </div>
             </div>
           )}
 
@@ -1414,17 +1375,6 @@ function PropsForm({
             </div>
           );
         }
-        if (field.type === "json" && field.key === "founders" && block.type === "founders") {
-          return (
-            <div key={field.key}>
-              <label className={LABEL}>{field.label}</label>
-              {field.hint && (
-                <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>
-              )}
-              <FoundersField value={val} onChange={(next) => set(field.key, next)} />
-            </div>
-          );
-        }
         if (field.type === "textarea" || field.type === "json") {
           return (
             <div key={field.key}>
@@ -1490,50 +1440,48 @@ function AssetTile({ def }: { def: AssetTypeDef }) {
 
 // ── Column placement picker ───────────────────────────────────────────────────
 
-function ColumnPicker({
-  columns,
-  col,
-  colSpan,
-  onChange,
+function SpanStrip({
+  count,
+  selectedStart,
+  selectedEnd,
+  isFullSpan,
+  label,
+  onSelect,
+  onFullSpan,
 }: {
-  columns: number;
-  col?: number;
-  colSpan?: number;
-  onChange: (col?: number, colSpan?: number) => void;
+  count: number;
+  selectedStart: number;
+  selectedEnd: number;
+  isFullSpan: boolean;
+  label: string;
+  onSelect: (start: number, end: number) => void;
+  onFullSpan: () => void;
 }) {
   const [dragStart, setDragStart] = useState<number | null>(null);
 
-  const isFullWidth = !col;
-  const startIdx = col ? col - 1 : 0;
-  const endIdx = col ? Math.min(startIdx + (colSpan ?? 1) - 1, columns - 1) : columns - 1;
-
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       <div
         className="flex gap-1 select-none"
         onMouseLeave={() => setDragStart(null)}
         onMouseUp={() => setDragStart(null)}
       >
-        {Array.from({ length: columns }, (_, i) => {
-          const isSelected = !isFullWidth && i >= startIdx && i <= endIdx;
+        {Array.from({ length: count }, (_, i) => {
+          const isSelected = !isFullSpan && i >= selectedStart && i <= selectedEnd;
           return (
             <div
               key={i}
-              className={`flex-1 h-10 rounded cursor-pointer flex items-center justify-center transition-colors border ${
+              className={`flex-1 h-8 rounded cursor-pointer flex items-center justify-center transition-colors border ${
                 isSelected
                   ? "bg-[#2a1050] border-[#8b5cf6]"
                   : "bg-[#0f0a1a] border-[#2a2a35] hover:border-[#8b5cf6]/60"
               }`}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                setDragStart(i);
-                onChange(i + 1, 1);
-              }}
+              onMouseDown={(e) => { e.preventDefault(); setDragStart(i); onSelect(i, i); }}
               onMouseEnter={() => {
                 if (dragStart === null) return;
                 const from = Math.min(dragStart, i);
                 const to = Math.max(dragStart, i);
-                onChange(from + 1, to - from + 1);
+                onSelect(from, to);
               }}
             >
               <span className={`text-[9px] font-cinzel tracking-widest ${isSelected ? "text-[#a78bfa]" : "text-[#3a3a50]"}`}>
@@ -1545,19 +1493,82 @@ function ColumnPicker({
       </div>
       <button
         type="button"
-        onClick={() => onChange(undefined, undefined)}
-        className={`w-full py-1.5 rounded border text-[9px] font-cinzel tracking-widest uppercase transition-colors ${
-          isFullWidth
+        onClick={onFullSpan}
+        className={`w-full py-1 rounded border text-[9px] font-cinzel tracking-widest uppercase transition-colors ${
+          isFullSpan
             ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
             : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
         }`}
       >
-        ◀▶ Full Width
+        {label}
       </button>
-      {!isFullWidth && col && (
-        <p className="text-[9px] text-[#5a5060]">
-          Column {col}{(colSpan ?? 1) > 1 ? ` · spanning ${colSpan ?? 1} of ${columns}` : ` of ${columns}`}
-        </p>
+    </div>
+  );
+}
+
+function PlacementPicker({
+  columns,
+  rows,
+  col,
+  colSpan,
+  row,
+  rowSpan,
+  onChange,
+}: {
+  columns: number;
+  rows?: number;
+  col?: number;
+  colSpan?: number;
+  row?: number;
+  rowSpan?: number;
+  onChange: (col?: number, colSpan?: number, row?: number, rowSpan?: number) => void;
+}) {
+  const colStartIdx = col ? col - 1 : 0;
+  const colEndIdx = col ? Math.min(colStartIdx + (colSpan ?? 1) - 1, columns - 1) : columns - 1;
+
+  const rowStartIdx = row ? row - 1 : 0;
+  const rowEndIdx = rows && row ? Math.min(rowStartIdx + (rowSpan ?? 1) - 1, rows - 1) : (rows ?? 1) - 1;
+
+  return (
+    <div className="space-y-3">
+      {/* Column placement */}
+      <div>
+        <p className="text-[9px] text-[#5a5060] mb-1.5 font-cinzel tracking-widest uppercase">Columns</p>
+        <SpanStrip
+          count={columns}
+          selectedStart={colStartIdx}
+          selectedEnd={colEndIdx}
+          isFullSpan={!col}
+          label="◀▶ Full Width"
+          onSelect={(from, to) => onChange(from + 1, to - from + 1, row, rowSpan)}
+          onFullSpan={() => onChange(undefined, undefined, row, rowSpan)}
+        />
+        {col && (
+          <p className="mt-1 text-[9px] text-[#5a5060]">
+            Col {col}{(colSpan ?? 1) > 1 ? ` · span ${colSpan ?? 1} of ${columns}` : ` of ${columns}`}
+          </p>
+        )}
+      </div>
+
+      {/* Row placement — only shown when rows are defined */}
+      {rows && rows > 1 && (
+        <div>
+          <p className="text-[9px] text-[#5a5060] mb-1.5 font-cinzel tracking-widest uppercase">Rows</p>
+          <SpanStrip
+            count={rows}
+            selectedStart={rowStartIdx}
+            selectedEnd={rowEndIdx}
+            isFullSpan={!row}
+            label="▲▼ Auto"
+            onSelect={(from, to) => onChange(col, colSpan, from + 1, to - from + 1)}
+            onFullSpan={() => onChange(col, colSpan, undefined, undefined)}
+          />
+          {row && (
+            <p className="mt-1 text-[9px] text-[#5a5060]">
+              Row {row}{(rowSpan ?? 1) > 1 ? ` · span ${rowSpan ?? 1} of ${rows}` : ` of ${rows}`}
+            </p>
+          )}
+        </div>
       )}
     </div>
   );
@@ -1578,7 +1589,11 @@ interface PageEditPanelProps {
   onGridItemSelect: (id: string | null) => void;
   grid: PageGridMeta | null;
   onGridChange: (grid: PageGridMeta | null) => void;
-  onBlockPlacementChange: (id: string, col?: number, colSpan?: number) => void;
+  onBlockPlacementChange: (id: string, col?: number, colSpan?: number, row?: number, rowSpan?: number) => void;
+  canvasMode?: boolean;
+  onCanvasAddBlock?: (type: BlockType) => void;
+  onSwitchToCanvas?: () => void;
+  onSwitchToGrid?: () => void;
 }
 
 export function PageEditPanel({
@@ -1595,6 +1610,10 @@ export function PageEditPanel({
   grid,
   onGridChange,
   onBlockPlacementChange,
+  canvasMode = false,
+  onCanvasAddBlock,
+  onSwitchToCanvas,
+  onSwitchToGrid,
 }: PageEditPanelProps) {
   const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
   const editingCardLayout = editingBlock?.type === "layout-card";
@@ -1683,30 +1702,64 @@ export function PageEditPanel({
               <PropsForm block={editingBlock} onChange={onPropsChange} quickAdd={quickAdd} />
             )}
 
-            {/* ── Page-grid column placement (shown when grid is active) ── */}
+            {/* ── Page-grid placement (shown when grid is active) ── */}
             {grid && grid.columns > 1 && (
               <div className="mt-4 pt-4 border-t border-[#1e1828]">
                 <p className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-2">
-                  Column Placement
+                  Grid Placement
                 </p>
-                <ColumnPicker
+                <PlacementPicker
                   columns={grid.columns}
+                  rows={grid.rows}
                   col={editingBlock.col}
                   colSpan={editingBlock.colSpan}
-                  onChange={(col, colSpan) => onBlockPlacementChange(editingBlock.id, col, colSpan)}
+                  row={editingBlock.row}
+                  rowSpan={editingBlock.rowSpan}
+                  onChange={(col, colSpan, row, rowSpan) =>
+                    onBlockPlacementChange(editingBlock.id, col, colSpan, row, rowSpan)
+                  }
                 />
               </div>
             )}
           </div>
         )}
 
-        {/* ── Page Grid controls ── */}
+        {/* ── Layout mode + Page Grid controls ── */}
         <div className="px-4 py-4 border-b border-[#2a2a35]">
           <p className="text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] mb-2">
-            Page Columns
+            Layout Mode
           </p>
-          <div className="flex gap-1 mb-2">
-            {/* Off */}
+
+          {/* Grid / Freeform toggle */}
+          <div className="flex gap-1 mb-4">
+            <button
+              type="button"
+              onClick={canvasMode ? onSwitchToGrid : undefined}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                !canvasMode
+                  ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                  : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+              }`}
+            >
+              <span>⊞</span> Grid
+            </button>
+            <button
+              type="button"
+              onClick={!canvasMode ? onSwitchToCanvas : undefined}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                canvasMode
+                  ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                  : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+              }`}
+            >
+              <span>✦</span> Freeform
+            </button>
+          </div>
+
+          {/* Columns (only in grid mode) */}
+          {!canvasMode && (
+          <><p className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-1">Columns</p>
+          <div className="flex gap-1 mb-3">
             <button
               type="button"
               onClick={() => onGridChange(null)}
@@ -1722,7 +1775,7 @@ export function PageEditPanel({
               <button
                 key={n}
                 type="button"
-                onClick={() => onGridChange({ columns: n, gap: grid?.gap ?? "md" })}
+                onClick={() => onGridChange({ columns: n, rows: grid?.rows, gap: grid?.gap ?? "md" })}
                 className={`flex-1 py-2 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
                   grid?.columns === n
                     ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
@@ -1733,30 +1786,72 @@ export function PageEditPanel({
               </button>
             ))}
           </div>
+
           {grid && grid.columns > 1 && (
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] shrink-0">Gap</span>
-              <div className="flex gap-1 flex-1">
-                {(["sm", "md", "lg"] as const).map((g) => (
+            <>
+              {/* Rows */}
+              <p className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] mb-1">Rows</p>
+              <div className="flex gap-1 mb-3">
+                <button
+                  type="button"
+                  onClick={() => onGridChange({ ...grid, rows: undefined })}
+                  className={`flex-1 py-1.5 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                    !grid.rows
+                      ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                      : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
+                  }`}
+                >
+                  Auto
+                </button>
+                {([2, 3, 4, 5, 6] as const).map((n) => (
                   <button
-                    key={g}
+                    key={n}
                     type="button"
-                    onClick={() => onGridChange({ ...grid, gap: g })}
-                    className={`flex-1 py-1 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
-                      grid.gap === g
+                    onClick={() => onGridChange({ ...grid, rows: n })}
+                    className={`flex-1 py-1.5 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                      grid.rows === n
                         ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
-                        : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60"
+                        : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60 hover:text-[#a89880]"
                     }`}
                   >
-                    {g === "sm" ? "Sm" : g === "md" ? "Md" : "Lg"}
+                    {n}
                   </button>
                 ))}
               </div>
-            </div>
+
+              {/* Gap */}
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] font-cinzel tracking-widest uppercase text-[#5a5060] shrink-0">Gap</span>
+                <div className="flex gap-1 flex-1">
+                  {(["sm", "md", "lg"] as const).map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => onGridChange({ ...grid, gap: g })}
+                      className={`flex-1 py-1 rounded border text-[9px] font-cinzel tracking-widest transition-colors ${
+                        grid.gap === g
+                          ? "border-[#8b5cf6] bg-[#1a0d30] text-[#a78bfa]"
+                          : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]/60"
+                      }`}
+                    >
+                      {g === "sm" ? "Sm" : g === "md" ? "Md" : "Lg"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
           )}
+
           {(!grid || grid.columns <= 1) && (
             <p className="text-[10px] text-[#5a5060] mt-1">
-              Click a number to divide the page into columns. Select a block to set its column position.
+              Set columns to divide the page into a grid. Each block can then be placed in specific columns and rows.
+            </p>
+          )}
+          </>)}
+
+          {canvasMode && (
+            <p className="text-[10px] text-[#5a5060]">
+              Blocks are positioned freely. Drag to move, drag edges to resize.
             </p>
           )}
         </div>
@@ -1767,7 +1862,9 @@ export function PageEditPanel({
             Add Blocks
           </p>
           <p className="text-[10px] text-[#5a5060] mb-4 leading-relaxed">
-            Drag onto the page to insert. Hover any block to see its drag handle and reorder.
+            {canvasMode
+              ? "Click + to place a block on the canvas. Drag it to position and resize from the edges."
+              : "Drag onto the page to insert. Hover any block to see its drag handle and reorder."}
           </p>
 
           {categories.map(({ label, key }) => (
@@ -1776,9 +1873,25 @@ export function PageEditPanel({
                 {label}
               </p>
               <div className="space-y-1.5">
-                {byCategory[key].map((def) => (
-                  <AssetTile key={def.type} def={def} />
-                ))}
+                {byCategory[key].map((def) =>
+                  canvasMode ? (
+                    <button
+                      key={def.type}
+                      type="button"
+                      onClick={() => onCanvasAddBlock?.(def.type as BlockType)}
+                      className="w-full flex items-center gap-2.5 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-3 py-2 hover:border-[#8b5cf6] hover:bg-[#16161e] transition-colors text-left"
+                    >
+                      <span className="text-sm shrink-0 w-4 text-center text-[#f59e0b]">{def.icon}</span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-medium text-[#e8dfc8] truncate">{def.label}</p>
+                        <p className="text-[10px] text-[#5a5060] truncate leading-tight">{def.description}</p>
+                      </div>
+                      <span className="text-[#8b5cf6] text-sm shrink-0">+</span>
+                    </button>
+                  ) : (
+                    <AssetTile key={def.type} def={def} />
+                  )
+                )}
               </div>
             </div>
           ))}

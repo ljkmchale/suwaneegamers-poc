@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { PAGE_SECTIONS } from "./pageSections";
-import type { PageItem, PageGridMeta } from "./pageBlocks";
+import type { PageItem, PageGridMeta, CanvasMeta } from "./pageBlocks";
 
-type RawEntry = unknown[] | { grid?: PageGridMeta; items: unknown[] };
+type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
+type RawEntry = unknown[] | RawMeta;
 type RawLayouts = Record<string, RawEntry>;
 
 function layoutPath() {
@@ -20,6 +21,10 @@ function readRaw(): RawLayouts {
 
 function extractItems(entry: RawEntry): unknown[] {
   return Array.isArray(entry) ? entry : entry.items;
+}
+
+function extractMeta(entry: RawEntry): RawMeta | null {
+  return Array.isArray(entry) ? null : entry;
 }
 
 /** Returns the stored section + block order for a page. */
@@ -55,28 +60,44 @@ export function getPageLayout(pageId: string): PageItem[] {
 export function getPageGrid(pageId: string): PageGridMeta | null {
   const stored = readRaw()[pageId];
   if (!stored || Array.isArray(stored)) return null;
-  return (stored as { grid?: PageGridMeta }).grid ?? null;
+  return extractMeta(stored)?.grid ?? null;
+}
+
+/** Returns the page-level canvas config, or null if none is set. */
+export function getPageCanvas(pageId: string): CanvasMeta | null {
+  const stored = readRaw()[pageId];
+  if (!stored || Array.isArray(stored)) return null;
+  return extractMeta(stored)?.canvas ?? null;
 }
 
 /**
  * Saves the page layout.
- * - grid === undefined  → preserve any existing grid setting
- * - grid === null       → clear the grid (store as plain array)
- * - grid has a value    → set/update the grid
+ * - grid/canvas === undefined  → preserve any existing setting
+ * - grid/canvas === null       → clear that setting
+ * - grid/canvas has a value    → set/update that setting
+ * Canvas and grid are mutually exclusive; providing one clears the other.
  */
-export function setPageLayout(pageId: string, items: PageItem[], grid?: PageGridMeta | null): void {
+export function setPageLayout(
+  pageId: string,
+  items: PageItem[],
+  grid?: PageGridMeta | null,
+  canvas?: CanvasMeta | null,
+): void {
   const all = readRaw();
   const existing = all[pageId];
-  const existingGrid =
-    existing && !Array.isArray(existing)
-      ? (existing as { grid?: PageGridMeta }).grid
-      : undefined;
+  const meta = extractMeta(existing ?? []);
 
-  const newGrid = grid === undefined ? existingGrid : (grid ?? undefined);
+  const newGrid   = grid   === undefined ? meta?.grid   : (grid   ?? undefined);
+  const newCanvas = canvas === undefined ? meta?.canvas : (canvas ?? undefined);
 
-  all[pageId] = newGrid
-    ? { grid: newGrid, items: items as unknown[] }
-    : (items as unknown[]);
+  // Canvas and grid are mutually exclusive
+  if (newCanvas) {
+    all[pageId] = { canvas: newCanvas, items: items as unknown[] };
+  } else if (newGrid) {
+    all[pageId] = { grid: newGrid, items: items as unknown[] };
+  } else {
+    all[pageId] = items as unknown[];
+  }
 
   fs.writeFileSync(layoutPath(), JSON.stringify(all, null, 2) + "\n", "utf-8");
 }

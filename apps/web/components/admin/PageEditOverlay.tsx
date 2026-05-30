@@ -25,11 +25,13 @@ import {
   type BlockType,
   type CardLayoutItem,
   type PageGridMeta,
+  type CanvasMeta,
 } from "@/lib/pageBlocks";
 import { PageDragLayer } from "./PageDragLayer";
 import { PageEditPanel } from "./PageEditPanel";
 import { CardLayoutGridEditor } from "./CardLayoutGridEditor";
 import { BlockPicker } from "./BlockPicker";
+import { CanvasEditor, nextCanvasPosition } from "./CanvasEditor";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -156,6 +158,26 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
 
   if (item.type === "divider") {
     return <div className="h-px self-center" style={{ ...placement, background: "var(--color-bg-border)" }} />;
+  }
+
+  if (item.type === "person") {
+    const name = item.props.name as string | undefined;
+    const role = item.props.role as string | undefined;
+    const img  = item.props.img  as string | undefined;
+    return (
+      <div style={{ ...placement, display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "4px 0" }}>
+        {img ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={img} alt={name ?? ""} style={{ width: 40, height: 40, borderRadius: "50%", objectFit: "cover", objectPosition: "top", border: "1.5px solid var(--color-accent-gold)", flexShrink: 0 }} />
+        ) : (
+          <div style={{ width: 40, height: 40, borderRadius: "50%", border: "1.5px solid var(--color-accent-gold)", background: "var(--color-bg-card)", color: "var(--color-accent-gold)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontFamily: "var(--font-cinzel, serif)", flexShrink: 0 }}>
+            {(name ?? "?")[0]}
+          </div>
+        )}
+        <p style={{ fontSize: "0.7rem", fontFamily: "var(--font-cinzel, serif)", color: "var(--color-accent-gold)", margin: 0 }}>{name ?? "(no name)"}</p>
+        {role && <p style={{ fontSize: "0.55rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--color-text-muted)", margin: 0 }}>{role}</p>}
+      </div>
+    );
   }
 
   return null;
@@ -497,36 +519,6 @@ function DraftBlock({
     );
   }
 
-  if (item.type === "founders") {
-    const heading = (props.heading as string | undefined) ?? "Founded By";
-    const bio = props.bio as string | undefined;
-    let founders: Array<{ name?: string; role?: string; img?: string }> = [];
-    try { founders = JSON.parse((props.founders as string | undefined) ?? "[]"); } catch { /* */ }
-    return (
-      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-12">
-        <div className="fantasy-card p-8 text-center">
-          {heading && <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-8" style={{ color: "var(--color-text-muted)" }}>{heading}</p>}
-          <div className="flex flex-wrap justify-center gap-10">
-            {founders.map((f, i) => (
-              <div key={i} className="flex flex-col items-center gap-2">
-                {f.img
-                  // eslint-disable-next-line @next/next/no-img-element
-                  ? <img src={f.img} alt={f.name ?? ""} className="w-20 h-20 rounded-full object-cover object-top" style={{ border: "2px solid var(--color-accent-gold)" }} />
-                  : <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ border: "2px solid var(--color-accent-gold)", background: "var(--color-bg-card)" }}>
-                      <span className="font-cinzel text-lg" style={{ color: "var(--color-accent-gold)" }}>{(f.name ?? "?")[0]}</span>
-                    </div>
-                }
-                <p className="font-cinzel text-base" style={{ color: "var(--color-accent-gold)" }}>{f.name ?? ""}</p>
-                <p className="text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>{f.role ?? ""}</p>
-              </div>
-            ))}
-          </div>
-          {bio && <p className="mt-8 pt-6 text-sm leading-relaxed italic max-w-md mx-auto" style={{ borderTop: "1px solid var(--color-bg-border)", color: "var(--color-text-muted)" }}>{bio}</p>}
-        </div>
-      </section>
-    );
-  }
-
   if (item.type === "profile-card") {
     return (
       <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
@@ -634,6 +626,7 @@ function DraftPagePreview({
         style={useGrid ? {
           display: "grid",
           gridTemplateColumns: `repeat(${grid.columns}, minmax(0, 1fr))`,
+          ...(grid.rows ? { gridTemplateRows: `repeat(${grid.rows}, minmax(0, auto))` } : {}),
           gap: gapCss,
           padding: "4rem 1.5rem 7rem",
           alignContent: "start",
@@ -649,6 +642,9 @@ function DraftPagePreview({
                 gridColumn: block?.col
                   ? `${block.col} / span ${block.colSpan ?? 1}`
                   : `1 / span ${grid.columns}`,
+                gridRow: block?.row
+                  ? `${block.row} / span ${block.rowSpan ?? 1}`
+                  : undefined,
               } : {}}
               className={isEditing ? "outline outline-2 outline-[#8b5cf6] outline-offset-[-2px] rounded" : ""}
             >
@@ -676,6 +672,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const [originalItems, setOriginalItems] = useState<PageItem[]>([]);
   const [grid, setGrid] = useState<PageGridMeta | null>(null);
   const [originalGrid, setOriginalGrid] = useState<PageGridMeta | null>(null);
+  const [canvas, setCanvas] = useState<CanvasMeta | null>(null);
+  const [originalCanvas, setOriginalCanvas] = useState<CanvasMeta | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedGridItemId, setSelectedGridItemId] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<Active | null>(null);
@@ -695,11 +693,13 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
     if (!hasLayout || !open) return;
     fetch(`/api/page-layout?page=${encodeURIComponent(pathname)}`)
       .then((r) => r.json())
-      .then(({ items: fetched, grid: fetchedGrid }: { items: PageItem[]; grid: PageGridMeta | null }) => {
+      .then(({ items: fetched, grid: fetchedGrid, canvas: fetchedCanvas }: { items: PageItem[]; grid: PageGridMeta | null; canvas: CanvasMeta | null }) => {
         setItems(fetched ?? []);
         setOriginalItems(fetched ?? []);
         setGrid(fetchedGrid ?? null);
         setOriginalGrid(fetchedGrid ?? null);
+        setCanvas(fetchedCanvas ?? null);
+        setOriginalCanvas(fetchedCanvas ?? null);
       })
       .catch(() => {
         const defaults = (PAGE_SECTIONS[pathname] ?? []).map((s) => ({
@@ -710,6 +710,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
         setOriginalItems(defaults);
         setGrid(null);
         setOriginalGrid(null);
+        setCanvas(null);
+        setOriginalCanvas(null);
       });
   }, [pathname, open, hasLayout]);
 
@@ -721,8 +723,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
       setEditingId((id) => (id ? null : id));
       setSelectedGridItemId((id) => (id ? null : id));
     }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
   }, [open]);
 
   // ── DnD ──────────────────────────────────────────────────────────────────
@@ -792,20 +794,68 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
     setSaved(false);
   }
 
-  function handlePlacementChange(id: string, col?: number, colSpan?: number) {
+  function handlePlacementChange(id: string, col?: number, colSpan?: number, row?: number, rowSpan?: number) {
     setItems((prev) =>
       prev.map((i) =>
-        i.kind === "block" && i.id === id ? { ...i, col, colSpan } : i
+        i.kind === "block" && i.id === id ? { ...i, col, colSpan, row, rowSpan } : i
       )
     );
     setSaved(false);
   }
 
+  function handleCanvasBlockChange(id: string, changes: Partial<Pick<BlockItem, "x" | "y" | "w" | "h">>) {
+    setItems((prev) =>
+      prev.map((i) => i.kind === "block" && i.id === id ? { ...i, ...changes } : i)
+    );
+    setSaved(false);
+  }
+
+  function handleCanvasAddBlock(type: BlockType) {
+    const pos = nextCanvasPosition(items);
+    const newBlock: BlockItem = { ...makeBlock(type), ...pos };
+    setItems((prev) => [...prev, newBlock]);
+    setEditingId(newBlock.id);
+    setSaved(false);
+  }
+
+  function handleSwitchToCanvas() {
+    // Assign canvas positions — stack blocks vertically, full width by default
+    let nextY = 60;
+    const convertedItems = items.map((item) => {
+      if (item.kind !== "block") return item;
+      const { col: _c, colSpan: _cs, row: _r, rowSpan: _rs, ...rest } = item;
+      const blockH = 200;
+      const blockItem = { ...rest, x: 5, y: nextY, w: 90, h: blockH };
+      nextY += blockH + 24;
+      return blockItem;
+    });
+    setCanvas({ minHeight: Math.max(1200, nextY + 120) });
+    setGrid(null);
+    setItems(convertedItems);
+    setEditingId(null);
+    setSaved(false);
+  }
+
+  function handleSwitchToGrid() {
+    // Strip canvas placement and default to 2-column grid
+    const convertedItems = items.map((item) => {
+      if (item.kind !== "block") return item;
+      const { x: _x, y: _y, w: _w, h: _h, ...rest } = item;
+      return rest;
+    });
+    setGrid({ columns: 2, gap: "md" });
+    setCanvas(null);
+    setItems(convertedItems);
+    setEditingId(null);
+    setSaved(false);
+  }
+
   function handleSave() {
     startTransition(async () => {
-      await savePageLayoutAction(pathname, items, grid);
+      await savePageLayoutAction(pathname, items, grid, canvas);
       setOriginalItems([...items]);
       setOriginalGrid(grid);
+      setOriginalCanvas(canvas);
       setSaved(true);
       // Re-render the RSC subtree so the page immediately reflects the new
       // layout without a full browser reload. Client state (panel open,
@@ -818,8 +868,9 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   // ── Computed ─────────────────────────────────────────────────────────────
 
   const hasChanges =
-    JSON.stringify(items) !== JSON.stringify(originalItems) ||
-    JSON.stringify(grid) !== JSON.stringify(originalGrid);
+    JSON.stringify(items)   !== JSON.stringify(originalItems)   ||
+    JSON.stringify(grid)    !== JSON.stringify(originalGrid)    ||
+    JSON.stringify(canvas)  !== JSON.stringify(originalCanvas);
 
   const editingBlock =
     editingId != null
@@ -871,27 +922,41 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <DraftPagePreview
-            items={items}
-            pathname={pathname}
-            editingId={editingId}
-            selectedGridItemId={selectedGridItemId}
-            onGridPropsChange={handlePropsChange}
-            onSelectGridItem={setSelectedGridItemId}
-            grid={grid}
-          />
+          {/* ── Canvas mode ── */}
+          {canvas ? (
+            <CanvasEditor
+              items={items}
+              editingId={editingId}
+              onBlockChange={handleCanvasBlockChange}
+              onDelete={handleDeleteBlock}
+              onEditToggle={(id) => setEditingId((cur) => cur === id ? null : id)}
+            />
+          ) : (
+            <>
+              <DraftPagePreview
+                items={items}
+                pathname={pathname}
+                editingId={editingId}
+                selectedGridItemId={selectedGridItemId}
+                onGridPropsChange={handlePropsChange}
+                onSelectGridItem={setSelectedGridItemId}
+                grid={grid}
+              />
 
-          {/* Transparent overlay — drag handles + drop zones on the live page */}
-          <PageDragLayer
-            items={items}
-            pathname={pathname}
-            anyDragging={!!activeItem}
-            editingId={editingId}
-            onEditToggle={(id) => { setEditingId(id); setSelectedGridItemId(null); }}
-            onDeleteBlock={handleDeleteBlock}
-            onInsertAt={setInsertAtIndex}
-            grid={grid}
-          />
+              {/* Transparent overlay — drag handles + drop zones on the live page */}
+              <PageDragLayer
+                items={items}
+                pathname={pathname}
+                anyDragging={!!activeItem}
+                editingId={editingId}
+                onEditToggle={(id) => { setEditingId(id); setSelectedGridItemId(null); }}
+                onDeleteBlock={handleDeleteBlock}
+                onInsertAt={setInsertAtIndex}
+                onPlacementChange={handlePlacementChange}
+                grid={grid}
+              />
+            </>
+          )}
 
           {/* Right panel — asset library + props editor */}
           <PageEditPanel
@@ -905,9 +970,13 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
             onClose={() => setOpen(false)}
             selectedGridItemId={selectedGridItemId}
             onGridItemSelect={setSelectedGridItemId}
-            grid={grid}
-            onGridChange={setGrid}
+            grid={canvas ? null : grid}
+            onGridChange={canvas ? () => {} : setGrid}
             onBlockPlacementChange={handlePlacementChange}
+            canvasMode={!!canvas}
+            onCanvasAddBlock={canvas ? handleCanvasAddBlock : undefined}
+            onSwitchToCanvas={!canvas ? handleSwitchToCanvas : undefined}
+            onSwitchToGrid={canvas ? handleSwitchToGrid : undefined}
           />
 
           {/* Drag preview that follows the cursor */}

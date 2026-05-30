@@ -21,7 +21,6 @@ export type BlockType =
   | "page-header"
   | "page-banner"
   | "portal-links"
-  | "founders"
   | "calendar-embed"
   // ── Live data blocks (render from content/*.json) ──
   | "campaigns-grid"
@@ -42,7 +41,13 @@ export type BlockType =
 
 export interface PageGridMeta {
   columns: number;        // 1–6
+  rows?: number;          // explicit row count; if unset, grid auto-flows
   gap: "sm" | "md" | "lg";
+}
+
+/** Freeform absolute-position canvas. x/w are % of container width; y/h are px. */
+export interface CanvasMeta {
+  minHeight?: number;     // px minimum canvas height (default 1200)
 }
 
 export interface SectionItem {
@@ -55,8 +60,16 @@ export interface BlockItem {
   id: string;
   type: BlockType;
   props: Record<string, unknown>;
+  // Grid placement (grid mode)
   col?: number;           // page-level grid column start (1-based)
   colSpan?: number;       // page-level grid column span
+  row?: number;           // page-level grid row start (1-based)
+  rowSpan?: number;       // page-level grid row span
+  // Canvas placement (canvas mode) — x/w as % of container, y/h as px
+  x?: number;
+  y?: number;
+  w?: number;
+  h?: number;
 }
 
 export type PageItem = SectionItem | BlockItem;
@@ -115,7 +128,8 @@ export type CardLayoutItemType =
   | "text"
   | "inner-card"
   | "image"
-  | "divider";
+  | "divider"
+  | "person";
 
 export interface CardLayoutItem {
   id: string;
@@ -377,6 +391,17 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
     icon: "--",
     fields: GRID_PLACEMENT_FIELDS,
   },
+  {
+    type: "person",
+    label: "Person",
+    icon: "◉",
+    fields: [
+      { key: "name", label: "Name",        type: "text" },
+      { key: "role", label: "Role / Title", type: "text" },
+      { key: "img",  label: "Portrait",     type: "image" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
 ];
 
 // ── Asset field definitions ───────────────────────────────────────────────────
@@ -458,32 +483,6 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         type: "json",
         hint: 'Each item: { "title": "", "description": "", "href": "", "label": "" }',
         placeholder: '[{"title":"...","description":"...","href":"https://...","label":"Open"}]',
-      },
-    ],
-  },
-
-  {
-    type: "founders",
-    label: "Founders",
-    description: "Founder profile cards with portraits, names, roles, and an optional bio blurb",
-    icon: "👑",
-    category: "layout",
-    defaultProps: {
-      heading: "Founded By",
-      bio: "",
-      founders: JSON.stringify([
-        { name: "Founder Name", role: "Co-Founder", img: "/images/placeholder.png" },
-      ], null, 2),
-    },
-    fields: [
-      { key: "heading",  label: "Section heading",  type: "text",     placeholder: "e.g. Founded By" },
-      { key: "bio",      label: "Bio blurb (optional)", type: "textarea", placeholder: "A short story about the founders." },
-      {
-        key: "founders",
-        label: "Founders (JSON array)",
-        type: "json",
-        hint: 'Each item: { "name": "", "role": "", "img": "/images/..." }',
-        placeholder: '[{"name":"...","role":"...","img":"/images/..."}]',
       },
     ],
   },

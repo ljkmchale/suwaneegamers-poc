@@ -262,66 +262,6 @@ function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
   );
 }
 
-interface FounderData { name: string; role: string; img: string; }
-
-function FoundersBlock({ props }: { props: Record<string, unknown> }) {
-  const heading = (props.heading as string | undefined) ?? "Founded By";
-  const bio     = props.bio as string | undefined;
-  const raw     = props.founders as string | undefined;
-
-  let founders: FounderData[] = [];
-  try { founders = raw ? JSON.parse(raw) : []; } catch { /* malformed JSON */ }
-
-  return (
-    <section className="max-w-6xl mx-auto px-6 py-12">
-      <div className="fantasy-card p-8 text-center">
-        {heading && (
-          <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-8"
-            style={{ color: "var(--color-text-muted)" }}>
-            {heading}
-          </p>
-        )}
-        <div className="flex flex-wrap justify-center gap-10">
-          {founders.map((founder) => (
-            <div key={founder.name} className="flex flex-col items-center gap-2">
-              {founder.img ? (
-                <Image
-                  src={founder.img}
-                  alt={founder.name}
-                  width={80}
-                  height={80}
-                  className="w-20 h-20 rounded-full object-cover object-top"
-                  style={{ border: "2px solid var(--color-accent-gold)" }}
-                />
-              ) : (
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center font-cinzel text-lg"
-                  style={{ border: "2px solid var(--color-accent-gold)", background: "var(--color-bg-card)", color: "var(--color-accent-gold)" }}
-                >
-                  {(founder.name ?? "?")[0]}
-                </div>
-              )}
-              <p className="font-cinzel text-base" style={{ color: "var(--color-accent-gold)" }}>
-                {founder.name}
-              </p>
-              <p className="text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>
-                {founder.role}
-              </p>
-            </div>
-          ))}
-        </div>
-        {bio && (
-          <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--color-bg-border)" }}>
-            <p className="text-sm leading-relaxed italic max-w-md mx-auto"
-              style={{ color: "var(--color-text-muted)" }}>
-              {bio}
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
 
 interface PortalLinkData {
   title: string;
@@ -1256,6 +1196,31 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
     }
     case "divider":
       return <div className="h-px self-center" style={{ ...style, background: "var(--color-bg-border)" }} />;
+    case "person": {
+      const name = item.props.name as string | undefined;
+      const role = item.props.role as string | undefined;
+      const img  = item.props.img  as string | undefined;
+      return (
+        <div className="flex flex-col items-center gap-2 py-2 min-w-0" style={style}>
+          {img ? (
+            <Image src={img} alt={name ?? ""} width={80} height={80}
+              className="w-20 h-20 rounded-full object-cover object-top shrink-0"
+              style={{ border: "2px solid var(--color-accent-gold)" }} />
+          ) : (
+            <div className="w-20 h-20 rounded-full flex items-center justify-center font-cinzel text-lg shrink-0"
+              style={{ border: "2px solid var(--color-accent-gold)", background: "var(--color-bg-card)", color: "var(--color-accent-gold)" }}>
+              {(name ?? "?")[0]}
+            </div>
+          )}
+          {name && (
+            <p className="font-cinzel text-base text-center" style={{ color: "var(--color-accent-gold)" }}>{name}</p>
+          )}
+          {role && (
+            <p className="text-xs tracking-widest uppercase text-center" style={{ color: "var(--color-text-muted)" }}>{role}</p>
+          )}
+        </div>
+      );
+    }
     default:
       return null;
   }
@@ -1780,7 +1745,6 @@ function BlockContent({
     case "page-header":     return <PageHeaderBlock    props={block.props} />;
     case "page-banner":     return <HeroSection />;
     case "portal-links":    return <PortalLinksBlock   props={block.props} />;
-    case "founders":        return <FoundersBlock      props={block.props} />;
     case "calendar-embed":  return <CalendarEmbedBlock />;
     // Live data
     case "campaigns-grid":  return <CampaignsGridBlock />;

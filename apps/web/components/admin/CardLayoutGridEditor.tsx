@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -13,7 +13,7 @@ import {
   type DragEndEvent,
   type Active,
 } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
+
 import type { CardLayoutItem } from "@/lib/pageBlocks";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -89,6 +89,28 @@ export function findFreeCell(
   return { col: 1, row: rows + 1, needsNewRow: true };
 }
 
+/** Compute grid dimension overrides needed to fit all items. */
+function computeExpandOverrides(
+  items: CardLayoutItem[],
+  columns: number,
+  rows: number,
+): Partial<Record<string, unknown>> {
+  let reqCols = columns;
+  let reqRows = rows;
+  for (const item of items) {
+    const c  = numProp(item.props.col, 1);
+    const r  = numProp(item.props.row, 1);
+    const cs = numProp(item.props.colSpan, 1);
+    const rs = numProp(item.props.rowSpan, 1);
+    reqCols = Math.max(reqCols, c + cs - 1);
+    reqRows = Math.max(reqRows, r + rs - 1);
+  }
+  const overrides: Partial<Record<string, unknown>> = {};
+  if (reqCols !== columns) overrides.columns = String(reqCols);
+  if (reqRows !== rows)    overrides.rows    = String(reqRows);
+  return overrides;
+}
+
 // ── Type metadata ─────────────────────────────────────────────────────────────
 
 export const GRID_TYPE_META: Record<string, { label: string; icon: string; color: string }> = {
@@ -98,6 +120,7 @@ export const GRID_TYPE_META: Record<string, { label: string; icon: string; color
   "inner-card": { label: "Inner Card", icon: "◧", color: "#a78bfa" },
   image:        { label: "Image",      icon: "▣", color: "#34d399" },
   divider:      { label: "Divider",    icon: "—", color: "#5a5060" },
+  person:       { label: "Person",     icon: "◉", color: "#f59e0b" },
 };
 
 // ── Droppable grid cell ───────────────────────────────────────────────────────
@@ -126,7 +149,6 @@ function GridCell({
           : "rgba(255,255,255,0.04)",
         borderRadius: 4,
         transition: "background 0.1s, border-color 0.1s",
-        // During drag, cells rise to the top so pointer events can reach them.
         zIndex: dragging ? 5 : 1,
         pointerEvents: dragging ? "auto" : "none",
       }}
@@ -182,37 +204,127 @@ function ItemContent({ item }: { item: CardLayoutItem }) {
     }
     case "divider":
       return <div style={{ height: 1, background: "var(--color-bg-border)", margin: "4px 0", alignSelf: "center", width: "100%" }} />;
+    case "person": {
+      const name = item.props.name as string | undefined;
+      const role = item.props.role as string | undefined;
+      const img  = item.props.img  as string | undefined;
+      return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "4px 0" }}>
+          {img ? (
+            <img src={img} alt={name ?? ""} style={{ width: 40, height: 40, borderRadius: "50%", objectFit: "cover", objectPosition: "top", border: "1.5px solid var(--color-accent-gold)", flexShrink: 0 }} />
+          ) : (
+            <div style={{ width: 40, height: 40, borderRadius: "50%", border: "1.5px solid var(--color-accent-gold)", background: "var(--color-bg-card)", color: "var(--color-accent-gold)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontFamily: "var(--font-cinzel, serif)", flexShrink: 0 }}>
+              {(name ?? "?")[0]}
+            </div>
+          )}
+          <p style={{ fontSize: "0.7rem", fontFamily: "var(--font-cinzel, serif)", color: "var(--color-accent-gold)", margin: 0, textAlign: "center" }}>{name ?? "(no name)"}</p>
+          {role && <p style={{ fontSize: "0.55rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--color-text-muted)", margin: 0, textAlign: "center" }}>{role}</p>}
+        </div>
+      );
+    }
     default:
       return null;
   }
 }
 
-// ── Draggable item tile (renders real content + edit controls) ────────────────
+// ── Resize handle ─────────────────────────────────────────────────────────────
+
+function ResizeHandle({
+  dir,
+  show,
+  onPointerDown,
+}: {
+  dir: "col" | "row" | "both";
+  show: boolean;
+  onPointerDown: (e: React.PointerEvent) => void;
+}) {
+  return (
+    <div
+      onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); onPointerDown(e); }}
+      style={{
+        position: "absolute",
+        zIndex: 20,
+        background: "#8b5cf6",
+        opacity: show ? 1 : 0,
+        transition: "opacity 0.15s",
+        boxShadow: show ? "0 0 6px rgba(139,92,246,0.8)" : "none",
+        ...(dir === "col"
+          ? { right: 0, top: "15%", width: 8, height: "70%", cursor: "ew-resize", borderRadius: "3px 0 0 3px" }
+          : dir === "row"
+          ? { bottom: 0, left: "15%", height: 8, width: "70%", cursor: "ns-resize", borderRadius: "3px 3px 0 0" }
+          : { right: 0, bottom: 0, width: 14, height: 14, cursor: "nwse-resize", borderRadius: "4px 0 0 0" }),
+      }}
+    />
+  );
+}
+
+// ── Span number input ─────────────────────────────────────────────────────────
+
+function SpanInput({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+}) {
+  return (
+    <>
+      <span style={{ fontSize: 8, color: "#5a5060", lineHeight: 1 }}>{label}</span>
+      <input
+        type="number"
+        min={1}
+        value={value}
+        onChange={(e) => {
+          const v = parseInt(e.target.value, 10);
+          if (isFinite(v) && v >= 1) onChange(v);
+        }}
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: 30, height: 16, fontSize: 9, textAlign: "center",
+          background: "rgba(255,255,255,0.07)", border: "1px solid #3a3a45",
+          borderRadius: 2, color: "#a89880", padding: "0 2px",
+          appearance: "textfield",
+        }}
+      />
+    </>
+  );
+}
+
+// ── Draggable item tile ───────────────────────────────────────────────────────
 
 function GridItemTile({
   item,
   isSelected,
   dragging,
+  isResizing,
   onSelect,
+  onItemChange,
+  onResizeStart,
 }: {
   item: CardLayoutItem;
   isSelected: boolean;
   dragging: boolean;
+  isResizing: boolean;
   onSelect: () => void;
+  onItemChange: (updates: Partial<Record<string, string>>) => void;
+  onResizeStart: (e: React.PointerEvent, dir: "col" | "row" | "both") => void;
 }) {
   const [hovered, setHovered] = useState(false);
   const col     = numProp(item.props.col, 1, 1, 6);
   const row     = numProp(item.props.row, 1, 1, 10);
-  const colSpan = numProp(item.props.colSpan, 1, 1, 6);
-  const rowSpan = numProp(item.props.rowSpan, 1, 1, 10);
+  const colSpan = numProp(item.props.colSpan, 1);
+  const rowSpan = numProp(item.props.rowSpan, 1);
   const meta    = GRID_TYPE_META[item.type] ?? { label: item.type, icon: "?", color: "#5a5060" };
 
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `gi::${item.id}`,
     data: { item },
   });
 
-  const showControls = hovered || isSelected;
+  const showControls = (hovered || isSelected) && !isResizing && !dragging;
 
   return (
     <div
@@ -223,42 +335,43 @@ function GridItemTile({
       style={{
         gridColumn: `${col} / span ${colSpan}`,
         gridRow:    `${row} / span ${rowSpan}`,
-        transform:  CSS.Translate.toString(transform),
         zIndex:       isDragging ? 3 : 2,
-        opacity:      isDragging ? 0.25 : 1,
-        pointerEvents: dragging && !isDragging ? "none" : "auto",
+        opacity:      isDragging ? 0.3 : 1,
+        pointerEvents: (dragging && !isDragging) || isResizing ? "none" : "auto",
         outline:      isSelected ? "2px solid #8b5cf6" : hovered ? "1px solid rgba(255,255,255,0.15)" : "1px solid transparent",
         outlineOffset: "-1px",
         borderRadius: 4,
         cursor:       "pointer",
         padding:      "8px 10px",
         position:     "relative",
-        overflow:     "hidden",
+        overflow:     "visible",
         userSelect:   "none",
         boxSizing:    "border-box",
-        transition:   "outline-color 0.12s",
+        transition:   "outline-color 0.12s, opacity 0.12s",
       }}
     >
-      {/* Actual page content */}
-      <ItemContent item={item} />
+      <div style={{ overflow: "hidden", borderRadius: 3 }}>
+        <ItemContent item={item} />
+      </div>
 
-      {/* Floating controls bar — appears on hover/select */}
+      {/* Floating controls bar */}
       <div style={{
         position: "absolute",
         top: 4,
         right: 4,
         display: "flex",
         alignItems: "center",
-        gap: 2,
+        gap: 3,
         opacity: showControls ? 1 : 0,
         transition: "opacity 0.12s",
         pointerEvents: showControls ? "auto" : "none",
         background: "rgba(8,5,15,0.88)",
         border: "1px solid #2a2a35",
         borderRadius: 4,
-        padding: "2px 4px",
+        padding: "2px 5px",
+        zIndex: 8,
       }}>
-        <span style={{ fontSize: 9, color: meta.color, fontFamily: "var(--font-cinzel, serif)", textTransform: "uppercase", letterSpacing: "0.06em", marginRight: 3 }}>
+        <span style={{ fontSize: 9, color: meta.color, fontFamily: "var(--font-cinzel, serif)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
           {meta.icon}
         </span>
         <span
@@ -270,7 +383,20 @@ function GridItemTile({
         >
           ⠿
         </span>
+
+        {isSelected && (
+          <>
+            <div style={{ width: 1, height: 10, background: "#2a2a35", margin: "0 1px" }} />
+            <SpanInput label="C" value={colSpan} onChange={(v) => onItemChange({ colSpan: String(v) })} />
+            <SpanInput label="R" value={rowSpan} onChange={(v) => onItemChange({ rowSpan: String(v) })} />
+          </>
+        )}
       </div>
+
+      {/* Resize handles */}
+      <ResizeHandle dir="col"  show={showControls} onPointerDown={(e) => onResizeStart(e, "col")} />
+      <ResizeHandle dir="row"  show={showControls} onPointerDown={(e) => onResizeStart(e, "row")} />
+      <ResizeHandle dir="both" show={showControls} onPointerDown={(e) => onResizeStart(e, "both")} />
     </div>
   );
 }
@@ -299,7 +425,16 @@ function DragPreview({ item }: { item: CardLayoutItem }) {
 
 // ── Main exported component ───────────────────────────────────────────────────
 
-const ROW_HEIGHT = 88; // px per grid row
+const ROW_HEIGHT = 88;
+
+interface ResizeState {
+  itemId: string;
+  dir: "col" | "row" | "both";
+  startColSpan: number;
+  startRowSpan: number;
+  startX: number;
+  startY: number;
+}
 
 export function CardLayoutGridEditor({
   props,
@@ -313,6 +448,25 @@ export function CardLayoutGridEditor({
   onSelect: (id: string | null) => void;
 }) {
   const [activeItem, setActiveItem] = useState<CardLayoutItem | null>(null);
+  const [isResizing, setIsResizing] = useState(false);
+
+  const gridRef     = useRef<HTMLDivElement>(null);
+  const resizingRef = useRef<ResizeState | null>(null);
+
+  // Always-current snapshot for use inside stable effect handlers
+  const latestRef = useRef<{
+    gridItems: CardLayoutItem[];
+    columns: number;
+    rows: number;
+    gap: string;
+    props: Record<string, unknown>;
+    gridRoot: CardLayoutItem;
+    onPropsChange: (p: Record<string, unknown>) => void;
+  }>({
+    gridItems: [], columns: 2, rows: 1, gap: "md",
+    props: {}, gridRoot: {} as CardLayoutItem,
+    onPropsChange: () => {},
+  });
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } })
@@ -325,8 +479,12 @@ export function CardLayoutGridEditor({
   const gapCss = gap === "sm" ? "0.5rem" : gap === "lg" ? "1.25rem" : "0.75rem";
   const isDragging = activeItem !== null;
 
+  // Keep latestRef in sync every render
+  latestRef.current = { gridItems, columns, rows, gap, props, gridRoot, onPropsChange };
+
   function saveItems(newItems: CardLayoutItem[]) {
-    onPropsChange(saveCardLayoutItems(props, gridRoot, newItems));
+    const overrides = computeExpandOverrides(newItems, columns, rows);
+    onPropsChange(saveCardLayoutItems(props, gridRoot, newItems, Object.keys(overrides).length ? overrides : undefined));
   }
 
   function handleDragStart(e: { active: Active }) {
@@ -343,7 +501,7 @@ export function CardLayoutGridEditor({
     const [colStr, rowStr] = overId.slice(4).split("-");
     const targetCol = parseInt(colStr, 10);
     const targetRow = parseInt(rowStr, 10);
-    const itemId = String(active.id).slice(4); // strip "gi::"
+    const itemId = String(active.id).slice(4);
     saveItems(
       gridItems.map((item) =>
         item.id === itemId
@@ -352,6 +510,91 @@ export function CardLayoutGridEditor({
       )
     );
   }
+
+  function handleItemChange(itemId: string, updates: Partial<Record<string, string>>) {
+    saveItems(
+      gridItems.map((item) =>
+        item.id === itemId ? { ...item, props: { ...item.props, ...updates } } : item
+      )
+    );
+  }
+
+  function handleResizeStart(e: React.PointerEvent, itemId: string, dir: "col" | "row" | "both") {
+    const item = gridItems.find((i) => i.id === itemId);
+    if (!item) return;
+    resizingRef.current = {
+      itemId,
+      dir,
+      startColSpan: numProp(item.props.colSpan, 1),
+      startRowSpan: numProp(item.props.rowSpan, 1),
+      startX: e.clientX,
+      startY: e.clientY,
+    };
+    setIsResizing(true);
+    onSelect(itemId);
+  }
+
+  // Register global pointer handlers once — reads state via refs
+  useEffect(() => {
+    function onPointerMove(e: PointerEvent) {
+      if (!resizingRef.current) return;
+      const el = gridRef.current;
+      if (!el) return;
+
+      const { itemId, dir, startColSpan, startRowSpan, startX, startY } = resizingRef.current;
+      const { gridItems, columns, rows, gap, props, gridRoot, onPropsChange } = latestRef.current;
+
+      const rect   = el.getBoundingClientRect();
+      const gapPx  = gap === "sm" ? 8 : gap === "lg" ? 20 : 12;
+      const cellW  = (rect.width  - gapPx * (columns - 1)) / columns;
+      const cellH  = (rect.height - gapPx * (rows    - 1)) / rows;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      let newColSpan = startColSpan;
+      let newRowSpan = startRowSpan;
+
+      if (dir === "col" || dir === "both") {
+        newColSpan = Math.max(1, startColSpan + Math.round(dx / (cellW + gapPx)));
+      }
+      if (dir === "row" || dir === "both") {
+        newRowSpan = Math.max(1, startRowSpan + Math.round(dy / (cellH + gapPx)));
+      }
+
+      const item = gridItems.find((i) => i.id === itemId);
+      if (!item) return;
+
+      const curCS = numProp(item.props.colSpan, 1);
+      const curRS = numProp(item.props.rowSpan, 1);
+      if (newColSpan === curCS && newRowSpan === curRS) return;
+
+      const updates: Partial<Record<string, string>> = {};
+      if (newColSpan !== curCS) updates.colSpan = String(newColSpan);
+      if (newRowSpan !== curRS) updates.rowSpan = String(newRowSpan);
+
+      const newItems = gridItems.map((i) =>
+        i.id === itemId ? { ...i, props: { ...i.props, ...updates } } : i
+      );
+
+      const overrides = computeExpandOverrides(newItems, columns, rows);
+      onPropsChange(saveCardLayoutItems(props, gridRoot, newItems, Object.keys(overrides).length ? overrides : undefined));
+    }
+
+    function onPointerUp() {
+      if (resizingRef.current) {
+        resizingRef.current = null;
+        setIsResizing(false);
+      }
+    }
+
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }, []);
 
   // Build N×M background cells
   const cells: React.ReactNode[] = [];
@@ -369,7 +612,7 @@ export function CardLayoutGridEditor({
           {columns} col × {rows} row
         </span>
         <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.05)" }} />
-        <span style={{ fontSize: 9, color: "#5a5060" }}>drag ⠿ to reposition</span>
+        <span style={{ fontSize: 9, color: "#5a5060" }}>drag ⠿ to move · drag edges to resize</span>
       </div>
 
       <DndContext
@@ -379,6 +622,7 @@ export function CardLayoutGridEditor({
         onDragEnd={handleDragEnd}
       >
         <div
+          ref={gridRef}
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
@@ -386,16 +630,17 @@ export function CardLayoutGridEditor({
             gap: gapCss,
           }}
         >
-          {/* Cells first in DOM = visually behind items */}
           {cells}
-          {/* Items after cells = visually in front */}
           {gridItems.map((item) => (
             <GridItemTile
               key={item.id}
               item={item}
               isSelected={selectedId === item.id}
               dragging={isDragging}
+              isResizing={isResizing}
               onSelect={() => onSelect(item.id)}
+              onItemChange={(updates) => handleItemChange(item.id, updates)}
+              onResizeStart={(e, dir) => handleResizeStart(e, item.id, dir)}
             />
           ))}
         </div>
