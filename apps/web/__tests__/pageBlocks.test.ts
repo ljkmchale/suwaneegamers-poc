@@ -9,13 +9,13 @@ import {
 } from "@/lib/pageBlocks";
 
 // All types declared in the BlockType union — update this list whenever a type is added
+// Note: legacy data-block types (campaigns-grid, players-grid, etc.) remain in BlockType
+// for backwards compatibility with saved pages but have no ASSET_TYPES entry.
 const ALL_BLOCK_TYPES: BlockType[] = [
   "divider", "card", "image", "text", "callout", "section-heading",
   "button-link", "link-list", "gallery", "embed", "spacer", "quote",
-  "page-header", "hero-banner", "portal-links", "founders", "calendar-embed",
-  "campaigns-grid", "players-grid", "dms-grid", "bestiary-grid",
-  "campaign-card", "player-card", "creature-card",
-  "profile-card", "layout-card", "card-grid",
+  "page-header", "page-banner", "portal-links", "founders",
+  "profile-card", "layout-card", "card-grid", "grid-section",
 ];
 
 // ── Registry completeness ─────────────────────────────────────────────────────
@@ -34,11 +34,10 @@ describe("ASSET_TYPES registry — completeness", () => {
     expect(types.length).toBe(unique.size);
   });
 
-  it("covers all three categories", () => {
+  it("covers content and layout categories", () => {
     const cats = new Set(ASSET_TYPES.map((a) => a.category));
     expect(cats.has("content")).toBe(true);
     expect(cats.has("layout")).toBe(true);
-    expect(cats.has("data")).toBe(true);
   });
 });
 
@@ -60,7 +59,7 @@ describe("ASSET_TYPES — required fields on every entry", () => {
       });
 
       it("has a valid category", () => {
-        expect(["content", "layout", "data"]).toContain(def.category);
+        expect(["content", "layout"]).toContain(def.category);
       });
 
       it("has a defaultProps object", () => {
@@ -77,7 +76,7 @@ describe("ASSET_TYPES — required fields on every entry", () => {
 
 // ── Field-level invariants ─────────────────────────────────────────────────────
 
-const VALID_FIELD_TYPES = ["text", "textarea", "url", "image", "select", "json", "items", "card-layout-items"];
+const VALID_FIELD_TYPES = ["text", "textarea", "url", "image", "select", "json", "items", "card-layout-items", "grid-section-items"];
 
 describe("ASSET_TYPES — field type validity", () => {
   for (const def of ASSET_TYPES) {
@@ -126,22 +125,10 @@ describe("getAssetDef", () => {
 // ── Category filtering ────────────────────────────────────────────────────────
 
 describe("ASSET_TYPES — category membership", () => {
-  it("data-category blocks include all grid and single-item live data blocks", () => {
-    const data = ASSET_TYPES.filter((a) => a.category === "data").map((a) => a.type);
-    expect(data).toContain("campaigns-grid");
-    expect(data).toContain("players-grid");
-    expect(data).toContain("dms-grid");
-    expect(data).toContain("bestiary-grid");
-    expect(data).toContain("campaign-card");
-    expect(data).toContain("player-card");
-    expect(data).toContain("creature-card");
-    expect(data).toContain("calendar-embed");
-  });
-
   it("layout-category blocks include page structural blocks", () => {
     const layout = ASSET_TYPES.filter((a) => a.category === "layout").map((a) => a.type);
     expect(layout).toContain("page-header");
-    expect(layout).toContain("hero-banner");
+    expect(layout).toContain("page-banner");
     expect(layout).toContain("portal-links");
     expect(layout).toContain("founders");
     expect(layout).toContain("card-grid");
@@ -227,8 +214,8 @@ describe("defaultProps correctness", () => {
     expect(items[0].type).toBe("grid");
   });
 
-  it("data blocks with no fields have empty defaultProps", () => {
-    const noConfigTypes: BlockType[] = ["campaigns-grid", "players-grid", "dms-grid", "bestiary-grid", "calendar-embed", "hero-banner"];
+  it("blocks with no configurable fields have an empty fields array", () => {
+    const noConfigTypes: BlockType[] = ["page-banner"];
     for (const type of noConfigTypes) {
       const def = getAssetDef(type)!;
       expect(def.fields).toHaveLength(0);

@@ -192,7 +192,7 @@ function DraftBlock({
   if (item.type === "page-header") {
     const align = props.align === "left" ? "text-left" : "text-center";
     return (
-      <header data-block-id={item.id} data-block-type={item.type} className={`mb-14 max-w-6xl mx-auto px-6 pt-16 ${align}`}>
+      <header data-block-id={item.id} data-block-type={item.type} className={`mb-14 max-w-6xl mx-auto px-6 pt-8 ${align}`}>
         {props.eyebrow ? (
           <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3" style={{ color: "var(--color-accent-arcane)" }}>
             {props.eyebrow as string}
@@ -307,12 +307,14 @@ function DraftBlock({
     const eyebrow     = props.eyebrow     as string | undefined;
     const title       = props.title       as string | undefined;
     const description = props.description as string | undefined;
-    const centered    = props.align === "center";
+    const align       = (props.align as string | undefined) ?? "left";
+    const textAlign   = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
+    const descMargin  = align === "center" ? "max-w-2xl mx-auto" : align === "right" ? "max-w-2xl ml-auto" : "max-w-3xl";
     return (
-      <section data-block-id={item.id} data-block-type={item.type} className={`max-w-6xl mx-auto px-6 py-10 ${centered ? "text-center" : ""}`}>
+      <section data-block-id={item.id} data-block-type={item.type} className={`max-w-6xl mx-auto px-6 py-10 ${textAlign}`}>
         {eyebrow && <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-2" style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>}
         {title && <h2 className="font-cinzel text-3xl tracking-widest uppercase mb-3 shimmer-text">{title}</h2>}
-        {description && <p className={`text-sm leading-relaxed ${centered ? "max-w-2xl mx-auto" : "max-w-3xl"}`} style={{ color: "var(--color-text-secondary)" }}>{description}</p>}
+        {description && <p className={`text-sm leading-relaxed ${descMargin}`} style={{ color: "var(--color-text-secondary)" }}>{description}</p>}
       </section>
     );
   }
@@ -553,7 +555,7 @@ function DraftBlock({
     );
   }
 
-  if (item.type === "hero-banner") {
+  if (item.type === "page-banner") {
     return (
       <div data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-6">
         <div className="rounded-lg border flex items-center justify-center py-16" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
@@ -628,12 +630,12 @@ function DraftPagePreview({
       style={{ background: "var(--color-bg-deep)" }}
     >
       <div
-        className="min-h-full pb-28 pointer-events-none"
+        className="min-h-full pb-28 pointer-events-none pt-16"
         style={useGrid ? {
           display: "grid",
           gridTemplateColumns: `repeat(${grid.columns}, minmax(0, 1fr))`,
           gap: gapCss,
-          padding: "1.5rem 1.5rem 7rem",
+          padding: "4rem 1.5rem 7rem",
           alignContent: "start",
         } : {}}
       >
@@ -710,6 +712,18 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
         setOriginalGrid(null);
       });
   }, [pathname, open, hasLayout]);
+
+  // Escape key clears the active asset selection
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      setEditingId((id) => (id ? null : id));
+      setSelectedGridItemId((id) => (id ? null : id));
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   // ── DnD ──────────────────────────────────────────────────────────────────
 

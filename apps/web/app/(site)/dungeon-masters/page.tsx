@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 function HeaderSection() {
   return (
-    <header className="max-w-6xl mx-auto px-6 pt-20 mb-14 text-center">
+    <header className="max-w-6xl mx-auto px-6 pt-4 mb-14 text-center">
       <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
         style={{ color: "var(--color-accent-arcane)" }}>
         DM Roster

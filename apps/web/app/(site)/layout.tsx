@@ -36,7 +36,7 @@ export default async function SiteLayout({
       />
 
       {/* Page content */}
-      <main className="flex-1 relative z-10">{children}</main>
+      <main className="flex-1 relative z-10 pt-16">{children}</main>
 
       {/* Footer */}
       <Footer />

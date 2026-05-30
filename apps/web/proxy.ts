@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getIronSession } from "iron-session";
 import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Allow password entry through

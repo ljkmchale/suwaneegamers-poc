@@ -246,7 +246,7 @@ function PageHeaderBlock({ props }: { props: Record<string, unknown> }) {
   const cls = align === "center" ? "text-center" : "";
 
   return (
-    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-24 ${cls}`}>
+    <header className={`mb-14 max-w-6xl mx-auto px-6 pt-8 ${cls}`}>
       {eyebrow && (
         <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
           style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
@@ -445,10 +445,11 @@ function SectionHeadingBlock({ props }: { props: Record<string, unknown> }) {
   const title = props.title as string | undefined;
   const description = props.description as string | undefined;
   const align = (props.align as string | undefined) ?? "left";
-  const centered = align === "center";
+  const textAlign = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
+  const descMargin = align === "center" ? "max-w-2xl mx-auto" : align === "right" ? "max-w-2xl ml-auto" : "max-w-3xl";
 
   return (
-    <section className={`max-w-6xl mx-auto px-6 py-10 ${centered ? "text-center" : ""}`}>
+    <section className={`max-w-6xl mx-auto px-6 py-10 ${textAlign}`}>
       {eyebrow && (
         <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-2"
           style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
@@ -457,7 +458,7 @@ function SectionHeadingBlock({ props }: { props: Record<string, unknown> }) {
         <h2 className="font-cinzel text-3xl tracking-widest uppercase mb-3 shimmer-text">{title}</h2>
       )}
       {description && (
-        <p className={`text-sm leading-relaxed ${centered ? "max-w-2xl mx-auto" : "max-w-3xl"}`}
+        <p className={`text-sm leading-relaxed ${descMargin}`}
           style={{ color: "var(--color-text-secondary)" }}>{description}</p>
       )}
     </section>
@@ -1777,7 +1778,7 @@ function BlockContent({
     case "card-grid":       return <CardGridBlock      props={block.props}>{children}</CardGridBlock>;
     // Layout
     case "page-header":     return <PageHeaderBlock    props={block.props} />;
-    case "hero-banner":     return <HeroSection />;
+    case "page-banner":     return <HeroSection />;
     case "portal-links":    return <PortalLinksBlock   props={block.props} />;
     case "founders":        return <FoundersBlock      props={block.props} />;
     case "calendar-embed":  return <CalendarEmbedBlock />;

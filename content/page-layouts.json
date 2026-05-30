@@ -476,7 +476,10 @@
       "kind": "block",
       "id": "gaz-divider-completed",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "Completed Locations" }
+      "props": {
+        "variant": "ornate",
+        "label": "Completed Locations"
+      }
     },
     {
       "kind": "block",
@@ -491,7 +494,10 @@
       "kind": "block",
       "id": "gaz-divider-inprogress",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "In Progress" }
+      "props": {
+        "variant": "ornate",
+        "label": "In Progress"
+      }
     },
     {
       "kind": "block",
@@ -602,7 +608,10 @@
       "kind": "block",
       "id": "ter-div-a",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "A – B" }
+      "props": {
+        "variant": "ornate",
+        "label": "A – B"
+      }
     },
     {
       "kind": "block",
@@ -690,7 +699,10 @@
       "kind": "block",
       "id": "ter-div-c",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "C – D" }
+      "props": {
+        "variant": "ornate",
+        "label": "C – D"
+      }
     },
     {
       "kind": "block",
@@ -756,7 +768,10 @@
       "kind": "block",
       "id": "ter-div-e",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "E – G" }
+      "props": {
+        "variant": "ornate",
+        "label": "E – G"
+      }
     },
     {
       "kind": "block",
@@ -822,7 +837,10 @@
       "kind": "block",
       "id": "ter-div-h",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "H – K" }
+      "props": {
+        "variant": "ornate",
+        "label": "H – K"
+      }
     },
     {
       "kind": "block",
@@ -869,7 +887,10 @@
       "kind": "block",
       "id": "ter-div-l",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "L – N" }
+      "props": {
+        "variant": "ornate",
+        "label": "L – N"
+      }
     },
     {
       "kind": "block",
@@ -925,7 +946,10 @@
       "kind": "block",
       "id": "ter-div-o",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "O – R" }
+      "props": {
+        "variant": "ornate",
+        "label": "O – R"
+      }
     },
     {
       "kind": "block",
@@ -982,7 +1006,10 @@
       "kind": "block",
       "id": "ter-div-s",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "S – T" }
+      "props": {
+        "variant": "ornate",
+        "label": "S – T"
+      }
     },
     {
       "kind": "block",
@@ -1058,7 +1085,10 @@
       "kind": "block",
       "id": "ter-div-u",
       "type": "divider",
-      "props": { "variant": "ornate", "label": "U – Y" }
+      "props": {
+        "variant": "ornate",
+        "label": "U – Y"
+      }
     },
     {
       "kind": "block",
@@ -1152,6 +1182,12 @@
     "items": [
       {
         "kind": "block",
+        "id": "blk_1780146912019_w681",
+        "type": "page-banner",
+        "props": {}
+      },
+      {
+        "kind": "block",
         "id": "test-page-header",
         "type": "page-header",
         "props": {
@@ -1192,8 +1228,10 @@
           "eyebrow": "Test",
           "title": "Section Heading Block",
           "description": "Eyebrow, heading, and intro copy for any page section.",
-          "align": "left"
-        }
+          "align": "center"
+        },
+        "col": 2,
+        "colSpan": 1
       },
       {
         "kind": "block",
@@ -1480,7 +1518,7 @@
       {
         "kind": "block",
         "id": "hero_jszzw7",
-        "type": "hero-banner",
+        "type": "page-banner",
         "props": {}
       }
     ]

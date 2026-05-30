@@ -394,11 +394,18 @@ export function PageDragLayer({
     window.addEventListener("resize", remeasure);
     const ro = new ResizeObserver(remeasure);
     ro.observe(document.documentElement);
+
+    // The editor preview is a fixed overflow-y-auto div — its scroll doesn't
+    // bubble to window, so we attach a listener directly to it.
+    const preview = document.querySelector<HTMLElement>("[data-editor-preview='true']");
+    preview?.addEventListener("scroll", remeasure, { passive: true });
+
     return () => {
       window.clearTimeout(initialMeasure);
       window.removeEventListener("scroll", remeasure);
       window.removeEventListener("resize", remeasure);
       ro.disconnect();
+      preview?.removeEventListener("scroll", remeasure);
     };
   }, [remeasure]);
 
@@ -418,6 +425,7 @@ export function PageDragLayer({
   // Each zone spans from the midpoint of the element above it to the midpoint of the
   // element below it, so the entire page height is covered with no dead spots.
   const viewportH = window.innerHeight;
+  const NAV_HEIGHT = 64; // matches Navbar h-16
   const midOf = (el: MeasuredEl) => (el.top + el.bottom) / 2;
 
   const measuredItems = measured
@@ -427,7 +435,7 @@ export function PageDragLayer({
   const zones = measuredItems.map(({ el }, i) => {
     const previous = measuredItems[i - 1]?.el;
     const isGridCard = el.kind === "block" && el.width < window.innerWidth - 360;
-    const bandTop = i === 0 || !previous ? 0 : midOf(previous);
+    const bandTop = i === 0 || !previous ? NAV_HEIGHT : midOf(previous);
     return {
       id: `dz::${items.findIndex((item) => item.id === el.rawId)}`,
       top: isGridCard ? el.top : bandTop,

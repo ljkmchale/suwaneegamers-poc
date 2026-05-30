@@ -18,7 +18,7 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-8 pb-20">
         <motion.div
           className="max-w-3xl text-center lg:text-left"
           initial={{ opacity: 0, scale: 0.9 }}

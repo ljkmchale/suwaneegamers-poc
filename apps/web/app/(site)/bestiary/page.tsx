@@ -14,7 +14,7 @@ const legacyBestiaryUrl = "https://sites.google.com/view/suwanee-gamers/bestiary
 
 function HeaderSection() {
   return (
-    <header className="mb-14 text-center max-w-6xl mx-auto px-6 pt-20">
+    <header className="mb-14 text-center max-w-6xl mx-auto px-6 pt-4">
       <p className="font-cinzel text-xs tracking-[0.4em] uppercase mb-3"
         style={{ color: "var(--color-accent-arcane)" }}>
         Creature Archive

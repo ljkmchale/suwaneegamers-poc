@@ -1598,15 +1598,13 @@ export function PageEditPanel({
 }: PageEditPanelProps) {
   const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
   const editingCardLayout = editingBlock?.type === "layout-card";
-  const categories: { label: string; key: "layout" | "content" | "data" }[] = [
+  const categories: { label: string; key: "layout" | "content" }[] = [
     { label: "Layout", key: "layout" },
     { label: "Content", key: "content" },
-    { label: "Live Data", key: "data" },
   ];
   const byCategory = {
     layout: ASSET_TYPES.filter((a) => a.category === "layout"),
     content: ASSET_TYPES.filter((a) => a.category === "content"),
-    data: ASSET_TYPES.filter((a) => a.category === "data"),
   };
 
   return (

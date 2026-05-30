@@ -19,7 +19,7 @@ export type BlockType =
   | "quote"
   // ── Site-specific layout blocks ──
   | "page-header"
-  | "hero-banner"
+  | "page-banner"
   | "portal-links"
   | "founders"
   | "calendar-embed"
@@ -395,7 +395,7 @@ export interface AssetTypeDef {
   label: string;
   description: string;
   icon: string;
-  category: "content" | "layout" | "data";
+  category: "content" | "layout";
   defaultProps: Record<string, unknown>;
   fields: AssetField[];
 }
@@ -425,8 +425,8 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   {
-    type: "hero-banner",
-    label: "Hero Banner",
+    type: "page-banner",
+    label: "Page Banner",
     description: "Full-screen animated hero (title, tagline, CTA buttons) — same as the home page",
     icon: "⬛",
     category: "layout",
@@ -558,7 +558,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       { key: "description", label: "Description", type: "textarea" },
       {
         key: "align", label: "Alignment", type: "select",
-        options: [{ value: "left", label: "Left" }, { value: "center", label: "Center" }],
+        options: [{ value: "left", label: "Left" }, { value: "center", label: "Center" }, { value: "right", label: "Right" }],
       },
     ],
   },
@@ -858,91 +858,6 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     ],
   },
 
-  {
-    type: "campaigns-grid",
-    label: "Campaigns Grid",
-    description: "Live grid of all active campaigns (reads from campaigns.json)",
-    icon: "⚔",
-    category: "data",
-    defaultProps: {},
-    fields: [],
-  },
-
-  {
-    type: "players-grid",
-    label: "Players Grid",
-    description: "Live grid of all player profiles (reads from players.json)",
-    icon: "👤",
-    category: "data",
-    defaultProps: {},
-    fields: [],
-  },
-
-  {
-    type: "dms-grid",
-    label: "Dungeon Masters Grid",
-    description: "Live grid of all DM profiles (reads from dungeon-masters.json)",
-    icon: "🎲",
-    category: "data",
-    defaultProps: {},
-    fields: [],
-  },
-
-  {
-    type: "bestiary-grid",
-    label: "Bestiary Grid",
-    description: "Live grid of all creature cards (reads from bestiary.json)",
-    icon: "🐉",
-    category: "data",
-    defaultProps: {},
-    fields: [],
-  },
-
-  {
-    type: "campaign-card",
-    label: "Campaign Card",
-    description: "Single campaign card pulled live from campaigns.json — place inside a Card Grid",
-    icon: "⚔",
-    category: "data",
-    defaultProps: { id: "" },
-    fields: [
-      { key: "id", label: "Campaign ID", type: "text", hint: "e.g. a-new-adventure" },
-    ],
-  },
-
-  {
-    type: "player-card",
-    label: "Player Card",
-    description: "Single player profile card pulled live from players.json — place inside a Card Grid",
-    icon: "👤",
-    category: "data",
-    defaultProps: { id: "" },
-    fields: [
-      { key: "id", label: "Player ID", type: "text", hint: "e.g. sean-poole" },
-    ],
-  },
-
-  {
-    type: "creature-card",
-    label: "Creature Card",
-    description: "Single creature card pulled live from bestiary.json — place inside a Card Grid",
-    icon: "🐉",
-    category: "data",
-    defaultProps: { name: "" },
-    fields: [
-      { key: "name", label: "Creature name", type: "text", hint: "e.g. Bulas" },
-    ],
-  },
-
-  {
-    type: "calendar-embed",
-    label: "Calendar Embed",
-    description: "Embedded Google Calendar iframe",
-    icon: "📅",
-    category: "data",
-    defaultProps: {},
-    fields: [],
-  },
 ];
 
 export function getAssetDef(type: BlockType): AssetTypeDef | undefined {
