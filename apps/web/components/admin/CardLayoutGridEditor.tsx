@@ -472,68 +472,6 @@ export function CardLayoutGridEditor({
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } })
   );
 
-  const parsed = parseCardLayoutProps(props);
-  if (!parsed) return null;
-
-  const { gridRoot, columns, rows, gap, gridItems } = parsed;
-  const gapCss = gap === "sm" ? "0.5rem" : gap === "lg" ? "1.25rem" : "0.75rem";
-  const isDragging = activeItem !== null;
-
-  // Keep latestRef in sync every render
-  latestRef.current = { gridItems, columns, rows, gap, props, gridRoot, onPropsChange };
-
-  function saveItems(newItems: CardLayoutItem[]) {
-    const overrides = computeExpandOverrides(newItems, columns, rows);
-    onPropsChange(saveCardLayoutItems(props, gridRoot, newItems, Object.keys(overrides).length ? overrides : undefined));
-  }
-
-  function handleDragStart(e: { active: Active }) {
-    const d = e.active.data.current as { item: CardLayoutItem } | undefined;
-    setActiveItem(d?.item ?? null);
-  }
-
-  function handleDragEnd(e: DragEndEvent) {
-    setActiveItem(null);
-    const { active, over } = e;
-    if (!over) return;
-    const overId = String(over.id);
-    if (!overId.startsWith("gc::")) return;
-    const [colStr, rowStr] = overId.slice(4).split("-");
-    const targetCol = parseInt(colStr, 10);
-    const targetRow = parseInt(rowStr, 10);
-    const itemId = String(active.id).slice(4);
-    saveItems(
-      gridItems.map((item) =>
-        item.id === itemId
-          ? { ...item, props: { ...item.props, col: String(targetCol), row: String(targetRow) } }
-          : item
-      )
-    );
-  }
-
-  function handleItemChange(itemId: string, updates: Partial<Record<string, string>>) {
-    saveItems(
-      gridItems.map((item) =>
-        item.id === itemId ? { ...item, props: { ...item.props, ...updates } } : item
-      )
-    );
-  }
-
-  function handleResizeStart(e: React.PointerEvent, itemId: string, dir: "col" | "row" | "both") {
-    const item = gridItems.find((i) => i.id === itemId);
-    if (!item) return;
-    resizingRef.current = {
-      itemId,
-      dir,
-      startColSpan: numProp(item.props.colSpan, 1),
-      startRowSpan: numProp(item.props.rowSpan, 1),
-      startX: e.clientX,
-      startY: e.clientY,
-    };
-    setIsResizing(true);
-    onSelect(itemId);
-  }
-
   // Register global pointer handlers once — reads state via refs
   useEffect(() => {
     function onPointerMove(e: PointerEvent) {
@@ -595,6 +533,68 @@ export function CardLayoutGridEditor({
       window.removeEventListener("pointerup", onPointerUp);
     };
   }, []);
+
+  const parsed = parseCardLayoutProps(props);
+  if (!parsed) return null;
+
+  const { gridRoot, columns, rows, gap, gridItems } = parsed;
+  const gapCss = gap === "sm" ? "0.5rem" : gap === "lg" ? "1.25rem" : "0.75rem";
+  const isDragging = activeItem !== null;
+
+  // Keep latestRef in sync every render
+  latestRef.current = { gridItems, columns, rows, gap, props, gridRoot, onPropsChange };
+
+  function saveItems(newItems: CardLayoutItem[]) {
+    const overrides = computeExpandOverrides(newItems, columns, rows);
+    onPropsChange(saveCardLayoutItems(props, gridRoot, newItems, Object.keys(overrides).length ? overrides : undefined));
+  }
+
+  function handleDragStart(e: { active: Active }) {
+    const d = e.active.data.current as { item: CardLayoutItem } | undefined;
+    setActiveItem(d?.item ?? null);
+  }
+
+  function handleDragEnd(e: DragEndEvent) {
+    setActiveItem(null);
+    const { active, over } = e;
+    if (!over) return;
+    const overId = String(over.id);
+    if (!overId.startsWith("gc::")) return;
+    const [colStr, rowStr] = overId.slice(4).split("-");
+    const targetCol = parseInt(colStr, 10);
+    const targetRow = parseInt(rowStr, 10);
+    const itemId = String(active.id).slice(4);
+    saveItems(
+      gridItems.map((item) =>
+        item.id === itemId
+          ? { ...item, props: { ...item.props, col: String(targetCol), row: String(targetRow) } }
+          : item
+      )
+    );
+  }
+
+  function handleItemChange(itemId: string, updates: Partial<Record<string, string>>) {
+    saveItems(
+      gridItems.map((item) =>
+        item.id === itemId ? { ...item, props: { ...item.props, ...updates } } : item
+      )
+    );
+  }
+
+  function handleResizeStart(e: React.PointerEvent, itemId: string, dir: "col" | "row" | "both") {
+    const item = gridItems.find((i) => i.id === itemId);
+    if (!item) return;
+    resizingRef.current = {
+      itemId,
+      dir,
+      startColSpan: numProp(item.props.colSpan, 1),
+      startRowSpan: numProp(item.props.rowSpan, 1),
+      startX: e.clientX,
+      startY: e.clientY,
+    };
+    setIsResizing(true);
+    onSelect(itemId);
+  }
 
   // Build N×M background cells
   const cells: React.ReactNode[] = [];
