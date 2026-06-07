@@ -1,0 +1,147 @@
+[
+  {
+    "kind": "section",
+    "id": "header"
+  },
+  {
+    "kind": "block",
+    "id": "players-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "2",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-brian",
+    "type": "player-card",
+    "props": {
+      "id": "brian"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-chip-poole",
+    "type": "player-card",
+    "props": {
+      "id": "chip-poole"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-chuck",
+    "type": "player-card",
+    "props": {
+      "id": "chuck"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-cooper",
+    "type": "player-card",
+    "props": {
+      "id": "cooper"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-emma-cooper",
+    "type": "player-card",
+    "props": {
+      "id": "emma-cooper"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-jenny-mchale",
+    "type": "player-card",
+    "props": {
+      "id": "jenny-mchale"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-joshua-john",
+    "type": "player-card",
+    "props": {
+      "id": "joshua-john"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-larry-mchale",
+    "type": "player-card",
+    "props": {
+      "id": "larry-mchale"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-lesley-poole",
+    "type": "player-card",
+    "props": {
+      "id": "lesley-poole"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-michael-hewson",
+    "type": "player-card",
+    "props": {
+      "id": "michael-hewson"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-mike-brown",
+    "type": "player-card",
+    "props": {
+      "id": "mike-brown"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-sean-poole",
+    "type": "player-card",
+    "props": {
+      "id": "sean-poole"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-suzanne-chernetsky",
+    "type": "player-card",
+    "props": {
+      "id": "suzanne-chernetsky"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-tiffany-mulvihill",
+    "type": "player-card",
+    "props": {
+      "id": "tiffany-mulvihill"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-tom-chernetsky",
+    "type": "player-card",
+    "props": {
+      "id": "tom-chernetsky"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pc-ty-cooper",
+    "type": "player-card",
+    "props": {
+      "id": "ty-cooper"
+    }
+  },
+  {
+    "kind": "section",
+    "id": "unassigned"
+  }
+]

@@ -11,12 +11,21 @@ export type BlockType =
   | "text"
   | "callout"
   | "section-heading"
+  | "fold-header"
+  | "timeline"
   | "button-link"
   | "link-list"
   | "gallery"
   | "embed"
+  | "media-player"
   | "spacer"
   | "quote"
+  | "campaign-hero"
+  | "campaign-meta"
+  | "campaign-links"
+  | "campaign-notes"
+  | "campaign-roster"
+  | "campaign-sessions"
   // ── Site-specific layout blocks ──
   | "page-header"
   | "page-banner"
@@ -29,6 +38,8 @@ export type BlockType =
   | "bestiary-grid"
   // ── Single-item live data blocks ──
   | "campaign-card"
+  | "archived-campaign-card"
+  | "deity-card"
   | "player-card"
   | "creature-card"
   // ── Composable profile card & grid ──
@@ -126,6 +137,9 @@ export type CardLayoutItemType =
   | "grid"
   | "header"
   | "text"
+  | "link"
+  | "audio-link"
+  | "media-player"
   | "inner-card"
   | "image"
   | "divider"
@@ -165,6 +179,14 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
         options: [
           { value: "fixed", label: "Use card portrait zone" },
           { value: "inline", label: "Inline with card elements" },
+        ],
+      },
+      {
+        key: "cropPosition", label: "Image crop position", type: "select",
+        options: [
+          { value: "center", label: "Center" },
+          { value: "center top", label: "Top center" },
+          { value: "center bottom", label: "Bottom center" },
         ],
       },
     ],
@@ -308,9 +330,9 @@ export const PROFILE_CARD_ITEM_TYPES: ProfileCardItemDef[] = [
 
 const GRID_PLACEMENT_FIELDS: CardLayoutItemField[] = [
   { key: "col", label: "Column start", type: "text", hint: "1 to 6" },
-  { key: "row", label: "Row start", type: "text", hint: "1 to 10" },
+  { key: "row", label: "Row start", type: "text", hint: "1 to 40" },
   { key: "colSpan", label: "Column span", type: "text", hint: "1 to 6" },
-  { key: "rowSpan", label: "Row span", type: "text", hint: "1 to 10" },
+  { key: "rowSpan", label: "Row span", type: "text", hint: "1 to 40" },
 ];
 
 export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
@@ -320,7 +342,7 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
     icon: "#",
     fields: [
       { key: "columns", label: "Columns", type: "text", hint: "Up to 6 columns" },
-      { key: "rows", label: "Rows", type: "text", hint: "Up to 10 rows" },
+      { key: "rows", label: "Rows", type: "text", hint: "Up to 40 rows" },
       {
         key: "gap", label: "Gap", type: "select",
         options: [
@@ -341,6 +363,13 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
       { key: "eyebrow", label: "Eyebrow", type: "text" },
       { key: "title", label: "Title", type: "text" },
       {
+        key: "color", label: "Title color", type: "select",
+        options: [
+          { value: "primary", label: "Primary" },
+          { value: "gold", label: "Gold" },
+        ],
+      },
+      {
         key: "size", label: "Size", type: "select",
         options: [
           { value: "md", label: "Medium" },
@@ -356,6 +385,61 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
     icon: "T",
     fields: [
       { key: "content", label: "Text", type: "textarea" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "link",
+    label: "Link Pill",
+    icon: "->",
+    fields: [
+      { key: "label", label: "Label", type: "text" },
+      { key: "href", label: "URL", type: "text" },
+      {
+        key: "variant", label: "Style", type: "select",
+        options: [
+          { value: "primary", label: "Primary" },
+          { value: "secondary", label: "Secondary" },
+        ],
+      },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "audio-link",
+    label: "Recording Link",
+    icon: "ear",
+    fields: [
+      { key: "label", label: "Label", type: "text" },
+      { key: "href", label: "Recording URL", type: "text" },
+      ...GRID_PLACEMENT_FIELDS,
+    ],
+  },
+  {
+    type: "media-player",
+    label: "Media Player",
+    icon: ">",
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "src", label: "YouTube, audio, video, or Drive URL", type: "text" },
+      {
+        key: "mediaType", label: "Player type", type: "select",
+        options: [
+          { value: "auto", label: "Detect automatically" },
+          { value: "youtube", label: "YouTube video" },
+          { value: "audio", label: "Audio file" },
+          { value: "video", label: "Uploaded video" },
+        ],
+      },
+      {
+        key: "displayMode", label: "Display", type: "select",
+        options: [
+          { value: "full", label: "Full player" },
+          { value: "image-button", label: "Image button" },
+        ],
+      },
+      { key: "image", label: "Button image", type: "image" },
+      { key: "caption", label: "Caption", type: "textarea" },
       ...GRID_PLACEMENT_FIELDS,
     ],
   },
@@ -398,7 +482,15 @@ export const CARD_LAYOUT_ITEM_TYPES: CardLayoutItemDef[] = [
     fields: [
       { key: "name", label: "Name",        type: "text" },
       { key: "role", label: "Role / Title", type: "text" },
+      { key: "href", label: "Link URL",     type: "text" },
       { key: "img",  label: "Portrait",     type: "image" },
+      {
+        key: "variant", label: "Style", type: "select",
+        options: [
+          { value: "portrait", label: "Portrait" },
+          { value: "tile", label: "Campaign roster tile" },
+        ],
+      },
       ...GRID_PLACEMENT_FIELDS,
     ],
   },
@@ -421,6 +513,7 @@ export interface AssetTypeDef {
   description: string;
   icon: string;
   category: "content" | "layout";
+  retired?: boolean;
   defaultProps: Record<string, unknown>;
   fields: AssetField[];
 }
@@ -474,7 +567,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       ], null, 2),
     },
     fields: [
-      { key: "eyebrow",     label: "Eyebrow",            type: "text",   placeholder: "e.g. Knowledge Base" },
+      { key: "eyebrow",     label: "Eyebrow",            type: "text",   placeholder: "e.g. Chronicles" },
       { key: "title",       label: "Section title",      type: "text",   placeholder: "Optional heading above the grid" },
       { key: "description", label: "Section description", type: "textarea", placeholder: "Optional description above the grid" },
       {
@@ -563,12 +656,80 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   {
+    type: "fold-header",
+    label: "Fold Header",
+    description: "Expandable header with optional text and image inside the fold",
+    icon: "V",
+    category: "content",
+    defaultProps: {
+      eyebrow: "",
+      title: "Expandable Header",
+      description: "",
+      foldLabel: "View details",
+      foldText: "Add text inside the fold, choose an image, or use both.",
+      foldImage: "",
+      foldImageAlt: "",
+      foldImageFit: "cover",
+      defaultState: "closed",
+    },
+    fields: [
+      { key: "eyebrow",      label: "Eyebrow (optional)",              type: "text",     placeholder: "e.g. Additional Lore" },
+      { key: "title",        label: "Header title",                    type: "text",     placeholder: "Expandable Header" },
+      { key: "description",  label: "Intro text (optional)",           type: "textarea", placeholder: "Visible while the fold is closed." },
+      { key: "foldLabel",    label: "Fold button label",               type: "text",     placeholder: "View details" },
+      { key: "foldText",     label: "Text inside fold (optional)",     type: "textarea", placeholder: "Text shown after expanding the header." },
+      { key: "foldImage",    label: "Image inside fold (optional)",    type: "image",    placeholder: "/images/example.webp" },
+      { key: "foldImageAlt", label: "Fold image alt text",             type: "text",     placeholder: "Describe the image" },
+      {
+        key: "foldImageFit", label: "Fold image fit", type: "select",
+        options: [{ value: "cover", label: "Cover" }, { value: "contain", label: "Contain" }],
+      },
+      {
+        key: "defaultState", label: "Default fold state", type: "select",
+        options: [{ value: "closed", label: "Closed" }, { value: "open", label: "Open" }],
+      },
+    ],
+  },
+
+  {
+    type: "timeline",
+    label: "Timeline",
+    description: "Collapsible historical timeline with vertical or horizontal layout",
+    icon: "|-",
+    category: "content",
+    defaultProps: {
+      eyebrow: "Era",
+      title: "Timeline Era",
+      description: "",
+      orientation: "vertical",
+      entries: JSON.stringify([
+        { date: "1246", title: "Year of Discovery", description: "Short summary of the year.", events: ["Notable event"] },
+      ], null, 2),
+    },
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (optional)", type: "text", placeholder: "e.g. Era" },
+      { key: "title", label: "Timeline title", type: "text", placeholder: "Era title" },
+      { key: "description", label: "Intro text (optional)", type: "textarea", placeholder: "Visible before the timeline entries." },
+      {
+        key: "orientation", label: "Timeline orientation", type: "select",
+        options: [{ value: "vertical", label: "Vertical" }, { value: "horizontal", label: "Horizontal" }],
+      },
+      {
+        key: "entries",
+        label: "Timeline nodes",
+        type: "json",
+        hint: "Add, remove, and reorder the visible points on the timeline.",
+      },
+    ],
+  },
+
+  {
     type: "button-link",
     label: "Button Link",
     description: "One prominent call-to-action button",
     icon: "↗",
     category: "content",
-    defaultProps: { label: "Open Link", href: "", align: "left", variant: "primary" },
+    defaultProps: { label: "Open Link", href: "", align: "left", variant: "primary", arrow: "auto" },
     fields: [
       { key: "label", label: "Button label", type: "text" },
       { key: "href", label: "URL", type: "url" },
@@ -578,7 +739,20 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       },
       {
         key: "variant", label: "Style", type: "select",
-        options: [{ value: "primary", label: "Primary" }, { value: "secondary", label: "Secondary" }],
+        options: [
+          { value: "primary", label: "Primary" },
+          { value: "secondary", label: "Secondary" },
+          { value: "text", label: "Text link" },
+        ],
+      },
+      {
+        key: "arrow", label: "Arrow", type: "select",
+        options: [
+          { value: "auto", label: "Auto" },
+          { value: "left", label: "Left" },
+          { value: "right", label: "Right" },
+          { value: "none", label: "None" },
+        ],
       },
     ],
   },
@@ -664,10 +838,11 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     description: "Highlighted announcement or note with accent colour",
     icon: "◈",
     category: "content",
-    defaultProps: { title: "", content: "Add your callout message here.", variant: "gold", href: "" },
+    defaultProps: { title: "", content: "Add your callout message here.", variant: "gold", href: "", image: "" },
     fields: [
       { key: "title",   label: "Title (optional)", type: "text",     placeholder: "Callout heading" },
       { key: "href",    label: "Title link (optional)", type: "text", placeholder: "/path or https://..." },
+      { key: "image",   label: "Image (optional)", type: "image",    placeholder: "/images/pantheon/deity.webp" },
       { key: "content", label: "Content",          type: "textarea", placeholder: "Your message…" },
       {
         key: "variant", label: "Accent colour", type: "select",
@@ -721,6 +896,191 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   // ── Live data blocks ──────────────────────────────────────────────────────────
+
+  {
+    type: "campaign-hero",
+    label: "Campaign Hero",
+    description: "Campaign detail hero with editable title, eyebrow, and header image",
+    icon: "H",
+    category: "content",
+    defaultProps: { eyebrow: "Campaign", title: "Campaign Name", image: "", imagePosition: "center" },
+    fields: [
+      { key: "eyebrow", label: "Eyebrow", type: "text" },
+      { key: "title", label: "Title", type: "text" },
+      { key: "image", label: "Header image", type: "image" },
+      { key: "imagePosition", label: "Image position", type: "text", placeholder: "center or center top" },
+    ],
+  },
+
+  {
+    type: "campaign-meta",
+    label: "Campaign Meta",
+    description: "Campaign schedule, Dungeon Master, and live next-session date",
+    icon: "i",
+    category: "content",
+    defaultProps: { schedule: "", dm: "", campaignName: "" },
+    fields: [
+      { key: "schedule", label: "Schedule", type: "text" },
+      { key: "dm", label: "Dungeon Master", type: "text" },
+      { key: "campaignName", label: "Campaign name for calendar lookup", type: "text" },
+    ],
+  },
+
+  {
+    type: "campaign-links",
+    label: "Campaign Links",
+    description: "Editable resource buttons for a campaign detail page",
+    icon: "L",
+    category: "content",
+    retired: true,
+    defaultProps: {
+      links: JSON.stringify([{ label: "Resource", url: "https://example.com" }], null, 2),
+    },
+    fields: [
+      { key: "links", label: "Links", type: "json", hint: 'Each item: { "label": "", "url": "" }' },
+    ],
+  },
+
+  {
+    type: "campaign-notes",
+    label: "Campaign Notes",
+    description: "Editable notes card for a campaign detail page",
+    icon: "N",
+    category: "content",
+    retired: true,
+    defaultProps: { title: "Notes", content: "" },
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "content", label: "Content", type: "textarea" },
+    ],
+  },
+
+  {
+    type: "campaign-roster",
+    label: "Campaign Roster",
+    description: "Editable character roster with optional player names and links",
+    icon: "R",
+    category: "content",
+    retired: true,
+    defaultProps: {
+      title: "Roster",
+      members: JSON.stringify([{ name: "Character", player: "", url: "" }], null, 2),
+    },
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "members", label: "Roster members", type: "json", hint: 'Each item: { "name": "", "player": "", "url": "" }' },
+    ],
+  },
+
+  {
+    type: "campaign-sessions",
+    label: "Campaign Sessions",
+    description: "Editable campaign session summaries with optional audio links",
+    icon: "S",
+    category: "content",
+    retired: true,
+    defaultProps: {
+      title: "Session Summaries",
+      sessions: JSON.stringify([{ title: "Session", summary: "", audioLinks: [] }], null, 2),
+    },
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "sessions", label: "Sessions", type: "json", hint: 'Each item: { "title": "", "summary": "", "audioLinks": [{ "label": "", "url": "" }] }' },
+    ],
+  },
+
+  {
+    type: "archived-campaign-card",
+    label: "Archived Campaign Card",
+    description: "Editable previous-campaign card with status, DM, optional image, and detail link",
+    icon: "◇",
+    category: "content",
+    defaultProps: {
+      id: "archived-campaign",
+      title: "Archived Campaign",
+      status: "Completed",
+      dm: "",
+      image: "",
+      description: "",
+      referenceUrl: "",
+      resources: "[]",
+      party: "[]",
+      sections: "[]",
+    },
+    fields: [
+      { key: "id",     label: "Detail page slug",      type: "text",  placeholder: "archived-campaign" },
+      { key: "title",  label: "Campaign title",       type: "text",  placeholder: "Campaign name" },
+      {
+        key: "status", label: "Archive status", type: "select",
+        options: [
+          { value: "Completed", label: "Completed" },
+          { value: "On Hiatus", label: "On Hiatus" },
+        ],
+      },
+      { key: "dm",     label: "Dungeon Master",       type: "text",  placeholder: "DM name" },
+      { key: "image",  label: "Header image (optional)", type: "image", placeholder: "/images/campaigns/archive.jpg" },
+      { key: "description", label: "Campaign summary", type: "textarea", placeholder: "Archive summary" },
+      { key: "referenceUrl", label: "Detail link", type: "url", placeholder: "https://..." },
+      { key: "resources", label: "Resource links", type: "json", hint: 'Each item: { "label": "", "url": "" }' },
+      { key: "party", label: "Roster", type: "json", hint: 'Each item: { "name": "", "player": "", "url": "" }' },
+      { key: "sections", label: "Archive detail sections", type: "json", hint: 'Each item: { "title": "", "content": "", "entries": [] }' },
+    ],
+  },
+
+  {
+    type: "media-player",
+    label: "Media Player",
+    description: "Play a YouTube video, uploaded video, or audio file directly on the page",
+    icon: "▶",
+    category: "content",
+    defaultProps: { src: "", title: "", mediaType: "auto", displayMode: "full", image: "/images/dragon-ears.png", caption: "" },
+    fields: [
+      { key: "src", label: "YouTube, audio, or video URL", type: "url", placeholder: "https://youtu.be/... or /images/media/file.mp4" },
+      { key: "title", label: "Title (optional)", type: "text", placeholder: "Session recording" },
+      {
+        key: "mediaType",
+        label: "Player type",
+        type: "select",
+        options: [
+          { value: "auto", label: "Detect automatically" },
+          { value: "youtube", label: "YouTube video" },
+          { value: "audio", label: "Audio file" },
+          { value: "video", label: "Uploaded video" },
+        ],
+      },
+      {
+        key: "displayMode",
+        label: "Display",
+        type: "select",
+        options: [
+          { value: "full", label: "Full player" },
+          { value: "image-button", label: "Image button" },
+        ],
+      },
+      { key: "image", label: "Button image", type: "image", placeholder: "/images/dragon-ears.png" },
+      { key: "caption", label: "Caption (optional)", type: "textarea" },
+    ],
+  },
+
+  {
+    type: "deity-card",
+    label: "Deity Card",
+    description: "Editable Pantheon image card with divine title, domain, and optional reference link",
+    icon: "*",
+    category: "content",
+    defaultProps: {
+      title: "Deity",
+      domain: "",
+      href: "",
+      image: "",
+    },
+    fields: [
+      { key: "title",  label: "Divine title",             type: "text",  placeholder: 'Addan - "Eternal Guardian"' },
+      { key: "domain", label: "Domain",                   type: "text",  placeholder: "Order & Protection" },
+      { key: "href",   label: "Reference link (optional)", type: "url",   placeholder: "https://..." },
+      { key: "image",  label: "Deity image",              type: "image", placeholder: "/images/pantheon/deity.webp" },
+    ],
+  },
 
   {
     type: "profile-card",
@@ -778,6 +1138,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         key: "width", label: "Card width", type: "select",
         options: [
           { value: "wide", label: "Wide" },
+          { value: "campaign", label: "Campaign detail" },
           { value: "medium", label: "Medium" },
           { value: "full", label: "Full" },
         ],
@@ -859,8 +1220,62 @@ export const ASSET_TYPES: AssetTypeDef[] = [
 
 ];
 
+export const ACTIVE_ASSET_TYPES = ASSET_TYPES.filter((asset) => !asset.retired);
+
 export function getAssetDef(type: BlockType): AssetTypeDef | undefined {
   return ASSET_TYPES.find((a) => a.type === type);
+}
+
+export type MediaPlayerSource =
+  | { kind: "youtube"; src: string }
+  | { kind: "audio"; src: string }
+  | { kind: "video"; src: string }
+  | { kind: "iframe"; src: string };
+
+function youtubeVideoId(raw: string): string | null {
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return url.pathname.split("/").filter(Boolean)[0] ?? null;
+    if (host !== "youtube.com" && host !== "m.youtube.com") return null;
+    if (url.pathname === "/watch") return url.searchParams.get("v");
+    const [first, id] = url.pathname.split("/").filter(Boolean);
+    return ["embed", "shorts", "live"].includes(first) ? (id ?? null) : null;
+  } catch {
+    return null;
+  }
+}
+
+function googleDrivePreviewUrl(raw: string): string | null {
+  try {
+    const url = new URL(raw);
+    if (url.hostname !== "drive.google.com") return null;
+    const match = url.pathname.match(/^\/file\/d\/([^/]+)/);
+    return match ? `https://drive.google.com/file/d/${match[1]}/preview` : null;
+  } catch {
+    return null;
+  }
+}
+
+export function resolveMediaPlayerSource(raw: string, mediaType = "auto"): MediaPlayerSource | null {
+  const src = raw.trim();
+  if (!src) return null;
+
+  const videoId = youtubeVideoId(src);
+  if (videoId && mediaType !== "audio") {
+    return { kind: "youtube", src: `https://www.youtube-nocookie.com/embed/${videoId}` };
+  }
+
+  if (mediaType === "youtube") return null;
+
+  const drivePreview = googleDrivePreviewUrl(src);
+  if (drivePreview) return { kind: "iframe", src: drivePreview };
+
+  if (mediaType === "video" || (mediaType === "auto" && /\.(mp4|m4v|mov|ogv|webm)(?:[?#].*)?$/i.test(src))) {
+    return { kind: "video", src };
+  }
+
+  return { kind: "audio", src };
 }
 
 export function parseGridSectionItems(raw: unknown): GridSectionChild[] {

@@ -1,0 +1,351 @@
+[
+  {
+    "kind": "block",
+    "id": "pantheon-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "World Reference",
+      "title": "Pantheon",
+      "description": "The gods of Myrdae — their titles, domains, and divine mandates.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pantheon-kb-link",
+    "type": "button-link",
+    "props": {
+      "label": "Pantheon in Chronicles ↗",
+      "href": "https://kb.suwaneegamers.net/",
+      "variant": "secondary",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pantheon-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-addan",
+    "type": "deity-card",
+    "props": {
+      "title": "Addan — \"Eternal Guardian\"",
+      "domain": "Order & Protection",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.b6us9c2mrpk9",
+      "image": "/images/pantheon/addan.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-amriel",
+    "type": "deity-card",
+    "props": {
+      "title": "Amriel — \"Redeemer\"",
+      "domain": "Atonement",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.ig8yfraovtz0",
+      "image": "/images/pantheon/amriel.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-asmodeus",
+    "type": "deity-card",
+    "props": {
+      "title": "Asmodeus — \"Prince of Darkness\"",
+      "domain": "Tyranny, Indulgence & Fire",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.celz1to4pgb0",
+      "image": "/images/pantheon/asmodeus.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-brault",
+    "type": "deity-card",
+    "props": {
+      "title": "Brault — \"He Torn Asunder\"",
+      "domain": "Battle & Might",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.ogj4pzifxae2",
+      "image": "/images/pantheon/brault.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-celestine",
+    "type": "deity-card",
+    "props": {
+      "title": "Celestine — \"Night Whisper\"",
+      "domain": "Dreams, Stars & Reflection",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.su3ibv8bxcbm",
+      "image": "/images/pantheon/celestine.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-cembus",
+    "type": "deity-card",
+    "props": {
+      "title": "Cembus — \"Seeker\"",
+      "domain": "Exploration & Travel",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.c5ovebv46lm4",
+      "image": "/images/pantheon/cembus.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-coralei",
+    "type": "deity-card",
+    "props": {
+      "title": "Coralei — \"Tide Keeper\"",
+      "domain": "Water & The Sea",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.d5daag4ymko8",
+      "image": "/images/pantheon/coralei.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-crael",
+    "type": "deity-card",
+    "props": {
+      "title": "Crael — \"Soul Bearer\"",
+      "domain": "Death & Fate",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.12ct8t14dzky",
+      "image": "/images/pantheon/crael.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-diverra",
+    "type": "deity-card",
+    "props": {
+      "title": "Diverra — \"Ardent One\"",
+      "domain": "Love & Beauty",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.6ozfisc4472i",
+      "image": "/images/pantheon/diverra.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-eredra",
+    "type": "deity-card",
+    "props": {
+      "title": "Eredra — \"Spider Queen\"",
+      "domain": "Deception & Betrayal",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.l9gt3e4tbovm",
+      "image": "/images/pantheon/eredra.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-fralee",
+    "type": "deity-card",
+    "props": {
+      "title": "Fralee — \"Sister of Solace\"",
+      "domain": "Purity & Tranquility",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.m55owznsgius",
+      "image": "/images/pantheon/fralee.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-goldraen",
+    "type": "deity-card",
+    "props": {
+      "title": "Goldraen — \"Evercast\"",
+      "domain": "Craft & Creation",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.vj5rdhiw0xp1",
+      "image": "/images/pantheon/goldraen.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-iuzobal",
+    "type": "deity-card",
+    "props": {
+      "title": "Iuz'Obal — \"Eyes Beyond\"",
+      "domain": "Ether & Planar Travel",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.22w3ad2iayzf",
+      "image": "/images/pantheon/iuzobal.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-layeth",
+    "type": "deity-card",
+    "props": {
+      "title": "Layeth — \"Selfless One\"",
+      "domain": "Sacrifice & Perseverance",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.ws16fve9o7kc",
+      "image": "/images/pantheon/layeth.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-muerg",
+    "type": "deity-card",
+    "props": {
+      "title": "Muerg — \"Earth Father\"",
+      "domain": "Land & Earth",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.b667d4vrg3l4",
+      "image": "/images/pantheon/muerg.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-myrdris",
+    "type": "deity-card",
+    "props": {
+      "title": "Myrdris — \"Grand Weaver\"",
+      "domain": "Knowledge & Magic",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.475293nc9b4m",
+      "image": "/images/pantheon/myrdris.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-natafae",
+    "type": "deity-card",
+    "props": {
+      "title": "Natafae — \"Mistress of Pain\"",
+      "domain": "Pain & Suffering",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.bfdclhy7n4y",
+      "image": "/images/pantheon/natafae.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-nigrum",
+    "type": "deity-card",
+    "props": {
+      "title": "Nigrum — \"Netherlord\"",
+      "domain": "Corruption & The Undead",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.xbsr2fuef22f",
+      "image": "/images/pantheon/nigrum.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-olfarium",
+    "type": "deity-card",
+    "props": {
+      "title": "Ol'farium — \"Crowned Glory\"",
+      "domain": "Good & Honor",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.ep93pf1eifag",
+      "image": "/images/pantheon/olfarium.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-oneeye",
+    "type": "deity-card",
+    "props": {
+      "title": "One-Eye",
+      "domain": "Orcish deity",
+      "image": "/images/pantheon/oneeye.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-osanna",
+    "type": "deity-card",
+    "props": {
+      "title": "Osanna — \"Smiling Duchess\"",
+      "domain": "Luck & Fortune",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.6bruafrlhuhj",
+      "image": "/images/pantheon/osanna.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-phoe",
+    "type": "deity-card",
+    "props": {
+      "title": "Phoe — \"Hooded Lady\"",
+      "domain": "Night & Secrecy",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.ytxoc4ruegfm",
+      "image": "/images/pantheon/phoe.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-sylunara",
+    "type": "deity-card",
+    "props": {
+      "title": "Sylunara — \"Evening Radiance\"",
+      "domain": "Moons & Transformation",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.5r5p21a60lnx",
+      "image": "/images/pantheon/sylunara.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-tornia",
+    "type": "deity-card",
+    "props": {
+      "title": "Tornia — \"Deceiver\"",
+      "domain": "Chaos & Trickery",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.9fgy16yw26ek",
+      "image": "/images/pantheon/tornia.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-tyvarion",
+    "type": "deity-card",
+    "props": {
+      "title": "Tyvarion — \"Master of Masks\"",
+      "domain": "Art, Music & Poetry",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.757h4xt8vj2b",
+      "image": "/images/pantheon/tyvarion.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-urlich",
+    "type": "deity-card",
+    "props": {
+      "title": "Urlich — \"Regent of Ice\"",
+      "domain": "Cold & Ice",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.i43ktkd77hk",
+      "image": "/images/pantheon/urlich.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-utheri",
+    "type": "deity-card",
+    "props": {
+      "title": "Utheri — \"Truth Bringer\"",
+      "domain": "Order & Justice",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.xsx8lu5mv5mk",
+      "image": "/images/pantheon/utheri.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-villari",
+    "type": "deity-card",
+    "props": {
+      "title": "Villari — \"Dawn Princess\"",
+      "domain": "Life & Nature",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.4cmclqgmq0iu",
+      "image": "/images/pantheon/villari.webp"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "pan-voegurn",
+    "type": "deity-card",
+    "props": {
+      "title": "Vo'egurn — \"High Tempest\"",
+      "domain": "Storms & Destruction",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.mhijjfxqm2jb",
+      "image": "/images/pantheon/voegurn.webp"
+    }
+  }
+]

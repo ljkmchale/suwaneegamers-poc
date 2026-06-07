@@ -16,7 +16,7 @@
     "id": "sean-poole",
     "name": "Sean Poole",
     "focus": "High-stakes active campaigns with sharp danger and momentum.",
-    "description": "Sean currently runs two active campaigns on the reference site, with one completed campaign in the older archive.",
+    "description": "Sean currently runs two active campaigns, with one completed campaign in the archive.",
     "portrait": "/images/generated/sean-poole-card.webp",
     "activeCampaignIds": ["bloody-endeavor", "souls-of-destiny"],
     "previousCampaigns": [
@@ -62,7 +62,7 @@
     "id": "chris-glynn",
     "name": "Chris Glynn",
     "focus": "Completed published-adventure campaigns.",
-    "description": "Chris has completed campaign history on the reference site, including major D&D adventure paths from the archive.",
+    "description": "Chris has completed campaign history, including major D&D adventure paths from the archive.",
     "portrait": "/images/generated/chris-glynn-card.webp",
     "activeCampaignIds": [],
     "previousCampaigns": [

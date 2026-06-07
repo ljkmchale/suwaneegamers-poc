@@ -1,0 +1,63 @@
+[
+  {
+    "kind": "block",
+    "id": "mad-mage-back",
+    "type": "button-link",
+    "props": {
+      "label": "Campaigns",
+      "href": "/campaigns",
+      "align": "left",
+      "variant": "text",
+      "arrow": "left",
+      "width": "campaign"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "mad-mage-hero",
+    "type": "campaign-hero",
+    "props": {
+      "eyebrow": "Campaign",
+      "title": "Mad Mage",
+      "image": "/images/campaigns/mad-mage.jpg",
+      "imagePosition": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "mad-mage-meta",
+    "type": "campaign-meta",
+    "props": {
+      "schedule": "2nd Saturday",
+      "dm": "Michael Hewson",
+      "campaignName": "Mad Mage"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "mad-mage-resources-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"resources_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"2\",\n      \"rows\": \"1\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"resource_player-s-notes_1\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Player's Notes\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0/edit?usp=sharing\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_campaign-page_2\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Page\\\",\\n      \\\"href\\\": \\\"https://sites.google.com/view/suwanee-gamers/campaigns/mad-mage\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "mad-mage-notes-roster-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"notes_roster_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"2\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"notes_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Notes\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"notes_text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"A campaign of arcane mysteries, unstable power, hidden agendas, and strange discoveries beneath the surface of Myrdae.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "mad-mage-sessions-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"sessions_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"1\",\n      \"rows\": \"3\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"sessions_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session Summaries\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Dungeon of the Mad Mage\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"This campaign currently presents as a Dungeon of the Mad Mage hub with player notes.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  }
+]

@@ -46,23 +46,37 @@ describe("getNavConfig", () => {
 });
 
 describe("primary nav section", () => {
-  it("contains Calendar, Campaigns, DMs, and Players", () => {
+  it("contains Calendar, Campaigns, DMs, and Previous Campaigns", () => {
     const config = getNavConfig();
     const primary = getNavSection(config, "primary");
     const hrefs = primary.map((i) => i.href);
     expect(hrefs).toContain("/calendar");
     expect(hrefs).toContain("/campaigns");
-    expect(hrefs).toContain("/players");
+    expect(hrefs).toContain("/dungeon-masters");
+    expect(hrefs).toContain("/previous-campaigns");
   });
 });
 
 describe("world nav section", () => {
-  it("contains Bestiary and Setting", () => {
+  it("contains Setting references", () => {
     const config = getNavConfig();
     const world = getNavSection(config, "world");
     const hrefs = world.map((i) => i.href);
+    expect(hrefs).toContain("/history");
+    expect(hrefs).toContain("/pantheon");
+    expect(hrefs).toContain("/maps-of-myrdae");
+  });
+});
+
+describe("toolset nav section", () => {
+  it("contains the playable reference tools", () => {
+    const config = getNavConfig();
+    const toolset = getNavSection(config, "toolset-n4ch");
+    const hrefs = toolset.map((i) => i.href);
+    expect(hrefs).toContain("/campaign-setting");
+    expect(hrefs).toContain("/reference-for-dungeon-masters");
+    expect(hrefs).toContain("/gazetteer");
     expect(hrefs).toContain("/bestiary");
-    expect(hrefs).toContain("/setting");
   });
 });
 
@@ -84,5 +98,17 @@ describe("nav item ID uniqueness", () => {
     const config = getNavConfig();
     const ids = config.sections.flatMap((s) => s.items.map((i) => i.id));
     expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+describe("Chronicles navigation", () => {
+  it("uses one secure external Chronicles doorway with no Knowledge Base duplicate", () => {
+    const items = getNavConfig().sections.flatMap((section) => section.items);
+    const chronicles = items.filter((item) => item.label === "Chronicles");
+
+    expect(chronicles).toEqual([
+      expect.objectContaining({ href: "https://kb.suwaneegamers.net/" }),
+    ]);
+    expect(items.some((item) => item.label === "Knowledge Base")).toBe(false);
   });
 });

@@ -6,6 +6,7 @@ import {
   sideCampaigns,
   normalizeCampaignTitle,
   findNextCampaignEvent,
+  findCampaignForCalendarEvent,
   parseLegacyCampaignSessionSummariesFromHtml,
   type PortalCampaign,
 } from "@/lib/campaigns";
@@ -291,6 +292,48 @@ describe("findNextCampaignEvent", () => {
 });
 
 // ── parseLegacyCampaignSessionSummariesFromHtml ────────────────────────────────
+
+describe("findCampaignForCalendarEvent", () => {
+  const campaigns: PortalCampaign[] = [
+    {
+      id: "heroes-of-emberstran",
+      name: "Heroes of Emberstran",
+      dm: "Larry McHale",
+      schedule: "Biweekly",
+      description: "",
+      referenceUrl: "https://example.com",
+      headerImage: "/images/campaigns/heroes-of-emberstran.jpg",
+      aliases: ["Emberstran"],
+    },
+  ];
+
+  it("returns the matching campaign for an event title", () => {
+    const found = findCampaignForCalendarEvent(
+      makeEvent("Heroes of Emberstran", "2026-06-01T18:00:00Z"),
+      campaigns,
+    );
+
+    expect(found?.id).toBe("heroes-of-emberstran");
+  });
+
+  it("matches aliases inside longer event titles", () => {
+    const found = findCampaignForCalendarEvent(
+      makeEvent("Emberstran Session Night", "2026-06-01T18:00:00Z"),
+      campaigns,
+    );
+
+    expect(found?.id).toBe("heroes-of-emberstran");
+  });
+
+  it("returns undefined when no campaign matches", () => {
+    const found = findCampaignForCalendarEvent(
+      makeEvent("Open Board Game Night", "2026-06-01T18:00:00Z"),
+      campaigns,
+    );
+
+    expect(found).toBeUndefined();
+  });
+});
 
 describe("parseLegacyCampaignSessionSummariesFromHtml", () => {
   it("keeps Google Drive audio links attached to matching session summaries", () => {

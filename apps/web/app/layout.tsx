@@ -1,6 +1,5 @@
-import fs from "fs";
-import path from "path";
 import type { Metadata } from "next";
+import { loadTheme, type Theme } from "@/lib/theme";
 import {
   Cinzel,
   Lora,
@@ -34,34 +33,47 @@ const FONT_VAR_MAP: Record<string, string> = {
   MedievalSharp: "--font-medieval",
 };
 
-interface Theme {
-  colors: Record<string, string>;
-  fonts: { heading: string; body: string };
-  siteName?: string;
-  siteTagline?: string;
+
+function hexToRgb(hex: string): string | null {
+  const clean = hex.replace("#", "");
+  if (clean.length !== 6) return null;
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return null;
+  return `${r}, ${g}, ${b}`;
 }
 
-function loadTheme(): Theme {
-  try {
-    const filePath = path.join(process.cwd(), "../../content/theme.json");
-    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Theme;
-  } catch {
-    return {
-      colors: {},
-      fonts: { heading: "Cinzel", body: "Lora" },
-      siteName: "Suwanee Gamers",
-      siteTagline: "The World of Myrdae",
-    };
-  }
+function buildGlow(colorHex: string, intensity: string): string {
+  const rgb = hexToRgb(colorHex);
+  if (!rgb || intensity === "none") return "none";
+  if (intensity === "subtle") return `0 0 14px rgba(${rgb}, 0.25), 0 0 40px rgba(${rgb}, 0.07)`;
+  if (intensity === "strong") return `0 0 25px rgba(${rgb}, 0.65), 0 0 80px rgba(${rgb}, 0.22)`;
+  return `0 0 20px rgba(${rgb}, 0.4), 0 0 60px rgba(${rgb}, 0.1)`;
 }
 
 function buildThemeStyle(theme: Theme): string {
   const headingVar = FONT_VAR_MAP[theme.fonts.heading] ?? "--font-cinzel";
   const bodyVar = FONT_VAR_MAP[theme.fonts.body] ?? "--font-lora";
+
   const colorEntries = Object.entries(theme.colors)
     .map(([k, v]) => `  ${k}: ${v};`)
     .join("\n");
-  return `:root {\n${colorEntries}\n  --font-heading: var(${headingVar});\n  --font-body: var(${bodyVar});\n}`;
+
+  const surfaceEntries = Object.entries(theme.surfaces ?? {})
+    .map(([k, v]) => `  ${k}: ${v};`)
+    .join("\n");
+
+  const arcane = theme.colors["--color-accent-arcane"] ?? "#8b5cf6";
+  const gold = theme.colors["--color-accent-gold"] ?? "#f59e0b";
+  const intensity = theme.glowIntensity ?? "normal";
+  const glowEntries = [
+    `  --glow-arcane: ${buildGlow(arcane, intensity)};`,
+    `  --glow-gold: ${buildGlow(gold, intensity)};`,
+  ].join("\n");
+
+  const parts = [colorEntries, surfaceEntries, glowEntries].filter(Boolean).join("\n");
+  return `:root {\n${parts}\n  --font-heading: var(${headingVar});\n  --font-body: var(${bodyVar});\n}`;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -5,10 +5,6 @@ import { logoutAction } from "./login/actions";
 
 const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
-  { href: "/admin/campaigns", label: "Campaigns" },
-  { href: "/admin/players", label: "Players" },
-  { href: "/admin/dungeon-masters", label: "Dungeon Masters" },
-  { href: "/admin/bestiary", label: "Bestiary" },
   { href: "/admin/pages", label: "Pages" },
   { href: "/admin/page-layout", label: "Navigation Layout" },
   { href: "/admin/appearance", label: "Appearance" },

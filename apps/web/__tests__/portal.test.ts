@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   getPortalLinks,
-  kbLink,
+  chroniclesLink,
   calendarLink,
   PORTAL_URLS,
 } from "@/lib/portal";
@@ -29,8 +29,8 @@ describe("getPortalLinks", () => {
 });
 
 describe("PORTAL_URLS", () => {
-  it("knowledgeBase starts with http://kb", () => {
-    expect(PORTAL_URLS.knowledgeBase).toMatch(/^http:\/\/kb\./);
+  it("chronicles uses the secure kb URL", () => {
+    expect(PORTAL_URLS.chronicles).toBe("https://kb.suwaneegamers.net/");
   });
 
   it("referenceSite is an https Google Sites URL", () => {
@@ -46,19 +46,19 @@ describe("PORTAL_URLS", () => {
   });
 });
 
-describe("kbLink", () => {
-  it("uses the knowledge base URL", () => {
-    const link = kbLink("Find everything here");
-    expect(link.href).toBe(PORTAL_URLS.knowledgeBase);
+describe("chroniclesLink", () => {
+  it("uses the Chronicles URL", () => {
+    const link = chroniclesLink("Find everything here");
+    expect(link.href).toBe(PORTAL_URLS.chronicles);
   });
 
   it("uses the provided description", () => {
-    const link = kbLink("Custom description");
+    const link = chroniclesLink("Custom description");
     expect(link.description).toBe("Custom description");
   });
 
   it("has a title and label", () => {
-    const link = kbLink("desc");
+    const link = chroniclesLink("desc");
     expect(link.title).toBeTruthy();
     expect(link.label).toBeTruthy();
   });

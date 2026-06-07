@@ -23,18 +23,18 @@ function HeaderSection() {
       </h1>
       <p className="max-w-3xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
         The people behind the screen, their active tables, and the campaign history currently
-        represented on the Suwanee Gamers reference site.
+        represented across Suwanee Gamers.
       </p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <a href={dungeonMastersReferenceUrl} target="_blank" rel="noopener noreferrer"
           className="text-xs font-cinzel tracking-widest uppercase px-4 py-2 border rounded-full transition-colors hover:border-amber-400"
           style={{ color: "var(--color-accent-gold)", borderColor: "var(--color-bg-border)" }}>
-          Reference Site
+          Suwanee Gamers Site
         </a>
-        <a href={PORTAL_URLS.knowledgeBase} target="_blank" rel="noopener noreferrer"
+        <a href={PORTAL_URLS.chronicles} target="_blank" rel="noopener noreferrer"
           className="text-xs font-cinzel tracking-widest uppercase px-4 py-2 border rounded-full transition-colors hover:border-amber-400"
           style={{ color: "var(--color-text-secondary)", borderColor: "var(--color-bg-border)" }}>
-          Knowledge Base
+          Chronicles
         </a>
       </div>
     </header>

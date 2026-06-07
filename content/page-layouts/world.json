@@ -1,0 +1,21 @@
+[
+  {
+    "kind": "block",
+    "id": "world-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Map Portal",
+      "title": "The World of Myrdae",
+      "description": "Map and location truth should live outside this app. Use the portal to reach the Chronicles and map resources.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "world-links",
+    "type": "portal-links",
+    "props": {
+      "links": "[{\"title\":\"Suwanee Gamers Chronicles\",\"description\":\"Open Myrdae map notes, locations, and territory references.\",\"href\":\"https://kb.suwaneegamers.net/\",\"label\":\"Open Chronicles\"},{\"title\":\"Maps of Myrdae\",\"description\":\"Open the local map doorway for interactive and reference map links.\",\"href\":\"/maps-of-myrdae\",\"label\":\"View Maps\"}]"
+    }
+  }
+]

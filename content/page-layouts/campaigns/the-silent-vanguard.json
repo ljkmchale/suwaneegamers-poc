@@ -1,0 +1,63 @@
+[
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-back",
+    "type": "button-link",
+    "props": {
+      "label": "Campaigns",
+      "href": "/campaigns",
+      "align": "left",
+      "variant": "text",
+      "arrow": "left",
+      "width": "campaign"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-hero",
+    "type": "campaign-hero",
+    "props": {
+      "eyebrow": "Campaign",
+      "title": "The Silent Vanguard",
+      "image": "/images/campaigns/the-silent-vanguard.jpg",
+      "imagePosition": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-meta",
+    "type": "campaign-meta",
+    "props": {
+      "schedule": "1st & 3rd Wednesday",
+      "dm": "Michael Hewson",
+      "campaignName": "The Silent Vanguard"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-resources-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"resources_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"1\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"resource_dandd-beyond_1\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"D&D Beyond\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/7681563\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_notes_2\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Notes\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit?tab=t.0\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_campaign-page_3\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Page\\\",\\n      \\\"href\\\": \\\"https://sites.google.com/view/suwanee-gamers/campaigns/the-silent-vanguard\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-notes-roster-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"notes_roster_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"5\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"notes_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Notes\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"notes_text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Secret agents assembled by Master Thorne investigate outbreaks, conspiracies, and the ominous phrase The Long Night.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_jett-blackwood_1\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Jett Blackwood\\\",\\n      \\\"role\\\": \\\"Larry McHale\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_bedet-tul_2\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Bedet'Tul\\\",\\n      \\\"role\\\": \\\"Brian\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_lensworth-fistlemuch_3\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Lensworth Fistlemuch\\\",\\n      \\\"role\\\": \\\"Tom Chernetsky\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_dax-whirren_4\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Dax Whirren\\\",\\n      \\\"role\\\": \\\"Suzanne Chernetsky\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"4\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_fosslenob-gripefoot_5\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Fosslenob Gripefoot\\\",\\n      \\\"role\\\": \\\"Michael Hewson\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"4\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_axel-blackwood_6\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Axel Blackwood\\\",\\n      \\\"role\\\": \\\"Larry McHale\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"4\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_cletus-rashgut_7\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Cletus Rashgut\\\",\\n      \\\"role\\\": \\\"Brian\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"5\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_kern_8\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Kern\\\",\\n      \\\"role\\\": \\\"Tom Chernetsky\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"5\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"member_ivy-blackthorn_9\\\",\\n    \\\"type\\\": \\\"person\\\",\\n    \\\"props\\\": {\\n      \\\"name\\\": \\\"Ivy Blackthorn\\\",\\n      \\\"role\\\": \\\"Suzanne Chernetsky\\\",\\n      \\\"href\\\": \\\"\\\",\\n      \\\"variant\\\": \\\"tile\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"5\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "the-silent-vanguard-sessions-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"sessions_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"1\",\n      \"rows\": \"9\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"sessions_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session Summaries\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"02-a-town-full-of-zombies-and-a-mysterious-note_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"02 - A Town Full of Zombies and a Mysterious Note\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"02-a-town-full-of-zombies-and-a-mysterious-note_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"The party survived the zombie outbreak in Brinecross, escaped the general store and local house, found Harold at the stable, recovered the information and an ivory/statue clue, learned the phrase/location The Long Night, escaped town on horses, returned to Tratta, reported the zombie outbreak, returned a postal horse and mail, leveled up, and met with Thorin on the ship to discuss the clues.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"02-a-town-full-of-zombies-and-a-mysterious-note_recording_1\\\",\\n    \\\"type\\\": \\\"media-player\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session 02 Recording\\\",\\n      \\\"src\\\": \\\"https://drive.google.com/file/d/13stRxSl2LUjHQAtApWMCQDiaXuaCAKl7/view?usp=drive_link\\\",\\n      \\\"mediaType\\\": \\\"auto\\\",\\n      \\\"caption\\\": \\\"\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"4\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"2\\\",\\n      \\\"displayMode\\\": \\\"image-button\\\",\\n      \\\"image\\\": \\\"/images/dragon-ears.png\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"01-we-meet_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"01 - We Meet\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"6\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"01-we-meet_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"The party's first meeting took place in Tratta, a bustling sandstone harbor city watched over by a wizard's tower and split between public spectacle, dockside crime, hidden tunnels, thieves, spies, and darker powers. Master Thorne gathered six adventurers in a plain canvas tent near the Lower Dock markets, using the noise and cookstalls as cover.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"7\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"01-we-meet_recording_1\\\",\\n    \\\"type\\\": \\\"media-player\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session 01 Recording\\\",\\n      \\\"src\\\": \\\"https://drive.google.com/file/d/18JILL4c0N8OgVTwK-0eas3S4h23-QzvU/view?usp=drive_link\\\",\\n      \\\"mediaType\\\": \\\"auto\\\",\\n      \\\"caption\\\": \\\"\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"8\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"2\\\",\\n      \\\"displayMode\\\": \\\"image-button\\\",\\n      \\\"image\\\": \\\"/images/dragon-ears.png\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  }
+]

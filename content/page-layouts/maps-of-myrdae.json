@@ -1,0 +1,21 @@
+[
+  {
+    "kind": "block",
+    "id": "maps-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Map Portal",
+      "title": "Maps of Myrdae",
+      "description": "This page is the doorway for map resources, location notes, and table handouts.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "maps-links",
+    "type": "portal-links",
+    "props": {
+      "links": "[{\"title\":\"Suwanee Gamers Chronicles\",\"description\":\"Open canonical map notes, locations, territories, and table handouts.\",\"href\":\"https://kb.suwaneegamers.net/\",\"label\":\"Open Chronicles\"},{\"title\":\"Map Pages\",\"description\":\"Open the map pages for comparison and table reference.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Map Pages\"}]"
+    }
+  }
+]

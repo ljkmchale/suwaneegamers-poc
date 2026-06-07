@@ -12,6 +12,16 @@
     "--color-accent-blood": "#ef4444",
     "--color-accent-ice": "#93c5fd"
   },
+  "surfaces": {
+    "--card-radius": "0.75rem",
+    "--card-blur": "8px",
+    "--card-hover-border": "#8b5cf6"
+  },
+  "glowIntensity": "normal",
+  "effects": {
+    "particles": true,
+    "particleDensity": "medium"
+  },
   "fonts": {
     "heading": "Cinzel",
     "body": "Lora"

@@ -5,6 +5,7 @@ node_modules/
 
 # Next.js
 apps/web/.next/
+apps/web/.next-prod/
 apps/web/out/
 
 # Environment files (never commit secrets)
@@ -22,12 +23,14 @@ data/
 # Build outputs
 dist/
 build/
+backups/
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Logs
+logs/
 *.log
 npm-debug.log*
 pnpm-debug.log*

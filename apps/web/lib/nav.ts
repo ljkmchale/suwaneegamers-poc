@@ -25,6 +25,7 @@ const DEFAULT_CONFIG: NavConfig = {
       items: [
         { id: "calendar", href: "/calendar", label: "Calendar" },
         { id: "campaigns", href: "/campaigns", label: "Campaigns" },
+        { id: "chronicles", href: "https://kb.suwaneegamers.net/", label: "Chronicles" },
         { id: "dungeon-masters", href: "/dungeon-masters", label: "DMs" },
         { id: "players", href: "/players", label: "Players" },
       ],
@@ -46,9 +47,14 @@ const DEFAULT_CONFIG: NavConfig = {
     },
     {
       id: "tools",
-      label: "Tools",
+      label: "Toolset",
       items: [
-        { id: "knowledge-base", href: "http://kb.suwaneegamers.net", label: "Knowledge Base" },
+        { id: "campaign-setting", href: "/campaign-setting", label: "Campaign Setting" },
+        { id: "reference-for-dungeon-masters", href: "/reference-for-dungeon-masters", label: "DM Reference" },
+        { id: "gazetteer", href: "/gazetteer", label: "Gazetteer" },
+        { id: "bestiary", href: "/bestiary", label: "Bestiary" },
+        { id: "lore", href: "/lore", label: "Legends & Lore" },
+        { id: "territories", href: "/territories", label: "Territories" },
         { id: "previous-campaigns", href: "/previous-campaigns", label: "Previous Campaigns" },
       ],
     },

@@ -4,7 +4,17 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
-export function ParticleField() {
+const DENSITY_COUNT: Record<string, number> = {
+  low: 25,
+  medium: 60,
+  high: 120,
+};
+
+interface ParticleFieldProps {
+  density?: "low" | "medium" | "high";
+}
+
+export function ParticleField({ density = "medium" }: ParticleFieldProps) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -37,7 +47,7 @@ export function ParticleField() {
             straight: false,
             outModes: { default: "out" },
           },
-          number: { value: 60, density: { enable: true } },
+          number: { value: DENSITY_COUNT[density] ?? 60, density: { enable: true } },
           opacity: {
             value: { min: 0.1, max: 0.5 },
             animation: {

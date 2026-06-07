@@ -1,0 +1,10 @@
+[
+  {
+    "kind": "section",
+    "id": "hero"
+  },
+  {
+    "kind": "section",
+    "id": "portal"
+  }
+]

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export const PORTAL_URLS = {
-  knowledgeBase: "http://kb.suwaneegamers.net",
+  chronicles: "https://kb.suwaneegamers.net/",
   referenceSite: "https://sites.google.com/view/suwanee-gamers/",
   dndBeyond: "https://www.dndbeyond.com/",
   calendar: "/calendar",
@@ -28,12 +28,12 @@ export function getPortalLinks(): PortalLink[] {
 // backward-compat
 export const primaryPortalLinks: PortalLink[] = getPortalLinks();
 
-export function kbLink(description: string): PortalLink {
+export function chroniclesLink(description: string): PortalLink {
   return {
-    title: "Suwanee Gamers Knowledge Base",
+    title: "Suwanee Gamers Chronicles",
     description,
-    href: PORTAL_URLS.knowledgeBase,
-    label: "Open KB",
+    href: PORTAL_URLS.chronicles,
+    label: "Open Chronicles",
   };
 }
 

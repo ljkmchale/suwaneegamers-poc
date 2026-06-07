@@ -7,6 +7,7 @@
     "build": "next build",
     "build:prod": "node scripts/build-prod.js",
     "start": "next start -p 4652",
+    "start:prod": "node scripts/start-prod.js",
     "lint": "eslint app components lib __tests__",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

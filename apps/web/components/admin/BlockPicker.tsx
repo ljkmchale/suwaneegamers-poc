@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ASSET_TYPES } from "@/lib/pageBlocks";
+import { ACTIVE_ASSET_TYPES } from "@/lib/pageBlocks";
 import type { BlockType } from "@/lib/pageBlocks";
 
 type Category = "content" | "layout" | "data";
@@ -21,7 +21,7 @@ export function BlockPicker({
 }) {
   const [tab, setTab] = useState<Category>("content");
 
-  const blocks = ASSET_TYPES.filter((a) => a.category === tab);
+  const blocks = ACTIVE_ASSET_TYPES.filter((a) => a.category === tab);
 
   return (
     // Backdrop

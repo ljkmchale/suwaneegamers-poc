@@ -31,7 +31,7 @@ function PortalBlock({ portalLinks }: { portalLinks: ReturnType<typeof getPortal
               Campaign Portal
             </h2>
             <p className="max-w-2xl mb-10" style={{ color: "var(--color-text-secondary)" }}>
-              This site is the doorway. The Knowledge Base owns the campaign and Myrdae information;
+              This site is the doorway. Chronicles owns the campaign and Myrdae information;
               this portal gets players and DMs to the live tools, calendars, maps, and references.
             </p>
 

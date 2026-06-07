@@ -1,0 +1,551 @@
+[
+  {
+    "kind": "block",
+    "id": "ter-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "World Reference",
+      "title": "Territories",
+      "description": "The political regions, kingdoms, and wilderness areas of Myrdae. Each entry lists the capital and primary languages. Linked titles open the capital's full entry in the location archive.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-map",
+    "type": "button-link",
+    "props": {
+      "label": "View Myrdae Map",
+      "href": "https://drive.google.com/file/d/144TkmJ94UyZRUTw7iyYTJyVIrpyXJtgk/view?usp=sharing",
+      "variant": "secondary",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-a",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "A – B"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-aelbon",
+    "type": "callout",
+    "props": {
+      "title": "Aelbon — Capital: Dhá Chaomhnóir",
+      "href": "https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?usp=sharing",
+      "content": "Languages: Common\nLush territory nestled in southern Inverland, known for its rich natural resources, fertile fields, and thriving wildlife.",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-aikshaw",
+    "type": "callout",
+    "props": {
+      "title": "Aikshaw Descent",
+      "content": "Capital: Bonfaduhr · Languages: Common, Dwarven",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-aravae",
+    "type": "callout",
+    "props": {
+      "title": "Aravae",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-arbescar",
+    "type": "callout",
+    "props": {
+      "title": "Arbescar",
+      "content": "Capital: Marrowdale · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-baltwood",
+    "type": "callout",
+    "props": {
+      "title": "Baltwood — Capital: Emberstran",
+      "href": "https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit?usp=sharing",
+      "content": "Languages: Common, Elvish, Dwarven",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-barrford",
+    "type": "callout",
+    "props": {
+      "title": "Barrford",
+      "content": "Capital: Stinson · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-blisterfel",
+    "type": "callout",
+    "props": {
+      "title": "Blisterfel",
+      "content": "Capital: Avelvein · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-borealian",
+    "type": "callout",
+    "props": {
+      "title": "Borealian Sway",
+      "content": "Capital: Qal'dynn · Languages: Common, Elvish",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-c",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "C – D"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-camburne",
+    "type": "callout",
+    "props": {
+      "title": "Camburne",
+      "content": "Capital: Leoning · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-caristone",
+    "type": "callout",
+    "props": {
+      "title": "Caristone",
+      "content": "Capital: Edgewind · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-corse",
+    "type": "callout",
+    "props": {
+      "title": "Corse of Veinspear",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-crimson",
+    "type": "callout",
+    "props": {
+      "title": "Crimson March",
+      "content": "Capital: Stouhg · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-dalasor",
+    "type": "callout",
+    "props": {
+      "title": "Dalasor Coast",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-dunmoore",
+    "type": "callout",
+    "props": {
+      "title": "Dunmoore",
+      "content": "Capital: Oldport · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-e",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "E – G"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-esgaar",
+    "type": "callout",
+    "props": {
+      "title": "Esgaar",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-flarebane",
+    "type": "callout",
+    "props": {
+      "title": "Flarebane Isles",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-frystarian",
+    "type": "callout",
+    "props": {
+      "title": "Frystarian Strand",
+      "content": "Capital: Palason · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-gaelscape",
+    "type": "callout",
+    "props": {
+      "title": "Gaelscape",
+      "content": "Capital: Ulkef · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-glenleah",
+    "type": "callout",
+    "props": {
+      "title": "Glenleah",
+      "content": "Capital: Gibuldon · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-graelaug",
+    "type": "callout",
+    "props": {
+      "title": "Graelaug",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-h",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "H – K"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-halesworth",
+    "type": "callout",
+    "props": {
+      "title": "Halesworth — Capital: Basctdelm",
+      "href": "https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit?usp=sharing",
+      "content": "Languages: Common, Elvish, Dwarven, Halfling",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-hillock",
+    "type": "callout",
+    "props": {
+      "title": "Hillock Torn",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-khasvadia",
+    "type": "callout",
+    "props": {
+      "title": "Khasvadia",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-kholdur",
+    "type": "callout",
+    "props": {
+      "title": "Kholdur",
+      "content": "Capital: Thel Kholdur · Languages: Common, Dwarven",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-l",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "L – N"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-lyewell",
+    "type": "callout",
+    "props": {
+      "title": "Lyewell Stretch",
+      "content": "Capital: Porpen · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-mahruud",
+    "type": "callout",
+    "props": {
+      "title": "Mahruud",
+      "content": "Capital: Thrargael · Languages: Common, Orcish",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-matahal",
+    "type": "callout",
+    "props": {
+      "title": "Matahal Valley",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-mulshear",
+    "type": "callout",
+    "props": {
+      "title": "Mulshear",
+      "content": "Capital: Mulshear · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-nandahere",
+    "type": "callout",
+    "props": {
+      "title": "Nandahere",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-o",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "O – R"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-okodia",
+    "type": "callout",
+    "props": {
+      "title": "Okodia",
+      "content": "Capital: Skrettel · Languages: Common, Gnomish, Halfling",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-qaethesvorin",
+    "type": "callout",
+    "props": {
+      "title": "Qae'thesvorin",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-range",
+    "type": "callout",
+    "props": {
+      "title": "Range of Otesurr",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-roaring",
+    "type": "callout",
+    "props": {
+      "title": "Roaring Hollow",
+      "content": "Capital: Fjord'nahl · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-rostiena",
+    "type": "callout",
+    "props": {
+      "title": "Rostiena Foothills — Capital: Stoneshore",
+      "href": "https://docs.google.com/document/d/1Krz-9jcD87_dAlPcjW2Wglyv2obMjvyt5iqZvZl9K7Q/edit?usp=sharing",
+      "content": "Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-s",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "S – T"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-sarbaugh",
+    "type": "callout",
+    "props": {
+      "title": "Sarbaugh",
+      "content": "No established capital · Languages: Orcish",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-serriveil",
+    "type": "callout",
+    "props": {
+      "title": "Serriveil",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-severed",
+    "type": "callout",
+    "props": {
+      "title": "Severed Bend",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-sutherford",
+    "type": "callout",
+    "props": {
+      "title": "Sutherford",
+      "content": "Capital: Morrey · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-tegenwald",
+    "type": "callout",
+    "props": {
+      "title": "Tegenwald",
+      "content": "Capital: A'erley · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-theamis",
+    "type": "callout",
+    "props": {
+      "title": "Theamis",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-tundra",
+    "type": "callout",
+    "props": {
+      "title": "Tundra of Nalscour",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-div-u",
+    "type": "divider",
+    "props": {
+      "variant": "ornate",
+      "label": "U – Y"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-uldrea",
+    "type": "callout",
+    "props": {
+      "title": "Uldrea",
+      "content": "Capital: Sulura · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-wheldrake",
+    "type": "callout",
+    "props": {
+      "title": "Wheldrake",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-yagvur",
+    "type": "callout",
+    "props": {
+      "title": "Yag'vur",
+      "content": "No established capital · Languages: Common",
+      "variant": "gold"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "ter-yearning",
+    "type": "callout",
+    "props": {
+      "title": "Yearning Vale — Capital: Tratta",
+      "href": "https://docs.google.com/document/d/1nbv3ZA-BTR3i1qT535PrR0A3sFHzOuxeYAmXDD83TwY/edit?usp=sharing",
+      "content": "Languages: Common",
+      "variant": "gold"
+    }
+  }
+]

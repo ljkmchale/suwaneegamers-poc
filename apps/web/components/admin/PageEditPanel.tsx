@@ -6,13 +6,14 @@ import {
   saveCardLayoutItems,
   findFreeCell,
   GRID_TYPE_META,
+  CARD_LAYOUT_MAX_ROWS,
 } from "./CardLayoutGridEditor";
 import {
   useDraggable,
 } from "@dnd-kit/core";
 import { uploadFilesAction } from "@/app/admin/media/actions";
 import {
-  ASSET_TYPES,
+  ACTIVE_ASSET_TYPES,
   CARD_LAYOUT_ITEM_TYPES,
   PROFILE_CARD_ITEM_TYPES,
   getAssetDef,
@@ -32,14 +33,24 @@ interface EditorMediaFile {
   size: number;
 }
 
+const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".avif"];
+const AUDIO_EXTENSIONS = [".mp3", ".wav", ".m4a", ".ogg", ".flac"];
+const VIDEO_EXTENSIONS = [".mp4", ".m4v", ".mov", ".ogv", ".webm"];
+
+function hasExtension(filePath: string, extensions: string[]) {
+  return extensions.some((ext) => filePath.toLowerCase().endsWith(ext));
+}
+
 function MediaPickerDialog({
   open,
   onClose,
   onSelect,
+  allowMedia = false,
 }: {
   open: boolean;
   onClose: () => void;
   onSelect: (path: string) => void;
+  allowMedia?: boolean;
 }) {
   const [files, setFiles] = useState<EditorMediaFile[]>([]);
   const [query, setQuery] = useState("");
@@ -57,9 +68,12 @@ function MediaPickerDialog({
 
   const visibleFiles = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (!needle) return files;
-    return files.filter((file) => file.path.toLowerCase().includes(needle));
-  }, [files, query]);
+    const allowed = allowMedia ? [...AUDIO_EXTENSIONS, ...VIDEO_EXTENSIONS] : IMAGE_EXTENSIONS;
+    return files.filter((file) =>
+      hasExtension(file.path, allowed) &&
+      (!needle || file.path.toLowerCase().includes(needle))
+    );
+  }, [allowMedia, files, query]);
 
   if (!open) return null;
 
@@ -69,12 +83,12 @@ function MediaPickerDialog({
         <div className="flex items-center gap-3 border-b border-[#2a2a35] p-4">
           <div className="min-w-0 flex-1">
             <p className="font-cinzel text-xs tracking-widest uppercase text-[#8b5cf6]">Media Library</p>
-            <p className="text-[11px] text-[#5a5060]">{files.length} image assets</p>
+            <p className="text-[11px] text-[#5a5060]">{visibleFiles.length} {allowMedia ? "audio and video" : "image"} assets</p>
           </div>
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search images"
+            placeholder={allowMedia ? "Search audio or video" : "Search images"}
             className="w-56 rounded border border-[#2a2a35] bg-[#0f0a1a] px-3 py-1.5 text-xs text-[#e8dfc8] outline-none transition-colors focus:border-[#8b5cf6]"
           />
           <button
@@ -90,7 +104,7 @@ function MediaPickerDialog({
           {loading ? (
             <p className="py-10 text-center text-sm text-[#5a5060]">Loading media...</p>
           ) : visibleFiles.length === 0 ? (
-            <p className="py-10 text-center text-sm text-[#5a5060]">No images found.</p>
+            <p className="py-10 text-center text-sm text-[#5a5060]">No matching media found.</p>
           ) : (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {visibleFiles.map((file) => (
@@ -103,9 +117,15 @@ function MediaPickerDialog({
                   }}
                   className="group overflow-hidden rounded border border-[#2a2a35] bg-[#0f0a1a] text-left transition-colors hover:border-[#8b5cf6]"
                 >
-                  <div className="aspect-square bg-[#16161e]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={file.path} alt="" className="h-full w-full object-contain p-2" />
+                  <div className="aspect-square bg-[#16161e] flex items-center justify-center p-2">
+                    {hasExtension(file.path, AUDIO_EXTENSIONS) ? (
+                      <audio controls preload="metadata" src={file.path} className="w-full" />
+                    ) : hasExtension(file.path, VIDEO_EXTENSIONS) ? (
+                      <video controls preload="metadata" src={file.path} className="max-h-full max-w-full" />
+                    ) : (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={file.path} alt="" className="h-full w-full object-contain p-2" />
+                    )}
                   </div>
                   <div className="p-2">
                     <p className="truncate text-[11px] text-[#a89880]">{file.name}</p>
@@ -125,10 +145,16 @@ function ImagePathField({
   value,
   onChange,
   placeholder,
+  accept = ".jpg,.jpeg,.png,.webp,.gif,.svg,.avif",
+  dropLabel = "Drop image or click to upload",
+  previewMedia = false,
 }: {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  accept?: string;
+  dropLabel?: string;
+  previewMedia?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -188,8 +214,14 @@ function ImagePathField({
       </div>
       {value && (
         <div className="h-20 rounded border border-[#2a2a35] bg-[#16161e] overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={value} alt="" className="h-full w-full object-contain" />
+          {previewMedia && /\.(mp3|wav|m4a|ogg|flac)(?:[?#].*)?$/i.test(value) ? (
+            <audio controls preload="metadata" src={value} className="h-full w-full" />
+          ) : previewMedia && /\.(mp4|m4v|mov|ogv|webm)(?:[?#].*)?$/i.test(value) ? (
+            <video controls preload="metadata" src={value} className="h-full w-full object-contain" />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={value} alt="" className="h-full w-full object-contain" />
+          )}
         </div>
       )}
       <div
@@ -202,12 +234,12 @@ function ImagePathField({
         <input
           ref={inputRef}
           type="file"
-          accept=".jpg,.jpeg,.png,.webp,.gif,.svg,.avif"
+          accept={accept}
           className="sr-only"
           onChange={onFileChange}
         />
         <p className="text-[10px] text-[#a89880]">
-          {isPending ? "Uploading..." : "Drop image or click to upload"}
+          {isPending ? "Uploading..." : dropLabel}
         </p>
       </div>
       {error && <p className="text-[10px] text-[#ef4444]">{error}</p>}
@@ -215,6 +247,7 @@ function ImagePathField({
         open={pickerOpen}
         onClose={() => setPickerOpen(false)}
         onSelect={onChange}
+        allowMedia={previewMedia}
       />
     </div>
   );
@@ -250,7 +283,16 @@ interface EditableEntry {
   url?: string;
 }
 
-function parseJsonList<T>(value: string): T[] {
+interface EditableTimelineEntry {
+  date?: string;
+  title?: string;
+  description?: string;
+  events?: string[];
+}
+
+function parseJsonList<T>(value: unknown): T[] {
+  if (Array.isArray(value)) return value as T[];
+  if (typeof value !== "string") return [];
   try {
     const parsed = JSON.parse(value || "[]");
     return Array.isArray(parsed) ? (parsed as T[]) : [];
@@ -538,6 +580,78 @@ function EntriesField({
   );
 }
 
+function TimelineEntriesField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const entries = parseJsonList<EditableTimelineEntry>(value);
+
+  function save(next: EditableTimelineEntry[]) {
+    saveJsonList(onChange, next);
+  }
+
+  function setEntry(index: number, key: keyof Pick<EditableTimelineEntry, "date" | "title" | "description">, nextValue: string) {
+    save(entries.map((entry, i) => i === index ? { ...entry, [key]: nextValue } : entry));
+  }
+
+  const INPUT =
+    "w-full px-2 py-1 rounded border text-xs bg-[#08050f] text-[#e8dfc8] " +
+    "placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]";
+  const LABEL = "block mb-0.5 text-[10px] font-cinzel tracking-widest uppercase text-[#5a5060]";
+
+  return (
+    <div className="space-y-2">
+      {entries.length === 0 && (
+        <p className="rounded border border-dashed border-[#2a2a35] px-2 py-2 text-[10px] text-[#5a5060]">
+          No timeline nodes yet. Add one below to start the bar.
+        </p>
+      )}
+      {entries.map((entry, index) => (
+        <div key={index} className="rounded border border-[#2a2a35] bg-[#0f0a1a] p-2 space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <span className="flex-1 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880]">
+              Node {index + 1}
+            </span>
+            <button type="button" onClick={() => save(moveListItem(entries, index, index - 1))} disabled={index === 0}
+              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Up</button>
+            <button type="button" onClick={() => save(moveListItem(entries, index, index + 1))} disabled={index === entries.length - 1}
+              className="text-[11px] text-[#5a5060] hover:text-[#a89880] disabled:opacity-20 px-0.5">Down</button>
+            <button type="button" onClick={() => save(entries.filter((_, i) => i !== index))}
+              className="text-[11px] text-[#5a5060] hover:text-red-400 px-0.5">Remove</button>
+          </div>
+          <div className="grid gap-1.5 sm:grid-cols-2">
+            <div>
+              <label className={LABEL}>Date / era</label>
+              <input value={entry.date ?? ""} onChange={(e) => setEntry(index, "date", e.target.value)}
+                placeholder="1227 AF"
+                className={INPUT} />
+            </div>
+            <div>
+              <label className={LABEL}>Title</label>
+              <input value={entry.title ?? ""} onChange={(e) => setEntry(index, "title", e.target.value)}
+                placeholder="The Awakening"
+                className={INPUT} />
+            </div>
+          </div>
+          <div>
+            <label className={LABEL}>Description</label>
+            <textarea rows={3} value={entry.description ?? ""} onChange={(e) => setEntry(index, "description", e.target.value)}
+              placeholder="Short note shown with this timeline node."
+              className={`${INPUT} resize-y`} />
+          </div>
+        </div>
+      ))}
+      <button type="button" onClick={() => save([...entries, { date: "New Date", title: "New Timeline Node", description: "" }])}
+        className="w-full rounded border border-[#2a2a35] px-2 py-1.5 text-[10px] font-cinzel tracking-widest uppercase text-[#a89880] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]">
+        Add Timeline Node
+      </button>
+    </div>
+  );
+}
+
 function ItemsEditor({
   value,
   onChange,
@@ -808,6 +922,7 @@ function CardLayoutItemsEditor({
       if (type === "header") defaults.size = "md";
       if (type === "image") defaults.fit = "cover";
       if (type === "inner-card") defaults.items = "[]";
+      if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/images/dragon-ears.png"; defaults.caption = ""; }
       if (type === "person") { defaults.name = "New Person"; defaults.role = ""; defaults.img = ""; }
     }
     save([...items, { id, type, props: defaults }]);
@@ -1013,9 +1128,12 @@ function CardLayoutPanelSection({
     };
     if (type === "header")     { defaults.title = "New Header"; defaults.size = "md"; }
     if (type === "text")       { defaults.content = "New text block"; }
+    if (type === "link")       { defaults.label = "New Link"; defaults.href = ""; defaults.variant = "primary"; }
+    if (type === "audio-link") { defaults.label = "Recording"; defaults.href = ""; }
+    if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/images/dragon-ears.png"; defaults.caption = ""; defaults.rowSpan = "2"; }
     if (type === "inner-card") { defaults.items = "[]"; }
     if (type === "image")      { defaults.src = ""; defaults.fit = "cover"; }
-    if (type === "person")     { defaults.name = "New Person"; defaults.role = ""; defaults.img = ""; }
+    if (type === "person")     { defaults.name = "New Person"; defaults.role = ""; defaults.href = ""; defaults.img = ""; defaults.variant = "portrait"; }
     const newItem: CardLayoutItem = {
       id: `${type}_${Date.now()}`,
       type,
@@ -1043,6 +1161,7 @@ function CardLayoutPanelSection({
           className={INPUT}
         >
           <option value="wide">Wide</option>
+          <option value="campaign">Campaign detail</option>
           <option value="medium">Medium</option>
           <option value="full">Full</option>
         </select>
@@ -1068,7 +1187,7 @@ function CardLayoutPanelSection({
               <button type="button" onClick={() => rows > 1 && updateGridProp("rows", String(rows - 1))}
                 className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">−</button>
               <span className="w-6 text-center text-xs text-[#e8dfc8]">{rows}</span>
-              <button type="button" onClick={() => rows < 10 && updateGridProp("rows", String(rows + 1))}
+              <button type="button" onClick={() => rows < CARD_LAYOUT_MAX_ROWS && updateGridProp("rows", String(rows + 1))}
                 className="w-7 h-7 rounded border border-[#2a2a35] text-[#a89880] hover:border-[#8b5cf6] hover:text-[#e8dfc8] text-sm transition-colors">+</button>
             </div>
           </div>
@@ -1124,6 +1243,15 @@ function CardLayoutPanelSection({
                   <option value="lg">Large</option>
                 </select>
               </div>
+              <div>
+                <label className={LABEL}>Title color</label>
+                <select value={(selectedItem.props.color as string) ?? "primary"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "color", e.target.value)}
+                  className={INPUT}>
+                  <option value="primary">Primary</option>
+                  <option value="gold">Gold</option>
+                </select>
+              </div>
             </div>
           )}
 
@@ -1133,6 +1261,104 @@ function CardLayoutPanelSection({
               <textarea rows={4} value={(selectedItem.props.content as string) ?? ""}
                 onChange={(e) => updateItemProp(selectedItem.id, "content", e.target.value)}
                 className={`${INPUT} resize-y`} placeholder="Enter text…" />
+            </div>
+          )}
+
+          {selectedItem.type === "link" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Label</label>
+                <input type="text" value={(selectedItem.props.label as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "label", e.target.value)}
+                  className={INPUT} placeholder="Link label" />
+              </div>
+              <div>
+                <label className={LABEL}>URL</label>
+                <input type="text" value={(selectedItem.props.href as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "href", e.target.value)}
+                  className={INPUT} placeholder="https://..." />
+              </div>
+              <div>
+                <label className={LABEL}>Style</label>
+                <select value={(selectedItem.props.variant as string) ?? "primary"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "variant", e.target.value)}
+                  className={INPUT}>
+                  <option value="primary">Primary</option>
+                  <option value="secondary">Secondary</option>
+                </select>
+              </div>
+            </div>
+          )}
+
+          {selectedItem.type === "audio-link" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Label</label>
+                <input type="text" value={(selectedItem.props.label as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "label", e.target.value)}
+                  className={INPUT} placeholder="Session recording" />
+              </div>
+              <div>
+                <label className={LABEL}>Recording URL</label>
+                <input type="text" value={(selectedItem.props.href as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "href", e.target.value)}
+                  className={INPUT} placeholder="https://drive.google.com/..." />
+              </div>
+            </div>
+          )}
+
+          {selectedItem.type === "media-player" && (
+            <div className="space-y-2">
+              <div>
+                <label className={LABEL}>Title</label>
+                <input type="text" value={(selectedItem.props.title as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "title", e.target.value)}
+                  className={INPUT} placeholder="Session recording" />
+              </div>
+              <div>
+                <label className={LABEL}>Media URL</label>
+                <ImagePathField
+                  value={(selectedItem.props.src as string) ?? ""}
+                  onChange={(v) => updateItemProp(selectedItem.id, "src", v)}
+                  placeholder="https://drive.google.com/... or /images/media/file.mp4"
+                  accept=".mp3,.wav,.m4a,.ogg,.flac,.mp4,.m4v,.mov,.ogv,.webm"
+                  dropLabel="Drop audio or video, or click to upload"
+                  previewMedia
+                />
+              </div>
+              <div>
+                <label className={LABEL}>Player type</label>
+                <select value={(selectedItem.props.mediaType as string) ?? "auto"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "mediaType", e.target.value)}
+                  className={INPUT}>
+                  <option value="auto">Detect automatically</option>
+                  <option value="youtube">YouTube video</option>
+                  <option value="audio">Audio file</option>
+                  <option value="video">Uploaded video</option>
+                </select>
+              </div>
+              <div>
+                <label className={LABEL}>Display</label>
+                <select value={(selectedItem.props.displayMode as string) ?? "full"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "displayMode", e.target.value)}
+                  className={INPUT}>
+                  <option value="full">Full player</option>
+                  <option value="image-button">Image button</option>
+                </select>
+              </div>
+              <div>
+                <label className={LABEL}>Button image</label>
+                <ImagePathField
+                  value={(selectedItem.props.image as string) ?? "/images/dragon-ears.png"}
+                  onChange={(v) => updateItemProp(selectedItem.id, "image", v)}
+                />
+              </div>
+              <div>
+                <label className={LABEL}>Caption</label>
+                <textarea rows={3} value={(selectedItem.props.caption as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "caption", e.target.value)}
+                  className={`${INPUT} resize-y`} />
+              </div>
             </div>
           )}
 
@@ -1190,6 +1416,21 @@ function CardLayoutPanelSection({
                 <input type="text" value={(selectedItem.props.role as string) ?? ""}
                   onChange={(e) => updateItemProp(selectedItem.id, "role", e.target.value)}
                   className={INPUT} placeholder="e.g. Co-Founder, Guild Master" />
+              </div>
+              <div>
+                <label className={LABEL}>Link URL</label>
+                <input type="text" value={(selectedItem.props.href as string) ?? ""}
+                  onChange={(e) => updateItemProp(selectedItem.id, "href", e.target.value)}
+                  className={INPUT} placeholder="https://..." />
+              </div>
+              <div>
+                <label className={LABEL}>Style</label>
+                <select value={(selectedItem.props.variant as string) ?? "portrait"}
+                  onChange={(e) => updateItemProp(selectedItem.id, "variant", e.target.value)}
+                  className={INPUT}>
+                  <option value="portrait">Portrait</option>
+                  <option value="tile">Campaign roster tile</option>
+                </select>
               </div>
               <div>
                 <label className={LABEL}>Portrait</label>
@@ -1291,6 +1532,21 @@ function PropsForm({
     <div className="space-y-3">
       {def.fields.map((field) => {
         const val = (block.props[field.key] as string) ?? "";
+        if (block.type === "media-player" && field.key === "src") {
+          return (
+            <div key={field.key}>
+              <label className={LABEL}>{field.label}</label>
+              <ImagePathField
+                value={val}
+                onChange={(next) => set(field.key, next)}
+                placeholder={field.placeholder}
+                accept=".mp3,.wav,.m4a,.ogg,.flac,.mp4,.m4v,.mov,.ogv,.webm"
+                dropLabel="Drop audio or video, or click to upload"
+                previewMedia
+              />
+            </div>
+          );
+        }
         if (field.type === "select") {
           return (
             <div key={field.key}>
@@ -1375,6 +1631,17 @@ function PropsForm({
             </div>
           );
         }
+        if (field.type === "json" && field.key === "entries" && block.type === "timeline") {
+          return (
+            <div key={field.key}>
+              <label className={LABEL}>{field.label}</label>
+              {field.hint && (
+                <p className="text-[10px] text-[#5a5060] mb-1">{field.hint}</p>
+              )}
+              <TimelineEntriesField value={val} onChange={(next) => set(field.key, next)} />
+            </div>
+          );
+        }
         if (field.type === "textarea" || field.type === "json") {
           return (
             <div key={field.key}>
@@ -1411,7 +1678,7 @@ function PropsForm({
 
 // ── Draggable asset tile ───────────────────────────────────────────────────────
 
-function AssetTile({ def }: { def: AssetTypeDef }) {
+function AssetTile({ def, onAdd }: { def: AssetTypeDef; onAdd?: () => void }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `new-asset::${def.type}`,
     data: { kind: "new-asset", assetType: def.type },
@@ -1433,7 +1700,19 @@ function AssetTile({ def }: { def: AssetTypeDef }) {
         <p className="text-xs font-medium text-[#e8dfc8] truncate">{def.label}</p>
         <p className="text-[10px] text-[#5a5060] truncate leading-tight">{def.description}</p>
       </div>
-      <span className="ml-auto text-[#3a3a45] text-xs shrink-0 select-none">⠿</span>
+      {onAdd ? (
+        <button
+          type="button"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => { e.stopPropagation(); onAdd(); }}
+          className="ml-auto shrink-0 rounded border border-[#2a2a35] px-1.5 py-0.5 text-xs text-[#8b5cf6] hover:border-[#8b5cf6]"
+          title="Add at the next open canvas position"
+        >
+          +
+        </button>
+      ) : (
+        <span className="ml-auto text-[#3a3a45] text-xs shrink-0 select-none">⠿</span>
+      )}
     </div>
   );
 }
@@ -1616,15 +1895,21 @@ export function PageEditPanel({
   onSwitchToGrid,
 }: PageEditPanelProps) {
   const [quickAdd, setQuickAdd] = useState<{ type: CardLayoutItemType; nonce: number } | null>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const editingBlockId = editingBlock?.id;
   const editingCardLayout = editingBlock?.type === "layout-card";
   const categories: { label: string; key: "layout" | "content" }[] = [
     { label: "Layout", key: "layout" },
     { label: "Content", key: "content" },
   ];
   const byCategory = {
-    layout: ASSET_TYPES.filter((a) => a.category === "layout"),
-    content: ASSET_TYPES.filter((a) => a.category === "content"),
+    layout: ACTIVE_ASSET_TYPES.filter((a) => a.category === "layout"),
+    content: ACTIVE_ASSET_TYPES.filter((a) => a.category === "content"),
   };
+
+  useEffect(() => {
+    if (editingBlockId) bodyRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [editingBlockId]);
 
   return (
     <div
@@ -1667,7 +1952,7 @@ export function PageEditPanel({
       </div>
 
       {/* Scrollable body */}
-      <div className="flex-1 overflow-y-auto">
+      <div ref={bodyRef} className="flex-1 overflow-y-auto">
 
         {/* Props editor — shown when a block is selected */}
         {editingBlock && (
@@ -1863,7 +2148,7 @@ export function PageEditPanel({
           </p>
           <p className="text-[10px] text-[#5a5060] mb-4 leading-relaxed">
             {canvasMode
-              ? "Click + to place a block on the canvas. Drag it to position and resize from the edges."
+              ? "Drag a block onto the canvas to place it exactly, or click + for quick placement."
               : "Drag onto the page to insert. Hover any block to see its drag handle and reorder."}
           </p>
 
@@ -1873,25 +2158,13 @@ export function PageEditPanel({
                 {label}
               </p>
               <div className="space-y-1.5">
-                {byCategory[key].map((def) =>
-                  canvasMode ? (
-                    <button
-                      key={def.type}
-                      type="button"
-                      onClick={() => onCanvasAddBlock?.(def.type as BlockType)}
-                      className="w-full flex items-center gap-2.5 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-3 py-2 hover:border-[#8b5cf6] hover:bg-[#16161e] transition-colors text-left"
-                    >
-                      <span className="text-sm shrink-0 w-4 text-center text-[#f59e0b]">{def.icon}</span>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs font-medium text-[#e8dfc8] truncate">{def.label}</p>
-                        <p className="text-[10px] text-[#5a5060] truncate leading-tight">{def.description}</p>
-                      </div>
-                      <span className="text-[#8b5cf6] text-sm shrink-0">+</span>
-                    </button>
-                  ) : (
-                    <AssetTile key={def.type} def={def} />
-                  )
-                )}
+                {byCategory[key].map((def) => (
+                  <AssetTile
+                    key={def.type}
+                    def={def}
+                    onAdd={canvasMode ? () => onCanvasAddBlock?.(def.type as BlockType) : undefined}
+                  />
+                ))}
               </div>
             </div>
           ))}

@@ -22,7 +22,7 @@ function HeaderSection() {
         Active Campaigns
       </h1>
       <p className="max-w-2xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
-        Current Suwanee Gamers campaigns, matching the legacy campaign index: title, cadence, and DM.
+        Current Suwanee Gamers campaigns with each table&apos;s title, cadence, and Dungeon Master.
       </p>
     </header>
   );

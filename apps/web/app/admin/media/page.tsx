@@ -14,7 +14,7 @@ export default async function MediaPage({ searchParams }: Props) {
     <div>
       <h1 className="font-cinzel text-3xl tracking-widest uppercase mb-2">Media</h1>
       <p className="text-sm text-[#a89880] mb-8">
-        {'Upload images by dragging them onto the drop zone. Click "Copy path" next to any image to get the path for use in content forms.'}
+        {'Upload images, audio, or video by dragging files onto the drop zone. Click "Copy path" next to any file to get the path for use in content forms.'}
       </p>
       <MediaClient initialFiles={files} subfolders={subfolders} currentSubfolder={folder} />
     </div>

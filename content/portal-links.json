@@ -1,9 +1,9 @@
 [
   {
-    "title": "Knowledge Base",
+    "title": "Chronicles",
     "description": "Canonical Myrdae lore, campaign notes, world reference, and table knowledge.",
-    "href": "http://kb.suwaneegamers.net",
-    "label": "Open KB"
+    "href": "https://kb.suwaneegamers.net/",
+    "label": "Open Chronicles"
   },
   {
     "title": "Calendar",
@@ -16,11 +16,5 @@
     "description": "Campaign tools, character sheets, rules, and player resources.",
     "href": "https://www.dndbeyond.com/",
     "label": "Open D&D Beyond"
-  },
-  {
-    "title": "Original Google Site",
-    "description": "The legacy Suwanee Gamers site this portal is modeled after.",
-    "href": "https://sites.google.com/view/suwanee-gamers/",
-    "label": "Open Reference"
   }
 ]

@@ -1,0 +1,21 @@
+[
+  {
+    "kind": "block",
+    "id": "lore-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Chronicles",
+      "title": "Legends & Lore",
+      "description": "Myrdae canon belongs in the Chronicles. This portal should not duplicate or drift from it.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "lore-links",
+    "type": "portal-links",
+    "props": {
+      "links": "[{\"title\":\"Suwanee Gamers Chronicles\",\"description\":\"Open Myrdae lore, histories, myths, factions, and world notes.\",\"href\":\"https://kb.suwaneegamers.net/\",\"label\":\"Open Chronicles\"},{\"title\":\"Suwanee Gamers Site\",\"description\":\"Open the Suwanee Gamers table site and related campaign pages.\",\"href\":\"https://sites.google.com/view/suwanee-gamers/\",\"label\":\"Open Site\"}]"
+    }
+  }
+]

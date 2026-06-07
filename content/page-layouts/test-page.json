@@ -1,0 +1,428 @@
+{
+  "canvas": {
+    "minHeight": 5100
+  },
+  "items": [
+    {
+      "kind": "block",
+      "id": "test-page-header",
+      "type": "page-header",
+      "props": {
+        "eyebrow": "Internal Lab",
+        "title": "Test Page",
+        "description": "A working space for testing every asset type and layout feature before it moves into production pages.",
+        "align": "center"
+      },
+      "x": 2.73224043715847,
+      "y": 64,
+      "w": 94,
+      "h": 180
+    },
+    {
+      "kind": "block",
+      "id": "divider_ne16yy",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Content Blocks"
+      },
+      "x": 3,
+      "y": 240,
+      "w": 94,
+      "h": 24
+    },
+    {
+      "kind": "block",
+      "id": "blk_1780006857859_czlk",
+      "type": "card",
+      "props": {
+        "eyebrow": "",
+        "title": "New Card",
+        "description": "",
+        "href": "",
+        "linkLabel": ""
+      },
+      "col": 1,
+      "colSpan": 1,
+      "x": 0,
+      "y": 584,
+      "w": 50,
+      "h": 200
+    },
+    {
+      "kind": "block",
+      "id": "sec_akwmso",
+      "type": "section-heading",
+      "props": {
+        "eyebrow": "Test",
+        "title": "Section Heading Block",
+        "description": "Eyebrow, heading, and intro copy for any page section.",
+        "align": "center"
+      },
+      "col": 2,
+      "colSpan": 1,
+      "x": 50.81967213114754,
+      "y": 280,
+      "w": 46,
+      "h": 180
+    },
+    {
+      "kind": "block",
+      "id": "text_xwtc4d",
+      "type": "text",
+      "props": {
+        "content": "This is a Text Block. It renders a styled paragraph of body text. You can set alignment to left or center and type as much content as needed. This block is great for lore entries, announcements, or any descriptive copy.",
+        "align": "left"
+      },
+      "x": 3,
+      "y": 480,
+      "w": 46,
+      "h": 200
+    },
+    {
+      "kind": "block",
+      "id": "callout_gold_kud1gm",
+      "type": "callout",
+      "props": {
+        "title": "Gold Callout",
+        "content": "This is a highlighted callout in Gold. Try switching the accent to Arcane or Blood in the props panel.",
+        "variant": "gold"
+      },
+      "x": 50.862493839329716,
+      "y": 488,
+      "w": 46,
+      "h": 120
+    },
+    {
+      "kind": "block",
+      "id": "callout_arc_e3r9ej",
+      "type": "callout",
+      "props": {
+        "title": "Arcane Callout",
+        "content": "This callout uses the Arcane purple accent.",
+        "variant": "arcane"
+      },
+      "x": 51,
+      "y": 616,
+      "w": 46,
+      "h": 80
+    },
+    {
+      "kind": "block",
+      "id": "btn_primary_5rtqr6",
+      "type": "button-link",
+      "props": {
+        "label": "Primary Button Link",
+        "href": "/",
+        "align": "left",
+        "variant": "primary"
+      },
+      "col": 1,
+      "colSpan": 1,
+      "x": 3,
+      "y": 700,
+      "w": 44,
+      "h": 72
+    },
+    {
+      "kind": "block",
+      "id": "btn_secondary_arh7l7",
+      "type": "button-link",
+      "props": {
+        "label": "Secondary Button Link",
+        "href": "/campaigns",
+        "align": "center",
+        "variant": "secondary"
+      },
+      "x": 9.836065573770492,
+      "y": 704,
+      "w": 46,
+      "h": 72
+    },
+    {
+      "kind": "block",
+      "id": "linklist_zybr9v",
+      "type": "link-list",
+      "props": {
+        "title": "Link List Block",
+        "links": "[{\"label\":\"Home\",\"href\":\"/\",\"description\":\"Site home\"},{\"label\":\"Campaigns\",\"href\":\"/campaigns\",\"description\":\"Active campaigns\"},{\"label\":\"Chronicles\",\"href\":\"https://kb.suwaneegamers.net/\",\"description\":\"External lore reference\"}]"
+      },
+      "x": 2.73224043715847,
+      "y": 800,
+      "w": 94,
+      "h": 352
+    },
+    {
+      "kind": "block",
+      "id": "divider_30kzmj",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Cards"
+      },
+      "x": 3,
+      "y": 1112,
+      "w": 94,
+      "h": 24
+    },
+    {
+      "kind": "block",
+      "id": "test-single-card",
+      "type": "card",
+      "props": {
+        "eyebrow": "Test Card",
+        "title": "Card — Column 1",
+        "description": "This card is assigned to column 1 of the 2-column page grid. Use the Column Placement picker in Edit Block to move it.",
+        "href": "",
+        "linkLabel": ""
+      },
+      "col": 1,
+      "colSpan": 1,
+      "x": 3,
+      "y": 1156,
+      "w": 46,
+      "h": 200
+    },
+    {
+      "kind": "block",
+      "id": "card2_wwz68j",
+      "type": "card",
+      "props": {
+        "eyebrow": "Test Card",
+        "title": "Card — Column 2",
+        "description": "This card is assigned to column 2. Both cards demonstrate side-by-side placement using the page grid.",
+        "href": "",
+        "linkLabel": ""
+      },
+      "col": 2,
+      "colSpan": 1,
+      "x": 51,
+      "y": 1156,
+      "w": 46,
+      "h": 200
+    },
+    {
+      "kind": "block",
+      "id": "test-single-card-layout",
+      "type": "layout-card",
+      "props": {
+        "width": "wide",
+        "items": "[{\"id\":\"grid_root\",\"type\":\"grid\",\"props\":{\"columns\":\"3\",\"rows\":\"2\",\"gap\":\"md\",\"items\":\"[{\\\"id\\\":\\\"header_1\\\",\\\"type\\\":\\\"header\\\",\\\"props\\\":{\\\"title\\\":\\\"Card Layout\\\",\\\"eyebrow\\\":\\\"Test Asset\\\",\\\"col\\\":\\\"1\\\",\\\"row\\\":\\\"1\\\",\\\"colSpan\\\":\\\"3\\\",\\\"rowSpan\\\":\\\"1\\\",\\\"size\\\":\\\"lg\\\"}},{\\\"id\\\":\\\"text_1\\\",\\\"type\\\":\\\"text\\\",\\\"props\\\":{\\\"content\\\":\\\"Use the grid controls to arrange card internals up to 6 columns by 10 rows.\\\",\\\"col\\\":\\\"1\\\",\\\"row\\\":\\\"2\\\",\\\"colSpan\\\":\\\"2\\\",\\\"rowSpan\\\":\\\"1\\\"}},{\\\"id\\\":\\\"inner_1\\\",\\\"type\\\":\\\"inner-card\\\",\\\"props\\\":{\\\"col\\\":\\\"3\\\",\\\"row\\\":\\\"2\\\",\\\"colSpan\\\":\\\"1\\\",\\\"rowSpan\\\":\\\"1\\\",\\\"items\\\":\\\"[{\\\\\\\"id\\\\\\\":\\\\\\\"inner_text_1\\\\\\\",\\\\\\\"type\\\\\\\":\\\\\\\"text\\\\\\\",\\\\\\\"props\\\\\\\":{\\\\\\\"content\\\\\\\":\\\\\\\"Inner card\\\\\\\"}}]\\\"}}]\"}}]"
+      },
+      "x": 0,
+      "y": 296
+    },
+    {
+      "kind": "block",
+      "id": "profile_ajqh0e",
+      "type": "profile-card",
+      "props": {
+        "layout": "side",
+        "items": "[{\"id\":\"heading_1\",\"type\":\"heading\",\"props\":{\"value\":\"Test Profile\"}},{\"id\":\"role_1\",\"type\":\"description\",\"props\":{\"value\":\"Role or character class\"}},{\"id\":\"badge_1\",\"type\":\"badge\",\"props\":{\"label\":\"Active\",\"color\":\"arcane\"}},{\"id\":\"link_1\",\"type\":\"link\",\"props\":{\"label\":\"Character Sheet\",\"href\":\"/\"}}]"
+      },
+      "x": 0,
+      "y": 1376,
+      "w": 94,
+      "h": 280
+    },
+    {
+      "kind": "block",
+      "id": "divider_5xrqkz",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Media"
+      },
+      "x": 4.371584699453552,
+      "y": 1656,
+      "w": 94,
+      "h": 24
+    },
+    {
+      "kind": "block",
+      "id": "image_gqsnqo",
+      "type": "image",
+      "props": {
+        "src": "",
+        "alt": "Test image — pick one from the media library in the Edit Block panel",
+        "caption": "Image caption (optional)",
+        "size": "large"
+      },
+      "x": 3.278688524590164,
+      "y": 1728,
+      "w": 46,
+      "h": 280
+    },
+    {
+      "kind": "block",
+      "id": "gallery_fg8k3u",
+      "type": "gallery",
+      "props": {
+        "columns": "3",
+        "images": "[\n  {\n    \"src\": \"/images/bestiary/giant-solifugid.webp\",\n    \"alt\": \"Gallery slot 2\",\n    \"caption\": \"Caption 2\"\n  },\n  {\n    \"src\": \"/images/basil-cooper.png\",\n    \"alt\": \"Gallery slot 1 — add an image from the media library\",\n    \"caption\": \"Caption 1\"\n  },\n  {\n    \"src\": \"/images/bestiary/kahlbit.webp\",\n    \"alt\": \"Gallery slot 3\",\n    \"caption\": \"Caption 3\"\n  },\n  {\n    \"src\": \"/images/bestiary/narun.webp\",\n    \"alt\": \"\",\n    \"caption\": \"\"\n  }\n]"
+      },
+      "x": 23.497267759562842,
+      "y": 1712,
+      "w": 46,
+      "h": 400
+    },
+    {
+      "kind": "block",
+      "id": "divider_c8tl0x",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Layout Blocks"
+      },
+      "x": 2.73224043715847,
+      "y": 2624,
+      "w": 94,
+      "h": 24
+    },
+    {
+      "kind": "block",
+      "id": "portal_ix8sxt",
+      "type": "portal-links",
+      "props": {
+        "eyebrow": "Quick Links",
+        "title": "Portal Links Grid",
+        "description": "A 1–4 column grid of link cards with title, description, and a call-to-action button.",
+        "links": "[{\"title\":\"Campaigns\",\"description\":\"Active campaigns list.\",\"href\":\"/campaigns\",\"label\":\"View\"},{\"title\":\"Players\",\"description\":\"Player roster and characters.\",\"href\":\"/players\",\"label\":\"Browse\"},{\"title\":\"Chronicles\",\"description\":\"Lore and setting reference.\",\"href\":\"https://kb.suwaneegamers.net/\",\"label\":\"Open\"}]"
+      },
+      "x": 1.092896174863388,
+      "y": 2120,
+      "w": 94,
+      "h": 200
+    },
+    {
+      "kind": "block",
+      "id": "divider_ay21yq",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Card Grids"
+      },
+      "x": 2.185792349726776,
+      "y": 2032,
+      "w": 94,
+      "h": 24
+    },
+    {
+      "kind": "block",
+      "id": "divider_o488d6",
+      "type": "divider",
+      "props": {
+        "variant": "ornate",
+        "label": "Hero Banner"
+      },
+      "x": 2.73224043715847,
+      "y": 16,
+      "w": 93.98907103825137,
+      "h": 64
+    },
+    {
+      "kind": "block",
+      "id": "hero_jszzw7",
+      "type": "page-banner",
+      "props": {},
+      "x": 0,
+      "y": 3464,
+      "w": 94,
+      "h": 360
+    },
+    {
+      "kind": "block",
+      "id": "fold_header_demo",
+      "type": "fold-header",
+      "props": {
+        "eyebrow": "Interactive Asset",
+        "title": "Fold Header",
+        "description": "Click the label to fold supporting content up or down.",
+        "foldLabel": "View details",
+        "foldText": "This area can hold text, an image, or both. Use the page editor to set the content and choose whether the fold starts open or closed.",
+        "foldImage": "/images/pantheon/addan.webp",
+        "foldImageAlt": "Addan crest",
+        "foldImageFit": "contain",
+        "defaultState": "closed"
+      },
+      "x": 3.1542631838344013,
+      "y": 2736,
+      "w": 94,
+      "h": 300
+    },
+    {
+      "kind": "block",
+      "id": "test-media-player-audio",
+      "type": "media-player",
+      "props": {
+        "src": "/images/suwanee-media-player-test.wav",
+        "title": "Uploaded Audio Test",
+        "mediaType": "auto",
+        "caption": "Generated one-second WAV used to verify inline uploaded audio playback."
+      },
+      "x": 23.497267759562842,
+      "y": 3216,
+      "w": 46,
+      "h": 220
+    },
+    {
+      "kind": "block",
+      "id": "test-media-player-youtube",
+      "type": "media-player",
+      "props": {
+        "src": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+        "title": "YouTube Embed Test",
+        "mediaType": "auto",
+        "caption": "Ordinary YouTube watch URL converted into an inline player."
+      },
+      "x": 21.85792349726776,
+      "y": 4344,
+      "w": 46,
+      "h": 420
+    },
+    {
+      "kind": "block",
+      "id": "blk_1780434596824_ar57",
+      "type": "media-player",
+      "props": {
+        "src": "",
+        "title": "",
+        "mediaType": "auto",
+        "caption": ""
+      },
+      "x": 23.262690980778707,
+      "y": 3152,
+      "w": 46,
+      "h": 220
+    },
+    {
+      "kind": "block",
+      "id": "blk_1780487878523_dl8z",
+      "type": "media-player",
+      "props": {
+        "src": "",
+        "title": "Test Media",
+        "mediaType": "auto",
+        "caption": "this is a test of a media file"
+      },
+      "x": 22.950819672131146,
+      "y": 2944,
+      "w": 46,
+      "h": 220
+    },
+    {
+      "kind": "block",
+      "id": "blk_1780702400072_damo",
+      "type": "quote",
+      "props": {
+        "text": "I am a hero",
+        "attribution": "",
+        "variant": "muted"
+      },
+      "x": 19.12568306010929,
+      "y": 4872,
+      "w": 46,
+      "h": 220
+    }
+  ]
+}

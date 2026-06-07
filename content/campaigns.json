@@ -1,435 +1,1219 @@
 [
-    {
-        "id":  "a-new-adventure",
-        "name":  "A New Adventure",
-        "dm":  "Chip Poole",
-        "schedule":  "1st \u0026 3rd Thursday",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/a-new-adventure",
-        "headerImage":  "/images/campaigns/a-new-adventure.jpg",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/6291894"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit?usp=sharing"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Az\u0027efal",
-                          "player":  "Lesley Poole",
-                          "url":  "https://docs.google.com/document/d/1kburKCjnLS6VlsVC5XFofHz9R0-Y4R8fMz2jLYm0BkY/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Cerul",
-                          "player":  "Ty Cooper",
-                          "url":  "https://docs.google.com/document/d/18FBABoectfjBxQe_6K8MiZcsCXGZh813t0OgmQcbKNA/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Fungus",
-                          "player":  "Michael Hewson",
-                          "url":  "https://docs.google.com/document/d/1NDSp93C2swjcV6Rpv2ZSKHoAZ4J-eK1u-tczKZenxTA/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Kaizo",
-                          "player":  "Mike Brown",
-                          "url":  "https://docs.google.com/document/d/1kozh5hOYRd5ApSPB1DFp7gEFYZLrGsjSHLq4omFtmJY/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Relys",
-                          "player":  "Emma Cooper",
-                          "url":  "https://docs.google.com/document/d/1YM-U02s7UbpzayjDBhqQB457UGJa3ZE9tdYjLozW1RI/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Ridley",
-                          "player":  "Sean Poole",
-                          "url":  "https://docs.google.com/document/d/1e3QV4PMuvHoRmekDrxHoK3Mtb2Pn9CuadgbqYYIdRpo/edit?usp=sharing"
-                      }
-                  ],
-        "description":  "A classic Myrdae campaign built around exploration, table discovery, and the next generation of heroes stepping into a changed world.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Session 27 - Don\u0027t Threaten Us",
-                                     "summary":  "The caravan was confronted by an elvish wizard and a burly warrior demanding the prisoners\u0027 release. The fight ended with the attackers dead, but Ridley\u0027s long-sought robed elf escaped during the chaos."
-                                 },
-                                 {
-                                     "title":  "Session 26 - To Caelora and Beyond",
-                                     "summary":  "The party escorted wagons toward Shademoor, uncovered one of Ridley\u0027s targets among the prisoners, gained a bulas named Trygg, and defeated an oni and trolls at a stone bridge."
-                                 }
-                             ]
-    },
-    {
-        "id":  "bloody-endeavor",
-        "name":  "Bloody Endeavor",
-        "dm":  "Sean Poole",
-        "schedule":  "Mondays",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/bloody-endeavor",
-        "headerImage":  "/images/campaigns/bloody-endeavor.jpg",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/5891206"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit?usp=sharing"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Albross",
-                          "player":  "Cooper",
-                          "url":  "https://docs.google.com/document/d/1xqtDhGCfYguIbyshrq4hSeWWAXyJ0Wn97HZN8XB98H8/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Caelion",
-                          "player":  "Chuck",
-                          "url":  "https://docs.google.com/document/d/12twa_3rl1OwfHDRRLnyM-sz7ORIrYaKh_QFl7X4KmSU/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Lucerion",
-                          "player":  "Chip Poole",
-                          "url":  "https://docs.google.com/document/d/17KDAa35lIJwZC0oa6sdeMdxlYX5LHJtP3SSALaCCHbU/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Pagern",
-                          "player":  "Tom Chernetsky",
-                          "url":  "https://docs.google.com/document/d/1VqlRScjSZSjP3C6v3p0QbOoDomv5I40Am_wiDU9NRgY/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Rhody",
-                          "player":  "Joshua John",
-                          "url":  "https://docs.google.com/document/d/1mCHEm2bJKCON2p9dyHFfzha71KQJFCBgUURIJCMhcA0/edit?usp=sharing"
-                      }
-                  ],
-        "description":  "A darker campaign of hard choices, blood-soaked consequences, and morally tangled stories in the rougher corners of Myrdae.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Session 35 - Bloody Endeavor: Civil War",
-                                     "summary":  "Wyrm Bane entered the Ring of Respect, defeated the Sacred Crows, gained access to Khagdaruhel, researched the city\u0027s lords, and prepared for an imperial audience."
-                                 },
-                                 {
-                                     "title":  "Session 34 - Greatest of All Time",
-                                     "summary":  "The group recovered the blind goat, cleared drow-held towers, reached Khagdaruhel, and began the Ring of Respect challenges."
-                                 }
-                             ]
-    },
-    {
-        "id":  "collective-of-myrdae",
-        "name":  "Collective of Myrdae",
-        "dm":  "Rotating DMs",
-        "schedule":  "Varies by table",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/collective-of-myrdae",
-        "headerImage":  "/images/campaigns/collective-of-myrdae.jpg",
-        "official":  false,
-        "resources":  [
-                          {
-                              "label":  "Campaign Link (A)",
-                              "url":  "https://www.dndbeyond.com/campaigns/6166853"
-                          },
-                          {
-                              "label":  "Campaign Link (B)",
-                              "url":  "https://www.dndbeyond.com/campaigns/6343973"
-                          },
-                          {
-                              "label":  "Join Link A",
-                              "url":  "https://www.dndbeyond.com/campaigns/join/61668534168762738"
-                          },
-                          {
-                              "label":  "Join Link (B)",
-                              "url":  "https://www.dndbeyond.com/campaigns/join/6343973969925474"
-                          },
-                          {
-                              "label":  "Collective Availability",
-                              "url":  "https://docs.google.com/spreadsheets/d/1MtEAVh3QJ_oHBasE9Qw2Oq65BxAigtC5GjBQ0eQJ6Qc/edit?usp=sharing"
-                          }
-                      ],
-        "description":  "A pickup-group pool for players to keep characters ready for smaller adventures and shared sessions across the wider table.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Pickup Character Pool",
-                                     "summary":  "This is not an official campaign. It is a place for players to keep characters ready for pickup groups or smaller session groups using D\u0026D 2024 rules."
-                                 }
-                             ]
-    },
-    {
-        "id":  "dungeons-iii",
-        "name":  "Dungeons III",
-        "dm":  "Lesley Poole",
-        "schedule":  "Mondays",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/dungeons-iii",
-        "headerImage":  "/images/campaigns/dungeons-iii.jpg",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/join/64603123727126135"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit?usp=sharing"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Æon",
-                          "player":  "Tom Chernetsky",
-                          "url":  "https://docs.google.com/document/d/16U0_RGIBSInZw2uU4O8KYKK5hPEb1iYrf4aHuCsCEPA/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Draelith",
-                          "player":  "Chip Poole",
-                          "url":  "https://docs.google.com/document/d/13F8xXVrT9aN8jpxkZpaCQnkj3Iq3GwBDAlGPzwk9N3E/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Meles",
-                          "player":  "Brian",
-                          "url":  "https://docs.google.com/document/d/142gB5WN2RIngcBlkmMek7I8RE0BeCdx_LFigikr2w1g/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Nixie",
-                          "player":  "Chuck",
-                          "url":  "https://docs.google.com/document/d/1qozqNlJ3G2WD2IMmqVu7G-0Yd4rDgUT9R_97gi0YeRk/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Nova",
-                          "player":  "Tiffany Mulvihill",
-                          "url":  "https://docs.google.com/document/d/17vSLJWvhIfpVY5NUt7Uj74WOytEexALbrfg-wxcUGRo/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Seraphine",
-                          "player":  "Suzanne Chernetsky",
-                          "url":  "https://docs.google.com/document/d/1ZJjqP1e1GR_x9ZrSQ-wwcz0Hfg068Bdfdewr57Ud6pg/edit?usp=sharing"
-                      }
-                  ],
-        "description":  "A dungeon-forward adventure with inventive encounters, table momentum, and old-school discovery in the world of Myrdae.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Session 11 - Sand People Get In All the Crevices",
-                                     "summary":  "The kNight Watch pressed into the Jagged Waste Crags, defeated Mahruudian Raiders, claimed mounts and supplies, and ended in a suspicious cave."
-                                 },
-                                 {
-                                     "title":  "Session 10 - It\u0027s a Long Ass Way!",
-                                     "summary":  "The party rode from Scarwatch Hold toward the eastern crags, found Isgo\u0027s horse, survived difficult travel, and came under attack near the cult outpost."
-                                 }
-                             ]
-    },
-    {
-        "id":  "heroes-of-emberstran",
-        "name":  "Heroes of Emberstran",
-        "dm":  "Chip Poole",
-        "schedule":  "No cadence",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/heroes-of-emberstran",
-        "headerImage":  "/images/campaigns/heroes-of-emberstran.jpg",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/6506738"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit?usp=sharing"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Ainslie",
-                          "player":  "Sean Poole",
-                          "url":  "https://docs.google.com/document/d/1D1Ugxyxmmo8GeoIhyXylF30EHi25I6G_I1qL9_ByKG4/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Aurelius",
-                          "player":  "Larry McHale",
-                          "url":  "https://docs.google.com/document/d/1dfEYTFKPIF3IrmKXAMBdsRCznIQ4oqAtnPkMpZhR-vQ/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Hap",
-                          "player":  "Ty Cooper",
-                          "url":  "https://docs.google.com/document/d/14vp5ODlvd9dJ-wpwRg5QYxgClq1wjp5TcEXGg4yytvs/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Ky\u0027tha",
-                          "player":  "Lesley Poole",
-                          "url":  "https://docs.google.com/document/d/1BR5xi9-W3FWqqBQ0KkS_M93Z6VhtMqchNlFT7MEd00g/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Og",
-                          "player":  "Joshua John",
-                          "url":  "https://docs.google.com/document/d/1tnPfOKPbgomZqJoHRQwJaMO4lqknMVvWq6enxJMJoNw/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Zymve",
-                          "player":  "Emma Cooper",
-                          "url":  "https://docs.google.com/document/d/1vmNQB0KDk1wdz_wiPTdqPyjaDIKMLmJM1x7urwJZlSU/edit?usp=sharing"
-                      }
-                  ],
-        "description":  "Heroes rise near volcanic Mount Emberstran, where dwarven holds, Bathaen wilds, and ancient danger meet.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Session 25 - Grief Stricken",
-                                     "summary":  "The party entered the Emberheart Vault, faced trials and a spectral guardian, met Irragosa, and returned to Emberstran carrying grim news from Ulgrey."
-                                 },
-                                 {
-                                     "title":  "Session 24 - Let the Bodies Hit the Floor",
-                                     "summary":  "The heroes followed the Emberheart Tablet through Mount Emberstran, survived a firenewt ambush, sheltered with rock gnomes, and opened a dark corridor ahead."
-                                 }
-                             ],
-        "aliases":  [
-                        "emberstran"
-                    ]
-    },
-    {
-        "id":  "mad-mage",
-        "name":  "Mad Mage",
-        "dm":  "Michael Hewson",
-        "schedule":  "2nd Saturday",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/mad-mage",
-        "headerImage":  "/images/campaigns/mad-mage.jpg",
-        "resources":  [
-                          {
-                              "label":  "Player\u0027s Notes",
-                              "url":  "https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0/edit?usp=sharing"
-                          }
-                      ],
-        "description":  "A campaign of arcane mysteries, unstable power, hidden agendas, and strange discoveries beneath the surface of Myrdae.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "Dungeon of the Mad Mage",
-                                     "summary":  "The legacy page currently presents this campaign as a Dungeon of the Mad Mage hub with player notes."
-                                 }
-                             ]
-    },
-    {
-        "id":  "souls-of-destiny",
-        "name":  "Souls of Destiny",
-        "dm":  "Sean Poole",
-        "schedule":  "Last Saturday",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/souls-of-destiny",
-        "headerImage":  "/images/campaigns/souls-of-destiny.jpg",
-        "headerImagePosition":  "center 40%",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/join/71906853968179037"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit?usp=sharing"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Escanor",
-                          "player":  "Brian",
-                          "url":  "https://docs.google.com/document/d/10QDbe0u0oDsCw0FmQuasZQqhyYzhurIZ7gPfmoeaL3s/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Therric",
-                          "player":  "Chip Poole",
-                          "url":  "https://docs.google.com/document/d/1RuMwE9EGAeeub_cX68CJxDQJyZS7Ii7A0D-KK6Rm-8I/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Zephyra",
-                          "player":  "Jenny McHale",
-                          "url":  "https://docs.google.com/document/d/1WT_YH4B-vifhEie6ZC-XiqqWK_fZEj-RCFVWa8L1c54/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Kenton",
-                          "player":  "Larry McHale",
-                          "url":  "https://docs.google.com/document/d/1lBxNnDUY7TMbMdP_8p5A2U53T0V6JUSmGRQ8wuI8iIs/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Esylla",
-                          "player":  "Lesley Poole",
-                          "url":  "https://docs.google.com/document/d/1NzosnUBovb6tplRPiZM125WQ6XS2LnUc-238idEVxR4/edit?usp=sharing"
-                      },
-                      {
-                          "name":  "Lila",
-                          "player":  "Tiffany Mulvihill",
-                          "url":  "https://docs.google.com/document/d/1TSVxau1zHwSq_-8qyP44965FK0ft-O3UnX7PcgLGdlU/edit?usp=sharing"
-                      }
-                  ],
-        "description":  "A cult, poisoned wells, dark heart rituals, and unlikely heroes pulled into danger around Adsuren.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "07 - A Solid Plan",
-                                     "summary":  "The party planned a raid beneath Adsuren Center, planted stolen gold to deflect blame, discovered cult rituals using hearts and black salt, and reached deep double doors below town."
-                                 },
-                                 {
-                                     "title":  "06 - Who Took It?",
-                                     "summary":  "The group searched for the cult\u0027s ritual site, questioned townsfolk, found twitching rat heads and black-salt instructions, and tangled town suspicion with missing taxes."
-                                 }
-                             ]
-    },
-    {
-        "id":  "the-silent-vanguard",
-        "name":  "The Silent Vanguard",
-        "dm":  "Michael Hewson",
-        "schedule":  "1st \u0026 3rd Wednesday",
-        "referenceUrl":  "https://sites.google.com/view/suwanee-gamers/campaigns/the-silent-vanguard",
-        "headerImage":  "/images/campaigns/the-silent-vanguard.jpg",
-        "resources":  [
-                          {
-                              "label":  "D\u0026D Beyond",
-                              "url":  "https://www.dndbeyond.com/campaigns/7681563"
-                          },
-                          {
-                              "label":  "Notes",
-                              "url":  "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit?tab=t.0"
-                          }
-                      ],
-        "party":  [
-                      {
-                          "name":  "Jett Blackwood",
-                          "player":  "Larry McHale"
-                      },
-                      {
-                          "name":  "Bedet\u0027Tul",
-                          "player":  "Brian"
-                      },
-                      {
-                          "name":  "Lensworth Fistlemuch",
-                          "player":  "Tom Chernetsky"
-                      },
-                      {
-                          "name":  "Dax Whirren",
-                          "player":  "Suzanne Chernetsky"
-                      },
-                      {
-                          "name":  "Fosslenob Gripefoot",
-                          "player":  "Michael Hewson"
-                      },
-                      {
-                          "name":  "Axel Blackwood",
-                          "player":  "Larry McHale"
-                      },
-                      {
-                          "name":  "Cletus Rashgut",
-                          "player":  "Brian"
-                      },
-                      {
-                          "name":  "Kern",
-                          "player":  "Tom Chernetsky"
-                      },
-                      {
-                          "name":  "Ivy Blackthorn",
-                          "player":  "Suzanne Chernetsky"
-                      }
-                  ],
-        "description":  "Secret agents assembled by Master Thorne investigate outbreaks, conspiracies, and the ominous phrase The Long Night.",
-        "sessionSummaries":  [
-                                 {
-                                     "title":  "02 - A Town Full of Zombies and a Mysterious Note",
-                                     "summary":  "The party survived the zombie outbreak in Brinecross, escaped town, recovered clues about The Long Night, reported back in Tratta, and met Thorin aboard the ship."
-                                 },
-                                 {
-                                     "title":  "01 - We Meet",
-                                     "summary":  "Master Thorne gathered six adventurers in Tratta under the cover of the Lower Dock markets and pulled them into a covert assignment."
-                                 }
-                             ],
-        "aliases":  [
-                        "silent vanguard"
-                    ]
-    }
+  {
+    "id": "a-new-adventure",
+    "name": "A New Adventure",
+    "dm": "Chip Poole",
+    "schedule": "1st & 3rd Thursday",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/a-new-adventure",
+    "headerImage": "/images/campaigns/a-new-adventure.jpg",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/6291894"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit?usp=sharing"
+      }
+    ],
+    "party": [
+      {
+        "name": "Az'efal",
+        "player": "Lesley Poole",
+        "url": "https://docs.google.com/document/d/1kburKCjnLS6VlsVC5XFofHz9R0-Y4R8fMz2jLYm0BkY/edit?usp=sharing"
+      },
+      {
+        "name": "Cerul",
+        "player": "Ty Cooper",
+        "url": "https://docs.google.com/document/d/18FBABoectfjBxQe_6K8MiZcsCXGZh813t0OgmQcbKNA/edit?usp=sharing"
+      },
+      {
+        "name": "Fungus",
+        "player": "Michael Hewson",
+        "url": "https://docs.google.com/document/d/1NDSp93C2swjcV6Rpv2ZSKHoAZ4J-eK1u-tczKZenxTA/edit?usp=sharing"
+      },
+      {
+        "name": "Kaizo",
+        "player": "Mike Brown",
+        "url": "https://docs.google.com/document/d/1kozh5hOYRd5ApSPB1DFp7gEFYZLrGsjSHLq4omFtmJY/edit?usp=sharing"
+      },
+      {
+        "name": "Relys",
+        "player": "Emma Cooper",
+        "url": "https://docs.google.com/document/d/1YM-U02s7UbpzayjDBhqQB457UGJa3ZE9tdYjLozW1RI/edit?usp=sharing"
+      },
+      {
+        "name": "Ridley",
+        "player": "Sean Poole",
+        "url": "https://docs.google.com/document/d/1e3QV4PMuvHoRmekDrxHoK3Mtb2Pn9CuadgbqYYIdRpo/edit?usp=sharing"
+      }
+    ],
+    "description": "A classic Myrdae campaign built around exploration, table discovery, and the next generation of heroes stepping into a changed world.",
+    "sessionSummaries": [
+      {
+        "title": "Session 28 - Caelora has Issues!",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 28 - Caelora has Issues! Recording",
+            "url": "https://drive.google.com/file/d/1ACgEGOFaPiYSlOg_zTmVn2M1dPaxIsRQ/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 27 - Don't Threaten Us",
+        "summary": "The caravan was confronted by an elvish wizard and a burly warrior demanding the prisoners' release. The fight ended with the attackers dead, but Ridley's long-sought robed elf escaped during the chaos.",
+        "audioLinks": [
+          {
+            "label": "Session 27 - Don't Threaten Us Recording",
+            "url": "https://drive.google.com/file/d/1YCNrVP02iiaABwgud83Q6w7Xq75btu2P/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 26 - To Caelora and Beyond",
+        "summary": "The party escorted wagons toward Shademoor, uncovered one of Ridley's targets among the prisoners, gained a bulas named Trygg, and defeated an oni and trolls at a stone bridge.",
+        "audioLinks": [
+          {
+            "label": "Session 26 - To Caelora and Beyond Recording",
+            "url": "https://drive.google.com/file/d/1LHNkTKPhe8po714ZcVezICFvugx76Spu/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 25 - To Qal'dynn",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 25 - To Qal'dynn Recording",
+            "url": "https://drive.google.com/file/d/1RBImyCW5e4UEP9a54bmHlhZYbOj85Wtr/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 24 - Into the Shadowfell",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 24 - Into the Shadowfell Recording",
+            "url": "https://drive.google.com/file/d/1ZPfDzTJlyQe0IpkiRWL3NxQjtaTl8hYi/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 23 - Their Fates Tied",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 23 - Their Fates Tied Recording",
+            "url": "https://drive.google.com/file/d/1GOTJVRHfXYHOjvlQTI5Rm7oDMA3tZXOG/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 22 - The Blackstone Crucible",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 22 - The Blackstone Crucible Recording",
+            "url": "https://drive.google.com/file/d/1ZQXI5fp1n-gYSvFJygBowjTv7JyeN9Ls/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 21 - The Emerging Temple",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 21 - The Emerging Temple Recording",
+            "url": "https://drive.google.com/file/d/1ZVIBOeA2zLV4WdUH5wIXmspRUeKZ6_H9/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 20 - Restoring the Abbey",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 20 - Restoring the Abbey Recording",
+            "url": "https://drive.google.com/file/d/1vqOnQxEhx80lDJS52nQQirVFI2H1TBnP/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 19 - Ham's Helping Hand",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 19 - Ham's Helping Hand Recording",
+            "url": "https://drive.google.com/file/d/1neldkkkhq1UNx64WjtVdErqGYIazvwdw/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 18 - Abbey Undercroft",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 18 - Abbey Undercroft Recording",
+            "url": "https://drive.google.com/file/d/1YyTmsijfqKHgzRsN2HqsGQKI0z6Nswpb/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 17 - Abbey Arrival",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 17 - Abbey Arrival Recording",
+            "url": "https://drive.google.com/file/d/1c0WISriAyr_9u7NzLr1H72AZbY_v0pkd/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 16 - To the Abbey",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 16 - To the Abbey Recording",
+            "url": "https://drive.google.com/file/d/1Z6AooNIFf_wWR8pXJCyk-jVEJ5W_1YbE/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 15 - Empower the Charm",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 15 - Empower the Charm Recording",
+            "url": "https://drive.google.com/file/d/178-4GQ_mydGQLtILoXUwtmB8hwHSLLBP/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 14 - Thinbrew Hideaway",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 14 - Thinbrew Hideaway Recording",
+            "url": "https://drive.google.com/file/d/1HHakxZGoX1uVZAg8EZ8aDwF8dSbJpIhs/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 13 - Qal'dynn Mysteries",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 13 - Qal'dynn Mysteries Recording",
+            "url": "https://drive.google.com/file/d/1TQnIUlsl3b5rehwKt05jrxLZnYPCR5Pg/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 12 - Ambassador Hamalex",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 12 - Ambassador Hamalex Recording",
+            "url": "https://drive.google.com/file/d/1-xuCeKRm9OOX_QxCGlHIo7fmYyYmeS-H/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 11 - Audience with the King",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 11 - Audience with the King Recording",
+            "url": "https://drive.google.com/file/d/1f_-5m2FrnPcbOif3Vm7syg3LUriM65fn/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 10 - Prominent Rel'Udomina",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 10 - Prominent Rel'Udomina Recording",
+            "url": "https://drive.google.com/file/d/1boIV422l9-Q8t9Z_ZpGcP_BaFVi5J6sD/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 9 - Rel'Udomina Hideout",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 9 - Rel'Udomina Hideout Recording",
+            "url": "https://drive.google.com/file/d/1SShBjsszuQqxQAsrtCxLxOtDdoANqK0y/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 8 - The Secret Path Into Qal'dynn",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 8 - The Secret Path Into Qal'dynn Recording",
+            "url": "https://drive.google.com/file/d/15v4XohG3vwshwIiDBJaJxqyQag56lgjS/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 7 - Elle'berian Shrine",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 7 - Elle'berian Shrine Recording",
+            "url": "https://drive.google.com/file/d/1nJ5r6xHpcPNpH3hhdmYVY3FITgfSLXXY/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 6 - Cackletongue Lair",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 6 - Cackletongue Lair Recording",
+            "url": "https://drive.google.com/file/d/1s2lkCJmlZOLALq0AfgKbp3IVX44IOSm8/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 5 - Silent Circle Gnolls",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 5 - Silent Circle Gnolls Recording",
+            "url": "https://drive.google.com/file/d/1TWdqiH45ZecqhwVKA5SzWPR8Rqks70yJ/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 4 - In O'naren",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 4 - In O'naren Recording",
+            "url": "https://drive.google.com/file/d/1ejBBatfzmzoPas-GrAUgZk9YR5kvNUok/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 3 - Road to O'naren",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 3 - Road to O'naren Recording",
+            "url": "https://drive.google.com/file/d/1aRWfb5Y6xR618CuzaTGhwGUqUS3iJAJp/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 2 - Beneath the Citadel",
+        "summary": "",
+        "audioLinks": []
+      },
+      {
+        "title": "Session 1 - Met in Mossholde",
+        "summary": "",
+        "audioLinks": []
+      }
+    ]
+  },
+  {
+    "id": "bloody-endeavor",
+    "name": "Bloody Endeavor",
+    "dm": "Sean Poole",
+    "schedule": "Mondays",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/bloody-endeavor",
+    "headerImage": "/images/campaigns/bloody-endeavor.jpg",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/5891206"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit?usp=sharing"
+      }
+    ],
+    "party": [
+      {
+        "name": "Albross",
+        "player": "Cooper",
+        "url": "https://docs.google.com/document/d/1xqtDhGCfYguIbyshrq4hSeWWAXyJ0Wn97HZN8XB98H8/edit?usp=sharing"
+      },
+      {
+        "name": "Caelion",
+        "player": "Chuck",
+        "url": "https://docs.google.com/document/d/12twa_3rl1OwfHDRRLnyM-sz7ORIrYaKh_QFl7X4KmSU/edit?usp=sharing"
+      },
+      {
+        "name": "Lucerion",
+        "player": "Chip Poole",
+        "url": "https://docs.google.com/document/d/17KDAa35lIJwZC0oa6sdeMdxlYX5LHJtP3SSALaCCHbU/edit?usp=sharing"
+      },
+      {
+        "name": "Pagern",
+        "player": "Tom Chernetsky",
+        "url": "https://docs.google.com/document/d/1VqlRScjSZSjP3C6v3p0QbOoDomv5I40Am_wiDU9NRgY/edit?usp=sharing"
+      },
+      {
+        "name": "Rhody",
+        "player": "Joshua John",
+        "url": "https://docs.google.com/document/d/1mCHEm2bJKCON2p9dyHFfzha71KQJFCBgUURIJCMhcA0/edit?usp=sharing"
+      }
+    ],
+    "description": "A darker campaign of hard choices, blood-soaked consequences, and morally tangled stories in the rougher corners of Myrdae.",
+    "sessionSummaries": [
+      {
+        "title": "Session 35 - Bloody Endeavor: Civil War",
+        "summary": "Wyrm Bane entered the Ring of Respect, defeated the Sacred Crows, gained access to Khagdaruhel, researched the city's lords, and prepared for an imperial audience.",
+        "audioLinks": [
+          {
+            "label": "Session 35 - Bloody Endeavor: Civil War Recording",
+            "url": "https://drive.google.com/file/d/1Rog20hvD9EQR7pJoh7_xm5v07DHPi-vH/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 34 - Greatest of All Time",
+        "summary": "The group recovered the blind goat, cleared drow-held towers, reached Khagdaruhel, and began the Ring of Respect challenges.",
+        "audioLinks": [
+          {
+            "label": "Session 34 - Greatest of All Time Recording",
+            "url": "https://drive.google.com/file/d/1A8SE6fWLFUsuq55K7STfiy89hluwVTV4/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 33 - Caw!",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 33 - Caw! Recording",
+            "url": "https://drive.google.com/file/d/1KI5YrQk-LMUjGn0aZ2VOcvfyu2nfHhMG/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 32 - Over the Edge",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 32 - Over the Edge Recording",
+            "url": "https://drive.google.com/file/d/1yAL3NE_XnavPtpAbFPuuBXr8CNL_K-9j/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 31 - Don't Let This Drag-on",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 31 - Don't Let This Drag-on Recording",
+            "url": "https://drive.google.com/file/d/1jZn7OyP04AMYhLvWaiV0oT-a7LJyJVI8/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 30 - Let's Break A Deal!",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 30 - Let's Break A Deal! Recording",
+            "url": "https://drive.google.com/file/d/1J8LVk8yZn5mw6ReWSKpA4sqY2_L3TUNf/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 29 - Hags with Bags",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 29 - Hags with Bags Recording",
+            "url": "https://drive.google.com/file/d/1I3G2vJ719JCcnQKzVGb1kz6Qve6OetpO/view?usp=sharing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "collective-of-myrdae",
+    "name": "Collective of Myrdae",
+    "dm": "Rotating DMs",
+    "schedule": "Varies by table",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/collective-of-myrdae",
+    "headerImage": "/images/campaigns/collective-of-myrdae.jpg",
+    "official": false,
+    "resources": [
+      {
+        "label": "Campaign Link (A)",
+        "url": "https://www.dndbeyond.com/campaigns/6166853"
+      },
+      {
+        "label": "Campaign Link (B)",
+        "url": "https://www.dndbeyond.com/campaigns/6343973"
+      },
+      {
+        "label": "Join Link A",
+        "url": "https://www.dndbeyond.com/campaigns/join/61668534168762738"
+      },
+      {
+        "label": "Join Link (B)",
+        "url": "https://www.dndbeyond.com/campaigns/join/6343973969925474"
+      },
+      {
+        "label": "Collective Availability",
+        "url": "https://docs.google.com/spreadsheets/d/1MtEAVh3QJ_oHBasE9Qw2Oq65BxAigtC5GjBQ0eQJ6Qc/edit?usp=sharing"
+      }
+    ],
+    "description": "A pickup-group pool for players to keep characters ready for smaller adventures and shared sessions across the wider table.",
+    "sessionSummaries": [
+      {
+        "title": "Pickup Character Pool",
+        "summary": "This is not an official campaign. It is a place for players to keep characters ready for pickup groups or smaller session groups using D&D 2024 rules."
+      }
+    ]
+  },
+  {
+    "id": "dungeons-iii",
+    "name": "Dungeons III",
+    "dm": "Lesley Poole",
+    "schedule": "Mondays",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/dungeons-iii",
+    "headerImage": "/images/campaigns/dungeons-iii.jpg",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/join/64603123727126135"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit?usp=sharing"
+      }
+    ],
+    "party": [
+      {
+        "name": "Æon",
+        "player": "Tom Chernetsky",
+        "url": "https://docs.google.com/document/d/16U0_RGIBSInZw2uU4O8KYKK5hPEb1iYrf4aHuCsCEPA/edit?usp=sharing"
+      },
+      {
+        "name": "Draelith",
+        "player": "Chip Poole",
+        "url": "https://docs.google.com/document/d/13F8xXVrT9aN8jpxkZpaCQnkj3Iq3GwBDAlGPzwk9N3E/edit?usp=sharing"
+      },
+      {
+        "name": "Meles",
+        "player": "Brian",
+        "url": "https://docs.google.com/document/d/142gB5WN2RIngcBlkmMek7I8RE0BeCdx_LFigikr2w1g/edit?usp=sharing"
+      },
+      {
+        "name": "Nixie",
+        "player": "Chuck",
+        "url": "https://docs.google.com/document/d/1qozqNlJ3G2WD2IMmqVu7G-0Yd4rDgUT9R_97gi0YeRk/edit?usp=sharing"
+      },
+      {
+        "name": "Nova",
+        "player": "Tiffany Mulvihill",
+        "url": "https://docs.google.com/document/d/17vSLJWvhIfpVY5NUt7Uj74WOytEexALbrfg-wxcUGRo/edit?usp=sharing"
+      },
+      {
+        "name": "Seraphine",
+        "player": "Suzanne Chernetsky",
+        "url": "https://docs.google.com/document/d/1ZJjqP1e1GR_x9ZrSQ-wwcz0Hfg068Bdfdewr57Ud6pg/edit?usp=sharing"
+      }
+    ],
+    "description": "A dungeon-forward adventure with inventive encounters, table momentum, and old-school discovery in the world of Myrdae.",
+    "sessionSummaries": [
+      {
+        "title": "Session 11 - Sand People Get In All the Crevices",
+        "summary": "The kNight Watch pressed deeper into the Jagged Waste Crags to locate the Radiant Eye cult outpost and secure the lost celestial instrument. They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath. Seraphine examined the raiders' strange sun-sensitive bodies before the party fought and killed two packs of dire wolves that had been feeding on humanoids. They tracked the wolves to a series of terraced caves, avoided a hidden pit trap under a blood-soaked tapestry at the entrance, and the session ended with the group standing in a suspicious cave.",
+        "audioLinks": [
+          {
+            "label": "Session 11 Recording",
+            "url": "https://drive.google.com/file/d/1tBUOOi4gQMd6LOX4utwKv0z4Z2W4YbDo/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 10 - It's a Long Ass Way!",
+        "summary": "The kNight Watch rode out from Scarwatch Hold toward the eastern crags to investigate the Radiant Eye cult outpost and secure a lost celestial instrument while pursuing Isgo's kidnappers. They discovered Isgo's horse Bullseye and learned that two unknown riders had taken him, then endured several days of difficult travel through increasingly craggy terrain. Along the way they found a hidden cache of gold and potions, discovered a decomposed corpse, and defeated a Xorn that erupted from the earth. The session ended as Meles scouted ahead and spotted two figures in tan robes, who attacked the party as they approached.",
+        "audioLinks": [
+          {
+            "label": "Session 10 Recording",
+            "url": "https://drive.google.com/file/d/1Wqf4bV8GRHBkJAmu8d7PEVSoudjcuyYH/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 9 - A Cart-time Job",
+        "summary": "In Scarwatch Hold, the kNight Watch received their assignment from Warden Haliun to hunt Isgo. Umlin commissioned the party to complete a map of the eastern lands for 20 gold pieces. Shopping and tavern time followed, including reunions with Dempsey and Meles. The next morning the Radiant Eye cult symbol appeared on the Sanctuary wall, shifting priorities. Nambra redirected them to investigate the cult outpost in the eastern crags and secure a lost celestial instrument from nearby ruins. The party rode out mid-morning toward the crags, crossing the drawbridge as a lone black horse with a white blaze appeared riderless in the distance.",
+        "audioLinks": [
+          {
+            "label": "Session 09 Recording",
+            "url": "https://drive.google.com/file/d/1CjvCopdzZqfofggQBuYuZh_1RANjyCjA/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 8 - Mimic at the Gate",
+        "summary": "In Scarwatch Hold, the party was wrapping up local personal matters and responsibilities around the K9 Crew prisoners. A smoking wagon arrived and a mimic disguised as a barrel attacked with acidic tendrils. The adventurers fought it off fiercely. Nixie and Aeon delivered the prisoners' charges to Warden Naevaris Haliun, who confirmed the judgment for the next day. That night a shadowy burglar was driven from the bank. The following morning the Cap'n confessed dealings with the Scorpion as Draelith messed with the sending stone. A mysterious voice replied that their interference had complicated matters yet perhaps the party would be useful.",
+        "audioLinks": [
+          {
+            "label": "Session 08 Recording",
+            "url": "https://drive.google.com/file/d/1uFpAxFkMTSZBX6WJOVRt2z1yf-zV3316/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 7 - Brooch the Subject",
+        "summary": "The party's primary goal was to escort the captured K9 Crew bandits, including their wounded leader Captain Kinrik, from Hesfal to Scarwatch Hold and personally deliver them along with the sealed charges directly to Warden Haliun in the citadel. On the road, they encountered the abrasive half-orc Isgo, who recognized the crew; after some taunting from Draelith and intimidation by Nova, he backed off, though Meles later confirmed the Blackshield family smiths had clashed with him earlier and emerged unharmed. The group reached Scarwatch Hold without major incident, secured lodging, gathered rumors at the tavern, and the next morning pressed forward to complete the handover, only for a massive explosion to erupt at the Outer Gates, ending the session on that sudden, chaotic note.",
+        "audioLinks": [
+          {
+            "label": "Session 07 Recording",
+            "url": "https://drive.google.com/file/d/1PaRnBFJq64OK1WQ4Cqj54iyPxdb1Rzte/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 6 - Rope A Dope",
+        "summary": "The party focused on securing their prisoners and uncovering the true scope of the plot behind the chaos in Hesfal. They learned that the bandits were being directed through an amplified sending stone embedded in a magically attuned cavern, confirming that the Scorpion had planned more than a simple robbery and jailbreak. While investigating the depths of the hideout, the party fought and defeated dangerous creatures drawn to the cavern's magic, revealing a potential path toward the Underdark below. After returning the bandits to Hesfal and agreeing to transport them to Scarwatch Hold, the session ended with a final shock as an unknown figure was discovered rifling through Nova's belongings, signaling that the danger was far from over.",
+        "audioLinks": [
+          {
+            "label": "Session 06 Recording",
+            "url": "https://drive.google.com/file/d/1dH5n001GD34dgZV9sflUoUiSoug_pcAA/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 5 - The Hots for Nova",
+        "summary": "An ambush was set up to catch the escaped bandits and uncover who had orchestrated the chaos in Hesfal. Their ambush indirectly paid off, leading them from the bandits' horse drop through dangerous terrain to a hidden cave where they decisively dismantled the crew and forced their surrender. Interrogation revealed that the robbery, jailbreak, and murder arrest were all part of a paid plan meant to spread fear during Salvus, ordered by an unknown figure called the Scorpion. Everything came to an end with the chilling realization that their unseen employer was still watching, as a disembodied voice questioned the failure of the plan.",
+        "audioLinks": [
+          {
+            "label": "Session 05 Recording",
+            "url": "https://drive.google.com/file/d/1PYKRdgQ71fcUERMgsEx57vXWpcCdeIwM/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 4 - I Can't Even Take A ...",
+        "summary": "The party set out to track down the escaped bandits and the freed prisoner before they could disappear beyond Hesfal's reach. Following the trail into dense wilderness, they uncovered signs of deception, fought through hostile terrain, and survived a violent encounter with an owlbear and a swarm of stirges that nearly cost them their mounts. Their pursuit paid off with the discovery of a hidden cache and the bandits' horses, confirming they were closing in. The session ended with the party setting an ambush and holding their ground as the sound of someone approaching broke the silence.",
+        "audioLinks": [
+          {
+            "label": "Session 04 Recording",
+            "url": "https://drive.google.com/file/d/1Cj2mOZDo4XhLe4qx6ClcHI-hATCzC9dR/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 3 - Chase the Runners",
+        "summary": "The party focused on containing the fallout from the coordinated attacks in Hesfal and preventing the perpetrators from escaping justice. They attempted to stop the fleeing criminals using quick thinking and improvised tools, but the escape only partially failed, leaving unanswered questions and wounded allies in its wake. As the town struggled to regain order, the group uncovered troubling signs that the robbery, jailbreak, and recent murder were connected. By morning, they committed to pursuing the runners beyond Hesfal, gathering evidence, securing mounts, and preparing to take the hunt onto the road.",
+        "audioLinks": [
+          {
+            "label": "Session 03 Recording",
+            "url": "https://drive.google.com/file/d/1mHUEPXACaki6v2rdXhazP8-cBt9EGt-J/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 2 - A Pocket Prism",
+        "summary": "The party tried to enjoy a brief return to normalcy as Hesfal filled with travelers ahead of the Salvus festival, while keeping a wary eye on rumors of violence and unrest. What began as music, conversation, and curiosity about strange newcomers quickly turned dangerous when a coordinated tavern robbery erupted around them. The group stepped in to protect civilians and stop the attackers, only to discover the violence was part of something larger when the Town Ward was breached and prisoners were freed. By the end of the night, the party found themselves split across multiple threats, realizing that the chaos in Hesfal was organized, deliberate, and far from over.",
+        "audioLinks": [
+          {
+            "label": "Session 02 Recording",
+            "url": "https://drive.google.com/file/d/1-M5kb9u8cBEaPfn5DwkUmspil1B7uLaB/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 1 - It's Aeon",
+        "summary": "The party was united by circumstance, curiosity, and quiet personal searching as they each arrived in Hesfal on the eve of the Salvus festival. Individually, they sought rest, healing, faith, or simple opportunity, crossing paths in temples, taverns, and trading halls while sharing fragments of their pasts. Conversations revealed lingering scars from the Awakening, unresolved devotions to distant gods, and hints of deeper mysteries tying some of them together. By session's end, chance encounters gave way to recognition and shared history, just as the arrival of the final Salvus caravan signaled that Hesfal was about to become crowded, tense, and ripe for whatever fate was drawing them together.",
+        "audioLinks": [
+          {
+            "label": "Session 01 Recording",
+            "url": "https://drive.google.com/file/d/1CcpR9Dha0khE0a1OmHun1RukSZmYTd79/view?usp=drive_link"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "heroes-of-emberstran",
+    "name": "Heroes of Emberstran",
+    "dm": "Chip Poole",
+    "schedule": "No cadence",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/heroes-of-emberstran",
+    "headerImage": "/images/campaigns/heroes-of-emberstran.jpg",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/6506738"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit?usp=sharing"
+      }
+    ],
+    "party": [
+      {
+        "name": "Ainslie",
+        "player": "Sean Poole",
+        "url": "https://docs.google.com/document/d/1D1Ugxyxmmo8GeoIhyXylF30EHi25I6G_I1qL9_ByKG4/edit?usp=sharing"
+      },
+      {
+        "name": "Aurelius",
+        "player": "Larry McHale",
+        "url": "https://docs.google.com/document/d/1dfEYTFKPIF3IrmKXAMBdsRCznIQ4oqAtnPkMpZhR-vQ/edit?usp=sharing"
+      },
+      {
+        "name": "Hap",
+        "player": "Ty Cooper",
+        "url": "https://docs.google.com/document/d/14vp5ODlvd9dJ-wpwRg5QYxgClq1wjp5TcEXGg4yytvs/edit?usp=sharing"
+      },
+      {
+        "name": "Ky'tha",
+        "player": "Lesley Poole",
+        "url": "https://docs.google.com/document/d/1BR5xi9-W3FWqqBQ0KkS_M93Z6VhtMqchNlFT7MEd00g/edit?usp=sharing"
+      },
+      {
+        "name": "Og",
+        "player": "Joshua John",
+        "url": "https://docs.google.com/document/d/1tnPfOKPbgomZqJoHRQwJaMO4lqknMVvWq6enxJMJoNw/edit?usp=sharing"
+      },
+      {
+        "name": "Zymve",
+        "player": "Emma Cooper",
+        "url": "https://docs.google.com/document/d/1vmNQB0KDk1wdz_wiPTdqPyjaDIKMLmJM1x7urwJZlSU/edit?usp=sharing"
+      }
+    ],
+    "description": "Heroes rise near volcanic Mount Emberstran, where dwarven holds, Bathaen wilds, and ancient danger meet.",
+    "sessionSummaries": [
+      {
+        "title": "Session 26 -- Bad News & A Wild Goose Chase",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 26 -- Bad News & A Wild Goose Chase Recording",
+            "url": "https://drive.google.com/file/d/10MQYSzjLJSa_SxdvkJRnYAR4--q3C0U1/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 25 -- Grief Stricken",
+        "summary": "The party entered the Emberheart Vault, faced trials and a spectral guardian, met Irragosa, and returned to Emberstran carrying grim news from Ulgrey.",
+        "audioLinks": [
+          {
+            "label": "Session 25 -- Grief Stricken Recording",
+            "url": "https://drive.google.com/file/d/14mhqvZK3AC_uuAKw5WJCI_4lqlRH6KtB/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 24 -- Let the Bodies Hit the Floor",
+        "summary": "The heroes followed the Emberheart Tablet through Mount Emberstran, survived a firenewt ambush, sheltered with rock gnomes, and opened a dark corridor ahead.",
+        "audioLinks": [
+          {
+            "label": "Session 24 -- Let the Bodies Hit the Floor Recording",
+            "url": "https://drive.google.com/file/d/1ZzXPud0FSxftE09a9c8xb-tNLX8slE1h/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 23 -- Into the Fire",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 23 -- Into the Fire Recording",
+            "url": "https://drive.google.com/file/d/19z_5aw6xUyOIg4v86jNPPjpl3JDC1HuN/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 22 - The Tracker",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 22 - The Tracker Recording",
+            "url": "https://drive.google.com/file/d/1YNN63xR_Z9rzv3bb1ONdX5_JjSdvVgtH/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 21 - He Ate a Baby!",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 21 - He Ate a Baby! Recording",
+            "url": "https://drive.google.com/file/d/19m1KxptZNCjhYJjWvZbY5VSxOOX0sNft/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 20 - Coming Home",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 20 - Coming Home Recording",
+            "url": "https://drive.google.com/file/d/1-BZtPtPU5zcfnYhmUUZPJnAcUG1TRKEl/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 19 - Lost Sanctuary",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 19 - Lost Sanctuary Recording",
+            "url": "https://drive.google.com/file/d/1niG6tI0aW1zZUI1F6WMZUaoLc9K6_tgC/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 18 - In Bimblefol",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 18 - In Bimblefol Recording",
+            "url": "https://drive.google.com/file/d/1MSe5VhZsU7APOCNiU0KuzhImCG13jOYf/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 17 - Giant's Silver",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 17 - Giant's Silver Recording",
+            "url": "https://drive.google.com/file/d/1-6SX3BEDsJWSUzt3aE4I6dbT-FmD3Qc4/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 16 - Favor in Nunglthil",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 16 - Favor in Nunglthil Recording",
+            "url": "https://drive.google.com/file/d/1T4i2KxHaC7H3jn1kgWfhZZXnzirQkTUS/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 15 - The Spitespirit Cache",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 15 - The Spitespirit Cache Recording 1",
+            "url": "https://drive.google.com/file/d/1kaCJDPd8czzy4ijO_MNqucJCP2xRyj2D/view?usp=sharing"
+          },
+          {
+            "label": "Session 15 - The Spitespirit Cache Recording 2",
+            "url": "https://drive.google.com/file/d/1O1dyUdjhslQozHjBrN3vQVSyoVAhCpWy/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 14 - The Drowned Waypoint",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 14 - The Drowned Waypoint Recording 1",
+            "url": "https://drive.google.com/file/d/1kaCJDPd8czzy4ijO_MNqucJCP2xRyj2D/view?usp=sharing"
+          },
+          {
+            "label": "Session 14 - The Drowned Waypoint Recording 2",
+            "url": "https://drive.google.com/file/d/1Kzja3tPdqg0RnoicFz2h5Ir5q3LktJum/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 13 -The Emberheart Tablet",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 13 -The Emberheart Tablet Recording 1",
+            "url": "https://drive.google.com/file/d/1kaCJDPd8czzy4ijO_MNqucJCP2xRyj2D/view?usp=sharing"
+          },
+          {
+            "label": "Session 13 -The Emberheart Tablet Recording 2",
+            "url": "https://drive.google.com/file/d/1pHwklc7oTbH9I9MsSg-oiiU4XI5pHeEL/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 12 - The Eradic of Ghone",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 12 - The Eradic of Ghone Recording",
+            "url": "https://drive.google.com/file/d/1TRK8tbKjnWo7ebcKmEC7JtvQ4_BpzW0h/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 11 - Confronting the Cload",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 11 - Confronting the Cload Recording",
+            "url": "https://drive.google.com/file/d/1ff4Rr_Bt7r82c133KLd2QKrmOHGIwQr7/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "Session 10 - The Sewers",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 10 - The Sewers Recording",
+            "url": "https://drive.google.com/file/d/1uMfSK0ZwOOIiNjV9CIE701q0Yb77DYwn/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 9 - Sides and the 3rd Piece",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 9 - Sides and the 3rd Piece Recording",
+            "url": "https://drive.google.com/file/d/1V24h6_3gG8jjVtXaTY-ywOgq9ewtclzw/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 8 - Cemetery Mystery",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 8 - Cemetery Mystery Recording",
+            "url": "https://drive.google.com/file/d/1V8BBZdgW95kAFXZcSmr_nqEazmIqJTOT/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 7 - Divine Waypoint",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 7 - Divine Waypoint Recording",
+            "url": "https://drive.google.com/file/d/1CeEjT12ODx2IQVjfBgQev7UwC7DAMZKB/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 6 - Diverra's Grove",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 6 - Diverra's Grove Recording",
+            "url": "https://drive.google.com/file/d/1zBvg4u9cp9HlV-5Nq233wvSXs6JlpZ8I/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 5 - Lady Rook",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 5 - Lady Rook Recording",
+            "url": "https://drive.google.com/file/d/1aQan6G93fDcQqJV4BziW2gfjqOGCcmoK/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 4 - Beneath the City",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 4 - Beneath the City Recording",
+            "url": "https://drive.google.com/file/d/1C2eSFLd7urEhJJ09Q8P6FTze-F-8lKD0/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 3 - EGD",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 3 - EGD Recording",
+            "url": "https://drive.google.com/file/d/1sQklDuk1VPYEXkbknQZ1UmEmmlQPmfba/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 2 - Bad Wine",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 2 - Bad Wine Recording",
+            "url": "https://drive.google.com/file/d/1GNtjgjQvYF4IMdvO2pWPCAkCisqBBywg/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Session 1 - Dock Troubles",
+        "summary": "",
+        "audioLinks": [
+          {
+            "label": "Session 1 - Dock Troubles Recording",
+            "url": "https://drive.google.com/file/d/1EqklUTxxBpbCsqIRotONRaRcRW70r3Dx/view?usp=drive_link"
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      "emberstran"
+    ]
+  },
+  {
+    "id": "mad-mage",
+    "name": "Mad Mage",
+    "dm": "Michael Hewson",
+    "schedule": "2nd Saturday",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/mad-mage",
+    "headerImage": "/images/campaigns/mad-mage.jpg",
+    "resources": [
+      {
+        "label": "Player's Notes",
+        "url": "https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0/edit?usp=sharing"
+      }
+    ],
+    "description": "A campaign of arcane mysteries, unstable power, hidden agendas, and strange discoveries beneath the surface of Myrdae.",
+    "sessionSummaries": [
+      {
+        "title": "Dungeon of the Mad Mage",
+        "summary": "This campaign currently presents as a Dungeon of the Mad Mage hub with player notes."
+      }
+    ]
+  },
+  {
+    "id": "souls-of-destiny",
+    "name": "Souls of Destiny",
+    "dm": "Sean Poole",
+    "schedule": "Last Saturday",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/souls-of-destiny",
+    "headerImage": "/images/campaigns/souls-of-destiny.jpg",
+    "headerImagePosition": "center 40%",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/join/71906853968179037"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit?usp=sharing"
+      }
+    ],
+    "party": [
+      {
+        "name": "Escanor",
+        "player": "Brian",
+        "url": "https://docs.google.com/document/d/10QDbe0u0oDsCw0FmQuasZQqhyYzhurIZ7gPfmoeaL3s/edit?usp=sharing"
+      },
+      {
+        "name": "Therric",
+        "player": "Chip Poole",
+        "url": "https://docs.google.com/document/d/1RuMwE9EGAeeub_cX68CJxDQJyZS7Ii7A0D-KK6Rm-8I/edit?usp=sharing"
+      },
+      {
+        "name": "Zephyra",
+        "player": "Jenny McHale",
+        "url": "https://docs.google.com/document/d/1WT_YH4B-vifhEie6ZC-XiqqWK_fZEj-RCFVWa8L1c54/edit?usp=sharing"
+      },
+      {
+        "name": "Kenton",
+        "player": "Larry McHale",
+        "url": "https://docs.google.com/document/d/1lBxNnDUY7TMbMdP_8p5A2U53T0V6JUSmGRQ8wuI8iIs/edit?usp=sharing"
+      },
+      {
+        "name": "Esylla",
+        "player": "Lesley Poole",
+        "url": "https://docs.google.com/document/d/1NzosnUBovb6tplRPiZM125WQ6XS2LnUc-238idEVxR4/edit?usp=sharing"
+      },
+      {
+        "name": "Lila",
+        "player": "Tiffany Mulvihill",
+        "url": "https://docs.google.com/document/d/1TSVxau1zHwSq_-8qyP44965FK0ft-O3UnX7PcgLGdlU/edit?usp=sharing"
+      }
+    ],
+    "description": "A cult, poisoned wells, dark heart rituals, and unlikely heroes pulled into danger around Adsuren.",
+    "sessionSummaries": [
+      {
+        "title": "09 - That's a Good Looking Dwarf",
+        "summary": "The party investigated reports of a raging bulas near mines. After slaying the creature and trading its pelt for magic boots, Mollywop's alarm sent them to a fisherman's hut where a large creature erupted from the river during Market Day.",
+        "audioLinks": [
+          {
+            "label": "Session 09 Recording",
+            "url": "https://drive.google.com/file/d/1ZMcCpi2jpWhmCEAdBAElmSfd6wyMspzK/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "08 - Devil Spawn",
+        "summary": "The party plunged into the hidden cellar beneath the Adsuren Center determined to root out the Cult of the Immured and shatter their blood rituals before more townsfolk fell victim. They carved through chanting cultists in a gore-slicked chamber only to unmask the respected Intendant Eyovar Dunajor as the fiendish summoner Karranok. The interrupted rite summoned the succubus Aeolenne who promptly declared Zephyra her daughter, sparking a chaotic battle. Though the demoness escaped, the party dismantled the cult, delivered justice to its traitor, and emerged victorious with treasures, revelations, and fresh resolve to press on into the mines.",
+        "audioLinks": [
+          {
+            "label": "Session 08 Recording",
+            "url": "https://drive.google.com/file/d/1RZWWc0pMrk6F6T7CBK86TvoIvXJ64RXX/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "07 - A Solid Plan",
+        "summary": "The party aimed to raid the cellar beneath Adsuren Center, their strongest lead on the cult, while deflecting blame for the missing town taxes. Esylla found Mollywop oddly exhausted. They planted stolen gold in Ganon's boarding house to get the guards off their trail. They descended into the cellar that night, proving it to be the hideout they were hoping to find. They found cultists and evidence of their rituals using hearts and black salt. Descending deeper and disposing of more cultists, the session ended at a set of double doors deep beneath Adsuren.",
+        "audioLinks": [
+          {
+            "label": "Session 07 Recording",
+            "url": "https://drive.google.com/file/d/1_yWZston6bYsRlP6lSrO59-HLoMK9Caj/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "06 - Who Took It?",
+        "summary": "The party set out from Mollywop's tower determined to uncover the location of the rituals plaguing Adsuren and this Summoner Karranock. The heart-harvesting rites were taking place somewhere deeper in town. The day unfolded with tavern intrigue, dockside questioning, and a tense search of Ganon's rented room that revealed twitching rat heads and precise instructions for creating black salt from sentient hearts. Kenton added his own complications by quietly lifting tax pouches from the Adsuren Center, an act that quickly turned the town's Market Day preparations into a flurry of guarded suspicion. By session's end the Souls of Destiny found themselves chasing a shadowy cult while trying not to trip over the fresh chaos one of their own had sown.",
+        "audioLinks": [
+          {
+            "label": "Session 06 Recording",
+            "url": "https://drive.google.com/file/d/1bZuRvD9TeZ1z22PHqzqUTquIXYR8FndI/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "05 - Thugs & Cultists",
+        "summary": "The party set out to track the shadowy cult responsible for poisoning Adsuren's well. Most of the group interrogated the local tanner and battled his cultist apprentice Ganon. However, Kenton was ambushed in an alley by thugs led by Sir Rodolf Norran from Gibuldon. Rodolf left behind a healing potion marked \"Ryvennra\" after Kenton fell. The party then consulted Mollywop the Magnificent, who identified the cult's lesser fiendish amulet and unholy black salt, and used Speak with Dead to learn that Summoner Karranock leads the group and their outdoor rituals occur somewhere deeper in Adsuren. Now aware that an imp may have alerted the cult, the heroes must carefully flush out their hidden enemies without alarming the village, while also bracing for Rodolf's next move.",
+        "audioLinks": [
+          {
+            "label": "Session 05 Recording",
+            "url": "https://drive.google.com/file/d/1NpK-tNkffM9QkwSv96Jn6kBRE3aSQ69q/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "04 - Putrid",
+        "summary": "Returning to Adsuren, the group sought answers about the growing corruption tied to stolen hearts and the ritual they had uncovered in the swamp. After consulting Mollywop, they learned the heart was human, bound by necromancy and fiendish magic, and likely created by a hidden group operating within the town itself. Investigating the graveyard, they confirmed their fears when an unearthed body missing its heart rose as an undead attacker. After destroying it, they were working with the early signs of a cult working in secret among Adsuren's people. Spreading out for more information led to an untimely attack upon Kenton, with the party unaware.",
+        "audioLinks": [
+          {
+            "label": "Session 04 Recording",
+            "url": "https://drive.google.com/file/d/1QrNtaYGo2uDTV3KSxas1G0v-GYY63QXl/view?usp=sharing"
+          }
+        ]
+      },
+      {
+        "title": "03 - Fungipheliac Using Kinfolk",
+        "summary": "The party sought to uncover what had happened to the missing Sapcutt family after being betrayed and trapped beneath their home. Fighting through fungal undead and deadly traps, they discovered the house itself was sustained by a sentient corruption born from something pulled out of the swamp. By rescuing Lobella and learning the grim bargain her mother had made, the party chose to save the living rather than destroy everything in their path. They escaped into the night with the surviving Sapcutts, knowing the true source of the corruption still lurked somewhere beyond the house.",
+        "audioLinks": [
+          {
+            "label": "Session 03 Recording",
+            "url": "https://drive.google.com/file/d/1Ulp2O0rIsSBTTAnCmpv-2Yo5tpoLH0es/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "02 - Mollywop to Sapcutt",
+        "summary": "After saving Adsuren's well, the party sought to understand the darker magic behind the corruption and welcomed a new companion, Lila, into their ranks. They destroyed the tainted heart under holy blessing and set out to consult Mollywop the Magnificent for deeper insight. In exchange for her help, they agreed to investigate the disappearance of the Sapcutt family and traveled into the swampy lowlands beyond the river. What began as a warm welcome at the Sapcutt ranch ended in betrayal, as the party was drugged during dinner and dropped through a hidden pit beneath the house.",
+        "audioLinks": [
+          {
+            "label": "Session 02 Recording",
+            "url": "https://drive.google.com/file/d/1z2iws29s3qYPisVZ2tj0b-WRHjd3ThdF/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "01 - We Meet",
+        "summary": "In their first meeting in Adsuren, the newly formed party was drawn together by a sudden crisis when a villager collapsed after drinking from the town well. What began as a chance encounter quickly became a shared purpose as they set out to discover the source of the poisoning threatening the village. Their investigation led them beneath the settlement, where they fought through restless undead and uncovered a corrupted underground stream. By destroying the unnatural growth tainting the water and recovering its disturbing remnants, the party saved the well and prevented further harm, while realizing their brief alliance had become something more permanent.",
+        "audioLinks": [
+          {
+            "label": "Session 01 Recording",
+            "url": "https://drive.google.com/file/d/1XctceACyRxJYDtrH9AP-j5JPaDDzLsDq/view?usp=drive_link"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "the-silent-vanguard",
+    "name": "The Silent Vanguard",
+    "dm": "Michael Hewson",
+    "schedule": "1st & 3rd Wednesday",
+    "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/the-silent-vanguard",
+    "headerImage": "/images/campaigns/the-silent-vanguard.jpg",
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/7681563"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit?tab=t.0"
+      }
+    ],
+    "party": [
+      {
+        "name": "Jett Blackwood",
+        "player": "Larry McHale"
+      },
+      {
+        "name": "Bedet'Tul",
+        "player": "Brian"
+      },
+      {
+        "name": "Lensworth Fistlemuch",
+        "player": "Tom Chernetsky"
+      },
+      {
+        "name": "Dax Whirren",
+        "player": "Suzanne Chernetsky"
+      },
+      {
+        "name": "Fosslenob Gripefoot",
+        "player": "Michael Hewson"
+      },
+      {
+        "name": "Axel Blackwood",
+        "player": "Larry McHale"
+      },
+      {
+        "name": "Cletus Rashgut",
+        "player": "Brian"
+      },
+      {
+        "name": "Kern",
+        "player": "Tom Chernetsky"
+      },
+      {
+        "name": "Ivy Blackthorn",
+        "player": "Suzanne Chernetsky"
+      }
+    ],
+    "description": "Secret agents assembled by Master Thorne investigate outbreaks, conspiracies, and the ominous phrase The Long Night.",
+    "sessionSummaries": [
+      {
+        "title": "02 - A Town Full of Zombies and a Mysterious Note",
+        "summary": "The party survived the zombie outbreak in Brinecross, escaped the general store and local house, found Harold at the stable, recovered the information and an ivory/statue clue, learned the phrase/location The Long Night, escaped town on horses, returned to Tratta, reported the zombie outbreak, returned a postal horse and mail, leveled up, and met with Thorin on the ship to discuss the clues.",
+        "audioLinks": [
+          {
+            "label": "Session 02 Recording",
+            "url": "https://drive.google.com/file/d/13stRxSl2LUjHQAtApWMCQDiaXuaCAKl7/view?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "01 - We Meet",
+        "summary": "The party's first meeting took place in Tratta, a bustling sandstone harbor city watched over by a wizard's tower and split between public spectacle, dockside crime, hidden tunnels, thieves, spies, and darker powers. Master Thorne gathered six adventurers in a plain canvas tent near the Lower Dock markets, using the noise and cookstalls as cover.",
+        "audioLinks": [
+          {
+            "label": "Session 01 Recording",
+            "url": "https://drive.google.com/file/d/18JILL4c0N8OgVTwK-0eas3S4h23-QzvU/view?usp=drive_link"
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      "silent vanguard"
+    ]
+  }
 ]

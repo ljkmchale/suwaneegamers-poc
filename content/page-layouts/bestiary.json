@@ -1,0 +1,111 @@
+[
+  {
+    "kind": "section",
+    "id": "header"
+  },
+  {
+    "kind": "block",
+    "id": "bestiary-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-bulas",
+    "type": "creature-card",
+    "props": {
+      "name": "Bulas"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-chalyth",
+    "type": "creature-card",
+    "props": {
+      "name": "Chalyth"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-dralg",
+    "type": "creature-card",
+    "props": {
+      "name": "Dralg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-genling",
+    "type": "creature-card",
+    "props": {
+      "name": "Genling"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-gertot",
+    "type": "creature-card",
+    "props": {
+      "name": "Gertot"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-giant-solifugid",
+    "type": "creature-card",
+    "props": {
+      "name": "Giant Solifugid"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-kahlbit",
+    "type": "creature-card",
+    "props": {
+      "name": "Kahlbit"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-leatherback",
+    "type": "creature-card",
+    "props": {
+      "name": "Leatherback"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-narun",
+    "type": "creature-card",
+    "props": {
+      "name": "Narūn"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-rongri",
+    "type": "creature-card",
+    "props": {
+      "name": "Rongri"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-saber",
+    "type": "creature-card",
+    "props": {
+      "name": "Saber"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "bc-thall-mound",
+    "type": "creature-card",
+    "props": {
+      "name": "Thall Mound"
+    }
+  }
+]

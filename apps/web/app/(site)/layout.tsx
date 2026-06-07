@@ -5,7 +5,9 @@ import { getNavConfig } from "@/lib/nav";
 import { getAdminSession } from "@/lib/adminSession";
 import { PageEditOverlay } from "@/components/admin/PageEditOverlay";
 import { getActiveCustomPages } from "@/lib/customPages";
+import { getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
+import { loadTheme } from "@/lib/theme";
 
 export default async function SiteLayout({
   children,
@@ -13,6 +15,9 @@ export default async function SiteLayout({
   children: React.ReactNode;
 }) {
   const navConfig = getNavConfig();
+  const theme = loadTheme();
+  const showParticles = theme.effects?.particles !== false;
+  const particleDensity = theme.effects?.particleDensity ?? "medium";
 
   const session = await getAdminSession();
   const isAdmin = session.isAdmin === true;
@@ -20,13 +25,14 @@ export default async function SiteLayout({
 
   // Paths where the Edit Layout overlay should be available
   const builtInPaths = Object.keys(PAGE_SECTIONS);
+  const campaignDetailPaths = getManagedCampaignDetailPaths();
   const customPaths = getActiveCustomPages().map((p) => `/${p.slug}`);
-  const managedPaths = [...builtInPaths, ...customPaths];
+  const managedPaths = [...builtInPaths, ...campaignDetailPaths, ...customPaths];
 
   return (
     <div className="relative min-h-screen flex flex-col">
       {/* Fixed ambient particle layer */}
-      <ParticleField />
+      {showParticles && <ParticleField density={particleDensity} />}
 
       {/* Navigation */}
       <Navbar

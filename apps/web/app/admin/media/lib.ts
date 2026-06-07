@@ -3,7 +3,11 @@ import path from "path";
 
 const PUBLIC_IMAGES = path.join(process.cwd(), "public/images");
 
-const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".avif"]);
+const ALLOWED_EXTENSIONS = new Set([
+  ".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".avif",
+  ".mp3", ".wav", ".m4a", ".ogg", ".webm", ".flac",
+  ".mp4", ".m4v", ".mov", ".ogv",
+]);
 
 export interface MediaFile {
   path: string;

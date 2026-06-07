@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "section",
+    "id": "header"
+  },
+  {
+    "kind": "block",
+    "id": "campaigns-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-a-new-adventure",
+    "type": "campaign-card",
+    "props": {
+      "id": "a-new-adventure"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-bloody-endeavor",
+    "type": "campaign-card",
+    "props": {
+      "id": "bloody-endeavor"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-dungeons-iii",
+    "type": "campaign-card",
+    "props": {
+      "id": "dungeons-iii"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-heroes-of-emberstran",
+    "type": "campaign-card",
+    "props": {
+      "id": "heroes-of-emberstran"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-mad-mage",
+    "type": "campaign-card",
+    "props": {
+      "id": "mad-mage"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-souls-of-destiny",
+    "type": "campaign-card",
+    "props": {
+      "id": "souls-of-destiny"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-the-silent-vanguard",
+    "type": "campaign-card",
+    "props": {
+      "id": "the-silent-vanguard"
+    }
+  },
+  {
+    "kind": "section",
+    "id": "side-label"
+  },
+  {
+    "kind": "block",
+    "id": "side-campaigns-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "2",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "cc-collective-of-myrdae",
+    "type": "campaign-card",
+    "props": {
+      "id": "collective-of-myrdae"
+    }
+  }
+]

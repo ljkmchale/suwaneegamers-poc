@@ -239,6 +239,7 @@ export function CanvasEditor({
 
   function startMove(e: React.PointerEvent, block: BlockItem) {
     if (e.button !== 0) return;
+    if ((e.target as HTMLElement).closest("[data-canvas-toolbar], [data-resize-handle]")) return;
     e.preventDefault();
     setSelectedId(block.id);
     interactRef.current = {
@@ -301,7 +302,7 @@ export function CanvasEditor({
               top:           screenTop,
               width:         screenW,
               height:        bh,
-              pointerEvents: isEditing ? "none" : "auto",
+              pointerEvents: "auto",
               cursor:        "move",
               outline:       isEditing  ? "2px solid #8b5cf6"
                            : isSelected ? "2px solid #8b5cf6"
@@ -321,6 +322,8 @@ export function CanvasEditor({
             {/* Floating toolbar */}
             {(isSelected || isHovered) && (
               <div
+                data-canvas-toolbar
+                onPointerDown={(e) => e.stopPropagation()}
                 style={{
                   position:      "absolute",
                   [showAbove ? "bottom" : "top"]: showAbove ? "calc(100% + 6px)" : 4,
@@ -391,6 +394,7 @@ export function CanvasEditor({
             {isSelected && ALL_HANDLES.map((h) => (
               <div
                 key={h}
+                data-resize-handle
                 style={handleStyle(h)}
                 onPointerDown={(e) => startResize(e, block, h)}
               />

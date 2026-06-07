@@ -4,7 +4,7 @@ import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Territories",
-  description: "Portal link to Myrdae territories in the Knowledge Base.",
+  description: "Portal link to Myrdae territories in Chronicles.",
 };
 
 export default function TerritoriesPage() {

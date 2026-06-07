@@ -1,9 +1,11 @@
 import { describe, it, expect } from "vitest";
 import {
   ASSET_TYPES,
+  ACTIVE_ASSET_TYPES,
   CARD_LAYOUT_ITEM_TYPES,
   PROFILE_CARD_ITEM_TYPES,
   getAssetDef,
+  resolveMediaPlayerSource,
   type BlockType,
   type AssetTypeDef,
 } from "@/lib/pageBlocks";
@@ -12,10 +14,11 @@ import {
 // Note: legacy data-block types (campaigns-grid, players-grid, etc.) remain in BlockType
 // for backwards compatibility with saved pages but have no ASSET_TYPES entry.
 const ALL_BLOCK_TYPES: BlockType[] = [
-  "divider", "card", "image", "text", "callout", "section-heading",
-  "button-link", "link-list", "gallery", "embed", "spacer", "quote",
+  "divider", "card", "image", "text", "callout", "section-heading", "fold-header",
+  "timeline", "button-link", "link-list", "gallery", "embed", "media-player", "spacer", "quote",
+  "campaign-hero", "campaign-meta", "campaign-links", "campaign-notes", "campaign-roster", "campaign-sessions",
   "page-header", "page-banner", "portal-links",
-  "profile-card", "layout-card", "card-grid", "grid-section",
+  "archived-campaign-card", "deity-card", "profile-card", "layout-card", "card-grid", "grid-section",
 ];
 
 // ── Registry completeness ─────────────────────────────────────────────────────
@@ -38,6 +41,16 @@ describe("ASSET_TYPES registry — completeness", () => {
     const cats = new Set(ASSET_TYPES.map((a) => a.category));
     expect(cats.has("content")).toBe(true);
     expect(cats.has("layout")).toBe(true);
+  });
+
+  it("keeps retired assets registered but out of the add-block picker list", () => {
+    const retired = ["campaign-links", "campaign-notes", "campaign-roster", "campaign-sessions"];
+    const active = new Set(ACTIVE_ASSET_TYPES.map((a) => a.type));
+
+    for (const type of retired) {
+      expect(getAssetDef(type as BlockType)?.retired, `${type} should be retired`).toBe(true);
+      expect(active.has(type as BlockType), `${type} should not be addable`).toBe(false);
+    }
   });
 });
 
@@ -141,12 +154,23 @@ describe("ASSET_TYPES — category membership", () => {
     expect(content).toContain("text");
     expect(content).toContain("callout");
     expect(content).toContain("section-heading");
+    expect(content).toContain("fold-header");
+    expect(content).toContain("timeline");
     expect(content).toContain("button-link");
     expect(content).toContain("link-list");
     expect(content).toContain("gallery");
     expect(content).toContain("embed");
+    expect(content).toContain("media-player");
     expect(content).toContain("spacer");
     expect(content).toContain("quote");
+    expect(content).toContain("campaign-hero");
+    expect(content).toContain("campaign-meta");
+    expect(content).toContain("campaign-links");
+    expect(content).toContain("campaign-notes");
+    expect(content).toContain("campaign-roster");
+    expect(content).toContain("campaign-sessions");
+    expect(content).toContain("archived-campaign-card");
+    expect(content).toContain("deity-card");
   });
 });
 
@@ -163,6 +187,19 @@ describe("defaultProps correctness", () => {
     expect(def.defaultProps.variant).toBe("gold");
   });
 
+  it("fold-header starts closed with editable fold content", () => {
+    const def = getAssetDef("fold-header")!;
+    expect(def.defaultProps).toMatchObject({ defaultState: "closed", foldText: expect.any(String), foldImage: "" });
+  });
+
+  it("timeline has editable entries and orientation", () => {
+    const def = getAssetDef("timeline")!;
+    expect(def.defaultProps).toMatchObject({ orientation: "vertical" });
+    const entries = JSON.parse(def.defaultProps.entries as string);
+    expect(Array.isArray(entries)).toBe(true);
+    expect(entries[0]).toHaveProperty("date");
+  });
+
   it("spacer has md as default size", () => {
     const def = getAssetDef("spacer")!;
     expect(def.defaultProps.size).toBe("md");
@@ -176,6 +213,13 @@ describe("defaultProps correctness", () => {
   it("button-link has primary as default variant", () => {
     const def = getAssetDef("button-link")!;
     expect(def.defaultProps.variant).toBe("primary");
+    expect(def.defaultProps.arrow).toBe("auto");
+    expect(def.fields.find((field) => field.key === "arrow")?.type).toBe("select");
+  });
+
+  it("media-player detects its source type by default", () => {
+    const def = getAssetDef("media-player")!;
+    expect(def.defaultProps).toMatchObject({ src: "", mediaType: "auto", caption: "" });
   });
 
   it("gallery default images prop is valid JSON", () => {
@@ -211,6 +255,54 @@ describe("defaultProps correctness", () => {
       const def = getAssetDef(type)!;
       expect(def.fields).toHaveLength(0);
     }
+  });
+});
+
+describe("resolveMediaPlayerSource", () => {
+  it("converts normal YouTube watch links into privacy-enhanced embeds", () => {
+    expect(resolveMediaPlayerSource("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).toEqual({
+      kind: "youtube",
+      src: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+    });
+  });
+
+  it("converts short YouTube links into embeds", () => {
+    expect(resolveMediaPlayerSource("https://youtu.be/dQw4w9WgXcQ?t=12")).toEqual({
+      kind: "youtube",
+      src: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+    });
+  });
+
+  it("keeps a direct audio file URL for the native audio player", () => {
+    expect(resolveMediaPlayerSource("https://example.com/session.mp3")).toEqual({
+      kind: "audio",
+      src: "https://example.com/session.mp3",
+    });
+  });
+
+  it("uses the video player for uploaded MP4 files", () => {
+    expect(resolveMediaPlayerSource("/images/media/session-recap.mp4")).toEqual({
+      kind: "video",
+      src: "/images/media/session-recap.mp4",
+    });
+  });
+
+  it("converts YouTube Shorts links into embeds", () => {
+    expect(resolveMediaPlayerSource("https://www.youtube.com/shorts/dQw4w9WgXcQ")).toEqual({
+      kind: "youtube",
+      src: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+    });
+  });
+
+  it("turns a Google Drive file share link into an inline preview", () => {
+    expect(resolveMediaPlayerSource("https://drive.google.com/file/d/audio-27/view?usp=sharing")).toEqual({
+      kind: "iframe",
+      src: "https://drive.google.com/file/d/audio-27/preview",
+    });
+  });
+
+  it("rejects a non-YouTube URL when YouTube mode is forced", () => {
+    expect(resolveMediaPlayerSource("https://example.com/session.mp3", "youtube")).toBeNull();
   });
 });
 

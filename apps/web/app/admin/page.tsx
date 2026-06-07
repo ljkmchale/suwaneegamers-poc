@@ -1,9 +1,6 @@
 import Link from "next/link";
 
 const SECTIONS = [
-  { href: "/admin/campaigns", title: "Campaigns", desc: "Add, edit, reorder, or delete campaigns." },
-  { href: "/admin/dungeon-masters", title: "Dungeon Masters", desc: "Edit DM bios and campaign assignments." },
-  { href: "/admin/bestiary", title: "Bestiary", desc: "Add or remove creatures." },
   { href: "/admin/pages", title: "Pages", desc: "Create custom pages and build them with blocks." },
   { href: "/admin/page-layout", title: "Navigation Layout", desc: "Add, remove, rename, and reorder navigation menus and links." },
   { href: "/admin/appearance", title: "Appearance", desc: "Change colors, fonts, and site name." },

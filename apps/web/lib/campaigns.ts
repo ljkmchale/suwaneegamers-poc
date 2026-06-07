@@ -84,6 +84,18 @@ export function findNextCampaignEvent(
     .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())[0];
 }
 
+export function findCampaignForCalendarEvent(
+  event: CalendarEvent,
+  campaigns: PortalCampaign[] = getActiveCampaigns()
+): PortalCampaign | undefined {
+  const title = normalizeCampaignTitle(event.title);
+
+  return campaigns.find((campaign) => {
+    const names = [campaign.name, ...(campaign.aliases ?? [])].map(normalizeCampaignTitle);
+    return names.some((name) => title === name || title.includes(name));
+  });
+}
+
 const LEGACY_STOP_MARKERS = [
   "Previous Characters",
   "Old Notes",

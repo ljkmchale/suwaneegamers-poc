@@ -8,6 +8,8 @@ function isGridChild(item: PageItem): item is BlockItem {
     item.type === "layout-card" ||
     item.type === "card" ||
     item.type === "campaign-card" ||
+    item.type === "archived-campaign-card" ||
+    item.type === "deity-card" ||
     item.type === "player-card" ||
     item.type === "creature-card"
   );

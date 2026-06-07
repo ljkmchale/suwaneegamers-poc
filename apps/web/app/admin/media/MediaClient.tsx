@@ -11,6 +11,13 @@ interface Props {
   currentSubfolder: string;
 }
 
+const AUDIO_EXTENSIONS = [".mp3", ".wav", ".m4a", ".ogg", ".flac"];
+const VIDEO_EXTENSIONS = [".mp4", ".m4v", ".mov", ".ogv", ".webm"];
+
+function hasExtension(filePath: string, extensions: string[]) {
+  return extensions.some((ext) => filePath.toLowerCase().endsWith(ext));
+}
+
 export function MediaClient({ initialFiles, subfolders, currentSubfolder }: Props) {
   const [files, setFiles] = useState(initialFiles);
   const [subfolder, setSubfolder] = useState(currentSubfolder);
@@ -81,14 +88,14 @@ export function MediaClient({ initialFiles, subfolders, currentSubfolder }: Prop
         onClick={() => inputRef.current?.click()}
         className={`border-2 border-dashed rounded-lg p-10 text-center cursor-pointer transition-colors ${dragOver ? "border-[#8b5cf6] bg-[#1a1025]" : "border-[#2a2a35] hover:border-[#5a5060]"}`}
       >
-        <input ref={inputRef} type="file" multiple accept="image/*" className="hidden"
+        <input ref={inputRef} type="file" multiple accept="image/*,audio/*,video/*" className="hidden"
           onChange={(e) => upload(e.target.files)} />
         {uploading ? (
           <p className="text-[#8b5cf6]">Uploading…</p>
         ) : (
           <>
-            <p className="text-[#a89880] mb-1">Drag and drop images here</p>
-            <p className="text-xs text-[#5a5060]">or click to browse — JPG, PNG, WebP, GIF, SVG</p>
+            <p className="text-[#a89880] mb-1">Drag and drop images, audio, or video here</p>
+            <p className="text-xs text-[#5a5060]">or click to browse - JPG, PNG, WebP, GIF, SVG, MP3, WAV, M4A, OGG, FLAC, MP4, MOV, WebM</p>
           </>
         )}
       </div>
@@ -107,8 +114,14 @@ export function MediaClient({ initialFiles, subfolders, currentSubfolder }: Prop
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {files.map((f) => (
             <div key={f.path} className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] overflow-hidden group">
-              <div className="aspect-square relative bg-[#16161e]">
-                <Image src={f.path} alt={f.name} fill className="object-contain p-2" />
+              <div className="aspect-square relative bg-[#16161e] flex items-center justify-center p-2">
+                {hasExtension(f.path, AUDIO_EXTENSIONS) ? (
+                  <audio controls preload="metadata" src={f.path} className="w-full" />
+                ) : hasExtension(f.path, VIDEO_EXTENSIONS) ? (
+                  <video controls preload="metadata" src={f.path} className="max-h-full max-w-full" />
+                ) : (
+                  <Image src={f.path} alt={f.name} fill className="object-contain p-2" />
+                )}
               </div>
               <div className="p-2.5">
                 <p className="text-xs truncate text-[#a89880] mb-2">{f.name}</p>

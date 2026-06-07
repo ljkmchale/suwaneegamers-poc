@@ -4,7 +4,7 @@ import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "Pantheon",
-  description: "Portal link to the Myrdae pantheon in the Knowledge Base.",
+  description: "Portal link to the Myrdae pantheon in Chronicles.",
 };
 
 export default function PantheonPage() {

@@ -3,10 +3,22 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer
-      className="relative z-10 border-t mt-16 py-10"
-      style={{ borderColor: "var(--color-bg-border)" }}
+      className="relative z-10 overflow-hidden border-t py-10"
+      style={{
+        borderColor: "var(--color-bg-border)",
+        background:
+          "linear-gradient(180deg, rgba(8,5,15,0.92) 0%, rgba(8,5,15,0.98) 100%), linear-gradient(90deg, rgba(42,42,53,0.34), rgba(15,10,26,0.72), rgba(42,42,53,0.34))",
+      }}
     >
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-6 text-center sm:text-left">
+      <div
+        className="absolute inset-0 opacity-60"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 0%, rgba(245,158,11,0.10), transparent 32%), radial-gradient(circle at 80% 10%, rgba(139,92,246,0.12), transparent 34%)",
+        }}
+      />
+      <div className="relative max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-6 text-center sm:text-left">
         <Image
           src="/images/suwaneegamers-logo.png"
           alt="Suwanee Gamers"

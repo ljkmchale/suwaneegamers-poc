@@ -1,0 +1,209 @@
+[
+  {
+    "kind": "block",
+    "id": "prev-campaigns-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Campaign Archive",
+      "title": "Previous Campaigns",
+      "description": "Completed and on-hiatus Suwanee Gamers campaigns from the archive.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "previous-campaigns-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-beer-and-dice",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "beer-and-dice",
+      "title": "Beer & Dice",
+      "status": "Completed",
+      "dm": "Chip Poole",
+      "image": "/images/campaigns/archive/beer-and-dice.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-call-for-heroes",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "call-for-heroes",
+      "title": "Call for Heroes",
+      "status": "Completed",
+      "dm": "Sean Poole",
+      "image": "/images/campaigns/archive/call-for-heroes.jpg",
+      "description": "A summons to save the land where others have failed!",
+      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/call-for-heroes?authuser=0",
+      "resources": "[{\"label\":\"D&D Beyond\",\"url\":\"https://www.dndbeyond.com/campaigns/6289874\"},{\"label\":\"Players\",\"url\":\"https://docs.google.com/spreadsheets/d/14nreSmeSaJzDTBg-SUOjGof8I7LLKH1xlnMgvZ3thrg/edit?usp=sharing\"},{\"label\":\"Notes\",\"url\":\"https://docs.google.com/document/d/1kQwLXsKZcslT75sMZxRaAMC-jlWfXR7D6ogpInGgacg/edit?usp=sharing\"}]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-crystal-bottle",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "crystal-bottle",
+      "title": "Crystal Bottle",
+      "status": "On Hiatus",
+      "dm": "Larry McHale",
+      "image": "/images/campaigns/archive/crystal-bottle.jpg",
+      "description": "The Crystal Bottle archive includes the adventuring party, former characters, shared notes, world events, setting history, locations, portals, and magic-item references.",
+      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/crystal-bottle?authuser=0",
+      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit?usp=sharing\"},{\"label\":\"World Events\",\"url\":\"https://docs.google.com/spreadsheets/d/1LVqizTWmIqWG9EtKzJiZpJNAfW_kF1HdRIOC_vqwJsE/edit?pli=1&gid=0#gid=0\"},{\"label\":\"The Forge - VTT\",\"url\":\"https://larrymmchale-arbescar.forge-vtt.com/join\"}]",
+      "party": "[{\"name\":\"Narris\",\"url\":\"https://docs.google.com/document/d/17Ykglf4dOpfUFvzZ0KxisTUi8ibhW0wTT7LMfEe2SNM\"},{\"name\":\"Ren\",\"url\":\"https://docs.google.com/document/d/11V4HBR3QxxBcX70q3zU6yvXw5fmGZRZepRnMTHi1lnw/edit#heading=h.f6efuev4p3kk\"},{\"name\":\"Scarlytt\",\"url\":\"https://docs.google.com/document/d/1R751jMSxtMpYev91WokwlddqCbFwdC2WZBwTboXS16M/edit#heading=h.c8r561vao29x\"},{\"name\":\"Sigil\",\"url\":\"https://docs.google.com/document/d/1gsoFpizdvQCceCZx4vQU3ciLhhAtex9ST9XB8c5tciU/edit#heading=h.pgfwydinuc19\"},{\"name\":\"Galtrelon\"},{\"name\":\"Yvaine\",\"url\":\"https://docs.google.com/document/d/15sutdDEtu9ZR-08F8hOBEHOUB3zYFl9QC1Fyulut6mQ/edit#heading=h.wytg0g5ny630\"}]",
+      "sections": "[{\"title\":\"Former Adventurers\",\"entries\":[\"Dalbyre\",\"Opal\",\"Tass (RIP)\",\"Alteya\"]},{\"title\":\"Archive Index\",\"entries\":[\"Sessions\",\"Arbescar\",\"Timelines\",\"History\",\"Large Shards\",\"Council of Six\",\"ALM\",\"NPCs\",\"Portal Shards\",\"Locations\",\"Portals\",\"Talba'sar\",\"Magic Items\",\"Scarbrook\",\"Marrowdale\"]}]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-imminent-domain",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "imminent-domain",
+      "title": "Imminent Domain",
+      "status": "On Hiatus",
+      "dm": "Chip Poole",
+      "image": "/images/campaigns/archive/imminent-domain.jpg",
+      "description": "A kingdom-building archive centered on Staghaven and the Kilgreen borderlands, with blue books, locations, campaign rules, and the kingdom charter.",
+      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/imminent-domain?authuser=0",
+      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1UxJ8GCbKf-zBkeKwnwZxycX2Ufg7vRoPfGeCKXxKcBU/edit?usp=sharing\"},{\"label\":\"PC Info for DM\",\"url\":\"https://docs.google.com/spreadsheets/d/17UDoBUJDDFFru4-XrD2GJa5AG2PaO7koQ10-vwrI8kU/edit?usp=sharing\"},{\"label\":\"Hex Map Slide\",\"url\":\"https://docs.google.com/presentation/d/1dILDF74YaD2P46hsyuqeM5Ewyuk2Xn1UKoTaZkV4zB8/edit?usp=sharing\"}]",
+      "party": "[{\"name\":\"Dallas\",\"url\":\"https://docs.google.com/document/d/1FntiME8YaX4Kc0RzRtDs4c5kUMfm9fVbjJ0cOsBFmF4/edit?usp=sharing\"},{\"name\":\"Fenwick\",\"url\":\"https://docs.google.com/document/d/1vbPZ4KA_dp0NkslZravFP2vsyDgMqcxGLw08Oc_7qgY/edit?usp=sharing\"},{\"name\":\"H'nuute\",\"url\":\"https://docs.google.com/document/d/1a8bVVjwiWbDsh3xDR0fAkSDiDSleV7kxhi9Y71v71Z8/edit?usp=sharing\"},{\"name\":\"Rhys\",\"url\":\"https://docs.google.com/document/d/11Q54rxxJT3hvCrtuOVvtQWnNyV3wOkI2oCIq76o0N5c/edit?usp=sharing\"},{\"name\":\"Shagrol\",\"url\":\"https://docs.google.com/document/d/1qdV5jZehU3M3ZYR9EispwXC5atn1g41fSvtIVa21Ilw/edit?usp=sharing\"},{\"name\":\"Sydriel\",\"url\":\"https://docs.google.com/document/d/1nhhVgpluErJ8mwdmohOcYBQlTkbk4iHCb9cGhJIsk5k/edit?usp=sharing\"}]",
+      "sections": "[{\"title\":\"Locations\",\"entries\":[\"Annagos\",\"Edgewind\",\"Deston's Trading Post\",\"Rosevale\",\"Ulkef\"]},{\"title\":\"Staghaven\",\"entries\":[\"Lady Lieryn (from House of Ronefel) - Advisor - drow\",\"Feck van Hyden - Assistant to the Advisor - human\",\"Gilibur Sivay - Head guard - human\",\"Auchs - Assistant to the guard\",\"Beyla Ramhearth - Blacksmith - dwarf\",\"Kroft Hindergrass - Brewer - half-elf\",\"Diggu Balldown - Inn Owner - half-orc\"]},{\"title\":\"Kingdom Charter\",\"content\":\"The bearers of this charter, having delivered the northern reaches of the Kilgreen from banditry and other hazards, are granted the right to rule and protect a new nation south of the Borderland with the support of Ulkef and Raisland.\"},{\"title\":\"Original Charter\",\"content\":\"The bearer of this charter is granted the right of exploration and travel within the wilderness regions known as the Borderland and the Kilgreen, west and south of Deston's Trading Post, and charged to strive against banditry and unlawful behavior.\"}]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-legends-of-larch",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "legends-of-larch",
+      "title": "Legends of Larch",
+      "status": "Completed",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/legends-of-larch.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-mead-society",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "mead-society",
+      "title": "MEAD Society",
+      "status": "Completed",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/mead-society.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-middle-earth",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "middle-earth",
+      "title": "Middle Earth",
+      "status": "On Hiatus",
+      "dm": "Michael Hewson",
+      "image": "/images/campaigns/archive/middle-earth.png",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-obliged-corpses",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "obliged-corpses",
+      "title": "Obliged Corpses",
+      "status": "On Hiatus",
+      "dm": "Chip Poole",
+      "image": "/images/campaigns/archive/obliged-corpses.png",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-strahd-avernus",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "strahd-avernus",
+      "title": "Strahd / Avernus",
+      "status": "Completed",
+      "dm": "Chris Glynn",
+      "image": "/images/campaigns/archive/strahd-avernus.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-storm-kings-thunder",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "storm-kings-thunder",
+      "title": "Storm King's Thunder",
+      "status": "Completed",
+      "dm": "Chris Glynn",
+      "image": "/images/campaigns/archive/storm-kings-thunder.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-the-company",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "the-company",
+      "title": "The Company",
+      "status": "Completed",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/the-company.jpg",
+      "description": "An archived adventuring company with a linked character roster and shared player and Dungeon Master materials.",
+      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/the-company?authuser=0",
+      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1_ZCiO6XowP1Oab5XpeqPNg_Qx_OOQOr8cdb_ngU8wGQ/edit?usp=sharing\"},{\"label\":\"Player's Info for DM\",\"url\":\"https://docs.google.com/spreadsheets/d/1S-vsocOXM8s7lod3ghpo3SHNRjnYn9DQI0YwFzDjX7E/edit?usp=sharing\"},{\"label\":\"D&D Beyond\",\"url\":\"https://www.dndbeyond.com/campaigns/1397765\"},{\"label\":\"DM Material\",\"url\":\"https://drive.google.com/drive/folders/1hiRfbEKs8NIDtuT2IoJmgtAc57XjOahY?usp=sharing\"}]",
+      "party": "[{\"name\":\"Charlo Sand-O'Foot\",\"url\":\"https://www.dndbeyond.com/characters/31311185\"},{\"name\":\"Edisen Mullendore\",\"url\":\"https://www.dndbeyond.com/characters/36265204\"},{\"name\":\"Mokai Lostwanderer\",\"url\":\"https://www.dndbeyond.com/characters/91033064\"},{\"name\":\"Muckbuckle\",\"url\":\"https://www.dndbeyond.com/characters/53279445\"},{\"name\":\"Pyrry Wynlyte\",\"url\":\"https://www.dndbeyond.com/characters/130341470\"},{\"name\":\"Tam Rowansdottir\",\"url\":\"https://www.dndbeyond.com/characters/35739512\"}]",
+      "sections": "[]"
+    }
+  }
+]

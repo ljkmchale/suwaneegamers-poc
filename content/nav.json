@@ -15,9 +15,9 @@
           "label": "Campaigns"
         },
         {
-          "id": "chronicle-y28n",
-          "label": "Chronicle",
-          "href": "/chronicle"
+          "id": "chronicles-y28n",
+          "label": "Chronicles",
+          "href": "https://kb.suwaneegamers.net/"
         },
         {
           "id": "dungeon-masters",
@@ -82,9 +82,14 @@
       "label": "Toolset",
       "items": [
         {
-          "id": "knowledge-base",
-          "href": "http://kb.suwaneegamers.net",
-          "label": "Knowledge Base"
+          "id": "campaign-setting",
+          "href": "/campaign-setting",
+          "label": "Campaign Setting"
+        },
+        {
+          "id": "reference-for-dungeon-masters",
+          "href": "/reference-for-dungeon-masters",
+          "label": "DM Reference"
         },
         {
           "id": "gazetteer",

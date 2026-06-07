@@ -1,0 +1,63 @@
+[
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-back",
+    "type": "button-link",
+    "props": {
+      "label": "Campaigns",
+      "href": "/campaigns",
+      "align": "left",
+      "variant": "text",
+      "arrow": "left",
+      "width": "campaign"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-hero",
+    "type": "campaign-hero",
+    "props": {
+      "eyebrow": "Campaign",
+      "title": "Collective of Myrdae",
+      "image": "/images/campaigns/collective-of-myrdae.jpg",
+      "imagePosition": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-meta",
+    "type": "campaign-meta",
+    "props": {
+      "schedule": "Varies by table",
+      "dm": "Rotating DMs",
+      "campaignName": "Collective of Myrdae"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-resources-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"resources_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"2\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"resource_campaign-link-a_1\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Link (A)\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/6166853\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_campaign-link-b_2\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Link (B)\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/6343973\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_join-link-a_3\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Join Link A\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/join/61668534168762738\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_join-link-b_4\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Join Link (B)\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/join/6343973969925474\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_collective-availability_5\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Collective Availability\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/spreadsheets/d/1MtEAVh3QJ_oHBasE9Qw2Oq65BxAigtC5GjBQ0eQJ6Qc/edit?usp=sharing\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_campaign-page_6\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Page\\\",\\n      \\\"href\\\": \\\"https://sites.google.com/view/suwanee-gamers/campaigns/collective-of-myrdae\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-notes-roster-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"notes_roster_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"2\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"notes_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Notes\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"notes_text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"A pickup-group pool for players to keep characters ready for smaller adventures and shared sessions across the wider table.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "collective-of-myrdae-sessions-card",
+    "type": "layout-card",
+    "props": {
+      "width": "campaign",
+      "items": "[\n  {\n    \"id\": \"sessions_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"1\",\n      \"rows\": \"3\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"sessions_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session Summaries\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"pickup-character-pool_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Pickup Character Pool\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"pickup-character-pool_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"This is not an official campaign. It is a place for players to keep characters ready for pickup groups or smaller session groups using D&D 2024 rules.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  }
+]

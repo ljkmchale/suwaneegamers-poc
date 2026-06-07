@@ -15,6 +15,9 @@ import {
 } from "@dnd-kit/core";
 
 import type { CardLayoutItem } from "@/lib/pageBlocks";
+import { resolveMediaPlayerSource } from "@/lib/pageBlocks";
+
+export const CARD_LAYOUT_MAX_ROWS = 120;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -43,7 +46,7 @@ export function parseCardLayoutProps(props: Record<string, unknown>) {
   return {
     gridRoot,
     columns: numProp(gridRoot.props.columns, 2, 1, 6),
-    rows:    numProp(gridRoot.props.rows, 1, 1, 10),
+    rows:    numProp(gridRoot.props.rows, 1, 1, CARD_LAYOUT_MAX_ROWS),
     gap:     (gridRoot.props.gap as string) ?? "md",
     gridItems: parseGridItems(gridRoot.props.items),
   };
@@ -72,9 +75,9 @@ export function findFreeCell(
   const occupied = new Set<string>();
   for (const item of items) {
     const c  = numProp(item.props.col, 1, 1, 6);
-    const r  = numProp(item.props.row, 1, 1, 10);
+    const r  = numProp(item.props.row, 1, 1, CARD_LAYOUT_MAX_ROWS);
     const cs = numProp(item.props.colSpan, 1, 1, 6);
-    const rs = numProp(item.props.rowSpan, 1, 1, 10);
+    const rs = numProp(item.props.rowSpan, 1, 1, CARD_LAYOUT_MAX_ROWS);
     for (let dc = 0; dc < cs; dc++) {
       for (let dr = 0; dr < rs; dr++) {
         occupied.add(`${c + dc}-${r + dr}`);
@@ -98,10 +101,10 @@ function computeExpandOverrides(
   let reqCols = columns;
   let reqRows = rows;
   for (const item of items) {
-    const c  = numProp(item.props.col, 1);
-    const r  = numProp(item.props.row, 1);
-    const cs = numProp(item.props.colSpan, 1);
-    const rs = numProp(item.props.rowSpan, 1);
+    const c  = numProp(item.props.col, 1, 1, 6);
+    const r  = numProp(item.props.row, 1, 1, CARD_LAYOUT_MAX_ROWS);
+    const cs = numProp(item.props.colSpan, 1, 1, 6);
+    const rs = numProp(item.props.rowSpan, 1, 1, CARD_LAYOUT_MAX_ROWS);
     reqCols = Math.max(reqCols, c + cs - 1);
     reqRows = Math.max(reqRows, r + rs - 1);
   }
@@ -117,6 +120,9 @@ export const GRID_TYPE_META: Record<string, { label: string; icon: string; color
   grid:         { label: "Grid",       icon: "⊞", color: "#8b5cf6" },
   header:       { label: "Header",     icon: "H", color: "#f59e0b" },
   text:         { label: "Text",       icon: "T", color: "#60a5fa" },
+  link:         { label: "Link",       icon: "->", color: "#f59e0b" },
+  "audio-link": { label: "Recording",  icon: "ear", color: "#f59e0b" },
+  "media-player": { label: "Player",   icon: ">", color: "#f59e0b" },
   "inner-card": { label: "Inner Card", icon: "◧", color: "#a78bfa" },
   image:        { label: "Image",      icon: "▣", color: "#34d399" },
   divider:      { label: "Divider",    icon: "—", color: "#5a5060" },
@@ -129,10 +135,12 @@ function GridCell({
   col,
   row,
   dragging,
+  active,
 }: {
   col: number;
   row: number;
   dragging: boolean;
+  active: boolean;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: `gc::${col}-${row}` });
   return (
@@ -141,14 +149,15 @@ function GridCell({
       style={{
         gridColumn: col,
         gridRow: row,
-        border: `1px dashed ${isOver ? "#8b5cf6" : "rgba(255,255,255,0.28)"}`,
+        minHeight: active ? 48 : 0,
+        border: `1px dashed ${isOver ? "#8b5cf6" : active ? "rgba(255,255,255,0.22)" : "transparent"}`,
         background: isOver
           ? "rgba(139,92,246,0.15)"
           : dragging
           ? "rgba(255,255,255,0.05)"
-          : "rgba(255,255,255,0.04)",
+          : "transparent",
         borderRadius: 4,
-        transition: "background 0.1s, border-color 0.1s",
+        transition: "background 0.1s, border-color 0.1s, min-height 0.1s",
         zIndex: dragging ? 5 : 1,
         pointerEvents: dragging ? "auto" : "none",
       }}
@@ -162,23 +171,83 @@ function ItemContent({ item }: { item: CardLayoutItem }) {
   switch (item.type) {
     case "header":
       return (
-        <div style={{ padding: "4px 0" }}>
+        <div>
           {item.props.eyebrow ? (
             <p style={{ fontSize: "0.6rem", fontFamily: "var(--font-cinzel, serif)", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: 4, color: "var(--color-accent-arcane)" }}>
               {item.props.eyebrow as string}
             </p>
           ) : null}
-          <h2 style={{ fontFamily: "var(--font-cinzel, serif)", fontSize: item.props.size === "lg" ? "1.25rem" : "1rem", lineHeight: 1.2, color: "var(--color-text-primary)", margin: 0 }}>
+          <h2 style={{ fontFamily: "var(--font-cinzel, serif)", fontSize: item.props.size === "lg" ? "1.5rem" : "1.125rem", lineHeight: 1.2, color: item.props.color === "gold" ? "var(--color-accent-gold)" : "var(--color-text-primary)", margin: 0 }}>
             {(item.props.title as string | undefined) ?? "(no title)"}
           </h2>
         </div>
       );
     case "text":
       return (
-        <p style={{ fontSize: "0.8rem", lineHeight: 1.6, color: "var(--color-text-secondary)", whiteSpace: "pre-wrap", margin: 0 }}>
+        <p style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "var(--color-text-secondary)", whiteSpace: "pre-wrap", margin: 0 }}>
           {(item.props.content as string | undefined) ?? ""}
         </p>
       );
+    case "link":
+      return (
+        <span style={{
+          display: "inline-flex",
+          border: "1px solid var(--color-bg-border)",
+          borderRadius: 6,
+          padding: "6px 10px",
+          fontSize: "0.6rem",
+          fontFamily: "var(--font-cinzel, serif)",
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          color: item.props.variant === "secondary" ? "var(--color-text-secondary)" : "var(--color-accent-gold)",
+        }}>
+          {(item.props.label as string | undefined) ?? "Link"}
+        </span>
+      );
+    case "audio-link":
+      return (
+        <div style={{
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          border: "1px solid var(--color-bg-border)",
+          background: "rgba(0,0,0,.2)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "var(--color-accent-gold)",
+          fontSize: 10,
+          fontFamily: "var(--font-cinzel, serif)",
+          textAlign: "center",
+        }}>
+          REC
+        </div>
+      );
+    case "media-player": {
+      const title = (item.props.title as string | undefined) ?? "Media Player";
+      const source = resolveMediaPlayerSource(
+        (item.props.src as string | undefined) ?? "",
+        (item.props.mediaType as string | undefined) ?? "auto",
+      );
+      return (
+        <div style={{
+          border: "1px solid var(--color-bg-border)",
+          borderRadius: 6,
+          padding: "8px 10px",
+          background: "rgba(0,0,0,.2)",
+          color: "var(--color-text-secondary)",
+          fontSize: "0.7rem",
+          minHeight: 54,
+        }}>
+          <p style={{ margin: 0, fontFamily: "var(--font-cinzel, serif)", color: "var(--color-accent-gold)", fontSize: "0.65rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            {title}
+          </p>
+          <p style={{ margin: "6px 0 0", color: "var(--color-text-muted)", fontSize: "0.62rem" }}>
+            {source ? "Internal player" : "Missing media URL"}
+          </p>
+        </div>
+      );
+    }
     case "image": {
       const src = item.props.src as string | undefined;
       return src ? (
@@ -208,6 +277,14 @@ function ItemContent({ item }: { item: CardLayoutItem }) {
       const name = item.props.name as string | undefined;
       const role = item.props.role as string | undefined;
       const img  = item.props.img  as string | undefined;
+      if (item.props.variant === "tile") {
+        return (
+          <div style={{ border: "1px solid var(--color-bg-border)", borderRadius: 6, padding: "0.5rem 0.75rem", color: "var(--color-text-secondary)", fontSize: "0.875rem" }}>
+            <span style={{ display: "block" }}>{name ?? "(no name)"}</span>
+            {role && <span style={{ display: "block", marginTop: 4, fontSize: "0.75rem", color: "var(--color-text-muted)" }}>{role}</span>}
+          </div>
+        );
+      }
       return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "4px 0" }}>
           {img ? (
@@ -314,9 +391,9 @@ function GridItemTile({
 }) {
   const [hovered, setHovered] = useState(false);
   const col     = numProp(item.props.col, 1, 1, 6);
-  const row     = numProp(item.props.row, 1, 1, 10);
-  const colSpan = numProp(item.props.colSpan, 1);
-  const rowSpan = numProp(item.props.rowSpan, 1);
+  const row     = numProp(item.props.row, 1, 1, CARD_LAYOUT_MAX_ROWS);
+  const colSpan = numProp(item.props.colSpan, 1, 1, 6);
+  const rowSpan = numProp(item.props.rowSpan, 1, 1, CARD_LAYOUT_MAX_ROWS);
   const meta    = GRID_TYPE_META[item.type] ?? { label: item.type, icon: "?", color: "#5a5060" };
 
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
@@ -342,7 +419,7 @@ function GridItemTile({
         outlineOffset: "-1px",
         borderRadius: 4,
         cursor:       "pointer",
-        padding:      "8px 10px",
+        padding:      0,
         position:     "relative",
         overflow:     "visible",
         userSelect:   "none",
@@ -425,7 +502,7 @@ function DragPreview({ item }: { item: CardLayoutItem }) {
 
 // ── Main exported component ───────────────────────────────────────────────────
 
-const ROW_HEIGHT = 88;
+const ROW_MIN_HEIGHT = 48;
 
 interface ResizeState {
   itemId: string;
@@ -540,6 +617,7 @@ export function CardLayoutGridEditor({
   const { gridRoot, columns, rows, gap, gridItems } = parsed;
   const gapCss = gap === "sm" ? "0.5rem" : gap === "lg" ? "1.25rem" : "0.75rem";
   const isDragging = activeItem !== null;
+  const showScaffold = isDragging || isResizing;
 
   // Keep latestRef in sync every render
   latestRef.current = { gridItems, columns, rows, gap, props, gridRoot, onPropsChange };
@@ -600,14 +678,24 @@ export function CardLayoutGridEditor({
   const cells: React.ReactNode[] = [];
   for (let r = 1; r <= rows; r++) {
     for (let c = 1; c <= columns; c++) {
-      cells.push(<GridCell key={`${c}-${r}`} col={c} row={r} dragging={isDragging} />);
+      cells.push(<GridCell key={`${c}-${r}`} col={c} row={r} dragging={isDragging} active={showScaffold} />);
     }
   }
 
   return (
-    <article className="fantasy-card p-5 md:p-6" onClick={() => onSelect(null)}>
+    <article className="fantasy-card relative p-5 md:p-6" onClick={() => onSelect(null)}>
       {/* Grid legend */}
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+      <div style={{
+        position: "absolute",
+        left: 24,
+        right: 24,
+        top: 10,
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        opacity: showScaffold ? 0.9 : 0.42,
+        pointerEvents: "none",
+      }}>
         <span style={{ fontSize: 9, fontFamily: "var(--font-cinzel, serif)", color: "#5a5060", letterSpacing: "0.2em", textTransform: "uppercase" }}>
           {columns} col × {rows} row
         </span>
@@ -626,7 +714,7 @@ export function CardLayoutGridEditor({
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-            gridTemplateRows: `repeat(${rows}, ${ROW_HEIGHT}px)`,
+            gridTemplateRows: `repeat(${rows}, minmax(${showScaffold ? ROW_MIN_HEIGHT : 0}px, auto))`,
             gap: gapCss,
           }}
         >

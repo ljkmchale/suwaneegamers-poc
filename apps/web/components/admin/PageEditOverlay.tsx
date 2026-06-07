@@ -10,16 +10,19 @@ import {
   KeyboardSensor,
   useSensor,
   useSensors,
+  useDroppable,
   type DragEndEvent,
   type DragStartEvent,
   type Active,
 } from "@dnd-kit/core";
+import { FoldHeaderBlock } from "@/components/blocks/FoldHeaderBlock";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { savePageLayoutAction } from "@/app/admin/page-layout/actions";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import {
   getAssetDef,
+  resolveMediaPlayerSource,
   type PageItem,
   type BlockItem,
   type BlockType,
@@ -29,7 +32,7 @@ import {
 } from "@/lib/pageBlocks";
 import { PageDragLayer } from "./PageDragLayer";
 import { PageEditPanel } from "./PageEditPanel";
-import { CardLayoutGridEditor } from "./CardLayoutGridEditor";
+import { CardLayoutGridEditor, CARD_LAYOUT_MAX_ROWS } from "./CardLayoutGridEditor";
 import { BlockPicker } from "./BlockPicker";
 import { CanvasEditor, nextCanvasPosition } from "./CanvasEditor";
 
@@ -38,6 +41,22 @@ import { CanvasEditor, nextCanvasPosition } from "./CanvasEditor";
 type DragData =
   | { kind: "existing"; dndId: string }
   | { kind: "new-asset"; assetType: BlockType };
+
+function CanvasAssetDropZone({ active }: { active: boolean }) {
+  const { setNodeRef, isOver } = useDroppable({ id: "canvas-drop" });
+  return (
+    <div
+      ref={setNodeRef}
+      className="fixed left-0 right-[288px] top-0 bottom-0 z-[46]"
+      style={{
+        pointerEvents: active ? "auto" : "none",
+        background: isOver ? "rgba(139,92,246,0.08)" : "transparent",
+        outline: isOver ? "2px dashed rgba(167,139,250,0.9)" : "none",
+        outlineOffset: "-10px",
+      }}
+    />
+  );
+}
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -68,6 +87,17 @@ function parseDraftItems(raw: unknown): CardLayoutItem[] {
   }
 }
 
+function parseDraftTimelineEntries(raw: unknown): Array<{ date?: string; title?: string; description?: string; events?: string[] }> {
+  if (Array.isArray(raw)) return raw as Array<{ date?: string; title?: string; description?: string; events?: string[] }>;
+  if (typeof raw !== "string") return [];
+  try {
+    const parsed = JSON.parse(raw || "[]");
+    return Array.isArray(parsed) ? (parsed as Array<{ date?: string; title?: string; description?: string; events?: string[] }>) : [];
+  } catch {
+    return [];
+  }
+}
+
 function clampNumber(value: unknown, fallback: number, min: number, max: number) {
   const parsed = Number.parseInt(String(value ?? ""), 10);
   if (!Number.isFinite(parsed)) return fallback;
@@ -76,9 +106,9 @@ function clampNumber(value: unknown, fallback: number, min: number, max: number)
 
 function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
   const col = clampNumber(item.props.col, 1, 1, 6);
-  const row = clampNumber(item.props.row, 1, 1, 10);
+  const row = clampNumber(item.props.row, 1, 1, CARD_LAYOUT_MAX_ROWS);
   const colSpan = clampNumber(item.props.colSpan, 1, 1, 6);
-  const rowSpan = clampNumber(item.props.rowSpan, 1, 1, 10);
+  const rowSpan = clampNumber(item.props.rowSpan, 1, 1, CARD_LAYOUT_MAX_ROWS);
   const hasPlacement = item.props.col || item.props.row || item.props.colSpan || item.props.rowSpan;
   const placement = hasPlacement ? {
     gridColumn: `${col} / span ${colSpan}`,
@@ -87,7 +117,7 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
 
   if (item.type === "grid") {
     const columns = clampNumber(item.props.columns, 2, 1, 6);
-    const rows = clampNumber(item.props.rows, 1, 1, 10);
+    const rows = clampNumber(item.props.rows, 1, 1, CARD_LAYOUT_MAX_ROWS);
     const gap = item.props.gap === "sm" ? "0.5rem" : item.props.gap === "lg" ? "1.25rem" : "0.75rem";
     return (
       <div style={placement}>
@@ -116,7 +146,7 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
         ) : null}
         {item.props.title ? (
           <h2 className={`font-cinzel leading-tight ${item.props.size === "lg" ? "text-2xl" : "text-lg"}`}
-            style={{ color: "var(--color-text-primary)" }}>
+            style={{ color: item.props.color === "gold" ? "var(--color-accent-gold)" : "var(--color-text-primary)" }}>
             {item.props.title as string}
           </h2>
         ) : null}
@@ -129,6 +159,103 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
       <p className="whitespace-pre-wrap text-sm leading-relaxed" style={{ ...placement, color: "var(--color-text-secondary)" }}>
         {(item.props.content as string | undefined) ?? ""}
       </p>
+    );
+  }
+
+  if (item.type === "link") {
+    return (
+      <div style={placement} className="flex items-end">
+        <a
+          href={(item.props.href as string | undefined) ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex rounded-md border px-4 py-2 font-cinzel text-xs tracking-widest uppercase transition-colors hover:border-amber-400"
+          style={{
+            borderColor: "var(--color-bg-border)",
+            color: item.props.variant === "secondary" ? "var(--color-text-secondary)" : "var(--color-accent-gold)",
+          }}
+        >
+          {(item.props.label as string | undefined) ?? "Link"}
+        </a>
+      </div>
+    );
+  }
+
+  if (item.type === "audio-link") {
+    return (
+      <div style={placement}>
+        <a
+          href={(item.props.href as string | undefined) ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex h-14 w-14 items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400"
+          style={{ borderColor: "var(--color-bg-border)", boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)" }}
+          title={(item.props.label as string | undefined) ?? "Session recording"}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/dragon-ears.png" alt="" className="h-full w-full rounded-full object-contain" />
+        </a>
+      </div>
+    );
+  }
+
+  if (item.type === "media-player") {
+    const title = (item.props.title as string | undefined)?.trim();
+    const caption = (item.props.caption as string | undefined)?.trim();
+    const displayMode = (item.props.displayMode as string | undefined) ?? "full";
+    const source = resolveMediaPlayerSource(
+      (item.props.src as string | undefined) ?? "",
+      (item.props.mediaType as string | undefined) ?? "auto",
+    );
+    return (
+      <div style={placement} className="min-w-0">
+        {displayMode === "image-button" ? (
+          <details className="group">
+            <summary
+              title={title || "Play media"}
+              className="inline-flex h-14 w-14 cursor-pointer list-none items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400 [&::-webkit-details-marker]:hidden"
+              style={{ borderColor: "var(--color-bg-border)", boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={(item.props.image as string | undefined) || "/images/dragon-ears.png"} alt="" className="h-full w-full rounded-full object-contain" />
+            </summary>
+            <div className="mt-3 min-w-0">
+              {!source ? (
+                <div className="flex h-24 items-center justify-center rounded-md border" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+                  <p className="font-cinzel text-[0.65rem] tracking-widest" style={{ color: "var(--color-text-muted)" }}>Media Player - paste a media URL</p>
+                </div>
+              ) : source.kind === "audio" ? (
+                <audio controls preload="metadata" src={source.src} className="w-full" />
+              ) : source.kind === "video" ? (
+                <video controls preload="metadata" src={source.src} className="w-full rounded-md" />
+              ) : (
+                <div className={source.kind === "youtube" ? "aspect-video" : "h-24 sm:h-32"}>
+                  <iframe src={source.src} title={title || "Embedded media"} className="h-full w-full rounded-md border-0" />
+                </div>
+              )}
+              {caption && <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>{caption}</p>}
+            </div>
+          </details>
+        ) : (
+          <>
+            {title && <p className="mb-2 font-cinzel text-xs tracking-widest uppercase" style={{ color: "var(--color-accent-gold)" }}>{title}</p>}
+            {!source ? (
+              <div className="flex h-24 items-center justify-center rounded-md border" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+                <p className="font-cinzel text-[0.65rem] tracking-widest" style={{ color: "var(--color-text-muted)" }}>Media Player - paste a media URL</p>
+              </div>
+            ) : source.kind === "audio" ? (
+              <audio controls preload="metadata" src={source.src} className="w-full" />
+            ) : source.kind === "video" ? (
+              <video controls preload="metadata" src={source.src} className="w-full rounded-md" />
+            ) : (
+              <div className={source.kind === "youtube" ? "aspect-video" : "h-24 sm:h-32"}>
+                <iframe src={source.src} title={title || "Embedded media"} className="h-full w-full rounded-md border-0" />
+              </div>
+            )}
+            {caption && <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>{caption}</p>}
+          </>
+        )}
+      </div>
     );
   }
 
@@ -147,11 +274,17 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
 
   if (item.type === "image") {
     const src = item.props.src as string | undefined;
+    const objectPosition = (item.props.objectPosition as string | undefined) ?? "center";
     if (!src) return null;
     return (
       <div className="min-h-36 overflow-hidden rounded-md border" style={{ ...placement, borderColor: "var(--color-bg-border)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={(item.props.alt as string | undefined) ?? ""} className={`h-full min-h-36 w-full ${item.props.fit === "contain" ? "object-contain p-3" : "object-cover"}`} />
+        <img
+          src={src}
+          alt={(item.props.alt as string | undefined) ?? ""}
+          className={`h-full min-h-36 w-full ${item.props.fit === "contain" ? "object-contain p-3" : "object-cover"}`}
+          style={{ objectPosition }}
+        />
       </div>
     );
   }
@@ -164,6 +297,23 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
     const name = item.props.name as string | undefined;
     const role = item.props.role as string | undefined;
     const img  = item.props.img  as string | undefined;
+    if (item.props.variant === "tile") {
+      return (
+        <div
+          style={{
+            ...placement,
+            border: "1px solid var(--color-bg-border)",
+            borderRadius: 6,
+            padding: "0.5rem 0.75rem",
+            color: "var(--color-text-secondary)",
+            fontSize: "0.875rem",
+          }}
+        >
+          <span className="block">{name}</span>
+          {role && <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>{role}</span>}
+        </div>
+      );
+    }
     return (
       <div style={{ ...placement, display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "4px 0" }}>
         {img ? (
@@ -181,6 +331,117 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
   }
 
   return null;
+}
+
+function DraftTimelineBar({
+  item,
+  eyebrow,
+  title,
+  description,
+  orientation,
+  entries,
+}: {
+  item: BlockItem;
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  orientation: string;
+  entries: Array<{ date?: string; title?: string; description?: string }>;
+}) {
+  const accents = [
+    "var(--color-accent-arcane)",
+    "var(--color-accent-gold)",
+    "var(--color-accent-ice)",
+    "var(--color-accent-blood)",
+  ];
+  const visibleEntries = entries.filter((entry) => entry.date || entry.title || entry.description);
+  const label = (entry: { date?: string; title?: string; description?: string }, accent: string, align: "center" | "left" = "center") => (
+    <div className={align === "center" ? "text-center" : "text-left"}>
+      {entry.date && (
+        <p className="font-cinzel text-[0.65rem] tracking-[0.28em] uppercase" style={{ color: accent }}>
+          {entry.date}
+        </p>
+      )}
+      {entry.title && (
+        <h3 className="mt-1 font-cinzel text-sm leading-tight" style={{ color: "var(--color-text-primary)" }}>
+          {entry.title}
+        </h3>
+      )}
+      {entry.description && (
+        <p className="mt-2 text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          {entry.description}
+        </p>
+      )}
+    </div>
+  );
+
+  return (
+    <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-8">
+      <div className="fantasy-card overflow-hidden p-5">
+        <header className="mb-6 text-center">
+          {eyebrow && <p className="font-cinzel text-xs tracking-[0.35em] uppercase" style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>}
+          <h2 className="mt-2 font-cinzel text-2xl tracking-widest uppercase" style={{ color: "var(--color-text-primary)" }}>{title}</h2>
+          {description && <p className="mx-auto mt-2 max-w-3xl text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{description}</p>}
+        </header>
+        {orientation === "vertical" ? (
+          <div className="relative mx-auto max-w-3xl space-y-5 pl-8 before:absolute before:bottom-0 before:left-8 before:top-0 before:w-2 before:rounded-full before:bg-[var(--color-bg-border)]">
+            {visibleEntries.map((entry, index) => {
+              const accent = accents[index % accents.length];
+              return (
+                <div key={`${entry.date}-${entry.title}-${index}`} className="relative pl-10">
+                  <span className="absolute left-[-0.68rem] top-3 z-10 h-6 w-6 rounded-full border-4" style={{ borderColor: accent, background: "var(--color-bg-deep)" }} />
+                  <article className="rounded-md border p-4" style={{ borderColor: accent, background: "rgba(15,10,26,.78)" }}>
+                    {label(entry, accent, "left")}
+                  </article>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="overflow-x-auto pb-2">
+            <div className="relative grid min-w-[58rem] grid-rows-[minmax(7rem,auto)_4rem_minmax(7rem,auto)] px-5">
+              <div className="absolute left-8 right-8 top-1/2 h-2 -translate-y-1/2 rounded-full" style={{ background: "linear-gradient(90deg, var(--color-accent-arcane), var(--color-accent-gold), var(--color-accent-ice), var(--color-accent-blood))" }} />
+              <div className="col-start-1 row-start-1 grid" style={{ gridTemplateColumns: `repeat(${visibleEntries.length}, minmax(9rem, 1fr))` }}>
+                {visibleEntries.map((entry, index) => {
+                  const accent = accents[index % accents.length];
+                  return index % 2 === 0 ? (
+                    <div key={`${entry.date}-top-${index}`} className="px-2 pb-4">
+                      {label(entry, accent)}
+                    </div>
+                  ) : <div key={`${entry.date}-top-${index}`} />;
+                })}
+              </div>
+              <div className="relative col-start-1 row-start-2 grid" style={{ gridTemplateColumns: `repeat(${visibleEntries.length}, minmax(9rem, 1fr))` }}>
+                {visibleEntries.map((entry, index) => {
+                  const accent = accents[index % accents.length];
+                  const top = index % 2 === 0;
+                  const marker = entry.date?.includes("PF") ? "PF" : entry.date?.match(/\d+/)?.[0] ?? String(index + 1);
+                  return (
+                    <div key={`${entry.date}-node-${index}`} className="relative flex items-center justify-center">
+                      <span className={`absolute h-8 w-px ${top ? "bottom-1/2" : "top-1/2"}`} style={{ background: accent }} aria-hidden="true" />
+                      <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-4 font-cinzel text-[0.62rem] shadow-xl" style={{ borderColor: accent, background: "var(--color-bg-deep)", color: accent }}>
+                        {marker}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="col-start-1 row-start-3 grid" style={{ gridTemplateColumns: `repeat(${visibleEntries.length}, minmax(9rem, 1fr))` }}>
+                {visibleEntries.map((entry, index) => {
+                  const accent = accents[index % accents.length];
+                  return index % 2 === 0 ? <div key={`${entry.date}-bottom-${index}`} /> : (
+                    <div key={`${entry.date}-bottom-${index}`} className="px-2 pt-4">
+                      {label(entry, accent)}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
 
 function DraftBlock({
@@ -341,14 +602,76 @@ function DraftBlock({
     );
   }
 
+  if (item.type === "fold-header") {
+    return <FoldHeaderBlock props={props} dataBlockId={item.id} />;
+  }
+
+  if (item.type === "timeline") {
+    const eyebrow = props.eyebrow as string | undefined;
+    const title = (props.title as string | undefined) ?? "Timeline";
+    const description = props.description as string | undefined;
+    const orientation = (props.orientation as string | undefined) ?? "vertical";
+    const defaultState = (props.defaultState as string | undefined) ?? "closed";
+    const entries = parseDraftTimelineEntries(props.entries);
+
+    return (
+      <DraftTimelineBar
+        item={item}
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        orientation={orientation}
+        entries={entries}
+      />
+    );
+
+    return (
+      <section data-block-id={item.id} data-block-type="timeline" className="max-w-6xl mx-auto px-6 py-5">
+        <details className="group" open={defaultState === "open"}>
+          <summary
+            className="fantasy-card flex cursor-pointer list-none items-center justify-between gap-4 p-5 transition-colors hover:border-amber-400 [&::-webkit-details-marker]:hidden"
+            style={{ borderColor: "var(--color-bg-border)" }}
+          >
+            <span>
+              {eyebrow && <span className="block font-cinzel text-xs tracking-[0.35em] uppercase" style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</span>}
+              <span className="mt-1 block font-cinzel text-2xl tracking-widest uppercase" style={{ color: "var(--color-text-primary)" }}>{title}</span>
+              {description && <span className="mt-2 block max-w-3xl text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{description}</span>}
+            </span>
+            <span className="shrink-0 font-cinzel text-lg transition-transform group-open:rotate-180" style={{ color: "var(--color-accent-gold)" }}>v</span>
+          </summary>
+          <div className={orientation === "horizontal" ? "mt-4 flex gap-4 overflow-x-auto pb-3" : "relative mt-5 space-y-4 pl-5 before:absolute before:bottom-0 before:left-7 before:top-0 before:w-px before:bg-[var(--color-bg-border)]"}>
+            {entries.map((entry, index) => (
+              <article
+                key={`${entry.date}-${entry.title}-${index}`}
+                className={`${orientation === "horizontal" ? "w-72 shrink-0" : "relative ml-8"} rounded-md border p-4`}
+                style={{ borderColor: "var(--color-bg-border)", background: "rgba(15,10,26,.58)" }}
+              >
+                {entry.date && <p className="font-cinzel text-xs tracking-[0.35em] uppercase" style={{ color: "var(--color-accent-arcane)" }}>{entry.date}</p>}
+                {entry.title && <h3 className="mt-1 font-cinzel text-lg leading-tight" style={{ color: "var(--color-accent-gold)" }}>{entry.title}</h3>}
+                {entry.description && <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{entry.description}</p>}
+                {entry.events?.length ? (
+                  <ul className="mt-3 space-y-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                    {entry.events.map((event, eventIndex) => <li key={`${event}-${eventIndex}`}>• {event}</li>)}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </details>
+      </section>
+    );
+  }
+
   if (item.type === "callout") {
     const title   = props.title   as string | undefined;
     const content = (props.content as string | undefined) ?? "";
+    const image   = props.image   as string | undefined;
     const variant = (props.variant as string | undefined) ?? "gold";
     const colorVar = variant === "arcane" ? "var(--color-accent-arcane)" : variant === "blood" ? "var(--color-accent-blood)" : "var(--color-accent-gold)";
     return (
       <div data-block-id={item.id} data-block-type={item.type} className="max-w-3xl mx-auto px-6 py-4">
-        <div className="rounded-lg border-l-4 p-5" style={{ borderColor: colorVar, background: "var(--color-bg-card)" }}>
+        <div className={`rounded-lg border-l-4 p-5 ${image ? "grid grid-cols-[7rem_1fr] gap-x-4" : ""}`} style={{ borderColor: colorVar, background: "var(--color-bg-card)" }}>
+          {image && <img src={image} alt={title ? `${title} illustration` : "Callout illustration"} className="row-span-2 h-full max-h-36 w-full rounded-md object-cover" />}
           {title && <p className="font-cinzel text-sm tracking-widest uppercase mb-2" style={{ color: colorVar }}>{title}</p>}
           <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{content}</p>
         </div>
@@ -491,6 +814,68 @@ function DraftBlock({
     );
   }
 
+  if (item.type === "media-player") {
+    const title = (props.title as string | undefined)?.trim();
+    const caption = (props.caption as string | undefined)?.trim();
+    const displayMode = (props.displayMode as string | undefined) ?? "full";
+    const source = resolveMediaPlayerSource(
+      (props.src as string | undefined) ?? "",
+      (props.mediaType as string | undefined) ?? "auto",
+    );
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-4xl mx-auto px-6 py-6">
+        <div className="fantasy-card overflow-hidden p-5">
+          {displayMode === "image-button" ? (
+            <details className="group">
+              <summary
+                title={title || "Play media"}
+                className="inline-flex h-14 w-14 cursor-pointer list-none items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400 [&::-webkit-details-marker]:hidden"
+                style={{ borderColor: "var(--color-bg-border)", boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={(props.image as string | undefined) || "/images/dragon-ears.png"} alt="" className="h-full w-full rounded-full object-contain" />
+              </summary>
+              <div className="mt-3">
+                {!source ? (
+                  <div className="h-24 rounded-lg border flex items-center justify-center" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+                    <p className="font-cinzel text-xs tracking-widest" style={{ color: "var(--color-text-muted)" }}>Media Player - paste a media URL</p>
+                  </div>
+                ) : source.kind === "audio" ? (
+                  <audio controls preload="metadata" src={source.src} className="w-full" />
+                ) : source.kind === "video" ? (
+                  <video controls preload="metadata" src={source.src} className="w-full rounded-lg" />
+                ) : (
+                  <div className={source.kind === "youtube" ? "aspect-video" : "h-24"}>
+                    <iframe src={source.src} title={title || "Embedded media"} className="h-full w-full rounded-lg border" style={{ borderColor: "var(--color-bg-border)" }} />
+                  </div>
+                )}
+                {caption && <p className="mt-3 text-xs" style={{ color: "var(--color-text-muted)" }}>{caption}</p>}
+              </div>
+            </details>
+          ) : (
+            <>
+              {title && <p className="font-cinzel text-sm tracking-widest uppercase mb-3" style={{ color: "var(--color-accent-gold)" }}>{title}</p>}
+              {!source ? (
+                <div className="h-24 rounded-lg border flex items-center justify-center" style={{ borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }}>
+                  <p className="font-cinzel text-xs tracking-widest" style={{ color: "var(--color-text-muted)" }}>Media Player - paste a media URL</p>
+                </div>
+              ) : source.kind === "audio" ? (
+                <audio controls preload="metadata" src={source.src} className="w-full" />
+              ) : source.kind === "video" ? (
+                <video controls preload="metadata" src={source.src} className="w-full rounded-lg" />
+              ) : (
+                <div className={source.kind === "youtube" ? "aspect-video" : "h-24"}>
+                  <iframe src={source.src} title={title || "Embedded media"} className="h-full w-full rounded-lg border" style={{ borderColor: "var(--color-bg-border)" }} />
+                </div>
+              )}
+              {caption && <p className="mt-3 text-xs" style={{ color: "var(--color-text-muted)" }}>{caption}</p>}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   if (item.type === "portal-links") {
     const eyebrow     = props.eyebrow     as string | undefined;
     const title       = props.title       as string | undefined;
@@ -527,6 +912,48 @@ function DraftBlock({
             {parseDraftItems(props.items).map((child) => (
               <DraftCardLayoutItem key={child.id} item={child} />
             ))}
+          </div>
+        </article>
+      </section>
+    );
+  }
+
+  if (item.type === "archived-campaign-card") {
+    const title  = (props.title as string | undefined) ?? "Archived Campaign";
+    const status = (props.status as string | undefined) ?? "Completed";
+    const dm     = props.dm as string | undefined;
+    const id     = props.id as string | undefined;
+    const image  = props.image as string | undefined;
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-3">
+        <article className="fantasy-card overflow-hidden">
+          {image && <div className="h-28 border-b bg-cover bg-center" style={{ borderColor: "var(--color-bg-border)", backgroundImage: `url("${image}")` }} />}
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <h2 className="font-cinzel text-lg" style={{ color: "var(--color-text-primary)" }}>{title}</h2>
+              <span className="shrink-0 rounded-full border px-2 py-1 text-[10px] font-cinzel tracking-widest uppercase" style={{ color: "var(--color-accent-gold)", borderColor: "var(--color-accent-gold)" }}>{status}</span>
+            </div>
+            {dm && <p className="mt-4 text-sm" style={{ color: "var(--color-accent-gold)" }}>DM: {dm}</p>}
+            {id && <p className="mt-3 text-xs font-cinzel tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>View details</p>}
+          </div>
+        </article>
+      </section>
+    );
+  }
+
+  if (item.type === "deity-card") {
+    const title  = (props.title as string | undefined) ?? "Deity";
+    const domain = props.domain as string | undefined;
+    const href   = props.href as string | undefined;
+    const image  = props.image as string | undefined;
+    return (
+      <section data-block-id={item.id} data-block-type={item.type} className="max-w-6xl mx-auto px-6 py-3">
+        <article className="fantasy-card overflow-hidden">
+          {image && <div className="h-36 border-b bg-contain bg-center bg-no-repeat" style={{ borderColor: "var(--color-bg-border)", backgroundImage: `url("${image}")` }} />}
+          <div className="p-5">
+            <h2 className="font-cinzel text-lg" style={{ color: "var(--color-text-primary)" }}>{title}</h2>
+            {domain && <p className="mt-3 text-xs font-cinzel tracking-widest uppercase" style={{ color: "var(--color-accent-arcane)" }}>{domain}</p>}
+            {href && <p className="mt-4 text-xs font-cinzel tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>Divine Record</p>}
           </div>
         </article>
       </section>
@@ -740,6 +1167,22 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
 
     const data = active.data.current as DragData | undefined;
     const overId = over.id.toString();
+    if (canvas && overId === "canvas-drop" && data?.kind === "new-asset") {
+      const canvasArea = document.querySelector<HTMLElement>("[data-canvas-area='true']");
+      const translated = active.rect.current.translated;
+      if (!canvasArea || !translated) return;
+      const rect = canvasArea.getBoundingClientRect();
+      const w = 46;
+      const h = 220;
+      const x = Math.max(0, Math.min(100 - w, ((translated.left - rect.left) / rect.width) * 100));
+      const y = Math.max(0, translated.top - rect.top);
+      const newBlock: BlockItem = { ...makeBlock(data.assetType), x, y, w, h };
+      setItems((prev) => [...prev, newBlock]);
+      setEditingId(newBlock.id);
+      setSaved(false);
+      return;
+    }
+
     if (!overId.startsWith("dz::")) return;
 
     const dropIdx = parseInt(overId.slice(4), 10);
@@ -924,13 +1367,16 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
         >
           {/* ── Canvas mode ── */}
           {canvas ? (
-            <CanvasEditor
-              items={items}
-              editingId={editingId}
-              onBlockChange={handleCanvasBlockChange}
-              onDelete={handleDeleteBlock}
-              onEditToggle={(id) => setEditingId((cur) => cur === id ? null : id)}
-            />
+            <>
+              <CanvasEditor
+                items={items}
+                editingId={editingId}
+                onBlockChange={handleCanvasBlockChange}
+                onDelete={handleDeleteBlock}
+                onEditToggle={(id) => setEditingId(id)}
+              />
+              <CanvasAssetDropZone active={activeItem?.data.current?.kind === "new-asset"} />
+            </>
           ) : (
             <>
               <DraftPagePreview

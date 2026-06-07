@@ -4,7 +4,7 @@ import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
   title: "History",
-  description: "Portal link to Myrdae history in the Knowledge Base.",
+  description: "Portal link to Myrdae history in Chronicles.",
 };
 
 export default function HistoryPage() {

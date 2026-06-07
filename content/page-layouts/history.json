@@ -1,0 +1,114 @@
+[
+  {
+    "kind": "block",
+    "id": "history-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Chronicles",
+      "title": "History",
+      "description": "The eras, named years, and remembered events of Myrdae.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-overview-timeline",
+    "type": "timeline",
+    "props": {
+      "eyebrow": "Myrdae Timeline",
+      "title": "Ages of Myrdae",
+      "description": "A visual era bar for the major historical periods. Expand the era folds below for the year-by-year record.",
+      "orientation": "horizontal",
+      "entries": "[\n  {\n    \"date\": \"900 PF\",\n    \"title\": \"Pre-Fracturing\",\n    \"description\": \"Before the harmon calendar.\"\n  },\n  {\n    \"date\": \"1 AF\",\n    \"title\": \"Time of Growth\",\n    \"description\": \"The first age after the Fracturing.\"\n  },\n  {\n    \"date\": \"942 AF\",\n    \"title\": \"Cycle of Change\",\n    \"description\": \"Liberation and exile shape the record.\"\n  },\n  {\n    \"date\": \"1111 AF\",\n    \"title\": \"Era of Ascendance\",\n    \"description\": \"Prophecy, planar threats, and rising powers.\"\n  },\n  {\n    \"date\": \"1227 AF\",\n    \"title\": \"The Awakening\",\n    \"description\": \"The new divine order and modern age.\"\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-instructions",
+    "type": "text",
+    "props": {
+      "content": "Click an era below to expand the history notes.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-awakening-fold",
+    "type": "fold-header",
+    "props": {
+      "eyebrow": "Historical Era",
+      "title": "The Awakening: 1227 to Present",
+      "description": "A prominent period of adventure, divine upheaval, rebuilding, and discovery after the old gods abandoned Myrdae.",
+      "foldLabel": "Open Era Details",
+      "foldText": "1246 - Year of Discovery\nA prominent period of adventure, where it was common to see people travel the land having gained comfort in the new gods of Myrdae.\n- Heroes were collected to re-establish the lost domain in the Mahruud.\n\n1240 - Year of Emergence\n- Denizens of the Underdark are found more frequently on the surface.\n\n1237 - Year of Harboring\n- The Soul Reaper gathers the souls lost during the Awakening under his command.\n\n1229 - Year of Convergence\n- Empowered by the magical weave of Myrdae, Tegenwald is re-established as a prominent land in the Bathaen Empire.\n\n1228 - Year of Enlightenment\n- Several additional deities rose to prominence in the world of Myrdae.\n- Torn settlements were rebuilt and people relocated to form new hamlets and towns.\n\n1227 - Year of Abandonment\n- A transition to a new era in Myrdae, known as The Awakening.\n- Prayers from the 8 major deities, Athuel, Bellum, Disgar, Lyess, Neera, Smott, Tiash and Torec, were no longer being answered as these gods abandoned the people of Myrdae.\n- Previous lesser deities rose in power and were joined by other notable deities that were previously only recognized in estranged sects.\n- The new pantheon order were recognized by the clergy of the land and labeled as Ameliorate Divine, or more commonly called the New Order.\n- Muerg the Earth Father called upon his champion Ashe and several primordials to repair the torn land.\n- For a harmon, Ashe led these earthen mights to fill the Great Cravasse.\n- It did not come without other impact to the land, as such force erected mountains and moved islands.\n- It was a fingerprint on the material world that only a champion like Ashe could leave.",
+      "foldImage": "",
+      "foldImageAlt": "",
+      "foldImageFit": "cover",
+      "defaultState": "closed"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-ascendance-fold",
+    "type": "fold-header",
+    "props": {
+      "eyebrow": "Historical Era",
+      "title": "Era of Ascendance: 1111 to 1226 AF",
+      "description": "The long rise toward the Awakening: prophecy, planar travel, villains, the Thornage line, and the final threats of the old era.",
+      "foldLabel": "Open Era Details",
+      "foldText": "1226 - Year of Fending\nThe people of Myrdae had to fend off an attack or defend themselves against a great rising threat that came during the Year of Rising.\n- 22nd of Luros - Di'Belgi summons Meresse Noakes, influencing the outcome of the Rising Harmony.\n- 30th of Evalee - Nethyndria captures the Regulators.\n\n1225 - Year of Rising\nThe year that several key villains rose to take over the land: Di'Belgi the demon lord, Itoro the chronomancer, Nethyndria the dracolich, Suthrin and Tol'behgekt.\n- 5th of Kesero - Tor Gulkta secures the doctor's services for Phrogg's soul.\n- 14th of Kesero - Ki'rin Behki sends Xel to set in motion the Rising Harmony.\n- 1st of Nessare - Elyra re-establishes the Eradic of Ghone, a following of Si'julous.\n- 4th of Talil - The red dragon Socurenth is defeated by the group known as the Plane Shifters.\n\n1224 - Year of Being\n- Suthrin is released from the hells through the Laztyr.\n- Thalex Stormvigor consults with Avant Sinestia Thornage.\n- It is determined the Astereal Accord needs to be reformed.\n\n1223 - Year of Deliverance\n- Sinestia Thornage becomes Avant at the age of 31.\n- Sinestia is the first successor to Avant in the Thornage bloodline.\n\n1222 - Year of Atrophy\n- Evil becomes more prevalent across Myrdae.\n- Avant Mathaen Knot is found to be corrupt.\n- Mathaen Knot is stripped of the title Avant.\n\n1221 - Year of Eviction\n- Itoro Gradel emerges, sending people from Myrdae to other planes and timelines.\n\n1220 - Year of Recognition\n- Meress Noakes leaves the apprenticeship of Yibrix.\n- Meress settles in Stouhg.\n\n1219 - Year of Blood\n- A second coup in the Mahruud is organized, killing Tor Brom.\n- Gulkta becomes the Tor of the Mahruud.\n\n1218 - Year of Imminence\n- Mathean Knot is recognized as the new Avant.\n- Gulkta defies odds, winning a staged arena battle.\n\n1217 - Year of Unrest\n- Avant Istoria Gi and Sinestia once again leave Myrdae.\n- Only Sinestia returns.\n\n1212 - Year of Ovation\n- Avant Istoria Gi and Sinestia return to the Agent Halls after traveling to another plane.\n\n1211 - Year of Affluence\n- The lands are rich and blessed by Bellum, the goddess of life.\n- Crops and livestock flourish, mining caves prove rich.\n\n1210 - Year of Tranquility\n- There has been a decade of peace on the mainland.\n- The year is recognized for Fralee, the deity of Tranquility.\n- As a result, Fralee acquires a huge following.\n\n1209 - Year of Absence\n- Sinestia becomes the youngest Avantee at age 17.\n- Avant Istoria Gi takes Sinestia on planar travel for learning.\n- Sinestia learns of the Pact of the Planes and the Planar Council.\n\n1206 - Year of Erudition\n- Sinestia enters the Argent Halls.\n- Avant Istoria Gi takes Sinestia as an apprentice.\n\n1205 - Year of the Prodigy\n- Sinestia becomes known as the Thornage Prodigy.\n- Corebb Keep is fully constructed.\n\n1200 - Year of Stability\n- Order is prominent across the land.\n- Outlaws are driven out or move to underground networks.\n\n1199 - Year of Incursion\n- Last recorded year of the greater deities visiting Myrdae.\n- Many civilized areas struggle with order.\n- Bandits plague the highways; pirates rule the seas.\n\n1194 - Year of Access\n- Gulkta is born into a slave ring.\n- The Tether Core decide to retire on Myrdae.\n- The Astereal Accord is ended as a guardian organization.\n- The Tether Core begin construction on Corebb Keep.\n\n1193 - Year of Parting\n- The evil chronomancer, Itoro Gradel, is defeated.\n- This is done by the Tether Core of the Astereal Accord.\n\n1192 - Year of the Oracle\n- The Prophecy of the Auspicious.\n- Sinestia Thornage is born.\n\n1123 - Year of Lunacy\n- Zibeus, a mage from Orbansia, becomes mad.\n- The mad mage spreads chaos, killing hundreds.\n- The Bathaen Empire begins requiring a Caster's Grant.\n\n1111 - Year of Turning\n- Sages across the land prophesize a clash of heroes.",
+      "foldImage": "",
+      "foldImageAlt": "",
+      "foldImageFit": "cover",
+      "defaultState": "closed"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-change-fold",
+    "type": "fold-header",
+    "props": {
+      "eyebrow": "Historical Era",
+      "title": "Cycle of Change: 942 AF to 1110 AF",
+      "description": "A shorter recorded cycle marked by exile and liberation from demonic pressure below the world.",
+      "foldLabel": "Open Era Details",
+      "foldText": "1078 - Year of Exile\n- Thrargael?s guards organize a coup that fails.\n- They are exiled to the island of Kabn?sh.\n\n942 - Year of Liberation\n- Myrdae claims success in having pushed back the demonic threat of the Underdark.",
+      "foldImage": "",
+      "foldImageAlt": "",
+      "foldImageFit": "cover",
+      "defaultState": "closed"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-growth-fold",
+    "type": "fold-header",
+    "props": {
+      "eyebrow": "Historical Era",
+      "title": "Time of Growth: 0 to 941 AF",
+      "description": "The first age after the Fracturing, when empires rose, calendars formed, and the Crungess shaped the surface world.",
+      "foldLabel": "Open Era Details",
+      "foldText": "567 - Year of Blight\n- Evil woodland creatures appear across the Mahruud.\n- These creatures are referred to as The Broken.\n\n500 - Year of Pleasantries\n- No monstrosities have emerged from the Crungess in 50 years.\n- Sentries are recognized as Sentinels of Myrdae.\n\n450 - Year of Cease\n- Monstrosities from the Crungess are considered at bay.\n\n373 - Year of Form\n- Basctdelm becomes the capital of the Bathaen Empire.\n- Gibuldon becomes the capital of Inverland.\n- Thrargael becomes the capital of the Mahruud.\n\n329 - Year of Dignity\n- The Bathaen Empire recognizes three empires in its land.\n- Inverland recognizes Vecs as representatives.\n\n50 - Year of Endurance\n- Monstrosities arise from the Crungess.\n- Provinces send forces to protect the surface.\n- The Meridian leads the defense with the angel Zariel.\n- The Meridian rode into the depths of the Underdark.\n- Some of the Meridian stayed behind and were cursed.\n- The cursed defenders were referred to as the Revenir.\n\n15 - Year of Runes\n- Di'Belgi develops the arcane art of Rune Weaving.\n- How to Rune Weave is written by Yibrix in a tome.\n\n5 - Year of Deceit\n- The demon De'Belgi fools the angel Amriel.\n- Together they steal the Crown of Lyess.\n\n4 - Year of Designation\n- Asterin Thornage begins consulting with a prophet.\n- This prophet becomes the Harbiter.\n- A Harbiter names the year and judge of things to come.\n- Padora Fallowood is recognized as the first Harbiter.\n\n3 - Year of Marking\n- The harmon calendar is created by Asterin Thornage.\n- The calendar corresponds to the Fracturing.\n\n1 - Year of Fracturing\n- It is said that Neera threw Brault from the heavens.\n- This is known as the Fracturing.\n- The Crungess, also known as Great Crevasse, was created.\n- The neighboring areas were destroyed and buried in rubble.\n- It is also believed to have ended the Great War.",
+      "foldImage": "",
+      "foldImageAlt": "",
+      "foldImageFit": "cover",
+      "defaultState": "closed"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "history-pre-fracturing-fold",
+    "type": "fold-header",
+    "props": {
+      "eyebrow": "Historical Era",
+      "title": "Pre-Fracturing (PF)",
+      "description": "Events remembered before the harmon calendar and the creation of the Crungess.",
+      "foldLabel": "Open Era Details",
+      "foldText": "23 PF - Wood Elf Departure\n- Shunned by high elves, the wood elves leave the Bathaen Empire.\n\n51 PF - Birth of Suthrin\n- Suthrin, son of Brault and Tornia, is said to have been born this day.\n\n77 PF - Death of Threan Maul\n- The Tor of the Mahruud, Threan Maul, dies during the War of Might.\n\n100 PF - War of Might Begins\n- The beginning of the War of Might, between the Bathaen Empire and the Mahruud.\n\n500 PF - Harsh Times in the Mahruud\n- Harsh times strike the Mahruud, transforming it into a barbaric land.\n\n900 PF - Inverland Recognized\n- Inverland recognized as an empire, known as a province at the time.",
+      "foldImage": "",
+      "foldImageAlt": "",
+      "foldImageFit": "cover",
+      "defaultState": "closed"
+    }
+  }
+]
