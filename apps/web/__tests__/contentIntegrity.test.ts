@@ -3,6 +3,8 @@
  * These tests verify referential consistency between content JSON files —
  * things that would silently break at runtime if a rename went wrong.
  */
+import fs from "fs";
+import path from "path";
 import { describe, it, expect } from "vitest";
 import { getActiveCampaigns } from "@/lib/campaigns";
 import { getDungeonMasters } from "@/lib/dungeonMasters";
@@ -17,6 +19,16 @@ import type { BlockItem } from "@/lib/pageBlocks";
 const campaigns  = getActiveCampaigns();
 const dms        = getDungeonMasters();
 const players    = getPlayerProfileSeeds();
+
+function findRepoRootForTest() {
+  let dir = process.cwd();
+  while (true) {
+    if (fs.existsSync(path.join(dir, "content", "page-layouts"))) return dir;
+    const parent = path.dirname(dir);
+    if (parent === dir) return process.cwd();
+    dir = parent;
+  }
+}
 
 // ── Campaign ↔ DM cross-references ───────────────────────────────────────────
 
@@ -204,6 +216,17 @@ describe("Stored page layouts", () => {
 
     for (const route of storedRoutes) {
       expect(getPageLayout(route).length, `${route} should load layout items`).toBeGreaterThan(0);
+    }
+  });
+
+  it("loads modular layouts when the app process starts from the repo root", () => {
+    const originalCwd = process.cwd();
+    try {
+      process.chdir(findRepoRootForTest());
+      expect(getStoredPageLayoutIds()).toContain("/campaigns");
+      expect(getPageLayout("/campaigns").map((item) => item.id)).toContain("campaigns-grid");
+    } finally {
+      process.chdir(originalCwd);
     }
   });
 });

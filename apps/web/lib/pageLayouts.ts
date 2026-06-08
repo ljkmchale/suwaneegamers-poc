@@ -8,12 +8,30 @@ type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
 type RawEntry = unknown[] | RawMeta;
 type RawLayouts = Record<string, RawEntry>;
 
+function contentDir() {
+  const candidates = [
+    path.join(process.cwd(), "content"),
+    path.join(process.cwd(), "../../content"),
+  ];
+
+  let dir = process.cwd();
+  while (true) {
+    candidates.push(path.join(dir, "content"));
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+
+  const found = candidates.find((candidate) => fs.existsSync(candidate));
+  return found ?? path.join(process.cwd(), "content");
+}
+
 function legacyLayoutPath() {
-  return path.join(process.cwd(), "../../content/page-layouts.json");
+  return path.join(contentDir(), "page-layouts.json");
 }
 
 function layoutsDir() {
-  return path.join(process.cwd(), "../../content/page-layouts");
+  return path.join(contentDir(), "page-layouts");
 }
 
 function pageIdToLayoutPath(pageId: string) {

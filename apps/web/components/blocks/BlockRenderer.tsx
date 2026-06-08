@@ -24,6 +24,9 @@ const CARD_LAYOUT_MAX_ROWS = 120;
 const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://");
 
+const opensInNewTab = (href: string) =>
+  isExternal(href) || href.startsWith("/images/");
+
 // ── Generic content blocks ────────────────────────────────────────────────────
 
 function DividerBlock({ props }: { props: Record<string, unknown> }) {
@@ -1939,13 +1942,14 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const href = item.props.href as string | undefined;
       const variant = (item.props.variant as string | undefined) ?? "primary";
       if (!label || !href) return null;
+      const newTab = opensInNewTab(href);
 
       return (
         <div style={style} className="flex items-end">
           <a
             href={href}
-            target={isExternal(href) ? "_blank" : undefined}
-            rel={isExternal(href) ? "noopener noreferrer" : undefined}
+            target={newTab ? "_blank" : undefined}
+            rel={newTab ? "noopener noreferrer" : undefined}
             className="inline-flex rounded-md border px-4 py-2 font-cinzel text-xs tracking-widest uppercase transition-colors hover:border-amber-400"
             style={{
               borderColor: "var(--color-bg-border)",
