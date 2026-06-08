@@ -1,0 +1,325 @@
+[
+  {
+    "kind": "block",
+    "id": "organizations-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Chapter 5",
+      "title": "Organizations (Factions)",
+      "description": "Guilds, orders, cults, hidden networks, and allied powers that shape Myrdae.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "organizations-overview-card",
+    "type": "layout-card",
+    "props": {
+      "width": "wide",
+      "items": "[\n  {\n    \"id\": \"organizations-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"organizations-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp\\\",\\n      \\\"alt\\\": \\\"Factions reference artwork\\\",\\n      \\\"fit\\\": \\\"cover\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Guide\\\",\\n      \\\"title\\\": \\\"Factions of Myrdae\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Adventurers can join established organizations or create their own with the DM. Advents of Harmony, Cloak of Defiance, Everdawn, Meridian, and Tegenwald Phet are the best-known factions that recruit adventurers.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-factions-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Factions\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-index-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Organization Index\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"2\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "organizations-reference-links",
+    "type": "link-list",
+    "props": {
+      "title": "Reference Links",
+      "links": "[\n  {\n    \"label\": \"Factions\",\n    \"href\": \"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\",\n    \"description\": \"Chapter 5 faction overview.\"\n  },\n  {\n    \"label\": \"Well Known Organizations\",\n    \"href\": \"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\",\n    \"description\": \"Organization table and faction entries.\"\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "organizations-featured-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "lg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-advents-of-harmony",
+    "type": "card",
+    "props": {
+      "eyebrow": "Exploration & History",
+      "title": "Advents of Harmony",
+      "description": "Myrdae's oldest organization, known for exploration, preserved history, deep archives, and trusted advisors.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-cloak-of-defiance",
+    "type": "card",
+    "props": {
+      "eyebrow": "Power & Influence",
+      "title": "Cloak of Defiance",
+      "description": "A mercenary network and sprawling thieves' guild that rose from the shadows of the Malfease.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-everdawn",
+    "type": "card",
+    "props": {
+      "eyebrow": "Balance & Preservation",
+      "title": "Everdawn",
+      "description": "A widespread nature-minded faction that watches the boundary between civilization and the natural world.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-meridian",
+    "type": "card",
+    "props": {
+      "eyebrow": "Alliance & Order",
+      "title": "Meridian",
+      "description": "A recognized force for law, order, protection, and alliances across the people of Myrdae.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-tegenwald-phet",
+    "type": "card",
+    "props": {
+      "eyebrow": "Secrecy & Magic",
+      "title": "Tegenwald Phet",
+      "description": "Seekers of knowledge and power through magic, secrecy, and hidden study.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "organizations-index-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "md"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-anders",
+    "type": "card",
+    "props": {
+      "eyebrow": "Diplomacy & Secrecy",
+      "title": "Andërs",
+      "description": "An artistic public face conceals a diplomatic network of politically placed operatives.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-astereal-accord",
+    "type": "card",
+    "props": {
+      "eyebrow": "Extra-planar Protection",
+      "title": "Astereal Accord",
+      "description": "Protectors focused on threats from beyond Myrdae, unstable breaches, and corrupted magic.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-barrenscars",
+    "type": "card",
+    "props": {
+      "eyebrow": "Slave Trade",
+      "title": "Barrenscars",
+      "description": "Mercenaries known for trafficking people.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-bastille",
+    "type": "card",
+    "props": {
+      "eyebrow": "Organization",
+      "title": "Bastille",
+      "description": "Listed among the well-known organizations of Myrdae.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-bloodhand",
+    "type": "card",
+    "props": {
+      "eyebrow": "Hired Sellswords",
+      "title": "Bloodhand",
+      "description": "Blades for hire among Myrdae's known powers.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-empyrean-ascendants",
+    "type": "card",
+    "props": {
+      "eyebrow": "Non-believers",
+      "title": "Empyrean Ascendants",
+      "description": "Also known as the League of the Sky, they reject the gods and pursue higher existence.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-eradic-of-ghone",
+    "type": "card",
+    "props": {
+      "eyebrow": "Worshipping a Lich",
+      "title": "Eradic of Ghone",
+      "description": "A cult devoted to Si'julous Ghone and the promise of a coming unbinding.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-etterset",
+    "type": "card",
+    "props": {
+      "eyebrow": "Thieves' Guild",
+      "title": "Etterset",
+      "description": "An Emberstran-founded thieves' guild focused on theft, smuggling, and underground trade.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-howling-meek",
+    "type": "card",
+    "props": {
+      "eyebrow": "Bounty Hunting",
+      "title": "Howling Meek",
+      "description": "Hunters who pursue others for sport or profit.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-malfease",
+    "type": "card",
+    "props": {
+      "eyebrow": "Control & Secrecy",
+      "title": "Malfease",
+      "description": "A largely disbanded worldwide thieves' guild.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-osmanae",
+    "type": "card",
+    "props": {
+      "eyebrow": "Ancient Order",
+      "title": "Osmanae",
+      "description": "A diminished ancient order whose relics and artifacts still remain mostly undiscovered.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-paragon-tear",
+    "type": "card",
+    "props": {
+      "eyebrow": "Pain & Discipline",
+      "title": "Paragon Tear",
+      "description": "A Natafae-linked group centered on growth through pain and discipline.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-populi-verde",
+    "type": "card",
+    "props": {
+      "eyebrow": "Nature Fanatics",
+      "title": "Populi Verde",
+      "description": "Enthusiasts obsessed with Mother Nature.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-promissory",
+    "type": "card",
+    "props": {
+      "eyebrow": "Dealing in Artifacts",
+      "title": "Promissory",
+      "description": "A business-facing alias used around the acquisition and trade of hard-to-find goods.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-radiant-eye",
+    "type": "card",
+    "props": {
+      "eyebrow": "Organization",
+      "title": "Radiant Eye",
+      "description": "Listed among the well-known organizations of Myrdae.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-rel-udomina",
+    "type": "card",
+    "props": {
+      "eyebrow": "Anarchy",
+      "title": "Rel'Udomina",
+      "description": "A secretive organization that undermines entrenched rulers and destabilizes political structures.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-umbral-order",
+    "type": "card",
+    "props": {
+      "eyebrow": "Thieves' Guild",
+      "title": "Umbral Order",
+      "description": "A hidden order that grew from exile into a covert thieves' guild.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "org-venomtips",
+    "type": "card",
+    "props": {
+      "eyebrow": "Assassins",
+      "title": "Venomtips",
+      "description": "Killers for hire.",
+      "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+      "linkLabel": "Open Reference"
+    }
+  }
+]
