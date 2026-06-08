@@ -18,7 +18,7 @@ export default function OrganizationsPage() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/organizations/detail-tegenwald-phet.webp")',
+            'url("/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp")',
         }}
       />
       <div

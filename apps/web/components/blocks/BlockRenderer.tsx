@@ -89,8 +89,8 @@ function CardBlock({
           alt={imageAlt}
           width={640}
           height={360}
-          className="-mx-6 -mt-6 mb-5 h-44 w-[calc(100%+3rem)] max-w-none object-cover border-b"
-          style={{ borderColor: "var(--color-bg-border)" }}
+          className="-mx-6 -mt-6 mb-5 h-48 w-[calc(100%+3rem)] max-w-none border-b object-contain p-4"
+          style={{ borderColor: "var(--color-bg-border)", background: "rgba(7, 5, 14, 0.72)" }}
         />
       )}
       {eyebrow && (

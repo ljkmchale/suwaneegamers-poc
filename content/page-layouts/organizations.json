@@ -16,7 +16,7 @@
     "type": "layout-card",
     "props": {
       "width": "wide",
-      "items": "[\n  {\n    \"id\": \"organizations-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"organizations-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/organizations/detail-advents-of-harmony.webp\\\",\\n      \\\"alt\\\": \\\"Advents of Harmony artwork from the faction guide\\\",\\n      \\\"fit\\\": \\\"cover\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Guide\\\",\\n      \\\"title\\\": \\\"Factions of Myrdae\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Adventurers can join established organizations or create their own with the DM. Advents of Harmony, Cloak of Defiance, Everdawn, Meridian, and Tegenwald Phet are the best-known factions that recruit adventurers.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-factions-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Factions\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-index-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Organization Index\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"2\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+      "items": "[\n  {\n    \"id\": \"organizations-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"organizations-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp\\\",\\n      \\\"alt\\\": \\\"Factions reference artwork\\\",\\n      \\\"fit\\\": \\\"contain\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Guide\\\",\\n      \\\"title\\\": \\\"Factions of Myrdae\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Adventurers can join established organizations or create their own with the DM. Advents of Harmony, Cloak of Defiance, Everdawn, Meridian, and Tegenwald Phet are the best-known factions that recruit adventurers.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-factions-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Factions\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-index-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Organization Index\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"2\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
     }
   },
   {
@@ -34,7 +34,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-advents-of-harmony.webp",
-      "imageAlt": "Advents of Harmony artwork from the faction guide",
+      "imageAlt": "Advents of Harmony faction artwork",
       "eyebrow": "Exploration & History",
       "title": "Advents of Harmony",
       "description": "Myrdae's oldest organization, known for exploration, preserved history, deep archives, and trusted advisors.",
@@ -48,7 +48,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-cloak-of-defiance.webp",
-      "imageAlt": "Cloak of Defiance artwork from the faction guide",
+      "imageAlt": "Cloak of Defiance faction artwork",
       "eyebrow": "Power & Influence",
       "title": "Cloak of Defiance",
       "description": "A mercenary network and sprawling thieves' guild that rose from the shadows of the Malfease.",
@@ -62,7 +62,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-everdawn.webp",
-      "imageAlt": "Everdawn artwork from the faction guide",
+      "imageAlt": "Everdawn faction artwork",
       "eyebrow": "Balance & Preservation",
       "title": "Everdawn",
       "description": "A widespread nature-minded faction that watches the boundary between civilization and the natural world.",
@@ -76,7 +76,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-meridian.webp",
-      "imageAlt": "Meridian artwork from the faction guide",
+      "imageAlt": "Meridian faction artwork",
       "eyebrow": "Alliance & Order",
       "title": "Meridian",
       "description": "A recognized force for law, order, protection, and alliances across the people of Myrdae.",
@@ -90,7 +90,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-tegenwald-phet.webp",
-      "imageAlt": "Tegenwald Phet artwork from the faction guide",
+      "imageAlt": "Tegenwald Phet faction artwork",
       "eyebrow": "Secrecy & Magic",
       "title": "Tegenwald Phet",
       "description": "Seekers of knowledge and power through magic, secrecy, and hidden study.",
@@ -113,7 +113,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-anders.webp",
-      "imageAlt": "Andërs artwork from the faction guide",
+      "imageAlt": "Andërs faction artwork",
       "eyebrow": "Diplomacy & Secrecy",
       "title": "Andërs",
       "description": "An artistic public face conceals a diplomatic network of politically placed operatives.",
@@ -127,7 +127,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-astereal-accord.webp",
-      "imageAlt": "Astereal Accord artwork from the faction guide",
+      "imageAlt": "Astereal Accord faction artwork",
       "eyebrow": "Extra-planar Protection",
       "title": "Astereal Accord",
       "description": "Protectors focused on threats from beyond Myrdae, unstable breaches, and corrupted magic.",
@@ -141,7 +141,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/table-barrenscars.webp",
-      "imageAlt": "Barrenscars artwork from the faction guide",
+      "imageAlt": "Barrenscars faction artwork",
       "eyebrow": "Slave Trade",
       "title": "Barrenscars",
       "description": "Mercenaries known for trafficking people.",
@@ -158,7 +158,9 @@
       "title": "Bastille",
       "description": "Listed among the well-known organizations of Myrdae.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-bastille.webp",
+      "imageAlt": "Bastille faction artwork"
     }
   },
   {
@@ -167,7 +169,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/table-bloodhand.webp",
-      "imageAlt": "Bloodhand artwork from the faction guide",
+      "imageAlt": "Bloodhand faction artwork",
       "eyebrow": "Hired Sellswords",
       "title": "Bloodhand",
       "description": "Blades for hire among Myrdae's known powers.",
@@ -184,7 +186,9 @@
       "title": "Empyrean Ascendants",
       "description": "Also known as the League of the Sky, they reject the gods and pursue higher existence.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-empyrean-ascendants.webp",
+      "imageAlt": "Empyrean Ascendants faction artwork"
     }
   },
   {
@@ -193,7 +197,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/table-eradic-of-ghone.webp",
-      "imageAlt": "Eradic of Ghone artwork from the faction guide",
+      "imageAlt": "Eradic of Ghone faction artwork",
       "eyebrow": "Worshipping a Lich",
       "title": "Eradic of Ghone",
       "description": "A cult devoted to Si'julous Ghone and the promise of a coming unbinding.",
@@ -210,7 +214,9 @@
       "title": "Etterset",
       "description": "An Emberstran-founded thieves' guild focused on theft, smuggling, and underground trade.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-etterset.webp",
+      "imageAlt": "Etterset faction artwork"
     }
   },
   {
@@ -222,7 +228,9 @@
       "title": "Howling Meek",
       "description": "Hunters who pursue others for sport or profit.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-howling-meek.webp",
+      "imageAlt": "Howling Meek faction artwork"
     }
   },
   {
@@ -234,7 +242,9 @@
       "title": "Malfease",
       "description": "A largely disbanded worldwide thieves' guild.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-malfease.webp",
+      "imageAlt": "Malfease faction artwork"
     }
   },
   {
@@ -246,7 +256,9 @@
       "title": "Osmanae",
       "description": "A diminished ancient order whose relics and artifacts still remain mostly undiscovered.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-osmanae.webp",
+      "imageAlt": "Osmanae faction artwork"
     }
   },
   {
@@ -258,7 +270,9 @@
       "title": "Paragon Tear",
       "description": "A Natafae-linked group centered on growth through pain and discipline.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-paragon-tear.webp",
+      "imageAlt": "Paragon Tear faction artwork"
     }
   },
   {
@@ -270,7 +284,9 @@
       "title": "Populi Verde",
       "description": "Enthusiasts obsessed with Mother Nature.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-populi-verde.webp",
+      "imageAlt": "Populi Verde faction artwork"
     }
   },
   {
@@ -282,7 +298,9 @@
       "title": "Promissory",
       "description": "A business-facing alias used around the acquisition and trade of hard-to-find goods.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-promissory.webp",
+      "imageAlt": "Promissory faction artwork"
     }
   },
   {
@@ -291,7 +309,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/detail-radiant-eye.webp",
-      "imageAlt": "Radiant Eye artwork from the faction guide",
+      "imageAlt": "Radiant Eye faction artwork",
       "eyebrow": "Organization",
       "title": "Radiant Eye",
       "description": "Listed among the well-known organizations of Myrdae.",
@@ -305,7 +323,7 @@
     "type": "card",
     "props": {
       "image": "/images/organizations/table-rel-udomina.webp",
-      "imageAlt": "Rel'Udomina artwork from the faction guide",
+      "imageAlt": "Rel'Udomina faction artwork",
       "eyebrow": "Anarchy",
       "title": "Rel'Udomina",
       "description": "A secretive organization that undermines entrenched rulers and destabilizes political structures.",
@@ -322,7 +340,9 @@
       "title": "Umbral Order",
       "description": "A hidden order that grew from exile into a covert thieves' guild.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-umbral-order.webp",
+      "imageAlt": "Umbral Order faction artwork"
     }
   },
   {
@@ -334,7 +354,9 @@
       "title": "Venomtips",
       "description": "Killers for hire.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
-      "linkLabel": "Open Reference"
+      "linkLabel": "Open Reference",
+      "image": "/images/organizations/generated-venomtips.webp",
+      "imageAlt": "Venomtips faction artwork"
     }
   }
 ]
