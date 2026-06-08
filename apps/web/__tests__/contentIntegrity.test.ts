@@ -161,7 +161,7 @@ const KNOWN_INTERNAL_ROUTES = new Set([
   "/", "/calendar", "/campaigns", "/dungeon-masters", "/players",
   "/bestiary", "/setting", "/territories", "/pantheon",
   "/history", "/lore", "/gazetteer", "/maps-of-myrdae",
-  "/campaign-setting", "/organizations", "/reference-for-dungeon-masters",
+  "/campaign-setting", "/organizations", "/references", "/reference-for-dungeon-masters",
   "/previous-campaigns", "/world", "/test-page",
 ]);
 

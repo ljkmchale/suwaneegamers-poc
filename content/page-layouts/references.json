@@ -1,0 +1,258 @@
+[
+  {
+    "kind": "block",
+    "id": "references-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "Toolbox",
+      "title": "References (Sourcebooks)",
+      "description": "Sourcebook adventures, DM tools, maps, miniatures, and prep resources.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "references-overview-card",
+    "type": "layout-card",
+    "props": {
+      "width": "wide",
+      "items": "[\n  {\n    \"id\": \"references-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"references-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/references-sourcebooks/references-sourcebooks-overview.webp\\\",\\n      \\\"alt\\\": \\\"Sourcebooks and reference library artwork\\\",\\n      \\\"fit\\\": \\\"cover\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"references-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Library\\\",\\n      \\\"title\\\": \\\"Sourcebooks & Table Tools\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"references-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"A shared shelf for adventure documents, encounter prep, maps, miniatures, and Dungeon Master resources.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"references-overview-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open DM Reference\\\",\\n      \\\"href\\\": \\\"/reference-for-dungeon-masters\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "references-sourcebook-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Sourcebooks",
+      "title": "Adventure References",
+      "description": "Ready reference documents for adventures and table prep.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "references-sourcebook-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "lg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-bastion-of-the-ghost-fiend",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-bastion-of-the-ghost-fiend.webp",
+      "imageAlt": "Bastion of the Ghost Fiend artwork",
+      "eyebrow": "Adventure",
+      "title": "Bastion of the Ghost Fiend",
+      "description": "A haunted bastion adventure reference.",
+      "href": "https://docs.google.com/document/d/1FbAd9V9dXnfq7vf4RZwVXfXGcZm1NW6Qmsjerf3ftas/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-nest-of-the-eldritch-eye",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-nest-of-the-eldritch-eye.webp",
+      "imageAlt": "Nest of the Eldritch Eye artwork",
+      "eyebrow": "Adventure",
+      "title": "Nest of the Eldritch Eye",
+      "description": "An eldritch lair adventure reference.",
+      "href": "https://docs.google.com/document/d/1fv4CtPh6kCkRT6y4eQRARIMhJbxYbKZQeDgLH09jGDk/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-ruins-of-the-assembly",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-ruins-of-the-assembly.webp",
+      "imageAlt": "Ruins of the Assembly artwork",
+      "eyebrow": "Adventure",
+      "title": "Ruins of the Assembly",
+      "description": "Ancient ruins and assembly-site adventure material.",
+      "href": "https://docs.google.com/document/d/1-t3E272S-sr4uZ4Gi1HLaOl_D0oLs2PSE4a4TZZ3-Zs/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-the-broken-citadel",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-the-broken-citadel.webp",
+      "imageAlt": "The Broken Citadel artwork",
+      "eyebrow": "Adventure",
+      "title": "The Broken Citadel",
+      "description": "A broken stronghold adventure reference.",
+      "href": "https://docs.google.com/document/d/1pWr92KHvgnHLbk7hMjEWn-M0jRO0K6foaqSl2R5gPhc/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-tomb-of-the-amberblade",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-tomb-of-the-amberblade.webp",
+      "imageAlt": "Tomb of the Amberblade artwork",
+      "eyebrow": "Adventure",
+      "title": "Tomb of the Amberblade",
+      "description": "A tomb-delving sourcebook adventure.",
+      "href": "https://docs.google.com/document/d/1VfqK4uLpE1MYvaaYSg2_pgwQA8uHOISIcF0e-Xhb-1c/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-trolling-the-dwarven-ruins",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/adventure-trolling-the-dwarven-ruins.webp",
+      "imageAlt": "Trolling the Dwarven Ruins artwork",
+      "eyebrow": "Adventure",
+      "title": "Trolling the Dwarven Ruins",
+      "description": "A dwarven-ruins adventure reference.",
+      "href": "https://docs.google.com/document/d/1hyc_8cYOc0ZPe3-jQluu--BlDo6jybreupKMKavw-Fw/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "references-tools-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Tools",
+      "title": "Dungeon Master Resources",
+      "description": "Calculators, maps, miniatures, downloads, and prep tools.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "references-tools-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "lg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-encounter-difficulty",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-encounter-difficulty.webp",
+      "imageAlt": "5.5e Encounter Difficulty Calculator artwork",
+      "eyebrow": "Calculator",
+      "title": "5.5e Encounter Difficulty Calculator",
+      "description": "Encounter balancing spreadsheet for 5.5e games.",
+      "href": "https://docs.google.com/spreadsheets/d/1rJdFGCTSEtBJotMqy7IQ65DWcH4hifDr1LvMeztZAa8/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-battlemap-archive",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-battlemap-archive.webp",
+      "imageAlt": "Battlemap Archive artwork",
+      "eyebrow": "Maps",
+      "title": "Battlemap Archive",
+      "description": "Battlemap archive for encounter prep.",
+      "href": "https://www.patreon.com/posts/cropox-archive-97244810",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-cliffhangers",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-cliffhangers.webp",
+      "imageAlt": "Cliffhangers artwork",
+      "eyebrow": "Session Hooks",
+      "title": "Cliffhangers",
+      "description": "Cliffhanger prompts and session-ending support.",
+      "href": "https://drive.google.com/file/d/1vDIZa6kHFruia_d5cwMTK_DwNfB8jSUw/view?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-dm-lair",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-dm-lair.webp",
+      "imageAlt": "DM Lair artwork",
+      "eyebrow": "Downloads",
+      "title": "DM Lair",
+      "description": "RPG downloads and DM support resources.",
+      "href": "https://thedmlair.com/pages/5e-rpg-downloads",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-forge-of-foes",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-forge-of-foes.webp",
+      "imageAlt": "Forge of Foes artwork",
+      "eyebrow": "Monster Tools",
+      "title": "Forge of Foes",
+      "description": "Monster-building and foe-design reference.",
+      "href": "https://drive.google.com/file/d/198fkacRaDkx2pB2kcm8if3uU9Cab87dz/view?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-map-generator",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-map-generator.webp",
+      "imageAlt": "Map Generator artwork",
+      "eyebrow": "Cartography",
+      "title": "Map Generator",
+      "description": "Dungeon and encounter map generator.",
+      "href": "https://app.dungeonscrawl.com/",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-miniatures",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-miniatures.webp",
+      "imageAlt": "Miniatures artwork",
+      "eyebrow": "Inventory",
+      "title": "Miniatures",
+      "description": "Shared miniature inventory spreadsheet.",
+      "href": "https://docs.google.com/spreadsheets/d/1wAzpTzJ-u4Qu6o4nHuEfi3EkH2b2Z-BO_OFDl22Tu4g/edit?usp=sharing",
+      "linkLabel": "Open Resource"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-minis-hewson-can-print",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-minis-hewson-can-print.webp",
+      "imageAlt": "Minis Hewson Can Print artwork",
+      "eyebrow": "Printable Minis",
+      "title": "Minis Hewson Can Print",
+      "description": "Available miniature print files.",
+      "href": "https://www.dropbox.com/scl/fo/smkbu88avqrv09d0e0zv6/AJ7XV1r7g_OGqL-5ZXZHv10?rlkey=csy132cs576amkbuys8wtejfo&e=1&dl=0",
+      "linkLabel": "Open Resource"
+    }
+  }
+]
