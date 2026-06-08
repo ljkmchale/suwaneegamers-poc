@@ -16,16 +16,7 @@
     "type": "layout-card",
     "props": {
       "width": "wide",
-      "items": "[\n  {\n    \"id\": \"organizations-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"organizations-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp\\\",\\n      \\\"alt\\\": \\\"Factions reference artwork\\\",\\n      \\\"fit\\\": \\\"cover\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Guide\\\",\\n      \\\"title\\\": \\\"Factions of Myrdae\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Adventurers can join established organizations or create their own with the DM. Advents of Harmony, Cloak of Defiance, Everdawn, Meridian, and Tegenwald Phet are the best-known factions that recruit adventurers.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-factions-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Factions\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-index-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Organization Index\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"2\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "organizations-reference-links",
-    "type": "link-list",
-    "props": {
-      "title": "Reference Links",
-      "links": "[\n  {\n    \"label\": \"Factions\",\n    \"href\": \"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\",\n    \"description\": \"Chapter 5 faction overview.\"\n  },\n  {\n    \"label\": \"Well Known Organizations\",\n    \"href\": \"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\",\n    \"description\": \"Organization table and faction entries.\"\n  }\n]"
+      "items": "[\n  {\n    \"id\": \"organizations-overview-grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"4\",\n      \"rows\": \"3\",\n      \"gap\": \"lg\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"organizations-overview-art\\\",\\n    \\\"type\\\": \\\"image\\\",\\n    \\\"props\\\": {\\n      \\\"src\\\": \\\"/images/organizations/detail-advents-of-harmony.webp\\\",\\n      \\\"alt\\\": \\\"Advents of Harmony artwork from the faction guide\\\",\\n      \\\"fit\\\": \\\"cover\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"3\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-heading\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"eyebrow\\\": \\\"Reference Guide\\\",\\n      \\\"title\\\": \\\"Factions of Myrdae\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"lg\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-overview-text\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"Adventurers can join established organizations or create their own with the DM. Advents of Harmony, Cloak of Defiance, Everdawn, Meridian, and Tegenwald Phet are the best-known factions that recruit adventurers.\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"3\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-factions-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Factions\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.q44b405kq7vf\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"organizations-index-link\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Open Organization Index\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"2\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
     }
   },
   {
@@ -42,6 +33,8 @@
     "id": "org-advents-of-harmony",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-advents-of-harmony.webp",
+      "imageAlt": "Advents of Harmony artwork from the faction guide",
       "eyebrow": "Exploration & History",
       "title": "Advents of Harmony",
       "description": "Myrdae's oldest organization, known for exploration, preserved history, deep archives, and trusted advisors.",
@@ -54,6 +47,8 @@
     "id": "org-cloak-of-defiance",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-cloak-of-defiance.webp",
+      "imageAlt": "Cloak of Defiance artwork from the faction guide",
       "eyebrow": "Power & Influence",
       "title": "Cloak of Defiance",
       "description": "A mercenary network and sprawling thieves' guild that rose from the shadows of the Malfease.",
@@ -66,6 +61,8 @@
     "id": "org-everdawn",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-everdawn.webp",
+      "imageAlt": "Everdawn artwork from the faction guide",
       "eyebrow": "Balance & Preservation",
       "title": "Everdawn",
       "description": "A widespread nature-minded faction that watches the boundary between civilization and the natural world.",
@@ -78,6 +75,8 @@
     "id": "org-meridian",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-meridian.webp",
+      "imageAlt": "Meridian artwork from the faction guide",
       "eyebrow": "Alliance & Order",
       "title": "Meridian",
       "description": "A recognized force for law, order, protection, and alliances across the people of Myrdae.",
@@ -90,6 +89,8 @@
     "id": "org-tegenwald-phet",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-tegenwald-phet.webp",
+      "imageAlt": "Tegenwald Phet artwork from the faction guide",
       "eyebrow": "Secrecy & Magic",
       "title": "Tegenwald Phet",
       "description": "Seekers of knowledge and power through magic, secrecy, and hidden study.",
@@ -111,6 +112,8 @@
     "id": "org-anders",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-anders.webp",
+      "imageAlt": "Andërs artwork from the faction guide",
       "eyebrow": "Diplomacy & Secrecy",
       "title": "Andërs",
       "description": "An artistic public face conceals a diplomatic network of politically placed operatives.",
@@ -123,6 +126,8 @@
     "id": "org-astereal-accord",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-astereal-accord.webp",
+      "imageAlt": "Astereal Accord artwork from the faction guide",
       "eyebrow": "Extra-planar Protection",
       "title": "Astereal Accord",
       "description": "Protectors focused on threats from beyond Myrdae, unstable breaches, and corrupted magic.",
@@ -135,6 +140,8 @@
     "id": "org-barrenscars",
     "type": "card",
     "props": {
+      "image": "/images/organizations/table-barrenscars.webp",
+      "imageAlt": "Barrenscars artwork from the faction guide",
       "eyebrow": "Slave Trade",
       "title": "Barrenscars",
       "description": "Mercenaries known for trafficking people.",
@@ -159,6 +166,8 @@
     "id": "org-bloodhand",
     "type": "card",
     "props": {
+      "image": "/images/organizations/table-bloodhand.webp",
+      "imageAlt": "Bloodhand artwork from the faction guide",
       "eyebrow": "Hired Sellswords",
       "title": "Bloodhand",
       "description": "Blades for hire among Myrdae's known powers.",
@@ -183,6 +192,8 @@
     "id": "org-eradic-of-ghone",
     "type": "card",
     "props": {
+      "image": "/images/organizations/table-eradic-of-ghone.webp",
+      "imageAlt": "Eradic of Ghone artwork from the faction guide",
       "eyebrow": "Worshipping a Lich",
       "title": "Eradic of Ghone",
       "description": "A cult devoted to Si'julous Ghone and the promise of a coming unbinding.",
@@ -279,6 +290,8 @@
     "id": "org-radiant-eye",
     "type": "card",
     "props": {
+      "image": "/images/organizations/detail-radiant-eye.webp",
+      "imageAlt": "Radiant Eye artwork from the faction guide",
       "eyebrow": "Organization",
       "title": "Radiant Eye",
       "description": "Listed among the well-known organizations of Myrdae.",
@@ -291,6 +304,8 @@
     "id": "org-rel-udomina",
     "type": "card",
     "props": {
+      "image": "/images/organizations/table-rel-udomina.webp",
+      "imageAlt": "Rel'Udomina artwork from the faction guide",
       "eyebrow": "Anarchy",
       "title": "Rel'Udomina",
       "description": "A secretive organization that undermines entrenched rulers and destabilizes political structures.",

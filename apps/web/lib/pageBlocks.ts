@@ -605,13 +605,15 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     description: "Fantasy-styled content card with title and optional link",
     icon: "▭",
     category: "content",
-    defaultProps: { eyebrow: "", title: "New Card", description: "", href: "", linkLabel: "" },
+    defaultProps: { eyebrow: "", title: "New Card", description: "", href: "", linkLabel: "", image: "", imageAlt: "" },
     fields: [
       { key: "eyebrow",     label: "Eyebrow (optional)", type: "text",     placeholder: "e.g. Featured" },
       { key: "title",       label: "Title",              type: "text",     placeholder: "Card title" },
       { key: "description", label: "Description",        type: "textarea", placeholder: "Card body text" },
       { key: "href",        label: "Link URL (optional)", type: "url",     placeholder: "https://…  or  /internal" },
       { key: "linkLabel",   label: "Link label",          type: "text",    placeholder: "e.g. Learn more" },
+      { key: "image",       label: "Artwork (optional)",   type: "image",   placeholder: "/images/..." },
+      { key: "imageAlt",    label: "Artwork alt text",     type: "text",    placeholder: "Describe the artwork" },
     ],
   },
 

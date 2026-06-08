@@ -77,10 +77,22 @@ function CardBlock({
   const description = props.description as string | undefined;
   const href        = props.href        as string | undefined;
   const linkLabel   = props.linkLabel   as string | undefined;
+  const image       = props.image       as string | undefined;
+  const imageAlt    = (props.imageAlt   as string | undefined) ?? title;
   const inGrid = variant === "grid-item";
 
   const inner = (
-    <div className="fantasy-card p-6">
+    <div className="fantasy-card p-6 h-full overflow-hidden">
+      {image && (
+        <Image
+          src={image}
+          alt={imageAlt}
+          width={640}
+          height={360}
+          className="-mx-6 -mt-6 mb-5 h-44 w-[calc(100%+3rem)] max-w-none object-cover border-b"
+          style={{ borderColor: "var(--color-bg-border)" }}
+        />
+      )}
       {eyebrow && (
         <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-2"
           style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
