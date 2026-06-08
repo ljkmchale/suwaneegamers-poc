@@ -126,7 +126,7 @@
     "id": "org-astereal-accord",
     "type": "card",
     "props": {
-      "image": "/images/organizations/detail-astereal-accord.webp",
+      "image": "/images/organizations/table-astereal-accord.webp",
       "imageAlt": "Astereal Accord faction artwork",
       "eyebrow": "Extra-planar Protection",
       "title": "Astereal Accord",
@@ -159,7 +159,7 @@
       "description": "Listed among the well-known organizations of Myrdae.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-bastille.webp",
+      "image": "/images/organizations/marked-generated-bastille.webp",
       "imageAlt": "Bastille faction artwork"
     }
   },
@@ -187,7 +187,7 @@
       "description": "Also known as the League of the Sky, they reject the gods and pursue higher existence.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-empyrean-ascendants.webp",
+      "image": "/images/organizations/marked-generated-empyrean-ascendants.webp",
       "imageAlt": "Empyrean Ascendants faction artwork"
     }
   },
@@ -215,7 +215,7 @@
       "description": "An Emberstran-founded thieves' guild focused on theft, smuggling, and underground trade.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-etterset.webp",
+      "image": "/images/organizations/marked-generated-etterset.webp",
       "imageAlt": "Etterset faction artwork"
     }
   },
@@ -229,7 +229,7 @@
       "description": "Hunters who pursue others for sport or profit.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-howling-meek.webp",
+      "image": "/images/organizations/marked-generated-howling-meek.webp",
       "imageAlt": "Howling Meek faction artwork"
     }
   },
@@ -243,7 +243,7 @@
       "description": "A largely disbanded worldwide thieves' guild.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-malfease.webp",
+      "image": "/images/organizations/marked-generated-malfease.webp",
       "imageAlt": "Malfease faction artwork"
     }
   },
@@ -257,7 +257,7 @@
       "description": "A diminished ancient order whose relics and artifacts still remain mostly undiscovered.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-osmanae.webp",
+      "image": "/images/organizations/marked-generated-osmanae.webp",
       "imageAlt": "Osmanae faction artwork"
     }
   },
@@ -271,7 +271,7 @@
       "description": "A Natafae-linked group centered on growth through pain and discipline.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-paragon-tear.webp",
+      "image": "/images/organizations/marked-generated-paragon-tear.webp",
       "imageAlt": "Paragon Tear faction artwork"
     }
   },
@@ -285,7 +285,7 @@
       "description": "Enthusiasts obsessed with Mother Nature.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-populi-verde.webp",
+      "image": "/images/organizations/marked-generated-populi-verde.webp",
       "imageAlt": "Populi Verde faction artwork"
     }
   },
@@ -299,7 +299,7 @@
       "description": "A business-facing alias used around the acquisition and trade of hard-to-find goods.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-promissory.webp",
+      "image": "/images/organizations/marked-generated-promissory.webp",
       "imageAlt": "Promissory faction artwork"
     }
   },
@@ -341,7 +341,7 @@
       "description": "A hidden order that grew from exile into a covert thieves' guild.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-umbral-order.webp",
+      "image": "/images/organizations/marked-generated-umbral-order.webp",
       "imageAlt": "Umbral Order faction artwork"
     }
   },
@@ -355,7 +355,7 @@
       "description": "Killers for hire.",
       "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
       "linkLabel": "Open Reference",
-      "image": "/images/organizations/generated-venomtips.webp",
+      "image": "/images/organizations/marked-generated-venomtips.webp",
       "imageAlt": "Venomtips faction artwork"
     }
   }
