@@ -910,6 +910,7 @@ function SectionHeadingBlock({ props }: { props: Record<string, unknown> }) {
   const eyebrow = props.eyebrow as string | undefined;
   const title = props.title as string | undefined;
   const description = props.description as string | undefined;
+  const note = props.note as string | undefined;
   const align = (props.align as string | undefined) ?? "left";
   const textAlign = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
   const descMargin = align === "center" ? "max-w-2xl mx-auto" : align === "right" ? "max-w-2xl ml-auto" : "max-w-3xl";
@@ -926,6 +927,10 @@ function SectionHeadingBlock({ props }: { props: Record<string, unknown> }) {
       {description && (
         <p className={`text-sm leading-relaxed ${descMargin}`}
           style={{ color: "var(--color-text-secondary)" }}>{description}</p>
+      )}
+      {note && (
+        <p className={`text-sm font-semibold mt-2 ${descMargin}`}
+          style={{ color: "var(--color-accent-gold)" }}>{note}</p>
       )}
     </section>
   );

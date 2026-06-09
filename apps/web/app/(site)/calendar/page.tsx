@@ -34,6 +34,13 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: GOOGLE_CALENDAR_TIMEZONE,
 });
 
+const calendarDayFormatter = new Intl.DateTimeFormat("en-CA", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: GOOGLE_CALENDAR_TIMEZONE,
+});
+
 function eventTimeLabel(event: CalendarEvent): string {
   if (event.allDay) return "All day";
 
@@ -45,13 +52,21 @@ function eventTimeLabel(event: CalendarEvent): string {
     : timeFormatter.format(start);
 }
 
+function calendarDayKey(date: Date): string {
+  return calendarDayFormatter.format(date);
+}
+
+function isEventToday(event: CalendarEvent, today = new Date()): boolean {
+  return calendarDayKey(new Date(event.start)) === calendarDayKey(today);
+}
+
 export default async function CalendarPage() {
   let events: CalendarEvent[] = [];
   let feedError = false;
   const campaigns = getActiveCampaigns();
 
   try {
-    events = await fetchUpcomingCalendarEvents(8);
+    events = await fetchUpcomingCalendarEvents();
   } catch {
     feedError = true;
   }
@@ -129,14 +144,15 @@ export default async function CalendarPage() {
                   const showCampaignLabel =
                     campaign &&
                     normalizeCampaignTitle(event.title) !== normalizeCampaignTitle(campaign.name);
+                  const today = isEventToday(event);
 
                   return (
                     <article
                       key={event.uid}
                       className={
                         image
-                          ? "grid overflow-hidden rounded-lg border sm:grid-cols-[13rem_1fr]"
-                          : "grid gap-4 rounded-lg border p-4 sm:grid-cols-[8rem_1fr]"
+                          ? "relative grid overflow-hidden rounded-lg border sm:grid-cols-[13rem_1fr]"
+                          : "relative grid gap-4 rounded-lg border p-4 sm:grid-cols-[8rem_1fr]"
                       }
                       style={{
                         borderColor: "var(--color-bg-border)",
@@ -145,6 +161,19 @@ export default async function CalendarPage() {
                         boxShadow: "0 14px 38px rgba(0,0,0,.28)",
                       }}
                     >
+                      {today && (
+                        <span
+                          className="absolute right-3 top-3 z-10 rounded-full border px-3 py-1 font-cinzel text-[0.65rem] uppercase tracking-[0.2em]"
+                          style={{
+                            background: "rgba(245,158,11,.18)",
+                            borderColor: "rgba(245,158,11,.55)",
+                            color: "var(--color-accent-gold)",
+                            boxShadow: "0 0 18px rgba(245,158,11,.22)",
+                          }}
+                        >
+                          Today
+                        </span>
+                      )}
                       {image ? (
                         <div className="relative min-h-40 sm:min-h-full">
                           <Image
@@ -200,6 +229,14 @@ export default async function CalendarPage() {
                           style={{ color: "var(--color-text-primary)" }}
                         >
                           {event.title}
+                          {campaign?.dm && (
+                            <span
+                              className="ml-2 inline-block text-sm"
+                              style={{ color: "var(--color-accent-gold)" }}
+                            >
+                              - DM: {campaign.dm}
+                            </span>
+                          )}
                         </h3>
                         {showCampaignLabel && (
                           <p

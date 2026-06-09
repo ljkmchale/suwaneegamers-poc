@@ -15,11 +15,6 @@
           "label": "Campaigns"
         },
         {
-          "id": "chronicles-y28n",
-          "label": "Chronicles",
-          "href": "https://kb.suwaneegamers.net/"
-        },
-        {
           "id": "dungeon-masters",
           "href": "/dungeon-masters",
           "label": "DMs"
@@ -28,6 +23,11 @@
           "id": "previous-campaigns-0jo7",
           "label": "Previous Campaigns",
           "href": "/previous-campaigns"
+        },
+        {
+          "id": "chronicles-y28n",
+          "label": "Chronicles",
+          "href": "https://kb.suwaneegamers.net/"
         }
       ]
     },

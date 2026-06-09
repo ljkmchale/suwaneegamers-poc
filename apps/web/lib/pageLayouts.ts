@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { contentDir } from "./contentFiles";
 import { PAGE_SECTIONS } from "./pageSections";
 import { buildCampaignDetailLayout, findCampaignForDetailPath } from "./campaignDetailLayouts";
 import type { PageItem, PageGridMeta, CanvasMeta } from "./pageBlocks";
@@ -7,24 +8,6 @@ import type { PageItem, PageGridMeta, CanvasMeta } from "./pageBlocks";
 type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
 type RawEntry = unknown[] | RawMeta;
 type RawLayouts = Record<string, RawEntry>;
-
-function contentDir() {
-  const candidates = [
-    path.join(process.cwd(), "content"),
-    path.join(process.cwd(), "../../content"),
-  ];
-
-  let dir = process.cwd();
-  while (true) {
-    candidates.push(path.join(dir, "content"));
-    const parent = path.dirname(dir);
-    if (parent === dir) break;
-    dir = parent;
-  }
-
-  const found = candidates.find((candidate) => fs.existsSync(candidate));
-  return found ?? path.join(process.cwd(), "content");
-}
 
 function legacyLayoutPath() {
   return path.join(contentDir(), "page-layouts.json");

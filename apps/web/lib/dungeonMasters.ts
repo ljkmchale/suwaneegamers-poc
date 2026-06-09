@@ -1,6 +1,6 @@
 import fs from "fs";
-import path from "path";
 import { getActiveCampaigns } from "@/lib/campaigns";
+import { contentPath } from "@/lib/contentFiles";
 import { PORTAL_URLS } from "@/lib/portal";
 
 export interface DungeonMasterProfile {
@@ -14,10 +14,6 @@ export interface DungeonMasterProfile {
     name: string;
     status: "Completed" | "On Hiatus";
   }[];
-}
-
-function contentPath(filename: string) {
-  return path.join(process.cwd(), "../../content", filename);
 }
 
 export function getDungeonMasters(): DungeonMasterProfile[] {

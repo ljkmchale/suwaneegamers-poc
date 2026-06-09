@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import { contentPath } from "@/lib/contentFiles";
 
 export const PORTAL_URLS = {
   chronicles: "https://kb.suwaneegamers.net/",
@@ -14,10 +14,6 @@ export interface PortalLink {
   description: string;
   href: string;
   label?: string;
-}
-
-function contentPath(filename: string) {
-  return path.join(process.cwd(), "../../content", filename);
 }
 
 export function getPortalLinks(): PortalLink[] {

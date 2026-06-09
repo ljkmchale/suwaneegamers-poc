@@ -8,6 +8,26 @@ export interface CalendarEvent {
   allDay: boolean;
 }
 
+interface RawIcsEvent {
+  uid: string;
+  title: string;
+  description?: string;
+  location?: string;
+  start: Date;
+  end?: Date;
+  allDay: boolean;
+  rrule?: string;
+  exdates: Date[];
+  recurrenceId?: Date;
+}
+
+interface CalendarWindow {
+  start: Date;
+  end: Date;
+}
+
+export const LIVE_CALENDAR_WINDOW_MONTHS = 1;
+
 export const GOOGLE_CALENDAR_ID =
   process.env.GOOGLE_CALENDAR_ID ??
   process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID ??
@@ -39,7 +59,37 @@ export function googleCalendarIcsUrl(): string {
   )}/public/basic.ics`;
 }
 
-export async function fetchUpcomingCalendarEvents(limit = 8): Promise<CalendarEvent[]> {
+export function addCalendarMonths(date: Date, months: number): Date {
+  const next = new Date(date);
+  next.setMonth(next.getMonth() + months);
+  return next;
+}
+
+export function liveCalendarWindow(now = new Date()) {
+  return {
+    start: now,
+    end: addCalendarMonths(now, LIVE_CALENDAR_WINDOW_MONTHS),
+  };
+}
+
+export function filterCalendarEventsForWindow(
+  events: CalendarEvent[],
+  window: CalendarWindow = liveCalendarWindow(),
+): CalendarEvent[] {
+  const startMs = window.start.getTime();
+  const endMs = window.end.getTime();
+
+  return events
+    .filter((event) => {
+      const eventStartMs = new Date(event.start).getTime();
+      const eventEndMs = new Date(event.end ?? event.start).getTime();
+
+      return eventEndMs >= startMs && eventStartMs <= endMs;
+    })
+    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+}
+
+export async function fetchUpcomingCalendarEvents(limit?: number): Promise<CalendarEvent[]> {
   const res = await fetch(googleCalendarIcsUrl(), {
     next: { revalidate: 300 },
   });
@@ -49,18 +99,16 @@ export async function fetchUpcomingCalendarEvents(limit = 8): Promise<CalendarEv
   }
 
   const ics = await res.text();
-  const now = new Date();
+  const window = liveCalendarWindow();
+  const events = filterCalendarEventsForWindow(parseIcsEvents(ics, window), window);
 
-  return parseIcsEvents(ics)
-    .filter((event) => new Date(event.end ?? event.start) >= now)
-    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-    .slice(0, limit);
+  return typeof limit === "number" ? events.slice(0, limit) : events;
 }
 
-export function parseIcsEvents(ics: string): CalendarEvent[] {
+export function parseIcsEvents(ics: string, recurrenceWindow?: CalendarWindow): CalendarEvent[] {
   const lines = unfoldIcsLines(ics);
-  const events: CalendarEvent[] = [];
-  let current: Record<string, string> | null = null;
+  const rawEvents: RawIcsEvent[] = [];
+  let current: Record<string, string[]> | null = null;
 
   for (const line of lines) {
     if (line === "BEGIN:VEVENT") {
@@ -69,22 +117,8 @@ export function parseIcsEvents(ics: string): CalendarEvent[] {
     }
 
     if (line === "END:VEVENT") {
-      if (current?.DTSTART && current.SUMMARY) {
-        const start = parseIcsDate(current.DTSTART);
-        const end = current.DTEND ? parseIcsDate(current.DTEND) : undefined;
-
-        if (start) {
-          events.push({
-            uid: current.UID ?? `${current.SUMMARY}-${current.DTSTART}`,
-            title: decodeIcsText(current.SUMMARY),
-            description: current.DESCRIPTION ? decodeIcsText(current.DESCRIPTION) : undefined,
-            location: current.LOCATION ? decodeIcsText(current.LOCATION) : undefined,
-            start: start.toISOString(),
-            end: end?.toISOString(),
-            allDay: current.DTSTART.length === 8,
-          });
-        }
-      }
+      const rawEvent = current ? rawEventFromProperties(current) : null;
+      if (rawEvent) rawEvents.push(rawEvent);
       current = null;
       continue;
     }
@@ -98,10 +132,273 @@ export function parseIcsEvents(ics: string): CalendarEvent[] {
     const value = line.slice(separator + 1);
     const key = rawKey.split(";")[0];
 
-    current[key] = value;
+    current[key] = [...(current[key] ?? []), value];
+  }
+
+  return expandRawEvents(rawEvents, recurrenceWindow);
+}
+
+function rawEventFromProperties(current: Record<string, string[]>): RawIcsEvent | null {
+  const dtstart = firstProperty(current, "DTSTART");
+  const summary = firstProperty(current, "SUMMARY");
+  if (!dtstart || !summary) return null;
+
+  const start = parseIcsDate(dtstart);
+  if (!start) return null;
+
+  const dtend = firstProperty(current, "DTEND");
+  const end = dtend ? parseIcsDate(dtend) ?? undefined : undefined;
+  const recurrenceId = firstProperty(current, "RECURRENCE-ID");
+  const description = firstProperty(current, "DESCRIPTION")
+    ? cleanCalendarDescription(decodeIcsText(firstProperty(current, "DESCRIPTION") ?? ""))
+    : undefined;
+
+  return {
+    uid: firstProperty(current, "UID") ?? `${summary}-${dtstart}`,
+    title: decodeIcsText(summary),
+    description,
+    location: firstProperty(current, "LOCATION")
+      ? decodeIcsText(firstProperty(current, "LOCATION") ?? "")
+      : undefined,
+    start,
+    end,
+    allDay: dtstart.length === 8,
+    rrule: firstProperty(current, "RRULE"),
+    exdates: allProperties(current, "EXDATE").flatMap(parseIcsDateList),
+    recurrenceId: recurrenceId ? parseIcsDate(recurrenceId) ?? undefined : undefined,
+  };
+}
+
+function expandRawEvents(rawEvents: RawIcsEvent[], recurrenceWindow?: CalendarWindow): CalendarEvent[] {
+  const overrides = rawEvents.filter((event) => event.recurrenceId);
+  const overrideKeys = new Set(
+    overrides.map((event) => `${event.uid}:${event.recurrenceId?.getTime()}`),
+  );
+  const events: CalendarEvent[] = [];
+
+  for (const event of rawEvents) {
+    if (event.recurrenceId) {
+      events.push(toCalendarEvent(event));
+      continue;
+    }
+
+    if (!event.rrule || !recurrenceWindow) {
+      events.push(toCalendarEvent(event));
+      continue;
+    }
+
+    for (const occurrence of expandRecurringEvent(event, recurrenceWindow)) {
+      if (overrideKeys.has(`${event.uid}:${occurrence.start.getTime()}`)) continue;
+      events.push(toCalendarEvent(occurrence));
+    }
   }
 
   return events;
+}
+
+function expandRecurringEvent(event: RawIcsEvent, window: CalendarWindow): RawIcsEvent[] {
+  const rule = parseRrule(event.rrule ?? "");
+  const until = rule.UNTIL ? parseIcsDate(rule.UNTIL) : null;
+  const effectiveEnd = until && until < window.end ? until : window.end;
+
+  if (effectiveEnd < event.start) return [];
+
+  if (rule.FREQ === "WEEKLY") {
+    return expandWeeklyEvent(event, window.start, effectiveEnd, rule);
+  }
+
+  if (rule.FREQ === "MONTHLY") {
+    return expandMonthlyEvent(event, window.start, effectiveEnd, rule);
+  }
+
+  return [];
+}
+
+function expandWeeklyEvent(
+  event: RawIcsEvent,
+  windowStart: Date,
+  windowEnd: Date,
+  rule: Record<string, string>,
+): RawIcsEvent[] {
+  const interval = parsePositiveInt(rule.INTERVAL) ?? 1;
+  const byDays = (rule.BYDAY?.split(",") ?? [weekdayCode(event.start)]).map(parseByDay);
+  const duration = eventDurationMs(event);
+  const occurrences: RawIcsEvent[] = [];
+  const cursor = startOfLocalDay(event.start);
+
+  while (cursor <= windowEnd) {
+    const weeksSinceStart = Math.floor((startOfLocalDay(cursor).getTime() - startOfLocalDay(event.start).getTime()) / (7 * 24 * 60 * 60 * 1000));
+    const repeatsThisWeek = weeksSinceStart >= 0 && weeksSinceStart % interval === 0;
+
+    if (repeatsThisWeek && byDays.some((byDay) => byDay.weekday === weekdayCode(cursor))) {
+      const occurrenceStart = withTimeFrom(cursor, event.start);
+      const occurrenceEnd = new Date(occurrenceStart.getTime() + duration);
+      if (
+        occurrenceEnd >= windowStart &&
+        occurrenceStart <= windowEnd &&
+        !isExcludedOccurrence(event, occurrenceStart)
+      ) {
+        occurrences.push(cloneOccurrence(event, occurrenceStart, occurrenceEnd));
+      }
+    }
+
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return occurrences;
+}
+
+function expandMonthlyEvent(
+  event: RawIcsEvent,
+  windowStart: Date,
+  windowEnd: Date,
+  rule: Record<string, string>,
+): RawIcsEvent[] {
+  const interval = parsePositiveInt(rule.INTERVAL) ?? 1;
+  const byDays = (rule.BYDAY?.split(",") ?? [`${monthlyOrdinal(event.start)}${weekdayCode(event.start)}`]).map(parseByDay);
+  const duration = eventDurationMs(event);
+  const occurrences: RawIcsEvent[] = [];
+  const cursor = new Date(event.start.getFullYear(), event.start.getMonth(), 1);
+
+  while (cursor <= windowEnd) {
+    const monthsSinceStart =
+      (cursor.getFullYear() - event.start.getFullYear()) * 12 +
+      (cursor.getMonth() - event.start.getMonth());
+    const repeatsThisMonth = monthsSinceStart >= 0 && monthsSinceStart % interval === 0;
+
+    if (repeatsThisMonth) {
+      for (const byDay of byDays) {
+        const occurrenceDate = nthWeekdayOfMonth(cursor.getFullYear(), cursor.getMonth(), byDay.weekday, byDay.ordinal);
+        if (!occurrenceDate) continue;
+
+        const occurrenceStart = withTimeFrom(occurrenceDate, event.start);
+        const occurrenceEnd = new Date(occurrenceStart.getTime() + duration);
+        if (
+          occurrenceStart >= event.start &&
+          occurrenceEnd >= windowStart &&
+          occurrenceStart <= windowEnd &&
+          !isExcludedOccurrence(event, occurrenceStart)
+        ) {
+          occurrences.push(cloneOccurrence(event, occurrenceStart, occurrenceEnd));
+        }
+      }
+    }
+
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+
+  return occurrences;
+}
+
+function toCalendarEvent(event: RawIcsEvent): CalendarEvent {
+  return {
+    uid: event.recurrenceId ? `${event.uid}-${event.recurrenceId.toISOString()}` : event.uid,
+    title: event.title,
+    description: event.description,
+    location: event.location,
+    start: event.start.toISOString(),
+    end: event.end?.toISOString(),
+    allDay: event.allDay,
+  };
+}
+
+function firstProperty(properties: Record<string, string[]>, key: string): string | undefined {
+  return properties[key]?.[0];
+}
+
+function allProperties(properties: Record<string, string[]>, key: string): string[] {
+  return properties[key] ?? [];
+}
+
+function parseIcsDateList(value: string): Date[] {
+  return value.split(",").flatMap((dateValue) => {
+    const date = parseIcsDate(dateValue);
+    return date ? [date] : [];
+  });
+}
+
+function parseRrule(rrule: string): Record<string, string> {
+  return Object.fromEntries(
+    rrule.split(";").map((part) => {
+      const [key, value = ""] = part.split("=");
+      return [key, value];
+    }),
+  );
+}
+
+function parsePositiveInt(value: string | undefined): number | null {
+  if (!value) return null;
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+function parseByDay(value: string): { ordinal: number | null; weekday: string } {
+  const match = value.match(/^([+-]?\d+)?([A-Z]{2})$/);
+  return {
+    ordinal: match?.[1] ? Number.parseInt(match[1], 10) : null,
+    weekday: match?.[2] ?? value,
+  };
+}
+
+function weekdayCode(date: Date): string {
+  return ["SU", "MO", "TU", "WE", "TH", "FR", "SA"][date.getDay()];
+}
+
+function monthlyOrdinal(date: Date): number {
+  return Math.ceil(date.getDate() / 7);
+}
+
+function nthWeekdayOfMonth(year: number, month: number, weekday: string, ordinal: number | null): Date | null {
+  const weekdayIndex = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"].indexOf(weekday);
+  if (weekdayIndex === -1) return null;
+
+  if ((ordinal ?? 0) < 0) {
+    const date = new Date(year, month + 1, 0);
+    while (date.getDay() !== weekdayIndex) date.setDate(date.getDate() - 1);
+    date.setDate(date.getDate() - (Math.abs(ordinal ?? -1) - 1) * 7);
+    return date.getMonth() === month ? date : null;
+  }
+
+  const nth = ordinal ?? 1;
+  const date = new Date(year, month, 1);
+  while (date.getDay() !== weekdayIndex) date.setDate(date.getDate() + 1);
+  date.setDate(date.getDate() + (nth - 1) * 7);
+  return date.getMonth() === month ? date : null;
+}
+
+function eventDurationMs(event: RawIcsEvent): number {
+  return event.end ? event.end.getTime() - event.start.getTime() : 0;
+}
+
+function startOfLocalDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function withTimeFrom(date: Date, timeSource: Date): Date {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    timeSource.getHours(),
+    timeSource.getMinutes(),
+    timeSource.getSeconds(),
+    timeSource.getMilliseconds(),
+  );
+}
+
+function isExcludedOccurrence(event: RawIcsEvent, occurrenceStart: Date): boolean {
+  return event.exdates.some((exdate) => exdate.getTime() === occurrenceStart.getTime());
+}
+
+function cloneOccurrence(event: RawIcsEvent, start: Date, end?: Date): RawIcsEvent {
+  return {
+    ...event,
+    start,
+    end,
+    recurrenceId: start,
+    rrule: undefined,
+    exdates: [],
+  };
 }
 
 function unfoldIcsLines(ics: string): string[] {
@@ -166,4 +463,14 @@ function decodeIcsText(value: string): string {
     .replace(/\\;/g, ";")
     .replace(/\\\\/g, "\\")
     .trim();
+}
+
+function cleanCalendarDescription(value: string): string | undefined {
+  const cleaned = value
+    .replace(/Join with Google Meet:\s*https:\/\/meet\.google\.com\/[^\s]+/gi, "")
+    .replace(/Learn more about Meet at:\s*https:\/\/support\.google\.com\/[^\s]+/gi, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  return cleaned || undefined;
 }

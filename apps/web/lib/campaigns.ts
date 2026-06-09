@@ -1,6 +1,6 @@
 import fs from "fs";
-import path from "path";
 import type { CalendarEvent } from "@/lib/calendar";
+import { contentPath } from "@/lib/contentFiles";
 
 export interface CampaignSessionSummary {
   title: string;
@@ -36,10 +36,6 @@ export interface PortalCampaign {
   party?: CampaignPartyMember[];
   sessionSummaries?: CampaignSessionSummary[];
   aliases?: string[];
-}
-
-function contentPath(filename: string) {
-  return path.join(process.cwd(), "../../content", filename);
 }
 
 export function getActiveCampaigns(): PortalCampaign[] {

@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import { contentPath } from "@/lib/contentFiles";
 
 export interface Theme {
   colors: Record<string, string>;
@@ -14,17 +14,32 @@ export interface Theme {
   siteTagline?: string;
 }
 
+const FALLBACK_THEME: Theme = {
+  colors: {},
+  surfaces: {},
+  fonts: { heading: "Cinzel", body: "Lora" },
+  siteName: "Suwanee Gamers",
+  siteTagline: "The World of Myrdae",
+};
+
+export function normalizeTheme(theme: Partial<Theme> | null | undefined): Theme {
+  return {
+    ...FALLBACK_THEME,
+    ...theme,
+    colors: theme?.colors ?? FALLBACK_THEME.colors,
+    surfaces: theme?.surfaces ?? FALLBACK_THEME.surfaces,
+    fonts: {
+      heading: theme?.fonts?.heading ?? FALLBACK_THEME.fonts.heading,
+      body: theme?.fonts?.body ?? FALLBACK_THEME.fonts.body,
+    },
+    effects: theme?.effects,
+  };
+}
+
 export function loadTheme(): Theme {
   try {
-    const filePath = path.join(process.cwd(), "../../content/theme.json");
-    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Theme;
+    return normalizeTheme(JSON.parse(fs.readFileSync(contentPath("theme.json"), "utf-8")) as Partial<Theme>);
   } catch {
-    return {
-      colors: {},
-      surfaces: {},
-      fonts: { heading: "Cinzel", body: "Lora" },
-      siteName: "Suwanee Gamers",
-      siteTagline: "The World of Myrdae",
-    };
+    return normalizeTheme(null);
   }
 }

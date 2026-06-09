@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  filterCalendarEventsForWindow,
   parseIcsEvents,
   googleCalendarEmbedUrl,
   googleCalendarIcsUrl,
@@ -195,6 +196,32 @@ END:VEVENT
 END:VCALENDAR`);
     expect(events[0].description).toBe("Line 1\nLine 2");
   });
+
+  it("removes Google Meet boilerplate from DESCRIPTION", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART:20260201T180000Z
+UID:meet@test
+SUMMARY:Meet Test
+DESCRIPTION:Session notes\\n\\nJoin with Google Meet: https://meet.google.com/qdu-ckxo-pym\\n\\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+END:VEVENT
+END:VCALENDAR`);
+
+    expect(events[0].description).toBe("Session notes");
+  });
+
+  it("omits DESCRIPTION when it contains only Google Meet boilerplate", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART:20260201T180000Z
+UID:meet-only@test
+SUMMARY:Meet Only Test
+DESCRIPTION:Join with Google Meet: https://meet.google.com/qdu-ckxo-pym\\n\\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720
+END:VEVENT
+END:VCALENDAR`);
+
+    expect(events[0].description).toBeUndefined();
+  });
 });
 
 describe("parseIcsEvents — DTSTART value parameter", () => {
@@ -209,6 +236,164 @@ END:VCALENDAR`);
 
     expect(events).toHaveLength(1);
     expect(events[0].allDay).toBe(false);
+  });
+});
+
+describe("filterCalendarEventsForWindow", () => {
+  it("keeps only current and upcoming events within the one-month schedule window", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART:20260608T230000Z
+DTEND:20260609T010000Z
+UID:past@test
+SUMMARY:Past Session
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20260609T230000Z
+DTEND:20260610T010000Z
+UID:tonight@test
+SUMMARY:Tonight Session
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20260709T160000Z
+DTEND:20260709T170000Z
+UID:outside@test
+SUMMARY:Outside Window
+END:VEVENT
+END:VCALENDAR`);
+
+    const filtered = filterCalendarEventsForWindow(events, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(filtered.map((event) => event.uid)).toEqual(["tonight@test"]);
+  });
+
+  it("keeps an event that is already in progress", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART:20260609T100000Z
+DTEND:20260609T160000Z
+UID:ongoing@test
+SUMMARY:Ongoing Session
+END:VEVENT
+END:VCALENDAR`);
+
+    const filtered = filterCalendarEventsForWindow(events, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(filtered.map((event) => event.uid)).toEqual(["ongoing@test"]);
+  });
+});
+
+describe("parseIcsEvents — recurrence expansion", () => {
+  it("expands biweekly events inside the requested window", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20260610T180000
+DTEND;TZID=America/New_York:20260610T220000
+RRULE:FREQ=WEEKLY;INTERVAL=2
+UID:silent@test
+SUMMARY:Silent Vanguard
+END:VEVENT
+END:VCALENDAR`, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(events.map((event) => event.start)).toEqual([
+      "2026-06-10T22:00:00.000Z",
+      "2026-06-24T22:00:00.000Z",
+      "2026-07-08T22:00:00.000Z",
+    ]);
+  });
+
+  it("gives expanded recurrence instances unique ids", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20260610T180000
+DTEND;TZID=America/New_York:20260610T220000
+RRULE:FREQ=WEEKLY;INTERVAL=2
+UID:recurring@test
+SUMMARY:Recurring Session
+END:VEVENT
+END:VCALENDAR`, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(new Set(events.map((event) => event.uid)).size).toBe(events.length);
+    expect(events.map((event) => event.uid)).toEqual([
+      "recurring@test-2026-06-10T22:00:00.000Z",
+      "recurring@test-2026-06-24T22:00:00.000Z",
+      "recurring@test-2026-07-08T22:00:00.000Z",
+    ]);
+  });
+
+  it("expands monthly nth-weekday events inside the requested window", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20250918T180000
+DTEND;TZID=America/New_York:20250918T223000
+RRULE:FREQ=MONTHLY;BYDAY=3TH
+UID:adventure@test
+SUMMARY:A New Adventure
+END:VEVENT
+END:VCALENDAR`, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(events.map((event) => event.start)).toEqual([
+      "2026-06-18T22:00:00.000Z",
+    ]);
+  });
+
+  it("honors recurrence exclusions", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20260604T180000
+DTEND;TZID=America/New_York:20260604T223000
+RRULE:FREQ=MONTHLY;BYDAY=1TH
+EXDATE;TZID=America/New_York:20260702T180000
+UID:excluded@test
+SUMMARY:Excluded Adventure
+END:VEVENT
+END:VCALENDAR`, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(events).toHaveLength(0);
+  });
+
+  it("uses moved recurrence instances instead of the original occurrence", () => {
+    const events = parseIcsEvents(`BEGIN:VCALENDAR
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20250515T173000
+DTEND;TZID=America/New_York:20250515T220000
+RRULE:FREQ=MONTHLY;BYDAY=3TH
+UID:moved@test
+SUMMARY:A New Adventure
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20260626T173000
+DTEND;TZID=America/New_York:20260626T220000
+UID:moved@test
+RECURRENCE-ID;TZID=America/New_York:20260618T173000
+SUMMARY:A New Adventure
+END:VEVENT
+END:VCALENDAR`, {
+      start: new Date("2026-06-09T12:00:00.000Z"),
+      end: new Date("2026-07-09T12:00:00.000Z"),
+    });
+
+    expect(events.map((event) => event.start)).toEqual([
+      "2026-06-26T21:30:00.000Z",
+    ]);
   });
 });
 

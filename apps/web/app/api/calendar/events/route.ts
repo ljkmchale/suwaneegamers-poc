@@ -3,7 +3,7 @@ import { fetchUpcomingCalendarEvents } from "@/lib/calendar";
 
 export async function GET() {
   try {
-    const events = await fetchUpcomingCalendarEvents(12);
+    const events = await fetchUpcomingCalendarEvents();
     return NextResponse.json({ events });
   } catch (err) {
     console.error("[Calendar Events]", err);

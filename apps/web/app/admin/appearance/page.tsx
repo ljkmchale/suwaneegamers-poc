@@ -1,9 +1,9 @@
 import { readContent } from "@/lib/contentFiles";
 import { AppearanceEditor } from "./AppearanceEditor";
-import type { Theme } from "@/lib/theme";
+import { normalizeTheme, type Theme } from "@/lib/theme";
 
 export default function AppearancePage() {
-  const theme = readContent<Theme>("theme.json");
+  const theme = normalizeTheme(readContent<Partial<Theme>>("theme.json"));
 
   return (
     <div>

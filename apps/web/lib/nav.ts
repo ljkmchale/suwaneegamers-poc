@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import { contentPath } from "@/lib/contentFiles";
 
 export interface NavItem {
   id: string;
@@ -62,7 +62,7 @@ const DEFAULT_CONFIG: NavConfig = {
 };
 
 function navPath() {
-  return path.join(process.cwd(), "../../content/nav.json");
+  return contentPath("nav.json");
 }
 
 export function getNavConfig(): NavConfig {

@@ -1,6 +1,6 @@
 import fs from "fs";
-import path from "path";
 import { getActiveCampaigns, type CampaignPartyMember, type PortalCampaign } from "@/lib/campaigns";
+import { contentPath } from "@/lib/contentFiles";
 import { getDungeonMasters } from "@/lib/dungeonMasters";
 
 export interface PlayerProfileSeed {
@@ -19,10 +19,6 @@ export interface PlayerProfile extends PlayerProfileSeed {
   dmProfileId?: string;
   portrait?: string;
   assignments: PlayerCharacterAssignment[];
-}
-
-function contentPath(filename: string) {
-  return path.join(process.cwd(), "../../content", filename);
 }
 
 export function getPlayerProfileSeeds(): PlayerProfileSeed[] {

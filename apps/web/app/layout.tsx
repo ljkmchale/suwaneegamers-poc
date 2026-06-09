@@ -53,10 +53,10 @@ function buildGlow(colorHex: string, intensity: string): string {
 }
 
 function buildThemeStyle(theme: Theme): string {
-  const headingVar = FONT_VAR_MAP[theme.fonts.heading] ?? "--font-cinzel";
-  const bodyVar = FONT_VAR_MAP[theme.fonts.body] ?? "--font-lora";
+  const headingVar = FONT_VAR_MAP[theme.fonts?.heading] ?? "--font-cinzel";
+  const bodyVar = FONT_VAR_MAP[theme.fonts?.body] ?? "--font-lora";
 
-  const colorEntries = Object.entries(theme.colors)
+  const colorEntries = Object.entries(theme.colors ?? {})
     .map(([k, v]) => `  ${k}: ${v};`)
     .join("\n");
 
@@ -64,8 +64,8 @@ function buildThemeStyle(theme: Theme): string {
     .map(([k, v]) => `  ${k}: ${v};`)
     .join("\n");
 
-  const arcane = theme.colors["--color-accent-arcane"] ?? "#8b5cf6";
-  const gold = theme.colors["--color-accent-gold"] ?? "#f59e0b";
+  const arcane = theme.colors?.["--color-accent-arcane"] ?? "#8b5cf6";
+  const gold = theme.colors?.["--color-accent-gold"] ?? "#f59e0b";
   const intensity = theme.glowIntensity ?? "normal";
   const glowEntries = [
     `  --glow-arcane: ${buildGlow(arcane, intensity)};`,
