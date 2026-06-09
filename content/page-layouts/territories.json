@@ -6,546 +6,89 @@
     "props": {
       "eyebrow": "World Reference",
       "title": "Territories",
-      "description": "The political regions, kingdoms, and wilderness areas of Myrdae. Each entry lists the capital and primary languages. Linked titles open the capital's full entry in the location archive.",
+      "description": "The political regions, kingdoms, and wilderness areas of Myrdae. Each entry lists the capital and primary languages. Linked entries open the full location in the archive.",
       "align": "center"
     }
   },
   {
     "kind": "block",
-    "id": "ter-map",
-    "type": "button-link",
+    "id": "ter-overview-card",
+    "type": "layout-card",
     "props": {
-      "label": "View Myrdae Map",
-      "href": "https://drive.google.com/file/d/144TkmJ94UyZRUTw7iyYTJyVIrpyXJtgk/view?usp=sharing",
-      "variant": "secondary",
-      "align": "left"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-ov-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"4\", \"rows\": \"3\", \"gap\": \"lg\", \"items\": \"[{\\\"id\\\": \\\"ter-ov-art\\\", \\\"type\\\": \\\"image\\\", \\\"props\\\": {\\\"src\\\": \\\"/images/maps-of-myrdae/territories-map.webp\\\", \\\"alt\\\": \\\"Map of Myrdae territories\\\", \\\"fit\\\": \\\"cover\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"3\\\"}}, {\\\"id\\\": \\\"ter-ov-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"World Reference\\\", \\\"title\\\": \\\"Territories of Myrdae\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ov-text\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Use this index to explore the political regions, kingdoms, and wilderness areas of the world. Entries with full write-ups link directly to the location archive.\\\", \\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ov-link\\\", \\\"type\\\": \\\"link\\\", \\\"props\\\": {\\\"label\\\": \\\"View Myrdae Map\\\", \\\"href\\\": \\\"https://drive.google.com/file/d/144TkmJ94UyZRUTw7iyYTJyVIrpyXJtgk/view?usp=sharing\\\", \\\"variant\\\": \\\"secondary\\\", \\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-div-a",
-    "type": "divider",
+    "id": "ter-section-ab",
+    "type": "layout-card",
     "props": {
-      "variant": "ornate",
-      "label": "A – B"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-ab-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"5\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-ab-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"A - B\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ab-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Aelbon through Borealian Sway.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ab-aelbon\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-aelbon\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Aelbon territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-aelbon\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Aelbon\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"gold\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-aelbon\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Dha Chaomhnoir \\\\\\\\u00b7 Languages: Common\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"link-aelbon\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"link\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"label\\\\\\\": \\\\\\\"Open Entry\\\\\\\", \\\\\\\"href\\\\\\\": \\\\\\\"https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?usp=sharing\\\\\\\", \\\\\\\"variant\\\\\\\": \\\\\\\"secondary\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-aikshaw\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-aikshaw\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Aikshaw Descent territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-aikshaw\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Aikshaw Descent\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-aikshaw\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Bonfaduhr \\\\\\\\u00b7 Languages: Common, Dwarven\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-aravae\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-aravae\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Aravae territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-aravae\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Aravae\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-aravae\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-arbescar\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-arbescar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Arbescar territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-arbescar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Arbescar\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-arbescar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Marrowdale \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-baltwood\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-baltwood\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Baltwood territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-baltwood\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Baltwood\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"gold\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-baltwood\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Emberstran \\\\\\\\u00b7 Languages: Common, Elvish, Dwarven\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"link-baltwood\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"link\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"label\\\\\\\": \\\\\\\"Open Entry\\\\\\\", \\\\\\\"href\\\\\\\": \\\\\\\"https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit?usp=sharing\\\\\\\", \\\\\\\"variant\\\\\\\": \\\\\\\"secondary\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-barrford\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-barrford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Barrford territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-barrford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Barrford\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-barrford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Stinson \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-blisterfel\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"5\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-blisterfel\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Blisterfel territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-blisterfel\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Blisterfel\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-blisterfel\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Avelvein \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ab-borealian\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"5\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-borealian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Borealian Sway territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-borealian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Borealian Sway\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-borealian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Qaldynn \\\\\\\\u00b7 Languages: Common, Elvish\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-aelbon",
-    "type": "callout",
+    "id": "ter-section-cd",
+    "type": "layout-card",
     "props": {
-      "title": "Aelbon — Capital: Dhá Chaomhnóir",
-      "href": "https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?usp=sharing",
-      "content": "Languages: Common\nLush territory nestled in southern Inverland, known for its rich natural resources, fertile fields, and thriving wildlife.",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-cd-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-cd-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"C - D\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-cd-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Camburne through Dunmoore.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-cd-camburne\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-camburne\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Camburne territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-camburne\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Camburne\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-camburne\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Leoning \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-cd-caristone\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-caristone\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Caristone territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-caristone\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Caristone\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-caristone\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Edgewind \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-cd-corse\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-corse\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Corse of Veinspear territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-corse\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Corse of Veinspear\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-corse\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-cd-crimson\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-crimson\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Crimson March territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-crimson\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Crimson March\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-crimson\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Stouhg \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-cd-dalasor\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-dalasor\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Dalasor Coast territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-dalasor\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Dalasor Coast\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-dalasor\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-cd-dunmoore\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-dunmoore\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Dunmoore territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-dunmoore\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Dunmoore\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-dunmoore\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Oldport \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-aikshaw",
-    "type": "callout",
+    "id": "ter-section-eg",
+    "type": "layout-card",
     "props": {
-      "title": "Aikshaw Descent",
-      "content": "Capital: Bonfaduhr · Languages: Common, Dwarven",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-eg-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-eg-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"E - G\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-eg-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Esgaar through Graelaug.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-eg-esgaar\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-esgaar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Esgaar territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-esgaar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Esgaar\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-esgaar\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-eg-flarebane\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-flarebane\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Flarebane Isles territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-flarebane\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Flarebane Isles\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-flarebane\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-eg-frystarian\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-frystarian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Frystarian Strand territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-frystarian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Frystarian Strand\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-frystarian\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Palason \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-eg-gaelscape\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-gaelscape\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Gaelscape territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-gaelscape\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Gaelscape\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-gaelscape\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Ulkef \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-eg-glenleah\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-glenleah\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Glenleah territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-glenleah\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Glenleah\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-glenleah\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Gibuldon \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-eg-graelaug\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-graelaug\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Graelaug territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-graelaug\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Graelaug\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-graelaug\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-aravae",
-    "type": "callout",
+    "id": "ter-section-hk",
+    "type": "layout-card",
     "props": {
-      "title": "Aravae",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-hk-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-hk-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"H - K\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-hk-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Halesworth through Kholdur.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-hk-halesworth\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-halesworth\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Halesworth territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-halesworth\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Halesworth\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"gold\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-halesworth\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Basctdelm \\\\\\\\u00b7 Languages: Common, Elvish, Dwarven, Halfling\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"link-halesworth\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"link\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"label\\\\\\\": \\\\\\\"Open Entry\\\\\\\", \\\\\\\"href\\\\\\\": \\\\\\\"https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit?usp=sharing\\\\\\\", \\\\\\\"variant\\\\\\\": \\\\\\\"secondary\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-hk-hillock\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-hillock\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Hillock Torn territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-hillock\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Hillock Torn\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-hillock\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-hk-khasvadia\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-khasvadia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Khasvadia territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-khasvadia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Khasvadia\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-khasvadia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-hk-kholdur\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-kholdur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Kholdur territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-kholdur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Kholdur\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-kholdur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Thel Kholdur \\\\\\\\u00b7 Languages: Common, Dwarven\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-arbescar",
-    "type": "callout",
+    "id": "ter-section-ln",
+    "type": "layout-card",
     "props": {
-      "title": "Arbescar",
-      "content": "Capital: Marrowdale · Languages: Common",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-ln-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-ln-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"L - N\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ln-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Lyewell Stretch through Nandahere.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-ln-lyewell\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-lyewell\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Lyewell Stretch territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-lyewell\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Lyewell Stretch\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-lyewell\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Porpen \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ln-mahruud\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-mahruud\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Mahruud territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-mahruud\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Mahruud\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-mahruud\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Thrargael \\\\\\\\u00b7 Languages: Common, Orcish\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ln-matahal\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-matahal\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Matahal Valley territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-matahal\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Matahal Valley\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-matahal\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ln-mulshear\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-mulshear\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Mulshear territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-mulshear\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Mulshear\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-mulshear\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Mulshear \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-ln-nandahere\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-nandahere\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Nandahere territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-nandahere\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Nandahere\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-nandahere\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-baltwood",
-    "type": "callout",
+    "id": "ter-section-or",
+    "type": "layout-card",
     "props": {
-      "title": "Baltwood — Capital: Emberstran",
-      "href": "https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit?usp=sharing",
-      "content": "Languages: Common, Elvish, Dwarven",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-or-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-or-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"O - R\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-or-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Okodia through Rostiena Foothills.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-or-okodia\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-okodia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Okodia territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-okodia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Okodia\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-okodia\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Skrettel \\\\\\\\u00b7 Languages: Common, Gnomish, Halfling\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-or-qaethesvorin\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-qaethesvorin\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Qaethesvorin territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-qaethesvorin\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Qaethesvorin\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-qaethesvorin\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-or-range\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-range\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Range of Otesurr territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-range\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Range of Otesurr\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-range\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-or-roaring\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-roaring\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Roaring Hollow territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-roaring\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Roaring Hollow\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-roaring\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Fjordnahl \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-or-rostiena\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-rostiena\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Rostiena Foothills territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-rostiena\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Rostiena Foothills\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"gold\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-rostiena\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Stoneshore \\\\\\\\u00b7 Languages: Common\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"link-rostiena\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"link\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"label\\\\\\\": \\\\\\\"Open Entry\\\\\\\", \\\\\\\"href\\\\\\\": \\\\\\\"https://docs.google.com/document/d/1Krz-9jcD87_dAlPcjW2Wglyv2obMjvyt5iqZvZl9K7Q/edit?usp=sharing\\\\\\\", \\\\\\\"variant\\\\\\\": \\\\\\\"secondary\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-barrford",
-    "type": "callout",
+    "id": "ter-section-st",
+    "type": "layout-card",
     "props": {
-      "title": "Barrford",
-      "content": "Capital: Stinson · Languages: Common",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-st-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"5\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-st-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"S - T\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-st-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Sarbaugh through Tundra of Nalscour.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-st-sarbaugh\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-sarbaugh\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Sarbaugh territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-sarbaugh\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Sarbaugh\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-sarbaugh\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Orcish\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-serriveil\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-serriveil\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Serriveil territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-serriveil\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Serriveil\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-serriveil\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-severed\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-severed\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Severed Bend territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-severed\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Severed Bend\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-severed\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-sutherford\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-sutherford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Sutherford territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-sutherford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Sutherford\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-sutherford\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Morrey \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-tegenwald\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-tegenwald\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Tegenwald territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-tegenwald\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Tegenwald\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-tegenwald\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Aerley \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-theamis\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-theamis\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Theamis territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-theamis\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Theamis\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-theamis\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-st-tundra\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"5\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-tundra\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Tundra of Nalscour territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-tundra\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Tundra of Nalscour\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-tundra\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}]\"}}]"
     }
   },
   {
     "kind": "block",
-    "id": "ter-blisterfel",
-    "type": "callout",
+    "id": "ter-section-uy",
+    "type": "layout-card",
     "props": {
-      "title": "Blisterfel",
-      "content": "Capital: Avelvein · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-borealian",
-    "type": "callout",
-    "props": {
-      "title": "Borealian Sway",
-      "content": "Capital: Qal'dynn · Languages: Common, Elvish",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-c",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "C – D"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-camburne",
-    "type": "callout",
-    "props": {
-      "title": "Camburne",
-      "content": "Capital: Leoning · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-caristone",
-    "type": "callout",
-    "props": {
-      "title": "Caristone",
-      "content": "Capital: Edgewind · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-corse",
-    "type": "callout",
-    "props": {
-      "title": "Corse of Veinspear",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-crimson",
-    "type": "callout",
-    "props": {
-      "title": "Crimson March",
-      "content": "Capital: Stouhg · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-dalasor",
-    "type": "callout",
-    "props": {
-      "title": "Dalasor Coast",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-dunmoore",
-    "type": "callout",
-    "props": {
-      "title": "Dunmoore",
-      "content": "Capital: Oldport · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-e",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "E – G"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-esgaar",
-    "type": "callout",
-    "props": {
-      "title": "Esgaar",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-flarebane",
-    "type": "callout",
-    "props": {
-      "title": "Flarebane Isles",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-frystarian",
-    "type": "callout",
-    "props": {
-      "title": "Frystarian Strand",
-      "content": "Capital: Palason · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-gaelscape",
-    "type": "callout",
-    "props": {
-      "title": "Gaelscape",
-      "content": "Capital: Ulkef · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-glenleah",
-    "type": "callout",
-    "props": {
-      "title": "Glenleah",
-      "content": "Capital: Gibuldon · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-graelaug",
-    "type": "callout",
-    "props": {
-      "title": "Graelaug",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-h",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "H – K"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-halesworth",
-    "type": "callout",
-    "props": {
-      "title": "Halesworth — Capital: Basctdelm",
-      "href": "https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit?usp=sharing",
-      "content": "Languages: Common, Elvish, Dwarven, Halfling",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-hillock",
-    "type": "callout",
-    "props": {
-      "title": "Hillock Torn",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-khasvadia",
-    "type": "callout",
-    "props": {
-      "title": "Khasvadia",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-kholdur",
-    "type": "callout",
-    "props": {
-      "title": "Kholdur",
-      "content": "Capital: Thel Kholdur · Languages: Common, Dwarven",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-l",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "L – N"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-lyewell",
-    "type": "callout",
-    "props": {
-      "title": "Lyewell Stretch",
-      "content": "Capital: Porpen · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-mahruud",
-    "type": "callout",
-    "props": {
-      "title": "Mahruud",
-      "content": "Capital: Thrargael · Languages: Common, Orcish",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-matahal",
-    "type": "callout",
-    "props": {
-      "title": "Matahal Valley",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-mulshear",
-    "type": "callout",
-    "props": {
-      "title": "Mulshear",
-      "content": "Capital: Mulshear · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-nandahere",
-    "type": "callout",
-    "props": {
-      "title": "Nandahere",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-o",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "O – R"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-okodia",
-    "type": "callout",
-    "props": {
-      "title": "Okodia",
-      "content": "Capital: Skrettel · Languages: Common, Gnomish, Halfling",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-qaethesvorin",
-    "type": "callout",
-    "props": {
-      "title": "Qae'thesvorin",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-range",
-    "type": "callout",
-    "props": {
-      "title": "Range of Otesurr",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-roaring",
-    "type": "callout",
-    "props": {
-      "title": "Roaring Hollow",
-      "content": "Capital: Fjord'nahl · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-rostiena",
-    "type": "callout",
-    "props": {
-      "title": "Rostiena Foothills — Capital: Stoneshore",
-      "href": "https://docs.google.com/document/d/1Krz-9jcD87_dAlPcjW2Wglyv2obMjvyt5iqZvZl9K7Q/edit?usp=sharing",
-      "content": "Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-s",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "S – T"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-sarbaugh",
-    "type": "callout",
-    "props": {
-      "title": "Sarbaugh",
-      "content": "No established capital · Languages: Orcish",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-serriveil",
-    "type": "callout",
-    "props": {
-      "title": "Serriveil",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-severed",
-    "type": "callout",
-    "props": {
-      "title": "Severed Bend",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-sutherford",
-    "type": "callout",
-    "props": {
-      "title": "Sutherford",
-      "content": "Capital: Morrey · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-tegenwald",
-    "type": "callout",
-    "props": {
-      "title": "Tegenwald",
-      "content": "Capital: A'erley · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-theamis",
-    "type": "callout",
-    "props": {
-      "title": "Theamis",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-tundra",
-    "type": "callout",
-    "props": {
-      "title": "Tundra of Nalscour",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-div-u",
-    "type": "divider",
-    "props": {
-      "variant": "ornate",
-      "label": "U – Y"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-uldrea",
-    "type": "callout",
-    "props": {
-      "title": "Uldrea",
-      "content": "Capital: Sulura · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-wheldrake",
-    "type": "callout",
-    "props": {
-      "title": "Wheldrake",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-yagvur",
-    "type": "callout",
-    "props": {
-      "title": "Yag'vur",
-      "content": "No established capital · Languages: Common",
-      "variant": "gold"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "ter-yearning",
-    "type": "callout",
-    "props": {
-      "title": "Yearning Vale — Capital: Tratta",
-      "href": "https://docs.google.com/document/d/1nbv3ZA-BTR3i1qT535PrR0A3sFHzOuxeYAmXDD83TwY/edit?usp=sharing",
-      "content": "Languages: Common",
-      "variant": "gold"
+      "width": "wide",
+      "items": "[{\"id\": \"ter-uy-grid\", \"type\": \"grid\", \"props\": {\"columns\": \"3\", \"rows\": \"4\", \"gap\": \"md\", \"items\": \"[{\\\"id\\\": \\\"ter-uy-heading\\\", \\\"type\\\": \\\"header\\\", \\\"props\\\": {\\\"eyebrow\\\": \\\"Territories\\\", \\\"title\\\": \\\"U - Y\\\", \\\"color\\\": \\\"gold\\\", \\\"size\\\": \\\"lg\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"1\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-uy-desc\\\", \\\"type\\\": \\\"text\\\", \\\"props\\\": {\\\"content\\\": \\\"Uldrea through Yearning Vale.\\\", \\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"2\\\", \\\"colSpan\\\": \\\"3\\\", \\\"rowSpan\\\": \\\"1\\\"}}, {\\\"id\\\": \\\"ter-uy-uldrea\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-uldrea\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Uldrea territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-uldrea\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Uldrea\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-uldrea\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Sulura \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-uy-wheldrake\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"2\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-wheldrake\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Wheldrake territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-wheldrake\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Wheldrake\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-wheldrake\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-uy-yagvur\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"3\\\", \\\"row\\\": \\\"3\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-yagvur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Yagvur territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-yagvur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Yagvur\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"primary\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-yagvur\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"No established capital \\\\\\\\u00b7 Languages: Common\\\\\\\"}}]\\\"}}, {\\\"id\\\": \\\"ter-uy-yearning\\\", \\\"type\\\": \\\"inner-card\\\", \\\"props\\\": {\\\"col\\\": \\\"1\\\", \\\"row\\\": \\\"4\\\", \\\"colSpan\\\": \\\"1\\\", \\\"rowSpan\\\": \\\"1\\\", \\\"items\\\": \\\"[{\\\\\\\"id\\\\\\\": \\\\\\\"img-yearning\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"image\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"src\\\\\\\": \\\\\\\"/images/maps-of-myrdae/territories-map.webp\\\\\\\", \\\\\\\"alt\\\\\\\": \\\\\\\"Yearning Vale territory\\\\\\\", \\\\\\\"fit\\\\\\\": \\\\\\\"cover\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"title-yearning\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"header\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"title\\\\\\\": \\\\\\\"Yearning Vale\\\\\\\", \\\\\\\"color\\\\\\\": \\\\\\\"gold\\\\\\\", \\\\\\\"size\\\\\\\": \\\\\\\"md\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"text-yearning\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"text\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"content\\\\\\\": \\\\\\\"Capital: Tratta \\\\\\\\u00b7 Languages: Common\\\\\\\"}}, {\\\\\\\"id\\\\\\\": \\\\\\\"link-yearning\\\\\\\", \\\\\\\"type\\\\\\\": \\\\\\\"link\\\\\\\", \\\\\\\"props\\\\\\\": {\\\\\\\"label\\\\\\\": \\\\\\\"Open Entry\\\\\\\", \\\\\\\"href\\\\\\\": \\\\\\\"https://docs.google.com/document/d/1nbv3ZA-BTR3i1qT535PrR0A3sFHzOuxeYAmXDD83TwY/edit?usp=sharing\\\\\\\", \\\\\\\"variant\\\\\\\": \\\\\\\"secondary\\\\\\\"}}]\\\"}}]\"}}]"
     }
   }
 ]
