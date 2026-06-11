@@ -15,7 +15,7 @@ import {
 // for backwards compatibility with saved pages but have no ASSET_TYPES entry.
 const ALL_BLOCK_TYPES: BlockType[] = [
   "divider", "card", "image", "text", "callout", "section-heading", "fold-header",
-  "timeline", "button-link", "link-list", "gallery", "embed", "media-player", "spacer", "quote",
+  "timeline", "button-link", "link-list", "gallery", "embed", "media-player", "spacer", "quote", "table",
   "campaign-hero", "campaign-meta", "campaign-links", "campaign-notes", "campaign-roster", "campaign-sessions",
   "page-header", "page-banner", "portal-links",
   "archived-campaign-card", "deity-card", "profile-card", "layout-card", "card-grid", "grid-section",

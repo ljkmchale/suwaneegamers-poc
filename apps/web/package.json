@@ -11,6 +11,7 @@
     "lint": "eslint app components lib __tests__",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "sync-notes": "tsx scripts/sync-session-notes.ts",
     "test:watch": "vitest"
   },
   "dependencies": {

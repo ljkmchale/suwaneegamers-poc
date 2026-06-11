@@ -15,14 +15,14 @@
           "label": "Campaigns"
         },
         {
-          "id": "dungeon-masters",
-          "href": "/dungeon-masters",
-          "label": "DMs"
-        },
-        {
           "id": "chronicles-y28n",
           "label": "Chronicles",
-          "href": "https://kb.suwaneegamers.net/"
+          "href": "/chronicles"
+        },
+        {
+          "id": "maps-of-myrdae",
+          "href": "/maps-of-myrdae",
+          "label": "Map"
         }
       ]
     },
@@ -31,18 +31,33 @@
       "label": "Setting",
       "items": [
         {
+          "id": "bestiary",
+          "href": "/bestiary",
+          "label": "Bestiary"
+        },
+        {
+          "id": "gazetteer",
+          "href": "/gazetteer",
+          "label": "Gazetteer"
+        },
+        {
+          "id": "land-kpsa",
+          "label": "Guides",
+          "href": "/guides"
+        },
+        {
           "id": "history",
           "href": "/history",
           "label": "History"
         },
         {
-          "id": "land-kpsa",
-          "label": "Land",
-          "href": "/land"
+          "id": "lore-hu9m",
+          "label": "Legends & Lore",
+          "href": "/lore"
         },
         {
           "id": "organizations-factions-wxwf",
-          "label": "Organizations (Factions)",
+          "label": "Organizations",
           "href": "/organizations"
         },
         {
@@ -51,19 +66,9 @@
           "label": "Pantheon"
         },
         {
-          "id": "references-752a",
-          "label": "References (Sourcebooks)",
-          "href": "/references"
-        },
-        {
-          "id": "maps-of-myrdae",
-          "href": "/maps-of-myrdae",
-          "label": "Maps"
-        },
-        {
-          "id": "map-viewer",
-          "href": "https://mapeditor.suwaneegamers.net/embed-map.html",
-          "label": "Interactive Map"
+          "id": "territories",
+          "href": "/territories",
+          "label": "Territories"
         }
       ]
     },
@@ -77,9 +82,24 @@
       "label": "Toolset",
       "items": [
         {
+          "id": "adventures-m9fw",
+          "label": "Adventures",
+          "href": "/adventures"
+        },
+        {
+          "id": "crit-tables-5nt6",
+          "label": "Crit Tables",
+          "href": "/crit_tables"
+        },
+        {
           "id": "campaign-setting",
           "href": "/campaign-setting",
           "label": "Campaign Setting"
+        },
+        {
+          "id": "references-752a",
+          "label": "References (Sourcebooks)",
+          "href": "/references"
         },
         {
           "id": "reference-for-dungeon-masters",
@@ -87,29 +107,35 @@
           "label": "DM Reference"
         },
         {
-          "id": "gazetteer",
-          "href": "/gazetteer",
-          "label": "Gazetteer"
-        },
-        {
-          "id": "bestiary",
-          "href": "/bestiary",
-          "label": "Bestiary"
-        },
-        {
           "id": "lore",
           "href": "/lore",
           "label": "Legends & Lore"
         },
         {
-          "id": "territories",
-          "href": "/territories",
-          "label": "Territories"
-        },
-        {
           "id": "test-page",
           "href": "/test-page",
           "label": "Test Page"
+        }
+      ]
+    },
+    {
+      "id": "about-e533",
+      "label": "About",
+      "items": [
+        {
+          "id": "our-story-ug2r",
+          "label": "Our Story",
+          "href": "/ourstory"
+        },
+        {
+          "id": "dungeon-masters",
+          "href": "/dungeon-masters",
+          "label": "Our Dungeon Masters"
+        },
+        {
+          "id": "supporting-our-gamers-xm90",
+          "label": "Supporting Our Gamers",
+          "href": "/supportourgamers"
         }
       ]
     }

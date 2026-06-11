@@ -170,9 +170,13 @@ function ImagePathField({
     fd.append("files", files[0]);
 
     startTransition(async () => {
-      const result = await uploadFilesAction(fd);
-      if (result.uploaded[0]) onChange(result.uploaded[0]);
-      if (result.errors.length > 0) setError(result.errors.join(", "));
+      try {
+        const result = await uploadFilesAction(fd);
+        if (result.uploaded[0]) onChange(result.uploaded[0]);
+        if (result.errors.length > 0) setError(result.errors.join(", "));
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Upload failed — the file may be too large.");
+      }
     });
   }
 

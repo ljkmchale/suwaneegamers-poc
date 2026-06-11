@@ -1,0 +1,245 @@
+[
+  {
+    "id": "advents-of-harmony",
+    "name": "Advents of Harmony",
+    "knownFor": "Exploration & History",
+    "summary": "Adventure, explore and record for historical purposes",
+    "description": "Myrdae's oldest organization, known for exploration, preserved history, deep archives, and trusted advisors.",
+    "image": "/images/organizations/detail-advents-of-harmony.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": true,
+    "details": "The Advents of Harmony is the oldest organization in Myrdae. They originally started as adventurers and explorers, but soon became known as more of a historical faction. Today, the Advents of Harmony maintain the largest historical archive on Myrdae and are sought out by many leaders as advisors, sages, and the like.\n\nGiven their immense depth of knowledge, the Advents of Harmony have strong contacts throughout the land. They often have connections with town and city leaders, although they are often reluctant to reveal those connections without just cause.\n\nThe Advents of Harmony have the following Goals:\n\n• Adventure into the unexplored\n• Record and preserve history\n\nBELIEFS AND VALUES\n\nThose joining the Advents of Harmony know that a strong mind and body are required, following these tenets:\n\n• Body & Spirit – essence within and beyond\n• Knowledge & Lore – historical awareness\n• Travel & Exploration – absorb that which sustains us\n\nSTRUCTURE & MEMBERSHIP\n\nThe Advents of Harmony are run by a well-organized set of leaders and although members take their duties seriously, they are given a lot of leeway to explore and learn of the world. Membership is most sought out by those wishing to contribute to the cause of the Advents, although other members may frequently recruit strong adventurers. A member of the Advents of Harmony is always recognized by their journal.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Avantee\n  2  |  2 - 9  |  Venture\n  3  |  10 - 24  |  Seeker\n  4  |  25+  |  Savant\n\nBENEFITS\n\nThe following assets are available to members:\n\n1. A journal is always available for documentation\n2. Audience with village or town leaders, once per stretch\n3. Minor services by a priest or cleric (such as Lesser Restoration)"
+  },
+  {
+    "id": "anders",
+    "name": "Anders",
+    "knownFor": "Diplomacy & Secrecy",
+    "summary": "Diplomatic organization disguised as art lovers",
+    "description": "An artistic public face conceals a diplomatic network of politically placed operatives.",
+    "image": "/images/organizations/detail-anders.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "On the surface, the Anders is a respected group of poets, storytellers, and writers. However, beneath this artistic facade lies their true purpose: a covert network of politically astute operatives in towns and cities placed to gain insight into their political structures, while offering subtle counsel to leaders to promote stability and diplomacy. The Anders represents the balance between art and influence, using the beauty of words to shape the political landscapes of Myrdae without overtly revealing their true intentions.\n\nFor a character seeking to influence the world through wit and wisdom, the Anders offers a unique opportunity. Membership provides access to valuable information, connections with influential figures, and a platform to subtly guide the course of political events. Whether driven by a desire to protect their homeland, gain political leverage, or uncover secrets hidden beneath the surface of society, joining the Anders allows characters to be part of a sophisticated network that wields words as their most potent weapon.\n\nThe Anders have the following Goals:\n\n• Ensure leaders have the knowledge to maintain stability\n• Guide rulers and influential figures toward diplomatic resolutions\n• Promote peace and cooperation\n\nBELIEFS AND VALUES\n\n• Words are the most powerful tools for change\n• True influence lies in subtlety and discretion\n• Knowledge is for fostering stability and preventing conflict\n\nSTRUCTURE AND MEMBERSHIP\n\nEach town or city where the Anders operates has a designated leader, known as the Preceptor, that is recognized as the primary diplomat and coordinates efforts to gather intelligence. While towns and villages only have a handful of members, in the cities, the Preceptor is supported by three or four Adjutants, who assist in managing the organization's affairs. Members gather every stretch to discuss their latest reads, but near the end of these meetings, key individuals discuss recent events and needed diplomatic efforts. Each settlement has their own membership token with the Anders symbol, which could be a ring, amulet or other item.\n\nBENEFITS\n\nMembers gain access to privileged information and political secrets, giving them an edge in both social and strategic situations.\n\nThe network of the Anders connects members to influential figures across Myrdae, offering opportunities for alliances and support."
+  },
+  {
+    "id": "astereal-accord",
+    "name": "Astereal Accord",
+    "knownFor": "Extra-planar Protection",
+    "summary": "Protect Myrdae from otherworldly threats",
+    "description": "Protectors focused on threats from beyond Myrdae, unstable breaches, and corrupted magic.",
+    "image": "/images/organizations/table-astereal-accord.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "The Astereal Accord was founded years ago, when threats from the skies, unstable planar breaches, and corrupted magic endangered Myrdae. Unlike the Meridian, who focus on law, order, and protection against the Crungess and terrestrial dangers, the Accord looks outward and upward, safeguarding Myrdae from threats beyond its borders and balance. Over the decades, the Accord became recognized as the foremost organization against extraplanar dangers, unstable magical resonance, and abuses of Lodestone technology.\n\nThe Astereal Accord have the following Goals:\n\n• Guard Myrdae against extraplanar incursions and breaches.\n• Preserve balance in the use of magic and prevent its corruption.\n• Protect the skies through stewardship of Lodestones and airship fleets.\n\nBELIEFS AND VALUES\n\n• Diplomacy – every force must be countered with harmony, never dominance.\n• Vigilance – the skies, planes, and weave are fragile; constant watch is required.\n• Unity – only through equal voice between divisions can Myrdae remain safe."
+  },
+  {
+    "id": "barrenscars",
+    "name": "Barrenscars",
+    "knownFor": "Slave Trade",
+    "summary": "Mercenaries that traffic people",
+    "description": "Mercenaries known for trafficking people.",
+    "image": "/images/organizations/table-barrenscars.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "bastille",
+    "name": "Bastille",
+    "knownFor": null,
+    "summary": null,
+    "description": "Listed among the well-known organizations of Myrdae.",
+    "image": "/images/organizations/marked-generated-bastille.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "bloodhand",
+    "name": "Bloodhand",
+    "knownFor": "Hired sellswords",
+    "summary": null,
+    "description": "Blades for hire among Myrdae's known powers.",
+    "image": "/images/organizations/table-bloodhand.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "cloak-of-defiance",
+    "name": "Cloak of Defiance",
+    "knownFor": "Power & Influence",
+    "summary": "Mercenaries and large thieves' guild",
+    "description": "A mercenary network and sprawling thieves' guild that rose from the shadows of the Malfease.",
+    "image": "/images/organizations/detail-cloak-of-defiance.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": true,
+    "details": "For decades, the Cloak of Defiance have fought to replace the Malfease as the most powerful organization that works behind the shadows. In 1232, the Cloak of Defiance were able to supplant the leadership within the Malfease, raising them to one of the most powerfully connected networks in Myrdae.\n\nThe leadership of the Cloak of Defiance spreads far and wide, holding key positions in the largest cities. Their roots come from a loose network of thieves' guilds and have spawned into a unity of many thieves' guilds all over the land.\n\nThe Cloak of Defiance have the following Goals:\n\n• Attain power and influence across the land\n• Seek and acquire wealth and powerful items\n\nBELIEFS AND VALUES\n\n• Prime – know your family, know your priorities\n• Ambition – determination has its rewards\n• Bias – some things, or people, are worth more\n\nSTRUCTURE & MEMBERSHIP\n\nThe Cloak of Defiance is a tight organization, led by one individual with a self-given title or name. This leader chooses where they will operate from, but for the past several years, it has been from the Bellows of Basctdelm. Members are known to have each other's back and will flock in numbers to stand up for a fellow Cloak if there is need.\n\nThe Cloak of Defiance are always looking to advance their cause and strengthen their numbers, so membership is self-declared. Members of the Cloak of Defiance are given a coin, where the front of the coin has the Cloak of Defiance symbol and the back has the alias of the member that vouched for them.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Tenderfoot\n  2  |  2 - 9  |  Edge\n  3  |  10 - 24  |  Agent\n  4  |  25+  |  Cloak\n\nBENEFITS\n\nThe following assets are available to members:\n\n1. Forgery services in a town or major city\n2. Access to purchase poisons in a town or city"
+  },
+  {
+    "id": "empyrean-ascendants",
+    "name": "Empyrean Ascendants",
+    "knownFor": "Non-believers",
+    "summary": "Believe the gods are a farce",
+    "description": "Also known as the League of the Sky, they reject the gods and pursue higher existence.",
+    "image": "/images/organizations/marked-generated-empyrean-ascendants.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "Empyrean Ascendants, a cult following also known as League of the Sky, believe that you can enter a higher plane of existence, which can only occur during Absentia (when the two moons are new). By performing various rituals during the time when both moons are in their new moon phase, the followers believe worthy souls elevate to an Absent Transition.\n\nThe symbol of the Empyrean Ascendants is a perfectly round black star sapphire, with the star shining brightly across the surface of the black orb.\n\nThere are those who claim that they have ascended into an Absent Transition, returning with various thoughts and feelings on the matter:\n\n• Higher Truth – leaders of Empyrean Ascendants feel they have gone, only to return as a guide to lead others who are worthy.\n• Insanity – some speak of entering a realm of demonic presence, where they believe to be possessed or overcome by demons.\n• Denial – Some that return say that it is like a dream state woven into reality. They feel that they have lived an existence that seemed no different until they returned. Over time, they claim to have seen evidence their actions have had some impact on things that really occurred on Myrdae, though only in pieces and parts."
+  },
+  {
+    "id": "eradic-of-ghone",
+    "name": "Eradic of Ghone",
+    "knownFor": "Worshipping a Lich",
+    "summary": "Cult doing the bidding of Si'julous Ghone",
+    "description": "A cult devoted to Si'julous Ghone and the promise of a coming unbinding.",
+    "image": "/images/organizations/table-eradic-of-ghone.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "Pronounced \\[ERA-DIK\\]\n\nThis group of cultists named the Eradic of Ghone, are followers of the Soul Reaper, lich-demigod Si'julous Ghone, spread all over Myrdae. The cult believes that death frees the soul from false identity — and that Si'julous Ghone will soon usher in a \"Great Unbinding.\" Many members are former healers, caretakers, or grieving families who were seduced into believing that death is purity."
+  },
+  {
+    "id": "etterset",
+    "name": "Etterset",
+    "knownFor": "Thieves' Guild",
+    "summary": "Founded in Emberstran",
+    "description": "An Emberstran-founded thieves' guild focused on theft, smuggling, and underground trade.",
+    "image": "/images/organizations/marked-generated-etterset.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "The Etterset is a thieves' guild formed around 1240\\. The Etterset usually only have pragmatic members that are profit-driven, focusing on theft, smuggling and control of underground trade. The Etterset tend to compete against the Cloak of Defiance for power and control of underground networks."
+  },
+  {
+    "id": "everdawn",
+    "name": "Everdawn",
+    "knownFor": "Balance & Preservation",
+    "summary": "Nature loving group seeking coexistence",
+    "description": "A widespread nature-minded faction that watches the boundary between civilization and the natural world.",
+    "image": "/images/organizations/detail-everdawn.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": true,
+    "details": "Known for their love of nature, the Everdawn are widespread. Often, members will keep a low profile, observing things from the outskirts of civilization. Members react swiftly at signs of disruption in the balance of man and nature.\n\nThe Everdawn tend to have strong relationships with villages and towns because of their dependence on nearby natural resources and the fact that they are more vulnerable to threats. However, cities recognize the importance of the Everdawn's presence.\n\nThe Everdawn have the following Goals:\n\n• Help people work together with nature for coexistence.\n• Remove unnatural entities that pose a threat to nature.\n\nBELIEFS AND VALUES\n\n• Preservation - preserve the natural order of things\n• Balance - ensure that civilization and nature exist in harmony\n• Restraint - restrain violence against natural things\n\nSTRUCTURE & MEMBERSHIP\n\nThe Everdawn is one of the more loosely based factions in Myrdae. There is one individual who rises to the top of the ranks in the Everdawn, known as the Dawnmother or Dawnfather. Members, while scattered, have a camaraderie with each other and are willing to help any who need it. They train where available and share information when encountering other members, alerting them of threats.\n\nThe Everdawn members have a crescent moon pin surrounded by vines. They identify other members by showing their insignia and stating the motto of Preservation, Balance and Restraint.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Scout\n  2  |  2 - 9  |  Watcher\n  3  |  10 - 24  |  Sentry\n  4  |  25+  |  Warden\n\nBENEFITS\n\nThe following assets are available to members:\n\n1. You are always met with hospitality in a village\n2. You get Advantage on survival checks for tracking in the wilderness"
+  },
+  {
+    "id": "howling-meek",
+    "name": "Howling Meek",
+    "knownFor": "Bounty Hunting",
+    "summary": "Hunt other for sport or profit",
+    "description": "Hunters who pursue others for sport or profit.",
+    "image": "/images/organizations/marked-generated-howling-meek.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "malfease",
+    "name": "Malfease",
+    "knownFor": "Control & Secrecy",
+    "summary": "Largely disbanded worldwide thieves' guild",
+    "description": "A largely disbanded worldwide thieves' guild.",
+    "image": "/images/organizations/marked-generated-malfease.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "meridian",
+    "name": "Meridian",
+    "knownFor": "Alliance & Order",
+    "summary": "Create alliances among people and protect them",
+    "description": "A recognized force for law, order, protection, and alliances across the people of Myrdae.",
+    "image": "/images/organizations/detail-meridian.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": true,
+    "details": "The Meridian originated as the Halesworth Charge, a select force for order guided by the ruler of Halesworth in the Bathaen Empire. They grew in name and numbers, and many of the people of Myrdae adopted their mission and referred to them as the \"Meridian.\" Today, the Meridian is the main organization recognized by most of Myrdae that helps to bring law and order across the land.\n\nAlmost all of the large cities in Myrdae have Meridian representatives who are well connected to important figures in the city. They work with other representatives to flush out chaos and other nefarious activities.\n\nThe Meridian have the following Goals:\n\n• Advocate for honor and order.\n• Fight against bringers of anarchy and chaos.\n\nBELIEFS AND VALUES\n\n• Undivided – a united front is stronger than a divided land\n• Order – you are responsible for honor and order\n• Never Fear – meet threats head on, don't wait for them to have an advantage\n\nSTRUCTURE & MEMBERSHIP\n\nThe Meridian organization is led by an Ambassador who is aligned with each major region in Myrdae. There is also one Templar who has the responsibility of mediating decisions. There are embassies in each region in Myrdae, with an Ambassador heading up each location (Adamont, Basctdelm, Gibuldon, and Thrargael). Leaders of the Meridian gather every harmon to review threats on the land.\n\nMembers of the Meridian grasp their silver amulet insignia in their right hand and place it over their heart with a nod of their head.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Pledge\n  2  |  2 - 9  |  Stalwart\n  3  |  10 - 24  |  Gallant\n  4  |  25+  |  Templar\n\nBENEFITS\n\nThe following assets are available to members:\n\n1. Issued preferred weapon, if they do not own one\n2. Recognition by local guards\n3. Access to defense training grounds and barracks"
+  },
+  {
+    "id": "osmanae",
+    "name": "Osmanae",
+    "knownFor": null,
+    "summary": "Ancient order, largely diminished. Relics and artifacts still in existence, but mostly undiscovered.",
+    "description": "A diminished ancient order whose relics and artifacts still remain mostly undiscovered.",
+    "image": "/images/organizations/marked-generated-osmanae.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "paragon-tear",
+    "name": "Paragon Tear",
+    "knownFor": "Pain & Discipline",
+    "summary": "Growth through experiencing pain (Natafae)",
+    "description": "A Natafae-linked group centered on growth through pain and discipline.",
+    "image": "/images/organizations/marked-generated-paragon-tear.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "populi-verde",
+    "name": "Populi Verde",
+    "knownFor": "Nature Fanatics",
+    "summary": "Enthusiasts obsessed with Mother Nature",
+    "description": "Enthusiasts obsessed with Mother Nature.",
+    "image": "/images/organizations/marked-generated-populi-verde.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "promissory",
+    "name": "Promissory",
+    "knownFor": "Dealing in Artifacts",
+    "summary": "Funds adventurers to acquire hard to find goods",
+    "description": "A business-facing alias used around the acquisition and trade of hard-to-find goods.",
+    "image": "/images/organizations/marked-generated-promissory.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "The Ebonhand are a secretive group that deals in the acquisition and trade of hard to find goods, such as artifacts. They use the alias \"The Promissory\" as an official business and trade organization, in an attempt to cover any illegal activity they are involved in."
+  },
+  {
+    "id": "radiant-eye",
+    "name": "Radiant Eye",
+    "knownFor": null,
+    "summary": null,
+    "description": "Listed among the well-known organizations of Myrdae.",
+    "image": "/images/organizations/detail-radiant-eye.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  },
+  {
+    "id": "reludomina",
+    "name": "Rel'Udomina",
+    "knownFor": "Anarchy",
+    "summary": null,
+    "description": "A secretive organization that undermines entrenched rulers and destabilizes political structures.",
+    "image": "/images/organizations/table-rel-udomina.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "Rel'Udomina is a secretive organization that seeks to undermine the ruling elites of Myrdae by manipulating local governance and destabilizing political structures. Unlike the Anders, who work within the system to promote diplomacy and balance, Rel'Udomina believes that the established order must be broken to free Myrdae from the dominance of entrenched power. Their ultimate goal is to replace the region's rulers with those who align with their philosophy, gaining control from the shadows.\n\nThe symbol of the Rel'Udomina is a stern plain mask over a flame, which is often tattooed on their forearm in a place that can be easily covered.\n\nThe Rel'Udomina operates in the shadows, infiltrating political circles and gathering intelligence to use as leverage. Its agents are well-trained in deception, subterfuge, and manipulation, often positioning themselves as trusted advisors, scholars, or merchants. They prioritize secrecy, and only a select few know the full extent of their influence.\n\nWhen the Rel'Udomina establish themselves in a town or city, they appoint a leader they refer to as \"The Prominent\".\n\nSTRUCTURE & MEMBERSHIP\n\n• Udomina – The hidden ruling head of the organization.\n• Archon – Mystical and deadly hands to the Udomina.\n• Voice – Regional commanders responsible for entire territories or spheres of influence. Each Archon directs numerous Ministers of Threads, coordinating operations ranging from political subversion to religious corruption. They ensure the Udomina's unseen hand controls the flow of information and power.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Incipient\n  2  |  2 - 9  |  Agent\n  3  |  10 - 24  |  Minister\n  4  |  25+  |  Voice\n\n####"
+  },
+  {
+    "id": "tegenwald-phet",
+    "name": "Tegenwald Phet",
+    "knownFor": "Secrecy & Magic",
+    "summary": "Seekers of knowledge and power through magic",
+    "description": "Seekers of knowledge and power through magic, secrecy, and hidden study.",
+    "image": "/images/organizations/detail-tegenwald-phet.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": true,
+    "details": "In 777 PF, the Runic Brotherhood (Prong), the Leybearers (Swift), and the Nightweave (Veil) merged in Tratta to form the Tegenwald Phet. The new organization blended the Brotherhood's contingency planning with the Leybearers' confident, decisive use of magic and the Nightweave's emphasis on covert action to protect freedom.\n\nFor centuries the Tegenwald Phet worked in secrecy, scattered across Myrdae. During the Year of Fending, the people and leaders of Myrdae turned to them for aid against existential threats. Their crucial support re-established the Tegenwald Phet as a powerful and respected organization.\n\nToday, the Tegenwald Phet is seen as very knowledgeable and has become influential advisors to many leaders. It is very common for city leaders to have Tegenwald Phet members as part of their council.\n\nThe Tegenwald Phet have the following Goals:\n\n• Learn and advance magic.\n• One should be free to live and die as they see fit.\n\nBELIEFS AND VALUES\n\n• Swift – Confidence through magic and knowledge\n• Prong – Contingency plans improve success\n• Veil – Covert means can be the best promoter of freedom\n\nSTRUCTURE & MEMBERSHIP\n\nThe Tegenwald Phet are run by a council known as the Phet'extant who are made up of a head member of highest rank, Master Arcanum, and of ranked members representing these areas of magic: arcane, divine, primal, psychic, ritual, and versatile. The Phet'extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).\n\nTegenwald Phet members are recruited by other members who have an eye for noticing those in alignment with the faction's goals and values. Members receive a tattoo of the faction symbol that not only identifies the member can be leveraged by upper-ranking members to locate them.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Herald\n  2  |  2 - 9  |  Covet\n  3  |  10 - 24  |  Scholar\n  4  |  25+  |  Magister\n\nBENEFITS\n\nThe following assets are available to members:\n\n1. Spell components in a city\n2. Access to any scholar sitting on a ruler's court\n3. Access to defense training grounds and barracks"
+  },
+  {
+    "id": "umbral-order",
+    "name": "Umbral Order",
+    "knownFor": "Thieves' Guild",
+    "summary": null,
+    "description": "A hidden order that grew from exile into a covert thieves' guild.",
+    "image": "/images/organizations/marked-generated-umbral-order.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false,
+    "details": "The Umbral Order was born centuries ago, when a group of disenfranchised elves in the Bathaen Empire were exiled for defying noble decrees. Instead of dissolving, they went underground — literally — into the crypts, catacombs, and sewers beneath Basctdelm and other imperial cities. Over time, the Order transformed into a thieves' guild that operates not with brute force, but with precision, patience, and a strict code of loyalty. They see themselves as shadows balancing the empire's light — taking what is owed, ensuring secrets remain hidden, and maintaining influence behind the scenes.\n\nOPERATIONS\n\nUnlike common thieves, the Umbral Order prioritizes secrets. Blackmail, coded ledgers, stolen treaties, and intercepted correspondence are more valuable than gold. They do engage in smuggling, extortion, and theft, but always with precision. Their marks are chosen carefully — corrupt officials, bloated guilds, or those who broke bargains with them. Members see themselves not as brigands but as keepers of balance, trimming corruption where they see fit and redistributing wealth and secrets to ensure no one faction in the empire grows too powerful. In this way, they are thieves, but thieves with a cause — and their loyalty to one another is absolute.\n\nHIDEOUTS (GLOOMS)\n\nHideouts are called Glooms, dim sanctuaries beneath taverns, sewers, and ruins. Each Gloom is marked with a sigil only visible under moonlight.\n\nSTRUCTURE & MEMBERSHIP\n\nOne figure leads the Umbral Order, the Eclipse. They are always masked, whose true identity is known only to a handful. They are chosen not by blood or power but through unanimous consensus of the Shadows.\n\n  Rank  |  Renown  |  Title\n  1  |  0 - 1  |  Initiate\n  2  |  2 - 9  |  Silhouette\n  3  |  10 - 24  |  Umbral\n  4  |  25+  |  Shadow\n\n# Appendicies {#appendicies}"
+  },
+  {
+    "id": "venomtips",
+    "name": "Venomtips",
+    "knownFor": "Assassins",
+    "summary": "Killers for hire",
+    "description": "Killers for hire.",
+    "image": "/images/organizations/marked-generated-venomtips.webp",
+    "href": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.dcv7wkagd94i",
+    "faction": false
+  }
+]

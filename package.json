@@ -8,7 +8,8 @@
     "images:prepare": "node scripts/prepare-images.mjs",
     "lint": "pnpm --filter web lint",
     "typecheck": "pnpm --filter web typecheck",
-    "test": "pnpm --filter web test"
+    "test": "pnpm --filter web test",
+    "sync-notes": "pnpm --filter web sync-notes"
   },
   "packageManager": "pnpm@9.15.0",
   "devDependencies": {

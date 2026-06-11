@@ -8,6 +8,7 @@ import { getActiveCustomPages } from "@/lib/customPages";
 import { getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { loadTheme } from "@/lib/theme";
+import { getAutoManagedPages } from "@/lib/autoManagedPagesData";
 
 export default async function SiteLayout({
   children,
@@ -48,7 +49,12 @@ export default async function SiteLayout({
       <Footer />
 
       {/* Page layout editor — only rendered when admin is logged in */}
-      {editMode && <PageEditOverlay managedPaths={managedPaths} />}
+      {editMode && (
+        <PageEditOverlay
+          managedPaths={managedPaths}
+          autoManagedPages={getAutoManagedPages()}
+        />
+      )}
     </div>
   );
 }

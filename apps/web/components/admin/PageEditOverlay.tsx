@@ -35,12 +35,84 @@ import { PageEditPanel } from "./PageEditPanel";
 import { CardLayoutGridEditor, CARD_LAYOUT_MAX_ROWS } from "./CardLayoutGridEditor";
 import { BlockPicker } from "./BlockPicker";
 import { CanvasEditor, nextCanvasPosition } from "./CanvasEditor";
+import type { AutoManagedPage } from "@/lib/autoManagedPages";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 type DragData =
   | { kind: "existing"; dndId: string }
   | { kind: "new-asset"; assetType: BlockType };
+
+function AutoManagedPagePanel({
+  page,
+  onClose,
+}: {
+  page: AutoManagedPage;
+  onClose: () => void;
+}) {
+  return (
+    <aside
+      className="fixed top-0 right-0 h-full z-50 flex flex-col"
+      style={{
+        width: "288px",
+        background: "rgba(8, 5, 15, 0.97)",
+        borderLeft: "1px solid var(--color-bg-border)",
+        backdropFilter: "blur(16px)",
+      }}
+    >
+      <div className="px-4 py-4 border-b border-[#2a2a35] shrink-0 space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="font-cinzel text-[10px] tracking-[0.4em] uppercase text-[#8b5cf6]">
+            Source Managed
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-7 h-7 flex items-center justify-center rounded border border-[#2a2a35] text-[#5a5060] hover:text-[#e8dfc8] hover:border-[#5a5060] transition-colors text-lg leading-none"
+            aria-label="Close editor panel"
+          >
+            x
+          </button>
+        </div>
+
+        <div className="rounded-lg border border-[#5b3f11] bg-[#1b1407] px-3 py-3">
+          <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#f59e0b]">
+            Manual editing disabled
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-[#d8c8a8]">
+            {page.label} is generated from {page.sourceName}.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+        <div>
+          <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#a89880]">
+            Page
+          </p>
+          <p className="mt-1 text-sm text-[#e8dfc8]">{page.label}</p>
+          <p className="mt-1 text-xs text-[#5a5060]">{page.path}</p>
+        </div>
+
+        <div>
+          <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#a89880]">
+            Source
+          </p>
+          <p className="mt-1 text-sm text-[#e8dfc8]">{page.sourceName}</p>
+          <p className="mt-2 text-xs leading-relaxed text-[#8d7f66]">
+            {page.refreshLabel}
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-3 py-3">
+          <p className="text-xs leading-relaxed text-[#a89880]">
+            {page.editNote}
+          </p>
+        </div>
+      </div>
+    </aside>
+  );
+}
 
 function CanvasAssetDropZone({ active }: { active: boolean }) {
   const { setNodeRef, isOver } = useDroppable({ id: "canvas-drop" });
@@ -729,6 +801,63 @@ function DraftBlock({
     );
   }
 
+  if (item.type === "table") {
+    const eyebrow = props.eyebrow as string | undefined;
+    const title   = props.title   as string | undefined;
+    const headers = ((props.headers as string | undefined) ?? "")
+      .split("|").map((h) => h.trim()).filter(Boolean);
+    const rows = ((props.rows as string | undefined) ?? "")
+      .split("\n")
+      .map((line) => line.split("|").map((c) => c.trim()))
+      .filter((cells) => cells.some(Boolean));
+    return (
+      <div data-block-id={item.id} data-block-type={item.type} className="max-w-3xl mx-auto px-6 py-8">
+        {eyebrow && (
+          <p className="font-cinzel text-xs tracking-[0.35em] uppercase mb-1"
+            style={{ color: "var(--color-accent-arcane)" }}>{eyebrow}</p>
+        )}
+        {title && (
+          <h3 className="font-cinzel text-xl tracking-widest uppercase mb-4"
+            style={{ color: "var(--color-text-primary)" }}>{title}</h3>
+        )}
+        <div className="overflow-x-auto rounded-lg border" style={{ borderColor: "var(--color-bg-border)" }}>
+          <table className="w-full text-sm">
+            {headers.length > 0 && (
+              <thead>
+                <tr style={{ background: "rgba(245,158,11,.08)" }}>
+                  {headers.map((header, i) => (
+                    <th key={i}
+                      className="font-cinzel px-4 py-3 text-left text-xs uppercase tracking-[0.2em]"
+                      style={{ color: "var(--color-accent-gold)", borderBottom: "1px solid var(--color-bg-border)" }}>
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {rows.length === 0 && (
+                <tr><td className="px-4 py-2.5 text-xs" style={{ color: "var(--color-text-muted)" }}>
+                  Add rows in the panel — one per line, cells separated by |
+                </td></tr>
+              )}
+              {rows.map((cells, r) => (
+                <tr key={r} style={r < rows.length - 1 ? { borderBottom: "1px solid var(--color-bg-border)" } : undefined}>
+                  {cells.map((cell, c) => (
+                    <td key={c} className="px-4 py-2.5 align-top"
+                      style={{ color: c === 0 ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
   if (item.type === "quote") {
     const text        = (props.text          as string | undefined) ?? "";
     const attribution = props.attribution   as string | undefined;
@@ -1091,7 +1220,13 @@ function DraftPagePreview({
   );
 }
 
-export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
+export function PageEditOverlay({
+  managedPaths,
+  autoManagedPages,
+}: {
+  managedPaths: string[];
+  autoManagedPages?: AutoManagedPage[];
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -1109,6 +1244,9 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
   const [saved, setSaved] = useState(false);
 
   const hasLayout = managedPaths.includes(pathname);
+  const autoManagedPage =
+    autoManagedPages?.find((page) => page.path === pathname) ?? null;
+  const isAutoManaged = autoManagedPage != null;
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -1117,7 +1255,7 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
 
   // Fetch layout when the panel opens or path changes
   useEffect(() => {
-    if (!hasLayout || !open) return;
+    if (!hasLayout || !open || isAutoManaged) return;
     fetch(`/api/page-layout?page=${encodeURIComponent(pathname)}`)
       .then((r) => r.json())
       .then(({ items: fetched, grid: fetchedGrid, canvas: fetchedCanvas }: { items: PageItem[]; grid: PageGridMeta | null; canvas: CanvasMeta | null }) => {
@@ -1140,7 +1278,7 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
         setCanvas(null);
         setOriginalCanvas(null);
       });
-  }, [pathname, open, hasLayout]);
+  }, [pathname, open, hasLayout, isAutoManaged]);
 
   // Escape key clears the active asset selection
   useEffect(() => {
@@ -1329,7 +1467,8 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
       {/* ── Floating toggle button ── */}
       <button
         onClick={() => setOpen((v) => !v)}
-        title="Edit page layout"
+        title={isAutoManaged ? "View source-managed page status" : "Edit page layout"}
+        aria-label={isAutoManaged ? "View source-managed page status" : "Edit page layout"}
         className="fixed z-50 flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-cinzel tracking-widest uppercase shadow-2xl backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-100"
         style={{
           bottom: "24px",
@@ -1354,11 +1493,18 @@ export function PageEditOverlay({ managedPaths }: { managedPaths: string[] }) {
             <path strokeLinecap="round" d="M12 4v16M4 12h16" />
           )}
         </svg>
-        {open ? "Close" : "Edit Layout"}
+        {open ? "Close" : isAutoManaged ? "Source Locked" : "Edit Layout"}
       </button>
 
       {/* ── Active edit mode ── */}
-      {open && (
+      {open && isAutoManaged && autoManagedPage && (
+        <AutoManagedPagePanel
+          page={autoManagedPage}
+          onClose={() => setOpen(false)}
+        />
+      )}
+
+      {open && !isAutoManaged && (
         <DndContext
           sensors={sensors}
           collisionDetection={pointerWithin}

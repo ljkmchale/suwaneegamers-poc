@@ -1,0 +1,74 @@
+[
+  {
+    "path": "/lore",
+    "label": "Legends & Lore",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0",
+    "refreshLabel": "Refreshes from the source document about once per hour.",
+    "editNote": "The lore entries, card list, and lore text are generated from the source document. Update the Google Doc to change this page."
+  },
+  {
+    "path": "/calendar",
+    "label": "Calendar",
+    "sourceName": "Google Calendar",
+    "sourceUrl": "https://calendar.google.com/calendar/embed?src=g3kgagicusaol82fqhjc62o47o%40group.calendar.google.com",
+    "refreshLabel": "Events are pulled live from the group's Google Calendar.",
+    "editNote": "Add or update events directly in Google Calendar — changes appear here automatically."
+  },
+  {
+    "path": "/chronicles",
+    "label": "Chronicles",
+    "sourceName": "Campaign Brain",
+    "sourceUrl": "https://kb.suwaneegamers.net/",
+    "refreshLabel": "Content is served live from the Campaign Brain knowledge base.",
+    "editNote": "Update content directly in Campaign Brain at kb.suwaneegamers.net."
+  },
+  {
+    "path": "/organizations",
+    "label": "Organizations",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Synced from the campaign setting Google Doc by the scheduled lore sync.",
+    "editNote": "Update organizations in the campaign setting doc — run the lore sync to apply changes."
+  },
+  {
+    "path": "/territories",
+    "label": "Territories",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Synced from the campaign setting Google Doc by the scheduled lore sync.",
+    "editNote": "Update territories in the campaign setting doc — run the lore sync to apply changes."
+  },
+  {
+    "path": "/history",
+    "label": "History",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://sites.google.com/view/suwanee-gamers/history",
+    "refreshLabel": "Content is managed from an external source.",
+    "editNote": "Update the source document to change this page."
+  },
+  {
+    "path": "/maps-of-myrdae",
+    "label": "Maps of Myrdae",
+    "sourceName": "Map Editor",
+    "sourceUrl": "https://mapeditor.suwaneegamers.net/embed-map.html",
+    "refreshLabel": "The interactive map is served live from the Myrdae map editor.",
+    "editNote": "Update the map directly in the Myrdae map editor at mapeditor.suwaneegamers.net."
+  },
+  {
+    "path": "/campaign-setting",
+    "label": "Campaign Setting",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Content is managed from an external source.",
+    "editNote": "Update the source document to change this page."
+  },
+  {
+    "path": "/crit_tables",
+    "label": "Crit Tables",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1eODEiSco7IhOJw_kJW92YqTJDdYO9IfG_tnnXfYUY80",
+    "refreshLabel": "Content is managed from the Crit Tables Google Doc.",
+    "editNote": "Update the Critical Success, Critical Failure, and Body Hit tables in the source Google Doc, then re-sync to apply changes."
+  }
+]

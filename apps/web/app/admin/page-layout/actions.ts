@@ -23,4 +23,8 @@ export async function savePageLayoutAction(
 
   setPageLayout(pageId, items, grid, canvas);
   revalidatePath(pageId);
+  if (/^\/campaigns\/[^/]+$/.test(pageId)) {
+    revalidatePath("/campaigns");
+    revalidatePath("/calendar");
+  }
 }

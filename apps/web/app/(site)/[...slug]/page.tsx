@@ -32,6 +32,7 @@ export default async function CustomPageRoute({ params }: Props) {
   const pageId = `/${slugStr}`;
   const items = getPageLayout(pageId);
   const grid = getPageGrid(pageId);
+  const isCritTables = pageId === "/crit_tables";
 
   if (items.length === 0) {
     return (
@@ -80,12 +81,36 @@ export default async function CustomPageRoute({ params }: Props) {
     );
   }
 
-  return (
-    <div>
-      {items.map((item) => {
-        if (item.kind === "section") return null; // custom pages have no built-in sections
-        return <BlockRenderer key={item.id} block={item as BlockItem} />;
-      })}
-    </div>
-  );
+  const renderedItems = items.map((item) => {
+    if (item.kind === "section") return null; // custom pages have no built-in sections
+    return <BlockRenderer key={item.id} block={item as BlockItem} />;
+  });
+
+  if (isCritTables) {
+    return (
+      <div className="relative min-h-screen overflow-hidden bg-black">
+        <div
+          className="fixed inset-0 z-0 bg-cover bg-center"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              'url("/images/guides-to-myrdae/reference-cards/dm-reference-background.webp")',
+          }}
+        />
+        <div
+          className="fixed inset-0 z-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(8,5,15,0.82) 0%, rgba(8,5,15,0.68) 42%, rgba(8,5,15,0.96) 100%), linear-gradient(90deg, rgba(8,5,15,0.76), rgba(34,18,11,0.48), rgba(8,5,15,0.78))",
+          }}
+        />
+        <div className="relative z-10 pb-20 pt-8">
+          {renderedItems}
+        </div>
+      </div>
+    );
+  }
+
+  return <div>{renderedItems}</div>;
 }

@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "Myrdae campaign setting references, lore, and worldbuilding resources.",
 };
 
+export const revalidate = 86400;
+
 export default function CampaignSettingPage() {
   const order = getPageLayout("/campaign-setting");
   const grid = getPageGrid("/campaign-setting");

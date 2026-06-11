@@ -14,6 +14,7 @@ import { getPageLayout, getStoredPageLayoutIds } from "@/lib/pageLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { getPortalLinks } from "@/lib/portal";
 import { buildCampaignDetailLayout, getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
+import { getActiveCustomPages } from "@/lib/customPages";
 import type { BlockItem } from "@/lib/pageBlocks";
 
 const campaigns  = getActiveCampaigns();
@@ -158,23 +159,47 @@ describe("DM names → players.json", () => {
 // ── Nav → internal pages exist ───────────────────────────────────────────────
 
 const KNOWN_INTERNAL_ROUTES = new Set([
-  "/", "/calendar", "/campaigns", "/dungeon-masters", "/players",
+  "/", "/calendar", "/campaigns", "/chronicles", "/dungeon-masters", "/players",
   "/bestiary", "/setting", "/territories", "/pantheon",
   "/history", "/lore", "/gazetteer", "/maps-of-myrdae",
   "/campaign-setting", "/organizations", "/references", "/reference-for-dungeon-masters",
   "/previous-campaigns", "/world", "/test-page",
 ]);
 
+// Nav placeholders for pages that haven't been built yet. These currently
+// 404 — when one gets a real page (app route or custom page), remove it here.
+const PLANNED_NAV_ROUTES = new Set([
+  "/guides", "/adventures", "/crit_tables", "/ourstory", "/supportourgamers",
+]);
+
 describe("Nav internal hrefs → known routes", () => {
-  it("every internal nav href is a registered app route", () => {
+  it("every internal nav href is a registered app route, custom page, or known placeholder", () => {
+    const customPageRoutes = new Set(
+      getActiveCustomPages().map((page) => `/${page.slug}`),
+    );
+
     for (const section of getNavConfig().sections) {
       for (const item of section.items) {
         if (item.href.startsWith("http")) continue; // external links are fine
         expect(
-          KNOWN_INTERNAL_ROUTES.has(item.href),
-          `Nav item "${item.id}" href "${item.href}" is not in the known routes list`,
+          KNOWN_INTERNAL_ROUTES.has(item.href) ||
+            customPageRoutes.has(item.href) ||
+            PLANNED_NAV_ROUTES.has(item.href),
+          `Nav item "${item.id}" href "${item.href}" is not a known route, custom page, or planned placeholder`,
         ).toBe(true);
       }
+    }
+  });
+
+  it("planned placeholder routes have not silently become real pages", () => {
+    const customPageRoutes = new Set(
+      getActiveCustomPages().map((page) => `/${page.slug}`),
+    );
+    for (const route of PLANNED_NAV_ROUTES) {
+      expect(
+        customPageRoutes.has(route),
+        `"${route}" now exists as a custom page — remove it from PLANNED_NAV_ROUTES`,
+      ).toBe(false);
     }
   });
 });
@@ -302,6 +327,17 @@ describe("Editable campaign detail pages", () => {
         sessionSummaryBlocks.every((item) => item.type === "layout-card"),
         `${campaign.id} session summaries should use the richer card layout asset`,
       ).toBe(true);
+    }
+  });
+
+  it("keeps campaign detail hero artwork in sync with shared campaign cards", () => {
+    for (const campaign of campaigns) {
+      const hero = detailBlocksFor(campaign.id).find((block) => block.type === "campaign-hero");
+
+      expect(hero, `${campaign.id} should have a campaign hero block`).toBeTruthy();
+      expect(hero?.props.image, `${campaign.id} hero image should match campaigns.json`).toBe(campaign.headerImage);
+      expect(hero?.props.imagePosition ?? "center", `${campaign.id} hero image position should match campaigns.json`)
+        .toBe(campaign.headerImagePosition ?? "center");
     }
   });
 

@@ -1,0 +1,46 @@
+[
+  {
+    "kind": "block",
+    "id": "crit-tables-header",
+    "type": "page-header",
+    "props": {
+      "eyebrow": "House Rules",
+      "title": "Critical Tables",
+      "description": "Critical Success, Critical Failure, and Body Hit tables used in Suwanee Gamers sessions.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "crit-tables-success",
+    "type": "table",
+    "props": {
+      "eyebrow": "Natural 20",
+      "title": "Critical Success",
+      "headers": "Roll | Label | Description (Save DC = 8 + Attack Bonus)",
+      "rows": "1 - 6 | Normal | Normal critical damage\n7 - 8 | Noteworthy | Normal critical damage + CON Save — On Fail: disadvantage on next attack; On Save: no additional effect\n9 - 10 | Remarkable | Normal critical damage + DEX Save — On Fail: target knocked prone; On Save: no additional effect\n11 - 12 | Substantial | Normal critical damage + Body hit, Minor\n13 | Grave | Normal critical damage + CON Save — On Fail: target loses half remaining hit points (after crit. dmg.); On Save: no additional effect\n14 | Prominent | Normal critical damage + DEX Save — On Fail: weapon/shield broken (if magical, auto save DC); On Save: weapon or shield dropped\n15 | Grievous | Normal critical damage + CON Save — On Fail: target stunned until end of their next turn; On Save: no additional effect\n16 | Savage | An overpowering blow extends beyond the target — ½ damage to another target in range (player's choice). If no additional target in range, double critical damage\n17 | Scarring | Maximum critical damage\n18 | Severe | Maximum critical damage + Body hit, Major\n19 | Dire | Critical damage doubled + CON Save — On Fail: target unconscious until end of its next turn; On Save: no additional effect\n20 | Deadly | CON Save at disadvantage — On Fail: drops to 0 hit points (½ remaining hit points for boss); On Save: double critical damage"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "crit-tables-failure",
+    "type": "table",
+    "props": {
+      "eyebrow": "Natural 1",
+      "title": "Critical Failure",
+      "headers": "Roll | Label | Description",
+      "rows": "15 - 20 | Awkward | You fumble but steady yourself\n10 - 14 | Embarrassing | Your fumble puts you off balance — you lose your reaction until the end of your next turn\n5 - 9 | Humiliating | Your fumble causes you to fall prone\n4 | Insufferable | Your fumble shows you are overwhelmed — you lose your movement until the end of your next turn\n3 | Terrible | Your fumble causes you to backfire — you target/damage self, drop weapon/shield (DM's Discretion)\n2 | Painful | Your fumble exposes you — one target may make an Attack of Opportunity against you\n1 | Unspeakable | Your fumble causes you to hit an ally — you damage an ally (DM discretion)"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "crit-tables-body-hits",
+    "type": "table",
+    "props": {
+      "eyebrow": "Triggered on Substantial / Severe Critical Success",
+      "title": "Body Hits",
+      "headers": "Roll | Location | Minor / Major Effect",
+      "rows": "1 | Full Body | Minor: target knocked back 10' — Major: target knocked back 10' and prone\n2 | Head | Minor: target stunned until end of its next turn — Major: target stunned 1d4 rounds\n3 | Chest | Minor: target knocked prone — Major: target unconscious until end of its next turn\n4 | Stomach | Minor: internal damage, target's next attack at disadvantage — Major: internal damage, 1d6 damage for 1d4 rounds\n5L - 6R | Arm | Minor: injured, DM discretion or unusable until combat end — Major: DEX Save or severed (DM discretion on consequences)\n7L - 8R | Leg | Minor: injured, DM discretion or move halved until combat end — Major: DEX Save or severed (DM discretion on consequences)\n9L - 10R | Hand | Minor: injured, DM discretion or unusable until combat end — Major: DEX Save or severed (DM discretion on consequences)\n11L - 12R | Foot | Minor: injured, DM discretion or move halved until combat end — Major: DEX Save or severed (DM discretion on consequences)"
+    }
+  }
+]

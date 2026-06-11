@@ -328,7 +328,7 @@
     "dm": "Sean Poole",
     "schedule": "Mondays",
     "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/bloody-endeavor",
-    "headerImage": "/images/campaigns/bloody-endeavor.jpg",
+    "headerImage": "/images/battle-scene.jpg",
     "resources": [
       {
         "label": "D&D Beyond",
@@ -376,7 +376,8 @@
             "label": "Session 35 - Bloody Endeavor: Civil War Recording",
             "url": "https://drive.google.com/file/d/1Rog20hvD9EQR7pJoh7_xm5v07DHPi-vH/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-11"
       },
       {
         "title": "Session 34 - Greatest of All Time",
@@ -386,7 +387,8 @@
             "label": "Session 34 - Greatest of All Time Recording",
             "url": "https://drive.google.com/file/d/1A8SE6fWLFUsuq55K7STfiy89hluwVTV4/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-09"
       },
       {
         "title": "Session 33 - Caw!",
@@ -396,7 +398,8 @@
             "label": "Session 33 - Caw! Recording",
             "url": "https://drive.google.com/file/d/1KI5YrQk-LMUjGn0aZ2VOcvfyu2nfHhMG/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-09"
       },
       {
         "title": "Session 32 - Over the Edge",
@@ -406,7 +409,8 @@
             "label": "Session 32 - Over the Edge Recording",
             "url": "https://drive.google.com/file/d/1yAL3NE_XnavPtpAbFPuuBXr8CNL_K-9j/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-23"
       },
       {
         "title": "Session 31 - Don't Let This Drag-on",
@@ -416,7 +420,8 @@
             "label": "Session 31 - Don't Let This Drag-on Recording",
             "url": "https://drive.google.com/file/d/1jZn7OyP04AMYhLvWaiV0oT-a7LJyJVI8/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-03"
       },
       {
         "title": "Session 30 - Let's Break A Deal!",
@@ -426,7 +431,8 @@
             "label": "Session 30 - Let's Break A Deal! Recording",
             "url": "https://drive.google.com/file/d/1J8LVk8yZn5mw6ReWSKpA4sqY2_L3TUNf/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-26"
       },
       {
         "title": "Session 29 - Hags with Bags",
@@ -436,9 +442,11 @@
             "label": "Session 29 - Hags with Bags Recording",
             "url": "https://drive.google.com/file/d/1I3G2vJ719JCcnQKzVGb1kz6Qve6OetpO/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-12"
       }
-    ]
+    ],
+    "playerNotesUrl": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit"
   },
   {
     "id": "collective-of-myrdae",
@@ -530,6 +538,12 @@
     "description": "A dungeon-forward adventure with inventive encounters, table momentum, and old-school discovery in the world of Myrdae.",
     "sessionSummaries": [
       {
+        "title": "Session 12 - Meles is Awesome",
+        "summary": "The party delved into the tiered caves of the Jagged Waste Crags, where Meles's relentless scouting — earning no shortage of praise from his companions — guided them past a nest of giant centipedes and deeper into the complex. They encountered a group of battered hobgoblins, including their leader Kelkaruud, and brokered an uneasy peace, reuniting the survivors and taking custody of a captive bearing the mark of the Radiant Eye cult. Further in, the party battled a gelatinous cube lurking in a more refined stone passage before Meles uncovered a hidden lockbox and the group pressed on into a natural tunnel lined with an unsettling number of stone 'statues.' The session ended on a tense note as a large reptilian presence made itself known in the darkness ahead.",
+        "auto": true,
+        "sessionDate": "2026-06-01"
+      },
+      {
         "title": "Session 11 - Sand People Get In All the Crevices",
         "summary": "The kNight Watch pressed deeper into the Jagged Waste Crags to locate the Radiant Eye cult outpost and secure the lost celestial instrument. They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath. Seraphine examined the raiders' strange sun-sensitive bodies before the party fought and killed two packs of dire wolves that had been feeding on humanoids. They tracked the wolves to a series of terraced caves, avoided a hidden pit trap under a blood-soaked tapestry at the entrance, and the session ended with the group standing in a suspicious cave.",
         "audioLinks": [
@@ -537,7 +551,8 @@
             "label": "Session 11 Recording",
             "url": "https://drive.google.com/file/d/1tBUOOi4gQMd6LOX4utwKv0z4Z2W4YbDo/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-18"
       },
       {
         "title": "Session 10 - It's a Long Ass Way!",
@@ -547,7 +562,8 @@
             "label": "Session 10 Recording",
             "url": "https://drive.google.com/file/d/1Wqf4bV8GRHBkJAmu8d7PEVSoudjcuyYH/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-04"
       },
       {
         "title": "Session 9 - A Cart-time Job",
@@ -557,7 +573,8 @@
             "label": "Session 09 Recording",
             "url": "https://drive.google.com/file/d/1CjvCopdzZqfofggQBuYuZh_1RANjyCjA/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-06"
       },
       {
         "title": "Session 8 - Mimic at the Gate",
@@ -567,7 +584,8 @@
             "label": "Session 08 Recording",
             "url": "https://drive.google.com/file/d/1uFpAxFkMTSZBX6WJOVRt2z1yf-zV3316/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-16"
       },
       {
         "title": "Session 7 - Brooch the Subject",
@@ -577,7 +595,8 @@
             "label": "Session 07 Recording",
             "url": "https://drive.google.com/file/d/1PaRnBFJq64OK1WQ4Cqj54iyPxdb1Rzte/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-24"
       },
       {
         "title": "Session 6 - Rope A Dope",
@@ -587,7 +606,8 @@
             "label": "Session 06 Recording",
             "url": "https://drive.google.com/file/d/1dH5n001GD34dgZV9sflUoUiSoug_pcAA/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-02"
       },
       {
         "title": "Session 5 - The Hots for Nova",
@@ -597,7 +617,8 @@
             "label": "Session 05 Recording",
             "url": "https://drive.google.com/file/d/1PYKRdgQ71fcUERMgsEx57vXWpcCdeIwM/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-05"
       },
       {
         "title": "Session 4 - I Can't Even Take A ...",
@@ -607,7 +628,8 @@
             "label": "Session 04 Recording",
             "url": "https://drive.google.com/file/d/1Cj2mOZDo4XhLe4qx6ClcHI-hATCzC9dR/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-12-15"
       },
       {
         "title": "Session 3 - Chase the Runners",
@@ -617,7 +639,8 @@
             "label": "Session 03 Recording",
             "url": "https://drive.google.com/file/d/1mHUEPXACaki6v2rdXhazP8-cBt9EGt-J/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-11-17"
       },
       {
         "title": "Session 2 - A Pocket Prism",
@@ -627,7 +650,8 @@
             "label": "Session 02 Recording",
             "url": "https://drive.google.com/file/d/1-M5kb9u8cBEaPfn5DwkUmspil1B7uLaB/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-11-03"
       },
       {
         "title": "Session 1 - It's Aeon",
@@ -637,9 +661,11 @@
             "label": "Session 01 Recording",
             "url": "https://drive.google.com/file/d/1CcpR9Dha0khE0a1OmHun1RukSZmYTd79/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-10-10"
       }
-    ]
+    ],
+    "playerNotesUrl": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit"
   },
   {
     "id": "heroes-of-emberstran",
@@ -693,6 +719,17 @@
     "description": "Heroes rise near volcanic Mount Emberstran, where dwarven holds, Bathaen wilds, and ancient danger meet.",
     "sessionSummaries": [
       {
+        "title": "Session 27 - A Bitter Day",
+        "summary": "The party emerged from their hard won victory over the undead horrors only to find themselves entangled in a fresh web of drow intrigue when Zabeek let loose tales of the party to a drow from House Maerth. The party lured the drow to the Dyed Cane to learn that it was Zymve's distant cousin pressing her to get the relic for the drow matron. Ainslie bonded with the Emberheart and in a rare moment of trust, passed her the Marrowstone to Zymve. The party left Emberstran behind, camped with the colorful Weftirin wayfarers where a dreamcatcher revealed visions of ancient clan conflict tied to Ky'tha. But when pushing to the next campsite, the Weftirin found themselves seduced by the song of the sea and the party raced to rescue.",
+        "audioLinks": [
+          {
+            "label": "Session Audio",
+            "url": "https://drive.google.com/file/d/1gn3Mwcibi4yIkx82LU80g4THHCLZnZwW/view?usp=sharing"
+          }
+        ],
+        "sessionDate": "2026-06-09"
+      },
+      {
         "title": "Session 26 -- Bad News & A Wild Goose Chase",
         "summary": "Grim news came that Phira had been seized by the Cloak of Defiance and was being taken to the Shadow Sovereign in Basctdelm. They secured the silver dragon scale from Lady Rook, bartered for an arcane sigil to reach Basctdelm, uncovered troubling drow threads from Ys'nonterien, and sent the Arnol to safety while Diverra's guidance through Aury turned them away from direct confrontation with the Cloak and toward the one remaining threat in Emberstran. At the sealed cult hideout they faced a zombie beholder and a vampire who whispered of Countess Nas Verdidra while sinking her fangs into Ains and draining his vitality, until steel, daylight, and rage ended the creatures in fire and ash. The session closed with Zabeek's voice echoing through their fading telepathic bond that a mysterious stranger had just given him a ruby ring.",
         "audioLinks": [
@@ -700,7 +737,8 @@
             "label": "Session 26 -- Bad News & A Wild Goose Chase Recording",
             "url": "https://drive.google.com/file/d/10MQYSzjLJSa_SxdvkJRnYAR4--q3C0U1/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-25"
       },
       {
         "title": "Session 25 -- Grief Stricken",
@@ -710,7 +748,8 @@
             "label": "Session 25 -- Grief Stricken Recording",
             "url": "https://drive.google.com/file/d/14mhqvZK3AC_uuAKw5WJCI_4lqlRH6KtB/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-14"
       },
       {
         "title": "Session 24 -- Let the Bodies Hit the Floor",
@@ -720,7 +759,8 @@
             "label": "Session 24 -- Let the Bodies Hit the Floor Recording",
             "url": "https://drive.google.com/file/d/1ZzXPud0FSxftE09a9c8xb-tNLX8slE1h/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-30"
       },
       {
         "title": "Session 23 -- Into the Fire",
@@ -730,7 +770,8 @@
             "label": "Session 23 -- Into the Fire Recording",
             "url": "https://drive.google.com/file/d/19z_5aw6xUyOIg4v86jNPPjpl3JDC1HuN/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-21"
       },
       {
         "title": "Session 22 - The Tracker",
@@ -740,7 +781,8 @@
             "label": "Session 22 - The Tracker Recording",
             "url": "https://drive.google.com/file/d/1YNN63xR_Z9rzv3bb1ONdX5_JjSdvVgtH/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-13"
       },
       {
         "title": "Session 21 - He Ate a Baby!",
@@ -750,7 +792,8 @@
             "label": "Session 21 - He Ate a Baby! Recording",
             "url": "https://drive.google.com/file/d/19m1KxptZNCjhYJjWvZbY5VSxOOX0sNft/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-08"
       },
       {
         "title": "Session 20 - Coming Home",
@@ -760,7 +803,8 @@
             "label": "Session 20 - Coming Home Recording",
             "url": "https://drive.google.com/file/d/1-BZtPtPU5zcfnYhmUUZPJnAcUG1TRKEl/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-02"
       },
       {
         "title": "Session 19 - Lost Sanctuary",
@@ -770,7 +814,8 @@
             "label": "Session 19 - Lost Sanctuary Recording",
             "url": "https://drive.google.com/file/d/1niG6tI0aW1zZUI1F6WMZUaoLc9K6_tgC/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-02"
       },
       {
         "title": "Session 18 - In Bimblefol",
@@ -780,7 +825,8 @@
             "label": "Session 18 - In Bimblefol Recording",
             "url": "https://drive.google.com/file/d/1MSe5VhZsU7APOCNiU0KuzhImCG13jOYf/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-17"
       },
       {
         "title": "Session 17 - Giant's Silver",
@@ -790,7 +836,8 @@
             "label": "Session 17 - Giant's Silver Recording",
             "url": "https://drive.google.com/file/d/1-6SX3BEDsJWSUzt3aE4I6dbT-FmD3Qc4/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-28"
       },
       {
         "title": "Session 16 - Favor in Nunglthil",
@@ -800,7 +847,8 @@
             "label": "Session 16 - Favor in Nunglthil Recording",
             "url": "https://drive.google.com/file/d/1T4i2KxHaC7H3jn1kgWfhZZXnzirQkTUS/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-07"
       },
       {
         "title": "Session 15 - The Spitespirit Cache",
@@ -814,7 +862,8 @@
             "label": "Session 15 - The Spitespirit Cache Recording 2",
             "url": "https://drive.google.com/file/d/1O1dyUdjhslQozHjBrN3vQVSyoVAhCpWy/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-11-28"
       },
       {
         "title": "Session 14 - The Drowned Waypoint",
@@ -828,7 +877,8 @@
             "label": "Session 14 - The Drowned Waypoint Recording 2",
             "url": "https://drive.google.com/file/d/1Kzja3tPdqg0RnoicFz2h5Ir5q3LktJum/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-11-12"
       },
       {
         "title": "Session 13 -The Emberheart Tablet",
@@ -842,7 +892,8 @@
             "label": "Session 13 -The Emberheart Tablet Recording 2",
             "url": "https://drive.google.com/file/d/1pHwklc7oTbH9I9MsSg-oiiU4XI5pHeEL/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-10-23"
       },
       {
         "title": "Session 12 - The Eradic of Ghone",
@@ -852,7 +903,8 @@
             "label": "Session 12 - The Eradic of Ghone Recording",
             "url": "https://drive.google.com/file/d/1TRK8tbKjnWo7ebcKmEC7JtvQ4_BpzW0h/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2025-10-07"
       },
       {
         "title": "Session 11 - Confronting the Cload",
@@ -862,7 +914,8 @@
             "label": "Session 11 - Confronting the Cload Recording",
             "url": "https://drive.google.com/file/d/1ff4Rr_Bt7r82c133KLd2QKrmOHGIwQr7/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2025-09-09"
       },
       {
         "title": "Session 10 - The Sewers",
@@ -872,7 +925,8 @@
             "label": "Session 10 - The Sewers Recording",
             "url": "https://drive.google.com/file/d/1uMfSK0ZwOOIiNjV9CIE701q0Yb77DYwn/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-08-20"
       },
       {
         "title": "Session 9 - Sides and the 3rd Piece",
@@ -882,7 +936,8 @@
             "label": "Session 9 - Sides and the 3rd Piece Recording",
             "url": "https://drive.google.com/file/d/1V24h6_3gG8jjVtXaTY-ywOgq9ewtclzw/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-08-11"
       },
       {
         "title": "Session 8 - Cemetery Mystery",
@@ -892,7 +947,8 @@
             "label": "Session 8 - Cemetery Mystery Recording",
             "url": "https://drive.google.com/file/d/1V8BBZdgW95kAFXZcSmr_nqEazmIqJTOT/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-07-16"
       },
       {
         "title": "Session 7 - Divine Waypoint",
@@ -902,7 +958,8 @@
             "label": "Session 7 - Divine Waypoint Recording",
             "url": "https://drive.google.com/file/d/1CeEjT12ODx2IQVjfBgQev7UwC7DAMZKB/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-07-09"
       },
       {
         "title": "Session 6 - Diverra's Grove",
@@ -912,7 +969,8 @@
             "label": "Session 6 - Diverra's Grove Recording",
             "url": "https://drive.google.com/file/d/1zBvg4u9cp9HlV-5Nq233wvSXs6JlpZ8I/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-06-24"
       },
       {
         "title": "Session 5 - Lady Rook",
@@ -922,7 +980,8 @@
             "label": "Session 5 - Lady Rook Recording",
             "url": "https://drive.google.com/file/d/1aQan6G93fDcQqJV4BziW2gfjqOGCcmoK/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-06-10"
       },
       {
         "title": "Session 4 - Beneath the City",
@@ -932,7 +991,8 @@
             "label": "Session 4 - Beneath the City Recording",
             "url": "https://drive.google.com/file/d/1C2eSFLd7urEhJJ09Q8P6FTze-F-8lKD0/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-05-28"
       },
       {
         "title": "Session 3 - EGD",
@@ -942,7 +1002,8 @@
             "label": "Session 3 - EGD Recording",
             "url": "https://drive.google.com/file/d/1sQklDuk1VPYEXkbknQZ1UmEmmlQPmfba/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-05-06"
       },
       {
         "title": "Session 2 - Bad Wine",
@@ -952,7 +1013,8 @@
             "label": "Session 2 - Bad Wine Recording",
             "url": "https://drive.google.com/file/d/1GNtjgjQvYF4IMdvO2pWPCAkCisqBBywg/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-04-22"
       },
       {
         "title": "Session 1 - Dock Troubles",
@@ -962,12 +1024,14 @@
             "label": "Session 1 - Dock Troubles Recording",
             "url": "https://drive.google.com/file/d/1EqklUTxxBpbCsqIRotONRaRcRW70r3Dx/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-03-03"
       }
     ],
     "aliases": [
       "emberstran"
-    ]
+    ],
+    "playerNotesUrl": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit"
   },
   {
     "id": "mad-mage",
@@ -1050,7 +1114,8 @@
             "label": "Session 09 Recording",
             "url": "https://drive.google.com/file/d/1ZMcCpi2jpWhmCEAdBAElmSfd6wyMspzK/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-30"
       },
       {
         "title": "08 - Devil Spawn",
@@ -1060,7 +1125,8 @@
             "label": "Session 08 Recording",
             "url": "https://drive.google.com/file/d/1RZWWc0pMrk6F6T7CBK86TvoIvXJ64RXX/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-02"
       },
       {
         "title": "07 - A Solid Plan",
@@ -1070,7 +1136,8 @@
             "label": "Session 07 Recording",
             "url": "https://drive.google.com/file/d/1_yWZston6bYsRlP6lSrO59-HLoMK9Caj/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-04-19"
       },
       {
         "title": "06 - Who Took It?",
@@ -1080,7 +1147,8 @@
             "label": "Session 06 Recording",
             "url": "https://drive.google.com/file/d/1bZuRvD9TeZ1z22PHqzqUTquIXYR8FndI/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-03-27"
       },
       {
         "title": "05 - Thugs & Cultists",
@@ -1090,7 +1158,8 @@
             "label": "Session 05 Recording",
             "url": "https://drive.google.com/file/d/1NpK-tNkffM9QkwSv96Jn6kBRE3aSQ69q/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-02-21"
       },
       {
         "title": "04 - Putrid",
@@ -1100,7 +1169,8 @@
             "label": "Session 04 Recording",
             "url": "https://drive.google.com/file/d/1QrNtaYGo2uDTV3KSxas1G0v-GYY63QXl/view?usp=sharing"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-24"
       },
       {
         "title": "03 - Fungipheliac Using Kinfolk",
@@ -1110,7 +1180,8 @@
             "label": "Session 03 Recording",
             "url": "https://drive.google.com/file/d/1Ulp2O0rIsSBTTAnCmpv-2Yo5tpoLH0es/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2026-01-03"
       },
       {
         "title": "02 - Mollywop to Sapcutt",
@@ -1120,7 +1191,8 @@
             "label": "Session 02 Recording",
             "url": "https://drive.google.com/file/d/1z2iws29s3qYPisVZ2tj0b-WRHjd3ThdF/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-12-11"
       },
       {
         "title": "01 - We Meet",
@@ -1130,9 +1202,11 @@
             "label": "Session 01 Recording",
             "url": "https://drive.google.com/file/d/1XctceACyRxJYDtrH9AP-j5JPaDDzLsDq/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2025-11-19"
       }
-    ]
+    ],
+    "playerNotesUrl": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit"
   },
   {
     "id": "the-silent-vanguard",
@@ -1199,7 +1273,8 @@
             "label": "Session 02 Recording",
             "url": "https://drive.google.com/file/d/13stRxSl2LUjHQAtApWMCQDiaXuaCAKl7/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-29"
       },
       {
         "title": "01 - We Meet",
@@ -1209,11 +1284,13 @@
             "label": "Session 01 Recording",
             "url": "https://drive.google.com/file/d/18JILL4c0N8OgVTwK-0eas3S4h23-QzvU/view?usp=drive_link"
           }
-        ]
+        ],
+        "sessionDate": "2026-05-19"
       }
     ],
     "aliases": [
       "silent vanguard"
-    ]
+    ],
+    "playerNotesUrl": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit"
   }
 ]

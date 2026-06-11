@@ -6,6 +6,7 @@ import { logoutAction } from "./login/actions";
 const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/pages", label: "Pages" },
+  { href: "/admin/source-managed", label: "Source Managed" },
   { href: "/admin/page-layout", label: "Navigation Layout" },
   { href: "/admin/appearance", label: "Appearance" },
   { href: "/admin/media", label: "Media" },

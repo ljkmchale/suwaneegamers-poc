@@ -10,10 +10,12 @@ export function FoldHeaderBlock({
   props: Record<string, unknown>;
   dataBlockId?: string;
 }) {
-  const eyebrow      = props.eyebrow      as string | undefined;
-  const title        = (props.title       as string | undefined) ?? "Expandable Header";
-  const description  = props.description  as string | undefined;
-  const foldLabel    = (props.foldLabel   as string | undefined) ?? "View details";
+  const eyebrow        = props.eyebrow        as string | undefined;
+  const title          = (props.title         as string | undefined) ?? "Expandable Header";
+  const description    = props.description    as string | undefined;
+  const headerImage    = props.headerImage    as string | undefined;
+  const headerImageAlt = (props.headerImageAlt as string | undefined) ?? "";
+  const foldLabel      = (props.foldLabel     as string | undefined) ?? "View details";
   const foldText     = props.foldText     as string | undefined;
   const foldImage    = props.foldImage    as string | undefined;
   const foldImageAlt = (props.foldImageAlt as string | undefined) ?? "";
@@ -29,8 +31,24 @@ export function FoldHeaderBlock({
     <section data-block-id={dataBlockId} data-block-type="fold-header" className="max-w-6xl mx-auto px-6 py-6">
       <div className="fantasy-card overflow-hidden">
         <button type="button" aria-expanded={isOpen} onClick={() => setIsOpen((open) => !open)}
-          className="w-full cursor-pointer px-6 py-5 text-left">
-          <div className="flex items-center justify-between gap-5">
+          className={headerImage
+            ? "w-full cursor-pointer text-left grid overflow-hidden sm:grid-cols-[13rem_1fr]"
+            : "w-full cursor-pointer px-6 py-5 text-left"}>
+          {headerImage && (
+            <div className="relative min-h-28 sm:min-h-full">
+              <Image src={headerImage} alt={headerImageAlt} fill
+                sizes="(min-width: 640px) 13rem, 100vw"
+                className="object-cover"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(180deg, rgba(8,5,15,.04), rgba(8,5,15,.34))" }}
+              />
+            </div>
+          )}
+          <div className={headerImage
+            ? "flex items-center justify-between gap-5 px-6 py-5"
+            : "flex items-center justify-between gap-5"}>
             <div className="min-w-0">
               {eyebrow && (
                 <p className="font-cinzel text-[0.65rem] tracking-[0.35em] uppercase mb-1"

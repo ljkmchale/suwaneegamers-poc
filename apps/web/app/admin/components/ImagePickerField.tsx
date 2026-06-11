@@ -25,12 +25,16 @@ export function ImagePickerField({ name, label, subfolder, defaultValue = "" }: 
     for (const f of Array.from(files)) fd.append("files", f);
 
     startTransition(async () => {
-      const result = await uploadFilesAction(fd);
-      if (result.uploaded.length > 0) {
-        setPath(result.uploaded[0]);
-      }
-      if (result.errors.length > 0) {
-        setError(result.errors.join(", "));
+      try {
+        const result = await uploadFilesAction(fd);
+        if (result.uploaded.length > 0) {
+          setPath(result.uploaded[0]);
+        }
+        if (result.errors.length > 0) {
+          setError(result.errors.join(", "));
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Upload failed — the file may be too large.");
       }
     });
   }

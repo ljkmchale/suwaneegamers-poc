@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "crit-tables-page",
+    "slug": "crit_tables",
+    "title": "Crit Tables",
+    "status": "active",
+    "createdAt": "2026-06-11"
+  }
+]

@@ -1,6 +1,6 @@
 import fs from "fs";
 import type { CalendarEvent } from "@/lib/calendar";
-import { contentPath } from "@/lib/contentFiles";
+import { contentPath, writeContent } from "@/lib/contentFiles";
 
 export interface CampaignSessionSummary {
   title: string;
@@ -9,6 +9,10 @@ export interface CampaignSessionSummary {
     label: string;
     url: string;
   }[];
+  /** True when the summary was auto-generated from raw player notes; replaced when the DM posts an official one. */
+  auto?: boolean;
+  /** Date the session was played, as a local YYYY-MM-DD string. */
+  sessionDate?: string;
 }
 
 export interface CampaignResourceLink {
@@ -32,6 +36,8 @@ export interface PortalCampaign {
   headerImage?: string;
   headerImagePosition?: string;
   official?: boolean;
+  /** Google Doc with the players' full running session notes. */
+  playerNotesUrl?: string;
   resources?: CampaignResourceLink[];
   party?: CampaignPartyMember[];
   sessionSummaries?: CampaignSessionSummary[];
@@ -58,6 +64,44 @@ export function findCampaign(id: string) {
   return getActiveCampaigns().find((c) => c.id === id);
 }
 
+export function updateCampaignHeaderImage(
+  id: string,
+  headerImage?: string,
+  headerImagePosition?: string
+): boolean {
+  const campaigns = getActiveCampaigns();
+  const index = campaigns.findIndex((campaign) => campaign.id === id);
+  if (index === -1) return false;
+
+  const current = campaigns[index];
+  const nextImage = headerImage?.trim() || undefined;
+  const nextPosition = headerImagePosition?.trim() || undefined;
+  const next: PortalCampaign = { ...current };
+
+  if (nextImage) {
+    next.headerImage = nextImage;
+  } else {
+    delete next.headerImage;
+  }
+
+  if (nextPosition) {
+    next.headerImagePosition = nextPosition;
+  } else {
+    delete next.headerImagePosition;
+  }
+
+  if (
+    current.headerImage === next.headerImage &&
+    current.headerImagePosition === next.headerImagePosition
+  ) {
+    return false;
+  }
+
+  campaigns[index] = next;
+  writeContent("campaigns.json", campaigns);
+  return true;
+}
+
 export function normalizeCampaignTitle(value: string) {
   return value
     .toLowerCase()
@@ -78,6 +122,20 @@ export function findNextCampaignEvent(
       return names.some((name) => title === name || title.includes(name));
     })
     .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())[0];
+}
+
+export function findPreviousCampaignEvent(
+  campaign: PortalCampaign,
+  pastEvents: CalendarEvent[]
+): CalendarEvent | undefined {
+  const names = [campaign.name, ...(campaign.aliases ?? [])].map(normalizeCampaignTitle);
+
+  return pastEvents
+    .filter((event) => {
+      const title = normalizeCampaignTitle(event.title);
+      return names.some((name) => title === name || title.includes(name));
+    })
+    .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime())[0];
 }
 
 export function findCampaignForCalendarEvent(
@@ -187,7 +245,7 @@ function normalizeSessionTitle(parts: string[]) {
     .replace(/\s+/g, " ")
     .replace(/^Session\s+(\d)\s+(\d)\b/i, "Session $1$2")
     .replace(/^(\d)\s+(\d)\s*[-–—]/, "$1$2 -")
-    .replace(/\s*[-–—]\s*/g, " - ")
+    .replace(/\s+[-–—]+\s*|[-–—]+\s+|[-–—]{2,}/g, " - ")
     .trim();
 }
 

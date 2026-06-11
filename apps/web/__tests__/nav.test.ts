@@ -46,14 +46,13 @@ describe("getNavConfig", () => {
 });
 
 describe("primary nav section", () => {
-  it("contains Calendar, Campaigns, DMs, and Previous Campaigns", () => {
+  it("contains Calendar, Campaigns, and the Map doorway", () => {
     const config = getNavConfig();
     const primary = getNavSection(config, "primary");
     const hrefs = primary.map((i) => i.href);
     expect(hrefs).toContain("/calendar");
     expect(hrefs).toContain("/campaigns");
-    expect(hrefs).toContain("/dungeon-masters");
-    expect(hrefs).toContain("/previous-campaigns");
+    expect(hrefs).toContain("/maps-of-myrdae");
   });
 });
 
@@ -64,7 +63,9 @@ describe("world nav section", () => {
     const hrefs = world.map((i) => i.href);
     expect(hrefs).toContain("/history");
     expect(hrefs).toContain("/pantheon");
-    expect(hrefs).toContain("/maps-of-myrdae");
+    expect(hrefs).toContain("/bestiary");
+    expect(hrefs).toContain("/gazetteer");
+    expect(hrefs).toContain("/territories");
   });
 });
 
@@ -75,8 +76,15 @@ describe("toolset nav section", () => {
     const hrefs = toolset.map((i) => i.href);
     expect(hrefs).toContain("/campaign-setting");
     expect(hrefs).toContain("/reference-for-dungeon-masters");
-    expect(hrefs).toContain("/gazetteer");
-    expect(hrefs).toContain("/bestiary");
+    expect(hrefs).toContain("/references");
+  });
+});
+
+describe("about nav section", () => {
+  it("keeps the DM profiles doorway", () => {
+    const config = getNavConfig();
+    const about = getNavSection(config, "about-e533");
+    expect(about.map((i) => i.href)).toContain("/dungeon-masters");
   });
 });
 
@@ -102,12 +110,12 @@ describe("nav item ID uniqueness", () => {
 });
 
 describe("Chronicles navigation", () => {
-  it("uses one secure external Chronicles doorway with no Knowledge Base duplicate", () => {
+  it("uses one embedded Chronicles doorway with no Knowledge Base duplicate", () => {
     const items = getNavConfig().sections.flatMap((section) => section.items);
     const chronicles = items.filter((item) => item.label === "Chronicles");
 
     expect(chronicles).toEqual([
-      expect.objectContaining({ href: "https://kb.suwaneegamers.net/" }),
+      expect.objectContaining({ href: "/chronicles" }),
     ]);
     expect(items.some((item) => item.label === "Knowledge Base")).toBe(false);
   });

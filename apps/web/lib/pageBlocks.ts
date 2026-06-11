@@ -20,6 +20,7 @@ export type BlockType =
   | "media-player"
   | "spacer"
   | "quote"
+  | "table"
   | "campaign-hero"
   | "campaign-meta"
   | "campaign-links"
@@ -36,6 +37,8 @@ export type BlockType =
   | "players-grid"
   | "dms-grid"
   | "bestiary-grid"
+  | "organizations-list"
+  | "territories-list"
   // ── Single-item live data blocks ──
   | "campaign-card"
   | "archived-campaign-card"
@@ -553,6 +556,30 @@ export const ASSET_TYPES: AssetTypeDef[] = [
   },
 
   {
+    type: "organizations-list",
+    label: "Organizations List",
+    description: "Data-driven organization and faction folds",
+    icon: "O",
+    category: "layout",
+    defaultProps: { helperText: "Click an organization below to expand its details." },
+    fields: [
+      { key: "helperText", label: "Helper text", type: "text" },
+    ],
+  },
+
+  {
+    type: "territories-list",
+    label: "Territories List",
+    description: "Data-driven territory folds grouped by region",
+    icon: "T",
+    category: "layout",
+    defaultProps: { helperText: "Click a region below to expand its territories." },
+    fields: [
+      { key: "helperText", label: "Helper text", type: "text" },
+    ],
+  },
+
+  {
     type: "portal-links",
     label: "Portal Links Grid",
     description: "A 1–4 col grid of link cards with title, description, and a button — same pattern as the Myrdae lore pages",
@@ -667,6 +694,8 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       eyebrow: "",
       title: "Expandable Header",
       description: "",
+      headerImage: "",
+      headerImageAlt: "",
       foldLabel: "View details",
       foldText: "Add text inside the fold, choose an image, or use both.",
       foldImage: "",
@@ -678,6 +707,8 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       { key: "eyebrow",      label: "Eyebrow (optional)",              type: "text",     placeholder: "e.g. Additional Lore" },
       { key: "title",        label: "Header title",                    type: "text",     placeholder: "Expandable Header" },
       { key: "description",  label: "Intro text (optional)",           type: "textarea", placeholder: "Visible while the fold is closed." },
+      { key: "headerImage",  label: "Header image (left, optional)",   type: "image",    placeholder: "/images/example.webp" },
+      { key: "headerImageAlt", label: "Header image alt text",         type: "text",     placeholder: "Describe the image" },
       { key: "foldLabel",    label: "Fold button label",               type: "text",     placeholder: "View details" },
       { key: "foldText",     label: "Text inside fold (optional)",     type: "textarea", placeholder: "Text shown after expanding the header." },
       { key: "foldImage",    label: "Image inside fold (optional)",    type: "image",    placeholder: "/images/example.webp" },
@@ -690,6 +721,26 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         key: "defaultState", label: "Default fold state", type: "select",
         options: [{ value: "closed", label: "Closed" }, { value: "open", label: "Open" }],
       },
+    ],
+  },
+
+  {
+    type: "table",
+    label: "Table",
+    description: "Styled data table with a header row, like doc rank and renown tables",
+    icon: "#",
+    category: "content",
+    defaultProps: {
+      eyebrow: "",
+      title: "",
+      headers: "Rank | Renown | Title",
+      rows: "1 | 0 - 1 | Avantee\n2 | 2 - 9 | Venture\n3 | 10 - 24 | Seeker\n4 | 25+ | Savant",
+    },
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (optional)", type: "text",     placeholder: "e.g. Structure & Membership" },
+      { key: "title",   label: "Title (optional)",   type: "text",     placeholder: "Ranks" },
+      { key: "headers", label: "Column headers",     type: "text",     placeholder: "Rank | Renown | Title" },
+      { key: "rows",    label: "Rows (one per line, cells separated by |)", type: "textarea", placeholder: "1 | 0 - 1 | Avantee" },
     ],
   },
 

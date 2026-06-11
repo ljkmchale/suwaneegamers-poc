@@ -13,9 +13,13 @@ import {
 } from "@/lib/campaigns";
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
+import { getOrganizations } from "@/lib/organizations";
+import { getTerritories, type Territory } from "@/lib/territories";
 import { fetchUpcomingCalendarEvents, GOOGLE_CALENDAR_TIMEZONE } from "@/lib/calendar";
 import type { BlockItem, CardLayoutItem, ProfileCardItem } from "@/lib/pageBlocks";
 import { parseGridSectionItems, resolveMediaPlayerSource } from "@/lib/pageBlocks";
+import { OrganizationFolds } from "@/app/(site)/organizations/OrganizationFolds";
+import { TerritoryFolds } from "@/app/(site)/territories/TerritoryFolds";
 
 const CARD_LAYOUT_MAX_ROWS = 120;
 
@@ -220,6 +224,109 @@ function SpacerBlock({ props }: { props: Record<string, unknown> }) {
   const size = (props.size as string | undefined) ?? "md";
   const h = size === "sm" ? "h-8" : size === "lg" ? "h-24" : "h-16";
   return <div className={h} aria-hidden="true" />;
+}
+
+function TableBlock({ props }: { props: Record<string, unknown> }) {
+  const eyebrow = props.eyebrow as string | undefined;
+  const title   = props.title   as string | undefined;
+  const headers = ((props.headers as string | undefined) ?? "")
+    .split("|").map((h) => h.trim()).filter(Boolean);
+  const rows = ((props.rows as string | undefined) ?? "")
+    .split("\n")
+    .map((line) => line.split("|").map((c) => c.trim()))
+    .filter((cells) => cells.some(Boolean));
+
+  if (!headers.length && !rows.length) return null;
+
+  return (
+    <section className="mx-auto max-w-5xl px-6 py-7">
+      <article className="fantasy-card overflow-hidden">
+        {(eyebrow || title) && (
+          <header
+            className="border-b px-5 py-5 md:px-6"
+            style={{
+              borderColor: "var(--color-bg-border)",
+              background:
+                "linear-gradient(90deg, rgba(245,158,11,0.12), rgba(139,92,246,0.08), rgba(8,5,15,0.18))",
+            }}
+          >
+            {eyebrow && (
+              <p
+                className="font-cinzel text-xs tracking-[0.35em] uppercase"
+                style={{ color: "var(--color-accent-arcane)" }}
+              >
+                {eyebrow}
+              </p>
+            )}
+            {title && (
+              <h3
+                className="font-cinzel mt-1 text-2xl tracking-widest uppercase"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                {title}
+              </h3>
+            )}
+          </header>
+        )}
+
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[44rem] text-sm">
+            {headers.length > 0 && (
+              <thead>
+                <tr style={{ background: "rgba(8,5,15,.72)" }}>
+                  {headers.map((header, i) => (
+                    <th
+                      key={i}
+                      className="font-cinzel px-4 py-3 text-left text-xs uppercase tracking-[0.2em]"
+                      style={{
+                        color: "var(--color-accent-gold)",
+                        borderBottom: "1px solid var(--color-bg-border)",
+                      }}
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {rows.map((cells, r) => (
+                <tr
+                  key={r}
+                  style={{
+                    background:
+                      r % 2 === 0 ? "rgba(255,255,255,0.025)" : "rgba(139,92,246,0.035)",
+                    borderBottom:
+                      r < rows.length - 1 ? "1px solid var(--color-bg-border)" : undefined,
+                  }}
+                >
+                  {cells.map((cell, c) => (
+                    <td
+                      key={c}
+                      className={`px-4 py-3 align-top leading-relaxed ${
+                        c === 0 ? "font-cinzel text-xs tracking-widest" : ""
+                      }`}
+                      style={{
+                        color:
+                          c === 0
+                            ? "var(--color-accent-gold)"
+                            : c === 1
+                              ? "var(--color-text-primary)"
+                              : "var(--color-text-secondary)",
+                        width: c === 0 ? "7rem" : c === 1 ? "11rem" : undefined,
+                      }}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  );
 }
 
 function QuoteBlock({ props }: { props: Record<string, unknown> }) {
@@ -1400,6 +1507,65 @@ function BestiaryGridBlock() {
 }
 
 // ── Live calendar helpers ─────────────────────────────────────────────────────
+
+function OrganizationsListBlock({ props }: { props: Record<string, unknown> }) {
+  const organizations = getOrganizations();
+  const helperText = (props.helperText as string | undefined) ?? "Click an organization below to expand its details.";
+  const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name);
+  const groups = [
+    {
+      label: "Factions",
+      organizations: organizations.filter((organization) => organization.faction).sort(byName),
+    },
+    {
+      label: "Well Known Organizations",
+      organizations: organizations.filter((organization) => !organization.faction).sort(byName),
+    },
+  ];
+
+  return (
+    <div className="max-w-6xl mx-auto px-6 pb-20">
+      {helperText && (
+        <p className="mb-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
+          {helperText}
+        </p>
+      )}
+      <OrganizationFolds groups={groups} />
+    </div>
+  );
+}
+
+function groupTerritoriesByRegion(territories: Territory[]) {
+  const groups = new Map<string, Territory[]>();
+  for (const territory of territories) {
+    const list = groups.get(territory.region) ?? [];
+    list.push(territory);
+    groups.set(territory.region, list);
+  }
+
+  return [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([region, list]) => ({
+      region,
+      territories: list.sort((a, b) => a.name.localeCompare(b.name)),
+    }));
+}
+
+function TerritoriesListBlock({ props }: { props: Record<string, unknown> }) {
+  const groups = groupTerritoriesByRegion(getTerritories());
+  const helperText = (props.helperText as string | undefined) ?? "Click a region below to expand its territories.";
+
+  return (
+    <div className="max-w-6xl mx-auto px-6 pb-20">
+      {helperText && (
+        <p className="mb-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
+          {helperText}
+        </p>
+      )}
+      <TerritoryFolds groups={groups} />
+    </div>
+  );
+}
 
 const _dateFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "short", month: "short", day: "numeric",
@@ -2656,6 +2822,7 @@ function BlockContent({
     case "media-player":    return <MediaPlayerBlock   props={block.props} />;
     case "spacer":          return <SpacerBlock        props={block.props} />;
     case "quote":           return <QuoteBlock         props={block.props} />;
+    case "table":           return <TableBlock         props={block.props} />;
     case "campaign-hero":   return <CampaignHeroBlock  props={block.props} />;
     case "campaign-meta":   return <CampaignMetaBlock  props={block.props} />;
     case "campaign-links":  return <CampaignLinksBlock props={block.props} />;
@@ -2673,6 +2840,8 @@ function BlockContent({
     case "players-grid":    return <PlayersGridBlock />;
     case "dms-grid":        return <DmsGridBlock />;
     case "bestiary-grid":   return <BestiaryGridBlock />;
+    case "organizations-list": return <OrganizationsListBlock props={block.props} />;
+    case "territories-list": return <TerritoriesListBlock props={block.props} />;
     // Single-item live data
     case "campaign-card":   return <CampaignCardBlock  props={block.props} variant={variant} />;
     case "archived-campaign-card": return <ArchivedCampaignCardBlock props={block.props} variant={variant} />;

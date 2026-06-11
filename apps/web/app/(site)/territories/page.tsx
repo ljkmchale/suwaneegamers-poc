@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
+import { getPageGrid, getPageLayout } from "@/lib/pageLayouts";
 
 export const metadata: Metadata = {
   title: "Territories",
-  description: "Portal link to Myrdae territories in Chronicles.",
+  description: "The territories of Myrdae with capitals, regions, and lore.",
 };
+
+export const revalidate = 86400;
 
 export default function TerritoriesPage() {
   const order = getPageLayout("/territories");
   const grid = getPageGrid("/territories");
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
       <div
@@ -24,7 +27,8 @@ export default function TerritoriesPage() {
             "linear-gradient(180deg, rgba(8,5,15,0.82) 0%, rgba(8,5,15,0.72) 36%, rgba(8,5,15,0.96) 100%), linear-gradient(90deg, rgba(8,5,15,0.7), rgba(8,5,15,0.34), rgba(8,5,15,0.72))",
         }}
       />
-      <div className="relative z-10 pb-20">
+
+      <div className="relative z-10 pt-12">
         <PageBlockList items={order} grid={grid} />
       </div>
     </div>

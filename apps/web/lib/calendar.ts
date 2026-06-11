@@ -28,10 +28,23 @@ interface CalendarWindow {
 
 export const LIVE_CALENDAR_WINDOW_MONTHS = 1;
 
-export const GOOGLE_CALENDAR_ID =
-  process.env.GOOGLE_CALENDAR_ID ??
-  process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID ??
-  "g3kgagicusaol82fqhjc62o47o@group.calendar.google.com";
+function resolveCalendarId(): string {
+  const fromEnv =
+    process.env.GOOGLE_CALENDAR_ID ?? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID;
+  if (fromEnv) return fromEnv;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { getAutoManagedPages, googleCalendarIdFromUrl } = require("./autoManagedPagesData") as typeof import("./autoManagedPagesData");
+    const entry = getAutoManagedPages().find((p) => p.path === "/calendar");
+    const id = entry?.sourceUrl ? googleCalendarIdFromUrl(entry.sourceUrl) : null;
+    if (id) return id;
+  } catch {
+    // content file not available (build time, edge, etc.) — use hardcoded default
+  }
+  return "g3kgagicusaol82fqhjc62o47o@group.calendar.google.com";
+}
+
+export const GOOGLE_CALENDAR_ID = resolveCalendarId();
 
 export const GOOGLE_CALENDAR_COLOR =
   process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_COLOR ?? "#fa573c";
@@ -72,6 +85,15 @@ export function liveCalendarWindow(now = new Date()) {
   };
 }
 
+export const RECENT_CALENDAR_WINDOW_MONTHS = 2;
+
+export function recentCalendarWindow(now = new Date()) {
+  return {
+    start: addCalendarMonths(now, -RECENT_CALENDAR_WINDOW_MONTHS),
+    end: now,
+  };
+}
+
 export function filterCalendarEventsForWindow(
   events: CalendarEvent[],
   window: CalendarWindow = liveCalendarWindow(),
@@ -103,6 +125,21 @@ export async function fetchUpcomingCalendarEvents(limit?: number): Promise<Calen
   const events = filterCalendarEventsForWindow(parseIcsEvents(ics, window), window);
 
   return typeof limit === "number" ? events.slice(0, limit) : events;
+}
+
+export async function fetchRecentCalendarEvents(): Promise<CalendarEvent[]> {
+  const res = await fetch(googleCalendarIcsUrl(), {
+    next: { revalidate: 300 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Google Calendar feed returned ${res.status}`);
+  }
+
+  const ics = await res.text();
+  const window = recentCalendarWindow();
+
+  return filterCalendarEventsForWindow(parseIcsEvents(ics, window), window);
 }
 
 export function parseIcsEvents(ics: string, recurrenceWindow?: CalendarWindow): CalendarEvent[] {

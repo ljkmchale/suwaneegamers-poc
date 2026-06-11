@@ -3,6 +3,7 @@ import path from "path";
 import { contentDir } from "./contentFiles";
 import { PAGE_SECTIONS } from "./pageSections";
 import { buildCampaignDetailLayout, findCampaignForDetailPath } from "./campaignDetailLayouts";
+import { updateCampaignHeaderImage } from "./campaigns";
 import type { PageItem, PageGridMeta, CanvasMeta } from "./pageBlocks";
 
 type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
@@ -77,6 +78,22 @@ function extractItems(entry: RawEntry): unknown[] {
 
 function extractMeta(entry: RawEntry): RawMeta | null {
   return Array.isArray(entry) ? null : entry;
+}
+
+function syncCampaignHeaderImage(pageId: string, items: PageItem[]) {
+  const campaign = findCampaignForDetailPath(pageId);
+  if (!campaign) return;
+
+  const hero = items.find(
+    (item) => item.kind === "block" && item.type === "campaign-hero"
+  );
+  if (!hero || hero.kind !== "block") return;
+
+  updateCampaignHeaderImage(
+    campaign.id,
+    hero.props.image as string | undefined,
+    hero.props.imagePosition as string | undefined
+  );
 }
 
 /** Returns the stored section + block order for a page. */
@@ -163,4 +180,5 @@ export function setPageLayout(
 
   fs.mkdirSync(path.dirname(layoutFile), { recursive: true });
   fs.writeFileSync(layoutFile, JSON.stringify(nextEntry, null, 2) + "\n", "utf-8");
+  syncCampaignHeaderImage(pageId, items);
 }
