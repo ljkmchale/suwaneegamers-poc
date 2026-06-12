@@ -54,7 +54,7 @@ function LoreBody({ body }: { body: string }) {
         className="text-sm leading-relaxed"
         style={{ color: "var(--color-text-secondary)" }}
       >
-        The source document text could not be loaded. Please try again later.
+        The lore archive could not be loaded. Please try again later.
       </p>
     );
   }

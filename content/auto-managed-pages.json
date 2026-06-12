@@ -43,9 +43,17 @@
     "path": "/history",
     "label": "History",
     "sourceName": "Google Docs",
-    "sourceUrl": "https://sites.google.com/view/suwanee-gamers/history",
-    "refreshLabel": "Content is managed from an external source.",
-    "editNote": "Update the source document to change this page."
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.5nrncw894vg0",
+    "refreshLabel": "Calendar and chronology content refresh from the campaign setting Google Doc about once per day.",
+    "editNote": "Update the Time & History section in the campaign setting doc to change this page."
+  },
+  {
+    "path": "/pantheon",
+    "label": "Pantheon",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Deity cards and expanded details refresh from the campaign setting Google Doc about once per day.",
+    "editNote": "Update the Deities of the New Order section in the campaign setting doc to change these cards."
   },
   {
     "path": "/maps-of-myrdae",
@@ -62,6 +70,14 @@
     "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
     "refreshLabel": "Content is managed from an external source.",
     "editNote": "Update the source document to change this page."
+  },
+  {
+    "path": "/gazetteer",
+    "label": "Gazetteer",
+    "sourceName": "Google Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Settlement cards are generated from linked entries in the campaign setting Google Doc and refresh at least once per day.",
+    "editNote": "Add or remove Gazetteer links in the Settlements table of the campaign setting Google Doc to update these cards."
   },
   {
     "path": "/crit_tables",

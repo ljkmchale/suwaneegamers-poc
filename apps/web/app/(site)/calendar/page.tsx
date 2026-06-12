@@ -15,6 +15,7 @@ import {
   listedCampaigns,
   normalizeCampaignTitle,
 } from "@/lib/campaigns";
+import { SessionRecordingPlayer } from "./SessionRecordingPlayer";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -363,7 +364,7 @@ export default async function CalendarPage() {
                   className="font-cinzel mt-1 text-2xl"
                   style={{ color: "var(--color-accent-gold)" }}
                 >
-                  Latest Adventures
+                  Previous Adventures
                 </h2>
               </div>
               <a
@@ -466,7 +467,7 @@ export default async function CalendarPage() {
                           {adventure.campaignName}
                         </Link>
                         <span
-                          className="ml-2 inline-block text-sm"
+                          className="mt-1 block text-sm"
                           style={{ color: "var(--color-accent-gold)" }}
                         >
                           - {adventure.sessionTitle}
@@ -476,31 +477,7 @@ export default async function CalendarPage() {
 
                     <div className="flex shrink-0 items-center gap-3">
                       {adventure.audioUrl && (
-                        <a
-                          href={adventure.audioUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title="Listen to the session recording"
-                          aria-label="Listen to the session recording"
-                          className="transition-colors hover:opacity-80"
-                          style={{ color: "var(--color-text-muted)" }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-7 w-7"
-                            aria-hidden="true"
-                          >
-                            <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2z" />
-                            <path d="M3 14v-3a9 9 0 0 1 18 0v3" />
-                          </svg>
-                        </a>
+                        <SessionRecordingPlayer url={adventure.audioUrl} />
                       )}
                       {adventure.notesUrl && (
                         <a

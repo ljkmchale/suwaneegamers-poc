@@ -48,6 +48,21 @@
     ]
   },
   {
+    "id": "tom-chernetsky",
+    "name": "Tom Chernetsky",
+    "focus": "Table storytelling, player-driven choices, and shared campaign momentum.",
+    "description": "Tom is part of the Suwanee Gamers Dungeon Master roster and brings another table voice to the shared campaign world.",
+    "portrait": "/images/generated/tom-chernetsky-card.png",
+    "activeCampaignIds": [],
+    "previousCampaigns": [
+      {
+        "name": "Charlemagne's Angels",
+        "status": "Completed",
+        "url": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/charlemagnes-angels"
+      }
+    ]
+  },
+  {
     "id": "larry-mchale",
     "name": "Larry McHale",
     "focus": "Archived campaign work and portal stewardship.",

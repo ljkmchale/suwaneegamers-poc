@@ -22,7 +22,7 @@ function HeaderSection() {
         Active Campaigns
       </h1>
       <p className="max-w-2xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
-        Current Suwanee Gamers campaigns with each table&apos;s title, cadence, and Dungeon Master.
+        Step into the ongoing adventures shaping Myrdae, from long-running sagas to the next table gathering.
       </p>
     </header>
   );

@@ -50,6 +50,15 @@
   },
   {
     "kind": "block",
+    "id": "dm-tom-chernetsky",
+    "type": "profile-card",
+    "props": {
+      "layout": "top",
+      "items": "[{\"id\":\"tc-portrait\",\"type\":\"portrait\",\"props\":{\"src\":\"/images/generated/tom-chernetsky-card.png\",\"name\":\"Tom Chernetsky\",\"cropPosition\":\"center top\"}},{\"id\":\"tc-heading\",\"type\":\"heading\",\"props\":{\"value\":\"Tom Chernetsky\"}},{\"id\":\"tc-focus\",\"type\":\"eyebrow\",\"props\":{\"value\":\"Table storytelling, player-driven choices, and shared campaign momentum.\",\"variant\":\"subtitle\"}},{\"id\":\"tc-badge\",\"type\":\"badge\",\"props\":{\"value\":\"Archive\",\"color\":\"muted\"}},{\"id\":\"tc-desc\",\"type\":\"description\",\"props\":{\"value\":\"Tom is represented in the campaign archive for Charlemagne's Angels and remains part of the Suwanee Gamers table history.\"}},{\"id\":\"tc-history\",\"type\":\"item-list\",\"props\":{\"title\":\"Campaign History\",\"entries\":\"[{\\\"title\\\":\\\"Charlemagne's Angels\\\",\\\"status\\\":\\\"Completed\\\",\\\"url\\\":\\\"https://sites.google.com/view/suwanee-gamers/previous-campaigns/charlemagnes-angels\\\"}]\"}}]"
+    }
+  },
+  {
+    "kind": "block",
     "id": "dm-larry-mchale",
     "type": "profile-card",
     "props": {

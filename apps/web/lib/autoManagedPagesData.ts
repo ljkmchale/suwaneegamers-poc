@@ -56,7 +56,7 @@ export function googleCalendarIdFromUrl(sourceUrl: string): string | null {
  */
 export function googleDocExportUrl(
   sourceUrl: string,
-  format: "html" | "txt" = "html",
+  format: "html" | "txt" | "md" = "html",
 ): string | null {
   if (!sourceUrl) return null;
   if (sourceUrl.includes("/export?format=")) return sourceUrl;

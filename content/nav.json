@@ -41,9 +41,9 @@
           "label": "Gazetteer"
         },
         {
-          "id": "land-kpsa",
-          "label": "Guides",
-          "href": "/guides"
+          "id": "campaign-setting",
+          "href": "/campaign-setting",
+          "label": "Guides"
         },
         {
           "id": "history",
@@ -82,9 +82,9 @@
       "label": "Toolset",
       "items": [
         {
-          "id": "adventures-m9fw",
+          "id": "references-752a",
           "label": "Adventures",
-          "href": "/adventures"
+          "href": "/references"
         },
         {
           "id": "crit-tables-5nt6",
@@ -92,24 +92,14 @@
           "href": "/crit_tables"
         },
         {
-          "id": "campaign-setting",
-          "href": "/campaign-setting",
-          "label": "Campaign Setting"
-        },
-        {
-          "id": "references-752a",
-          "label": "References (Sourcebooks)",
-          "href": "/references"
+          "id": "land-kpsa",
+          "label": "Links",
+          "href": "/links"
         },
         {
           "id": "reference-for-dungeon-masters",
           "href": "/reference-for-dungeon-masters",
           "label": "DM Reference"
-        },
-        {
-          "id": "lore",
-          "href": "/lore",
-          "label": "Legends & Lore"
         },
         {
           "id": "test-page",

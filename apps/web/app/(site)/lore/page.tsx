@@ -448,43 +448,6 @@ export default async function LorePage() {
           </p>
         </header>
 
-        <section className="fantasy-card mb-12 overflow-hidden p-5 md:p-6">
-          <div className="grid gap-6 md:grid-cols-[minmax(0,18rem)_1fr] md:items-center">
-            <figure className="relative mx-auto w-full max-w-[18rem] overflow-hidden rounded-md border border-[var(--color-bg-border)] bg-black/40">
-              <Image
-                src="/images/lore/legends-lore-cover.png"
-                alt="Legends & Lore cover artwork"
-                width={800}
-                height={1035}
-                className="h-auto w-full object-cover"
-                priority
-              />
-            </figure>
-            <div>
-              <p
-                className="font-cinzel text-xs uppercase tracking-[0.35em]"
-                style={{ color: "var(--color-accent-arcane)" }}
-              >
-                Cover Artwork
-              </p>
-              <h2
-                className="font-cinzel mt-2 text-2xl uppercase tracking-widest"
-                style={{ color: "var(--color-text-primary)" }}
-              >
-                Legends & Lore
-              </h2>
-              <p
-                className="mt-4 max-w-2xl text-sm leading-relaxed"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                Chip Poole&apos;s cover art sets the tone for the archive: a doorway
-                into older myths, dangerous magic, and the stories that still echo
-                through Myrdae.
-              </p>
-            </div>
-          </div>
-        </section>
-
         <LoreFolds entries={loreEntries} />
       </div>
     </div>

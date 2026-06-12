@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { dungeonMastersReferenceUrl } from "@/lib/dungeonMasters";
-import { PORTAL_URLS } from "@/lib/portal";
 import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
@@ -25,18 +23,7 @@ function HeaderSection() {
         The people behind the screen, their active tables, and the campaign history currently
         represented across Suwanee Gamers.
       </p>
-      <div className="mt-6 flex flex-wrap justify-center gap-3">
-        <a href={dungeonMastersReferenceUrl} target="_blank" rel="noopener noreferrer"
-          className="text-xs font-cinzel tracking-widest uppercase px-4 py-2 border rounded-full transition-colors hover:border-amber-400"
-          style={{ color: "var(--color-accent-gold)", borderColor: "var(--color-bg-border)" }}>
-          Suwanee Gamers Site
-        </a>
-        <a href={PORTAL_URLS.chronicles} target="_blank" rel="noopener noreferrer"
-          className="text-xs font-cinzel tracking-widest uppercase px-4 py-2 border rounded-full transition-colors hover:border-amber-400"
-          style={{ color: "var(--color-text-secondary)", borderColor: "var(--color-bg-border)" }}>
-          Chronicles
-        </a>
-      </div>
+
     </header>
   );
 }
