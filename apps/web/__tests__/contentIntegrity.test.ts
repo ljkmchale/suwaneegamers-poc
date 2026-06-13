@@ -15,6 +15,7 @@ import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { getPortalLinks } from "@/lib/portal";
 import { buildCampaignDetailLayout, getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { getActiveCustomPages } from "@/lib/customPages";
+import { parsePantheonMarkdown } from "@/lib/pantheon";
 import type { BlockItem } from "@/lib/pageBlocks";
 
 const campaigns  = getActiveCampaigns();
@@ -162,14 +163,14 @@ const KNOWN_INTERNAL_ROUTES = new Set([
   "/", "/calendar", "/campaigns", "/chronicles", "/dungeon-masters", "/players",
   "/bestiary", "/setting", "/territories", "/pantheon",
   "/history", "/lore", "/gazetteer", "/maps-of-myrdae",
-  "/campaign-setting", "/organizations", "/references", "/reference-for-dungeon-masters",
+  "/campaign-setting", "/organizations", "/adventures", "/reference-for-dungeon-masters",
   "/previous-campaigns", "/world", "/test-page",
 ]);
 
 // Nav placeholders for pages that haven't been built yet. These currently
 // 404 — when one gets a real page (app route or custom page), remove it here.
 const PLANNED_NAV_ROUTES = new Set([
-  "/guides", "/adventures", "/links", "/ourstory", "/supportourgamers",
+  "/guides", "/ourstory", "/supportourgamers",
 ]);
 
 describe("Nav internal hrefs → known routes", () => {
@@ -357,27 +358,39 @@ describe("Editable campaign detail pages", () => {
 });
 
 describe("Previous campaign archive", () => {
-  it("ingests the 11 visible legacy campaigns and their available detail links", () => {
+  it("ingests the full campaign status document archive", () => {
     const cards = getPageLayout("/previous-campaigns").filter(
       (item): item is BlockItem => item.kind === "block" && item.type === "archived-campaign-card",
     );
 
     expect(cards.map((card) => card.props.title)).toEqual([
-      "Beer & Dice",
+      "Beer & Dice I",
+      "Beer & Dice II",
+      "Beer & Dice III",
+      "Blisterfel - The Company",
+      "Bloody Endeavor I",
       "Call for Heroes",
+      "Charlemagne's Angels",
       "Crystal Bottle",
+      "Curse of Strahd",
+      "Dungeons I - Legends of Larch",
+      "Dungeons II - MEAD Society",
       "Imminent Domain",
-      "Legends of Larch",
-      "MEAD Society",
       "Middle Earth",
+      "Myrdaen Misfits",
+      "Nomads",
       "Obliged Corpses",
-      "Strahd / Avernus",
+      "Order of the Raven",
+      "Plane Shifters",
+      "Soulreaper's Reach",
       "Storm King's Thunder",
-      "The Company",
+      "Treasure Hunters",
+      "Tyranny of Dragons",
+      "Uldrea",
     ]);
     expect(cards.every((card) => card.props.id)).toBe(true);
     expect(cards.filter((card) => card.props.referenceUrl).length).toBe(4);
-    expect(cards.filter((card) => card.props.image).length).toBe(11);
+    expect(cards.filter((card) => card.props.image).length).toBe(14);
   });
 });
 
@@ -394,6 +407,25 @@ describe("Pantheon", () => {
     expect(grid?.props).toMatchObject({ columns: "3", gap: "md" });
     expect(cards).toHaveLength(29);
     expect(cards.every((card) => card.props.title && card.props.domain && card.props.image)).toBe(true);
+  });
+
+  it("normalizes Diverra source spelling before attaching saved card art", () => {
+    const deities = parsePantheonMarkdown(`
+| Name | Title | Domain(s) |
+| --- | --- | --- |
+| Divera | Ardent One | Love & Beauty |
+
+### Divera
+
+Diverra details.
+`);
+    const diverra = deities.find((deity) => deity.name === "Diverra");
+
+    expect(diverra).toMatchObject({
+      id: "pan-diverra",
+      image: "/images/pantheon/diverra.webp",
+      details: "Diverra details.",
+    });
   });
 });
 

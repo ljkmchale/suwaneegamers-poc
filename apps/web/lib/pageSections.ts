@@ -38,7 +38,7 @@ export const PAGE_SECTIONS: Record<string, SectionMeta[]> = {
   "/gazetteer":          [],
   "/campaign-setting":   [],
   "/organizations":      [],
-  "/references":         [],
+  "/adventures":         [],
   "/reference-for-dungeon-masters": [],
   "/territories":        [],
   "/calendar":           [],

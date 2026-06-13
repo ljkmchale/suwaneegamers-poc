@@ -22,3 +22,7 @@ export async function setSourceUrlAction(formData: FormData) {
   revalidatePath(path);
   revalidatePath("/admin/source-managed");
 }
+
+export async function refreshPageAction(path: string) {
+  revalidatePath(path);
+}

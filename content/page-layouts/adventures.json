@@ -29,7 +29,8 @@
       "imageAlt": "Bastion of the Ghost Fiend artwork",
       "eyebrow": "Adventure",
       "title": "Bastion of the Ghost Fiend",
-      "description": "A haunted bastion adventure reference."
+      "description": "A haunted bastion adventure reference.",
+      "href": "https://docs.google.com/document/d/1FbAd9V9dXnfq7vf4RZwVXfXGcZm1NW6Qmsjerf3ftas/edit?usp=sharing"
     }
   },
   {
@@ -54,7 +55,8 @@
       "imageAlt": "Ruins of the Assembly artwork",
       "eyebrow": "Adventure",
       "title": "Ruins of the Assembly",
-      "description": "Ancient ruins and assembly-site adventure material."
+      "description": "Ancient ruins and assembly-site adventure material.",
+      "href": "https://docs.google.com/document/d/1-t3E272S-sr4uZ4Gi1HLaOl_D0oLs2PSE4a4TZZ3-Zs/edit?usp=sharing"
     }
   },
   {
@@ -66,7 +68,9 @@
       "imageAlt": "The Broken Citadel artwork",
       "eyebrow": "Adventure",
       "title": "The Broken Citadel",
-      "description": "A broken stronghold adventure reference."
+      "description": "A broken stronghold adventure reference.",
+      "href": "https://docs.google.com/document/d/1pWr92KHvgnHLbk7hMjEWn-M0jRO0K6foaqSl2R5gPhc/edit?usp=sharing",
+      "linkLabel": "Module"
     }
   },
   {
@@ -78,7 +82,8 @@
       "imageAlt": "Tomb of the Amberblade artwork",
       "eyebrow": "Adventure",
       "title": "Tomb of the Amberblade",
-      "description": "A tomb-delving sourcebook adventure."
+      "description": "A tomb-delving sourcebook adventure.",
+      "href": "https://docs.google.com/document/d/1VfqK4uLpE1MYvaaYSg2_pgwQA8uHOISIcF0e-Xhb-1c/edit?usp=sharing"
     }
   },
   {
@@ -90,7 +95,8 @@
       "imageAlt": "Trolling the Dwarven Ruins artwork",
       "eyebrow": "Adventure",
       "title": "Trolling the Dwarven Ruins",
-      "description": "A dwarven-ruins adventure reference."
+      "description": "A dwarven-ruins adventure reference.",
+      "href": "https://docs.google.com/document/d/1hyc_8cYOc0ZPe3-jQluu--BlDo6jybreupKMKavw-Fw/edit?usp=sharing"
     }
   },
   {
@@ -111,6 +117,20 @@
     "props": {
       "columns": "3",
       "gap": "lg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "reference-dm-reference-guide",
+    "type": "card",
+    "props": {
+      "image": "/images/guides-to-myrdae/dm-reference.jpg",
+      "imageAlt": "Reference for Dungeon Masters cover artwork",
+      "eyebrow": "DM Toolkit",
+      "title": "Reference for Dungeon Masters",
+      "description": "Dungeon Master-facing rules, tables, services, travel references, prices, and NPC support for Myrdae.",
+      "href": "https://sites.google.com/view/suwanee-gamers/guides-to-myrdae#h.5x2zg7xwpada",
+      "linkLabel": "Open Reference"
     }
   },
   {

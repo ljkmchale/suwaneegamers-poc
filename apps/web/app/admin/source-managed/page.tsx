@@ -7,6 +7,7 @@ import {
   lockPageAction,
   unlockPageAction,
   setSourceUrlAction,
+  refreshPageAction,
 } from "./actions";
 
 const BUILTIN_LABELS: Record<string, string> = {
@@ -23,7 +24,7 @@ const BUILTIN_LABELS: Record<string, string> = {
   "/gazetteer": "Gazetteer",
   "/campaign-setting": "Campaign Setting",
   "/organizations": "Organizations",
-  "/references": "References",
+  "/adventures": "Adventures",
   "/reference-for-dungeon-masters": "Reference for DMs",
   "/territories": "Territories",
   "/calendar": "Calendar",
@@ -145,14 +146,24 @@ export default function SourceManagedPage() {
                   </div>
                 </form>
 
-                <form action={unlockPageAction.bind(null, page.path)}>
-                  <button
-                    type="submit"
-                    className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors"
-                  >
-                    Unlock page
-                  </button>
-                </form>
+                <div className="flex items-center gap-4">
+                  <form action={refreshPageAction.bind(null, page.path)}>
+                    <button
+                      type="submit"
+                      className="text-xs text-[#5a5060] hover:text-[#8b5cf6] transition-colors"
+                    >
+                      Refresh content
+                    </button>
+                  </form>
+                  <form action={unlockPageAction.bind(null, page.path)}>
+                    <button
+                      type="submit"
+                      className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors"
+                    >
+                      Unlock page
+                    </button>
+                  </form>
+                </div>
               </div>
             ))}
           </div>
@@ -232,6 +243,11 @@ export default function SourceManagedPage() {
           <li>
             Paste the Google Doc share URL — it appears as a clickable link in
             the admin overlay and here.
+          </li>
+          <li>
+            Hit <strong className="text-[#e8dfc8]">Refresh content</strong> to
+            bust the cache and pull the latest from the source immediately (otherwise
+            pages refresh automatically every hour).
           </li>
           <li>Unlock to re-enable the layout editor at any time.</li>
         </ol>

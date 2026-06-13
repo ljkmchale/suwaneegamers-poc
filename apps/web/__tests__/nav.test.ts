@@ -75,7 +75,7 @@ describe("toolset nav section", () => {
     const config = getNavConfig();
     const toolset = getNavSection(config, "toolset-n4ch");
     const hrefs = toolset.map((i) => i.href);
-    expect(hrefs).toContain("/references");
+    expect(hrefs).toContain("/adventures");
     expect(hrefs).toContain("/crit_tables");
     expect(hrefs).toContain("/links");
     expect(hrefs).toContain("/reference-for-dungeon-masters");

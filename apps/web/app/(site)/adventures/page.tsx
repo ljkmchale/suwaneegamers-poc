@@ -3,13 +3,13 @@ import { PageBlockList } from "@/components/blocks/PageBlockList";
 import { getPageGrid, getPageLayout } from "@/lib/pageLayouts";
 
 export const metadata: Metadata = {
-  title: "References (Sourcebooks)",
+  title: "Adventures",
   description: "Sourcebooks, adventures, and table references for Suwanee Gamers.",
 };
 
-export default function ReferencesPage() {
-  const order = getPageLayout("/references");
-  const grid = getPageGrid("/references");
+export default function AdventuresPage() {
+  const order = getPageLayout("/adventures");
+  const grid = getPageGrid("/adventures");
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">

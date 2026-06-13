@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAllCustomPages } from "@/lib/customPages";
-import { archivePageAction, restorePageAction, deletePageAction } from "./actions";
+import { archivePageAction, restorePageAction } from "./actions";
+import { DeletePageButton } from "./DeletePageButton";
 
 export default function AdminPagesPage() {
   const pages = getAllCustomPages().filter((p) => p.status !== "deleted");
@@ -99,17 +100,7 @@ export default function AdminPagesPage() {
                           </button>
                         </form>
                       )}
-                      <form
-                        action={deletePageAction.bind(null, page.id)}
-                        onSubmit={(e) => {
-                          if (!confirm(`Permanently delete "${page.title}"?`)) e.preventDefault();
-                        }}
-                      >
-                        <button type="submit"
-                          className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors">
-                          Delete
-                        </button>
-                      </form>
+                      <DeletePageButton pageId={page.id} pageTitle={page.title} />
                     </div>
                   </td>
                 </tr>
