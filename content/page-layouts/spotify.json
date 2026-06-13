@@ -1,0 +1,105 @@
+{
+  "grid": {
+    "columns": 3,
+    "gap": "lg"
+  },
+  "items": [
+    {
+      "kind": "block",
+      "id": "links-music-heading",
+      "type": "section-heading",
+      "col": 1,
+      "colSpan": 3,
+      "props": {
+        "eyebrow": "Toolset",
+        "title": "Music",
+        "description": "Spotify playlists for table ambiance, pregame, battle, exploration, suspense, tavern scenes, and darker moments.",
+        "align": "center"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-ambiance",
+      "type": "embed",
+      "col": 1,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/7m1uNTlc1hZ9A9QOnf5M80?utm_source=generator",
+        "title": "Ambiance Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-battle",
+      "type": "embed",
+      "col": 2,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/5cJCkeGFDqg0pFpkQwkoBx?utm_source=generator",
+        "title": "Battle Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-pregame",
+      "type": "embed",
+      "col": 3,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/5GkXesiOwLisKg1RsEFWX3?utm_source=generator",
+        "title": "Campaign Pregame Songs Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-dark",
+      "type": "embed",
+      "col": 1,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/2uAPK71lR0r9rHBfUWbC7d?utm_source=generator",
+        "title": "Dark Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-exploration",
+      "type": "embed",
+      "col": 2,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/7uOQMVCRsuhakviTCDdfdx?utm_source=generator",
+        "title": "Exploration Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-suspense",
+      "type": "embed",
+      "col": 3,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/3qYSSwtJij5C5PA0JcVrEc?utm_source=generator",
+        "title": "Suspense Spotify playlist",
+        "height": "380"
+      }
+    },
+    {
+      "kind": "block",
+      "id": "links-music-tavern",
+      "type": "embed",
+      "col": 1,
+      "colSpan": 1,
+      "props": {
+        "src": "https://open.spotify.com/embed/playlist/18z12PQkZAknsUfYDG6FrR?utm_source=generator",
+        "title": "Tavern Spotify playlist",
+        "height": "380"
+      }
+    }
+  ]
+}

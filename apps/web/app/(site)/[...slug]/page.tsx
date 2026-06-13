@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { getCustomPage } from "@/lib/customPages";
 import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
-import type { BlockItem } from "@/lib/pageBlocks";
+import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 interface Props {
   params: Promise<{ slug: string[] }>;
@@ -48,44 +47,6 @@ export default async function CustomPageRoute({ params }: Props) {
     );
   }
 
-  if (grid && grid.columns > 1) {
-    const gapCss = grid.gap === "sm" ? "0.75rem" : grid.gap === "lg" ? "1.5rem" : "1.125rem";
-    return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${grid.columns}, minmax(0, 1fr))`,
-          gap: gapCss,
-          padding: "0 1.5rem",
-          maxWidth: "90rem",
-          margin: "0 auto",
-        }}
-      >
-        {items.map((item) => {
-          if (item.kind === "section") return null;
-          const block = item as BlockItem;
-          return (
-            <div
-              key={block.id}
-              style={{
-                gridColumn: block.col
-                  ? `${block.col} / span ${block.colSpan ?? 1}`
-                  : `1 / span ${grid.columns}`,
-              }}
-            >
-              <BlockRenderer block={block} />
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-
-  const renderedItems = items.map((item) => {
-    if (item.kind === "section") return null; // custom pages have no built-in sections
-    return <BlockRenderer key={item.id} block={item as BlockItem} />;
-  });
-
   if (isCritTables) {
     return (
       <div className="relative min-h-screen overflow-hidden bg-black">
@@ -106,11 +67,11 @@ export default async function CustomPageRoute({ params }: Props) {
           }}
         />
         <div className="relative z-10 pb-20 pt-8">
-          {renderedItems}
+          <PageBlockList items={items} grid={grid} />
         </div>
       </div>
     );
   }
 
-  return <div>{renderedItems}</div>;
+  return <PageBlockList items={items} grid={grid} />;
 }

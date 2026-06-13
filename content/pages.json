@@ -5,5 +5,19 @@
     "title": "Crit Tables",
     "status": "active",
     "createdAt": "2026-06-11"
+  },
+  {
+    "id": "dm-links-page",
+    "slug": "links",
+    "title": "Links",
+    "status": "active",
+    "createdAt": "2026-06-13"
+  },
+  {
+    "id": "links-page",
+    "slug": "spotify",
+    "title": "Spotify",
+    "status": "active",
+    "createdAt": "2026-06-13"
   }
 ]

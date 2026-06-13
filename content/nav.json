@@ -88,6 +88,11 @@
         },
         {
           "id": "land-kpsa",
+          "label": "Spotify",
+          "href": "/spotify"
+        },
+        {
+          "id": "land-kpsa-links",
           "label": "Links",
           "href": "/links"
         },
