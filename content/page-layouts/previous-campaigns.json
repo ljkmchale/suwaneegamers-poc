@@ -21,14 +21,82 @@
   },
   {
     "kind": "block",
-    "id": "archive-beer-and-dice",
+    "id": "archive-beer-and-dice-i",
     "type": "archived-campaign-card",
     "props": {
-      "id": "beer-and-dice",
-      "title": "Beer & Dice",
+      "id": "beer-and-dice-i",
+      "title": "Beer & Dice I",
       "status": "Completed",
       "dm": "Chip Poole",
       "image": "/images/campaigns/archive/beer-and-dice.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-beer-and-dice-ii",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "beer-and-dice-ii",
+      "title": "Beer & Dice II",
+      "status": "Completed",
+      "dm": "Chip Poole",
+      "image": "/images/campaigns/archive/beer-and-dice.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-beer-and-dice-iii",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "beer-and-dice-iii",
+      "title": "Beer & Dice III",
+      "status": "Completed",
+      "dm": "Chip Poole",
+      "image": "/images/campaigns/archive/beer-and-dice.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-the-company",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "the-company",
+      "title": "Blisterfel - The Company",
+      "status": "On Hiatus",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/the-company.jpg",
+      "description": "An archived adventuring company with a linked character roster and shared player and Dungeon Master materials.",
+      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/the-company?authuser=0",
+      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1_ZCiO6XowP1Oab5XpeqPNg_Qx_OOQOr8cdb_ngU8wGQ/edit?usp=sharing\"},{\"label\":\"Player's Info for DM\",\"url\":\"https://docs.google.com/spreadsheets/d/1S-vsocOXM8s7lod3ghpo3SHNRjnYn9DQI0YwFzDjX7E/edit?usp=sharing\"},{\"label\":\"D&D Beyond\",\"url\":\"https://www.dndbeyond.com/campaigns/1397765\"},{\"label\":\"DM Material\",\"url\":\"https://drive.google.com/drive/folders/1hiRfbEKs8NIDtuT2IoJmgtAc57XjOahY?usp=sharing\"}]",
+      "party": "[{\"name\":\"Charlo Sand-O'Foot\",\"url\":\"https://www.dndbeyond.com/characters/31311185\"},{\"name\":\"Edisen Mullendore\",\"url\":\"https://www.dndbeyond.com/characters/36265204\"},{\"name\":\"Mokai Lostwanderer\",\"url\":\"https://www.dndbeyond.com/characters/91033064\"},{\"name\":\"Muckbuckle\",\"url\":\"https://www.dndbeyond.com/characters/53279445\"},{\"name\":\"Pyrry Wynlyte\",\"url\":\"https://www.dndbeyond.com/characters/130341470\"},{\"name\":\"Tam Rowansdottir\",\"url\":\"https://www.dndbeyond.com/characters/35739512\"}]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-bloody-endeavor-i",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "bloody-endeavor-i",
+      "title": "Bloody Endeavor I",
+      "status": "Completed",
+      "dm": "Sean Poole",
+      "image": "/images/campaigns/bloody-endeavor.jpg",
       "description": "Completed campaign from the Suwanee Gamers archive.",
       "referenceUrl": "",
       "resources": "[]",
@@ -55,6 +123,23 @@
   },
   {
     "kind": "block",
+    "id": "archive-charlemagnes-angels",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "charlemagnes-angels",
+      "title": "Charlemagne's Angels",
+      "status": "On Hiatus",
+      "dm": "Tom Chernetzky",
+      "image": "",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
     "id": "archive-crystal-bottle",
     "type": "archived-campaign-card",
     "props": {
@@ -68,6 +153,57 @@
       "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit?usp=sharing\"},{\"label\":\"World Events\",\"url\":\"https://docs.google.com/spreadsheets/d/1LVqizTWmIqWG9EtKzJiZpJNAfW_kF1HdRIOC_vqwJsE/edit?pli=1&gid=0#gid=0\"},{\"label\":\"The Forge - VTT\",\"url\":\"https://larrymmchale-arbescar.forge-vtt.com/join\"}]",
       "party": "[{\"name\":\"Narris\",\"url\":\"https://docs.google.com/document/d/17Ykglf4dOpfUFvzZ0KxisTUi8ibhW0wTT7LMfEe2SNM\"},{\"name\":\"Ren\",\"url\":\"https://docs.google.com/document/d/11V4HBR3QxxBcX70q3zU6yvXw5fmGZRZepRnMTHi1lnw/edit#heading=h.f6efuev4p3kk\"},{\"name\":\"Scarlytt\",\"url\":\"https://docs.google.com/document/d/1R751jMSxtMpYev91WokwlddqCbFwdC2WZBwTboXS16M/edit#heading=h.c8r561vao29x\"},{\"name\":\"Sigil\",\"url\":\"https://docs.google.com/document/d/1gsoFpizdvQCceCZx4vQU3ciLhhAtex9ST9XB8c5tciU/edit#heading=h.pgfwydinuc19\"},{\"name\":\"Galtrelon\"},{\"name\":\"Yvaine\",\"url\":\"https://docs.google.com/document/d/15sutdDEtu9ZR-08F8hOBEHOUB3zYFl9QC1Fyulut6mQ/edit#heading=h.wytg0g5ny630\"}]",
       "sections": "[{\"title\":\"Former Adventurers\",\"entries\":[\"Dalbyre\",\"Opal\",\"Tass (RIP)\",\"Alteya\"]},{\"title\":\"Archive Index\",\"entries\":[\"Sessions\",\"Arbescar\",\"Timelines\",\"History\",\"Large Shards\",\"Council of Six\",\"ALM\",\"NPCs\",\"Portal Shards\",\"Locations\",\"Portals\",\"Talba'sar\",\"Magic Items\",\"Scarbrook\",\"Marrowdale\"]}]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-curse-of-strahd",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "curse-of-strahd",
+      "title": "Curse of Strahd",
+      "status": "On Hiatus",
+      "dm": "Chris Glynn",
+      "image": "/images/campaigns/archive/strahd-avernus.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-legends-of-larch",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "legends-of-larch",
+      "title": "Dungeons I - Legends of Larch",
+      "status": "Completed",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/legends-of-larch.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-mead-society",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "mead-society",
+      "title": "Dungeons II - MEAD Society",
+      "status": "Completed",
+      "dm": "Lesley Poole",
+      "image": "/images/campaigns/archive/mead-society.png",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
     }
   },
   {
@@ -89,40 +225,6 @@
   },
   {
     "kind": "block",
-    "id": "archive-legends-of-larch",
-    "type": "archived-campaign-card",
-    "props": {
-      "id": "legends-of-larch",
-      "title": "Legends of Larch",
-      "status": "Completed",
-      "dm": "Lesley Poole",
-      "image": "/images/campaigns/archive/legends-of-larch.png",
-      "description": "Completed campaign from the Suwanee Gamers archive.",
-      "referenceUrl": "",
-      "resources": "[]",
-      "party": "[]",
-      "sections": "[]"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "archive-mead-society",
-    "type": "archived-campaign-card",
-    "props": {
-      "id": "mead-society",
-      "title": "MEAD Society",
-      "status": "Completed",
-      "dm": "Lesley Poole",
-      "image": "/images/campaigns/archive/mead-society.png",
-      "description": "Completed campaign from the Suwanee Gamers archive.",
-      "referenceUrl": "",
-      "resources": "[]",
-      "party": "[]",
-      "sections": "[]"
-    }
-  },
-  {
-    "kind": "block",
     "id": "archive-middle-earth",
     "type": "archived-campaign-card",
     "props": {
@@ -132,6 +234,40 @@
       "dm": "Michael Hewson",
       "image": "/images/campaigns/archive/middle-earth.png",
       "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-myrdaen-misfits",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "myrdaen-misfits",
+      "title": "Myrdaen Misfits",
+      "status": "On Hiatus",
+      "dm": "Chip Poole & Sean Poole",
+      "image": "",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-nomads",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "nomads",
+      "title": "Nomads",
+      "status": "Completed",
+      "dm": "Chris Glynn",
+      "image": "",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
       "referenceUrl": "",
       "resources": "[]",
       "party": "[]",
@@ -157,15 +293,49 @@
   },
   {
     "kind": "block",
-    "id": "archive-strahd-avernus",
+    "id": "archive-order-of-the-raven",
     "type": "archived-campaign-card",
     "props": {
-      "id": "strahd-avernus",
-      "title": "Strahd / Avernus",
-      "status": "Completed",
-      "dm": "Chris Glynn",
-      "image": "/images/campaigns/archive/strahd-avernus.png",
-      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "id": "order-of-the-raven",
+      "title": "Order of the Raven",
+      "status": "On Hiatus",
+      "dm": "Chip Poole",
+      "image": "",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-plane-shifters",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "plane-shifters",
+      "title": "Plane Shifters",
+      "status": "On Hiatus",
+      "dm": "Chip Poole",
+      "image": "",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-soulreapers-reach",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "soulreapers-reach",
+      "title": "Soulreaper's Reach",
+      "status": "On Hiatus",
+      "dm": "Sean Poole",
+      "image": "",
+      "description": "On-hiatus campaign from the Suwanee Gamers archive.",
       "referenceUrl": "",
       "resources": "[]",
       "party": "[]",
@@ -182,6 +352,7 @@
       "status": "Completed",
       "dm": "Chris Glynn",
       "image": "/images/campaigns/archive/storm-kings-thunder.png",
+      "imagePosition": "top",
       "description": "Completed campaign from the Suwanee Gamers archive.",
       "referenceUrl": "",
       "resources": "[]",
@@ -191,18 +362,52 @@
   },
   {
     "kind": "block",
-    "id": "archive-the-company",
+    "id": "archive-treasure-hunters",
     "type": "archived-campaign-card",
     "props": {
-      "id": "the-company",
-      "title": "The Company",
+      "id": "treasure-hunters",
+      "title": "Treasure Hunters",
       "status": "Completed",
-      "dm": "Lesley Poole",
-      "image": "/images/campaigns/archive/the-company.jpg",
-      "description": "An archived adventuring company with a linked character roster and shared player and Dungeon Master materials.",
-      "referenceUrl": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/the-company?authuser=0",
-      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1_ZCiO6XowP1Oab5XpeqPNg_Qx_OOQOr8cdb_ngU8wGQ/edit?usp=sharing\"},{\"label\":\"Player's Info for DM\",\"url\":\"https://docs.google.com/spreadsheets/d/1S-vsocOXM8s7lod3ghpo3SHNRjnYn9DQI0YwFzDjX7E/edit?usp=sharing\"},{\"label\":\"D&D Beyond\",\"url\":\"https://www.dndbeyond.com/campaigns/1397765\"},{\"label\":\"DM Material\",\"url\":\"https://drive.google.com/drive/folders/1hiRfbEKs8NIDtuT2IoJmgtAc57XjOahY?usp=sharing\"}]",
-      "party": "[{\"name\":\"Charlo Sand-O'Foot\",\"url\":\"https://www.dndbeyond.com/characters/31311185\"},{\"name\":\"Edisen Mullendore\",\"url\":\"https://www.dndbeyond.com/characters/36265204\"},{\"name\":\"Mokai Lostwanderer\",\"url\":\"https://www.dndbeyond.com/characters/91033064\"},{\"name\":\"Muckbuckle\",\"url\":\"https://www.dndbeyond.com/characters/53279445\"},{\"name\":\"Pyrry Wynlyte\",\"url\":\"https://www.dndbeyond.com/characters/130341470\"},{\"name\":\"Tam Rowansdottir\",\"url\":\"https://www.dndbeyond.com/characters/35739512\"}]",
+      "dm": "Chip Poole",
+      "image": "",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-tyranny-of-dragons",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "tyranny-of-dragons",
+      "title": "Tyranny of Dragons",
+      "status": "Completed",
+      "dm": "Chip Poole",
+      "image": "",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
+      "sections": "[]"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "archive-uldrea",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "uldrea",
+      "title": "Uldrea",
+      "status": "Completed",
+      "dm": "Sean Poole",
+      "image": "",
+      "description": "Completed campaign from the Suwanee Gamers archive.",
+      "referenceUrl": "",
+      "resources": "[]",
+      "party": "[]",
       "sections": "[]"
     }
   }

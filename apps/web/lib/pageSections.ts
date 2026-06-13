@@ -16,8 +16,9 @@ export const PAGE_SECTIONS: Record<string, SectionMeta[]> = {
     { id: "portal", label: "Portal Links", description: "Quick-access portal link cards" },
   ],
   "/campaigns": [
-    { id: "campaigns",      label: "Active Campaigns",     description: "Campaign cards grid" },
-    { id: "side-campaigns", label: "Other Campaign Tools", description: "Side / alternate campaign cards" },
+    { id: "campaigns",           label: "Active Campaigns",     description: "Campaign cards grid" },
+    { id: "side-campaigns",      label: "Other Campaign Tools", description: "Side / alternate campaign cards" },
+    { id: "previous-campaigns",  label: "Previous Campaigns",   description: "Archived campaign fold cards" },
   ],
   "/players": [
     { id: "players",    label: "Player Profiles",       description: "Player cards with characters" },

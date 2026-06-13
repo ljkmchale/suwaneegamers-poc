@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
+import { getArchivedCampaigns } from "@/lib/archivedCampaigns";
+import { PreviousCampaignFoldCard } from "./PreviousCampaignFoldCard";
 
 export const metadata: Metadata = {
   title: "Campaigns",
@@ -39,6 +41,28 @@ function SideLabelSection() {
   );
 }
 
+function PreviousCampaignsSection() {
+  const campaigns = getArchivedCampaigns();
+  return (
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="grid gap-4">
+        {campaigns.map((campaign) => (
+          <PreviousCampaignFoldCard
+            key={campaign.id}
+            id={campaign.id}
+            name={campaign.name}
+            dm={campaign.dm}
+            status={campaign.status}
+            headerImage={campaign.headerImage || undefined}
+            headerImagePosition={campaign.headerImagePosition}
+            description={campaign.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function CampaignsPage() {
@@ -52,6 +76,7 @@ export default function CampaignsPage() {
         sections={{
           header:     <HeaderSection />,
           "side-label": <SideLabelSection />,
+          "previous-campaigns": <PreviousCampaignsSection />,
         }}
       />
     </div>

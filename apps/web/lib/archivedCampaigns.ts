@@ -25,6 +25,7 @@ export interface ArchivedCampaign {
   description: string;
   referenceUrl?: string;
   headerImage?: string;
+  headerImagePosition?: string;
   resources: ArchivedCampaignResource[];
   party: ArchivedCampaignPartyMember[];
   sections: ArchivedCampaignSection[];
@@ -56,6 +57,7 @@ export function getArchivedCampaigns(): ArchivedCampaign[] {
       description: (item.props.description as string | undefined) ?? "",
       referenceUrl: item.props.referenceUrl as string | undefined,
       headerImage: item.props.image as string | undefined,
+      headerImagePosition: item.props.imagePosition as string | undefined,
       resources: parseArray<ArchivedCampaignResource>(item.props.resources),
       party: parseArray<ArchivedCampaignPartyMember>(item.props.party),
       sections: parseArray<ArchivedCampaignSection>(item.props.sections),
