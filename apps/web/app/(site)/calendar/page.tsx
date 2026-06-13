@@ -10,10 +10,10 @@ import {
 import {
   findCampaignForCalendarEvent,
   findPreviousCampaignEvent,
-  getActiveCampaigns,
-  listedCampaigns,
   normalizeCampaignTitle,
+  type PortalCampaign,
 } from "@/lib/campaigns";
+import { getCampaignsWithDocumentSessionSummaries } from "@/lib/sessionSummaries";
 import { AdventureFoldCard } from "./AdventureFoldCard";
 import { LogoLightning } from "./LogoLightning";
 import { RunicBackground } from "./RunicBackground";
@@ -117,19 +117,27 @@ function sessionSortDate(value: string): number {
   return new Date(value).getTime();
 }
 
-function latestAdventures(pastEvents: CalendarEvent[], limit = 8): LatestAdventure[] {
+function visibleCampaigns(campaigns: PortalCampaign[]) {
+  return campaigns.filter((campaign) => campaign.official !== false);
+}
+
+function latestAdventures(
+  campaigns: PortalCampaign[],
+  pastEvents: CalendarEvent[],
+  limit = 6,
+): LatestAdventure[] {
   const adventures: LatestAdventure[] = [];
 
-  for (const campaign of listedCampaigns()) {
+  for (const campaign of visibleCampaigns(campaigns)) {
     const notes = campaign.sessionSummaries ?? [];
 
-    notes.forEach((note, index) => {
-      // The newest note without a stored date can still borrow its date from
-      // the most recent calendar event for the campaign.
+    // Only the most recent session per campaign — notes[0] is newest.
+    for (let index = 0; index < notes.length; index++) {
+      const note = notes[index];
       const date =
         note.sessionDate ??
         (index === 0 ? findPreviousCampaignEvent(campaign, pastEvents)?.start : undefined);
-      if (!date) return;
+      if (!date) continue;
 
       const { number, text } = splitSessionTitle(note.title);
       adventures.push({
@@ -145,7 +153,8 @@ function latestAdventures(pastEvents: CalendarEvent[], limit = 8): LatestAdventu
         summary: note.summary,
         audioUrl: note.audioLinks?.[0]?.url,
       });
-    });
+      break; // one entry per campaign
+    }
   }
 
   return adventures.sort((a, b) => b.sortDate - a.sortDate).slice(0, limit);
@@ -155,7 +164,7 @@ export default async function CalendarPage() {
   let events: CalendarEvent[] = [];
   let pastEvents: CalendarEvent[] = [];
   let feedError = false;
-  const campaigns = getActiveCampaigns();
+  const campaigns = await getCampaignsWithDocumentSessionSummaries();
 
   try {
     events = await fetchUpcomingCalendarEvents(6);
@@ -169,7 +178,7 @@ export default async function CalendarPage() {
     // Latest adventures still render from stored session dates.
   }
 
-  const adventures = latestAdventures(pastEvents, 6);
+  const adventures = latestAdventures(campaigns, pastEvents, 6);
 
   return (
     <div className="relative min-h-screen">
@@ -352,7 +361,7 @@ export default async function CalendarPage() {
                         className="font-cinzel text-lg leading-snug"
                         style={{ color: "var(--color-text-primary)" }}
                       >
-                        {event.title}
+                        {showCampaignLabel ? campaign.name : event.title}
                         {campaign?.dm && (
                           <span
                             className="ml-2 inline-block text-sm"
@@ -362,14 +371,6 @@ export default async function CalendarPage() {
                           </span>
                         )}
                       </h3>
-                      {showCampaignLabel && (
-                        <p
-                          className="mt-1 font-cinzel text-xs uppercase tracking-[0.24em]"
-                          style={{ color: "var(--color-accent-gold)" }}
-                        >
-                          {campaign.name}
-                        </p>
-                      )}
                     </div>
                   </article>
                 );
