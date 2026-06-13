@@ -5,11 +5,6 @@
       "label": "Primary Navigation",
       "items": [
         {
-          "id": "calendar",
-          "href": "/calendar",
-          "label": "Calendar"
-        },
-        {
           "id": "campaigns",
           "href": "/campaigns",
           "label": "Campaigns"

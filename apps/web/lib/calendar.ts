@@ -32,15 +32,6 @@ function resolveCalendarId(): string {
   const fromEnv =
     process.env.GOOGLE_CALENDAR_ID ?? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID;
   if (fromEnv) return fromEnv;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { getAutoManagedPages, googleCalendarIdFromUrl } = require("./autoManagedPagesData") as typeof import("./autoManagedPagesData");
-    const entry = getAutoManagedPages().find((p) => p.path === "/calendar");
-    const id = entry?.sourceUrl ? googleCalendarIdFromUrl(entry.sourceUrl) : null;
-    if (id) return id;
-  } catch {
-    // content file not available (build time, edge, etc.) — use hardcoded default
-  }
   return "g3kgagicusaol82fqhjc62o47o@group.calendar.google.com";
 }
 

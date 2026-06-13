@@ -46,11 +46,11 @@ describe("getNavConfig", () => {
 });
 
 describe("primary nav section", () => {
-  it("contains Calendar, Campaigns, and the Map doorway", () => {
+  it("uses the homepage as the calendar landing and keeps Campaigns and Map in the menu", () => {
     const config = getNavConfig();
     const primary = getNavSection(config, "primary");
     const hrefs = primary.map((i) => i.href);
-    expect(hrefs).toContain("/calendar");
+    expect(hrefs).not.toContain("/calendar");
     expect(hrefs).toContain("/campaigns");
     expect(hrefs).toContain("/maps-of-myrdae");
   });
@@ -61,6 +61,7 @@ describe("world nav section", () => {
     const config = getNavConfig();
     const world = getNavSection(config, "world");
     const hrefs = world.map((i) => i.href);
+    expect(hrefs).toContain("/campaign-setting");
     expect(hrefs).toContain("/history");
     expect(hrefs).toContain("/pantheon");
     expect(hrefs).toContain("/bestiary");
@@ -74,9 +75,10 @@ describe("toolset nav section", () => {
     const config = getNavConfig();
     const toolset = getNavSection(config, "toolset-n4ch");
     const hrefs = toolset.map((i) => i.href);
-    expect(hrefs).toContain("/campaign-setting");
-    expect(hrefs).toContain("/reference-for-dungeon-masters");
     expect(hrefs).toContain("/references");
+    expect(hrefs).toContain("/crit_tables");
+    expect(hrefs).toContain("/links");
+    expect(hrefs).toContain("/reference-for-dungeon-masters");
   });
 });
 

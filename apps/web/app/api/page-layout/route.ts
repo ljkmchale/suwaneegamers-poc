@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPageLayout, getPageGrid, getPageCanvas } from "@/lib/pageLayouts";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
+  const { getPageLayout, getPageGrid, getPageCanvas } = await import("@/lib/pageLayoutRead");
   const pageId = req.nextUrl.searchParams.get("page") ?? "/";
   const items  = getPageLayout(pageId);
   const grid   = getPageGrid(pageId);

@@ -1,5 +1,7 @@
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
 
+export const HISTORY_REVALIDATE_SECONDS = 24 * 60 * 60;
+
 export interface HistoryTable {
   headers: string[];
   rows: string[][];
@@ -214,7 +216,7 @@ export function parseHistoryMarkdown(markdown: string): HistoryData {
 }
 
 export async function getHistoryData(): Promise<HistoryData> {
-  const response = await fetch(exportUrl(), { next: { revalidate: 86400 } });
+  const response = await fetch(exportUrl(), { next: { revalidate: HISTORY_REVALIDATE_SECONDS } });
   if (!response.ok) throw new Error(`History source returned ${response.status}`);
   return parseHistoryMarkdown(await response.text());
 }

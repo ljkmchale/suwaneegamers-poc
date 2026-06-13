@@ -1,6 +1,6 @@
 import fs from "fs";
 import { contentPath } from "@/lib/contentFiles";
-import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
+import { getAutoManagedPages, getEffectiveDocExportUrl, googleDocExportUrl } from "@/lib/autoManagedPagesData";
 import type { BlockItem } from "@/lib/pageBlocks";
 
 export interface PantheonDeity {
@@ -81,7 +81,7 @@ export function getPantheonSourceUrl(): string {
 }
 
 export function getPantheonExportUrl(): string {
-  return googleDocExportUrl(getPantheonSourceUrl(), "md") ?? googleDocExportUrl(FALLBACK_SOURCE_URL, "md")!;
+  return getEffectiveDocExportUrl("/pantheon", "md") ?? googleDocExportUrl(FALLBACK_SOURCE_URL, "md")!;
 }
 
 function extractNewOrderTable(markdown: string): PantheonDeity[] {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import {
   type CalendarEvent,
   fetchRecentCalendarEvents,
@@ -15,7 +14,9 @@ import {
   listedCampaigns,
   normalizeCampaignTitle,
 } from "@/lib/campaigns";
-import { SessionRecordingPlayer } from "./SessionRecordingPlayer";
+import { AdventureFoldCard } from "./AdventureFoldCard";
+import { LogoLightning } from "./LogoLightning";
+import { RunicBackground } from "./RunicBackground";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -92,8 +93,8 @@ interface LatestAdventure {
   sessionTitle: string;
   sessionDate: string;
   sortDate: number;
+  summary?: string;
   audioUrl?: string;
-  notesUrl?: string;
 }
 
 function splitSessionTitle(title: string): { number?: number; text: string } {
@@ -141,8 +142,8 @@ function latestAdventures(pastEvents: CalendarEvent[], limit = 8): LatestAdventu
         sessionTitle: text,
         sessionDate: date,
         sortDate: sessionSortDate(date),
+        summary: note.summary,
         audioUrl: note.audioLinks?.[0]?.url,
-        notesUrl: campaign.playerNotesUrl,
       });
     });
   }
@@ -157,7 +158,7 @@ export default async function CalendarPage() {
   const campaigns = getActiveCampaigns();
 
   try {
-    events = await fetchUpcomingCalendarEvents();
+    events = await fetchUpcomingCalendarEvents(6);
   } catch {
     feedError = true;
   }
@@ -168,55 +169,83 @@ export default async function CalendarPage() {
     // Latest adventures still render from stored session dates.
   }
 
-  const adventures = latestAdventures(pastEvents);
+  const adventures = latestAdventures(pastEvents, 6);
 
   return (
-    <div
-      className="art-bg-silver relative min-h-screen overflow-hidden bg-[#07101d]"
-      style={{
-        backgroundAttachment: "fixed",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/45" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(8,5,15,0.78) 0%, rgba(8,5,15,0.38) 36%, rgba(8,5,15,0.92) 100%)",
-        }}
-      />
+    <div className="relative min-h-screen">
+      <RunicBackground />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20">
-        <header className="mb-10 text-center">
-          <h1 className="font-cinzel mb-4 text-4xl uppercase tracking-widest shimmer-text">
-            Events
+      <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-20">
+        <header className="mb-14 flex flex-col items-center text-center">
+          <LogoLightning
+            src="/images/suwaneegamers-logo-v18-4800p.png"
+            alt="Suwanee Gamers"
+            width={220}
+            height={220}
+            className="mb-6 drop-shadow-[0_0_32px_rgba(139,92,246,0.35)]"
+            priority
+          />
+          <h1 className="font-cinzel mb-4 text-5xl uppercase tracking-widest shimmer-text">
+            Suwanee Gamers
           </h1>
           <p
-            className="mx-auto max-w-2xl"
+            className="max-w-2xl text-base italic leading-relaxed"
             style={{
-              color: "#f3ead7",
-              textShadow: "0 2px 18px rgba(0,0,0,0.75)",
+              color: "var(--color-text-secondary)",
+              textShadow: "0 2px 12px rgba(0,0,0,0.6)",
             }}
           >
-            Shared Suwanee Gamers schedule.
+            &ldquo;Many campaigns. Five Dungeon Masters. One living world. Welcome to Myrdae in the era of The Awakening — where the old gods have gone silent and the world holds its breath while welcoming the new gods.&rdquo;
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr_3fr]">
           <section>
-            <div className="mb-5">
-              <p
-                className="font-cinzel text-xs uppercase tracking-[0.35em]"
-                style={{ color: "var(--color-accent-arcane)" }}
+            <div className="mb-5 flex items-end justify-between gap-3">
+              <div>
+                <p
+                  className="font-cinzel text-xs uppercase tracking-[0.35em]"
+                  style={{ color: "var(--color-accent-arcane)" }}
+                >
+                  Live Schedule
+                </p>
+                <h2
+                  className="font-cinzel mt-1 text-2xl"
+                  style={{ color: "var(--color-accent-gold)" }}
+                >
+                  Upcoming Adventures
+                </h2>
+              </div>
+              <a
+                href={googleCalendarEmbedUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Open the full Google Calendar"
+                aria-label="Open the full Google Calendar"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-colors hover:opacity-80"
+                style={{
+                  borderColor: "rgba(245,158,11,.34)",
+                  background: "rgba(245,158,11,.08)",
+                  color: "var(--color-accent-gold)",
+                }}
               >
-                Live Schedule
-              </p>
-              <h2
-                className="font-cinzel mt-1 text-2xl"
-                style={{ color: "var(--color-accent-gold)" }}
-              >
-                Upcoming Adventures
-              </h2>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </a>
             </div>
 
             {feedError && (
@@ -352,51 +381,19 @@ export default async function CalendarPage() {
             className="lg:border-l lg:pl-10"
             style={{ borderColor: "var(--color-bg-border)" }}
           >
-            <div className="mb-5 flex items-end justify-between gap-3">
-              <div>
-                <p
-                  className="font-cinzel text-xs uppercase tracking-[0.35em]"
-                  style={{ color: "var(--color-accent-arcane)" }}
-                >
-                  Session Notes
-                </p>
-                <h2
-                  className="font-cinzel mt-1 text-2xl"
-                  style={{ color: "var(--color-accent-gold)" }}
-                >
-                  Previous Adventures
-                </h2>
-              </div>
-              <a
-                href={googleCalendarEmbedUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Open the full Google Calendar"
-                aria-label="Open the full Google Calendar"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-colors hover:opacity-80"
-                style={{
-                  borderColor: "rgba(245,158,11,.34)",
-                  background: "rgba(245,158,11,.08)",
-                  color: "var(--color-accent-gold)",
-                }}
+            <div className="mb-5">
+              <p
+                className="font-cinzel text-xs uppercase tracking-[0.35em]"
+                style={{ color: "var(--color-accent-arcane)" }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-              </a>
+                Session Notes
+              </p>
+              <h2
+                className="font-cinzel mt-1 text-2xl"
+                style={{ color: "var(--color-accent-gold)" }}
+              >
+                Previous Adventures
+              </h2>
             </div>
 
             {adventures.length === 0 && (
@@ -407,109 +404,18 @@ export default async function CalendarPage() {
 
             <div className="grid gap-4">
               {adventures.map((adventure) => (
-                <article
+                <AdventureFoldCard
                   key={adventure.key}
-                  className={
-                    adventure.headerImage
-                      ? "relative grid overflow-hidden rounded-lg border sm:grid-cols-[13rem_1fr]"
-                      : "relative rounded-lg border p-4"
-                  }
-                  style={{
-                    borderColor: "var(--color-bg-border)",
-                    background:
-                      "linear-gradient(135deg, rgba(15,10,26,.82), rgba(8,5,15,.72))",
-                    boxShadow: "0 14px 38px rgba(0,0,0,.28)",
-                  }}
-                >
-                  {adventure.headerImage && (
-                    <Link
-                      href={`/campaigns/${adventure.campaignId}`}
-                      className="relative block min-h-28 sm:min-h-full"
-                      aria-label={`${adventure.campaignName} campaign page`}
-                    >
-                      <Image
-                        src={adventure.headerImage}
-                        alt={`${adventure.campaignName} campaign art`}
-                        fill
-                        sizes="(min-width: 640px) 13rem, 100vw"
-                        className="object-cover"
-                        style={{ objectPosition: adventure.headerImagePosition ?? "center" }}
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(8,5,15,.04), rgba(8,5,15,.34))",
-                        }}
-                      />
-                    </Link>
-                  )}
-
-                  <div className="flex min-w-0 items-center justify-between gap-4 p-5">
-                    <div className="min-w-0">
-                      <p
-                        className="font-cinzel mb-2 text-xs uppercase tracking-[0.24em]"
-                        style={{ color: "var(--color-accent-arcane)" }}
-                      >
-                        {formatSessionDate(adventure.sessionDate)}
-                        {adventure.sessionNumber !== undefined && (
-                          <> - Session {adventure.sessionNumber}</>
-                        )}
-                      </p>
-                      <h3
-                        className="font-cinzel text-lg leading-snug"
-                        style={{ color: "var(--color-text-primary)" }}
-                      >
-                        <Link
-                          href={`/campaigns/${adventure.campaignId}`}
-                          className="hover:underline"
-                        >
-                          {adventure.campaignName}
-                        </Link>
-                        <span
-                          className="mt-1 block text-sm"
-                          style={{ color: "var(--color-accent-gold)" }}
-                        >
-                          - {adventure.sessionTitle}
-                        </span>
-                      </h3>
-                    </div>
-
-                    <div className="flex shrink-0 items-center gap-3">
-                      {adventure.audioUrl && (
-                        <SessionRecordingPlayer url={adventure.audioUrl} />
-                      )}
-                      {adventure.notesUrl && (
-                        <a
-                          href={adventure.notesUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title="Read the full session notes"
-                          aria-label="Read the full session notes"
-                          className="transition-colors hover:opacity-80"
-                          style={{ color: "var(--color-text-muted)" }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-6 w-6"
-                            aria-hidden="true"
-                          >
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line x1="16" y1="13" x2="8" y2="13" />
-                            <line x1="16" y1="17" x2="8" y2="17" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
+                  campaignId={adventure.campaignId}
+                  campaignName={adventure.campaignName}
+                  headerImage={adventure.headerImage}
+                  headerImagePosition={adventure.headerImagePosition}
+                  dateLabel={formatSessionDate(adventure.sessionDate)}
+                  sessionNumber={adventure.sessionNumber}
+                  sessionTitle={adventure.sessionTitle}
+                  summary={adventure.summary}
+                  audioUrl={adventure.audioUrl}
+                />
               ))}
             </div>
           </section>

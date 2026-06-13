@@ -65,6 +65,22 @@ export function googleDocExportUrl(
   return `https://docs.google.com/document/d/${match[1]}/export?format=${format}`;
 }
 
+/**
+ * Returns the first resolvable Google Doc export URL for the given page path,
+ * trying sourceUrl first, then fallbackSourceUrl.
+ */
+export function getEffectiveDocExportUrl(
+  path: string,
+  format: "html" | "txt" | "md" = "html",
+): string | null {
+  const page = safeRead().find((p) => p.path === path);
+  if (!page) return null;
+  return (
+    (page.sourceUrl ? googleDocExportUrl(page.sourceUrl, format) : null) ??
+    (page.fallbackSourceUrl ? googleDocExportUrl(page.fallbackSourceUrl, format) : null)
+  );
+}
+
 export function setPageSourceUrl(path: string, url: string): void {
   writeContent(
     FILE,

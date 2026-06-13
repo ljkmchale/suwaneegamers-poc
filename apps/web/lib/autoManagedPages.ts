@@ -10,8 +10,10 @@ export interface AutoManagedPage {
   path: string;
   label: string;
   sourceName: string;
-  /** URL of the source document (e.g. a Google Doc share link). */
+  /** Primary source URL (e.g. a Google Drive folder or Doc share link). */
   sourceUrl?: string;
+  /** Legacy/fallback source URL used when sourceUrl is unavailable or not yet a parseable Google Doc. */
+  fallbackSourceUrl?: string;
   refreshLabel: string;
   editNote: string;
 }

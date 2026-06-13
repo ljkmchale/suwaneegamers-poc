@@ -26,10 +26,11 @@
   {
     "path": "/organizations",
     "label": "Organizations",
-    "sourceName": "Google Docs",
-    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-    "refreshLabel": "Synced from the campaign setting Google Doc by the scheduled lore sync.",
-    "editNote": "Update organizations in the campaign setting doc — run the lore sync to apply changes."
+    "sourceName": "Google Drive",
+    "sourceUrl": "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Synced from the Organizations Google Drive folder.",
+    "editNote": "Add or update organization docs in the Organizations Drive folder. Fallback: campaign setting Google Doc."
   },
   {
     "path": "/territories",
@@ -50,10 +51,11 @@
   {
     "path": "/pantheon",
     "label": "Pantheon",
-    "sourceName": "Google Docs",
-    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-    "refreshLabel": "Deity cards and expanded details refresh from the campaign setting Google Doc about once per day.",
-    "editNote": "Update the Deities of the New Order section in the campaign setting doc to change these cards."
+    "sourceName": "Google Drive",
+    "sourceUrl": "https://drive.google.com/drive/folders/14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Deity cards and expanded details refresh from the Pantheon Google Drive folder.",
+    "editNote": "Add or update deity docs in the Pantheon Drive folder. Fallback: campaign setting Google Doc."
   },
   {
     "path": "/maps-of-myrdae",
@@ -74,10 +76,35 @@
   {
     "path": "/gazetteer",
     "label": "Gazetteer",
+    "sourceName": "Google Drive",
+    "sourceUrl": "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "refreshLabel": "Settlement cards are generated from the Gazetteer Google Drive folder.",
+    "editNote": "Add or update settlement docs in the Gazetteer Drive folder. Fallback: campaign setting Google Doc."
+  },
+  {
+    "path": "/campaigns",
+    "label": "Session Summaries",
     "sourceName": "Google Docs",
-    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-    "refreshLabel": "Settlement cards are generated from linked entries in the campaign setting Google Doc and refresh at least once per day.",
-    "editNote": "Add or remove Gazetteer links in the Settlements table of the campaign setting Google Doc to update these cards."
+    "sourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "refreshLabel": "Session summaries sync daily from the Session Summaries Google Doc.",
+    "editNote": "Update the Session Summaries Google Doc — run the session notes sync to apply changes. Fallback: individual campaign referenceUrls in campaigns.json."
+  },
+  {
+    "path": "/reference-for-dungeon-masters",
+    "label": "Guides",
+    "sourceName": "Google Drive",
+    "sourceUrl": "https://drive.google.com/drive/folders/198sTv45Mur0RuvA6Ma8DPv-f9NIC0QCk",
+    "refreshLabel": "Guide content will be pulled from the Guides Google Drive folder.",
+    "editNote": "Add or update guide docs in the Guides Drive folder. Migration from static content is pending."
+  },
+  {
+    "path": "/_assets",
+    "label": "Site Assets",
+    "sourceName": "Google Drive",
+    "sourceUrl": "https://drive.google.com/drive/folders/17CpsNf2LhbUwGs0asOuSXyUjZU9HbwZK",
+    "refreshLabel": "Site artwork and images are sourced from the Site Assets Google Drive folder.",
+    "editNote": "Upload new images to the Site Assets Drive folder. Migration of image references is pending."
   },
   {
     "path": "/crit_tables",

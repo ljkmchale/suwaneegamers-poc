@@ -2,6 +2,10 @@ import fs from "fs";
 import path from "path";
 
 export function contentDir() {
+  if (process.env.SUWANEE_CONTENT_DIR) {
+    return process.env.SUWANEE_CONTENT_DIR;
+  }
+
   const candidates = [
     path.join(/*turbopackIgnore: true*/ process.cwd(), "content"),
     path.join(/*turbopackIgnore: true*/ process.cwd(), "../../content"),

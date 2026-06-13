@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
+import { getEffectiveDocExportUrl } from "@/lib/autoManagedPagesData";
 
 export const metadata: Metadata = {
   title: "Gazetteer",
@@ -56,11 +56,7 @@ const SUPPLEMENTAL_DOCUMENTED_ENTRIES: GazetteerEntry[] = [
 ];
 
 function getGazetteerExportUrl() {
-  const pages = getAutoManagedPages();
-  const entry =
-    pages.find((page) => page.path === "/gazetteer") ??
-    pages.find((page) => page.path === "/campaign-setting");
-  return entry?.sourceUrl ? googleDocExportUrl(entry.sourceUrl, "md") : null;
+  return getEffectiveDocExportUrl("/gazetteer", "md") ?? getEffectiveDocExportUrl("/campaign-setting", "md");
 }
 
 function decodeEntities(value: string) {

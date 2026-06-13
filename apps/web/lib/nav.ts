@@ -23,7 +23,6 @@ const DEFAULT_CONFIG: NavConfig = {
       id: "primary",
       label: "Primary Navigation",
       items: [
-        { id: "calendar", href: "/calendar", label: "Calendar" },
         { id: "campaigns", href: "/campaigns", label: "Campaigns" },
         { id: "chronicles", href: "https://kb.suwaneegamers.net/", label: "Chronicles" },
         { id: "dungeon-masters", href: "/dungeon-masters", label: "DMs" },

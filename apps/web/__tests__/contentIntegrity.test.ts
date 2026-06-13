@@ -169,7 +169,7 @@ const KNOWN_INTERNAL_ROUTES = new Set([
 // Nav placeholders for pages that haven't been built yet. These currently
 // 404 — when one gets a real page (app route or custom page), remove it here.
 const PLANNED_NAV_ROUTES = new Set([
-  "/guides", "/adventures", "/crit_tables", "/ourstory", "/supportourgamers",
+  "/guides", "/adventures", "/links", "/ourstory", "/supportourgamers",
 ]);
 
 describe("Nav internal hrefs → known routes", () => {
