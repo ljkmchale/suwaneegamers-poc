@@ -361,7 +361,7 @@ export default async function CalendarPage() {
                         className="font-cinzel text-lg leading-snug"
                         style={{ color: "var(--color-text-primary)" }}
                       >
-                        {showCampaignLabel ? campaign.name : event.title}
+                        {campaign?.name ?? event.title}
                         {campaign?.dm && (
                           <span
                             className="ml-2 inline-block text-sm"
