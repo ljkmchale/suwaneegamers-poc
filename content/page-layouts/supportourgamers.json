@@ -1,0 +1,36 @@
+[
+  {
+    "kind": "block",
+    "id": "supporting-gamers-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "About",
+      "title": "Supporting Our Gamers",
+      "description": "Community projects, creator shops, and table resources from Suwanee Gamers.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "supporting-gamers-grid",
+    "type": "card-grid",
+    "props": {
+      "columns": "3",
+      "gap": "lg"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "supporting-gamers-michael-hewson-etsy",
+    "type": "card",
+    "props": {
+      "image": "/images/references-sourcebooks/tool-minis-hewson-can-print.webp",
+      "imageAlt": "RPG Mini 3D Print Paint artwork",
+      "eyebrow": "Player Creator",
+      "title": "Michael Hewson's RPGMini3dPrintPaint",
+      "description": "Michael Hewson's Etsy shop for 3D printed and painted RPG miniatures.",
+      "href": "http://rpgmini3dprintpaint.etsy.com",
+      "linkLabel": "Visit Etsy Shop"
+    }
+  }
+]

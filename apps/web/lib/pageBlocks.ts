@@ -1075,7 +1075,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       { key: "description", label: "Campaign summary", type: "textarea", placeholder: "Archive summary" },
       { key: "referenceUrl", label: "Detail link", type: "url", placeholder: "https://..." },
       { key: "resources", label: "Resource links", type: "json", hint: 'Each item: { "label": "", "url": "" }' },
-      { key: "party", label: "Roster", type: "json", hint: 'Each item: { "name": "", "player": "", "links": [{ "label": "Character Sheet", "type": "sheet", "url": "" }, { "label": "Background", "type": "background", "url": "" }] }' },
+      { key: "party", label: "Roster", type: "json", hint: 'Each item: { "name": "", "player": "", "links": [{ "label": "Background Sheet", "type": "background", "url": "" }] }' },
       { key: "sections", label: "Archive detail sections", type: "json", hint: 'Each item: { "title": "", "content": "", "entries": [] }' },
     ],
   },

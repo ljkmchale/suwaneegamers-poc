@@ -21,8 +21,8 @@ function partyLinks(member: CampaignPartyMember) {
   const links = [...(member.links ?? [])];
   if (member.url && !links.some((link) => link.url === member.url)) {
     links.unshift({
-      label: "Character Sheet",
-      type: "sheet" as const,
+      label: "Background Sheet",
+      type: "background" as const,
       url: member.url,
     });
   }
@@ -84,6 +84,7 @@ export function buildCampaignSessionsCard(campaign: PortalCampaign): PageItem | 
           title: session.title,
           color: "gold",
           size: "md",
+          audioLinks: cardLayoutItems(session.audioLinks ?? []),
           col: "1",
           row: String(row),
           colSpan: "1",
@@ -103,26 +104,6 @@ export function buildCampaignSessionsCard(campaign: PortalCampaign): PageItem | 
       },
     );
     row += 2;
-
-    for (const [recordingIndex, recording] of (session.audioLinks ?? []).entries()) {
-      sessionItems.push({
-        id: `${sessionSlug}_recording_${recordingIndex + 1}`,
-        type: "media-player",
-        props: {
-          title: recording.label,
-          src: recording.url,
-          mediaType: "auto",
-          displayMode: "image-button",
-          image: "/images/dragon-ears.png",
-          caption: "",
-          col: "1",
-          row: String(row),
-          colSpan: "1",
-          rowSpan: "2",
-        },
-      });
-      row += 2;
-    }
   }
 
   return layoutCard(`${campaign.id}-sessions-card`, [
@@ -183,7 +164,7 @@ export function buildCampaignDetailLayout(campaign: PortalCampaign): PageItem[] 
       props: {
         name: member.name,
         role: member.player ?? "",
-        href: partyLinks(member).find((link) => link.type === "sheet")?.url ?? "",
+        href: partyLinks(member).find((link) => link.type === "background")?.url ?? "",
         links: cardLayoutItems(partyLinks(member)),
         variant: "tile",
         col: String((index % 3) + 1),

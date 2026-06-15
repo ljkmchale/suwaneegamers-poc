@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useTransition, useMemo } from "react";
+import type { CSSProperties } from "react";
 import { saveAppearanceAction, resetAppearanceAction } from "./actions";
 import type { Theme } from "@/lib/theme";
+import { COLOR_KEYS, DEFAULT_THEME, SURFACE_KEYS } from "./themeConfig";
 
 // ── Fonts ─────────────────────────────────────────────────────────────────────
 
@@ -327,6 +329,140 @@ function ColorRow({ colorKey, label, value, onChange }: {
 
 // ── Tabs ───────────────────────────────────────────────────────────────────────
 
+function previewGlow(intensity: "none" | "subtle" | "normal" | "strong", accent: string) {
+  switch (intensity) {
+    case "none":
+      return "none";
+    case "subtle":
+      return `0 0 18px ${accent}33`;
+    case "strong":
+      return `0 0 28px ${accent}80, 0 0 72px ${accent}33`;
+    case "normal":
+    default:
+      return `0 0 22px ${accent}66, 0 0 54px ${accent}26`;
+  }
+}
+
+function AppearancePreview({
+  colors,
+  surfaces,
+  glowIntensity,
+  fonts,
+  siteName,
+  siteTagline,
+}: {
+  colors: Record<string, string>;
+  surfaces: Record<string, string>;
+  glowIntensity: "none" | "subtle" | "normal" | "strong";
+  fonts: { heading: string; body: string };
+  siteName: string;
+  siteTagline: string;
+}) {
+  const arcane = colors["--color-accent-arcane"] ?? DEFAULT_THEME.colors["--color-accent-arcane"];
+  const gold = colors["--color-accent-gold"] ?? DEFAULT_THEME.colors["--color-accent-gold"];
+  const previewStyle = {
+    ...colors,
+    ...surfaces,
+    "--preview-heading-font": `var(${FONT_VAR_MAP[fonts.heading] ?? "--font-cinzel"})`,
+    "--preview-body-font": `var(${FONT_VAR_MAP[fonts.body] ?? "--font-lora"})`,
+    "--preview-glow": previewGlow(glowIntensity, arcane),
+  } as CSSProperties;
+
+  return (
+    <section className="mb-8 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-4">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <h2 className="font-cinzel text-xs uppercase tracking-[0.3em] text-[#f59e0b]">Preview</h2>
+        <span className="rounded border border-[#2a2a35] px-2 py-1 text-[10px] font-cinzel uppercase tracking-widest text-[#5a5060]">
+          Unsaved
+        </span>
+      </div>
+      <div
+        className="overflow-hidden rounded-md border p-5 transition-colors"
+        style={{
+          ...previewStyle,
+          background: "var(--color-bg-deep)",
+          borderColor: "var(--color-bg-border)",
+          color: "var(--color-text-primary)",
+          fontFamily: "var(--preview-body-font), Georgia, serif",
+        }}
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3" style={{ borderColor: "var(--color-bg-border)" }}>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.35em]" style={{ color: "var(--color-accent-arcane)", fontFamily: "var(--preview-heading-font), serif" }}>
+              {siteTagline || "The World of Myrdae"}
+            </p>
+            <h3 className="mt-1 text-2xl uppercase tracking-widest" style={{ color: "var(--color-text-primary)", fontFamily: "var(--preview-heading-font), serif" }}>
+              {siteName || "Suwanee Gamers"}
+            </h3>
+          </div>
+          <div className="flex gap-2">
+            {[arcane, gold, colors["--color-accent-ice"], colors["--color-accent-blood"]].map((color) => (
+              <span key={color} className="h-5 w-5 rounded-full border border-white/10" style={{ background: color }} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.8fr]">
+          <article
+            className="border p-4"
+            style={{
+              background: "color-mix(in srgb, var(--color-bg-card) 92%, transparent)",
+              borderColor: "var(--card-hover-border)",
+              borderRadius: "var(--card-radius)",
+              boxShadow: "var(--preview-glow)",
+              backdropFilter: `blur(${surfaces["--card-blur"] ?? "8px"})`,
+            }}
+          >
+            <p className="text-[10px] uppercase tracking-[0.3em]" style={{ color: "var(--color-accent-arcane)", fontFamily: "var(--preview-heading-font), serif" }}>
+              Campaign Feature
+            </p>
+            <h4 className="mt-2 text-xl leading-tight" style={{ color: "var(--color-accent-gold)", fontFamily: "var(--preview-heading-font), serif" }}>
+              The Silent Vanguard
+            </h4>
+            <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              A band of heroes follows old clues through bright halls, broken keeps, and the long shadow of Myrdae.
+            </p>
+            <button
+              type="button"
+              className="mt-4 rounded border px-3 py-2 text-xs uppercase tracking-widest"
+              style={{
+                borderColor: "var(--color-accent-arcane)",
+                color: "var(--color-text-primary)",
+                fontFamily: "var(--preview-heading-font), serif",
+              }}
+            >
+              View Campaign
+            </button>
+          </article>
+
+          <div className="space-y-3">
+            {["Primary text", "Secondary text", "Muted text"].map((label, index) => {
+              const textColor = index === 0
+                ? "var(--color-text-primary)"
+                : index === 1
+                ? "var(--color-text-secondary)"
+                : "var(--color-text-muted)";
+              return (
+                <div
+                  key={label}
+                  className="rounded border px-3 py-2 text-sm"
+                  style={{
+                    background: "var(--color-bg-surface)",
+                    borderColor: "var(--color-bg-border)",
+                    color: textColor,
+                  }}
+                >
+                  {label}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const TABS = [
   { id: "presets", label: "Presets" },
   { id: "identity", label: "Identity & Fonts" },
@@ -341,12 +477,8 @@ type TabId = (typeof TABS)[number]["id"];
 
 export function AppearanceEditor({ initial }: { initial: Theme }) {
   const [tab, setTab] = useState<TabId>("presets");
-  const [colors, setColors] = useState(initial.colors);
-  const [surfaces, setSurfaces] = useState(initial.surfaces ?? {
-    "--card-radius": "0.75rem",
-    "--card-blur": "8px",
-    "--card-hover-border": "#8b5cf6",
-  });
+  const [colors, setColors] = useState({ ...DEFAULT_THEME.colors, ...initial.colors });
+  const [surfaces, setSurfaces] = useState({ ...DEFAULT_THEME.surfaces, ...(initial.surfaces ?? {}) });
   const [glowIntensity, setGlowIntensity] = useState(initial.glowIntensity ?? "normal");
   const [fonts, setFonts] = useState(initial.fonts);
   const [siteName, setSiteName] = useState(initial.siteName ?? "Suwanee Gamers");
@@ -385,9 +517,16 @@ export function AppearanceEditor({ initial }: { initial: Theme }) {
     fd.set("particles", String(particles));
     fd.set("particleDensity", particleDensity);
     fd.set("glowIntensity", glowIntensity);
-    fd.set("--card-radius", surfaces["--card-radius"] ?? "0.75rem");
-    fd.set("--card-blur", surfaces["--card-blur"] ?? "8px");
-    fd.set("--card-hover-border", surfaces["--card-hover-border"] ?? "#8b5cf6");
+    fd.set("fontHeading", fonts.heading);
+    fd.set("fontBody", fonts.body);
+    fd.set("siteName", siteName);
+    fd.set("siteTagline", siteTagline);
+    for (const key of COLOR_KEYS) {
+      fd.set(key, colors[key] ?? DEFAULT_THEME.colors[key] ?? "#000000");
+    }
+    for (const key of SURFACE_KEYS) {
+      fd.set(key, surfaces[key] ?? DEFAULT_THEME.surfaces?.[key] ?? "");
+    }
     startTransition(async () => {
       await saveAppearanceAction(fd);
       setSaved(true);
@@ -431,6 +570,15 @@ export function AppearanceEditor({ initial }: { initial: Theme }) {
       </div>
 
       {/* ── Tab: Presets ─────────────────────────────────────────────────── */}
+      <AppearancePreview
+        colors={colors}
+        surfaces={surfaces}
+        glowIntensity={glowIntensity}
+        fonts={fonts}
+        siteName={siteName}
+        siteTagline={siteTagline}
+      />
+
       {tab === "presets" && (
         <div className="space-y-4">
           <p className="text-sm text-[#a89880] mb-6">
@@ -511,7 +659,7 @@ export function AppearanceEditor({ initial }: { initial: Theme }) {
             })}
           </div>
           <p className="text-xs text-[#5a5060] pt-2">
-            Clicking a preset updates the form — hit <strong className="text-[#a89880]">Save Appearance</strong> at the bottom to apply it to the live site.
+            Clicking a preset updates the preview first. Hit <strong className="text-[#a89880]">Save Appearance</strong> at the bottom to apply it to the live site.
           </p>
         </div>
       )}

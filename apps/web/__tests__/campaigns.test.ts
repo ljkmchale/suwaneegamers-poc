@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   activeCampaigns,
   findCampaign,
@@ -12,6 +12,7 @@ import {
 } from "@/lib/campaigns";
 import type { CalendarEvent } from "@/lib/calendar";
 import {
+  fetchSessionSummariesForCampaign,
   parseSessionSummariesDocumentHtml,
   SESSION_SUMMARIES_REVALIDATE_SECONDS,
 } from "@/lib/sessionSummaries";
@@ -19,6 +20,11 @@ import {
   applyCampaignTrackingToActiveCampaigns,
   parseCampaignTrackingText,
 } from "@/lib/campaignTracking";
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
 
 // ── Data shape ────────────────────────────────────────────────────────────────
 
@@ -62,7 +68,7 @@ describe("activeCampaigns resources", () => {
 });
 
 describe("activeCampaigns party links", () => {
-  it("uses typed Google Docs links for character sheets and backgrounds", () => {
+  it("uses typed Google Docs links for character backgrounds and sheets", () => {
     const validTypes = new Set(["sheet", "background", "other"]);
 
     for (const campaign of activeCampaigns) {
@@ -72,6 +78,17 @@ describe("activeCampaigns party links", () => {
           expect(validTypes.has(link.type)).toBe(true);
           expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
           expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
+        }
+      }
+    }
+  });
+
+  it("labels the campaign character Google Docs as background sheets", () => {
+    for (const campaign of activeCampaigns) {
+      for (const member of campaign.party ?? []) {
+        for (const link of member.links ?? []) {
+          expect(link.label).toBe("Background Sheet");
+          expect(link.type).toBe("background");
         }
       }
     }
@@ -474,6 +491,45 @@ describe("parseSessionSummariesDocumentHtml", () => {
 
   it("refreshes the Session Summaries document cache every 24 hours", () => {
     expect(SESSION_SUMMARIES_REVALIDATE_SECONDS).toBe(86400);
+  });
+
+  it("keeps stored recording links when refreshed summaries omit audio anchors", async () => {
+    const campaign: PortalCampaign = {
+      id: "a-new-adventure",
+      name: "A New Adventure",
+      dm: "Chip Poole",
+      schedule: "Monthly",
+      description: "",
+      sessionSummaries: [
+        {
+          title: "Session 28 - Caelora has Issues!",
+          summary: "Stored summary",
+          audioLinks: [
+            {
+              label: "Session 28 Recording",
+              url: "https://drive.google.com/file/d/audio-28/view?usp=sharing",
+            },
+          ],
+        },
+      ],
+    };
+
+    vi.stubGlobal("fetch", vi.fn(async () => ({
+      ok: true,
+      text: async () => `
+        <h1><span>A New Adventure</span></h1>
+        <h2><span>Session 28 - Caelora has Issues!</span></h2>
+        <p><span>Refreshed summary without a recording link.</span></p>
+      `,
+    })));
+
+    await expect(fetchSessionSummariesForCampaign(campaign)).resolves.toEqual([
+      expect.objectContaining({
+        title: "Session 28 - Caelora has Issues!",
+        summary: "Refreshed summary without a recording link.",
+        audioLinks: campaign.sessionSummaries?.[0]?.audioLinks,
+      }),
+    ]);
   });
 });
 

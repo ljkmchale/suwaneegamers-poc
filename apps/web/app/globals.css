@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@layer utilities {
+  .font-cinzel {
+    font-family: var(--font-heading), var(--font-cinzel), serif;
+  }
+
+  .font-lora {
+    font-family: var(--font-body), var(--font-lora), Georgia, serif;
+  }
+}
+
 /* ── Fantasy Design Tokens ─────────────────────────────── */
 
 :root {
@@ -42,7 +52,7 @@ html {
 body {
   background-color: var(--color-bg-deep);
   color: var(--color-text-primary);
-  font-family: var(--font-lora), Georgia, serif;
+  font-family: var(--font-body), var(--font-lora), Georgia, serif;
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -108,7 +118,7 @@ body {
 .prose-fantasy h1,
 .prose-fantasy h2,
 .prose-fantasy h3 {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-heading), var(--font-cinzel), serif;
   color: var(--color-accent-gold);
   letter-spacing: 0.05em;
 }

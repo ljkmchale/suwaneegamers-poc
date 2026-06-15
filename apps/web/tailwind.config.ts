@@ -57,8 +57,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        cinzel: ["var(--font-cinzel)", "serif"],
-        lora: ["var(--font-lora)", "serif"],
+        cinzel: ["var(--font-heading)", "var(--font-cinzel)", "serif"],
+        lora: ["var(--font-body)", "var(--font-lora)", "serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
       backgroundImage: {

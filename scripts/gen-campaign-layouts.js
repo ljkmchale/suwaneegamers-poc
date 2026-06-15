@@ -130,7 +130,7 @@ function makeSessionsCard(campaignId, sessionSummaries) {
     items.push({
       id: `${sessionSlug}_title`,
       type: "header",
-      props: { title: session.title, color: "gold", size: "md", col: "1", row: String(currentRow), colSpan: "1", rowSpan: "1" },
+      props: { title: session.title, color: "gold", size: "md", audioLinks: JSON.stringify(session.audioLinks ?? []), col: "1", row: String(currentRow), colSpan: "1", rowSpan: "1" },
     });
     currentRow++;
 
@@ -140,17 +140,6 @@ function makeSessionsCard(campaignId, sessionSummaries) {
       props: { content: session.summary, col: "1", row: String(currentRow), colSpan: "1", rowSpan: "1" },
     });
     currentRow++;
-
-    if (session.audioLinks && session.audioLinks.length > 0) {
-      session.audioLinks.forEach((audio, ai) => {
-        items.push({
-          id: `${sessionSlug}_recording_${ai + 1}`,
-          type: "media-player",
-          props: { title: audio.label, src: audio.url, mediaType: "auto", displayMode: "image-button", image: "/images/dragon-ears.png", caption: "", col: "1", row: String(currentRow), colSpan: "1", rowSpan: "2" },
-        });
-        currentRow += 2;
-      });
-    }
   });
 
   const grid = {

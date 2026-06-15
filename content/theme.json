@@ -17,15 +17,15 @@
     "--card-blur": "8px",
     "--card-hover-border": "#8b5cf6"
   },
-  "glowIntensity": "normal",
-  "effects": {
-    "particles": true,
-    "particleDensity": "medium"
-  },
   "fonts": {
     "heading": "Cinzel",
     "body": "Lora"
   },
   "siteName": "Suwanee Gamers",
-  "siteTagline": "The World of Myrdae"
+  "siteTagline": "The World of Myrdae",
+  "glowIntensity": "normal",
+  "effects": {
+    "particles": true,
+    "particleDensity": "medium"
+  }
 }

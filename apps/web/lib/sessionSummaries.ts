@@ -86,16 +86,20 @@ function sessionKey(title: string): string {
   return `t:${title.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()}`;
 }
 
-function preserveStoredSessionDates(
+function preserveStoredSessionFields(
   parsed: CampaignSessionSummary[],
   stored: CampaignSessionSummary[] = [],
 ) {
   const storedByKey = new Map(stored.map((note) => [sessionKey(note.title), note]));
 
-  return parsed.map((note) => ({
-    ...note,
-    sessionDate: storedByKey.get(sessionKey(note.title))?.sessionDate,
-  }));
+  return parsed.map((note) => {
+    const storedNote = storedByKey.get(sessionKey(note.title));
+    return {
+      ...note,
+      audioLinks: note.audioLinks?.length ? note.audioLinks : storedNote?.audioLinks,
+      sessionDate: storedNote?.sessionDate,
+    };
+  });
 }
 
 export function parseSessionSummariesDocumentHtml(
@@ -186,7 +190,7 @@ export async function getCampaignsWithDocumentSessionSummaries(
     return campaigns.map((campaign) => ({
       ...campaign,
       sessionSummaries: summariesByCampaign[campaign.id]
-        ? preserveStoredSessionDates(summariesByCampaign[campaign.id], campaign.sessionSummaries)
+        ? preserveStoredSessionFields(summariesByCampaign[campaign.id], campaign.sessionSummaries)
         : campaign.sessionSummaries,
     }));
   } catch {
@@ -200,7 +204,7 @@ export async function fetchSessionSummariesForCampaign(
   try {
     const summariesByCampaign = await fetchSessionSummariesByCampaign(getActiveCampaigns());
     return summariesByCampaign[campaign.id]
-      ? preserveStoredSessionDates(summariesByCampaign[campaign.id], campaign.sessionSummaries)
+      ? preserveStoredSessionFields(summariesByCampaign[campaign.id], campaign.sessionSummaries)
       : campaign.sessionSummaries ?? [];
   } catch {
     return campaign.sessionSummaries ?? [];

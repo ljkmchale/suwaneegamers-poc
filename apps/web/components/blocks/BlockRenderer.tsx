@@ -39,6 +39,36 @@ function parseLinks(raw: unknown): CampaignPartyLinkData[] {
   return parseJsonArray<CampaignPartyLinkData>(raw).filter((link) => link.label && link.url);
 }
 
+function parseAudioLinks(raw: unknown): CampaignAudioLinkData[] {
+  if (Array.isArray(raw)) return raw.filter((link) => link?.url);
+  if (typeof raw !== "string") return [];
+  return parseJsonArray<CampaignAudioLinkData>(raw).filter((link) => link.url);
+}
+
+function DragonEarAudioPlayers({
+  links,
+  compact = false,
+}: {
+  links: CampaignAudioLinkData[];
+  compact?: boolean;
+}) {
+  if (links.length === 0) return null;
+
+  return (
+    <div className="flex shrink-0 flex-wrap items-start gap-2">
+      {links.map((audioLink, audioIndex) => (
+        <MediaPlayerImageButton
+          key={`${audioLink.url}-${audioIndex}`}
+          source={resolveMediaPlayerSource(audioLink.url ?? "", "auto")}
+          title={audioLink.label}
+          image="/images/dragon-ears.png"
+          compact={compact}
+        />
+      ))}
+    </div>
+  );
+}
+
 // ── Generic content blocks ────────────────────────────────────────────────────
 
 function DividerBlock({ props }: { props: Record<string, unknown> }) {
@@ -859,7 +889,7 @@ function CampaignRosterBlock({ props }: { props: Record<string, unknown> }) {
           {members.map((member, index) => {
             const memberLinks = [
               ...parseLinks(member.links),
-              ...(member.url ? [{ label: "Character Sheet", type: "sheet", url: member.url }] : []),
+              ...(member.url ? [{ label: "Background Sheet", type: "background", url: member.url }] : []),
             ].filter((link, linkIndex, links) =>
               link.url && links.findIndex((candidate) => candidate.url === link.url) === linkIndex,
             );
@@ -922,41 +952,20 @@ function CampaignSessionsBlock({ props }: { props: Record<string, unknown> }) {
           {sessions.map((session, index) => (
             <article key={`${session.title}-${index}`}>
               {session.title && (
-                <h3 className="font-cinzel text-lg mb-2" style={{ color: "var(--color-accent-gold)" }}>
-                  {session.title}
-                </h3>
+                <div className="mb-2 flex min-w-0 items-start gap-3">
+                  <DragonEarAudioPlayers links={(session.audioLinks ?? []).filter((audioLink) => audioLink.url)} compact />
+                  <h3
+                    className="min-w-0 font-cinzel text-lg leading-tight"
+                    style={{ color: "var(--color-accent-gold)" }}
+                  >
+                    {session.title}
+                  </h3>
+                </div>
               )}
               {session.summary && (
                 <p className="text-sm leading-relaxed whitespace-pre-wrap" style={{ color: "var(--color-text-secondary)" }}>
                   {session.summary}
                 </p>
-              )}
-              {session.audioLinks && session.audioLinks.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-3">
-                  {session.audioLinks.filter((audioLink) => audioLink.url).map((audioLink, audioIndex) => (
-                    <a
-                      key={`${audioLink.url}-${audioIndex}`}
-                      href={audioLink.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={audioLink.label ?? `Audio for ${session.title ?? "session"}`}
-                      title={audioLink.label}
-                      className="inline-flex h-14 w-14 items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400"
-                      style={{
-                        borderColor: "var(--color-bg-border)",
-                        boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)",
-                      }}
-                    >
-                      <Image
-                        src="/images/dragon-ears.png"
-                        alt=""
-                        width={44}
-                        height={44}
-                        className="h-full w-full rounded-full object-contain"
-                      />
-                    </a>
-                  ))}
-                </div>
               )}
             </article>
           ))}
@@ -977,7 +986,7 @@ function savedCharactersFromItem(item: ProfileCardItem): SavedCharacterData[] {
     name: character.name,
     campaign: campaign.name,
     dm: campaign.dm,
-    url: character.links?.find((link) => link.type === "sheet")?.url ?? character.url,
+    url: character.links?.find((link) => link.type === "background")?.url ?? character.url,
   }));
 }
 
@@ -1267,21 +1276,32 @@ function MediaPlayerImageButton({
   caption,
   image,
   className = "",
+  compact = false,
 }: {
   source: ReturnType<typeof resolveMediaPlayerSource>;
   title?: string;
   caption?: string;
   image?: string;
   className?: string;
+  compact?: boolean;
 }) {
   const buttonImage = image || "/images/dragon-ears.png";
+  const buttonSizeClass = compact ? "h-9 w-9 p-1" : "h-14 w-14 p-1.5";
+  const imageSize = compact ? 30 : 44;
+  const detailsClass = compact ? "relative" : "";
+  const playerClass = compact
+    ? "absolute left-0 z-20 mt-3 w-80 max-w-[calc(100vw-3rem)] rounded-md border p-3 shadow-xl"
+    : "mt-3 min-w-0";
+  const playerStyle = compact
+    ? { borderColor: "var(--color-bg-border)", background: "var(--color-bg-card)" }
+    : undefined;
 
   return (
-    <details className={`group ${className}`}>
+    <details className={`group ${detailsClass} ${className}`}>
       <summary
         aria-label={title ? `Play ${title}` : "Play media"}
         title={title || "Play media"}
-        className="inline-flex h-14 w-14 cursor-pointer list-none items-center justify-center rounded-full border bg-black/20 p-1.5 shadow-lg transition-all hover:scale-105 hover:border-amber-400 [&::-webkit-details-marker]:hidden"
+        className={`inline-flex ${buttonSizeClass} cursor-pointer list-none items-center justify-center rounded-full border bg-black/20 shadow-lg transition-all hover:scale-105 hover:border-amber-400 [&::-webkit-details-marker]:hidden`}
         style={{
           borderColor: "var(--color-bg-border)",
           boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)",
@@ -1290,12 +1310,12 @@ function MediaPlayerImageButton({
         <Image
           src={buttonImage}
           alt=""
-          width={44}
-          height={44}
+          width={imageSize}
+          height={imageSize}
           className="h-full w-full rounded-full object-contain"
         />
       </summary>
-      <div className="mt-3 min-w-0">
+      <div className={playerClass} style={playerStyle}>
         <MediaPlayerInline source={source} title={title} caption={caption} />
       </div>
     </details>
@@ -2114,6 +2134,7 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const title = item.props.title as string | undefined;
       const size = item.props.size as string | undefined;
       const color = item.props.color === "gold" ? "var(--color-accent-gold)" : "var(--color-text-primary)";
+      const audioLinks = parseAudioLinks(item.props.audioLinks);
       if (!eyebrow && !title) return null;
       return (
         <header style={style} className="min-w-0">
@@ -2124,10 +2145,13 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
             </p>
           )}
           {title && (
-            <h2 className={`font-cinzel leading-tight ${size === "lg" ? "text-2xl" : "text-lg"}`}
-              style={{ color }}>
-              {title}
-            </h2>
+            <div className="flex min-w-0 items-start gap-3">
+              <DragonEarAudioPlayers links={audioLinks} compact />
+              <h2 className={`min-w-0 font-cinzel leading-tight ${size === "lg" ? "text-2xl" : "text-lg"}`}
+                style={{ color }}>
+                {title}
+              </h2>
+            </div>
           )}
         </header>
       );
@@ -2270,7 +2294,7 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const href = item.props.href as string | undefined;
       const links = [
         ...parseLinks(item.props.links),
-        ...(href ? [{ label: "Character Sheet", type: "sheet", url: href }] : []),
+        ...(href ? [{ label: "Background Sheet", type: "background", url: href }] : []),
       ].filter((link, index, allLinks) =>
         link.url && allLinks.findIndex((candidate) => candidate.url === link.url) === index,
       );

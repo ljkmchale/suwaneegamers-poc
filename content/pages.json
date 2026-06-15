@@ -19,5 +19,12 @@
     "title": "Spotify",
     "status": "active",
     "createdAt": "2026-06-13"
+  },
+  {
+    "id": "supporting-our-gamers-page",
+    "slug": "supportourgamers",
+    "title": "Supporting Our Gamers",
+    "status": "active",
+    "createdAt": "2026-06-15"
   }
 ]

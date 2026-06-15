@@ -314,6 +314,23 @@ describe("Editable campaign detail pages", () => {
     return count;
   }
 
+  function countNestedHeaderAudioLinks(blocks: BlockItem[]) {
+    let count = 0;
+    const visit = (items: { id: string; type: string; props: Record<string, unknown> }[]) => {
+      for (const item of items) {
+        if (item.type === "header") {
+          count += parseLinks(item.props.audioLinks).length;
+        }
+        visit(parseCardLayoutItems(item.props.items));
+      }
+    };
+
+    for (const block of blocks) {
+      if (block.type === "layout-card") visit(parseCardLayoutItems(block.props.items));
+    }
+    return count;
+  }
+
   function nestedPeople(blocks: BlockItem[]) {
     const people: { id: string; type: string; props: Record<string, unknown> }[] = [];
     const visit = (items: { id: string; type: string; props: Record<string, unknown> }[]) => {
@@ -408,8 +425,9 @@ describe("Editable campaign detail pages", () => {
         const topLevelMediaPlayers = blocks.filter((item) => item.type === "media-player").length;
         const nestedMediaPlayers = countNestedLayoutItems(blocks, "media-player");
         const nestedAudioLinks = countNestedLayoutItems(blocks, "audio-link");
-        expect(topLevelMediaPlayers + nestedMediaPlayers + nestedAudioLinks).toBe(recordings.length);
-        expect(nestedAudioLinks, `${campaign.id} recordings should use the internal media player asset`).toBe(0);
+        const nestedHeaderAudioLinks = countNestedHeaderAudioLinks(blocks);
+        expect(nestedHeaderAudioLinks).toBe(recordings.length);
+        expect(topLevelMediaPlayers + nestedMediaPlayers + nestedAudioLinks).toBe(0);
       }
 
       const sessionSummaryBlocks = blocks.filter((item) => item.id.includes("-session-") && item.id.endsWith("-summary"));
