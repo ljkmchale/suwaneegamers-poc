@@ -1,35 +1,18 @@
 /**
- * Sync campaign session notes into content/campaigns.json from two sources:
+ * Sync campaign session notes into content/campaigns.json from the
+ * Campaign Brain vault's raw player notes (pulled daily from the
+ * players' Google Docs). Sessions newer than anything stored are
+ * summarized headlessly via the Claude CLI and added with `auto: true`
+ * so the morning-after notes appear before the DM posts official ones.
  *
- * 1. The legacy Google Sites pages (curated DM summaries). Only campaigns
- *    that had a calendar event within the lookback window (--days N, default
- *    2) are checked, or every campaign with --all. New sessions are added;
- *    stored entries are never overwritten — except auto-generated ones,
- *    which an official summary for the same session replaces.
- *
- * 2. The Campaign Brain vault's raw player notes (pulled daily from the
- *    players' Google Docs). Sessions newer than anything stored are
- *    summarized headlessly via the Claude CLI and added with `auto: true`
- *    so the morning-after notes appear before the DM posts official ones.
- *
- *   npx tsx scripts/sync-session-notes.ts            # campaigns that just played
- *   npx tsx scripts/sync-session-notes.ts --days 7   # wider lookback
- *   npx tsx scripts/sync-session-notes.ts --all      # every campaign
- *   npx tsx scripts/sync-session-notes.ts --no-ai    # skip the Claude summarization phase
+ *   npx tsx scripts/sync-session-notes.ts        # all campaigns
+ *   npx tsx scripts/sync-session-notes.ts --no-ai  # skip Claude summarization
  */
 import fs from "fs";
 import path from "path";
 import { spawnSync } from "child_process";
 import {
-  filterCalendarEventsForWindow,
-  googleCalendarIcsUrl,
-  parseIcsEvents,
-  type CalendarEvent,
-} from "@/lib/calendar";
-import {
-  findPreviousCampaignEvent,
   getActiveCampaigns,
-  parseLegacyCampaignSessionSummariesFromHtml,
   type CampaignSessionSummary,
   type PortalCampaign,
 } from "@/lib/campaigns";
@@ -49,136 +32,14 @@ const RAW_NOTES_FILES: Record<string, string> = {
 };
 
 interface CliOptions {
-  all: boolean;
-  days: number;
   ai: boolean;
 }
 
 function parseArgs(argv: string[]): CliOptions {
-  const all = argv.includes("--all");
-  const ai = !argv.includes("--no-ai");
-  const daysIndex = argv.indexOf("--days");
-  const days = daysIndex >= 0 ? Number.parseInt(argv[daysIndex + 1] ?? "", 10) : 2;
-
-  if (!Number.isFinite(days) || days <= 0) {
-    throw new Error("--days must be a positive integer");
-  }
-
-  return { all, days, ai };
+  return { ai: !argv.includes("--no-ai") };
 }
 
-/**
- * Identity for a session note so the same session parsed with slightly
- * different title formatting (e.g. "Session 3 - Foo" vs "3 - Foo") doesn't
- * get added twice. Numbered sessions key on the session number; unnumbered
- * ones key on the normalized title text.
- */
-function sessionKey(title: string): string {
-  const num = title.match(/\d+/);
-  if (num) return `n:${Number.parseInt(num[0], 10)}`;
-  return `t:${title.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()}`;
-}
-
-async function fetchPastEvents(days: number): Promise<CalendarEvent[]> {
-  const res = await fetch(googleCalendarIcsUrl());
-  if (!res.ok) {
-    throw new Error(`Google Calendar feed returned ${res.status}`);
-  }
-
-  const ics = await res.text();
-  const now = new Date();
-  const window = {
-    start: new Date(now.getTime() - days * 24 * 60 * 60 * 1000),
-    end: now,
-  };
-
-  return filterCalendarEventsForWindow(parseIcsEvents(ics, window), window);
-}
-
-async function fetchLatestNotes(campaign: PortalCampaign) {
-  const res = await fetch(campaign.referenceUrl);
-  if (!res.ok) {
-    throw new Error(`${campaign.referenceUrl} returned ${res.status}`);
-  }
-
-  return parseLegacyCampaignSessionSummariesFromHtml(await res.text());
-}
-
-// ── Phase 1: curated summaries from the Google Sites pages ────────────────
-
-async function syncOfficialNotes(
-  campaigns: PortalCampaign[],
-  options: CliOptions
-): Promise<number> {
-  let targets: PortalCampaign[];
-  if (options.all) {
-    targets = campaigns.filter((campaign) => campaign.referenceUrl);
-  } else {
-    const pastEvents = await fetchPastEvents(options.days);
-    targets = campaigns.filter(
-      (campaign) =>
-        campaign.referenceUrl && findPreviousCampaignEvent(campaign, pastEvents)
-    );
-    console.log(
-      `${targets.length} campaign(s) had a session in the last ${options.days} day(s).`
-    );
-  }
-
-  let updated = 0;
-
-  for (const target of targets) {
-    const stored = target.sessionSummaries ?? [];
-
-    let parsed;
-    try {
-      parsed = await fetchLatestNotes(target);
-    } catch (error) {
-      console.error(`✗ ${target.id}: fetch failed — ${(error as Error).message}`);
-      continue;
-    }
-
-    if (parsed.length === 0) {
-      console.warn(`✗ ${target.id}: no session notes parsed from page, skipping.`);
-      continue;
-    }
-
-    // Only add sessions that aren't stored yet. Stored entries are curated
-    // (better labels, hand-tuned text) and must never be overwritten — the
-    // exception is auto-generated entries, which the official summary for
-    // the same session replaces.
-    const storedByKey = new Map(stored.map((note) => [sessionKey(note.title), note]));
-    const fresh: CampaignSessionSummary[] = [];
-    let replaced = 0;
-
-    for (const note of parsed) {
-      const existing = storedByKey.get(sessionKey(note.title));
-      if (!existing) {
-        fresh.push(note);
-      } else if (existing.auto) {
-        const index = stored.indexOf(existing);
-        stored[index] = { ...note, sessionDate: existing.sessionDate };
-        replaced += 1;
-      }
-    }
-
-    if (fresh.length === 0 && replaced === 0) {
-      console.log(`· ${target.id}: already up to date (${stored.length} notes).`);
-      continue;
-    }
-
-    target.sessionSummaries = [...fresh, ...stored];
-    updated += 1;
-    const parts = [
-      fresh.length > 0 ? `added ${fresh.length} new note(s)` : "",
-      replaced > 0 ? `replaced ${replaced} auto note(s) with official ones` : "",
-    ].filter(Boolean);
-    console.log(`✓ ${target.id}: ${parts.join(", ")}.`);
-  }
-
-  return updated;
-}
-
-// ── Phase 2: auto-summaries from Campaign Brain raw player notes ───────────
+// ── Auto-summaries from Campaign Brain raw player notes ───────────
 
 interface RawSessionBlock {
   number: number;
@@ -433,7 +294,7 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const campaigns = getActiveCampaigns();
 
-  let updated = await syncOfficialNotes(campaigns, options);
+  let updated = 0;
   if (options.ai) {
     updated += syncRawNotes(campaigns);
   }

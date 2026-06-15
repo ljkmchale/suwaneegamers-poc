@@ -25,7 +25,7 @@
     "type": "archived-campaign-card",
     "props": {
       "id": "beer-and-dice-i",
-      "title": "Beer & Dice",
+      "title": "Beer & Dice I",
       "status": "Completed",
       "dm": "Chip Poole",
       "image": "/images/campaigns/beer-and-dice.jpg",
@@ -93,7 +93,7 @@
     "type": "archived-campaign-card",
     "props": {
       "id": "bloody-endeavor-i",
-      "title": "Bloody Endeavor",
+      "title": "Bloody Endeavor I",
       "status": "Completed",
       "dm": "Sean Poole",
       "image": "/images/campaigns/bloody-endeavor.jpg",

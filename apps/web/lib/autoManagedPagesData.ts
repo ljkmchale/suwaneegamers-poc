@@ -187,14 +187,6 @@ function uniqueSources(sources: ManagedSourceLink[]) {
 function campaignLinkSources(campaign: PortalCampaign): ManagedSourceLink[] {
   const sources: ManagedSourceLink[] = [];
 
-  if (campaign.referenceUrl) {
-    sources.push({
-      label: "Legacy Campaign Page",
-      url: campaign.referenceUrl,
-      role: "supporting",
-    });
-  }
-
   for (const resource of campaign.resources ?? []) {
     sources.push({
       label: resource.label || "Campaign Resource",

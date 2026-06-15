@@ -16,6 +16,7 @@ import {
   BookOpen,
   Skull,
   Sparkles,
+  LayoutDashboard,
 } from "lucide-react";
 import type { SearchResult, SearchResultType } from "@/lib/search";
 
@@ -29,6 +30,7 @@ const TYPE_ICONS: Record<SearchResultType, LucideIcon> = {
   gazetteer: BookOpen,
   creature: Skull,
   deity: Sparkles,
+  page: LayoutDashboard,
 };
 
 const CATEGORY_COLOR: Record<string, string> = {
@@ -41,6 +43,7 @@ const CATEGORY_COLOR: Record<string, string> = {
   Gazetteer: "var(--color-accent-gold)",
   Bestiary: "var(--color-accent-blood)",
   Pantheon: "var(--color-accent-arcane)",
+  Pages: "var(--color-text-muted)",
 };
 
 interface SearchPaletteProps {

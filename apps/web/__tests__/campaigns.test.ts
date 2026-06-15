@@ -33,7 +33,6 @@ describe("activeCampaigns — data shape", () => {
       expect(c.name,        `${c.id} missing name`).toBeTruthy();
       expect(c.dm,          `${c.id} missing dm`).toBeTruthy();
       expect(c.schedule,    `${c.id} missing schedule`).toBeTruthy();
-      expect(c.referenceUrl, `${c.id} missing referenceUrl`).toBeTruthy();
     }
   });
 
@@ -41,20 +40,13 @@ describe("activeCampaigns — data shape", () => {
     const ids = activeCampaigns.map((c) => c.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
-
-  it("all referenceUrls are absolute https links", () => {
-    for (const c of activeCampaigns) {
-      expect(c.referenceUrl, `${c.id} bad referenceUrl`).toMatch(/^https?:\/\//);
-    }
-  });
 });
 
 describe("activeCampaigns resources", () => {
-  it("uses real resource URLs instead of sending campaign buttons to legacy pages", () => {
+  it("uses real resource URLs", () => {
     for (const campaign of activeCampaigns) {
       for (const resource of campaign.resources ?? []) {
         expect(resource.url).toMatch(/^https:\/\//);
-        expect(resource.url).not.toBe(campaign.referenceUrl);
       }
     }
   });
@@ -79,7 +71,7 @@ describe("activeCampaigns party links", () => {
           expect(link.label).toBeTruthy();
           expect(validTypes.has(link.type)).toBe(true);
           expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
-          expect(link.url).not.toBe(campaign.referenceUrl);
+          expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
         }
       }
     }
@@ -244,7 +236,6 @@ describe("findNextCampaignEvent", () => {
     dm: "Larry McHale",
     schedule: "Biweekly",
     description: "",
-    referenceUrl: "https://example.com",
   };
 
   it("matches an event by exact normalized title", () => {
@@ -303,7 +294,7 @@ describe("findCampaignForCalendarEvent", () => {
       dm: "Larry McHale",
       schedule: "Biweekly",
       description: "",
-      referenceUrl: "https://example.com",
+
       headerImage: "/images/campaigns/heroes-of-emberstran.jpg",
       aliases: ["Emberstran"],
     },
@@ -435,7 +426,7 @@ describe("parseSessionSummariesDocumentHtml", () => {
       dm: "Chip Poole",
       schedule: "Monthly",
       description: "",
-      referenceUrl: "https://example.com/a-new-adventure",
+
     },
     {
       id: "the-silent-vanguard",
@@ -443,7 +434,7 @@ describe("parseSessionSummariesDocumentHtml", () => {
       dm: "Sean Poole",
       schedule: "Biweekly",
       description: "",
-      referenceUrl: "https://example.com/the-silent-vanguard",
+
     },
   ];
 
@@ -519,7 +510,7 @@ describe("Campaign Tracking document", () => {
         dm: "Lesley Poole",
         schedule: "Mondays",
         description: "",
-        referenceUrl: "https://example.com/d3",
+
       },
       {
         id: "old-campaign",
@@ -527,7 +518,7 @@ describe("Campaign Tracking document", () => {
         dm: "Chip Poole",
         schedule: "Monthly",
         description: "",
-        referenceUrl: "https://example.com/old",
+
       },
     ];
 

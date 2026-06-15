@@ -172,7 +172,7 @@ const KNOWN_INTERNAL_ROUTES = new Set([
 // Nav placeholders for pages that haven't been built yet. These currently
 // 404 — when one gets a real page (app route or custom page), remove it here.
 const PLANNED_NAV_ROUTES = new Set([
-  "/guides", "/ourstory", "/supportourgamers",
+  "/guides", "/ourstory",
 ]);
 
 describe("Nav internal hrefs → known routes", () => {
@@ -472,11 +472,11 @@ describe("Previous campaign archive", () => {
     );
 
     expect(cards.map((card) => card.props.title)).toEqual([
-      "Beer & Dice",
+      "Beer & Dice I",
       "Beer & Dice II",
       "Beer & Dice III",
       "Blisterfel - The Company",
-      "Bloody Endeavor",
+      "Bloody Endeavor I",
       "Call for Heroes",
       "Charlemagne's Angels",
       "Crystal Bottle",

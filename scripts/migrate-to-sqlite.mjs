@@ -34,7 +34,6 @@ db.exec(`
     dm                           TEXT NOT NULL,
     schedule                     TEXT NOT NULL,
     description                  TEXT NOT NULL,
-    reference_url                TEXT NOT NULL,
     header_image                 TEXT,
     header_image_position        TEXT NOT NULL DEFAULT 'center',
     header_image_source_folder   TEXT,
@@ -163,12 +162,12 @@ migrate("campaigns + session_summaries", () => {
 
   const upsertCampaign = db.prepare(`
     INSERT OR REPLACE INTO campaigns
-      (id, name, dm, schedule, description, reference_url,
+      (id, name, dm, schedule, description,
        header_image, header_image_position,
        header_image_source_folder, header_image_source_file_id, header_image_source_file_name,
        official, player_notes_url, aliases, resources, party)
     VALUES
-      (@id, @name, @dm, @schedule, @description, @reference_url,
+      (@id, @name, @dm, @schedule, @description,
        @header_image, @header_image_position,
        @header_image_source_folder, @header_image_source_file_id, @header_image_source_file_name,
        @official, @player_notes_url, @aliases, @resources, @party)
@@ -191,7 +190,6 @@ migrate("campaigns + session_summaries", () => {
       dm: c.dm,
       schedule: c.schedule,
       description: c.description,
-      reference_url: c.referenceUrl,
       header_image: c.headerImage ?? null,
       header_image_position: c.headerImagePosition ?? "center",
       header_image_source_folder: c.headerImageSourceFolder ?? null,

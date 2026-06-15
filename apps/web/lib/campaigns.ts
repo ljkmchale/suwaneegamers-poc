@@ -41,7 +41,6 @@ export interface PortalCampaign {
   dm: string;
   schedule: string;
   description: string;
-  referenceUrl: string;
   headerImage?: string;
   headerImagePosition?: string;
   headerImageSourceFolder?: string;
@@ -66,7 +65,6 @@ interface DbCampaignRow {
   dm: string;
   schedule: string;
   description: string;
-  reference_url: string;
   header_image: string | null;
   header_image_position: string;
   header_image_source_folder: string | null;
@@ -97,7 +95,6 @@ function rowToCampaign(c: DbCampaignRow, summaries: CampaignSessionSummary[]): P
     dm: c.dm,
     schedule: c.schedule,
     description: c.description,
-    referenceUrl: c.reference_url,
     headerImage: c.header_image ?? undefined,
     headerImagePosition: c.header_image_position ?? undefined,
     headerImageSourceFolder: c.header_image_source_folder ?? undefined,
@@ -415,18 +412,3 @@ export function parseLegacyCampaignSessionSummariesFromHtml(html: string) {
   return parseLegacySessionSummaries(legacyHtmlToLines(html));
 }
 
-export async function fetchLegacyCampaignSessionSummaries(campaign: PortalCampaign) {
-  try {
-    const response = await fetch(campaign.referenceUrl, {
-      next: { revalidate: 300 },
-    });
-
-    if (!response.ok) return campaign.sessionSummaries ?? [];
-
-    const html = await response.text();
-    const parsed = parseLegacyCampaignSessionSummariesFromHtml(html);
-    return parsed.length > 0 ? parsed : campaign.sessionSummaries ?? [];
-  } catch {
-    return campaign.sessionSummaries ?? [];
-  }
-}

@@ -12,7 +12,17 @@ export function getDb(): Database.Database {
   _db.pragma("journal_mode = WAL");
   _db.pragma("foreign_keys = ON");
   initializeSchema(_db);
+  migrateSchema(_db);
   return _db;
+}
+
+function migrateSchema(db: Database.Database): void {
+  const hasRefUrl = db
+    .prepare(`SELECT COUNT(*) AS n FROM pragma_table_info('campaigns') WHERE name = 'reference_url'`)
+    .get() as { n: number };
+  if (hasRefUrl.n > 0) {
+    db.exec(`ALTER TABLE campaigns DROP COLUMN reference_url`);
+  }
 }
 
 function initializeSchema(db: Database.Database): void {
@@ -26,7 +36,6 @@ function initializeSchema(db: Database.Database): void {
       dm                           TEXT NOT NULL,
       schedule                     TEXT NOT NULL,
       description                  TEXT NOT NULL,
-      reference_url                TEXT NOT NULL,
       header_image                 TEXT,
       header_image_position        TEXT NOT NULL DEFAULT 'center',
       header_image_source_folder   TEXT,

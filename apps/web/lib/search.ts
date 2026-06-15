@@ -11,7 +11,31 @@ export type SearchResultType =
   | "player"
   | "gazetteer"
   | "creature"
-  | "deity";
+  | "deity"
+  | "page";
+
+const SITE_PAGES: { path: string; label: string }[] = [
+  { path: "/", label: "Home" },
+  { path: "/campaigns", label: "Campaigns" },
+  { path: "/players", label: "Players" },
+  { path: "/dungeon-masters", label: "Dungeon Masters" },
+  { path: "/bestiary", label: "Bestiary" },
+  { path: "/lore", label: "Legends & Lore" },
+  { path: "/world", label: "World" },
+  { path: "/setting", label: "Setting" },
+  { path: "/history", label: "History" },
+  { path: "/pantheon", label: "Pantheon" },
+  { path: "/gazetteer", label: "Gazetteer" },
+  { path: "/campaign-setting", label: "Campaign Setting" },
+  { path: "/organizations", label: "Organizations" },
+  { path: "/adventures", label: "Adventures" },
+  { path: "/reference-for-dungeon-masters", label: "Reference for DMs" },
+  { path: "/territories", label: "Territories" },
+  { path: "/calendar", label: "Calendar" },
+  { path: "/chronicles", label: "Chronicles" },
+  { path: "/maps-of-myrdae", label: "Maps of Myrdae" },
+  { path: "/previous-campaigns", label: "Previous Campaigns" },
+];
 
 export interface SearchResult {
   id: string;
@@ -48,6 +72,41 @@ export function search(query: string): SearchResult[] {
   const db = getDb();
   const like = `%${q}%`;
   const results: SearchResult[] = [];
+
+  // ── Site pages ──
+  const ql = q.toLowerCase();
+  const matchingPages = SITE_PAGES.filter((p) =>
+    p.label.toLowerCase().includes(ql) || p.path.includes(ql),
+  );
+  for (const p of matchingPages) {
+    results.push({
+      id: `page-${p.path}`,
+      type: "page",
+      title: p.label,
+      category: "Pages",
+      href: p.path,
+    });
+  }
+  // Custom pages from pages.json
+  try {
+    const customPages = JSON.parse(
+      fs.readFileSync(contentPath("pages.json"), "utf-8"),
+    ) as { id: string; slug: string; title: string; status: string }[];
+    for (const p of customPages) {
+      if (p.status !== "active") continue;
+      if (p.title.toLowerCase().includes(ql) || p.slug.toLowerCase().includes(ql)) {
+        results.push({
+          id: `page-custom-${p.id}`,
+          type: "page",
+          title: p.title,
+          category: "Pages",
+          href: `/${p.slug}`,
+        });
+      }
+    }
+  } catch {
+    // ignore if file is missing
+  }
 
   // ── Territories ──
   const territories = db
