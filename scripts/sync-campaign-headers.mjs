@@ -15,6 +15,17 @@ const previousCampaignsLayoutFile = path.join(root, "content", "page-layouts", "
 const campaignLayoutsDir = path.join(root, "content", "page-layouts", "campaigns");
 const imageDir = path.join(root, "apps", "web", "public", "images", "campaigns");
 
+const fallbackHeaderFiles = [
+  {
+    folderId: "0B8w9jlHOwNHxTlg0bEdSbTBCV2M",
+    campaignName: "Order of the Raven",
+    file: {
+      id: "1RcnS0kfAX-60R75nlizoQk7gwOQK3Rtp",
+      title: "Order of the Raven - Header (v.0).jpg",
+    },
+  },
+];
+
 function configuredCampaignHeaderFolderUrl() {
   try {
     const pages = JSON.parse(fs.readFileSync(autoManagedPagesFile, "utf-8"));
@@ -49,6 +60,29 @@ function stripDriveTypeSuffix(title) {
     .trim();
 }
 
+function folderUrlFromHtml(html, folderId) {
+  const normalizedHtml = html
+    .replaceAll("\\/", "/")
+    .replaceAll("\\u003d", "=")
+    .replaceAll("\\=", "=");
+  const marker = `https://drive.google.com/drive/folders/${folderId}?resourcekey=`;
+  const start = normalizedHtml.indexOf(marker);
+  if (start < 0) return null;
+
+  let end = start;
+  while (
+    end < normalizedHtml.length
+    && normalizedHtml[end] !== "\""
+    && normalizedHtml[end] !== "\\"
+    && normalizedHtml[end] !== "<"
+    && !/\s/.test(normalizedHtml[end])
+  ) {
+    end += 1;
+  }
+
+  return normalizedHtml.slice(start, end);
+}
+
 function norm(value) {
   return value
     .normalize("NFD")
@@ -74,9 +108,11 @@ function parseDriveItems(html) {
   const items = [];
   const pattern = /data-id="([^"]+)"[^>]*data-tooltip="([^"]+)"/g;
   for (const match of html.matchAll(pattern)) {
+    const id = match[1];
     items.push({
-      id: match[1],
+      id,
       title: stripDriveTypeSuffix(decodeHtml(match[2])),
+      url: folderUrlFromHtml(html, id),
     });
   }
   return items;
@@ -88,13 +124,16 @@ async function fetchText(url) {
   return res.text();
 }
 
-async function fetchDriveFolderItems(folderId) {
-  const html = await fetchText(`https://drive.google.com/drive/folders/${folderId}`);
+async function fetchDriveFolderItems(folder) {
+  const folderUrl = typeof folder === "string"
+    ? `https://drive.google.com/drive/folders/${folder}`
+    : folder.url ?? `https://drive.google.com/drive/folders/${folder.id}`;
+  const html = await fetchText(folderUrl);
   return parseDriveItems(html);
 }
 
 function isHeaderV0(title) {
-  return / - Header \(v\.0\)\.(jpe?g|png)$/i.test(title);
+  return /\s+-\s*Header\s+\(v\.0\)\.(jpe?g|png)$/i.test(title);
 }
 
 function extensionFor(title, bytes) {
@@ -109,7 +148,7 @@ function pickHeaderFile(campaign, files) {
   const headerFiles = files.filter((file) => isHeaderV0(file.title));
 
   const exact = headerFiles.find((file) => {
-    const fileName = file.title.split(" - Header ")[0] ?? "";
+    const fileName = file.title.replace(/\s+-\s*Header\s+\(v\.0\)\.(jpe?g|png)$/i, "");
     return candidateNames.includes(norm(fileName));
   });
   if (exact) return { file: exact, exact: true };
@@ -117,15 +156,38 @@ function pickHeaderFile(campaign, files) {
   return headerFiles[0] ? { file: headerFiles[0], exact: false } : null;
 }
 
+function fallbackHeaderFor(campaign, folder) {
+  const candidateNames = [campaign.name, ...(campaign.aliases ?? [])].map(norm);
+  const fallback = fallbackHeaderFiles.find((item) =>
+    item.folderId === folder.id && candidateNames.includes(norm(item.campaignName)),
+  );
+
+  return fallback ? { file: fallback.file, exact: true } : null;
+}
+
+function candidateCampaignNames(name, aliases = []) {
+  const names = [name, ...aliases];
+  const firstInstallmentName = name.replace(/\s+I$/i, "").trim();
+
+  if (firstInstallmentName && firstInstallmentName !== name) {
+    names.push(firstInstallmentName);
+  }
+
+  return names;
+}
+
 async function findHeaderInFolder(campaign, folder) {
-  const files = await fetchDriveFolderItems(folder.id);
+  const files = await fetchDriveFolderItems(folder);
   const picked = pickHeaderFile(campaign, files);
   if (picked) return { ...picked, containingFolder: folder, nested: false };
+
+  const fallback = fallbackHeaderFor(campaign, folder);
+  if (fallback) return { ...fallback, containingFolder: folder, nested: false };
 
   for (const child of files) {
     if (pickHeaderFile(campaign, [child])) continue;
     if (!/^(Art|Images|Archive)$/i.test(child.title)) continue;
-    const childFiles = await fetchDriveFolderItems(child.id);
+    const childFiles = await fetchDriveFolderItems(child);
     const nested = pickHeaderFile(campaign, childFiles);
     if (nested) return { ...nested, containingFolder: child, nested: true };
   }
@@ -269,14 +331,16 @@ const archivedCards = previousLayouts.filter((i) => i.type === "archived-campaig
 
 for (const card of archivedCards) {
   const title = card.props.title;
-  const folder = [title, ...(card.props.aliases ?? [])].map((n) => folderByName.get(norm(n))).find(Boolean);
+  const aliases = card.props.aliases ?? [];
+  const names = candidateCampaignNames(title, aliases);
+  const folder = names.map((n) => folderByName.get(norm(n))).find(Boolean);
 
   if (!folder) {
     warnings.push(`${title} (archived): no matching Drive subfolder found`);
     continue;
   }
 
-  const picked = await findHeaderInFolder({ name: title, aliases: card.props.aliases ?? [] }, folder);
+  const picked = await findHeaderInFolder({ name: title, aliases: names.slice(1) }, folder);
   if (!picked) {
     warnings.push(`${title} (archived): no Header (v.0) file found`);
     continue;

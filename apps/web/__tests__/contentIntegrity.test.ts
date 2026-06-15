@@ -472,11 +472,11 @@ describe("Previous campaign archive", () => {
     );
 
     expect(cards.map((card) => card.props.title)).toEqual([
-      "Beer & Dice I",
+      "Beer & Dice",
       "Beer & Dice II",
       "Beer & Dice III",
       "Blisterfel - The Company",
-      "Bloody Endeavor I",
+      "Bloody Endeavor",
       "Call for Heroes",
       "Charlemagne's Angels",
       "Crystal Bottle",
@@ -498,7 +498,7 @@ describe("Previous campaign archive", () => {
     ]);
     expect(cards.every((card) => card.props.id)).toBe(true);
     expect(cards.filter((card) => card.props.referenceUrl).length).toBe(4);
-    expect(cards.filter((card) => card.props.image).length).toBe(21);
+    expect(cards.filter((card) => card.props.image).length).toBe(23);
   });
 });
 

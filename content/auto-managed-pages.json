@@ -4,6 +4,13 @@
     "label": "Legends & Lore",
     "sourceName": "Google Docs",
     "sourceUrl": "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0",
+    "managedSources": [
+      {
+        "label": "Legends & Lore Google Doc",
+        "url": "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0",
+        "role": "primary"
+      }
+    ],
     "refreshLabel": "Refreshes from the source document about once per hour.",
     "editNote": "The lore entries, card list, and lore text are generated from the source document. Update the Google Doc to change this page."
   },
@@ -29,8 +36,20 @@
     "sourceName": "Google Drive",
     "sourceUrl": "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P",
     "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "managedSources": [
+      {
+        "label": "Organization Symbols Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P",
+        "role": "primary"
+      },
+      {
+        "label": "Campaign Setting Google Doc",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+        "role": "fallback"
+      }
+    ],
     "refreshLabel": "Synced from the Organizations Google Drive folder.",
-    "editNote": "Add or update organization docs in the Organizations Drive folder. Fallback: campaign setting Google Doc."
+    "editNote": "Organization symbol images come from the Drive folder. Organization names, known-for, summaries, and details come from the campaign setting Google Doc (lore sync)."
   },
   {
     "path": "/territories",
@@ -54,8 +73,20 @@
     "sourceName": "Google Drive",
     "sourceUrl": "https://drive.google.com/drive/folders/14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI",
     "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "managedSources": [
+      {
+        "label": "Deity Symbols Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI",
+        "role": "primary"
+      },
+      {
+        "label": "Campaign Setting Google Doc",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+        "role": "fallback"
+      }
+    ],
     "refreshLabel": "Deity cards and expanded details refresh from the Pantheon Google Drive folder.",
-    "editNote": "Add or update deity docs in the Pantheon Drive folder. Fallback: campaign setting Google Doc."
+    "editNote": "Deity symbol images come from the Drive folder (sync-pantheon-symbols). Deity names, titles, domains, and detail text come from the campaign setting Google Doc."
   },
   {
     "path": "/maps-of-myrdae",
@@ -79,8 +110,20 @@
     "sourceName": "Google Drive",
     "sourceUrl": "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg",
     "fallbackSourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "managedSources": [
+      {
+        "label": "Settlement Docs Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg",
+        "role": "primary"
+      },
+      {
+        "label": "Campaign Setting Google Doc",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+        "role": "fallback"
+      }
+    ],
     "refreshLabel": "Settlement cards are generated from the Gazetteer Google Drive folder.",
-    "editNote": "Add or update settlement docs in the Gazetteer Drive folder. Fallback: campaign setting Google Doc."
+    "editNote": "Each settlement is a Google Doc in the Drive folder. The campaign setting doc is kept as a reference source."
   },
   {
     "path": "/campaigns",

@@ -154,7 +154,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                 <form action={setManagedSourceUrlAction} className="hidden" style={{ display: "none" }}>
                   <input type="hidden" name="path" value={page.path} />
                   <input type="hidden" name="sourceKey" value="sourceUrl" />
-                  <label className="block font-cinzel text-[10px] tracking-widest uppercase text-[#5a5060] mb-1.5">
+                  <label className="block font-cinzel text-[10px] tracking-widest uppercase text-[#9080a0] mb-1.5">
                     Primary source URL
                   </label>
                   <div className="flex gap-2">
@@ -179,7 +179,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                 </form>
 
                 <div className="mb-4 rounded-lg border border-[#2a2a35] bg-[#08050f] p-3">
-                  <p className="mb-2 font-cinzel text-[10px] tracking-widest uppercase text-[#5a5060]">
+                  <p className="mb-2 font-cinzel text-[10px] tracking-widest uppercase text-[#9080a0]">
                     Managed Links
                   </p>
                   <div className="space-y-2">
@@ -190,7 +190,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                             {source.label}
                           </span>
                           {source.role && (
-                            <span className="rounded border border-[#2a2a35] px-1.5 py-0.5 text-[9px] uppercase tracking-widest text-[#5a5060]">
+                            <span className="rounded border border-[#2a2a35] px-1.5 py-0.5 text-[9px] uppercase tracking-widest text-[#9080a0]">
                               {source.role}
                             </span>
                           )}
@@ -217,7 +217,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                               href={source.url}
                               target="_blank"
                               rel="noreferrer"
-                              className="shrink-0 rounded border border-[#2a2a35] px-3 py-2 font-cinzel text-[10px] uppercase tracking-widest text-[#5a5060] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]"
+                              className="shrink-0 rounded border border-[#2a2a35] px-3 py-2 font-cinzel text-[10px] uppercase tracking-widest text-[#9080a0] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]"
                             >
                               Open
                             </a>
@@ -238,20 +238,20 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                   <form action={refreshPageAction.bind(null, page.path)}>
                     <button
                       type="submit"
-                      className="text-xs text-[#5a5060] hover:text-[#8b5cf6] transition-colors"
+                      className="text-xs text-[#9080a0] hover:text-[#8b5cf6] transition-colors"
                     >
                       Refresh content
                     </button>
                   </form>
                   {page.generated ? (
-                    <span className="text-xs text-[#5a5060]">
+                    <span className="text-xs text-[#9080a0]">
                       Generated from campaign content; saving a link creates an override.
                     </span>
                   ) : (
                     <form action={unlockPageAction.bind(null, page.path)}>
                       <button
                         type="submit"
-                        className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors"
+                        className="text-xs text-[#9080a0] hover:text-[#ef4444] transition-colors"
                       >
                         Unlock page
                       </button>
@@ -266,7 +266,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
 
       {/* Unlocked pages — grouped */}
       <section>
-        <h2 className="font-cinzel text-xs tracking-[0.3em] uppercase text-[#5a5060] mb-4">
+        <h2 className="font-cinzel text-xs tracking-[0.3em] uppercase text-[#9080a0] mb-4">
           Editable Pages
         </h2>
 
@@ -275,7 +275,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
           if (entries.length === 0) return null;
           return (
             <div key={group} className="mb-6">
-              <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#3a3040] mb-2 px-1">
+              <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#7a6a88] mb-2 px-1">
                 {group}
               </p>
               <div className="border border-[#2a2a35] rounded-lg overflow-hidden">
@@ -289,7 +289,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                         <td className="px-4 py-3 text-[#e8dfc8]">
                           {entry.label}
                         </td>
-                        <td className="px-4 py-3 font-mono text-xs text-[#5a5060]">
+                        <td className="px-4 py-3 font-mono text-xs text-[#9080a0]">
                           {entry.path}
                         </td>
                         <td className="px-4 py-3 text-right">
@@ -302,7 +302,7 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
                           >
                             <button
                               type="submit"
-                              className="text-xs text-[#5a5060] hover:text-[#f59e0b] transition-colors"
+                              className="text-xs text-[#9080a0] hover:text-[#f59e0b] transition-colors"
                             >
                               Lock page
                             </button>
@@ -318,14 +318,14 @@ export default async function SourceManagedPage({ searchParams }: SourceManagedP
         })}
 
         {unlockedEntries.length === 0 && (
-          <p className="text-xs text-[#5a5060] px-1">
+          <p className="text-xs text-[#9080a0] px-1">
             All pages are source-locked.
           </p>
         )}
       </section>
 
       <div className="mt-8 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-5">
-        <p className="font-cinzel text-xs tracking-widest uppercase text-[#5a5060] mb-2">
+        <p className="font-cinzel text-xs tracking-widest uppercase text-[#9080a0] mb-2">
           How it works
         </p>
         <ol className="text-sm text-[#a89880] space-y-1 list-decimal list-inside">
