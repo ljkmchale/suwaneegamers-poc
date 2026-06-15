@@ -87,19 +87,19 @@
           "href": "/crit_tables"
         },
         {
-          "id": "land-kpsa",
-          "label": "Spotify",
-          "href": "/spotify"
-        },
-        {
           "id": "land-kpsa-links",
           "label": "Links",
           "href": "/links"
         },
         {
+          "id": "land-kpsa",
+          "label": "Spotify Playlists",
+          "href": "/spotify"
+        },
+        {
           "id": "reference-for-dungeon-masters",
           "href": "/reference-for-dungeon-masters",
-          "label": "DM Reference"
+          "label": "References for DMs"
         },
         {
           "id": "test-page",

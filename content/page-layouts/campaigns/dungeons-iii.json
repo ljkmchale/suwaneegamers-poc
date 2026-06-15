@@ -19,8 +19,11 @@
     "props": {
       "eyebrow": "Campaign",
       "title": "Dungeons III",
-      "image": "/images/campaigns/dungeons-iii.jpg",
-      "imagePosition": "center"
+      "image": "/images/campaigns/dungeons-iii-knight-watch.jpg",
+      "imagePosition": "center",
+      "imageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+      "imageSourceFileId": "130hFx4bRO4qmhPBbT946OKf-v4VVF3zH",
+      "imageSourceFileName": "Dungeons III - kNight Watch - Header (v.0).jpg"
     }
   },
   {
@@ -39,7 +42,7 @@
     "type": "layout-card",
     "props": {
       "width": "campaign",
-      "items": "[\n  {\n    \"id\": \"resources_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"3\",\n      \"rows\": \"1\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"resource_dandd-beyond_1\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"D&D Beyond\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/join/64603123727126135\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_notes_2\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Notes\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit?usp=sharing\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_campaign-page_3\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Campaign Page\\\",\\n      \\\"href\\\": \\\"https://sites.google.com/view/suwanee-gamers/campaigns/dungeons-iii\\\",\\n      \\\"variant\\\": \\\"secondary\\\",\\n      \\\"col\\\": \\\"3\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+      "items": "[\n  {\n    \"id\": \"resources_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"2\",\n      \"rows\": \"1\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"resource_dandd-beyond_1\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"D&D Beyond\\\",\\n      \\\"href\\\": \\\"https://www.dndbeyond.com/campaigns/join/64603123727126135\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"resource_notes_2\\\",\\n    \\\"type\\\": \\\"link\\\",\\n    \\\"props\\\": {\\n      \\\"label\\\": \\\"Notes\\\",\\n      \\\"href\\\": \\\"https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit?usp=sharing\\\",\\n      \\\"variant\\\": \\\"primary\\\",\\n      \\\"col\\\": \\\"2\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
     }
   },
   {

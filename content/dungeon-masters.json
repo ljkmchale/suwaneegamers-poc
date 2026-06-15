@@ -5,22 +5,84 @@
     "focus": "Long-form Myrdae campaigns and classic table adventure.",
     "description": "Chip is one of the main active DMs for the table, currently carrying multiple Myrdae campaigns and several older arcs from the archive.",
     "portrait": "/images/generated/chip-poole-card.webp",
-    "activeCampaignIds": ["a-new-adventure", "heroes-of-emberstran"],
+    "activeCampaignIds": [
+      "a-new-adventure",
+      "heroes-of-emberstran"
+    ],
     "previousCampaigns": [
-      { "name": "Beer & Dice", "status": "Completed" },
-      { "name": "Imminent Domain", "status": "On Hiatus" },
-      { "name": "Obliged Corpses", "status": "On Hiatus" }
+      {
+        "name": "Beer & Dice I",
+        "status": "Completed"
+      },
+      {
+        "name": "Beer & Dice II",
+        "status": "Completed"
+      },
+      {
+        "name": "Beer & Dice III",
+        "status": "Completed"
+      },
+      {
+        "name": "Imminent Domain",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Myrdaen Misfits",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Obliged Corpses",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Order of the Raven",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Plane Shifters",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Treasure Hunters",
+        "status": "Completed"
+      },
+      {
+        "name": "Tyranny of Dragons",
+        "status": "Completed"
+      }
     ]
   },
   {
     "id": "sean-poole",
     "name": "Sean Poole",
     "focus": "High-stakes active campaigns with sharp danger and momentum.",
-    "description": "Sean currently runs two active campaigns, with one completed campaign in the archive.",
+    "description": "Sean currently runs two active campaigns, with several completed and on-hiatus campaigns in the archive.",
     "portrait": "/images/generated/sean-poole-card.webp",
-    "activeCampaignIds": ["bloody-endeavor", "souls-of-destiny"],
+    "activeCampaignIds": [
+      "bloody-endeavor",
+      "souls-of-destiny"
+    ],
     "previousCampaigns": [
-      { "name": "Call for Heroes", "status": "Completed" }
+      {
+        "name": "Bloody Endeavor I",
+        "status": "Completed"
+      },
+      {
+        "name": "Call for Heroes",
+        "status": "Completed"
+      },
+      {
+        "name": "Myrdaen Misfits",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Soulreaper's Reach",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Uldrea",
+        "status": "Completed"
+      }
     ]
   },
   {
@@ -29,22 +91,39 @@
     "focus": "Dungeon-forward play, society stories, and completed table arcs.",
     "description": "Lesley runs an active Monday campaign and has several completed campaigns listed in the previous-campaign archive.",
     "portrait": "/images/generated/lesley-poole-card.webp",
-    "activeCampaignIds": ["dungeons-iii"],
+    "activeCampaignIds": [
+      "dungeons-iii"
+    ],
     "previousCampaigns": [
-      { "name": "Legends of Larch", "status": "Completed" },
-      { "name": "MEAD Society", "status": "Completed" },
-      { "name": "The Company", "status": "Completed" }
+      {
+        "name": "Blisterfel - The Company",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Dungeons I - Legends of Larch",
+        "status": "Completed"
+      },
+      {
+        "name": "Dungeons II - MEAD Society",
+        "status": "Completed"
+      }
     ]
   },
   {
     "id": "michael-hewson",
     "name": "Michael Hewson",
     "focus": "Arcane mysteries, covert operations, and strange threats.",
-    "description": "Michael currently hosts two active campaigns and has a Middle Earth campaign listed in the archive.",
+    "description": "Michael currently hosts Mad Mage and The Silent Vanguard, and has Middle Earth listed in the archive.",
     "portrait": "/images/generated/michael-hewson-card.webp",
-    "activeCampaignIds": ["mad-mage", "the-silent-vanguard"],
+    "activeCampaignIds": [
+      "mad-mage",
+      "the-silent-vanguard"
+    ],
     "previousCampaigns": [
-      { "name": "Middle Earth", "status": "On Hiatus" }
+      {
+        "name": "Middle Earth",
+        "status": "On Hiatus"
+      }
     ]
   },
   {
@@ -57,7 +136,7 @@
     "previousCampaigns": [
       {
         "name": "Charlemagne's Angels",
-        "status": "Completed",
+        "status": "On Hiatus",
         "url": "https://sites.google.com/view/suwanee-gamers/previous-campaigns/charlemagnes-angels"
       }
     ]
@@ -70,19 +149,43 @@
     "portrait": "/images/generated/larry-mchale-card.webp",
     "activeCampaignIds": [],
     "previousCampaigns": [
-      { "name": "Crystal Bottle", "status": "On Hiatus" }
+      {
+        "name": "Crystal Bottle",
+        "status": "On Hiatus"
+      }
     ]
   },
   {
     "id": "chris-glynn",
     "name": "Chris Glynn",
     "focus": "Completed published-adventure campaigns.",
-    "description": "Chris has completed campaign history, including major D&D adventure paths from the archive.",
+    "description": "Chris has campaign history in the archive, including published-adventure campaigns.",
     "portrait": "/images/generated/chris-glynn-card.webp",
     "activeCampaignIds": [],
     "previousCampaigns": [
-      { "name": "Strahd / Avernus", "status": "Completed" },
-      { "name": "Storm King's Thunder", "status": "Completed" }
+      {
+        "name": "Curse of Strahd",
+        "status": "On Hiatus"
+      },
+      {
+        "name": "Nomads",
+        "status": "Completed"
+      },
+      {
+        "name": "Storm King's Thunder",
+        "status": "Completed"
+      }
     ]
+  },
+  {
+    "id": "rotating-dms",
+    "name": "Rotating DMs",
+    "focus": "Shared one-shots, rotating tables, and collaborative campaign nights.",
+    "description": "The rotating DM slot covers campaign play led by different Dungeon Masters across the Suwanee Gamers table.",
+    "portrait": "/images/generated/rotating-dms-card.webp",
+    "activeCampaignIds": [
+      "collective-of-myrdae"
+    ],
+    "previousCampaigns": []
   }
 ]

@@ -4,8 +4,8 @@
     "id": "organizations-header",
     "type": "page-header",
     "props": {
-      "eyebrow": "Organizations",
-      "title": "Organizations",
+      "eyebrow": "Factions and Organizations",
+      "title": "Factions and Organizations",
       "description": "Guilds, orders, cults, hidden networks, and allied powers that shape Myrdae. Factions are organizations that heavily recruit adventurers.",
       "align": "center"
     }

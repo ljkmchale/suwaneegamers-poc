@@ -148,7 +148,7 @@
     "name": "Frystarian Strand",
     "capital": "Palason",
     "region": "Bathaes",
-    "description": "The Frystarian Strand is the northernmost reach of the Bathaen Empire, where cliffs and forests meet the waves of the Broken Deep and High Sea. Centuries ago, the mages of the Tegenwald ignited the Shroudburn — vast magical blazes that scorched away the dense wilderness and drove out the shadowy creatures that lurked within. The land still bears the scars and blessings of that fire, with warm mist rising from the land and ancient stones said to whisper remnants of forgotten spells.",
+    "description": "The Frystarian Strand is the northernmost reach of the Bathaes, where cliffs and forests meet the waves of the Broken Deep and High Sea. Centuries ago, the mages of the Tegenwald ignited the Shroudburn — vast magical blazes that scorched away the dense wilderness and drove out the shadowy creatures that lurked within. The land still bears the scars and blessings of that fire, with warm mist rising from the land and ancient stones said to whisper remnants of forgotten spells.",
     "image": "/images/maps-of-myrdae/territories/frystarian.webp",
     "href": null
   },
@@ -211,7 +211,7 @@
     "name": "Kholdur",
     "capital": "Thel Kholdur",
     "region": "Orbansia",
-    "description": "Kholdur, located in northern Orbansia, is full of foothills and rivers that flow from the Distancion Mountains to meet the Sea of Sondera. The land is known for Thel Kholdur, a grand dwarven city carved deep into the mountains with a long underground pass that leads to the Bathaen Empire beneath.",
+    "description": "Kholdur, located in northern Orbansia, is full of foothills and rivers that flow from the Distancion Mountains to meet the Sea of Sondera. The land is known for Thel Kholdur, a grand dwarven city carved deep into the mountains with a long underground pass that leads to the Bathaes beneath.",
     "image": "/images/maps-of-myrdae/territories/kholdur.webp",
     "href": null
   },
@@ -382,7 +382,7 @@
     "name": "Wheldrake",
     "capital": "Basctdelm (shared)",
     "region": "Bathaes",
-    "description": "Wheldrake is the northeasternmost territory of the Bathaen Empire, a land of hills and marshes. Wheldrake is home to the legend of the Order of the Blade — a once-revered brotherhood of knights who upheld honor above imperial decree and vanished after defying an old corrupt king of the Bathaen Empire. Their final fortress is said to be hidden in the Wheldrake Hills, guarded by spectral sentinels and relics that await the return of a worthy bearer to restore their broken vow. Wheldrake and Halesworth share Basctdelm as a capital.",
+    "description": "Wheldrake is the northeasternmost territory of the Bathaes, a land of hills and marshes. Wheldrake is home to the legend of the Order of the Blade — a once-revered brotherhood of knights who upheld honor above imperial decree and vanished after defying an old corrupt king of the Bathaen Empire. Their final fortress is said to be hidden in the Wheldrake Hills, guarded by spectral sentinels and relics that await the return of a worthy bearer to restore their broken vow. Wheldrake and Halesworth share Basctdelm as a capital.",
     "image": "/images/maps-of-myrdae/territories/wheldrake.webp",
     "href": null
   },

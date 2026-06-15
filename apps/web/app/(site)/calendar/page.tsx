@@ -8,11 +8,13 @@ import {
   GOOGLE_CALENDAR_TIMEZONE,
 } from "@/lib/calendar";
 import {
+  getActiveCampaigns,
   findCampaignForCalendarEvent,
   findPreviousCampaignEvent,
   normalizeCampaignTitle,
   type PortalCampaign,
 } from "@/lib/campaigns";
+import { getTrackedActiveCampaigns } from "@/lib/campaignTracking";
 import { getCampaignsWithDocumentSessionSummaries } from "@/lib/sessionSummaries";
 import { AdventureFoldCard } from "./AdventureFoldCard";
 import { LogoLightning } from "./LogoLightning";
@@ -164,7 +166,9 @@ export default async function CalendarPage() {
   let events: CalendarEvent[] = [];
   let pastEvents: CalendarEvent[] = [];
   let feedError = false;
-  const campaigns = await getCampaignsWithDocumentSessionSummaries();
+  const campaigns = await getCampaignsWithDocumentSessionSummaries(
+    await getTrackedActiveCampaigns(getActiveCampaigns()),
+  );
 
   try {
     events = await fetchUpcomingCalendarEvents(6);

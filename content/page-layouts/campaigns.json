@@ -61,6 +61,14 @@
     }
   },
   {
+    "kind": "block",
+    "id": "cc-the-silent-vanguard",
+    "type": "campaign-card",
+    "props": {
+      "id": "the-silent-vanguard"
+    }
+  },
+  {
     "kind": "section",
     "id": "side-label"
   },

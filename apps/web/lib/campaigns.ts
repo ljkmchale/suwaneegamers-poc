@@ -35,6 +35,9 @@ export interface PortalCampaign {
   referenceUrl: string;
   headerImage?: string;
   headerImagePosition?: string;
+  headerImageSourceFolder?: string;
+  headerImageSourceFileId?: string;
+  headerImageSourceFileName?: string;
   official?: boolean;
   /** Google Doc with the players' full running session notes. */
   playerNotesUrl?: string;

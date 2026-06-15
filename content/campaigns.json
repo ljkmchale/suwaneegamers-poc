@@ -320,16 +320,19 @@
         "summary": "In the first session, the party came together at the remote outpost of Mossholde, each carrying their own reasons for being on the frontier. A badly wounded elf staggered in during the night, he warned them of an ambush by strange blue creatures and pointed toward the ruins of an old citadel in the southern valley. Choosing action over caution, the group tracked the attackers at first light, uncovering signs of grisly feeding and unnatural behavior. Their pursuit led them into the Broken Citadel itself, where a hard fought battle revealed organized enemies, unsettling magical clues, and the first clear link between the ruins and the poison that had sickened Ro's father.",
         "audioLinks": []
       }
-    ]
+    ],
+    "headerImagePosition": "center"
   },
   {
     "id": "bloody-endeavor",
     "name": "Bloody Endeavor II",
-    "aliases": ["Bloody Endeavor"],
+    "aliases": [
+      "Bloody Endeavor"
+    ],
     "dm": "Sean Poole",
     "schedule": "Mondays",
     "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/bloody-endeavor",
-    "headerImage": "/images/battle-scene.jpg",
+    "headerImage": "/images/campaigns/bloody-endeavor-ii.jpg",
     "resources": [
       {
         "label": "D&D Beyond",
@@ -448,9 +451,9 @@
       }
     ],
     "playerNotesUrl": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit",
-    "aliases": [
-      "Bloody Endeavor"
-    ]
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "1nvWZQWq_QuTWxNgSABz7MHtS5z50ds37",
+    "headerImageSourceFileName": "Bloody Endeavor II - Header (v.0).jpg"
   },
   {
     "id": "collective-of-myrdae",
@@ -488,7 +491,10 @@
         "title": "Pickup Character Pool",
         "summary": "This is not an official campaign. It is a place for players to keep characters ready for pickup groups or smaller session groups using D&D 2024 rules."
       }
-    ]
+    ],
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "1VOgp8_o_K7yMt_Co_c_f4N2SVfJZLfsq",
+    "headerImageSourceFileName": "Collective of Myrdae - Header (v.0).jpg"
   },
   {
     "id": "dungeons-iii",
@@ -496,7 +502,7 @@
     "dm": "Lesley Poole",
     "schedule": "Mondays",
     "referenceUrl": "https://sites.google.com/view/suwanee-gamers/campaigns/dungeons-iii",
-    "headerImage": "/images/campaigns/dungeons-iii.jpg",
+    "headerImage": "/images/campaigns/dungeons-iii-knight-watch.jpg",
     "resources": [
       {
         "label": "D&D Beyond",
@@ -672,7 +678,10 @@
     "playerNotesUrl": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit",
     "aliases": [
       "Dungeons III"
-    ]
+    ],
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "130hFx4bRO4qmhPBbT946OKf-v4VVF3zH",
+    "headerImageSourceFileName": "Dungeons III - kNight Watch - Header (v.0).jpg"
   },
   {
     "id": "heroes-of-emberstran",
@@ -1038,7 +1047,10 @@
     "aliases": [
       "emberstran"
     ],
-    "playerNotesUrl": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit"
+    "playerNotesUrl": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit",
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "1CgDEzpZOCE0iuv98hi5_M4Q0WKce2hNf",
+    "headerImageSourceFileName": "Heroes of Emberstran - Header (v.0).jpg"
   },
   {
     "id": "mad-mage",
@@ -1059,7 +1071,10 @@
         "title": "Dungeon of the Mad Mage",
         "summary": "This campaign currently presents as a Dungeon of the Mad Mage hub with player notes."
       }
-    ]
+    ],
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "1aA0uwpkkTYVOWxHCIlHew4QK1buT2IkE",
+    "headerImageSourceFileName": "Mad Mage - Header (v.0).jpg"
   },
   {
     "id": "souls-of-destiny",
@@ -1233,15 +1248,42 @@
       }
     ],
     "party": [
-      { "name": "Jett Blackwood", "player": "Larry McHale" },
-      { "name": "Bedet'Tul", "player": "Brian" },
-      { "name": "Lensworth Fistlemuch", "player": "Tom Chernetsky" },
-      { "name": "Dax Whirren", "player": "Suzanne Chernetsky" },
-      { "name": "Fosslenob Gripefoot", "player": "Michael Hewson" },
-      { "name": "Axel Blackwood", "player": "Larry McHale" },
-      { "name": "Cletus Rashgut", "player": "Brian" },
-      { "name": "Kern", "player": "Tom Chernetsky" },
-      { "name": "Ivy Blackthorn", "player": "Suzanne Chernetsky" }
+      {
+        "name": "Jett Blackwood",
+        "player": "Larry McHale"
+      },
+      {
+        "name": "Bedet'Tul",
+        "player": "Brian"
+      },
+      {
+        "name": "Lensworth Fistlemuch",
+        "player": "Tom Chernetsky"
+      },
+      {
+        "name": "Dax Whirren",
+        "player": "Suzanne Chernetsky"
+      },
+      {
+        "name": "Fosslenob Gripefoot",
+        "player": "Michael Hewson"
+      },
+      {
+        "name": "Axel Blackwood",
+        "player": "Larry McHale"
+      },
+      {
+        "name": "Cletus Rashgut",
+        "player": "Brian"
+      },
+      {
+        "name": "Kern",
+        "player": "Tom Chernetsky"
+      },
+      {
+        "name": "Ivy Blackthorn",
+        "player": "Suzanne Chernetsky"
+      }
     ],
     "description": "Secret agents assembled by Master Thorne investigate outbreaks, conspiracies, and the ominous phrase The Long Night.",
     "sessionSummaries": [

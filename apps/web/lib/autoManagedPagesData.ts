@@ -1,5 +1,6 @@
 import { readContent, writeContent } from "./contentFiles";
-import type { AutoManagedPage } from "./autoManagedPages";
+import type { AutoManagedPage, ManagedSourceLink } from "./autoManagedPages";
+import { getActiveCampaigns, type PortalCampaign } from "./campaigns";
 
 const FILE = "auto-managed-pages.json";
 
@@ -12,7 +13,7 @@ function safeRead(): AutoManagedPage[] {
 }
 
 export function getAutoManagedPages(): AutoManagedPage[] {
-  return safeRead();
+  return mergeGeneratedPages(safeRead());
 }
 
 export function lockPage(path: string, label: string): void {
@@ -82,8 +83,193 @@ export function getEffectiveDocExportUrl(
 }
 
 export function setPageSourceUrl(path: string, url: string): void {
+  const pages = safeRead();
+  const existingPage = pages.find((p) => p.path === path);
+
+  if (!existingPage) {
+    const generatedPage = campaignDetailManagedPages(pages).find((p) => p.path === path);
+    if (generatedPage) {
+      writeContent(FILE, [
+        ...pages,
+        {
+          ...generatedPage,
+          generated: false,
+          sourceUrl: url,
+        },
+      ]);
+      return;
+    }
+  }
+
   writeContent(
     FILE,
-    safeRead().map((p) => (p.path === path ? { ...p, sourceUrl: url } : p)),
+    pages.map((p) => (p.path === path ? { ...p, sourceUrl: url } : p)),
   );
+}
+
+function syncLegacySourceFields(
+  page: AutoManagedPage,
+  source: ManagedSourceLink,
+  url: string,
+): AutoManagedPage {
+  if (source.role === "primary") return { ...page, sourceUrl: url };
+  if (source.role === "fallback") return { ...page, fallbackSourceUrl: url };
+  if (/session summaries/i.test(source.label)) return { ...page, fallbackSourceUrl: url };
+  return page;
+}
+
+export function setManagedSourceUrl(path: string, sourceKey: string, url: string): void {
+  const pages = safeRead();
+  const existingPage = pages.find((page) => page.path === path);
+  const pageToUpdate =
+    existingPage ??
+    campaignDetailManagedPages(pages).find((page) => page.path === path);
+
+  if (!pageToUpdate) return;
+
+  const updatedPage = updateManagedSourceUrl(pageToUpdate, sourceKey, url);
+  const persistedPage = { ...updatedPage, generated: false };
+
+  if (!existingPage) {
+    writeContent(FILE, [...pages, persistedPage]);
+    return;
+  }
+
+  writeContent(
+    FILE,
+    pages.map((page) => (page.path === path ? persistedPage : page)),
+  );
+}
+
+function updateManagedSourceUrl(
+  page: AutoManagedPage,
+  sourceKey: string,
+  url: string,
+): AutoManagedPage {
+  if (sourceKey === "sourceUrl") return { ...page, sourceUrl: url };
+  if (sourceKey === "fallbackSourceUrl") return { ...page, fallbackSourceUrl: url };
+
+  const match = /^managedSources\.(\d+)$/.exec(sourceKey);
+  if (!match || !page.managedSources) return page;
+
+  const index = Number(match[1]);
+  const source = page.managedSources[index];
+  if (!source) return page;
+
+  const managedSources = page.managedSources.map((item, itemIndex) =>
+    itemIndex === index ? { ...item, url } : item,
+  );
+
+  return syncLegacySourceFields({ ...page, managedSources }, source, url);
+}
+
+export function getConfiguredManagedSourceUrl(
+  path: string,
+  labelPattern: RegExp,
+  fallbackUrl: string,
+): string {
+  const page = safeRead().find((p) => p.path === path);
+  const source = page?.managedSources?.find((item) => labelPattern.test(item.label));
+  return source?.url || fallbackUrl;
+}
+
+function uniqueSources(sources: ManagedSourceLink[]) {
+  const seen = new Set<string>();
+  return sources.filter((source) => {
+    if (!source.url) return false;
+    const key = `${source.label.toLowerCase()}::${source.url}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function campaignLinkSources(campaign: PortalCampaign): ManagedSourceLink[] {
+  const sources: ManagedSourceLink[] = [];
+
+  if (campaign.referenceUrl) {
+    sources.push({
+      label: "Legacy Campaign Page",
+      url: campaign.referenceUrl,
+      role: "supporting",
+    });
+  }
+
+  for (const resource of campaign.resources ?? []) {
+    sources.push({
+      label: resource.label || "Campaign Resource",
+      url: resource.url,
+      role: /notes?/i.test(resource.label) ? "primary" : "supporting",
+    });
+  }
+
+  if (campaign.playerNotesUrl) {
+    sources.push({
+      label: "Player Notes Google Doc",
+      url: campaign.playerNotesUrl,
+      role: "primary",
+    });
+  }
+
+  return uniqueSources(sources);
+}
+
+function campaignDetailManagedPages(staticPages: AutoManagedPage[]): AutoManagedPage[] {
+  const campaignsPage = staticPages.find((page) => page.path === "/campaigns");
+  const campaignTrackingUrl =
+    campaignsPage?.managedSources?.find((source) => /campaign tracking/i.test(source.label))?.url ??
+    campaignsPage?.sourceUrl;
+  const sessionSummariesUrl =
+    campaignsPage?.managedSources?.find((source) => /session summaries/i.test(source.label))?.url ??
+    campaignsPage?.fallbackSourceUrl;
+  const campaignHeadersUrl =
+    campaignsPage?.managedSources?.find((source) => /campaign headers/i.test(source.label))?.url;
+
+  return getActiveCampaigns().map((campaign) => {
+    const managedSources = uniqueSources([
+      ...(campaignTrackingUrl
+        ? [{
+            label: "Campaign Tracking Google Doc",
+            url: campaignTrackingUrl,
+            role: "primary" as const,
+          }]
+        : []),
+      ...(sessionSummariesUrl
+        ? [{
+            label: "Session Summaries Google Doc",
+            url: sessionSummariesUrl,
+            role: "supporting" as const,
+          }]
+        : []),
+      ...(campaignHeadersUrl
+        ? [{
+            label: "Campaign Headers Google Drive Folder",
+            url: campaignHeadersUrl,
+            role: "supporting" as const,
+          }]
+        : []),
+      ...campaignLinkSources(campaign),
+    ]);
+
+    return {
+      path: `/campaigns/${campaign.id}`,
+      label: campaign.name,
+      sourceName: "Campaign Docs",
+      generated: true,
+      sourceUrl: managedSources[0]?.url ?? "",
+      fallbackSourceUrl: sessionSummariesUrl,
+      managedSources,
+      refreshLabel: "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+      editNote: "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record.",
+    };
+  });
+}
+
+function mergeGeneratedPages(staticPages: AutoManagedPage[]) {
+  const staticPaths = new Set(staticPages.map((page) => page.path));
+  const generatedPages = campaignDetailManagedPages(staticPages).filter(
+    (page) => !staticPaths.has(page.path),
+  );
+
+  return [...staticPages, ...generatedPages];
 }

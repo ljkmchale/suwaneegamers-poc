@@ -77,24 +77,18 @@ export function SessionRecordingPlayer({ url }: { url: string }) {
         title={open ? "Close session recording" : "Play session recording"}
         aria-label={open ? "Close session recording" : "Play session recording"}
         aria-expanded={open}
-        className="transition-colors hover:opacity-80"
-        style={{ color: "var(--color-text-muted)" }}
+        className="grid h-9 w-9 place-items-center overflow-hidden rounded-full border transition-colors hover:opacity-80"
+        style={{
+          borderColor: "var(--color-bg-border)",
+          background: "rgba(255, 255, 255, 0.06)",
+        }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-7 w-7"
+        <img
+          src="/images/dragon-ears.png"
+          alt=""
           aria-hidden="true"
-        >
-          <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2z" />
-          <path d="M3 14v-3a9 9 0 0 1 18 0v3" />
-        </svg>
+          className="h-full w-full object-cover"
+        />
       </button>
 
       {open && (

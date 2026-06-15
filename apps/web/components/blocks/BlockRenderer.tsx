@@ -6,11 +6,13 @@ import type { CSSProperties, ReactNode } from "react";
 import { HeroSection } from "@/components/fantasy/HeroSection";
 import { FoldHeaderBlock } from "@/components/blocks/FoldHeaderBlock";
 import {
+  getActiveCampaigns,
   listedCampaigns,
   sideCampaigns,
   findCampaign,
   normalizeCampaignTitle,
 } from "@/lib/campaigns";
+import { findTrackedCampaign, getTrackedActiveCampaigns } from "@/lib/campaignTracking";
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
 import { getOrganizations } from "@/lib/organizations";
@@ -1340,8 +1342,8 @@ function CalendarEmbedBlock() {
 
 // ── Live data blocks ──────────────────────────────────────────────────────────
 
-function CampaignsGridBlock() {
-  const listed = listedCampaigns();
+async function CampaignsGridBlock() {
+  const listed = await getTrackedActiveCampaigns(listedCampaigns());
   const side   = sideCampaigns();
 
   return (
@@ -1514,12 +1516,8 @@ function OrganizationsListBlock({ props }: { props: Record<string, unknown> }) {
   const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name);
   const groups = [
     {
-      label: "Factions",
-      organizations: organizations.filter((organization) => organization.faction).sort(byName),
-    },
-    {
-      label: "Well Known Organizations",
-      organizations: organizations.filter((organization) => !organization.faction).sort(byName),
+      label: "Factions and Organizations",
+      organizations: [...organizations].sort(byName),
     },
   ];
 
@@ -1660,7 +1658,7 @@ async function CampaignCardBlock({
   variant?: "standalone" | "grid-item";
 }) {
   const id = props.id as string;
-  const campaign = findCampaign(id);
+  const campaign = await findTrackedCampaign(getActiveCampaigns(), id) ?? findCampaign(id);
   if (!campaign) return null;
 
   const inGrid = variant === "grid-item";

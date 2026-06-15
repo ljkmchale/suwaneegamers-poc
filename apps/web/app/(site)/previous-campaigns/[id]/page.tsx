@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { findArchivedCampaign, getArchivedCampaigns } from "@/lib/archivedCampaigns";
+import { getTrackedArchivedCampaigns } from "@/lib/campaignTracking";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -13,7 +14,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const campaign = findArchivedCampaign(id);
+  const campaign = (await getTrackedArchivedCampaigns(getArchivedCampaigns()))
+    .find((campaign) => campaign.id === id) ?? findArchivedCampaign(id);
   return {
     title: campaign?.name ?? "Previous Campaign",
     description: campaign?.description ?? "Suwanee Gamers previous campaign archive.",
@@ -22,13 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArchivedCampaignDetailPage({ params }: Props) {
   const { id } = await params;
-  const campaign = findArchivedCampaign(id);
+  const campaign = (await getTrackedArchivedCampaigns(getArchivedCampaigns()))
+    .find((campaign) => campaign.id === id) ?? findArchivedCampaign(id);
   if (!campaign) notFound();
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-20">
       <Link
-        href="/previous-campaigns"
+        href="/campaigns"
         className="text-xs font-cinzel tracking-widest uppercase transition-opacity hover:opacity-80"
         style={{ color: "var(--color-text-muted)" }}
       >
@@ -83,7 +86,7 @@ export default async function ArchivedCampaignDetailPage({ params }: Props) {
           </p>
         </section>
 
-        {(campaign.resources.length > 0 || campaign.referenceUrl) && (
+        {campaign.resources.length > 0 && (
           <section className="fantasy-card p-6 mb-6">
             <h2 className="font-cinzel text-xl tracking-widest uppercase mb-4" style={{ color: "var(--color-text-primary)" }}>
               Resources
@@ -101,17 +104,6 @@ export default async function ArchivedCampaignDetailPage({ params }: Props) {
                   {resource.label}
                 </a>
               ))}
-              {campaign.referenceUrl && (
-                <a
-                  href={campaign.referenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-md border font-cinzel text-xs tracking-widest uppercase transition-colors hover:border-amber-400"
-                  style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
-                >
-                  Campaign Page
-                </a>
-              )}
             </div>
           </section>
         )}

@@ -84,11 +84,29 @@
   },
   {
     "path": "/campaigns",
-    "label": "Session Summaries",
+    "label": "Campaigns",
     "sourceName": "Google Docs",
-    "sourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
-    "refreshLabel": "Session summaries sync daily from the Session Summaries Google Doc.",
-    "editNote": "Update the Session Summaries Google Doc — run the session notes sync to apply changes. Fallback: individual campaign referenceUrls in campaigns.json."
+    "sourceUrl": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo/edit?usp=sharing",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo/edit?usp=sharing",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      }
+    ],
+    "refreshLabel": "Campaign names, status, and Dungeon Masters refresh from the Campaign Tracking Google Doc.",
+    "editNote": "Update Campaign Tracking to change campaign status, names, or DMs. Session summaries continue to read from the Session Summaries Google Doc."
   },
   {
     "path": "/reference-for-dungeon-masters",
@@ -96,7 +114,9 @@
     "sourceName": "Google Drive",
     "sourceUrl": "https://drive.google.com/drive/folders/198sTv45Mur0RuvA6Ma8DPv-f9NIC0QCk",
     "refreshLabel": "Guide content will be pulled from the Guides Google Drive folder.",
-    "editNote": "Add or update guide docs in the Guides Drive folder. Migration from static content is pending."
+    "editNote": "Add or update guide docs in the Guides Drive folder. Migration from static content is pending.",
+    "coverImageSourceFileId": "1kDIb7eQj7Upha3tYrNIM5FN5IsPCUduA",
+    "coverImageSourceFileName": "Reference for Dungeon Masters - Cover (v.26.05.28).jpg"
   },
   {
     "path": "/_assets",
@@ -113,5 +133,376 @@
     "sourceUrl": "https://docs.google.com/document/d/1eODEiSco7IhOJw_kJW92YqTJDdYO9IfG_tnnXfYUY80",
     "refreshLabel": "Content is managed from the Crit Tables Google Doc.",
     "editNote": "Update the Critical Success, Critical Failure, and Body Hit tables in the source Google Doc, then re-sync to apply changes."
+  },
+  {
+    "path": "/campaigns/bloody-endeavor",
+    "label": "Bloody Endeavor II",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/bloody-endeavor",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/5891206",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc",
+        "role": "primary"
+      },
+      {
+        "label": "Player Notes Google Doc",
+        "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/a-new-adventure",
+    "label": "A New Adventure",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/a-new-adventure",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/6291894",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/collective-of-myrdae",
+    "label": "Collective of Myrdae",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/collective-of-myrdae",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Link (A)",
+        "url": "https://www.dndbeyond.com/campaigns/6166853",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Link (B)",
+        "url": "https://www.dndbeyond.com/campaigns/6343973",
+        "role": "supporting"
+      },
+      {
+        "label": "Join Link A",
+        "url": "https://www.dndbeyond.com/campaigns/join/61668534168762738",
+        "role": "supporting"
+      },
+      {
+        "label": "Join Link (B)",
+        "url": "https://www.dndbeyond.com/campaigns/join/6343973969925474",
+        "role": "supporting"
+      },
+      {
+        "label": "Collective Availability",
+        "url": "https://docs.google.com/spreadsheets/d/1MtEAVh3QJ_oHBasE9Qw2Oq65BxAigtC5GjBQ0eQJ6Qc",
+        "role": "supporting"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/dungeons-iii",
+    "label": "Dungeons III - kNight Watch",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/dungeons-iii",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/join/64603123727126135",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY",
+        "role": "primary"
+      },
+      {
+        "label": "Player Notes Google Doc",
+        "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/heroes-of-emberstran",
+    "label": "Heroes of Emberstran",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/heroes-of-emberstran",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/6506738",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4",
+        "role": "primary"
+      },
+      {
+        "label": "Player Notes Google Doc",
+        "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/mad-mage",
+    "label": "Mad Mage",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/mad-mage",
+        "role": "supporting"
+      },
+      {
+        "label": "Player's Notes",
+        "url": "https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/souls-of-destiny",
+    "label": "Souls of Destiny",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/souls-of-destiny",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/join/71906853968179037",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8",
+        "role": "primary"
+      },
+      {
+        "label": "Player Notes Google Doc",
+        "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/the-silent-vanguard",
+    "label": "The Silent Vanguard",
+    "sourceName": "Campaign Docs",
+    "generated": false,
+    "sourceUrl": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY",
+    "fallbackSourceUrl": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+    "managedSources": [
+      {
+        "label": "Campaign Tracking Google Doc",
+        "url": "https://docs.google.com/document/d/1OCKi_nV-Qv1Zqg7koEbEX8yaURrV2DgieohO2RgNyGo",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting"
+      },
+      {
+        "label": "Campaign Headers Google Drive Folder",
+        "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
+        "role": "supporting"
+      },
+      {
+        "label": "Legacy Campaign Page",
+        "url": "https://sites.google.com/view/suwanee-gamers/campaigns/the-silent-vanguard",
+        "role": "supporting"
+      },
+      {
+        "label": "D&D Beyond",
+        "url": "https://www.dndbeyond.com/campaigns/7681563",
+        "role": "supporting"
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY",
+        "role": "primary"
+      },
+      {
+        "label": "Player Notes Google Doc",
+        "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY",
+        "role": "primary"
+      }
+    ],
+    "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
+    "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
   }
 ]

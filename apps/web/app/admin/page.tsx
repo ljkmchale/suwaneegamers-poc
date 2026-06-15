@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const SECTIONS = [
+  { href: "/admin/map-editor", title: "Map Editor", desc: "Open the hosted Myrdae map editor inside the admin toolset." },
   { href: "/admin/pages", title: "Pages", desc: "Create custom pages and build them with blocks." },
   { href: "/admin/source-managed", title: "Source Managed", desc: "Lock pages and link Google Docs as authoritative sources." },
   { href: "/admin/page-layout", title: "Navigation Layout", desc: "Add, remove, rename, and reorder navigation menus and links." },

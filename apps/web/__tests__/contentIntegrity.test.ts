@@ -16,11 +16,15 @@ import { getPortalLinks } from "@/lib/portal";
 import { buildCampaignDetailLayout, getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { getActiveCustomPages } from "@/lib/customPages";
 import { parsePantheonMarkdown } from "@/lib/pantheon";
+import { getAutoManagedPages, setManagedSourceUrl } from "@/lib/autoManagedPagesData";
 import type { BlockItem } from "@/lib/pageBlocks";
+import { readContent, writeContent } from "@/lib/contentFiles";
+import type { AutoManagedPage } from "@/lib/autoManagedPages";
 
 const campaigns  = getActiveCampaigns();
 const dms        = getDungeonMasters();
 const players    = getPlayerProfileSeeds();
+const ALLOWED_SPECIAL_DM_NAMES = new Set(["Rotating DMs"]);
 
 function findRepoRootForTest() {
   let dir = process.cwd();
@@ -37,11 +41,9 @@ function findRepoRootForTest() {
 describe("Campaign DM field → DM profiles", () => {
   it("every campaign's dm field matches a known DM name or a recognised special value", () => {
     const dmNames = new Set(dms.map((d) => d.name));
-    // Some campaigns list multiple or rotating DMs using a free-text description
-    const ALLOWED_SPECIAL = new Set(["Rotating DMs"]);
     for (const c of campaigns) {
       const isKnownDm      = dmNames.has(c.dm);
-      const isSpecialValue = ALLOWED_SPECIAL.has(c.dm);
+      const isSpecialValue = ALLOWED_SPECIAL_DM_NAMES.has(c.dm);
       expect(
         isKnownDm || isSpecialValue,
         `Campaign "${c.id}" DM "${c.dm}" not found in dungeon-masters.json`,
@@ -147,7 +149,7 @@ describe("DM names → players.json", () => {
   it("every DM who runs an active campaign also has a player profile", () => {
     const playerNames = new Set(players.map((p) => p.name));
     for (const dm of dms) {
-      if (dm.activeCampaignIds.length > 0) {
+      if (dm.activeCampaignIds.length > 0 && !ALLOWED_SPECIAL_DM_NAMES.has(dm.name)) {
         expect(
           playerNames.has(dm.name),
           `DM "${dm.name}" runs active campaigns but has no players.json entry`,
@@ -255,6 +257,16 @@ describe("Stored page layouts", () => {
       process.chdir(originalCwd);
     }
   });
+
+  it("keeps each listed campaign visible on the campaigns page", () => {
+    const campaignCardIds = getPageLayout("/campaigns")
+      .filter((item): item is BlockItem => item.kind === "block" && item.type === "campaign-card")
+      .map((item) => item.props.id);
+
+    for (const campaign of campaigns.filter((campaign) => campaign.official !== false)) {
+      expect(campaignCardIds, `${campaign.name} should be visible on /campaigns`).toContain(campaign.id);
+    }
+  });
 });
 
 describe("Editable campaign detail pages", () => {
@@ -295,6 +307,45 @@ describe("Editable campaign detail pages", () => {
     expect(getManagedCampaignDetailPaths()).toEqual(
       campaigns.map((campaign) => `/campaigns/${campaign.id}`),
     );
+  });
+
+  it("source-locks every campaign detail path from campaign content", () => {
+    const autoManagedPages = getAutoManagedPages();
+
+    for (const campaign of campaigns) {
+      const page = autoManagedPages.find((entry) => entry.path === `/campaigns/${campaign.id}`);
+      expect(page, `${campaign.id} detail route should be source-managed`).toBeTruthy();
+      expect(page?.generated).toBe(true);
+      expect(page?.managedSources?.some((source) => /campaign tracking/i.test(source.label))).toBe(true);
+      expect(page?.managedSources?.some((source) => /session summaries/i.test(source.label))).toBe(true);
+      expect(page?.managedSources?.some((source) => /campaign headers/i.test(source.label))).toBe(true);
+    }
+  });
+
+  it("persists source-link edits for generated campaign detail pages as overrides", () => {
+    const originalPages = readContent<AutoManagedPage[]>("auto-managed-pages.json") ?? [];
+    const path = `/campaigns/${campaigns[0].id}`;
+    const probeUrl = "https://docs.google.com/document/d/campaign-detail-save-probe";
+
+    try {
+      writeContent(
+        "auto-managed-pages.json",
+        originalPages.filter((page) => page.path !== path),
+      );
+
+      expect(getAutoManagedPages().find((page) => page.path === path)?.generated).toBe(true);
+
+      setManagedSourceUrl(path, "managedSources.0", probeUrl);
+
+      const savedPages = readContent<AutoManagedPage[]>("auto-managed-pages.json") ?? [];
+      const savedPage = savedPages.find((page) => page.path === path);
+      expect(savedPage?.generated).toBe(false);
+      expect(savedPage?.managedSources?.[0]?.url).toBe(probeUrl);
+      expect(getAutoManagedPages().find((page) => page.path === path)?.managedSources?.[0]?.url)
+        .toBe(probeUrl);
+    } finally {
+      writeContent("auto-managed-pages.json", originalPages);
+    }
   });
 
   it("stores each campaign detail page as individually editable assets", () => {
@@ -358,6 +409,25 @@ describe("Editable campaign detail pages", () => {
 });
 
 describe("Previous campaign archive", () => {
+  it("returns archived campaign detail visitors to the main campaigns page", () => {
+    const routeSource = fs.readFileSync(
+      path.join(
+        findRepoRootForTest(),
+        "apps",
+        "web",
+        "app",
+        "(site)",
+        "previous-campaigns",
+        "[id]",
+        "page.tsx",
+      ),
+      "utf-8",
+    );
+
+    expect(routeSource).toContain('href="/campaigns"');
+    expect(routeSource).not.toContain('href="/previous-campaigns"');
+  });
+
   it("ingests the full campaign status document archive", () => {
     const cards = getPageLayout("/previous-campaigns").filter(
       (item): item is BlockItem => item.kind === "block" && item.type === "archived-campaign-card",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 import { getArchivedCampaigns } from "@/lib/archivedCampaigns";
+import { getTrackedArchivedCampaigns } from "@/lib/campaignTracking";
 import { PreviousCampaignFoldCard } from "./PreviousCampaignFoldCard";
 
 export const metadata: Metadata = {
@@ -41,8 +42,8 @@ function SideLabelSection() {
   );
 }
 
-function PreviousCampaignsSection() {
-  const campaigns = getArchivedCampaigns();
+async function PreviousCampaignsSection() {
+  const campaigns = await getTrackedArchivedCampaigns(getArchivedCampaigns());
   return (
     <div className="max-w-6xl mx-auto px-6">
       <div className="grid gap-4">

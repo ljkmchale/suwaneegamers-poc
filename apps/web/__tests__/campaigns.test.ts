@@ -11,6 +11,14 @@ import {
   type PortalCampaign,
 } from "@/lib/campaigns";
 import type { CalendarEvent } from "@/lib/calendar";
+import {
+  parseSessionSummariesDocumentHtml,
+  SESSION_SUMMARIES_REVALIDATE_SECONDS,
+} from "@/lib/sessionSummaries";
+import {
+  applyCampaignTrackingToActiveCampaigns,
+  parseCampaignTrackingText,
+} from "@/lib/campaignTracking";
 
 // ── Data shape ────────────────────────────────────────────────────────────────
 
@@ -148,23 +156,13 @@ describe("activeCampaigns party links", () => {
     expect(souls?.party?.some((member) => member.name === "Lawrence")).toBe(false);
   });
 
-  it("tracks Silent Vanguard player names", () => {
-    const vanguard = activeCampaigns.find((campaign) => campaign.id === "the-silent-vanguard");
-
-    expect(vanguard?.party).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ name: "Jett Blackwood", player: "Larry McHale" }),
-        expect.objectContaining({ name: "Bedet'Tul", player: "Brian" }),
-        expect.objectContaining({ name: "Lensworth Fistlemuch", player: "Tom Chernetsky" }),
-        expect.objectContaining({ name: "Dax Whirren", player: "Suzanne Chernetsky" }),
-        expect.objectContaining({ name: "Fosslenob Gripefoot", player: "Michael Hewson" }),
-        expect.objectContaining({ name: "Axel Blackwood", player: "Larry McHale" }),
-        expect.objectContaining({ name: "Cletus Rashgut", player: "Brian" }),
-        expect.objectContaining({ name: "Kern", player: "Tom Chernetsky" }),
-        expect.objectContaining({ name: "Ivy Blackthorn", player: "Suzanne Chernetsky" }),
-      ]),
-    );
-    expect(vanguard?.party?.some((member) => member.name === "Kenton")).toBe(false);
+  it("uses the campaign tracking doc names for active sequel campaigns", () => {
+    expect(activeCampaigns.find((campaign) => campaign.id === "bloody-endeavor")?.name)
+      .toBe("Bloody Endeavor II");
+    expect(activeCampaigns.find((campaign) => campaign.id === "dungeons-iii")?.name)
+      .toBe("Dungeons III - kNight Watch");
+    expect(activeCampaigns.find((campaign) => campaign.id === "the-silent-vanguard")?.name)
+      .toBe("The Silent Vanguard");
   });
 });
 
@@ -422,5 +420,121 @@ describe("parseLegacyCampaignSessionSummariesFromHtml", () => {
     `);
     expect(summaries.length).toBeGreaterThan(0);
     expect(summaries[0].audioLinks).toBeUndefined();
+  });
+});
+
+describe("parseSessionSummariesDocumentHtml", () => {
+  const campaigns: PortalCampaign[] = [
+    {
+      id: "a-new-adventure",
+      name: "A New Adventure",
+      dm: "Chip Poole",
+      schedule: "Monthly",
+      description: "",
+      referenceUrl: "https://example.com/a-new-adventure",
+    },
+    {
+      id: "the-silent-vanguard",
+      name: "The Silent Vanguard",
+      dm: "Sean Poole",
+      schedule: "Biweekly",
+      description: "",
+      referenceUrl: "https://example.com/the-silent-vanguard",
+    },
+  ];
+
+  it("parses campaign headings, session summaries, and exported audio links", () => {
+    const parsed = parseSessionSummariesDocumentHtml(
+      `
+        <h1><span>A New Adventure</span></h1>
+        <h2><span>Session 28 &ndash; Caelora has Issues!</span></h2>
+        <p><span>The party reached Caelora.</span></p>
+        <p><a href="https://www.google.com/url?q=https://drive.google.com/file/d/audio-28/view?usp%3Dsharing&amp;sa=D">28 - Caelora has Issues.mp3</a></p>
+        <h1><span>The Silent Vanguard</span></h1>
+        <h2><span>02 - A Town full of Zombies</span></h2>
+        <p><span>The party survived Brinecross.</span></p>
+      `,
+      campaigns,
+    );
+
+    expect(parsed["a-new-adventure"]).toEqual([
+      {
+        title: "Session 28 - Caelora has Issues!",
+        summary: "The party reached Caelora.",
+        audioLinks: [
+          {
+            label: "28 - Caelora has Issues.mp3",
+            url: "https://drive.google.com/file/d/audio-28/view?usp=sharing",
+          },
+        ],
+      },
+    ]);
+    expect(parsed["the-silent-vanguard"]).toEqual([
+      {
+        title: "02 - A Town full of Zombies",
+        summary: "The party survived Brinecross.",
+      },
+    ]);
+  });
+
+  it("refreshes the Session Summaries document cache every 24 hours", () => {
+    expect(SESSION_SUMMARIES_REVALIDATE_SECONDS).toBe(86400);
+  });
+});
+
+describe("Campaign Tracking document", () => {
+  it("parses campaign names, statuses, and canonical DM names", () => {
+    const entries = parseCampaignTrackingText(`
+      Campaign List
+      Campaigns
+      Name
+      Status
+      DM
+
+      Dungeons III - kNight Watch
+      Active
+      Lesely Poole
+
+      Storm King's Thunder
+      Complete
+      Chris Glynn
+    `);
+
+    expect(entries).toEqual([
+      { name: "Dungeons III - kNight Watch", status: "Active", dm: "Lesley Poole" },
+      { name: "Storm King's Thunder", status: "Completed", dm: "Chris Glynn" },
+    ]);
+  });
+
+  it("keeps active doc campaigns and removes campaigns no longer active", () => {
+    const campaigns: PortalCampaign[] = [
+      {
+        id: "dungeons-iii",
+        name: "Dungeons III",
+        aliases: ["Dungeons III - kNight Watch"],
+        dm: "Lesley Poole",
+        schedule: "Mondays",
+        description: "",
+        referenceUrl: "https://example.com/d3",
+      },
+      {
+        id: "old-campaign",
+        name: "Old Campaign",
+        dm: "Chip Poole",
+        schedule: "Monthly",
+        description: "",
+        referenceUrl: "https://example.com/old",
+      },
+    ];
+
+    expect(applyCampaignTrackingToActiveCampaigns(campaigns, [
+      { name: "Dungeons III - kNight Watch", status: "Active", dm: "Lesley Poole" },
+      { name: "Old Campaign", status: "Completed", dm: "Chip Poole" },
+    ])).toEqual([
+      expect.objectContaining({
+        id: "dungeons-iii",
+        name: "Dungeons III - kNight Watch",
+      }),
+    ]);
   });
 });

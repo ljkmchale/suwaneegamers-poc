@@ -5,6 +5,7 @@ import { logoutAction } from "./login/actions";
 
 const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/map-editor", label: "Map Editor" },
   { href: "/admin/pages", label: "Pages" },
   { href: "/admin/source-managed", label: "Source Managed" },
   { href: "/admin/page-layout", label: "Navigation Layout" },
@@ -15,6 +16,7 @@ const NAV_LINKS = [
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const requestHeaders = await headers();
   const isLoginPage = requestHeaders.get("x-admin-login-page") === "1";
+  const isMapEditor = requestHeaders.get("x-admin-path") === "/admin/map-editor";
 
   if (isLoginPage) return children;
 
@@ -64,7 +66,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto p-8 max-w-5xl">
+      <main className={isMapEditor ? "flex-1 overflow-hidden" : "flex-1 overflow-auto p-8"}>
         {children}
       </main>
     </div>

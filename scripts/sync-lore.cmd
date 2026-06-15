@@ -6,4 +6,9 @@ cd /d "%~dp0.."
 if not exist "logs" mkdir "logs"
 echo [%date% %time%] lore sync starting >> "logs\sync-lore.log"
 node scripts\sync-lore.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-organization-symbols.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-pantheon-symbols.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-gazetteer-entries.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-dm-reference.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-crit-tables.mjs >> "logs\sync-lore.log" 2>&1
 echo [%date% %time%] lore sync finished (exit %errorlevel%) >> "logs\sync-lore.log"

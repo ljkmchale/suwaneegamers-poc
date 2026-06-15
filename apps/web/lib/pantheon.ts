@@ -26,6 +26,17 @@ function slug(value: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+const CANONICAL_DEITY_NAMES = new Map<string, string>([
+  ["divera", "Diverra"],
+  ["diverra", "Diverra"],
+  ["divvera", "Diverra"],
+]);
+
+function canonicalDeityName(value: string): string {
+  const name = value.trim();
+  return CANONICAL_DEITY_NAMES.get(slug(name)) ?? name;
+}
+
 function stripMarkdown(value: string): string {
   return value
     .replace(/\\-/g, "-")
@@ -94,9 +105,10 @@ function extractNewOrderTable(markdown: string): PantheonDeity[] {
     if (!line.startsWith("|")) break;
     const cells = line.split("|").slice(1, -1).map((cell) => stripMarkdown(cell));
     if (cells.length < 3 || !cells[0]) continue;
+    const name = canonicalDeityName(cells[0]);
     rows.push({
-      id: `pan-${slug(cells[0])}`,
-      name: cells[0],
+      id: `pan-${slug(name)}`,
+      name,
       title: cells[1] || null,
       domain: cells[2] || null,
       image: null,
@@ -127,7 +139,7 @@ function extractDetailSections(markdown: string): Map<string, string> {
 
   while ((match = headingRegex.exec(detailMarkdown))) {
     const heading = stripMarkdown(match[1]);
-    const name = heading.split(",")[0].trim();
+    const name = canonicalDeityName(heading.split(",")[0]);
     headings.push({ name, start: match.index, end: headingRegex.lastIndex });
   }
 

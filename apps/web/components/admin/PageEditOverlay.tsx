@@ -35,7 +35,7 @@ import { PageEditPanel } from "./PageEditPanel";
 import { CardLayoutGridEditor, CARD_LAYOUT_MAX_ROWS } from "./CardLayoutGridEditor";
 import { BlockPicker } from "./BlockPicker";
 import { CanvasEditor, nextCanvasPosition } from "./CanvasEditor";
-import type { AutoManagedPage } from "@/lib/autoManagedPages";
+import { getManagedSourceLinks, type AutoManagedPage } from "@/lib/autoManagedPages";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -50,6 +50,8 @@ function AutoManagedPagePanel({
   page: AutoManagedPage;
   onClose: () => void;
 }) {
+  const managedLinks = getManagedSourceLinks(page);
+
   return (
     <aside
       className="fixed top-0 right-0 h-full z-50 flex flex-col"
@@ -96,9 +98,29 @@ function AutoManagedPagePanel({
 
         <div>
           <p className="font-cinzel text-[10px] tracking-widest uppercase text-[#a89880]">
-            Source
+            Managed Links
           </p>
           <p className="mt-1 text-sm text-[#e8dfc8]">{page.sourceName}</p>
+          {managedLinks.length > 0 && (
+            <div className="mt-3 space-y-2">
+              {managedLinks.map((source) => (
+                <a
+                  key={`${source.label}-${source.url}`}
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded border border-[#2a2a35] bg-[#08050f] px-3 py-2 transition-colors hover:border-[#8b5cf6]"
+                >
+                  <span className="block font-cinzel text-[10px] tracking-widest uppercase text-[#8b5cf6]">
+                    {source.label}
+                  </span>
+                  <span className="mt-1 block break-all text-[11px] leading-relaxed text-[#a89880]">
+                    {source.url}
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
           <p className="mt-2 text-xs leading-relaxed text-[#8d7f66]">
             {page.refreshLabel}
           </p>

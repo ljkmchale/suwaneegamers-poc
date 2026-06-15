@@ -244,35 +244,6 @@ function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
   );
 }
 
-function SectionDivider({
-  eyebrow,
-  title,
-}: {
-  eyebrow: string;
-  title: string;
-}) {
-  return (
-    <div className="col-span-full flex items-center gap-4 pt-6">
-      <div className="h-px flex-1" style={{ background: "var(--color-bg-border)" }} />
-      <div className="text-center">
-        <p
-          className="font-cinzel text-[0.65rem] uppercase tracking-[0.32em]"
-          style={{ color: "var(--color-accent-arcane)" }}
-        >
-          {eyebrow}
-        </p>
-        <h2
-          className="font-cinzel mt-1 text-xl uppercase tracking-widest"
-          style={{ color: "var(--color-accent-gold)" }}
-        >
-          {title}
-        </h2>
-      </div>
-      <div className="h-px flex-1" style={{ background: "var(--color-bg-border)" }} />
-    </div>
-  );
-}
-
 function MinorSettlementsCard({ href }: { href: string }) {
   return (
     <a
@@ -295,7 +266,7 @@ function MinorSettlementsCard({ href }: { href: string }) {
           className="font-cinzel text-xs uppercase tracking-[0.32em]"
           style={{ color: "var(--color-accent-arcane)" }}
         >
-          In Progress
+          Living Document
         </p>
         <h2
           className="font-cinzel mt-3 text-2xl uppercase tracking-widest transition-colors group-hover:text-amber-400"
@@ -320,13 +291,14 @@ function MinorSettlementsCard({ href }: { href: string }) {
 export default async function GazetteerPage() {
   const entries = await getGazetteerEntries();
   const minorEntries = entries.filter((entry) => !DOCUMENTED_ENTRY_SLUGS.has(slugify(entry.name)));
-  const featuredEntries = entries
+  const sortedEntries = entries
     .filter((entry) => DOCUMENTED_ENTRY_SLUGS.has(slugify(entry.name)))
     .sort(
       (left, right) =>
         DOCUMENTED_ENTRY_SLUGS_IN_ORDER.indexOf(slugify(left.name)) -
         DOCUMENTED_ENTRY_SLUGS_IN_ORDER.indexOf(slugify(right.name)),
-    );
+    )
+    .concat(minorEntries);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -361,13 +333,7 @@ export default async function GazetteerPage() {
               <MinorSettlementsCard href={MINOR_SETTLEMENTS_REFERENCE_URL} />
             )}
 
-            <SectionDivider eyebrow="Ready for play" title="Documented Locations" />
-            {featuredEntries.map((entry) => (
-              <GazetteerCard key={entry.href} entry={entry} />
-            ))}
-
-            <SectionDivider eyebrow="In progress" title="Non-Documented Locations" />
-            {minorEntries.map((entry) => (
+            {sortedEntries.map((entry) => (
               <GazetteerCard key={entry.href} entry={entry} />
             ))}
           </section>

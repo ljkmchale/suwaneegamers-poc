@@ -116,7 +116,7 @@ function parseOrganizationDetails(md) {
 
   for (let i = start + 1; i < lines.length; i++) {
     const raw = lines[i];
-    if (/^##\s/.test(raw) && !/^###/.test(raw)) break; // next major heading
+    if (/^#{1,2}\s/.test(raw)) break; // next major heading
 
     const section = raw.match(/^###\s+(.+)$/);
     if (section) {

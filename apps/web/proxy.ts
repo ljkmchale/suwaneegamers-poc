@@ -4,10 +4,11 @@ import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-admin-path", pathname);
 
   // Allow password entry through
   if (pathname === "/admin/login") {
-    const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-admin-login-page", "1");
     return NextResponse.next({
       request: {
@@ -16,7 +17,11 @@ export async function proxy(request: NextRequest) {
     });
   }
 
-  const response = NextResponse.next();
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
   const session = await getIronSession<AdminSessionData>(request, response, SESSION_OPTIONS);
 
   if (session.isAdmin !== true) {

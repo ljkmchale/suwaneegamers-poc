@@ -1,4 +1,5 @@
 import { getAutoManagedPages } from "@/lib/autoManagedPagesData";
+import { getManagedSourceLinks } from "@/lib/autoManagedPages";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { getActiveCampaigns } from "@/lib/campaigns";
@@ -6,7 +7,7 @@ import { getActiveCustomPages } from "@/lib/customPages";
 import {
   lockPageAction,
   unlockPageAction,
-  setSourceUrlAction,
+  setManagedSourceUrlAction,
   refreshPageAction,
 } from "./actions";
 
@@ -118,12 +119,11 @@ export default function SourceManagedPage() {
                 </div>
 
                 {/* Source URL field */}
-                <form action={setSourceUrlAction} className="mb-3">
+                <form action={setManagedSourceUrlAction} className="hidden" style={{ display: "none" }}>
                   <input type="hidden" name="path" value={page.path} />
+                  <input type="hidden" name="sourceKey" value="sourceUrl" />
                   <label className="block font-cinzel text-[10px] tracking-widest uppercase text-[#5a5060] mb-1.5">
-                    {page.sourceName === "Google Calendar"
-                      ? "Google Calendar URL"
-                      : "Google Doc URL"}
+                    Primary source URL
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -146,6 +146,62 @@ export default function SourceManagedPage() {
                   </div>
                 </form>
 
+                <div className="mb-4 rounded-lg border border-[#2a2a35] bg-[#08050f] p-3">
+                  <p className="mb-2 font-cinzel text-[10px] tracking-widest uppercase text-[#5a5060]">
+                    Managed Links
+                  </p>
+                  <div className="space-y-2">
+                    {getManagedSourceLinks(page).map((source) => {
+                      const sourceHeading = (
+                        <span className="flex flex-wrap items-center gap-2">
+                          <span className="font-cinzel text-[10px] tracking-widest uppercase text-[#8b5cf6]">
+                            {source.label}
+                          </span>
+                          {source.role && (
+                            <span className="rounded border border-[#2a2a35] px-1.5 py-0.5 text-[9px] uppercase tracking-widest text-[#5a5060]">
+                              {source.role}
+                            </span>
+                          )}
+                        </span>
+                      );
+
+                      return (
+                        <form
+                          key={`${source.label}-${source.url}`}
+                          action={setManagedSourceUrlAction}
+                          className="rounded border border-[#2a2a35] bg-[#0f0a1a] px-3 py-2"
+                        >
+                          <input type="hidden" name="path" value={page.path} />
+                          <input type="hidden" name="sourceKey" value={source.key ?? ""} />
+                          {sourceHeading}
+                          <div className="mt-2 flex gap-2">
+                            <input
+                              type="url"
+                              name="url"
+                              defaultValue={source.url}
+                              className="min-w-0 flex-1 rounded border border-[#2a2a35] bg-[#08050f] px-3 py-2 text-xs text-[#e8dfc8] placeholder-[#3a3040] focus:border-[#8b5cf6] focus:outline-none"
+                            />
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="shrink-0 rounded border border-[#2a2a35] px-3 py-2 font-cinzel text-[10px] uppercase tracking-widest text-[#5a5060] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]"
+                            >
+                              Open
+                            </a>
+                            <button
+                              type="submit"
+                              className="shrink-0 rounded border border-[#2a2a35] px-3 py-2 font-cinzel text-[10px] uppercase tracking-widest text-[#a89880] transition-colors hover:border-[#8b5cf6] hover:text-[#e8dfc8]"
+                            >
+                              Save
+                            </button>
+                          </div>
+                        </form>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-4">
                   <form action={refreshPageAction.bind(null, page.path)}>
                     <button
@@ -155,14 +211,20 @@ export default function SourceManagedPage() {
                       Refresh content
                     </button>
                   </form>
-                  <form action={unlockPageAction.bind(null, page.path)}>
-                    <button
-                      type="submit"
-                      className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors"
-                    >
-                      Unlock page
-                    </button>
-                  </form>
+                  {page.generated ? (
+                    <span className="text-xs text-[#5a5060]">
+                      Generated from campaign content; saving a link creates an override.
+                    </span>
+                  ) : (
+                    <form action={unlockPageAction.bind(null, page.path)}>
+                      <button
+                        type="submit"
+                        className="text-xs text-[#5a5060] hover:text-[#ef4444] transition-colors"
+                      >
+                        Unlock page
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             ))}

@@ -1,6 +1,6 @@
 # Suwanee Gamers Website Inventory
 
-Last reviewed: 2026-06-10
+Last reviewed: 2026-06-14
 
 A complete map of the site: every route, content file, page layout, block type, and image asset. Read this before making changes — it tells you where everything lives and which file to edit.
 
@@ -35,7 +35,7 @@ Suwanee Gamers is a fantasy-themed portal for a tabletop RPG group. It is a ligh
 | `/bestiary` | section (header) + creature cards | `bestiary.json` |
 | `/pantheon` | block-only; 29 deity cards | `pantheon.json` |
 | `/history` | block-only; timeline + fold-headers | `history.json` |
-| `/organizations` | block-only; 23 org cards in grids | `organizations.json` |
+| `/organizations` | block-only; 25 org cards in grids | `organizations.json` |
 | `/references` | block-only; sourcebook/tool cards | `references.json` |
 | `/territories` | block-only; 9 layout-cards | `territories.json` |
 | `/maps-of-myrdae` | block-only; map layout-cards | `maps-of-myrdae.json` |
@@ -60,7 +60,7 @@ Suwanee Gamers is a fantasy-themed portal for a tabletop RPG group. It is a ligh
 
 | File | Records | Shape (top-level keys per record) |
 |---|---|---|
-| `campaigns.json` | 8 active/side campaigns | `id, name, dm, schedule, referenceUrl, headerImage, resources[], party[], description, sessionSummaries[]` — sessionSummaries: `{title, summary, audioLinks[{label,url}]}`. All summaries fully populated as of 2026-06-10 (imported from the Google Site). |
+| `campaigns.json` | 6 active campaigns + 1 side campaign | `id, name, dm, schedule, referenceUrl, headerImage, resources[], party[], description, sessionSummaries[]` — sessionSummaries: `{title, summary, audioLinks[{label,url}]}`. All summaries fully populated as of 2026-06-10 (imported from the Google Site); Google-backed session sync rechecked 2026-06-14. |
 | `players.json` | 16 | `id, name, description` |
 | `dungeon-masters.json` | 6 | `id, name, focus, description, portrait, activeCampaignIds, previousCampaigns` |
 | `bestiary.json` | 12 | `name, type, image, href` |
@@ -106,7 +106,7 @@ All paths below are referenced from content JSON as `/images/...`.
 |---|---|---|
 | (root) | 18 | DM/player portraits (`chip-poole.png`, `larry-mchale.png`, `*-clean.webp` …), dragon icons (`bronze/copper/silver-dragon.png`), `suwaneegamers-logo.png`, `dragon-ears.png` (audio-player button art on campaign session recordings), `suwanee-media-player-test.wav` |
 | `campaigns/` | 8 | Active campaign header images, one per campaign id (`a-new-adventure.jpg` … `the-silent-vanguard.jpg`) |
-| `campaigns/archive/` | 11 | Archived campaign card images (beer-and-dice, call-for-heroes, crystal-bottle, imminent-domain, legends-of-larch, mead-society, middle-earth, obliged-corpses, storm-kings-thunder, strahd-avernus, the-company) |
+| `campaigns/archive/` | 11 | Archived campaign card images used by the 23-card campaign archive; several newly tracked archive cards intentionally use the card fallback until dedicated art exists. |
 | `bestiary/` | 12 | Creature portraits (bulas, chalyth, dralg, genling, gertot, giant-solifugid, kahlbit, leatherback, narun, rongri, saber, thall-mound) |
 | `pantheon/` | 29 | Deity portraits, one per deity-card on /pantheon (addan … voegurn) |
 | `organizations/` | 32 | Org art in three naming tiers: `detail-*` (9, full art), `marked-generated-*` (11, generated placeholders), `table-*` (12, table-row art) |

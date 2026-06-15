@@ -3,7 +3,7 @@ import { PageBlockList } from "@/components/blocks/PageBlockList";
 import { getPageGrid, getPageLayout } from "@/lib/pageLayouts";
 
 export const metadata: Metadata = {
-  title: "Organizations (Factions)",
+  title: "Factions and Organizations",
   description: "Myrdae organizations, factions, guilds, orders, and hidden powers.",
 };
 
