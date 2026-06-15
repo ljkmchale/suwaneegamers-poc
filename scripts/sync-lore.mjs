@@ -1,16 +1,17 @@
 // Lore sync: pulls the master lore Google Doc (markdown export) and merges
-// the Territories table into content/territories.json.
+// the Territories and Organizations tables into SQLite.
 //
 // Merge rules (conservative):
 //   - Changed capital/region/description -> updated automatically
 //   - New territory in the doc           -> added (image/href empty, flagged)
-//   - Territory missing from the doc     -> kept on site, flagged for review
+//   - Territory missing from the doc     -> kept in DB, flagged for review
 //
 // Run manually:  node scripts/sync-lore.mjs
 // Scheduled:     scripts/sync-lore.cmd (SuwaneeGamers Lore Sync task)
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -28,7 +29,6 @@ function resolveExportUrl() {
 }
 
 const EXPORT_URL = resolveExportUrl();
-const contentFile = path.join(root, "content", "territories.json");
 
 function clean(s) {
   return s
@@ -152,11 +152,11 @@ function parseOrganizationDetails(md) {
 const slugify = (s) =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-// Merges doc rows into a content file. `fields` maps content keys to doc row
-// keys that sync automatically; `makeNew` builds a record for new doc rows.
-// Existing entries missing from the doc are kept and flagged, never deleted.
-function mergeContent(label, file, docRows, fields, makeNew, changes) {
-  const existing = JSON.parse(fs.readFileSync(file, "utf-8"));
+// Merges doc rows into an array of existing records. `fields` maps content
+// keys to doc row values that sync automatically; `makeNew` builds a record
+// for new doc rows. Existing entries missing from the doc are kept and
+// flagged, never deleted.
+function mergeContent(label, existing, docRows, fields, makeNew, changes) {
   const existingByName = new Map(existing.map((t) => [norm(t.name), t]));
   const docNames = new Set(docRows.map((r) => norm(r.name)));
   const merged = [];
@@ -165,7 +165,7 @@ function mergeContent(label, file, docRows, fields, makeNew, changes) {
     const current = existingByName.get(norm(row.name));
     if (!current) {
       merged.push(makeNew(row));
-      changes.push(`NEW ${label}: ${row.name} — added without image; review content/${path.basename(file)}`);
+      changes.push(`NEW ${label}: ${row.name} — added without image; review DB record before publishing`);
       continue;
     }
     const next = { ...current };
@@ -193,12 +193,14 @@ const res = await fetch(EXPORT_URL, { redirect: "follow" });
 if (!res.ok) throw new Error(`Doc export failed: HTTP ${res.status}`);
 const md = await res.text();
 
+const db = getDb();
 const changes = [];
 
 // ── Territories ──
+const existingTerritories = db.prepare(`SELECT * FROM territories ORDER BY rowid`).all();
 const territories = mergeContent(
   "territory",
-  contentFile,
+  existingTerritories,
   parseTerritoriesTable(md),
   (row) => ({
     capital: row.capital && row.capital.toLowerCase() !== "none" ? row.capital : null,
@@ -220,11 +222,12 @@ const territories = mergeContent(
 // ── Organizations ──
 // knownFor/summary/details sync from the doc; description, image, href, and
 // the faction flag are site-owned and never overwritten.
-const orgsFile = path.join(root, "content", "organizations.json");
 const orgDetails = parseOrganizationDetails(md);
+const existingOrgs = db.prepare(`SELECT id, name, known_for AS knownFor, summary, details, description, image, href, faction FROM organizations ORDER BY rowid`).all()
+  .map((row) => ({ ...row, faction: Boolean(row.faction) }));
 const organizations = mergeContent(
   "organization",
-  orgsFile,
+  existingOrgs,
   parseOrganizationsTable(md),
   (row) => ({
     knownFor: row.knownFor,
@@ -249,8 +252,24 @@ const stamp = new Date().toISOString();
 if (changes.length === 0) {
   console.log(`[${stamp}] Lore sync: up to date (${territories.length} territories, ${organizations.length} organizations, no changes).`);
 } else {
-  fs.writeFileSync(contentFile, JSON.stringify(territories, null, 2) + "\n", "utf-8");
-  fs.writeFileSync(orgsFile, JSON.stringify(organizations, null, 2) + "\n", "utf-8");
+  const upsertTerritory = db.prepare(
+    `INSERT OR REPLACE INTO territories (id, name, capital, region, description, image, href) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+  );
+  db.transaction(() => {
+    for (const t of territories) {
+      upsertTerritory.run(t.id, t.name, t.capital ?? null, t.region, t.description, t.image ?? null, t.href ?? null);
+    }
+  })();
+
+  const upsertOrg = db.prepare(
+    `INSERT OR REPLACE INTO organizations (id, name, known_for, summary, details, description, image, href, faction) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  );
+  db.transaction(() => {
+    for (const o of organizations) {
+      upsertOrg.run(o.id, o.name, o.knownFor ?? null, o.summary ?? null, o.details ?? null, o.description ?? null, o.image ?? null, o.href ?? null, o.faction ? 1 : 0);
+    }
+  })();
+
   console.log(`[${stamp}] Lore sync: ${changes.length} change(s) applied:`);
   for (const c of changes) console.log("  " + c);
 }

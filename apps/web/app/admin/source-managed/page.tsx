@@ -41,7 +41,19 @@ interface PathEntry {
   group: string;
 }
 
-export default function SourceManagedPage() {
+interface SourceManagedPageProps {
+  searchParams?: Promise<{
+    status?: string;
+    path?: string;
+    message?: string;
+  }>;
+}
+
+export default async function SourceManagedPage({ searchParams }: SourceManagedPageProps) {
+  const refreshStatus = await searchParams;
+  const refreshMessage = refreshStatus?.message;
+  const refreshPath = refreshStatus?.path;
+  const refreshFailed = refreshStatus?.status === "refresh-failed";
   const locked = getAutoManagedPages();
   const lockedPaths = new Set(locked.map((p) => p.path));
 
@@ -91,6 +103,26 @@ export default function SourceManagedPage() {
           source (Google Doc or Google Calendar).
         </p>
       </div>
+
+      {refreshMessage && (
+        <div
+          className={`mb-6 rounded-lg border p-4 text-sm ${
+            refreshFailed
+              ? "border-[#7f1d1d] bg-[#2a0f12] text-[#fecaca]"
+              : "border-[#315c3d] bg-[#0f2117] text-[#bbf7d0]"
+          }`}
+        >
+          <p className="font-cinzel text-[10px] uppercase tracking-widest">
+            {refreshFailed ? "Refresh Failed" : "Refresh Complete"}
+          </p>
+          <p className="mt-1">
+            {refreshPath && (
+              <span className="mr-2 font-mono text-xs opacity-80">{refreshPath}</span>
+            )}
+            {refreshMessage}
+          </p>
+        </div>
+      )}
 
       {/* Locked pages */}
       {lockedEntries.length > 0 && (
@@ -308,8 +340,8 @@ export default function SourceManagedPage() {
           </li>
           <li>
             Hit <strong className="text-[#e8dfc8]">Refresh content</strong> to
-            bust the cache and pull the latest from the source immediately (otherwise
-            pages refresh automatically every hour).
+            run the page's configured source sync when one exists, then bust
+            the page cache so the latest content can render immediately.
           </li>
           <li>Unlock to re-enable the layout editor at any time.</li>
         </ol>

@@ -1,12 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   lockPage,
   unlockPage,
   setPageSourceUrl,
   setManagedSourceUrl,
 } from "@/lib/autoManagedPagesData";
+import { refreshManagedPage } from "@/lib/managedPageRefresh";
+
+function refreshMessageFromError(error: unknown) {
+  const message = error instanceof Error ? error.message : "Refresh failed.";
+  return message.replace(/\s+/g, " ").trim().slice(0, 300);
+}
 
 export async function lockPageAction(path: string, label: string) {
   lockPage(path, label);
@@ -38,5 +45,20 @@ export async function setManagedSourceUrlAction(formData: FormData) {
 }
 
 export async function refreshPageAction(path: string) {
+  let status = "refreshed";
+  let message = "Refreshed the page cache.";
+
+  try {
+    const result = await refreshManagedPage(path);
+    message = result.message;
+  } catch (error) {
+    status = "refresh-failed";
+    message = refreshMessageFromError(error);
+  }
+
   revalidatePath(path);
+  revalidatePath("/admin/source-managed");
+  redirect(
+    `/admin/source-managed?status=${status}&path=${encodeURIComponent(path)}&message=${encodeURIComponent(message)}`,
+  );
 }

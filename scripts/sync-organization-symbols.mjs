@@ -9,11 +9,11 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const driveRootFolderUrl = "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P?usp=sharing";
 const driveRootFolderId = "1K-Z6118llmVHHqCteN67b-G6n49edz3P";
-const orgsFile = path.join(root, "content", "organizations.json");
 const imageDir = path.join(root, "apps", "web", "public", "images", "organizations");
 
 const folderNameAliases = new Map([
@@ -118,7 +118,8 @@ async function downloadPng(fileId, destination) {
   fs.writeFileSync(destination, bytes);
 }
 
-const organizations = JSON.parse(fs.readFileSync(orgsFile, "utf-8"));
+const db = getDb();
+const organizations = db.prepare(`SELECT id, name, image FROM organizations ORDER BY rowid`).all();
 fs.mkdirSync(imageDir, { recursive: true });
 
 const rootItems = parseDriveItems(await fetchText(driveRootFolderUrl));
@@ -165,7 +166,12 @@ for (const organization of organizations) {
   }
 }
 
-fs.writeFileSync(orgsFile, JSON.stringify(organizations, null, 2) + "\n", "utf-8");
+const updateImage = db.prepare(`UPDATE organizations SET image = ? WHERE id = ?`);
+db.transaction(() => {
+  for (const org of organizations) {
+    updateImage.run(org.image ?? null, org.id);
+  }
+})();
 
 const stamp = new Date().toISOString();
 console.log(`[${stamp}] Organization symbols synced from Drive folder ${driveRootFolderId}`);

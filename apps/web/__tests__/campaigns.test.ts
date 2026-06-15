@@ -70,12 +70,16 @@ describe("activeCampaigns resources", () => {
 });
 
 describe("activeCampaigns party links", () => {
-  it("uses Google Docs links for linked character buttons", () => {
+  it("uses typed Google Docs links for character sheets and backgrounds", () => {
+    const validTypes = new Set(["sheet", "background", "other"]);
+
     for (const campaign of activeCampaigns) {
       for (const member of campaign.party ?? []) {
-        if (member.url) {
-          expect(member.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
-          expect(member.url).not.toBe(campaign.referenceUrl);
+        for (const link of member.links ?? []) {
+          expect(link.label).toBeTruthy();
+          expect(validTypes.has(link.type)).toBe(true);
+          expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
+          expect(link.url).not.toBe(campaign.referenceUrl);
         }
       }
     }

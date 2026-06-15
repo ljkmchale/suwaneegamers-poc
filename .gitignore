@@ -18,6 +18,8 @@ apps/web/out/
 # SQLite database
 *.db
 *.db-journal
+*.db-shm
+*.db-wal
 data/
 
 # Build outputs

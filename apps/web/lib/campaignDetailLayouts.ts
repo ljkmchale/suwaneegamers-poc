@@ -1,4 +1,4 @@
-import { findCampaign, getActiveCampaigns, type PortalCampaign } from "@/lib/campaigns";
+import { findCampaign, getActiveCampaigns, type CampaignPartyMember, type PortalCampaign } from "@/lib/campaigns";
 import type { PageItem } from "@/lib/pageBlocks";
 
 function resourceLinks(campaign: PortalCampaign) {
@@ -15,6 +15,18 @@ function slugPart(value: string, fallback: string) {
 
 function cardLayoutItems(items: unknown[]) {
   return JSON.stringify(items, null, 2);
+}
+
+function partyLinks(member: CampaignPartyMember) {
+  const links = [...(member.links ?? [])];
+  if (member.url && !links.some((link) => link.url === member.url)) {
+    links.unshift({
+      label: "Character Sheet",
+      type: "sheet" as const,
+      url: member.url,
+    });
+  }
+  return links;
 }
 
 export function getCampaignDetailPath(campaignId: string) {
@@ -171,7 +183,8 @@ export function buildCampaignDetailLayout(campaign: PortalCampaign): PageItem[] 
       props: {
         name: member.name,
         role: member.player ?? "",
-        href: member.url ?? "",
+        href: partyLinks(member).find((link) => link.type === "sheet")?.url ?? "",
+        links: cardLayoutItems(partyLinks(member)),
         variant: "tile",
         col: String((index % 3) + 1),
         row: String(Math.floor(index / 3) + 3),

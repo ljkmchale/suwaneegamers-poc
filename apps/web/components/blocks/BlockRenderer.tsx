@@ -33,6 +33,12 @@ const isExternal = (href: string) =>
 const opensInNewTab = (href: string) =>
   isExternal(href) || href.startsWith("/images/");
 
+function parseLinks(raw: unknown): CampaignPartyLinkData[] {
+  if (Array.isArray(raw)) return raw.filter((link) => link?.label && link?.url);
+  if (typeof raw !== "string") return [];
+  return parseJsonArray<CampaignPartyLinkData>(raw).filter((link) => link.label && link.url);
+}
+
 // ── Generic content blocks ────────────────────────────────────────────────────
 
 function DividerBlock({ props }: { props: Record<string, unknown> }) {
@@ -676,9 +682,16 @@ interface CampaignLinkData {
   url?: string;
 }
 
+interface CampaignPartyLinkData {
+  label?: string;
+  type?: string;
+  url?: string;
+}
+
 interface CampaignRosterMemberData {
   name?: string;
   player?: string;
+  links?: CampaignPartyLinkData[];
   url?: string;
 }
 
@@ -844,6 +857,12 @@ function CampaignRosterBlock({ props }: { props: Record<string, unknown> }) {
         )}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {members.map((member, index) => {
+            const memberLinks = [
+              ...parseLinks(member.links),
+              ...(member.url ? [{ label: "Character Sheet", type: "sheet", url: member.url }] : []),
+            ].filter((link, linkIndex, links) =>
+              link.url && links.findIndex((candidate) => candidate.url === link.url) === linkIndex,
+            );
             const inner = (
               <>
                 <span className="block">{member.name}</span>
@@ -852,24 +871,29 @@ function CampaignRosterBlock({ props }: { props: Record<string, unknown> }) {
                     {member.player}
                   </span>
                 )}
+                {memberLinks.length > 0 && (
+                  <span className="mt-2 flex flex-wrap gap-2">
+                    {memberLinks.map((link) => (
+                      <a
+                        key={`${member.name}-${link.label}-${link.url}`}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-cinzel text-[10px] tracking-widest uppercase transition-colors hover:text-amber-300"
+                        style={{ color: "var(--color-accent-gold)" }}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </span>
+                )}
               </>
             );
-            return member.url ? (
-              <a
-                key={`${member.name}-${index}`}
-                href={member.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-md border px-3 py-2 text-sm transition-colors hover:border-amber-400"
-                style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
-              >
-                {inner}
-              </a>
-            ) : (
+            return (
               <span
                 key={`${member.name}-${index}`}
                 className="rounded-md border px-3 py-2 text-sm"
-                style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-muted)" }}
+                style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
               >
                 {inner}
               </span>
@@ -953,7 +977,7 @@ function savedCharactersFromItem(item: ProfileCardItem): SavedCharacterData[] {
     name: character.name,
     campaign: campaign.name,
     dm: campaign.dm,
-    url: character.url,
+    url: character.links?.find((link) => link.type === "sheet")?.url ?? character.url,
   }));
 }
 
@@ -2244,12 +2268,18 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const role = item.props.role as string | undefined;
       const img  = item.props.img  as string | undefined;
       const href = item.props.href as string | undefined;
+      const links = [
+        ...parseLinks(item.props.links),
+        ...(href ? [{ label: "Character Sheet", type: "sheet", url: href }] : []),
+      ].filter((link, index, allLinks) =>
+        link.url && allLinks.findIndex((candidate) => candidate.url === link.url) === index,
+      );
       const variant = (item.props.variant as string | undefined) ?? "portrait";
       if (variant === "tile") {
         const tile = (
           <span
-            className="block rounded-md border px-3 py-2 text-sm transition-colors hover:border-amber-400"
-            style={{ borderColor: "var(--color-bg-border)", color: href ? "var(--color-text-secondary)" : "var(--color-text-muted)" }}
+            className="block rounded-md border px-3 py-2 text-sm"
+            style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
           >
             <span className="block">{name}</span>
             {role && (
@@ -2257,15 +2287,27 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
                 {role}
               </span>
             )}
+            {links.length > 0 && (
+              <span className="mt-2 flex flex-wrap gap-2">
+                {links.map((link) => (
+                  <a
+                    key={`${name}-${link.label}-${link.url}`}
+                    href={link.url}
+                    target={isExternal(link.url ?? "") ? "_blank" : undefined}
+                    rel={isExternal(link.url ?? "") ? "noopener noreferrer" : undefined}
+                    className="font-cinzel text-[10px] tracking-widest uppercase transition-colors hover:text-amber-300"
+                    style={{ color: "var(--color-accent-gold)" }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </span>
+            )}
           </span>
         );
         return (
           <div style={style}>
-            {href ? (
-              <a href={href} target={isExternal(href) ? "_blank" : undefined} rel={isExternal(href) ? "noopener noreferrer" : undefined}>
-                {tile}
-              </a>
-            ) : tile}
+            {tile}
           </div>
         );
       }

@@ -12,11 +12,11 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const driveFolderUrl = "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
 const driveFolderId = "1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
-const gazetteerFile = path.join(root, "content", "gazetteer.json");
 const layoutFile = path.join(root, "content", "page-layouts", "gazetteer.json");
 
 function decodeHtml(value) {
@@ -153,10 +153,10 @@ const entries = docItems.map((item) => ({
   docUrl: `https://docs.google.com/document/d/${item.id}/edit?usp=sharing`,
 }));
 
-// Read existing gazetteer.json if present (to preserve previously known entries that
+// Read existing entries from SQLite (preserves previously known entries that
 // may have fallen off the Drive listing due to its fetch limitations).
-let existing = [];
-try { existing = JSON.parse(fs.readFileSync(gazetteerFile, "utf-8")); } catch { /* first run */ }
+const db = getDb();
+const existing = db.prepare(`SELECT id, title, slug, doc_url AS docUrl FROM gazetteer`).all();
 
 const existingById = new Map(existing.map((e) => [e.id, e]));
 const newById = new Map(entries.map((e) => [e.id, e]));
@@ -170,11 +170,16 @@ const merged = [...newById.values()].sort((a, b) => a.title.localeCompare(b.titl
 const changes = [];
 const warnings = [];
 
-// Write gazetteer.json
+// Upsert into gazetteer table
 const previous = existing.length;
-fs.writeFileSync(gazetteerFile, JSON.stringify(merged, null, 2) + "\n", "utf-8");
+const upsert = db.prepare(`INSERT OR REPLACE INTO gazetteer (id, title, slug, doc_url) VALUES (?, ?, ?, ?)`);
+db.transaction(() => {
+  for (const entry of merged) {
+    upsert.run(entry.id, entry.title, entry.slug, entry.docUrl);
+  }
+})();
 if (merged.length !== previous) {
-  changes.push(`gazetteer.json: ${previous} -> ${merged.length} entries`);
+  changes.push(`gazetteer: ${previous} -> ${merged.length} entries`);
 }
 
 // Update stat counters in the layout

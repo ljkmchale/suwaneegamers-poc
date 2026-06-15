@@ -1,5 +1,4 @@
-import fs from "fs";
-import { contentPath } from "@/lib/contentFiles";
+import { getDb } from "@/lib/db";
 
 export interface Territory {
   id: string;
@@ -11,7 +10,16 @@ export interface Territory {
   href: string | null;
 }
 
+interface DbTerritoryRow {
+  id: string;
+  name: string;
+  capital: string | null;
+  region: string;
+  description: string;
+  image: string | null;
+  href: string | null;
+}
+
 export function getTerritories(): Territory[] {
-  const raw = fs.readFileSync(contentPath("territories.json"), "utf-8");
-  return JSON.parse(raw) as Territory[];
+  return getDb().prepare(`SELECT * FROM territories ORDER BY rowid`).all() as DbTerritoryRow[];
 }

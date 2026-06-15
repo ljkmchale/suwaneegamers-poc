@@ -288,6 +288,17 @@ describe("Editable campaign detail pages", () => {
     }
   }
 
+  function parseLinks(raw: unknown): unknown[] {
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw !== "string") return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
   function countNestedLayoutItems(blocks: BlockItem[], type: string) {
     let count = 0;
     const visit = (items: { id: string; type: string; props: Record<string, unknown> }[]) => {
@@ -303,19 +314,33 @@ describe("Editable campaign detail pages", () => {
     return count;
   }
 
+  function nestedPeople(blocks: BlockItem[]) {
+    const people: { id: string; type: string; props: Record<string, unknown> }[] = [];
+    const visit = (items: { id: string; type: string; props: Record<string, unknown> }[]) => {
+      for (const item of items) {
+        if (item.type === "person") people.push(item);
+        visit(parseCardLayoutItems(item.props.items));
+      }
+    };
+
+    for (const block of blocks) {
+      if (block.type === "layout-card") visit(parseCardLayoutItems(block.props.items));
+    }
+    return people;
+  }
+
   it("registers every campaign detail path as a managed editable page", () => {
     expect(getManagedCampaignDetailPaths()).toEqual(
       campaigns.map((campaign) => `/campaigns/${campaign.id}`),
     );
   });
 
-  it("source-locks every campaign detail path from campaign content", () => {
+  it("source-manages every campaign detail path from campaign content or saved overrides", () => {
     const autoManagedPages = getAutoManagedPages();
 
     for (const campaign of campaigns) {
       const page = autoManagedPages.find((entry) => entry.path === `/campaigns/${campaign.id}`);
       expect(page, `${campaign.id} detail route should be source-managed`).toBeTruthy();
-      expect(page?.generated).toBe(true);
       expect(page?.managedSources?.some((source) => /campaign tracking/i.test(source.label))).toBe(true);
       expect(page?.managedSources?.some((source) => /session summaries/i.test(source.label))).toBe(true);
       expect(page?.managedSources?.some((source) => /campaign headers/i.test(source.label))).toBe(true);
@@ -345,6 +370,19 @@ describe("Editable campaign detail pages", () => {
         .toBe(probeUrl);
     } finally {
       writeContent("auto-managed-pages.json", originalPages);
+    }
+  });
+
+  it("keeps saved campaign roster links in the structured party links shape", () => {
+    for (const campaign of campaigns) {
+      const people = nestedPeople(detailBlocksFor(campaign.id));
+
+      for (const member of campaign.party ?? []) {
+        const person = people.find((item) => item.props.name === member.name);
+        expect(person, `${campaign.id} should render ${member.name} in the saved roster`).toBeTruthy();
+
+        expect(parseLinks(person?.props.links)).toEqual(member.links ?? []);
+      }
     }
   });
 
@@ -460,7 +498,7 @@ describe("Previous campaign archive", () => {
     ]);
     expect(cards.every((card) => card.props.id)).toBe(true);
     expect(cards.filter((card) => card.props.referenceUrl).length).toBe(4);
-    expect(cards.filter((card) => card.props.image).length).toBe(14);
+    expect(cards.filter((card) => card.props.image).length).toBe(21);
   });
 });
 
@@ -493,7 +531,7 @@ Diverra details.
 
     expect(diverra).toMatchObject({
       id: "pan-diverra",
-      image: "/images/pantheon/diverra.webp",
+      image: "/images/pantheon/diverra-symbol.png",
       details: "Diverra details.",
     });
   });

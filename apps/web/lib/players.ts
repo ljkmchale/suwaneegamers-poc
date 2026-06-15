@@ -1,6 +1,5 @@
-import fs from "fs";
 import { getActiveCampaigns, type CampaignPartyMember, type PortalCampaign } from "@/lib/campaigns";
-import { contentPath } from "@/lib/contentFiles";
+import { getDb } from "@/lib/db";
 import { getDungeonMasters } from "@/lib/dungeonMasters";
 
 export interface PlayerProfileSeed {
@@ -21,9 +20,21 @@ export interface PlayerProfile extends PlayerProfileSeed {
   assignments: PlayerCharacterAssignment[];
 }
 
+interface DbPlayerRow {
+  id: string;
+  name: string;
+  description: string;
+  portrait: string | null;
+  dm_profile_id: string | null;
+}
+
 export function getPlayerProfileSeeds(): PlayerProfileSeed[] {
-  const raw = fs.readFileSync(contentPath("players.json"), "utf-8");
-  return JSON.parse(raw) as PlayerProfileSeed[];
+  return (getDb().prepare(`SELECT * FROM players ORDER BY rowid`).all() as DbPlayerRow[]).map((row) => ({
+    id: row.id,
+    name: row.name,
+    description: row.description,
+    portrait: row.portrait ?? undefined,
+  }));
 }
 
 // backward-compat export used by tests

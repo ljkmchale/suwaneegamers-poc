@@ -6,11 +6,11 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultDriveRootFolderUrl = "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing";
 const autoManagedPagesFile = path.join(root, "content", "auto-managed-pages.json");
-const campaignsFile = path.join(root, "content", "campaigns.json");
 const previousCampaignsLayoutFile = path.join(root, "content", "page-layouts", "previous-campaigns.json");
 const campaignLayoutsDir = path.join(root, "content", "page-layouts", "campaigns");
 const imageDir = path.join(root, "apps", "web", "public", "images", "campaigns");
@@ -184,7 +184,19 @@ function updateCampaignDetailLayout(campaign) {
   return changed;
 }
 
-const campaigns = JSON.parse(fs.readFileSync(campaignsFile, "utf-8"));
+const db = getDb();
+const campaigns = db.prepare(
+  `SELECT id, name, header_image, header_image_position, header_image_source_folder, header_image_source_file_id, header_image_source_file_name, aliases FROM campaigns`,
+).all().map((row) => ({
+  id: row.id,
+  name: row.name,
+  headerImage: row.header_image,
+  headerImagePosition: row.header_image_position,
+  headerImageSourceFolder: row.header_image_source_folder,
+  headerImageSourceFileId: row.header_image_source_file_id,
+  headerImageSourceFileName: row.header_image_source_file_name,
+  aliases: JSON.parse(row.aliases ?? "[]"),
+}));
 fs.mkdirSync(imageDir, { recursive: true });
 
 const rootItems = parseDriveItems(await fetchText(driveRootFolderUrl));
@@ -236,7 +248,20 @@ for (const campaign of campaigns) {
   }
 }
 
-fs.writeFileSync(campaignsFile, JSON.stringify(campaigns, null, 2) + "\n", "utf-8");
+const updateHeader = db.prepare(
+  `UPDATE campaigns SET header_image = ?, header_image_source_folder = ?, header_image_source_file_id = ?, header_image_source_file_name = ? WHERE id = ?`,
+);
+db.transaction(() => {
+  for (const campaign of campaigns) {
+    updateHeader.run(
+      campaign.headerImage ?? null,
+      campaign.headerImageSourceFolder ?? null,
+      campaign.headerImageSourceFileId ?? null,
+      campaign.headerImageSourceFileName ?? null,
+      campaign.id,
+    );
+  }
+})();
 
 // --- Archived campaign cards in previous-campaigns.json ---
 const previousLayouts = JSON.parse(fs.readFileSync(previousCampaignsLayoutFile, "utf-8"));

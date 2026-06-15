@@ -1,6 +1,5 @@
-import fs from "fs";
 import { getActiveCampaigns } from "@/lib/campaigns";
-import { contentPath } from "@/lib/contentFiles";
+import { getDb } from "@/lib/db";
 import { PORTAL_URLS } from "@/lib/portal";
 
 export interface DungeonMasterProfile {
@@ -16,9 +15,30 @@ export interface DungeonMasterProfile {
   }[];
 }
 
+interface DbDmRow {
+  id: string;
+  name: string;
+  focus: string;
+  description: string;
+  portrait: string | null;
+  active_campaign_ids: string;
+  previous_campaigns: string;
+}
+
+function rowToDm(row: DbDmRow): DungeonMasterProfile {
+  return {
+    id: row.id,
+    name: row.name,
+    focus: row.focus,
+    description: row.description,
+    portrait: row.portrait ?? undefined,
+    activeCampaignIds: JSON.parse(row.active_campaign_ids) as string[],
+    previousCampaigns: JSON.parse(row.previous_campaigns) as DungeonMasterProfile["previousCampaigns"],
+  };
+}
+
 export function getDungeonMasters(): DungeonMasterProfile[] {
-  const raw = fs.readFileSync(contentPath("dungeon-masters.json"), "utf-8");
-  return JSON.parse(raw) as DungeonMasterProfile[];
+  return (getDb().prepare(`SELECT * FROM dungeon_masters ORDER BY rowid`).all() as DbDmRow[]).map(rowToDm);
 }
 
 // backward-compat export used by tests

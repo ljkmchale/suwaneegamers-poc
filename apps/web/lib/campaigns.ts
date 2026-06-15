@@ -1,6 +1,5 @@
-import fs from "fs";
 import type { CalendarEvent } from "@/lib/calendar";
-import { contentPath, writeContent } from "@/lib/contentFiles";
+import { getDb } from "@/lib/db";
 
 export interface CampaignSessionSummary {
   title: string;
@@ -20,9 +19,19 @@ export interface CampaignResourceLink {
   url: string;
 }
 
+export type CampaignPartyLinkType = "sheet" | "background" | "other";
+
+export interface CampaignPartyLink {
+  label: string;
+  type: CampaignPartyLinkType;
+  url: string;
+}
+
 export interface CampaignPartyMember {
   name: string;
   player?: string;
+  links?: CampaignPartyLink[];
+  /** Legacy character-sheet link. Prefer links[]. */
   url?: string;
 }
 
@@ -47,9 +56,94 @@ export interface PortalCampaign {
   aliases?: string[];
 }
 
+// ---------------------------------------------------------------------------
+// Internal DB row types
+// ---------------------------------------------------------------------------
+
+interface DbCampaignRow {
+  id: string;
+  name: string;
+  dm: string;
+  schedule: string;
+  description: string;
+  reference_url: string;
+  header_image: string | null;
+  header_image_position: string;
+  header_image_source_folder: string | null;
+  header_image_source_file_id: string | null;
+  header_image_source_file_name: string | null;
+  official: number;
+  player_notes_url: string | null;
+  aliases: string;
+  resources: string;
+  party: string;
+}
+
+interface DbSummaryRow {
+  id: number;
+  campaign_id: string;
+  title: string;
+  summary: string;
+  audio_links: string;
+  auto: number;
+  session_date: string | null;
+  sort_order: number;
+}
+
+function rowToCampaign(c: DbCampaignRow, summaries: CampaignSessionSummary[]): PortalCampaign {
+  return {
+    id: c.id,
+    name: c.name,
+    dm: c.dm,
+    schedule: c.schedule,
+    description: c.description,
+    referenceUrl: c.reference_url,
+    headerImage: c.header_image ?? undefined,
+    headerImagePosition: c.header_image_position ?? undefined,
+    headerImageSourceFolder: c.header_image_source_folder ?? undefined,
+    headerImageSourceFileId: c.header_image_source_file_id ?? undefined,
+    headerImageSourceFileName: c.header_image_source_file_name ?? undefined,
+    official: Boolean(c.official),
+    playerNotesUrl: c.player_notes_url ?? undefined,
+    aliases: JSON.parse(c.aliases) as string[],
+    resources: JSON.parse(c.resources) as CampaignResourceLink[],
+    party: JSON.parse(c.party) as CampaignPartyMember[],
+    sessionSummaries: summaries,
+  };
+}
+
+function rowToSummary(s: DbSummaryRow): CampaignSessionSummary {
+  return {
+    title: s.title,
+    summary: s.summary,
+    audioLinks: JSON.parse(s.audio_links) as CampaignSessionSummary["audioLinks"],
+    auto: s.auto ? true : undefined,
+    sessionDate: s.session_date ?? undefined,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Reads
+// ---------------------------------------------------------------------------
+
 export function getActiveCampaigns(): PortalCampaign[] {
-  const raw = fs.readFileSync(contentPath("campaigns.json"), "utf-8");
-  return JSON.parse(raw) as PortalCampaign[];
+  const db = getDb();
+  const campaignRows = db.prepare(
+    `SELECT * FROM campaigns ORDER BY rowid`
+  ).all() as DbCampaignRow[];
+
+  const summaryRows = db.prepare(
+    `SELECT * FROM session_summaries ORDER BY campaign_id, sort_order`
+  ).all() as DbSummaryRow[];
+
+  const summariesByCampaign = new Map<string, CampaignSessionSummary[]>();
+  for (const s of summaryRows) {
+    const arr = summariesByCampaign.get(s.campaign_id) ?? [];
+    arr.push(rowToSummary(s));
+    summariesByCampaign.set(s.campaign_id, arr);
+  }
+
+  return campaignRows.map((c) => rowToCampaign(c, summariesByCampaign.get(c.id) ?? []));
 }
 
 // backward-compat export used by tests; server pages should call getActiveCampaigns() directly
@@ -64,46 +158,43 @@ export function sideCampaigns() {
 }
 
 export function findCampaign(id: string) {
-  return getActiveCampaigns().find((c) => c.id === id);
+  const db = getDb();
+  const c = db.prepare(`SELECT * FROM campaigns WHERE id = ?`).get(id) as DbCampaignRow | undefined;
+  if (!c) return undefined;
+
+  const summaryRows = db.prepare(
+    `SELECT * FROM session_summaries WHERE campaign_id = ? ORDER BY sort_order`
+  ).all(id) as DbSummaryRow[];
+
+  return rowToCampaign(c, summaryRows.map(rowToSummary));
 }
+
+// ---------------------------------------------------------------------------
+// Writes
+// ---------------------------------------------------------------------------
 
 export function updateCampaignHeaderImage(
   id: string,
   headerImage?: string,
   headerImagePosition?: string
 ): boolean {
-  const campaigns = getActiveCampaigns();
-  const index = campaigns.findIndex((campaign) => campaign.id === id);
-  if (index === -1) return false;
+  const db = getDb();
+  const nextImage = headerImage?.trim() || null;
+  const nextPosition = headerImagePosition?.trim() || "center";
 
-  const current = campaigns[index];
-  const nextImage = headerImage?.trim() || undefined;
-  const nextPosition = headerImagePosition?.trim() || undefined;
-  const next: PortalCampaign = { ...current };
+  const result = db.prepare(`
+    UPDATE campaigns
+    SET header_image = @header_image, header_image_position = @header_image_position
+    WHERE id = @id
+      AND (header_image IS NOT @header_image OR header_image_position != @header_image_position)
+  `).run({ id, header_image: nextImage, header_image_position: nextPosition });
 
-  if (nextImage) {
-    next.headerImage = nextImage;
-  } else {
-    delete next.headerImage;
-  }
-
-  if (nextPosition) {
-    next.headerImagePosition = nextPosition;
-  } else {
-    delete next.headerImagePosition;
-  }
-
-  if (
-    current.headerImage === next.headerImage &&
-    current.headerImagePosition === next.headerImagePosition
-  ) {
-    return false;
-  }
-
-  campaigns[index] = next;
-  writeContent("campaigns.json", campaigns);
-  return true;
+  return result.changes > 0;
 }
+
+// ---------------------------------------------------------------------------
+// Pure helpers (no I/O)
+// ---------------------------------------------------------------------------
 
 export function normalizeCampaignTitle(value: string) {
   return value
@@ -153,6 +244,10 @@ export function findCampaignForCalendarEvent(
   });
 }
 
+// ---------------------------------------------------------------------------
+// Legacy session summary parsing (unchanged — pure string processing)
+// ---------------------------------------------------------------------------
+
 const LEGACY_STOP_MARKERS = [
   "Previous Characters",
   "Old Notes",
@@ -181,7 +276,7 @@ function legacyHtmlToLines(html: string) {
       .replace(/<style[\s\S]*?<\/style>/gi, "")
       .replace(/<[^>]+>/g, "\n")
   )
-    .replace(/ /g, " ")
+    .replace(/ /g, " ")
     .split(/\n+/)
     .map((line) => line.replace(/\s+/g, " ").trim())
     .filter(Boolean);

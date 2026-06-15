@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { PencilLine, Shield } from "lucide-react";
+import { useState, useEffect } from "react";
+import { PencilLine, Shield, Search } from "lucide-react";
 import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/actions";
 import type { NavSection } from "@/lib/nav";
+import { SearchPalette } from "@/components/layout/SearchPalette";
 
 interface NavProps {
   sections: NavSection[];
@@ -17,6 +18,18 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   const isExternal = (href: string) => href.startsWith("http://") || href.startsWith("https://");
   const isActive = (href: string) =>
@@ -133,7 +146,23 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
             );
           })}
 
-          <form action={editMode ? disableEditModeAction : enableEditModeAction} className="ml-auto">
+          <button
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search (Ctrl+K)"
+            title="Search (Ctrl+K)"
+            className="ml-auto inline-flex h-9 items-center gap-2 px-3 rounded border transition-colors"
+            style={{
+              borderColor: "var(--color-bg-border)",
+              color: "var(--color-text-muted)",
+            }}
+          >
+            <Search size={14} strokeWidth={2} aria-hidden="true" />
+            <span className="text-xs font-cinzel tracking-wider hidden xl:inline" style={{ color: "var(--color-text-muted)" }}>
+              Ctrl+K
+            </span>
+          </button>
+
+          <form action={editMode ? disableEditModeAction : enableEditModeAction}>
             <input type="hidden" name="from" value={pathname} />
             <button
               type="submit"
@@ -162,6 +191,16 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
             <Shield size={17} strokeWidth={2} aria-hidden="true" />
           </Link>
         </div>
+
+        {/* Mobile search icon */}
+        <button
+          className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
+          onClick={() => setSearchOpen(true)}
+          aria-label="Search"
+          style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-muted)" }}
+        >
+          <Search size={17} strokeWidth={2} aria-hidden="true" />
+        </button>
 
         {/* Mobile hamburger */}
         <button
@@ -255,6 +294,8 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
           </div>
         </div>
       )}
+
+      <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 }
