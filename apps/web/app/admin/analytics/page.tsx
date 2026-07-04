@@ -8,7 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { getAnalyticsDashboardData } from "@/lib/analytics";
-import { RefreshAnalyticsButton } from "./RefreshAnalyticsButton";
+import { AnalyticsAutoRefresh } from "./AnalyticsAutoRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -146,16 +146,15 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
 
   return (
     <div className="mx-auto max-w-[96rem]">
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8">
         <div>
           <h1 className="font-cinzel text-3xl uppercase tracking-widest">Usage & Connections</h1>
           <p className="mt-2 max-w-3xl text-sm text-[#a89880]">
             Anonymous site activity, reading and listening engagement, visitor connections, and scheduled content health.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <RefreshAnalyticsButton />
-          <div className="flex rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-1">
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-2">
+          <div className="flex rounded-lg bg-[#08050f] p-1">
             {[7, 30, 90].map((days) => (
               <Link
                 key={days}
@@ -168,6 +167,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               </Link>
             ))}
           </div>
+          <AnalyticsAutoRefresh />
         </div>
       </div>
 
