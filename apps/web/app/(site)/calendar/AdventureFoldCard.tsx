@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SessionRecordingPlayer } from "./SessionRecordingPlayer";
+import { recordUsageEvent } from "@/components/analytics/AnalyticsTracker";
 
 export interface AdventureFoldCardProps {
   campaignId: string;
@@ -74,13 +75,35 @@ export function AdventureFoldCard({
           role={hasSummary ? "button" : undefined}
           tabIndex={hasSummary ? 0 : undefined}
           aria-expanded={hasSummary ? isOpen : undefined}
-          onClick={hasSummary ? () => setIsOpen((open) => !open) : undefined}
+          onClick={hasSummary ? () => {
+            setIsOpen((open) => {
+              if (!open) {
+                recordUsageEvent({
+                  eventType: "content_open",
+                  contentType: "session summary",
+                  contentId: `${campaignId}:${sessionNumber ?? sessionTitle}`,
+                  contentLabel: `${campaignName} - ${sessionTitle}`,
+                });
+              }
+              return !open;
+            });
+          } : undefined}
           onKeyDown={
             hasSummary
               ? (event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
-                    setIsOpen((open) => !open);
+                    setIsOpen((open) => {
+                      if (!open) {
+                        recordUsageEvent({
+                          eventType: "content_open",
+                          contentType: "session summary",
+                          contentId: `${campaignId}:${sessionNumber ?? sessionTitle}`,
+                          contentLabel: `${campaignName} - ${sessionTitle}`,
+                        });
+                      }
+                      return !open;
+                    });
                   }
                 }
               : undefined
@@ -116,11 +139,26 @@ export function AdventureFoldCard({
             className="flex shrink-0 items-center gap-3"
             onClick={(event) => event.stopPropagation()}
           >
-            {audioUrl && <SessionRecordingPlayer url={audioUrl} />}
+            {audioUrl && (
+              <SessionRecordingPlayer
+                url={audioUrl}
+                label={`${campaignName} - ${sessionTitle}`}
+              />
+            )}
             {hasSummary && (
               <button
                 type="button"
-                onClick={() => setIsOpen((open) => !open)}
+                onClick={() => setIsOpen((open) => {
+                  if (!open) {
+                    recordUsageEvent({
+                      eventType: "content_open",
+                      contentType: "session summary",
+                      contentId: `${campaignId}:${sessionNumber ?? sessionTitle}`,
+                      contentLabel: `${campaignName} - ${sessionTitle}`,
+                    });
+                  }
+                  return !open;
+                })}
                 title={isOpen ? "Hide session summary" : "Read the session summary"}
                 aria-label={isOpen ? "Hide session summary" : "Read the session summary"}
                 aria-expanded={isOpen}

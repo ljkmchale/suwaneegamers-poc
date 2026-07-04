@@ -15,7 +15,6 @@ import {
   type PortalCampaign,
 } from "@/lib/campaigns";
 import { getTrackedActiveCampaigns } from "@/lib/campaignTracking";
-import { getCampaignsWithDocumentSessionSummaries } from "@/lib/sessionSummaries";
 import { AdventureFoldCard } from "./AdventureFoldCard";
 import { LogoLightning } from "./LogoLightning";
 import { RunicBackground } from "./RunicBackground";
@@ -166,9 +165,7 @@ export default async function CalendarPage() {
   let events: CalendarEvent[] = [];
   let pastEvents: CalendarEvent[] = [];
   let feedError = false;
-  const campaigns = await getCampaignsWithDocumentSessionSummaries(
-    await getTrackedActiveCampaigns(getActiveCampaigns()),
-  );
+  const campaigns = await getTrackedActiveCampaigns(getActiveCampaigns());
 
   try {
     events = await fetchUpcomingCalendarEvents(6);

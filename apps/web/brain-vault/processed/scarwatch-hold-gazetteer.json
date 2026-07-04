@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "rawFile": "raw/scarwatch-hold-gazetteer.md",
+  "rawContentHash": "d764d05607aeac4bca20154b7a0045a329ae2350e59859120211603782ac39fa",
+  "status": "processed",
+  "processedAt": "2026-05-13T20:01:38.689Z",
+  "pagesUpdated": [
+    "wiki/summaries/Scarwatch Hold Gazetteer.md",
+    "wiki/world/locations/Scarwatch Hold.md",
+    "wiki/locations/Dungeons III/Scarwatch Hold.md",
+    "index.md",
+    "log.md",
+    "brain-query/src/query.mjs"
+  ],
+  "notes": ""
+}

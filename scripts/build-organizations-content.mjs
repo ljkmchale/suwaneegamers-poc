@@ -1,10 +1,12 @@
 // One-off: merge the lore doc's "Well Known Organizations" table with
 // image/link/description data from the old block layout into
-// content/organizations.json.
+// the SQLite organizations table.
 import fs from "fs";
 import path from "path";
 import os from "os";
 import { fileURLToPath } from "url";
+import { getDb } from "./sync-db.mjs";
+import { readContent } from "./content-documents.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const md = fs.readFileSync(path.join(os.tmpdir(), "lore-doc.md"), "utf-8");
@@ -59,7 +61,7 @@ for (let i = headerIdx + 1; i < lines.length; i++) {
 console.log(`Doc rows: ${rows.length}`);
 
 // ── Pull image / href / curated description from the old layout ──
-const layout = JSON.parse(fs.readFileSync(path.join(root, "content/page-layouts/organizations.json"), "utf-8"));
+const layout = readContent("page-layouts/organizations.json");
 const layoutItems = Array.isArray(layout) ? layout : layout.items;
 const cards = layoutItems
   .filter((i) => i.type === "card" && i.props?.title)
@@ -95,5 +97,31 @@ console.log("Doc orgs without layout card:", unmatchedDoc.join(", ") || "none");
 console.log("Layout cards not in doc:", unmatchedCards.join(", ") || "none");
 console.log("Factions:", organizations.filter((o) => o.faction).map((o) => o.name).join(", "));
 
-fs.writeFileSync(path.join(root, "content/organizations.json"), JSON.stringify(organizations, null, 2) + "\n", "utf-8");
-console.log(`Wrote content/organizations.json with ${organizations.length} organizations`);
+const db = getDb();
+const existingDetails = new Map(
+  db.prepare(`SELECT id, details FROM organizations`).all().map((row) => [row.id, row.details]),
+);
+const upsert = db.prepare(`
+  INSERT OR REPLACE INTO organizations
+    (id, name, known_for, summary, details, description, image, href, faction)
+  VALUES
+    (@id, @name, @known_for, @summary, @details, @description, @image, @href, @faction)
+`);
+
+db.transaction(() => {
+  for (const org of organizations) {
+    upsert.run({
+      id: org.id,
+      name: org.name,
+      known_for: org.knownFor ?? null,
+      summary: org.summary ?? null,
+      details: existingDetails.get(org.id) ?? null,
+      description: org.description ?? null,
+      image: org.image ?? null,
+      href: org.href ?? null,
+      faction: org.faction ? 1 : 0,
+    });
+  }
+})();
+
+console.log(`Upserted ${organizations.length} organizations into SQLite`);

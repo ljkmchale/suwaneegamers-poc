@@ -14,9 +14,6 @@ export default function AdminMapEditorPage() {
           <h1 className="font-cinzel text-xl tracking-widest uppercase">
             Map Editor
           </h1>
-          <p className="text-sm text-[#a89880]">
-            Hosted Myrdae map editor embedded in the admin toolset.
-          </p>
         </div>
 
         <a

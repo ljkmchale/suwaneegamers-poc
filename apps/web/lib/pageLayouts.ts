@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { contentDir } from "./contentFiles";
+import { contentDir, readContent, writeContent } from "./contentFiles";
+import { getDb } from "./db";
 import { PAGE_SECTIONS } from "./pageSections";
 import { buildCampaignDetailLayout, findCampaignForDetailPath } from "./campaignDetailLayouts";
 import { updateCampaignHeaderImage } from "./campaigns";
@@ -34,6 +35,10 @@ function pageIdToLayoutPath(pageId: string) {
   return path.join(/*turbopackIgnore: true*/ layoutsDir(), ...segments, fileName);
 }
 
+function pageIdToLayoutKey(pageId: string) {
+  return path.relative(contentDir(), pageIdToLayoutPath(pageId)).replaceAll(path.sep, "/");
+}
+
 function layoutPathToPageId(filePath: string) {
   const relative = path.relative(layoutsDir(), filePath);
   const parts = relative.split(path.sep);
@@ -46,7 +51,7 @@ function layoutPathToPageId(filePath: string) {
 
 function readLegacyRaw(): RawLayouts {
   try {
-    return JSON.parse(fs.readFileSync(legacyLayoutPath(), "utf-8")) as RawLayouts;
+    return readContent<RawLayouts>("page-layouts.json");
   } catch {
     return {};
   }
@@ -54,9 +59,21 @@ function readLegacyRaw(): RawLayouts {
 
 function readRawEntry(pageId: string): RawEntry | undefined {
   try {
-    return JSON.parse(fs.readFileSync(pageIdToLayoutPath(pageId), "utf-8")) as RawEntry;
+    return readContent<RawEntry>(pageIdToLayoutKey(pageId));
   } catch {
     return readLegacyRaw()[pageId];
+  }
+}
+
+function storedLayoutKeysFromDb(): string[] {
+  try {
+    return (
+      getDb()
+        .prepare(`SELECT path FROM content_documents WHERE path LIKE 'page-layouts/%.json'`)
+        .all() as { path: string }[]
+    ).map((row) => row.path);
+  } catch {
+    return [];
   }
 }
 
@@ -129,9 +146,10 @@ export function getPageLayout(pageId: string): PageItem[] {
 
 /** Returns routes with a saved editable layout. */
 export function getStoredPageLayoutIds(): string[] {
+  const dbIds = storedLayoutKeysFromDb().map((key) => layoutPathToPageId(path.join(contentDir(), key)));
   const modularIds = collectLayoutFiles(layoutsDir()).map(layoutPathToPageId);
   const legacyIds = Object.keys(readLegacyRaw());
-  return Array.from(new Set([...modularIds, ...legacyIds])).sort();
+  return Array.from(new Set([...dbIds, ...modularIds, ...legacyIds])).sort();
 }
 
 /** Returns the page-level grid config, or null if none is set. */
@@ -178,7 +196,6 @@ export function setPageLayout(
     nextEntry = items as unknown[];
   }
 
-  fs.mkdirSync(path.dirname(layoutFile), { recursive: true });
-  fs.writeFileSync(layoutFile, JSON.stringify(nextEntry, null, 2) + "\n", "utf-8");
+  writeContent(path.relative(contentDir(), layoutFile).replaceAll(path.sep, "/"), nextEntry);
   syncCampaignHeaderImage(pageId, items);
 }

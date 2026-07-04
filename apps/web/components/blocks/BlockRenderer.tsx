@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
@@ -22,6 +20,7 @@ import type { BlockItem, CardLayoutItem, ProfileCardItem } from "@/lib/pageBlock
 import { parseGridSectionItems, resolveMediaPlayerSource } from "@/lib/pageBlocks";
 import { OrganizationFolds } from "@/app/(site)/organizations/OrganizationFolds";
 import { TerritoryFolds } from "@/app/(site)/territories/TerritoryFolds";
+import { readContent } from "@/lib/contentFiles";
 
 const CARD_LAYOUT_MAX_ROWS = 120;
 
@@ -1518,9 +1517,7 @@ function DmsGridBlock() {
 function BestiaryGridBlock() {
   let creatures: Creature[] = [];
   try {
-    creatures = JSON.parse(
-      fs.readFileSync(path.join(process.cwd(), "../../content/bestiary.json"), "utf-8")
-    ) as Creature[];
+    creatures = readContent<Creature[]>("bestiary.json");
   } catch { /* ignore */ }
 
   return (
@@ -1955,9 +1952,7 @@ function CreatureCardBlock({
   const name = props.name as string;
   let creatures: Creature[] = [];
   try {
-    creatures = JSON.parse(
-      fs.readFileSync(path.join(process.cwd(), "../../content/bestiary.json"), "utf-8")
-    ) as Creature[];
+    creatures = readContent<Creature[]>("bestiary.json");
   } catch { /* ignore */ }
 
   const creature = creatures.find((c) => c.name === name);

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "rawFile": "raw/myrdae-world-guide.md",
+  "rawContentHash": "c1f7f8ddc5981e3c6df10b20ddab62918047025fd80efe021f4653d59924110e",
+  "status": "processed",
+  "processedAt": "2026-05-13T18:01:49.170Z",
+  "pagesUpdated": [
+    "wiki/summaries/Myrdae World Guide.md",
+    "wiki/world/Oberra.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Regions of Myrdae.md",
+    "wiki/world/Territories of Myrdae.md",
+    "wiki/world/Calendar of Myrdae.md",
+    "wiki/world/Species of Myrdae.md",
+    "wiki/world/Languages of Myrdae.md",
+    "wiki/world/Factions of Myrdae.md",
+    "wiki/world/locations/Adsuren.md",
+    "wiki/world/locations/Hesfal.md",
+    "wiki/world/locations/Scarwatch Hold.md",
+    "wiki/world/locations/Tratta.md",
+    "wiki/world/locations/Trailpoint.md",
+    "wiki/world/locations/Nunglthil.md",
+    "index.md",
+    "log.md",
+    "AGENTS.md"
+  ],
+  "notes": ""
+}

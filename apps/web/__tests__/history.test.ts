@@ -1,3 +1,4 @@
+import fs from "fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { revalidate } from "@/app/(site)/history/page";
 import { getHistoryData, HISTORY_REVALIDATE_SECONDS } from "@/lib/history";
@@ -47,6 +48,12 @@ describe("History timeline refresh", () => {
   });
 
   it("keeps the page and source fetch on the same 24-hour revalidation window", async () => {
+    const realReadFileSync = fs.readFileSync.bind(fs);
+    vi.spyOn(fs, "readFileSync").mockImplementation((path, ...args) => {
+      if (String(path).includes("history-doc-cache")) throw new Error("no cache");
+      return realReadFileSync(path, ...args as [never]);
+    });
+
     const fetchMock = vi.fn(async () => ({
       ok: true,
       text: async () => historyMarkdown,

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "rawFile": "raw/emberstran-gazetteer.md",
+  "rawContentHash": "87930e0d43c7177dae13af8661ea488cd5a2f4bad6e6feb41efb06b00a66cf7b",
+  "status": "processed",
+  "processedAt": "2026-05-13T19:18:05.696Z",
+  "pagesUpdated": [
+    "wiki/summaries/Emberstran Gazetteer.md",
+    "wiki/world/locations/Emberstran.md",
+    "wiki/locations/HoE/Emberstran.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Territories of Myrdae.md",
+    "index.md",
+    "log.md",
+    "brain-query/src/query.mjs"
+  ],
+  "notes": ""
+}

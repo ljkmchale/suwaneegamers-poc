@@ -1,11 +1,11 @@
-// One-off import: fill empty session summaries in content/campaigns.json and
+// One-off import: fill empty session summaries in SQLite and
 // content/page-layouts/campaigns/*.json from sites.google.com/view/suwanee-gamers.
 import fs from "fs";
 import path from "path";
+import { getDb } from "./sync-db.mjs";
+import { readContent, writeContent, contentPath } from "./content-documents.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
-const campaignsPath = path.join(root, "content", "campaigns.json");
-const layoutsDir = path.join(root, "content", "page-layouts", "campaigns");
 
 const SUMMARIES = {
   "a-new-adventure": {
@@ -72,32 +72,37 @@ const SUMMARIES = {
 };
 
 function sessionNumber(title) {
-  const m = String(title).match(/Session\s+(\d+)/i);
+  const m = String(title).match(/(?:Session\s+)?(\d+)\s*[-–]/i);
   return m ? Number(m[1]) : null;
 }
 
-// 1) campaigns.json
-const campaigns = JSON.parse(fs.readFileSync(campaignsPath, "utf-8"));
+// 1) SQLite session_summaries
+const db = getDb();
+const sessions = db.prepare(`
+  SELECT id, campaign_id, title, summary
+  FROM session_summaries
+`).all();
+const updateSummary = db.prepare(`UPDATE session_summaries SET summary = ? WHERE id = ?`);
 let filledData = 0;
-for (const campaign of campaigns) {
-  const map = SUMMARIES[campaign.id];
-  if (!map) continue;
-  for (const session of campaign.sessionSummaries ?? []) {
+db.transaction(() => {
+  for (const session of sessions) {
+    const map = SUMMARIES[session.campaign_id];
+    if (!map || session.summary) continue;
     const num = sessionNumber(session.title);
-    if (!session.summary && num != null && map[num]) {
-      session.summary = map[num];
+    if (num != null && map[num]) {
+      updateSummary.run(map[num], session.id);
       filledData++;
     }
   }
-}
-fs.writeFileSync(campaignsPath, JSON.stringify(campaigns, null, 2) + "\n");
-console.log(`campaigns.json: filled ${filledData} summaries`);
+})();
+console.log(`SQLite session_summaries: filled ${filledData} summaries`);
 
 // 2) saved page layouts — same data lives denormalized inside the sessions card
 for (const id of Object.keys(SUMMARIES)) {
-  const layoutPath = path.join(layoutsDir, `${id}.json`);
+  const layoutKey = `page-layouts/campaigns/${id}.json`;
+  const layoutPath = contentPath(layoutKey);
   if (!fs.existsSync(layoutPath)) continue;
-  const layout = JSON.parse(fs.readFileSync(layoutPath, "utf-8"));
+  const layout = readContent(layoutKey);
   const card = layout.find((item) => item.id === `${id}-sessions-card`);
   if (!card) { console.log(`${id}: no sessions card`); continue; }
 
@@ -120,6 +125,6 @@ for (const id of Object.keys(SUMMARIES)) {
 
   grid.props.items = JSON.stringify(inner, null, 2);
   card.props.items = JSON.stringify(outer, null, 2);
-  fs.writeFileSync(layoutPath, JSON.stringify(layout, null, 2) + "\n");
+  writeContent(layoutKey, layout);
   console.log(`${id} layout: filled ${filled} summaries`);
 }

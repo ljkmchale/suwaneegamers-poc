@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rawFile": "raw/ahndashere-gazetteer.md",
+  "rawContentHash": "17148a97ab33fc510c6f4fc202f4916eb1ab6d9ab2c20cf4b11495e3886c9f63",
+  "status": "processed",
+  "processedAt": "2026-05-14T14:44:06.833Z",
+  "pagesUpdated": [
+    "wiki/summaries/Ahndashere Gazetteer.md",
+    "wiki/world/locations/Ahndashere.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Territories of Myrdae.md",
+    "index.md"
+  ],
+  "notes": ""
+}

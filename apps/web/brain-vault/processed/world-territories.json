@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rawFile": "raw/world-territories.md",
+  "rawContentHash": "49d116942e7bd51f05b2e649fb2472bf486ac7034a9ac2ae9229b704710d33cb",
+  "status": "processed",
+  "processedAt": "2026-05-13T12:39:39.856Z",
+  "pagesUpdated": [
+    "wiki/world/Territories of Myrdae.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Oberra.md",
+    "index.md",
+    "log.md"
+  ],
+  "notes": ""
+}

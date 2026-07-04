@@ -7,14 +7,12 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { readContent, writeContent } from "./content-documents.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const layoutFile = path.join(root, "content", "page-layouts", "crit_tables.json");
-const autoManagedPagesFile = path.join(root, "content", "auto-managed-pages.json");
-
 function resolveDocExportUrl() {
   try {
-    const pages = JSON.parse(fs.readFileSync(autoManagedPagesFile, "utf-8"));
+    const pages = readContent("auto-managed-pages.json");
     const entry = pages.find((p) => p.path === "/crit_tables");
     const match = /\/document\/d\/([\w-]+)/.exec(entry?.sourceUrl ?? "");
     if (match) return `https://docs.google.com/document/d/${match[1]}/export?format=md`;
@@ -91,7 +89,7 @@ const critSuccessTable = findTableAfterHeading(lines, /critical\s+success/i);
 const critFailureTable = findTableAfterHeading(lines, /critical\s+fail/i);
 const bodyHitTable = findTableAfterHeading(lines, /body\s+hit/i);
 
-const layout = JSON.parse(fs.readFileSync(layoutFile, "utf-8"));
+const layout = readContent("page-layouts/crit_tables.json");
 const changes = [];
 const warnings = [];
 
@@ -124,7 +122,7 @@ updateTableBlock("crit-tables-body-hits", bodyHitTable);
 const stamp = new Date().toISOString();
 
 if (changes.length) {
-  fs.writeFileSync(layoutFile, JSON.stringify(layout, null, 2) + "\n", "utf-8");
+  writeContent("page-layouts/crit_tables.json", layout);
   console.log(`[${stamp}] Crit tables layout updated.`);
   console.log("Changes:");
   for (const change of changes) console.log(`  ${change}`);

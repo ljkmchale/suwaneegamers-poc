@@ -26,7 +26,10 @@ export interface ManagedSourceLink {
   key?: string;
   label: string;
   url: string;
+  section?: string;
   role?: "primary" | "fallback" | "supporting";
+  /** ID of the content_sync_jobs row that syncs this source — used to wire "+ Schedule this doc" */
+  syncJobId?: string;
 }
 
 function sourceLabel(sourceName: string) {

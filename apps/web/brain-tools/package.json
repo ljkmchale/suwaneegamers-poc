@@ -1,0 +1,29 @@
+{
+  "name": "campaign-brain-query",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Chronicles query API and indexing service for an Obsidian D&D campaign brain.",
+  "scripts": {
+    "index": "node src/indexer.mjs",
+    "ask": "node src/cli-ask.mjs",
+    "pull-doc": "node src/pull-google-doc.mjs",
+    "sync-docs": "node src/sync-google-docs.mjs",
+    "process-unprocessed": "node src/process-unprocessed.mjs",
+    "import-world-map": "node scripts/import-worldofmyrdae-map.mjs",
+    "audit-wiki": "node scripts/audit-wiki.mjs",
+    "rebuild-page-index": "node scripts/rebuild-full-page-index.mjs",
+    "test:brain": "node scripts/test-brain-behavior.mjs",
+    "eval:answers": "node scripts/eval-answer-quality.mjs",
+    "refresh-sources": "node src/refresh-sources.mjs",
+    "processed-status": "node src/processed-status.mjs",
+    "ingest-report": "node scripts/ingest-readiness-report.mjs",
+    "mark-processed": "node src/mark-processed.mjs",
+    "check-ingest": "node scripts/post-ingest-check.mjs",
+    "check-ingest:dry": "node scripts/post-ingest-check.mjs --dry-run"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=20"
+  }
+}

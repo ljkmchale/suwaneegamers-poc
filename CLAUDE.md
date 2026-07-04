@@ -16,7 +16,7 @@ All commands run from the **repo root** unless noted.
 
 ```bash
 # Development
-pnpm dev            # starts Next.js on port 4652
+pnpm dev            # starts Next.js on localhost:3000
 
 # Quality
 pnpm lint           # ESLint across app/, components/, lib/, __tests__/
@@ -30,10 +30,20 @@ cd apps/web && npx vitest run __tests__/pageBlocks.test.ts
 cd apps/web && npx vitest
 
 # Build
-pnpm build
+pnpm build          # builds the normal .next folder
+pnpm --filter web build:prod  # builds the production .next-prod folder
 ```
 
 Environment variable required for production: `ADMIN_SESSION_SECRET` (32+ char string). Without it the dev fallback is used.
+
+### Local and Production Servers
+
+- Dev server: `pnpm dev`, `http://localhost:3000`, normal `.next`.
+- Production service: Windows NSSM service `SuwaneeGamers`, port `4652`, serves from `apps/web/.next-prod`.
+- Production build: run `pnpm --filter web build:prod` or `scripts/deploy-prod.ps1`. A plain `pnpm build` updates `.next` only and will not change production.
+- Production restart requires elevation: `C:\EaselLocal\nssm.exe restart SuwaneeGamers`.
+- If a code/UI change appears in dev but not production, check that `.next-prod` was rebuilt and the NSSM service restarted.
+- If content JSON changes do not appear, check the SQLite `content_documents` row as well as the file.
 
 ---
 
@@ -52,10 +62,32 @@ Environment variable required for production: `ADMIN_SESSION_SECRET` (32+ char s
 │   ├── pages.json        # Custom page registry
 │   └── theme.json        # Design token overrides
 ├── apps/web/             # Next.js 16 app (the only workspace package)
+│   ├── lib/brain/        # Chronicles RAG engine (query, embeddings, vector store) — runs in-process
+│   ├── brain-vault/      # Chronicles content: wiki/, raw/, processed/ — see its own CLAUDE.md
+│   ├── brain-tools/      # Standalone CLI scripts that maintain brain-vault/ (indexer, ingest helpers, audits)
+│   └── brain-data/       # Generated: brain-index.json, query cache, logs (gitignored)
 └── docs/                 # Human-facing reference docs
 ```
 
-`content/` is co-located with the server process and read directly off disk via `lib/contentFiles.ts`. There is no database.
+`content/` is co-located with the server process, but runtime reads go through `lib/contentFiles.ts`, which prefers the SQLite `content_documents` table in `content/suwaneegamers.db` before falling back to JSON files. `writeContent()` writes both the DB row and the JSON file. If you manually edit JSON, sync or update the DB row too, or the running app may keep showing the old value.
+
+Useful sync commands:
+
+```bash
+pnpm content:sync-documents  # copy content/*.json and content/page-layouts/*.json into content_documents
+pnpm content:scheduler:once  # run due scheduled content jobs once
+pnpm content:sync-all        # run all scheduler jobs once
+```
+
+### Source-Managed / Chronicles Notes
+
+`/admin/source-managed` reads `content/auto-managed-pages.json` through `lib/contentFiles.ts`, so remember the DB-first rule above. If the JSON file is correct but the admin UI is stale, inspect `content_documents.path = 'auto-managed-pages.json'` in `content/suwaneegamers.db`.
+
+`/chronicles` is a Brain Vault page. Its managed source rows should mirror `apps/web/brain-tools/google-doc-sources.json`; the scheduler job id is `chronicles-sources`, which runs `apps/web/brain-tools/src/refresh-sources.mjs`. Public `/chronicles` is player-safe; `/admin/chronicles` can expose DM-visible sources behind admin auth.
+
+### Chronicles / Brain Vault
+
+Chronicles (`/chronicles`, `/admin/chronicles`) is a RAG-backed wiki for the group's D&D campaigns, fully embedded in this app — no separate server. `lib/brain/` holds the TypeScript query engine; `brain-vault/` holds the actual Markdown content it answers questions from. See [apps/web/brain-vault/CLAUDE.md](apps/web/brain-vault/CLAUDE.md) for vault conventions (campaign isolation, wiki structure, ingest workflow). `brain-tools/` contains the indexer and CLI scripts (`npm run index`, `npm run pull-doc`, `npm run mark-processed`, etc.) used to maintain the vault and rebuild `brain-data/brain-index.json`.
 
 ---
 

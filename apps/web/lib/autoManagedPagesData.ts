@@ -118,7 +118,33 @@ function syncLegacySourceFields(
   return page;
 }
 
-export function setManagedSourceUrl(path: string, sourceKey: string, url: string): void {
+export function addManagedSource(path: string, source: Omit<ManagedSourceLink, "key">): void {
+  const pages = safeRead();
+  const existingPage = pages.find((p) => p.path === path);
+
+  if (!existingPage) {
+    const generatedPage = campaignDetailManagedPages(pages).find((p) => p.path === path);
+    if (!generatedPage) return;
+    writeContent(FILE, [
+      ...pages,
+      { ...generatedPage, generated: false, managedSources: [...(generatedPage.managedSources ?? []), source] },
+    ]);
+    return;
+  }
+
+  const managedSources = [...(existingPage.managedSources ?? []), source];
+  writeContent(FILE, pages.map((p) => (p.path === path ? { ...p, managedSources } : p)));
+}
+
+export function removeManagedSource(path: string, index: number): void {
+  const pages = safeRead();
+  const existingPage = pages.find((p) => p.path === path);
+  if (!existingPage?.managedSources) return;
+  const managedSources = existingPage.managedSources.filter((_, i) => i !== index);
+  writeContent(FILE, pages.map((p) => (p.path === path ? { ...p, managedSources } : p)));
+}
+
+export function setManagedSourceUrl(path: string, sourceKey: string, url: string, section?: string): void {
   const pages = safeRead();
   const existingPage = pages.find((page) => page.path === path);
   const pageToUpdate =
@@ -127,7 +153,7 @@ export function setManagedSourceUrl(path: string, sourceKey: string, url: string
 
   if (!pageToUpdate) return;
 
-  const updatedPage = updateManagedSourceUrl(pageToUpdate, sourceKey, url);
+  const updatedPage = updateManagedSourceUrl(pageToUpdate, sourceKey, url, section);
   const persistedPage = { ...updatedPage, generated: false };
 
   if (!existingPage) {
@@ -145,8 +171,20 @@ function updateManagedSourceUrl(
   page: AutoManagedPage,
   sourceKey: string,
   url: string,
+  section?: string,
 ): AutoManagedPage {
-  if (sourceKey === "sourceUrl") return { ...page, sourceUrl: url };
+  if (sourceKey === "sourceUrl") {
+    // If a section is provided, promote the legacy field to a managedSources entry so the label is preserved
+    if (section) {
+      const existing = page.managedSources ?? [];
+      const label = existing[0]?.label ?? page.sourceName ?? "Primary Source";
+      const managedSources = existing.length > 0
+        ? existing.map((s, i) => i === 0 ? { ...s, url, section } : s)
+        : [{ label, url, section, role: "primary" as const }];
+      return { ...page, sourceUrl: url, managedSources };
+    }
+    return { ...page, sourceUrl: url };
+  }
   if (sourceKey === "fallbackSourceUrl") return { ...page, fallbackSourceUrl: url };
 
   const match = /^managedSources\.(\d+)$/.exec(sourceKey);
@@ -157,7 +195,9 @@ function updateManagedSourceUrl(
   if (!source) return page;
 
   const managedSources = page.managedSources.map((item, itemIndex) =>
-    itemIndex === index ? { ...item, url } : item,
+    itemIndex === index
+      ? { ...item, url, ...(section !== undefined ? { section: section || undefined } : {}) }
+      : item,
   );
 
   return syncLegacySourceFields({ ...page, managedSources }, source, url);
@@ -173,11 +213,23 @@ export function getConfiguredManagedSourceUrl(
   return source?.url || fallbackUrl;
 }
 
+function managedSourceIdentity(url: string) {
+  const trimmed = url.trim();
+  const googleId =
+    trimmed.match(/\/document\/d\/([A-Za-z0-9_-]+)/)?.[1] ??
+    trimmed.match(/\/spreadsheets\/d\/([A-Za-z0-9_-]+)/)?.[1] ??
+    trimmed.match(/\/drive\/folders\/([A-Za-z0-9_-]+)/)?.[1] ??
+    trimmed.match(/\/file\/d\/([A-Za-z0-9_-]+)/)?.[1];
+
+  if (googleId) return googleId;
+  return trimmed.replace(/[?#].*$/, "").replace(/\/$/, "");
+}
+
 function uniqueSources(sources: ManagedSourceLink[]) {
   const seen = new Set<string>();
   return sources.filter((source) => {
     if (!source.url) return false;
-    const key = `${source.label.toLowerCase()}::${source.url}`;
+    const key = managedSourceIdentity(source.url);
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

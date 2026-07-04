@@ -1,6 +1,5 @@
-import fs from "fs";
 import { getDb } from "@/lib/db";
-import { contentPath } from "@/lib/contentFiles";
+import { readContent } from "@/lib/contentFiles";
 
 export type SearchResultType =
   | "territory"
@@ -87,25 +86,20 @@ export function search(query: string): SearchResult[] {
       href: p.path,
     });
   }
-  // Custom pages from pages.json
-  try {
-    const customPages = JSON.parse(
-      fs.readFileSync(contentPath("pages.json"), "utf-8"),
-    ) as { id: string; slug: string; title: string; status: string }[];
-    for (const p of customPages) {
-      if (p.status !== "active") continue;
-      if (p.title.toLowerCase().includes(ql) || p.slug.toLowerCase().includes(ql)) {
-        results.push({
-          id: `page-custom-${p.id}`,
-          type: "page",
-          title: p.title,
-          category: "Pages",
-          href: `/${p.slug}`,
-        });
-      }
+  // Custom pages from DB
+  const customPages = db
+    .prepare(`SELECT id, slug, title FROM custom_pages WHERE status = 'active'`)
+    .all() as { id: string; slug: string; title: string }[];
+  for (const p of customPages) {
+    if (p.title.toLowerCase().includes(ql) || p.slug.toLowerCase().includes(ql)) {
+      results.push({
+        id: `page-custom-${p.id}`,
+        type: "page",
+        title: p.title,
+        category: "Pages",
+        href: `/${p.slug}`,
+      });
     }
-  } catch {
-    // ignore if file is missing
   }
 
   // ── Territories ──
@@ -266,36 +260,25 @@ export function search(query: string): SearchResult[] {
     });
   }
 
-  // ── Bestiary (JSON, 12 entries — filter in memory) ──
-  try {
-    const bestiary = JSON.parse(fs.readFileSync(contentPath("bestiary.json"), "utf-8")) as {
-      name: string;
-      type: string;
-      href?: string;
-    }[];
-    const ql = q.toLowerCase();
-    for (const b of bestiary) {
-      if (b.name?.toLowerCase().includes(ql) || b.type?.toLowerCase().includes(ql)) {
-        results.push({
-          id: `creature-${b.name.replace(/\s+/g, "-").toLowerCase()}`,
-          type: "creature",
-          title: b.name,
-          subtitle: b.type,
-          category: "Bestiary",
-          href: b.href ?? "/bestiary",
-          external: !!b.href,
-        });
-      }
-    }
-  } catch {
-    // ignore if file is missing
+  // ── Bestiary (DB) ──
+  const bestiary = db
+    .prepare(`SELECT id, name, type, href FROM bestiary WHERE name LIKE ? OR type LIKE ? ORDER BY name`)
+    .all(like, like) as { id: string; name: string; type: string; href: string | null }[];
+  for (const b of bestiary) {
+    results.push({
+      id: `creature-${b.id}`,
+      type: "creature",
+      title: b.name,
+      subtitle: b.type,
+      category: "Bestiary",
+      href: b.href ?? "/bestiary",
+      external: !!b.href,
+    });
   }
 
   // ── Pantheon (layout JSON — deity-card blocks) ──
   try {
-    const pantheonLayout = JSON.parse(
-      fs.readFileSync(contentPath("page-layouts/pantheon.json"), "utf-8"),
-    ) as { kind: string; type: string; id: string; props: Record<string, unknown> }[];
+    const pantheonLayout = readContent<{ kind: string; type: string; id: string; props: Record<string, unknown> }[]>("page-layouts/pantheon.json");
     const ql = q.toLowerCase();
     for (const item of pantheonLayout) {
       if (item.kind !== "block" || item.type !== "deity-card") continue;

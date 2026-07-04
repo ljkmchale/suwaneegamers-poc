@@ -25,7 +25,6 @@ interface DbPlayerRow {
   name: string;
   description: string;
   portrait: string | null;
-  dm_profile_id: string | null;
 }
 
 export function getPlayerProfileSeeds(): PlayerProfileSeed[] {

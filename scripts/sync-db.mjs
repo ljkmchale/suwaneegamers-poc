@@ -16,5 +16,13 @@ export function getDb() {
   _db = new Database(dbPath);
   _db.pragma("journal_mode = WAL");
   _db.pragma("foreign_keys = ON");
+  _db.exec(`
+    CREATE TABLE IF NOT EXISTS content_documents (
+      path        TEXT PRIMARY KEY,
+      json        TEXT NOT NULL,
+      updated_at  TEXT NOT NULL,
+      source      TEXT NOT NULL DEFAULT 'filesystem'
+    );
+  `);
   return _db;
 }

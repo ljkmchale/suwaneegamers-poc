@@ -1,4 +1,9 @@
+import fs from "fs";
+import path from "path";
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
+import { contentPath } from "@/lib/contentFiles";
+
+const HISTORY_CACHE_PATH = contentPath("history-doc-cache.md");
 
 export const HISTORY_REVALIDATE_SECONDS = 24 * 60 * 60;
 
@@ -215,7 +220,18 @@ export function parseHistoryMarkdown(markdown: string): HistoryData {
   };
 }
 
+function readHistoryFromCache(): string | null {
+  try {
+    return fs.readFileSync(HISTORY_CACHE_PATH, "utf-8");
+  } catch {
+    return null;
+  }
+}
+
 export async function getHistoryData(): Promise<HistoryData> {
+  const cached = readHistoryFromCache();
+  if (cached) return parseHistoryMarkdown(cached);
+
   const response = await fetch(exportUrl(), { next: { revalidate: HISTORY_REVALIDATE_SECONDS } });
   if (!response.ok) throw new Error(`History source returned ${response.status}`);
   return parseHistoryMarkdown(await response.text());

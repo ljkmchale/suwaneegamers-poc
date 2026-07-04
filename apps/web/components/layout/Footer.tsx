@@ -55,6 +55,15 @@ export function Footer() {
             >
               Instagram — Suwanee Gamers
             </a>
+            <a
+              href="https://meet.google.com/mex-iakn-nmd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs transition-opacity hover:opacity-80"
+              style={{ color: "var(--color-accent-arcane)" }}
+            >
+              Google Meet — Group Call
+            </a>
           </div>
         </div>
         <div className="hidden h-20 w-20 sm:block" aria-hidden="true" />

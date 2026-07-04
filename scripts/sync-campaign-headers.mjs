@@ -7,12 +7,11 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { readContent, writeContent, contentPath } from "./content-documents.mjs";
+import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultDriveRootFolderUrl = "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing";
-const autoManagedPagesFile = path.join(root, "content", "auto-managed-pages.json");
-const previousCampaignsLayoutFile = path.join(root, "content", "page-layouts", "previous-campaigns.json");
-const campaignLayoutsDir = path.join(root, "content", "page-layouts", "campaigns");
 const imageDir = path.join(root, "apps", "web", "public", "images", "campaigns");
 
 const fallbackHeaderFiles = [
@@ -28,7 +27,7 @@ const fallbackHeaderFiles = [
 
 function configuredCampaignHeaderFolderUrl() {
   try {
-    const pages = JSON.parse(fs.readFileSync(autoManagedPagesFile, "utf-8"));
+    const pages = readContent("auto-managed-pages.json");
     const campaignsPage = pages.find((page) => page.path === "/campaigns");
     const source = campaignsPage?.managedSources?.find((item) =>
       /campaign headers/i.test(item.label),
@@ -43,50 +42,10 @@ const driveRootFolderUrl = configuredCampaignHeaderFolderUrl();
 const driveRootFolderId =
   /\/folders\/([^/?#]+)/.exec(driveRootFolderUrl)?.[1] ?? "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy";
 
-function decodeHtml(value) {
-  return value
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
-}
-
-function stripDriveTypeSuffix(title) {
-  return title
-    .replace(/ Shared folder$/i, "")
-    .replace(/ Image$/i, "")
-    .trim();
-}
-
-function folderUrlFromHtml(html, folderId) {
-  const normalizedHtml = html
-    .replaceAll("\\/", "/")
-    .replaceAll("\\u003d", "=")
-    .replaceAll("\\=", "=");
-  const marker = `https://drive.google.com/drive/folders/${folderId}?resourcekey=`;
-  const start = normalizedHtml.indexOf(marker);
-  if (start < 0) return null;
-
-  let end = start;
-  while (
-    end < normalizedHtml.length
-    && normalizedHtml[end] !== "\""
-    && normalizedHtml[end] !== "\\"
-    && normalizedHtml[end] !== "<"
-    && !/\s/.test(normalizedHtml[end])
-  ) {
-    end += 1;
-  }
-
-  return normalizedHtml.slice(start, end);
-}
-
 function norm(value) {
   return value
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/^the\s+/, "")
     .replace(/&/g, "and")
@@ -96,40 +55,12 @@ function norm(value) {
 function slugify(value) {
   return value
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/['']/g, "")
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-}
-
-function parseDriveItems(html) {
-  const items = [];
-  const pattern = /data-id="([^"]+)"[^>]*data-tooltip="([^"]+)"/g;
-  for (const match of html.matchAll(pattern)) {
-    const id = match[1];
-    items.push({
-      id,
-      title: stripDriveTypeSuffix(decodeHtml(match[2])),
-      url: folderUrlFromHtml(html, id),
-    });
-  }
-  return items;
-}
-
-async function fetchText(url) {
-  const res = await fetch(url, { redirect: "follow" });
-  if (!res.ok) throw new Error(`Fetch failed for ${url}: HTTP ${res.status}`);
-  return res.text();
-}
-
-async function fetchDriveFolderItems(folder) {
-  const folderUrl = typeof folder === "string"
-    ? `https://drive.google.com/drive/folders/${folder}`
-    : folder.url ?? `https://drive.google.com/drive/folders/${folder.id}`;
-  const html = await fetchText(folderUrl);
-  return parseDriveItems(html);
 }
 
 function isHeaderV0(title) {
@@ -177,7 +108,9 @@ function candidateCampaignNames(name, aliases = []) {
 }
 
 async function findHeaderInFolder(campaign, folder) {
-  const files = await fetchDriveFolderItems(folder);
+  const rawItems = await listDriveItems(folder.id);
+  const files = rawItems.map((f) => ({ id: f.id, title: f.name, isFolder: f.mimeType === "application/vnd.google-apps.folder" }));
+
   const picked = pickHeaderFile(campaign, files);
   if (picked) return { ...picked, containingFolder: folder, nested: false };
 
@@ -185,9 +118,10 @@ async function findHeaderInFolder(campaign, folder) {
   if (fallback) return { ...fallback, containingFolder: folder, nested: false };
 
   for (const child of files) {
-    if (pickHeaderFile(campaign, [child])) continue;
+    if (!child.isFolder) continue;
     if (!/^(Art|Images|Archive)$/i.test(child.title)) continue;
-    const childFiles = await fetchDriveFolderItems(child);
+    const childRaw = await listDriveItems(child.id);
+    const childFiles = childRaw.map((f) => ({ id: f.id, title: f.name }));
     const nested = pickHeaderFile(campaign, childFiles);
     if (nested) return { ...nested, containingFolder: child, nested: true };
   }
@@ -195,24 +129,17 @@ async function findHeaderInFolder(campaign, folder) {
   return null;
 }
 
-async function downloadImage(fileId) {
-  const url = `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`;
-  const res = await fetch(url, { redirect: "follow" });
-  if (!res.ok) throw new Error(`Download failed for ${fileId}: HTTP ${res.status}`);
-
-  const bytes = Buffer.from(await res.arrayBuffer());
-  const isPng = bytes.length >= 8
-    && bytes[0] === 0x89
-    && bytes[1] === 0x50
-    && bytes[2] === 0x4e
-    && bytes[3] === 0x47;
-  const isJpeg = bytes.length >= 3
-    && bytes[0] === 0xff
-    && bytes[1] === 0xd8
-    && bytes[2] === 0xff;
-  if (!isPng && !isJpeg) throw new Error(`Drive file ${fileId} did not download as a PNG/JPG`);
-
-  return bytes;
+async function tryDownloadImage(fileId) {
+  try {
+    await driveDownloadDelay();
+    const bytes = await downloadDriveFile(fileId);
+    const isPng = bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
+    const isJpeg = bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+    if (!isPng && !isJpeg) return null;
+    return bytes;
+  } catch {
+    return null;
+  }
 }
 
 function setPropIfDifferent(props, key, value) {
@@ -223,10 +150,11 @@ function setPropIfDifferent(props, key, value) {
 }
 
 function updateCampaignDetailLayout(campaign) {
-  const layoutFile = path.join(campaignLayoutsDir, `${campaign.id}.json`);
+  const layoutKey = `page-layouts/campaigns/${campaign.id}.json`;
+  const layoutFile = contentPath(layoutKey);
   if (!fs.existsSync(layoutFile)) return false;
 
-  const items = JSON.parse(fs.readFileSync(layoutFile, "utf-8"));
+  const items = readContent(layoutKey);
   let changed = false;
 
   for (const item of items) {
@@ -240,7 +168,7 @@ function updateCampaignDetailLayout(campaign) {
   }
 
   if (changed) {
-    fs.writeFileSync(layoutFile, JSON.stringify(items, null, 2) + "\n", "utf-8");
+    writeContent(layoutKey, items);
   }
 
   return changed;
@@ -261,7 +189,8 @@ const campaigns = db.prepare(
 }));
 fs.mkdirSync(imageDir, { recursive: true });
 
-const rootItems = parseDriveItems(await fetchText(driveRootFolderUrl));
+const rootRaw = await listDriveItems(driveRootFolderId);
+const rootItems = rootRaw.map((f) => ({ id: f.id, title: f.name }));
 const folderByName = new Map(rootItems.map((item) => [norm(item.title), item]));
 const changes = [];
 const warnings = [];
@@ -282,7 +211,12 @@ for (const campaign of campaigns) {
     continue;
   }
 
-  const bytes = await downloadImage(picked.file.id);
+  const bytes = await tryDownloadImage(picked.file.id);
+  if (!bytes) {
+    warnings.push(`${campaign.name}: Drive blocked download for ${picked.file.title}; keeping existing local cache`);
+    continue;
+  }
+
   const ext = extensionFor(picked.file.title, bytes);
   const filename = `${slugify(campaign.name)}.${ext}`;
   const destination = path.join(imageDir, filename);
@@ -326,7 +260,7 @@ db.transaction(() => {
 })();
 
 // --- Archived campaign cards in previous-campaigns.json ---
-const previousLayouts = JSON.parse(fs.readFileSync(previousCampaignsLayoutFile, "utf-8"));
+const previousLayouts = readContent("page-layouts/previous-campaigns.json");
 const archivedCards = previousLayouts.filter((i) => i.type === "archived-campaign-card");
 
 for (const card of archivedCards) {
@@ -346,7 +280,12 @@ for (const card of archivedCards) {
     continue;
   }
 
-  const bytes = await downloadImage(picked.file.id);
+  const bytes = await tryDownloadImage(picked.file.id);
+  if (!bytes) {
+    warnings.push(`${title} (archived): Drive blocked download for ${picked.file.title}; keeping existing local cache`);
+    continue;
+  }
+
   const ext = extensionFor(picked.file.title, bytes);
   const filename = `${slugify(title)}.${ext}`;
   const destination = path.join(imageDir, filename);
@@ -359,7 +298,9 @@ for (const card of archivedCards) {
   }
 }
 
-fs.writeFileSync(previousCampaignsLayoutFile, JSON.stringify(previousLayouts, null, 2) + "\n", "utf-8");
+if (changes.length) {
+  writeContent("page-layouts/previous-campaigns.json", previousLayouts);
+}
 
 const stamp = new Date().toISOString();
 console.log(`[${stamp}] Campaign headers synced from Drive folder ${driveRootFolderId}`);

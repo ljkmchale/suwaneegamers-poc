@@ -1,0 +1,52 @@
+{
+  "sources": [
+    {
+      "id": "hoe-player-notes",
+      "campaign": "HoE",
+      "title": "HoE - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit",
+      "filename": "hoe-campaign-player-notes.md",
+      "enabled": true
+    },
+    {
+      "id": "sod-player-notes",
+      "campaign": "SoD",
+      "title": "SoD - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit",
+      "filename": "sod-campaign-player-notes.md",
+      "enabled": true
+    },
+    {
+      "id": "silent-vanguard-player-reference",
+      "campaign": "The Silent Vanguard",
+      "title": "The Silent Vanguard - Player's Reference & Tracking",
+      "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit",
+      "filename": "the-silent-vanguard-player-reference.md",
+      "enabled": true
+    },
+    {
+      "id": "bloody-endeavor-player-notes",
+      "campaign": "Bloody Endeavor",
+      "title": "Bloody Endeavor - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit",
+      "filename": "bloody-endeavor-campaign-player-notes.md",
+      "enabled": true
+    },
+    {
+      "id": "dungeons-iii-player-notes",
+      "campaign": "Dungeons III",
+      "title": "Dungeons III - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit",
+      "filename": "dungeons-iii-campaign-player-notes.md",
+      "enabled": true
+    },
+    {
+      "id": "tcb-player-notes",
+      "campaign": "The Crystal Bottle",
+      "title": "The Crystal Bottle - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit",
+      "filename": "the-crystal-bottle-campaign-player-notes.md",
+      "enabled": true
+    }
+  ]
+}

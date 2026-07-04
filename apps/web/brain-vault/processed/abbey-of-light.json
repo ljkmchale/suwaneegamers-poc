@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "rawFile": "raw/abbey-of-light.md",
+  "rawContentHash": "9af178d18f8d6595bbc64220a733a8024d11e28aea174c13c86908cafee4877e",
+  "status": "processed",
+  "processedAt": "2026-05-13T19:01:49.752Z",
+  "pagesUpdated": [
+    "wiki/summaries/Abbey of Light.md",
+    "wiki/world/locations/Abbey of Light.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Territories of Myrdae.md",
+    "index.md",
+    "log.md",
+    "brain-query/src/query.mjs"
+  ],
+  "notes": ""
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rawFile": "raw/basctdelm-gazetteer.md",
+  "rawContentHash": "4e1c09be471f7f0a837c782fa3087f73eb917b550464792c85cda57c13fa8cb8",
+  "status": "processed",
+  "processedAt": "2026-05-14T15:02:30.129Z",
+  "pagesUpdated": [
+    "wiki/summaries/Basctdelm Gazetteer.md",
+    "wiki/world/locations/Basctdelm.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Territories of Myrdae.md",
+    "index.md"
+  ],
+  "notes": ""
+}

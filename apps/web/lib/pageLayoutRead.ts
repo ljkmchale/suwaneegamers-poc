@@ -1,6 +1,5 @@
-import fs from "fs";
 import path from "path";
-import { contentDir } from "./contentFiles";
+import { readContent } from "./contentFiles";
 import { PAGE_SECTIONS } from "./pageSections";
 import { buildCampaignDetailLayout, findCampaignForDetailPath } from "./campaignDetailLayouts";
 import type { PageItem, PageGridMeta, CanvasMeta } from "./pageBlocks";
@@ -9,17 +8,9 @@ type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
 type RawEntry = unknown[] | RawMeta;
 type RawLayouts = Record<string, RawEntry>;
 
-function legacyLayoutPath() {
-  return path.join(/*turbopackIgnore: true*/ contentDir(), "page-layouts.json");
-}
-
-function layoutsDir() {
-  return path.join(/*turbopackIgnore: true*/ contentDir(), "page-layouts");
-}
-
-function pageIdToLayoutPath(pageId: string) {
+function pageIdToLayoutKey(pageId: string) {
   const safeId = pageId.startsWith("/") ? pageId : `/${pageId}`;
-  if (safeId === "/") return path.join(/*turbopackIgnore: true*/ layoutsDir(), "home.json");
+  if (safeId === "/") return "page-layouts/home.json";
 
   const segments = safeId
     .split("/")
@@ -27,15 +18,15 @@ function pageIdToLayoutPath(pageId: string) {
     .map((segment) => segment.replace(/[^a-zA-Z0-9._-]/g, "-"))
     .filter((segment) => segment !== "." && segment !== "..");
 
-  if (!segments.length) return path.join(/*turbopackIgnore: true*/ layoutsDir(), "home.json");
+  if (!segments.length) return "page-layouts/home.json";
 
   const fileName = `${segments.pop()}.json`;
-  return path.join(/*turbopackIgnore: true*/ layoutsDir(), ...segments, fileName);
+  return path.join("page-layouts", ...segments, fileName).replaceAll("\\", "/");
 }
 
 function readLegacyRaw(): RawLayouts {
   try {
-    return JSON.parse(fs.readFileSync(legacyLayoutPath(), "utf-8")) as RawLayouts;
+    return readContent<RawLayouts>("page-layouts.json");
   } catch {
     return {};
   }
@@ -43,7 +34,7 @@ function readLegacyRaw(): RawLayouts {
 
 function readRawEntry(pageId: string): RawEntry | undefined {
   try {
-    return JSON.parse(fs.readFileSync(pageIdToLayoutPath(pageId), "utf-8")) as RawEntry;
+    return readContent<RawEntry>(pageIdToLayoutKey(pageId));
   } catch {
     return readLegacyRaw()[pageId];
   }

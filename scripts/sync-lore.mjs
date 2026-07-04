@@ -12,14 +12,13 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { readContent } from "./content-documents.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 function resolveExportUrl() {
   try {
-    const pages = JSON.parse(
-      fs.readFileSync(path.join(root, "content", "auto-managed-pages.json"), "utf-8"),
-    );
+    const pages = readContent("auto-managed-pages.json");
     const entry = pages.find((p) => p.path === "/organizations" || p.path === "/territories");
     const sourceUrl = entry?.sourceUrl ?? "";
     const match = /\/document\/d\/([\w-]+)/.exec(sourceUrl);
@@ -192,6 +191,13 @@ function mergeContent(label, existing, docRows, fields, makeNew, changes) {
 const res = await fetch(EXPORT_URL, { redirect: "follow" });
 if (!res.ok) throw new Error(`Doc export failed: HTTP ${res.status}`);
 const md = await res.text();
+
+// History and Pantheon use different sections of this same source document.
+// Keep their shared local export fresh so page requests never block on Google.
+if (!md.includes("| Name | Title | Domain(s) |")) {
+  throw new Error("Campaign Setting export is missing the Pantheon table");
+}
+fs.writeFileSync(path.join(root, "content", "history-doc-cache.md"), md, "utf-8");
 
 const db = getDb();
 const changes = [];

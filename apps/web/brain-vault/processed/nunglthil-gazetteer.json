@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "rawFile": "raw/nunglthil-gazetteer.md",
+  "rawContentHash": "ac57425644ac5cb94f82695fe6875c9ff75859f6155773f1c4b4b5075a3a8a27",
+  "status": "processed",
+  "processedAt": "2026-05-13T20:11:04.513Z",
+  "pagesUpdated": [
+    "wiki/summaries/Nunglthil Gazetteer.md",
+    "wiki/world/locations/Nunglthil.md",
+    "wiki/world/Myrdae.md",
+    "index.md",
+    "log.md",
+    "brain-query/src/query.mjs"
+  ],
+  "notes": ""
+}

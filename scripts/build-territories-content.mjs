@@ -1,8 +1,10 @@
 // One-off: merge the Google Doc territories table with image/link data
-// from the old block layout into content/territories.json.
+// from the old block layout into the SQLite territories table.
 import fs from "fs";
 import path from "path";
 import os from "os";
+import { getDb } from "./sync-db.mjs";
+import { readContent } from "./content-documents.mjs";
 
 const root = process.cwd();
 const docText = fs.readFileSync(path.join(os.tmpdir(), "lore-doc.txt"), "utf-8");
@@ -42,7 +44,7 @@ for (let i = startIdx; i < lines.length; i++) {
 }
 
 // ── Pull image + href per territory from the old layout ──
-const layout = JSON.parse(fs.readFileSync(path.join(root, "content/page-layouts/territories.json"), "utf-8"));
+const layout = readContent("page-layouts/territories.json");
 const layoutItems = Array.isArray(layout) ? layout : layout.items;
 const found = []; // {title, image, href}
 function walk(node) {
@@ -90,5 +92,26 @@ const unmatchedLayout = found.filter((f) => !rows.some((r) => norm(r.name) === n
 console.log("Doc territories without layout match:", unmatchedDoc.join(", ") || "none");
 console.log("Layout cards not in doc:", unmatchedLayout.join(", ") || "none");
 
-fs.writeFileSync(path.join(root, "content/territories.json"), JSON.stringify(territories, null, 2) + "\n", "utf-8");
-console.log(`Wrote content/territories.json with ${territories.length} territories`);
+const db = getDb();
+const upsert = db.prepare(`
+  INSERT OR REPLACE INTO territories
+    (id, name, capital, region, description, image, href)
+  VALUES
+    (@id, @name, @capital, @region, @description, @image, @href)
+`);
+
+db.transaction(() => {
+  for (const territory of territories) {
+    upsert.run({
+      id: territory.id,
+      name: territory.name,
+      capital: territory.capital ?? null,
+      region: territory.region,
+      description: territory.description,
+      image: territory.image ?? null,
+      href: territory.href ?? null,
+    });
+  }
+})();
+
+console.log(`Upserted ${territories.length} territories into SQLite`);

@@ -11,6 +11,7 @@ import { getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { loadTheme } from "@/lib/theme";
 import { getAutoManagedPages } from "@/lib/autoManagedPagesData";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 
 export default async function SiteLayout({
   children,
@@ -34,6 +35,7 @@ export default async function SiteLayout({
 
   return (
     <div className="relative min-h-screen flex flex-col">
+      <AnalyticsTracker />
       {/* Fixed ambient particle layer */}
       {showParticles && <ParticleField density={particleDensity} />}
 

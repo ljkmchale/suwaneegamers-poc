@@ -7,7 +7,6 @@ import { activeCampaigns, findCampaign, getActiveCampaigns } from "@/lib/campaig
 import { findTrackedCampaign } from "@/lib/campaignTracking";
 import { replaceCampaignSessionsCard } from "@/lib/campaignDetailLayouts";
 import { getPageLayout } from "@/lib/pageLayouts";
-import { fetchSessionSummariesForCampaign } from "@/lib/sessionSummaries";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -66,12 +65,8 @@ export default async function CampaignDetailPage({ params }: Props) {
 
   if (!campaign) notFound();
 
-  const sessionSummaries = await fetchSessionSummariesForCampaign(campaign);
   const trackedItems = replaceTrackedCampaignFields(getPageLayout(`/campaigns/${campaign.id}`), campaign);
-  const items = replaceCampaignSessionsCard(trackedItems, {
-    ...campaign,
-    sessionSummaries,
-  });
+  const items = replaceCampaignSessionsCard(trackedItems, campaign);
 
   return (
     <div className="relative min-h-screen pb-20 pt-20">

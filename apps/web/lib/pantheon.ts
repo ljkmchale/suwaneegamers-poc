@@ -1,5 +1,5 @@
 import fs from "fs";
-import { contentPath } from "@/lib/contentFiles";
+import { contentPath, readContent } from "@/lib/contentFiles";
 import { getAutoManagedPages, getEffectiveDocExportUrl, googleDocExportUrl } from "@/lib/autoManagedPagesData";
 import type { BlockItem } from "@/lib/pageBlocks";
 
@@ -15,6 +15,13 @@ export interface PantheonDeity {
 
 const FALLBACK_SOURCE_URL =
   "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ";
+
+// Pantheon and History are sections of the same Campaign Setting document.
+// The daily source jobs keep this local export current so public page loads do
+// not have to wait for Google before they can render.
+const PANTHEON_CACHE_PATH = contentPath("history-doc-cache.md");
+
+export const PANTHEON_REVALIDATE_SECONDS = 24 * 60 * 60;
 
 function slug(value: string): string {
   return value
@@ -59,8 +66,7 @@ function cleanMarkdownDetails(value: string): string {
 
 function readLocalPantheonCards(): PantheonDeity[] {
   try {
-    const raw = fs.readFileSync(contentPath("page-layouts/pantheon.json"), "utf-8");
-    const layout = JSON.parse(raw) as BlockItem[];
+    const layout = readContent<BlockItem[]>("page-layouts/pantheon.json");
     return layout
       .filter((item): item is BlockItem => item.kind === "block" && item.type === "deity-card")
       .map((item) => {
@@ -167,9 +173,26 @@ export function parsePantheonMarkdown(markdown: string): PantheonDeity[] {
   });
 }
 
-export async function getPantheonDeities(): Promise<PantheonDeity[]> {
+function readCachedPantheonMarkdown(): string | null {
   try {
-    const response = await fetch(getPantheonExportUrl(), { next: { revalidate: 86400 } });
+    const markdown = fs.readFileSync(PANTHEON_CACHE_PATH, "utf-8");
+    return markdown.includes("| Name | Title | Domain(s) |") ? markdown : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function getPantheonDeities(): Promise<PantheonDeity[]> {
+  const cached = readCachedPantheonMarkdown();
+  if (cached) {
+    const deities = parsePantheonMarkdown(cached);
+    if (deities.length > 0) return deities;
+  }
+
+  try {
+    const response = await fetch(getPantheonExportUrl(), {
+      next: { revalidate: PANTHEON_REVALIDATE_SECONDS },
+    });
     if (!response.ok) throw new Error(`Pantheon source returned ${response.status}`);
     const deities = parsePantheonMarkdown(await response.text());
     if (deities.length > 0) return deities;

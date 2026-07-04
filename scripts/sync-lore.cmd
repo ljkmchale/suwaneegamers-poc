@@ -1,7 +1,8 @@
 @echo off
 rem Weekly lore sync - run by the "SuwaneeGamers Lore Sync" Windows scheduled
-rem task. Pulls the master lore Google Doc and merges the Territories table
-rem into content\territories.json. Logs to logs\sync-lore.log at the repo root.
+rem task. Pulls managed Google/Drive sources and merges DB-backed content
+rem into content\suwaneegamers.db. Layout/media scripts still update files.
+rem Logs to logs\sync-lore.log at the repo root.
 cd /d "%~dp0.."
 if not exist "logs" mkdir "logs"
 echo [%date% %time%] lore sync starting >> "logs\sync-lore.log"
@@ -12,4 +13,5 @@ node scripts\sync-gazetteer-entries.mjs >> "logs\sync-lore.log" 2>&1
 node scripts\sync-dm-reference.mjs >> "logs\sync-lore.log" 2>&1
 node scripts\sync-crit-tables.mjs >> "logs\sync-lore.log" 2>&1
 node scripts\sync-session-audio.mjs >> "logs\sync-lore.log" 2>&1
+node scripts\sync-content-documents.mjs >> "logs\sync-lore.log" 2>&1
 echo [%date% %time%] lore sync finished (exit %errorlevel%) >> "logs\sync-lore.log"

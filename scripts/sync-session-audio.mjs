@@ -10,27 +10,34 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { readContent } from "./content-documents.mjs";
+import { listDriveItems } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DRIVE_ROOT_FOLDER_ID = "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy";
 
-function decodeHtml(value) {
-  return value
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+function configuredDriveFolderUrl(pagePath, labelPattern, fallback) {
+  try {
+    const pages = readContent("auto-managed-pages.json");
+    const page = pages.find((p) => p.path === pagePath);
+    const source = page?.managedSources?.find((s) => labelPattern.test(s.label));
+    return source?.url ?? page?.sourceUrl ?? fallback;
+  } catch {
+    return fallback;
+  }
 }
 
-function stripDriveTypeSuffix(title) {
-  return title
-    .replace(/ Shared folder$/i, "")
-    .replace(/ Audio$/i, "")
-    .replace(/ Image$/i, "")
-    .trim();
+function folderIdFromUrl(url) {
+  return /\/folders\/([a-zA-Z0-9_-]+)/.exec(url)?.[1] ?? null;
 }
+
+const DRIVE_ROOT_FOLDER_ID =
+  folderIdFromUrl(
+    configuredDriveFolderUrl(
+      "/campaigns",
+      /campaign headers/i,
+      "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    ),
+  ) ?? "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy";
 
 function norm(value) {
   return value
@@ -40,31 +47,6 @@ function norm(value) {
     .replace(/^the\s+/, "")
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]/g, "");
-}
-
-function parseDriveItems(html) {
-  const items = [];
-  const pattern = /data-id="([^"]+)"[^>]*data-tooltip="([^"]+)"/g;
-  for (const match of html.matchAll(pattern)) {
-    const id = match[1];
-    items.push({
-      id,
-      title: stripDriveTypeSuffix(decodeHtml(match[2])),
-    });
-  }
-  return items;
-}
-
-async function fetchText(url) {
-  const res = await fetch(url, { redirect: "follow" });
-  if (!res.ok) throw new Error(`Fetch failed for ${url}: HTTP ${res.status}`);
-  return res.text();
-}
-
-async function fetchDriveFolderItems(folderId) {
-  const url = `https://drive.google.com/drive/folders/${folderId}`;
-  const html = await fetchText(url);
-  return parseDriveItems(html);
 }
 
 // Extract leading session number from audio filename: "28 - Title.mp3" → 28
@@ -113,8 +95,8 @@ for (const s of sessions) {
   sessionIndex.set(key, s);
 }
 
-const rootItems = parseDriveItems(await fetchText(`https://drive.google.com/drive/folders/${DRIVE_ROOT_FOLDER_ID}`));
-const folderByName = new Map(rootItems.map((item) => [norm(item.title), item]));
+const rootRaw = await listDriveItems(DRIVE_ROOT_FOLDER_ID);
+const folderByName = new Map(rootRaw.map((f) => [norm(f.name), { id: f.id, title: f.name }]));
 
 const changes = [];
 const warnings = [];
@@ -130,7 +112,8 @@ for (const campaign of campaigns) {
     continue;
   }
 
-  const subItems = await fetchDriveFolderItems(folder.id);
+  const subRaw = await listDriveItems(folder.id);
+  const subItems = subRaw.map((f) => ({ id: f.id, title: f.name }));
   const audioFolder = subItems.find((item) => /session\s+summar/i.test(item.title) && /audio/i.test(item.title))
     ?? subItems.find((item) => /audio/i.test(item.title));
 
@@ -139,8 +122,10 @@ for (const campaign of campaigns) {
     continue;
   }
 
-  const audioFiles = await fetchDriveFolderItems(audioFolder.id);
-  const mp3Files = audioFiles.filter((f) => /\.(?:mp3|txt\.mp3)$/i.test(f.title));
+  const audioRaw = await listDriveItems(audioFolder.id);
+  const mp3Files = audioRaw
+    .map((f) => ({ id: f.id, title: f.name }))
+    .filter((f) => /\.(?:mp3|txt\.mp3)$/i.test(f.title));
 
   if (mp3Files.length === 0) {
     warnings.push(`${campaign.name}: Session Summaries Audio folder is empty`);

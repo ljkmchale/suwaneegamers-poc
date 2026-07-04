@@ -1,5 +1,4 @@
-import fs from "fs";
-import { contentPath } from "@/lib/contentFiles";
+import { readContent, writeContent } from "@/lib/contentFiles";
 
 export interface NavItem {
   id: string;
@@ -60,20 +59,16 @@ const DEFAULT_CONFIG: NavConfig = {
   ],
 };
 
-function navPath() {
-  return contentPath("nav.json");
-}
-
 export function getNavConfig(): NavConfig {
   try {
-    return JSON.parse(fs.readFileSync(navPath(), "utf-8")) as NavConfig;
+    return readContent<NavConfig>("nav.json");
   } catch {
     return DEFAULT_CONFIG;
   }
 }
 
 export function writeNavConfig(config: NavConfig): void {
-  fs.writeFileSync(navPath(), JSON.stringify(config, null, 2) + "\n", "utf-8");
+  writeContent("nav.json", config);
 }
 
 /** Convenience: pull a section's items by id */

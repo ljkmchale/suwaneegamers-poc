@@ -1,0 +1,43 @@
+[
+  {
+    "name": "direct roster answer stays deterministic",
+    "question": "who is in HoE",
+    "mustInclude": ["Ainslie", "Aurelius", "Hap", "Ky'tha", "Og", "Zymve"],
+    "mustNotInclude": ["Kenton", "Zephyra"],
+    "expectedSources": ["wiki/quick/HoE Quick Reference.md"]
+  },
+  {
+    "name": "wrong campaign identity refuses crossover",
+    "question": "Who is Kenton in HoE?",
+    "mustInclude": ["Kenton is not documented in Heroes of Emberstran"],
+    "mustNotInclude": ["House Reyvennra", "Adsuren"],
+    "requiresSourceAnchors": false
+  },
+  {
+    "name": "unnamed campaign identity requires scope",
+    "question": "Who is Kenton?",
+    "mustInclude": ["Choose a specific campaign"],
+    "mustNotInclude": ["House Reyvennra", "Adsuren"],
+    "requiresSourceAnchors": false
+  },
+  {
+    "name": "operational log remains out of answer context",
+    "question": "What changed on May 14?",
+    "mustInclude": ["I do not use the maintenance log"],
+    "mustNotInclude": ["Phira", "Rothenloch", "Nunglthil"],
+    "requiresSourceAnchors": false
+  },
+  {
+    "name": "structured open thread lookup uses index page",
+    "question": "What threads are still open in SoD?",
+    "campaign": "SoD",
+    "mustInclude": ["Open threads"],
+    "expectedSources": ["wiki/threads/Open Threads By Campaign.md"]
+  },
+  {
+    "name": "named route lookup uses canonical location page",
+    "question": "What routes connect to Emberstran?",
+    "mustInclude": ["Adamont", "Ahndashere", "Glimmerstone", "Paendley", "Stonetrace", "Ulgrey"],
+    "expectedSources": ["wiki/world/locations/Emberstran.md"]
+  }
+]

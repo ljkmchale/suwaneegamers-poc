@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { ArchivedCampaign } from "@/lib/archivedCampaigns";
 import type { PortalCampaign } from "@/lib/campaigns";
 import { getConfiguredManagedSourceUrl } from "@/lib/autoManagedPagesData";
@@ -89,17 +90,23 @@ export function parseCampaignTrackingText(text: string): CampaignTrackingEntry[]
   return entries;
 }
 
-export async function fetchCampaignTrackingEntries(): Promise<CampaignTrackingEntry[]> {
-  const response = await fetch(campaignTrackingExportUrl(), {
-    next: { revalidate: CAMPAIGN_TRACKING_REVALIDATE_SECONDS },
-  });
+// Wrapped in React cache() so multiple callers within a single request/render
+// (e.g. generateMetadata + the page body) share one fetch. The Next data cache
+// (`next.revalidate`) then keeps that result warm across requests for a day, so
+// the Google Docs round-trip stays off the critical render path.
+export const fetchCampaignTrackingEntries = cache(
+  async (): Promise<CampaignTrackingEntry[]> => {
+    const response = await fetch(campaignTrackingExportUrl(), {
+      next: { revalidate: CAMPAIGN_TRACKING_REVALIDATE_SECONDS },
+    });
 
-  if (!response.ok) {
-    throw new Error(`Campaign Tracking document returned ${response.status}`);
-  }
+    if (!response.ok) {
+      throw new Error(`Campaign Tracking document returned ${response.status}`);
+    }
 
-  return parseCampaignTrackingText(await response.text());
-}
+    return parseCampaignTrackingText(await response.text());
+  },
+);
 
 function campaignKeys(campaign: Pick<PortalCampaign, "id" | "name" | "aliases">) {
   return [

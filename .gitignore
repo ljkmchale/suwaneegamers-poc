@@ -21,6 +21,8 @@ apps/web/out/
 *.db-shm
 *.db-wal
 data/
+apps/web/brain-data/
+content/*-doc-cache.*
 
 # Build outputs
 dist/

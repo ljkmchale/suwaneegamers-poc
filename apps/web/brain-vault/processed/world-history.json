@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rawFile": "raw/world-history.md",
+  "rawContentHash": "3882817a9e788a93958b5a2bf0ff5c9d53130d2edfdc3ee1364db3b911836561",
+  "status": "processed",
+  "processedAt": "2026-05-13T12:39:39.857Z",
+  "pagesUpdated": [
+    "wiki/world/History of Myrdae.md",
+    "wiki/world/Myrdae.md",
+    "wiki/world/Oberra.md",
+    "index.md",
+    "log.md"
+  ],
+  "notes": ""
+}

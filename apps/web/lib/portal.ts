@@ -1,5 +1,4 @@
-import fs from "fs";
-import { contentPath } from "@/lib/contentFiles";
+import { readContent } from "@/lib/contentFiles";
 
 export const PORTAL_URLS = {
   chronicles: "https://kb.suwaneegamers.net/",
@@ -17,12 +16,9 @@ export interface PortalLink {
 }
 
 export function getPortalLinks(): PortalLink[] {
-  const raw = fs.readFileSync(contentPath("portal-links.json"), "utf-8");
-  return JSON.parse(raw) as PortalLink[];
+  return readContent<PortalLink[]>("portal-links.json");
 }
 
-// backward-compat
-export const primaryPortalLinks: PortalLink[] = getPortalLinks();
 
 export function chroniclesLink(description: string): PortalLink {
   return {

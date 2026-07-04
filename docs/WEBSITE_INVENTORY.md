@@ -1,6 +1,6 @@
 # Suwanee Gamers Website Inventory
 
-Last reviewed: 2026-06-14
+Last reviewed: 2026-06-19
 
 A complete map of the site: every route, content file, page layout, block type, and image asset. Read this before making changes — it tells you where everything lives and which file to edit.
 
@@ -12,6 +12,12 @@ Suwanee Gamers is a fantasy-themed portal for a tabletop RPG group. It is a ligh
 - Dev server: `pnpm dev` → **localhost:3000**
 - Calendar source: `g3kgagicusaol82fqhjc62o47o@group.calendar.google.com`
 
+Current operations note:
+- Dev server is `pnpm dev` on `http://localhost:3000`.
+- Production is the Windows NSSM service `SuwaneeGamers` on port `4652`.
+- Production serves `apps/web/.next-prod`; run `pnpm --filter web build:prod`, not plain `pnpm build`, for production UI/code changes.
+- Restarting production requires an elevated prompt: `C:\EaselLocal\nssm.exe restart SuwaneeGamers`.
+
 ## Technology Stack
 
 - Next.js 16 App Router, React 19, TypeScript 5, Tailwind CSS 4
@@ -19,6 +25,8 @@ Suwanee Gamers is a fantasy-themed portal for a tabletop RPG group. It is a ligh
 - Vitest 3 + jsdom (≈539 tests in `apps/web/__tests__/`)
 - No database — all data is JSON files in `content/`, read off disk at request time
 - Deploy: `next build`, then restart the `SuwaneeGamers` NSSM service (see `/deploy` skill / memory)
+
+Current data/deploy correction: runtime content is DB-first for JSON documents. `apps/web/lib/contentFiles.ts` reads `content/suwaneegamers.db` table `content_documents` before falling back to JSON files in `content/`, and `writeContent()` writes both. If a JSON edit does not show up in the app, sync or inspect the matching `content_documents.path` row.
 
 ## Routes
 
@@ -139,3 +147,6 @@ Design tokens are CSS custom properties in `app/globals.css`, overridable via `c
 4. **BlockRenderer ↔ PageEditOverlay DraftBlock** must stay in sync.
 5. **Dev (3000) vs prod (4652)**: stop the dev server before `next build` (shared `.next`); production needs an NSSM service restart to pick up code (content JSON changes appear via `revalidate = 300` without redeploy).
 6. **Known pre-existing test failure**: nav `/land` route (contentIntegrity.test.ts).
+7. **Production build folder**: production does not serve the normal `.next` folder. Use `pnpm --filter web build:prod` so `apps/web/.next-prod` is rebuilt, then restart `SuwaneeGamers`.
+8. **Source-Managed DB mirror**: `/admin/source-managed` reads `auto-managed-pages.json` through `contentFiles.ts`; check both `content/auto-managed-pages.json` and `content_documents.path = 'auto-managed-pages.json'`.
+9. **Chronicles managed sources**: `/chronicles` should list the same Google Docs as `apps/web/brain-tools/google-doc-sources.json`; the scheduler job id is `chronicles-sources`.

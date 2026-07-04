@@ -1,7 +1,11 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { LoreFolds, type LoreBlock, type LoreEntry, type LoreInline } from "./LoreFolds";
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
+
+const LORE_CACHE_PATH = path.join(process.cwd(), "..", "..", "content", "lore-doc-cache.html");
 
 export const metadata: Metadata = {
   title: "Legends & Lore",
@@ -360,24 +364,38 @@ function getSummary(body: string) {
   return summary.length > 190 ? `${summary.slice(0, 187).trim()}...` : summary;
 }
 
+function readLoreDocFromCache(): string | null {
+  try {
+    return fs.readFileSync(LORE_CACHE_PATH, "utf-8");
+  } catch {
+    return null;
+  }
+}
+
 async function getLoreEntries(): Promise<LoreEntry[]> {
   let sections: ExtractedLoreSection[] = [];
-  const exportUrl = getLoreDocExportUrl();
 
-  if (exportUrl) {
-    try {
-      const response = await fetch(exportUrl, {
-        next: { revalidate: 3600 },
-      });
-      if (response.ok) {
-        const docHtml = await response.text();
-        sections = extractLoreSectionsFromHtml(docHtml);
-        if (sections.length === 0) {
-          sections = extractLoreSectionsFromText(docHtml);
+  const cached = readLoreDocFromCache();
+  if (cached) {
+    sections = extractLoreSectionsFromHtml(cached);
+    if (sections.length === 0) sections = extractLoreSectionsFromText(cached);
+  }
+
+  if (sections.length === 0) {
+    const exportUrl = getLoreDocExportUrl();
+    if (exportUrl) {
+      try {
+        const response = await fetch(exportUrl, { cache: "no-store" });
+        if (response.ok) {
+          const docHtml = await response.text();
+          sections = extractLoreSectionsFromHtml(docHtml);
+          if (sections.length === 0) {
+            sections = extractLoreSectionsFromText(docHtml);
+          }
         }
+      } catch {
+        sections = [];
       }
-    } catch {
-      sections = [];
     }
   }
 

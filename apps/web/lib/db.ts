@@ -1,19 +1,23 @@
 import Database from "better-sqlite3";
+import fs from "fs";
 import path from "path";
 import { contentDir } from "@/lib/contentFiles";
 
-let _db: Database.Database | null = null;
+// Persist the connection on globalThis so Next.js HMR module reloads reuse it
+// instead of opening a second connection (which causes WAL checkpoint conflicts).
+const g = globalThis as typeof globalThis & { __sgDb?: Database.Database };
 
 export function getDb(): Database.Database {
-  if (_db) return _db;
+  if (g.__sgDb) return g.__sgDb;
 
   const dbPath = path.join(contentDir(), "suwaneegamers.db");
-  _db = new Database(dbPath);
-  _db.pragma("journal_mode = WAL");
-  _db.pragma("foreign_keys = ON");
-  initializeSchema(_db);
-  migrateSchema(_db);
-  return _db;
+  const db = new Database(dbPath);
+  db.pragma("journal_mode = WAL");
+  db.pragma("foreign_keys = ON");
+  initializeSchema(db);
+  migrateSchema(db);
+  g.__sgDb = db;
+  return db;
 }
 
 function migrateSchema(db: Database.Database): void {
@@ -23,6 +27,114 @@ function migrateSchema(db: Database.Database): void {
   if (hasRefUrl.n > 0) {
     db.exec(`ALTER TABLE campaigns DROP COLUMN reference_url`);
   }
+
+  // Drop denormalized columns — activeCampaignIds is now computed from campaigns.dm at runtime
+  const dmColumns = new Set(
+    (db.prepare(`PRAGMA table_info(dungeon_masters)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (dmColumns.has("active_campaign_ids")) {
+    db.exec(`ALTER TABLE dungeon_masters DROP COLUMN active_campaign_ids`);
+  }
+
+  // Drop always-NULL dm_profile_id — computed at runtime via name-matching DMs
+  const playerColumns = new Set(
+    (db.prepare(`PRAGMA table_info(players)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (playerColumns.has("dm_profile_id")) {
+    db.exec(`ALTER TABLE players DROP COLUMN dm_profile_id`);
+  }
+
+  // Add missing indexes (including unique slug enforcement for existing gazetteer tables)
+  db.exec(`
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_gazetteer_slug ON gazetteer(slug);
+    CREATE INDEX IF NOT EXISTS idx_gazetteer_region ON gazetteer(region);
+    CREATE INDEX IF NOT EXISTS idx_campaigns_dm ON campaigns(dm);
+  `);
+
+  // Backfill campaign_dms junction table from campaigns.dm if it's empty but campaigns exist
+  const cdCount = (db.prepare(`SELECT COUNT(*) AS n FROM campaign_dms`).get() as { n: number }).n;
+  const campaignCount = (db.prepare(`SELECT COUNT(*) AS n FROM campaigns`).get() as { n: number }).n;
+  if (cdCount === 0 && campaignCount > 0) {
+    const campaignRows = db.prepare(`SELECT id, dm FROM campaigns`).all() as { id: string; dm: string }[];
+    const findDm = db.prepare(`SELECT id FROM dungeon_masters WHERE name = ?`);
+    const insertCd = db.prepare(`INSERT OR IGNORE INTO campaign_dms (campaign_id, dm_id) VALUES (?, ?)`);
+    db.transaction(() => {
+      for (const row of campaignRows) {
+        for (const dmName of row.dm.split(/\s*&\s*/)) {
+          const dm = findDm.get(dmName.trim()) as { id: string } | undefined;
+          if (dm) insertCd.run(row.id, dm.id);
+        }
+      }
+    })();
+  }
+
+  // Seed custom_pages from pages.json on first startup
+  const cpCount = (db.prepare(`SELECT COUNT(*) AS n FROM custom_pages`).get() as { n: number }).n;
+  if (cpCount === 0) {
+    try {
+      const raw = fs.readFileSync(path.join(contentDir(), "pages.json"), "utf-8");
+      const pages = JSON.parse(raw) as Array<{ id: string; slug: string; title: string; status: string; createdAt: string }>;
+      const ins = db.prepare(`INSERT OR IGNORE INTO custom_pages (id, slug, title, status, created_at) VALUES (?, ?, ?, ?, ?)`);
+      for (const p of pages) ins.run(p.id, p.slug, p.title, p.status, p.createdAt);
+    } catch { /* pages.json absent on fresh install */ }
+  }
+
+  // Seed bestiary from bestiary.json on first startup
+  const bCount = (db.prepare(`SELECT COUNT(*) AS n FROM bestiary`).get() as { n: number }).n;
+  if (bCount === 0) {
+    try {
+      const raw = fs.readFileSync(path.join(contentDir(), "bestiary.json"), "utf-8");
+      const creatures = JSON.parse(raw) as Array<{ name: string; type: string; image?: string; href?: string }>;
+      const ins = db.prepare(`INSERT OR IGNORE INTO bestiary (id, name, type, image, href) VALUES (?, ?, ?, ?, ?)`);
+      for (const c of creatures) {
+        ins.run(c.name.toLowerCase().replace(/[^a-z0-9]/g, "-"), c.name, c.type, c.image ?? null, c.href ?? null);
+      }
+    } catch { /* bestiary.json absent on fresh install */ }
+  }
+
+  // Seed content_documents with config files (nav, portal-links, theme) on first startup
+  const checkDoc = db.prepare(`SELECT COUNT(*) AS n FROM content_documents WHERE path = ?`);
+  const insDoc = db.prepare(
+    `INSERT OR IGNORE INTO content_documents (path, json, updated_at, source) VALUES (?, ?, ?, 'filesystem')`,
+  );
+  for (const file of ["nav.json", "portal-links.json", "theme.json"]) {
+    const exists = (checkDoc.get(file) as { n: number }).n > 0;
+    if (!exists) {
+      try {
+        const json = fs.readFileSync(path.join(contentDir(), file), "utf-8");
+        insDoc.run(file, json, new Date().toISOString());
+      } catch { /* file absent on fresh install */ }
+    }
+  }
+
+  // Add schedule_json column for user-editable schedules
+  const jobColumns = new Set(
+    (db.prepare(`PRAGMA table_info(content_sync_jobs)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!jobColumns.has("schedule_json")) {
+    db.exec(`ALTER TABLE content_sync_jobs ADD COLUMN schedule_json TEXT`);
+  }
+  if (!jobColumns.has("revalidate_paths_json")) {
+    db.exec(`ALTER TABLE content_sync_jobs ADD COLUMN revalidate_paths_json TEXT`);
+  }
+  if (!jobColumns.has("source_job_id")) {
+    db.exec(`ALTER TABLE content_sync_jobs ADD COLUMN source_job_id TEXT`);
+  }
+
+  const gazetteerColumns = new Set(
+    (db.prepare(`PRAGMA table_info(gazetteer)`).all() as { name: string }[]).map((column) => column.name),
+  );
+  const addGazetteerColumn = (name: string, type: string) => {
+    if (!gazetteerColumns.has(name)) db.exec(`ALTER TABLE gazetteer ADD COLUMN ${name} ${type}`);
+  };
+  addGazetteerColumn("folder_url", "TEXT");
+  addGazetteerColumn("reference_url", "TEXT");
+  addGazetteerColumn("image_url", "TEXT");
+  addGazetteerColumn("image_source_file_id", "TEXT");
+  addGazetteerColumn("image_source_file_name", "TEXT");
+  addGazetteerColumn("size", "TEXT");
+  addGazetteerColumn("region", "TEXT");
+  addGazetteerColumn("description", "TEXT");
 }
 
 function initializeSchema(db: Database.Database): void {
@@ -95,24 +207,22 @@ function initializeSchema(db: Database.Database): void {
     -- Dungeon Masters
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS dungeon_masters (
-      id                  TEXT PRIMARY KEY,
-      name                TEXT NOT NULL,
-      focus               TEXT NOT NULL,
-      description         TEXT NOT NULL,
-      portrait            TEXT,
-      active_campaign_ids TEXT NOT NULL DEFAULT '[]',
-      previous_campaigns  TEXT NOT NULL DEFAULT '[]'
+      id                 TEXT PRIMARY KEY,
+      name               TEXT NOT NULL,
+      focus              TEXT NOT NULL,
+      description        TEXT NOT NULL,
+      portrait           TEXT,
+      previous_campaigns TEXT NOT NULL DEFAULT '[]'
     );
 
     -- ----------------------------------------------------------------
     -- Players
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS players (
-      id            TEXT PRIMARY KEY,
-      name          TEXT NOT NULL,
-      description   TEXT NOT NULL,
-      portrait      TEXT,
-      dm_profile_id TEXT
+      id          TEXT PRIMARY KEY,
+      name        TEXT NOT NULL,
+      description TEXT NOT NULL,
+      portrait    TEXT
     );
 
     -- ----------------------------------------------------------------
@@ -144,13 +254,138 @@ function initializeSchema(db: Database.Database): void {
     );
 
     -- ----------------------------------------------------------------
+    -- Campaign DM assignments (junction table normalizing campaigns.dm)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS campaign_dms (
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      dm_id       TEXT NOT NULL REFERENCES dungeon_masters(id) ON DELETE CASCADE,
+      PRIMARY KEY (campaign_id, dm_id)
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_campaign_dms_dm ON campaign_dms(dm_id);
+
+    -- ----------------------------------------------------------------
     -- Gazetteer entries
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS gazetteer (
-      id      TEXT PRIMARY KEY,
-      title   TEXT NOT NULL,
-      slug    TEXT NOT NULL,
-      doc_url TEXT NOT NULL
+      id                     TEXT PRIMARY KEY,
+      title                  TEXT NOT NULL,
+      slug                   TEXT NOT NULL UNIQUE,
+      doc_url                TEXT NOT NULL,
+      folder_url             TEXT,
+      reference_url          TEXT,
+      image_url              TEXT,
+      image_source_file_id   TEXT,
+      image_source_file_name TEXT,
+      size                   TEXT,
+      region                 TEXT,
+      description            TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_gazetteer_region ON gazetteer(region);
+    CREATE INDEX IF NOT EXISTS idx_campaigns_dm ON campaigns(dm);
+
+    -- ----------------------------------------------------------------
+    -- Content sync scheduler
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS content_sync_jobs (
+      id                TEXT PRIMARY KEY,
+      label             TEXT NOT NULL,
+      schedule          TEXT NOT NULL,
+      command           TEXT NOT NULL,
+      enabled           INTEGER NOT NULL DEFAULT 1,
+      last_started_at   TEXT,
+      last_finished_at  TEXT,
+      last_success_at   TEXT,
+      last_status       TEXT,
+      last_exit_code    INTEGER,
+      last_duration_ms  INTEGER,
+      next_run_at       TEXT,
+      last_message      TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS content_sync_runs (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      job_id        TEXT NOT NULL REFERENCES content_sync_jobs(id) ON DELETE CASCADE,
+      started_at    TEXT NOT NULL,
+      finished_at   TEXT,
+      status        TEXT NOT NULL,
+      exit_code     INTEGER,
+      duration_ms   INTEGER,
+      message       TEXT,
+      stdout_tail   TEXT,
+      stderr_tail   TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_content_sync_runs_job_started
+      ON content_sync_runs(job_id, started_at DESC);
+
+    -- ----------------------------------------------------------------
+    -- Privacy-conscious site analytics
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS analytics_sessions (
+      session_id    TEXT PRIMARY KEY,
+      first_seen_at TEXT NOT NULL,
+      last_seen_at  TEXT NOT NULL,
+      entry_path    TEXT NOT NULL,
+      last_path     TEXT NOT NULL,
+      referrer_host TEXT,
+      device_type   TEXT NOT NULL DEFAULT 'desktop',
+      page_views    INTEGER NOT NULL DEFAULT 0,
+      engaged_seconds INTEGER NOT NULL DEFAULT 0
+    );
+
+    CREATE TABLE IF NOT EXISTS analytics_events (
+      id               INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id       TEXT NOT NULL REFERENCES analytics_sessions(session_id) ON DELETE CASCADE,
+      event_type       TEXT NOT NULL,
+      path             TEXT NOT NULL,
+      content_type     TEXT,
+      content_id       TEXT,
+      content_label    TEXT,
+      duration_seconds INTEGER NOT NULL DEFAULT 0,
+      created_at       TEXT NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_analytics_events_created
+      ON analytics_events(created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_events_type_created
+      ON analytics_events(event_type, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_events_path_created
+      ON analytics_events(path, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_sessions_last_seen
+      ON analytics_sessions(last_seen_at DESC);
+
+    -- ----------------------------------------------------------------
+    -- Custom pages (admin-created pages with slugs)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS custom_pages (
+      id         TEXT PRIMARY KEY,
+      slug       TEXT NOT NULL UNIQUE,
+      title      TEXT NOT NULL,
+      status     TEXT NOT NULL DEFAULT 'active',
+      created_at TEXT NOT NULL
+    );
+
+    -- ----------------------------------------------------------------
+    -- Bestiary (custom creatures for the campaign)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS bestiary (
+      id    TEXT PRIMARY KEY,
+      name  TEXT NOT NULL,
+      type  TEXT NOT NULL,
+      image TEXT,
+      href  TEXT
+    );
+
+    -- ----------------------------------------------------------------
+    -- JSON content documents
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS content_documents (
+      path        TEXT PRIMARY KEY,
+      json        TEXT NOT NULL,
+      updated_at  TEXT NOT NULL,
+      source      TEXT NOT NULL DEFAULT 'filesystem'
     );
   `);
 }

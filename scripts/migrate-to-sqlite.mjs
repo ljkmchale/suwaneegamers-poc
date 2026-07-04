@@ -86,21 +86,19 @@ db.exec(`
   END;
 
   CREATE TABLE IF NOT EXISTS dungeon_masters (
-    id                  TEXT PRIMARY KEY,
-    name                TEXT NOT NULL,
-    focus               TEXT NOT NULL,
-    description         TEXT NOT NULL,
-    portrait            TEXT,
-    active_campaign_ids TEXT NOT NULL DEFAULT '[]',
-    previous_campaigns  TEXT NOT NULL DEFAULT '[]'
+    id                 TEXT PRIMARY KEY,
+    name               TEXT NOT NULL,
+    focus              TEXT NOT NULL,
+    description        TEXT NOT NULL,
+    portrait           TEXT,
+    previous_campaigns TEXT NOT NULL DEFAULT '[]'
   );
 
   CREATE TABLE IF NOT EXISTS players (
-    id            TEXT PRIMARY KEY,
-    name          TEXT NOT NULL,
-    description   TEXT NOT NULL,
-    portrait      TEXT,
-    dm_profile_id TEXT
+    id          TEXT PRIMARY KEY,
+    name        TEXT NOT NULL,
+    description TEXT NOT NULL,
+    portrait    TEXT
   );
 
   CREATE TABLE IF NOT EXISTS organizations (
@@ -125,11 +123,36 @@ db.exec(`
     href        TEXT
   );
 
+  CREATE TABLE IF NOT EXISTS campaign_dms (
+    campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+    dm_id       TEXT NOT NULL REFERENCES dungeon_masters(id) ON DELETE CASCADE,
+    PRIMARY KEY (campaign_id, dm_id)
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_campaign_dms_dm ON campaign_dms(dm_id);
+  CREATE INDEX IF NOT EXISTS idx_gazetteer_region ON gazetteer(region);
+  CREATE INDEX IF NOT EXISTS idx_campaigns_dm ON campaigns(dm);
+
   CREATE TABLE IF NOT EXISTS gazetteer (
-    id      TEXT PRIMARY KEY,
-    title   TEXT NOT NULL,
-    slug    TEXT NOT NULL,
-    doc_url TEXT NOT NULL
+    id                     TEXT PRIMARY KEY,
+    title                  TEXT NOT NULL,
+    slug                   TEXT NOT NULL UNIQUE,
+    doc_url                TEXT NOT NULL,
+    folder_url             TEXT,
+    reference_url          TEXT,
+    image_url              TEXT,
+    image_source_file_id   TEXT,
+    image_source_file_name TEXT,
+    size                   TEXT,
+    region                 TEXT,
+    description            TEXT
+  );
+
+  CREATE TABLE IF NOT EXISTS content_documents (
+    path        TEXT PRIMARY KEY,
+    json        TEXT NOT NULL,
+    updated_at  TEXT NOT NULL,
+    source      TEXT NOT NULL DEFAULT 'filesystem'
   );
 `);
 
@@ -228,9 +251,9 @@ migrate("dungeon_masters", () => {
 
   const upsert = db.prepare(`
     INSERT OR REPLACE INTO dungeon_masters
-      (id, name, focus, description, portrait, active_campaign_ids, previous_campaigns)
+      (id, name, focus, description, portrait, previous_campaigns)
     VALUES
-      (@id, @name, @focus, @description, @portrait, @active_campaign_ids, @previous_campaigns)
+      (@id, @name, @focus, @description, @portrait, @previous_campaigns)
   `);
 
   for (const dm of dms) {
@@ -240,10 +263,32 @@ migrate("dungeon_masters", () => {
       focus: dm.focus,
       description: dm.description,
       portrait: dm.portrait ?? null,
-      active_campaign_ids: j(dm.activeCampaignIds),
       previous_campaigns: j(dm.previousCampaigns),
     });
     totalInserted++;
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Campaign DM assignments (junction table)
+// ---------------------------------------------------------------------------
+migrate("campaign_dms", () => {
+  const campaigns = readJson("campaigns.json");
+  const dms = readJson("dungeon-masters.json");
+  if (!campaigns || !dms) return;
+
+  const dmByName = new Map(dms.map((d) => [d.name, d.id]));
+  db.prepare(`DELETE FROM campaign_dms`).run();
+  const insert = db.prepare(`INSERT OR IGNORE INTO campaign_dms (campaign_id, dm_id) VALUES (?, ?)`);
+
+  for (const c of campaigns) {
+    for (const dmName of c.dm.split(/\s*&\s*/)) {
+      const dmId = dmByName.get(dmName.trim());
+      if (dmId) {
+        insert.run(c.id, dmId);
+        totalInserted++;
+      }
+    }
   }
 });
 
@@ -255,8 +300,8 @@ migrate("players", () => {
   if (!players) return;
 
   const upsert = db.prepare(`
-    INSERT OR REPLACE INTO players (id, name, description, portrait, dm_profile_id)
-    VALUES (@id, @name, @description, @portrait, @dm_profile_id)
+    INSERT OR REPLACE INTO players (id, name, description, portrait)
+    VALUES (@id, @name, @description, @portrait)
   `);
 
   for (const p of players) {
@@ -265,7 +310,6 @@ migrate("players", () => {
       name: p.name,
       description: p.description,
       portrait: p.portrait ?? null,
-      dm_profile_id: p.dmProfileId ?? null,
     });
     totalInserted++;
   }
@@ -335,12 +379,77 @@ migrate("gazetteer", () => {
   if (!entries) return;
 
   const upsert = db.prepare(`
-    INSERT OR REPLACE INTO gazetteer (id, title, slug, doc_url)
-    VALUES (@id, @title, @slug, @doc_url)
+    INSERT OR REPLACE INTO gazetteer (
+      id,
+      title,
+      slug,
+      doc_url,
+      folder_url,
+      reference_url,
+      image_url,
+      image_source_file_id,
+      image_source_file_name,
+      size,
+      region,
+      description
+    )
+    VALUES (
+      @id,
+      @title,
+      @slug,
+      @doc_url,
+      @folder_url,
+      @reference_url,
+      @image_url,
+      @image_source_file_id,
+      @image_source_file_name,
+      @size,
+      @region,
+      @description
+    )
   `);
 
   for (const e of entries) {
-    upsert.run({ id: e.id, title: e.title, slug: e.slug, doc_url: e.docUrl });
+    upsert.run({
+      id: e.id,
+      title: e.title,
+      slug: e.slug,
+      doc_url: e.docUrl,
+      folder_url: e.folderUrl ?? null,
+      reference_url: e.referenceUrl ?? e.docUrl,
+      image_url: e.imageUrl ?? null,
+      image_source_file_id: e.imageSourceFileId ?? null,
+      image_source_file_name: e.imageSourceFileName ?? null,
+      size: e.size ?? "",
+      region: e.region ?? "",
+      description: e.description ?? "",
+    });
+    totalInserted++;
+  }
+});
+
+// ---------------------------------------------------------------------------
+// JSON content documents
+// ---------------------------------------------------------------------------
+function walkJsonFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) return walkJsonFiles(entryPath);
+    return entry.isFile() && entry.name.endsWith(".json") ? [entryPath] : [];
+  });
+}
+
+migrate("content_documents", () => {
+  const upsert = db.prepare(`
+    INSERT OR REPLACE INTO content_documents (path, json, updated_at, source)
+    VALUES (?, ?, ?, 'filesystem')
+  `);
+  const stamp = new Date().toISOString();
+
+  for (const file of walkJsonFiles(contentDir)) {
+    const json = fs.readFileSync(file, "utf-8");
+    JSON.parse(json);
+    upsert.run(path.relative(contentDir, file).replaceAll(path.sep, "/"), json, stamp);
     totalInserted++;
   }
 });

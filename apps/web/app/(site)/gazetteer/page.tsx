@@ -1,26 +1,13 @@
-import fs from "fs";
-import path from "path";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getEffectiveDocExportUrl } from "@/lib/autoManagedPagesData";
+import { getGazetteerEntries, type GazetteerEntry } from "@/lib/gazetteer";
 
 export const metadata: Metadata = {
   title: "Gazetteer",
   description: "A field guide to notable settlements across Myrdae.",
 };
 
-export const revalidate = 86400;
-
-interface GazetteerEntry {
-  name: string;
-  size: string;
-  coord: string;
-  region: string;
-  description: string;
-  href: string;
-  image: string;
-  imageType: "heraldry" | "artwork" | "fallback";
-}
+export const revalidate = 3600;
 
 const FALLBACK_IMAGE =
   "/images/guides-to-myrdae/reference-cards/campaign-setting-settlements.webp";
@@ -30,164 +17,14 @@ const MINOR_SETTLEMENTS_REFERENCE_URL =
 
 const MINOR_SETTLEMENTS_COUNT = 11;
 
-const DOCUMENTED_ENTRY_SLUGS_IN_ORDER = [
-  "abbey-of-light",
-  "adsuren",
-  "emberstran",
-  "nunglthil",
-  "onaren",
-  "scarwatch-hold",
-  "shademoor",
-];
-
-const DOCUMENTED_ENTRY_SLUGS = new Set(DOCUMENTED_ENTRY_SLUGS_IN_ORDER);
-
-const SUPPLEMENTAL_DOCUMENTED_ENTRIES: GazetteerEntry[] = [
-  {
-    name: "Nunglthil",
-    href: "https://docs.google.com/document/d/1Uow9Y0-_llBAp4meZsA-QEFTmMslbMV_IlgYV3UjNxg/edit?usp=sharing",
-    size: "",
-    coord: "",
-    region: "Underdark",
-    description: "Full location write-up available.",
-    image: "/images/gazetteer/cities/nunglthil.png",
-    imageType: "artwork",
-  },
-];
-
-function getGazetteerExportUrl() {
-  return getEffectiveDocExportUrl("/gazetteer", "md") ?? getEffectiveDocExportUrl("/campaign-setting", "md");
-}
-
-function decodeEntities(value: string) {
-  return value
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-}
-
-function cleanMarkdown(value: string) {
-  return decodeEntities(value)
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/!\[\]\[[^\]]+\]/g, "")
-    .replace(/\\([*_`\-[\]()])/g, "$1")
-    .replace(/\*\*/g, "")
-    .replace(/\*/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function slugify(value: string) {
-  return cleanMarkdown(value)
-    .replace(/\([^)]*\)/g, "")
-    .toLowerCase()
-    .replace(/[''`]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-function withSupplementalDocumentedEntries(entries: GazetteerEntry[]) {
-  const sourceSlugs = new Set(entries.map((entry) => slugify(entry.name)));
-  return [
-    ...entries,
-    ...SUPPLEMENTAL_DOCUMENTED_ENTRIES.filter((entry) => !sourceSlugs.has(slugify(entry.name))),
-  ];
-}
-
-function getImageForEntry(name: string): Pick<GazetteerEntry, "image" | "imageType"> {
-  const slug = slugify(name);
-  const imageDir = path.join(process.cwd(), "public", "images", "gazetteer", "cities");
-  for (const ext of ["png", "jpg", "jpeg", "webp"]) {
-    const filename = `${slug}.${ext}`;
-    if (fs.existsSync(path.join(imageDir, filename))) {
-      return { image: `/images/gazetteer/cities/${filename}`, imageType: "artwork" };
-    }
-  }
-  return { image: FALLBACK_IMAGE, imageType: "fallback" };
-}
-
-function parseImageReferences(markdown: string) {
-  const references = new Map<string, string>();
-  for (const match of markdown.matchAll(/^\[([^\]]+)\]:\s*<?([^>\s]+)>?/gm)) {
-    references.set(match[1], decodeEntities(match[2]));
-  }
-  return references;
-}
-
-function getHeraldryImage(markdownCell: string, imageReferences: Map<string, string>) {
-  const reference = markdownCell.match(/!\[[^\]]*\]\[([^\]]+)\]/);
-  if (reference) return imageReferences.get(reference[1]) ?? null;
-
-  const inline = markdownCell.match(/!\[[^\]]*\]\(([^)]+)\)/);
-  return inline ? decodeEntities(inline[1].replace(/^<|>$/g, "")) : null;
-}
-
-function parseSettlementRows(markdown: string): GazetteerEntry[] {
-  const lines = markdown.split("\n");
-  const imageReferences = parseImageReferences(markdown);
-  const headerIndex = lines.findIndex((line) =>
-    /^\|\s*Heraldry\s*\|\s*Settlement\s*\|\s*Size\s*\|\s*Coord\.\s*\|\s*Region\s*\|\s*Description\s*\|/.test(
-      line.replaceAll("*", ""),
-    ),
-  );
-  if (headerIndex < 0) return [];
-
-  const entries: GazetteerEntry[] = [];
-  const seen = new Set<string>();
-
-  for (let index = headerIndex + 1; index < lines.length; index += 1) {
-    const line = lines[index].trim();
-    if (!line.startsWith("|")) break;
-    if (/^\|[\s:|-]+\|$/.test(line)) continue;
-
-    const cells = line.split("|").slice(1, -1).map((cell) => cell.trim());
-    if (cells.length < 6) continue;
-
-    const link = cells[1].match(/\[([^\]]+)\]\((https:\/\/docs\.google\.com\/document\/d\/[^)]+)\)/);
-    if (!link) continue;
-
-    const name = cleanMarkdown(link[1]);
-    const key = slugify(name);
-    if (!name || seen.has(key)) continue;
-    seen.add(key);
-
-    const heraldryImage = getHeraldryImage(cells[0], imageReferences);
-    const fallbackImage = getImageForEntry(name);
-
-    entries.push({
-      name,
-      href: link[2],
-      size: cleanMarkdown(cells[2]),
-      coord: cleanMarkdown(cells[3]),
-      region: cleanMarkdown(cells[4]),
-      description: cleanMarkdown(cells[5]),
-      image: heraldryImage ?? fallbackImage.image,
-      imageType: heraldryImage ? "heraldry" : fallbackImage.imageType,
-    });
-  }
-
-  return entries;
-}
-
-async function getGazetteerEntries() {
-  const exportUrl = getGazetteerExportUrl();
-  if (!exportUrl) return [];
-
-  try {
-    const response = await fetch(exportUrl, { next: { revalidate: 86400 } });
-    if (!response.ok) return [];
-    return withSupplementalDocumentedEntries(parseSettlementRows(await response.text()));
-  } catch {
-    return SUPPLEMENTAL_DOCUMENTED_ENTRIES;
-  }
-}
-
 function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
+  const href = entry.referenceUrl ?? entry.docUrl ?? entry.folderUrl ?? "#";
+  const image = entry.imageUrl ?? FALLBACK_IMAGE;
+  const hasRemoteHeraldry = Boolean(entry.imageUrl);
+
   return (
     <a
-      href={entry.href}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="fantasy-card group grid min-h-[118px] grid-cols-[92px_minmax(0,1fr)] gap-4 overflow-hidden p-4 transition-transform duration-200 hover:-translate-y-1"
@@ -196,19 +33,19 @@ function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
         className="relative h-[92px] w-[92px] overflow-hidden"
         style={{ borderColor: "var(--color-bg-border)" }}
       >
-        {entry.imageType === "heraldry" ? (
-          // Google Docs exports table heraldry as data URLs, which Next/Image should not optimize.
+        {hasRemoteHeraldry ? (
+          // Drive image URLs should render directly; Next/Image only optimizes configured remote hosts.
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={entry.image}
-            alt={`${entry.name} heraldry`}
+            src={image}
+            alt={`${entry.title} heraldry`}
             className="absolute inset-0 h-full w-full object-contain"
             loading="lazy"
           />
         ) : (
           <Image
-            src={entry.image}
-            alt={`${entry.name} Gazetteer artwork`}
+            src={image}
+            alt={`${entry.title} Gazetteer artwork`}
             fill
             sizes="92px"
             className="object-contain"
@@ -220,7 +57,7 @@ function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
           className="font-cinzel truncate text-base leading-tight transition-colors group-hover:text-amber-400"
           style={{ color: "var(--color-accent-gold)" }}
         >
-          {entry.name}
+          {entry.title}
         </h2>
         <p
           className="mt-2 truncate text-xs"
@@ -228,9 +65,9 @@ function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
         >
           {entry.size ? `${entry.size} Sized` : "Settlement"}
         </p>
-        {(entry.region || entry.coord) && (
+        {entry.region && (
           <p className="mt-2 truncate text-xs" style={{ color: "var(--color-accent-arcane)" }}>
-            {entry.region || `Map ${entry.coord}`}
+            {entry.region}
           </p>
         )}
         <span
@@ -289,16 +126,7 @@ function MinorSettlementsCard({ href }: { href: string }) {
 }
 
 export default async function GazetteerPage() {
-  const entries = await getGazetteerEntries();
-  const minorEntries = entries.filter((entry) => !DOCUMENTED_ENTRY_SLUGS.has(slugify(entry.name)));
-  const sortedEntries = entries
-    .filter((entry) => DOCUMENTED_ENTRY_SLUGS.has(slugify(entry.name)))
-    .sort(
-      (left, right) =>
-        DOCUMENTED_ENTRY_SLUGS_IN_ORDER.indexOf(slugify(left.name)) -
-        DOCUMENTED_ENTRY_SLUGS_IN_ORDER.indexOf(slugify(right.name)),
-    )
-    .concat(minorEntries);
+  const entries = getGazetteerEntries();
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -329,12 +157,10 @@ export default async function GazetteerPage() {
 
         {entries.length > 0 ? (
           <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-            {minorEntries.length > 0 && (
-              <MinorSettlementsCard href={MINOR_SETTLEMENTS_REFERENCE_URL} />
-            )}
+            <MinorSettlementsCard href={MINOR_SETTLEMENTS_REFERENCE_URL} />
 
-            {sortedEntries.map((entry) => (
-              <GazetteerCard key={entry.href} entry={entry} />
+            {entries.map((entry) => (
+              <GazetteerCard key={entry.id} entry={entry} />
             ))}
           </section>
         ) : (

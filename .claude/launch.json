@@ -1,1 +1,1 @@
-{"version":"0.0.1","configurations":[{"name":"web","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":3000,"cwd":"apps/web","autoPort":false}]}
+{"version":"0.0.1","configurations":[{"name":"web","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":4652,"cwd":"apps/web","autoPort":true}]}

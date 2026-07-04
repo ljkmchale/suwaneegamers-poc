@@ -77,17 +77,23 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
       setActiveIndex(-1);
       return;
     }
+    const controller = new AbortController();
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+          signal: controller.signal,
+        });
         const data: SearchResult[] = await res.json();
         setResults(data);
         setActiveIndex(-1);
       } catch {
-        /* ignore fetch errors */
+        /* ignore fetch errors and aborted stale requests */
       }
     }, 250);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [query, open]);
 
   // Scroll active item into view

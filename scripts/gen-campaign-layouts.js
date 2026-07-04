@@ -4,13 +4,72 @@
 
 const fs = require("fs");
 const path = require("path");
+const Database = require("better-sqlite3");
 
 const root = path.join(__dirname, "..");
-const campaignsPath = path.join(root, "content", "campaigns.json");
+const dbPath = path.join(root, "content", "suwaneegamers.db");
 const layoutsPath = path.join(root, "content", "page-layouts.json");
 
-const campaigns = JSON.parse(fs.readFileSync(campaignsPath, "utf-8"));
-const layouts = JSON.parse(fs.readFileSync(layoutsPath, "utf-8"));
+const db = new Database(dbPath);
+db.exec(`
+  CREATE TABLE IF NOT EXISTS content_documents (
+    path        TEXT PRIMARY KEY,
+    json        TEXT NOT NULL,
+    updated_at  TEXT NOT NULL,
+    source      TEXT NOT NULL DEFAULT 'filesystem'
+  );
+`);
+
+function readContent(filename) {
+  const row = db.prepare(`SELECT json FROM content_documents WHERE path = ?`).get(filename);
+  if (row?.json) return JSON.parse(row.json);
+  return JSON.parse(fs.readFileSync(path.join(root, "content", filename), "utf-8"));
+}
+
+function writeContent(filename, data) {
+  const json = JSON.stringify(data, null, 2) + "\n";
+  db.prepare(`
+    INSERT INTO content_documents (path, json, updated_at, source)
+    VALUES (?, ?, ?, 'sync')
+    ON CONFLICT(path) DO UPDATE SET
+      json = excluded.json,
+      updated_at = excluded.updated_at,
+      source = excluded.source
+  `).run(filename, json, new Date().toISOString());
+  const filePath = path.join(root, "content", filename);
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, json, "utf-8");
+}
+
+const campaignRows = db.prepare(`SELECT * FROM campaigns ORDER BY rowid`).all();
+const summaryRows = db.prepare(`SELECT * FROM session_summaries ORDER BY campaign_id, sort_order`).all();
+const layouts = readContent("page-layouts.json");
+
+const summariesByCampaign = new Map();
+for (const summary of summaryRows) {
+  const list = summariesByCampaign.get(summary.campaign_id) ?? [];
+  list.push({
+    title: summary.title,
+    summary: summary.summary,
+    audioLinks: JSON.parse(summary.audio_links ?? "[]"),
+    auto: summary.auto ? true : undefined,
+    sessionDate: summary.session_date ?? undefined,
+  });
+  summariesByCampaign.set(summary.campaign_id, list);
+}
+
+const campaigns = campaignRows.map((campaign) => ({
+  id: campaign.id,
+  name: campaign.name,
+  dm: campaign.dm,
+  schedule: campaign.schedule,
+  description: campaign.description,
+  headerImage: campaign.header_image,
+  headerImagePosition: campaign.header_image_position,
+  resources: JSON.parse(campaign.resources ?? "[]"),
+  party: JSON.parse(campaign.party ?? "[]"),
+  sessionSummaries: summariesByCampaign.get(campaign.id) ?? [],
+}));
 
 function slug(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -231,5 +290,6 @@ for (const campaign of campaigns) {
   console.log(`Generated layout for ${key}`);
 }
 
-fs.writeFileSync(layoutsPath, JSON.stringify(layouts, null, 2));
-console.log("Done. Wrote content/page-layouts.json");
+writeContent("page-layouts.json", layouts);
+db.close();
+console.log("Done. Wrote content/page-layouts.json and content_documents.");

@@ -8,7 +8,8 @@
       {
         "label": "Legends & Lore Google Doc",
         "url": "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0",
-        "role": "primary"
+        "role": "primary",
+        "syncJobId": "lore-page"
       }
     ],
     "refreshLabel": "Refreshes from the source document about once per hour.",
@@ -19,16 +20,73 @@
     "label": "Calendar",
     "sourceName": "Google Calendar",
     "sourceUrl": "https://calendar.google.com/calendar/embed?src=g3kgagicusaol82fqhjc62o47o%40group.calendar.google.com",
-    "refreshLabel": "Events are pulled live from the group's Google Calendar.",
-    "editNote": "Add or update events directly in Google Calendar — changes appear here automatically."
+    "managedSources": [
+      {
+        "label": "Google Calendar",
+        "url": "https://calendar.google.com/calendar/embed?src=g3kgagicusaol82fqhjc62o47o%40group.calendar.google.com",
+        "role": "primary"
+      },
+      {
+        "label": "Session Summaries Google Doc",
+        "url": "https://docs.google.com/document/d/1D7HTn5ZXjLGApClfwIyhT37hYfJCO_JvoBIqS4e_jfQ",
+        "role": "supporting",
+        "syncJobId": "session-notes"
+      }
+    ],
+    "refreshLabel": "Events are pulled live from the group's Google Calendar. Previous Adventures use the synced Session Summaries Google Doc.",
+    "editNote": "Add or update events directly in Google Calendar. Update the Session Summaries Google Doc to change the Previous Adventures notes."
   },
   {
     "path": "/chronicles",
     "label": "Chronicles",
-    "sourceName": "Campaign Brain",
+    "sourceName": "Brain Vault",
     "sourceUrl": "https://kb.suwaneegamers.net/",
-    "refreshLabel": "Content is served live from the Campaign Brain knowledge base.",
-    "editNote": "Update content directly in Campaign Brain at kb.suwaneegamers.net."
+    "managedSources": [
+      {
+        "label": "HoE Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit",
+        "section": "HoE",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "SoD Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit",
+        "section": "SoD",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Silent Vanguard Player Reference",
+        "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit",
+        "section": "The Silent Vanguard",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Bloody Endeavor Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit",
+        "section": "Bloody Endeavor",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Dungeons III Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit",
+        "section": "Dungeons III",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "The Crystal Bottle Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit",
+        "section": "The Crystal Bottle",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      }
+    ],
+    "refreshLabel": "Pulls configured Chronicles Google Docs into the Brain Vault, processes stale raw sources, and rebuilds the index when needed.",
+    "editNote": "Update the Google Docs listed here or maintained wiki pages in apps/web/brain-vault. Public /chronicles uses player-safe sources; /admin/chronicles can use DM-visible sources."
   },
   {
     "path": "/organizations",
@@ -40,22 +98,35 @@
       {
         "label": "Organization Symbols Google Drive Folder",
         "url": "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P",
-        "role": "primary"
+        "role": "primary",
+        "syncJobId": "organization-symbols"
       },
       {
         "label": "Campaign Setting Google Doc",
         "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-        "role": "fallback"
+        "role": "fallback",
+        "syncJobId": "lore-core",
+        "section": "Organizations Tab"
       }
     ],
     "refreshLabel": "Synced from the Organizations Google Drive folder.",
-    "editNote": "Organization symbol images come from the Drive folder. Organization names, known-for, summaries, and details come from the campaign setting Google Doc (lore sync)."
+    "editNote": "Organization symbol images come from the Drive folder. Organization names, known-for, summaries, and details come from the campaign setting Google Doc (lore sync).",
+    "generated": false
   },
   {
     "path": "/territories",
     "label": "Territories",
     "sourceName": "Google Docs",
     "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "managedSources": [
+      {
+        "label": "Campaign Setting Google Doc",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+        "section": "Territories tab",
+        "role": "primary",
+        "syncJobId": "territories-sync"
+      }
+    ],
     "refreshLabel": "Synced from the campaign setting Google Doc by the scheduled lore sync.",
     "editNote": "Update territories in the campaign setting doc — run the lore sync to apply changes."
   },
@@ -63,7 +134,16 @@
     "path": "/history",
     "label": "History",
     "sourceName": "Google Docs",
-    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit?tab=t.0#heading=h.5nrncw894vg0",
+    "sourceUrl": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+    "managedSources": [
+      {
+        "label": "Campaign Setting Google Doc",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
+        "section": "Time & History tab",
+        "role": "primary",
+        "syncJobId": "history-page"
+      }
+    ],
     "refreshLabel": "Calendar and chronology content refresh from the campaign setting Google Doc about once per day.",
     "editNote": "Update the Time & History section in the campaign setting doc to change this page."
   },
@@ -77,22 +157,26 @@
       {
         "label": "Deity Symbols Google Drive Folder",
         "url": "https://drive.google.com/drive/folders/14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI",
-        "role": "primary"
+        "role": "primary",
+        "syncJobId": "pantheon-symbols"
       },
       {
         "label": "Campaign Setting Google Doc",
         "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-        "role": "fallback"
+        "role": "fallback",
+        "syncJobId": "lore-core",
+        "section": "Deities of the New Order tab"
       }
     ],
     "refreshLabel": "Deity cards and expanded details refresh from the Pantheon Google Drive folder.",
-    "editNote": "Deity symbol images come from the Drive folder (sync-pantheon-symbols). Deity names, titles, domains, and detail text come from the campaign setting Google Doc."
+    "editNote": "Deity symbol images come from the Drive folder (sync-pantheon-symbols). Deity names, titles, domains, and detail text come from the campaign setting Google Doc.",
+    "generated": false
   },
   {
     "path": "/maps-of-myrdae",
     "label": "Maps of Myrdae",
     "sourceName": "Map Editor",
-    "sourceUrl": "https://mapeditor.suwaneegamers.net/embed-map.html",
+    "sourceUrl": "https://mapeditor.suwaneegamers.net/embed-map.html?v=underdark-20260701-1",
     "refreshLabel": "The interactive map is served live from the Myrdae map editor.",
     "editNote": "Update the map directly in the Myrdae map editor at mapeditor.suwaneegamers.net."
   },
@@ -114,16 +198,20 @@
       {
         "label": "Settlement Docs Google Drive Folder",
         "url": "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg",
-        "role": "primary"
+        "role": "primary",
+        "syncJobId": "gazetteer"
       },
       {
         "label": "Campaign Setting Google Doc",
         "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ",
-        "role": "fallback"
+        "role": "fallback",
+        "syncJobId": "gazetteer",
+        "section": "Settlements Tab"
       }
     ],
     "refreshLabel": "Settlement cards are generated from the Gazetteer Google Drive folder.",
-    "editNote": "Each settlement is a Google Doc in the Drive folder. The campaign setting doc is kept as a reference source."
+    "editNote": "Each settlement is a Google Doc in the Drive folder. The campaign setting doc is kept as a reference source.",
+    "generated": false
   },
   {
     "path": "/campaigns",
@@ -175,7 +263,16 @@
     "sourceName": "Google Docs",
     "sourceUrl": "https://docs.google.com/document/d/1eODEiSco7IhOJw_kJW92YqTJDdYO9IfG_tnnXfYUY80",
     "refreshLabel": "Content is managed from the Crit Tables Google Doc.",
-    "editNote": "Update the Critical Success, Critical Failure, and Body Hit tables in the source Google Doc, then re-sync to apply changes."
+    "editNote": "Update the Critical Success, Critical Failure, and Body Hit tables in the source Google Doc, then re-sync to apply changes.",
+    "managedSources": [
+      {
+        "label": "Google Docs",
+        "url": "https://docs.google.com/document/d/1eODEiSco7IhOJw_kJW92YqTJDdYO9IfG_tnnXfYUY80",
+        "section": "Homebrew Rules Tab",
+        "role": "primary"
+      }
+    ],
+    "generated": false
   },
   {
     "path": "/campaigns/bloody-endeavor",
@@ -207,11 +304,6 @@
       },
       {
         "label": "Notes",
-        "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc",
-        "role": "primary"
-      },
-      {
-        "label": "Player Notes Google Doc",
         "url": "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc",
         "role": "primary"
       }
@@ -340,11 +432,6 @@
         "label": "Notes",
         "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY",
         "role": "primary"
-      },
-      {
-        "label": "Player Notes Google Doc",
-        "url": "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY",
-        "role": "primary"
       }
     ],
     "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
@@ -380,11 +467,6 @@
       },
       {
         "label": "Notes",
-        "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4",
-        "role": "primary"
-      },
-      {
-        "label": "Player Notes Google Doc",
         "url": "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4",
         "role": "primary"
       }
@@ -456,11 +538,6 @@
         "label": "Notes",
         "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8",
         "role": "primary"
-      },
-      {
-        "label": "Player Notes Google Doc",
-        "url": "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8",
-        "role": "primary"
       }
     ],
     "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
@@ -496,11 +573,6 @@
       },
       {
         "label": "Notes",
-        "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY",
-        "role": "primary"
-      },
-      {
-        "label": "Player Notes Google Doc",
         "url": "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY",
         "role": "primary"
       }

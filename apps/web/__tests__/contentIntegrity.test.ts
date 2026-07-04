@@ -364,6 +364,13 @@ describe("Editable campaign detail pages", () => {
     }
   });
 
+  it("lists both Calendar inputs on the source-managed admin page", () => {
+    const calendarPage = getAutoManagedPages().find((entry) => entry.path === "/calendar");
+
+    expect(calendarPage?.managedSources?.some((source) => /google calendar/i.test(source.label))).toBe(true);
+    expect(calendarPage?.managedSources?.some((source) => /session summaries/i.test(source.label))).toBe(true);
+  });
+
   it("persists source-link edits for generated campaign detail pages as overrides", () => {
     const originalPages = readContent<AutoManagedPage[]>("auto-managed-pages.json") ?? [];
     const path = `/campaigns/${campaigns[0].id}`;

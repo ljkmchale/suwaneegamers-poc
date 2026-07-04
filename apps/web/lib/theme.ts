@@ -1,5 +1,4 @@
-import fs from "fs";
-import { contentPath } from "@/lib/contentFiles";
+import { readContent } from "@/lib/contentFiles";
 
 export interface Theme {
   colors: Record<string, string>;
@@ -68,7 +67,7 @@ export function normalizeTheme(theme: Partial<Theme> | null | undefined): Theme 
 
 export function loadTheme(): Theme {
   try {
-    return normalizeTheme(JSON.parse(fs.readFileSync(contentPath("theme.json"), "utf-8")) as Partial<Theme>);
+    return normalizeTheme(readContent<Partial<Theme>>("theme.json"));
   } catch {
     return normalizeTheme(null);
   }

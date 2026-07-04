@@ -172,7 +172,7 @@ export async function fetchSessionSummariesByCampaign(
   campaigns: PortalCampaign[] = getActiveCampaigns(),
 ): Promise<Record<string, CampaignSessionSummary[]>> {
   const response = await fetch(googleDocHtmlExportUrl(), {
-    next: { revalidate: SESSION_SUMMARIES_REVALIDATE_SECONDS },
+    cache: "no-store",
   });
 
   if (!response.ok) {

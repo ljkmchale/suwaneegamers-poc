@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { recordUsageEvent } from "@/components/analytics/AnalyticsTracker";
 
 function drivePreviewUrl(url: string) {
   const driveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
@@ -14,7 +15,7 @@ function canUseNativeAudio(url: string) {
   return /\.(mp3|m4a|wav|ogg|aac)(?:[?#].*)?$/i.test(url);
 }
 
-export function SessionRecordingPlayer({ url }: { url: string }) {
+export function SessionRecordingPlayer({ url, label = "Session recording" }: { url: string; label?: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [open, setOpen] = useState(false);
@@ -36,6 +37,16 @@ export function SessionRecordingPlayer({ url }: { url: string }) {
 
     setOpen(true);
     setBlocked(false);
+    // Native audio emits a real "play" event that the site-wide tracker captures.
+    // Drive embeds do not expose playback events across the iframe boundary.
+    if (!useNativeAudio) {
+      recordUsageEvent({
+        eventType: "media_play",
+        contentType: "session recording",
+        contentId: url,
+        contentLabel: label,
+      });
+    }
 
     if (useNativeAudio) {
       requestAnimationFrame(() => {
@@ -107,7 +118,14 @@ export function SessionRecordingPlayer({ url }: { url: string }) {
               className="h-20 w-full rounded border-0"
             />
           ) : useNativeAudio ? (
-            <audio ref={audioRef} src={url} controls preload="none" className="h-9 w-full" />
+            <audio
+              ref={audioRef}
+              src={url}
+              controls
+              preload="none"
+              data-analytics-label={label}
+              className="h-9 w-full"
+            />
           ) : (
             <a
               href={url}

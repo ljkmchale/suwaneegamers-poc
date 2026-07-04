@@ -1,11 +1,12 @@
 // Sync Gazetteer entries from the shared Google Drive folder.
-// Maintains content/gazetteer.json with the list of known city docs,
-// and updates the "Documented" / "In Progress" stat counters in the
-// Gazetteer page layout.
+// A settlement is defined by a subfolder in the Gazetteer folder.
+// Size, region, and the Reference hyperlink are pulled from the Campaign
+// Setting settlements table when present. Heraldry is pulled from each
+// settlement subfolder by preferring "<name> - Heraldry (v.0)" or "(v0)",
+// with a folder-local heraldry fallback for spelling/punctuation variants.
 //
-// Source: Google Drive folder with one Google Doc per settlement.
-// Documented entries = those already rendered as inner-cards in the layout.
-// In-progress entries = Drive docs not yet in the layout.
+// Requires GOOGLE_API_KEY with the Google Drive API enabled.
+// Add it to .env.local or set it in the system/shell environment.
 //
 // Run manually:  node scripts/sync-gazetteer-entries.mjs
 // Scheduled:     scripts/sync-lore.cmd
@@ -13,11 +14,49 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { readContent, writeContent } from "./content-documents.mjs";
+import { listDriveItems } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const driveFolderUrl = "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
-const driveFolderId = "1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
-const layoutFile = path.join(root, "content", "page-layouts", "gazetteer.json");
+
+function configuredDriveFolderUrl(pagePath, labelPattern, fallback) {
+  try {
+    const pages = readContent("auto-managed-pages.json");
+    const page = pages.find((p) => p.path === pagePath);
+    const source = page?.managedSources?.find((s) => labelPattern.test(s.label));
+    return source?.url ?? page?.sourceUrl ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function folderIdFromUrl(url) {
+  return /\/folders\/([a-zA-Z0-9_-]+)/.exec(url)?.[1] ?? null;
+}
+
+const driveFolderUrl = configuredDriveFolderUrl(
+  "/gazetteer",
+  /settlement docs/i,
+  "https://drive.google.com/drive/folders/1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg",
+);
+const driveFolderId = folderIdFromUrl(driveFolderUrl) ?? "1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
+const campaignSettingDocId = "1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ";
+
+const SKIPPED_FOLDER_TITLES = new Set(["new folder", "inspiration"]);
+
+// --- Drive item helpers ------------------------------------------------------
+
+function toCommonItem(file) {
+  return {
+    id: file.id,
+    title: file.name,
+    isFolder: file.mimeType === "application/vnd.google-apps.folder",
+    isGoogleDoc: file.mimeType === "application/vnd.google-apps.document",
+    isImage: (file.mimeType ?? "").startsWith("image/"),
+  };
+}
+
+// --- Metadata fetch (Campaign Setting doc export) ----------------------------
 
 function decodeHtml(value) {
   return value
@@ -29,54 +68,199 @@ function decodeHtml(value) {
     .replace(/&gt;/g, ">");
 }
 
-function stripDriveTypeSuffix(title) {
-  return title.replace(/ Shared folder$/i, "").replace(/ Image$/i, "").trim();
-}
-
-function parseDriveItems(html) {
-  const items = [];
-  const pattern = /data-id="([^"]+)"[^>]*data-tooltip="([^"]+)"/g;
-  for (const match of html.matchAll(pattern)) {
-    items.push({
-      id: match[1],
-      title: stripDriveTypeSuffix(decodeHtml(match[2])),
-    });
-  }
-  return items;
-}
-
 async function fetchText(url) {
   const res = await fetch(url, { redirect: "follow" });
   if (!res.ok) throw new Error(`Fetch failed for ${url}: HTTP ${res.status}`);
   return res.text();
 }
 
-function slugify(value) {
-  return value
+// --- String utilities --------------------------------------------------------
+
+function clean(value) {
+  return decodeHtml(value)
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
+    .replace(/['']/g, "'")
+    .replace(/[""]/g, '"')
+    .replace(/&nbsp;/g, " ")
+    .replace(/!\[[^\]]*\]\[[^\]]+\]/g, "")
+    .replace(/\\([*_`\-[\]()])/g, "$1")
+    .replace(/\*\*/g, "")
+    .replace(/\*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function slugify(value) {
+  return clean(value)
     .toLowerCase()
-    .replace(/['']/g, "")
+    .replace(/['`]/g, "")
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
 
-// Recursively walk items that may be stored as nested JSON strings.
+// --- Campaign Setting metadata -----------------------------------------------
+
+function getCampaignSettingExportUrl() {
+  try {
+    const pages = readContent("auto-managed-pages.json");
+    const page = pages.find((p) => p.path === "/gazetteer");
+    const sourceUrl = page?.fallbackSourceUrl ?? "";
+    const match = /\/document\/d\/([\w-]+)/.exec(sourceUrl);
+    if (match) return `https://docs.google.com/document/d/${match[1]}/export?format=md`;
+  } catch {
+    // Fall through to the default Campaign Setting document.
+  }
+  return `https://docs.google.com/document/d/${campaignSettingDocId}/export?format=md`;
+}
+
+function splitMarkdownRow(line) {
+  return line.split("|").slice(1, -1).map((cell) => cell.trim());
+}
+
+function parseSettlementMetadata(markdown) {
+  const lines = markdown.split("\n");
+  const headerIndex = lines.findIndex((line) =>
+    /^\|\s*Heraldry\s*\|\s*Settlement\s*\|\s*Size\s*\|\s*Coord\.\s*\|\s*Region\s*\|\s*Description\s*\|/.test(
+      line.replaceAll("*", ""),
+    ),
+  );
+  if (headerIndex < 0) return new Map();
+
+  const rows = new Map();
+  for (let index = headerIndex + 1; index < lines.length; index += 1) {
+    const line = lines[index].trim();
+    if (!line.startsWith("|")) break;
+    if (/^\|[\s:|-]+\|$/.test(line)) continue;
+
+    const cells = splitMarkdownRow(line);
+    if (cells.length < 6) continue;
+
+    const link = cells[1].match(/\[([^\]]+)\]\((https:\/\/docs\.google\.com\/document\/d\/[^)]+)\)/);
+    const name = clean(link?.[1] ?? cells[1]);
+    if (!name) continue;
+
+    rows.set(slugify(name), {
+      name,
+      referenceUrl: link?.[2] ?? null,
+      size: clean(cells[2]),
+      region: clean(cells[4]),
+      description: clean(cells[5]),
+    });
+  }
+  return rows;
+}
+
+// --- Drive URL helpers -------------------------------------------------------
+
+function toDriveFolderUrl(id) {
+  return `https://drive.google.com/drive/folders/${id}`;
+}
+
+function toDriveThumbnailUrl(id) {
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w500`;
+}
+
+function toDocUrl(id) {
+  return `https://docs.google.com/document/d/${id}/edit?usp=sharing`;
+}
+
+// --- Heraldry selection ------------------------------------------------------
+
+function normalizedName(value) {
+  return clean(value)
+    .toLowerCase()
+    .replace(/['`]/g, "")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+function versionNumber(title) {
+  const match = clean(title).match(/\bv\.?\s*(\d+(?:\.\d+)?)/i);
+  if (!match) return null;
+  return Number.parseFloat(match[1]);
+}
+
+function isVersionZero(title) {
+  const version = versionNumber(title);
+  return version === 0;
+}
+
+function isSmallDerivative(title) {
+  return /\b(500px|small|thumbnail)\b/i.test(clean(title));
+}
+
+function heraldryScore(item, settlementName) {
+  if (!item.isImage || !/\bheraldry\b/i.test(clean(item.title))) return -1;
+
+  const title = clean(item.title);
+  const titlePrefix = normalizedName(title.split(/\s+-\s+heraldry/i)[0] ?? "");
+  const settlement = normalizedName(settlementName);
+  const version = versionNumber(title);
+  let score = 100;
+
+  if (titlePrefix && titlePrefix === settlement) score += 1000;
+  if (isVersionZero(title)) score += 500;
+  if (version !== null && !isVersionZero(title)) score += Math.min(version, 99);
+  if (isSmallDerivative(title)) score += 10;
+
+  return score;
+}
+
+function selectHeraldryImage(items, settlementName) {
+  return items
+    .map((item, index) => ({ item, index, score: heraldryScore(item, settlementName) }))
+    .filter((candidate) => candidate.score >= 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index)[0]?.item ?? null;
+}
+
+function isGazetteerReference(item) {
+  return item.isGoogleDoc && /\bgazetteer\b/i.test(item.title);
+}
+
+// --- Settlement folder inspection --------------------------------------------
+
+async function inspectSettlementFolder(folder) {
+  const rawItems = await listDriveItems(folder.id);
+  const items = rawItems.map(toCommonItem);
+  const heraldry = selectHeraldryImage(items, folder.title);
+  const reference = items.find(isGazetteerReference);
+
+  return {
+    folderId: folder.id,
+    title: folder.title,
+    slug: slugify(folder.title),
+    folderUrl: toDriveFolderUrl(folder.id),
+    referenceUrl: reference ? toDocUrl(reference.id) : null,
+    referenceFileId: reference?.id ?? null,
+    heraldryUrl: heraldry ? toDriveThumbnailUrl(heraldry.id) : null,
+    heraldryFileId: heraldry?.id ?? null,
+    heraldryFileName: heraldry?.title ?? null,
+  };
+}
+
+// --- Layout helpers ----------------------------------------------------------
+
 function walkItems(itemsJson, visitor) {
   let parsed;
-  try { parsed = JSON.parse(itemsJson); } catch { return; }
+  try {
+    parsed = JSON.parse(itemsJson);
+  } catch {
+    return;
+  }
   for (const item of parsed) {
     visitor(item);
     if (typeof item.props?.items === "string") walkItems(item.props.items, visitor);
   }
 }
 
-// Recursively update an item by id within a nested items JSON string.
-// Returns { itemsJson, changed }.
 function updateNestedItem(itemsJson, targetId, propUpdates) {
   let parsed;
-  try { parsed = JSON.parse(itemsJson); } catch { return { itemsJson, changed: false }; }
+  try {
+    parsed = JSON.parse(itemsJson);
+  } catch {
+    return { itemsJson, changed: false };
+  }
   let changed = false;
   for (const item of parsed) {
     if (item.id === targetId) {
@@ -95,7 +279,6 @@ function updateNestedItem(itemsJson, targetId, propUpdates) {
   return { itemsJson: JSON.stringify(parsed, null, indent), changed };
 }
 
-// Update a top-level or nested item within the layout by id.
 function updateLayoutItem(layout, targetId, propUpdates) {
   let changed = false;
   for (const block of layout) {
@@ -114,105 +297,168 @@ function updateLayoutItem(layout, targetId, propUpdates) {
   return changed;
 }
 
-// Extract all Google Doc IDs referenced in inner-card links within the layout.
-function extractDocumentedDocIds(layout) {
-  const docIds = new Set();
-  for (const block of layout) {
-    if (typeof block.props?.items === "string") {
-      walkItems(block.props.items, (item) => {
-        if (item.type === "link" && typeof item.props?.href === "string") {
-          const match = /\/document\/d\/([\w-]+)/.exec(item.props.href);
-          if (match) docIds.add(match[1]);
-        }
-      });
-    }
-  }
-  return docIds;
+// --- DB helpers --------------------------------------------------------------
+
+function ensureGazetteerColumns(db) {
+  const columns = new Set(db.prepare(`PRAGMA table_info(gazetteer)`).all().map((row) => row.name));
+  const addColumn = (name, type) => {
+    if (!columns.has(name)) db.exec(`ALTER TABLE gazetteer ADD COLUMN ${name} ${type}`);
+  };
+  addColumn("folder_url", "TEXT");
+  addColumn("reference_url", "TEXT");
+  addColumn("image_url", "TEXT");
+  addColumn("image_source_file_id", "TEXT");
+  addColumn("image_source_file_name", "TEXT");
+  addColumn("size", "TEXT");
+  addColumn("region", "TEXT");
+  addColumn("description", "TEXT");
 }
 
-const html = await fetchText(driveFolderUrl);
-const driveItems = parseDriveItems(html);
-
-// Filter to Google Docs (exclude images, folders, and other non-doc items by title heuristic).
-// Drive Docs don't have a file extension in their title; folders are suffixed "Shared folder".
-const docItems = driveItems.filter((item) => !/\.(jpe?g|png|gif|webp|pdf|zip)$/i.test(item.title));
+// --- Main --------------------------------------------------------------------
 
 const stamp = new Date().toISOString();
 
-if (!docItems.length) {
-  console.warn(`[${stamp}] No Google Docs found in Gazetteer Drive folder (${driveFolderId}).`);
-  console.warn("  Note: Drive HTML listing may be incomplete for large folders.");
-  process.exit(0);
+const rootApiItems = await listDriveItems(driveFolderId);
+const foldersById = new Map();
+for (const file of rootApiItems) {
+  const item = toCommonItem(file);
+  if (!item.isFolder) continue;
+  if (SKIPPED_FOLDER_TITLES.has(item.title.toLowerCase())) continue;
+  foldersById.set(item.id, item);
+}
+const folders = [...foldersById.values()].sort((a, b) => a.title.localeCompare(b.title));
+
+if (!folders.length) {
+  throw new Error(`No settlement folders found in Gazetteer Drive folder (${driveFolderId}).`);
 }
 
-// Build the entry list
-const entries = docItems.map((item) => ({
-  id: item.id,
-  title: item.title,
-  slug: slugify(item.title),
-  docUrl: `https://docs.google.com/document/d/${item.id}/edit?usp=sharing`,
-}));
+const metadataMarkdown = await fetchText(getCampaignSettingExportUrl());
+const metadataBySlug = parseSettlementMetadata(metadataMarkdown);
 
-// Read existing entries from SQLite (preserves previously known entries that
-// may have fallen off the Drive listing due to its fetch limitations).
+const entries = [];
+for (const folder of folders) {
+  const inspected = await inspectSettlementFolder(folder);
+  const metadata = metadataBySlug.get(inspected.slug);
+  const referenceUrl = metadata?.referenceUrl ?? inspected.referenceUrl ?? inspected.folderUrl;
+  entries.push({
+    id: inspected.folderId,
+    title: metadata?.name ?? inspected.title,
+    slug: inspected.slug,
+    docUrl: referenceUrl,
+    folderUrl: inspected.folderUrl,
+    referenceUrl,
+    imageUrl: inspected.heraldryUrl,
+    imageSourceFileId: inspected.heraldryFileId,
+    imageSourceFileName: inspected.heraldryFileName,
+    size: metadata?.size ?? "",
+    region: metadata?.region ?? "",
+    description: metadata?.description ?? "",
+    hasReference: Boolean(metadata?.referenceUrl || inspected.referenceUrl),
+  });
+}
+
 const db = getDb();
-const existing = db.prepare(`SELECT id, title, slug, doc_url AS docUrl FROM gazetteer`).all();
+ensureGazetteerColumns(db);
+const existing = db.prepare(`
+  SELECT id, title, slug, doc_url AS docUrl FROM gazetteer
+`).all();
 
-const existingById = new Map(existing.map((e) => [e.id, e]));
-const newById = new Map(entries.map((e) => [e.id, e]));
-
-// Merge: keep existing entries and add new ones. Never remove entries automatically.
-for (const [id, entry] of existingById) {
-  if (!newById.has(id)) newById.set(id, entry);
-}
-const merged = [...newById.values()].sort((a, b) => a.title.localeCompare(b.title));
+const merged = [...entries].sort((a, b) => a.title.localeCompare(b.title));
 
 const changes = [];
 const warnings = [];
 
-// Upsert into gazetteer table
 const previous = existing.length;
-const upsert = db.prepare(`INSERT OR REPLACE INTO gazetteer (id, title, slug, doc_url) VALUES (?, ?, ?, ?)`);
+const upsert = db.prepare(`
+  INSERT OR REPLACE INTO gazetteer (
+    id,
+    title,
+    slug,
+    doc_url,
+    folder_url,
+    reference_url,
+    image_url,
+    image_source_file_id,
+    image_source_file_name,
+    size,
+    region,
+    description
+  )
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+`);
+
+if (previous > 0 && merged.length < Math.ceil(previous * 0.5)) {
+  throw new Error(
+    `Refusing to replace ${previous} gazetteer entries with only ${merged.length} — looks like a partial Drive API response. Run again or check the API quota.`,
+  );
+}
+
 db.transaction(() => {
+  db.prepare(`DELETE FROM gazetteer`).run();
   for (const entry of merged) {
-    upsert.run(entry.id, entry.title, entry.slug, entry.docUrl);
+    upsert.run(
+      entry.id,
+      entry.title,
+      entry.slug,
+      entry.docUrl,
+      entry.folderUrl ?? null,
+      entry.referenceUrl ?? entry.docUrl,
+      entry.imageUrl ?? null,
+      entry.imageSourceFileId ?? null,
+      entry.imageSourceFileName ?? null,
+      entry.size ?? "",
+      entry.region ?? "",
+      entry.description ?? "",
+    );
   }
 })();
+
 if (merged.length !== previous) {
   changes.push(`gazetteer: ${previous} -> ${merged.length} entries`);
 }
 
-// Update stat counters in the layout
-const layout = JSON.parse(fs.readFileSync(layoutFile, "utf-8"));
-const documentedDocIds = extractDocumentedDocIds(layout);
-const documentedCount = documentedDocIds.size;
-const inProgressCount = Math.max(0, merged.length - documentedCount);
+writeContent(
+  "gazetteer.json",
+  merged.map((entry) => ({
+    id: entry.id,
+    title: entry.title,
+    slug: entry.slug,
+    docUrl: entry.docUrl,
+    folderUrl: entry.folderUrl ?? null,
+    referenceUrl: entry.referenceUrl ?? entry.docUrl,
+    imageUrl: entry.imageUrl ?? null,
+    imageSourceFileId: entry.imageSourceFileId ?? null,
+    imageSourceFileName: entry.imageSourceFileName ?? null,
+    size: entry.size ?? "",
+    region: entry.region ?? "",
+    description: entry.description ?? "",
+  })),
+);
+
+const layout = readContent("page-layouts/gazetteer.json");
+const documentedCount = entries.filter((entry) => entry.hasReference).length;
+const inProgressCount = Math.max(0, entries.length - documentedCount);
 
 const completeChanged = updateLayoutItem(layout, "complete-count", { title: String(documentedCount) });
 const progressChanged = updateLayoutItem(layout, "progress-count", { title: String(inProgressCount) });
 
 if (completeChanged || progressChanged) {
-  fs.writeFileSync(layoutFile, JSON.stringify(layout, null, 2) + "\n", "utf-8");
+  writeContent("page-layouts/gazetteer.json", layout);
   changes.push(`gazetteer layout stats: ${documentedCount} documented, ${inProgressCount} in progress`);
 }
 
-// Warn about new Drive entries that aren't yet in the layout
 for (const entry of entries) {
-  if (!documentedDocIds.has(entry.id)) {
-    // Only warn if this is genuinely new (not already known from a previous sync)
-    if (!existingById.has(entry.id)) {
-      warnings.push(`New entry not yet in layout: ${entry.title} (${entry.docUrl})`);
-    }
+  if (!entry.hasReference) {
+    warnings.push(`Settlement folder has no Gazetteer reference doc yet: ${entry.title} (${entry.folderUrl})`);
+  }
+  if (!entry.imageUrl) {
+    warnings.push(`Settlement folder has no heraldry image: ${entry.title} (${entry.folderUrl})`);
   }
 }
 
 console.log(`[${stamp}] Gazetteer entries synced from Drive folder ${driveFolderId}`);
-console.log(`  Fetched ${docItems.length} docs from Drive. Total known entries: ${merged.length}.`);
+console.log(`  Fetched ${folders.length} settlement folders via Drive API. Total known entries: ${merged.length}.`);
 console.log(`  Layout stats: ${documentedCount} documented, ${inProgressCount} in progress.`);
-
-if (driveItems.length < 20) {
-  warnings.push(`Only ${driveItems.length} items returned from Drive listing — folder may have more entries than the initial HTML fetch shows.`);
-}
 
 if (changes.length) {
   console.log("Changes:");
