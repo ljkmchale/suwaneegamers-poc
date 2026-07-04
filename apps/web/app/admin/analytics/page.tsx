@@ -150,7 +150,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <div>
           <h1 className="font-cinzel text-3xl uppercase tracking-widest">Usage & Connections</h1>
           <p className="mt-2 max-w-3xl text-sm text-[#a89880]">
-            Anonymous site activity, reading and listening engagement, visitor connections, and scheduled content health.
+            Signed-in visitor activity, reading and listening engagement, visitor connections, and scheduled content health.
           </p>
         </div>
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-2">
@@ -323,12 +323,13 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Recent visitors</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Anonymous sessions only; no names, IP addresses, or form contents</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in visitors are shown by name; no IP addresses or form contents are stored</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="border-y border-[#2a2a35] bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
                 <tr>
+                  <th className="px-5 py-3 font-normal">Visitor</th>
                   <th className="px-5 py-3 font-normal">Last seen</th>
                   <th className="px-5 py-3 font-normal">Entry</th>
                   <th className="px-5 py-3 font-normal">Last page</th>
@@ -340,6 +341,11 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               <tbody>
                 {data.recentVisitors.map((visitor, index) => (
                   <tr key={`${visitor.lastSeenAt}-${index}`} className="border-b border-[#201927] last:border-0">
+                    <td className="max-w-40 truncate px-5 py-3" title={visitor.visitorEmail ?? undefined}>
+                      {visitor.visitorName
+                        ? <span className="text-[#e8dfc8]">{visitor.visitorName}</span>
+                        : <span className="text-[#6a5a78]">Anonymous</span>}
+                    </td>
                     <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(visitor.lastSeenAt)}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#a89880]">{visitor.entryPath}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#e8dfc8]">{visitor.lastPath}</td>
@@ -354,6 +360,44 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           {data.recentVisitors.length === 0 && <p className="p-8 text-center text-xs text-[#6a5a78]">New sessions will appear here.</p>}
         </section>
       </div>
+
+      <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+        <div className="p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Who&apos;s been on the site</h2>
+          <p className="mt-1 text-xs text-[#6a5a78]">Signed-in members active in the selected period, most recent first</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="border-y border-[#2a2a35] bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
+              <tr>
+                <th className="px-5 py-3 font-normal">Member</th>
+                <th className="px-5 py-3 font-normal">Email</th>
+                <th className="px-5 py-3 font-normal">Last seen</th>
+                <th className="px-5 py-3 text-right font-normal">Visits</th>
+                <th className="px-5 py-3 text-right font-normal">Views</th>
+                <th className="px-5 py-3 text-right font-normal">Engaged</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.people.map((person) => (
+                <tr key={person.email} className="border-b border-[#201927] last:border-0">
+                  <td className="px-5 py-3 text-[#e8dfc8]">{person.name}</td>
+                  <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
+                  <td className="px-5 py-3 text-right">{person.sessions}</td>
+                  <td className="px-5 py-3 text-right">{person.pageViews}</td>
+                  <td className="px-5 py-3 text-right text-[#f59e0b]">{duration(person.engagedSeconds)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {data.people.length === 0 && (
+          <p className="p-8 text-center text-xs text-[#6a5a78]">
+            Once visitors sign in with Google, they&apos;ll be listed here by name.
+          </p>
+        )}
+      </section>
 
       <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
         <div className="flex flex-wrap items-center justify-between gap-4 p-5">
@@ -408,7 +452,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       </section>
 
       <p className="mt-5 text-xs leading-relaxed text-[#5a5060]">
-        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. Browser identifiers are randomly generated and hashed before storage.
+        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. Visitors sign in with Google, so sessions are attributed to the member&apos;s name and email; no passwords or IP addresses are stored.
       </p>
     </div>
   );

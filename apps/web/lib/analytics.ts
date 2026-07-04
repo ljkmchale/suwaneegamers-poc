@@ -66,6 +66,16 @@ export interface AnalyticsDashboardData {
     deviceType: string;
     pageViews: number;
     engagedSeconds: number;
+    visitorName: string | null;
+    visitorEmail: string | null;
+  }>;
+  people: Array<{
+    name: string;
+    email: string;
+    sessions: number;
+    pageViews: number;
+    engagedSeconds: number;
+    lastSeenAt: string;
   }>;
   activeVisitors: Array<{
     visitor: string;
@@ -145,10 +155,13 @@ export function recordUsageEvents(input: {
   events: UsageEventInput[];
   referrer?: string;
   userAgent?: string;
+  identity?: { email?: string; name?: string };
 }): void {
   const db = getDb();
   const sessionId = anonymizeSessionId(input.rawSessionId);
   const now = new Date().toISOString();
+  const visitorEmail = cleanText(input.identity?.email, 200) ?? null;
+  const visitorName = cleanText(input.identity?.name, 120) ?? null;
   const ua = input.userAgent ?? "";
   const deviceType = /ipad|tablet/i.test(ua)
     ? "tablet"
@@ -160,9 +173,14 @@ export function recordUsageEvents(input: {
 
   const insertSession = db.prepare(`
     INSERT INTO analytics_sessions
-      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_email, visitor_name)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(session_id) DO NOTHING
+  `);
+  const updateIdentity = db.prepare(`
+    UPDATE analytics_sessions
+    SET visitor_email = ?, visitor_name = ?
+    WHERE session_id = ?
   `);
   const updateSession = db.prepare(`
     UPDATE analytics_sessions
@@ -179,7 +197,9 @@ export function recordUsageEvents(input: {
   `);
 
   db.transaction(() => {
-    insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType);
+    insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorEmail, visitorName);
+    // Backfill identity on sessions that started before sign-in resolved.
+    if (visitorEmail) updateIdentity.run(visitorEmail, visitorName, sessionId);
     for (const event of input.events) {
       if (event.eventType !== "heartbeat") {
         insertEvent.run(
@@ -351,7 +371,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   `).all(sinceIso) as Array<{ label: string; value: number }>);
 
   const recentVisitors = (db.prepare(`
-    SELECT last_seen_at, entry_path, last_path, device_type, page_views, engaged_seconds
+    SELECT last_seen_at, entry_path, last_path, device_type, page_views, engaged_seconds, visitor_email, visitor_name
     FROM analytics_sessions
     ORDER BY last_seen_at DESC
     LIMIT 12
@@ -362,6 +382,8 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     device_type: string;
     page_views: number;
     engaged_seconds: number;
+    visitor_email: string | null;
+    visitor_name: string | null;
   }>).map((row) => ({
     lastSeenAt: row.last_seen_at,
     entryPath: row.entry_path,
@@ -369,10 +391,41 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     deviceType: row.device_type,
     pageViews: row.page_views,
     engagedSeconds: row.engaged_seconds,
+    visitorName: row.visitor_name,
+    visitorEmail: row.visitor_email,
+  }));
+
+  const people = (db.prepare(`
+    SELECT
+      visitor_email AS email,
+      COALESCE(MAX(visitor_name), visitor_email) AS name,
+      COUNT(*) AS sessions,
+      SUM(page_views) AS page_views,
+      SUM(engaged_seconds) AS engaged_seconds,
+      MAX(last_seen_at) AS last_seen_at
+    FROM analytics_sessions
+    WHERE visitor_email IS NOT NULL AND last_seen_at >= ?
+    GROUP BY visitor_email
+    ORDER BY last_seen_at DESC
+    LIMIT 50
+  `).all(sinceIso) as Array<{
+    email: string;
+    name: string | null;
+    sessions: number;
+    page_views: number;
+    engaged_seconds: number;
+    last_seen_at: string;
+  }>).map((row) => ({
+    email: row.email,
+    name: row.name ?? row.email,
+    sessions: row.sessions,
+    pageViews: row.page_views,
+    engagedSeconds: row.engaged_seconds,
+    lastSeenAt: row.last_seen_at,
   }));
 
   const activeVisitors = (db.prepare(`
-    SELECT session_id, last_path, device_type, last_seen_at, page_views
+    SELECT session_id, last_path, device_type, last_seen_at, page_views, visitor_name, visitor_email
     FROM analytics_sessions
     WHERE last_seen_at >= ?
     ORDER BY last_seen_at DESC
@@ -383,8 +436,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     device_type: string;
     last_seen_at: string;
     page_views: number;
+    visitor_name: string | null;
+    visitor_email: string | null;
   }>).map((row) => ({
-    visitor: `Visitor ${row.session_id.slice(0, 6).toUpperCase()}`,
+    visitor: row.visitor_name
+      ?? row.visitor_email
+      ?? `Visitor ${row.session_id.slice(0, 6).toUpperCase()}`,
     currentPath: row.last_path,
     deviceType: row.device_type,
     lastSeenAt: row.last_seen_at,
@@ -451,6 +508,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     devices,
     referrers,
     recentVisitors,
+    people,
     activeVisitors,
     syncJobs,
     recentSyncRuns,

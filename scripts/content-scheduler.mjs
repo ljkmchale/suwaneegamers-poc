@@ -301,6 +301,44 @@ function upsertJobs(db) {
   }
 }
 
+// Extra margin beyond a job's own timeout before a still-"running" row is
+// assumed orphaned. runProcess() SIGTERMs the child at timeoutMs and records the
+// result, so a row can only outlive timeoutMs when the scheduler process itself
+// died mid-run — leaving a stale "running" status that would otherwise wedge the
+// job forever (dueJobs skips running jobs).
+const STALE_RUN_GRACE_MS = 2 * 60_000;
+
+function timeoutForRow(row) {
+  const hardcoded = jobs.find((j) => j.id === row.id);
+  if (hardcoded) return hardcoded.timeoutMs;
+  const sourceJob = row.source_job_id ? jobs.find((j) => j.id === row.source_job_id) : null;
+  return sourceJob ? sourceJob.timeoutMs : 10_000;
+}
+
+// Reset jobs orphaned in "running" by an interrupted scheduler so they can run again.
+function reclaimStaleRunning(db, now = new Date()) {
+  const running = db.prepare(`SELECT * FROM content_sync_jobs WHERE last_status = 'running'`).all();
+  for (const row of running) {
+    const startedAt = row.last_started_at ? new Date(row.last_started_at) : null;
+    const threshold = timeoutForRow(row) + STALE_RUN_GRACE_MS;
+    if (startedAt && now.getTime() - startedAt.getTime() <= threshold) continue;
+
+    const finishedAt = iso(now);
+    const message = `Recovered stale run: no completion recorded within ${Math.round(threshold / 1000)}s (scheduler likely interrupted).`;
+    db.prepare(
+      `UPDATE content_sync_runs
+       SET finished_at = ?, status = 'failed', exit_code = -1, message = ?
+       WHERE job_id = ? AND status = 'running'`,
+    ).run(finishedAt, message, row.id);
+    db.prepare(
+      `UPDATE content_sync_jobs
+       SET last_status = 'failed', last_finished_at = ?, last_exit_code = -1, last_message = ?
+       WHERE id = ?`,
+    ).run(finishedAt, message, row.id);
+    console.warn(`[${finishedAt}] Reclaimed stale running job: ${row.label} (${row.id}).`);
+  }
+}
+
 function dueJobs(db, now = new Date()) {
   const allRows = db.prepare(`SELECT * FROM content_sync_jobs WHERE enabled = 1`).all();
   const rowsById = new Map(allRows.map((row) => [row.id, row]));
@@ -489,6 +527,7 @@ async function runJob(db, job) {
 
 async function tick(db) {
   upsertJobs(db);
+  reclaimStaleRunning(db);
   const pending = dueJobs(db);
   for (const job of pending) {
     await runJob(db, job);

@@ -135,6 +135,17 @@ function migrateSchema(db: Database.Database): void {
   addGazetteerColumn("size", "TEXT");
   addGazetteerColumn("region", "TEXT");
   addGazetteerColumn("description", "TEXT");
+
+  // Identify analytics sessions once Google sign-in is enforced
+  const analyticsSessionColumns = new Set(
+    (db.prepare(`PRAGMA table_info(analytics_sessions)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!analyticsSessionColumns.has("visitor_email")) {
+    db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_email TEXT`);
+  }
+  if (!analyticsSessionColumns.has("visitor_name")) {
+    db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_name TEXT`);
+  }
 }
 
 function initializeSchema(db: Database.Database): void {

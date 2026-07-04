@@ -4,6 +4,7 @@ import {
   recordUsageEvents,
   type UsageEventInput,
 } from "@/lib/analytics";
+import { getUserSession, isSignedIn } from "@/lib/userSession";
 
 export const dynamic = "force-dynamic";
 
@@ -46,11 +47,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No valid events" }, { status: 400 });
   }
 
+  // Identity is read from the signed-in session server-side, never from the
+  // client payload, so it cannot be spoofed.
+  const userSession = await getUserSession();
+  const identity = isSignedIn(userSession)
+    ? { email: userSession.email, name: userSession.name }
+    : undefined;
+
   recordUsageEvents({
     rawSessionId,
     events,
     referrer: typeof payload.referrer === "string" ? payload.referrer : undefined,
     userAgent: request.headers.get("user-agent") ?? undefined,
+    identity,
   });
   return new NextResponse(null, { status: 204 });
 }

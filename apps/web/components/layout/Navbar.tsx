@@ -3,18 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { PencilLine, Shield, Search } from "lucide-react";
+import { PencilLine, Shield, Search, LogOut } from "lucide-react";
 import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/actions";
 import type { NavSection } from "@/lib/nav";
 import { SearchPalette } from "@/components/layout/SearchPalette";
+import { UserMenu, type NavUser } from "@/components/auth/UserMenu";
 
 interface NavProps {
   sections: NavSection[];
   isAdmin?: boolean;
   editMode?: boolean;
+  user?: NavUser | null;
 }
 
-export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps) {
+export function Navbar({ sections, isAdmin = false, editMode = false, user = null }: NavProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -190,6 +192,8 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
           >
             <Shield size={17} strokeWidth={2} aria-hidden="true" />
           </Link>
+
+          {user && <UserMenu user={user} />}
         </div>
 
         {/* Mobile search icon */}
@@ -291,6 +295,26 @@ export function Navbar({ sections, isAdmin = false, editMode = false }: NavProps
               <Shield size={16} strokeWidth={2} aria-hidden="true" />
               Admin
             </Link>
+            {user && (
+              <div className="mt-2 border-t pt-2" style={{ borderColor: "var(--color-bg-border)" }}>
+                <p className="px-3 py-1 text-xs" style={{ color: "var(--color-text-primary)" }}>
+                  {user.name}
+                </p>
+                <p className="px-3 pb-2 text-[10px] truncate" style={{ color: "var(--color-text-muted)" }}>
+                  {user.email}
+                </p>
+                <form action="/api/auth/logout" method="post">
+                  <button
+                    type="submit"
+                    className="flex w-full items-center gap-2 px-3 py-2.5 rounded font-cinzel text-xs tracking-wider uppercase"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    <LogOut size={16} strokeWidth={2} aria-hidden="true" />
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       )}

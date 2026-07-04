@@ -10,8 +10,12 @@ import { getActiveCustomPages } from "@/lib/customPages";
 import { getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { loadTheme } from "@/lib/theme";
+import { cookies } from "next/headers";
 import { getAutoManagedPages } from "@/lib/autoManagedPagesData";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
+import { getUserSession, isSignedIn } from "@/lib/userSession";
+import { isGoogleAuthConfigured } from "@/lib/googleOAuth";
+import { SignInGate } from "@/components/auth/SignInGate";
 
 export default async function SiteLayout({
   children,
@@ -26,6 +30,24 @@ export default async function SiteLayout({
   const session = await getAdminSession();
   const isAdmin = session.isAdmin === true;
   const editMode = isAdmin && session.editMode === true;
+
+  // Require Google sign-in for the public site once OAuth is configured.
+  // Admins are always allowed through so they can never lock themselves out.
+  const userSession = await getUserSession();
+  const signedIn = isSignedIn(userSession) || isAdmin;
+  if (isGoogleAuthConfigured() && !signedIn) {
+    const cookieStore = await cookies();
+    const authError = cookieStore.get("sg-auth-error")?.value;
+    return <SignInGate error={authError} />;
+  }
+
+  const navUser = isSignedIn(userSession)
+    ? {
+        name: userSession.name ?? userSession.email ?? "Adventurer",
+        email: userSession.email ?? "",
+        picture: userSession.picture,
+      }
+    : null;
 
   // Paths where the Edit Layout overlay should be available
   const builtInPaths = Object.keys(PAGE_SECTIONS);
@@ -44,6 +66,7 @@ export default async function SiteLayout({
         sections={navConfig.sections}
         isAdmin={isAdmin}
         editMode={editMode}
+        user={navUser}
       />
 
       {/* Page content */}
