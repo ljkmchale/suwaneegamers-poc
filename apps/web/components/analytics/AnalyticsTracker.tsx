@@ -20,6 +20,7 @@ type ClientUsageEvent = {
 };
 
 const ANALYTICS_EVENT_NAME = "sg:usage-event";
+const VISIT_TIMEOUT_MS = 30 * 60 * 1000;
 let lastPageViewPath = "";
 let firstPayload = true;
 
@@ -29,20 +30,48 @@ function analyticsEnabled() {
     && !window.location.pathname.startsWith("/admin/");
 }
 
-function sessionId() {
-  const key = "sg-analytics-session";
+function visitorId() {
+  const key = "sg-analytics-visitor";
   let id = window.localStorage.getItem(key);
   if (!id) {
-    id = window.crypto.randomUUID();
+    // Preserve the identifier installed by the original analytics tracker so
+    // existing browsers remain recognizable after the visit model upgrade.
+    id = window.localStorage.getItem("sg-analytics-session") ?? window.crypto.randomUUID();
     window.localStorage.setItem(key, id);
   }
   return id;
 }
 
+function visitId() {
+  const key = "sg-analytics-visit";
+  const now = Date.now();
+  type StoredVisit = { id: string; lastActivity: number };
+  let visit: StoredVisit | null = null;
+  try {
+    visit = JSON.parse(window.localStorage.getItem(key) ?? "null") as StoredVisit | null;
+  } catch {
+    visit = null;
+  }
+  if (!visit?.id || !visit.lastActivity || now - visit.lastActivity > VISIT_TIMEOUT_MS) {
+    visit = { id: window.crypto.randomUUID(), lastActivity: now };
+    firstPayload = true;
+  } else {
+    visit.lastActivity = now;
+  }
+  window.localStorage.setItem(key, JSON.stringify(visit));
+  return visit.id;
+}
+
+function pageLabel() {
+  return document.querySelector("main h1")?.textContent?.replace(/\s+/g, " ").trim().slice(0, 160)
+    || document.title.replace(/\s+/g, " ").trim().slice(0, 160);
+}
+
 function send(events: ClientUsageEvent[], beacon = false) {
   if (!analyticsEnabled() || events.length === 0) return;
   const payload = JSON.stringify({
-    sessionId: sessionId(),
+    sessionId: visitId(),
+    visitorId: visitorId(),
     referrer: firstPayload ? document.referrer : undefined,
     events: events.map((event) => ({
       ...event,
@@ -108,7 +137,7 @@ export function AnalyticsTracker() {
     engagedSeconds.current = 0;
     if (lastPageViewPath !== pathname) {
       lastPageViewPath = pathname;
-      send([{ eventType: "page_view", path: pathname }]);
+      send([{ eventType: "page_view", path: pathname, contentLabel: pageLabel() }]);
     }
 
     const interval = window.setInterval(() => {

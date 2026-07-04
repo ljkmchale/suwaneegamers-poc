@@ -29,6 +29,7 @@ export interface AnalyticsDashboardData {
   summary: {
     pageViews: number;
     uniqueVisitors: number;
+    visits: number;
     engagedMinutes: number;
     mediaPlays: number;
     activeNow: number;
@@ -76,6 +77,26 @@ export interface AnalyticsDashboardData {
     pageViews: number;
     engagedSeconds: number;
     lastSeenAt: string;
+    pagesViewed: number;
+    topPage: string;
+  }>;
+  memberPageActivity: Array<{
+    name: string;
+    email: string;
+    path: string;
+    pageLabel: string;
+    pageViews: number;
+    engagedSeconds: number;
+    firstViewedAt: string;
+    lastViewedAt: string;
+  }>;
+  pageAudiences: Array<{
+    path: string;
+    pageLabel: string;
+    pageViews: number;
+    people: number;
+    visitorNames: string[];
+    lastViewedAt: string;
   }>;
   activeVisitors: Array<{
     visitor: string;
@@ -152,6 +173,7 @@ function safeReferrerHost(value: unknown): string | null {
 
 export function recordUsageEvents(input: {
   rawSessionId: string;
+  rawVisitorId?: string;
   events: UsageEventInput[];
   referrer?: string;
   userAgent?: string;
@@ -159,6 +181,7 @@ export function recordUsageEvents(input: {
 }): void {
   const db = getDb();
   const sessionId = anonymizeSessionId(input.rawSessionId);
+  const visitorId = input.rawVisitorId ? anonymizeSessionId(input.rawVisitorId) : sessionId;
   const now = new Date().toISOString();
   const visitorEmail = cleanText(input.identity?.email, 200) ?? null;
   const visitorName = cleanText(input.identity?.name, 120) ?? null;
@@ -173,13 +196,13 @@ export function recordUsageEvents(input: {
 
   const insertSession = db.prepare(`
     INSERT INTO analytics_sessions
-      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_email, visitor_name)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_id, visitor_email, visitor_name)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(session_id) DO NOTHING
   `);
   const updateIdentity = db.prepare(`
     UPDATE analytics_sessions
-    SET visitor_email = ?, visitor_name = ?
+    SET visitor_id = ?, visitor_email = ?, visitor_name = ?
     WHERE session_id = ?
   `);
   const updateSession = db.prepare(`
@@ -197,9 +220,9 @@ export function recordUsageEvents(input: {
   `);
 
   db.transaction(() => {
-    insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorEmail, visitorName);
+    insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName);
     // Backfill identity on sessions that started before sign-in resolved.
-    if (visitorEmail) updateIdentity.run(visitorEmail, visitorName, sessionId);
+    updateIdentity.run(visitorId, visitorEmail, visitorName, sessionId);
     for (const event of input.events) {
       if (event.eventType !== "heartbeat") {
         insertEvent.run(
@@ -235,14 +258,17 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const summary = db.prepare(`
     SELECT
-      SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
-      COUNT(DISTINCT session_id) AS visitors,
-      SUM(CASE WHEN event_type = 'page_engagement' THEN duration_seconds ELSE 0 END) AS engaged_seconds,
-      SUM(CASE WHEN event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
-    FROM analytics_events
-    WHERE created_at >= ?
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      COUNT(DISTINCT e.session_id) AS visits,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
+      SUM(CASE WHEN e.event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
   `).get(sinceIso) as {
     page_views: number | null;
+    visits: number | null;
     visitors: number | null;
     engaged_seconds: number | null;
     media_plays: number | null;
@@ -250,7 +276,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const activeThreshold = new Date(Date.now() - 2 * 60_000).toISOString();
   const activeNow = (db.prepare(`
-    SELECT COUNT(*) AS count
+    SELECT COUNT(DISTINCT COALESCE(visitor_email, visitor_id, session_id)) AS count
     FROM analytics_sessions
     WHERE last_seen_at >= ?
   `).get(activeThreshold) as { count: number }).count;
@@ -259,12 +285,13 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     SELECT
       date(created_at, 'localtime') AS date,
       SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
-      COUNT(DISTINCT session_id) AS visitors,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
       SUM(CASE WHEN event_type = 'page_engagement' THEN duration_seconds ELSE 0 END) AS engaged_seconds,
       SUM(CASE WHEN event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
-    FROM analytics_events
-    WHERE created_at >= ?
-    GROUP BY date(created_at, 'localtime')
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+    GROUP BY date(e.created_at, 'localtime')
     ORDER BY date
   `).all(sinceIso) as Array<{
     date: string;
@@ -294,13 +321,14 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const topPages = (db.prepare(`
     SELECT
-      path,
-      SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
-      COUNT(DISTINCT session_id) AS visitors,
-      SUM(CASE WHEN event_type = 'page_engagement' THEN duration_seconds ELSE 0 END) AS engaged_seconds
-    FROM analytics_events
-    WHERE created_at >= ?
-    GROUP BY path
+      e.path,
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+    GROUP BY e.path
     HAVING page_views > 0
     ORDER BY page_views DESC, engaged_seconds DESC
     LIMIT 12
@@ -397,15 +425,16 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const people = (db.prepare(`
     SELECT
-      visitor_email AS email,
-      COALESCE(MAX(visitor_name), visitor_email) AS name,
-      COUNT(*) AS sessions,
-      SUM(page_views) AS page_views,
-      SUM(engaged_seconds) AS engaged_seconds,
-      MAX(last_seen_at) AS last_seen_at
-    FROM analytics_sessions
-    WHERE visitor_email IS NOT NULL AND last_seen_at >= ?
-    GROUP BY visitor_email
+      s.visitor_email AS email,
+      COALESCE(MAX(s.visitor_name), s.visitor_email) AS name,
+      COUNT(DISTINCT s.session_id) AS sessions,
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
+      MAX(e.created_at) AS last_seen_at
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE s.visitor_email IS NOT NULL AND e.created_at >= ?
+    GROUP BY s.visitor_email
     ORDER BY last_seen_at DESC
     LIMIT 50
   `).all(sinceIso) as Array<{
@@ -422,12 +451,112 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     pageViews: row.page_views,
     engagedSeconds: row.engaged_seconds,
     lastSeenAt: row.last_seen_at,
+    pagesViewed: 0,
+    topPage: "",
+  }));
+
+  const memberPageActivity = (db.prepare(`
+    SELECT
+      s.visitor_email AS email,
+      COALESCE(MAX(s.visitor_name), s.visitor_email) AS name,
+      e.path,
+      COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
+      MIN(e.created_at) AS first_viewed_at,
+      MAX(e.created_at) AS last_viewed_at
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+      AND s.visitor_email IS NOT NULL
+      AND e.event_type IN ('page_view', 'page_engagement')
+    GROUP BY s.visitor_email, e.path
+    HAVING page_views > 0
+    ORDER BY last_viewed_at DESC
+  `).all(sinceIso) as Array<{
+    email: string;
+    name: string;
+    path: string;
+    page_label: string;
+    page_views: number;
+    engaged_seconds: number;
+    first_viewed_at: string;
+    last_viewed_at: string;
+  }>).map((row) => ({
+    name: row.name,
+    email: row.email,
+    path: row.path,
+    pageLabel: row.page_label,
+    pageViews: row.page_views,
+    engagedSeconds: row.engaged_seconds,
+    firstViewedAt: row.first_viewed_at,
+    lastViewedAt: row.last_viewed_at,
+  }));
+
+  const activityByEmail = new Map<string, typeof memberPageActivity>();
+  for (const activity of memberPageActivity) {
+    const rows = activityByEmail.get(activity.email) ?? [];
+    rows.push(activity);
+    activityByEmail.set(activity.email, rows);
+  }
+  for (const person of people) {
+    const rows = activityByEmail.get(person.email) ?? [];
+    person.pagesViewed = rows.length;
+    person.topPage = [...rows].sort((a, b) => b.pageViews - a.pageViews)[0]?.path ?? "";
+  }
+
+  const pageAudiences = (db.prepare(`
+    SELECT
+      e.path,
+      COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      COUNT(DISTINCT s.visitor_email) AS people,
+      GROUP_CONCAT(DISTINCT COALESCE(s.visitor_name, s.visitor_email)) AS visitor_names,
+      MAX(e.created_at) AS last_viewed_at
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+      AND s.visitor_email IS NOT NULL
+      AND e.event_type IN ('page_view', 'page_engagement')
+    GROUP BY e.path
+    HAVING page_views > 0
+    ORDER BY people DESC, page_views DESC
+    LIMIT 50
+  `).all(sinceIso) as Array<{
+    path: string;
+    page_label: string;
+    page_views: number;
+    people: number;
+    visitor_names: string | null;
+    last_viewed_at: string;
+  }>).map((row) => ({
+    path: row.path,
+    pageLabel: row.page_label,
+    pageViews: row.page_views,
+    people: row.people,
+    visitorNames: row.visitor_names?.split(",") ?? [],
+    lastViewedAt: row.last_viewed_at,
   }));
 
   const activeVisitors = (db.prepare(`
     SELECT session_id, last_path, device_type, last_seen_at, page_views, visitor_name, visitor_email
-    FROM analytics_sessions
-    WHERE last_seen_at >= ?
+    FROM (
+      SELECT
+        session_id,
+        last_path,
+        device_type,
+        last_seen_at,
+        page_views,
+        visitor_name,
+        visitor_email,
+        ROW_NUMBER() OVER (
+          PARTITION BY COALESCE(visitor_email, visitor_id, session_id)
+          ORDER BY last_seen_at DESC
+        ) AS visitor_rank
+      FROM analytics_sessions
+      WHERE last_seen_at >= ?
+    )
+    WHERE visitor_rank = 1
     ORDER BY last_seen_at DESC
     LIMIT 20
   `).all(activeThreshold) as Array<{
@@ -497,6 +626,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     summary: {
       pageViews: summary.page_views ?? 0,
       uniqueVisitors: summary.visitors ?? 0,
+      visits: summary.visits ?? 0,
       engagedMinutes: Math.round((summary.engaged_seconds ?? 0) / 60),
       mediaPlays: summary.media_plays ?? 0,
       activeNow,
@@ -509,6 +639,8 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     referrers,
     recentVisitors,
     people,
+    memberPageActivity,
+    pageAudiences,
     activeVisitors,
     syncJobs,
     recentSyncRuns,

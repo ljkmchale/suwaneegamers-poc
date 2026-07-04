@@ -5,6 +5,7 @@ import {
   Ear,
   Eye,
   Radio,
+  Route,
   Users,
 } from "lucide-react";
 import { getAnalyticsDashboardData } from "@/lib/analytics";
@@ -127,6 +128,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
   const cards = [
     { label: "Page views", value: number(data.summary.pageViews), icon: Eye, color: "#a78bfa" },
     { label: "Visitors", value: number(data.summary.uniqueVisitors), icon: Users, color: "#60a5fa" },
+    { label: "Visits", value: number(data.summary.visits), icon: Route, color: "#2dd4bf" },
     { label: "Engaged minutes", value: number(data.summary.engagedMinutes), icon: Clock3, color: "#f59e0b" },
     { label: "Media plays", value: number(data.summary.mediaPlays), icon: Ear, color: "#f472b6" },
     { label: "Active now", value: number(data.summary.activeNow), icon: Radio, color: "#34d399" },
@@ -171,7 +173,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         </div>
       </div>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
         {cards.map((card) => {
           const Icon = card.icon;
           return (
@@ -191,7 +193,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           <div>
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Who is on now</h2>
             <p className="mt-1 text-xs text-[#6a5a78]">
-              Anonymous visitors active within the last two minutes
+              Signed-in members and anonymous visitors active within the last two minutes
             </p>
           </div>
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-900 bg-emerald-950/30 px-3 py-1 text-xs text-emerald-300">
@@ -237,7 +239,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Traffic over time</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Daily page views and anonymous visitors</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Daily page views and distinct signed-in members or browsers</p>
           </div>
           <div className="flex gap-5 text-xs text-[#9080a0]">
             <span><i className="mr-2 inline-block h-2 w-2 rounded-full bg-[#8b5cf6]" />Page views</span>
@@ -374,6 +376,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                 <th className="px-5 py-3 font-normal">Email</th>
                 <th className="px-5 py-3 font-normal">Last seen</th>
                 <th className="px-5 py-3 text-right font-normal">Visits</th>
+                <th className="px-5 py-3 text-right font-normal">Pages</th>
+                <th className="px-5 py-3 font-normal">Top page</th>
                 <th className="px-5 py-3 text-right font-normal">Views</th>
                 <th className="px-5 py-3 text-right font-normal">Engaged</th>
               </tr>
@@ -385,6 +389,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                   <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email}</td>
                   <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
                   <td className="px-5 py-3 text-right">{person.sessions}</td>
+                  <td className="px-5 py-3 text-right">{person.pagesViewed}</td>
+                  <td className="max-w-52 truncate px-5 py-3 font-mono text-[#a89880]" title={person.topPage}>{person.topPage || "—"}</td>
                   <td className="px-5 py-3 text-right">{person.pageViews}</td>
                   <td className="px-5 py-3 text-right text-[#f59e0b]">{duration(person.engagedSeconds)}</td>
                 </tr>
@@ -398,6 +404,72 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           </p>
         )}
       </section>
+
+      <div className="mb-6 grid gap-6 2xl:grid-cols-[1.35fr_0.65fr]">
+        <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+          <div className="p-5">
+            <h2 className="font-cinzel text-sm uppercase tracking-widest">What each member viewed</h2>
+            <p className="mt-1 text-xs text-[#6a5a78]">Member-by-page activity in the selected period, most recent first</p>
+          </div>
+          <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
+            <table className="w-full text-left text-xs">
+              <thead className="sticky top-0 bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
+                <tr>
+                  <th className="px-5 py-3 font-normal">Member</th>
+                  <th className="px-5 py-3 font-normal">Page</th>
+                  <th className="px-5 py-3 text-right font-normal">Views</th>
+                  <th className="px-5 py-3 text-right font-normal">Engaged</th>
+                  <th className="px-5 py-3 font-normal">Last viewed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.memberPageActivity.map((activity) => (
+                  <tr key={`${activity.email}-${activity.path}`} className="border-t border-[#201927]">
+                    <td className="max-w-44 truncate px-5 py-3" title={activity.email}>
+                      <span className="text-[#e8dfc8]">{activity.name}</span>
+                    </td>
+                    <td className="max-w-72 px-5 py-3" title={activity.path}>
+                      <p className="truncate text-[#c8bda8]">{activity.pageLabel}</p>
+                      <p className="truncate font-mono text-[10px] text-[#6a5a78]">{activity.path}</p>
+                    </td>
+                    <td className="px-5 py-3 text-right">{activity.pageViews}</td>
+                    <td className="px-5 py-3 text-right text-[#f59e0b]">{duration(activity.engagedSeconds)}</td>
+                    <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(activity.lastViewedAt)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {data.memberPageActivity.length === 0 && (
+              <p className="p-8 text-center text-xs text-[#6a5a78]">Signed-in page activity will appear here.</p>
+            )}
+          </div>
+        </section>
+
+        <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+          <div className="p-5">
+            <h2 className="font-cinzel text-sm uppercase tracking-widest">Who viewed each page</h2>
+            <p className="mt-1 text-xs text-[#6a5a78]">The signed-in audience for each page</p>
+          </div>
+          <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
+            {data.pageAudiences.map((page) => (
+              <div key={page.path} className="border-b border-[#201927] p-5 last:border-0">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="truncate text-xs text-[#e8dfc8]" title={page.path}>{page.pageLabel}</p>
+                    <p className="mt-1 truncate font-mono text-[10px] text-[#6a5a78]">{page.path}</p>
+                  </div>
+                  <span className="shrink-0 text-xs text-[#a78bfa]">{page.people} {page.people === 1 ? "member" : "members"}</span>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-[#a89880]">{page.visitorNames.join(", ")}</p>
+                <p className="mt-2 text-[10px] text-[#6a5a78]">{page.pageViews} views · last {dateTime(page.lastViewedAt)}</p>
+              </div>
+            ))}
+            {data.pageAudiences.length === 0 && (
+              <p className="p-8 text-center text-xs text-[#6a5a78]">Page audiences will appear after members browse the site.</p>
+            )}
+          </div>
+        </section>
+      </div>
 
       <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
         <div className="flex flex-wrap items-center justify-between gap-4 p-5">
@@ -452,7 +524,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       </section>
 
       <p className="mt-5 text-xs leading-relaxed text-[#5a5060]">
-        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. Visitors sign in with Google, so sessions are attributed to the member&apos;s name and email; no passwords or IP addresses are stored.
+        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. A visit resets after 30 minutes without activity. Signed-in activity is attributed to the member&apos;s name and email; no passwords, IP addresses, or page contents are stored.
       </p>
     </div>
   );

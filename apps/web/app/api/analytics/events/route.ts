@@ -35,6 +35,9 @@ export async function POST(request: NextRequest) {
   const rawSessionId = typeof payload.sessionId === "string"
     ? payload.sessionId.trim().slice(0, 100)
     : "";
+  const rawVisitorId = typeof payload.visitorId === "string"
+    ? payload.visitorId.trim().slice(0, 100)
+    : "";
   if (rawSessionId.length < 16) {
     return NextResponse.json({ error: "Invalid session" }, { status: 400 });
   }
@@ -56,6 +59,7 @@ export async function POST(request: NextRequest) {
 
   recordUsageEvents({
     rawSessionId,
+    rawVisitorId: rawVisitorId.length >= 16 ? rawVisitorId : undefined,
     events,
     referrer: typeof payload.referrer === "string" ? payload.referrer : undefined,
     userAgent: request.headers.get("user-agent") ?? undefined,

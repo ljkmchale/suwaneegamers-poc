@@ -146,6 +146,17 @@ function migrateSchema(db: Database.Database): void {
   if (!analyticsSessionColumns.has("visitor_name")) {
     db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_name TEXT`);
   }
+  if (!analyticsSessionColumns.has("visitor_id")) {
+    db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_id TEXT`);
+  }
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_analytics_sessions_visitor
+      ON analytics_sessions(visitor_id, last_seen_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_sessions_email
+      ON analytics_sessions(visitor_email, last_seen_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_events_session_created
+      ON analytics_events(session_id, created_at DESC);
+  `);
 }
 
 function initializeSchema(db: Database.Database): void {
@@ -343,7 +354,10 @@ function initializeSchema(db: Database.Database): void {
       referrer_host TEXT,
       device_type   TEXT NOT NULL DEFAULT 'desktop',
       page_views    INTEGER NOT NULL DEFAULT 0,
-      engaged_seconds INTEGER NOT NULL DEFAULT 0
+      engaged_seconds INTEGER NOT NULL DEFAULT 0,
+      visitor_id    TEXT,
+      visitor_email TEXT,
+      visitor_name  TEXT
     );
 
     CREATE TABLE IF NOT EXISTS analytics_events (
