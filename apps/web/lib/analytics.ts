@@ -67,12 +67,15 @@ export interface AnalyticsDashboardData {
     deviceType: string;
     pageViews: number;
     engagedSeconds: number;
+    visitorLabel: string;
     visitorName: string | null;
     visitorEmail: string | null;
   }>;
   people: Array<{
+    visitorKey: string;
     name: string;
-    email: string;
+    email: string | null;
+    signedIn: boolean;
     sessions: number;
     pageViews: number;
     engagedSeconds: number;
@@ -81,8 +84,10 @@ export interface AnalyticsDashboardData {
     topPage: string;
   }>;
   memberPageActivity: Array<{
+    visitorKey: string;
     name: string;
-    email: string;
+    email: string | null;
+    signedIn: boolean;
     path: string;
     pageLabel: string;
     pageViews: number;
@@ -399,7 +404,20 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   `).all(sinceIso) as Array<{ label: string; value: number }>);
 
   const recentVisitors = (db.prepare(`
-    SELECT last_seen_at, entry_path, last_path, device_type, page_views, engaged_seconds, visitor_email, visitor_name
+    SELECT
+      last_seen_at,
+      entry_path,
+      last_path,
+      device_type,
+      page_views,
+      engaged_seconds,
+      visitor_email,
+      visitor_name,
+      COALESCE(
+        visitor_name,
+        visitor_email,
+        'Anonymous ' || UPPER(SUBSTR(COALESCE(visitor_id, session_id), 1, 6))
+      ) AS visitor_label
     FROM analytics_sessions
     ORDER BY last_seen_at DESC
     LIMIT 12
@@ -412,6 +430,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     engaged_seconds: number;
     visitor_email: string | null;
     visitor_name: string | null;
+    visitor_label: string;
   }>).map((row) => ({
     lastSeenAt: row.last_seen_at,
     entryPath: row.entry_path,
@@ -419,34 +438,43 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     deviceType: row.device_type,
     pageViews: row.page_views,
     engagedSeconds: row.engaged_seconds,
+    visitorLabel: row.visitor_label,
     visitorName: row.visitor_name,
     visitorEmail: row.visitor_email,
   }));
 
   const people = (db.prepare(`
     SELECT
-      s.visitor_email AS email,
-      COALESCE(MAX(s.visitor_name), s.visitor_email) AS name,
+      COALESCE(s.visitor_email, s.visitor_id, s.session_id) AS visitor_key,
+      MAX(s.visitor_email) AS email,
+      COALESCE(
+        MAX(s.visitor_name),
+        MAX(s.visitor_email),
+        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+      ) AS name,
       COUNT(DISTINCT s.session_id) AS sessions,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
       MAX(e.created_at) AS last_seen_at
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE s.visitor_email IS NOT NULL AND e.created_at >= ?
-    GROUP BY s.visitor_email
+    WHERE e.created_at >= ?
+    GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id)
     ORDER BY last_seen_at DESC
     LIMIT 50
   `).all(sinceIso) as Array<{
-    email: string;
-    name: string | null;
+    visitor_key: string;
+    email: string | null;
+    name: string;
     sessions: number;
     page_views: number;
     engaged_seconds: number;
     last_seen_at: string;
   }>).map((row) => ({
+    visitorKey: row.visitor_key,
     email: row.email,
-    name: row.name ?? row.email,
+    name: row.name,
+    signedIn: row.email !== null,
     sessions: row.sessions,
     pageViews: row.page_views,
     engagedSeconds: row.engaged_seconds,
@@ -457,8 +485,13 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const memberPageActivity = (db.prepare(`
     SELECT
-      s.visitor_email AS email,
-      COALESCE(MAX(s.visitor_name), s.visitor_email) AS name,
+      COALESCE(s.visitor_email, s.visitor_id, s.session_id) AS visitor_key,
+      MAX(s.visitor_email) AS email,
+      COALESCE(
+        MAX(s.visitor_name),
+        MAX(s.visitor_email),
+        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+      ) AS name,
       e.path,
       COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
@@ -468,13 +501,13 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
     WHERE e.created_at >= ?
-      AND s.visitor_email IS NOT NULL
       AND e.event_type IN ('page_view', 'page_engagement')
-    GROUP BY s.visitor_email, e.path
+    GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id), e.path
     HAVING page_views > 0
     ORDER BY last_viewed_at DESC
   `).all(sinceIso) as Array<{
-    email: string;
+    visitor_key: string;
+    email: string | null;
     name: string;
     path: string;
     page_label: string;
@@ -483,8 +516,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     first_viewed_at: string;
     last_viewed_at: string;
   }>).map((row) => ({
+    visitorKey: row.visitor_key,
     name: row.name,
     email: row.email,
+    signedIn: row.email !== null,
     path: row.path,
     pageLabel: row.page_label,
     pageViews: row.page_views,
@@ -493,14 +528,14 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     lastViewedAt: row.last_viewed_at,
   }));
 
-  const activityByEmail = new Map<string, typeof memberPageActivity>();
+  const activityByVisitor = new Map<string, typeof memberPageActivity>();
   for (const activity of memberPageActivity) {
-    const rows = activityByEmail.get(activity.email) ?? [];
+    const rows = activityByVisitor.get(activity.visitorKey) ?? [];
     rows.push(activity);
-    activityByEmail.set(activity.email, rows);
+    activityByVisitor.set(activity.visitorKey, rows);
   }
   for (const person of people) {
-    const rows = activityByEmail.get(person.email) ?? [];
+    const rows = activityByVisitor.get(person.visitorKey) ?? [];
     person.pagesViewed = rows.length;
     person.topPage = [...rows].sort((a, b) => b.pageViews - a.pageViews)[0]?.path ?? "";
   }
@@ -510,13 +545,16 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       e.path,
       COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
-      COUNT(DISTINCT s.visitor_email) AS people,
-      GROUP_CONCAT(DISTINCT COALESCE(s.visitor_name, s.visitor_email)) AS visitor_names,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, s.session_id)) AS people,
+      GROUP_CONCAT(DISTINCT COALESCE(
+        s.visitor_name,
+        s.visitor_email,
+        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+      )) AS visitor_names,
       MAX(e.created_at) AS last_viewed_at
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
     WHERE e.created_at >= ?
-      AND s.visitor_email IS NOT NULL
       AND e.event_type IN ('page_view', 'page_engagement')
     GROUP BY e.path
     HAVING page_views > 0
@@ -570,7 +608,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   }>).map((row) => ({
     visitor: row.visitor_name
       ?? row.visitor_email
-      ?? `Visitor ${row.session_id.slice(0, 6).toUpperCase()}`,
+      ?? `Anonymous ${row.session_id.slice(0, 6).toUpperCase()}`,
     currentPath: row.last_path,
     deviceType: row.device_type,
     lastSeenAt: row.last_seen_at,

@@ -344,9 +344,9 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                 {data.recentVisitors.map((visitor, index) => (
                   <tr key={`${visitor.lastSeenAt}-${index}`} className="border-b border-[#201927] last:border-0">
                     <td className="max-w-40 truncate px-5 py-3" title={visitor.visitorEmail ?? undefined}>
-                      {visitor.visitorName
-                        ? <span className="text-[#e8dfc8]">{visitor.visitorName}</span>
-                        : <span className="text-[#6a5a78]">Anonymous</span>}
+                      <span className={visitor.visitorName ? "text-[#e8dfc8]" : "text-[#6a5a78]"}>
+                        {visitor.visitorLabel}
+                      </span>
                     </td>
                     <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(visitor.lastSeenAt)}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#a89880]">{visitor.entryPath}</td>
@@ -366,13 +366,13 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
         <div className="p-5">
           <h2 className="font-cinzel text-sm uppercase tracking-widest">Who&apos;s been on the site</h2>
-          <p className="mt-1 text-xs text-[#6a5a78]">Signed-in members active in the selected period, most recent first</p>
+          <p className="mt-1 text-xs text-[#6a5a78]">All recorded visitors in the selected period, most recent first</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="border-y border-[#2a2a35] bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
               <tr>
-                <th className="px-5 py-3 font-normal">Member</th>
+                <th className="px-5 py-3 font-normal">Visitor</th>
                 <th className="px-5 py-3 font-normal">Email</th>
                 <th className="px-5 py-3 font-normal">Last seen</th>
                 <th className="px-5 py-3 text-right font-normal">Visits</th>
@@ -384,9 +384,9 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
             </thead>
             <tbody>
               {data.people.map((person) => (
-                <tr key={person.email} className="border-b border-[#201927] last:border-0">
+                <tr key={person.visitorKey} className="border-b border-[#201927] last:border-0">
                   <td className="px-5 py-3 text-[#e8dfc8]">{person.name}</td>
-                  <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email}</td>
+                  <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email ?? "Anonymous"}</td>
                   <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
                   <td className="px-5 py-3 text-right">{person.sessions}</td>
                   <td className="px-5 py-3 text-right">{person.pagesViewed}</td>
@@ -400,7 +400,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         </div>
         {data.people.length === 0 && (
           <p className="p-8 text-center text-xs text-[#6a5a78]">
-            Once visitors sign in with Google, they&apos;ll be listed here by name.
+            Visitors will appear here after they browse the site.
           </p>
         )}
       </section>
@@ -408,14 +408,14 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       <div className="mb-6 grid gap-6 2xl:grid-cols-[1.35fr_0.65fr]">
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
-            <h2 className="font-cinzel text-sm uppercase tracking-widest">What each member viewed</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Member-by-page activity in the selected period, most recent first</p>
+            <h2 className="font-cinzel text-sm uppercase tracking-widest">What each visitor viewed</h2>
+            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in and anonymous visitor activity, most recent first</p>
           </div>
           <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
             <table className="w-full text-left text-xs">
               <thead className="sticky top-0 bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
                 <tr>
-                  <th className="px-5 py-3 font-normal">Member</th>
+                  <th className="px-5 py-3 font-normal">Visitor</th>
                   <th className="px-5 py-3 font-normal">Page</th>
                   <th className="px-5 py-3 text-right font-normal">Views</th>
                   <th className="px-5 py-3 text-right font-normal">Engaged</th>
@@ -424,8 +424,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               </thead>
               <tbody>
                 {data.memberPageActivity.map((activity) => (
-                  <tr key={`${activity.email}-${activity.path}`} className="border-t border-[#201927]">
-                    <td className="max-w-44 truncate px-5 py-3" title={activity.email}>
+                  <tr key={`${activity.visitorKey}-${activity.path}`} className="border-t border-[#201927]">
+                    <td className="max-w-44 truncate px-5 py-3" title={activity.email ?? activity.name}>
                       <span className="text-[#e8dfc8]">{activity.name}</span>
                     </td>
                     <td className="max-w-72 px-5 py-3" title={activity.path}>
@@ -440,7 +440,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               </tbody>
             </table>
             {data.memberPageActivity.length === 0 && (
-              <p className="p-8 text-center text-xs text-[#6a5a78]">Signed-in page activity will appear here.</p>
+              <p className="p-8 text-center text-xs text-[#6a5a78]">Visitor page activity will appear here.</p>
             )}
           </div>
         </section>
@@ -448,7 +448,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Who viewed each page</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">The signed-in audience for each page</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in and anonymous visitors for each page</p>
           </div>
           <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
             {data.pageAudiences.map((page) => (
@@ -458,14 +458,14 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                     <p className="truncate text-xs text-[#e8dfc8]" title={page.path}>{page.pageLabel}</p>
                     <p className="mt-1 truncate font-mono text-[10px] text-[#6a5a78]">{page.path}</p>
                   </div>
-                  <span className="shrink-0 text-xs text-[#a78bfa]">{page.people} {page.people === 1 ? "member" : "members"}</span>
+                  <span className="shrink-0 text-xs text-[#a78bfa]">{page.people} {page.people === 1 ? "visitor" : "visitors"}</span>
                 </div>
                 <p className="mt-3 text-xs leading-5 text-[#a89880]">{page.visitorNames.join(", ")}</p>
                 <p className="mt-2 text-[10px] text-[#6a5a78]">{page.pageViews} views · last {dateTime(page.lastViewedAt)}</p>
               </div>
             ))}
             {data.pageAudiences.length === 0 && (
-              <p className="p-8 text-center text-xs text-[#6a5a78]">Page audiences will appear after members browse the site.</p>
+              <p className="p-8 text-center text-xs text-[#6a5a78]">Page audiences will appear after visitors browse the site.</p>
             )}
           </div>
         </section>
