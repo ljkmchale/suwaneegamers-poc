@@ -10,6 +10,7 @@ export const ANALYTICS_EVENT_TYPES = [
   "content_open",
   "media_play",
   "media_complete",
+  "heartbeat",
 ] as const;
 
 export type AnalyticsEventType = (typeof ANALYTICS_EVENT_TYPES)[number];
@@ -65,6 +66,13 @@ export interface AnalyticsDashboardData {
     deviceType: string;
     pageViews: number;
     engagedSeconds: number;
+  }>;
+  activeVisitors: Array<{
+    visitor: string;
+    currentPath: string;
+    deviceType: string;
+    lastSeenAt: string;
+    pageViews: number;
   }>;
   syncJobs: Array<{
     id: string;
@@ -173,16 +181,18 @@ export function recordUsageEvents(input: {
   db.transaction(() => {
     insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType);
     for (const event of input.events) {
-      insertEvent.run(
-        sessionId,
-        event.eventType,
-        event.path,
-        event.contentType ?? null,
-        event.contentId ?? null,
-        event.contentLabel ?? null,
-        event.durationSeconds ?? 0,
-        now,
-      );
+      if (event.eventType !== "heartbeat") {
+        insertEvent.run(
+          sessionId,
+          event.eventType,
+          event.path,
+          event.contentType ?? null,
+          event.contentId ?? null,
+          event.contentLabel ?? null,
+          event.durationSeconds ?? 0,
+          now,
+        );
+      }
     }
     updateSession.run(
       now,
@@ -218,11 +228,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     media_plays: number | null;
   };
 
+  const activeThreshold = new Date(Date.now() - 2 * 60_000).toISOString();
   const activeNow = (db.prepare(`
     SELECT COUNT(*) AS count
     FROM analytics_sessions
     WHERE last_seen_at >= ?
-  `).get(new Date(Date.now() - 5 * 60_000).toISOString()) as { count: number }).count;
+  `).get(activeThreshold) as { count: number }).count;
 
   const dailyRows = db.prepare(`
     SELECT
@@ -360,6 +371,26 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     engagedSeconds: row.engaged_seconds,
   }));
 
+  const activeVisitors = (db.prepare(`
+    SELECT session_id, last_path, device_type, last_seen_at, page_views
+    FROM analytics_sessions
+    WHERE last_seen_at >= ?
+    ORDER BY last_seen_at DESC
+    LIMIT 20
+  `).all(activeThreshold) as Array<{
+    session_id: string;
+    last_path: string;
+    device_type: string;
+    last_seen_at: string;
+    page_views: number;
+  }>).map((row) => ({
+    visitor: `Visitor ${row.session_id.slice(0, 6).toUpperCase()}`,
+    currentPath: row.last_path,
+    deviceType: row.device_type,
+    lastSeenAt: row.last_seen_at,
+    pageViews: row.page_views,
+  }));
+
   const syncJobs = (db.prepare(`
     SELECT id, label, last_status, last_started_at, last_finished_at, next_run_at, last_duration_ms
     FROM content_sync_jobs
@@ -420,6 +451,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     devices,
     referrers,
     recentVisitors,
+    activeVisitors,
     syncJobs,
     recentSyncRuns,
   };

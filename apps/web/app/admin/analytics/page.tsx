@@ -8,6 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { getAnalyticsDashboardData } from "@/lib/analytics";
+import { RefreshAnalyticsButton } from "./RefreshAnalyticsButton";
 
 export const dynamic = "force-dynamic";
 
@@ -152,18 +153,21 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
             Anonymous site activity, reading and listening engagement, visitor connections, and scheduled content health.
           </p>
         </div>
-        <div className="flex rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-1">
-          {[7, 30, 90].map((days) => (
-            <Link
-              key={days}
-              href={`/admin/analytics?days=${days}`}
-              className={`rounded-md px-4 py-2 font-cinzel text-[10px] uppercase tracking-widest transition-colors ${
-                data.days === days ? "bg-[#8b5cf6] text-white" : "text-[#9080a0] hover:text-[#e8dfc8]"
-              }`}
-            >
-              {days} days
-            </Link>
-          ))}
+        <div className="flex flex-wrap items-center gap-3">
+          <RefreshAnalyticsButton />
+          <div className="flex rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-1">
+            {[7, 30, 90].map((days) => (
+              <Link
+                key={days}
+                href={`/admin/analytics?days=${days}`}
+                className={`rounded-md px-4 py-2 font-cinzel text-[10px] uppercase tracking-widest transition-colors ${
+                  data.days === days ? "bg-[#8b5cf6] text-white" : "text-[#9080a0] hover:text-[#e8dfc8]"
+                }`}
+              >
+                {days} days
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -181,6 +185,53 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           );
         })}
       </div>
+
+      <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-5">
+          <div>
+            <h2 className="font-cinzel text-sm uppercase tracking-widest">Who is on now</h2>
+            <p className="mt-1 text-xs text-[#6a5a78]">
+              Anonymous visitors active within the last two minutes
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-900 bg-emerald-950/30 px-3 py-1 text-xs text-emerald-300">
+            <i className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            {data.activeVisitors.length} active
+          </span>
+        </div>
+        {data.activeVisitors.length > 0 ? (
+          <div className="overflow-x-auto border-t border-[#2a2a35]">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
+                <tr>
+                  <th className="px-5 py-3 font-normal">Visitor</th>
+                  <th className="px-5 py-3 font-normal">Looking at</th>
+                  <th className="px-5 py-3 font-normal">Device</th>
+                  <th className="px-5 py-3 text-right font-normal">Page views</th>
+                  <th className="px-5 py-3 text-right font-normal">Last activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.activeVisitors.map((visitor) => (
+                  <tr key={visitor.visitor} className="border-t border-[#201927]">
+                    <td className="px-5 py-3 font-cinzel text-[10px] tracking-wider text-emerald-300">
+                      {visitor.visitor}
+                    </td>
+                    <td className="px-5 py-3 font-mono text-[#e8dfc8]">{visitor.currentPath}</td>
+                    <td className="px-5 py-3 capitalize text-[#9080a0]">{visitor.deviceType}</td>
+                    <td className="px-5 py-3 text-right text-[#a89880]">{visitor.pageViews}</td>
+                    <td className="px-5 py-3 text-right text-[#9080a0]">{dateTime(visitor.lastSeenAt)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="border-t border-[#2a2a35] px-5 py-8 text-center text-xs text-[#6a5a78]">
+            No active visitors right now.
+          </p>
+        )}
+      </section>
 
       <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">

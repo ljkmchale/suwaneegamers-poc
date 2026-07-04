@@ -10,7 +10,8 @@ type ClientUsageEvent = {
     | "content_view"
     | "content_open"
     | "media_play"
-    | "media_complete";
+    | "media_complete"
+    | "heartbeat";
   path?: string;
   contentType?: string;
   contentId?: string;
@@ -115,6 +116,11 @@ export function AnalyticsTracker() {
         engagedSeconds.current += 5;
       }
     }, 5_000);
+    const heartbeat = window.setInterval(() => {
+      if (document.visibilityState === "visible") {
+        send([{ eventType: "heartbeat", path: trackedPath.current }]);
+      }
+    }, 30_000);
 
     const flushEngagement = () => {
       const duration = engagedSeconds.current;
@@ -135,6 +141,7 @@ export function AnalyticsTracker() {
 
     return () => {
       window.clearInterval(interval);
+      window.clearInterval(heartbeat);
       window.removeEventListener("pagehide", flushEngagement);
       document.removeEventListener("visibilitychange", handleVisibility);
       flushEngagement();
