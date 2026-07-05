@@ -7,6 +7,7 @@
     "build": "pnpm --filter web build",
     "images:prepare": "node scripts/prepare-images.mjs",
     "sync-campaign-headers": "node scripts/sync-campaign-headers.mjs",
+    "sync-campaign-journeys": "node scripts/sync-campaign-journeys.mjs",
     "sync-organization-symbols": "node scripts/sync-organization-symbols.mjs",
     "sync-pantheon-symbols": "node scripts/sync-pantheon-symbols.mjs",
     "content:scheduler": "node scripts/content-scheduler.mjs",
@@ -16,7 +17,7 @@
     "lint": "pnpm --filter web lint",
     "typecheck": "pnpm --filter web typecheck",
     "test": "pnpm --filter web test",
-    "sync-notes": "pnpm --filter web sync-notes"
+    "sync-notes": "pnpm --filter web sync-notes && node scripts/sync-campaign-journeys.mjs"
   },
   "packageManager": "pnpm@9.15.0",
   "devDependencies": {

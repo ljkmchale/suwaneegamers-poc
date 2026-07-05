@@ -16,6 +16,7 @@ export type SearchResultType =
 const SITE_PAGES: { path: string; label: string }[] = [
   { path: "/", label: "Home" },
   { path: "/campaigns", label: "Campaigns" },
+  { path: "/campaign-journeys", label: "Myrdae in Motion" },
   { path: "/players", label: "Players" },
   { path: "/dungeon-masters", label: "Dungeon Masters" },
   { path: "/bestiary", label: "Bestiary" },

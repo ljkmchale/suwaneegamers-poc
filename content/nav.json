@@ -10,6 +10,11 @@
           "label": "Campaigns"
         },
         {
+          "id": "campaign-journeys",
+          "href": "/campaign-journeys",
+          "label": "Journeys"
+        },
+        {
           "id": "chronicles-y28n",
           "label": "Chronicles",
           "href": "/chronicles"

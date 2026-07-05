@@ -129,6 +129,14 @@ const jobs = [
     revalidatePaths: ["/chronicles", "/admin/chronicles"],
   },
   {
+    id: "campaign-journeys",
+    label: "Campaign journeys",
+    schedule: { kind: "daily", time: "10:50" },
+    command: [node, ["scripts/sync-campaign-journeys.mjs"]],
+    timeoutMs: 5 * 60_000,
+    revalidatePaths: ["/campaign-journeys"],
+  },
+  {
     id: "content-documents",
     label: "JSON content documents",
     schedule: { kind: "daily", time: "10:55" },
@@ -139,6 +147,7 @@ const jobs = [
       "/admin/source-managed",
       "/bestiary",
       "/campaigns",
+      "/campaign-journeys",
       "/dungeon-masters",
       "/gazetteer",
       "/organizations",

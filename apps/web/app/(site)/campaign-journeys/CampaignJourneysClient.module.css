@@ -1,0 +1,103 @@
+.mapShell {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(74, 123, 168, 0.18), transparent 45%),
+    linear-gradient(155deg, rgba(7, 16, 29, 0.98), rgba(5, 8, 16, 0.98));
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.42),
+    inset 0 0 70px rgba(4, 8, 18, 0.78);
+}
+
+.mapViewport {
+  aspect-ratio: 1400 / 788;
+  isolation: isolate;
+}
+
+.mapSvg {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: #102232;
+}
+
+.route {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-width: 2px;
+  stroke-dasharray: 7px 5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.92;
+  transition: opacity 220ms ease;
+}
+
+.routeGlow {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-width: 5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.16;
+}
+
+.stopButton {
+  cursor: pointer;
+  outline: none;
+}
+
+.stopButton:focus-visible .stopRing {
+  stroke: #ffffff;
+  stroke-width: 0.42;
+}
+
+.pulse {
+  animation: mapPulse 1.9s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.partyToken {
+  filter: drop-shadow(0 0 0.8px rgba(0, 0, 0, 0.95));
+}
+
+.selectedLabel {
+  paint-order: stroke;
+  stroke: rgba(3, 7, 14, 0.92);
+  stroke-width: 0.48px;
+  stroke-linejoin: round;
+}
+
+.scanline {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.018) 4px
+  );
+  background-size: 100% 4px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.impactCard {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 55%),
+    rgba(8, 11, 21, 0.76);
+}
+
+@keyframes mapPulse {
+  0% {
+    opacity: 0.78;
+    transform: scale(0.72);
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(2.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

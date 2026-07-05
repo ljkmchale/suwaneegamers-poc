@@ -38,6 +38,7 @@ Current data/deploy correction: runtime content is DB-first for JSON documents. 
 | `/calendar` | hardcoded page (embed + ICS event list) | — |
 | `/campaigns` | sections (header, side-label) + blocks. Active campaign cards, "Other Campaign Tools", then divider + **Previous Campaigns archive** (merged 2026-06-10) | `campaigns.json` |
 | `/campaigns/[id]` | block-only; saved layout per campaign, falls back to `buildCampaignDetailLayout()` | `campaigns/<id>.json` |
+| `/campaign-journeys` | interactive "Myrdae in Motion" map; automatically generated campaign paths, current locations, session stops, and world impacts | `content/campaign-journeys.json` |
 | `/players` | sections (header, unassigned) + player cards | `players.json` |
 | `/dungeon-masters` | section (header) + profile cards | `dungeon-masters.json` |
 | `/bestiary` | section (header) + creature cards | `bestiary.json` |
@@ -69,6 +70,7 @@ Current data/deploy correction: runtime content is DB-first for JSON documents. 
 | File | Records | Shape (top-level keys per record) |
 |---|---|---|
 | `campaigns.json` | 6 active campaigns + 1 side campaign | `id, name, dm, schedule, referenceUrl, headerImage, resources[], party[], description, sessionSummaries[]` — sessionSummaries: `{title, summary, audioLinks[{label,url}]}`. All summaries fully populated as of 2026-06-10 (imported from the Google Site); Google-backed session sync rechecked 2026-06-14. |
+| `campaign-journeys.json` | curated seed stops + automatically generated session stops | `campaigns[].stops[]` with map position, session identity, source hash, confidence, and world impact. `scripts/sync-campaign-journeys.mjs` reads SQLite `session_summaries`, resolves locations against the live Myrdae map API, and updates JSON plus `content_documents`. |
 | `players.json` | 16 | `id, name, description` |
 | `dungeon-masters.json` | 6 | `id, name, focus, description, portrait, activeCampaignIds, previousCampaigns` |
 | `bestiary.json` | 12 | `name, type, image, href` |
