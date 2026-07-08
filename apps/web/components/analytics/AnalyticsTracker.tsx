@@ -11,6 +11,13 @@ type ClientUsageEvent = {
     | "content_open"
     | "media_play"
     | "media_complete"
+    | "internal_click"
+    | "outbound_click"
+    | "search_query"
+    | "search_result_click"
+    | "search_no_results"
+    | "scroll_depth"
+    | "page_exit"
     | "heartbeat";
   path?: string;
   contentType?: string;
@@ -126,6 +133,28 @@ function mediaId(element: HTMLMediaElement): string {
   }
 }
 
+function clickLabel(element: Element): string {
+  return element.getAttribute("data-analytics-label")
+    ?? element.getAttribute("aria-label")
+    ?? element.getAttribute("title")
+    ?? element.textContent?.replace(/\s+/g, " ").trim().slice(0, 160)
+    ?? "Unlabeled link";
+}
+
+function normalizedHref(anchor: HTMLAnchorElement): string {
+  const rawHref = anchor.getAttribute("href") ?? "";
+  if (!rawHref) return "";
+  try {
+    const parsed = new URL(rawHref, window.location.origin);
+    if (parsed.origin === window.location.origin) {
+      return `${parsed.pathname}${parsed.search}`;
+    }
+    return parsed.href;
+  } catch {
+    return rawHref.slice(0, 300);
+  }
+}
+
 export function AnalyticsTracker() {
   const pathname = usePathname();
   const engagedSeconds = useRef(0);
@@ -135,6 +164,8 @@ export function AnalyticsTracker() {
     if (!analyticsEnabled()) return;
     trackedPath.current = pathname;
     engagedSeconds.current = 0;
+    let exitRecorded = false;
+    const scrollMilestones = new Set<number>();
     if (lastPageViewPath !== pathname) {
       lastPageViewPath = pathname;
       send([{ eventType: "page_view", path: pathname, contentLabel: pageLabel() }]);
@@ -162,17 +193,53 @@ export function AnalyticsTracker() {
         engagedSeconds.current = 0;
       }
     };
-    const handleVisibility = () => {
-      if (document.visibilityState === "hidden") flushEngagement();
+    const recordExit = () => {
+      if (exitRecorded) return;
+      exitRecorded = true;
+      send([{
+        eventType: "page_exit",
+        path: trackedPath.current,
+        durationSeconds: engagedSeconds.current,
+        contentLabel: pageLabel(),
+      }], true);
     };
-    window.addEventListener("pagehide", flushEngagement);
+    const handleScrollDepth = () => {
+      const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const depth = Math.min(100, Math.round((window.scrollY / scrollable) * 100));
+      for (const milestone of [25, 50, 75, 100]) {
+        if (depth >= milestone && !scrollMilestones.has(milestone)) {
+          scrollMilestones.add(milestone);
+          send([{
+            eventType: "scroll_depth",
+            path: trackedPath.current,
+            contentLabel: pageLabel(),
+            durationSeconds: milestone,
+          }]);
+        }
+      }
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === "hidden") {
+        recordExit();
+        flushEngagement();
+      }
+    };
+    const handlePageHide = () => {
+      recordExit();
+      flushEngagement();
+    };
+    window.addEventListener("pagehide", handlePageHide);
+    window.addEventListener("scroll", handleScrollDepth, { passive: true });
     document.addEventListener("visibilitychange", handleVisibility);
+    handleScrollDepth();
 
     return () => {
       window.clearInterval(interval);
       window.clearInterval(heartbeat);
-      window.removeEventListener("pagehide", flushEngagement);
+      window.removeEventListener("pagehide", handlePageHide);
+      window.removeEventListener("scroll", handleScrollDepth);
       document.removeEventListener("visibilitychange", handleVisibility);
+      recordExit();
       flushEngagement();
     };
   }, [pathname]);
@@ -220,11 +287,28 @@ export function AnalyticsTracker() {
         contentLabel: elementLabel(summary),
       }]);
     };
+    const handleClick = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest("a[href]");
+      if (!(anchor instanceof HTMLAnchorElement)) return;
+      const href = normalizedHref(anchor);
+      if (!href || href.startsWith("#")) return;
+      const isInternal = href.startsWith("/");
+      send([{
+        eventType: isInternal ? "internal_click" : "outbound_click",
+        path: pathname,
+        contentType: isInternal ? "internal link" : "outbound link",
+        contentId: href,
+        contentLabel: clickLabel(anchor),
+      }]);
+    };
 
     window.addEventListener(ANALYTICS_EVENT_NAME, handleCustomEvent);
     document.addEventListener("play", handleMediaPlay, true);
     document.addEventListener("ended", handleMediaComplete, true);
     document.addEventListener("click", handleMediaButton, true);
+    document.addEventListener("click", handleClick, true);
 
     const timers = new Map<Element, number>();
     const seen = new Set<string>();
@@ -268,6 +352,7 @@ export function AnalyticsTracker() {
       document.removeEventListener("play", handleMediaPlay, true);
       document.removeEventListener("ended", handleMediaComplete, true);
       document.removeEventListener("click", handleMediaButton, true);
+      document.removeEventListener("click", handleClick, true);
       observer.disconnect();
       timers.forEach((timer) => window.clearTimeout(timer));
     };

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dragon Single-Mesh Rig — Suwanee Gamers</title>
+<style>
+  :root{ --bg-deep:#0e0b16; --bg-card:#1e1830; --border:#332a4d; --text:#e9e4f5; --muted:#a99fc7; --arcane:#8b5cf6; --gold:#f2c14e; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,Segoe UI,sans-serif;color:var(--text);
+    background:radial-gradient(1200px 700px at 50% -8%, #241a3d 0%, var(--bg-deep) 60%);min-height:100vh;padding:30px 16px 70px}
+  h1{font-size:20px;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:var(--gold);font-weight:600}
+  .sub{text-align:center;color:var(--muted);max-width:660px;margin:8px auto 26px;font-size:13px;line-height:1.6}
+  .stage-row{display:flex;gap:44px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+  #host{filter:drop-shadow(0 0 34px rgba(139,92,246,.35))}
+  .static-img{width:460px;height:477px;background:url('/images/suwaneegamers-logo-v18-4800p.png') center/contain no-repeat;filter:drop-shadow(0 0 34px rgba(139,92,246,.35))}
+  .controls{max-width:660px;margin:32px auto 0;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .controls h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+  .row{display:flex;align-items:center;gap:12px;margin:11px 0}
+  .row label{flex:0 0 150px;font-size:13px}
+  input[type=range]{flex:1;accent-color:var(--arcane)}
+  .val{flex:0 0 46px;text-align:right;font-variant-numeric:tabular-nums;color:var(--gold);font-size:13px}
+  .toggles{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:6px}
+  .toggles label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}
+  input[type=checkbox]{accent-color:var(--arcane);width:16px;height:16px}
+  .note{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+  code{background:#0000004d;padding:1px 5px;border-radius:4px;color:var(--gold)}
+  #err{color:#ff8080;text-align:center;font-size:13px;margin-top:10px;white-space:pre-wrap}
+  #diag{max-width:660px;margin:12px auto 0;background:#0000006b;border:1px solid var(--border);border-radius:8px;
+    padding:10px 12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:#bfe0c8;white-space:pre-wrap}
+</style>
+</head>
+<body>
+  <h1>Dragon Single-Mesh Rig</h1>
+  <p class="sub">The <b>entire logo is one continuous WebGL mesh</b>. A weight map freezes the shield, banner,
+  text, body, head and claws (weight 0) and lets only the wings + free tail move. Because it's one connected
+  mesh, the wings <b>cannot tear off</b> the body and the shield can never break. Left = live rig, right = static.</p>
+
+  <div class="stage-row">
+    <div class="stage"><div id="host"></div><div class="label">Animated single-mesh rig</div></div>
+    <div class="stage"><div class="static-img"></div><div class="label">Current static logo</div></div>
+  </div>
+  <div id="err"></div>
+  <pre id="diag">starting…</pre>
+
+  <div class="controls">
+    <h2>Controls</h2>
+    <div class="toggles">
+      <label><input type="checkbox" id="t-wings" checked> Wings</label>
+      <label><input type="checkbox" id="t-tail" checked> Tail</label>
+      <label><input type="checkbox" id="t-reduce"> Respect reduced-motion</label>
+    </div>
+    <div class="row"><label>Wing beat</label><input type="range" id="s-flap" min="0" max="0.7" step="0.01" value="0.22"><span class="val" id="v-flap">.22</span></div>
+    <div class="row"><label>Membrane slack</label><input type="range" id="s-billow" min="0" max="0.6" step="0.01" value="0.16"><span class="val" id="v-billow">.16</span></div>
+    <div class="row"><label>Tail undulation</label><input type="range" id="s-tail" min="0" max="1.4" step="0.02" value="0.7"><span class="val" id="v-tail">.70</span></div>
+    <div class="row"><label>Speed</label><input type="range" id="s-speed" min="0.3" max="2" step="0.05" value="1"><span class="val" id="v-speed">1.0</span></div>
+    <p class="note">Prototype — one mesh over <code>/images/dragon-layers-hi/logo-full.png</code> driven by
+    <code>weightmap.png</code>. Nothing on the live site is changed. Honors <code>prefers-reduced-motion</code>.
+    Shield/body/text are frozen; only wings + tail flex.</p>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.4.2/pixi.min.js"></script>
+<script>
+  window.addEventListener('error',e=>{const d=document.getElementById('err');if(d)d.textContent='Window error: '+(e.message||e.type);});
+</script>
+<script>
+(async function(){
+  const errEl=document.getElementById('err'), diag=document.getElementById('diag');
+  const lines=[]; const log=s=>{lines.push(s);diag.textContent=lines.join('\n');};
+  try{
+    log('PIXI: '+(typeof PIXI!=='undefined'?('v'+(PIXI.VERSION||'?')):'NOT LOADED (CDN blocked?)'));
+    if(typeof PIXI==='undefined') throw new Error('PixiJS did not load (external CDN blocked). I can bundle it locally.');
+    const MeshPlane=PIXI.SimplePlane||PIXI.MeshPlane;
+    if(!MeshPlane) throw new Error('No SimplePlane in this Pixi build.');
+
+    const W=460, H=Math.round(W/0.9652083333);
+    const app=new PIXI.Application({width:W,height:H,backgroundAlpha:0,antialias:true,
+      resolution:Math.min(window.devicePixelRatio||1,2),autoDensity:true});
+    document.getElementById('host').appendChild(app.view);
+
+    // load logo texture + weightmap — MUST be the same source the weightmap was built from (750px logo)
+    const tex=await PIXI.Assets.load('/images/suwaneegamers-logo-v18.png');
+    log('texture: '+tex.width+'x'+tex.height+' (weightmap-aligned)');
+
+    // read weightmap pixels
+    const wmImg=new Image(); wmImg.src='/images/dragon-layers-hi/weightmap.png';
+    await wmImg.decode();
+    const wc=document.createElement('canvas'); wc.width=wmImg.width; wc.height=wmImg.height;
+    const wctx=wc.getContext('2d',{willReadFrequently:true}); wctx.drawImage(wmImg,0,0);
+    const wmData=wctx.getImageData(0,0,wc.width,wc.height).data;
+    log('weightmap: '+wc.width+'x'+wc.height);
+
+    const GX=60, GY=62;
+    const plane=new MeshPlane(tex,GX,GY);
+    plane.width=W; plane.height=H;
+    app.stage.addChild(plane);
+    const buf=plane.geometry.getBuffer('aVertexPosition');
+    const orig=Float32Array.from(buf.data);
+    const N=orig.length/2;
+
+    // per-vertex weights + pivots (normalized -> texture px, matching orig coords which are 0..tex.width)
+    const wL=new Float32Array(N), wR=new Float32Array(N), wT=new Float32Array(N);
+    function sampleWM(u,v){ // u,v in 0..1 -> [r,g,b] 0..1
+      const x=Math.min(wc.width-1,Math.max(0,Math.round(u*(wc.width-1))));
+      const y=Math.min(wc.height-1,Math.max(0,Math.round(v*(wc.height-1))));
+      const i=(y*wc.width+x)*4; return [wmData[i]/255,wmData[i+1]/255,wmData[i+2]/255];
+    }
+    let anyW=0;
+    for(let k=0;k<N;k++){
+      const u=orig[k*2]/tex.width, v=orig[k*2+1]/tex.height;
+      const [r,g,b]=sampleWM(u,v); wL[k]=r; wR[k]=g; wT[k]=b; anyW+=r+g+b;
+    }
+    log('weighted verts sum: '+anyW.toFixed(1)+' (should be >0)');
+
+    // pivots in texture px
+    const LP=[0.648*tex.width, 0.299*tex.height];
+    const RP=[0.667*tex.width, 0.299*tex.height];
+
+    const prm={flap:0.22,billow:0.16,tail:0.7,speed:1,wings:true,tailOn:true,respectReduce:false};
+    const osReduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    log('OS reduced-motion: '+(osReduce?'ON (still animates unless box ticked)':'off'));
+
+    function warp(t){
+      const d=buf.data;
+      const F=1.3;                                   // slow heavy beat
+      const beat=Math.sin(t*F);
+      const angL=(prm.wings? -prm.flap*beat:0);       // left wing beats up on +
+      const angR=(prm.wings?  prm.flap*beat:0);       // right mirrors
+      const slack=prm.billow*Math.sin(t*F-0.9);       // membrane lag
+      const cL=Math.cos(angL),sL=Math.sin(angL), cR=Math.cos(angR),sR=Math.sin(angR);
+      const sway=(prm.tailOn? prm.tail*36*Math.sin(t*2.1):0);
+      const swayY=(prm.tailOn? prm.tail*8*Math.cos(t*2.1):0);
+      for(let k=0;k<N;k++){
+        let x=orig[k*2], y=orig[k*2+1];
+        const a=wL[k], b=wR[k], c=wT[k];
+        if(a>0.004){                                  // left wing: rigid beat + a little membrane lag
+          const ang=angL*a + slack*a;
+          const dx=x-LP[0], dy=y-LP[1], ca=Math.cos(ang), sa=Math.sin(ang);
+          x=LP[0]+dx*ca-dy*sa; y=LP[1]+dx*sa+dy*ca;
+        }
+        if(b>0.004){                                  // right wing (mirrored)
+          const ang=angR*b - slack*b;
+          const dx=x-RP[0], dy=y-RP[1], ca=Math.cos(ang), sa=Math.sin(ang);
+          x=RP[0]+dx*ca-dy*sa; y=RP[1]+dx*sa+dy*ca;
+        }
+        if(c>0.004){ x+=sway*c; y+=swayY*c*(1-0.5*c); } // tail undulation
+        d[k*2]=x; d[k*2+1]=y;
+      }
+      buf.update();
+    }
+
+    let e=0, frames=0, last=performance.now();
+    app.ticker.add(()=>{
+      frames++; const now=performance.now();
+      if(now-last>1000){ lines[lines.length-1]='frames: '+frames+'  ('+Math.round(frames*1000/(now-(last-1000)))+' fps)'; diag.textContent=lines.join('\n'); last=now; frames=0; }
+      if(prm.respectReduce && osReduce){ buf.data.set(orig); buf.update(); return; }
+      e+=app.ticker.deltaMS/1000*prm.speed;
+      warp(e);
+    });
+    log('ticker started — counting frames…');
+
+    const bind=(id,vid,f,fmt)=>{const s=document.getElementById(id),v=document.getElementById(vid);
+      s.oninput=()=>{f(+s.value); v.textContent=fmt(+s.value);};};
+    bind('s-flap','v-flap',x=>prm.flap=x,x=>x.toFixed(2).replace(/^0/,''));
+    bind('s-billow','v-billow',x=>prm.billow=x,x=>x.toFixed(2).replace(/^0/,''));
+    bind('s-tail','v-tail',x=>prm.tail=x,x=>x.toFixed(2).replace(/^0/,''));
+    bind('s-speed','v-speed',x=>prm.speed=x,x=>x.toFixed(1));
+    document.getElementById('t-wings').onchange=e=>prm.wings=e.target.checked;
+    document.getElementById('t-tail').onchange=e=>prm.tailOn=e.target.checked;
+    document.getElementById('t-reduce').onchange=e=>prm.respectReduce=e.target.checked;
+  }catch(ex){ errEl.textContent='Error: '+(ex&&ex.message||ex); if(diag) diag.textContent+='\nFAILED: '+(ex&&ex.stack||ex); console.error(ex); }
+})();
+</script>
+</body>
+</html>

@@ -53,3 +53,21 @@ Chronicles is embedded in this Next app:
 The Source-Managed `/chronicles` row should mirror `apps/web/brain-tools/google-doc-sources.json`. The scheduler job id is `chronicles-sources`, which runs `apps/web/brain-tools/src/refresh-sources.mjs` to pull configured Google Docs, process stale raw sources, and rebuild the index when needed.
 
 Keep public/player-safe Chronicles separate from admin/DM surfaces.
+
+## Automatic Campaign Journeys
+
+- Public UI: `/campaign-journeys` ("Myrdae in Motion")
+- Generated content: `content/campaign-journeys.json`
+- Generator: `scripts/sync-campaign-journeys.mjs`
+- Scheduler job id: `campaign-journeys`, after session notes and Chronicles
+- Map source: `https://mapeditor.suwaneegamers.net/api/world-data`
+- Session source: SQLite `session_summaries`
+
+The generator preserves curated seed stops, adds or replaces automatic stops by stable `campaign:session-N` source keys, and writes both JSON and the `content_documents` row. Off-map locations are anchored at the last mapped position and labeled `precision: "off-map"`; do not silently convert those anchors into canonical coordinates.
+
+Useful commands:
+
+```bash
+pnpm sync-campaign-journeys
+node scripts/sync-campaign-journeys.mjs --dry-run
+```

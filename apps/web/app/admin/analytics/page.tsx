@@ -1,11 +1,15 @@
 import Link from "next/link";
 import {
   Activity,
+  ArrowRight,
   Clock3,
   Ear,
   Eye,
+  LogOut,
+  MousePointerClick,
   Radio,
   Route,
+  Search,
   Users,
 } from "lucide-react";
 import { getAnalyticsDashboardData } from "@/lib/analytics";
@@ -131,6 +135,9 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
     { label: "Visits", value: number(data.summary.visits), icon: Route, color: "#2dd4bf" },
     { label: "Engaged minutes", value: number(data.summary.engagedMinutes), icon: Clock3, color: "#f59e0b" },
     { label: "Media plays", value: number(data.summary.mediaPlays), icon: Ear, color: "#f472b6" },
+    { label: "Clicks", value: number(data.summary.clicks), icon: MousePointerClick, color: "#38bdf8" },
+    { label: "Searches", value: number(data.summary.searches), icon: Search, color: "#c084fc" },
+    { label: "Exits", value: number(data.summary.exits), icon: LogOut, color: "#fb7185" },
     { label: "Active now", value: number(data.summary.activeNow), icon: Radio, color: "#34d399" },
   ];
   const healthyJobs = data.syncJobs.filter((job) => job.status === "succeeded").length;
@@ -173,7 +180,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         </div>
       </div>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
+      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {cards.map((card) => {
           const Icon = card.icon;
           return (
@@ -285,6 +292,91 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           detail: `${media.completions} completed`,
         }))} />
       </section>
+
+      <div className="mb-6 grid gap-6 xl:grid-cols-2">
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <div className="mb-5 flex items-center gap-3">
+            <MousePointerClick size={20} className="text-[#38bdf8]" aria-hidden="true" />
+            <div>
+              <h2 className="font-cinzel text-sm uppercase tracking-widest">Most clicked</h2>
+              <p className="mt-1 text-xs text-[#6a5a78]">Internal links, outbound links, and search result choices</p>
+            </div>
+          </div>
+          <HorizontalBars rows={data.topClicks.map((click) => ({
+            label: click.label,
+            value: click.clicks,
+            detail: click.type,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <div className="mb-5 flex items-center gap-3">
+            <Search size={20} className="text-[#c084fc]" aria-hidden="true" />
+            <div>
+              <h2 className="font-cinzel text-sm uppercase tracking-widest">Site searches</h2>
+              <p className="mt-1 text-xs text-[#6a5a78]">What visitors tried to find and whether they clicked through</p>
+            </div>
+          </div>
+          <HorizontalBars rows={data.searchTerms.map((term) => ({
+            label: term.query,
+            value: term.searches,
+            detail: `${term.resultClicks} clicked`,
+          }))} />
+          {data.zeroResultSearches.length > 0 && (
+            <div className="mt-6 border-t border-[#201927] pt-4">
+              <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">No-result searches</p>
+              <div className="space-y-2">
+                {data.zeroResultSearches.map((term) => (
+                  <div key={term.query} className="flex justify-between gap-4 text-xs">
+                    <span className="truncate text-[#a89880]" title={term.query}>{term.query}</span>
+                    <span className="text-[#e8dfc8]">{term.searches}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      </div>
+
+      <div className="mb-6 grid gap-6 xl:grid-cols-3">
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Page depth</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">How far visitors reached on long pages</p>
+          <HorizontalBars rows={data.pageDepth.map((page) => ({
+            label: page.pageLabel,
+            value: page.maxDepth,
+            detail: `${page.visitors} visitors`,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Exit pages</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Where visits most often ended</p>
+          <HorizontalBars rows={data.exitPages.map((page) => ({
+            label: page.path,
+            value: page.exits,
+            detail: `${duration(page.engagedSeconds)} engaged`,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Top paths</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Common page-to-page movement within a visit</p>
+          <div className="space-y-3">
+            {data.journeyPaths.map((path) => (
+              <div key={`${path.fromPath}-${path.toPath}`} className="rounded-lg border border-[#201927] bg-[#08050f] p-3">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="min-w-0 flex-1 truncate font-mono text-[#a89880]" title={path.fromPath}>{path.fromPath}</span>
+                  <ArrowRight size={14} className="shrink-0 text-[#6a5a78]" aria-hidden="true" />
+                  <span className="min-w-0 flex-1 truncate font-mono text-[#e8dfc8]" title={path.toPath}>{path.toPath}</span>
+                </div>
+                <p className="mt-2 text-right text-[10px] uppercase tracking-widest text-[#9080a0]">{path.transitions} moves</p>
+              </div>
+            ))}
+            {data.journeyPaths.length === 0 && <p className="py-10 text-center text-sm text-[#6a5a78]">Paths will appear after visitors move between pages.</p>}
+          </div>
+        </section>
+      </div>
 
       <div className="mb-6 grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
         <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
@@ -524,7 +616,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       </section>
 
       <p className="mt-5 text-xs leading-relaxed text-[#5a5060]">
-        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. A visit resets after 30 minutes without activity. Signed-in activity is attributed to the member&apos;s name and email; no passwords, IP addresses, or page contents are stored.
+        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. A visit resets after 30 minutes without activity. Signed-in activity is attributed to the member&apos;s name and email; search terms are stored for site-improvement reporting, but no passwords, IP addresses, or page contents are stored.
       </p>
     </div>
   );

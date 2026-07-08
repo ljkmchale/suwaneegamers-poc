@@ -35,6 +35,7 @@ Thumbs.db
 
 # Logs
 logs/
+tmp/
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -48,6 +49,7 @@ yarn-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+__pycache__/
 
 # PM2
 .pm2/

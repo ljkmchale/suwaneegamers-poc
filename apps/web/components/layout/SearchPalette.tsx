@@ -19,6 +19,7 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import type { SearchResult, SearchResultType } from "@/lib/search";
+import { recordUsageEvent } from "@/components/analytics/AnalyticsTracker";
 
 const TYPE_ICONS: Record<SearchResultType, LucideIcon> = {
   territory: MapPin,
@@ -86,6 +87,13 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
         const data: SearchResult[] = await res.json();
         setResults(data);
         setActiveIndex(-1);
+        recordUsageEvent({
+          eventType: data.length > 0 ? "search_query" : "search_no_results",
+          contentType: "site search",
+          contentId: query,
+          contentLabel: query,
+          durationSeconds: data.length,
+        });
       } catch {
         /* ignore fetch errors and aborted stale requests */
       }
@@ -105,6 +113,12 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
 
   const navigate = useCallback(
     (result: SearchResult) => {
+      recordUsageEvent({
+        eventType: "search_result_click",
+        contentType: result.type,
+        contentId: result.href,
+        contentLabel: query,
+      });
       onClose();
       if (result.external) {
         window.open(result.href, "_blank", "noopener,noreferrer");
@@ -112,7 +126,7 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
         router.push(result.href);
       }
     },
-    [onClose, router],
+    [onClose, query, router],
   );
 
   const handleKeyDown = useCallback(

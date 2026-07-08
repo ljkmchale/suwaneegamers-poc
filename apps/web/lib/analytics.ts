@@ -10,6 +10,13 @@ export const ANALYTICS_EVENT_TYPES = [
   "content_open",
   "media_play",
   "media_complete",
+  "internal_click",
+  "outbound_click",
+  "search_query",
+  "search_result_click",
+  "search_no_results",
+  "scroll_depth",
+  "page_exit",
   "heartbeat",
 ] as const;
 
@@ -32,6 +39,9 @@ export interface AnalyticsDashboardData {
     visits: number;
     engagedMinutes: number;
     mediaPlays: number;
+    clicks: number;
+    searches: number;
+    exits: number;
     activeNow: number;
   };
   daily: Array<{
@@ -57,6 +67,38 @@ export interface AnalyticsDashboardData {
     mediaId: string;
     plays: number;
     completions: number;
+  }>;
+  topClicks: Array<{
+    label: string;
+    href: string;
+    type: string;
+    clicks: number;
+  }>;
+  searchTerms: Array<{
+    query: string;
+    searches: number;
+    resultClicks: number;
+  }>;
+  zeroResultSearches: Array<{
+    query: string;
+    searches: number;
+  }>;
+  pageDepth: Array<{
+    path: string;
+    pageLabel: string;
+    visitors: number;
+    maxDepth: number;
+    depthEvents: number;
+  }>;
+  exitPages: Array<{
+    path: string;
+    exits: number;
+    engagedSeconds: number;
+  }>;
+  journeyPaths: Array<{
+    fromPath: string;
+    toPath: string;
+    transitions: number;
   }>;
   devices: Array<{ label: string; value: number }>;
   referrers: Array<{ label: string; value: number }>;
@@ -267,7 +309,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COUNT(DISTINCT e.session_id) AS visits,
       COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
-      SUM(CASE WHEN e.event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
+      SUM(CASE WHEN e.event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays,
+      SUM(CASE WHEN e.event_type IN ('internal_click', 'outbound_click', 'search_result_click') THEN 1 ELSE 0 END) AS clicks,
+      SUM(CASE WHEN e.event_type IN ('search_query', 'search_no_results') THEN 1 ELSE 0 END) AS searches,
+      SUM(CASE WHEN e.event_type = 'page_exit' THEN 1 ELSE 0 END) AS exits
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
     WHERE e.created_at >= ?
@@ -277,6 +322,9 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     visitors: number | null;
     engaged_seconds: number | null;
     media_plays: number | null;
+    clicks: number | null;
+    searches: number | null;
+    exits: number | null;
   };
 
   const activeThreshold = new Date(Date.now() - 2 * 60_000).toISOString();
@@ -334,7 +382,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
     WHERE e.created_at >= ?
     GROUP BY e.path
-    HAVING page_views > 0
+    HAVING page_views > 0 OR engaged_seconds > 0
     ORDER BY page_views DESC, engaged_seconds DESC
     LIMIT 12
   `).all(sinceIso) as Array<{
@@ -386,6 +434,141 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     completions: row.completions,
   }));
 
+  const topClicks = (db.prepare(`
+    SELECT
+      COALESCE(NULLIF(content_label, ''), content_id, path) AS label,
+      COALESCE(content_id, path) AS href,
+      CASE
+        WHEN event_type = 'outbound_click' THEN 'outbound'
+        WHEN event_type = 'search_result_click' THEN 'search result'
+        ELSE 'internal'
+      END AS type,
+      COUNT(*) AS clicks
+    FROM analytics_events
+    WHERE created_at >= ?
+      AND event_type IN ('internal_click', 'outbound_click', 'search_result_click')
+    GROUP BY label, href, type
+    ORDER BY clicks DESC, label
+    LIMIT 12
+  `).all(sinceIso) as Array<{
+    label: string;
+    href: string;
+    type: string;
+    clicks: number;
+  }>);
+
+  const searchTerms = (db.prepare(`
+    SELECT
+      COALESCE(NULLIF(content_label, ''), content_id, 'Unknown search') AS query,
+      SUM(CASE WHEN event_type IN ('search_query', 'search_no_results') THEN 1 ELSE 0 END) AS searches,
+      SUM(CASE WHEN event_type = 'search_result_click' THEN 1 ELSE 0 END) AS result_clicks
+    FROM analytics_events
+    WHERE created_at >= ?
+      AND event_type IN ('search_query', 'search_no_results', 'search_result_click')
+    GROUP BY query
+    HAVING searches > 0 OR result_clicks > 0
+    ORDER BY searches DESC, result_clicks DESC, query
+    LIMIT 12
+  `).all(sinceIso) as Array<{
+    query: string;
+    searches: number;
+    result_clicks: number;
+  }>).map((row) => ({
+    query: row.query,
+    searches: row.searches,
+    resultClicks: row.result_clicks,
+  }));
+
+  const zeroResultSearches = (db.prepare(`
+    SELECT
+      COALESCE(NULLIF(content_label, ''), content_id, 'Unknown search') AS query,
+      COUNT(*) AS searches
+    FROM analytics_events
+    WHERE created_at >= ?
+      AND event_type = 'search_no_results'
+    GROUP BY query
+    ORDER BY searches DESC, query
+    LIMIT 12
+  `).all(sinceIso) as Array<{ query: string; searches: number }>);
+
+  const pageDepth = (db.prepare(`
+    SELECT
+      e.path,
+      COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
+      MAX(CASE WHEN e.event_type = 'scroll_depth' THEN e.duration_seconds ELSE 0 END) AS max_depth,
+      SUM(CASE WHEN e.event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS depth_events
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+      AND e.event_type IN ('page_view', 'scroll_depth')
+    GROUP BY e.path
+    HAVING depth_events > 0
+    ORDER BY max_depth DESC, visitors DESC, depth_events DESC
+    LIMIT 12
+  `).all(sinceIso) as Array<{
+    path: string;
+    page_label: string;
+    visitors: number;
+    max_depth: number;
+    depth_events: number;
+  }>).map((row) => ({
+    path: row.path,
+    pageLabel: row.page_label,
+    visitors: row.visitors,
+    maxDepth: row.max_depth,
+    depthEvents: row.depth_events,
+  }));
+
+  const exitPages = (db.prepare(`
+    SELECT
+      e.path,
+      COUNT(*) AS exits,
+      SUM(e.duration_seconds) AS engaged_seconds
+    FROM analytics_events AS e
+    WHERE e.created_at >= ?
+      AND e.event_type = 'page_exit'
+    GROUP BY e.path
+    ORDER BY exits DESC, engaged_seconds DESC
+    LIMIT 12
+  `).all(sinceIso) as Array<{
+    path: string;
+    exits: number;
+    engaged_seconds: number;
+  }>).map((row) => ({
+    path: row.path,
+    exits: row.exits,
+    engagedSeconds: row.engaged_seconds,
+  }));
+
+  const journeyPaths = (db.prepare(`
+    WITH page_views AS (
+      SELECT
+        e.session_id,
+        e.path,
+        e.created_at,
+        LEAD(e.path) OVER (PARTITION BY e.session_id ORDER BY e.created_at, e.id) AS next_path
+      FROM analytics_events AS e
+      WHERE e.created_at >= ?
+        AND e.event_type = 'page_view'
+    )
+    SELECT path AS from_path, next_path AS to_path, COUNT(*) AS transitions
+    FROM page_views
+    WHERE next_path IS NOT NULL
+      AND next_path != path
+    GROUP BY path, next_path
+    ORDER BY transitions DESC, from_path, to_path
+    LIMIT 12
+  `).all(sinceIso) as Array<{
+    from_path: string;
+    to_path: string;
+    transitions: number;
+  }>).map((row) => ({
+    fromPath: row.from_path,
+    toPath: row.to_path,
+    transitions: row.transitions,
+  }));
+
   const devices = (db.prepare(`
     SELECT device_type AS label, COUNT(*) AS value
     FROM analytics_sessions
@@ -395,10 +578,17 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   `).all(sinceIso) as Array<{ label: string; value: number }>);
 
   const referrers = (db.prepare(`
-    SELECT COALESCE(referrer_host, 'Direct') AS label, COUNT(*) AS value
+    SELECT
+      CASE
+        WHEN referrer_host IS NULL THEN 'Direct'
+        WHEN referrer_host IN ('suwaneegamers.net', 'www.suwaneegamers.net', 'localhost', '127.0.0.1') THEN 'Same site'
+        WHEN referrer_host = 'accounts.google.com' THEN 'Google sign-in'
+        ELSE referrer_host
+      END AS label,
+      COUNT(*) AS value
     FROM analytics_sessions
     WHERE first_seen_at >= ?
-    GROUP BY COALESCE(referrer_host, 'Direct')
+    GROUP BY label
     ORDER BY value DESC
     LIMIT 8
   `).all(sinceIso) as Array<{ label: string; value: number }>);
@@ -419,9 +609,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
         'Anonymous ' || UPPER(SUBSTR(COALESCE(visitor_id, session_id), 1, 6))
       ) AS visitor_label
     FROM analytics_sessions
+    WHERE last_seen_at >= ?
     ORDER BY last_seen_at DESC
     LIMIT 12
-  `).all() as Array<{
+  `).all(sinceIso) as Array<{
     last_seen_at: string;
     entry_path: string;
     last_path: string;
@@ -503,7 +694,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     WHERE e.created_at >= ?
       AND e.event_type IN ('page_view', 'page_engagement')
     GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id), e.path
-    HAVING page_views > 0
+    HAVING page_views > 0 OR engaged_seconds > 0
     ORDER BY last_viewed_at DESC
   `).all(sinceIso) as Array<{
     visitor_key: string;
@@ -557,7 +748,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     WHERE e.created_at >= ?
       AND e.event_type IN ('page_view', 'page_engagement')
     GROUP BY e.path
-    HAVING page_views > 0
+    HAVING page_views > 0 OR SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) > 0
     ORDER BY people DESC, page_views DESC
     LIMIT 50
   `).all(sinceIso) as Array<{
@@ -577,10 +768,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   }));
 
   const activeVisitors = (db.prepare(`
-    SELECT session_id, last_path, device_type, last_seen_at, page_views, visitor_name, visitor_email
+    SELECT session_id, visitor_id, last_path, device_type, last_seen_at, page_views, visitor_name, visitor_email
     FROM (
       SELECT
         session_id,
+        visitor_id,
         last_path,
         device_type,
         last_seen_at,
@@ -599,6 +791,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     LIMIT 20
   `).all(activeThreshold) as Array<{
     session_id: string;
+    visitor_id: string | null;
     last_path: string;
     device_type: string;
     last_seen_at: string;
@@ -608,7 +801,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   }>).map((row) => ({
     visitor: row.visitor_name
       ?? row.visitor_email
-      ?? `Anonymous ${row.session_id.slice(0, 6).toUpperCase()}`,
+      ?? `Anonymous ${(row.visitor_id ?? row.session_id).slice(0, 6).toUpperCase()}`,
     currentPath: row.last_path,
     deviceType: row.device_type,
     lastSeenAt: row.last_seen_at,
@@ -667,12 +860,21 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       visits: summary.visits ?? 0,
       engagedMinutes: Math.round((summary.engaged_seconds ?? 0) / 60),
       mediaPlays: summary.media_plays ?? 0,
+      clicks: summary.clicks ?? 0,
+      searches: summary.searches ?? 0,
+      exits: summary.exits ?? 0,
       activeNow,
     },
     daily,
     topPages,
     topContent,
     topMedia,
+    topClicks,
+    searchTerms,
+    zeroResultSearches,
+    pageDepth,
+    exitPages,
+    journeyPaths,
     devices,
     referrers,
     recentVisitors,
