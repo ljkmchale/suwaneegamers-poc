@@ -1,10 +1,12 @@
 import Link from "next/link";
 import {
   Activity,
+  AlertTriangle,
   ArrowRight,
   Clock3,
   Ear,
   Eye,
+  Gauge,
   LogOut,
   MousePointerClick,
   Radio,
@@ -26,6 +28,11 @@ function duration(seconds: number) {
   const minutes = Math.round(seconds / 60);
   if (minutes < 60) return `${minutes}m`;
   return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+}
+
+function milliseconds(value: number) {
+  if (value < 1000) return `${value}ms`;
+  return `${(value / 1000).toFixed(1)}s`;
 }
 
 function dateTime(value: string | null) {
@@ -135,9 +142,11 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
     { label: "Visits", value: number(data.summary.visits), icon: Route, color: "#2dd4bf" },
     { label: "Engaged minutes", value: number(data.summary.engagedMinutes), icon: Clock3, color: "#f59e0b" },
     { label: "Media plays", value: number(data.summary.mediaPlays), icon: Ear, color: "#f472b6" },
-    { label: "Clicks", value: number(data.summary.clicks), icon: MousePointerClick, color: "#38bdf8" },
+    { label: "Action clicks", value: number(data.summary.actionClicks), icon: MousePointerClick, color: "#38bdf8" },
     { label: "Searches", value: number(data.summary.searches), icon: Search, color: "#c084fc" },
     { label: "Exits", value: number(data.summary.exits), icon: LogOut, color: "#fb7185" },
+    { label: "Slow loads", value: number(data.summary.slowLoads), icon: Gauge, color: "#f97316" },
+    { label: "Client errors", value: number(data.summary.clientErrors), icon: AlertTriangle, color: "#ef4444" },
     { label: "Active now", value: number(data.summary.activeNow), icon: Radio, color: "#34d399" },
   ];
   const healthyJobs = data.syncJobs.filter((job) => job.status === "succeeded").length;
@@ -289,7 +298,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <HorizontalBars rows={data.topMedia.map((media) => ({
           label: media.label,
           value: media.plays,
-          detail: `${media.completions} completed`,
+          detail: `${media.progress50} half / ${media.progress75} 75% / ${media.completions} done`,
         }))} />
       </section>
 
@@ -298,8 +307,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           <div className="mb-5 flex items-center gap-3">
             <MousePointerClick size={20} className="text-[#38bdf8]" aria-hidden="true" />
             <div>
-              <h2 className="font-cinzel text-sm uppercase tracking-widest">Most clicked</h2>
-              <p className="mt-1 text-xs text-[#6a5a78]">Internal links, outbound links, and search result choices</p>
+              <h2 className="font-cinzel text-sm uppercase tracking-widest">Most clicked actions</h2>
+              <p className="mt-1 text-xs text-[#6a5a78]">Content, campaign, card, media, outbound, and search result choices</p>
             </div>
           </div>
           <HorizontalBars rows={data.topClicks.map((click) => ({
@@ -307,6 +316,19 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
             value: click.clicks,
             detail: click.type,
           }))} />
+          {data.clickTypes.length > 0 && (
+            <div className="mt-6 border-t border-[#201927] pt-4">
+              <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">Click categories</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {data.clickTypes.map((type) => (
+                  <div key={type.type} className="flex justify-between gap-4 rounded-md border border-[#201927] bg-[#08050f] px-3 py-2 text-xs">
+                    <span className="truncate capitalize text-[#a89880]">{type.type}</span>
+                    <span className="text-[#e8dfc8]">{type.clicks}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
@@ -322,19 +344,99 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
             value: term.searches,
             detail: `${term.resultClicks} clicked`,
           }))} />
-          {data.zeroResultSearches.length > 0 && (
-            <div className="mt-6 border-t border-[#201927] pt-4">
-              <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">No-result searches</p>
+          <div className="mt-6 grid gap-5 border-t border-[#201927] pt-4 lg:grid-cols-2">
+            <div>
+              <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">Search gaps</p>
               <div className="space-y-2">
-                {data.zeroResultSearches.map((term) => (
+                {data.searchGaps.map((term) => (
                   <div key={term.query} className="flex justify-between gap-4 text-xs">
                     <span className="truncate text-[#a89880]" title={term.query}>{term.query}</span>
-                    <span className="text-[#e8dfc8]">{term.searches}</span>
+                    <span className="text-[#e8dfc8]">{term.noResults ? `${term.noResults} no result` : "no click"}</span>
                   </div>
                 ))}
+                {data.searchGaps.length === 0 && <p className="text-xs text-[#6a5a78]">No search gaps recorded yet.</p>}
               </div>
             </div>
-          )}
+            <div>
+              <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">Chosen results</p>
+              <div className="space-y-2">
+                {data.searchResultChoices.map((choice) => (
+                  <div key={`${choice.query}-${choice.href}`} className="text-xs">
+                    <div className="flex justify-between gap-4">
+                      <span className="truncate text-[#a89880]" title={choice.query}>{choice.query}</span>
+                      <span className="text-[#e8dfc8]">{choice.clicks}</span>
+                    </div>
+                    <p className="truncate font-mono text-[10px] text-[#6a5a78]" title={choice.href}>{choice.href}</p>
+                  </div>
+                ))}
+                {data.searchResultChoices.length === 0 && <p className="text-xs text-[#6a5a78]">Search result choices will appear after visitors click results.</p>}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="mb-6 grid gap-6 xl:grid-cols-2">
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Campaign engagement</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Campaign page views, readers, summaries, and recordings</p>
+          <HorizontalBars rows={data.campaignEngagement.map((campaign) => ({
+            label: campaign.campaign,
+            value: campaign.pageViews,
+            detail: `${campaign.visitors} visitors / ${campaign.sessionOpens} summaries / ${campaign.mediaPlays} plays`,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Session interest</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Which summaries and recordings get deliberate attention</p>
+          <HorizontalBars rows={data.sessionEngagement.map((session) => ({
+            label: session.label,
+            value: session.opens + session.mediaPlays,
+            detail: `${session.opens} opens / ${session.mediaPlays} plays`,
+          }))} />
+        </section>
+      </div>
+
+      <div className="mb-6 grid gap-6 xl:grid-cols-3">
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Audience mix</h2>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Separates your own browsing from member and anonymous traffic</p>
+          <HorizontalBars rows={data.visitorSegments.map((segment) => ({
+            label: segment.segment,
+            value: segment.pageViews,
+            detail: `${segment.visitors} visitors / ${duration(segment.engagedSeconds)}`,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <div className="mb-5 flex items-center gap-3">
+            <Gauge size={20} className="text-[#f97316]" aria-hidden="true" />
+            <div>
+              <h2 className="font-cinzel text-sm uppercase tracking-widest">Slow page loads</h2>
+              <p className="mt-1 text-xs text-[#6a5a78]">Client-side load timings over three seconds</p>
+            </div>
+          </div>
+          <HorizontalBars rows={data.performanceIssues.map((issue) => ({
+            label: issue.path,
+            value: issue.worstMs,
+            detail: `${issue.events} events / avg ${milliseconds(issue.averageMs)}`,
+          }))} />
+        </section>
+
+        <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+          <div className="mb-5 flex items-center gap-3">
+            <AlertTriangle size={20} className="text-[#ef4444]" aria-hidden="true" />
+            <div>
+              <h2 className="font-cinzel text-sm uppercase tracking-widest">Client errors</h2>
+              <p className="mt-1 text-xs text-[#6a5a78]">Browser-side errors grouped by page</p>
+            </div>
+          </div>
+          <HorizontalBars rows={data.clientErrors.map((error) => ({
+            label: error.label,
+            value: error.count,
+            detail: error.path,
+          }))} />
         </section>
       </div>
 
@@ -417,7 +519,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Recent visitors</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in visitors are shown by name; no IP addresses or form contents are stored</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in visitors are shown by name; IP addresses are not stored</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
@@ -616,7 +718,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       </section>
 
       <p className="mt-5 text-xs leading-relaxed text-[#5a5060]">
-        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. A visit resets after 30 minutes without activity. Signed-in activity is attributed to the member&apos;s name and email; search terms are stored for site-improvement reporting, but no passwords, IP addresses, or page contents are stored.
+        Analytics collection began when this screen was installed; earlier site traffic cannot be reconstructed. A visit resets after 30 minutes without activity. Signed-in activity is attributed to the member&apos;s name and email; search terms, page-load timing, click targets, and client-error labels are stored for site-improvement reporting, but no passwords, IP addresses, or page contents are stored.
       </p>
     </div>
   );

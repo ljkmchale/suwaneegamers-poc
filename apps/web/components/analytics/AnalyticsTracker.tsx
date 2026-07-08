@@ -10,6 +10,7 @@ type ClientUsageEvent = {
     | "content_view"
     | "content_open"
     | "media_play"
+    | "media_progress"
     | "media_complete"
     | "internal_click"
     | "outbound_click"
@@ -18,6 +19,8 @@ type ClientUsageEvent = {
     | "search_no_results"
     | "scroll_depth"
     | "page_exit"
+    | "page_load"
+    | "client_error"
     | "heartbeat";
   path?: string;
   contentType?: string;
@@ -155,6 +158,18 @@ function normalizedHref(anchor: HTMLAnchorElement): string {
   }
 }
 
+function clickType(anchor: HTMLAnchorElement, href: string): string {
+  if (anchor.closest("nav, header")) return "nav";
+  if (anchor.closest("footer")) return "footer";
+  if (anchor.closest("[data-media-control='true']")) return "media";
+  const block = anchor.closest("[data-block-type]");
+  const blockType = block?.getAttribute("data-block-type");
+  if (blockType?.includes("campaign")) return "campaign";
+  if (blockType?.includes("card") || anchor.closest("article")) return "card";
+  if (!href.startsWith("/")) return "outbound";
+  return "content";
+}
+
 export function AnalyticsTracker() {
   const pathname = usePathname();
   const engagedSeconds = useRef(0);
@@ -170,6 +185,18 @@ export function AnalyticsTracker() {
       lastPageViewPath = pathname;
       send([{ eventType: "page_view", path: pathname, contentLabel: pageLabel() }]);
     }
+    const loadTimer = window.setTimeout(() => {
+      const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+      const durationMs = nav ? Math.round(nav.loadEventEnd || nav.duration) : 0;
+      if (durationMs > 0) {
+        send([{
+          eventType: "page_load",
+          path: trackedPath.current,
+          contentLabel: pageLabel(),
+          durationSeconds: durationMs,
+        }]);
+      }
+    }, 1500);
 
     const interval = window.setInterval(() => {
       if (document.visibilityState === "visible" && document.hasFocus()) {
@@ -236,6 +263,7 @@ export function AnalyticsTracker() {
     return () => {
       window.clearInterval(interval);
       window.clearInterval(heartbeat);
+      window.clearTimeout(loadTimer);
       window.removeEventListener("pagehide", handlePageHide);
       window.removeEventListener("scroll", handleScrollDepth);
       document.removeEventListener("visibilitychange", handleVisibility);
@@ -273,6 +301,27 @@ export function AnalyticsTracker() {
         contentLabel: elementLabel(media),
       }]);
     };
+    const mediaProgress = new Map<HTMLMediaElement, Set<number>>();
+    const handleMediaProgress = (event: Event) => {
+      const media = event.target;
+      if (!(media instanceof HTMLMediaElement) || !Number.isFinite(media.duration) || media.duration <= 0) return;
+      const percent = Math.floor((media.currentTime / media.duration) * 100);
+      const seen = mediaProgress.get(media) ?? new Set<number>();
+      for (const milestone of [25, 50, 75]) {
+        if (percent >= milestone && !seen.has(milestone)) {
+          seen.add(milestone);
+          send([{
+            eventType: "media_progress",
+            path: pathname,
+            contentType: media instanceof HTMLVideoElement ? "video" : "audio",
+            contentId: mediaId(media),
+            contentLabel: elementLabel(media),
+            durationSeconds: milestone,
+          }]);
+        }
+      }
+      mediaProgress.set(media, seen);
+    };
     const handleMediaButton = (event: Event) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
@@ -298,14 +347,39 @@ export function AnalyticsTracker() {
       send([{
         eventType: isInternal ? "internal_click" : "outbound_click",
         path: pathname,
-        contentType: isInternal ? "internal link" : "outbound link",
+        contentType: clickType(anchor, href),
         contentId: href,
         contentLabel: clickLabel(anchor),
       }]);
     };
+    const handleWindowError = (event: ErrorEvent) => {
+      send([{
+        eventType: "client_error",
+        path: pathname,
+        contentType: "window error",
+        contentId: event.filename ? `${event.filename}:${event.lineno}` : undefined,
+        contentLabel: event.message || "Client error",
+      }]);
+    };
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      const reason = event.reason instanceof Error
+        ? event.reason.message
+        : typeof event.reason === "string"
+          ? event.reason
+          : "Unhandled promise rejection";
+      send([{
+        eventType: "client_error",
+        path: pathname,
+        contentType: "promise rejection",
+        contentLabel: reason.slice(0, 160),
+      }]);
+    };
 
     window.addEventListener(ANALYTICS_EVENT_NAME, handleCustomEvent);
+    window.addEventListener("error", handleWindowError);
+    window.addEventListener("unhandledrejection", handleUnhandledRejection);
     document.addEventListener("play", handleMediaPlay, true);
+    document.addEventListener("timeupdate", handleMediaProgress, true);
     document.addEventListener("ended", handleMediaComplete, true);
     document.addEventListener("click", handleMediaButton, true);
     document.addEventListener("click", handleClick, true);
@@ -349,7 +423,10 @@ export function AnalyticsTracker() {
 
     return () => {
       window.removeEventListener(ANALYTICS_EVENT_NAME, handleCustomEvent);
+      window.removeEventListener("error", handleWindowError);
+      window.removeEventListener("unhandledrejection", handleUnhandledRejection);
       document.removeEventListener("play", handleMediaPlay, true);
+      document.removeEventListener("timeupdate", handleMediaProgress, true);
       document.removeEventListener("ended", handleMediaComplete, true);
       document.removeEventListener("click", handleMediaButton, true);
       document.removeEventListener("click", handleClick, true);

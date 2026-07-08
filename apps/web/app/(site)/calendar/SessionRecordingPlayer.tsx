@@ -84,6 +84,7 @@ export function SessionRecordingPlayer({ url, label = "Session recording" }: { u
     <div ref={rootRef} className="relative flex shrink-0 items-center">
       <button
         type="button"
+        data-media-control="true"
         onClick={handleClick}
         title={open ? "Close session recording" : "Play session recording"}
         aria-label={open ? "Close session recording" : "Play session recording"}

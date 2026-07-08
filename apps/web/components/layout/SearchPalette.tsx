@@ -115,7 +115,7 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
     (result: SearchResult) => {
       recordUsageEvent({
         eventType: "search_result_click",
-        contentType: result.type,
+        contentType: `search result: ${result.type}`,
         contentId: result.href,
         contentLabel: query,
       });
