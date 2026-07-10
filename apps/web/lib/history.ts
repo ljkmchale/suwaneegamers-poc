@@ -1,5 +1,4 @@
 import fs from "fs";
-import path from "path";
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
 import { contentPath } from "@/lib/contentFiles";
 
@@ -16,6 +15,7 @@ export interface HistoryEra {
   id: string;
   title: string;
   description: string;
+  imageUrl: string;
   years: HistoryTable;
 }
 
@@ -186,6 +186,7 @@ function parseEras(chronology: string): { intro: string[]; eras: HistoryEra[] } 
       id: slug(heading.title),
       title: heading.title,
       description,
+      imageUrl: `/images/history/timeline-${slug(heading.title)}-book.webp`,
       years,
     };
   });
