@@ -1,7 +1,7 @@
 {
   "title": "Myrdae in Motion",
   "subtitle": "Follow the paths of the adventuring parties changing Myrdae.",
-  "mapImage": "/images/maps-of-myrdae/locations-map.webp",
+  "mapImage": "/images/maps-of-myrdae/locations-map.webp?v=20260713-hires",
   "campaigns": [
     {
       "id": "a-new-adventure",
@@ -921,7 +921,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "Master Icy Sow’s building · beyond the mapped world",
+      "status": "At Khagdaruhl",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1186,6 +1186,39 @@
           },
           "sourceKey": "bloody-endeavor:session-38",
           "sourceHash": "b630f98f5517ce2706827956d6c16c3d43ff8543c9d07b0142765f5eb5593571",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-39",
+          "location": "Khagdaruhl",
+          "x": 57.2,
+          "y": 69.8,
+          "precision": "approximate",
+          "session": "Session 39",
+          "title": "Why’d You Wanna Hit Me Man?",
+          "summary": "The party had to restore Rhody to life before returning to Khagdaruhl with the Rimestone to reseal the eldritch threat before its roots claimed more minds. In the dwarven kingdom, the group had time to rest and shop, learning of the legendary sword Kretopulus, which with the party had two shards from and which they handed to forgemaster Hultgrum for restoration. Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room.…",
+          "impact": {
+            "type": "political",
+            "title": "Khagdaruhl's balance shifted",
+            "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "portal",
+            "points": [
+              {
+                "x": 57.2,
+                "y": 69.8
+              },
+              {
+                "x": 57.2,
+                "y": 69.8
+              }
+            ]
+          },
+          "sourceKey": "bloody-endeavor:session-39",
+          "sourceHash": "8cd16d689f22e8ce774890f9b056b27566376517f29b264efe91749c75f4f598",
           "current": true
         }
       ],
@@ -1612,7 +1645,7 @@
       "id": "heroes-of-emberstran",
       "name": "Heroes of Emberstran",
       "color": "#ff9f43",
-      "status": "Featherfall campsite · beyond the mapped world",
+      "status": "At Ulgrey",
       "campaignHref": "/campaigns/heroes-of-emberstran",
       "stops": [
         {
@@ -2268,8 +2301,8 @@
           "id": "auto-heroes-of-emberstran-session-25",
           "locationId": "ulgrey",
           "location": "Ulgrey",
-          "x": 62.87,
-          "y": 60.8,
+          "x": 62.83,
+          "y": 60.92,
           "session": "Session 25",
           "title": "Grief Stricken",
           "summary": "The party stepped into the Emberheart Vault. They bested trials of roaring fear and a spectral guardian before Irragosa herself appeared, naming their ancestral ties, revealing the relic’s power to shatter a cycle of rebirth, and entrusting the pulsing crystal to Ainslie. With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding light. The session ended with grim tidings from Ulgrey where Hap's sister was last seen.",
@@ -2288,11 +2321,11 @@
                 "y": 55.5
               },
               {
-                "x": 62.87,
-                "y": 60.8
+                "x": 62.83,
+                "y": 60.92
               }
             ],
-            "miles": 132.6
+            "miles": 135.7
           },
           "sourceKey": "heroes-of-emberstran:session-25",
           "sourceHash": "d7a3e3218de9175062d36edc8b484bd60f3002124753bf80bef04113201ac747",
@@ -2318,8 +2351,8 @@
             "mode": "road",
             "points": [
               {
-                "x": 62.87,
-                "y": 60.8
+                "x": 62.83,
+                "y": 60.92
               },
               {
                 "x": 62.54,
@@ -2338,8 +2371,8 @@
                 "y": 58.23
               }
             ],
-            "miles": 104.7,
-            "days": 5.2,
+            "miles": 107.2,
+            "days": 5.4,
             "roadIds": [
               "ulgrey-road-northwest"
             ],
@@ -2404,6 +2437,39 @@
           },
           "sourceKey": "heroes-of-emberstran:session-28",
           "sourceHash": "23303c56b0f9aaa1f317c0d03e4ffe1c29d382ca7d84ff86db8c4a9b79d4a2e2",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-29",
+          "locationId": "ulgrey",
+          "location": "Ulgrey",
+          "x": 62.83,
+          "y": 60.92,
+          "session": "Session 29",
+          "title": "Made it to Ulgrey",
+          "summary": "The Heroes of Emberstran lingered at the Featherfall campsite to aid the grieving Weftirin gypsies after Finn’s death. Aury received mysterious signs from his goddess and the party recovered a depleted Idol of Vo’egurn from a hidden sea cave. They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years.…",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Ulgrey",
+            "description": "They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "off-map",
+            "points": [
+              {
+                "x": 60.75,
+                "y": 58.23
+              },
+              {
+                "x": 62.83,
+                "y": 60.92
+              }
+            ]
+          },
+          "sourceKey": "heroes-of-emberstran:session-29",
+          "sourceHash": "b9165a1c576468b33ae8ad96a4164cf302f4b49ca4db2a9969740cd8344d8dd4",
           "current": true
         }
       ],
@@ -2886,10 +2952,10 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-07-08T14:50:39.444Z",
+    "lastGeneratedAt": "2026-07-15T14:50:24.391Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 95,
+    "generatedStops": 97,
     "routedSegments": 6,
     "impactLocations": 25
   },
@@ -3495,6 +3561,51 @@
       "crossCampaign": false
     },
     {
+      "id": "name-khagdaruhl",
+      "location": "Khagdaruhl",
+      "x": 57.2,
+      "y": 69.8,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 34",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 35",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 36",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 39",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -3536,43 +3647,6 @@
           "title": "Conflict reshaped Mount Emberstran",
           "type": "battle",
           "description": "A savage firenewt ambush erupted in the lava-lit caverns, nearly overwhelming, and slaying Og."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "name-khagdaruhl",
-      "location": "Khagdaruhl",
-      "x": 57.2,
-      "y": 69.8,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 34",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 35",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 36",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
         }
       ],
       "crossCampaign": false
@@ -3839,6 +3913,36 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-ulgrey",
+      "locationId": "ulgrey",
+      "location": "Ulgrey",
+      "x": 62.83,
+      "y": 60.92,
+      "realm": "surface",
+      "campaignIds": [
+        "heroes-of-emberstran"
+      ],
+      "impacts": [
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 25",
+          "title": "Ulgrey's balance shifted",
+          "type": "political",
+          "description": "With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding li…"
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 29",
+          "title": "Arcane consequences at Ulgrey",
+          "type": "arcane",
+          "description": "They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-varenwood",
       "locationId": "varenwood",
       "location": "Varenwood",
@@ -3970,28 +4074,6 @@
           "title": "Arcane consequences at Stygia",
           "type": "arcane",
           "description": "At the Wayfarer’s Rest, Nanise revealed House Rulendor’s corruption and handed Ridley a key to the hidden cellar entrance, prompting a stealthy infiltration, before the group was pulled through a hellish portal into the frozen wastes of Stygia."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-ulgrey",
-      "locationId": "ulgrey",
-      "location": "Ulgrey",
-      "x": 62.87,
-      "y": 60.8,
-      "realm": "surface",
-      "campaignIds": [
-        "heroes-of-emberstran"
-      ],
-      "impacts": [
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 25",
-          "title": "Ulgrey's balance shifted",
-          "type": "political",
-          "description": "With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding li…"
         }
       ],
       "crossCampaign": false
