@@ -6,6 +6,8 @@
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
     "images:prepare": "node scripts/prepare-images.mjs",
+    "images:audit-local": "node scripts/audit-local-images.mjs",
+    "audio:audit-local": "node scripts/audit-local-audio.mjs",
     "sync-campaign-headers": "node scripts/sync-campaign-headers.mjs",
     "sync-campaign-journeys": "node scripts/sync-campaign-journeys.mjs",
     "sync-organization-symbols": "node scripts/sync-organization-symbols.mjs",

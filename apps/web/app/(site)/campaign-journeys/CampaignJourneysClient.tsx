@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   CampaignImpactType,
   CampaignJourney,
@@ -12,6 +12,9 @@ import styles from "./CampaignJourneysClient.module.css";
 
 const MAP_HEIGHT = (788 / 1400) * 100;
 const PLAYBACK_DURATION_MS = 32_000;
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 4;
+const ZOOM_STEP = 0.4;
 
 const IMPACT_LABELS: Record<CampaignImpactType, string> = {
   arcane: "Arcane shift",
@@ -167,6 +170,11 @@ export function CampaignJourneysClient({
   const [zoom, setZoom] = useState(1);
   const [focus, setFocus] = useState({ x: 50, y: MAP_HEIGHT / 2 });
   const [selectedStopId, setSelectedStopId] = useState<string | null>(null);
+  const [isPanning, setIsPanning] = useState(false);
+  const mapRef = useRef<SVGSVGElement>(null);
+  const pointersRef = useRef(new Map<number, { x: number; y: number }>());
+  const mousePositionRef = useRef<{ x: number; y: number } | null>(null);
+  const suppressClickRef = useRef(false);
 
   const visibleCampaigns = useMemo(
     () =>
@@ -246,6 +254,67 @@ export function CampaignJourneysClient({
   );
   const viewBox = `${viewX} ${viewY} ${viewWidth} ${viewHeight}`;
 
+  function constrainFocus(nextFocus: { x: number; y: number }, nextZoom = zoom) {
+    const nextWidth = 100 / nextZoom;
+    const nextHeight = MAP_HEIGHT / nextZoom;
+    return {
+      x: Math.max(nextWidth / 2, Math.min(100 - nextWidth / 2, nextFocus.x)),
+      y: Math.max(
+        nextHeight / 2,
+        Math.min(MAP_HEIGHT - nextHeight / 2, nextFocus.y),
+      ),
+    };
+  }
+
+  function setMapZoom(nextZoom: number, anchor?: { x: number; y: number }) {
+    const boundedZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, nextZoom));
+    if (boundedZoom === zoom) return;
+
+    const anchorX = anchor?.x ?? 0.5;
+    const anchorY = anchor?.y ?? 0.5;
+    const mapAnchor = {
+      x: viewX + anchorX * viewWidth,
+      y: viewY + anchorY * viewHeight,
+    };
+    const nextWidth = 100 / boundedZoom;
+    const nextHeight = MAP_HEIGHT / boundedZoom;
+    setFocus(
+      constrainFocus(
+        {
+          x: mapAnchor.x + (0.5 - anchorX) * nextWidth,
+          y: mapAnchor.y + (0.5 - anchorY) * nextHeight,
+        },
+        boundedZoom,
+      ),
+    );
+    setZoom(boundedZoom);
+  }
+
+  function panByPixels(deltaX: number, deltaY: number) {
+    const bounds = mapRef.current?.getBoundingClientRect();
+    if (!bounds?.width || !bounds.height) return;
+    setFocus((current) =>
+      constrainFocus({
+        x: current.x - (deltaX / bounds.width) * viewWidth,
+        y: current.y - (deltaY / bounds.height) * viewHeight,
+      }),
+    );
+  }
+
+  function panByDirection(deltaX: number, deltaY: number) {
+    setFocus((current) =>
+      constrainFocus({
+        x: current.x + deltaX * viewWidth * 0.22,
+        y: current.y + deltaY * viewHeight * 0.22,
+      }),
+    );
+  }
+
+  function fitMap() {
+    setZoom(1);
+    setFocus({ x: 50, y: MAP_HEIGHT / 2 });
+  }
+
   function chooseCampaign(id: string) {
     setCampaignFilter(id);
     setSelectedStopId(null);
@@ -269,14 +338,146 @@ export function CampaignJourneysClient({
     }
   }
 
-  function resetMap() {
-    setCampaignFilter("all");
-    setProgress(100);
-    setPlaying(false);
-    setSelectedStopId(null);
-    setZoom(1);
-    setFocus({ x: 50, y: MAP_HEIGHT / 2 });
+  function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
+    if (event.pointerType === "mouse") return;
+    mapRef.current?.setPointerCapture(event.pointerId);
+    pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    suppressClickRef.current = false;
+    setIsPanning(true);
   }
+
+  function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
+    if (event.pointerType === "mouse") return;
+    const previous = pointersRef.current.get(event.pointerId);
+    if (!previous) return;
+
+    const previousPointers = [...pointersRef.current.values()];
+    pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const currentPointers = [...pointersRef.current.values()];
+    const movedX = event.clientX - previous.x;
+    const movedY = event.clientY - previous.y;
+    if (Math.hypot(movedX, movedY) > 2) suppressClickRef.current = true;
+
+    if (currentPointers.length === 1) {
+      panByPixels(movedX, movedY);
+      return;
+    }
+
+    if (currentPointers.length === 2 && previousPointers.length === 2) {
+      const previousDistance = Math.hypot(
+        previousPointers[0].x - previousPointers[1].x,
+        previousPointers[0].y - previousPointers[1].y,
+      );
+      const currentDistance = Math.hypot(
+        currentPointers[0].x - currentPointers[1].x,
+        currentPointers[0].y - currentPointers[1].y,
+      );
+      const previousMidpoint = {
+        x: (previousPointers[0].x + previousPointers[1].x) / 2,
+        y: (previousPointers[0].y + previousPointers[1].y) / 2,
+      };
+      const currentMidpoint = {
+        x: (currentPointers[0].x + currentPointers[1].x) / 2,
+        y: (currentPointers[0].y + currentPointers[1].y) / 2,
+      };
+      panByPixels(
+        currentMidpoint.x - previousMidpoint.x,
+        currentMidpoint.y - previousMidpoint.y,
+      );
+      if (previousDistance > 0) {
+        const bounds = mapRef.current?.getBoundingClientRect();
+        setMapZoom(zoom * (currentDistance / previousDistance),
+          bounds
+            ? {
+                x: (currentMidpoint.x - bounds.left) / bounds.width,
+                y: (currentMidpoint.y - bounds.top) / bounds.height,
+              }
+            : undefined,
+        );
+      }
+    }
+  }
+
+  function releasePointer(event: React.PointerEvent<SVGSVGElement>) {
+    if (event.pointerType === "mouse") return;
+    pointersRef.current.delete(event.pointerId);
+    if (pointersRef.current.size === 0) setIsPanning(false);
+  }
+
+  function handleMouseDown(event: React.MouseEvent<SVGSVGElement>) {
+    mousePositionRef.current = { x: event.clientX, y: event.clientY };
+    suppressClickRef.current = false;
+    setIsPanning(true);
+  }
+
+  function handleMouseMove(event: React.MouseEvent<SVGSVGElement>) {
+    const previous = mousePositionRef.current;
+    if (!previous) return;
+    const movedX = event.clientX - previous.x;
+    const movedY = event.clientY - previous.y;
+    mousePositionRef.current = { x: event.clientX, y: event.clientY };
+    if (Math.hypot(movedX, movedY) > 2) suppressClickRef.current = true;
+    panByPixels(movedX, movedY);
+  }
+
+  function releaseMouse() {
+    mousePositionRef.current = null;
+    setIsPanning(false);
+  }
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const bounds = map.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      const anchorX = Math.max(
+        0,
+        Math.min(1, (event.clientX - bounds.left) / bounds.width),
+      );
+      const anchorY = Math.max(
+        0,
+        Math.min(1, (event.clientY - bounds.top) / bounds.height),
+      );
+      const nextZoom = Math.max(
+        MIN_ZOOM,
+        Math.min(MAX_ZOOM, zoom * Math.exp(-event.deltaY * 0.0015)),
+      );
+      if (nextZoom === zoom) return;
+
+      const mapAnchorX = viewX + anchorX * viewWidth;
+      const mapAnchorY = viewY + anchorY * viewHeight;
+      const nextWidth = 100 / nextZoom;
+      const nextHeight = MAP_HEIGHT / nextZoom;
+      setFocus({
+        x: Math.max(
+          nextWidth / 2,
+          Math.min(
+            100 - nextWidth / 2,
+            mapAnchorX + (0.5 - anchorX) * nextWidth,
+          ),
+        ),
+        y: Math.max(
+          nextHeight / 2,
+          Math.min(
+            MAP_HEIGHT - nextHeight / 2,
+            mapAnchorY + (0.5 - anchorY) * nextHeight,
+          ),
+        ),
+      });
+      setZoom(nextZoom);
+    };
+
+    map.addEventListener("wheel", handleWheel, {
+      capture: true,
+      passive: false,
+    });
+    return () => map.removeEventListener("wheel", handleWheel, true);
+  }, [viewHeight, viewWidth, viewX, viewY, zoom]);
 
   return (
     <div className="mx-auto w-full max-w-[1680px] px-4 pb-20 sm:px-6 lg:px-8">
@@ -373,7 +574,7 @@ export function CampaignJourneysClient({
                 ))}
               </div>
 
-              <div className="grid items-center gap-3 md:grid-cols-[auto_minmax(180px,1fr)_auto]">
+              <div className="grid items-center gap-3 md:grid-cols-[auto_minmax(180px,1fr)]">
                 <button
                   type="button"
                   onClick={() => {
@@ -402,41 +603,55 @@ export function CampaignJourneysClient({
                     aria-label="Journey progress"
                   />
                 </label>
-                <div className="flex items-center justify-end gap-1">
-                  <button
-                    type="button"
-                    onClick={() => setZoom((current) => Math.max(1, current - 0.35))}
-                    className="h-9 w-9 rounded-lg border border-white/10 bg-white/5 text-lg text-white/70 hover:bg-white/10"
-                    aria-label="Zoom out"
-                  >
-                    −
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setZoom((current) => Math.min(3.2, current + 0.35))}
-                    className="h-9 w-9 rounded-lg border border-white/10 bg-white/5 text-lg text-white/70 hover:bg-white/10"
-                    aria-label="Zoom in"
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={resetMap}
-                    className="h-9 rounded-lg border border-white/10 bg-white/5 px-3 font-cinzel text-[9px] uppercase tracking-widest text-white/55 hover:bg-white/10 hover:text-white"
-                  >
-                    Reset
-                  </button>
-                </div>
               </div>
             </div>
           </div>
 
           <div className={`${styles.mapViewport} relative overflow-hidden`}>
             <svg
-              className={styles.mapSvg}
+              ref={mapRef}
+              className={`${styles.mapSvg} ${isPanning ? styles.isPanning : ""}`}
               viewBox={viewBox}
               role="img"
+              tabIndex={0}
               aria-label="Interactive campaign journey map of Myrdae"
+              aria-describedby="journey-map-help"
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={releasePointer}
+              onPointerCancel={releasePointer}
+              onLostPointerCapture={releasePointer}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={releaseMouse}
+              onMouseLeave={releaseMouse}
+              onClickCapture={(event) => {
+                if (!suppressClickRef.current) return;
+                event.preventDefault();
+                event.stopPropagation();
+                suppressClickRef.current = false;
+              }}
+              onDoubleClick={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                setMapZoom(zoom + ZOOM_STEP, {
+                  x: (event.clientX - bounds.left) / bounds.width,
+                  y: (event.clientY - bounds.top) / bounds.height,
+                });
+              }}
+              onKeyDown={(event) => {
+                if (event.target !== event.currentTarget) return;
+                if (event.key === "ArrowLeft") panByDirection(-1, 0);
+                else if (event.key === "ArrowRight") panByDirection(1, 0);
+                else if (event.key === "ArrowUp") panByDirection(0, -1);
+                else if (event.key === "ArrowDown") panByDirection(0, 1);
+                else if (event.key === "+" || event.key === "=")
+                  setMapZoom(zoom + ZOOM_STEP);
+                else if (event.key === "-" || event.key === "_")
+                  setMapZoom(zoom - ZOOM_STEP);
+                else if (event.key === "0") fitMap();
+                else return;
+                event.preventDefault();
+              }}
             >
               <image
                 href={document.mapImage}
@@ -567,9 +782,12 @@ export function CampaignJourneysClient({
               )}
             </svg>
             <div className={`${styles.scanline} absolute inset-0`} />
-            <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-white/10 bg-[#050914]/80 px-3 py-2 text-[10px] text-white/55 backdrop-blur">
-              Solid markers are each party&apos;s position at the selected story point.
-              Click any stop to open its history.
+            <div
+              id="journey-map-help"
+              className="pointer-events-none absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-lg border border-white/10 bg-[#050914]/80 px-3 py-2 text-[10px] text-white/65 backdrop-blur"
+            >
+              Drag to move. Scroll or pinch to zoom. Double-click to zoom in.
+              Click a stop for its history.
             </div>
           </div>
         </div>

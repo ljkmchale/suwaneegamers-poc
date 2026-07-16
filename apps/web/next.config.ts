@@ -10,12 +10,6 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-    ],
     // Keep optimized images for 1 hour instead of the default 1 year, so
     // sync-script image updates are visible in production within an hour
     // without needing a rebuild.
@@ -28,6 +22,12 @@ const nextConfig: NextConfig = {
         // files under public/images/ so the optimization cache respects the
         // shorter TTL above and Cloudflare doesn't cache stale images forever.
         source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=3600, must-revalidate" },
+        ],
+      },
+      {
+        source: "/media/session-audio/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=3600, must-revalidate" },
         ],

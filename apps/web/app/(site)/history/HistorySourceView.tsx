@@ -77,7 +77,8 @@ function Timeline({ eras }: { eras: HistoryEra[] }) {
                 <span className={`relative mx-auto block aspect-[2/3] w-full overflow-hidden bg-transparent shadow-xl transition duration-300 ${active ? "-translate-y-1 drop-shadow-[0_0_14px_rgba(245,158,11,.42)]" : "opacity-65 group-hover:opacity-100"}`}>
                   <Image src={era.imageUrl} alt={`Fantasy sourcebook cover representing ${era.title}`} fill sizes="(max-width: 640px) 136px, (max-width: 1280px) 160px, 176px" className="object-contain transition duration-300 group-hover:scale-[1.025]" />
                 </span>
-                <span className={`font-cinzel mt-3 block text-sm uppercase tracking-wider transition ${active ? "text-amber-200" : "text-white/55"}`}>{yearRange(era)}</span>
+                <span className={`font-cinzel mt-3 block min-h-[2.5rem] text-sm uppercase leading-tight tracking-[0.08em] transition ${active ? "text-white" : "text-white/70 group-hover:text-white/90"}`}>{era.title}</span>
+                <span className={`font-cinzel mt-1 block text-xs uppercase tracking-wider transition ${active ? "text-amber-200" : "text-white/50"}`}>{yearRange(era)}</span>
                 <span className={`relative z-10 mx-auto mt-3 block h-3 w-3 rounded-full border transition ${active ? "scale-125 border-white bg-[#080716] shadow-[0_0_14px_rgba(255,255,255,.45)]" : "border-white/55 bg-[#080716]"}`} aria-hidden="true" />
                 <span aria-hidden="true" className={`mx-auto mt-2 block h-0 w-0 border-x-[5px] border-t-[7px] border-x-transparent transition ${active ? "border-t-red-500 opacity-100" : "border-t-transparent opacity-0"}`} />
                 <span className="sr-only">{era.title}</span>

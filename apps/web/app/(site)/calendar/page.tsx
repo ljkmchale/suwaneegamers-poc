@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   type CalendarEvent,
   fetchRecentCalendarEvents,
@@ -11,7 +10,6 @@ import {
   getActiveCampaigns,
   findCampaignForCalendarEvent,
   findPreviousCampaignEvent,
-  normalizeCampaignTitle,
   type PortalCampaign,
 } from "@/lib/campaigns";
 import { getTrackedActiveCampaigns } from "@/lib/campaignTracking";
@@ -98,6 +96,13 @@ interface LatestAdventure {
   audioUrl?: string;
 }
 
+interface CombinedAdventureCard {
+  key: string;
+  event?: CalendarEvent;
+  campaign?: PortalCampaign;
+  adventure?: LatestAdventure;
+}
+
 function splitSessionTitle(title: string): { number?: number; text: string } {
   const match = title.match(/^(?:session\s*)?(\d+)\s*[-–—:\s]+\s*(.+)$/i);
   if (match) {
@@ -125,7 +130,6 @@ function visibleCampaigns(campaigns: PortalCampaign[]) {
 function latestAdventures(
   campaigns: PortalCampaign[],
   pastEvents: CalendarEvent[],
-  limit = 6,
 ): LatestAdventure[] {
   const adventures: LatestAdventure[] = [];
 
@@ -158,7 +162,7 @@ function latestAdventures(
     }
   }
 
-  return adventures.sort((a, b) => b.sortDate - a.sortDate).slice(0, limit);
+  return adventures.sort((a, b) => b.sortDate - a.sortDate);
 }
 
 export default async function CalendarPage() {
@@ -168,7 +172,7 @@ export default async function CalendarPage() {
   const campaigns = await getTrackedActiveCampaigns(getActiveCampaigns());
 
   try {
-    events = await fetchUpcomingCalendarEvents(6);
+    events = await fetchUpcomingCalendarEvents(50);
   } catch {
     feedError = true;
   }
@@ -179,7 +183,55 @@ export default async function CalendarPage() {
     // Latest adventures still render from stored session dates.
   }
 
-  const adventures = latestAdventures(campaigns, pastEvents, 6);
+  const activeCampaigns = visibleCampaigns(campaigns);
+  const adventures = latestAdventures(activeCampaigns, pastEvents);
+  const adventuresByCampaign = new Map(
+    adventures.map((adventure) => [adventure.campaignId, adventure]),
+  );
+  const upcomingByCampaign = new Map<string, CalendarEvent>();
+  const unmatchedEvents: CalendarEvent[] = [];
+
+  for (const event of events) {
+    const campaign = findCampaignForCalendarEvent(event, activeCampaigns);
+    if (campaign) {
+      if (!upcomingByCampaign.has(campaign.id)) {
+        upcomingByCampaign.set(campaign.id, event);
+      }
+    } else {
+      unmatchedEvents.push(event);
+    }
+  }
+
+  const combinedCards: CombinedAdventureCard[] = activeCampaigns.flatMap((campaign) => {
+    const event = upcomingByCampaign.get(campaign.id);
+    const adventure = adventuresByCampaign.get(campaign.id);
+    if (!event && !adventure) return [];
+
+    return [{
+      key: `campaign-${campaign.id}`,
+      event,
+      campaign,
+      adventure,
+    }];
+  });
+
+  for (const event of unmatchedEvents) {
+    combinedCards.push({ key: `event-${event.uid}`, event });
+  }
+
+  combinedCards.sort((a, b) => {
+    const aNext = a.event ? new Date(a.event.start).getTime() : Number.POSITIVE_INFINITY;
+    const bNext = b.event ? new Date(b.event.start).getTime() : Number.POSITIVE_INFINITY;
+    if (aNext !== bNext) return aNext - bNext;
+
+    const aPrior = a.adventure?.sortDate ?? Number.NEGATIVE_INFINITY;
+    const bPrior = b.adventure?.sortDate ?? Number.NEGATIVE_INFINITY;
+    if (aPrior !== bPrior) return bPrior - aPrior;
+
+    return (a.campaign?.name ?? a.event?.title ?? "").localeCompare(
+      b.campaign?.name ?? b.event?.title ?? "",
+    );
+  });
 
   return (
     <div className="relative min-h-screen">
@@ -209,7 +261,7 @@ export default async function CalendarPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr_3fr]">
+        <div>
           <section>
             <div className="mb-5 flex items-end justify-between gap-3">
               <div>
@@ -223,7 +275,7 @@ export default async function CalendarPage() {
                   className="font-cinzel mt-1 text-2xl"
                   style={{ color: "var(--color-accent-gold)" }}
                 >
-                  Upcoming Adventures
+                  Adventures
                 </h2>
               </div>
               <a
@@ -264,159 +316,28 @@ export default async function CalendarPage() {
               </p>
             )}
 
-            {!feedError && events.length === 0 && (
+            {!feedError && combinedCards.length === 0 && (
               <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                No upcoming events are currently visible in the public feed.
+                No adventures are currently available.
               </p>
             )}
 
             <div className="grid gap-4">
-              {events.map((event) => {
-                const start = new Date(event.start);
-                const campaign = findCampaignForCalendarEvent(event, campaigns);
-                const image = campaign?.headerImage;
-                const showCampaignLabel =
-                  campaign &&
-                  normalizeCampaignTitle(event.title) !== normalizeCampaignTitle(campaign.name);
-                const today = isEventToday(event);
-
-                return (
-                  <article
-                    key={event.uid}
-                    className={
-                      image
-                        ? "relative grid overflow-hidden rounded-lg border sm:grid-cols-[13rem_1fr]"
-                        : "relative grid gap-4 rounded-lg border p-4 sm:grid-cols-[8rem_1fr]"
-                    }
-                    style={{
-                      borderColor: "var(--color-bg-border)",
-                      background:
-                        "linear-gradient(135deg, rgba(15,10,26,.82), rgba(8,5,15,.72))",
-                      boxShadow: "0 14px 38px rgba(0,0,0,.28)",
-                    }}
-                  >
-                    {today && (
-                      <span
-                        className="absolute right-3 top-3 z-10 rounded-full border px-3 py-1 font-cinzel text-[0.65rem] uppercase tracking-[0.2em]"
-                        style={{
-                          background: "rgba(245,158,11,.18)",
-                          borderColor: "rgba(245,158,11,.55)",
-                          color: "var(--color-accent-gold)",
-                          boxShadow: "0 0 18px rgba(245,158,11,.22)",
-                        }}
-                      >
-                        Today
-                      </span>
-                    )}
-                    {image ? (
-                      <div className="relative min-h-28 sm:min-h-full">
-                        <Image
-                          src={image}
-                          alt={campaign?.name ? `${campaign.name} campaign art` : ""}
-                          fill
-                          sizes="(min-width: 640px) 13rem, 100vw"
-                          className="object-cover"
-                          style={{ objectPosition: campaign?.headerImagePosition ?? "center" }}
-                        />
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background:
-                              "linear-gradient(180deg, rgba(8,5,15,.04), rgba(8,5,15,.34))",
-                          }}
-                        />
-                      </div>
-                    ) : (
-                      <div
-                        className="rounded-md border px-3 py-3 text-center"
-                        style={{
-                          borderColor: "rgba(245,158,11,.34)",
-                          background: "rgba(245,158,11,.08)",
-                        }}
-                      >
-                        <p
-                          className="font-cinzel text-sm leading-tight"
-                          style={{ color: "var(--color-accent-gold)" }}
-                        >
-                          {dateFormatter.format(start)}
-                        </p>
-                        <p
-                          className="mt-2 text-xs"
-                          style={{ color: "var(--color-text-secondary)" }}
-                        >
-                          {eventTimeLabel(event)}
-                        </p>
-                      </div>
-                    )}
-
-                    <div className={image ? "flex min-w-0 flex-col justify-center p-5" : "min-w-0"}>
-                      {image && (
-                        <p
-                          className="font-cinzel mb-2 text-xs uppercase tracking-[0.24em]"
-                          style={{ color: "var(--color-accent-arcane)" }}
-                        >
-                          {dateFormatter.format(start)} - {eventTimeLabel(event)}
-                        </p>
-                      )}
-                      <h3
-                        className="font-cinzel text-lg leading-snug"
-                        style={{ color: "var(--color-text-primary)" }}
-                      >
-                        {campaign?.name ?? event.title}
-                        {campaign?.dm && (
-                          <span
-                            className="ml-2 inline-block text-sm"
-                            style={{ color: "var(--color-accent-gold)" }}
-                          >
-                            - DM: {campaign.dm}
-                          </span>
-                        )}
-                      </h3>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
-
-          <section
-            className="lg:border-l lg:pl-10"
-            style={{ borderColor: "var(--color-bg-border)" }}
-          >
-            <div className="mb-5">
-              <p
-                className="font-cinzel text-xs uppercase tracking-[0.35em]"
-                style={{ color: "var(--color-accent-arcane)" }}
-              >
-                Session Notes
-              </p>
-              <h2
-                className="font-cinzel mt-1 text-2xl"
-                style={{ color: "var(--color-accent-gold)" }}
-              >
-                Previous Adventures
-              </h2>
-            </div>
-
-            {adventures.length === 0 && (
-              <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                No session notes have been recorded yet.
-              </p>
-            )}
-
-            <div className="grid gap-4">
-              {adventures.map((adventure) => (
+              {combinedCards.map(({ key, event, campaign, adventure }) => (
                 <AdventureFoldCard
-                  key={adventure.key}
-                  campaignId={adventure.campaignId}
-                  campaignName={adventure.campaignName}
-                  headerImage={adventure.headerImage}
-                  headerImagePosition={adventure.headerImagePosition}
-                  dateLabel={formatSessionDate(adventure.sessionDate)}
-                  sessionNumber={adventure.sessionNumber}
-                  sessionTitle={adventure.sessionTitle}
-                  summary={adventure.summary}
-                  audioUrl={adventure.audioUrl}
+                  key={key}
+                  campaignId={campaign?.id ?? adventure?.campaignId ?? "calendar"}
+                  campaignName={campaign?.name ?? adventure?.campaignName ?? event?.title ?? "Adventure"}
+                  headerImage={campaign?.headerImage ?? adventure?.headerImage}
+                  headerImagePosition={campaign?.headerImagePosition ?? adventure?.headerImagePosition}
+                  nextDateLabel={event ? dateFormatter.format(new Date(event.start)) : undefined}
+                  nextTimeLabel={event ? eventTimeLabel(event) : undefined}
+                  isToday={event ? isEventToday(event) : false}
+                  dateLabel={adventure ? formatSessionDate(adventure.sessionDate) : undefined}
+                  sessionNumber={adventure?.sessionNumber}
+                  sessionTitle={adventure?.sessionTitle ?? "No prior session recorded"}
+                  summary={adventure?.summary}
+                  audioUrl={adventure?.audioUrl}
                 />
               ))}
             </div>

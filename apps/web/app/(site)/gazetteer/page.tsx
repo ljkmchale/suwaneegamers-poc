@@ -16,10 +16,16 @@ const MINOR_SETTLEMENTS_REFERENCE_URL =
   "https://docs.google.com/document/d/1qY82tYJ_K6VMwEhfBZ-NvuX6WMKdSOpga3E40UzFUdE/edit?usp=sharing";
 
 const MINOR_SETTLEMENTS_COUNT = 11;
+const HERALDRY_CACHE_VERSION = "2026-07-14-1";
+
+function versionHeraldryUrl(imageUrl: string): string {
+  if (!imageUrl.startsWith("/images/gazetteer/cities/")) return imageUrl;
+  return `${imageUrl}?v=${HERALDRY_CACHE_VERSION}`;
+}
 
 function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
   const href = entry.referenceUrl ?? entry.docUrl ?? entry.folderUrl ?? "#";
-  const image = entry.imageUrl ?? FALLBACK_IMAGE;
+  const image = versionHeraldryUrl(entry.imageUrl ?? FALLBACK_IMAGE);
   const hasRemoteHeraldry = Boolean(entry.imageUrl);
 
   return (
@@ -150,8 +156,7 @@ export default async function GazetteerPage() {
             Gazetteer
           </h1>
           <p className="mx-auto mt-4 max-w-3xl" style={{ color: "var(--color-text-secondary)" }}>
-            Browse the notable towns, ports, abbeys, keeps, and hidden enclaves recorded
-            across the lands of Myrdae.
+            Details on notable settlements across Myrdae.
           </p>
         </header>
 

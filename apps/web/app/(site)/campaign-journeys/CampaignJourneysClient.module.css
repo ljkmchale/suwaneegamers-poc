@@ -17,6 +17,19 @@
   width: 100%;
   display: block;
   background: #102232;
+  cursor: grab;
+  overscroll-behavior: contain;
+  touch-action: none;
+  user-select: none;
+}
+
+.mapSvg:focus-visible {
+  outline: 2px solid rgba(196, 181, 253, 0.9);
+  outline-offset: -3px;
+}
+
+.mapSvg.isPanning {
+  cursor: grabbing;
 }
 
 .route {

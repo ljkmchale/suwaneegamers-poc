@@ -12,7 +12,10 @@ export interface AdventureFoldCardProps {
   campaignName: string;
   headerImage?: string;
   headerImagePosition?: string;
-  dateLabel: string;
+  dateLabel?: string;
+  nextDateLabel?: string;
+  nextTimeLabel?: string;
+  isToday?: boolean;
   sessionNumber?: number;
   sessionTitle: string;
   summary?: string;
@@ -25,6 +28,9 @@ export function AdventureFoldCard({
   headerImage,
   headerImagePosition,
   dateLabel,
+  nextDateLabel,
+  nextTimeLabel,
+  isToday = false,
   sessionNumber,
   sessionTitle,
   summary,
@@ -111,15 +117,8 @@ export function AdventureFoldCard({
           className={`flex min-w-0 items-center justify-between gap-4 p-5 ${hasSummary ? "cursor-pointer" : ""}`}
         >
           <div className="min-w-0">
-            <p
-              className="font-cinzel mb-2 text-xs uppercase tracking-[0.24em]"
-              style={{ color: "var(--color-accent-arcane)" }}
-            >
-              {dateLabel}
-              {sessionNumber !== undefined && <> - Session {sessionNumber}</>}
-            </p>
             <h3
-              className="font-cinzel whitespace-nowrap text-lg leading-snug"
+              className="font-cinzel mb-2 text-lg leading-snug"
               style={{ color: "var(--color-text-primary)" }}
             >
               <Link
@@ -129,16 +128,54 @@ export function AdventureFoldCard({
               >
                 {campaignName}
               </Link>
-              <span className="ml-2 inline text-sm" style={{ color: "var(--color-accent-gold)" }}>
-                - {sessionTitle}
-              </span>
             </h3>
+            {nextDateLabel && (
+              <p className="text-sm leading-relaxed">
+                <span
+                  className="font-cinzel mr-3 uppercase"
+                  style={{ color: "var(--color-accent-gold)" }}
+                >
+                  Next session
+                </span>
+                <span style={{ color: "var(--color-accent-arcane)" }}>
+                  {nextDateLabel}{nextTimeLabel ? ` - ${nextTimeLabel}` : ""}
+                </span>
+              </p>
+            )}
+            {dateLabel && (
+              <p className="text-sm leading-relaxed">
+                <span
+                  className="font-cinzel mr-3 uppercase"
+                  style={{ color: "var(--color-accent-gold)" }}
+                >
+                  Prior session
+                </span>
+                <span style={{ color: "var(--color-accent-arcane)" }}>
+                  {dateLabel} -{" "}
+                  {sessionNumber !== undefined && <>Session {sessionNumber} - </>}
+                  {sessionTitle}
+                </span>
+              </p>
+            )}
           </div>
 
           <div
-            className="flex shrink-0 items-center gap-3"
+            className="flex shrink-0 items-center gap-3 self-start sm:self-center"
             onClick={(event) => event.stopPropagation()}
           >
+            {isToday && (
+              <span
+                className="rounded-full border px-3 py-1 font-cinzel text-[0.65rem] uppercase tracking-[0.2em]"
+                style={{
+                  background: "rgba(245,158,11,.18)",
+                  borderColor: "rgba(245,158,11,.55)",
+                  color: "var(--color-accent-gold)",
+                  boxShadow: "0 0 18px rgba(245,158,11,.22)",
+                }}
+              >
+                Today
+              </span>
+            )}
             {audioUrl && (
               <SessionRecordingPlayer
                 url={audioUrl}

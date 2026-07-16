@@ -404,6 +404,24 @@ function initializeSchema(db: Database.Database): void {
     );
 
     -- ----------------------------------------------------------------
+    -- Security log (failed admin logins, suspicious/admin requests)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS security_events (
+      id         INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at TEXT NOT NULL,
+      kind       TEXT NOT NULL,
+      ip         TEXT,
+      method     TEXT,
+      path       TEXT NOT NULL,
+      user_agent TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_security_events_created
+      ON security_events(created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_security_events_kind_created
+      ON security_events(kind, created_at DESC);
+
+    -- ----------------------------------------------------------------
     -- JSON content documents
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS content_documents (

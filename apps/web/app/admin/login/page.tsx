@@ -21,11 +21,27 @@ export default async function AdminLoginPage({ searchParams }: Props) {
           {wantsEditMode ? "Enable Page Editing" : "Suwanee Gamers Portal"}
         </p>
 
-        {error && (
+        {error === "locked" ? (
+          <p className="text-sm text-center mb-4 text-red-400">
+            Too many failed attempts. Try again in 15 minutes.
+          </p>
+        ) : error === "signin" ? (
+          <p className="text-sm text-center mb-4 text-red-400">
+            Sign in with Google first, then come back here and enter the admin
+            password.{" "}
+            <a href="/api/auth/google/login" className="underline text-[#8b5cf6]">
+              Sign in with Google
+            </a>
+          </p>
+        ) : error === "forbidden" ? (
+          <p className="text-sm text-center mb-4 text-red-400">
+            This Google account is not authorized for admin access.
+          </p>
+        ) : error ? (
           <p className="text-sm text-center mb-4 text-red-400">
             Incorrect admin password.
           </p>
-        )}
+        ) : null}
 
         <form action={loginAction}>
           <input type="hidden" name="from" value={from ?? (wantsEditMode ? "/" : "/admin")} />

@@ -7,13 +7,15 @@
 //   - New file found in Drive → adds entry by fileId (never duplicates)
 //   - Existing file already in audio_links → skipped
 //   - Entries already in audio_links not found in Drive → kept (never deleted)
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 import { readContent } from "./content-documents.mjs";
-import { listDriveItems } from "./drive-api.mjs";
+import { listDriveItems, downloadPublicDriveFileToPath, driveDownloadDelay } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const audioRoot = path.join(root, "apps", "web", "public", "media", "session-audio");
 
 function configuredDriveFolderUrl(pagePath, labelPattern, fallback) {
   try {
@@ -70,6 +72,31 @@ function cleanAudioTitle(filename) {
     .trim();
 }
 
+function localAudioUrl(campaignId, sessionNumber, fileId) {
+  return `/media/session-audio/${campaignId}/session-${sessionNumber}-${fileId}.mp3`;
+}
+
+function driveFileId(link) {
+  return link.sourceFileId
+    ?? /drive\.google\.com\/file\/d\/([^/]+)/.exec(link.url ?? "")?.[1]
+    ?? null;
+}
+
+async function cacheAudioFile(file, campaignId, sessionNumber) {
+  const url = localAudioUrl(campaignId, sessionNumber, file.id);
+  const destination = path.join(root, "apps", "web", "public", ...url.split("/").filter(Boolean));
+  const expectedSize = Number(file.size ?? 0);
+  if (fs.existsSync(destination) && (!expectedSize || fs.statSync(destination).size === expectedSize)) {
+    return { url, downloaded: false };
+  }
+
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  await driveDownloadDelay();
+  await downloadPublicDriveFileToPath(file.id, destination);
+  if (!fs.statSync(destination).size) throw new Error(`Drive returned an empty file for ${file.title}`);
+  return { url, downloaded: true };
+}
+
 const db = getDb();
 
 const campaigns = db.prepare("SELECT id, name, aliases FROM campaigns").all().map((row) => ({
@@ -95,11 +122,16 @@ for (const s of sessions) {
   sessionIndex.set(key, s);
 }
 
+console.log(`Scanning Drive campaign root ${DRIVE_ROOT_FOLDER_ID}...`);
 const rootRaw = await listDriveItems(DRIVE_ROOT_FOLDER_ID);
 const folderByName = new Map(rootRaw.map((f) => [norm(f.name), { id: f.id, title: f.name }]));
 
 const changes = [];
 const warnings = [];
+let downloadedCount = 0;
+let cachedCount = 0;
+let sourceBytes = 0;
+fs.mkdirSync(audioRoot, { recursive: true });
 const updates = new Map(); // session.id → new audio_links array
 
 for (const campaign of campaigns) {
@@ -111,6 +143,8 @@ for (const campaign of campaigns) {
     warnings.push(`${campaign.name}: no matching Drive subfolder found`);
     continue;
   }
+
+  console.log(`Scanning ${campaign.name} for session audio...`);
 
   const subRaw = await listDriveItems(folder.id);
   const subItems = subRaw.map((f) => ({ id: f.id, title: f.name }));
@@ -124,7 +158,7 @@ for (const campaign of campaigns) {
 
   const audioRaw = await listDriveItems(audioFolder.id);
   const mp3Files = audioRaw
-    .map((f) => ({ id: f.id, title: f.name }))
+    .map((f) => ({ id: f.id, title: f.name, size: f.size, modifiedTime: f.modifiedTime }))
     .filter((f) => /\.(?:mp3|txt\.mp3)$/i.test(f.title));
 
   if (mp3Files.length === 0) {
@@ -146,20 +180,68 @@ for (const campaign of campaigns) {
       continue;
     }
 
-    const driveUrl = `https://drive.google.com/file/d/${file.id}/view?usp=sharing`;
-    const alreadyLinked = session.audioLinks.some((link) =>
-      link.url?.includes(file.id),
-    );
-    if (alreadyLinked) continue;
+    sourceBytes += Number(file.size ?? 0);
+    console.log(`  Caching ${campaign.name} session ${num}: ${file.title}`);
+    let cached;
+    try {
+      cached = await cacheAudioFile(file, campaign.id, num);
+    } catch (error) {
+      warnings.push(`${campaign.name} #${num}: could not cache ${file.title}: ${error.message}`);
+      continue;
+    }
+    if (cached.downloaded) downloadedCount += 1;
+    else cachedCount += 1;
 
-    const title = cleanAudioTitle(file.title);
-    const label = `${session.title} Recording`;
-    const newLink = { label, url: driveUrl };
-
-    const pending = updates.get(session.id) ?? session.audioLinks;
-    updates.set(session.id, [...pending, newLink]);
-    changes.push(`${campaign.name} #${num}: added audio link "${label}"`);
+    const pending = updates.get(session.id) ?? [...session.audioLinks];
+    const existingIndex = pending.findIndex((link) => driveFileId(link) === file.id);
+    const existing = existingIndex >= 0 ? pending[existingIndex] : null;
+    const label = existing?.label ?? cleanAudioTitle(file.title) ?? `${session.title} Recording`;
+    const localLink = {
+      label,
+      url: cached.url,
+      sourceFileId: file.id,
+      sourceFileName: file.title,
+      sourceUrl: `https://drive.google.com/file/d/${file.id}/view?usp=sharing`,
+    };
+    if (existingIndex >= 0) pending[existingIndex] = localLink;
+    else pending.push(localLink);
+    updates.set(session.id, pending);
+    if (!existing || existing.url !== cached.url) {
+      changes.push(`${campaign.name} #${num}: ${existing ? "localized" : "added"} audio "${label}"`);
+    }
   }
+}
+
+// Some older campaigns keep recording links outside the standard audio folder.
+// Localize any remaining direct Drive links already attached to a session.
+for (const session of sessions) {
+  const pending = updates.get(session.id) ?? [...session.audioLinks];
+  let changed = false;
+  for (let index = 0; index < pending.length; index += 1) {
+    const link = pending[index];
+    if (link.url?.startsWith("/media/session-audio/")) continue;
+    const fileId = driveFileId(link);
+    if (!fileId || session.sessionNumber === null) continue;
+
+    const file = { id: fileId, title: link.sourceFileName ?? link.label ?? `${session.title}.mp3` };
+    try {
+      const cached = await cacheAudioFile(file, session.campaignId, session.sessionNumber);
+      if (cached.downloaded) downloadedCount += 1;
+      else cachedCount += 1;
+      pending[index] = {
+        ...link,
+        url: cached.url,
+        sourceFileId: fileId,
+        sourceFileName: file.title,
+        sourceUrl: link.sourceUrl ?? link.url,
+      };
+      changed = true;
+      changes.push(`${session.campaignId} #${session.sessionNumber}: localized direct audio "${link.label ?? file.title}"`);
+    } catch (error) {
+      warnings.push(`${session.campaignId} #${session.sessionNumber}: could not cache direct audio: ${error.message}`);
+    }
+  }
+  if (changed) updates.set(session.id, pending);
 }
 
 if (updates.size > 0) {
@@ -176,6 +258,7 @@ if (updates.size > 0) {
 const stamp = new Date().toISOString();
 console.log(`[${stamp}] Session audio sync complete`);
 console.log(`Scanned ${campaigns.length} campaigns, updated ${updates.size} session(s).`);
+console.log(`Audio cache: ${downloadedCount} downloaded, ${cachedCount} already current, ${(sourceBytes / 1024 / 1024).toFixed(1)} MB indexed.`);
 
 if (changes.length) {
   console.log("Changes:");
