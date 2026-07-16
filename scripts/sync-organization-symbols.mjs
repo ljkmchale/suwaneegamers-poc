@@ -121,7 +121,7 @@ for (const organization of organizations) {
   }
 
   const subRaw = await listDriveItems(folder.id);
-  const files = subRaw.map((f) => ({ id: f.id, title: f.name }));
+  const files = subRaw.map((f) => ({ id: f.id, title: f.name, size: Number(f.size ?? 0) }));
   const picked = pickSymbolFile(folder.title, files);
   if (!picked) {
     if (organization.image) {
@@ -134,7 +134,13 @@ for (const organization of organizations) {
 
   const filename = `${slugify(organization.name)}-symbol.png`;
   const destination = path.join(imageDir, filename);
-  const downloaded = await tryDownloadPng(picked.file.id, destination);
+
+  // Drive's abuse limiter slow-403s bulk API-key downloads, so skip files
+  // whose cached copy already matches the size Drive reports in the listing.
+  const upToDate = picked.file.size > 0
+    && fs.existsSync(destination)
+    && fs.statSync(destination).size === picked.file.size;
+  const downloaded = upToDate || await tryDownloadPng(picked.file.id, destination);
 
   if (!downloaded) {
     warnings.push(`${organization.name}: Drive blocked unauthenticated PNG download for ${picked.file.title}; keeping existing local cache`);

@@ -95,7 +95,7 @@ fs.mkdirSync(imageDir, { recursive: true });
 
 const rawItems = await listDriveItems(driveFolderId);
 const driveItems = rawItems
-  .map((f) => ({ id: f.id, title: f.name }))
+  .map((f) => ({ id: f.id, title: f.name, size: Number(f.size ?? 0) }))
   .filter((item) => / - Symbol \(v\.0\)\.png$/i.test(item.title));
 
 const symbolByName = new Map(
@@ -117,7 +117,13 @@ for (const block of deityBlocks) {
 
   const filename = `${slugify(deityName)}-symbol.png`;
   const destination = path.join(imageDir, filename);
-  const downloaded = await tryDownloadPng(symbol.id, destination);
+
+  // Drive's abuse limiter slow-403s bulk API-key downloads, so skip files
+  // whose cached copy already matches the size Drive reports in the listing.
+  const upToDate = symbol.size > 0
+    && fs.existsSync(destination)
+    && fs.statSync(destination).size === symbol.size;
+  const downloaded = upToDate || await tryDownloadPng(symbol.id, destination);
 
   // Resolve image path: prefer the downloaded PNG, then an already-cached local PNG,
   // then the webp fallback, then the PNG path as a last resort.

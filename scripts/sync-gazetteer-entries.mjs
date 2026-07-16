@@ -15,7 +15,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 import { readContent, writeContent } from "./content-documents.mjs";
-import { listDriveItems } from "./drive-api.mjs";
+import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -41,6 +41,7 @@ const driveFolderUrl = configuredDriveFolderUrl(
 );
 const driveFolderId = folderIdFromUrl(driveFolderUrl) ?? "1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
 const campaignSettingDocId = "1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ";
+const heraldryImageDir = path.join(root, "apps", "web", "public", "images", "gazetteer", "cities");
 
 const SKIPPED_FOLDER_TITLES = new Set(["new folder", "inspiration"]);
 
@@ -53,6 +54,8 @@ function toCommonItem(file) {
     isFolder: file.mimeType === "application/vnd.google-apps.folder",
     isGoogleDoc: file.mimeType === "application/vnd.google-apps.document",
     isImage: (file.mimeType ?? "").startsWith("image/"),
+    mimeType: file.mimeType ?? "",
+    size: Number(file.size ?? 0),
   };
 }
 
@@ -158,12 +161,52 @@ function toDriveFolderUrl(id) {
   return `https://drive.google.com/drive/folders/${id}`;
 }
 
-function toDriveThumbnailUrl(id) {
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w500`;
-}
-
 function toDocUrl(id) {
   return `https://docs.google.com/document/d/${id}/edit?usp=sharing`;
+}
+
+function imageExtension(mimeType) {
+  if (mimeType === "image/jpeg") return "jpg";
+  if (mimeType === "image/webp") return "webp";
+  if (mimeType === "image/gif") return "gif";
+  return "png";
+}
+
+function existingLocalHeraldry(slug) {
+  for (const extension of ["png", "jpg", "jpeg", "webp", "gif"]) {
+    const filename = `${slug}.${extension}`;
+    if (fs.existsSync(path.join(heraldryImageDir, filename))) {
+      return `/images/gazetteer/cities/${filename}`;
+    }
+  }
+  return null;
+}
+
+async function cacheHeraldry(heraldry, slug) {
+  if (!heraldry) return null;
+
+  const extension = imageExtension(heraldry.mimeType);
+  const filename = `${slug}.${extension}`;
+  const destination = path.join(heraldryImageDir, filename);
+
+  // Drive rejects API-key downloads for these files (slow 403 + public-URL
+  // fallback per image), so re-downloading all ~70 crests every run blows the
+  // job timeout. Skip files whose cached copy already matches the Drive size.
+  if (heraldry.size > 0 && fs.existsSync(destination) && fs.statSync(destination).size === heraldry.size) {
+    return `/images/gazetteer/cities/${filename}`;
+  }
+
+  try {
+    await driveDownloadDelay();
+    const bytes = await downloadDriveFile(heraldry.id);
+    if (!bytes.length) throw new Error("empty image response");
+    fs.writeFileSync(destination, bytes);
+    return `/images/gazetteer/cities/${filename}`;
+  } catch (error) {
+    const cached = existingLocalHeraldry(slug);
+    if (cached) return cached;
+    throw new Error(`Unable to cache heraldry ${heraldry.title}: ${error.message}`);
+  }
 }
 
 // --- Heraldry selection ------------------------------------------------------
@@ -225,15 +268,17 @@ async function inspectSettlementFolder(folder) {
   const items = rawItems.map(toCommonItem);
   const heraldry = selectHeraldryImage(items, folder.title);
   const reference = items.find(isGazetteerReference);
+  const slug = slugify(folder.title);
+  const heraldryUrl = await cacheHeraldry(heraldry, slug);
 
   return {
     folderId: folder.id,
     title: folder.title,
-    slug: slugify(folder.title),
+    slug,
     folderUrl: toDriveFolderUrl(folder.id),
     referenceUrl: reference ? toDocUrl(reference.id) : null,
     referenceFileId: reference?.id ?? null,
-    heraldryUrl: heraldry ? toDriveThumbnailUrl(heraldry.id) : null,
+    heraldryUrl,
     heraldryFileId: heraldry?.id ?? null,
     heraldryFileName: heraldry?.title ?? null,
   };
@@ -317,6 +362,7 @@ function ensureGazetteerColumns(db) {
 // --- Main --------------------------------------------------------------------
 
 const stamp = new Date().toISOString();
+fs.mkdirSync(heraldryImageDir, { recursive: true });
 
 const rootApiItems = await listDriveItems(driveFolderId);
 const foldersById = new Map();
