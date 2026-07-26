@@ -382,6 +382,43 @@ function initializeSchema(db: Database.Database): void {
       ON analytics_sessions(last_seen_at DESC);
 
     -- ----------------------------------------------------------------
+    -- Voice assistant analytics (admin-only question text)
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS voice_sessions (
+      session_id     TEXT PRIMARY KEY,
+      room_name      TEXT NOT NULL UNIQUE,
+      member_id      TEXT NOT NULL,
+      member_name    TEXT,
+      member_email   TEXT,
+      started_at     TEXT NOT NULL,
+      ended_at       TEXT,
+      duration_seconds INTEGER NOT NULL DEFAULT 0,
+      status         TEXT NOT NULL DEFAULT 'started',
+      question_count INTEGER NOT NULL DEFAULT 0,
+      error_count    INTEGER NOT NULL DEFAULT 0
+    );
+
+    CREATE TABLE IF NOT EXISTS voice_questions (
+      id             INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id     TEXT NOT NULL REFERENCES voice_sessions(session_id) ON DELETE CASCADE,
+      asked_at       TEXT NOT NULL,
+      question       TEXT NOT NULL,
+      answer         TEXT,
+      category       TEXT NOT NULL,
+      response_mode  TEXT NOT NULL,
+      response_ms    INTEGER,
+      success        INTEGER NOT NULL DEFAULT 1,
+      error_message  TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_voice_sessions_started
+      ON voice_sessions(started_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_voice_questions_asked
+      ON voice_questions(asked_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_voice_questions_category
+      ON voice_questions(category, asked_at DESC);
+
+    -- ----------------------------------------------------------------
     -- Custom pages (admin-created pages with slugs)
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS custom_pages (
