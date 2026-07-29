@@ -28,10 +28,10 @@ describe("getPlayerProfileSeeds", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("portrait paths start with /images/ when set", () => {
+  it("portrait paths start with /media/images/ when set", () => {
     for (const seed of getPlayerProfileSeeds()) {
       if (seed.portrait) {
-        expect(seed.portrait).toMatch(/^\/images\//);
+        expect(seed.portrait).toMatch(/^\/media\/images\//);
       }
     }
   });
@@ -65,8 +65,8 @@ describe("getPlayerProfiles", () => {
       ]),
     );
 
-    expect(ty?.portrait).toBe("/images/ty-cooper-clean.webp");
-    expect(emma?.portrait).toBe("/images/emma-cooper-clean.webp");
+    expect(ty?.portrait).toBe("/media/images/ty-cooper-clean.webp");
+    expect(emma?.portrait).toBe("/media/images/emma-cooper-clean.webp");
   });
 
   it("returns players sorted alphabetically by name", () => {

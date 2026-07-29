@@ -7,6 +7,18 @@ import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = path.join(root, "apps", "web", "public");
+// Images moved out of public/ and are served by app/media/images/[...segments],
+// so a /media/images/... URL resolves under apps/web/media, not apps/web/public.
+const mediaDir = path.join(root, "apps", "web", "media");
+const MEDIA_URL_PREFIX = "/media/";
+
+function resolveLocalPath(pathname) {
+  const segments = pathname.split("/").filter(Boolean);
+  if (pathname.startsWith(MEDIA_URL_PREFIX)) {
+    return path.join(mediaDir, ...segments.slice(1));
+  }
+  return path.join(publicDir, ...segments);
+}
 const imageKeys = /^(image|imageUrl|image_url|headerImage|header_image|logo|artwork|portrait|banner|cover|thumbnail|symbol|icon)$/i;
 const imageBlockTypes = new Set(["image", "deity-card", "campaign-hero"]);
 const remote = [];
@@ -21,8 +33,7 @@ function inspectImage(value, location) {
   if (!value.startsWith("/")) return;
 
   const pathname = value.split(/[?#]/, 1)[0];
-  const localPath = path.join(publicDir, ...pathname.split("/").filter(Boolean));
-  if (!fs.existsSync(localPath)) missing.push({ location, value });
+  if (!fs.existsSync(resolveLocalPath(pathname))) missing.push({ location, value });
 }
 
 function walk(value, location, parentType = "") {

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const ASSET_ROOT = "/images/logo-animation";
+const ASSET_ROOT = "/media/images/logo-animation";
 
 export function DragonLogoStudy() {
   const [paused, setPaused] = useState(false);

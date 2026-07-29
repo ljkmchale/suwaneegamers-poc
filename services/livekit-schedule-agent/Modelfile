@@ -1,4 +1,18 @@
-FROM "C:\Users\Larry McHale\.ollama\models\blobs\sha256-7f4030143c1c477224c5434f8272c662a8b042079a0a584f0a27a1684fe2e1fa-partial"
+# Myra's voice model.
+#
+# Qwen2.5 3B Instruct (Q4_K_M) on top of Ollama's official image. Replaced the
+# earlier 0.6B model: at the same GPU latency (~270ms to first spoken word) it
+# answers grounded lookups correctly where the 0.6B hallucinated (e.g. it reads
+# the right god of Death, Crael, straight out of the injected roster). Not a
+# reasoning model, so there is no chain-of-thought to disable.
+#
+# num_ctx is pinned small on purpose: the compact system prompt is ~1,800 tokens,
+# so 8k leaves comfortable room for several conversation turns while keeping
+# prefill fast and KV-cache VRAM tiny (~0.3 GB) on the 8 GB card.
+#
+# Rebuild after editing:
+#   ollama create suwanee-schedule -f Modelfile
+FROM qwen2.5:3b
 
-PARAMETER temperature 0.2
-PARAMETER num_ctx 4096
+PARAMETER temperature 0.3
+PARAMETER num_ctx 8192

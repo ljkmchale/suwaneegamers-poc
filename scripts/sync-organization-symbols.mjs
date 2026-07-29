@@ -12,6 +12,7 @@ import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 import { readContent } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
+import { hasCachedImage, saveOptimizedImage } from "./lib-image-cache.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -36,7 +37,7 @@ const driveRootFolderUrl = configuredDriveFolderUrl(
   "https://drive.google.com/drive/folders/1K-Z6118llmVHHqCteN67b-G6n49edz3P",
 );
 const driveRootFolderId = folderIdFromUrl(driveRootFolderUrl) ?? "1K-Z6118llmVHHqCteN67b-G6n49edz3P";
-const imageDir = path.join(root, "apps", "web", "public", "images", "organizations");
+const imageDir = path.join(root, "apps", "web", "media", "images", "organizations");
 
 const folderNameAliases = new Map([
   ["peragontear", "paragontear"],
@@ -80,7 +81,7 @@ function pickSymbolFile(folderName, files) {
   return pngSymbols[0] ? { file: pngSymbols[0], exact: false } : null;
 }
 
-async function tryDownloadPng(fileId, destination) {
+async function tryDownloadPngBytes(fileId) {
   try {
     await driveDownloadDelay();
     const bytes = await downloadDriveFile(fileId);
@@ -89,11 +90,10 @@ async function tryDownloadPng(fileId, destination) {
       && bytes[2] === 0x4e && bytes[3] === 0x47
       && bytes[4] === 0x0d && bytes[5] === 0x0a
       && bytes[6] === 0x1a && bytes[7] === 0x0a;
-    if (!isPng) return false;
-    fs.writeFileSync(destination, bytes);
-    return true;
+    if (!isPng) return null;
+    return bytes;
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -132,17 +132,24 @@ for (const organization of organizations) {
     continue;
   }
 
-  const filename = `${slugify(organization.name)}-symbol.png`;
-  const destination = path.join(imageDir, filename);
+  const basename = `${slugify(organization.name)}-symbol`;
+  const legacyPng = path.join(imageDir, `${basename}.png`);
 
   // Drive's abuse limiter slow-403s bulk API-key downloads, so skip files
-  // whose cached copy already matches the size Drive reports in the listing.
-  const upToDate = picked.file.size > 0
-    && fs.existsSync(destination)
-    && fs.statSync(destination).size === picked.file.size;
-  const downloaded = upToDate || await tryDownloadPng(picked.file.id, destination);
+  // whose cached copy was built from the size Drive reports in the listing
+  // (tracked in the directory manifest — cached files are re-encoded WebP).
+  let filename = null;
+  if (hasCachedImage(imageDir, basename, picked.file.size)) {
+    filename = `${basename}.webp`;
+  } else if (picked.file.size > 0 && fs.existsSync(legacyPng) && fs.statSync(legacyPng).size === picked.file.size) {
+    // legacy raw-PNG cache still matches Drive: re-encode locally, no download
+    filename = await saveOptimizedImage(imageDir, basename, fs.readFileSync(legacyPng), picked.file.size);
+  } else {
+    const bytes = await tryDownloadPngBytes(picked.file.id);
+    if (bytes) filename = await saveOptimizedImage(imageDir, basename, bytes, picked.file.size);
+  }
 
-  if (!downloaded) {
+  if (!filename) {
     warnings.push(`${organization.name}: Drive blocked unauthenticated PNG download for ${picked.file.title}; keeping existing local cache`);
     continue;
   }

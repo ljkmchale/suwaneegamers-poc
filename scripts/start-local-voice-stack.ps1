@@ -1,5 +1,13 @@
 $ErrorActionPreference = "Stop"
 
+# GPU policy for this stack: Ollama (the LLM) runs on the RTX 5060; everything
+# else stays on CPU. faster-whisper / CTranslate2 in Speaches does NOT run on
+# this Blackwell card and crashes on model load if the GPU is visible, so the
+# default here is CPU-only and we grant the GPU to Ollama alone, just before it
+# launches. Do NOT set CUDA_VISIBLE_DEVICES globally (User/Machine scope) — that
+# takes Speaches down with it.
+$env:CUDA_VISIBLE_DEVICES = "-1"
+
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $liveKitRoot = Join-Path $env:LOCALAPPDATA "SuwaneeGamers\LiveKit"
 $liveKitExe = Join-Path $liveKitRoot "1.13.4\livekit-server.exe"
@@ -34,11 +42,16 @@ if (-not (Test-TcpPort 8000)) {
 
 if (-not (Test-TcpPort 11434)) {
   $ollama = Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"
+  $env:OLLAMA_KEEP_ALIVE = "-1"
+  # Grant the GPU to Ollama only (the model runs 100% on the RTX 5060).
+  $env:CUDA_VISIBLE_DEVICES = "0"
   Start-Process `
     -FilePath $ollama `
     -ArgumentList "serve" `
     -WorkingDirectory (Split-Path -Parent $ollama) `
     -WindowStyle Hidden
+  # Restore CPU-only for anything launched after this (the agent).
+  $env:CUDA_VISIBLE_DEVICES = "-1"
 }
 
 $agentRunning = Get-CimInstance Win32_Process |
@@ -53,4 +66,3 @@ if (-not $agentRunning) {
     -WorkingDirectory $agentRoot `
     -WindowStyle Hidden
 }
-

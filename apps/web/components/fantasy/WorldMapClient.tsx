@@ -44,7 +44,7 @@ export function WorldMapClient({ locations }: { locations: Location[] }) {
               Map of Myrdae
             </p>
             <p className="text-sm mt-2" style={{ color: "var(--color-text-muted)" }}>
-              Add a world map image to /public/images/world-map.jpg
+              Add a world map image to /public/media/images/world-map.jpg
             </p>
           </div>
         </div>

@@ -21,24 +21,10 @@
   },
   {
     "kind": "block",
-    "id": "reference-dm-reference-guide",
-    "type": "card",
-    "props": {
-      "image": "/images/guides-to-myrdae/dm-reference.jpg",
-      "imageAlt": "Reference for Dungeon Masters cover artwork",
-      "eyebrow": "DM Toolkit",
-      "title": "Reference for Dungeon Masters",
-      "description": "Dungeon Master-facing rules, tables, services, travel references, prices, and NPC support for Myrdae.",
-      "href": "https://sites.google.com/view/suwanee-gamers/guides-to-myrdae#h.5x2zg7xwpada",
-      "linkLabel": "Open Reference"
-    }
-  },
-  {
-    "kind": "block",
     "id": "reference-encounter-difficulty",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-encounter-difficulty.webp",
+      "image": "/media/images/references-sourcebooks/tool-encounter-difficulty.webp",
       "imageAlt": "5.5e Encounter Difficulty Calculator artwork",
       "eyebrow": "Calculator",
       "title": "5.5e Encounter Difficulty Calculator",
@@ -52,7 +38,7 @@
     "id": "reference-battlemap-archive",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-battlemap-archive.webp",
+      "image": "/media/images/references-sourcebooks/tool-battlemap-archive.webp",
       "imageAlt": "Battlemap Archive artwork",
       "eyebrow": "Maps",
       "title": "Battlemap Archive",
@@ -66,7 +52,7 @@
     "id": "reference-dm-lair",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-dm-lair.webp",
+      "image": "/media/images/references-sourcebooks/tool-dm-lair.webp",
       "imageAlt": "DM Lair artwork",
       "eyebrow": "Downloads",
       "title": "DM Lair",
@@ -80,7 +66,7 @@
     "id": "reference-map-generator",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-map-generator.webp",
+      "image": "/media/images/references-sourcebooks/tool-map-generator.webp",
       "imageAlt": "Map Generator artwork",
       "eyebrow": "Cartography",
       "title": "Map Generator",
@@ -94,7 +80,7 @@
     "id": "reference-miniatures",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-miniatures.webp",
+      "image": "/media/images/references-sourcebooks/tool-miniatures.webp",
       "imageAlt": "Miniatures artwork",
       "eyebrow": "Inventory",
       "title": "Miniatures",
@@ -108,7 +94,7 @@
     "id": "reference-minis-hewson-can-print",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/tool-minis-hewson-can-print.webp",
+      "image": "/media/images/references-sourcebooks/tool-minis-hewson-can-print.webp",
       "imageAlt": "Minis Hewson Can Print artwork",
       "eyebrow": "Printable Minis",
       "title": "Minis Hewson Can Print",

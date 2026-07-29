@@ -287,7 +287,7 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
           title={(item.props.label as string | undefined) ?? "Session recording"}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/dragon-ears.png" alt="" className="h-full w-full rounded-full object-contain" />
+          <img src="/media/images/dragon-ears.webp" alt="" className="h-full w-full rounded-full object-contain" />
         </a>
       </div>
     );
@@ -311,7 +311,7 @@ function DraftCardLayoutItem({ item }: { item: CardLayoutItem }) {
               style={{ borderColor: "var(--color-bg-border)", boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={(item.props.image as string | undefined) || "/images/dragon-ears.png"} alt="" className="h-full w-full rounded-full object-contain" />
+              <img src={(item.props.image as string | undefined) || "/media/images/dragon-ears.webp"} alt="" className="h-full w-full rounded-full object-contain" />
             </summary>
             <div className="mt-3 min-w-0">
               {!source ? (
@@ -600,8 +600,13 @@ function DraftBlock({
             {(props.title as string | undefined) ?? "New Card"}
           </h3>
           {props.description ? (
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="mt-3 whitespace-pre-line text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {props.description as string}
+            </p>
+          ) : null}
+          {props.highlightText ? (
+            <p className="mt-2 text-sm font-semibold leading-relaxed" style={{ color: "var(--color-accent-blood)" }}>
+              {props.highlightText as string}
             </p>
           ) : null}
         </div>
@@ -984,7 +989,7 @@ function DraftBlock({
                 style={{ borderColor: "var(--color-bg-border)", boxShadow: "0 0 18px rgba(245, 158, 11, 0.14)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={(props.image as string | undefined) || "/images/dragon-ears.png"} alt="" className="h-full w-full rounded-full object-contain" />
+                <img src={(props.image as string | undefined) || "/media/images/dragon-ears.webp"} alt="" className="h-full w-full rounded-full object-contain" />
               </summary>
               <div className="mt-3">
                 {!source ? (

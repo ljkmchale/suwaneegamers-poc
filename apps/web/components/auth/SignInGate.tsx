@@ -7,7 +7,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   not_configured: "Sign-in is not available right now.",
 };
 
-export function SignInGate({ error }: { error?: string }) {
+export function SignInGate({ error, returnTo }: { error?: string; returnTo?: string }) {
   const message = error ? ERROR_MESSAGES[error] : undefined;
 
   return (
@@ -52,7 +52,7 @@ export function SignInGate({ error }: { error?: string }) {
           </p>
         )}
 
-        <GoogleSignInButton />
+        <GoogleSignInButton returnTo={returnTo} />
 
         <p className="mt-8 text-xs leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
           We only use your name and email to show who&apos;s active in the group.

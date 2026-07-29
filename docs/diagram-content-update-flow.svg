@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffaf2"/><stop offset="1" stop-color="#f5f3ff"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#312e81" flood-opacity=".14"/></filter>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="#62677c"/></marker>
+    <style>.t{font:700 34px Arial;fill:#292550}.b{rx:18;stroke-width:2;filter:url(#s)}.l{font:700 22px Arial;fill:#27263b;text-anchor:middle}.d{font:400 16px Arial;fill:#62677c;text-anchor:middle}.ar{stroke:#62677c;stroke-width:4;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1400" height="520" rx="28" fill="url(#bg)"/>
+  <text x="700" y="58" class="t" text-anchor="middle">How content reaches the website</text>
+  <rect class="b" x="45" y="150" width="235" height="145" fill="#fff" stroke="#f59e0b"/>
+  <text x="163" y="195" class="l">Source material</text><text x="163" y="230" class="d">Google Docs • Drive</text><text x="163" y="258" class="d">Calendar • world map</text>
+  <rect class="b" x="335" y="150" width="235" height="145" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="453" y="195" class="l">Scheduler</text><text x="453" y="230" class="d">Imports and processes</text><text x="453" y="258" class="d">Records each job</text>
+  <rect class="b" x="625" y="150" width="235" height="145" fill="#ecfdf5" stroke="#059669"/>
+  <text x="743" y="195" class="l">SQLite first</text><text x="743" y="230" class="d">Live content source</text><text x="743" y="258" class="d">Used by the website</text>
+  <rect class="b" x="915" y="150" width="200" height="145" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="1015" y="195" class="l">File mirrors</text><text x="1015" y="230" class="d">JSON • Markdown</text><text x="1015" y="258" class="d">Fallback and history</text>
+  <rect class="b" x="1170" y="150" width="185" height="145" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="1263" y="195" class="l">Website</text><text x="1263" y="230" class="d">Revalidates pages</text><text x="1263" y="258" class="d">Shows new content</text>
+  <path class="ar" d="M280 223h43"/><path class="ar" d="M570 223h43"/><path class="ar" d="M860 223h43"/><path class="ar" d="M1115 223h43"/>
+  <path class="ar" d="M743 307c0 115 520 115 520 0"/>
+  <text x="1005" y="420" class="d">Runtime pages normally read SQLite before the mirror files</text>
+</svg>

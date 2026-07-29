@@ -186,7 +186,7 @@ function parseEras(chronology: string): { intro: string[]; eras: HistoryEra[] } 
       id: slug(heading.title),
       title: heading.title,
       description,
-      imageUrl: `/images/history/timeline-${slug(heading.title)}-book.webp`,
+      imageUrl: `/media/images/history/timeline-${slug(heading.title)}-book.webp`,
       years,
     };
   });

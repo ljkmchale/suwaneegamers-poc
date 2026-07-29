@@ -1,0 +1,49 @@
+[
+  {
+    "kind": "block",
+    "id": "terms-of-use-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Suwanee Gamers",
+      "title": "Terms of Use",
+      "description": "Terms governing access to and use of this website.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "terms-of-use-agreement",
+    "type": "text",
+    "props": {
+      "content": "You agree to the following terms when accessing or using the Suwanee Gamers website:",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "terms-of-use-limited-license",
+    "type": "text",
+    "props": {
+      "content": "Users are granted a limited license to view, download, and print materials for personal, non-commercial tabletop gaming use only.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "terms-of-use-prohibited-use",
+    "type": "text",
+    "props": {
+      "content": "Users are strictly prohibited from republishing, selling, licensing, or commercially distributing any text, imagery, or files from the site.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "terms-of-use-enforcement",
+    "type": "text",
+    "props": {
+      "content": "Any commercial exploitation will result in immediate termination of access and potential legal action.",
+      "align": "left"
+    }
+  }
+]

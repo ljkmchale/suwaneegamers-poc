@@ -16,6 +16,7 @@ import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 import { readContent, writeContent } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
+import { hasCachedImage, saveOptimizedImage } from "./lib-image-cache.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -41,7 +42,7 @@ const driveFolderUrl = configuredDriveFolderUrl(
 );
 const driveFolderId = folderIdFromUrl(driveFolderUrl) ?? "1idEf0ZY4tSnwaoQbVUZWtcwGdeBlbSTg";
 const campaignSettingDocId = "1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ";
-const heraldryImageDir = path.join(root, "apps", "web", "public", "images", "gazetteer", "cities");
+const heraldryImageDir = path.join(root, "apps", "web", "media", "images", "gazetteer", "cities");
 
 const SKIPPED_FOLDER_TITLES = new Set(["new folder", "inspiration"]);
 
@@ -173,7 +174,7 @@ function imageExtension(mimeType) {
 }
 
 function existingLocalHeraldry(slug) {
-  for (const extension of ["png", "jpg", "jpeg", "webp", "gif"]) {
+  for (const extension of ["webp", "png", "jpg", "jpeg", "gif"]) {
     const filename = `${slug}.${extension}`;
     if (fs.existsSync(path.join(heraldryImageDir, filename))) {
       return `/images/gazetteer/cities/${filename}`;
@@ -185,22 +186,22 @@ function existingLocalHeraldry(slug) {
 async function cacheHeraldry(heraldry, slug) {
   if (!heraldry) return null;
 
-  const extension = imageExtension(heraldry.mimeType);
-  const filename = `${slug}.${extension}`;
-  const destination = path.join(heraldryImageDir, filename);
-
   // Drive rejects API-key downloads for these files (slow 403 + public-URL
   // fallback per image), so re-downloading all ~70 crests every run blows the
-  // job timeout. Skip files whose cached copy already matches the Drive size.
-  if (heraldry.size > 0 && fs.existsSync(destination) && fs.statSync(destination).size === heraldry.size) {
-    return `/images/gazetteer/cities/${filename}`;
+  // job timeout. Skip files whose cached copy was built from the same Drive
+  // size (tracked in the directory manifest — the stored file is re-encoded
+  // WebP, so its own size can't be compared to Drive's).
+  if (hasCachedImage(heraldryImageDir, slug, heraldry.size)) {
+    return `/images/gazetteer/cities/${slug}.webp`;
   }
 
   try {
     await driveDownloadDelay();
     const bytes = await downloadDriveFile(heraldry.id);
     if (!bytes.length) throw new Error("empty image response");
-    fs.writeFileSync(destination, bytes);
+    const filename = await saveOptimizedImage(heraldryImageDir, slug, bytes, heraldry.size, {
+      fallbackExtension: imageExtension(heraldry.mimeType),
+    });
     return `/images/gazetteer/cities/${filename}`;
   } catch (error) {
     const cached = existingLocalHeraldry(slug);

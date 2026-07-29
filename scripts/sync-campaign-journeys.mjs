@@ -130,6 +130,18 @@ function hashSource(campaignId, title, summary) {
     .digest("hex");
 }
 
+// Source summaries can be placeholders ("Unknown", empty) when a session has no
+// notes yet. Substitute readable fallback copy for display fields — but keep
+// sourceHash on the raw summary so change detection still fires when real notes land.
+const PLACEHOLDER_SUMMARY =
+  "No session summary has been recorded for this session yet.";
+
+function usableSummary(value) {
+  const text = String(value ?? "").trim();
+  if (text.length <= 20 || /^unknown\.?$/i.test(text)) return PLACEHOLDER_SUMMARY;
+  return text;
+}
+
 function cleanText(value, maxLength = 720) {
   const text = String(value ?? "")
     .replace(/\s+/g, " ")
@@ -810,8 +822,8 @@ function buildGeneratedStop(
     session: `Session ${number}`,
     realDate: row.session_date ?? undefined,
     title: sessionLabel(row.title),
-    summary: cleanText(row.summary),
-    impact: impactFor(row.summary, location.location),
+    summary: cleanText(usableSummary(row.summary)),
+    impact: impactFor(usableSummary(row.summary), location.location),
     automatic: true,
     confidence: Number(location.confidence.toFixed(2)),
     ...(route ? { route } : {}),

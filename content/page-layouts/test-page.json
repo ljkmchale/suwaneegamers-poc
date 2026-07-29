@@ -259,7 +259,7 @@
       "type": "gallery",
       "props": {
         "columns": "3",
-        "images": "[\n  {\n    \"src\": \"/images/bestiary/giant-solifugid.webp\",\n    \"alt\": \"Gallery slot 2\",\n    \"caption\": \"Caption 2\"\n  },\n  {\n    \"src\": \"/images/basil-cooper.png\",\n    \"alt\": \"Gallery slot 1 — add an image from the media library\",\n    \"caption\": \"Caption 1\"\n  },\n  {\n    \"src\": \"/images/bestiary/kahlbit.webp\",\n    \"alt\": \"Gallery slot 3\",\n    \"caption\": \"Caption 3\"\n  },\n  {\n    \"src\": \"/images/bestiary/narun.webp\",\n    \"alt\": \"\",\n    \"caption\": \"\"\n  }\n]"
+        "images": "[\n  {\n    \"src\": \"/media/images/bestiary/giant-solifugid.webp\",\n    \"alt\": \"Gallery slot 2\",\n    \"caption\": \"Caption 2\"\n  },\n  {\n    \"src\": \"/media/images/basil-cooper.png\",\n    \"alt\": \"Gallery slot 1 — add an image from the media library\",\n    \"caption\": \"Caption 1\"\n  },\n  {\n    \"src\": \"/media/images/bestiary/kahlbit.webp\",\n    \"alt\": \"Gallery slot 3\",\n    \"caption\": \"Caption 3\"\n  },\n  {\n    \"src\": \"/media/images/bestiary/narun.webp\",\n    \"alt\": \"\",\n    \"caption\": \"\"\n  }\n]"
       },
       "x": 23.497267759562842,
       "y": 1712,
@@ -340,7 +340,7 @@
         "description": "Click the label to fold supporting content up or down.",
         "foldLabel": "View details",
         "foldText": "This area can hold text, an image, or both. Use the page editor to set the content and choose whether the fold starts open or closed.",
-        "foldImage": "/images/pantheon/addan.webp",
+        "foldImage": "/media/images/pantheon/addan.webp",
         "foldImageAlt": "Addan crest",
         "foldImageFit": "contain",
         "defaultState": "closed"
@@ -355,7 +355,7 @@
       "id": "test-media-player-audio",
       "type": "media-player",
       "props": {
-        "src": "/images/suwanee-media-player-test.wav",
+        "src": "/media/images/suwanee-media-player-test.wav",
         "title": "Uploaded Audio Test",
         "mediaType": "auto",
         "caption": "Generated one-second WAV used to verify inline uploaded audio playback."

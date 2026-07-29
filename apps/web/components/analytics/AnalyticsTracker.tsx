@@ -174,6 +174,7 @@ export function AnalyticsTracker() {
   const pathname = usePathname();
   const engagedSeconds = useRef(0);
   const trackedPath = useRef(pathname);
+  const pageLoadRecorded = useRef(false);
 
   useEffect(() => {
     if (!analyticsEnabled()) return;
@@ -185,18 +186,21 @@ export function AnalyticsTracker() {
       lastPageViewPath = pathname;
       send([{ eventType: "page_view", path: pathname, contentLabel: pageLabel() }]);
     }
-    const loadTimer = window.setTimeout(() => {
-      const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-      const durationMs = nav ? Math.round(nav.loadEventEnd || nav.duration) : 0;
-      if (durationMs > 0) {
-        send([{
-          eventType: "page_load",
-          path: trackedPath.current,
-          contentLabel: pageLabel(),
-          durationSeconds: durationMs,
-        }]);
-      }
-    }, 1500);
+    const loadTimer = pageLoadRecorded.current
+      ? undefined
+      : window.setTimeout(() => {
+          const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+          const durationMs = nav ? Math.round(nav.loadEventEnd || nav.duration) : 0;
+          if (durationMs > 0) {
+            pageLoadRecorded.current = true;
+            send([{
+              eventType: "page_load",
+              path: pathname,
+              contentLabel: pageLabel(),
+              durationSeconds: durationMs,
+            }]);
+          }
+        }, 1500);
 
     const interval = window.setInterval(() => {
       if (document.visibilityState === "visible" && document.hasFocus()) {
@@ -263,7 +267,7 @@ export function AnalyticsTracker() {
     return () => {
       window.clearInterval(interval);
       window.clearInterval(heartbeat);
-      window.clearTimeout(loadTimer);
+      if (loadTimer !== undefined) window.clearTimeout(loadTimer);
       window.removeEventListener("pagehide", handlePageHide);
       window.removeEventListener("scroll", handleScrollDepth);
       document.removeEventListener("visibilitychange", handleVisibility);

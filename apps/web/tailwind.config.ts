@@ -62,8 +62,8 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"],
       },
       backgroundImage: {
-        "dungeon-texture": "url('/images/textures/dungeon.jpg')",
-        "parchment-texture": "url('/images/textures/parchment.jpg')",
+        "dungeon-texture": "url('/media/images/textures/dungeon.jpg')",
+        "parchment-texture": "url('/media/images/textures/parchment.jpg')",
         "hero-gradient":
           "radial-gradient(ellipse at center, rgba(139,92,246,0.15) 0%, rgba(8,5,15,1) 70%)",
         "card-gradient":

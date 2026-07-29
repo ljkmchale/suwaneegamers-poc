@@ -2,11 +2,35 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from schedule_agent.agent import (
+    about_suwanee_gamers_answer,
+    apply_pronunciations,
     campaign_schedule_answer,
+    canonicalize_spoken_entity_question,
+    event_loop_lag,
     general_schedule_answer,
+    is_about_suwanee_gamers_question,
+    is_personal_schedule_question,
+    is_recap_question,
+    is_schedule_question,
+    is_self_diagnosis_question,
+    load_full_pantheon_knowledge,
+    load_pantheon_knowledge,
+    load_voice_entity_catalog,
+    navigation_request_target,
+    pantheon_deity_answer,
     parse_dispatch_metadata,
+    persona_speed,
+    persona_style_block,
+    persona_voice,
+    personalized_schedule_answer,
+    recap_answer,
+    resolve_navigation,
+    resolve_spoken_entity,
     schedule_facts,
     select_events,
+    summarize_health,
+    tool_result_is_current,
+    wake_word_command,
 )
 
 
@@ -28,6 +52,184 @@ def test_parse_dispatch_metadata_extracts_knowledge():
 def test_parse_dispatch_metadata_knowledge_defaults_to_empty():
     payload = parse_dispatch_metadata('{"timezone": "America/New_York", "events": []}')
     assert payload["knowledge"] == ""
+
+
+def test_parse_dispatch_metadata_keeps_about_and_safe_navigation():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "aboutSuwaneeGamers": "Our Story", "navigation": ['
+        '{"label": "Pantheon", "href": "/pantheon"},'
+        '{"label": "Unsafe", "href": "https://example.com"}]}'
+    )
+    assert payload["aboutSuwaneeGamers"] == "Our Story"
+    assert payload["navigation"] == [{"label": "Pantheon", "href": "/pantheon"}]
+
+
+def test_parse_dispatch_metadata_keeps_the_members_persona():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "persona": {"id": "british-cheeky", "label": "British & cheeky",'
+        ' "voice": "bf_emma", "speed": 1.0, "style": ["Dry British wit."],'
+        ' "examples": ["Say \\"Right then\\"."]}}'
+    )
+    assert payload["persona"]["voice"] == "bf_emma"
+    assert payload["persona"]["style"] == ["Dry British wit."]
+    assert persona_voice(payload["persona"]) == "bf_emma"
+    assert persona_speed(payload["persona"]) == 1.0
+
+
+def test_parse_dispatch_metadata_drops_a_nonsense_voice_id():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "persona": {"id": "x", "voice": "../../etc/passwd"}}'
+    )
+    assert "voice" not in payload["persona"]
+    # Falls back to the configured default rather than a broken TTS request.
+    assert persona_voice(payload["persona"]) == "af_heart"
+
+
+def test_persona_speed_stays_intelligible():
+    assert persona_speed({"speed": 4}) == 1.25
+    assert persona_speed({"speed": 0.1}) == 0.7
+    assert persona_speed({"speed": "quick"}) == 0.96
+    assert persona_speed({}) == 0.96
+
+
+def test_persona_style_block_falls_back_to_classic_myra():
+    block = persona_style_block({})
+    assert "knowledgeable gaming friend" in block
+    assert "Yeah — I can help with that." in block
+
+
+def test_persona_style_block_keeps_the_shared_guard_rails():
+    block = persona_style_block(
+        {"style": ["Be a sharp, quick-witted Brit."], "examples": ["Say \"Right then\"."]}
+    )
+    assert "quick-witted Brit" in block
+    assert "knowledgeable gaming friend" not in block
+    # Persona-independent limits survive any personality.
+    assert "Personality never outranks accuracy" in block
+    assert "No profanity" in block
+    assert "Never output SSML" in block
+
+
+def test_pantheon_reference_keeps_rosters_and_drops_prose():
+    pantheon = load_pantheon_knowledge()
+    # Both rosters (names, titles, domains) stay for fast god-list/domain answers.
+    assert "## The New Order" in pantheon
+    assert "Tyvarion" in pantheon
+    assert "Master of Masks" in pantheon
+    assert "## The Old Gods" in pantheon
+    assert "Athuel" in pantheon
+    # The heavy per-deity prose is intentionally excluded to keep the prompt small
+    # and the prefix cache warm — that detail comes from search_knowledge_base.
+    assert "## Deity Entries" not in pantheon
+    assert "Commandments:" not in pantheon
+
+
+def test_spoken_deity_name_resolves_to_canonical_pantheon_entry():
+    answer = pantheon_deity_answer(
+        "Can you tell me about Aden?",
+        load_full_pantheon_knowledge(),
+    )
+    assert answer is not None
+    assert answer.startswith("Addan, the Eternal Guardian.")
+    assert "order and protection" in answer
+
+
+def test_site_wide_voice_catalog_resolves_common_transcription_variants():
+    catalog = load_voice_entity_catalog()
+    assert "Addan" in catalog
+    assert "Myrdae" in catalog
+    assert "Souls of Destiny" in catalog
+    assert resolve_spoken_entity("Aden", catalog) == "Addan"
+    assert resolve_spoken_entity("Mirdi", catalog) == "Myrdae"
+    assert resolve_spoken_entity("Soals of Destiny", catalog) == "Souls of Destiny"
+    assert resolve_spoken_entity("ordinary weather", catalog) is None
+
+
+def test_entity_question_is_rewritten_with_canonical_name():
+    catalog = load_voice_entity_catalog()
+    assert canonicalize_spoken_entity_question(
+        "Can you tell me about Aden?",
+        catalog,
+    ) == "Can you tell me about Addan?"
+    assert canonicalize_spoken_entity_question(
+        "When does Soals of Destiny play next?",
+        catalog,
+    ) == "When does Souls of Destiny play next?"
+    assert canonicalize_spoken_entity_question(
+        "What do you know about Kenton in Mirdi?",
+        catalog,
+    ) == "What do you know about Kenton in Myrdae?"
+    assert canonicalize_spoken_entity_question(
+        "I would like to know about the gods of Mirdi.",
+        catalog,
+    ) == "I would like to know about the gods of Myrdae."
+
+
+def test_parse_dispatch_metadata_extracts_tuning():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "tuning": {"minEndpointingDelay": 0.35, "minInterruptionDuration": 0.9}}'
+    )
+    assert payload["tuning"] == {"minEndpointingDelay": 0.35, "minInterruptionDuration": 0.9}
+
+
+def test_parse_dispatch_metadata_tuning_defaults_to_empty():
+    payload = parse_dispatch_metadata('{"events": [], "tuning": "nope"}')
+    assert payload["tuning"] == {}
+
+
+def test_parse_dispatch_metadata_extracts_pronunciations():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "pronunciations": {"Emberstran": "Em-ber-stran"}}'
+    )
+    assert payload["pronunciations"] == {"Emberstran": "Em-ber-stran"}
+
+
+def test_parse_dispatch_metadata_extracts_signed_in_member_name():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "memberName": "Larry"}'
+    )
+    assert payload["memberName"] == "Larry"
+
+
+def test_parse_dispatch_metadata_extracts_welcome_kind():
+    assert parse_dispatch_metadata(
+        '{"events": [], "welcomeKind": "new"}'
+    )["welcomeKind"] == "new"
+    assert parse_dispatch_metadata(
+        '{"events": [], "welcomeKind": "unexpected"}'
+    )["welcomeKind"] == "none"
+
+
+def test_parse_dispatch_metadata_extracts_current_user_profile():
+    profile = parse_dispatch_metadata(
+        '{"events":[],"userProfile":{"displayName":"Larry McHale",'
+        '"playerName":"Larry McHale","favoriteLocations":["Emberstran"],'
+        '"games":["Souls of Destiny"],"characters":["Kenton"]}}'
+    )["userProfile"]
+    assert profile == {
+        "displayName": "Larry McHale",
+        "playerName": "Larry McHale",
+        "favoriteLocations": ["Emberstran"],
+        "games": ["Souls of Destiny"],
+        "characters": ["Kenton"],
+    }
+
+
+def test_wake_word_command_requires_opening_hey_myra():
+    assert wake_word_command("Hey Myra, take me home") == "take me home"
+    assert wake_word_command("Hey, Mira. What games are next?") == "What games are next?"
+    assert wake_word_command("Hey Myra") == ""
+    assert wake_word_command("Take me home") is None
+    assert wake_word_command("Someone said hey Myra yesterday") is None
+
+
+def test_apply_pronunciations_preserves_written_source_and_handles_case():
+    source = "Heroes of Emberstran return to EMBERSTRAN."
+
+    spoken = apply_pronunciations(source, {"Emberstran": "Em-ber-stran"})
+
+    assert source == "Heroes of Emberstran return to EMBERSTRAN."
+    assert spoken == "Heroes of Em-ber-stran return to Em-ber-stran."
 
 
 def test_select_events_filters_campaign_and_sorts():
@@ -82,10 +284,127 @@ def test_general_schedule_answer_is_immediate_and_specific():
     now = datetime(2026, 7, 26, 10, 0, tzinfo=ZoneInfo("America/New_York"))
 
     assert general_schedule_answer(schedule, now) == (
-        "Today, Souls of Destiny at 1:00 PM. Coming up next: "
+        "Yep — today, Souls of Destiny at 1:00 PM. And coming up next, "
         "Dungeons III on Monday, July 27 at 6:00 PM, "
         "Heroes of Emberstran on Thursday, July 30 at 6:00 PM."
     )
+
+
+def test_personal_schedule_intent_recognizes_user_focused_questions():
+    assert is_personal_schedule_question("What are my games scheduled?")
+    assert is_personal_schedule_question("When do I play next?")
+    assert is_personal_schedule_question("What games am I in?")
+    assert not is_personal_schedule_question("What games are scheduled?")
+
+
+def test_personalized_schedule_only_includes_the_users_games():
+    now = datetime(2026, 7, 28, 9, 0, tzinfo=ZoneInfo("America/New_York"))
+    schedule = {
+        "timezone": "America/New_York",
+        "events": [
+            {"title": "Souls of Destiny", "start": "2026-07-29T18:00:00-04:00"},
+            {"title": "Mad Mage", "start": "2026-07-30T19:00:00-04:00"},
+            {"title": "Souls of Destiny", "start": "2026-08-05T18:00:00-04:00"},
+        ],
+    }
+    answer = personalized_schedule_answer(schedule, ["Souls of Destiny"], now)
+    assert "Souls of Destiny" in answer
+    assert "Mad Mage" not in answer
+
+
+def test_personalized_schedule_explains_when_profile_has_no_games():
+    assert personalized_schedule_answer(
+        {"timezone": "America/New_York", "events": []},
+        [],
+    ) == "Hmm, I don't see any active campaign assignments linked to your profile yet."
+
+
+def test_is_self_diagnosis_question_detects_feeling_and_status_intents():
+    assert is_self_diagnosis_question("How do you feel?")
+    assert is_self_diagnosis_question("Hey, are you okay today?")
+    assert is_self_diagnosis_question("Run a diagnostic on yourself")
+    assert is_self_diagnosis_question("Is everything working?")
+
+
+def test_is_self_diagnosis_question_ignores_schedule_questions():
+    assert not is_self_diagnosis_question("What is scheduled today?")
+    assert not is_self_diagnosis_question("When does Mad Mage play next?")
+
+
+def test_summarize_health_reports_all_clear():
+    spoken, status = summarize_health(
+        speech_ok=True,
+        thinking_ok=True,
+        calendar_ok=True,
+        knowledge_ok=True,
+        upcoming_count=3,
+    )
+    assert status == "healthy"
+    assert "3 games coming up" in spoken
+    assert "No problems to report" in spoken
+
+
+def test_summarize_health_flags_thinking_engine_down_as_impaired():
+    spoken, status = summarize_health(
+        speech_ok=True,
+        thinking_ok=False,
+        calendar_ok=True,
+        knowledge_ok=True,
+        upcoming_count=1,
+    )
+    assert status == "impaired"
+    assert "thinking engine" in spoken
+
+
+def test_summarize_health_flags_missing_knowledge_as_degraded():
+    spoken, status = summarize_health(
+        speech_ok=True,
+        thinking_ok=True,
+        calendar_ok=True,
+        knowledge_ok=False,
+        upcoming_count=0,
+    )
+    assert status == "degraded"
+    assert "notes about the group" in spoken
+
+
+def test_is_recap_question_detects_recap_intent_not_schedule():
+    assert is_recap_question("What happened last time in Souls of Destiny?")
+    assert is_recap_question("Give me a recap of Mad Mage")
+    assert is_recap_question("Where did we leave off?")
+    assert not is_recap_question("When is Souls of Destiny playing?")
+    assert not is_recap_question("What's scheduled today?")
+
+
+def test_recap_answer_returns_latest_summary_for_named_campaign():
+    recaps = [
+        {
+            "name": "Souls of Destiny",
+            "aliases": [],
+            "title": "Session 5 - The Reckoning",
+            "summary": "The party stormed the cult's inner sanctum and freed the captives.",
+        },
+    ]
+
+    answer, category = recap_answer(recaps, "what happened last time in souls of destiny")
+    assert category == "recap"
+    assert "Souls of Destiny" in answer
+    assert "cult's inner sanctum" in answer
+
+
+def test_recap_answer_matches_aliases_and_reports_missing_summaries():
+    recaps = [
+        {"name": "Dungeons III - kNight Watch", "aliases": ["Dungeons III"], "title": "", "summary": ""},
+    ]
+
+    answer, category = recap_answer(recaps, "recap dungeons iii for me")
+    assert category == "recap"
+    assert "don't have a session recap" in answer
+
+
+def test_recap_answer_returns_none_when_no_campaign_named():
+    recaps = [{"name": "Mad Mage", "aliases": [], "title": "S1", "summary": "Stuff happened."}]
+    assert recap_answer(recaps, "what happened last time") is None
 
 
 def test_campaign_question_is_answered_without_ollama():
@@ -100,6 +419,127 @@ def test_campaign_question_is_answered_without_ollama():
         schedule,
         "When is Souls of Destiny playing?",
     ) == (
-        "The next Souls of Destiny game is Sunday, July 26 at 1:00 PM.",
+        "Yep — the next Souls of Destiny game is Sunday, July 26 at 1:00 PM.",
         "campaign",
     )
+
+
+def test_campaign_name_alone_is_not_a_schedule_intent():
+    assert not is_schedule_question("Tell me about Souls of Destiny")
+    assert is_schedule_question("When does Souls of Destiny play next?")
+
+
+def test_navigation_resolves_exact_pages_and_surfaces_ambiguity():
+    navigation = [
+        {"label": "Home", "href": "/"},
+        {"label": "Campaigns", "href": "/campaigns"},
+        {"label": "Campaign Journeys", "href": "/campaign-journeys"},
+        {"label": "Our Story", "href": "/ourstory"},
+        {"label": "Pantheon", "href": "/pantheon"},
+        {"label": "My Profile", "href": "/profile"},
+    ]
+    assert resolve_navigation(navigation, "our story") == (
+        {"label": "Our Story", "href": "/ourstory"},
+        [],
+    )
+    assert resolve_navigation(navigation, "home page") == (
+        {"label": "Home", "href": "/"},
+        [],
+    )
+    assert resolve_navigation(navigation, "the gods section of the site") == (
+        {"label": "Pantheon", "href": "/pantheon"},
+        [],
+    )
+    assert resolve_navigation(navigation, "panthy on") == (
+        {"label": "Pantheon", "href": "/pantheon"},
+        [],
+    )
+    for profile_request in (
+        "profile",
+        "my profile",
+        "user profile",
+        "my account",
+        "settings",
+    ):
+        assert resolve_navigation(navigation, profile_request) == (
+            {"label": "My Profile", "href": "/profile"},
+            [],
+        )
+    match, choices = resolve_navigation(navigation, "campaign")
+    assert match is None
+    assert choices == ["Campaigns", "Campaign Journeys"]
+    assert navigation_request_target("Please open the Our Story page") == "Our Story"
+    assert navigation_request_target(
+        "I want you to navigate me back to the home page."
+    ) == "home"
+    assert navigation_request_target(
+        "Can you take me back to the home page?"
+    ) == "home"
+    assert (
+        navigation_request_target("Take me to the gods section of the site")
+        == "gods section of the site"
+    )
+    natural_request = navigation_request_target(
+        "Can you take me to the page where the gods are?"
+    )
+    assert natural_request == "page where the gods are"
+    assert resolve_navigation(navigation, natural_request) == (
+        {"label": "Pantheon", "href": "/pantheon"},
+        [],
+    )
+    assert navigation_request_target("Who is Kenton?") is None
+
+
+def test_about_suwanee_gamers_intent_does_not_match_schedule():
+    assert is_about_suwanee_gamers_question(
+        "I want to know about Suwanee Gamers"
+    )
+    assert is_about_suwanee_gamers_question("Tell me about the group")
+    assert not is_about_suwanee_gamers_question(
+        "What is scheduled for Suwanee Gamers tonight?"
+    )
+
+
+def test_about_suwanee_gamers_answer_uses_our_story_content():
+    answer = about_suwanee_gamers_answer(
+        "Suwanee Gamers began in 2012. It grew from family game nights. "
+        "This third sentence is intentionally omitted."
+    )
+    assert answer == (
+        "Suwanee Gamers began in 2012. It grew from family game nights. "
+        "And if you'd like the full story, it's on the Our Story page."
+    )
+
+
+def test_about_suwanee_gamers_answer_falls_back_to_brain_section():
+    answer = about_suwanee_gamers_answer(
+        "",
+        "# Brain\n\n## What Suwanee Gamers is\n\n"
+        "Suwanee Gamers is a local tabletop RPG group. "
+        "The group plays in Myrdae.\n\n## How to help\n\nIgnore this.",
+    )
+    assert answer == (
+        "Suwanee Gamers is a local tabletop RPG group. "
+        "The group plays in Myrdae. "
+        "And if you'd like the full story, it's on the Our Story page."
+    )
+
+
+def test_knowledge_search_is_cancellable_and_rejects_duplicates():
+    from livekit.agents.llm import ToolFlag
+
+    from schedule_agent.agent import Myra
+
+    tool_info = Myra.search_knowledge_base.info
+    assert tool_info.flags & ToolFlag.CANCELLABLE
+    assert tool_info.on_duplicate == "reject"
+
+
+def test_background_tool_result_only_belongs_to_the_turn_that_started_it():
+    assert tool_result_is_current(7, 7)
+    assert not tool_result_is_current(7, 8)
+
+
+def test_event_loop_lag_never_reports_early_wakeup_as_blocking():
+    assert round(event_loop_lag(10.0, 10.35), 2) == 0.35
+    assert event_loop_lag(10.0, 9.95) == 0.0

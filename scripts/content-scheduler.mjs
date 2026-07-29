@@ -101,6 +101,14 @@ const jobs = [
     revalidatePaths: ["/campaigns", "/previous-campaigns"],
   },
   {
+    id: "campaign-roster",
+    label: "Campaign character roster",
+    schedule: { kind: "daily", time: "10:32" },
+    command: [node, ["scripts/sync-campaign-roster.mjs"]],
+    timeoutMs: 5 * 60_000,
+    revalidatePaths: ["/campaigns"],
+  },
+  {
     id: "session-audio",
     label: "Session audio",
     schedule: { kind: "daily", time: "10:40" },
@@ -121,6 +129,18 @@ const jobs = [
     revalidatePaths: ["/campaigns", "/calendar"],
   },
   {
+    // Re-splice the saved campaign sessions-card from session_summaries after the
+    // session/audio syncs above, so the stored layouts don't drift out of date.
+    // Placed after both session jobs in this array; jobs run sequentially in array
+    // order within a tick, so this always follows them.
+    id: "campaign-session-cards",
+    label: "Campaign session cards refresh",
+    schedule: { kind: "daily", time: "10:42" },
+    command: [node, ["scripts/refresh-campaign-session-cards.mjs"]],
+    timeoutMs: 5 * 60_000,
+    revalidatePaths: ["/campaigns", "/previous-campaigns"],
+  },
+  {
     id: "chronicles-sources",
     label: "Chronicles sources",
     schedule: { kind: "daily", time: "10:45" },
@@ -135,6 +155,38 @@ const jobs = [
     command: [node, ["scripts/sync-campaign-journeys.mjs"]],
     timeoutMs: 5 * 60_000,
     revalidatePaths: ["/campaign-journeys"],
+  },
+  {
+    id: "assistant-brain",
+    label: "Voice assistant knowledge base",
+    schedule: { kind: "daily", time: "10:52" },
+    command: [node, ["scripts/build-assistant-brain.mjs"]],
+    timeoutMs: 2 * 60_000,
+    revalidatePaths: ["/"],
+  },
+  {
+    id: "assistant-autotune",
+    label: "Voice assistant auto-tuning",
+    schedule: { kind: "daily", time: "11:10" },
+    command: [node, [
+      path.join("apps", "web", "node_modules", "tsx", "dist", "cli.mjs"),
+      "--tsconfig", "apps/web/tsconfig.json",
+      "apps/web/scripts/autotune-assistant.ts",
+    ]],
+    timeoutMs: 3 * 60_000,
+    revalidatePaths: ["/"],
+  },
+  {
+    id: "assistant-learn",
+    label: "Voice assistant self-learning",
+    schedule: { kind: "daily", time: "11:25" },
+    command: [node, [
+      path.join("apps", "web", "node_modules", "tsx", "dist", "cli.mjs"),
+      "--tsconfig", "apps/web/tsconfig.json",
+      "apps/web/scripts/learn-assistant.ts",
+    ]],
+    timeoutMs: 10 * 60_000,
+    revalidatePaths: ["/"],
   },
   {
     id: "content-documents",

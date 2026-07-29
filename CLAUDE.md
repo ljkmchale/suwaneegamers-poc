@@ -79,6 +79,15 @@ pnpm content:scheduler:once  # run due scheduled content jobs once
 pnpm content:sync-all        # run all scheduler jobs once
 ```
 
+### Image Optimization
+
+Site images live in `apps/web/media/images/` and are served raw (many blocks use CSS `background-image`, which bypasses `next/image`), so files must be small on disk. Two mechanisms keep them that way:
+
+- **Drive-sync scripts** (`sync-gazetteer-entries`, `sync-pantheon-symbols`, `sync-organization-symbols`, `sync-campaign-headers`, `sync-dm-reference`) re-encode downloads as WebP (quality 80, longest side ≤1920px) via `scripts/lib-image-cache.mjs`. Each image directory keeps a `.drive-cache.json` manifest recording the upstream Drive size per file so unchanged files are not re-downloaded (local sizes can't be compared to Drive's after re-encoding).
+- **`pnpm images:optimize`** (`scripts/optimize-images.mjs`) is the batch pass for images added by other routes: converts PNG/JPG >150KB to WebP, recompresses oversized WebP in place, and rewrites references in `content/` and `apps/web` source. It does NOT touch the SQLite relational tables (campaigns, gazetteer, etc.) — check those manually if it renames files, and run `pnpm content:sync-documents` afterwards.
+
+Do not commit multi-megabyte originals; `/images/suwaneegamers-logo.png` intentionally stays PNG (apple-touch-icon).
+
 ### Source-Managed / Chronicles Notes
 
 `/admin/source-managed` reads `content/auto-managed-pages.json` through `lib/contentFiles.ts`, so remember the DB-first rule above. If the JSON file is correct but the admin UI is stale, inspect `content_documents.path = 'auto-managed-pages.json'` in `content/suwaneegamers.db`.
@@ -158,6 +167,38 @@ All admin mutations go through server actions in `app/admin/[domain]/actions.ts`
 `proxy.ts` (Next.js 16 proxy convention) guards all `/admin/*` routes via iron-session. The session cookie is `sg-admin`. `lib/adminSession.ts` exports `getAdminSession()` for use in server components and actions.
 
 Edit mode is a separate session flag (`editMode`). An admin can be logged in without edit mode active — edit mode enables the `PageEditOverlay`.
+
+**The whole site is members-only.** `proxy.ts` also requires a Google sign-in session (`sg-user`) for every page and API route, redirecting browsers to `/signin?from=…` and returning 401 to API callers. Exceptions are listed in `PUBLIC_PATHS` (the gate and the OAuth round trip) and `MACHINE_PATHS` (callers with their own bearer secret: LiveKit metrics/analytics, the content scheduler). Enforcement is skipped entirely when `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are absent, so a server without OAuth configured cannot lock everyone out.
+
+This gate **must** stay in the proxy. The `(site)` layout also renders `SignInGate`, but that alone is not protection: React renders the layout and the page in parallel, so a layout that swaps in the gate still streams the page's rendered RSC payload in the same HTML — `curl /campaigns` returned every campaign name before the proxy gate existed. Never move an authorization check from the proxy into a layout.
+
+`lib/authRedirect.ts` holds `safeReturnPath()`, the open-redirect guard for the post-sign-in destination; the path rides through Google in the short-lived `sg-oauth-from` cookie. Note that `proxy.ts`'s matcher excludes `images/`, `media/`, and `fonts/`, so static asset URLs remain fetchable by anyone who knows them.
+
+### The Home-Page Voice Assistant
+
+The mic button on the home page is a LiveKit voice agent (`services/livekit-schedule-agent/`, local Ollama + Speaches). `POST /api/livekit/token` builds the dispatch metadata: a live calendar snapshot (`events`) **and** a `knowledge` string — the contents of `content/assistant-brain.md`, read via `lib/assistantBrain.ts`.
+
+`assistant-brain.md` is the assistant's **knowledge base** (a Karpathy-style "LLM wiki"): a compact, curated Markdown doc about the group, campaigns, DMs, and links. The prose outside the `<!-- AUTO:BEGIN -->` / `<!-- AUTO:END -->` markers is hand-editable; the block between them is regenerated from `campaigns.json`, `dungeon-masters.json`, and `portal-links.json` by `scripts/build-assistant-brain.mjs` (`pnpm content:build-assistant-brain`, also the daily `assistant-brain` scheduler job).
+
+In `agent.py`, schedule questions are still answered deterministically for speed; other questions fall through to the Ollama model, grounded on the knowledge base injected into its instructions. Keep the brain small — it rides in dispatch metadata every session.
+
+#### Personas (per-member voice and manner)
+
+A **persona** changes only how Myra sounds and talks — never who she is, what she knows, or her grounding rules. Personas live in `content/assistant-personas.json`:
+
+| Piece | Role |
+|---|---|
+| `lib/assistantPersonas.ts` | Pure logic: types, `VOICE_OPTIONS` (Kokoro voices the local Speaches server serves), `clampPersona`/`clampPersonaCatalog`, `resolvePersona`. No fs — unit-tested. |
+| `lib/assistantPersonaStore.ts` | DB-first read/write of `assistant-personas.json`, plus `personaForAgentMember()`. |
+| `user_profiles.myra_persona` | A member's explicit choice, written by `/profile` (member) or `/admin/voice-assistant` (admin). Last write wins. |
+
+Resolution order is **explicit choice → `matchPlayers` roster match → `defaultPersonaId`**, so someone can have the right voice before they ever sign in (that is how "Michael Hewson" gets the British persona). The token route ships the resolved persona in dispatch metadata; `agent.py` uses `voice`/`speed` for the Kokoro TTS and renders `style` + `examples` into the "Spoken personality" section of the system prompt. `PERSONA_INVARIANTS` in `agent.py` are the ceiling every persona inherits (accuracy over character, no profanity, no SSML/stage directions) and are not editable per persona.
+
+The admin panel lists **both** signed-in members and roster players who have never signed in. The two rows save differently: a member's choice goes to `user_profiles.myra_persona`, while a roster player's goes into that persona's `matchPlayers` (there is no profile row to write yet). `/api/admin/voice-preview` auditions a voice — admin-gated, and it accepts only a voice id plus an optional persona id, never free text, so it cannot become an open text-to-speech endpoint.
+
+**Kokoro is the prosody ceiling.** An 82M model has almost no expressive range, so *what* a persona says carries the personality, not how it is delivered. Comma-linked clauses read with shape; clipped fragments come out flat — persona `style` lines should say so. If a persona ever needs real delivery control, the installed `openai.TTS` plugin accepts an `instructions` string that `gpt-4o-mini-tts` performs.
+
+Adding a persona means editing the JSON (then `pnpm content:sync-documents`) — the voice must be one of `VOICE_IDS`, or it silently falls back to the default. Changes to `agent.py` require restarting the voice stack (scheduled task `SuwaneeGamersVoiceStack`); changes to personas alone take effect on the next voice session.
 
 ### Styling
 

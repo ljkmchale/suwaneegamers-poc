@@ -96,7 +96,7 @@ export function SessionRecordingPlayer({ url, label = "Session recording" }: { u
         }}
       >
         <img
-          src="/images/dragon-ears.png"
+          src="/media/images/dragon-ears.webp"
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover"

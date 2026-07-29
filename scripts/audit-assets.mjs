@@ -1,12 +1,14 @@
-// One-off asset audit: finds broken /images/ references in content JSON,
+// One-off asset audit: finds broken /media/images/ references in content JSON,
 // orphaned files on disk, and oversized assets.
 import fs from "fs";
 import path from "path";
 
 const root = process.cwd();
 const contentDir = path.join(root, "content");
-const publicDir = path.join(root, "apps", "web", "public");
-const imagesDir = path.join(publicDir, "images");
+// Images live outside public/ and are served by app/media/images/[...segments],
+// so a "/media/images/..." URL resolves relative to apps/web, not apps/web/public.
+const assetBase = path.join(root, "apps", "web");
+const imagesDir = path.join(assetBase, "media", "images");
 
 function walk(dir, filter) {
   if (!fs.existsSync(dir)) return [];
@@ -17,10 +19,10 @@ function walk(dir, filter) {
   });
 }
 
-// 1. Gather all /images/... references from content JSON
+// 1. Gather all /media/images/... references from content JSON
 const refs = new Map(); // ref -> [files]
 const jsonFiles = walk(contentDir, (p) => p.endsWith(".json"));
-const refRe = /"(\/images\/[^"]+?)"/g;
+const refRe = /"(\/media\/images\/[^"]+?)"/g;
 for (const f of jsonFiles) {
   const text = fs.readFileSync(f, "utf-8");
   for (const m of text.matchAll(refRe)) {
@@ -34,7 +36,7 @@ for (const f of jsonFiles) {
 const broken = [];
 for (const [ref, sources] of refs) {
   const cleanRef = ref.split(/[?#]/)[0];
-  const abs = path.join(publicDir, decodeURIComponent(cleanRef));
+  const abs = path.join(assetBase, decodeURIComponent(cleanRef));
   if (!fs.existsSync(abs)) broken.push({ ref, sources: [...new Set(sources)] });
 }
 
@@ -43,14 +45,14 @@ const allFiles = walk(imagesDir, () => true);
 const refSet = new Set([...refs.keys()].map((r) => decodeURIComponent(r.split(/[?#]/)[0]).toLowerCase()));
 const orphans = [];
 for (const f of allFiles) {
-  const rel = "/" + path.relative(publicDir, f).replaceAll("\\", "/");
+  const rel = "/" + path.relative(assetBase, f).replaceAll("\\", "/");
   if (!refSet.has(rel.toLowerCase())) orphans.push({ rel, size: fs.statSync(f).size });
 }
 
 // 4. Oversized referenced assets (>500KB)
 const big = [];
 for (const ref of refs.keys()) {
-  const abs = path.join(publicDir, decodeURIComponent(ref.split(/[?#]/)[0]));
+  const abs = path.join(assetBase, decodeURIComponent(ref.split(/[?#]/)[0]));
   if (fs.existsSync(abs)) {
     const size = fs.statSync(abs).size;
     if (size > 500 * 1024) big.push({ ref, size });

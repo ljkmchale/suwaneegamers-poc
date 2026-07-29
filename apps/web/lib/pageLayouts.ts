@@ -11,10 +11,6 @@ type RawMeta = { grid?: PageGridMeta; canvas?: CanvasMeta; items: unknown[] };
 type RawEntry = unknown[] | RawMeta;
 type RawLayouts = Record<string, RawEntry>;
 
-function legacyLayoutPath() {
-  return path.join(/*turbopackIgnore: true*/ contentDir(), "page-layouts.json");
-}
-
 function layoutsDir() {
   return path.join(/*turbopackIgnore: true*/ contentDir(), "page-layouts");
 }

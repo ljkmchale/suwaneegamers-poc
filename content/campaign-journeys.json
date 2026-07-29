@@ -1,7 +1,7 @@
 {
   "title": "Myrdae in Motion",
   "subtitle": "Follow the paths of the adventuring parties changing Myrdae.",
-  "mapImage": "/images/maps-of-myrdae/locations-map.webp?v=20260713-hires",
+  "mapImage": "/media/images/maps-of-myrdae/locations-map.webp?v=20260713-hires",
   "campaigns": [
     {
       "id": "a-new-adventure",
@@ -863,6 +863,30 @@
           },
           "sourceKey": "a-new-adventure:session-30",
           "sourceHash": "cb03799b0d25e8857fc4cd6ec7bb67e692870153e65e1e9d14cde318ac16deda",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-31",
+          "locationId": "caelora",
+          "location": "Caelora",
+          "x": 53.13,
+          "y": 36.23,
+          "session": "Session 31",
+          "title": "You Are Where You Belong",
+          "summary": "The party returned from Stygia to the Rulendor cellar in Caelora, determined to close the hellish portal and confront the aftermath of Urovil’s death. They severed the connection, learned an entire day had been lost, and split to pursue personal leads while Kaizo aided the monk Taelis, Relys learned her lantern stone held the spirit of her grandmother, and Kulv Farbreak pressed both Fungus and Affy to abandon Shotty Nell for the fey lord Selbranan. At noon Ridley, Cerul, and Relys told Lord Theravin the full truth of Hell; the lord accepted the account, declared the debt paid with gold and platinum, and released Ridley from all service.…",
+          "impact": {
+            "type": "political",
+            "title": "Caelora's balance shifted",
+            "description": "They severed the connection, learned an entire day had been lost, and split to pursue personal leads while Kaizo aided the monk Taelis, Relys learned her lantern stone held the spirit of her grandmother, and Kulv Farbreak pressed both Fungus and Affy to abandon Shotty Nell for the fey lord Selbranan…"
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "a-new-adventure:session-31",
+          "sourceHash": "0b8242f51e2ccbd333f103fbc17579c355308363545063dbc44e5b66f35c14e5",
           "current": true
         }
       ],
@@ -921,7 +945,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "At Khagdaruhl",
+      "status": "At Nurador",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1190,10 +1214,10 @@
         },
         {
           "id": "auto-bloody-endeavor-session-39",
+          "locationId": "kahgdaruhl",
           "location": "Khagdaruhl",
-          "x": 57.2,
-          "y": 69.8,
-          "precision": "approximate",
+          "x": 53.5,
+          "y": 74,
           "session": "Session 39",
           "title": "Why’d You Wanna Hit Me Man?",
           "summary": "The party had to restore Rhody to life before returning to Khagdaruhl with the Rimestone to reseal the eldritch threat before its roots claimed more minds. In the dwarven kingdom, the group had time to rest and shop, learning of the legendary sword Kretopulus, which with the party had two shards from and which they handed to forgemaster Hultgrum for restoration. Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room.…",
@@ -1212,13 +1236,47 @@
                 "y": 69.8
               },
               {
-                "x": 57.2,
-                "y": 69.8
+                "x": 53.5,
+                "y": 74
               }
             ]
           },
           "sourceKey": "bloody-endeavor:session-39",
           "sourceHash": "8cd16d689f22e8ce774890f9b056b27566376517f29b264efe91749c75f4f598",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-40",
+          "locationId": "nurador",
+          "location": "Nurador",
+          "x": 55.21,
+          "y": 67.71,
+          "session": "Session 40",
+          "title": "Zeroes of Khagdaruhl",
+          "summary": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room. Lucerion returned from a harrowing vision, the party battered Admiral Xezev with critical strikes and fire, and the Rimestone’s blinding light knocked everyone unconscious for three days; they awoke frozen in ice, Rhody dead once more, and the Sacred Crows chiseling them free. After the Lord Emperor summoned clerics and a grand celebration, he granted Khagdaruhl’s neutrality, a tower anywhere in Orbansia, and the nearly complete legendary sword Kretopolus to Lucerion.…",
+          "impact": {
+            "type": "political",
+            "title": "Nurador's balance shifted",
+            "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 53.5,
+                "y": 74
+              },
+              {
+                "x": 55.21,
+                "y": 67.71
+              }
+            ],
+            "miles": 163
+          },
+          "sourceKey": "bloody-endeavor:session-40",
+          "sourceHash": "2936427ffe15152f50bce1739b5e07531d07b9ec9fb002b7dbd8b7d62589fdaa",
           "current": true
         }
       ],
@@ -1611,6 +1669,30 @@
           },
           "sourceKey": "dungeons-iii:session-13",
           "sourceHash": "527657ead1e435f6d9bac731cbc4da067bad073ee9e8d385312b893ed433e08f",
+          "current": false
+        },
+        {
+          "id": "auto-dungeons-iii-session-14",
+          "locationId": "jagged-waste-crags",
+          "location": "Jagged Waste Crags",
+          "x": 73.37,
+          "y": 49.4,
+          "session": "Session 14",
+          "title": "Boils and Blood",
+          "summary": "The party set out to clear the remaining caves of the lower terrace in the Jagged Waste Crags and uncover whatever threats or secrets still lingered there. They battled steam mephits, a lone gnoll, and a pair of giant spiders. Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing. A secret stair of refined stonework led upward, carrying with it the scent of smoke as the session closed.",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "dungeons-iii:session-14",
+          "sourceHash": "6a4cbcdc6a0816a396b82cdf2588c0e3a3acadcbb557af6d88dcd9691890f384",
           "current": true
         }
       ],
@@ -1645,7 +1727,7 @@
       "id": "heroes-of-emberstran",
       "name": "Heroes of Emberstran",
       "color": "#ff9f43",
-      "status": "At Ulgrey",
+      "status": "At Basctdelm",
       "campaignHref": "/campaigns/heroes-of-emberstran",
       "stops": [
         {
@@ -2470,6 +2552,64 @@
           },
           "sourceKey": "heroes-of-emberstran:session-29",
           "sourceHash": "b9165a1c576468b33ae8ad96a4164cf302f4b49ca4db2a9969740cd8344d8dd4",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-30",
+          "locationId": "ulgrey",
+          "location": "Ulgrey",
+          "x": 62.83,
+          "y": 60.92,
+          "session": "Session 30",
+          "title": "We Don’t Like Wizards",
+          "summary": "At the Riverdog Inn in Ulgrey, the party encountered a Meridian soldier and the wizard Thalex who they spent a little time getting to know before offering aid to Basctdelm. Shanna provided Phira’s abandoned pack and Og recognized the Gilded Vultures from his mercenary past while Ainslie infiltrated Paeris’s tower only to be knocked out by cake after Zabeek had revealed some of their secrets. Some members experienced vivid dreams before the morning of the third of Paramor and the magical cat Tatters provided his collar as a gift. They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore.…",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Ulgrey",
+            "description": "They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "heroes-of-emberstran:session-30",
+          "sourceHash": "24547b0007206ef58401ef5dc3b441cd70e84c9d2f9b1ab0a3a75ca7b1d3b311",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-31",
+          "locationId": "basctdelm",
+          "location": "Basctdelm",
+          "x": 57.72,
+          "y": 31.66,
+          "session": "Session 31",
+          "title": "Oh No Zabeek",
+          "summary": "The Heroes of Emberstran set out from Ulgrey to investigate the strange mist and red-wormed body reported by the hunter Erland in Kahlbit’s Vale while tracking the abandoned carriage linked to Phira’s abduction. They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm. Inside the group found evidence that the Cloak had used this forgotten place as a staging ground for their kidnapping.…",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 62.83,
+                "y": 60.92
+              },
+              {
+                "x": 57.72,
+                "y": 31.66
+              }
+            ],
+            "miles": 742.6
+          },
+          "sourceKey": "heroes-of-emberstran:session-31",
+          "sourceHash": "012b306217c130b1865718034a0021d22043779dd465b10e277ca864e6288159",
           "current": true
         }
       ],
@@ -2794,6 +2934,30 @@
           },
           "sourceKey": "souls-of-destiny:session-11",
           "sourceHash": "e64d72039e96837d04e0ab646dddc1f3841da700e53aba3262f8dcb8635b9d8f",
+          "current": false
+        },
+        {
+          "id": "auto-souls-of-destiny-session-12",
+          "locationId": "adsuren",
+          "location": "Adsuren",
+          "x": 24.1,
+          "y": 28.6,
+          "session": "Session 12",
+          "title": "Scyldgar Keep",
+          "summary": "After the assassination attempt on Mollywop, the Souls of Destiny rode north from Adsuren determined to track the fleeing assassin, Esylla’s uncle Ifryn, and uncover whatever larger threat still moved in the shadows. They followed the blood trail through the woods to a ruined keep once held by the cutthroat Scyldgar family, a place that stirred both Lila’s visions and Therric’s recurring dreams of a great cat protecting a younger Areana Duskwhisper. Inside they faced rising undead skeletons that Escanor banished in a single radiant command, then battled living gargoyles that took flight from the rooftop statues, with Zephyra’s rage, Lila’s magic, and Kenton’s whip ending the fight.…",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Adsuren",
+            "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
+          },
+          "automatic": true,
+          "confidence": 0.88,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "souls-of-destiny:session-12",
+          "sourceHash": "10a486fb02e29489f08c529a6e45b5c89dd26ebff1aa29309cf7f93605b0f3ea",
           "current": true
         }
       ],
@@ -2828,7 +2992,7 @@
       "id": "the-silent-vanguard",
       "name": "The Silent Vanguard",
       "color": "#67a8ff",
-      "status": "At Tratta",
+      "status": "The Long Night · beyond the mapped world",
       "campaignHref": "/campaigns/the-silent-vanguard",
       "stops": [
         {
@@ -2899,6 +3063,63 @@
           },
           "sourceKey": "the-silent-vanguard:session-3",
           "sourceHash": "8e75c39523555b81f2761c63b1fa3d6b11c27d9b0df9c8694bb415b87e677b7d",
+          "current": false
+        },
+        {
+          "id": "auto-the-silent-vanguard-session-4",
+          "locationId": "tratta",
+          "location": "Tratta",
+          "x": 70.6,
+          "y": 35.9,
+          "session": "Session 4",
+          "title": "Secondary Characters",
+          "summary": "No session summary has been recorded for this session yet.",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Tratta",
+            "description": "No session summary has been recorded for this session yet."
+          },
+          "automatic": true,
+          "confidence": 0.68,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "the-silent-vanguard:session-4",
+          "sourceHash": "c020ab316e1a0cfc6c5d5d0c641ba5b6435d083c7ff9cbbd0ba0d3d2496ee2de",
+          "current": false
+        },
+        {
+          "id": "auto-the-silent-vanguard-session-5",
+          "location": "The Long Night",
+          "x": 70.6,
+          "y": 35.9,
+          "precision": "off-map",
+          "session": "Session 5",
+          "title": "The A-Team",
+          "summary": "The \"A-Team\" adventurers infiltrated \"The Long Night\" tavern to investigate an illicit drug production facility located in the basement. The facility is allegedly smuggling performance-enhancing drugs to gladiators in the Colosseum. ### Combat Engagement: The Bakery & Production Office The session opened with the party split between the bakery and the alleyway. A high-intensity skirmish ensued against guards, a hobgoblin spellcaster, and a bugbear overseer. ### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…"
+          },
+          "automatic": true,
+          "confidence": 0.79,
+          "route": {
+            "mode": "off-map",
+            "points": [
+              {
+                "x": 70.6,
+                "y": 35.9
+              },
+              {
+                "x": 70.6,
+                "y": 35.9
+              }
+            ]
+          },
+          "sourceKey": "the-silent-vanguard:session-5",
+          "sourceHash": "ee623061e5550888405fab4e2512b133313550b6594063b0376a9cd595d185c1",
           "current": true
         }
       ],
@@ -2952,12 +3173,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-07-15T14:50:24.391Z",
+    "lastGeneratedAt": "2026-07-29T14:50:15.379Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 97,
+    "generatedStops": 105,
     "routedSegments": 6,
-    "impactLocations": 25
+    "impactLocations": 29
   },
   "locationImpacts": [
     {
@@ -3103,6 +3324,100 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-adsuren",
+      "locationId": "adsuren",
+      "location": "Adsuren",
+      "x": 24.1,
+      "y": 28.6,
+      "realm": "surface",
+      "campaignIds": [
+        "souls-of-destiny"
+      ],
+      "impacts": [
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 1",
+          "title": "Adsuren's balance shifted",
+          "type": "political",
+          "description": "By destroying the unnatural growth tainting the water and recovering its disturbing remnants, the party saved the well and prevented further harm, while realizing their brief alliance had become something more permanent."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 4",
+          "title": "Arcane consequences at Adsuren",
+          "type": "arcane",
+          "description": "After consulting Mollywop, they learned the heart was human, bound by necromancy and fiendish magic, and likely created by a hidden group operating within the town itself."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 5",
+          "title": "Danger remains at Adsuren",
+          "type": "warning",
+          "description": "The party set out to track the shadowy cult responsible for poisoning Adsuren’s well."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 6",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "The day unfolded with tavern intrigue, dockside questioning, and a tense search of Ganon’s rented room that revealed twitching rat heads and precise instructions for creating black salt from sentient hearts."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 7",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Esylla found Mollywop oddly exhausted."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 8",
+          "title": "Conflict reshaped Adsuren",
+          "type": "battle",
+          "description": "Though the demoness escaped, the party dismantled the cult, delivered justice to its traitor and emerged victorious with treasures, revelations and fresh resolve to press on into the mines.."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 9",
+          "title": "Conflict reshaped Adsuren",
+          "type": "battle",
+          "description": "The thick-skinned bulas charged in the next morning and was slain."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 10",
+          "title": "Conflict reshaped Adsuren",
+          "type": "battle",
+          "description": "The party fought the majestic yet corrupted beast, finally felling the dragon."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 11",
+          "title": "Conflict reshaped Adsuren",
+          "type": "battle",
+          "description": "The party returned to the lively Market Day in Adsuren ready to unwind, sell their goods, shop for essentials, and stay sharp for any signs of the mysterious plan."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 12",
+          "title": "Arcane consequences at Adsuren",
+          "type": "arcane",
+          "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-qaldynn",
       "locationId": "qaldynn",
       "location": "Qal'dynn",
@@ -3192,92 +3507,6 @@
           "title": "A new truth surfaced",
           "type": "discovery",
           "description": "Affy uncovered that one of the shackled prisoners was none other than Ridley’s long-sought assassination target."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-adsuren",
-      "locationId": "adsuren",
-      "location": "Adsuren",
-      "x": 24.1,
-      "y": 28.6,
-      "realm": "surface",
-      "campaignIds": [
-        "souls-of-destiny"
-      ],
-      "impacts": [
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 1",
-          "title": "Adsuren's balance shifted",
-          "type": "political",
-          "description": "By destroying the unnatural growth tainting the water and recovering its disturbing remnants, the party saved the well and prevented further harm, while realizing their brief alliance had become something more permanent."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 4",
-          "title": "Arcane consequences at Adsuren",
-          "type": "arcane",
-          "description": "After consulting Mollywop, they learned the heart was human, bound by necromancy and fiendish magic, and likely created by a hidden group operating within the town itself."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 5",
-          "title": "Danger remains at Adsuren",
-          "type": "warning",
-          "description": "The party set out to track the shadowy cult responsible for poisoning Adsuren’s well."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 6",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "The day unfolded with tavern intrigue, dockside questioning, and a tense search of Ganon’s rented room that revealed twitching rat heads and precise instructions for creating black salt from sentient hearts."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 7",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "Esylla found Mollywop oddly exhausted."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 8",
-          "title": "Conflict reshaped Adsuren",
-          "type": "battle",
-          "description": "Though the demoness escaped, the party dismantled the cult, delivered justice to its traitor and emerged victorious with treasures, revelations and fresh resolve to press on into the mines.."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 9",
-          "title": "Conflict reshaped Adsuren",
-          "type": "battle",
-          "description": "The thick-skinned bulas charged in the next morning and was slain."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 10",
-          "title": "Conflict reshaped Adsuren",
-          "type": "battle",
-          "description": "The party fought the majestic yet corrupted beast, finally felling the dragon."
-        },
-        {
-          "campaignId": "souls-of-destiny",
-          "campaignName": "Souls of Destiny",
-          "session": "Session 11",
-          "title": "Conflict reshaped Adsuren",
-          "type": "battle",
-          "description": "The party returned to the lively Market Day in Adsuren ready to unwind, sell their goods, shop for essentials, and stay sharp for any signs of the mysterious plan."
         }
       ],
       "crossCampaign": false
@@ -3407,6 +3636,60 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-jagged-waste-crags",
+      "locationId": "jagged-waste-crags",
+      "location": "Jagged Waste Crags",
+      "x": 73.37,
+      "y": 49.4,
+      "realm": "surface",
+      "campaignIds": [
+        "dungeons-iii"
+      ],
+      "impacts": [
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 10",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "Along the way they found a hidden cache of gold and potions, discovered a decomposed corpse, and defeated a Xorn that erupted from the earth."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 11",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 12",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "The party defeated a Gelatinous Cube, discovered Isgo unconscious among the dead, stabilized and questioned him about the cult's arena fights, and found useful loot in a hidden lockbox."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 13",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "They defeated two basilisks in fierce combat, while uncovering a telling note on a petrified person offering gold to loot a destroyed watchtower near Ahnassa."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 14",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-onaren",
       "locationId": "onaren",
       "location": "O'naren",
@@ -3515,97 +3798,6 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-jagged-waste-crags",
-      "locationId": "jagged-waste-crags",
-      "location": "Jagged Waste Crags",
-      "x": 73.37,
-      "y": 49.4,
-      "realm": "surface",
-      "campaignIds": [
-        "dungeons-iii"
-      ],
-      "impacts": [
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 10",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "Along the way they found a hidden cache of gold and potions, discovered a decomposed corpse, and defeated a Xorn that erupted from the earth."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 11",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 12",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "The party defeated a Gelatinous Cube, discovered Isgo unconscious among the dead, stabilized and questioned him about the cult's arena fights, and found useful loot in a hidden lockbox."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 13",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "They defeated two basilisks in fierce combat, while uncovering a telling note on a petrified person offering gold to loot a destroyed watchtower near Ahnassa."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "name-khagdaruhl",
-      "location": "Khagdaruhl",
-      "x": 57.2,
-      "y": 69.8,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 34",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 35",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 36",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 39",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -3647,6 +3839,127 @@
           "title": "Conflict reshaped Mount Emberstran",
           "type": "battle",
           "description": "A savage firenewt ambush erupted in the lava-lit caverns, nearly overwhelming, and slaying Og."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-tratta",
+      "locationId": "tratta",
+      "location": "Tratta",
+      "x": 70.6,
+      "y": 35.9,
+      "realm": "surface",
+      "campaignIds": [
+        "the-silent-vanguard"
+      ],
+      "impacts": [
+        {
+          "campaignId": "the-silent-vanguard",
+          "campaignName": "The Silent Vanguard",
+          "session": "Session 1",
+          "title": "Danger remains at Tratta",
+          "type": "warning",
+          "description": "The party’s first meeting took place in Tratta, a bustling sandstone harbor city watched over by a wizard’s tower and split between public spectacle, dockside crime, hidden tunnels, thieves, spies, and darker powers."
+        },
+        {
+          "campaignId": "the-silent-vanguard",
+          "campaignName": "The Silent Vanguard",
+          "session": "Session 2",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "The party survived the zombie outbreak in Brinecross, escaped the general store and local house, found Harold at the stable, recovered the information and an ivory/statue clue, learned the phrase/location “The Long Night,” escaped town on horses, returned to Tratta, reported the zombie outbreak, ret…"
+        },
+        {
+          "campaignId": "the-silent-vanguard",
+          "campaignName": "The Silent Vanguard",
+          "session": "Session 3",
+          "title": "Danger remains at Tratta",
+          "type": "warning",
+          "description": "As they move through the darker parts of the city, they learn that this shipment may be tied to a growing threat that could bring serious danger to El’goroth."
+        },
+        {
+          "campaignId": "the-silent-vanguard",
+          "campaignName": "The Silent Vanguard",
+          "session": "Session 4",
+          "title": "Danger remains at Tratta",
+          "type": "warning",
+          "description": "No session summary has been recorded for this session yet."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-caelora",
+      "locationId": "caelora",
+      "location": "Caelora",
+      "x": 53.13,
+      "y": 36.23,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 28",
+          "title": "Danger remains at Caelora",
+          "type": "warning",
+          "description": "The party continued to help Affy follow a lead in Basctdelm and help Ridley with business in Caelora."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 30",
+          "title": "Arcane consequences at Caelora",
+          "type": "arcane",
+          "description": "Standing in the frozen hellscape of Stygia after pursuing Urovil through the portal, the party sought to defeat the guarding fiends, rescue the chained prisoner, confront Urovil, and escape back to the material plane."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 31",
+          "title": "Caelora's balance shifted",
+          "type": "political",
+          "description": "They severed the connection, learned an entire day had been lost, and split to pursue personal leads while Kaizo aided the monk Taelis, Relys learned her lantern stone held the spirit of her grandmother, and Kulv Farbreak pressed both Fungus and Affy to abandon Shotty Nell for the fey lord Selbranan…"
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "name-khagdaruhl",
+      "location": "Khagdaruhl",
+      "x": 57.2,
+      "y": 69.8,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 34",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 35",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 36",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
         }
       ],
       "crossCampaign": false
@@ -3727,39 +4040,39 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-tratta",
-      "locationId": "tratta",
-      "location": "Tratta",
-      "x": 70.6,
-      "y": 35.9,
+      "id": "surface-ulgrey",
+      "locationId": "ulgrey",
+      "location": "Ulgrey",
+      "x": 62.83,
+      "y": 60.92,
       "realm": "surface",
       "campaignIds": [
-        "the-silent-vanguard"
+        "heroes-of-emberstran"
       ],
       "impacts": [
         {
-          "campaignId": "the-silent-vanguard",
-          "campaignName": "The Silent Vanguard",
-          "session": "Session 1",
-          "title": "Danger remains at Tratta",
-          "type": "warning",
-          "description": "The party’s first meeting took place in Tratta, a bustling sandstone harbor city watched over by a wizard’s tower and split between public spectacle, dockside crime, hidden tunnels, thieves, spies, and darker powers."
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 25",
+          "title": "Ulgrey's balance shifted",
+          "type": "political",
+          "description": "With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding li…"
         },
         {
-          "campaignId": "the-silent-vanguard",
-          "campaignName": "The Silent Vanguard",
-          "session": "Session 2",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "The party survived the zombie outbreak in Brinecross, escaped the general store and local house, found Harold at the stable, recovered the information and an ivory/statue clue, learned the phrase/location “The Long Night,” escaped town on horses, returned to Tratta, reported the zombie outbreak, ret…"
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 29",
+          "title": "Arcane consequences at Ulgrey",
+          "type": "arcane",
+          "description": "They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years."
         },
         {
-          "campaignId": "the-silent-vanguard",
-          "campaignName": "The Silent Vanguard",
-          "session": "Session 3",
-          "title": "Danger remains at Tratta",
-          "type": "warning",
-          "description": "As they move through the darker parts of the city, they learn that this shipment may be tied to a growing threat that could bring serious danger to El’goroth."
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 30",
+          "title": "Arcane consequences at Ulgrey",
+          "type": "arcane",
+          "description": "They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore."
         }
       ],
       "crossCampaign": false
@@ -3790,36 +4103,6 @@
           "title": "Lives changed at Broken Citadel",
           "type": "rescue",
           "description": "After splitting briefly to ensure the rescued wolf pup and the strange powder were returned safely to Mossholde, the remaining adventurers descended into the ruins below and found evidence of layered, ancient uses, including alchemical work, undead guardians, and infernal summoning."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-caelora",
-      "locationId": "caelora",
-      "location": "Caelora",
-      "x": 53.13,
-      "y": 36.23,
-      "realm": "surface",
-      "campaignIds": [
-        "a-new-adventure"
-      ],
-      "impacts": [
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 28",
-          "title": "Danger remains at Caelora",
-          "type": "warning",
-          "description": "The party continued to help Affy follow a lead in Basctdelm and help Ridley with business in Caelora."
-        },
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 30",
-          "title": "Arcane consequences at Caelora",
-          "type": "arcane",
-          "description": "Standing in the frozen hellscape of Stygia after pursuing Urovil through the portal, the party sought to defeat the guarding fiends, rescue the chained prisoner, confront Urovil, and escape back to the material plane."
         }
       ],
       "crossCampaign": false
@@ -3913,36 +4196,6 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-ulgrey",
-      "locationId": "ulgrey",
-      "location": "Ulgrey",
-      "x": 62.83,
-      "y": 60.92,
-      "realm": "surface",
-      "campaignIds": [
-        "heroes-of-emberstran"
-      ],
-      "impacts": [
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 25",
-          "title": "Ulgrey's balance shifted",
-          "type": "political",
-          "description": "With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding li…"
-        },
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 29",
-          "title": "Arcane consequences at Ulgrey",
-          "type": "arcane",
-          "description": "They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "surface-varenwood",
       "locationId": "varenwood",
       "location": "Varenwood",
@@ -3968,6 +4221,28 @@
           "title": "Conflict reshaped Varenwood",
           "type": "battle",
           "description": "In the Shadowfell, waves of shadowy assailants and an avatar of Malgri'n assailed them, nearly claiming Fungus before the group rallied before defeated the avatar."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-basctdelm",
+      "locationId": "basctdelm",
+      "location": "Basctdelm",
+      "x": 57.72,
+      "y": 31.66,
+      "realm": "surface",
+      "campaignIds": [
+        "heroes-of-emberstran"
+      ],
+      "impacts": [
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 31",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
         }
       ],
       "crossCampaign": false
@@ -4058,6 +4333,50 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-kahgdaruhl",
+      "locationId": "kahgdaruhl",
+      "location": "Khagdaruhl",
+      "x": 53.5,
+      "y": 74,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 39",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-nurador",
+      "locationId": "nurador",
+      "location": "Nurador",
+      "x": 55.21,
+      "y": 67.71,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 40",
+          "title": "Nurador's balance shifted",
+          "type": "political",
+          "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "name-stygia",
       "location": "Stygia",
       "x": 53.13,
@@ -4074,6 +4393,27 @@
           "title": "Arcane consequences at Stygia",
           "type": "arcane",
           "description": "At the Wayfarer’s Rest, Nanise revealed House Rulendor’s corruption and handed Ridley a key to the hidden cellar entrance, prompting a stealthy infiltration, before the group was pulled through a hellish portal into the frozen wastes of Stygia."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "name-longnight",
+      "location": "The Long Night",
+      "x": 70.6,
+      "y": 35.9,
+      "realm": "surface",
+      "campaignIds": [
+        "the-silent-vanguard"
+      ],
+      "impacts": [
+        {
+          "campaignId": "the-silent-vanguard",
+          "campaignName": "The Silent Vanguard",
+          "session": "Session 5",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…"
         }
       ],
       "crossCampaign": false

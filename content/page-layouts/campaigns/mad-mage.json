@@ -19,7 +19,7 @@
     "props": {
       "eyebrow": "Campaign",
       "title": "Mad Mage",
-      "image": "/images/campaigns/mad-mage.jpg",
+      "image": "/media/images/campaigns/mad-mage.webp",
       "imagePosition": "center",
       "imageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
       "imageSourceFileId": "1aA0uwpkkTYVOWxHCIlHew4QK1buT2IkE",
@@ -60,7 +60,7 @@
     "type": "layout-card",
     "props": {
       "width": "campaign",
-      "items": "[\n  {\n    \"id\": \"sessions_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"1\",\n      \"rows\": \"3\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"sessions_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session Summaries\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Dungeon of the Mad Mage\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"This campaign currently presents as a Dungeon of the Mad Mage hub with player notes.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
+      "items": "[\n  {\n    \"id\": \"sessions_grid\",\n    \"type\": \"grid\",\n    \"props\": {\n      \"columns\": \"1\",\n      \"rows\": \"3\",\n      \"gap\": \"md\",\n      \"items\": \"[\\n  {\\n    \\\"id\\\": \\\"sessions_header\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Session Summaries\\\",\\n      \\\"color\\\": \\\"primary\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"1\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_title\\\",\\n    \\\"type\\\": \\\"header\\\",\\n    \\\"props\\\": {\\n      \\\"title\\\": \\\"Dungeon of the Mad Mage\\\",\\n      \\\"color\\\": \\\"gold\\\",\\n      \\\"size\\\": \\\"md\\\",\\n      \\\"audioLinks\\\": \\\"[]\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"2\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  },\\n  {\\n    \\\"id\\\": \\\"dungeon-of-the-mad-mage_summary\\\",\\n    \\\"type\\\": \\\"text\\\",\\n    \\\"props\\\": {\\n      \\\"content\\\": \\\"This campaign currently presents as a Dungeon of the Mad Mage hub with player notes.\\\",\\n      \\\"col\\\": \\\"1\\\",\\n      \\\"row\\\": \\\"3\\\",\\n      \\\"colSpan\\\": \\\"1\\\",\\n      \\\"rowSpan\\\": \\\"1\\\"\\n    }\\n  }\\n]\"\n    }\n  }\n]"
     }
   }
 ]

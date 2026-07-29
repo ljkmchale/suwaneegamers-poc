@@ -30,7 +30,7 @@ const isExternal = (href: string) =>
   href.startsWith("http://") || href.startsWith("https://");
 
 const opensInNewTab = (href: string) =>
-  isExternal(href) || href.startsWith("/images/");
+  isExternal(href) || href.startsWith("/media/images/");
 
 function parseLinks(raw: unknown): CampaignPartyLinkData[] {
   if (Array.isArray(raw)) return raw.filter((link) => link?.label && link?.url);
@@ -60,7 +60,7 @@ function DragonEarAudioPlayers({
           key={`${audioLink.url}-${audioIndex}`}
           source={resolveMediaPlayerSource(audioLink.url ?? "", "auto")}
           title={audioLink.label}
-          image="/images/dragon-ears.png"
+          image="/media/images/dragon-ears.webp"
           compact={compact}
         />
       ))}
@@ -116,6 +116,7 @@ function CardBlock({
   const eyebrow     = props.eyebrow     as string | undefined;
   const title       = props.title       as string;
   const description = props.description as string | undefined;
+  const highlightText = props.highlightText as string | undefined;
   const href        = props.href        as string | undefined;
   const linkLabel   = props.linkLabel   as string | undefined;
   const image       = props.image       as string | undefined;
@@ -142,8 +143,13 @@ function CardBlock({
         {title}
       </h3>
       {description && (
-        <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="mt-3 whitespace-pre-line text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
           {description}
+        </p>
+      )}
+      {highlightText && (
+        <p className="mt-2 text-sm font-semibold leading-relaxed" style={{ color: "var(--color-accent-blood)" }}>
+          {highlightText}
         </p>
       )}
       {href && linkLabel && (
@@ -393,102 +399,6 @@ function QuoteBlock({ props }: { props: Record<string, unknown> }) {
         )}
       </blockquote>
     </div>
-  );
-}
-
-function TimelineBlock({ props }: { props: Record<string, unknown> }) {
-  const eyebrow = props.eyebrow as string | undefined;
-  const title = (props.title as string | undefined) ?? "Timeline";
-  const description = props.description as string | undefined;
-  const orientation = (props.orientation as string | undefined) ?? "vertical";
-  const defaultState = (props.defaultState as string | undefined) ?? "closed";
-  const entries = parseJsonArray<TimelineEntryData>(props.entries).filter(
-    (entry) => entry.date || entry.title || entry.description || entry.events?.length,
-  );
-
-  if (entries.length === 0) return null;
-
-  const entryCard = (entry: TimelineEntryData, index: number) => (
-    <article
-      key={`${entry.date}-${entry.title}-${index}`}
-      className="rounded-md border p-4"
-      style={{ borderColor: "var(--color-bg-border)", background: "rgba(15,10,26,.58)" }}
-    >
-      {entry.date && (
-        <p className="font-cinzel text-xs tracking-[0.35em] uppercase" style={{ color: "var(--color-accent-arcane)" }}>
-          {entry.date}
-        </p>
-      )}
-      {entry.title && (
-        <h3 className="mt-1 font-cinzel text-lg leading-tight" style={{ color: "var(--color-accent-gold)" }}>
-          {entry.title}
-        </h3>
-      )}
-      {entry.description && (
-        <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          {entry.description}
-        </p>
-      )}
-      {entry.events?.length ? (
-        <ul className="mt-3 space-y-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          {entry.events.map((event, eventIndex) => (
-            <li key={`${event}-${eventIndex}`} className="flex gap-2">
-              <span aria-hidden="true" style={{ color: "var(--color-accent-gold)" }}>•</span>
-              <span>{event}</span>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </article>
-  );
-
-  return (
-    <section className="max-w-6xl mx-auto px-6 py-5">
-      <details className="group" open={defaultState === "open"}>
-        <summary
-          className="fantasy-card flex cursor-pointer list-none items-center justify-between gap-4 p-5 transition-colors hover:border-amber-400 [&::-webkit-details-marker]:hidden"
-          style={{ borderColor: "var(--color-bg-border)" }}
-        >
-          <span>
-            {eyebrow && (
-              <span className="block font-cinzel text-xs tracking-[0.35em] uppercase" style={{ color: "var(--color-accent-arcane)" }}>
-                {eyebrow}
-              </span>
-            )}
-            <span className="mt-1 block font-cinzel text-2xl tracking-widest uppercase" style={{ color: "var(--color-text-primary)" }}>
-              {title}
-            </span>
-            {description && (
-              <span className="mt-2 block max-w-3xl text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                {description}
-              </span>
-            )}
-          </span>
-          <span className="shrink-0 font-cinzel text-lg transition-transform group-open:rotate-180" style={{ color: "var(--color-accent-gold)" }}>
-            v
-          </span>
-        </summary>
-        {orientation === "horizontal" ? (
-          <div className="mt-4 overflow-x-auto pb-3">
-            <div className="flex min-w-max gap-4">
-              {entries.map((entry, index) => (
-                <div key={`${entry.date}-${index}`} className="w-72 shrink-0">
-                  {entryCard(entry, index)}
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="relative mt-5 space-y-4 pl-5 before:absolute before:bottom-0 before:left-7 before:top-0 before:w-px before:bg-[var(--color-bg-border)]">
-            {entries.map((entry, index) => (
-              <div key={`${entry.date}-${index}`} className="relative pl-8 before:absolute before:left-0 before:top-5 before:h-3 before:w-3 before:rounded-full before:border before:border-[var(--color-accent-gold)] before:bg-[var(--color-bg-deep)]">
-                {entryCard(entry, index)}
-              </div>
-            ))}
-          </div>
-        )}
-      </details>
-    </section>
   );
 }
 
@@ -1284,7 +1194,7 @@ function MediaPlayerImageButton({
   className?: string;
   compact?: boolean;
 }) {
-  const buttonImage = image || "/images/dragon-ears.png";
+  const buttonImage = image || "/media/images/dragon-ears.webp";
   const buttonSizeClass = compact ? "h-9 w-9 p-1" : "h-14 w-14 p-1.5";
   const imageSize = compact ? 30 : 44;
   const detailsClass = compact ? "relative" : "";
@@ -2205,7 +2115,7 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
             }}
           >
             <Image
-              src="/images/dragon-ears.png"
+              src="/media/images/dragon-ears.webp"
               alt=""
               width={44}
               height={44}

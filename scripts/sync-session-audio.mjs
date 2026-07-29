@@ -15,7 +15,11 @@ import { readContent } from "./content-documents.mjs";
 import { listDriveItems, downloadPublicDriveFileToPath, driveDownloadDelay } from "./drive-api.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const audioRoot = path.join(root, "apps", "web", "public", "media", "session-audio");
+// Audio lives outside public/ so it is served dynamically by the Next route
+// handler (app/media/session-audio/[...segments]/route.ts), not as a static
+// asset frozen at server boot. The public URL (/media/session-audio/...) is
+// unchanged — only the on-disk location differs (no "public" segment).
+const audioRoot = path.join(root, "apps", "web", "media", "session-audio");
 
 function configuredDriveFolderUrl(pagePath, labelPattern, fallback) {
   try {
@@ -84,7 +88,9 @@ function driveFileId(link) {
 
 async function cacheAudioFile(file, campaignId, sessionNumber) {
   const url = localAudioUrl(campaignId, sessionNumber, file.id);
-  const destination = path.join(root, "apps", "web", "public", ...url.split("/").filter(Boolean));
+  // url is "/media/session-audio/...", so joining under apps/web (no "public")
+  // lands in apps/web/media/session-audio/... — matches audioRoot above.
+  const destination = path.join(root, "apps", "web", ...url.split("/").filter(Boolean));
   const expectedSize = Number(file.size ?? 0);
   if (fs.existsSync(destination) && (!expectedSize || fs.statSync(destination).size === expectedSize)) {
     return { url, downloaded: false };

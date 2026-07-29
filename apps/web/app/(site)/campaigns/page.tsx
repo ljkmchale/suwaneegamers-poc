@@ -3,6 +3,7 @@ import { getPageLayout, getPageGrid } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 import { getArchivedCampaigns } from "@/lib/archivedCampaigns";
 import { getTrackedArchivedCampaigns } from "@/lib/campaignTracking";
+import { getAllCampaignRosters } from "@/lib/campaignRosterData";
 import { PreviousCampaignFoldCard } from "./PreviousCampaignFoldCard";
 
 export const metadata: Metadata = {
@@ -44,6 +45,7 @@ function SideLabelSection() {
 
 async function PreviousCampaignsSection() {
   const campaigns = await getTrackedArchivedCampaigns(getArchivedCampaigns());
+  const rosters = getAllCampaignRosters();
   return (
     <div className="max-w-6xl mx-auto px-6">
       <div className="grid gap-4">
@@ -57,6 +59,7 @@ async function PreviousCampaignsSection() {
             headerImage={campaign.headerImage || undefined}
             headerImagePosition={campaign.headerImagePosition}
             description={campaign.description}
+            roster={rosters[campaign.id]}
           />
         ))}
       </div>

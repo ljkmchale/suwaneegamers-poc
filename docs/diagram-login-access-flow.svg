@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8f7ff"/><stop offset="1" stop-color="#eef6ff"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#312e81" flood-opacity=".14"/></filter>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="#62677c"/></marker>
+    <style>.t{font:700 34px Arial;fill:#292550}.b{rx:18;stroke-width:2;filter:url(#s)}.l{font:700 22px Arial;fill:#27263b;text-anchor:middle}.d{font:400 16px Arial;fill:#62677c;text-anchor:middle}.ar{stroke:#62677c;stroke-width:4;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1400" height="520" rx="28" fill="url(#bg)"/>
+  <text x="700" y="58" class="t" text-anchor="middle">Login and protected-page access</text>
+  <rect class="b" x="45" y="145" width="210" height="145" fill="#fff" stroke="#9ca3af"/>
+  <text x="150" y="191" class="l">Visitor</text><text x="150" y="226" class="d">Opens a protected page</text>
+  <rect class="b" x="305" y="145" width="235" height="145" fill="#fff7ed" stroke="#f59e0b"/>
+  <text x="423" y="191" class="l">Terms check</text><text x="423" y="226" class="d">Accept once per browser</text><text x="423" y="254" class="d">Required before sign-in</text>
+  <rect class="b" x="590" y="145" width="210" height="145" fill="#eff6ff" stroke="#4285f4"/>
+  <text x="695" y="191" class="l">Google login</text><text x="695" y="226" class="d">Confirms identity</text>
+  <rect class="b" x="850" y="145" width="240" height="145" fill="#ecfdf5" stroke="#059669"/>
+  <text x="970" y="191" class="l">Member session</text><text x="970" y="226" class="d">Encrypted sg-user cookie</text><text x="970" y="254" class="d">Checked before rendering</text>
+  <rect class="b" x="1140" y="145" width="215" height="145" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="1248" y="191" class="l">Protected page</text><text x="1248" y="226" class="d">Content is returned</text>
+  <path class="ar" d="M255 218h38"/><path class="ar" d="M540 218h38"/><path class="ar" d="M800 218h38"/><path class="ar" d="M1090 218h38"/>
+  <rect class="b" x="565" y="360" width="270" height="105" fill="#fff" stroke="#dc2626"/>
+  <text x="700" y="402" class="l">Sign out</text><text x="700" y="435" class="d">Clears member and admin cookies → sign-in</text>
+  <path class="ar" d="M970 302c0 65-150 110-123 110"/>
+</svg>

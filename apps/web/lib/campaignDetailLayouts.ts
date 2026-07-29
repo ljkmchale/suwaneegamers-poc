@@ -1,4 +1,6 @@
 import { findCampaign, getActiveCampaigns, type CampaignPartyMember, type PortalCampaign } from "@/lib/campaigns";
+import { findRosterCharacter, rosterDescriptor, rosterStatusLabel } from "@/lib/campaignRoster";
+import { getCampaignRoster } from "@/lib/campaignRosterData";
 import type { PageItem } from "@/lib/pageBlocks";
 
 function resourceLinks(campaign: PortalCampaign) {
@@ -126,6 +128,49 @@ export function replaceCampaignSessionsCard(items: PageItem[], campaign: PortalC
   const withoutStoredSessions = items.filter((item) => item.id !== sessionsCardId);
 
   return sessions ? [...withoutStoredSessions, sessions] : withoutStoredSessions;
+}
+
+/**
+ * Enriches the person tiles on the notes/roster card with synced roster data
+ * (species, class, level, status) from content/campaign-roster.json. Applied at
+ * render time so both fresh layouts and saved page-layout overrides pick up
+ * spreadsheet changes without touching the stored layout.
+ */
+export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCampaign): PageItem[] {
+  const roster = getCampaignRoster(campaign.id);
+  if (roster.length === 0) return items;
+
+  const rosterCardId = `${campaign.id}-notes-roster-card`;
+
+  function enrichCardItems(json: string): string {
+    let cardItems: unknown;
+    try { cardItems = JSON.parse(json); } catch { return json; }
+    if (!Array.isArray(cardItems)) return json;
+
+    const next = cardItems.map((cardItem) => {
+      const record = cardItem as { type?: string; props?: Record<string, unknown> };
+      if (record.type === "grid" && typeof record.props?.items === "string") {
+        return { ...record, props: { ...record.props, items: enrichCardItems(record.props.items) } };
+      }
+      if (record.type !== "person" || typeof record.props?.name !== "string") return cardItem;
+
+      const match = findRosterCharacter(roster, record.props.name);
+      if (!match) return cardItem;
+
+      const role = [record.props.role || match.player, rosterDescriptor(match), rosterStatusLabel(match)]
+        .filter(Boolean)
+        .join(" · ");
+      return { ...record, props: { ...record.props, role } };
+    });
+
+    return JSON.stringify(next, null, 2);
+  }
+
+  return items.map((item) => {
+    if (item.kind !== "block" || item.id !== rosterCardId) return item;
+    if (typeof item.props.items !== "string") return item;
+    return { ...item, props: { ...item.props, items: enrichCardItems(item.props.items) } };
+  });
 }
 
 export function buildCampaignDetailLayout(campaign: PortalCampaign): PageItem[] {

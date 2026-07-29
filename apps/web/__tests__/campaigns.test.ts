@@ -312,7 +312,7 @@ describe("findCampaignForCalendarEvent", () => {
       schedule: "Biweekly",
       description: "",
 
-      headerImage: "/images/campaigns/heroes-of-emberstran.jpg",
+      headerImage: "/media/images/campaigns/heroes-of-emberstran.jpg",
       aliases: ["Emberstran"],
     },
   ];

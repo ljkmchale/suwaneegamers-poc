@@ -1,0 +1,466 @@
+[
+  {
+    "from": "/images/battle-scene.jpg",
+    "to": "/images/battle-scene.webp"
+  },
+  {
+    "from": "/images/bronze-dragon.png",
+    "to": "/images/bronze-dragon.webp"
+  },
+  {
+    "from": "/images/campaigns/a-new-adventure.jpg",
+    "to": "/images/campaigns/a-new-adventure.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/beer-and-dice.png",
+    "to": "/images/campaigns/archive/beer-and-dice.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/crystal-bottle.jpg",
+    "to": "/images/campaigns/archive/crystal-bottle.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/imminent-domain.jpg",
+    "to": "/images/campaigns/archive/imminent-domain.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/legends-of-larch.png",
+    "to": "/images/campaigns/archive/legends-of-larch.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/mead-society.png",
+    "to": "/images/campaigns/archive/mead-society.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/middle-earth.png",
+    "to": "/images/campaigns/archive/middle-earth.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/obliged-corpses.png",
+    "to": "/images/campaigns/archive/obliged-corpses.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/storm-kings-thunder.png",
+    "to": "/images/campaigns/archive/storm-kings-thunder.webp"
+  },
+  {
+    "from": "/images/campaigns/archive/strahd-avernus.png",
+    "to": "/images/campaigns/archive/strahd-avernus.webp"
+  },
+  {
+    "from": "/images/campaigns/beer-and-dice-i.jpg",
+    "to": "/images/campaigns/beer-and-dice-i.webp"
+  },
+  {
+    "from": "/images/campaigns/beer-and-dice-ii.jpg",
+    "to": "/images/campaigns/beer-and-dice-ii.webp"
+  },
+  {
+    "from": "/images/campaigns/beer-and-dice-iii.jpg",
+    "to": "/images/campaigns/beer-and-dice-iii.webp"
+  },
+  {
+    "from": "/images/campaigns/beer-and-dice.jpg",
+    "to": "/images/campaigns/beer-and-dice.webp"
+  },
+  {
+    "from": "/images/campaigns/blisterfel-the-company.jpg",
+    "to": "/images/campaigns/blisterfel-the-company.webp"
+  },
+  {
+    "from": "/images/campaigns/bloody-endeavor-ii.jpg",
+    "to": "/images/campaigns/bloody-endeavor-ii.webp"
+  },
+  {
+    "from": "/images/campaigns/call-for-heroes.png",
+    "to": "/images/campaigns/call-for-heroes.webp"
+  },
+  {
+    "from": "/images/campaigns/charlemagnes-angels.jpg",
+    "to": "/images/campaigns/charlemagnes-angels.webp"
+  },
+  {
+    "from": "/images/campaigns/collective-of-myrdae.jpg",
+    "to": "/images/campaigns/collective-of-myrdae.webp"
+  },
+  {
+    "from": "/images/campaigns/crystal-bottle.jpg",
+    "to": "/images/campaigns/crystal-bottle.webp"
+  },
+  {
+    "from": "/images/campaigns/curse-of-strahd.jpg",
+    "to": "/images/campaigns/curse-of-strahd.webp"
+  },
+  {
+    "from": "/images/campaigns/dungeons-i-legends-of-larch.jpg",
+    "to": "/images/campaigns/dungeons-i-legends-of-larch.webp"
+  },
+  {
+    "from": "/images/campaigns/dungeons-ii-mead-society.jpg",
+    "to": "/images/campaigns/dungeons-ii-mead-society.webp"
+  },
+  {
+    "from": "/images/campaigns/dungeons-iii-knight-watch.jpg",
+    "to": "/images/campaigns/dungeons-iii-knight-watch.webp"
+  },
+  {
+    "from": "/images/campaigns/heroes-of-emberstran.jpg",
+    "to": "/images/campaigns/heroes-of-emberstran.webp"
+  },
+  {
+    "from": "/images/campaigns/imminent-domain.jpg",
+    "to": "/images/campaigns/imminent-domain.webp"
+  },
+  {
+    "from": "/images/campaigns/mad-mage.jpg",
+    "to": "/images/campaigns/mad-mage.webp"
+  },
+  {
+    "from": "/images/campaigns/middle-earth.jpg",
+    "to": "/images/campaigns/middle-earth.webp"
+  },
+  {
+    "from": "/images/campaigns/myrdaen-misfits.jpg",
+    "to": "/images/campaigns/myrdaen-misfits.webp"
+  },
+  {
+    "from": "/images/campaigns/nomads.png",
+    "to": "/images/campaigns/nomads.webp"
+  },
+  {
+    "from": "/images/campaigns/obliged-corpses.jpg",
+    "to": "/images/campaigns/obliged-corpses.webp"
+  },
+  {
+    "from": "/images/campaigns/order-of-the-raven.jpg",
+    "to": "/images/campaigns/order-of-the-raven.webp"
+  },
+  {
+    "from": "/images/campaigns/plane-shifters.jpg",
+    "to": "/images/campaigns/plane-shifters.webp"
+  },
+  {
+    "from": "/images/campaigns/souls-of-destiny.jpg",
+    "to": "/images/campaigns/souls-of-destiny.webp"
+  },
+  {
+    "from": "/images/campaigns/storm-kings-thunder.png",
+    "to": "/images/campaigns/storm-kings-thunder.webp"
+  },
+  {
+    "from": "/images/campaigns/the-silent-vanguard.jpg",
+    "to": "/images/campaigns/the-silent-vanguard.webp"
+  },
+  {
+    "from": "/images/campaigns/treasure-hunters.jpg",
+    "to": "/images/campaigns/treasure-hunters.webp"
+  },
+  {
+    "from": "/images/campaigns/tyranny-of-dragons.jpg",
+    "to": "/images/campaigns/tyranny-of-dragons.webp"
+  },
+  {
+    "from": "/images/campaigns/uldrea.png",
+    "to": "/images/campaigns/uldrea.webp"
+  },
+  {
+    "from": "/images/chip-poole.png",
+    "to": "/images/chip-poole.webp"
+  },
+  {
+    "from": "/images/chris-glynn.png",
+    "to": "/images/chris-glynn.webp"
+  },
+  {
+    "from": "/images/copper-dragon.png",
+    "to": "/images/copper-dragon.webp"
+  },
+  {
+    "from": "/images/dragon-ears.png",
+    "to": "/images/dragon-ears.webp"
+  },
+  {
+    "from": "/images/dragon-layers-hi/base.png",
+    "to": "/images/dragon-layers-hi/base.webp"
+  },
+  {
+    "from": "/images/dragon-layers-hi/left-wing.png",
+    "to": "/images/dragon-layers-hi/left-wing.webp"
+  },
+  {
+    "from": "/images/dragon-layers-hi/logo-full.png",
+    "to": "/images/dragon-layers-hi/logo-full.webp"
+  },
+  {
+    "from": "/images/dragon-layers-hi/right-wing.png",
+    "to": "/images/dragon-layers-hi/right-wing.webp"
+  },
+  {
+    "from": "/images/dragon-layers-hi/tail.png",
+    "to": "/images/dragon-layers-hi/tail.webp"
+  },
+  {
+    "from": "/images/dragon-layers/base.png",
+    "to": "/images/dragon-layers/base.webp"
+  },
+  {
+    "from": "/images/dragon-layers/left-wing.png",
+    "to": "/images/dragon-layers/left-wing.webp"
+  },
+  {
+    "from": "/images/dragon-layers/right-wing.png",
+    "to": "/images/dragon-layers/right-wing.webp"
+  },
+  {
+    "from": "/images/dragon-layers/tail.png",
+    "to": "/images/dragon-layers/tail.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/abbey-of-light.jpg",
+    "to": "/images/gazetteer/cities/abbey-of-light.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/adsuren.jpg",
+    "to": "/images/gazetteer/cities/adsuren.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/aerly.jpg",
+    "to": "/images/gazetteer/cities/aerly.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/ahnassa.jpg",
+    "to": "/images/gazetteer/cities/ahnassa.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/alburest.jpg",
+    "to": "/images/gazetteer/cities/alburest.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/basctdelm.jpg",
+    "to": "/images/gazetteer/cities/basctdelm.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/bonfaduhr.jpg",
+    "to": "/images/gazetteer/cities/bonfaduhr.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/caelora.jpg",
+    "to": "/images/gazetteer/cities/caelora.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/caldwynn.jpg",
+    "to": "/images/gazetteer/cities/caldwynn.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/deadfield.jpg",
+    "to": "/images/gazetteer/cities/deadfield.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/dha-chaomhnoir.png",
+    "to": "/images/gazetteer/cities/dha-chaomhnoir.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/dunduar.jpg",
+    "to": "/images/gazetteer/cities/dunduar.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/emberstran.jpg",
+    "to": "/images/gazetteer/cities/emberstran.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/felden.png",
+    "to": "/images/gazetteer/cities/felden.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/gevakaln.png",
+    "to": "/images/gazetteer/cities/gevakaln.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/gibuldon.png",
+    "to": "/images/gazetteer/cities/gibuldon.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/gur-madihl.jpg",
+    "to": "/images/gazetteer/cities/gur-madihl.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/harbok.png",
+    "to": "/images/gazetteer/cities/harbok.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/hesfal.jpg",
+    "to": "/images/gazetteer/cities/hesfal.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/kelaad.png",
+    "to": "/images/gazetteer/cities/kelaad.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/khagdaruhl.png",
+    "to": "/images/gazetteer/cities/khagdaruhl.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/lehnthruakk.png",
+    "to": "/images/gazetteer/cities/lehnthruakk.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/lenshur.jpg",
+    "to": "/images/gazetteer/cities/lenshur.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/lurdoba.png",
+    "to": "/images/gazetteer/cities/lurdoba.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/marrowdale.jpg",
+    "to": "/images/gazetteer/cities/marrowdale.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/naurkhad.jpg",
+    "to": "/images/gazetteer/cities/naurkhad.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/nunglthil.jpg",
+    "to": "/images/gazetteer/cities/nunglthil.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/nurador.jpg",
+    "to": "/images/gazetteer/cities/nurador.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/onaren.jpg",
+    "to": "/images/gazetteer/cities/onaren.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/scarwatch-hold.jpg",
+    "to": "/images/gazetteer/cities/scarwatch-hold.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/shademoor.jpg",
+    "to": "/images/gazetteer/cities/shademoor.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/skrettel.png",
+    "to": "/images/gazetteer/cities/skrettel.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/stoneshore.jpg",
+    "to": "/images/gazetteer/cities/stoneshore.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/talbasar.png",
+    "to": "/images/gazetteer/cities/talbasar.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/thel-kholdur.jpg",
+    "to": "/images/gazetteer/cities/thel-kholdur.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/tirncall.jpg",
+    "to": "/images/gazetteer/cities/tirncall.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/tratta.jpg",
+    "to": "/images/gazetteer/cities/tratta.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/ulgrey.jpg",
+    "to": "/images/gazetteer/cities/ulgrey.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/valenlun.jpg",
+    "to": "/images/gazetteer/cities/valenlun.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/witguard.png",
+    "to": "/images/gazetteer/cities/witguard.webp"
+  },
+  {
+    "from": "/images/gazetteer/cities/ysnonterien.jpg",
+    "to": "/images/gazetteer/cities/ysnonterien.webp"
+  },
+  {
+    "from": "/images/generated/tom-chernetsky-card.png",
+    "to": "/images/generated/tom-chernetsky-card.webp"
+  },
+  {
+    "from": "/images/guides-to-myrdae/dm-reference.jpg",
+    "to": "/images/guides-to-myrdae/dm-reference.webp"
+  },
+  {
+    "from": "/images/history/Ages - Pre-Fracturing.png",
+    "to": "/images/history/Ages - Pre-Fracturing.webp"
+  },
+  {
+    "from": "/images/history/Ages Book - Cycle of Change.png",
+    "to": "/images/history/Ages Book - Cycle of Change.webp"
+  },
+  {
+    "from": "/images/history/Ages Book - Era of Ascendance.png",
+    "to": "/images/history/Ages Book - Era of Ascendance.webp"
+  },
+  {
+    "from": "/images/history/Ages Book - The Awakening.png",
+    "to": "/images/history/Ages Book - The Awakening.webp"
+  },
+  {
+    "from": "/images/history/Ages Book - Time of Growth.png",
+    "to": "/images/history/Ages Book - Time of Growth.webp"
+  },
+  {
+    "from": "/images/larry-mchale.png",
+    "to": "/images/larry-mchale.webp"
+  },
+  {
+    "from": "/images/lesley-poole.png",
+    "to": "/images/lesley-poole.webp"
+  },
+  {
+    "from": "/images/logo-animation/complete-shield-layer.png",
+    "to": "/images/logo-animation/complete-shield-layer.webp"
+  },
+  {
+    "from": "/images/logo-animation/full-dragon-layer.png",
+    "to": "/images/logo-animation/full-dragon-layer.webp"
+  },
+  {
+    "from": "/images/lore/legends-lore-cover.png",
+    "to": "/images/lore/legends-lore-cover.webp"
+  },
+  {
+    "from": "/images/michael-hewson.png",
+    "to": "/images/michael-hewson.webp"
+  },
+  {
+    "from": "/images/organizations/blindhilt-symbol.png",
+    "to": "/images/organizations/blindhilt-symbol.webp"
+  },
+  {
+    "from": "/images/organizations/populi-verde-symbol.png",
+    "to": "/images/organizations/populi-verde-symbol.webp"
+  },
+  {
+    "from": "/images/organizations/promissory-symbol.png",
+    "to": "/images/organizations/promissory-symbol.webp"
+  },
+  {
+    "from": "/images/pantheon/nigrum-symbol.png",
+    "to": "/images/pantheon/nigrum-symbol.webp"
+  },
+  {
+    "from": "/images/pantheon/sylunara-symbol.png",
+    "to": "/images/pantheon/sylunara-symbol.webp"
+  },
+  {
+    "from": "/images/sean-poole.png",
+    "to": "/images/sean-poole.webp"
+  },
+  {
+    "from": "/images/silver-dragon.png",
+    "to": "/images/silver-dragon.webp"
+  },
+  {
+    "from": "/images/suwaneegamers-logo-v18-4800p.png",
+    "to": "/images/suwaneegamers-logo-v18-4800p.webp"
+  }
+]

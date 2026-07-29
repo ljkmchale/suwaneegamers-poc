@@ -3,7 +3,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const root = process.cwd();
-const imageDir = path.join(root, "apps", "web", "public", "images");
+const imageDir = path.join(root, "apps", "web", "media", "images");
 const outputDir = path.join(imageDir, "generated");
 
 const backgroundPresets = [

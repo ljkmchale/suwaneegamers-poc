@@ -16,6 +16,9 @@ import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { isGoogleAuthConfigured } from "@/lib/googleOAuth";
 import { SignInGate } from "@/components/auth/SignInGate";
+import { ScheduleVoiceAssistant } from "@/components/livekit/ScheduleVoiceAssistant";
+import { getOrCreateUserProfile } from "@/lib/userProfiles";
+import { isStorefrontEnabled } from "@/lib/store";
 
 export default async function SiteLayout({
   children,
@@ -48,6 +51,15 @@ export default async function SiteLayout({
         picture: userSession.picture,
       }
     : null;
+  const profileState = isSignedIn(userSession)
+    ? getOrCreateUserProfile(userSession)
+    : null;
+  const liveKitConfigured = Boolean(
+    process.env.NODE_ENV !== "production" ||
+      (process.env.LIVEKIT_URL &&
+        process.env.LIVEKIT_API_KEY &&
+        process.env.LIVEKIT_API_SECRET),
+  );
 
   // Paths where the Edit Layout overlay should be available
   const builtInPaths = Object.keys(PAGE_SECTIONS);
@@ -67,6 +79,12 @@ export default async function SiteLayout({
         isAdmin={isAdmin}
         editMode={editMode}
         user={navUser}
+        storeEnabled={isStorefrontEnabled()}
+      />
+      <ScheduleVoiceAssistant
+        configured={liveKitConfigured}
+        enabled={profileState?.profile.myraEnabled ?? false}
+        isNewVisitor={profileState?.isNew ?? false}
       />
 
       {/* Page content */}

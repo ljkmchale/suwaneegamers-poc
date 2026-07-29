@@ -7,7 +7,6 @@ import {
   getAssetDef,
   resolveMediaPlayerSource,
   type BlockType,
-  type AssetTypeDef,
 } from "@/lib/pageBlocks";
 
 // All types declared in the BlockType union — update this list whenever a type is added
@@ -281,9 +280,9 @@ describe("resolveMediaPlayerSource", () => {
   });
 
   it("uses the video player for uploaded MP4 files", () => {
-    expect(resolveMediaPlayerSource("/images/media/session-recap.mp4")).toEqual({
+    expect(resolveMediaPlayerSource("/media/images/media/session-recap.mp4")).toEqual({
       kind: "video",
-      src: "/images/media/session-recap.mp4",
+      src: "/media/images/media/session-recap.mp4",
     });
   });
 

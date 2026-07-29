@@ -2,12 +2,19 @@ import { NextResponse, type NextRequest } from "next/server";
 import { sealData } from "iron-session";
 import { USER_SESSION_OPTIONS, USER_SESSION_TTL_SECONDS, type UserSessionData } from "@/lib/userSession";
 import { exchangeCodeForIdentity, getBaseUrl, getRedirectUri, isGoogleAuthConfigured } from "@/lib/googleOAuth";
+import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 
 export const dynamic = "force-dynamic";
 
 function homeUrl(request: NextRequest) {
   // Public host from proxy headers, never the internal origin (localhost:4652).
   return new URL("/", getBaseUrl(request));
+}
+
+/** Where to land after a successful sign-in: the page they originally asked for. */
+function returnUrl(request: NextRequest) {
+  const from = safeReturnPath(request.cookies.get(RETURN_TO_COOKIE)?.value);
+  return new URL(from, getBaseUrl(request));
 }
 
 function failure(request: NextRequest, reason: string) {
@@ -53,12 +60,13 @@ export async function GET(request: NextRequest) {
     { password: USER_SESSION_OPTIONS.password as string, ttl: USER_SESSION_TTL_SECONDS },
   );
 
-  const response = NextResponse.redirect(homeUrl(request));
+  const response = NextResponse.redirect(returnUrl(request));
   response.cookies.set(USER_SESSION_OPTIONS.cookieName, sealed, {
     ...USER_SESSION_OPTIONS.cookieOptions,
     maxAge: USER_SESSION_TTL_SECONDS,
   });
   response.cookies.delete("sg-oauth-state");
   response.cookies.delete("sg-auth-error");
+  response.cookies.delete(RETURN_TO_COOKIE);
   return response;
 }

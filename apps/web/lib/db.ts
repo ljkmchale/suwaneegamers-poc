@@ -121,6 +121,13 @@ function migrateSchema(db: Database.Database): void {
     db.exec(`ALTER TABLE content_sync_jobs ADD COLUMN source_job_id TEXT`);
   }
 
+  const storeProductColumns = new Set(
+    (db.prepare(`PRAGMA table_info(store_products)`).all() as { name: string }[]).map((column) => column.name),
+  );
+  if (!storeProductColumns.has("category")) {
+    db.exec(`ALTER TABLE store_products ADD COLUMN category TEXT NOT NULL DEFAULT 'other'`);
+  }
+
   const gazetteerColumns = new Set(
     (db.prepare(`PRAGMA table_info(gazetteer)`).all() as { name: string }[]).map((column) => column.name),
   );
@@ -135,6 +142,14 @@ function migrateSchema(db: Database.Database): void {
   addGazetteerColumn("size", "TEXT");
   addGazetteerColumn("region", "TEXT");
   addGazetteerColumn("description", "TEXT");
+
+  // Per-member Myra persona (voice + speaking manner), added with the persona system
+  const userProfileColumns = new Set(
+    (db.prepare(`PRAGMA table_info(user_profiles)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!userProfileColumns.has("myra_persona")) {
+    db.exec(`ALTER TABLE user_profiles ADD COLUMN myra_persona TEXT`);
+  }
 
   // Identify analytics sessions once Google sign-in is enforced
   const analyticsSessionColumns = new Set(
@@ -156,11 +171,118 @@ function migrateSchema(db: Database.Database): void {
       ON analytics_sessions(visitor_email, last_seen_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_events_session_created
       ON analytics_events(session_id, created_at DESC);
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_user_profiles_email
+      ON user_profiles(email);
   `);
 }
 
 function initializeSchema(db: Database.Database): void {
   db.exec(`
+    -- ----------------------------------------------------------------
+    -- Signed-in visitor profiles
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS user_profiles (
+      id                      TEXT PRIMARY KEY,
+      google_sub              TEXT,
+      email                   TEXT NOT NULL,
+      display_name            TEXT NOT NULL,
+      player_name             TEXT,
+      favorite_locations_json TEXT NOT NULL DEFAULT '[]',
+      myra_enabled            INTEGER NOT NULL DEFAULT 1,
+      myra_persona            TEXT,
+      created_at              TEXT NOT NULL,
+      updated_at              TEXT NOT NULL,
+      last_seen_at            TEXT NOT NULL
+    );
+
+    -- ----------------------------------------------------------------
+    -- Store catalog and orders
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS store_products (
+      id                 TEXT PRIMARY KEY,
+      slug               TEXT NOT NULL UNIQUE,
+      name               TEXT NOT NULL,
+      short_description  TEXT NOT NULL DEFAULT '',
+      description        TEXT NOT NULL DEFAULT '',
+      price_cents        INTEGER NOT NULL DEFAULT 0 CHECK (price_cents >= 0),
+      currency           TEXT NOT NULL DEFAULT 'USD',
+      image_url          TEXT,
+      category           TEXT NOT NULL DEFAULT 'other',
+      inventory_quantity INTEGER,
+      status             TEXT NOT NULL DEFAULT 'draft'
+                         CHECK (status IN ('draft', 'active', 'archived')),
+      fulfillment_type   TEXT NOT NULL DEFAULT 'physical'
+                         CHECK (fulfillment_type IN ('physical', 'digital', 'event')),
+      created_at         TEXT NOT NULL,
+      updated_at         TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS store_settings (
+      key        TEXT PRIMARY KEY,
+      value      TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    INSERT OR IGNORE INTO store_settings (key, value, updated_at)
+      VALUES ('storefront_enabled', 'false', CURRENT_TIMESTAMP);
+
+    CREATE TABLE IF NOT EXISTS store_orders (
+      id                  TEXT PRIMARY KEY,
+      order_number        TEXT NOT NULL UNIQUE,
+      user_email          TEXT,
+      customer_email      TEXT,
+      customer_name       TEXT,
+      status              TEXT NOT NULL DEFAULT 'pending',
+      currency            TEXT NOT NULL DEFAULT 'USD',
+      subtotal_cents      INTEGER NOT NULL,
+      tax_cents           INTEGER NOT NULL DEFAULT 0,
+      shipping_cents      INTEGER NOT NULL DEFAULT 0,
+      total_cents         INTEGER NOT NULL,
+      paypal_order_id     TEXT UNIQUE,
+      paypal_capture_id   TEXT UNIQUE,
+      shipping_json       TEXT,
+      created_at          TEXT NOT NULL,
+      updated_at          TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS store_order_items (
+      id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+      order_id           TEXT NOT NULL REFERENCES store_orders(id) ON DELETE CASCADE,
+      product_id         TEXT REFERENCES store_products(id) ON DELETE SET NULL,
+      product_name       TEXT NOT NULL,
+      unit_price_cents   INTEGER NOT NULL,
+      quantity           INTEGER NOT NULL CHECK (quantity > 0),
+      line_total_cents   INTEGER NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS store_product_variants (
+      id                 TEXT PRIMARY KEY,
+      product_id         TEXT NOT NULL REFERENCES store_products(id) ON DELETE CASCADE,
+      name               TEXT NOT NULL,
+      sku                TEXT,
+      price_cents        INTEGER,
+      inventory_quantity INTEGER,
+      active             INTEGER NOT NULL DEFAULT 1,
+      sort_order         INTEGER NOT NULL DEFAULT 0
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_store_variants_product
+      ON store_product_variants(product_id, sort_order);
+
+    CREATE TABLE IF NOT EXISTS store_webhook_events (
+      paypal_event_id TEXT PRIMARY KEY,
+      event_type      TEXT NOT NULL,
+      payload_json    TEXT NOT NULL,
+      processed_at    TEXT NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_store_products_status
+      ON store_products(status, updated_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_store_orders_created
+      ON store_orders(created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_store_orders_email
+      ON store_orders(user_email, created_at DESC);
+
     -- ----------------------------------------------------------------
     -- Campaigns
     -- ----------------------------------------------------------------
@@ -417,6 +539,20 @@ function initializeSchema(db: Database.Database): void {
       ON voice_questions(asked_at DESC);
     CREATE INDEX IF NOT EXISTS idx_voice_questions_category
       ON voice_questions(category, asked_at DESC);
+
+    -- Granular per-turn timing metrics (TTFT, end-of-utterance, TTS TTFB,
+    -- interruptions) forwarded by the agent; feed the nightly autotuner.
+    CREATE TABLE IF NOT EXISTS voice_metrics (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id    TEXT,
+      kind          TEXT NOT NULL,
+      value_ms      INTEGER,
+      cached_tokens INTEGER,
+      created_at    TEXT NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_voice_metrics_kind_created
+      ON voice_metrics(kind, created_at DESC);
 
     -- ----------------------------------------------------------------
     -- Custom pages (admin-created pages with slugs)

@@ -3,7 +3,7 @@ import { getPageGrid, getPageLayout } from "@/lib/pageLayouts";
 import { PageBlockList } from "@/components/blocks/PageBlockList";
 
 export const metadata: Metadata = {
-  title: "Campaign Setting",
+  title: "Myrdae Setting Guides",
   description: "Myrdae campaign setting references, lore, and worldbuilding resources.",
 };
 
@@ -14,13 +14,13 @@ export default function CampaignSettingPage() {
   const grid = getPageGrid("/campaign-setting");
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
+    <div className="campaign-setting-page relative min-h-screen overflow-hidden bg-black">
       <div
         className="fixed inset-0 z-0 bg-cover bg-center"
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/guides-to-myrdae/reference-cards/campaign-setting-full-setting-guide.webp")',
+            'url("/media/images/guides-to-myrdae/reference-cards/campaign-setting-full-setting-guide.webp")',
         }}
       />
       <div

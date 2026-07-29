@@ -85,9 +85,14 @@ function TrafficChart({
         <polyline points={points("pageViews")} fill="none" stroke="#8b5cf6" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
         <polyline points={points("visitors")} fill="none" stroke="#f59e0b" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
         {rows.map((row, index) => (
-          <circle key={row.date} cx={x(index)} cy={y(row.pageViews)} r="3" fill="#c4b5fd">
-            <title>{row.date}: {row.pageViews} views, {row.visitors} visitors</title>
-          </circle>
+          <circle
+            key={row.date}
+            cx={x(index)}
+            cy={y(row.pageViews)}
+            r="3"
+            fill="#c4b5fd"
+            aria-label={`${row.date}: ${row.pageViews} views, ${row.visitors} visitors`}
+          />
         ))}
         {labels.map((index) => (
           <text key={index} x={x(index)} y={height + 16} textAnchor="middle" fill="#6a5a78" fontSize="11">
@@ -110,8 +115,8 @@ function HorizontalBars({
   }
   return (
     <div className="space-y-4">
-      {rows.map((row) => (
-        <div key={`${row.label}-${row.detail ?? ""}`}>
+      {rows.map((row, index) => (
+        <div key={`${row.label}-${row.detail ?? ""}-${index}`}>
           <div className="mb-1.5 flex items-end justify-between gap-4 text-xs">
             <span className="min-w-0 truncate text-[#c8bda8]" title={row.label}>{row.label}</span>
             <span className="shrink-0 text-[#9080a0]">{number(row.value)}{row.detail ? ` · ${row.detail}` : ""}</span>
@@ -209,7 +214,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           <div>
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Who is on now</h2>
             <p className="mt-1 text-xs text-[#6a5a78]">
-              Signed-in members and anonymous visitors active within the last two minutes
+              Verified members and unidentified visitors active within the last two minutes
             </p>
           </div>
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-900 bg-emerald-950/30 px-3 py-1 text-xs text-emerald-300">
@@ -247,6 +252,48 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         ) : (
           <p className="border-t border-[#2a2a35] px-5 py-8 text-center text-xs text-[#6a5a78]">
             No active visitors right now.
+          </p>
+        )}
+      </section>
+
+      <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+        <div className="p-5">
+          <h2 className="font-cinzel text-sm uppercase tracking-widest">Who&apos;s been on the site</h2>
+          <p className="mt-1 text-xs text-[#6a5a78]">All recorded visitors in the selected period, most recent first</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="border-y border-[#2a2a35] bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
+              <tr>
+                <th className="px-5 py-3 font-normal">Visitor</th>
+                <th className="px-5 py-3 font-normal">Email</th>
+                <th className="px-5 py-3 font-normal">Last seen</th>
+                <th className="px-5 py-3 text-right font-normal">Visits</th>
+                <th className="px-5 py-3 text-right font-normal">Pages</th>
+                <th className="px-5 py-3 font-normal">Top page</th>
+                <th className="px-5 py-3 text-right font-normal">Views</th>
+                <th className="px-5 py-3 text-right font-normal">Engaged</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.people.map((person) => (
+                <tr key={person.visitorKey} className="border-b border-[#201927] last:border-0">
+                  <td className="px-5 py-3 text-[#e8dfc8]">{person.name}</td>
+                  <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email ?? "Identity not verified"}</td>
+                  <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
+                  <td className="px-5 py-3 text-right">{person.sessions}</td>
+                  <td className="px-5 py-3 text-right">{person.pagesViewed}</td>
+                  <td className="max-w-52 truncate px-5 py-3 font-mono text-[#a89880]" title={person.topPage}>{person.topPage || "—"}</td>
+                  <td className="px-5 py-3 text-right">{person.pageViews}</td>
+                  <td className="px-5 py-3 text-right text-[#f59e0b]">{duration(person.engagedSeconds)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {data.people.length === 0 && (
+          <p className="p-8 text-center text-xs text-[#6a5a78]">
+            Visitors will appear here after they browse the site.
           </p>
         )}
       </section>
@@ -401,7 +448,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
       <div className="mb-6 grid gap-6 xl:grid-cols-3">
         <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
           <h2 className="font-cinzel text-sm uppercase tracking-widest">Audience mix</h2>
-          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Separates your own browsing from member and anonymous traffic</p>
+          <p className="mb-6 mt-1 text-xs text-[#6a5a78]">Separates your own browsing from members and unidentified traffic</p>
           <HorizontalBars rows={data.visitorSegments.map((segment) => ({
             label: segment.segment,
             value: segment.pageViews,
@@ -557,53 +604,11 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         </section>
       </div>
 
-      <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
-        <div className="p-5">
-          <h2 className="font-cinzel text-sm uppercase tracking-widest">Who&apos;s been on the site</h2>
-          <p className="mt-1 text-xs text-[#6a5a78]">All recorded visitors in the selected period, most recent first</p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="border-y border-[#2a2a35] bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
-              <tr>
-                <th className="px-5 py-3 font-normal">Visitor</th>
-                <th className="px-5 py-3 font-normal">Email</th>
-                <th className="px-5 py-3 font-normal">Last seen</th>
-                <th className="px-5 py-3 text-right font-normal">Visits</th>
-                <th className="px-5 py-3 text-right font-normal">Pages</th>
-                <th className="px-5 py-3 font-normal">Top page</th>
-                <th className="px-5 py-3 text-right font-normal">Views</th>
-                <th className="px-5 py-3 text-right font-normal">Engaged</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.people.map((person) => (
-                <tr key={person.visitorKey} className="border-b border-[#201927] last:border-0">
-                  <td className="px-5 py-3 text-[#e8dfc8]">{person.name}</td>
-                  <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email ?? "Anonymous"}</td>
-                  <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
-                  <td className="px-5 py-3 text-right">{person.sessions}</td>
-                  <td className="px-5 py-3 text-right">{person.pagesViewed}</td>
-                  <td className="max-w-52 truncate px-5 py-3 font-mono text-[#a89880]" title={person.topPage}>{person.topPage || "—"}</td>
-                  <td className="px-5 py-3 text-right">{person.pageViews}</td>
-                  <td className="px-5 py-3 text-right text-[#f59e0b]">{duration(person.engagedSeconds)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {data.people.length === 0 && (
-          <p className="p-8 text-center text-xs text-[#6a5a78]">
-            Visitors will appear here after they browse the site.
-          </p>
-        )}
-      </section>
-
       <div className="mb-6 grid gap-6 2xl:grid-cols-[1.35fr_0.65fr]">
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
             <h2 className="font-cinzel text-sm uppercase tracking-widest">What each visitor viewed</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in and anonymous visitor activity, most recent first</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Verified and unidentified visitor activity, most recent first</p>
           </div>
           <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
             <table className="w-full text-left text-xs">
@@ -642,7 +647,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
         <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
           <div className="p-5">
             <h2 className="font-cinzel text-sm uppercase tracking-widest">Who viewed each page</h2>
-            <p className="mt-1 text-xs text-[#6a5a78]">Signed-in and anonymous visitors for each page</p>
+            <p className="mt-1 text-xs text-[#6a5a78]">Verified and unidentified visitors for each page</p>
           </div>
           <div className="max-h-[38rem] overflow-auto border-t border-[#2a2a35]">
             {data.pageAudiences.map((page) => (

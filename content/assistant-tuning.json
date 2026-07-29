@@ -1,0 +1,13 @@
+{
+  "minEndpointingDelay": 0.4,
+  "maxEndpointingDelay": 5,
+  "vadMinSilence": 0.45,
+  "vadActivationThreshold": 0.6,
+  "minInterruptionDuration": 1.2,
+  "minInterruptionWords": 3,
+  "ollamaTemperature": 0.3,
+  "ollamaTopP": 0.9,
+  "updatedAt": "",
+  "updatedBy": "manual",
+  "note": "Raised interruption guard to reject speaker echo and short background speech."
+}

@@ -17,8 +17,8 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "apps/web/public/images/suwaneegamers-logo-v18-4800p.png"
-OUTPUT = ROOT / "apps/web/public/images/logo-animation"
+SOURCE = ROOT / "apps/web/media/images/suwaneegamers-logo-v18-4800p.png"
+OUTPUT = ROOT / "apps/web/media/images/logo-animation"
 GENERATED_DRAGON = OUTPUT / "dragon-complete.png"
 HEIGHT = 1800
 

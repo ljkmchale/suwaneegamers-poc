@@ -5,7 +5,7 @@ import type { PageItem } from "@/lib/pageBlocks";
 import type { PortalCampaign } from "@/lib/campaigns";
 import { activeCampaigns, findCampaign, getActiveCampaigns } from "@/lib/campaigns";
 import { findTrackedCampaign } from "@/lib/campaignTracking";
-import { replaceCampaignSessionsCard } from "@/lib/campaignDetailLayouts";
+import { enrichCampaignRosterCard, replaceCampaignSessionsCard } from "@/lib/campaignDetailLayouts";
 import { getPageLayout } from "@/lib/pageLayouts";
 
 interface Props {
@@ -66,7 +66,7 @@ export default async function CampaignDetailPage({ params }: Props) {
   if (!campaign) notFound();
 
   const trackedItems = replaceTrackedCampaignFields(getPageLayout(`/campaigns/${campaign.id}`), campaign);
-  const items = replaceCampaignSessionsCard(trackedItems, campaign);
+  const items = enrichCampaignRosterCard(replaceCampaignSessionsCard(trackedItems, campaign), campaign);
 
   return (
     <div className="relative min-h-screen pb-20 pt-20">

@@ -165,14 +165,14 @@ const KNOWN_INTERNAL_ROUTES = new Set([
   "/", "/calendar", "/campaigns", "/chronicles", "/dungeon-masters", "/players",
   "/bestiary", "/setting", "/territories", "/pantheon",
   "/history", "/lore", "/gazetteer", "/maps-of-myrdae",
-  "/campaign-setting", "/organizations", "/adventures", "/reference-for-dungeon-masters",
+  "/campaign-setting", "/campaign-journeys", "/organizations", "/adventures", "/reference-for-dungeon-masters",
   "/previous-campaigns", "/world", "/test-page",
 ]);
 
 // Nav placeholders for pages that haven't been built yet. These currently
 // 404 — when one gets a real page (app route or custom page), remove it here.
 const PLANNED_NAV_ROUTES = new Set([
-  "/guides", "/ourstory",
+  "/guides",
 ]);
 
 describe("Nav internal hrefs → known routes", () => {
@@ -433,8 +433,8 @@ describe("Editable campaign detail pages", () => {
         const nestedMediaPlayers = countNestedLayoutItems(blocks, "media-player");
         const nestedAudioLinks = countNestedLayoutItems(blocks, "audio-link");
         const nestedHeaderAudioLinks = countNestedHeaderAudioLinks(blocks);
-        expect(nestedHeaderAudioLinks).toBe(recordings.length);
-        expect(topLevelMediaPlayers + nestedMediaPlayers + nestedAudioLinks).toBe(0);
+        expect(nestedHeaderAudioLinks, `${campaign.id} header audio links`).toBe(recordings.length);
+        expect(topLevelMediaPlayers + nestedMediaPlayers + nestedAudioLinks, `${campaign.id} legacy audio blocks`).toBe(0);
       }
 
       const sessionSummaryBlocks = blocks.filter((item) => item.id.includes("-session-") && item.id.endsWith("-summary"));
@@ -556,7 +556,7 @@ Diverra details.
 
     expect(diverra).toMatchObject({
       id: "pan-diverra",
-      image: "/images/pantheon/diverra-symbol.png",
+      image: "/media/images/pantheon/diverra-symbol.webp",
       details: "Diverra details.",
     });
   });

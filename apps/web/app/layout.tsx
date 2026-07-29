@@ -85,9 +85,9 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       "Eight campaigns. Four Dungeon Masters. One living world. The official campaign portal for Suwanee Gamers — explore the world of Myrdae, track campaigns, and follow upcoming sessions.",
     icons: {
-      icon: "/images/suwaneegamers-logo.png",
-      shortcut: "/images/suwaneegamers-logo.png",
-      apple: "/images/suwaneegamers-logo.png",
+      icon: "/media/images/suwaneegamers-logo.png",
+      shortcut: "/media/images/suwaneegamers-logo.png",
+      apple: "/media/images/suwaneegamers-logo.png",
     },
     openGraph: {
       title: siteName,

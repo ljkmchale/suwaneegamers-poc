@@ -234,9 +234,15 @@
         "label": "Campaign Headers Google Drive Folder",
         "url": "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing",
         "role": "supporting"
+      },
+      {
+        "label": "PC Roster Google Sheet",
+        "url": "https://docs.google.com/spreadsheets/d/18dJmPar88AcVipVvmKesSQDkSi9dzpsYkUngUHpg6z0/edit?gid=1198014666",
+        "role": "supporting",
+        "syncJobId": "campaign-roster"
       }
     ],
-    "refreshLabel": "Campaign names, status, and Dungeon Masters refresh from the Campaign Tracking Google Doc.",
+    "refreshLabel": "Campaign names, status, and Dungeon Masters refresh from the Campaign Tracking Google Doc. Character rosters refresh daily from the PC Roster Google Sheet.",
     "editNote": "Update Campaign Tracking to change campaign status, names, or DMs. Session summaries continue to read from the Session Summaries Google Doc."
   },
   {

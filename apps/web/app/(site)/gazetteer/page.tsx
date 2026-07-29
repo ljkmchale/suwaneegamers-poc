@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { getGazetteerEntries, type GazetteerEntry } from "@/lib/gazetteer";
 
 export const metadata: Metadata = {
@@ -10,17 +13,25 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 const FALLBACK_IMAGE =
-  "/images/guides-to-myrdae/reference-cards/campaign-setting-settlements.webp";
+  "/media/images/guides-to-myrdae/reference-cards/campaign-setting-settlements.webp";
 
 const MINOR_SETTLEMENTS_REFERENCE_URL =
   "https://docs.google.com/document/d/1qY82tYJ_K6VMwEhfBZ-NvuX6WMKdSOpga3E40UzFUdE/edit?usp=sharing";
 
 const MINOR_SETTLEMENTS_COUNT = 11;
-const HERALDRY_CACHE_VERSION = "2026-07-14-1";
 
 function versionHeraldryUrl(imageUrl: string): string {
-  if (!imageUrl.startsWith("/images/gazetteer/cities/")) return imageUrl;
-  return `${imageUrl}?v=${HERALDRY_CACHE_VERSION}`;
+  if (!imageUrl.startsWith("/media/images/gazetteer/cities/")) return imageUrl;
+  try {
+    const imagePath = path.join(process.cwd(), "public", imageUrl.slice(1));
+    const fingerprint = createHash("sha256")
+      .update(readFileSync(imagePath))
+      .digest("hex")
+      .slice(0, 12);
+    return `${imageUrl}?v=${fingerprint}`;
+  } catch {
+    return imageUrl;
+  }
 }
 
 function GazetteerCard({ entry }: { entry: GazetteerEntry }) {
@@ -150,7 +161,7 @@ export default async function GazetteerPage() {
             className="font-cinzel mb-3 text-xs uppercase tracking-[0.4em]"
             style={{ color: "var(--color-accent-arcane)" }}
           >
-            Gazetteer
+            Settlement References
           </p>
           <h1 className="font-cinzel shimmer-text text-4xl uppercase tracking-widest">
             Gazetteer

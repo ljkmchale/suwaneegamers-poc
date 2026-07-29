@@ -1,6 +1,6 @@
 // Sync the Reference for Dungeon Masters cover image from the shared Google Drive folder.
 // Downloads the latest versioned cover image to:
-//   apps/web/public/images/guides-to-myrdae/dm-reference.{ext}
+//   apps/web/media/images/guides-to-myrdae/dm-reference.{ext}
 //
 // Source convention:
 //   Reference for Dungeon Masters - Cover (v.YY.MM.DD).jpg
@@ -12,6 +12,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { readContent, writeContent } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile } from "./drive-api.mjs";
+import { saveOptimizedImage } from "./lib-image-cache.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -36,7 +37,7 @@ const driveFolderUrl = configuredDriveFolderUrl(
   "https://drive.google.com/drive/folders/198sTv45Mur0RuvA6Ma8DPv-f9NIC0QCk",
 );
 const driveFolderId = folderIdFromUrl(driveFolderUrl) ?? "198sTv45Mur0RuvA6Ma8DPv-f9NIC0QCk";
-const imageDir = path.join(root, "apps", "web", "public", "images", "guides-to-myrdae");
+const imageDir = path.join(root, "apps", "web", "media", "images", "guides-to-myrdae");
 
 function isCoverImage(title) {
   return /^Reference for Dungeon Masters\s*-\s*Cover\s*\(v\.[^)]+\)\.(jpe?g|png)$/i.test(title);
@@ -71,9 +72,11 @@ if (!cover) {
     const isJpeg = bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
     if (!isPng && !isJpeg) throw new Error(`Drive file ${cover.id} did not download as a PNG/JPG`);
 
+    // Saved as dm-reference.webp — page layouts reference that path directly.
     const ext = extensionFor(cover.title, bytes);
-    fs.mkdirSync(imageDir, { recursive: true });
-    fs.writeFileSync(path.join(imageDir, `dm-reference.${ext}`), bytes);
+    const filename = await saveOptimizedImage(imageDir, "dm-reference", bytes, bytes.length, {
+      fallbackExtension: ext,
+    });
 
     // Track source file ID so we don't re-download the same version
     if (pageEntry) {
@@ -84,6 +87,6 @@ if (!cover) {
 
     const prev = previousFileId ? `(was: ${previousFileId})` : "(first download)";
     console.log(`[${stamp}] DM Reference cover image updated: ${cover.title} ${prev}`);
-    console.log(`  Saved to: /images/guides-to-myrdae/dm-reference.${ext}`);
+    console.log(`  Saved to: /images/guides-to-myrdae/${filename}`);
   }
 }

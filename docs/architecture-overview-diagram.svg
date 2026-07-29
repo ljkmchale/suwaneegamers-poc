@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="860" viewBox="0 0 1400 860">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f7ff"/>
+      <stop offset="1" stop-color="#eef6ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#312e81" flood-opacity=".14"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#5b5f76"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Arial, sans-serif; fill: #251f4d; }
+      .subtitle { font: 400 18px Arial, sans-serif; fill: #5d6175; }
+      .box { rx: 18; filter: url(#shadow); stroke-width: 2; }
+      .label { font: 700 23px Arial, sans-serif; fill: #24233a; text-anchor: middle; }
+      .detail { font: 400 17px Arial, sans-serif; fill: #5d6175; text-anchor: middle; }
+      .arrow { stroke: #5b5f76; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .line { stroke: #7a7f96; stroke-width: 3; fill: none; }
+      .small { font: 700 16px Arial, sans-serif; fill: #52566c; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="860" rx="28" fill="url(#bg)"/>
+  <text x="700" y="58" class="title" text-anchor="middle">How the Suwanee Gamers system fits together</text>
+  <text x="700" y="91" class="subtitle" text-anchor="middle">The website is the hub; content tools and Myra connect around it.</text>
+
+  <rect class="box" x="65" y="145" width="250" height="112" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="190" y="190" class="label">Members</text>
+  <text x="190" y="220" class="detail">Phone or computer</text>
+
+  <rect class="box" x="405" y="145" width="250" height="112" fill="#f3e8ff" stroke="#8b5cf6"/>
+  <text x="530" y="190" class="label">Cloudflare</text>
+  <text x="530" y="220" class="detail">Public secure address</text>
+
+  <rect class="box" x="745" y="130" width="390" height="142" fill="#ede9fe" stroke="#6d28d9"/>
+  <text x="940" y="180" class="label">Next.js website</text>
+  <text x="940" y="211" class="detail">Pages, APIs, login, admin &amp; store</text>
+  <text x="940" y="239" class="detail">Windows production service • port 4652</text>
+
+  <path class="arrow" d="M315 201 H395"/>
+  <path class="arrow" d="M655 201 H735"/>
+
+  <rect class="box" x="1190" y="145" width="160" height="112" fill="#ffffff" stroke="#4285f4"/>
+  <text x="1270" y="188" class="label">Google</text>
+  <text x="1270" y="218" class="detail">Member login</text>
+  <path class="arrow" d="M1180 201 H1147"/>
+
+  <rect class="box" x="705" y="360" width="260" height="128" fill="#ecfdf5" stroke="#059669"/>
+  <text x="835" y="405" class="label">SQLite</text>
+  <text x="835" y="436" class="detail">Content, users, analytics</text>
+  <text x="835" y="464" class="detail">and operational history</text>
+
+  <rect class="box" x="1015" y="360" width="285" height="128" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="1158" y="405" class="label">Content files</text>
+  <text x="1158" y="436" class="detail">JSON &amp; Markdown mirrors</text>
+  <text x="1158" y="464" class="detail">Page layouts and knowledge</text>
+
+  <path class="arrow" d="M900 275 L850 348"/>
+  <path class="arrow" d="M980 275 L1130 348"/>
+
+  <rect class="box" x="65" y="355" width="355" height="138" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="243" y="399" class="label">Automatic content scheduler</text>
+  <text x="243" y="432" class="detail">Refreshes and publishes site content</text>
+  <text x="243" y="462" class="detail">Records each job in SQLite</text>
+
+  <rect class="box" x="65" y="570" width="355" height="150" fill="#ffffff" stroke="#f59e0b"/>
+  <text x="243" y="613" class="label">External sources</text>
+  <text x="243" y="646" class="detail">Google Docs • Drive • Calendar</text>
+  <text x="243" y="678" class="detail">World map API • session data</text>
+
+  <path class="arrow" d="M243 560 V505"/>
+  <path class="arrow" d="M430 424 H690"/>
+  <path class="arrow" d="M430 452 C545 515 620 515 740 475"/>
+
+  <rect class="box" x="560" y="590" width="220" height="112" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="670" y="633" class="label">LiveKit</text>
+  <text x="670" y="664" class="detail">Realtime voice room</text>
+
+  <rect class="box" x="865" y="570" width="260" height="150" fill="#f5f3ff" stroke="#7c3aed"/>
+  <text x="995" y="615" class="label">Myra worker</text>
+  <text x="995" y="647" class="detail">Python voice assistant</text>
+  <text x="995" y="678" class="detail">Uses current site context</text>
+
+  <rect class="box" x="1190" y="540" width="160" height="88" fill="#ffffff" stroke="#64748b"/>
+  <text x="1270" y="578" class="label">Ollama</text>
+  <text x="1270" y="606" class="detail">Local AI</text>
+
+  <rect class="box" x="1190" y="670" width="160" height="88" fill="#ffffff" stroke="#64748b"/>
+  <text x="1270" y="708" class="label">Speaches</text>
+  <text x="1270" y="736" class="detail">Voice ↔ text</text>
+
+  <path class="line" d="M190 270 V646 H545"/>
+  <path class="arrow" d="M545 646 H548"/>
+  <text x="450" y="626" class="small">Voice conversation</text>
+  <path class="arrow" d="M780 646 H853"/>
+  <path class="arrow" d="M1125 615 H1178"/>
+  <path class="arrow" d="M1125 688 H1178"/>
+  <path class="arrow" d="M940 285 V558"/>
+  <text x="963" y="527" class="small" text-anchor="start">Identity + live context</text>
+
+  <text x="700" y="814" class="subtitle" text-anchor="middle">Normal page traffic follows the top path. Content updates flow through the scheduler. Voice traffic flows through LiveKit and Myra.</text>
+</svg>

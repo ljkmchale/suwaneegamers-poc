@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { LoreFolds, type LoreBlock, type LoreEntry, type LoreInline } from "./LoreFolds";
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
 
@@ -22,43 +21,43 @@ export const revalidate = 3600;
 const knownLoreImages = [
   {
     title: "Betrayal of Amriel",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-faith-beliefs.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-faith-beliefs.webp",
   },
   {
     title: "Blood Wars Arrive",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-time-history.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-time-history.webp",
   },
   {
     title: "The Forging of Dwarves",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-species.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-species.webp",
   },
   {
     title: "Prophecy of the Year of Rising",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp",
   },
   {
     title: "Layeth & Brault - Torn Apart",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-settlements.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-settlements.webp",
   },
   {
     title: "Dwarves of Dunduar",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-species.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-species.webp",
   },
   {
     title: "Rise of the Ardent One",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-classes.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-classes.webp",
   },
   {
     title: "Oldport & the Smiling Duchess",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-the-land.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-the-land.webp",
   },
   {
     title: "The Laztyr & Suthrin",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-territories.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-territories.webp",
   },
   {
     title: "Year of Fending Heroes",
-    image: "/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp",
+    image: "/media/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp",
   },
 ];
 
@@ -432,7 +431,7 @@ export default async function LorePage() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp")',
+            'url("/media/images/guides-to-myrdae/reference-cards/campaign-setting-glossary.webp")',
         }}
       />
       <div

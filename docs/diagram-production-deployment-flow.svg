@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3f8ff"/><stop offset="1" stop-color="#f7f2ff"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#312e81" flood-opacity=".14"/></filter>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="#62677c"/></marker>
+    <style>.t{font:700 34px Arial;fill:#292550}.b{rx:18;stroke-width:2;filter:url(#s)}.l{font:700 22px Arial;fill:#27263b;text-anchor:middle}.d{font:400 16px Arial;fill:#62677c;text-anchor:middle}.ar{stroke:#62677c;stroke-width:4;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1400" height="520" rx="28" fill="url(#bg)"/>
+  <text x="700" y="58" class="t" text-anchor="middle">Development and production are separate</text>
+  <rect class="b" x="45" y="125" width="220" height="130" fill="#fff" stroke="#64748b"/>
+  <text x="155" y="170" class="l">Code change</text><text x="155" y="205" class="d">Edit and test locally</text>
+  <rect class="b" x="345" y="100" width="260" height="155" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="475" y="145" class="l">Development</text><text x="475" y="180" class="d">localhost:3000</text><text x="475" y="210" class="d">apps/web/.next</text>
+  <rect class="b" x="345" y="320" width="260" height="155" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="475" y="365" class="l">Production build</text><text x="475" y="400" class="d">pnpm --filter web build:prod</text><text x="475" y="430" class="d">apps/web/.next-prod</text>
+  <rect class="b" x="715" y="320" width="250" height="155" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="840" y="365" class="l">Windows restart</text><text x="840" y="400" class="d">SuwaneeGamers service</text><text x="840" y="430" class="d">Requires elevation</text>
+  <rect class="b" x="1075" y="320" width="280" height="155" fill="#ecfdf5" stroke="#059669"/>
+  <text x="1215" y="365" class="l">Public production</text><text x="1215" y="400" class="d">Port 4652 via Cloudflare</text><text x="1215" y="430" class="d">New build is now active</text>
+  <path class="ar" d="M265 177h68"/><path class="ar" d="M155 267c0 130 90 130 178 130"/><path class="ar" d="M605 397h98"/><path class="ar" d="M965 397h98"/>
+  <text x="835" y="112" class="d">A completed build does not restart the production service</text>
+</svg>

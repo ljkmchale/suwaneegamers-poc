@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef9ff"/><stop offset="1" stop-color="#f8f3ff"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#312e81" flood-opacity=".14"/></filter>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="#62677c"/></marker>
+    <style>.t{font:700 34px Arial;fill:#292550}.b{rx:18;stroke-width:2;filter:url(#s)}.l{font:700 22px Arial;fill:#27263b;text-anchor:middle}.d{font:400 16px Arial;fill:#62677c;text-anchor:middle}.ar{stroke:#62677c;stroke-width:4;fill:none;marker-end:url(#a)}.bi{stroke:#62677c;stroke-width:4;fill:none;marker-start:url(#a);marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1400" height="520" rx="28" fill="url(#bg)"/>
+  <text x="700" y="58" class="t" text-anchor="middle">How a conversation with Myra works</text>
+  <rect class="b" x="45" y="145" width="210" height="145" fill="#fff" stroke="#9ca3af"/>
+  <text x="150" y="190" class="l">Member</text><text x="150" y="225" class="d">Microphone and speaker</text>
+  <rect class="b" x="315" y="145" width="210" height="145" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="420" y="190" class="l">LiveKit</text><text x="420" y="225" class="d">Realtime audio room</text>
+  <rect class="b" x="585" y="125" width="245" height="185" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="708" y="172" class="l">Myra worker</text><text x="708" y="207" class="d">Python voice agent</text><text x="708" y="237" class="d">Receives current calendar</text><text x="708" y="267" class="d">and approved knowledge</text>
+  <rect class="b" x="915" y="105" width="205" height="135" fill="#fff" stroke="#64748b"/>
+  <text x="1018" y="150" class="l">Speaches</text><text x="1018" y="185" class="d">Voice ↔ text</text>
+  <rect class="b" x="915" y="295" width="205" height="135" fill="#fff" stroke="#64748b"/>
+  <text x="1018" y="340" class="l">Ollama</text><text x="1018" y="375" class="d">Grounded local AI</text>
+  <rect class="b" x="1190" y="145" width="165" height="145" fill="#ecfdf5" stroke="#059669"/>
+  <text x="1273" y="190" class="l">Answer</text><text x="1273" y="225" class="d">Spoken back</text><text x="1273" y="253" class="d">through LiveKit</text>
+  <path class="bi" d="M267 218h36"/><path class="bi" d="M537 218h36"/><path class="bi" d="M842 177h61"/><path class="ar" d="M830 260c55 0 45 102 73 102"/><path class="ar" d="M1120 218h58"/>
+  <text x="700" y="474" class="d">Voice sessions and timing metrics are stored for the Voice Assistant dashboard</text>
+</svg>

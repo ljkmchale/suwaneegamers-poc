@@ -9,10 +9,11 @@ import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 import { readContent, writeContent, contentPath } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
+import { saveOptimizedImage } from "./lib-image-cache.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultDriveRootFolderUrl = "https://drive.google.com/drive/folders/1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy?usp=sharing";
-const imageDir = path.join(root, "apps", "web", "public", "images", "campaigns");
+const imageDir = path.join(root, "apps", "web", "media", "images", "campaigns");
 
 const fallbackHeaderFiles = [
   {
@@ -218,9 +219,9 @@ for (const campaign of campaigns) {
   }
 
   const ext = extensionFor(picked.file.title, bytes);
-  const filename = `${slugify(campaign.name)}.${ext}`;
-  const destination = path.join(imageDir, filename);
-  fs.writeFileSync(destination, bytes);
+  const filename = await saveOptimizedImage(imageDir, slugify(campaign.name), bytes, bytes.length, {
+    fallbackExtension: ext,
+  });
 
   const imagePath = `/images/campaigns/${filename}`;
   if (campaign.headerImage !== imagePath) {
@@ -287,9 +288,9 @@ for (const card of archivedCards) {
   }
 
   const ext = extensionFor(picked.file.title, bytes);
-  const filename = `${slugify(title)}.${ext}`;
-  const destination = path.join(imageDir, filename);
-  fs.writeFileSync(destination, bytes);
+  const filename = await saveOptimizedImage(imageDir, slugify(title), bytes, bytes.length, {
+    fallbackExtension: ext,
+  });
 
   const imagePath = `/images/campaigns/${filename}`;
   if (card.props.image !== imagePath) {

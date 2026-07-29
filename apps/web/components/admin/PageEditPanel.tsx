@@ -201,7 +201,7 @@ function ImagePathField({
         <input
           type="text"
           value={value}
-          placeholder={placeholder ?? "/images/example.webp"}
+          placeholder={placeholder ?? "/media/images/example.webp"}
           onChange={(e) => onChange(e.target.value)}
           className="flex-1 min-w-0 px-2.5 py-1.5 rounded border text-xs bg-[#08050f] text-[#e8dfc8] placeholder-[#5a5060] focus:outline-none focus:border-[#8b5cf6] transition-colors border-[#2a2a35]"
         />
@@ -926,7 +926,7 @@ function CardLayoutItemsEditor({
       if (type === "header") defaults.size = "md";
       if (type === "image") defaults.fit = "cover";
       if (type === "inner-card") defaults.items = "[]";
-      if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/images/dragon-ears.png"; defaults.caption = ""; }
+      if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/media/images/dragon-ears.webp"; defaults.caption = ""; }
       if (type === "person") { defaults.name = "New Person"; defaults.role = ""; defaults.img = ""; }
     }
     save([...items, { id, type, props: defaults }]);
@@ -1134,7 +1134,7 @@ function CardLayoutPanelSection({
     if (type === "text")       { defaults.content = "New text block"; }
     if (type === "link")       { defaults.label = "New Link"; defaults.href = ""; defaults.variant = "primary"; }
     if (type === "audio-link") { defaults.label = "Recording"; defaults.href = ""; }
-    if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/images/dragon-ears.png"; defaults.caption = ""; defaults.rowSpan = "2"; }
+    if (type === "media-player") { defaults.title = "Session Recording"; defaults.src = ""; defaults.mediaType = "auto"; defaults.displayMode = "image-button"; defaults.image = "/media/images/dragon-ears.webp"; defaults.caption = ""; defaults.rowSpan = "2"; }
     if (type === "inner-card") { defaults.items = "[]"; }
     if (type === "image")      { defaults.src = ""; defaults.fit = "cover"; }
     if (type === "person")     { defaults.name = "New Person"; defaults.role = ""; defaults.href = ""; defaults.img = ""; defaults.variant = "portrait"; }
@@ -1324,7 +1324,7 @@ function CardLayoutPanelSection({
                 <ImagePathField
                   value={(selectedItem.props.src as string) ?? ""}
                   onChange={(v) => updateItemProp(selectedItem.id, "src", v)}
-                  placeholder="https://drive.google.com/... or /images/media/file.mp4"
+                  placeholder="https://drive.google.com/... or /media/images/media/file.mp4"
                   accept=".mp3,.wav,.m4a,.ogg,.flac,.mp4,.m4v,.mov,.ogv,.webm"
                   dropLabel="Drop audio or video, or click to upload"
                   previewMedia
@@ -1353,7 +1353,7 @@ function CardLayoutPanelSection({
               <div>
                 <label className={LABEL}>Button image</label>
                 <ImagePathField
-                  value={(selectedItem.props.image as string) ?? "/images/dragon-ears.png"}
+                  value={(selectedItem.props.image as string) ?? "/media/images/dragon-ears.webp"}
                   onChange={(v) => updateItemProp(selectedItem.id, "image", v)}
                 />
               </div>

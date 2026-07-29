@@ -1,0 +1,5 @@
+livekit-agents[openai,silero]>=1.6.1
+python-dotenv
+
+[:platform_system == "Windows"]
+tzdata

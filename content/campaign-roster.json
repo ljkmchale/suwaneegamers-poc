@@ -1,0 +1,1736 @@
+{
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/18dJmPar88AcVipVvmKesSQDkSi9dzpsYkUngUHpg6z0/edit?gid=1198014666",
+  "syncedAt": "2026-07-29T14:32:15.568Z",
+  "campaigns": {
+    "a-new-adventure": {
+      "name": "A New Adventure",
+      "kind": "active",
+      "sheetName": "A New Adventure",
+      "characters": [
+        {
+          "character": "Aerowen \"Ro\" Umberwood",
+          "player": "Christine Burrell",
+          "species": "Human",
+          "class": "Sorcerer",
+          "subclass": "Divine Soul",
+          "level": 4,
+          "status": "Retired"
+        },
+        {
+          "character": "Az'efal (Affy) Fairhand",
+          "player": "Lesley Poole",
+          "species": "Half-Orc",
+          "class": "FIghter",
+          "subclass": "Psi Warrior",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Cerul Slate",
+          "player": "Ty Cooper",
+          "species": "Aasimar",
+          "class": "Cleric",
+          "subclass": "Light Domain",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Hamalex Milton of the Anders",
+          "player": "Chris Glynn",
+          "species": "Elf",
+          "class": "Bard",
+          "subclass": "College of Dance",
+          "level": 6,
+          "status": "Retired"
+        },
+        {
+          "character": "Ireron Casmenos",
+          "player": "Sean Poole",
+          "species": "Tiefling",
+          "class": "WIzard",
+          "level": 2,
+          "status": "Retired"
+        },
+        {
+          "character": "Master Kaizo",
+          "player": "Mike Brown",
+          "species": "Elf",
+          "class": "Monk",
+          "subclass": "Warrior of Mercy",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Relys Pabblepobble",
+          "player": "Emma Cooper",
+          "species": "Gnome",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Ridley Morigan",
+          "player": "Sean Poole",
+          "species": "Human",
+          "class": "Ranger/Rogue",
+          "subclass": "Hunter",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Teldo \"Fungus Roundbelly\"",
+          "player": "Michael Hewson",
+          "species": "Goliath",
+          "class": "Warlock",
+          "subclass": "Archfey Patron",
+          "level": 9,
+          "status": "Active"
+        }
+      ]
+    },
+    "beer-and-dice-i": {
+      "name": "Beer & Dice I",
+      "kind": "archived",
+      "sheetName": "Beer & Dice ?",
+      "characters": [
+        {
+          "character": "Crotak",
+          "player": "Bob Wheeler",
+          "status": "Deceased",
+          "deathDate": "9/11/2020"
+        },
+        {
+          "character": "Dinah",
+          "player": "Chris Glynn",
+          "species": "Human",
+          "class": "Paladin",
+          "subclass": "Oathbreaker",
+          "level": 10,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Erdan",
+          "player": "Mike Brown",
+          "status": "Deceased",
+          "deathDate": "9/11/2020"
+        },
+        {
+          "character": "Knokky",
+          "player": "Michael Hewson",
+          "status": "Deceased",
+          "deathDate": "12/22/2017"
+        },
+        {
+          "character": "Levi Thypool",
+          "player": "Sean Poole",
+          "status": "Deceased",
+          "deathDate": "7/21/2017",
+          "notes": "First character to die"
+        },
+        {
+          "character": "Lexandyr Calen Stormborne \"Lex\"",
+          "player": "Chris Glynn",
+          "status": "Deceased",
+          "deathDate": "9/11/2020"
+        },
+        {
+          "character": "Mechalia",
+          "player": "Michael Hewson"
+        },
+        {
+          "character": "Orel Neutruval",
+          "player": "Larry McHale",
+          "species": "Half-Elf",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 16,
+          "status": "Deceased",
+          "deathDate": "4/21/2023",
+          "notes": "died in Beer & Dice III"
+        },
+        {
+          "character": "Rigurd Claud",
+          "player": "SamMeliot",
+          "species": "Gabuk",
+          "class": "Cleric",
+          "subclass": "Order Domain",
+          "level": 12
+        },
+        {
+          "character": "Urevael Dewor",
+          "player": "Sean Poole",
+          "species": "Elf",
+          "class": "Wizard",
+          "subclass": "School of Transmutation",
+          "level": 12
+        }
+      ]
+    },
+    "beer-and-dice-ii": {
+      "name": "Beer & Dice II",
+      "kind": "archived",
+      "sheetName": "Beer & Dice II",
+      "characters": [
+        {
+          "character": "Brother Kay",
+          "player": "Michael Hewson"
+        },
+        {
+          "character": "Brother Kelliem",
+          "player": "Larry McHale"
+        },
+        {
+          "character": "Grous Forgebane",
+          "player": "Ty Cooper",
+          "species": "Dwarf",
+          "class": "Druid",
+          "subclass": "Circle of the Land (Forest)",
+          "level": 12
+        },
+        {
+          "character": "Phrogg Orestomp",
+          "player": "Sean Poole"
+        },
+        {
+          "character": "Tekcor \"Tek\" (wee-folk dartwise)",
+          "player": "Mike Brown",
+          "species": "Gnome",
+          "class": "Fighter",
+          "subclass": "Champion",
+          "level": 10
+        },
+        {
+          "character": "Toorg",
+          "player": "Bob Wheeler",
+          "species": "Firbolg",
+          "class": "Wizard",
+          "subclass": "School of Enchantment",
+          "level": 10
+        },
+        {
+          "character": "Tyrianna",
+          "player": "Lesley Poole"
+        },
+        {
+          "character": "Xel",
+          "player": "Chris Glynn",
+          "status": "Deceased",
+          "deathDate": "1/17/2020"
+        }
+      ]
+    },
+    "beer-and-dice-iii": {
+      "name": "Beer & Dice III",
+      "kind": "archived",
+      "sheetName": "Beer & Dice III",
+      "characters": [
+        {
+          "character": "Abaddon",
+          "player": "Michael Hewson",
+          "species": "FeralTiefling",
+          "class": "Barbarian",
+          "subclass": "Path of the Berserker",
+          "level": 17,
+          "notes": "only player to survive fight"
+        },
+        {
+          "character": "Balthus Eboncrest",
+          "player": "Sean Poole",
+          "species": "Half-Orc",
+          "class": "Paladin",
+          "subclass": "Oath of Sacrifice",
+          "level": 16,
+          "status": "Deceased",
+          "deathDate": "4/21/2023"
+        },
+        {
+          "character": "Chamber",
+          "player": "Larry McHale",
+          "species": "Elf",
+          "class": "Monk",
+          "subclass": "Way of the Shadow",
+          "level": 12
+        },
+        {
+          "character": "Del",
+          "player": "Sean Poole"
+        },
+        {
+          "character": "Dhaaan Needeeveetow \"Dan\"",
+          "player": "Chris Glynn",
+          "species": "Faun",
+          "class": "Monk",
+          "subclass": "Way of the Drunken Master",
+          "level": 16,
+          "status": "Deceased",
+          "deathDate": "4/21/2023"
+        },
+        {
+          "character": "Lebo",
+          "player": "Chris Glynn",
+          "species": "Changeling",
+          "class": "Cleric",
+          "subclass": "Tempest Domain",
+          "level": 12
+        },
+        {
+          "character": "Skink",
+          "player": "Ty Cooper",
+          "status": "Deceased",
+          "deathDate": "4/21/2023"
+        },
+        {
+          "character": "Theran Goltorah",
+          "player": "Bob Wheeler",
+          "species": "Elf",
+          "class": "Ranger",
+          "subclass": "Gloom Stalker",
+          "level": 16,
+          "status": "Deceased",
+          "deathDate": "4/21/2023"
+        },
+        {
+          "character": "Zorrian",
+          "player": "Mike Brown",
+          "status": "Deceased",
+          "deathDate": "4/21/2023"
+        }
+      ]
+    },
+    "the-company": {
+      "name": "Blisterfel - The Company",
+      "kind": "archived",
+      "sheetName": "Blisterfel",
+      "characters": [
+        {
+          "character": "Arliss The SIlent One",
+          "species": "Yuan-ti",
+          "class": "Rogue",
+          "subclass": "Assassin",
+          "level": 7
+        },
+        {
+          "character": "Charlo \"Sandy\" Sand-O'Foot",
+          "player": "Chris Glynn",
+          "species": "Halfling",
+          "class": "Rogue",
+          "subclass": "Mastermind",
+          "level": 7
+        },
+        {
+          "character": "Dimvian Silverbeard \"Dim\"",
+          "player": "Andrew Kuehl",
+          "species": "Dwarf",
+          "class": "Paladin",
+          "subclass": "Oath of Vengeance",
+          "level": 4,
+          "status": "Retired"
+        },
+        {
+          "character": "Edesin Mullendore",
+          "player": "Chip Poole",
+          "species": "Human",
+          "class": "Wizard/Artificer",
+          "subclass": "Order of Scribes",
+          "level": 7
+        },
+        {
+          "character": "Kulmar",
+          "player": "Sean Poole",
+          "species": "Genasi",
+          "class": "Barbarian",
+          "subclass": "Path of the Storm Herald",
+          "level": 5,
+          "status": "Retired"
+        },
+        {
+          "character": "Mokai Lostwanderer Mukania",
+          "player": "Mike Brown",
+          "species": "Goliath",
+          "class": "Paladin",
+          "subclass": "Oath of Vengeance",
+          "level": 7
+        },
+        {
+          "character": "Pyrry Wynlyte",
+          "player": "Ty Cooper",
+          "species": "Elf",
+          "class": "Cleric",
+          "subclass": "Light Domain",
+          "level": 8
+        },
+        {
+          "character": "Tamarack Rowansdottir of Clan Fros'lea \"Tam\"",
+          "player": "Christine Burrell",
+          "species": "Firbolg",
+          "class": "Druid",
+          "subclass": "Circle of the Land (Mountain)",
+          "level": 7
+        },
+        {
+          "character": "Yola Winchester",
+          "player": "Deb Kuehl",
+          "species": "Tudaran Weefolk",
+          "class": "Sorcerer",
+          "subclass": "Shadow Magic",
+          "level": 4,
+          "status": "Retired"
+        }
+      ]
+    },
+    "bloody-endeavor-i": {
+      "name": "Bloody Endeavor I",
+      "kind": "archived",
+      "sheetName": "Bloody Endeavor",
+      "characters": [
+        {
+          "character": "Percival",
+          "player": "Tom Chernetsky",
+          "class": "Paladin",
+          "status": "Deceased",
+          "deathDate": "12/20/2023"
+        }
+      ]
+    },
+    "bloody-endeavor": {
+      "name": "Bloody Endeavor II",
+      "kind": "active",
+      "sheetName": "Bloody Endeavor II",
+      "characters": [
+        {
+          "character": "Albross Alto",
+          "player": "Cooper McGuarty",
+          "species": "Tiefling",
+          "class": "Warlock",
+          "subclass": "Celestial Patron",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Bakah T'luk",
+          "player": "Tom Chernetsky",
+          "species": "Human",
+          "class": "Barbarian",
+          "subclass": "Path of the Berserker",
+          "level": 7,
+          "status": "Deceased"
+        },
+        {
+          "character": "Caelion",
+          "player": "Chuck Byram",
+          "species": "Aasimar",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Lucerion Onn'bane",
+          "player": "Chip Poole",
+          "species": "Elf",
+          "class": "Paladin",
+          "subclass": "Oath of Glory",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Pagern Stonebuckle",
+          "player": "Tom Chernetsky",
+          "species": "Gnome",
+          "class": "Wizard",
+          "subclass": "Evoker",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Rhody Falco",
+          "player": "Joshua John",
+          "species": "Human",
+          "class": "Ranger",
+          "subclass": "Fey Wanderer",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Scipio Grudshnook",
+          "player": "Joshua John",
+          "species": "Half-Orc",
+          "class": "Druid/Fighter",
+          "subclass": "Circle of the Stars",
+          "level": 5,
+          "status": "Deceased"
+        }
+      ]
+    },
+    "charlemagnes-angels": {
+      "name": "Charlemagne's Angels",
+      "kind": "archived",
+      "sheetName": "Charlemagne's Angels",
+      "characters": [
+        {
+          "character": "Aria Windrunner",
+          "player": "Shari Wright",
+          "species": "Half-Elf",
+          "class": "Warlock",
+          "subclass": "The Hexblade",
+          "level": 1,
+          "status": "Retired"
+        },
+        {
+          "character": "Bosworth Stoneholder",
+          "player": "Tom Chernetsky",
+          "species": "Dwarf",
+          "class": "Bard",
+          "level": 1,
+          "status": "NPC"
+        },
+        {
+          "character": "Esha Serise",
+          "player": "Alyssa Baughman",
+          "species": "Elf",
+          "class": "Ranger",
+          "subclass": "Gloom Stalker",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Farrah Thistlefoot",
+          "player": "Laura Thetford",
+          "species": "Halfling",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 4,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Kelyia Glenleah",
+          "player": "Lesley Poole",
+          "species": "Tiefling",
+          "class": "Cleric",
+          "subclass": "Peace Domain",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Tabitha Goldenrod",
+          "player": "Suzanne Chernetsky",
+          "species": "Human",
+          "class": "Sorcerer",
+          "subclass": "Wild Magic",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Trinity Hightower",
+          "player": "Tiffany Mulvihill",
+          "species": "Elf",
+          "class": "FIghter",
+          "subclass": "Champion",
+          "level": 5,
+          "status": "Hiatus"
+        }
+      ]
+    },
+    "collective-of-myrdae": {
+      "name": "Collective of Myrdae",
+      "kind": "active",
+      "sheetName": "Collective of Myrdae",
+      "characters": [
+        {
+          "character": "Barracuda",
+          "player": "Michael Hewson",
+          "species": "Dragonborn",
+          "class": "Rogue",
+          "level": 2,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Chuck The Monk",
+          "player": "Chuck Blevins",
+          "species": "Human",
+          "class": "Monk",
+          "subclass": "Way of the Drunken Master",
+          "level": 5,
+          "status": "Retired"
+        },
+        {
+          "character": "Clef Ledger",
+          "player": "Larry McHale",
+          "species": "Human",
+          "class": "Bard",
+          "subclass": "College of Whispers",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Galias Vettermen",
+          "player": "Sean Poole",
+          "species": "Elf",
+          "class": "Cleric",
+          "level": 2,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Lt. Erik A. McBrennin",
+          "player": "Larry McHale",
+          "species": "Human",
+          "class": "Fighter",
+          "level": 2,
+          "status": "Hiatus"
+        },
+        {
+          "character": "McLevin the Kobold",
+          "player": "Sean Poole",
+          "species": "Kobold",
+          "class": "Ranger",
+          "subclass": "Drakewarden",
+          "level": 11
+        },
+        {
+          "character": "Moder",
+          "species": "Goliath",
+          "class": "Wizard",
+          "subclass": "Illusionist",
+          "level": 20,
+          "status": "NPC"
+        },
+        {
+          "character": "Orich Hearthstead",
+          "player": "Larry McHale",
+          "species": "Dwarf",
+          "class": "Barbarian",
+          "subclass": "Path of the Totem Warrior",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Quinfer Humbleshadow",
+          "player": "Ty Cooper",
+          "species": "Halfling",
+          "class": "Ranger",
+          "level": 2,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Varik Rine",
+          "player": "Joshua John",
+          "species": "Human",
+          "class": "Sorcerer",
+          "level": 2,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Ze'ryk Shadowborn",
+          "player": "Ray Franklin",
+          "species": "Aasimar",
+          "class": "Warlock",
+          "subclass": "The Hexblade",
+          "level": 2,
+          "status": "Hiatus"
+        }
+      ]
+    },
+    "crystal-bottle": {
+      "name": "Crystal Bottle",
+      "kind": "archived",
+      "sheetName": "Crystal Bottle",
+      "characters": [
+        {
+          "character": "Alteya Dawnbrisk",
+          "player": "Ella Cooper",
+          "species": "Elf",
+          "class": "Ranger",
+          "subclass": "Hunter",
+          "level": 7,
+          "status": "Retired"
+        },
+        {
+          "character": "Dalbyre Bramblesage",
+          "player": "Chip Poole",
+          "species": "Eladrin",
+          "class": "Bard",
+          "subclass": "College of Eloquence",
+          "level": 5,
+          "status": "Retired"
+        },
+        {
+          "character": "Galtrelon Rainire",
+          "player": "Sean Poole",
+          "species": "Custom",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 8,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Narris Thal'vein",
+          "player": "Chip Poole",
+          "species": "Custom",
+          "class": "Wizard/Artificer",
+          "subclass": "Bladesinging",
+          "level": 7,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Opal Creekbed",
+          "player": "Sydney McHale",
+          "species": "Human",
+          "class": "Paladin",
+          "level": 2,
+          "status": "Retired"
+        },
+        {
+          "character": "Rowan \"Ren\" Silverthorn",
+          "player": "Tiffany Mulvihill",
+          "species": "Custom",
+          "class": "Ranger",
+          "subclass": "Gloom Stalker",
+          "level": 8,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Sarrinna Alls",
+          "player": "Jenny McHale",
+          "species": "Human",
+          "class": "Rogue",
+          "subclass": "Swashbuckler",
+          "level": 16,
+          "status": "NPC"
+        },
+        {
+          "character": "Scarlytt Amyran",
+          "player": "Lesley Poole",
+          "species": "Eladrin",
+          "class": "Paladin",
+          "subclass": "Oath of the Ancients",
+          "level": 8,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Sigil",
+          "player": "Brian Winniford",
+          "species": "Half-Orc",
+          "class": "FIghter",
+          "subclass": "Rune Knight",
+          "level": 7,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Tassarion Ranges",
+          "player": "Sean Poole",
+          "species": "Eladrin",
+          "class": "Cleric",
+          "subclass": "Peace Domain",
+          "level": 6,
+          "status": "Retired"
+        },
+        {
+          "character": "Yvaine Harlowe",
+          "player": "Jenny McHale",
+          "species": "Aasimar",
+          "class": "Warlock",
+          "subclass": "The Celestial",
+          "level": 8,
+          "status": "Hiatus"
+        }
+      ]
+    },
+    "dungeons-iii": {
+      "name": "Dungeons III - kNight Watch",
+      "kind": "active",
+      "sheetName": "Dungeons III - kNight Watch",
+      "characters": [
+        {
+          "character": "Aeon Gavelsam",
+          "player": "Tom Chernetsky",
+          "species": "Elf",
+          "class": "Fighter",
+          "subclass": "Eldritch Knight",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Draelith al'Varren",
+          "player": "Chip Poole",
+          "species": "Human",
+          "class": "Wizard",
+          "subclass": "Illusionist",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Melessekoviendarre \"Meles\"",
+          "player": "Brian Winniford",
+          "species": "Elf",
+          "class": "Rogue",
+          "subclass": "Assassin",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Nixie Comet-tail",
+          "player": "Chuck Byram",
+          "species": "Gnome",
+          "class": "Druid",
+          "subclass": "Circle of the Stars",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Nova Valandras",
+          "player": "Tiffany Mulvihill",
+          "species": "Aasimar",
+          "class": "Bard",
+          "subclass": "College of Lore",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Seraphine Veyne",
+          "player": "Suzanne Chernetsky",
+          "species": "Aasimar",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 4,
+          "status": "Active"
+        }
+      ]
+    },
+    "heroes-of-emberstran": {
+      "name": "Heroes of Emberstran",
+      "kind": "active",
+      "sheetName": "Heroes of Emberstran",
+      "characters": [
+        {
+          "character": "Ainslie \"Ains\" Anaerin",
+          "player": "Sean Poole",
+          "species": "Human",
+          "class": "Sorcerer",
+          "subclass": "Aberrant Society",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Aurelius \"Aury\" Valeheart",
+          "player": "Larry McHale",
+          "species": "Aasimar",
+          "class": "Cleric",
+          "subclass": "Light Domain",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Hap Garemon",
+          "player": "Ty Cooper",
+          "species": "Tiefling",
+          "class": "FIghter",
+          "subclass": "Battle Master",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Ky'tha Fawnborn",
+          "player": "Lesley Poole",
+          "species": "Dwarf",
+          "class": "Rogue",
+          "subclass": "Thief",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Ogmund \"Og\" Crag",
+          "player": "Joshua John",
+          "species": "Goliath",
+          "class": "Barbarian",
+          "subclass": "Path of the World Tree",
+          "level": 9,
+          "status": "Active"
+        },
+        {
+          "character": "Zymve Inni",
+          "player": "Emma Cooper",
+          "species": "Elf",
+          "class": "Bard",
+          "subclass": "College of Glamour",
+          "level": 9,
+          "status": "Active"
+        }
+      ]
+    },
+    "imminent-domain": {
+      "name": "Imminent Domain",
+      "kind": "archived",
+      "sheetName": "Imminent Domain",
+      "characters": [
+        {
+          "character": "Dallas Soilier",
+          "player": "Tom Chernetsky",
+          "species": "Human",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 6
+        },
+        {
+          "character": "Eraztewr Swiftvoice \"Eraz\"",
+          "player": "Chris Glynn",
+          "species": "Dragonborn",
+          "class": "Wizard",
+          "subclass": "School of Illusion",
+          "level": 3
+        },
+        {
+          "character": "Fenwick Gearspark",
+          "player": "Larry McHale",
+          "species": "Gnome",
+          "class": "Artificer",
+          "subclass": "Alchemist",
+          "level": 6
+        },
+        {
+          "character": "Feral Shamanlad",
+          "player": "Chris Glynn",
+          "species": "Half-Elf",
+          "class": "Barbarian",
+          "subclass": "Path of the Zealot",
+          "level": 5
+        },
+        {
+          "character": "Rhys Wynlyte",
+          "player": "Ty Cooper",
+          "species": "Elf",
+          "class": "Cleric",
+          "subclass": "Light Domain",
+          "level": 6
+        },
+        {
+          "character": "Shagrol the Silent",
+          "player": "Mike Brown",
+          "species": "Half-Orc",
+          "class": "Paladin",
+          "subclass": "Oath of Vengeance",
+          "level": 6
+        },
+        {
+          "character": "Sydriel Melhana",
+          "player": "Sean Poole",
+          "species": "Fire Genasi",
+          "class": "Bard",
+          "subclass": "College of Lore",
+          "level": 6
+        },
+        {
+          "character": "Thorn Quickblade",
+          "player": "Chuck Byram",
+          "species": "Tiefling",
+          "class": "Rogue",
+          "subclass": "Swashbuckler",
+          "level": 6
+        },
+        {
+          "character": "Tomas Wild",
+          "player": "Larry McHale",
+          "species": "Elf",
+          "class": "Fighter",
+          "subclass": "Eldritch Knight",
+          "level": 5
+        }
+      ]
+    },
+    "mad-mage": {
+      "name": "Mad Mage",
+      "kind": "active",
+      "sheetName": "Mad Mage",
+      "characters": [
+        {
+          "character": "Cravendor Halwynn",
+          "player": "Mike Brown",
+          "species": "Half-Elf",
+          "class": "Rogue",
+          "subclass": "Swashbuckler",
+          "level": 9,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Dunfledrawg \"Drawg\" Horthonomer",
+          "player": "Tom Chernetsky",
+          "species": "Dwarf",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 9,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Gildor Inglorian",
+          "player": "Chuck Byram",
+          "species": "Elf",
+          "class": "Paladin",
+          "subclass": "Oath of the Ancients",
+          "level": 9,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Horrous Mixen",
+          "player": "Sean Poole",
+          "species": "Tiefling",
+          "class": "FIghter",
+          "subclass": "Battle Master",
+          "level": 7,
+          "status": "Retired"
+        },
+        {
+          "character": "Lia of the Longbow",
+          "player": "Chris Glynn",
+          "species": "Elf",
+          "class": "FIghter",
+          "subclass": "Arcane Archer",
+          "level": 8,
+          "status": "Retired"
+        },
+        {
+          "character": "Twittaria \"Twitty\" Yarnsley",
+          "player": "Lesley Poole",
+          "species": "Halfling",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 9,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Val'terrin Jinamek \"Jiminee Magicstick\" Magnerilus",
+          "player": "Chip Poole",
+          "species": "Human",
+          "class": "Warlock",
+          "subclass": "The Undead",
+          "level": 9,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Wrathgon",
+          "player": "Suzanne Chernetsky",
+          "species": "Dragonborn",
+          "class": "Barbarian",
+          "subclass": "Path of the Berserker",
+          "level": 9,
+          "status": "Hiatus"
+        }
+      ]
+    },
+    "mead-society": {
+      "name": "Dungeons II - MEAD Society",
+      "kind": "archived",
+      "sheetName": "Mead Society",
+      "characters": [
+        {
+          "character": "Bannor",
+          "player": "Chuck Byram",
+          "species": "Dwarf",
+          "class": "Fighter",
+          "subclass": "Battle Master",
+          "level": 16,
+          "status": "Deceased"
+        },
+        {
+          "character": "Cecily Scryre",
+          "player": "Claire Byram",
+          "species": "Half-Elf",
+          "class": "Rogue",
+          "subclass": "Swashbuckler",
+          "level": 9,
+          "status": "Retired"
+        },
+        {
+          "character": "Ilokas Torne",
+          "player": "Chip Poole",
+          "species": "Human",
+          "class": "Druid",
+          "subclass": "Circle of Dreams",
+          "level": 16,
+          "status": "Deceased"
+        },
+        {
+          "character": "Lejla",
+          "player": "Alyssa Baughman",
+          "species": "Human",
+          "class": "Fighter",
+          "level": 4,
+          "status": "Retired"
+        },
+        {
+          "character": "Lisbeth Graybloom",
+          "player": "Tiffany Mulvihill",
+          "species": "Half-Elf",
+          "class": "Barbarian/Fighter",
+          "subclass": "Path of the Ancestrial Guardian",
+          "level": 17,
+          "status": "Deceased"
+        },
+        {
+          "character": "Nipsy Ningel",
+          "player": "Suzanne Chernetsky",
+          "species": "Gnome",
+          "class": "Rogue",
+          "subclass": "Arcane Trickster",
+          "level": 16,
+          "status": "Deceased"
+        },
+        {
+          "character": "Rennigis Fynswallow",
+          "player": "Sean Poole",
+          "species": "Aasimar",
+          "class": "Warlock",
+          "subclass": "The Celestial",
+          "level": 16,
+          "status": "Deceased"
+        },
+        {
+          "character": "Rexan Houndsley",
+          "player": "Lesley Poole",
+          "species": "Half-Elf",
+          "class": "Paladin",
+          "subclass": "Oath of Devotion",
+          "level": 16,
+          "status": "Retired"
+        },
+        {
+          "character": "Sengann mac Dela",
+          "player": "Tom Chernetsky",
+          "species": "Firbolg",
+          "class": "Bard",
+          "subclass": "College of Lore",
+          "level": 16,
+          "status": "Deceased"
+        },
+        {
+          "character": "Vekol",
+          "player": "Doug Baughman",
+          "species": "Human",
+          "class": "Fighter",
+          "subclass": "Battle Master",
+          "level": 4,
+          "status": "Retired"
+        }
+      ]
+    },
+    "myrdaen-misfits": {
+      "name": "Myrdaen Misfits",
+      "kind": "archived",
+      "sheetName": "Mydaen Misfits",
+      "characters": [
+        {
+          "character": "Gast Haradain",
+          "player": "Sean Poole",
+          "species": "Human",
+          "class": "Ranger/FIghter",
+          "subclass": "Horizon Walker",
+          "level": 12,
+          "status": "Retired"
+        },
+        {
+          "character": "Mo'Fongo",
+          "player": "Steven Zimmerman",
+          "species": "Tabaxi",
+          "class": "Rogue/Thief",
+          "level": 12,
+          "status": "Retired"
+        },
+        {
+          "character": "Sloda",
+          "player": "Peter Zimmerman",
+          "species": "Firbolg",
+          "class": "Paladin",
+          "subclass": "Oath of Vengeance",
+          "level": 12,
+          "status": "Retired"
+        }
+      ]
+    },
+    "obliged-corpses": {
+      "name": "Obliged Corpses",
+      "kind": "archived",
+      "sheetName": "Obliged Corpses",
+      "characters": [
+        {
+          "character": "Amory",
+          "player": "Ella Cooper",
+          "species": "Faun",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 3,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Blaise",
+          "player": "Mike Brown",
+          "species": "Wood-Elf",
+          "class": "Druid",
+          "status": "Hiatus"
+        },
+        {
+          "character": "Don Ron Juan de Caracoles",
+          "player": "Nolan Brown",
+          "species": "Human",
+          "class": "Fighter",
+          "subclass": "Battle Master",
+          "level": 4,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Kurgin",
+          "player": "Ty Cooper",
+          "species": "Half-Orc",
+          "class": "Ranger",
+          "status": "Hiatus"
+        },
+        {
+          "character": "Mistral",
+          "player": "Emma Cooper",
+          "species": "Genasi",
+          "class": "Bard",
+          "level": 5,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Senaes Rathmore",
+          "player": "Sean Poole",
+          "species": "Undetermined",
+          "class": "Wizard",
+          "subclass": "School of Divination",
+          "level": 4,
+          "status": "Hiatus"
+        }
+      ]
+    },
+    "plane-shifters": {
+      "name": "Plane Shifters",
+      "kind": "archived",
+      "sheetName": "Plane Shifters",
+      "characters": [
+        {
+          "character": "Erdan Meliamne",
+          "player": "Andrew Kuehl",
+          "species": "Elf",
+          "class": "Ranger",
+          "subclass": "Hunter",
+          "level": 13,
+          "status": "Retired"
+        },
+        {
+          "character": "Galannys Elathira",
+          "player": "Christine Burrell",
+          "species": "Half-Elf",
+          "class": "Paladin",
+          "subclass": "Oath of Devotion",
+          "level": 13,
+          "status": "Retired"
+        },
+        {
+          "character": "Lune Nee'Tic",
+          "player": "Chris Glynn",
+          "species": "Half-Elf",
+          "class": "Druid",
+          "subclass": "Circle of the Moon",
+          "level": 15,
+          "status": "Retired"
+        },
+        {
+          "character": "Votherian Deold",
+          "player": "Sean Poole",
+          "species": "Half-Elf",
+          "class": "Sorcerer",
+          "subclass": "Draconic Bloodline",
+          "level": 13,
+          "status": "Retired"
+        },
+        {
+          "character": "Zylna Bizana",
+          "player": "Deb Kuehl",
+          "species": "Elf",
+          "class": "Wizard",
+          "subclass": "School of Evocation",
+          "level": 13,
+          "status": "Retired"
+        }
+      ]
+    },
+    "souls-of-destiny": {
+      "name": "Souls of Destiny",
+      "kind": "active",
+      "sheetName": "Souls of Destiny",
+      "characters": [
+        {
+          "character": "Escanor",
+          "player": "Brian Winniford",
+          "species": "Human",
+          "class": "Cleric",
+          "subclass": "Life Domain",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Esylla Fordevae",
+          "player": "Lesley Poole",
+          "species": "Elf",
+          "class": "Warlock",
+          "subclass": "Great Old One Patron",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Kenton Clawstar",
+          "player": "Larry McHale",
+          "species": "Human",
+          "class": "Rogue",
+          "subclass": "Shadow Stalker",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Lila Tealeaf",
+          "player": "Tiffany Mulvihill",
+          "species": "Halfling",
+          "class": "Sorcerer",
+          "subclass": "Spellfire Sorcery",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Therric Balenfore",
+          "player": "Chip Poole",
+          "species": "Half-Orc",
+          "class": "Monk/Ranger",
+          "subclass": "Warrior of the Elements",
+          "level": 4,
+          "status": "Active"
+        },
+        {
+          "character": "Zephyra Maelstrom",
+          "player": "Jenny McHale",
+          "species": "Tiefling",
+          "class": "Barbarian",
+          "subclass": "Path of the Zealot",
+          "level": 4,
+          "status": "Active"
+        }
+      ]
+    },
+    "treasure-hunters": {
+      "name": "Treasure Hunters",
+      "kind": "archived",
+      "sheetName": "Treasure Hunters",
+      "characters": [
+        {
+          "character": "Acosta",
+          "player": "Brian Winneford",
+          "status": "Deceased",
+          "notes": "died in Call for Heroes"
+        },
+        {
+          "character": "Aria",
+          "species": "Elf",
+          "class": "Monk",
+          "subclass": "Way of the Soul Sun",
+          "level": 3,
+          "status": "Retired"
+        },
+        {
+          "character": "Ash",
+          "player": "Jordan Mulvihill",
+          "species": "Genasi",
+          "class": "Fighter",
+          "subclass": "Champion",
+          "level": 13,
+          "status": "Retired"
+        },
+        {
+          "character": "Dionari Darkglimmer",
+          "player": "Lesley Poole",
+          "species": "Elf",
+          "class": "Wizard",
+          "subclass": "School of Conjuration",
+          "level": 17,
+          "status": "Retired"
+        },
+        {
+          "character": "Elora Trisralei",
+          "player": "Jenny McHale",
+          "species": "Elf",
+          "class": "Ranger/FIghter",
+          "subclass": "Arcane Archer",
+          "level": 17,
+          "status": "Retired"
+        },
+        {
+          "character": "Lazarus \"Isaiah\" Grey",
+          "player": "Kalin McHale",
+          "species": "Half-Elf",
+          "class": "Bard/Paladin",
+          "subclass": "Oath of Redemption",
+          "level": 15,
+          "status": "Retired"
+        },
+        {
+          "character": "Nelth \"Moonduke\" Lleuk",
+          "player": "Sean Poole",
+          "species": "Genasi",
+          "class": "Rogue",
+          "subclass": "Swashbuckler",
+          "level": 18,
+          "status": "Retired"
+        },
+        {
+          "character": "Yem'c Kivras",
+          "player": "Larry McHale",
+          "species": "Genasi",
+          "class": "Rogue/Artificer",
+          "subclass": "Mastermind",
+          "level": 17,
+          "status": "Retired",
+          "notes": "transformed into a gold dragon named C'mey"
+        }
+      ]
+    },
+    "tyranny-of-dragons": {
+      "name": "Tyranny of Dragons",
+      "kind": "archived",
+      "sheetName": "Tyranny of Dragons",
+      "characters": [
+        {
+          "character": "Arysale Amberwood",
+          "player": "Lesley Poole"
+        },
+        {
+          "character": "Dex Sydwinder",
+          "player": "Peter Zimmerman",
+          "species": "Half-Elf",
+          "class": "Rogue",
+          "subclass": "Thief",
+          "level": 14
+        },
+        {
+          "character": "Elora Ravenbraid",
+          "player": "Victoria Zimmerman"
+        },
+        {
+          "character": "Grobark",
+          "player": "Steven Zimmerman",
+          "species": "Half-Orc",
+          "class": "Fighter",
+          "subclass": "Champion",
+          "level": 14,
+          "status": "Hiatus"
+        },
+        {
+          "character": "Hobson \"Hobs\" Bilberry",
+          "player": "Christine Burrell",
+          "species": "Halfling",
+          "class": "Monk",
+          "subclass": "Way of the Four Elements",
+          "level": 14,
+          "status": "Deceased",
+          "deathDate": "1/12/2019",
+          "notes": "taken to hell"
+        },
+        {
+          "character": "Orsik Umberfist",
+          "player": "Conner Burrell"
+        },
+        {
+          "character": "Otth Umberfist",
+          "player": "Sean Poole",
+          "status": "Deceased",
+          "deathDate": "1/12/2019",
+          "notes": "taken to hell"
+        },
+        {
+          "character": "Quin Niuq",
+          "player": "Ella Cooper",
+          "species": "Elf",
+          "class": "Rogue",
+          "subclass": "Assassin",
+          "level": 14
+        },
+        {
+          "character": "Rellik",
+          "player": "Marquis Generally"
+        },
+        {
+          "character": "Therdak",
+          "player": "Brian Winniford"
+        }
+      ]
+    },
+    "uldrea": {
+      "name": "Uldrea",
+      "kind": "archived",
+      "sheetName": "Uldrea",
+      "characters": [
+        {
+          "character": "Ezrik Snapdragon",
+          "player": "Joshua John",
+          "species": "Human",
+          "class": "Barbarian",
+          "subclass": "Path of Wild Magic",
+          "level": 5,
+          "status": "Deceased"
+        },
+        {
+          "character": "Jari",
+          "player": "Chuck Byram",
+          "species": "Elf",
+          "class": "Monk",
+          "subclass": "Way of the Astral Self",
+          "level": 17,
+          "notes": "died in Call for Heroes"
+        },
+        {
+          "character": "Lightbrand",
+          "player": "Michael Hewson"
+        },
+        {
+          "character": "Martine Le Fleaux",
+          "player": "Tom Chernetsky",
+          "species": "Half-Elf",
+          "class": "Wizard",
+          "subclass": "War Magic",
+          "level": 5,
+          "status": "Deceased",
+          "deathDate": "8/25/2022"
+        },
+        {
+          "character": "Mershas Armir",
+          "player": "Cooper McGuarty",
+          "species": "Tiefling",
+          "class": "Bard",
+          "subclass": "College of Whispers",
+          "level": 13,
+          "status": "Deceased",
+          "deathDate": "9/2/2023"
+        },
+        {
+          "character": "Resseth \"Ren\" Nelcrath",
+          "player": "Chip Poole",
+          "species": "Dragonborn",
+          "class": "Cleric",
+          "subclass": "Forge Domain",
+          "level": 17,
+          "notes": "died in Call for Heroes"
+        },
+        {
+          "character": "Tadg mac Nuadat \"Twiggy\"",
+          "player": "Larry McHale",
+          "species": "Aasimar",
+          "class": "Druid",
+          "subclass": "Circle of the Shepherd",
+          "level": 9,
+          "status": "Retired"
+        },
+        {
+          "character": "Ven Gaza",
+          "player": "Tom Chernetsky",
+          "species": "Elf",
+          "class": "Rogue",
+          "subclass": "Assassin",
+          "level": 18,
+          "notes": "Call for Heroes"
+        }
+      ]
+    }
+  },
+  "unmatched": {
+    "Gabuk are People too": [
+      {
+        "character": "Asniff",
+        "player": "Chip Poole",
+        "species": "Halfling",
+        "class": "Druid",
+        "level": 2,
+        "status": "Hiatus"
+      },
+      {
+        "character": "Frangipan",
+        "player": "Suzanne Chernetsky",
+        "species": "Halfling",
+        "class": "Rogue",
+        "level": 2,
+        "status": "Hiatus"
+      },
+      {
+        "character": "Glynbuuk \"Buuk Buuk\"",
+        "player": "Chris Glynn",
+        "species": "Halfling",
+        "class": "Barbarian",
+        "level": 2,
+        "status": "Hiatus"
+      },
+      {
+        "character": "Grizzlethorn Nab",
+        "player": "Tom Chernetsky",
+        "species": "Halfling",
+        "class": "Rogue",
+        "level": 2,
+        "status": "Hiatus"
+      },
+      {
+        "character": "Zharrow",
+        "player": "Mike Brown",
+        "species": "Halfling",
+        "class": "Ranger",
+        "level": 2,
+        "status": "Hiatus"
+      }
+    ],
+    "Waves Edge": [
+      {
+        "character": "Calliope",
+        "player": "Jenny McHale",
+        "species": "Changeling",
+        "class": "Fighter",
+        "subclass": "Battle Master",
+        "level": 3
+      },
+      {
+        "character": "Ozirus \"Ozzie\" Mixen",
+        "player": "Sean Poole",
+        "species": "Cambion",
+        "class": "Fighter",
+        "subclass": "Echo Knight",
+        "level": 6
+      },
+      {
+        "character": "Trislan",
+        "player": "Larry McHale",
+        "species": "Eladrin",
+        "class": "Monk",
+        "subclass": "Way of the Ascendant Dragon",
+        "level": 3
+      }
+    ],
+    "(unspecified)": [
+      {
+        "character": "Arecibo",
+        "status": "Deceased",
+        "deathDate": "3/22/2019",
+        "notes": "yellow/green/white dice also retired that day"
+      },
+      {
+        "character": "Belros",
+        "status": "Deceased",
+        "deathDate": "1/19/2024"
+      },
+      {
+        "character": "Garrik",
+        "player": "Chip Poole",
+        "species": "Custom",
+        "class": "Fighter",
+        "subclass": "Eldritch Knight",
+        "level": 5
+      },
+      {
+        "character": "Gulkta",
+        "player": "Sean Poole",
+        "species": "Half-Orc",
+        "class": "Fighter",
+        "subclass": "Battle Master",
+        "level": 20,
+        "status": "NPC",
+        "notes": "Leader of the Mahruud"
+      },
+      {
+        "character": "Hashir Suflete",
+        "species": "Lineages",
+        "class": "Sorcerer",
+        "subclass": "Shadow Magic",
+        "level": 10
+      },
+      {
+        "character": "Hewie",
+        "player": "Sean Poole",
+        "species": "Human",
+        "class": "Cleric",
+        "subclass": "Twilight Domain",
+        "level": 3
+      },
+      {
+        "character": "Hob",
+        "status": "Deceased",
+        "deathDate": "9/15/2023"
+      },
+      {
+        "character": "Jareth",
+        "status": "Deceased",
+        "deathDate": "11/12/2021"
+      },
+      {
+        "character": "K'rak",
+        "status": "Deceased",
+        "deathDate": "9/15/2023"
+      },
+      {
+        "character": "Kablahm",
+        "status": "Deceased",
+        "deathDate": "9/15/2023"
+      },
+      {
+        "character": "Kashmir",
+        "player": "Steven Zimmerman",
+        "species": "Aasimar",
+        "class": "Sorcerer",
+        "subclass": "Draconic Bloodline",
+        "level": 5
+      },
+      {
+        "character": "Kharas",
+        "player": "Brian Winneford",
+        "status": "Deceased",
+        "deathDate": "1/26/2022"
+      },
+      {
+        "character": "Kuradim",
+        "status": "Deceased",
+        "deathDate": "11/12/2021"
+      },
+      {
+        "character": "Lily",
+        "status": "Deceased",
+        "deathDate": "8/25/2022"
+      },
+      {
+        "character": "Limorie",
+        "status": "Deceased",
+        "deathDate": "1/15/2024"
+      },
+      {
+        "character": "Lumi",
+        "status": "Deceased",
+        "deathDate": "3/26/2024"
+      },
+      {
+        "character": "Nestor Rotspiddle",
+        "player": "Nolan Brown",
+        "species": "Gnome",
+        "class": "Druid",
+        "subclass": "Circle of the Moon",
+        "level": 5
+      },
+      {
+        "character": "Reece",
+        "status": "Deceased",
+        "deathDate": "9/30/2020"
+      },
+      {
+        "character": "Scrap",
+        "player": "Kalin McHale",
+        "species": "Goblin",
+        "class": "Rogue",
+        "subclass": "Assassin",
+        "level": 5
+      },
+      {
+        "character": "Silas",
+        "status": "Deceased",
+        "deathDate": "9/15/2023"
+      }
+    ]
+  }
+}

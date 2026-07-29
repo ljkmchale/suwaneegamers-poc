@@ -17,7 +17,7 @@ export default async function PantheonPage() {
       <div
         className="fixed inset-0 z-0 bg-cover bg-center"
         aria-hidden="true"
-        style={{ backgroundImage: 'url("/images/guides-to-myrdae/reference-cards/campaign-setting-faith-beliefs.webp")' }}
+        style={{ backgroundImage: 'url("/media/images/guides-to-myrdae/reference-cards/campaign-setting-faith-beliefs.webp")' }}
       />
       <div
         className="fixed inset-0 z-0"

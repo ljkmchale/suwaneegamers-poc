@@ -70,7 +70,7 @@ export function MediaClient({ initialFiles, subfolders, currentSubfolder }: Prop
         <span className="text-xs font-cinzel tracking-widest uppercase text-[#a89880]">Folder:</span>
         <button type="button" onClick={() => setSubfolder("")}
           className={`text-xs px-3 py-1 rounded border transition-colors ${!subfolder ? "border-[#8b5cf6] text-[#8b5cf6]" : "border-[#2a2a35] text-[#5a5060] hover:border-[#8b5cf6]"}`}>
-          /images/
+          /media/images/
         </button>
         {subfolders.map((s) => (
           <button key={s} type="button" onClick={() => setSubfolder(s)}

@@ -29,6 +29,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
           <p className="text-sm text-center mb-4 text-red-400">
             Sign in with Google first, then come back here and enter the admin
             password.{" "}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- API route (OAuth redirect), not a page; <Link> would prefetch/client-navigate it */}
             <a href="/api/auth/google/login" className="underline text-[#8b5cf6]">
               Sign in with Google
             </a>

@@ -1,7 +1,43 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getIronSession } from "iron-session";
 import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
+import { USER_SESSION_OPTIONS, isSignedIn, type UserSessionData } from "@/lib/userSession";
 import { clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/lib/securityLog";
+
+// Reachable without a signed-in visitor. Everything else — pages and APIs alike
+// — requires Google sign-in.
+const PUBLIC_PATHS = [
+  "/signin", // the gate itself
+  "/api/auth/", // the sign-in round trip
+  "/api/analytics/events", // visit beacon; it also fires on the sign-in page
+];
+
+// Server-to-server callers that carry their own bearer secret and have no
+// browser session: the LiveKit agent posting metrics, and the content scheduler.
+const MACHINE_PATHS = [
+  "/api/livekit/analytics",
+  "/api/livekit/metrics",
+  "/api/content-scheduler/",
+  // Serves both signed-in members on /chronicles and the voice agent's
+  // search_knowledge_base tool, so it authorizes both cases inside the route
+  // rather than here. It is NOT public — see app/api/brain/ask/route.ts.
+  "/api/brain/ask",
+];
+
+// An entry ending in "/" covers everything beneath it; anything else must match
+// exactly. Without that rule "/api/brain/ask" would also exempt
+// "/api/brain/ask-stream", which has no authorization of its own.
+function isPublicPath(pathname: string): boolean {
+  return [...PUBLIC_PATHS, ...MACHINE_PATHS].some((entry) =>
+    entry.endsWith("/") ? pathname.startsWith(entry) : pathname === entry,
+  );
+}
+
+// Mirrors lib/googleOAuth.ts: sign-in is only *enforced* once real credentials
+// exist, so a server without OAuth configured is never locked out of itself.
+function googleAuthConfigured(): boolean {
+  return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+}
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -36,7 +72,32 @@ export async function proxy(request: NextRequest) {
         userAgent: request.headers.get("user-agent"),
       });
     }
-    return NextResponse.next();
+
+    if (!googleAuthConfigured() || isPublicPath(pathname)) {
+      return NextResponse.next();
+    }
+
+    // The whole site is members-only. This has to happen here rather than in a
+    // layout: React renders the layout and the page in parallel, so a layout
+    // that swaps in the sign-in screen still ships the page's rendered payload
+    // in the same HTML response. Stopping the request is the only way the
+    // content never leaves the server.
+    const response = NextResponse.next();
+    const userSession = await getIronSession<UserSessionData>(
+      request,
+      response,
+      USER_SESSION_OPTIONS,
+    );
+    if (isSignedIn(userSession)) return response;
+
+    // API callers get a status they can act on; browsers get the sign-in page,
+    // carrying where they were headed so the deep link survives the round trip.
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+    }
+    const signInUrl = new URL("/signin", request.url);
+    if (pathname !== "/") signInUrl.searchParams.set("from", pathname);
+    return NextResponse.redirect(signInUrl);
   }
 
   const requestHeaders = new Headers(request.headers);

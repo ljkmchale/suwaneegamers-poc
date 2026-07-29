@@ -18,7 +18,7 @@ export default function ReferenceForDungeonMastersPage() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/guides-to-myrdae/reference-cards/dm-reference-background.webp")',
+            'url("/media/images/guides-to-myrdae/reference-cards/dm-reference-background.webp")',
         }}
       />
       <div

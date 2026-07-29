@@ -107,7 +107,7 @@ Set-EnvironmentValues (Join-Path $repoRoot "apps\web\.env.local") @{
   LIVEKIT_URL = "wss://voice.suwaneegamers.net"
   LIVEKIT_API_KEY = $apiKey
   LIVEKIT_API_SECRET = $apiSecret
-  LIVEKIT_SCHEDULE_AGENT_NAME = "suwanee-schedule-assistant"
+  LIVEKIT_SCHEDULE_AGENT_NAME = "myra"
 }
 
 Set-EnvironmentValues (Join-Path $repoRoot "services\livekit-schedule-agent\.env.local") @{

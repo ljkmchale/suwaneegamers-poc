@@ -25,7 +25,7 @@
     "id": "reference-bastion-of-the-ghost-fiend",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-bastion-of-the-ghost-fiend.webp",
+      "image": "/media/images/references-sourcebooks/adventure-bastion-of-the-ghost-fiend.webp",
       "imageAlt": "Bastion of the Ghost Fiend artwork",
       "eyebrow": "Adventure",
       "title": "Bastion of the Ghost Fiend",
@@ -38,7 +38,7 @@
     "id": "reference-nest-of-the-eldritch-eye",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-nest-of-the-eldritch-eye.webp",
+      "image": "/media/images/references-sourcebooks/adventure-nest-of-the-eldritch-eye.webp",
       "imageAlt": "Nest of the Eldritch Eye artwork",
       "eyebrow": "Adventure",
       "title": "Nest of the Eldritch Eye",
@@ -51,7 +51,7 @@
     "id": "reference-ruins-of-the-assembly",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-ruins-of-the-assembly.webp",
+      "image": "/media/images/references-sourcebooks/adventure-ruins-of-the-assembly.webp",
       "imageAlt": "Ruins of the Assembly artwork",
       "eyebrow": "Adventure",
       "title": "Ruins of the Assembly",
@@ -64,7 +64,7 @@
     "id": "reference-the-broken-citadel",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-the-broken-citadel.webp",
+      "image": "/media/images/references-sourcebooks/adventure-the-broken-citadel.webp",
       "imageAlt": "The Broken Citadel artwork",
       "eyebrow": "Adventure",
       "title": "The Broken Citadel",
@@ -78,7 +78,7 @@
     "id": "reference-tomb-of-the-amberblade",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-tomb-of-the-amberblade.webp",
+      "image": "/media/images/references-sourcebooks/adventure-tomb-of-the-amberblade.webp",
       "imageAlt": "Tomb of the Amberblade artwork",
       "eyebrow": "Adventure",
       "title": "Tomb of the Amberblade",
@@ -91,7 +91,7 @@
     "id": "reference-trolling-the-dwarven-ruins",
     "type": "card",
     "props": {
-      "image": "/images/references-sourcebooks/adventure-trolling-the-dwarven-ruins.webp",
+      "image": "/media/images/references-sourcebooks/adventure-trolling-the-dwarven-ruins.webp",
       "imageAlt": "Trolling the Dwarven Ruins artwork",
       "eyebrow": "Adventure",
       "title": "Trolling the Dwarven Ruins",

@@ -170,6 +170,129 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* ── Myra voice orb ─────────────────────────────────────── */
+
+.myra-orb {
+  position: relative;
+  display: block;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.38) 0 2%, transparent 14%),
+    radial-gradient(
+      circle at 50% 54%,
+      color-mix(in srgb, var(--myra-orb-color) 68%, white) 0 7%,
+      color-mix(in srgb, var(--myra-orb-color) 68%, #1b102a) 28%,
+      rgba(14, 7, 29, 0.88) 62%,
+      transparent 100%
+    );
+  -webkit-mask-image: radial-gradient(circle, #000 48%, rgba(0, 0, 0, 0.78) 70%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 48%, rgba(0, 0, 0, 0.78) 70%, transparent 100%);
+  box-shadow:
+    inset 0 0 10px rgba(255, 255, 255, 0.18),
+    0 0 10px color-mix(in srgb, var(--myra-orb-color) 72%, transparent),
+    0 0 22px color-mix(in srgb, var(--myra-orb-color) 48%, transparent);
+  transition:
+    background 300ms ease,
+    box-shadow 55ms linear,
+    transform 55ms linear,
+    filter 55ms linear;
+  animation: myra-orb-breathe 2.8s ease-in-out infinite;
+}
+
+.myra-orb--listening {
+  box-shadow:
+    inset 0 0 var(--myra-listening-inner-glow) rgba(255, 255, 255, 0.22),
+    0 0 var(--myra-listening-glow)
+      color-mix(in srgb, var(--myra-orb-color) 78%, transparent),
+    0 0 var(--myra-listening-halo)
+      color-mix(in srgb, var(--myra-orb-color) 52%, transparent);
+  filter: brightness(var(--myra-listening-brightness));
+  transform: scale(var(--myra-listening-scale));
+  animation: none;
+}
+
+.myra-orb__wisp {
+  position: absolute;
+  z-index: 1;
+  left: var(--myra-wisp-left);
+  top: var(--myra-wisp-top);
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.92) 0 10%,
+    color-mix(in srgb, var(--myra-orb-color) 62%, white) 30%,
+    color-mix(in srgb, var(--myra-orb-color) 42%, transparent) 58%,
+    transparent 78%
+  );
+  filter: blur(var(--myra-wisp-blur));
+  opacity: var(--myra-wisp-opacity);
+  box-shadow:
+    inset 0 0 3px rgba(255, 255, 255, 0.5),
+    0 0 5px color-mix(in srgb, var(--myra-orb-color) 68%, transparent);
+  mix-blend-mode: screen;
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--myra-wisp-rotate))
+    scale(var(--myra-wisp-scale));
+  transform-origin: center center;
+  transition:
+    left var(--myra-wisp-duration) cubic-bezier(0.37, 0, 0.63, 1),
+    top var(--myra-wisp-duration) cubic-bezier(0.37, 0, 0.63, 1),
+    transform var(--myra-wisp-duration) cubic-bezier(0.37, 0, 0.63, 1),
+    opacity var(--myra-wisp-duration) ease,
+    filter var(--myra-wisp-duration) ease;
+}
+
+.myra-orb__wisp--2 {
+  width: 0.46rem;
+  height: 0.46rem;
+}
+
+.myra-orb__wisp--3 {
+  width: 0.38rem;
+  height: 0.38rem;
+}
+
+.myra-orb__wisp--4 {
+  width: 0.32rem;
+  height: 0.32rem;
+}
+
+.myra-orb__wisp--5 {
+  width: 0.42rem;
+  height: 0.42rem;
+}
+
+.myra-orb--connecting,
+.myra-orb--thinking {
+  animation-duration: 1.2s;
+}
+
+.myra-orb--speaking {
+  animation-duration: 0.85s;
+}
+
+@keyframes myra-orb-breathe {
+  0%, 100% { transform: scale(0.96); filter: brightness(0.9); }
+  50% { transform: scale(1.04); filter: brightness(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .myra-orb,
+  .myra-orb__wisp {
+    animation: none;
+  }
+
+  .myra-orb__wisp {
+    transition: none;
+  }
+}
+
 /* ── Card base ──────────────────────────────────────────── */
 
 .fantasy-card {
@@ -200,44 +323,44 @@ body {
 }
 
 .art-bg-bronze {
-  background-image: url("/images/generated/bronze-dragon-desktop.webp");
+  background-image: url("/media/images/generated/bronze-dragon-desktop.webp");
 }
 
 .art-bg-silver {
-  background-image: url("/images/generated/silver-dragon-desktop.webp");
+  background-image: url("/media/images/generated/silver-dragon-desktop.webp");
 }
 
 .art-bg-copper {
-  background-image: url("/images/generated/copper-dragon-desktop.webp");
+  background-image: url("/media/images/generated/copper-dragon-desktop.webp");
   background-color: #05030a;
   background-size: contain;
 }
 
 @media (min-aspect-ratio: 2 / 1) {
   .art-bg-bronze {
-    background-image: url("/images/generated/bronze-dragon-wide.webp");
+    background-image: url("/media/images/generated/bronze-dragon-wide.webp");
   }
 
   .art-bg-silver {
-    background-image: url("/images/generated/silver-dragon-wide.webp");
+    background-image: url("/media/images/generated/silver-dragon-wide.webp");
   }
 
   .art-bg-copper {
-    background-image: url("/images/generated/copper-dragon-wide.webp");
+    background-image: url("/media/images/generated/copper-dragon-wide.webp");
   }
 }
 
 @media (orientation: portrait) {
   .art-bg-bronze {
-    background-image: url("/images/generated/bronze-dragon-portrait.webp");
+    background-image: url("/media/images/generated/bronze-dragon-portrait.webp");
   }
 
   .art-bg-silver {
-    background-image: url("/images/generated/silver-dragon-portrait.webp");
+    background-image: url("/media/images/generated/silver-dragon-portrait.webp");
   }
 
   .art-bg-copper {
-    background-image: url("/images/generated/copper-dragon-portrait.webp");
+    background-image: url("/media/images/generated/copper-dragon-portrait.webp");
   }
 }
 
@@ -279,4 +402,15 @@ body {
 
 body:has([data-full-page-route="chronicles"]) footer {
   display: none;
+}
+@media (max-width: 640px) {
+  .campaign-setting-page .fantasy-card .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: none !important;
+  }
+
+  .campaign-setting-page .fantasy-card .grid > * {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
 }

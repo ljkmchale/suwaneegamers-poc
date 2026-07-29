@@ -37,6 +37,6 @@ Do not skip these. Almost every mistake on this site comes from editing the wron
 ## Conventions
 
 - Content reference source: `https://sites.google.com/view/suwanee-gamers/home` (legacy site); deeper lore: `http://kb.suwaneegamers.net`.
-- Images: webp preferred, kebab-case named after the content id they belong to, in the matching `apps/web/public/images/<domain>/` directory.
+- Images: webp preferred, kebab-case named after the content id they belong to, in the matching `apps/web/media/images/<domain>/` directory.
 - Design tokens: CSS custom properties (`--color-accent-gold`, etc.) from `app/globals.css` + `content/theme.json`. Use `style={{ color: "var(--token)" }}`, not hardcoded hex.
 - Do not commit or deploy unless asked. Report what you changed, what you verified, and anything that needs a deploy to reach production (code changes do; content JSON changes appear within ~5 minutes via ISR revalidation).

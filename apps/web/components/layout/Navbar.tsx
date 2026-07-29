@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { PencilLine, Shield, Search, LogOut } from "lucide-react";
+import { PencilLine, Shield, Search, LogOut, ShoppingBag } from "lucide-react";
 import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/actions";
 import type { NavSection } from "@/lib/nav";
 import { SearchPalette } from "@/components/layout/SearchPalette";
@@ -14,9 +14,10 @@ interface NavProps {
   isAdmin?: boolean;
   editMode?: boolean;
   user?: NavUser | null;
+  storeEnabled?: boolean;
 }
 
-export function Navbar({ sections, isAdmin = false, editMode = false, user = null }: NavProps) {
+export function Navbar({ sections, isAdmin = false, editMode = false, user = null, storeEnabled = false }: NavProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -148,11 +149,25 @@ export function Navbar({ sections, isAdmin = false, editMode = false, user = nul
             );
           })}
 
+          {storeEnabled && <Link
+            href="/store"
+            aria-label="Store"
+            title="Store"
+            className="ml-auto inline-flex h-9 items-center gap-2 rounded border px-3 font-cinzel text-xs uppercase tracking-wider transition-colors"
+            style={{
+              borderColor: isActive("/store") ? "var(--color-accent-gold)" : "var(--color-bg-border)",
+              color: isActive("/store") ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
+            }}
+          >
+            <ShoppingBag size={16} strokeWidth={2} aria-hidden="true" />
+            Store
+          </Link>}
+
           <button
             onClick={() => setSearchOpen(true)}
             aria-label="Search (Ctrl+K)"
             title="Search (Ctrl+K)"
-            className="ml-auto inline-flex h-9 items-center gap-2 px-3 rounded border transition-colors"
+            className="inline-flex h-9 items-center gap-2 px-3 rounded border transition-colors"
             style={{
               borderColor: "var(--color-bg-border)",
               color: "var(--color-text-muted)",
@@ -195,6 +210,19 @@ export function Navbar({ sections, isAdmin = false, editMode = false, user = nul
 
           {user && <UserMenu user={user} />}
         </div>
+
+        {storeEnabled && <Link
+          href="/store"
+          aria-label="Store"
+          title="Store"
+          className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded border transition-colors"
+          style={{
+            borderColor: isActive("/store") ? "var(--color-accent-gold)" : "var(--color-bg-border)",
+            color: isActive("/store") ? "var(--color-accent-gold)" : "var(--color-text-secondary)",
+          }}
+        >
+          <ShoppingBag size={17} strokeWidth={2} aria-hidden="true" />
+        </Link>}
 
         {/* Mobile search icon */}
         <button

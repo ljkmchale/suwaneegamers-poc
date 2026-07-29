@@ -18,7 +18,7 @@ export default function AdventuresPage() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/references-sourcebooks/references-sourcebooks-overview.webp")',
+            'url("/media/images/references-sourcebooks/references-sourcebooks-overview.webp")',
         }}
       />
       <div

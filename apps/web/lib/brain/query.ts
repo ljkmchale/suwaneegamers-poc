@@ -809,7 +809,7 @@ function answerRosterPlayerQuestion(question: string, options: QueryOptions = {}
   if (!roster) return null;
 
   const normalizedQuestion = normalize(question);
-  let playerMatches = roster.members.filter((member) => normalize(member.player) && normalizedQuestion.includes(normalize(member.player)));
+  const playerMatches = roster.members.filter((member) => normalize(member.player) && normalizedQuestion.includes(normalize(member.player)));
 
   if (!playerMatches.length && /\blarry\b/i.test(question)) {
     const larryMatches = roster.members.filter((member) => /\bLarry\b/i.test(member.player));
@@ -1272,7 +1272,7 @@ function selectStructuredLines(markdown: string, scope: QueryScope, question: st
     if (isAnswerMaintenanceHeading(currentHeading)) continue;
     if (campaign !== "All" && currentCampaignSection !== "All" && currentCampaignSection !== campaign && currentCampaignSection !== "World") continue;
 
-    let text = bullet[1].replace(/\s+/g, " ").trim();
+    const text = bullet[1].replace(/\s+/g, " ").trim();
     if (!text || /^raw source:/i.test(text)) continue;
     const normalizedText = normalize(`${currentHeading} ${text}`);
     if (entityNames.length && !entityNames.some((name) => normalizedText.includes(name))) {

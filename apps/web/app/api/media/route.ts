@@ -3,7 +3,7 @@ import path from "path";
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/adminAuth";
 
-const PUBLIC_IMAGES = path.join(process.cwd(), "public/images");
+const IMAGES_ROOT = path.join(process.cwd(), "media/images");
 const ALLOWED_EXTENSIONS = new Set([
   ".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".avif",
   ".mp3", ".wav", ".m4a", ".ogg", ".webm", ".flac",
@@ -33,7 +33,7 @@ function walkImages(dir: string, relDir = ""): MediaFile[] {
 
     const stats = fs.statSync(abs);
     return [{
-      path: `/images/${rel.replaceAll("\\", "/")}`,
+      path: `/media/images/${rel.replaceAll("\\", "/")}`,
       name: entry.name,
       size: stats.size,
     }];
@@ -42,6 +42,6 @@ function walkImages(dir: string, relDir = ""): MediaFile[] {
 
 export async function GET() {
   await requireAdmin();
-  const files = walkImages(PUBLIC_IMAGES).sort((a, b) => a.path.localeCompare(b.path));
+  const files = walkImages(IMAGES_ROOT).sort((a, b) => a.path.localeCompare(b.path));
   return NextResponse.json({ files });
 }

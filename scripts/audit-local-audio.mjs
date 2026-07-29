@@ -5,7 +5,10 @@ import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const publicDir = path.join(root, "apps", "web", "public");
+// Session audio lives under apps/web/media/session-audio (outside public/) and
+// is served dynamically by the route handler. The URL keeps its /media/... form,
+// so joining it under apps/web resolves to the on-disk file.
+const mediaBase = path.join(root, "apps", "web");
 const db = getDb();
 const failures = [];
 let recordingCount = 0;
@@ -21,7 +24,7 @@ for (const row of db.prepare(
       continue;
     }
     const pathname = link.url.split(/[?#]/, 1)[0];
-    const localPath = path.join(publicDir, ...pathname.split("/").filter(Boolean));
+    const localPath = path.join(mediaBase, ...pathname.split("/").filter(Boolean));
     if (!fs.existsSync(localPath) || fs.statSync(localPath).size === 0) {
       failures.push(`${row.campaign_id} / ${row.title}: missing local file ${link.url}`);
     }

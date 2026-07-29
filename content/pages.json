@@ -26,5 +26,19 @@
     "title": "Supporting Our Gamers",
     "status": "active",
     "createdAt": "2026-06-15"
+  },
+  {
+    "id": "our-story-page",
+    "slug": "ourstory",
+    "title": "Our Story",
+    "status": "active",
+    "createdAt": "2026-07-23"
+  },
+  {
+    "id": "terms-of-use-page",
+    "slug": "terms-of-use",
+    "title": "Terms of Use",
+    "status": "active",
+    "createdAt": "2026-07-28"
   }
 ]

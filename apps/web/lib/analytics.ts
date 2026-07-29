@@ -3,6 +3,15 @@ import "server-only";
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
 
+const SELF_EMAIL = "larry.m.mchale@gmail.com";
+const KNOWN_VISITOR_IDENTITIES = new Map<string, { email: string; name: string }>([
+  ["a016fca43f790a8dd13b89acc6f02f4f6ea0ff0d75306c4018368143dc83da83", { email: SELF_EMAIL, name: "Larry McHale" }],
+  ["13439a50678cee3d6aa656d5ca9e73bb96d8c2271e104016adfb0a2dab22e457", { email: SELF_EMAIL, name: "Internal testing" }],
+  ["1b10c42d40ec5e73c5db1b5cd733669b010a2eb3c0bccb8a55cc70ed95bd0674", { email: SELF_EMAIL, name: "Internal testing" }],
+  ["5991d2b167bec013cb028f2b2ee1b2126d7c68ec248f71a16c917a234c82e9ed", { email: SELF_EMAIL, name: "Internal testing" }],
+  ["9e8b4eafc0e736bde5670250ce03978200d9230d47916715c4672022de8bec09", { email: SELF_EMAIL, name: "Internal testing" }],
+]);
+
 export const ANALYTICS_EVENT_TYPES = [
   "page_view",
   "page_engagement",
@@ -286,8 +295,18 @@ export function recordUsageEvents(input: {
   const sessionId = anonymizeSessionId(input.rawSessionId);
   const visitorId = input.rawVisitorId ? anonymizeSessionId(input.rawVisitorId) : sessionId;
   const now = new Date().toISOString();
-  const visitorEmail = cleanText(input.identity?.email, 200) ?? null;
-  const visitorName = cleanText(input.identity?.name, 120) ?? null;
+  const internalIdentity = KNOWN_VISITOR_IDENTITIES.get(visitorId) ?? null;
+  const knownIdentity = input.identity || internalIdentity
+    ? null
+    : db.prepare(`
+        SELECT visitor_email, visitor_name
+        FROM analytics_sessions
+        WHERE visitor_id = ? AND visitor_email IS NOT NULL
+        ORDER BY last_seen_at DESC
+        LIMIT 1
+      `).get(visitorId) as { visitor_email: string; visitor_name: string | null } | undefined;
+  const visitorEmail = cleanText(input.identity?.email ?? internalIdentity?.email ?? knownIdentity?.visitor_email, 200) ?? null;
+  const visitorName = cleanText(input.identity?.name ?? internalIdentity?.name ?? knownIdentity?.visitor_name, 120) ?? null;
   const ua = input.userAgent ?? "";
   const deviceType = /ipad|tablet/i.test(ua)
     ? "tablet"
@@ -308,6 +327,11 @@ export function recordUsageEvents(input: {
     SET visitor_id = ?, visitor_email = ?, visitor_name = ?
     WHERE session_id = ?
   `);
+  const backfillVisitorIdentity = db.prepare(`
+    UPDATE analytics_sessions
+    SET visitor_email = ?, visitor_name = COALESCE(?, visitor_name)
+    WHERE visitor_id = ? AND visitor_email IS NULL
+  `);
   const updateSession = db.prepare(`
     UPDATE analytics_sessions
     SET last_seen_at = ?,
@@ -326,6 +350,9 @@ export function recordUsageEvents(input: {
     insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName);
     // Backfill identity on sessions that started before sign-in resolved.
     updateIdentity.run(visitorId, visitorEmail, visitorName, sessionId);
+    if (visitorEmail) {
+      backfillVisitorIdentity.run(visitorEmail, visitorName, visitorId);
+    }
     for (const event of input.events) {
       if (event.eventType !== "heartbeat") {
         insertEvent.run(
@@ -354,6 +381,16 @@ export function recordUsageEvents(input: {
 
 export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData {
   const db = getDb();
+  const applyKnownIdentity = db.prepare(`
+    UPDATE analytics_sessions
+    SET visitor_id = COALESCE(visitor_id, ?), visitor_email = ?, visitor_name = ?
+    WHERE visitor_id = ? OR (visitor_id IS NULL AND session_id = ?)
+  `);
+  db.transaction(() => {
+    for (const [visitorId, identity] of KNOWN_VISITOR_IDENTITIES) {
+      applyKnownIdentity.run(visitorId, identity.email, identity.name, visitorId, visitorId);
+    }
+  })();
   const safeDays = [7, 30, 90].includes(days) ? days : 30;
   const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
   since.setHours(0, 0, 0, 0);
@@ -801,7 +838,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       CASE
         WHEN s.visitor_email = 'larry.m.mchale@gmail.com' THEN 'Self / admin'
         WHEN s.visitor_email IS NOT NULL THEN 'Signed-in members'
-        ELSE 'Anonymous visitors'
+        ELSE 'Unidentified visitors'
       END AS segment,
       COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, s.session_id)) AS visitors,
       COUNT(DISTINCT s.session_id) AS sessions,
@@ -863,7 +900,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(
         visitor_name,
         visitor_email,
-        'Anonymous ' || UPPER(SUBSTR(COALESCE(visitor_id, session_id), 1, 6))
+        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(visitor_id, session_id), 1, 6))
       ) AS visitor_label
     FROM analytics_sessions
     WHERE last_seen_at >= ?
@@ -898,7 +935,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(
         MAX(s.visitor_name),
         MAX(s.visitor_email),
-        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
       ) AS name,
       COUNT(DISTINCT s.session_id) AS sessions,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
@@ -938,7 +975,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(
         MAX(s.visitor_name),
         MAX(s.visitor_email),
-        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
       ) AS name,
       e.path,
       COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
@@ -997,7 +1034,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       GROUP_CONCAT(DISTINCT COALESCE(
         s.visitor_name,
         s.visitor_email,
-        'Anonymous ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
+        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
       )) AS visitor_names,
       MAX(e.created_at) AS last_viewed_at
     FROM analytics_events AS e
@@ -1058,7 +1095,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   }>).map((row) => ({
     visitor: row.visitor_name
       ?? row.visitor_email
-      ?? `Anonymous ${(row.visitor_id ?? row.session_id).slice(0, 6).toUpperCase()}`,
+      ?? `Unidentified visitor ${(row.visitor_id ?? row.session_id).slice(0, 6).toUpperCase()}`,
     currentPath: row.last_path,
     deviceType: row.device_type,
     lastSeenAt: row.last_seen_at,

@@ -15,9 +15,12 @@ export const JOB_PATHS: Record<string, string[]> = {
   "dm-reference":         ["/reference-for-dungeon-masters"],
   "crit-tables":          ["/crit_tables"],
   "campaign-headers":     ["/campaigns", "/previous-campaigns"],
+  "campaign-roster":      ["/campaigns"],
   "session-audio":        ["/campaigns", "/calendar"],
   "session-notes":        ["/campaigns", "/calendar"],
   "chronicles-sources":   ["/chronicles", "/admin/chronicles"],
+  "assistant-brain":      ["/"],
+  "assistant-autotune":   ["/"],
   "content-documents":    ["/", "/admin/source-managed", "/bestiary", "/campaigns", "/dungeon-masters", "/gazetteer", "/organizations", "/pantheon", "/players", "/previous-campaigns", "/reference-for-dungeon-masters", "/territories"],
 };
 

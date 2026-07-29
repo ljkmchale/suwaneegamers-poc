@@ -35,8 +35,8 @@ import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "apps/web/public/images/suwaneegamers-logo-v18-4800p.png"
-OUT = ROOT / "apps/web/public/images/logo-animation"
+SOURCE = ROOT / "apps/web/media/images/suwaneegamers-logo-v18-4800p.png"
+OUT = ROOT / "apps/web/media/images/logo-animation"
 
 # Sampled palette (RGB).
 RIM = (60, 35, 21)          # shield outer ink outline

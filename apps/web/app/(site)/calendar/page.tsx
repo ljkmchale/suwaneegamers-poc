@@ -16,7 +16,6 @@ import { getTrackedActiveCampaigns } from "@/lib/campaignTracking";
 import { AdventureFoldCard } from "./AdventureFoldCard";
 import { LogoLightning } from "./LogoLightning";
 import { RunicBackground } from "./RunicBackground";
-import { ScheduleVoiceAssistant } from "@/components/livekit/ScheduleVoiceAssistant";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -234,22 +233,14 @@ export default async function CalendarPage() {
     );
   });
 
-  const liveKitConfigured = Boolean(
-    process.env.NODE_ENV !== "production" ||
-      (process.env.LIVEKIT_URL &&
-        process.env.LIVEKIT_API_KEY &&
-        process.env.LIVEKIT_API_SECRET),
-  );
-
   return (
     <div className="relative min-h-screen">
       <RunicBackground />
 
       <div className="relative z-10 mx-auto max-w-[100rem] px-6 py-20">
         <header className="relative mb-14 flex flex-col items-center text-center">
-          <ScheduleVoiceAssistant configured={liveKitConfigured} />
           <LogoLightning
-            src="/images/suwaneegamers-logo-v18-4800p.webp"
+            src="/media/images/suwaneegamers-logo-v18-4800p.webp"
             alt="Suwanee Gamers"
             width={220}
             height={220}

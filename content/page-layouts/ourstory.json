@@ -1,0 +1,52 @@
+[
+  {
+    "kind": "block",
+    "id": "our-story-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Our Story",
+      "title": "About Suwanee Gamers",
+      "description": "",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "our-story-beginnings",
+    "type": "text",
+    "props": {
+      "content": "Suwanee Gamers began in 2012 when a circle of family and friends in the Suwanee, Georgia area decided to make regular gaming nights a permanent part of their lives. What started as casual get-togethers has grown into a lasting community centered on shared adventures, laughter, and the stories we create together.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "our-story-myrdae",
+    "type": "text",
+    "props": {
+      "content": "While the group enjoys a variety of games, Dungeons & Dragons has always been the heart of what we do. Over the years our players have built and refined the homebrew setting of Myrdae, the living world that hosts the majority of our campaigns. Multiple dungeon masters keep the stories moving, and more than thirty people have sat at our tables at one time or another. Since the group’s founding we have run nearly thirty distinct campaigns, ranging from short one-shots to multi-year epics.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "our-story-giving-back",
+    "type": "text",
+    "props": {
+      "content": "Beyond the dice and the drama, Suwanee Gamers has a strong tradition of giving back. For many years the group has organized fundraisers that support local organizations such as Children’s Healthcare of Atlanta and the North Gwinnett Co-op, turning our shared hobby into real help for the community around us.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "our-story-instagram",
+    "type": "button-link",
+    "props": {
+      "label": "Follow us on Instagram.",
+      "href": "https://www.instagram.com/suwaneegamers/",
+      "align": "center",
+      "variant": "primary",
+      "arrow": "auto"
+    }
+  }
+]

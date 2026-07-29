@@ -15,7 +15,7 @@ export default async function HistoryPage() {
   return (
     <div
       className="relative min-h-screen overflow-hidden bg-black bg-cover bg-center pb-20"
-      style={{ backgroundImage: 'url("/images/guides-to-myrdae/reference-cards/campaign-setting-time-history.webp")' }}
+      style={{ backgroundImage: 'url("/media/images/guides-to-myrdae/reference-cards/campaign-setting-time-history.webp")' }}
     >
       <div
         className="absolute inset-0 z-0"

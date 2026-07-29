@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { LogOut, User as UserIcon } from "lucide-react";
+import Link from "next/link";
+import { LogOut, Settings, User as UserIcon } from "lucide-react";
 
 export interface NavUser {
   name: string;
@@ -49,6 +50,15 @@ export function UserMenu({ user }: { user: NavUser }) {
                 {user.email}
               </p>
             </div>
+            <Link
+              href="/profile"
+              className="flex w-full items-center gap-2 px-4 py-2 text-xs font-cinzel tracking-wider uppercase transition-colors"
+              style={{ color: "var(--color-text-secondary)" }}
+              onClick={() => setOpen(false)}
+            >
+              <Settings size={14} strokeWidth={2} aria-hidden="true" />
+              Profile &amp; Myra
+            </Link>
             <form action="/api/auth/logout" method="post">
               <button
                 type="submit"
@@ -68,8 +78,8 @@ export function UserMenu({ user }: { user: NavUser }) {
 
 function Avatar({ user }: { user: NavUser }) {
   if (user.picture) {
-    // eslint-disable-next-line @next/next/no-img-element
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={user.picture}
         alt=""

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getUserSession, isSignedIn } from "@/lib/userSession";
+import { isMachineRequest } from "@/lib/machineAuth";
 import { answerQuestion } from "@/lib/brain/query";
 import { hasIndex } from "@/lib/brain/vector-store";
 import { brainConfig } from "@/lib/brain/config";
@@ -25,6 +27,13 @@ function logQuestion(campaign: string, question: string, answer: string, sources
 }
 
 export async function POST(request: NextRequest) {
+  // This route is exempt from the proxy's site-wide sign-in gate because it has
+  // two kinds of caller: signed-in members on /chronicles, and the LiveKit voice
+  // agent, which has no browser session. Authorization therefore happens here.
+  if (!isMachineRequest(request) && !isSignedIn(await getUserSession())) {
+    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+  }
+
   try {
     const body = await request.json() as Record<string, unknown>;
     const question = String(body.question ?? "").trim();

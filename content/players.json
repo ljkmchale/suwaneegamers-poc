@@ -23,13 +23,13 @@
     "id": "emma-cooper",
     "name": "Emma Cooper",
     "description": "Suwanee Gamers player with an active character in the Heroes of Emberstran campaign.",
-    "portrait": "/images/emma-cooper-clean.webp"
+    "portrait": "/media/images/emma-cooper-clean.webp"
   },
   {
     "id": "ty-cooper",
     "name": "Ty Cooper",
     "description": "Suwanee Gamers player with an active character in the Heroes of Emberstran campaign.",
-    "portrait": "/images/ty-cooper-clean.webp"
+    "portrait": "/media/images/ty-cooper-clean.webp"
   },
   {
     "id": "chip-poole",
@@ -60,13 +60,13 @@
     "id": "jenny-mchale",
     "name": "Jenny McHale",
     "description": "Suwanee Gamers player with active character information in the portal.",
-    "portrait": "/images/jenny-mchale-clean.webp"
+    "portrait": "/media/images/jenny-mchale-clean.webp"
   },
   {
     "id": "mike-brown",
     "name": "Mike Brown",
     "description": "Suwanee Gamers player with active character information in the portal.",
-    "portrait": "/images/mike-brown-clean.webp"
+    "portrait": "/media/images/mike-brown-clean.webp"
   },
   {
     "id": "michael-hewson",
@@ -77,7 +77,7 @@
     "id": "tom-chernetsky",
     "name": "Tom Chernetsky",
     "description": "Suwanee Gamers player with an active character in the Dungeons III campaign.",
-    "portrait": "/images/tom-chernetsky-clean.webp"
+    "portrait": "/media/images/tom-chernetsky-clean.webp"
   },
   {
     "id": "tiffany-mulvihill",

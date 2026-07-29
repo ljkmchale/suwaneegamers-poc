@@ -75,7 +75,14 @@ function Timeline({ eras }: { eras: HistoryEra[] }) {
             return (
               <button key={era.id} type="button" role="tab" aria-selected={active} aria-controls="selected-history-era" id={`history-tab-${era.id}`} data-timeline-index={index} onClick={() => select(index)} onKeyDown={(event) => { if (event.key === "ArrowLeft") { event.preventDefault(); move(-1); } if (event.key === "ArrowRight") { event.preventDefault(); move(1); } }} className="group relative z-10 w-[8.5rem] shrink-0 snap-center text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300 sm:w-[10rem] xl:w-[11rem]">
                 <span className={`relative mx-auto block aspect-[2/3] w-full overflow-hidden bg-transparent shadow-xl transition duration-300 ${active ? "-translate-y-1 drop-shadow-[0_0_14px_rgba(245,158,11,.42)]" : "opacity-65 group-hover:opacity-100"}`}>
-                  <Image src={era.imageUrl} alt={`Fantasy sourcebook cover representing ${era.title}`} fill sizes="(max-width: 640px) 136px, (max-width: 1280px) 160px, 176px" className="object-contain transition duration-300 group-hover:scale-[1.025]" />
+                  <Image
+                    src={era.imageUrl}
+                    alt={`Fantasy sourcebook cover representing ${era.title}`}
+                    fill
+                    sizes="(max-width: 640px) 136px, (max-width: 1280px) 160px, 176px"
+                    priority={index === 0}
+                    className="object-contain transition duration-300 group-hover:scale-[1.025]"
+                  />
                 </span>
                 <span className={`font-cinzel mt-3 block min-h-[2.5rem] text-sm uppercase leading-tight tracking-[0.08em] transition ${active ? "text-white" : "text-white/70 group-hover:text-white/90"}`}>{era.title}</span>
                 <span className={`font-cinzel mt-1 block text-xs uppercase tracking-wider transition ${active ? "text-amber-200" : "text-white/50"}`}>{yearRange(era)}</span>

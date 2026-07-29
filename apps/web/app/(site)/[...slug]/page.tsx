@@ -55,7 +55,7 @@ export default async function CustomPageRoute({ params }: Props) {
           aria-hidden="true"
           style={{
             backgroundImage:
-              'url("/images/guides-to-myrdae/reference-cards/dm-reference-background.webp")',
+              'url("/media/images/guides-to-myrdae/reference-cards/dm-reference-background.webp")',
           }}
         />
         <div

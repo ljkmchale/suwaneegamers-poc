@@ -170,7 +170,6 @@ function BlockHandle({
   grid,
   onPlacementChange,
   onResizeStart,
-  isResizing,
 }: {
   item: PageItem;
   measured: MeasuredEl;
@@ -594,7 +593,6 @@ export function PageDragLayer({
     } else {
       setRowBoundaries([]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid?.rows]);
 
   // Initial measure + track scroll / resize

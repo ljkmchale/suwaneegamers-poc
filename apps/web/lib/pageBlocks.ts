@@ -632,14 +632,15 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     description: "Fantasy-styled content card with title and optional link",
     icon: "▭",
     category: "content",
-    defaultProps: { eyebrow: "", title: "New Card", description: "", href: "", linkLabel: "", image: "", imageAlt: "" },
+    defaultProps: { eyebrow: "", title: "New Card", description: "", highlightText: "", href: "", linkLabel: "", image: "", imageAlt: "" },
     fields: [
       { key: "eyebrow",     label: "Eyebrow (optional)", type: "text",     placeholder: "e.g. Featured" },
       { key: "title",       label: "Title",              type: "text",     placeholder: "Card title" },
       { key: "description", label: "Description",        type: "textarea", placeholder: "Card body text" },
+      { key: "highlightText", label: "Highlighted text (optional)", type: "textarea", placeholder: "Sale or important notice" },
       { key: "href",        label: "Link URL (optional)", type: "url",     placeholder: "https://…  or  /internal" },
       { key: "linkLabel",   label: "Link label",          type: "text",    placeholder: "e.g. Learn more" },
-      { key: "image",       label: "Artwork (optional)",   type: "image",   placeholder: "/images/..." },
+      { key: "image",       label: "Artwork (optional)",   type: "image",   placeholder: "/media/images/..." },
       { key: "imageAlt",    label: "Artwork alt text",     type: "text",    placeholder: "Describe the artwork" },
     ],
   },
@@ -652,7 +653,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     category: "content",
     defaultProps: { src: "", alt: "", caption: "", size: "large" },
     fields: [
-      { key: "src",     label: "Image",              type: "image", placeholder: "/images/my-image.webp" },
+      { key: "src",     label: "Image",              type: "image", placeholder: "/media/images/my-image.webp" },
       { key: "alt",     label: "Alt text",           type: "text", placeholder: "Describe the image" },
       { key: "caption", label: "Caption (optional)", type: "text", placeholder: "Image caption" },
       {
@@ -707,11 +708,11 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       { key: "eyebrow",      label: "Eyebrow (optional)",              type: "text",     placeholder: "e.g. Additional Lore" },
       { key: "title",        label: "Header title",                    type: "text",     placeholder: "Expandable Header" },
       { key: "description",  label: "Intro text (optional)",           type: "textarea", placeholder: "Visible while the fold is closed." },
-      { key: "headerImage",  label: "Header image (left, optional)",   type: "image",    placeholder: "/images/example.webp" },
+      { key: "headerImage",  label: "Header image (left, optional)",   type: "image",    placeholder: "/media/images/example.webp" },
       { key: "headerImageAlt", label: "Header image alt text",         type: "text",     placeholder: "Describe the image" },
       { key: "foldLabel",    label: "Fold button label",               type: "text",     placeholder: "View details" },
       { key: "foldText",     label: "Text inside fold (optional)",     type: "textarea", placeholder: "Text shown after expanding the header." },
-      { key: "foldImage",    label: "Image inside fold (optional)",    type: "image",    placeholder: "/images/example.webp" },
+      { key: "foldImage",    label: "Image inside fold (optional)",    type: "image",    placeholder: "/media/images/example.webp" },
       { key: "foldImageAlt", label: "Fold image alt text",             type: "text",     placeholder: "Describe the image" },
       {
         key: "foldImageFit", label: "Fold image fit", type: "select",
@@ -839,7 +840,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     category: "content",
     defaultProps: {
       columns: "3",
-      images: JSON.stringify([{ src: "/images/placeholder.png", alt: "", caption: "" }], null, 2),
+      images: JSON.stringify([{ src: "/media/images/placeholder.png", alt: "", caption: "" }], null, 2),
     },
     fields: [
       {
@@ -850,7 +851,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         key: "images",
         label: "Images (JSON array)",
         type: "json",
-        hint: 'Each item: { "src": "/images/...", "alt": "", "caption": "" }',
+        hint: 'Each item: { "src": "/media/images/...", "alt": "", "caption": "" }',
       },
     ],
   },
@@ -895,7 +896,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     fields: [
       { key: "title",   label: "Title (optional)", type: "text",     placeholder: "Callout heading" },
       { key: "href",    label: "Title link (optional)", type: "text", placeholder: "/path or https://..." },
-      { key: "image",   label: "Image (optional)", type: "image",    placeholder: "/images/pantheon/deity.webp" },
+      { key: "image",   label: "Image (optional)", type: "image",    placeholder: "/media/images/pantheon/deity.webp" },
       { key: "content", label: "Content",          type: "textarea", placeholder: "Your message…" },
       {
         key: "variant", label: "Accent colour", type: "select",
@@ -1071,7 +1072,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
         ],
       },
       { key: "dm",     label: "Dungeon Master",       type: "text",  placeholder: "DM name" },
-      { key: "image",  label: "Header image (optional)", type: "image", placeholder: "/images/campaigns/archive.jpg" },
+      { key: "image",  label: "Header image (optional)", type: "image", placeholder: "/media/images/campaigns/archive.jpg" },
       { key: "description", label: "Campaign summary", type: "textarea", placeholder: "Archive summary" },
       { key: "referenceUrl", label: "Detail link", type: "url", placeholder: "https://..." },
       { key: "resources", label: "Resource links", type: "json", hint: 'Each item: { "label": "", "url": "" }' },
@@ -1086,9 +1087,9 @@ export const ASSET_TYPES: AssetTypeDef[] = [
     description: "Play a YouTube video, uploaded video, or audio file directly on the page",
     icon: "▶",
     category: "content",
-    defaultProps: { src: "", title: "", mediaType: "auto", displayMode: "full", image: "/images/dragon-ears.png", caption: "" },
+    defaultProps: { src: "", title: "", mediaType: "auto", displayMode: "full", image: "/media/images/dragon-ears.webp", caption: "" },
     fields: [
-      { key: "src", label: "YouTube, audio, or video URL", type: "url", placeholder: "https://youtu.be/... or /images/media/file.mp4" },
+      { key: "src", label: "YouTube, audio, or video URL", type: "url", placeholder: "https://youtu.be/... or /media/images/media/file.mp4" },
       { key: "title", label: "Title (optional)", type: "text", placeholder: "Session recording" },
       {
         key: "mediaType",
@@ -1110,7 +1111,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
           { value: "image-button", label: "Image button" },
         ],
       },
-      { key: "image", label: "Button image", type: "image", placeholder: "/images/dragon-ears.png" },
+      { key: "image", label: "Button image", type: "image", placeholder: "/media/images/dragon-ears.webp" },
       { key: "caption", label: "Caption (optional)", type: "textarea" },
     ],
   },
@@ -1131,7 +1132,7 @@ export const ASSET_TYPES: AssetTypeDef[] = [
       { key: "title",  label: "Divine title",             type: "text",  placeholder: 'Addan - "Eternal Guardian"' },
       { key: "domain", label: "Domain",                   type: "text",  placeholder: "Order & Protection" },
       { key: "href",   label: "Reference link (optional)", type: "url",   placeholder: "https://..." },
-      { key: "image",  label: "Deity image",              type: "image", placeholder: "/images/pantheon/deity.webp" },
+      { key: "image",  label: "Deity image",              type: "image", placeholder: "/media/images/pantheon/deity.webp" },
     ],
   },
 

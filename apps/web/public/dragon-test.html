@@ -15,7 +15,7 @@
   .stage{display:flex;flex-direction:column;align-items:center;gap:10px}
   .label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
   #host{filter:drop-shadow(0 0 34px rgba(139,92,246,.35))}
-  .static-img{width:460px;height:477px;background:url('/images/suwaneegamers-logo-v18-4800p.png') center/contain no-repeat;filter:drop-shadow(0 0 34px rgba(139,92,246,.35))}
+  .static-img{width:460px;height:477px;background:url('/media/images/suwaneegamers-logo-v18-4800p.png') center/contain no-repeat;filter:drop-shadow(0 0 34px rgba(139,92,246,.35))}
   .controls{max-width:660px;margin:32px auto 0;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
   .controls h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
   .row{display:flex;align-items:center;gap:12px;margin:11px 0}
@@ -56,7 +56,7 @@
     <div class="row"><label>Membrane slack</label><input type="range" id="s-billow" min="0" max="0.6" step="0.01" value="0.16"><span class="val" id="v-billow">.16</span></div>
     <div class="row"><label>Tail undulation</label><input type="range" id="s-tail" min="0" max="1.4" step="0.02" value="0.7"><span class="val" id="v-tail">.70</span></div>
     <div class="row"><label>Speed</label><input type="range" id="s-speed" min="0.3" max="2" step="0.05" value="1"><span class="val" id="v-speed">1.0</span></div>
-    <p class="note">Prototype — one mesh over <code>/images/dragon-layers-hi/logo-full.png</code> driven by
+    <p class="note">Prototype — one mesh over <code>/media/images/dragon-layers-hi/logo-full.png</code> driven by
     <code>weightmap.png</code>. Nothing on the live site is changed. Honors <code>prefers-reduced-motion</code>.
     Shield/body/text are frozen; only wings + tail flex.</p>
   </div>
@@ -81,11 +81,11 @@
     document.getElementById('host').appendChild(app.view);
 
     // load logo texture + weightmap — MUST be the same source the weightmap was built from (750px logo)
-    const tex=await PIXI.Assets.load('/images/suwaneegamers-logo-v18.png');
+    const tex=await PIXI.Assets.load('/media/images/suwaneegamers-logo-v18.png');
     log('texture: '+tex.width+'x'+tex.height+' (weightmap-aligned)');
 
     // read weightmap pixels
-    const wmImg=new Image(); wmImg.src='/images/dragon-layers-hi/weightmap.png';
+    const wmImg=new Image(); wmImg.src='/media/images/dragon-layers-hi/weightmap.png';
     await wmImg.decode();
     const wc=document.createElement('canvas'); wc.width=wmImg.width; wc.height=wmImg.height;
     const wctx=wc.getContext('2d',{willReadFrequently:true}); wctx.drawImage(wmImg,0,0);

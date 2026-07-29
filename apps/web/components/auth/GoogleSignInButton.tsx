@@ -1,14 +1,98 @@
-// Standard "Sign in with Google" button. A plain anchor to the login route —
-// no client JS required, so it works even before hydration.
-export function GoogleSignInButton() {
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const TERMS_ACCEPTANCE_KEY = "sg-terms-of-service-accepted-v1";
+
+export function GoogleSignInButton({ returnTo }: { returnTo?: string } = {}) {
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const href =
+    returnTo && returnTo !== "/"
+      ? `/api/auth/google/login?from=${encodeURIComponent(returnTo)}`
+      : "/api/auth/google/login";
+  const buttonClasses =
+    "inline-flex w-full items-center justify-center gap-3 rounded-lg px-5 py-3 font-medium shadow-sm transition-opacity";
+
+  useEffect(() => {
+    setTermsAccepted(window.localStorage.getItem(TERMS_ACCEPTANCE_KEY) === "true");
+  }, []);
+
+  function updateTermsAcceptance(accepted: boolean) {
+    setTermsAccepted(accepted);
+    if (accepted) {
+      window.localStorage.setItem(TERMS_ACCEPTANCE_KEY, "true");
+    } else {
+      window.localStorage.removeItem(TERMS_ACCEPTANCE_KEY);
+    }
+  }
+
   return (
-    <a
-      href="/api/auth/google/login"
-      className="inline-flex w-full items-center justify-center gap-3 rounded-lg bg-white px-5 py-3 font-medium text-[#1f1f1f] shadow-sm transition-opacity hover:opacity-90"
-    >
-      <GoogleGlyph />
-      <span className="text-sm">Continue with Google</span>
-    </a>
+    <div className="text-left">
+      <div
+        className="mb-5 space-y-3 rounded-lg border p-4 text-xs leading-relaxed"
+        style={{
+          borderColor: "var(--color-bg-border)",
+          background: "rgba(0,0,0,0.2)",
+          color: "var(--color-text-secondary)",
+        }}
+      >
+        <p>
+          When using this site, you agree to our{" "}
+          <Link
+            href="/terms-of-use"
+            className="underline underline-offset-2"
+            style={{ color: "var(--color-accent-arcane)" }}
+          >
+            Terms of Service
+          </Link>
+          :
+        </p>
+        <p>
+          Users are granted a limited license to view, download, and print materials for
+          personal, non-commercial tabletop gaming use only.
+        </p>
+        <p>
+          Users are strictly prohibited from republishing, selling, licensing, or
+          commercially distributing any text, imagery, or files from the site.
+        </p>
+        <p>
+          Any commercial exploitation will result in immediate termination of access and
+          potential legal action.
+        </p>
+      </div>
+
+      <label className="mb-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed">
+        <input
+          type="checkbox"
+          checked={termsAccepted}
+          onChange={(event) => updateTermsAcceptance(event.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[#8b5cf6]"
+        />
+        <span style={{ color: "var(--color-text-secondary)" }}>
+          I have read and agree to the Terms of Service.
+        </span>
+      </label>
+
+      {termsAccepted ? (
+        <a
+          href={href}
+          className={`${buttonClasses} bg-white text-[#1f1f1f] hover:opacity-90`}
+        >
+          <GoogleGlyph />
+          <span className="text-sm">Continue with Google</span>
+        </a>
+      ) : (
+        <button
+          type="button"
+          disabled
+          className={`${buttonClasses} cursor-not-allowed bg-white text-[#1f1f1f] opacity-45`}
+        >
+          <GoogleGlyph />
+          <span className="text-sm">Continue with Google</span>
+        </button>
+      )}
+    </div>
   );
 }
 

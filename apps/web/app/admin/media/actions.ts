@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import { requireAdmin } from "@/lib/adminAuth";
 
-const PUBLIC_IMAGES = path.join(process.cwd(), "public/images");
+const IMAGES_ROOT = path.join(process.cwd(), "media/images");
 
 const ALLOWED_EXTENSIONS = new Set([
   ".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".avif",
@@ -30,8 +30,8 @@ export async function uploadFilesAction(formData: FormData): Promise<{ uploaded:
   const errors: string[] = [];
 
   const targetDir = subfolder
-    ? path.join(PUBLIC_IMAGES, sanitizeFilename(subfolder.replace(/^\/+/, "")))
-    : PUBLIC_IMAGES;
+    ? path.join(IMAGES_ROOT, sanitizeFilename(subfolder.replace(/^\/+/, "")))
+    : IMAGES_ROOT;
 
   fs.mkdirSync(targetDir, { recursive: true });
 
@@ -50,7 +50,7 @@ export async function uploadFilesAction(formData: FormData): Promise<{ uploaded:
     const buffer = Buffer.from(await file.arrayBuffer());
     fs.writeFileSync(dest, buffer);
 
-    const relativePath = "/images/" + (subfolder ? subfolder.replace(/^\/+/, "") + "/" : "") + safe;
+    const relativePath = "/media/images/" + (subfolder ? subfolder.replace(/^\/+/, "") + "/" : "") + safe;
     uploaded.push(relativePath);
   }
 
@@ -61,11 +61,11 @@ export async function deleteMediaAction(formData: FormData): Promise<void> {
   await requireAdmin();
 
   const filePath = formData.get("filePath") as string;
-  if (!filePath || !filePath.startsWith("/images/")) return;
+  if (!filePath || !filePath.startsWith("/media/images/")) return;
 
   const abs = path.join(process.cwd(), "public", filePath);
-  // ensure the resolved path is still inside public/images
-  if (!abs.startsWith(PUBLIC_IMAGES)) return;
+  // ensure the resolved path is still inside media/images
+  if (!abs.startsWith(IMAGES_ROOT)) return;
 
   try {
     fs.unlinkSync(abs);

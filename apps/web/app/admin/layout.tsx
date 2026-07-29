@@ -7,8 +7,10 @@ import { logoutAction } from "./login/actions";
 
 const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/store", label: "Store" },
   { href: "/admin/analytics", label: "Usage & Connections" },
-  { href: "/admin/voice-assistant", label: "Voice Assistant" },
+  { href: "/admin/voice-assistant", label: "Myra" },
+  { href: "/admin/pronunciations", label: "Pronunciations" },
   { href: "/admin/security", label: "Security" },
   { href: "/admin/chronicles", label: "Chronicles" },
   { href: "/admin/map-editor", label: "Map Editor" },

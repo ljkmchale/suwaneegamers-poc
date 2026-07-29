@@ -108,9 +108,10 @@ Defined in `apps/web/lib/pageBlocks.ts` (client-safe, no fs). Rendered by `compo
 
 1. `BlockType` union in `lib/pageBlocks.ts` → 2. `ASSET_TYPES` entry → 3. render case in `BlockRenderer.tsx` → 4. `DraftBlock` preview case in `PageEditOverlay.tsx` → 5. `ALL_BLOCK_TYPES` in `__tests__/pageBlocks.test.ts`.
 
-## Image Assets — `apps/web/public/images/`
+## Image Assets — `apps/web/media/images/`
 
-All paths below are referenced from content JSON as `/images/...`.
+All paths below are referenced from content JSON as `/media/images/...` and served
+by the `app/media/images/[...segments]` route handler, not as static public files.
 
 | Directory | Count | Used by |
 |---|---|---|
@@ -128,7 +129,7 @@ All paths below are referenced from content JSON as `/images/...`.
 | `references-sourcebooks/` | 15 | `adventure-*` (6) and `tool-*` (8) card images + overview, for /references |
 | `generated/` | 15 | Derived variants: `*-card.webp` DM cards, `*-desktop/portrait/wide.webp` dragon banners (built by `scripts/prepare-images.mjs`) |
 
-Conventions: webp preferred; kebab-case names matching the content id/slug they belong to. Media uploads via `/admin/media` land in `public/images/`.
+Conventions: webp preferred; kebab-case names matching the content id/slug they belong to. Media uploads via `/admin/media` land in `media/images/`.
 
 ## Styling / Theme
 
@@ -137,7 +138,7 @@ Design tokens are CSS custom properties in `app/globals.css`, overridable via `c
 
 ## Scripts — `scripts/`
 
-- `prepare-images.mjs` — builds `public/images/generated/` variants
+- `prepare-images.mjs` — builds `media/images/generated/` variants
 - `fill-session-summaries.mjs` — one-off (2026-06-10): imported session summaries from the Google Site into `campaigns.json` + the saved campaign layouts
 - `setup-windows.md`, `deploy-windows.ps1` — Windows host setup/deploy
 

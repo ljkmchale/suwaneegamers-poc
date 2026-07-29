@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { readContent, writeContent } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
+import { hasCachedImage, saveOptimizedImage } from "./lib-image-cache.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -31,7 +32,7 @@ const driveFolderUrl = configuredDriveFolderUrl(
   "https://drive.google.com/drive/folders/14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI",
 );
 const driveFolderId = folderIdFromUrl(driveFolderUrl) ?? "14mCaYtQov1JyQASn9HQ82PeoMI8y1ylI";
-const imageDir = path.join(root, "apps", "web", "public", "images", "pantheon");
+const imageDir = path.join(root, "apps", "web", "media", "images", "pantheon");
 
 const driveNameAliases = new Map([
   ["valari", "villari"],
@@ -73,7 +74,7 @@ function getSymbolName(title) {
   return title.split(" - Symbol ")[0]?.trim() ?? title;
 }
 
-async function tryDownloadPng(fileId, destination) {
+async function tryDownloadPngBytes(fileId) {
   try {
     await driveDownloadDelay();
     const bytes = await downloadDriveFile(fileId);
@@ -82,11 +83,10 @@ async function tryDownloadPng(fileId, destination) {
       && bytes[2] === 0x4e && bytes[3] === 0x47
       && bytes[4] === 0x0d && bytes[5] === 0x0a
       && bytes[6] === 0x1a && bytes[7] === 0x0a;
-    if (!isPng) return false;
-    fs.writeFileSync(destination, bytes);
-    return true;
+    if (!isPng) return null;
+    return bytes;
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -115,26 +115,37 @@ for (const block of deityBlocks) {
     continue;
   }
 
-  const filename = `${slugify(deityName)}-symbol.png`;
-  const destination = path.join(imageDir, filename);
+  const basename = `${slugify(deityName)}-symbol`;
+  const legacyPng = path.join(imageDir, `${basename}.png`);
 
   // Drive's abuse limiter slow-403s bulk API-key downloads, so skip files
-  // whose cached copy already matches the size Drive reports in the listing.
-  const upToDate = symbol.size > 0
-    && fs.existsSync(destination)
-    && fs.statSync(destination).size === symbol.size;
-  const downloaded = upToDate || await tryDownloadPng(symbol.id, destination);
+  // whose cached copy was built from the size Drive reports in the listing
+  // (tracked in the directory manifest — cached files are re-encoded WebP).
+  let filename = null;
+  if (hasCachedImage(imageDir, basename, symbol.size)) {
+    filename = `${basename}.webp`;
+  } else if (symbol.size > 0 && fs.existsSync(legacyPng) && fs.statSync(legacyPng).size === symbol.size) {
+    // legacy raw-PNG cache still matches Drive: re-encode locally, no download
+    filename = await saveOptimizedImage(imageDir, basename, fs.readFileSync(legacyPng), symbol.size);
+  } else {
+    const bytes = await tryDownloadPngBytes(symbol.id);
+    if (bytes) filename = await saveOptimizedImage(imageDir, basename, bytes, symbol.size);
+  }
+  const downloaded = Boolean(filename);
 
-  // Resolve image path: prefer the downloaded PNG, then an already-cached local PNG,
-  // then the webp fallback, then the PNG path as a last resort.
+  // Resolve image path: prefer the cached symbol, then an already-present
+  // local copy, then the webp fallback, then the symbol path as a last resort.
   const fallbackSlug = localImageAliases.get(canonicalNorm(deityName)) ?? slugify(deityName);
   const fallbackFilename = `${fallbackSlug}.webp`;
   const fallbackPath = path.join(imageDir, fallbackFilename);
-  const imagePath = downloaded || fs.existsSync(destination)
+  const localCopy = ["webp", "png"].find((ext) => fs.existsSync(path.join(imageDir, `${basename}.${ext}`)));
+  const imagePath = downloaded
     ? `/images/pantheon/${filename}`
-    : fs.existsSync(fallbackPath)
-      ? `/images/pantheon/${fallbackFilename}`
-      : `/images/pantheon/${filename}`;
+    : localCopy
+      ? `/images/pantheon/${basename}.${localCopy}`
+      : fs.existsSync(fallbackPath)
+        ? `/images/pantheon/${fallbackFilename}`
+        : `/images/pantheon/${basename}.webp`;
   if (block.props.image !== imagePath) {
     changes.push(`${deityName}: ${block.props.image ?? "(none)"} -> ${imagePath}`);
     block.props.image = imagePath;

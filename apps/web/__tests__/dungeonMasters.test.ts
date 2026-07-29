@@ -45,10 +45,10 @@ describe("getDungeonMasters — data shape", () => {
     }
   });
 
-  it("portrait paths start with /images/ when set", () => {
+  it("portrait paths start with /media/images/ when set", () => {
     for (const dm of getDungeonMasters()) {
       if (dm.portrait) {
-        expect(dm.portrait).toMatch(/^\/images\//);
+        expect(dm.portrait).toMatch(/^\/media\/images\//);
       }
     }
   });

@@ -18,7 +18,7 @@ export default function TerritoriesPage() {
       <div
         className="fixed inset-0 z-0 bg-cover bg-center"
         aria-hidden="true"
-        style={{ backgroundImage: 'url("/images/maps-of-myrdae/territories-map.webp")' }}
+        style={{ backgroundImage: 'url("/media/images/maps-of-myrdae/territories-map.webp")' }}
       />
       <div
         className="fixed inset-0 z-0"

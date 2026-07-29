@@ -20,7 +20,7 @@ export default function OrganizationsPage() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            'url("/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp")',
+            'url("/media/images/guides-to-myrdae/reference-cards/campaign-setting-factions.webp")',
         }}
       />
       <div
