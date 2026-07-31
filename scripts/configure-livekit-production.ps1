@@ -56,6 +56,12 @@ $turnReady =
   (Test-Path -LiteralPath $turnKey)
 $turnEnabled = $turnReady.ToString().ToLowerInvariant()
 
+# node_ip is pinned below, so it has to be the current public address.
+$publicAddress = (Invoke-RestMethod -Uri "https://api.ipify.org?format=json" -TimeoutSec 30).ip
+if (-not $publicAddress) {
+  throw "The public IP could not be determined; LiveKit node_ip cannot be pinned."
+}
+
 $config = @"
 port: 7880
 log_level: info
@@ -64,6 +70,29 @@ rtc:
   tcp_port: 7881
   udp_port: 7882
   use_external_ip: true
+  # STUN finds the public IP fine, but LiveKit then validates it by reaching
+  # itself through that address, which requires NAT hairpinning. The eero does
+  # not hairpin, so validation races the IPv6 STUN lookups and loses with
+  # "context canceled"; LiveKit then drops the public IP and advertises the
+  # private LAN address, leaving remote callers with no routable ICE candidate
+  # while the LAN keeps working. The race is nondeterministic, so this fails
+  # intermittently across restarts. Do not remove without restoring hairpin.
+  skip_external_ip_validation: true
+  # Clients MUST get a reachable STUN server. With TURN enabled LiveKit
+  # otherwise hands out only the two TURN URLs, and both need inbound to this
+  # house. An off-network client (especially on cellular CGNAT) then offers
+  # nothing but unroutable host candidates and ICE fails with "could not
+  # establish pc connection". This NAT is address/port-restricted, so the hole
+  # is punched by our outbound probe to the client's reflexive address -- with
+  # no STUN there is no reflexive address to probe.
+  stun_servers:
+    - stun.l.google.com:19302
+    - stun1.l.google.com:19302
+  # LiveKit builds its external-IP map concurrently and the ordering varies per
+  # start. When an IPv6 entry wins, the TURN relay finds no matching node IP and
+  # the server exits with "no matching node IP for relay". Pinning kills that
+  # race. Must track the public IP -- see update-livekit-turn-dns.ps1.
+  node_ip: ${publicAddress}
 
 keys:
   ${apiKey}: ${apiSecret}
