@@ -1,0 +1,87 @@
+{
+  "entries": [
+    {
+      "question": "But I'm not part of Dungeons 3.",
+      "category": "routing-correction",
+      "proposedCorrection": "Review this member correction and update the relevant profile or campaign routing rule before teaching an answer.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-e8dcbc3025ae5b43",
+      "normalized": "but i m not part of dungeons 3",
+      "status": "dismissed",
+      "createdAt": "2026-07-30T00:15:18.904Z",
+      "reviewedAt": "2026-07-30T00:24:06.170Z"
+    },
+    {
+      "question": "It's pronounced Dungeons 3 and it's not K-9 watch, it's Night Watch.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-a247f2747d12e87a",
+      "normalized": "it s pronounced dungeons 3 and it s not k 9 watch it s night watch",
+      "status": "dismissed",
+      "createdAt": "2026-07-30T00:15:18.902Z",
+      "reviewedAt": "2026-07-30T00:24:08.279Z"
+    },
+    {
+      "question": "It's not I don't play in that game. I only play in heroes of image grand the silent band guard and souls of destiny",
+      "category": "routing-correction",
+      "proposedCorrection": "Review this member correction and update the relevant profile or campaign routing rule before teaching an answer.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-6be3066508fc5648",
+      "normalized": "it s not i don t play in that game i only play in heroes of image grand the silent band guard and souls of destiny",
+      "status": "dismissed",
+      "createdAt": "2026-07-30T00:15:18.900Z",
+      "reviewedAt": "2026-07-30T00:24:12.891Z"
+    },
+    {
+      "question": "Hey Mara, what do you know about the gods?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-9b3893ac5f9d8e76",
+      "normalized": "hey mara what do you know about the gods",
+      "status": "approved",
+      "createdAt": "2026-07-30T00:15:18.896Z",
+      "reviewedAt": "2026-07-30T00:24:17.840Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-07-30T00:33:00.000Z"
+      }
+    },
+    {
+      "question": "Devira is a god.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-7714ded27d6af9b4",
+      "normalized": "devira is a god",
+      "status": "dismissed",
+      "createdAt": "2026-07-30T00:15:18.890Z",
+      "reviewedAt": "2026-07-30T00:24:20.346Z"
+    }
+  ],
+  "updatedAt": "2026-07-30T00:24:20.346Z"
+}

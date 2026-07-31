@@ -8,6 +8,7 @@ import {
 import {
   getAssistantAbout,
   getAssistantBrain,
+  getAssistantMishearings,
   getAssistantPronunciations,
   getAssistantRecaps,
 } from "@/lib/assistantBrain";
@@ -22,6 +23,18 @@ import { getUserProfileContext } from "@/lib/userProfiles";
 import { isStorefrontEnabled } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
+
+/** Bound and validate the browser-supplied page context before it reaches the agent. */
+function sanitizePageContext(raw: unknown): { path: string; title: string; subject: string } | null {
+  if (!raw || typeof raw !== "object") return null;
+  const candidate = raw as { path?: unknown; title?: unknown; subject?: unknown };
+  const text = (value: unknown, max: number) =>
+    typeof value === "string" ? value.replace(/\s+/g, " ").trim().slice(0, max) : "";
+  const path = text(candidate.path, 200);
+  // Internal absolute paths only — never a protocol-relative or external URL.
+  if (!path.startsWith("/") || path.startsWith("//")) return null;
+  return { path, title: text(candidate.title, 120), subject: text(candidate.subject, 120) };
+}
 
 const requestsByAddress = new Map<string, { count: number; resetAt: number }>();
 const WINDOW_MS = 60_000;
@@ -90,11 +103,17 @@ export async function POST(request: NextRequest) {
   try {
     const requestBody = (await request.json().catch(() => ({}))) as {
       welcomeKind?: unknown;
+      page?: unknown;
     };
     const welcomeKind =
       requestBody.welcomeKind === "new" || requestBody.welcomeKind === "returning"
         ? requestBody.welcomeKind
         : "none";
+    // Which page the visitor had open when they tapped the mic, so "tell me
+    // about this" works on the very first question. Only an internal absolute
+    // path is accepted — the agent renders this into its prompt, so it is
+    // untrusted browser input and is bounded and validated here as well.
+    const page = sanitizePageContext(requestBody.page);
     const userProfile = getUserProfileContext(userSession);
     // How Myra sounds and behaves for this member: their chosen persona, or the
     // one that names them, or the house default.
@@ -138,6 +157,7 @@ export async function POST(request: NextRequest) {
       memberName,
       welcomeKind,
       persona,
+      page,
       userProfile: {
         displayName: userProfile.profile.displayName,
         playerName: userProfile.profile.playerName ?? "",
@@ -150,6 +170,7 @@ export async function POST(request: NextRequest) {
       aboutSuwaneeGamers: getAssistantAbout(),
       knowledge: getAssistantBrain(),
       pronunciations: getAssistantPronunciations(),
+      mishearings: getAssistantMishearings(),
       recaps: getAssistantRecaps(),
       faq: getLearnedFaqForAgent(),
       tuning: assistantTuningForAgent(),

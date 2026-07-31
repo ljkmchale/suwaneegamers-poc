@@ -6,6 +6,12 @@ node_modules/
 # Next.js
 apps/web/.next/
 apps/web/.next-prod/
+# A/B deployment slots and their local state pointers. These are build output
+# (~500MB each) plus machine-specific "which slot is live" markers, so they are
+# never source. Only .next-prod/ was ignored before the A/B rollout, which left
+# ~2.5GB of bundles staged for commit into a public repo.
+apps/web/.next-prod-*
+apps/web/.next-prod.incomplete-*
 apps/web/out/
 apps/web/media/session-audio/
 

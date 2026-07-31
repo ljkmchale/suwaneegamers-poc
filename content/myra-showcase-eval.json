@@ -1,0 +1,133 @@
+[
+  {
+    "category": "first-impression",
+    "mode": "brain",
+    "question": "What is Suwanee Gamers?",
+    "mustInclude": ["local tabletop RPG", "Myrdae"]
+  },
+  {
+    "category": "site-guidance",
+    "mode": "brain",
+    "question": "Where can I learn about settlements?",
+    "mustInclude": ["Settlements and local references", "/gazetteer"]
+  },
+  {
+    "category": "site-guidance",
+    "mode": "brain",
+    "question": "Where can I read about the gods?",
+    "mustInclude": ["Gods and religion", "/pantheon"]
+  },
+  {
+    "category": "site-guidance",
+    "mode": "brain",
+    "question": "Where are the maps?",
+    "mustInclude": ["Map", "/maps-of-myrdae"]
+  },
+  {
+    "category": "campaign",
+    "mode": "brain",
+    "question": "What is Heroes of Emberstran about?",
+    "mustInclude": ["Heroes of Emberstran", "Mount Emberstran", "ancient danger"]
+  },
+  {
+    "category": "campaign",
+    "mode": "brain",
+    "question": "Who runs Souls of Destiny?",
+    "mustInclude": ["Souls of Destiny", "DM Sean Poole"]
+  },
+  {
+    "category": "pantheon",
+    "mode": "knowledge",
+    "question": "What are Diverra's commandments?",
+    "mustInclude": ["Diverra", "love", "beauty"],
+    "sourceIncludes": ["Pantheon of Myrdae"]
+  },
+  {
+    "category": "pantheon",
+    "mode": "knowledge",
+    "question": "Who are the Old Gods of Myrdae?",
+    "mustInclude": ["Athuel", "Bellum", "Disgar"],
+    "sourceIncludes": ["Pantheon of Myrdae"]
+  },
+  {
+    "category": "gazetteer",
+    "mode": "knowledge",
+    "question": "Tell me about Nunglthil.",
+    "mustInclude": ["neutral", "Underdark", "Rothenloch"],
+    "sourceIncludes": ["Nunglthil"]
+  },
+  {
+    "category": "gazetteer",
+    "mode": "knowledge",
+    "question": "What routes connect to Emberstran?",
+    "mustInclude": ["Adamont", "Ahndashere", "Ulgrey"],
+    "sourceIncludes": ["Emberstran"]
+  },
+  {
+    "category": "character",
+    "mode": "knowledge",
+    "question": "Who is Aurelius in Heroes of Emberstran?",
+    "mustInclude": ["Aurelius", "Diverra"],
+    "mustNotInclude": ["not documented"]
+  },
+  {
+    "category": "character",
+    "mode": "knowledge",
+    "question": "Who is Kenton in Souls of Destiny?",
+    "mustInclude": ["Kenton"],
+    "mustNotInclude": ["not documented"]
+  },
+  {
+    "category": "sessions",
+    "mode": "knowledge",
+    "question": "What is the latest Heroes of Emberstran session?",
+    "mustInclude": ["Session 25"],
+    "mustNotInclude": ["not documented"]
+  },
+  {
+    "category": "quests",
+    "mode": "knowledge",
+    "question": "What threads are still open in Souls of Destiny?",
+    "mustInclude": ["Open threads"],
+    "mustNotInclude": ["not documented"]
+  },
+  {
+    "category": "world-lore",
+    "mode": "knowledge",
+    "question": "What was the Awakening in Myrdae?",
+    "mustInclude": ["Awakening"],
+    "mustNotInclude": ["not documented"]
+  },
+  {
+    "category": "speech",
+    "mode": "speech",
+    "question": "Whisper heard Diveria",
+    "map": "mishearings",
+    "heard": "Diveria",
+    "canonical": "Diverra"
+  },
+  {
+    "category": "speech",
+    "mode": "speech",
+    "question": "Whisper heard Mirdi",
+    "map": "mishearings",
+    "heard": "Mirdi",
+    "canonical": "Myrdae"
+  },
+  {
+    "category": "speech",
+    "mode": "speech",
+    "question": "Myra says Myrdae correctly",
+    "map": "pronunciations",
+    "heard": "Myrdae",
+    "canonical": "meer -day"
+  },
+  {
+    "category": "honesty",
+    "mode": "knowledge",
+    "question": "Who is Captain Definitely-Not-A-Real-Person in Heroes of Emberstran?",
+    "mustIncludeAny": ["not documented", "do not have", "could not find", "don't have"],
+    "mustNotInclude": ["Sources used:"],
+    "expectSources": false
+  }
+]

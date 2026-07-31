@@ -3,6 +3,9 @@ import path from "node:path";
 import { brainConfig } from "./config";
 
 const TTL_MS = 7 * 24 * 60 * 60 * 1000;
+// Increment whenever routing or answer-selection semantics change. Otherwise a
+// corrected query can keep serving its old seven-day answer after deployment.
+const QUERY_CACHE_VERSION = "v4";
 const EXCLUDED_SOURCE_PATHS = new Set(["log.md"]);
 
 interface CacheEntry {
@@ -58,7 +61,7 @@ function cacheKey(question: string, options: { campaign?: string; visibility?: s
   const campaign = String(options.campaign ?? "All");
   const visibility = String(options.visibility ?? "players");
   const normalized = String(question).trim().toLowerCase().replace(/\s+/g, " ");
-  return `${normalized}|${campaign}|${visibility}`;
+  return `${QUERY_CACHE_VERSION}|${normalized}|${campaign}|${visibility}`;
 }
 
 async function indexMtime(): Promise<number> {

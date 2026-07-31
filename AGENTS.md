@@ -6,7 +6,11 @@ Use this as the fast orientation file before editing this repo.
 
 - Dev server: `pnpm dev`, `http://localhost:3000`, normal `.next`.
 - Production service: Windows NSSM service `SuwaneeGamers`, port `4652`, serves `apps/web/.next-prod`.
-- Production build: `pnpm --filter web build:prod` or `scripts/deploy-prod.ps1`.
+- Production build: `pnpm --filter web build:prod` builds the inactive
+  immutable `.next-prod-a` or `.next-prod-b` slot. `scripts/restart-and-verify.ps1`
+  stops the service and switches `.next-prod-active.json` to the completed
+  slot. It never renames a compiled Next.js directory. `scripts/deploy-prod.ps1`
+  performs both.
 - Plain `pnpm build` updates `.next` only. It does not update production.
 - Restart production from an elevated PowerShell prompt:
 
@@ -14,7 +18,9 @@ Use this as the fast orientation file before editing this repo.
 C:\EaselLocal\nssm.exe restart SuwaneeGamers
 ```
 
-If production still shows old UI after a code change, check that `.next-prod` was rebuilt and the NSSM service restarted.
+If production still shows old UI after a code change, inspect
+`.next-prod-ready.json` and `.next-prod-active.json`. Never rename a compiled
+Next.js directory: its generated server files embed the original distDir.
 
 ## Content Data
 

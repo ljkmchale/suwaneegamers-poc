@@ -7,7 +7,8 @@
 //   content/assistant-brain.md
 //     - A hand-editable curated intro (anything OUTSIDE the AUTO markers).
 //     - An auto-generated facts block (BETWEEN the markers) rebuilt from
-//       campaigns.json, dungeon-masters.json, and portal-links.json.
+//       campaigns.json, dungeon-masters.json, portal-links.json, nav.json,
+//       auto-managed-pages.json, and the player-safe Chronicles wiki.
 //
 // The Next.js LiveKit token route reads this file and ships it to the agent in
 // the dispatch metadata. Run manually:
@@ -40,8 +41,9 @@ group. The group plays in the shared homebrew world of **Myrdae**. This website 
 lightweight doorway: it surfaces the game calendar, the active campaigns, the Dungeon
 Masters and players, and links out to the group's tools.
 
-All canonical lore, character histories, and session records live in **Chronicles** at
-kb.suwaneegamers.net — point people there for deep world or story questions.
+All canonical player-safe lore, character histories, and session records live in
+**Chronicles**. Use this file as the compact index that identifies the right source,
+then retrieve the detailed answer from Chronicles instead of guessing.
 
 ## How to help visitors
 
@@ -49,13 +51,27 @@ kb.suwaneegamers.net — point people there for deep world or story questions.
   is the source of truth (handled separately). Answer from the live calendar, not from here.
 - For "what is this site", "who are the DMs", "what campaigns are there", "where's the lore",
   answer from the facts below.
-- If something isn't covered here, say so briefly and point them to the relevant part of the
-  site or to Chronicles. Never invent campaigns, people, dates, or links.
+- A named god, character, NPC, settlement, faction, item, quest, session, or lore topic
+  is a retrieval request. Search the player-safe Chronicles knowledge base before saying
+  it is unknown.
+- Keep campaign histories isolated. Shared Myrdae world lore can apply across campaigns,
+  but campaign events and secrets stay attributed to their own campaign.
+- Never expose DM-only material on the player-facing voice assistant.
+- If the indexed player-safe sources do not cover something, say so briefly and point to
+  the relevant site page. Never invent campaigns, people, dates, lore, or links.
 `;
 
 function readJson(name) {
   const filePath = path.join(contentRoot, name);
   return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+}
+
+function readJsonIfPresent(name, fallback) {
+  try {
+    return readJson(name);
+  } catch {
+    return fallback;
+  }
 }
 
 function firstSentence(text) {
@@ -69,6 +85,8 @@ function buildAutoBlock() {
   const campaigns = readJson("campaigns.json");
   const dms = readJson("dungeon-masters.json");
   const links = readJson("portal-links.json");
+  const nav = readJsonIfPresent("nav.json", { sections: [] });
+  const managedPages = readJsonIfPresent("auto-managed-pages.json", []);
 
   const campaignNameById = new Map(campaigns.map((c) => [c.id, c.name]));
   const official = campaigns.filter((c) => c.official);
@@ -116,6 +134,53 @@ function buildAutoBlock() {
     if (!link?.title || !link?.href) continue;
     const desc = link.description ? ` — ${firstSentence(link.description)}` : "";
     lines.push(`- ${link.title}: ${link.href}${desc}`);
+  }
+  lines.push("");
+
+  lines.push("## Knowledge directory");
+  lines.push("");
+  lines.push(
+    "Use this as a routing index, not as a substitute for the source. Answer a quick fact from this file; for details, search the player-safe Chronicles knowledge base and direct the visitor to the matching site page.",
+  );
+  lines.push("");
+  lines.push("- **Campaigns and session history**: search Chronicles by campaign; site page `/campaigns`.");
+  lines.push("- **Characters, NPCs, factions, items, quests, and open threads**: search Chronicles; site page `/chronicles`.");
+  lines.push("- **Gods and religion**: use the Pantheon roster for names, titles, and domains; search Chronicles for a specific deity's rites, commandments, myths, faith, or campaign connections; site page `/pantheon`.");
+  lines.push("- **Settlements and local references**: search Chronicles and Gazetteer sources; site page `/gazetteer`.");
+  lines.push("- **Territories, regions, and travel context**: search Chronicles; site pages `/territories`, `/maps-of-myrdae`, and `/campaign-journeys`.");
+  lines.push("- **History, legends, and world lore**: search Chronicles; site pages `/history` and `/lore`.");
+  lines.push("- **Organizations and factions**: search Chronicles; site page `/organizations`.");
+  lines.push("- **Bestiary and creatures**: use the site content and search Chronicles; site page `/bestiary`.");
+  lines.push("- **Current dates and game times**: use the live calendar context, never the wiki; site page `/calendar`.");
+  lines.push("- **Site navigation or where to find something**: use the site page directory below.");
+  lines.push("");
+
+  lines.push("## Site page directory");
+  lines.push("");
+  const navItems = (nav.sections ?? []).flatMap((section) => section.items ?? []);
+  const uniqueNavItems = navItems.filter(
+    (item, index, items) =>
+      item?.label &&
+      item?.href?.startsWith("/") &&
+      items.findIndex((candidate) => candidate.href === item.href) === index,
+  );
+  for (const item of uniqueNavItems) {
+    lines.push(`- ${item.label}: ${item.href}`);
+  }
+  lines.push("");
+
+  lines.push("## Authoritative content sources");
+  lines.push("");
+  for (const page of managedPages) {
+    if (!page?.path || !page?.label || page.path.startsWith("/_")) continue;
+    const supporting = (page.managedSources ?? [])
+      .map((source) => source.label)
+      .filter(Boolean)
+      .slice(0, 3);
+    const sourceLabel = supporting.length
+      ? supporting.join("; ")
+      : page.sourceName || "site-managed content";
+    lines.push(`- ${page.label} (${page.path}): ${sourceLabel}.`);
   }
 
   return lines.join("\n").trim();

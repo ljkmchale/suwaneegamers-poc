@@ -13,11 +13,10 @@ import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import Database from "better-sqlite3";
+import { getDb } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentPath = path.join(root, "content", "campaign-journeys.json");
-const dbPath = path.join(root, "content", "suwaneegamers.db");
 const mapApi =
   process.env.MYRDAE_MAP_API ??
   "https://mapeditor.suwaneegamers.net/api/world-data";
@@ -988,8 +987,7 @@ function writeJourneyDocument(db, document) {
 }
 
 async function main() {
-  const db = new Database(dbPath);
-  db.pragma("journal_mode = WAL");
+  const db = getDb();
   const document = readJourneyDocument(db);
   const { world, source } = await fetchWorld();
   const locations = dedupeLocations([

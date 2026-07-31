@@ -19,6 +19,8 @@
     "content:sync-documents": "node scripts/sync-content-documents.mjs",
     "content:build-assistant-brain": "node scripts/build-assistant-brain.mjs",
     "content:autotune-assistant": "cd apps/web && npx tsx scripts/autotune-assistant.ts",
+    "eval:myra-showcase": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/evaluate-myra-showcase.ps1",
+    "restart:all": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/restart-and-verify.ps1",
     "voice:restart-agent": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/restart-voice-agent.ps1",
     "lint": "pnpm --filter web lint",
     "typecheck": "pnpm --filter web typecheck",

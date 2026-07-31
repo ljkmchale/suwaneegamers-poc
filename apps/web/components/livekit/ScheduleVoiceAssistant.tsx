@@ -186,6 +186,26 @@ function AssistantRoom({
     [router],
   );
   useDataChannel("myra.ui_action", handleUiAction);
+
+  // Keep Myra pointed at whatever the visitor is looking at. Fires on connect
+  // and on every navigation — including the ones Myra performs herself via
+  // open_site_page, so "tell me more about this" works right after she opens
+  // something. Best effort: if the publish fails, she still has the page that
+  // rode in with the connection token.
+  const pathname = usePathname();
+  useEffect(() => {
+    const participant = room?.localParticipant;
+    if (!participant) return;
+    const payload = JSON.stringify({ path: pathname, title: document.title });
+    void participant
+      .publishData(new TextEncoder().encode(payload), {
+        reliable: true,
+        topic: "myra.page_context",
+      })
+      .catch(() => {
+        // Non-fatal: page context is an enhancement, not required for a turn.
+      });
+  }, [room, pathname]);
   const stateLabel =
     state === "listening"
       ? "Listening"
@@ -344,14 +364,10 @@ export function ScheduleVoiceAssistant({
   const [connection, setConnection] = useState<ConnectionDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [autoWelcomeKind, setAutoWelcomeKind] = useState<"new" | "returning" | "none">("none");
-  const autoWelcomeStartedRef = useRef(false);
 
   useLayoutEffect(() => {
     if (window.sessionStorage.getItem("sg-myra-welcomed")) return;
     welcomeKindRef.current = isNewVisitor ? "new" : "returning";
-    setAutoWelcomeKind(welcomeKindRef.current);
-    window.sessionStorage.setItem("sg-myra-welcomed", "1");
   }, [isNewVisitor]);
 
   function finishConversation() {
@@ -367,6 +383,13 @@ export function ScheduleVoiceAssistant({
   }
 
   async function handleRoomError(roomError: Error) {
+    if (
+      roomError.name === "NotAllowedError" ||
+      /permission|not allowed by the user agent|not allowed by the platform/i.test(roomError.message)
+    ) {
+      setError("Myra needs microphone permission. Tap Myra again and choose Allow.");
+      return;
+    }
     if (
       roomError.message.toLowerCase().includes("requested device not found") &&
       navigator.mediaDevices?.enumerateDevices
@@ -394,22 +417,6 @@ export function ScheduleVoiceAssistant({
     return () => window.removeEventListener("pagehide", finishOnExit);
   }, [connection]);
 
-  useEffect(() => {
-    if (
-      autoWelcomeKind === "none" ||
-      autoWelcomeStartedRef.current ||
-      !enabled ||
-      !configured ||
-      hiddenOnCurrentPage
-    ) {
-      return;
-    }
-    autoWelcomeStartedRef.current = true;
-    void startConversation();
-    // This intentionally runs once for the welcome kind selected at first mount.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoWelcomeKind, configured, enabled, hiddenOnCurrentPage]);
-
   if (!enabled || hiddenOnCurrentPage) {
     return null;
   }
@@ -419,18 +426,41 @@ export function ScheduleVoiceAssistant({
     setError(null);
 
     try {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error("This browser does not provide microphone access for Myra.");
+      }
+      // Ask while this function is running from the visitor's tap. New mobile
+      // and external browsers reject an automatic page-load microphone request,
+      // even when the same browser was previously allowed on the home network.
+      const permissionStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      permissionStream.getTracks().forEach((track) => track.stop());
+
       const response = await fetch("/api/livekit/token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ welcomeKind: welcomeKindRef.current }),
+        body: JSON.stringify({
+          welcomeKind: welcomeKindRef.current,
+          // The page they were on when they tapped the mic, so the very first
+          // question can be about it. Navigation after this point is sent over
+          // the myra.page_context data channel instead.
+          page: { path: pathname, title: document.title },
+        }),
       });
       const payload = (await response.json()) as ConnectionDetails & { error?: string };
       if (!response.ok) {
         throw new Error(payload.error ?? "Myra is unavailable.");
       }
+      window.sessionStorage.setItem("sg-myra-welcomed", "1");
       setConnection(payload);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Myra is unavailable.");
+      if (
+        caught instanceof DOMException &&
+        (caught.name === "NotAllowedError" || caught.name === "SecurityError")
+      ) {
+        setError("Myra needs microphone permission. Tap Myra again and choose Allow.");
+      } else {
+        setError(caught instanceof Error ? caught.message : "Myra is unavailable.");
+      }
     } finally {
       setLoading(false);
     }

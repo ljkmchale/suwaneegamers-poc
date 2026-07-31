@@ -14,6 +14,12 @@ export function getDb(): Database.Database {
   const db = new Database(dbPath);
   db.pragma("journal_mode = WAL");
   db.pragma("foreign_keys = ON");
+  // Several processes write this file — the dev server, the prod service, and
+  // the sync scripts the scheduler spawns. WAL keeps readers unblocked, but
+  // writers still serialize, and a bulk sync (content-documents rewrites all
+  // 50+ rows in one transaction) can outlast better-sqlite3's 5s default.
+  // Keep this in step with scripts/sync-db.mjs.
+  db.pragma("busy_timeout = 15000");
   initializeSchema(db);
   migrateSchema(db);
   g.__sgDb = db;
@@ -164,6 +170,35 @@ function migrateSchema(db: Database.Database): void {
   if (!analyticsSessionColumns.has("visitor_id")) {
     db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_id TEXT`);
   }
+
+  // Records which model answered each voice question. Added when Myra moved
+  // from Ollama-only to Claude-with-Ollama-fallback: without it a fallback is
+  // invisible, because both paths write response_mode = 'llm'.
+  const voiceQuestionColumns = new Set(
+    (db.prepare(`PRAGMA table_info(voice_questions)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!voiceQuestionColumns.has("model")) {
+    db.exec(`ALTER TABLE voice_questions ADD COLUMN model TEXT`);
+  }
+
+  // Provider usage attached to each LLM timing event. Keeping this on the same
+  // row makes latency, tokens, model selection, and estimated cost auditable
+  // without trying to join two asynchronous event streams.
+  const voiceMetricColumns = new Set(
+    (db.prepare(`PRAGMA table_info(voice_metrics)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  const addVoiceMetricColumn = (name: string, type: string) => {
+    if (!voiceMetricColumns.has(name)) {
+      db.exec(`ALTER TABLE voice_metrics ADD COLUMN ${name} ${type}`);
+    }
+  };
+  addVoiceMetricColumn("provider", "TEXT");
+  addVoiceMetricColumn("model", "TEXT");
+  addVoiceMetricColumn("input_tokens", "INTEGER");
+  addVoiceMetricColumn("output_tokens", "INTEGER");
+  addVoiceMetricColumn("cache_read_tokens", "INTEGER");
+  addVoiceMetricColumn("cache_creation_tokens", "INTEGER");
+  addVoiceMetricColumn("estimated_cost_microusd", "INTEGER");
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_analytics_sessions_visitor
       ON analytics_sessions(visitor_id, last_seen_at DESC);
@@ -173,6 +208,8 @@ function migrateSchema(db: Database.Database): void {
       ON analytics_events(session_id, created_at DESC);
     CREATE UNIQUE INDEX IF NOT EXISTS idx_user_profiles_email
       ON user_profiles(email);
+    CREATE INDEX IF NOT EXISTS idx_voice_metrics_provider_created
+      ON voice_metrics(provider, created_at DESC);
   `);
 }
 
@@ -528,6 +565,11 @@ function initializeSchema(db: Database.Database): void {
       answer         TEXT,
       category       TEXT NOT NULL,
       response_mode  TEXT NOT NULL,
+      -- Which language model actually answered ("claude" / "ollama"), so a
+      -- silent fallback to the local model is visible instead of both paths
+      -- looking identical under response_mode = 'llm'. Null for deterministic
+      -- answers, which never reach a model at all.
+      model          TEXT,
       response_ms    INTEGER,
       success        INTEGER NOT NULL DEFAULT 1,
       error_message  TEXT
@@ -548,6 +590,13 @@ function initializeSchema(db: Database.Database): void {
       kind          TEXT NOT NULL,
       value_ms      INTEGER,
       cached_tokens INTEGER,
+      provider      TEXT,
+      model         TEXT,
+      input_tokens  INTEGER,
+      output_tokens INTEGER,
+      cache_read_tokens INTEGER,
+      cache_creation_tokens INTEGER,
+      estimated_cost_microusd INTEGER,
       created_at    TEXT NOT NULL
     );
 

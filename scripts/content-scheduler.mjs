@@ -6,13 +6,12 @@
 // Production:
 //   apps/web/scripts/start-prod.js starts this beside Next unless
 //   SUWANEE_CONTENT_SCHEDULER=0 is set.
-import Database from "better-sqlite3";
 import { spawn } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getDb, pruneExpired } from "./sync-db.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const dbPath = path.join(root, "content", "suwaneegamers.db");
 const pollMs = Number(process.env.SUWANEE_SCHEDULER_POLL_MS ?? 60_000);
 const once = process.argv.includes("--once");
 const runAll = process.argv.includes("--run-all");
@@ -586,18 +585,43 @@ async function runJob(db, job) {
   if (result.status === "succeeded") await revalidate(job.revalidatePaths);
 }
 
+// Run history carries stdout_tail/stderr_tail, so rows are ~1.2KB each and the
+// table outweighs everything except analytics within a couple of months. A
+// month of history is more than anyone reads back.
+const RUN_RETENTION_DAYS = 30;
+const PRUNE_INTERVAL_MS = 24 * 60 * 60 * 1000;
+let lastRunPruneAt = 0;
+
+function pruneRunHistory(db) {
+  const now = Date.now();
+  if (now - lastRunPruneAt < PRUNE_INTERVAL_MS) return;
+  lastRunPruneAt = now;
+  try {
+    const deleted = pruneExpired(db, {
+      table: "content_sync_runs",
+      column: "started_at",
+      days: RUN_RETENTION_DAYS,
+    });
+    if (deleted > 0) {
+      console.log(`[${iso()}] Pruned ${deleted} content_sync_runs rows older than ${RUN_RETENTION_DAYS}d.`);
+    }
+  } catch (error) {
+    // Housekeeping must never stop the scheduler from running its jobs.
+    console.error(`[${iso()}] Run-history prune failed:`, error);
+  }
+}
+
 async function tick(db) {
   upsertJobs(db);
   reclaimStaleRunning(db);
+  pruneRunHistory(db);
   const pending = dueJobs(db);
   for (const job of pending) {
     await runJob(db, job);
   }
 }
 
-const db = new Database(dbPath);
-db.pragma("journal_mode = WAL");
-db.pragma("foreign_keys = ON");
+const db = getDb();
 ensureSchema(db);
 upsertJobs(db);
 

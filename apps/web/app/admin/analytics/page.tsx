@@ -45,6 +45,14 @@ function dateTime(value: string | null) {
   }).format(new Date(value));
 }
 
+function FirstTimeBadge() {
+  return (
+    <span className="inline-flex rounded-full border border-sky-800 bg-sky-950/40 px-2 py-0.5 font-sans text-[9px] uppercase tracking-wider text-sky-300">
+      First time
+    </span>
+  );
+}
+
 function statusClass(status: string | null) {
   if (status === "succeeded") return "border-emerald-900 text-emerald-300 bg-emerald-950/30";
   if (status === "running") return "border-amber-800 text-amber-300 bg-amber-950/30";
@@ -237,8 +245,13 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               <tbody>
                 {data.activeVisitors.map((visitor) => (
                   <tr key={visitor.visitor} className="border-t border-[#201927]">
-                    <td className="px-5 py-3 font-cinzel text-[10px] tracking-wider text-emerald-300">
-                      {visitor.visitor}
+                    <td className="px-5 py-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-cinzel text-[10px] tracking-wider text-emerald-300">
+                          {visitor.visitor}
+                        </span>
+                        {visitor.firstTimeVisitor ? <FirstTimeBadge /> : null}
+                      </div>
                     </td>
                     <td className="px-5 py-3 font-mono text-[#e8dfc8]">{visitor.currentPath}</td>
                     <td className="px-5 py-3 capitalize text-[#9080a0]">{visitor.deviceType}</td>
@@ -278,7 +291,12 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
             <tbody>
               {data.people.map((person) => (
                 <tr key={person.visitorKey} className="border-b border-[#201927] last:border-0">
-                  <td className="px-5 py-3 text-[#e8dfc8]">{person.name}</td>
+                  <td className="px-5 py-3 text-[#e8dfc8]">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span>{person.name}</span>
+                      {person.firstTimeVisitor ? <FirstTimeBadge /> : null}
+                    </div>
+                  </td>
                   <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email ?? "Identity not verified"}</td>
                   <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
                   <td className="px-5 py-3 text-right">{person.sessions}</td>
@@ -585,9 +603,12 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                 {data.recentVisitors.map((visitor, index) => (
                   <tr key={`${visitor.lastSeenAt}-${index}`} className="border-b border-[#201927] last:border-0">
                     <td className="max-w-40 truncate px-5 py-3" title={visitor.visitorEmail ?? undefined}>
-                      <span className={visitor.visitorName ? "text-[#e8dfc8]" : "text-[#6a5a78]"}>
-                        {visitor.visitorLabel}
-                      </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={visitor.visitorName ? "text-[#e8dfc8]" : "text-[#6a5a78]"}>
+                          {visitor.visitorLabel}
+                        </span>
+                        {visitor.firstTimeVisitor ? <FirstTimeBadge /> : null}
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(visitor.lastSeenAt)}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#a89880]">{visitor.entryPath}</td>

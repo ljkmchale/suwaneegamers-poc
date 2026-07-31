@@ -170,6 +170,47 @@ function clickType(anchor: HTMLAnchorElement, href: string): string {
   return "content";
 }
 
+function benignBrowserRejection(reason: unknown): boolean {
+  const name = reason instanceof DOMException || reason instanceof Error ? reason.name : "";
+  const message = reason instanceof Error
+    ? reason.message
+    : typeof reason === "string"
+      ? reason
+      : "";
+  return (
+    name === "AbortError" ||
+    name === "NotAllowedError" ||
+    /request is not allowed by the user agent or the platform/i.test(message) ||
+    /permission denied/i.test(message)
+  );
+}
+
+function rejectionDetails(reason: unknown): {
+  label: string;
+  type: string;
+  source?: string;
+} {
+  if (reason instanceof Error) {
+    return {
+      label: reason.message || reason.name || "Promise rejection",
+      type: `promise:${reason.name || "Error"}`.slice(0, 40),
+      source: reason.stack?.replace(/\s+/g, " ").slice(0, 300),
+    };
+  }
+  if (typeof reason === "string") {
+    return { label: reason, type: "promise:string" };
+  }
+  try {
+    const serialized = JSON.stringify(reason);
+    return {
+      label: serialized && serialized !== "{}" ? serialized : "Promise rejected without a reason",
+      type: `promise:${Object.prototype.toString.call(reason).slice(8, -1)}`.slice(0, 40),
+    };
+  } catch {
+    return { label: "Promise rejected with an unreadable reason", type: "promise:unknown" };
+  }
+}
+
 export function AnalyticsTracker() {
   const pathname = usePathname();
   const engagedSeconds = useRef(0);
@@ -357,25 +398,26 @@ export function AnalyticsTracker() {
       }]);
     };
     const handleWindowError = (event: ErrorEvent) => {
+      const source = event.error instanceof Error
+        ? event.error.stack?.replace(/\s+/g, " ").slice(0, 300)
+        : undefined;
       send([{
         eventType: "client_error",
         path: pathname,
         contentType: "window error",
-        contentId: event.filename ? `${event.filename}:${event.lineno}` : undefined,
+        contentId: source ?? (event.filename ? `${event.filename}:${event.lineno}:${event.colno}` : undefined),
         contentLabel: event.message || "Client error",
       }]);
     };
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      const reason = event.reason instanceof Error
-        ? event.reason.message
-        : typeof event.reason === "string"
-          ? event.reason
-          : "Unhandled promise rejection";
+      if (benignBrowserRejection(event.reason)) return;
+      const details = rejectionDetails(event.reason);
       send([{
         eventType: "client_error",
         path: pathname,
-        contentType: "promise rejection",
-        contentLabel: reason.slice(0, 160),
+        contentType: details.type,
+        contentId: details.source,
+        contentLabel: details.label.slice(0, 160),
       }]);
     };
 

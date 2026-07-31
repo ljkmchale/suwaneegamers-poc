@@ -1,6 +1,13 @@
 import "server-only";
 
 import { getDb } from "@/lib/db";
+import { pruneExpired } from "@/lib/retention";
+import {
+  classifySecurityActors,
+  overallThreatLevel,
+  type ThreatActor,
+  type ThreatLevel,
+} from "@/lib/securityClassifier";
 
 export const SECURITY_EVENT_KINDS = ["failed_login", "admin_request", "suspicious_request"] as const;
 
@@ -59,7 +66,7 @@ export function recordSecurityEvent(input: {
       input.path.slice(0, 500),
       input.userAgent?.slice(0, 300) ?? null,
     );
-    pruneOldEvents(db);
+    pruneExpired([{ table: "security_events", column: "created_at", days: RETENTION_DAYS }]);
   } catch (error) {
     // Logging must never break request handling.
     console.error("[securityLog] failed to record event", error);
@@ -90,16 +97,6 @@ export function isLoginLockedOut(ip: string | null): boolean {
     console.error("[securityLog] lockout check failed", error);
     return false;
   }
-}
-
-let lastPruneAt = 0;
-
-function pruneOldEvents(db: ReturnType<typeof getDb>): void {
-  const now = Date.now();
-  if (now - lastPruneAt < 24 * 60 * 60 * 1000) return;
-  lastPruneAt = now;
-  const cutoff = new Date(now - RETENTION_DAYS * 24 * 60 * 60 * 1000).toISOString();
-  db.prepare(`DELETE FROM security_events WHERE created_at < ?`).run(cutoff);
 }
 
 interface SecurityEventRow {
@@ -185,5 +182,65 @@ export function getSecuritySummary(days: number): SecuritySummary {
     suspiciousRequests: byKind.get("suspicious_request") ?? 0,
     adminRequests: byKind.get("admin_request") ?? 0,
     topOffenderIps,
+  };
+}
+
+export interface SecuritySituation {
+  level: ThreatLevel;
+  actors: ThreatActor[];
+  activeVisitors: number;
+  signedInVisitors: number;
+  anonymousVisitors: number;
+  pageViews24h: number;
+  securityEvents60m: number;
+  scannerEvents60m: number;
+  failedLogins60m: number;
+  lastSecurityEventAt: string | null;
+}
+
+export function getSecuritySituation(): SecuritySituation {
+  const db = getDb();
+  const now = Date.now();
+  const cutoff7d = new Date(now - 7 * 86_400_000).toISOString();
+  const cutoff60m = new Date(now - 60 * 60_000).toISOString();
+  const cutoff15m = new Date(now - 15 * 60_000).toISOString();
+  const cutoff24h = new Date(now - 86_400_000).toISOString();
+  const rows = db
+    .prepare(`SELECT * FROM security_events WHERE created_at >= ? ORDER BY created_at DESC LIMIT 2000`)
+    .all(cutoff7d) as SecurityEventRow[];
+  const events = rows.map((row) => ({
+    createdAt: row.created_at,
+    kind: row.kind,
+    ip: row.ip,
+    path: row.path,
+    userAgent: row.user_agent,
+  }));
+  const actors = classifySecurityActors(events, now);
+  const currentActors = classifySecurityActors(
+    events.filter((event) => event.createdAt >= cutoff60m),
+    now,
+  );
+  const visitor = db.prepare(`
+    SELECT COUNT(*) AS active,
+      SUM(CASE WHEN visitor_email IS NOT NULL THEN 1 ELSE 0 END) AS signed_in
+    FROM analytics_sessions WHERE last_seen_at >= ?
+  `).get(cutoff15m) as { active: number; signed_in: number | null };
+  const pageViews = db.prepare(`
+    SELECT COUNT(*) AS n FROM analytics_events
+    WHERE event_type = 'page_view' AND created_at >= ?
+  `).get(cutoff24h) as { n: number };
+  const current = events.filter((event) => event.createdAt >= cutoff60m);
+
+  return {
+    level: overallThreatLevel(currentActors),
+    actors,
+    activeVisitors: visitor.active,
+    signedInVisitors: visitor.signed_in ?? 0,
+    anonymousVisitors: visitor.active - (visitor.signed_in ?? 0),
+    pageViews24h: pageViews.n,
+    securityEvents60m: current.length,
+    scannerEvents60m: current.filter((event) => event.kind === "suspicious_request").length,
+    failedLogins60m: current.filter((event) => event.kind === "failed_login").length,
+    lastSecurityEventAt: events[0]?.createdAt ?? null,
   };
 }

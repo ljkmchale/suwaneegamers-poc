@@ -1,11 +1,17 @@
+import json
 from datetime import datetime
+from types import SimpleNamespace
 from zoneinfo import ZoneInfo
+
+from livekit.agents.llm import FallbackAdapter
 
 from schedule_agent.agent import (
     about_suwanee_gamers_answer,
+    apply_mishearings,
     apply_pronunciations,
     campaign_schedule_answer,
     canonicalize_spoken_entity_question,
+    canonicalize_spoken_question,
     event_loop_lag,
     general_schedule_answer,
     is_about_suwanee_gamers_question,
@@ -16,6 +22,7 @@ from schedule_agent.agent import (
     load_full_pantheon_knowledge,
     load_pantheon_knowledge,
     load_voice_entity_catalog,
+    metric_forward_payload,
     navigation_request_target,
     pantheon_deity_answer,
     parse_dispatch_metadata,
@@ -134,6 +141,16 @@ def test_spoken_deity_name_resolves_to_canonical_pantheon_entry():
     assert "order and protection" in answer
 
 
+def test_diverra_transcription_variant_resolves_to_full_deity_entry():
+    answer = pantheon_deity_answer(
+        "Who is Diveria?",
+        load_full_pantheon_knowledge(),
+    )
+    assert answer is not None
+    assert answer.startswith("Diverra, the Ardent One.")
+    assert "love, beauty, passion, and pleasure" in answer
+
+
 def test_site_wide_voice_catalog_resolves_common_transcription_variants():
     catalog = load_voice_entity_catalog()
     assert "Addan" in catalog
@@ -163,6 +180,112 @@ def test_entity_question_is_rewritten_with_canonical_name():
         "I would like to know about the gods of Mirdi.",
         catalog,
     ) == "I would like to know about the gods of Myrdae."
+
+
+MISHEARINGS = {
+    "Imberstran": "Emberstran",
+    "Image Brand": "Emberstran",
+    "Swanee Gamers": "Suwanee Gamers",
+    "Funny Gamers": "Suwanee Gamers",
+    "Dungeons 3": "Dungeons III",
+    "K-9 Watch": "kNight Watch",
+    "Amira": "Myra",
+}
+
+
+def test_known_mishearings_are_corrected_longest_key_first():
+    assert apply_mishearings("It's Heroes of Image Brand.", MISHEARINGS) == (
+        "It's Heroes of Emberstran."
+    )
+    # "Dungeons 3" is a substring of the longer key, which must win.
+    assert apply_mishearings("not K-9 Watch", {**MISHEARINGS, "K-9 Watch is": "x"}) == (
+        "not kNight Watch"
+    )
+    assert apply_mishearings("nothing to fix", MISHEARINGS) == "nothing to fix"
+
+
+def test_free_form_corrections_are_repaired_outside_question_phrasings():
+    catalog = load_voice_entity_catalog()
+
+    def repair(text: str) -> str:
+        return canonicalize_spoken_question(apply_mishearings(text, MISHEARINGS), catalog)
+
+    # None of these match an intent phrase, so before the free-form pass existed
+    # the entity catalog never saw them — these are real turns from voice_questions.
+    assert repair("That is not correct. It's Heroes of Image Brand.") == (
+        "That is not correct. It's Heroes of Emberstran."
+    )
+    assert repair("Not funny gamers. Swanee gamers.") == "Not Suwanee Gamers. Suwanee Gamers."
+    assert repair("When is my next session of Heroes of Imberstran?") == (
+        "When is my next session of Heroes of Emberstran?"
+    )
+
+
+def test_intent_pass_does_not_run_past_the_first_sentence():
+    catalog = load_voice_entity_catalog()
+    # The intent span used to run to end-of-string, so the permissive matcher got
+    # the whole tail of a two-sentence turn and produced "Dungeons III III".
+    repaired = canonicalize_spoken_question(
+        "When is my next session of Heroes of Imberstran? "
+        "And does Myra know about Dungeons III - kNight Watch?",
+        catalog,
+    )
+    assert "III III" not in repaired
+    assert "Heroes of Emberstran" in repaired
+    # The sentence after the intent phrase is left for the strict free-form pass,
+    # which must not disturb an already-canonical name.
+    assert "Dungeons III - kNight Watch" in repaired
+    # The intent span itself still stops at its own sentence.
+    assert canonicalize_spoken_question("Tell me about Aden. I play weekly.", catalog) == (
+        "Tell me about Addan. I play weekly."
+    )
+
+
+def test_entity_repair_never_rewrites_ordinary_speech():
+    catalog = load_voice_entity_catalog()
+    for utterance in (
+        "No.",
+        "That's not true.",
+        "What's next?",
+        "So the images are rough.",
+        "Can you take me to the whole page?",
+        "the gods of the world",
+        "not part of that game",
+        "I am not in that campaign",
+        "tell me a joke about dice",
+        "what games are on the schedule",
+    ):
+        assert canonicalize_spoken_question(utterance, catalog) == utterance
+
+
+def test_entity_repair_never_swallows_a_negation():
+    catalog = load_voice_entity_catalog()
+    # "not kNight Watch" scores 0.875 against the catalog entry "The kNight
+    # Watch" on whole-string similarity alone; replacing "not" with "The" would
+    # invert what the speaker said.
+    repaired = canonicalize_spoken_question("it's not kNight Watch", catalog)
+    assert "not" in repaired
+    assert "The kNight Watch" not in repaired
+    # Likewise a stray function word must not be absorbed into a name.
+    assert canonicalize_spoken_question("Heroes of Emberstran", catalog) == (
+        "Heroes of Emberstran"
+    )
+
+
+def test_myra_is_never_canonicalized_into_myrdae():
+    catalog = load_voice_entity_catalog()
+    assert canonicalize_spoken_question("Myra?", catalog) == "Myra?"
+    assert canonicalize_spoken_question("Can you tell me about Myra?", catalog) == (
+        "Can you tell me about Myra?"
+    )
+
+
+def test_parse_dispatch_metadata_extracts_mishearings():
+    payload = parse_dispatch_metadata(
+        '{"events": [], "mishearings": {"Imberstran": "Emberstran", "bad": ""}}'
+    )
+    assert payload["mishearings"] == {"Imberstran": "Emberstran"}
+    assert parse_dispatch_metadata('{"events": []}')["mishearings"] == {}
 
 
 def test_parse_dispatch_metadata_extracts_tuning():
@@ -543,3 +666,114 @@ def test_background_tool_result_only_belongs_to_the_turn_that_started_it():
 def test_event_loop_lag_never_reports_early_wakeup_as_blocking():
     assert round(event_loop_lag(10.0, 10.35), 2) == 0.35
     assert event_loop_lag(10.0, 9.95) == 0.0
+
+
+def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
+    metric = type(
+        "LLMMetrics",
+        (),
+        {
+            "cancelled": False,
+            "ttft": 0.42,
+            "prompt_tokens": 12_000,
+            "completion_tokens": 800,
+            "prompt_cached_tokens": 2_000,
+            "metadata": SimpleNamespace(
+                model_provider="anthropic",
+                model_name="claude-haiku-4-5",
+            ),
+        },
+    )()
+
+    assert metric_forward_payload(metric, "session-1") == {
+        "sessionId": "session-1",
+        "kind": "llm_ttft",
+        "valueMs": 420,
+        "cachedTokens": 2_000,
+        "provider": "anthropic",
+        "model": "claude-haiku-4-5",
+        "inputTokens": 12_000,
+        "outputTokens": 800,
+        "cacheReadTokens": 2_000,
+        "cacheCreationTokens": 0,
+    }
+
+
+def test_llm_is_local_only_when_no_anthropic_key_is_configured(monkeypatch):
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    built = build_llm({})
+    assert not isinstance(built, FallbackAdapter)
+    assert built.model == "suwanee-schedule"
+
+
+def test_llm_falls_back_from_claude_to_local_ollama(monkeypatch):
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    built = build_llm({})
+    assert isinstance(built, FallbackAdapter)
+    primary, secondary = built._llm_instances
+    assert primary.model == "claude-haiku-4-5"
+    assert secondary.model == "suwanee-schedule"
+
+
+def test_claude_temperature_ignores_the_ollama_autotuner(monkeypatch):
+    """The nightly tuner calibrates against Qwen; it must not steer Claude too."""
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    monkeypatch.delenv("ANTHROPIC_TEMPERATURE", raising=False)
+    claude, ollama = build_llm({"ollamaTemperature": 0.95})._llm_instances
+    assert ollama._opts.temperature == 0.95
+    assert claude._opts.temperature == 0.3
+
+
+def test_page_context_block_rejects_anything_but_an_internal_path():
+    from schedule_agent.agent import page_context_block
+
+    assert page_context_block({"path": "/pantheon"})
+    # Protocol-relative and absolute URLs must never reach the prompt.
+    assert page_context_block({"path": "//evil.example"}) == ""
+    assert page_context_block({"path": "https://evil.example"}) == ""
+    assert page_context_block({"path": ""}) == ""
+    assert page_context_block("not a dict") == ""
+    assert page_context_block(None) == ""
+
+
+def test_page_context_block_bounds_browser_supplied_text():
+    from schedule_agent.agent import page_context_block
+
+    block = page_context_block(
+        {"path": "/campaigns/x", "title": "T" * 500, "subject": "S" * 500}
+    )
+    assert "T" * 120 in block
+    assert "T" * 121 not in block
+    assert "S" * 121 not in block
+
+
+def test_page_context_block_never_claims_to_see_the_screen():
+    from schedule_agent.agent import page_context_block
+
+    block = page_context_block({"path": "/pantheon", "title": "Pantheon"}).casefold()
+    assert "cannot see their screen" in block
+
+
+def test_dispatch_metadata_defaults_page_to_empty_when_malformed():
+    from schedule_agent.agent import parse_dispatch_metadata
+
+    assert parse_dispatch_metadata(json.dumps({"page": "nope"}))["page"] == {}
+    assert parse_dispatch_metadata(json.dumps({}))["page"] == {}
+    assert parse_dispatch_metadata(
+        json.dumps({"page": {"path": "/lore"}})
+    )["page"] == {"path": "/lore"}
+
+
+def test_llm_short_name_distinguishes_claude_from_the_local_model():
+    from schedule_agent.agent import llm_short_name
+
+    assert llm_short_name("livekit.plugins.anthropic.llm.LLM") == "claude"
+    # The openai plugin is pointed at Ollama, so it means "local" here.
+    assert llm_short_name("livekit.plugins.openai.llm.LLM") == "ollama"
+    assert llm_short_name("") == "unknown"

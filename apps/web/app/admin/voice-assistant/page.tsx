@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  Coins,
   GraduationCap,
   HelpCircle,
   MessageCircleQuestion,
@@ -7,8 +8,10 @@ import {
   SlidersHorizontal,
   SpellCheck2,
   Theater,
+  Wrench,
 } from "lucide-react";
 import { getVoiceAnalytics } from "@/lib/voiceAnalytics";
+import { getClaudeUsage } from "@/lib/voiceMetrics";
 import { readAssistantTuning } from "@/lib/assistantTuningStore";
 import { readLearned } from "@/lib/assistantLearned";
 import { readAssistantPersonas } from "@/lib/assistantPersonaStore";
@@ -20,9 +23,13 @@ import {
 } from "@/lib/assistantPersonas";
 import { listUserProfiles } from "@/lib/userProfiles";
 import { getPlayerProfileSeeds } from "@/lib/players";
+import { readRemediationAudit, readRemediations } from "@/lib/assistantRemediation";
+import { RemediationPanel } from "@/components/admin/RemediationPanel";
 import { VoiceAudition, type AuditionVoice } from "@/components/admin/VoiceAudition";
 import {
   forgetQuestionAction,
+  approveRemediationAction,
+  dismissRemediationAction,
   setMemberPersonaAction,
   setRosterPersonaAction,
 } from "./actions";
@@ -47,6 +54,15 @@ function dateTime(value: string) {
     hour: "numeric",
     minute: "2-digit",
   }).format(new Date(value));
+}
+
+function tokenCount(value: number) {
+  return new Intl.NumberFormat("en-US").format(value);
+}
+
+function dollars(value: number) {
+  if (value === 0) return "$0.0000";
+  return value < 0.01 ? `$${value.toFixed(4)}` : `$${value.toFixed(2)}`;
 }
 
 function HorizontalBars({ rows }: { rows: Array<{ label: string; value: number }> }) {
@@ -116,8 +132,12 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
   const requestedDays = Number(params?.days ?? 30);
   const days = [7, 30, 90].includes(requestedDays) ? requestedDays : 30;
   const voice = getVoiceAnalytics(days);
+  const claude = getClaudeUsage(days);
   const tuning = readAssistantTuning();
   const learned = readLearned();
+  const remediationStore = readRemediations();
+  const remediationQueue = remediationStore.entries.filter((entry) => entry.status === "pending");
+  const remediationAudit = readRemediationAudit();
   const personaCatalog = readAssistantPersonas();
   // Every signed-in member with the persona they will actually hear, whether it
   // was chosen, matched from the roster, or the house default.
@@ -250,6 +270,155 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           </div>
         ))}
       </div>
+
+      <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
+              <Coins size={17} className="text-amber-400" aria-hidden="true" />
+              Claude tokens &amp; estimated cost
+            </h2>
+            <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[#6a5a78]">
+              Provider-reported usage for Myra&apos;s Claude requests in this period.
+              Local Ollama fallback requests cost $0 and are excluded.
+            </p>
+          </div>
+          <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] uppercase tracking-widest text-amber-300">
+            {claude.summary.requests} Claude requests
+          </span>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            ["Input tokens", tokenCount(claude.summary.inputTokens)],
+            ["Output tokens", tokenCount(claude.summary.outputTokens)],
+            ["Cache reads", tokenCount(claude.summary.cacheReadTokens)],
+            ["Cache writes", tokenCount(claude.summary.cacheCreationTokens)],
+            ["Estimated cost", dollars(claude.summary.estimatedCostUsd)],
+          ].map(([label, value]) => (
+            <div key={label} className="rounded-lg border border-[#201927] bg-[#08050f] p-4">
+              <p className="text-[10px] uppercase tracking-widest text-[#6a5a78]">{label}</p>
+              <p className="mt-2 font-cinzel text-xl text-amber-300">{value}</p>
+            </div>
+          ))}
+        </div>
+        {claude.models.length > 0 ? (
+          <div className="mt-4 overflow-x-auto rounded-lg border border-[#201927]">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-[#08050f] text-[10px] uppercase tracking-widest text-[#6a5a78]">
+                <tr>
+                  <th className="px-4 py-3 font-normal">Model</th>
+                  <th className="px-4 py-3 text-right font-normal">Requests</th>
+                  <th className="px-4 py-3 text-right font-normal">Input</th>
+                  <th className="px-4 py-3 text-right font-normal">Output</th>
+                  <th className="px-4 py-3 text-right font-normal">Cache read</th>
+                  <th className="px-4 py-3 text-right font-normal">Cache write</th>
+                  <th className="px-4 py-3 text-right font-normal">Est. cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {claude.models.map((model) => (
+                  <tr key={model.model} className="border-t border-[#201927]">
+                    <td className="px-4 py-3 text-[#e8dfc8]">{model.model}</td>
+                    <td className="px-4 py-3 text-right text-[#a89880]">{model.requests}</td>
+                    <td className="px-4 py-3 text-right text-[#a89880]">{tokenCount(model.inputTokens)}</td>
+                    <td className="px-4 py-3 text-right text-[#a89880]">{tokenCount(model.outputTokens)}</td>
+                    <td className="px-4 py-3 text-right text-[#a89880]">{tokenCount(model.cacheReadTokens)}</td>
+                    <td className="px-4 py-3 text-right text-[#a89880]">{tokenCount(model.cacheCreationTokens)}</td>
+                    <td className="px-4 py-3 text-right text-amber-300">{dollars(model.estimatedCostUsd)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="mt-4 rounded-lg border border-[#201927] bg-[#08050f] py-8 text-center text-xs text-[#6a5a78]">
+            Claude token usage will appear after Myra answers her next model-assisted question.
+          </p>
+        )}
+        <p className="mt-4 text-[10px] leading-relaxed text-[#5a5060]">
+          Cost is an estimate based on the configured model&apos;s published direct API token
+          rates. It excludes taxes, credits, negotiated pricing, and unrelated Anthropic usage.
+        </p>
+      </section>
+
+      <RemediationPanel entries={remediationQueue} audit={remediationAudit} />
+
+      <section className="hidden">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
+              <Wrench size={17} className="text-amber-400" aria-hidden="true" />
+              Myra remediation queue
+            </h2>
+            <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[#6a5a78]">
+              Weak answers from the showcase and nightly learning land here with a proposed
+              correction and player-safe evidence. Approving a grounded learned answer makes
+              it available to Myra; structural approvals record the decision without silently
+              rewriting lore or routing code.
+            </p>
+          </div>
+          <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] uppercase tracking-widest text-amber-300">
+            {remediationQueue.length} pending
+          </span>
+        </div>
+        {remediationQueue.length === 0 ? (
+          <p className="rounded-lg border border-[#201927] bg-[#08050f] py-8 text-center text-xs text-[#6a5a78]">
+            No weak answers are waiting for review.
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {remediationQueue.slice(0, 20).map((entry) => (
+              <article key={entry.id} className="rounded-lg border border-[#201927] bg-[#08050f] p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-[#1c1330] px-2 py-0.5 text-[9px] uppercase tracking-widest text-violet-300">
+                        {entry.category.replaceAll("-", " ")}
+                      </span>
+                      <span className="text-[10px] text-[#5a5060]">
+                        {entry.source.replaceAll("-", " ")} · seen {entry.timesSeen}×
+                      </span>
+                    </div>
+                    <p className="mt-3 text-sm text-[#e8dfc8]">“{entry.question}”</p>
+                    <p className="mt-2 text-xs leading-relaxed text-[#a89880]">
+                      <span className="text-[#6a5a78]">Proposed correction: </span>
+                      {entry.proposedCorrection}
+                    </p>
+                    {entry.answerCandidate ? (
+                      <p className="mt-2 rounded-md border border-[#201927] bg-[#0f0a1a] p-3 text-xs leading-relaxed text-[#c8bda8]">
+                        {entry.answerCandidate}
+                      </p>
+                    ) : null}
+                    <p className="mt-2 text-[10px] text-[#5a5060]">
+                      Evidence: {entry.evidence.length > 0 ? entry.evidence.join(" · ") : "No grounded source yet"}
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-2">
+                    <form action={approveRemediationAction}>
+                      <input type="hidden" name="id" value={entry.id} />
+                      <button
+                        type="submit"
+                        className="rounded-md bg-emerald-600 px-3 py-2 text-[10px] uppercase tracking-widest text-white hover:bg-emerald-500"
+                      >
+                        Approve
+                      </button>
+                    </form>
+                    <form action={dismissRemediationAction}>
+                      <input type="hidden" name="id" value={entry.id} />
+                      <button
+                        type="submit"
+                        className="rounded-md border border-[#2a2a35] px-3 py-2 text-[10px] uppercase tracking-widest text-[#9080a0] hover:border-red-400 hover:text-red-300"
+                      >
+                        Dismiss
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
 
       <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -593,7 +762,21 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
                     <p className="text-[#e8dfc8]">“{question.question}”</p>
                     <p className="mt-1 text-[#6a5a78]">{question.answer ?? question.errorMessage ?? "No answer recorded"}</p>
                   </td>
-                  <td className="px-5 py-3 capitalize text-violet-300">{question.category.replaceAll("_", " ")}</td>
+                  <td className="px-5 py-3 capitalize text-violet-300">
+                    {question.category.replaceAll("_", " ")}
+                    {question.model && (
+                      <span
+                        className="mt-1 block text-[0.65rem] uppercase tracking-wider text-[#6a5a78]"
+                        title={
+                          question.model === "ollama"
+                            ? "Answered by the local fallback model — Claude was unreachable"
+                            : "Answered by Claude"
+                        }
+                      >
+                        {question.model}
+                      </span>
+                    )}
+                  </td>
                   <td className="whitespace-nowrap px-5 py-3 text-right text-[#a89880]">{milliseconds(question.responseMs)}</td>
                 </tr>
               ))}

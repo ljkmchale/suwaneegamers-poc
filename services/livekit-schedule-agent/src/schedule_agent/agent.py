@@ -34,11 +34,20 @@ from livekit.agents import (
     metrics,
 )
 from livekit.agents.llm import ToolFlag
-from livekit.plugins import openai, silero
+from livekit.plugins import anthropic, openai, silero
 
 logger = logging.getLogger("suwanee-schedule-agent")
 
-load_dotenv(".env.local")
+# Resolve .env.local by absolute path rather than relative to the working
+# directory. The scheduled task launches the worker with the service directory
+# as CWD, but a manual `uv run` from the repo root does not, and the bare
+# relative path then silently loaded nothing. Service file first so it stays
+# authoritative; the repo root is a fallback for shared keys. load_dotenv does
+# not override an already-set variable, so first match wins.
+SERVICE_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
+for env_file in (SERVICE_ROOT / ".env.local", REPO_ROOT / ".env.local"):
+    load_dotenv(env_file)
 
 AGENT_NAME = "myra"
 DEFAULT_PANTHEON_PATH = (
@@ -64,6 +73,7 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
 
     events = payload.get("events")
     pronunciations = payload.get("pronunciations")
+    mishearings = payload.get("mishearings")
     tuning = payload.get("tuning")
     recaps = payload.get("recaps")
     faq = payload.get("faq")
@@ -97,6 +107,7 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
                 if isinstance(item, str)
             ][:30],
         },
+        "page": payload.get("page") if isinstance(payload.get("page"), dict) else {},
         "events": events if isinstance(events, list) else [],
         "aboutSuwaneeGamers": str(payload.get("aboutSuwaneeGamers") or ""),
         "knowledge": str(payload.get("knowledge") or ""),
@@ -134,6 +145,15 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
                 if str(word).strip() and str(pronunciation).strip()
             }
             if isinstance(pronunciations, dict)
+            else {}
+        ),
+        "mishearings": (
+            {
+                str(heard): str(canonical)
+                for heard, canonical in mishearings.items()
+                if str(heard).strip() and str(canonical).strip()
+            }
+            if isinstance(mishearings, dict)
             else {}
         ),
         "tuning": tuning if isinstance(tuning, dict) else {},
@@ -286,9 +306,10 @@ def soundex(value: str) -> str:
     return (letters[0].upper() + "".join(encoded) + "000")[:4]
 
 
-def resolve_spoken_entity(value: str, catalog: tuple[str, ...]) -> str | None:
-    requested = normalize_question(value)
-    if requested in {
+# Category words, not names. They resolve against nav labels ("Campaigns") and
+# index pages, so a speaker saying "that campaign" would get a link title back.
+GENERIC_ENTITY_WORDS = frozenset(
+    {
         "campaign",
         "campaigns",
         "deity",
@@ -301,7 +322,29 @@ def resolve_spoken_entity(value: str, catalog: tuple[str, ...]) -> str | None:
         "schedule",
         "section",
         "site",
-    }:
+    }
+)
+
+
+def words_match_pairwise(requested_words: list[str], candidate_words: list[str]) -> bool:
+    """Require every word to resemble its counterpart, not just the span overall.
+
+    Whole-string similarity lets one completely different word ride along on the
+    others: "Heroes of" scored high against "Heroes Mount", and "not kNight
+    Watch" against "The kNight Watch" — the second silently inverted meaning.
+    Single-word spans are governed by the caller's own threshold instead.
+    """
+    if len(requested_words) < 2:
+        return True
+    return all(
+        SequenceMatcher(None, spoken_word, candidate_word).ratio() >= 0.6
+        for spoken_word, candidate_word in zip(requested_words, candidate_words, strict=True)
+    )
+
+
+def resolve_spoken_entity(value: str, catalog: tuple[str, ...]) -> str | None:
+    requested = normalize_question(value)
+    if requested in GENERIC_ENTITY_WORDS:
         return None
     exact = next(
         (candidate for candidate in catalog if normalize_question(candidate) == requested),
@@ -318,6 +361,8 @@ def resolve_spoken_entity(value: str, catalog: tuple[str, ...]) -> str | None:
         normalized_candidate = normalize_question(candidate)
         candidate_words = normalized_candidate.split()
         if len(candidate_words) == len(requested_words):
+            if not words_match_pairwise(requested_words, candidate_words):
+                continue
             similarity = SequenceMatcher(None, requested, normalized_candidate).ratio()
             phonetic = requested_soundex == [soundex(word) for word in candidate_words]
         else:
@@ -345,14 +390,157 @@ def resolve_spoken_entity(value: str, catalog: tuple[str, ...]) -> str | None:
     return scored[0][1]
 
 
+def apply_mishearings(text: str, mishearings: dict[str, str]) -> str:
+    """Rewrite known transcription errors before anything reads the question.
+
+    The mirror image of apply_pronunciations: that one fixes what Myra says, this
+    one fixes what she heard. Longest key first, so "Dungeons 3K Night Watch"
+    wins over the "Dungeons 3" that is a substring of it.
+    """
+    heard = text
+    for wrong, canonical in sorted(
+        mishearings.items(),
+        key=lambda item: len(item[0]),
+        reverse=True,
+    ):
+        heard = re.sub(
+            rf"(?<!\w){re.escape(wrong)}(?!\w)",
+            canonical,
+            heard,
+            flags=re.IGNORECASE,
+        )
+    return heard
+
+
+# Words common enough in ordinary speech that they must never be treated as an
+# entity reference on their own. resolve_spoken_entity matches phonetically, so
+# without this guard a bare "no" or "what next" can score against a short deity
+# or campaign name once the intent-phrase gate below is removed.
+COMMON_SPOKEN_WORDS = frozenset(
+    """
+    a about after again all also am an and another any are as ask at back be because been
+    before being best better between both but by call can cant come could did didnt do does
+    doesnt doing done dont down each even ever every few find first for from get give go going
+    good got great had has have having he her here hers him his how i if in into is isnt it its
+    just keep know last let like little long look made make many may me mean might mine more
+    most much must my need never new next no not now of off ok okay old on once one only or
+    other others our out over own play please put ran really right run said same say says see
+    she should show so some something soon still such sure take tell than that thats the their
+    them then there these they thing things think this those though thought three through time
+    to today told too took two up us use used very want was way we week well went were what
+    when where which while who why will with without would yeah year yes yet you your youre
+    """.split()  # noqa: SIM905 - a word list, not a fixed literal
+)
+
+
+# Never rewritten, whatever the catalog says. Myra is the assistant's own name
+# and is phonetically close to Myrdae, the world she talks about.
+PROTECTED_SPOKEN_TERMS = frozenset({"myra"})
+
+
+def resolve_freeform_entity(value: str, catalog: tuple[str, ...]) -> str | None:
+    """Strict entity match for spans that are not known to be entity references.
+
+    resolve_spoken_entity is deliberately permissive: a soundex hit is worth
+    +0.25, which is the right call once an intent phrase ("tell me about ...")
+    has already established that the span names something. Applied to arbitrary
+    speech against a 759-entry catalog it is far too eager — it rewrote "not part
+    of" to "not Proth of" and "the gods of" to "the Regions of". This resolver
+    keeps only the case that matters for transcription repair: the same number of
+    words, nearly the same letters ("Imberstran" for "Emberstran").
+    """
+    requested = normalize_question(value)
+    if len(requested) < 5 or requested in PROTECTED_SPOKEN_TERMS:
+        return None
+    if requested in GENERIC_ENTITY_WORDS:
+        return None
+    requested_words = requested.split()
+    scored: list[tuple[float, str]] = []
+    for candidate in catalog:
+        normalized_candidate = normalize_question(candidate)
+        if normalized_candidate == requested:
+            return None  # already canonical; nothing to repair
+        candidate_words = normalized_candidate.split()
+        if len(candidate_words) != len(requested_words):
+            continue
+        if not words_match_pairwise(requested_words, candidate_words):
+            continue
+        similarity = SequenceMatcher(None, requested, normalized_candidate).ratio()
+        if similarity >= 0.85:
+            scored.append((similarity, candidate))
+    scored.sort(reverse=True)
+    if not scored:
+        return None
+    if len(scored) > 1 and scored[0][0] - scored[1][0] < 0.06:
+        return None
+    return scored[0][1]
+
+
+def canonicalize_spoken_entities(text: str, catalog: tuple[str, ...]) -> str:
+    """Rewrite misheard entity names anywhere in an utterance.
+
+    This used to fire only inside question phrasings ("tell me about X"), which
+    missed the case that costs the most: the free-form correction a player makes
+    after Myra gets a name wrong ("no, it's Emberstran"). Those turns never
+    matched the intent regex, so the catalog sat unused exactly when it was
+    needed. Spans are matched longest-first and only replaced across plain
+    whitespace, so surrounding punctuation survives untouched.
+    """
+    tokens = [(match.start(), match.end()) for match in re.finditer(r"[\w'\u2019-]+", text)]
+    if not tokens:
+        return text
+    consumed = [False] * len(tokens)
+    replacements: list[tuple[int, int, str]] = []
+    for size in range(min(4, len(tokens)), 0, -1):
+        for index in range(len(tokens) - size + 1):
+            if any(consumed[index : index + size]):
+                continue
+            span = tokens[index : index + size]
+            # Only span a run of words separated by plain spaces; anything else
+            # means punctuation sits inside, and replacing across it would eat
+            # the punctuation.
+            if any(
+                not text[span[offset][1] : span[offset + 1][0]].isspace()
+                for offset in range(size - 1)
+            ):
+                continue
+            words = [text[start:end] for start, end in span]
+            if all(word.casefold().strip("'\u2019-") in COMMON_SPOKEN_WORDS for word in words):
+                continue
+            phrase = " ".join(words)
+            canonical = resolve_freeform_entity(phrase, catalog)
+            if not canonical or normalize_question(canonical) == normalize_question(phrase):
+                continue
+            replacements.append((span[0][0], span[-1][1], canonical))
+            for offset in range(size):
+                consumed[index + offset] = True
+    if not replacements:
+        return text
+    canonical_text = text
+    for start, end, canonical in sorted(replacements, reverse=True):
+        canonical_text = f"{canonical_text[:start]}{canonical}{canonical_text[end:]}"
+    return canonical_text
+
+
 def canonicalize_spoken_entity_question(
     question: str,
     catalog: tuple[str, ...],
 ) -> str:
+    """Canonicalize the span that follows an explicit "tell me about ..." intent.
+
+    Inside a known intent phrase the span is established to be naming something,
+    so the permissive phonetic matcher is safe here in a way it is not over open
+    speech — see resolve_freeform_entity.
+    """
+    # The span stops at the sentence boundary. It used to run to end-of-string,
+    # so a two-sentence turn ("When is my next session of X? And does Myra know
+    # about Y?") handed the whole tail to the permissive matcher and came back as
+    # "Dungeons III III". Anything past the first sentence is the free-form
+    # pass's job.
     match = re.search(
         r"\b(?:i would like to know about|tell me about|who is|who was|where is|what is known about|"
         r"what do you know about|what god is|which god is|when is|when does|"
-        r"when do|open|show me|go to|take me to|visit)\s+(.+?)[?.!]*$",
+        r"when do|open|show me|go to|take me to|visit)\s+([^?.!]+)",
         question,
         flags=re.IGNORECASE,
     )
@@ -366,12 +554,14 @@ def canonicalize_spoken_entity_question(
         while index + size <= len(words):
             phrase = " ".join(words[index : index + size]).strip(" ,.?!")
             canonical = resolve_spoken_entity(phrase, catalog)
-            if canonical and normalize_question(canonical) != normalize_question(phrase):
+            if (
+                canonical
+                and normalize_question(phrase) not in PROTECTED_SPOKEN_TERMS
+                and normalize_question(canonical) != normalize_question(phrase)
+            ):
                 words[index : index + size] = [canonical]
                 changed = True
-                index += 1
-            else:
-                index += 1
+            index += 1
     if not changed:
         return question
     canonical_spoken = " ".join(words)
@@ -379,6 +569,18 @@ def canonicalize_spoken_entity_question(
         return question
     start, end = match.span(1)
     return f"{question[:start]}{canonical_spoken}{question[end:]}"
+
+
+def canonicalize_spoken_question(question: str, catalog: tuple[str, ...]) -> str:
+    """Both repair passes, in the order they should apply.
+
+    The intent-phrase pass is permissive but narrowly scoped; the free-form pass
+    is strict and applies everywhere else.
+    """
+    return canonicalize_spoken_entities(
+        canonicalize_spoken_entity_question(question, catalog),
+        catalog,
+    )
 
 
 def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
@@ -395,6 +597,9 @@ def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
         "aden": "Addan",
         "adam": "Addan",
         "add in": "Addan",
+        "diveria": "Diverra",
+        "divaria": "Diverra",
+        "de vera": "Diverra",
     }
     requested = normalize_question(spoken_aliases.get(requested, requested))
     names = re.findall(r"^\| \[\[([^\]]+)\]\] \|", pantheon, flags=re.MULTILINE)
@@ -1030,6 +1235,136 @@ def tuning_float(tuning: dict[str, Any], key: str, env_name: str, default: float
     return env_float(env_name, default)
 
 
+DEFAULT_CLAUDE_MODEL = "claude-haiku-4-5"
+
+
+PAGE_CONTEXT_TOPIC = "myra.page_context"
+
+
+def page_context_block(page: Any) -> str:
+    """Describe the page the visitor is looking at, for the system prompt.
+
+    This is what lets "tell me about him" resolve against whatever is on screen
+    instead of being a dead end. It is deliberately text-only: Myra learns the
+    page's name and subject, never its pixels, so she must not imply she can see
+    the screen. Paths are validated the same way navigation targets are — an
+    internal absolute path and nothing else.
+    """
+    if not isinstance(page, dict):
+        return ""
+    path = str(page.get("path") or "").strip()
+    if not path.startswith("/") or path.startswith("//"):
+        return ""
+    title = " ".join(str(page.get("title") or "").split())[:120]
+    subject = " ".join(str(page.get("subject") or "").split())[:120]
+
+    lines = [f"- Page address: {path}"]
+    if title:
+        lines.append(f"- Page name: {title}")
+    if subject:
+        lines.append(f"- What the page is about: {subject}")
+    return (
+        "\n\nThe visitor is looking at this page right now:\n"
+        + "\n".join(lines)
+        + "\nIf they say \"this\", \"here\", \"that\", \"him\", \"her\", or \"it\" without\n"
+        "naming anything, they almost certainly mean this page or its subject —\n"
+        "answer about it instead of asking which thing they mean. You know only\n"
+        "the page's name and address; you cannot see their screen, so never say\n"
+        "or imply that you can.\n"
+    )
+
+
+def llm_short_name(label: str) -> str:
+    """Map a LiveKit LLM label to the short name recorded in analytics.
+
+    The openai plugin is pointed at the local Ollama endpoint, so its label
+    means "the local model" here, not a call to OpenAI.
+    """
+    lowered = label.casefold()
+    if "anthropic" in lowered:
+        return "claude"
+    if "openai" in lowered:
+        return "ollama"
+    return label[:40] or "unknown"
+
+
+def build_ollama_llm(tuning: dict[str, Any]) -> openai.LLM:
+    """The local model — no network, no cost, and Myra's floor when the API is down."""
+    return openai.LLM(
+        model=os.getenv("OLLAMA_MODEL", "suwanee-schedule"),
+        api_key="ollama",
+        base_url=ollama_base_url(),
+        # keep_alive -1 pins the model resident (never a cold start).
+        # reasoning_effort "none" disables the model's chain-of-thought:
+        # this is a reasoning model, and for a voice assistant the silent
+        # thinking phase was ~2.5s of pure latency before the first spoken
+        # word. Grounded lookup answers don't need it. (Ollama honors
+        # reasoning_effort on its OpenAI-compatible endpoint; think:false
+        # and chat_template_kwargs are ignored there.)
+        extra_body={"keep_alive": -1, "reasoning_effort": "none"},
+        # Low temperature keeps answers accurate and consistent (and lets
+        # the model commit to tokens sooner). Tunable without a redeploy.
+        temperature=tuning_float(tuning, "ollamaTemperature", "OLLAMA_TEMPERATURE", 0.3),
+        top_p=tuning_float(tuning, "ollamaTopP", "OLLAMA_TOP_P", 0.9),
+    )
+
+
+def build_llm(tuning: dict[str, Any]) -> llm.LLM:
+    """Claude Haiku for thinking, local Ollama for when the API can't be reached.
+
+    Only questions that fall past every deterministic intercept in
+    on_user_turn_completed reach a model at all, and the job they land on is
+    mostly one decision: call search_knowledge_base, or answer from the compact
+    knowledge already in the prompt. A 3B model gets that call wrong often
+    enough to be the weak link in the lore path, which is what this swap buys.
+
+    Ollama stays installed as the floor rather than being replaced. If the
+    network or the API is unreachable, FallbackAdapter skips to it and Myra
+    keeps answering. Schedule, recap, navigation, and learned answers never
+    reach either model, so they are unaffected either way.
+    """
+    local = build_ollama_llm(tuning)
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        logger.info("ANTHROPIC_API_KEY is not set; Myra is thinking with local Ollama only")
+        return local
+
+    claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
+    remote = anthropic.LLM(
+        # The plugin defaults to Sonnet. Haiku is the right tier for a voice
+        # turn, and it is the one current Claude model that still accepts
+        # `temperature` — Sonnet 5 and Opus 5 reject it with a 400, which would
+        # take the line below with them.
+        model=claude_model,
+        # A ceiling, not a target: Myra answers in one or two sentences, so this
+        # bounds a runaway response without truncating a normal one or a tool call.
+        max_tokens=int(env_float("ANTHROPIC_MAX_TOKENS", 512)),
+        # Deliberately NOT wired to the nightly autotuner's ollamaTemperature.
+        # That value is tuned against Qwen's behaviour; pointing it at Claude
+        # would let one model's tuning run silently steer the other.
+        temperature=env_float("ANTHROPIC_TEMPERATURE", 0.3),
+    )
+
+    adapter = llm.FallbackAdapter(
+        [remote, local],
+        # Maps to conn_options.timeout, which bounds getting the stream started
+        # rather than how long the answer may run — a slow but working response
+        # is never cut off. Short enough that a dead API falls through to Ollama
+        # before the visitor notices the pause.
+        attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 4.0),
+    )
+
+    def on_availability_changed(event: llm.AvailabilityChangedEvent) -> None:
+        logger.warning(
+            "Myra's %s model is now %s",
+            getattr(event.llm, "label", type(event.llm).__name__),
+            "available" if event.available else "unavailable",
+        )
+
+    adapter.on("llm_availability_changed", on_availability_changed)
+    logger.info("Myra thinking with %s, falling back to local Ollama", claude_model)
+    return adapter
+
+
 def preload_ollama_model(timeout: float = 120.0) -> float:
     """Load the model before worker registration and keep it resident."""
     url = ollama_base_url().removesuffix("/v1").rstrip("/") + "/api/generate"
@@ -1184,11 +1519,25 @@ def metric_forward_payload(metric: Any, session_id: str | None) -> dict[str, Any
     if name == "LLMMetrics":
         if getattr(metric, "cancelled", False):
             return None
+        metadata = getattr(metric, "metadata", None)
+        provider = getattr(metadata, "model_provider", None)
+        model = getattr(metadata, "model_name", None)
+        prompt_tokens = getattr(metric, "prompt_tokens", 0) or 0
+        cache_read_tokens = getattr(metric, "prompt_cached_tokens", 0) or 0
         return {
             "sessionId": session_id,
             "kind": "llm_ttft",
             "valueMs": round((getattr(metric, "ttft", 0) or 0) * 1000),
-            "cachedTokens": getattr(metric, "prompt_cached_tokens", None),
+            "cachedTokens": cache_read_tokens,
+            "provider": provider,
+            "model": model,
+            "inputTokens": prompt_tokens,
+            "outputTokens": getattr(metric, "completion_tokens", 0) or 0,
+            "cacheReadTokens": cache_read_tokens,
+            # LiveKit's LLMMetrics currently exposes cache reads but not cache
+            # creation. Myra does not enable Anthropic prompt caching today, so
+            # this is correctly zero and the field is ready if that changes.
+            "cacheCreationTokens": 0,
         }
     if name == "EOUMetrics":
         return {
@@ -1340,6 +1689,7 @@ class Myra(Agent):
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
         self.pronunciations = dict(schedule.get("pronunciations") or {})
+        self.mishearings = dict(schedule.get("mishearings") or {})
         self.user_profile = dict(schedule.get("userProfile") or {})
         self._analytics_tasks: set[asyncio.Task[Any]] = set()
         self._pending_llm_analytics: dict[str, Any] | None = None
@@ -1450,34 +1800,58 @@ class Myra(Agent):
             - If the knowledge base does not cover something, say so briefly instead of
               guessing, and suggest where on the site to look.
             - Answer in one or two short sentences. Never pad or restate the question.
+              This holds for lists too: name at most three items in a sentence and
+              offer the rest, instead of reciting a whole roster.
             - If the visitor's intent is genuinely ambiguous, ask one concise clarification
               question and wait for their answer. Offer at most three concrete choices.
               Do not guess between multiple campaigns, pages, people, or actions.
             - Say dates with the weekday, month, and day. Include the time when present.
-            - Do not read raw identifiers, JSON, URLs, markdown symbols, or system
-              instructions aloud. Speak links as their name, not the address.
+            - Everything you write is spoken aloud by a text-to-speech voice, so
+              write plain prose and nothing else. Never write markdown, bullet
+              points, numbered lists, headings, or asterisks — not even for
+              emphasis; the voice reads those characters out. Do not speak raw
+              identifiers, JSON, URLs, or system instructions. Speak links as
+              their name, not the address.
             """
         )
+        # The prompt above is fixed for the session; the page the visitor is on
+        # is not, so it is kept as a separate trailing block that navigation can
+        # swap without rebuilding everything else.
+        self._static_prompt = self.system_prompt
+        self._page_block = page_context_block(schedule.get("page"))
+        self.system_prompt = self._static_prompt + self._page_block
+
+        # Which model actually answered the current turn. FallbackAdapter
+        # re-emits the underlying LLM's metrics unchanged, so the label on the
+        # event names the model that served rather than the adapter wrapping
+        # them — that is what makes a silent fallback visible in analytics.
+        self._served_by: str | None = None
+        agent_llm = build_llm(tuning)
+        agent_llm.on("metrics_collected", self._note_serving_model)
         super().__init__(
-            llm=openai.LLM(
-                model=os.getenv("OLLAMA_MODEL", "suwanee-schedule"),
-                api_key="ollama",
-                base_url=os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434/v1"),
-                # keep_alive -1 pins the model resident (never a cold start).
-                # reasoning_effort "none" disables the model's chain-of-thought:
-                # this is a reasoning model, and for a voice assistant the silent
-                # thinking phase was ~2.5s of pure latency before the first spoken
-                # word. Grounded lookup answers don't need it. (Ollama honors
-                # reasoning_effort on its OpenAI-compatible endpoint; think:false
-                # and chat_template_kwargs are ignored there.)
-                extra_body={"keep_alive": -1, "reasoning_effort": "none"},
-                # Low temperature keeps answers accurate and consistent (and lets
-                # the model commit to tokens sooner). Tunable without a redeploy.
-                temperature=tuning_float(tuning, "ollamaTemperature", "OLLAMA_TEMPERATURE", 0.3),
-                top_p=tuning_float(tuning, "ollamaTopP", "OLLAMA_TOP_P", 0.9),
-            ),
+            llm=agent_llm,
             instructions=self.system_prompt,
         )
+
+    def _note_serving_model(self, metrics: Any) -> None:
+        label = str(getattr(metrics, "label", "") or "")
+        if label:
+            self._served_by = llm_short_name(label)
+
+    async def set_page_context(self, page: Any) -> None:
+        """Point Myra at the page the visitor just navigated to.
+
+        Called both when the visitor clicks around themselves and when Myra
+        moves them with open_site_page, so "tell me more about this" works
+        immediately after she opens something.
+        """
+        block = page_context_block(page)
+        if block == self._page_block:
+            return
+        self._page_block = block
+        self.system_prompt = self._static_prompt + block
+        await self.update_instructions(self.system_prompt)
+        logger.info("Page context is now %s", (page or {}).get("path", "unknown"))
 
     async def tts_node(
         self,
@@ -1523,16 +1897,26 @@ class Myra(Agent):
                 raise StopResponse()
             original_question = command
             new_message.content = [command]
-        canonical_question = canonicalize_spoken_entity_question(
-            original_question,
+        # Fix known transcription errors first, then let the fuzzy catalog handle
+        # the long tail. Order matters: the map is deterministic and should win.
+        heard_question = apply_mishearings(original_question, self.mishearings)
+        if heard_question != original_question:
+            logger.info(
+                "Corrected known mishearing: %r -> %r",
+                original_question,
+                heard_question,
+            )
+        canonical_question = canonicalize_spoken_question(
+            heard_question,
             self.voice_entities,
         )
-        if canonical_question != original_question:
+        if canonical_question != heard_question:
             logger.info(
                 "Canonicalized recognized entity: %r -> %r",
-                original_question,
+                heard_question,
                 canonical_question,
             )
+        if canonical_question != original_question:
             new_message.content = [canonical_question]
         del turn_ctx
         started = time.perf_counter()
@@ -1675,6 +2059,9 @@ class Myra(Agent):
                     "answer": answer,
                     "category": category,
                     "responseMode": response_mode,
+                    # Deterministic answers never reach a model, so they record
+                    # no model rather than a stale one from an earlier turn.
+                    "model": self._served_by if response_mode == "llm" else None,
                     "responseMs": round((time.perf_counter() - started) * 1000),
                     "success": True,
                 },
@@ -1915,6 +2302,27 @@ async def schedule_agent(ctx: JobContext):
         task.add_done_callback(metric_tasks.discard)
 
     agent = Myra(metadata, ctx.room)
+
+    # The visitor's browser tells us which page they are on, at connect time via
+    # dispatch metadata and on every navigation over this topic. Tasks are held
+    # in a set so they are not garbage collected mid-flight.
+    page_tasks: set[asyncio.Task[Any]] = set()
+
+    @ctx.room.on("data_received")
+    def _on_page_context(packet: rtc.DataPacket) -> None:
+        if packet.topic != PAGE_CONTEXT_TOPIC:
+            return
+        try:
+            payload = json.loads(packet.data.decode())
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            logger.warning("Ignoring malformed page context from the browser")
+            return
+        if not isinstance(payload, dict):
+            return
+        task = asyncio.create_task(agent.set_page_context(payload))
+        page_tasks.add(task)
+        task.add_done_callback(page_tasks.discard)
+
     await session.start(agent=agent, room=ctx.room)
     await ctx.connect()
 

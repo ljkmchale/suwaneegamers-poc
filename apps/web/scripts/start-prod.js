@@ -6,6 +6,17 @@ const path = require("path");
 
 const contentDir = path.resolve(__dirname, "../../../content");
 const repoRoot = path.resolve(__dirname, "../../..");
+const webRoot = path.resolve(__dirname, "..");
+const activePointer = path.join(webRoot, ".next-prod-active.json");
+const allowedDistDirs = new Set([".next-prod", ".next-prod-a", ".next-prod-b"]);
+let activeDistDir = ".next-prod";
+if (require("fs").existsSync(activePointer)) {
+  const parsed = JSON.parse(require("fs").readFileSync(activePointer, "utf8"));
+  if (!allowedDistDirs.has(parsed.slot)) {
+    throw new Error(`Unsafe production slot in ${activePointer}: ${parsed.slot}`);
+  }
+  activeDistDir = parsed.slot;
+}
 const schedulerEnabled = process.env.SUWANEE_CONTENT_SCHEDULER !== "0";
 const schedulerToken = process.env.SUWANEE_SCHEDULER_TOKEN || randomUUID();
 const forwardedArgs = process.argv.slice(2).filter((arg) => arg !== "--");
@@ -23,7 +34,10 @@ function portFromArgs(args) {
 const port = process.env.PORT || portFromArgs(forwardedArgs) || "3000";
 const sharedEnv = {
   ...process.env,
-  NEXT_DIST_DIR: process.env.NEXT_DIST_DIR ?? ".next-prod",
+  // The active-slot pointer is authoritative. NSSM historically supplied
+  // NEXT_DIST_DIR=.next-prod; allowing that legacy value to win silently
+  // starts the old bundle after an A/B deployment.
+  NEXT_DIST_DIR: activeDistDir,
   PORT: port,
   SUWANEE_CONTENT_DIR: contentDir,
   SUWANEE_SCHEDULER_TOKEN: schedulerToken,

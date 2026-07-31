@@ -198,6 +198,25 @@ wheels = [
 ]
 
 [[package]]
+name = "anthropic"
+version = "0.120.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
+    { name = "docstring-parser" },
+    { name = "httpx" },
+    { name = "jiter" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/10/4ca013cb166f226bd89e0aeb0fcaff94f45ddf716d4925ce89475d3c587b/anthropic-0.120.2.tar.gz", hash = "sha256:9722efc10c27a30a69f5338ddacdb35bc6a64297a4e4ba729bf83af873d5fb3a", size = 1008421, upload-time = "2026-07-28T17:38:26.986Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/63/af/0f5db57b9397a0f3b7fc204cbef143401a7cadaf982330f97f1ce3d39f34/anthropic-0.120.2-py3-none-any.whl", hash = "sha256:0f0bc2b381dc0eb41c8d886b815d79c2041cd2374f83aed36f574b6dc9c579c1", size = 1022851, upload-time = "2026-07-28T17:38:25.466Z" },
+]
+
+[[package]]
 name = "anyio"
 version = "4.14.2"
 source = { registry = "https://pypi.org/simple" }
@@ -995,6 +1014,9 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+anthropic = [
+    { name = "livekit-plugins-anthropic" },
+]
 codecs = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
@@ -1093,6 +1115,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ba/9a/7cdf1a77d5fd80e06533d4f2584c45d2c978f1249338969f814502db45ad/livekit_local_inference-0.2.6-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:80dc582413d816c86a0620410c2bfc3234e782a49d2b07b4bed0ff6285bdf4a1", size = 34824215, upload-time = "2026-06-24T16:55:45.02Z" },
     { url = "https://files.pythonhosted.org/packages/86/f2/0207071f236f639cf9515838ce98cfc3a8c1b19db8e6f46350e7231f2200/livekit_local_inference-0.2.6-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9c148ec2735e903dc00e37dc2580e0417f67ec7ee4be119dca7844b104afbfe9", size = 34868380, upload-time = "2026-06-24T16:55:48.119Z" },
     { url = "https://files.pythonhosted.org/packages/1e/91/c194db20c8e9272cadf0913d42392cda5eec5e78a14820a3fa678e42e4b6/livekit_local_inference-0.2.6-cp314-cp314-win_amd64.whl", hash = "sha256:4140e4fd60dd7b7d69a55e1d454d5d893f8ffe026c30e0d7cd31fa42b10d5621", size = 34914243, upload-time = "2026-06-24T16:55:51.322Z" },
+]
+
+[[package]]
+name = "livekit-plugins-anthropic"
+version = "1.6.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anthropic" },
+    { name = "httpx" },
+    { name = "livekit-agents" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b1/86/6d03b07bb1fe8da91988b21f4b9830151a6ba557c26be2c1b391e06e73e3/livekit_plugins_anthropic-1.6.7.tar.gz", hash = "sha256:ec049d6fc89b431a9b51529bbc25b4347d1524831bcce393a3e23a546678e12d", size = 9306, upload-time = "2026-07-25T02:04:13.926Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e8/e0/69ade4e968d6b459a81fac745c49933ab13d8638782abc68d7663ac0d1c1/livekit_plugins_anthropic-1.6.7-py3-none-any.whl", hash = "sha256:909171805db215010e0ecae8fd28c6a63bb74aa112247a337e31c0d620604874", size = 11061, upload-time = "2026-07-25T02:04:12.546Z" },
 ]
 
 [[package]]
@@ -2367,7 +2403,7 @@ name = "suwanee-livekit-schedule-agent"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "livekit-agents", extra = ["openai", "silero"] },
+    { name = "livekit-agents", extra = ["anthropic", "openai", "silero"] },
     { name = "python-dotenv" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
@@ -2381,7 +2417,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "livekit-agents", extras = ["openai", "silero"], specifier = ">=1.6.1" },
+    { name = "livekit-agents", extras = ["anthropic", "openai", "silero"], specifier = ">=1.6.1" },
     { name = "python-dotenv" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]

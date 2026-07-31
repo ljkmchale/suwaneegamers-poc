@@ -4,6 +4,7 @@ import { config } from "./config.mjs";
 
 const CACHE_PATH = path.join(config.dataDir, "query-cache.json");
 const TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const QUERY_CACHE_VERSION = "v4";
 const queryExcludedSourcePaths = new Set(["log.md"]);
 
 let _cache = null;
@@ -39,7 +40,7 @@ function cacheKey(question, options = {}) {
   const campaign = String(options.campaign ?? "All");
   const visibility = String(options.visibility ?? "players");
   const normalized = String(question).trim().toLowerCase().replace(/\s+/g, " ");
-  return `${normalized}|${campaign}|${visibility}`;
+  return `${QUERY_CACHE_VERSION}|${normalized}|${campaign}|${visibility}`;
 }
 
 async function indexMtime() {

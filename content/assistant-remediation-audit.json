@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "id": "audit-rem-9b3893ac5f9d8e76-migration",
+      "remediationId": "rem-9b3893ac5f9d8e76",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-07-30T00:33:00.000Z"
+      },
+      "createdAt": "2026-07-30T00:33:00.000Z"
+    }
+  ]
+}

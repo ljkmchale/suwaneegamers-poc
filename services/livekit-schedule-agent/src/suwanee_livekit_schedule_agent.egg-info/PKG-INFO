@@ -3,6 +3,6 @@ Name: suwanee-livekit-schedule-agent
 Version: 0.1.0
 Summary: LiveKit voice agent for Suwanee Gamers calendar questions
 Requires-Python: <3.15,>=3.10
-Requires-Dist: livekit-agents[openai,silero]>=1.6.1
+Requires-Dist: livekit-agents[anthropic,openai,silero]>=1.6.1
 Requires-Dist: python-dotenv
 Requires-Dist: tzdata; platform_system == "Windows"

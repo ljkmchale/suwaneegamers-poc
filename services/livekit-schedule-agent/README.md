@@ -51,6 +51,25 @@ The default development configuration expects:
 - Ollama: `http://127.0.0.1:11434`
 - Speaches: `http://127.0.0.1:8000`
 
+## Language model
+
+Myra thinks with **Claude Haiku 4.5**, falling back to the local Ollama model
+when the API cannot be reached. Set the key in `.env.local` (either this
+directory or the repo root — both are loaded by absolute path, service first):
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+With no key set the agent runs on Ollama alone and logs that it did, so the
+stack still works offline. Optional overrides: `ANTHROPIC_MODEL` (default
+`claude-haiku-4-5`), `ANTHROPIC_MAX_TOKENS` (512), `ANTHROPIC_TEMPERATURE`
+(0.3), and `LLM_ATTEMPT_TIMEOUT` (4.0s before failing over to Ollama).
+
+A `400 ... credit balance is too low` in the agent log means the API key is
+valid but the account has no credits — Myra silently falls back to Ollama and
+keeps working. Add credits at console.anthropic.com under Plans &amp; Billing.
+
 Copy `.env.example` to `.env.local` if it is not already present. Then:
 
 1. Install dependencies:

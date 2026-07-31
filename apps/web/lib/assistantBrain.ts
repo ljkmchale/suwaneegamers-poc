@@ -61,6 +61,30 @@ export function getAssistantPronunciations(): Record<string, string> {
   }
 }
 
+// The inverse of the pronunciation map. Pronunciations fix what Myra *says*;
+// these fix what she *hears*. Whisper has never seen the group's invented proper
+// nouns, so "Emberstran" comes back as "Imberstran" and the answer that follows
+// is wrong — which costs a whole correction turn. Keys are what the transcript
+// contains, values are the canonical spelling.
+export function getAssistantMishearings(): Record<string, string> {
+  try {
+    const value = JSON.parse(
+      fs.readFileSync(contentPath("assistant-mishearings.json"), "utf-8"),
+    ) as unknown;
+    if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([heard, canonical]) =>
+          heard.trim().length > 0
+          && typeof canonical === "string"
+          && canonical.trim().length > 0)
+        .map(([heard, canonical]) => [heard.trim(), canonical.trim()]),
+    );
+  } catch {
+    return {};
+  }
+}
+
 export interface AssistantRecap {
   name: string;
   aliases: string[];

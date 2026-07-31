@@ -176,11 +176,17 @@ This gate **must** stay in the proxy. The `(site)` layout also renders `SignInGa
 
 ### The Home-Page Voice Assistant
 
-The mic button on the home page is a LiveKit voice agent (`services/livekit-schedule-agent/`, local Ollama + Speaches). `POST /api/livekit/token` builds the dispatch metadata: a live calendar snapshot (`events`) **and** a `knowledge` string — the contents of `content/assistant-brain.md`, read via `lib/assistantBrain.ts`.
+The mic button on the home page is a LiveKit voice agent (`services/livekit-schedule-agent/`, Claude Haiku for thinking + local Speaches for speech, with local Ollama as the offline fallback). `POST /api/livekit/token` builds the dispatch metadata: a live calendar snapshot (`events`) **and** a `knowledge` string — the contents of `content/assistant-brain.md`, read via `lib/assistantBrain.ts`.
 
 `assistant-brain.md` is the assistant's **knowledge base** (a Karpathy-style "LLM wiki"): a compact, curated Markdown doc about the group, campaigns, DMs, and links. The prose outside the `<!-- AUTO:BEGIN -->` / `<!-- AUTO:END -->` markers is hand-editable; the block between them is regenerated from `campaigns.json`, `dungeon-masters.json`, and `portal-links.json` by `scripts/build-assistant-brain.mjs` (`pnpm content:build-assistant-brain`, also the daily `assistant-brain` scheduler job).
 
-In `agent.py`, schedule questions are still answered deterministically for speed; other questions fall through to the Ollama model, grounded on the knowledge base injected into its instructions. Keep the brain small — it rides in dispatch metadata every session.
+In `agent.py`, schedule questions are still answered deterministically for speed; other questions fall through to the language model, grounded on the knowledge base injected into its instructions. Keep the brain small — it rides in dispatch metadata every session.
+
+**Page context.** Myra knows which page the visitor is on. The path + document title ride in the token request at connect time (`sanitizePageContext` in the token route validates them as internal absolute paths), and every later navigation is published to the `myra.page_context` data-channel topic by `AssistantRoom`. The agent renders this into a trailing prompt block via `page_context_block()` and swaps it with `update_instructions()` — so "tell me about this" resolves against what's on screen, including right after Myra opens a page herself. It is text-only: she gets the page's name and address, never its pixels, and the prompt explicitly forbids implying otherwise. Browser-supplied text is bounded on both sides.
+
+Each answer records which model served it in `voice_questions.model` (`claude` / `ollama` / null for deterministic), so a silent fallback is visible rather than looking identical under `response_mode = 'llm'`.
+
+`build_llm()` returns a `FallbackAdapter` over **Claude Haiku 4.5 first, local Ollama second**. Haiku is there for one job the 3B model was unreliable at: deciding when to call `search_knowledge_base`. Ollama remains installed as the floor — if the API is unreachable, out of credits, or the network is down, the adapter skips to it and Myra keeps answering. Set `ANTHROPIC_API_KEY` in `.env.local` (service dir or repo root; both are loaded by absolute path). With no key set, the agent runs local-only and logs that it did. Haiku is deliberate: it is the one current Claude model that still accepts `temperature`, which Sonnet 5 and Opus 5 reject with a 400. `ANTHROPIC_TEMPERATURE` is intentionally separate from the nightly autotuner's `ollamaTemperature`, which is calibrated against Qwen.
 
 #### Personas (per-member voice and manner)
 

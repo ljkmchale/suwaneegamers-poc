@@ -2,6 +2,11 @@ import "server-only";
 
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
+import { pruneExpired } from "@/lib/retention";
+
+// The dashboard only ever looks back over a bounded window, so rows past this
+// age are dead weight on every /admin/analytics query.
+const RETENTION_DAYS = 90;
 
 const SELF_EMAIL = "larry.m.mchale@gmail.com";
 const KNOWN_VISITOR_IDENTITIES = new Map<string, { email: string; name: string }>([
@@ -176,6 +181,7 @@ export interface AnalyticsDashboardData {
     visitorLabel: string;
     visitorName: string | null;
     visitorEmail: string | null;
+    firstTimeVisitor: boolean;
   }>;
   people: Array<{
     visitorKey: string;
@@ -188,6 +194,7 @@ export interface AnalyticsDashboardData {
     lastSeenAt: string;
     pagesViewed: number;
     topPage: string;
+    firstTimeVisitor: boolean;
   }>;
   memberPageActivity: Array<{
     visitorKey: string;
@@ -215,6 +222,7 @@ export interface AnalyticsDashboardData {
     deviceType: string;
     lastSeenAt: string;
     pageViews: number;
+    firstTimeVisitor: boolean;
   }>;
   syncJobs: Array<{
     id: string;
@@ -377,6 +385,15 @@ export function recordUsageEvents(input: {
       sessionId,
     );
   })();
+
+  // Outside the transaction: a slow housekeeping delete should not hold the
+  // write lock that the ingest above needs. Sessions go first so their events
+  // leave via ON DELETE CASCADE; the events pass then catches any stragglers
+  // whose session is still active.
+  pruneExpired([
+    { table: "analytics_sessions", column: "last_seen_at", days: RETENTION_DAYS },
+    { table: "analytics_events", column: "created_at", days: RETENTION_DAYS },
+  ]);
 }
 
 export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData {
@@ -889,22 +906,27 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
 
   const recentVisitors = (db.prepare(`
     SELECT
-      last_seen_at,
-      entry_path,
-      last_path,
-      device_type,
-      page_views,
-      engaged_seconds,
-      visitor_email,
-      visitor_name,
+      s.last_seen_at,
+      s.entry_path,
+      s.last_path,
+      s.device_type,
+      s.page_views,
+      s.engaged_seconds,
+      s.visitor_email,
+      s.visitor_name,
+      CASE WHEN (
+        SELECT COUNT(*) FROM analytics_sessions AS lifetime
+        WHERE COALESCE(lifetime.visitor_email, lifetime.visitor_id, lifetime.session_id)
+          = COALESCE(s.visitor_email, s.visitor_id, s.session_id)
+      ) = 1 THEN 1 ELSE 0 END AS first_time_visitor,
       COALESCE(
-        visitor_name,
-        visitor_email,
-        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(visitor_id, session_id), 1, 6))
+        s.visitor_name,
+        s.visitor_email,
+        'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
       ) AS visitor_label
-    FROM analytics_sessions
-    WHERE last_seen_at >= ?
-    ORDER BY last_seen_at DESC
+    FROM analytics_sessions AS s
+    WHERE s.last_seen_at >= ?
+    ORDER BY s.last_seen_at DESC
     LIMIT 12
   `).all(sinceIso) as Array<{
     last_seen_at: string;
@@ -916,6 +938,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     visitor_email: string | null;
     visitor_name: string | null;
     visitor_label: string;
+    first_time_visitor: number;
   }>).map((row) => ({
     lastSeenAt: row.last_seen_at,
     entryPath: row.entry_path,
@@ -926,9 +949,17 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     visitorLabel: row.visitor_label,
     visitorName: row.visitor_name,
     visitorEmail: row.visitor_email,
+    firstTimeVisitor: row.first_time_visitor === 1,
   }));
 
   const people = (db.prepare(`
+    WITH lifetime AS (
+      SELECT
+        COALESCE(visitor_email, visitor_id, session_id) AS visitor_key,
+        COUNT(*) AS lifetime_sessions
+      FROM analytics_sessions
+      GROUP BY COALESCE(visitor_email, visitor_id, session_id)
+    )
     SELECT
       COALESCE(s.visitor_email, s.visitor_id, s.session_id) AS visitor_key,
       MAX(s.visitor_email) AS email,
@@ -940,9 +971,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COUNT(DISTINCT s.session_id) AS sessions,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
-      MAX(e.created_at) AS last_seen_at
+      MAX(e.created_at) AS last_seen_at,
+      MAX(lifetime.lifetime_sessions) AS lifetime_sessions
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    JOIN lifetime
+      ON lifetime.visitor_key = COALESCE(s.visitor_email, s.visitor_id, s.session_id)
     WHERE e.created_at >= ?
     GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id)
     ORDER BY last_seen_at DESC
@@ -955,6 +989,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     page_views: number;
     engaged_seconds: number;
     last_seen_at: string;
+    lifetime_sessions: number;
   }>).map((row) => ({
     visitorKey: row.visitor_key,
     email: row.email,
@@ -966,6 +1001,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     lastSeenAt: row.last_seen_at,
     pagesViewed: 0,
     topPage: "",
+    firstTimeVisitor: row.lifetime_sessions === 1,
   }));
 
   const memberPageActivity = (db.prepare(`
@@ -1062,23 +1098,34 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   }));
 
   const activeVisitors = (db.prepare(`
-    SELECT session_id, visitor_id, last_path, device_type, last_seen_at, page_views, visitor_name, visitor_email
+    WITH lifetime AS (
+      SELECT
+        COALESCE(visitor_email, visitor_id, session_id) AS visitor_key,
+        COUNT(*) AS lifetime_sessions
+      FROM analytics_sessions
+      GROUP BY COALESCE(visitor_email, visitor_id, session_id)
+    )
+    SELECT session_id, visitor_id, last_path, device_type, last_seen_at, page_views,
+      visitor_name, visitor_email, lifetime_sessions
     FROM (
       SELECT
-        session_id,
-        visitor_id,
-        last_path,
-        device_type,
-        last_seen_at,
-        page_views,
-        visitor_name,
-        visitor_email,
+        s.session_id,
+        s.visitor_id,
+        s.last_path,
+        s.device_type,
+        s.last_seen_at,
+        s.page_views,
+        s.visitor_name,
+        s.visitor_email,
+        lifetime.lifetime_sessions,
         ROW_NUMBER() OVER (
-          PARTITION BY COALESCE(visitor_email, visitor_id, session_id)
-          ORDER BY last_seen_at DESC
+          PARTITION BY COALESCE(s.visitor_email, s.visitor_id, s.session_id)
+          ORDER BY s.last_seen_at DESC
         ) AS visitor_rank
-      FROM analytics_sessions
-      WHERE last_seen_at >= ?
+      FROM analytics_sessions AS s
+      JOIN lifetime
+        ON lifetime.visitor_key = COALESCE(s.visitor_email, s.visitor_id, s.session_id)
+      WHERE s.last_seen_at >= ?
     )
     WHERE visitor_rank = 1
     ORDER BY last_seen_at DESC
@@ -1092,6 +1139,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     page_views: number;
     visitor_name: string | null;
     visitor_email: string | null;
+    lifetime_sessions: number;
   }>).map((row) => ({
     visitor: row.visitor_name
       ?? row.visitor_email
@@ -1100,6 +1148,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     deviceType: row.device_type,
     lastSeenAt: row.last_seen_at,
     pageViews: row.page_views,
+    firstTimeVisitor: row.lifetime_sessions === 1,
   }));
 
   const syncJobs = (db.prepare(`

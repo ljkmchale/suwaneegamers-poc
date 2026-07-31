@@ -610,17 +610,6 @@ function resolveQueryScope(question, options = {}) {
     };
   }
 
-  if (isWorldOnlyQuestion(question)) {
-    return {
-      retrievalCampaign: "World",
-      promptCampaign: "World lore",
-      selectedCampaign: selected,
-      crossCampaign: false,
-      worldCrossCampaign: false,
-      requiresCampaign: false
-    };
-  }
-
   if (selected && selected !== "All") {
     const campaign = resolveCampaignSelection(selected);
     if (campaign) {
@@ -640,6 +629,17 @@ function resolveQueryScope(question, options = {}) {
     return {
       retrievalCampaign: mentionedCampaign.indexName,
       promptCampaign: mentionedCampaign.name,
+      selectedCampaign: selected,
+      crossCampaign: false,
+      worldCrossCampaign: false,
+      requiresCampaign: false
+    };
+  }
+
+  if (isWorldOnlyQuestion(question)) {
+    return {
+      retrievalCampaign: "World",
+      promptCampaign: "World lore",
       selectedCampaign: selected,
       crossCampaign: false,
       worldCrossCampaign: false,
@@ -1141,7 +1141,7 @@ async function answerExactWorldQuestion(question, options = {}) {
   if (isSuperlativeWorldQuestion(question)) return null;
   const scope = resolveQueryScope(question, options);
   if (scope.worldCrossCampaign) return null;
-  if (scope.retrievalCampaign !== "World" && scope.selectedCampaign !== "All") return null;
+  if (scope.retrievalCampaign !== "World") return null;
 
   const index = await loadIndex();
   const normalizedQuestion = normalize(question);
@@ -1353,11 +1353,19 @@ function stripMarkdownHeadings(value) {
 
 function isWorldOnlyQuestion(question) {
   if (isSuperlativeWorldQuestion(question)) return false;
-  return /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question)
+  const worldSubject = /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question);
+  const pantheonSubject = /\b(god|gods|goddess|goddesses|deity|deities|pantheon|Addan|Amriel|Asmodeus|Brault|Celestine|Cembus|Coralei|Crael|Diverra|Diveria|Eredra|Fralee|Goldraen|Iuz'?Obal|Layeth|Muerg|Myrdris|Natafae|Nigrum|Ol'?Farium|Osanna|Phoe|Sylunara|Tornia|Tyvarion|Urlich|Utheri|Villari|Vo'?egurn|Athuel|Bellum|Disgar|Lyess|Neera|Smott|Tiash|Torec)\b/i.test(question);
+  return (worldSubject || pantheonSubject)
     && !/\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane)\b/i.test(question);
 }
 
 function isCrossCampaignWorldQuestion(question) {
+  if (
+    resolveQuestionCampaign(question, { campaign: "All" }) &&
+    !shouldAnswerAcrossCampaigns(question)
+  ) {
+    return false;
+  }
   const hasWorldSubject = /\b(Oberra|Myrdae|Emberstran|O'?naren|Ahndashere|Basctdelm|Scarwatch|Nunglthil|Adsuren|Gibuldon|world lore|shared world)\b/i.test(question);
   const asksAboutEvents = /\b(what happened|has happened|happening|going on|events?|history|parties|campaigns|adventures?|visited|encountered|experienced|know about)\b/i.test(question);
   return hasWorldSubject && asksAboutEvents;
@@ -1467,7 +1475,7 @@ function answerAllCampaignRosters() {
 }
 
 async function answerLatestSessionQuestion(question, options = {}) {
-  if (!/\b(latest|most[\s-]recent|last|newest|current)\b.{0,20}\bsession\b|\bsession\b.{0,20}\b(latest|most[\s-]recent|last|newest|current)\b|\bwhat session\b|\bhow many sessions\b/i.test(question)) return null;
+  if (!/\b(latest|most[\s-]recent|last|newest|current)\b.{0,80}\bsession\b|\bsession\b.{0,80}\b(latest|most[\s-]recent|last|newest|current)\b|\bwhat session\b|\bhow many sessions\b/i.test(question)) return null;
 
   const scope = resolveQueryScope(question, options);
   const campaign = scope.retrievalCampaign;
@@ -1620,6 +1628,25 @@ function selectStructuredLines(markdown, scope, question, lookup) {
       const headingCampaign = resolveCampaignSelection(currentHeading);
       if (headingCampaign) currentCampaignSection = headingCampaign.indexName;
       if (/world/i.test(currentHeading)) currentCampaignSection = "World";
+      continue;
+    }
+
+    if (lookup.path.includes("Pantheon") && line.startsWith("|")) {
+      const oldGodsOnly = /\bold gods?\b/i.test(question);
+      const newOrderOnly = /\bnew order\b/i.test(question);
+      if (oldGodsOnly && !/\bold gods?\b/i.test(currentHeading)) continue;
+      if (newOrderOnly && !/\bnew order\b/i.test(currentHeading)) continue;
+      const cells = line
+        .split("|")
+        .slice(1, -1)
+        .map((cell) => cell.trim().replace(/\[\[([^]|]+)(?:\|[^]]+)?\]\]/g, "$1"));
+      if (
+        cells.length >= 2 &&
+        !cells.every((cell) => /^-+$/.test(cell)) &&
+        !/^(name|domain)$/i.test(cells[0])
+      ) {
+        lines.push(cells.filter(Boolean).join(" — "));
+      }
       continue;
     }
 
@@ -2085,6 +2112,7 @@ function cleanEntityName(value) {
   const cleaned = value
     .replace(/[?.!,;:]+$/g, "")
     .replace(/\b(in|from|for|about)\b.*$/i, "")
+    .replace(/['’]s\s+(commandments?|rites?|symbols?|myths?|domains?|titles?|faith|teachings?)$/i, "")
     .replace(/\b(thread|plot|quest|lead|mystery|storyline|story line|arc)\b$/i, "")
     .replace(/^the\s+/i, "")
     .trim();

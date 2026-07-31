@@ -81,6 +81,9 @@ describe("trimForVoice", () => {
     expect(trimForVoice("See [Session 12](https://kb.example.com/s12) for details.")).toBe(
       "See Session 12 for details.",
     );
+    expect(trimForVoice("[[Diverra]] and [[Souls of Destiny|the campaign]]")).toBe(
+      "Diverra and the campaign",
+    );
     expect(trimForVoice("- First point\n- Second point")).toBe("First point Second point");
   });
 

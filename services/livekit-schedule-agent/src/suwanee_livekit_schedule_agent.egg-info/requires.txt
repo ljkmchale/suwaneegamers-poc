@@ -1,4 +1,4 @@
-livekit-agents[openai,silero]>=1.6.1
+livekit-agents[anthropic,openai,silero]>=1.6.1
 python-dotenv
 
 [:platform_system == "Windows"]

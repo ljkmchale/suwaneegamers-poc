@@ -46,6 +46,7 @@ export function recordVoiceQuestion(input: {
   answer?: unknown;
   category: unknown;
   responseMode: unknown;
+  model?: unknown;
   responseMs?: unknown;
   success?: unknown;
   errorMessage?: unknown;
@@ -57,8 +58,8 @@ export function recordVoiceQuestion(input: {
   getDb().transaction(() => {
     getDb().prepare(`
       INSERT INTO voice_questions
-        (session_id, asked_at, question, answer, category, response_mode, response_ms, success, error_message)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (session_id, asked_at, question, answer, category, response_mode, model, response_ms, success, error_message)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       sessionId,
       new Date().toISOString(),
@@ -66,6 +67,7 @@ export function recordVoiceQuestion(input: {
       clean(input.answer, 1200) || null,
       clean(input.category, 50) || "unknown",
       clean(input.responseMode, 50) || "unknown",
+      clean(input.model, 40) || null,
       Math.min(600_000, Math.max(0, Math.round(Number(input.responseMs) || 0))),
       success ? 1 : 0,
       clean(input.errorMessage, 500) || null,
@@ -108,13 +110,13 @@ export function getVoiceAnalytics(days: number) {
     GROUP BY category ORDER BY value DESC
   `).all(sinceIso) as Array<{ label: string; value: number }>;
   const recentQuestions = db.prepare(`
-    SELECT q.id, q.asked_at, q.question, q.answer, q.category, q.response_mode,
+    SELECT q.id, q.asked_at, q.question, q.answer, q.category, q.response_mode, q.model,
       q.response_ms, q.success, q.error_message, s.member_name, s.member_email
     FROM voice_questions q JOIN voice_sessions s ON s.session_id = q.session_id
     WHERE q.asked_at >= ? ORDER BY q.asked_at DESC LIMIT 50
   `).all(sinceIso) as Array<{
     id: number; asked_at: string; question: string; answer: string | null; category: string;
-    response_mode: string; response_ms: number | null; success: number; error_message: string | null;
+    response_mode: string; model: string | null; response_ms: number | null; success: number; error_message: string | null;
     member_name: string | null; member_email: string | null;
   }>;
   const unsupported = db.prepare(`
@@ -144,6 +146,7 @@ export function getVoiceAnalytics(days: number) {
       answer: row.answer,
       category: row.category,
       responseMode: row.response_mode,
+      model: row.model,
       responseMs: row.response_ms ?? 0,
       success: row.success === 1,
       errorMessage: row.error_message,

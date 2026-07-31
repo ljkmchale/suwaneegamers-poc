@@ -149,6 +149,8 @@ export function isGroundedResult(result: { answer: string; sources: unknown[] })
  */
 export function stripMarkdownForVoice(text: string): string {
   return text
+    .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, "$2") // [[target|label]] -> label
+    .replace(/\[\[([^\]]+)\]\]/g, "$1") // [[target]] -> target
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // [label](url) -> label
     .replace(/https?:\/\/\S+/g, "") // bare URLs
     .replace(/\[\d+\]/g, "") // [1] footnote citations
