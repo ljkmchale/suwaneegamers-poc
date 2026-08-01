@@ -12,6 +12,7 @@ from schedule_agent.agent import (
     campaign_schedule_answer,
     canonicalize_spoken_entity_question,
     canonicalize_spoken_question,
+    diagnostic_request,
     event_loop_lag,
     general_schedule_answer,
     is_about_suwanee_gamers_question,
@@ -149,6 +150,33 @@ def test_diverra_transcription_variant_resolves_to_full_deity_entry():
     assert answer is not None
     assert answer.startswith("Diverra, the Ardent One.")
     assert "love, beauty, passion, and pleasure" in answer
+
+
+def test_tell_me_more_about_is_recognized_as_a_deity_intent():
+    """"Can you tell me more about X" is as common as "tell me about X" and used
+    to fall through to the model even for a known god."""
+    pantheon = load_full_pantheon_knowledge()
+    for phrasing in (
+        "can you tell me more about Diverra",
+        "tell me a bit more about Diverra",
+        "what can you tell me about Diverra",
+    ):
+        answer = pantheon_deity_answer(phrasing.casefold(), pantheon)
+        assert answer is not None, phrasing
+        assert answer.startswith("Diverra, the Ardent One."), phrasing
+
+
+def test_mispronounced_god_resolves_through_the_full_more_about_pipeline():
+    """The reported failure: "can you tell me more about Deveria" -> nothing.
+    The canonicalizer fixes Deveria->Diverra only inside a recognized intent
+    phrase, and "more about" was not one."""
+    catalog = load_voice_entity_catalog()
+    pantheon = load_full_pantheon_knowledge()
+    canonical = canonicalize_spoken_question("can you tell me more about Deveria", catalog)
+    assert "Diverra" in canonical
+    answer = pantheon_deity_answer(canonical.casefold(), pantheon)
+    assert answer is not None
+    assert answer.startswith("Diverra, the Ardent One.")
 
 
 def test_site_wide_voice_catalog_resolves_common_transcription_variants():
@@ -447,6 +475,15 @@ def test_is_self_diagnosis_question_detects_feeling_and_status_intents():
     assert is_self_diagnosis_question("Hey, are you okay today?")
     assert is_self_diagnosis_question("Run a diagnostic on yourself")
     assert is_self_diagnosis_question("Is everything working?")
+    assert is_self_diagnosis_question("You seem slow today.")
+    assert is_self_diagnosis_question("Check your brain.")
+
+
+def test_diagnostic_request_infers_depth_and_component():
+    assert diagnostic_request("Run a full diagnostic") == ("full", None)
+    assert diagnostic_request("Can you check your memory?") == ("component", "memory")
+    assert diagnostic_request("Why can't you hear me?") == ("component", "voice")
+    assert diagnostic_request("Is the website okay?") == ("component", "website")
 
 
 def test_is_self_diagnosis_question_ignores_schedule_questions():

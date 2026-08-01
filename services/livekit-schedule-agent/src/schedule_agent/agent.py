@@ -193,10 +193,8 @@ def sanitize_persona(raw: Any) -> dict[str, Any]:
     # session falls back to the configured default rather than failing silently.
     if re.fullmatch(r"[a-z]{2}_[a-z]{2,20}", voice):
         persona["voice"] = voice
-    try:
+    with contextlib.suppress(KeyError, TypeError, ValueError):
         persona["speed"] = float(raw["speed"])
-    except (KeyError, TypeError, ValueError):
-        pass
     return persona
 
 
@@ -733,8 +731,12 @@ def canonicalize_spoken_entity_question(
     # "Dungeons III III". Anything past the first sentence is the free-form
     # pass's job.
     match = re.search(
-        r"\b(?:i would like to know about|tell me about|who is|who was|where is|what is known about|"
-        r"what do you know about|what god is|which god is|when is|when does|"
+        # "tell me MORE about X" must resolve the entity too, or a mispronounced
+        # name (Deveria -> Diverra) never gets canonicalized before the deity
+        # lookup runs.
+        r"\b(?:i would like to know about|tell me (?:more |a bit more |a little more )?about|"
+        r"tell me more on|who is|who was|where is|what is known about|"
+        r"what (?:more )?do you know about|what god is|which god is|when is|when does|"
         r"when do|open|show me|go to|take me to|visit)\s+([^?.!]+)",
         question,
         flags=re.IGNORECASE,
@@ -780,7 +782,11 @@ def canonicalize_spoken_question(question: str, catalog: tuple[str, ...]) -> str
 
 def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
     intent = re.search(
-        r"\b(?:tell me about|who is|who was|what is known about)\s+(.+?)[?.!]*$",
+        # "tell me MORE about X" is as common as "tell me about X" and was not
+        # matched, so "can you tell me more about Diverra" fell through to the
+        # model even for a known god. Also accept "tell me more on".
+        r"\b(?:tell me (?:more |a bit more |a little more )?about|tell me more on|"
+        r"who is|who was|what is known about|what can you tell me about)\s+(.+?)[?.!]*$",
         question,
         flags=re.IGNORECASE,
     )
@@ -1335,12 +1341,37 @@ SELF_DIAGNOSIS_PHRASES = (
     "what's wrong with you",
     "how is your health",
     "how's your health",
+    "you seem slow",
+    "can you hear me",
+    "do you remember",
+    "is the site okay",
+    "check your brain",
+    "systems online",
+    "website doing",
+    "problems today",
+    "last error",
 )
 
 
 def is_self_diagnosis_question(question: str) -> bool:
     normalized = question.casefold()
     return any(phrase in normalized for phrase in SELF_DIAGNOSIS_PHRASES)
+
+
+def diagnostic_request(question: str) -> tuple[str, str | None]:
+    """Infer diagnostic depth and component without treating one phrase as proof."""
+    normalized = question.casefold()
+    depth = "full" if "full diagnostic" in normalized or "all your systems" in normalized else "quick"
+    components = {
+        "memory": ("memory", "remember", "brain", "wiki"),
+        "voice": ("hear", "voice", "microphone", "audio", "livekit", "speech"),
+        "website": ("site", "website", "database", "api"),
+        "ai": ("think", "model", "ai", "claude", "ollama"),
+    }
+    for component, terms in components.items():
+        if any(term in normalized for term in terms):
+            return "component", component
+    return depth, None
 
 
 RECAP_PHRASES = (
@@ -1990,6 +2021,7 @@ class Myra(Agent):
         self.schedule = schedule
         self.room = room
         self.knowledge = str(schedule.get("knowledge") or "").strip()
+        self.health = schedule.get("health") if isinstance(schedule.get("health"), dict) else {}
         self.about_suwanee_gamers = str(
             schedule.get("aboutSuwaneeGamers") or ""
         ).strip()
@@ -2248,7 +2280,10 @@ class Myra(Agent):
         started = time.perf_counter()
         question = canonical_question.casefold()
         if is_self_diagnosis_question(question):
-            spoken, status = await self.run_self_diagnosis()
+            depth, component = diagnostic_request(question)
+            result = await self._get_myra_health(depth=depth, component=component or "")
+            spoken = str(result.get("summary") or "I'm able to respond, but I cannot verify my current health.")
+            status = str(result.get("overallStatus") or "unknown")
             self.session.say(spoken, allow_interruptions=True)
             self._record_analytics(
                 question=original_question,
@@ -2433,6 +2468,58 @@ class Myra(Agent):
             knowledge_ok=knowledge_ok,
             upcoming_count=upcoming_count,
         )
+
+    @function_tool(flags=ToolFlag.CANCELLABLE, on_duplicate="reject")
+    async def get_myra_health(
+        self,
+        context: RunContext,
+        depth: str = "quick",
+        component: str = "",
+    ) -> dict[str, Any]:
+        """Get Myra's real, structured system health and current capabilities.
+
+        Call whenever a visitor asks how Myra feels, whether she or the website is
+        working, why she is behaving differently, or asks to check a component.
+
+        Args:
+            depth: quick, full, or component.
+            component: Optional ai, memory, voice, website, external, or runtime.
+        """
+        del context
+        return await self._get_myra_health(depth=depth, component=component)
+
+    async def _get_myra_health(self, depth: str = "quick", component: str = "") -> dict[str, Any]:
+        base_url = os.getenv("SUWANEE_GAMERS_BASE_URL", "http://127.0.0.1:4652").rstrip("/")
+        token = os.getenv("MYRA_INTERNAL_API_TOKEN", "")
+        endpoint = f"{base_url}/api/myra/health/summary"
+        if depth == "component" and component and token:
+            endpoint = f"{base_url}/api/myra/health/check/{component}"
+        try:
+            def request_health() -> dict[str, Any]:
+                headers = {"Authorization": f"Bearer {token}"} if token else {}
+                request = urllib.request.Request(
+                    endpoint,
+                    headers=headers,
+                    method="POST" if "/check/" in endpoint else "GET",
+                )
+                with urllib.request.urlopen(request, timeout=5) as response:
+                    payload = json.loads(response.read().decode("utf-8"))
+                return payload if isinstance(payload, dict) else {}
+
+            result = await asyncio.to_thread(request_health)
+            if result.get("summary"):
+                self.health = result
+                return result
+        except Exception as error:
+            logger.warning("Central Myra diagnostic request failed: %s", type(error).__name__)
+
+        if self.health.get("summary"):
+            cached = dict(self.health)
+            cached["summary"] = f"{cached['summary']} This is my most recent cached check."
+            return cached
+
+        spoken, status = await self.run_self_diagnosis()
+        return {"overallStatus": status, "summary": spoken, "capabilities": {}}
 
     @function_tool(flags=ToolFlag.CANCELLABLE, on_duplicate="reject")
     async def search_knowledge_base(
