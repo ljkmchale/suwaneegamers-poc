@@ -730,6 +730,142 @@ def test_claude_temperature_ignores_the_ollama_autotuner(monkeypatch):
     assert claude._opts.temperature == 0.3
 
 
+def test_claude_prompt_caching_is_on_by_default(monkeypatch):
+    """Myra's ~6.4k-token prefix was reprocessed cold on every turn."""
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    monkeypatch.delenv("ANTHROPIC_CACHING", raising=False)
+    claude, _ = build_llm({})._llm_instances
+    assert claude._opts.caching == "ephemeral"
+
+
+def test_claude_prompt_caching_can_be_switched_off_without_a_redeploy(monkeypatch):
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    for value in ("off", "none", "0", "false", "OFF"):
+        monkeypatch.setenv("ANTHROPIC_CACHING", value)
+        claude, _ = build_llm({})._llm_instances
+        # NOT_GIVEN, never the string "off" — the plugin only checks == "ephemeral".
+        assert claude._opts.caching != "ephemeral"
+
+
+def test_spoken_name_variants_splits_roster_nicknames():
+    from schedule_agent.agent import _spoken_name_variants
+
+    assert _spoken_name_variants('Az\'efal (Affy) Fairhand') == ["Az'efal Fairhand", "Affy"]
+    assert _spoken_name_variants('Teldo "Fungus Roundbelly"') == ["Teldo", "Fungus Roundbelly"]
+    assert _spoken_name_variants('Melessekoviendarre "Meles"') == [
+        "Melessekoviendarre",
+        "Meles",
+    ]
+    # A plain name is returned unchanged, and an apostrophe is not a nickname.
+    assert _spoken_name_variants("Cerul Slate") == ["Cerul Slate"]
+    assert _spoken_name_variants("Draelith al'Varren") == ["Draelith al'Varren"]
+    assert _spoken_name_variants("") == []
+    assert _spoken_name_variants(None) == []
+
+
+def test_active_player_characters_are_in_the_entity_catalog():
+    """Whisper returned "Valehart"; with no "Valeheart" to match, it was dropped."""
+    from schedule_agent.agent import load_active_character_names, load_voice_entity_catalog
+
+    active = load_active_character_names()
+    assert "Aurelius Valeheart" in active
+    # Only Active rows — a retired character must not widen the fuzzy surface.
+    assert "Aria Windrunner" not in active
+    # Nicknames too short to match safely against ordinary speech are excluded.
+    assert all(len(name) >= 5 for name in active)
+    assert "Ains" not in active
+
+    catalog = load_voice_entity_catalog()
+    assert "Aurelius Valeheart" in catalog
+
+
+def test_canonicalizer_repairs_the_mangled_name_instead_of_deleting_it():
+    """The exact string Speaches returned for this audio on 2026-08-01."""
+    from schedule_agent.agent import canonicalize_spoken_question, load_voice_entity_catalog
+
+    catalog = load_voice_entity_catalog()
+    fixed = canonicalize_spoken_question(
+        "Tell me about Aurelius Valehart from Heroes of Imberstran.",
+        catalog,
+    )
+    assert "Aurelius Valeheart" in fixed
+    assert "Heroes of Emberstran" in fixed
+    assert "Valehart" not in fixed
+
+
+def test_dungeon_master_is_not_mistaken_for_a_campaign_name():
+    """"who is the dungeon master" became "who is the Dungeons III Master Thorne"."""
+    from schedule_agent.agent import canonicalize_spoken_question, load_voice_entity_catalog
+
+    catalog = load_voice_entity_catalog()
+    for phrase in (
+        "who is the dungeon master",
+        "who are the dungeon masters",
+        "who is the dm",
+        "what characters are in the party",
+        "who are the players",
+    ):
+        assert canonicalize_spoken_question(phrase, catalog) == phrase, phrase
+
+
+def test_adding_player_characters_does_not_corrupt_ordinary_speech():
+    """The fuzzy matcher must never rewrite words that are not names.
+
+    Adding 29 character names widens its surface; these are the everyday
+    utterances that must survive it untouched.
+    """
+    from schedule_agent.agent import canonicalize_spoken_question, load_voice_entity_catalog
+
+    catalog = load_voice_entity_catalog()
+    for phrase in (
+        "what is my next game",
+        "no thanks, not right now",
+        "can you open the calendar for me",
+        "yes please",
+        "who is playing tonight",
+        "tell me about the gods",
+        "i do not want a recap",
+        "what time does it start",
+    ):
+        assert canonicalize_spoken_question(phrase, catalog) == phrase, phrase
+
+
+def test_bare_affirmation_accepts_agreement_only():
+    from schedule_agent.agent import is_bare_affirmation
+
+    for yes in ("yes", "Yeah.", "Sure!", "yes please", "OK", "go ahead", "  yep  "):
+        assert is_bare_affirmation(yes), yes
+    # A "yes" carrying its own question must keep the visitor's actual words —
+    # this decides whether to substitute a question they never asked.
+    for no in (
+        "yeah, what about the gods?",
+        "yes tell me about Aurelius",
+        "no",
+        "no thanks",
+        "",
+        "what's my next game?",
+    ):
+        assert not is_bare_affirmation(no), no
+
+
+def test_greeting_offers_route_to_the_deterministic_schedule_path():
+    """The greeting promises a fast answer; both offers must avoid the model."""
+    from schedule_agent.agent import (
+        is_personal_schedule_question,
+        is_schedule_question,
+    )
+
+    assert is_personal_schedule_question("when do i play next")
+    # The no-linked-campaigns variant must NOT hit the personal branch, which
+    # would answer "I don't see any assignments linked to your profile".
+    assert not is_personal_schedule_question("what games are coming up")
+    assert is_schedule_question("what games are coming up")
+
+
 def test_page_context_block_rejects_anything_but_an_internal_path():
     from schedule_agent.agent import page_context_block
 

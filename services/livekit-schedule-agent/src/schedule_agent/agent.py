@@ -280,8 +280,84 @@ def load_voice_entity_catalog() -> tuple[str, ...]:
 
     pantheon = load_full_pantheon_knowledge()
     names.update(re.findall(r"^\| \[\[([^\]]+)\]\] \|", pantheon, flags=re.MULTILINE))
+    # Active player characters. The wiki covers NPCs and locations, but the PCs
+    # live only in the synced roster sheet, so without this the canonicalizer
+    # cannot repair the names people say most often.
+    names.update(load_active_character_names())
     return tuple(sorted(names, key=lambda value: value.casefold()))
 
+
+
+def _spoken_name_variants(raw: str) -> list[str]:
+    """Split a roster name into the forms someone might actually say.
+
+    Roster entries carry their nickname inline — `Az'efal (Affy) Fairhand`,
+    `Teldo "Fungus Roundbelly"`, `Melessekoviendarre "Meles"`. A speaker says one
+    or the other, never the punctuation, so each becomes its own vocabulary
+    entry: the bracketed nickname, and the name with the brackets removed.
+    """
+    value = str(raw or "").strip()
+    if not value:
+        return []
+    variants: list[str] = []
+    for nickname in re.findall(r"[\"'“”]([^\"'“”]+)[\"'“”]|\(([^)]+)\)", value):
+        picked = (nickname[0] or nickname[1]).strip()
+        # Skip an apostrophe inside a name (Az'efal) being read as a quote.
+        if picked and " " not in picked and len(picked) < 3:
+            continue
+        if picked:
+            variants.append(picked)
+    base = re.sub(r"[\"“”]([^\"“”]+)[\"“”]|\(([^)]+)\)", " ", value)
+    base = re.sub(r"\s+", " ", base).strip(" ,-")
+    if base:
+        variants.insert(0, base)
+    return variants
+
+
+@functools.lru_cache(maxsize=1)
+def load_active_character_names() -> tuple[str, ...]:
+    """Player-character names for the canonicalizer, from campaign-roster.json.
+
+    These were missing from the entity catalog, and their absence was visible in
+    production: "Aurelius Valeheart" came back from Whisper as "Aurelius
+    Valehart", and the canonicalizer — having no "Valeheart" to match — dropped
+    the surname entirely rather than repairing it.
+
+    Only Active characters. Retired and hiatus rows are the bulk of the roster
+    (167 total, 29 active), they are unlikely to be asked about, and every extra
+    name widens the fuzzy matcher's surface for a false positive on open speech.
+    """
+    repo_root = Path(__file__).resolve().parents[4]
+    try:
+        roster = json.loads(
+            (repo_root / "content" / "campaign-roster.json").read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        return ()
+
+    names: list[str] = []
+    campaigns = roster.get("campaigns", {}) if isinstance(roster, dict) else {}
+    for record in campaigns.values() if isinstance(campaigns, dict) else []:
+        if not isinstance(record, dict):
+            continue
+        characters = record.get("characters")
+        for row in characters if isinstance(characters, list) else []:
+            if not isinstance(row, dict) or row.get("status") != "Active":
+                continue
+            names.extend(_spoken_name_variants(row.get("character")))
+
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for name in names:
+        # A one-word nickname like "Ains" or "Og" is too short to match safely
+        # against ordinary speech; the full name still carries it.
+        if len(name) < 5:
+            continue
+        key = name.casefold()
+        if key not in seen:
+            seen.add(key)
+            ordered.append(name)
+    return tuple(ordered)
 
 
 def soundex(value: str) -> str:
@@ -312,13 +388,27 @@ GENERIC_ENTITY_WORDS = frozenset(
     {
         "campaign",
         "campaigns",
+        "character",
+        "characters",
         "deity",
         "deities",
+        # "who is the dungeon master" resolved to "who is the Dungeons III
+        # Master Thorne" — the single word "dungeon" scored against the campaign
+        # "Dungeons III - kNight Watch". A table asks this constantly.
+        "dm",
+        "dms",
+        "dungeon",
+        "dungeons",
+        "dungeon master",
+        "dungeon masters",
         "game",
         "games",
         "god",
         "gods",
         "page",
+        "party",
+        "player",
+        "players",
         "schedule",
         "section",
         "site",
@@ -749,6 +839,42 @@ def general_schedule_answer(schedule: dict[str, Any], now: datetime | None = Non
     else:
         answer += " And I don't see any later games listed right now."
     return answer
+
+
+AFFIRMATIONS = frozenset(
+    {
+        "yes",
+        "yeah",
+        "yep",
+        "yup",
+        "sure",
+        "ok",
+        "okay",
+        "please",
+        "please do",
+        "yes please",
+        "go ahead",
+        "sounds good",
+        "definitely",
+        "absolutely",
+        "i do",
+        "that would be great",
+        "tell me",
+    }
+)
+
+
+def is_bare_affirmation(question: str) -> bool:
+    """True only for a standalone yes, never for a yes carrying its own question.
+
+    Deliberately strict. This decides whether to substitute a question the
+    visitor never asked, so "yeah, what about the gods?" must NOT match — only
+    an answer that is purely agreement. Compare the permissive fuzzy entity
+    matcher, which must never run on open speech for the same reason.
+    """
+    normalized = re.sub(r"[^a-z\s]", "", str(question or "").casefold()).strip()
+    normalized = re.sub(r"\s+", " ", normalized)
+    return normalized in AFFIRMATIONS
 
 
 def is_personal_schedule_question(question: str) -> bool:
@@ -1329,6 +1455,25 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
         return local
 
     claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
+    remote_kwargs: dict[str, Any] = {}
+    # Cache the system prompt, tool definitions, and chat history across turns.
+    # Myra's prefix is ~6.4k tokens (persona + pantheon roster + tool schemas)
+    # and was reprocessed cold on every turn — cache_read_tokens was 0 across
+    # every recorded session.
+    #
+    # This is a COST fix, not a latency fix. Measured A/B at this prompt size on
+    # 2026-08-01 (n=6 each, interleaved): median TTFT 0.876s cached vs 0.816s
+    # uncached — indistinguishable. What it does buy is ~5.7k of ~5.7k input
+    # tokens billed at the cache-read rate instead of full price.
+    # Set ANTHROPIC_CACHING=off to disable without a redeploy.
+    if os.getenv("ANTHROPIC_CACHING", "ephemeral").strip().casefold() not in {
+        "off",
+        "none",
+        "0",
+        "false",
+    }:
+        remote_kwargs["caching"] = "ephemeral"
+
     remote = anthropic.LLM(
         # The plugin defaults to Sonnet. Haiku is the right tier for a voice
         # turn, and it is the one current Claude model that still accepts
@@ -1342,6 +1487,7 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
         # That value is tuned against Qwen's behaviour; pointing it at Claude
         # would let one model's tuning run silently steer the other.
         temperature=env_float("ANTHROPIC_TEMPERATURE", 0.3),
+        **remote_kwargs,
     )
 
     adapter = llm.FallbackAdapter(
@@ -1694,6 +1840,9 @@ class Myra(Agent):
         self._analytics_tasks: set[asyncio.Task[Any]] = set()
         self._pending_llm_analytics: dict[str, Any] | None = None
         self._turn_revision = 0
+        # Set when the greeting ends on a question, so a bare "yes" is understood
+        # as accepting that specific offer. One-shot — see arm_greeting_offer.
+        self._pending_offer: str | None = None
         facts = schedule_facts(schedule)
         knowledge_block = (
             textwrap.dedent(
@@ -1838,6 +1987,13 @@ class Myra(Agent):
         if label:
             self._served_by = llm_short_name(label)
 
+    def arm_greeting_offer(self, question: str) -> None:
+        """Remember what the greeting just offered, so a bare "yes" can accept it.
+
+        Consumed and cleared on the next user turn, whatever that turn says.
+        """
+        self._pending_offer = question
+
     async def set_page_context(self, page: Any) -> None:
         """Point Myra at the page the visitor just navigated to.
 
@@ -1918,6 +2074,14 @@ class Myra(Agent):
             )
         if canonical_question != original_question:
             new_message.content = [canonical_question]
+        # The greeting ends on one concrete offer; a bare "yes" accepts it. Read
+        # and cleared on the first turn either way, so an unrelated "yes" later
+        # in the conversation can never resurrect it.
+        offer, self._pending_offer = self._pending_offer, None
+        if offer and is_bare_affirmation(canonical_question):
+            logger.info("Visitor accepted the greeting offer; treating turn as %r", offer)
+            canonical_question = offer
+            new_message.content = [offer]
         del turn_ctx
         started = time.perf_counter()
         question = canonical_question.casefold()
@@ -2228,6 +2392,14 @@ async def schedule_agent(ctx: JobContext):
                 "http://127.0.0.1:8000/v1",
             ),
             api_key="local-only",
+            # NOTE: do not add `prompt=` here to bias decoding toward campaign
+            # proper nouns. Measured against this model on 2026-08-01: a short
+            # prose prompt and a 10-name list changed nothing ("Valeheart" still
+            # came back "Valehart"), and a 20-name list collapsed the decoder
+            # into a repetition loop ("from Hoe, from Hoe, from Hoe..."), because
+            # Whisper treats initial_prompt as preceding transcript. Distilled
+            # models condition poorly on prompts. Name repair belongs in the
+            # entity canonicalizer instead, which runs on text after decoding.
         ),
         tts=openai.TTS(
             model=os.getenv(
@@ -2334,18 +2506,41 @@ async def schedule_agent(ctx: JobContext):
     member_name = re.sub(r"[\r\n\t]+", " ", metadata.get("memberName", "there")).strip()[:80]
     if not member_name:
         member_name = "there"
-    if metadata.get("welcomeKind") == "new":
+    # Keep both greetings short and end on ONE concrete, answerable question.
+    #
+    # The previous first-visit greeting listed five topics and closed on a
+    # statement — 28 words, ~11 seconds of Kokoro speech, plus the buffer above
+    # and TTS time-to-first-byte, so ~13 seconds before the visitor could speak.
+    # Every first-time session on record ran 8-19 seconds: people left within a
+    # breath of Myra finishing, and one left partway through. Not one reached a
+    # second turn.
+    #
+    # The offer is deliberately a schedule question, which is answered
+    # deterministically in ~1ms and never reaches a model — so the first thing a
+    # visitor experiences is Myra's fastest path, not her slowest. Accepting it
+    # with a bare "yes" is handled by _pending_offer in on_user_turn_completed.
+    #
+    # Which schedule question depends on the profile: offering someone their
+    # "next game" when no campaigns are linked to them would open the
+    # conversation with "I don't see any assignments linked to your profile."
+    if list(agent.user_profile.get("games") or []):
+        invitation = "Want to know when your next game is?"
+        offer = "when do i play next"
+    else:
+        invitation = "Want to hear what's coming up on the calendar?"
+        offer = "what games are coming up"
+
+    welcome_kind = metadata.get("welcomeKind")
+    if welcome_kind == "new":
+        agent.arm_greeting_offer(offer)
         session.say(
-            (
-                f"Welcome to Suwanee Gamers, {member_name}. "
-                "You can explore campaigns, Myrdae lore, session recaps, maps, and upcoming games. "
-                "I'm Myra, and I can help you find your way around."
-            ),
+            f"Welcome to Suwanee Gamers, {member_name}. I'm Myra. {invitation}",
             allow_interruptions=True,
         )
-    elif metadata.get("welcomeKind") == "returning":
+    elif welcome_kind == "returning":
+        agent.arm_greeting_offer(offer)
         session.say(
-            f"Welcome back, {member_name}. What can I help you with?",
+            f"Welcome back, {member_name}. {invitation}",
             allow_interruptions=True,
         )
 
