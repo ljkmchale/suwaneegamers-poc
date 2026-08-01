@@ -400,6 +400,168 @@ def load_campaign_roster_index() -> tuple[tuple[str, tuple[str, ...]], ...]:
     return tuple(index)
 
 
+@functools.lru_cache(maxsize=1)
+def load_roster_facts() -> dict[str, Any]:
+    """Structured character facts for the look_up_character tool.
+
+    Fast, exact stats read straight from the roster — not the story knowledge
+    base — because level/class/species are precise fields, not something to
+    retrieve semantically. Returns:
+      - "characters": {casefolded name: {...stats..., campaign}} for every
+        active character AND its spoken nickname, so "Aury" and "Aurelius
+        Valeheart" both resolve.
+      - "parties": {campaign name: [display names of active characters]}
+      - "campaign_links": {casefolded campaign name: D&D Beyond URL}
+      - "campaign_ids": {casefolded campaign name: site slug} for navigation.
+    """
+    repo_root = Path(__file__).resolve().parents[4]
+    characters: dict[str, dict[str, Any]] = {}
+    parties: dict[str, list[str]] = {}
+    try:
+        roster = json.loads(
+            (repo_root / "content" / "campaign-roster.json").read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        roster = {}
+    campaigns = roster.get("campaigns", {}) if isinstance(roster, dict) else {}
+    for record in campaigns.values() if isinstance(campaigns, dict) else []:
+        if not isinstance(record, dict) or record.get("kind") != "active":
+            continue
+        campaign_name = str(record.get("name") or "").strip()
+        rows = record.get("characters")
+        for row in rows if isinstance(rows, list) else []:
+            if not isinstance(row, dict) or row.get("status") != "Active":
+                continue
+            full = str(row.get("character") or "").strip()
+            if not full:
+                continue
+            facts = {
+                "character": full,
+                "player": str(row.get("player") or "").strip(),
+                "species": str(row.get("species") or "").strip(),
+                "class": str(row.get("class") or "").strip(),
+                "subclass": str(row.get("subclass") or "").strip(),
+                "level": row.get("level"),
+                "campaign": campaign_name,
+            }
+            parties.setdefault(campaign_name, []).append(full)
+            # Register the full name and each spoken variant (base + nickname) so
+            # the tool matches however the visitor refers to the character.
+            for variant in {full, *_spoken_name_variants(full)}:
+                if variant:
+                    characters.setdefault(variant.casefold(), facts)
+
+    # D&D Beyond links live per campaign in campaigns.json, not per character —
+    # our data has no per-character sheet URLs — so "my character sheet" resolves
+    # to the visitor's campaign on D&D Beyond, reached via the campaign page.
+    campaign_links: dict[str, str] = {}
+    campaign_ids: dict[str, str] = {}
+    try:
+        campaign_records = json.loads(
+            (repo_root / "content" / "campaigns.json").read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        campaign_records = []
+    for record in campaign_records if isinstance(campaign_records, list) else []:
+        if not isinstance(record, dict):
+            continue
+        name = str(record.get("name") or "").strip()
+        if not name:
+            continue
+        if record.get("id"):
+            campaign_ids[name.casefold()] = str(record["id"])
+        for resource in record.get("resources", []) if isinstance(record.get("resources"), list) else []:
+            label = str(resource.get("label") or "").casefold()
+            url = str(resource.get("url") or "")
+            if "dndbeyond.com/campaigns" in url and "join" not in label and "join" not in url:
+                campaign_links.setdefault(name.casefold(), url)
+
+    return {
+        "characters": characters,
+        "parties": parties,
+        "campaign_links": campaign_links,
+        "campaign_ids": campaign_ids,
+    }
+
+
+def describe_character(facts: dict[str, Any]) -> str:
+    """One spoken sentence of a character's stats. No URLs, TTS-friendly."""
+    bits = []
+    level = facts.get("level")
+    if isinstance(level, int):
+        bits.append(f"a level {level}")
+    species = facts.get("species")
+    klass = facts.get("class")
+    descriptor = " ".join(p for p in (species, klass) if p).strip()
+    lead = f"{bits[0]} {descriptor}".strip() if bits else descriptor
+    sentence = f"{facts['character']} is {lead or 'a character'}"
+    subclass = facts.get("subclass")
+    if subclass:
+        sentence += f", subclass {subclass}"
+    campaign = facts.get("campaign")
+    if campaign:
+        sentence += f", in {campaign}"
+    player = facts.get("player")
+    if player:
+        sentence += f", played by {player}"
+    return sentence + "."
+
+
+def look_up_character_facts(query: str, own_characters: Sequence[str]) -> str:
+    """Answer a character / party / player roster question from structured data.
+
+    Handles: a character (or nickname), a campaign (returns the party), a player
+    (their characters), and — with an empty query — the visitor's own character.
+    """
+    data = load_roster_facts()
+    chars: dict[str, dict[str, Any]] = data["characters"]
+    parties: dict[str, list[str]] = data["parties"]
+
+    asked = query.strip()
+    # No name given → the signed-in visitor's own character(s).
+    if not asked:
+        mine = [c for c in own_characters if c]
+        if not mine:
+            return (
+                "I don't have a character linked to your profile yet. Tell me a "
+                "character or campaign name and I'll look it up."
+            )
+        found = [chars[m.casefold()] for m in mine if m.casefold() in chars]
+        if not found:
+            return f"Your profile lists {mine[0]}, but I don't see current stats for that character."
+        return " ".join(describe_character(f) for f in found[:2])
+
+    key = asked.casefold()
+    # Exact character or nickname match.
+    if key in chars:
+        return describe_character(chars[key])
+    # Campaign name → the active party.
+    for campaign, members in parties.items():
+        if campaign.casefold() == key:
+            if not members:
+                return f"{campaign} has no active characters listed right now."
+            head = ", ".join(members[:4])
+            more = f", and {len(members) - 4} more" if len(members) > 4 else ""
+            return f"The {campaign} party includes {head}{more}."
+    # Player name → their active characters.
+    by_player = [f for f in {id(v): v for v in chars.values()}.values()
+                 if str(f.get("player") or "").casefold() == key]
+    if by_player:
+        return " ".join(describe_character(f) for f in by_player[:3])
+    # Fuzzy character match as a last resort (STT variance the canonicalizer missed).
+    best, best_score = None, 0.0
+    for name, facts in chars.items():
+        score = SequenceMatcher(None, key, name).ratio()
+        if score > best_score:
+            best, best_score = facts, score
+    if best and best_score >= 0.8:
+        return describe_character(best)
+    return (
+        f"I don't have a character, campaign, or player called {asked} in the "
+        "active roster. I can look it up in the Chronicles if you'd like."
+    )
+
+
 def stt_vocabulary_prompt(
     games: Sequence[str] = (),
     max_chars: int | None = None,
@@ -2149,15 +2311,21 @@ class Myra(Agent):
             - "Today", "tonight", and "coming up" never require clarification.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
+            - For a player character's STATS — level, class, species, subclass,
+              who plays them, or the members of a campaign's party — call
+              look_up_character. It reads the roster directly and is faster and
+              more exact than a search. Use it for "what level is my character",
+              "what class is Aury", "who plays in Heroes of Emberstran".
             - The compact knowledge below is an INDEX and overview, not the whole
-              knowledge base. For any question asking about a specific character,
-              NPC, location, settlement, faction, organization, item, artifact,
-              quest, session, event, deity's story, or any world-lore detail,
-              call search_knowledge_base — do not answer a specific-detail
-              question from the compact knowledge alone, and do not say you don't
-              know until you have searched. Treat the tool's answer as
-              player-safe and authoritative. It is better to search and confirm
-              than to give a thin answer or a wrong "I don't know."
+              knowledge base. For any question asking about a specific character's
+              STORY or backstory, or an NPC, location, settlement, faction,
+              organization, item, artifact, quest, session, event, deity's story,
+              or any world-lore detail, call search_knowledge_base — do not
+              answer a specific-detail question from the compact knowledge alone,
+              and do not say you don't know until you have searched. Treat the
+              tool's answer as player-safe and authoritative. It is better to
+              search and confirm than to give a thin answer or a wrong "I don't
+              know."
             - The Pantheon roster above lists every god with their title and domains.
               Answer only god-list, domain, and title questions from it directly.
               For anything else about a god — their story, rites, commandments,
@@ -2567,6 +2735,27 @@ class Myra(Agent):
 
         spoken, status = await self.run_self_diagnosis()
         return {"overallStatus": status, "summary": spoken, "capabilities": {}}
+
+    @function_tool
+    async def look_up_character(self, context: RunContext, name: str = "") -> str:
+        """Look up a player character's stats from the campaign roster.
+
+        Fast, exact facts — level, class, species, subclass, campaign, and the
+        player — read straight from the roster, NOT the story knowledge base. Use
+        this (not search_knowledge_base) for stat questions like "what level is
+        Aury", "what class is my character", "what's Cerul Slate's subclass", or
+        to list a party ("who plays in Heroes of Emberstran"). For story, lore,
+        or backstory about a character, use search_knowledge_base instead.
+
+        Args:
+            name: A character name or nickname, a campaign name, or a player's
+                name. Leave empty for the signed-in visitor's own character.
+        """
+        del context
+        own = [str(c) for c in (self.user_profile.get("characters") or [])]
+        answer = look_up_character_facts(name, own)
+        logger.info("look_up_character(%r) -> %s", name, answer[:80])
+        return answer
 
     @function_tool(flags=ToolFlag.CANCELLABLE, on_duplicate="reject")
     async def search_knowledge_base(

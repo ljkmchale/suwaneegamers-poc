@@ -142,6 +142,33 @@ def test_spoken_deity_name_resolves_to_canonical_pantheon_entry():
     assert "order and protection" in answer
 
 
+def test_look_up_character_returns_stats_from_the_roster():
+    from schedule_agent.agent import look_up_character_facts
+
+    # A named character: exact stats, no RAG.
+    answer = look_up_character_facts("Aurelius Valeheart", [])
+    assert "Aurelius" in answer and "level" in answer.lower()
+    assert "Cleric" in answer and "Heroes of Emberstran" in answer
+    # A nickname resolves to the same character.
+    assert look_up_character_facts("Aury", []) == answer
+
+
+def test_look_up_character_handles_party_player_and_own_character():
+    from schedule_agent.agent import look_up_character_facts
+
+    # A campaign name returns the party.
+    party = look_up_character_facts("Heroes of Emberstran", [])
+    assert "party" in party.lower() and "Aurelius" in party
+    # An empty query uses the signed-in visitor's own character.
+    mine = look_up_character_facts("", ["Aurelius Valeheart"])
+    assert "Aurelius" in mine and "Cleric" in mine
+    # No character linked and no name given: a helpful nudge, not a crash.
+    assert "don't have a character linked" in look_up_character_facts("", [])
+    # An unknown name does not fabricate stats.
+    unknown = look_up_character_facts("Gandalf the Grey", [])
+    assert "don't have" in unknown and "Chronicles" in unknown
+
+
 def test_diverra_transcription_variant_resolves_to_full_deity_entry():
     answer = pantheon_deity_answer(
         "Who is Diveria?",
