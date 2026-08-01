@@ -717,6 +717,26 @@ def canonicalize_spoken_entities(text: str, catalog: tuple[str, ...]) -> str:
     return canonical_text
 
 
+# Lead-in phrases after which the visitor is naming an entity they want to know
+# about. Deliberately broad — a live session produced "I need to know about De
+# Vira" and the missing "need to know about" left "De Vira" unresolved, so the
+# model got a garbled name and asked which campaign instead of answering. Being
+# broad is safe: the resolver only rewrites a span that matches a known catalog
+# name, so a false trigger on ordinary speech ("what's this all about") changes
+# nothing. Shared by the entity canonicalizer and the deity lookup so a new
+# phrasing is added in ONE place, not two.
+KNOW_ABOUT_LEADINS = (
+    r"(?:i |we )?(?:need|want|wanna|would like|'?d like|like|have|got|would love) to know "
+    r"(?:more |anything |something )?about|"
+    r"(?:do you |you )?know (?:anything|something|more) about|"
+    r"i would like to know about|"
+    r"tell me (?:more |a bit more |a little more |anything )?about|tell me more on|"
+    r"who is|who was|where is|what is known about|what can you tell me about|"
+    r"what (?:more )?do you know about|what god is|which god is|"
+    r"heard about|curious about"
+)
+
+
 def canonicalize_spoken_entity_question(
     question: str,
     catalog: tuple[str, ...],
@@ -733,13 +753,10 @@ def canonicalize_spoken_entity_question(
     # "Dungeons III III". Anything past the first sentence is the free-form
     # pass's job.
     match = re.search(
-        # "tell me MORE about X" must resolve the entity too, or a mispronounced
-        # name (Deveria -> Diverra) never gets canonicalized before the deity
-        # lookup runs.
-        r"\b(?:i would like to know about|tell me (?:more |a bit more |a little more )?about|"
-        r"tell me more on|who is|who was|where is|what is known about|"
-        r"what (?:more )?do you know about|what god is|which god is|when is|when does|"
-        r"when do|open|show me|go to|take me to|visit)\s+([^?.!]+)",
+        # The knowledge lead-ins (KNOW_ABOUT_LEADINS) plus the schedule and
+        # navigation verbs specific to this pass.
+        r"\b(?:" + KNOW_ABOUT_LEADINS + r"|when is|when does|when do|"
+        r"open|show me|go to|take me to|visit)\s+([^?.!]+)",
         question,
         flags=re.IGNORECASE,
     )
@@ -784,11 +801,9 @@ def canonicalize_spoken_question(question: str, catalog: tuple[str, ...]) -> str
 
 def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
     intent = re.search(
-        # "tell me MORE about X" is as common as "tell me about X" and was not
-        # matched, so "can you tell me more about Diverra" fell through to the
-        # model even for a known god. Also accept "tell me more on".
-        r"\b(?:tell me (?:more |a bit more |a little more )?about|tell me more on|"
-        r"who is|who was|what is known about|what can you tell me about)\s+(.+?)[?.!]*$",
+        # Same broad knowledge lead-ins as the canonicalizer (KNOW_ABOUT_LEADINS)
+        # so every phrasing that resolves a god's name also reaches this lookup.
+        r"\b(?:" + KNOW_ABOUT_LEADINS + r")\s+(.+?)[?.!]*$",
         question,
         flags=re.IGNORECASE,
     )
