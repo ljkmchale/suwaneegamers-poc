@@ -562,6 +562,43 @@ def look_up_character_facts(query: str, own_characters: Sequence[str]) -> str:
     )
 
 
+def resolve_sheet_campaign(
+    query: str,
+    own_characters: Sequence[str],
+    own_games: Sequence[str],
+) -> str:
+    """Which campaign page to open for a character-sheet request.
+
+    Our data has no per-character sheet URLs — the D&D Beyond link lives on the
+    campaign page — so a sheet request resolves to a campaign. A named character
+    or campaign wins; otherwise the signed-in visitor's own campaign (from their
+    character, or their single linked game). Empty means "ask which one".
+    """
+    data = load_roster_facts()
+    chars: dict[str, dict[str, Any]] = data["characters"]
+    parties: dict[str, list[str]] = data["parties"]
+
+    asked = query.strip()
+    if asked:
+        key = asked.casefold()
+        if key in chars:
+            return str(chars[key].get("campaign") or "")
+        for campaign in parties:
+            if campaign.casefold() == key:
+                return campaign
+        return ""
+
+    # No name: the visitor's own campaign.
+    for character in own_characters:
+        facts = chars.get(str(character).casefold())
+        if facts and facts.get("campaign"):
+            return str(facts["campaign"])
+    games = [str(g).strip() for g in own_games if str(g).strip()]
+    if len(games) == 1:
+        return games[0]
+    return ""
+
+
 def stt_vocabulary_prompt(
     games: Sequence[str] = (),
     max_chars: int | None = None,
@@ -2810,6 +2847,45 @@ class Myra(Agent):
             return "I couldn't match that request to an available site page."
         await self._publish_navigation(match)
         return f"Opened {match['label']}."
+
+    @function_tool
+    async def open_character_sheet(self, context: RunContext, name: str = "") -> str:
+        """Open the campaign page where a character's D&D Beyond sheet is linked.
+
+        Characters don't have individual sheet links here — the D&D Beyond link
+        lives on the campaign page — so this opens that page in the visitor's
+        browser. Use for "open my character sheet", "take me to my sheet", "where
+        is my character sheet", "open my campaign on D&D Beyond".
+
+        Args:
+            name: A character or campaign name. Leave empty for the signed-in
+                visitor's own campaign.
+        """
+        del context
+        own_chars = [str(c) for c in (self.user_profile.get("characters") or [])]
+        own_games = [str(g) for g in (self.user_profile.get("games") or [])]
+        campaign = resolve_sheet_campaign(name, own_chars, own_games)
+        if not campaign:
+            if name.strip():
+                return f"I couldn't find a campaign for {name.strip()} to open its sheet page."
+            return (
+                "I'm not sure which campaign is yours — tell me the campaign or "
+                "character name and I'll open its sheet page."
+            )
+        data = load_roster_facts()
+        slug = data["campaign_ids"].get(campaign.casefold())
+        if not slug:
+            return f"I couldn't find a site page for {campaign}."
+        href = f"/campaigns/{slug}"
+        # Constructed from a trusted campaign slug, but keep the same internal-only
+        # invariant the navigation guard enforces everywhere else.
+        if not href.startswith("/") or href.startswith("//"):
+            return f"I couldn't open the {campaign} page safely."
+        await self._publish_navigation({"href": href, "label": campaign})
+        logger.info("open_character_sheet(%r) -> %s", name, href)
+        if campaign.casefold() in data["campaign_links"]:
+            return f"Opening the {campaign} page — your D&D Beyond sheet link is there."
+        return f"Opening the {campaign} page."
 
     @function_tool
     async def get_upcoming_games(

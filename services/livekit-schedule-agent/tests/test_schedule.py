@@ -169,6 +169,25 @@ def test_look_up_character_handles_party_player_and_own_character():
     assert "don't have" in unknown and "Chronicles" in unknown
 
 
+def test_open_character_sheet_resolves_to_the_right_campaign():
+    from schedule_agent.agent import load_roster_facts, resolve_sheet_campaign
+
+    # The visitor's own campaign, from their linked character.
+    assert resolve_sheet_campaign("", ["Aurelius Valeheart"], []) == "Heroes of Emberstran"
+    # From a single linked game when no character is known.
+    assert resolve_sheet_campaign("", [], ["Souls of Destiny"]) == "Souls of Destiny"
+    # A named character resolves to its campaign.
+    assert resolve_sheet_campaign("Cerul Slate", [], []) == "A New Adventure"
+    # Ambiguous (nothing linked, or multiple games) resolves to empty -> ask.
+    assert resolve_sheet_campaign("", [], []) == ""
+    assert resolve_sheet_campaign("", [], ["Heroes of Emberstran", "Souls of Destiny"]) == ""
+
+    # Every active campaign resolves to a real /campaigns/<slug> page.
+    data = load_roster_facts()
+    for campaign in data["parties"]:
+        assert data["campaign_ids"].get(campaign.casefold()), campaign
+
+
 def test_diverra_transcription_variant_resolves_to_full_deity_entry():
     answer = pantheon_deity_answer(
         "Who is Diveria?",
