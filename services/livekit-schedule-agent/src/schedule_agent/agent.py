@@ -434,9 +434,10 @@ def stt_vocabulary_prompt(
     mine = [entry for entry in index if entry[0].casefold() in wanted]
     theirs = [entry for entry in index if entry[0].casefold() not in wanted]
 
-    # "Myrdae" (the world) and "Suwanee Gamers" (the group) come first: both are
-    # said constantly and both are mangled unbiased ("Suwanee" -> "Sue Any").
-    ordered: list[str] = ["Myrdae", "Suwanee Gamers"]
+    # Myra's own name, the world, and the group come first: all three are said
+    # constantly and all are mangled unbiased ("Myra" -> "Mara", "Suwanee" ->
+    # "Sue Any").
+    ordered: list[str] = ["Myra", "Myrdae", "Suwanee Gamers"]
     for campaign, characters in mine:
         ordered.append(campaign)
         ordered.extend(characters)

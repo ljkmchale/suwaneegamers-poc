@@ -881,11 +881,12 @@ def test_stt_vocabulary_puts_the_speakers_own_campaign_and_party_first(monkeypat
     prompt = stt_vocabulary_prompt(["Heroes of Emberstran"])
     names = prompt.removeprefix("Names: ").rstrip(".").split(", ")
 
-    assert names[0] == "Myrdae"
-    assert names[1] == "Suwanee Gamers"
-    assert names[2] == "Heroes of Emberstran"
+    assert names[0] == "Myra"
+    assert names[1] == "Myrdae"
+    assert names[2] == "Suwanee Gamers"
+    assert names[3] == "Heroes of Emberstran"
     # That campaign's party follows immediately, before any other campaign.
-    assert "Aurelius Valeheart" in names[3:9]
+    assert "Aurelius Valeheart" in names[4:10]
     assert names.index("Aurelius Valeheart") < names.index("A New Adventure")
 
 
