@@ -348,9 +348,11 @@ def load_active_character_names() -> tuple[str, ...]:
     seen: set[str] = set()
     ordered: list[str] = []
     for name in names:
-        # A one-word nickname like "Ains" or "Og" is too short to match safely
-        # against ordinary speech; the full name still carries it.
-        if len(name) < 5:
+        # A one-word nickname of three characters or fewer ("Og", "Ari") is too
+        # short to match safely against ordinary speech. Four-character invented
+        # nicknames (Aury, Ains, Affy) are distinctive enough to keep, and people
+        # do say them, so admit those; the full name still carries the rest.
+        if len(name) < 4:
             continue
         key = name.casefold()
         if key not in seen:
@@ -1237,7 +1239,7 @@ def wake_word_command(question: str) -> str | None:
     return match.group(1).strip() if match else None
 
 
-def query_player_knowledge(question: str) -> str:
+def query_player_knowledge(question: str, campaign: str = "All") -> str:
     endpoint = os.getenv(
         "BRAIN_ASK_URL",
         "http://127.0.0.1:4652/api/brain/ask",
@@ -1254,6 +1256,14 @@ def query_player_knowledge(question: str) -> str:
         data=json.dumps(
             {
                 "question": question,
+                # Character and party questions are campaign-scoped: the vault
+                # refuses to answer "tell me about Aurelius" under the default
+                # "All" scope ("name the campaign — I won't search across
+                # separate campaign histories") to avoid cross-campaign spoilers.
+                # Scoping to the visitor's own campaign unblocks their character
+                # questions, and world lore (gods, history, places) still answers
+                # under any scope.
+                "campaign": campaign or "All",
                 "visibility": "players",
                 "answerMode": "direct",
                 "quality": "fast",
@@ -2124,13 +2134,22 @@ class Myra(Agent):
             - "Today", "tonight", and "coming up" never require clarification.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
-            - For campaign, character, location, faction, item, session, or world-lore
-              questions not fully answered in the compact knowledge below, use the
-              search_knowledge_base tool. Treat its answer as player-safe and authoritative.
+            - The compact knowledge below is an INDEX and overview, not the whole
+              knowledge base. For any question asking about a specific character,
+              NPC, location, settlement, faction, organization, item, artifact,
+              quest, session, event, deity's story, or any world-lore detail,
+              call search_knowledge_base — do not answer a specific-detail
+              question from the compact knowledge alone, and do not say you don't
+              know until you have searched. Treat the tool's answer as
+              player-safe and authoritative. It is better to search and confirm
+              than to give a thin answer or a wrong "I don't know."
             - The Pantheon roster above lists every god with their title and domains.
-              Answer god-list, domain, and title questions from it directly. For a
-              specific god's rites, commandments, symbols, or myths, use
-              search_knowledge_base.
+              Answer only god-list, domain, and title questions from it directly.
+              For anything else about a god — their story, rites, commandments,
+              symbols, myths, faith, or campaign ties — use search_knowledge_base.
+            - When search_knowledge_base returns nothing useful, try once more
+              with the proper noun spelled as it appears in the roster or index
+              before telling the visitor it isn't covered.
             - Speech recognition may render Myrdae as "Mirdi", "Myrday", or another
               similar-sounding spelling. Treat those variants as Myrdae.
             - If the visitor asks to open, show, visit, or take them to a site page,
@@ -2187,6 +2206,19 @@ class Myra(Agent):
         Consumed and cleared on the next user turn, whatever that turn says.
         """
         self._pending_offer = question
+
+    def knowledge_campaign_scope(self) -> str:
+        """Which campaign to scope a knowledge search to for this visitor.
+
+        The vault refuses character/party questions under the default "All"
+        scope. A player almost always asks about their own campaign, so scope to
+        it — world lore (gods, history, places) still answers under any scope. If
+        the visitor has several linked campaigns, or none, fall back to "All":
+        world questions work, and cross-campaign character questions stay
+        deliberately unanswered rather than guessing the wrong campaign.
+        """
+        games = [str(g).strip() for g in (self.user_profile.get("games") or []) if str(g).strip()]
+        return games[0] if len(games) == 1 else "All"
 
     async def set_page_context(self, page: Any) -> None:
         """Point Myra at the page the visitor just navigated to.
@@ -2539,7 +2571,9 @@ class Myra(Agent):
         await context.update(
             "I'm checking the Chronicles now. This search is still in progress."
         )
-        answer = await asyncio.to_thread(query_player_knowledge, question)
+        answer = await asyncio.to_thread(
+            query_player_knowledge, question, self.knowledge_campaign_scope()
+        )
         if not tool_result_is_current(started_turn, self._turn_revision):
             logger.info(
                 "Discarding stale knowledge result from turn %s; current turn is %s",

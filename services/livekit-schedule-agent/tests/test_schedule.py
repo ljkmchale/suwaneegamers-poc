@@ -887,9 +887,10 @@ def test_active_player_characters_are_in_the_entity_catalog():
     assert "Aurelius Valeheart" in active
     # Only Active rows — a retired character must not widen the fuzzy surface.
     assert "Aria Windrunner" not in active
-    # Nicknames too short to match safely against ordinary speech are excluded.
-    assert all(len(name) >= 5 for name in active)
-    assert "Ains" not in active
+    # Four-char invented nicknames are distinctive enough to keep (people say
+    # them); three characters or fewer is too short to match ordinary speech.
+    assert all(len(name) >= 4 for name in active)
+    assert "Aury" in active  # 4-char nickname of Aurelius "Aury" Valeheart
 
     catalog = load_voice_entity_catalog()
     assert "Aurelius Valeheart" in catalog
