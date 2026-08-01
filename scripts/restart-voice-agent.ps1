@@ -48,7 +48,9 @@ Start-Sleep -Seconds 5
 $after = Get-AgentProcesses
 if ($after) {
   Write-Host "Voice agent restarted (PIDs: $($after.ProcessId -join ', '))."
-  foreach ($port in @(7880, 8000, 11434)) {
+  # 8767 is Parakeet STT (primary). If it is not listening the agent still works
+  # via the Whisper fallback, but it is worth seeing in the readout.
+  foreach ($port in @(7880, 8000, 8767, 11434)) {
     $up = [bool](Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue)
     Write-Host ("  stack port {0} listening: {1}" -f $port, $up)
   }

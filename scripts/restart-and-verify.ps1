@@ -37,6 +37,10 @@ $allowedSlots = @(".next-prod", ".next-prod-a", ".next-prod-b")
 $voiceLauncher = Join-Path $PSScriptRoot "start-local-voice-stack.ps1"
 $agentRoot = Join-Path $repoRoot "services\livekit-schedule-agent"
 $agentEnv = Join-Path $agentRoot ".env.local"
+# Parakeet STT (primary speech recognition) runs from a venv outside the repo.
+# When it is not installed on this machine the stack runs Whisper-only, so its
+# checks below are skipped rather than failed.
+$parakeetVenv = Join-Path $env:LOCALAPPDATA "SuwaneeGamers\Parakeet\.venv\Scripts\python.exe"
 $serviceName = "SuwaneeGamers"
 $websiteBaseUrl = "http://127.0.0.1:4652"
 
@@ -190,7 +194,7 @@ function Get-MyraProcesses {
 function Get-VoiceStackProcesses {
   return Get-CimInstance Win32_Process | Where-Object {
     ($_.Name -match "^python" -and
-      $_.CommandLine -match "schedule_agent\.agent|speaches\.main:create_app|uvicorn\.exe.*--port 8000") -or
+      $_.CommandLine -match "schedule_agent\.agent|speaches\.main:create_app|uvicorn\.exe.*--port 8000|parakeet-stt") -or
     $_.Name -in @(
       "livekit-server.exe",
       "ollama.exe",
@@ -248,11 +252,27 @@ if (-not $SkipVoice) {
   $voiceStopped = Wait-Until -Description "voice ports to close" -Seconds 20 -Condition {
     -not (Test-ListeningPort 7880) -and
     -not (Test-ListeningPort 8000) -and
+    -not (Test-ListeningPort 8767) -and
     -not (Test-ListeningPort 11434) -and
     -not (Get-MyraProcesses)
   }
   if (-not $voiceStopped) {
-    throw "The existing voice stack did not stop completely; refusing to start duplicates."
+    # Some processes did not stop. The usual cause is that the stack was started
+    # by the elevated SuwaneeGamersVoiceStack scheduled task (a different session
+    # / higher integrity), so a non-elevated Stop-Process silently fails on them.
+    # Do NOT leave the stack half-dead: run the idempotent launcher to restore
+    # anything that DID go down (it only starts what is not already listening),
+    # then fail with an actionable message.
+    Write-Host "Some voice processes could not be stopped; restoring service before failing..." -ForegroundColor Yellow
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $voiceLauncher
+    throw @"
+Could not fully restart the voice stack: some processes could not be stopped
+(most likely started elevated by the SuwaneeGamersVoiceStack scheduled task).
+The idempotent launcher was run to restore any services that went down, so the
+stack should be back up — but processes that could not be stopped are still on
+their previous code. For a clean full restart, run this script from an ELEVATED
+PowerShell.
+"@
   }
 
   & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $voiceLauncher
@@ -357,6 +377,21 @@ if (-not $SkipVoice) {
   Add-Result "Ollama" $ollamaOk $(
     if ($ollamaOk) { "Model registry responding" } else { "Model registry did not become ready" }
   )
+
+  # Parakeet is the primary STT but the agent falls back to Whisper if it is
+  # down, so only fail the restart when it is installed and did not come up. It
+  # loads a model on start (~10s), so give it the full timeout.
+  if (Test-Path -LiteralPath $parakeetVenv) {
+    $parakeetOk = Wait-Until -Description "Parakeet STT health" -Condition {
+      Test-HttpOk "http://127.0.0.1:8767/health"
+    }
+    Add-Result "Parakeet STT" $parakeetOk $(
+      if ($parakeetOk) { "Health endpoint responding on 8767" }
+      else { "Health endpoint did not become ready (agent falls back to Whisper)" }
+    )
+  } else {
+    Write-Host "[skip] Parakeet STT: venv not installed; running Whisper-only." -ForegroundColor DarkGray
+  }
 
   $myraOk = Wait-Until -Description "Myra worker and health port" -Condition {
     [bool](Get-MyraProcesses) -and (Test-ListeningPort 8081)
