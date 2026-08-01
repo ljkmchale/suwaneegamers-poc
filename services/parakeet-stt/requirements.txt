@@ -1,0 +1,14 @@
+# Parakeet STT service dependencies.
+#
+# torch MUST come from the cu128 index — the PyPI build is CPU-only and the
+# default build lacks sm_120 kernels for the Blackwell RTX 5060. Install it
+# first and separately (see setup.ps1):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+# Everything below installs from PyPI normally.
+nemo_toolkit[asr]
+fastapi
+uvicorn[standard]
+python-multipart
+soundfile
+librosa

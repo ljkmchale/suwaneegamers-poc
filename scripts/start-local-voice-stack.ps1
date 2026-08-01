@@ -1,11 +1,11 @@
 $ErrorActionPreference = "Stop"
 
-# GPU policy for this stack: Ollama (the LLM) runs on the RTX 5060; everything
-# else stays on CPU. faster-whisper / CTranslate2 in Speaches does NOT run on
-# this Blackwell card and crashes on model load if the GPU is visible, so the
-# default here is CPU-only and we grant the GPU to Ollama alone, just before it
-# launches. Do NOT set CUDA_VISIBLE_DEVICES globally (User/Machine scope) — that
-# takes Speaches down with it.
+# GPU policy for this stack: Parakeet (STT) and Ollama (the LLM fallback) run on
+# the RTX 5060; everything else stays on CPU. faster-whisper / CTranslate2 in
+# Speaches does NOT run on this Blackwell card and crashes on model load if the
+# GPU is visible, so the default here is CPU-only and we grant the GPU to each
+# GPU process individually, just before it launches. Do NOT set
+# CUDA_VISIBLE_DEVICES globally (User/Machine scope) — that takes Speaches down.
 $env:CUDA_VISIBLE_DEVICES = "-1"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
@@ -14,6 +14,8 @@ $liveKitExe = Join-Path $liveKitRoot "1.13.4\livekit-server.exe"
 $liveKitConfig = Join-Path $liveKitRoot "livekit.yaml"
 $speachesRoot = Join-Path $env:LOCALAPPDATA "SuwaneeGamers\Speaches\source"
 $agentRoot = Join-Path $repoRoot "services\livekit-schedule-agent"
+$parakeetVenv = Join-Path $env:LOCALAPPDATA "SuwaneeGamers\Parakeet\.venv\Scripts\python.exe"
+$parakeetServer = Join-Path $repoRoot "services\parakeet-stt\server.py"
 
 function Test-TcpPort([int]$port) {
   return [bool](Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue)
@@ -86,6 +88,20 @@ if (-not (Test-TcpPort 11434)) {
     WorkingDirectory = (Split-Path -Parent $ollama)
   }
   # Restore CPU-only for anything launched after this (the agent).
+  $env:CUDA_VISIBLE_DEVICES = "-1"
+}
+
+if ((Test-Path $parakeetVenv) -and -not (Test-TcpPort 8767)) {
+  # GPU speech recognition (NeMo Parakeet). ~15-25x faster than CPU Whisper and,
+  # with phrase boosting, more accurate on the campaign's invented names. The
+  # agent uses it as primary STT and falls back to Speaches/Whisper if it is
+  # down. Needs the GPU, same per-process grant as Ollama; the global mask stays.
+  $env:CUDA_VISIBLE_DEVICES = "0"
+  Start-Logged "parakeet" @{
+    FilePath = $parakeetVenv
+    ArgumentList = @("`"$parakeetServer`"")
+    WorkingDirectory = (Split-Path -Parent $parakeetServer)
+  }
   $env:CUDA_VISIBLE_DEVICES = "-1"
 }
 

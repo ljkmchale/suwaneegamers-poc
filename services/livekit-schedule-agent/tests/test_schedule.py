@@ -730,6 +730,81 @@ def test_claude_temperature_ignores_the_ollama_autotuner(monkeypatch):
     assert claude._opts.temperature == 0.3
 
 
+def _fake_vad():
+    # build_stt only needs *something* to hand the FallbackAdapter as its VAD;
+    # the adapter stores it without touching it at construction time.
+    class _VAD:
+        pass
+
+    return _VAD()
+
+
+def test_stt_uses_parakeet_primary_with_whisper_fallback(monkeypatch):
+    from livekit.agents.stt import FallbackAdapter as STTFallbackAdapter
+
+    from schedule_agent.agent import build_stt
+
+    monkeypatch.setenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")
+    monkeypatch.delenv("STT_ENGINE", raising=False)
+    built = build_stt("Names: Aurelius Valeheart.", _fake_vad())
+    assert isinstance(built, STTFallbackAdapter)
+    # Non-streaming children get wrapped in a StreamAdapter by the FallbackAdapter.
+    primary, secondary = (getattr(t, "wrapped_stt", t) for t in built._stt_instances)
+    assert primary._opts.model == "nvidia/parakeet-tdt-0.6b-v2"
+    assert secondary._opts.model == "Systran/faster-whisper-small.en"
+    # The vocabulary reaches BOTH engines.
+    assert primary._opts.prompt == "Names: Aurelius Valeheart."
+    assert secondary._opts.prompt == "Names: Aurelius Valeheart."
+
+
+def test_stt_falls_back_to_whisper_only_when_parakeet_disabled(monkeypatch):
+    from schedule_agent.agent import build_stt
+
+    # Either switch turns Parakeet off and drops the fallback layer entirely.
+    for key, val in (("STT_ENGINE", "whisper"), ("PARAKEET_BASE_URL", "off")):
+        monkeypatch.delenv("STT_ENGINE", raising=False)
+        monkeypatch.setenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")
+        monkeypatch.setenv(key, val)
+        built = build_stt("Names: X.", _fake_vad())
+        assert type(built).__name__ != "FallbackAdapter", (key, val)
+        assert built._opts.model == "Systran/faster-whisper-small.en"
+
+
+def test_parakeet_phrase_parsing_matches_the_vocabulary_prompt_format():
+    """The service must recover the exact names build_stt's prompt encodes."""
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "parakeet-stt"))
+    # server.py imports torch/nemo at module load; only the pure parser is under
+    # test, so pull it in isolation.
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "_pk_server",
+        Path(__file__).resolve().parents[2] / "parakeet-stt" / "server.py",
+    )
+    # Guard: if torch isn't importable in this env, skip rather than fail.
+    import pytest
+
+    try:
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception:
+        pytest.skip("parakeet server deps not installed in this venv")
+
+    from schedule_agent.agent import stt_vocabulary_prompt
+
+    prompt = stt_vocabulary_prompt(["Heroes of Emberstran"])
+    phrases = mod.parse_phrases(prompt)
+    assert "Aurelius Valeheart" in phrases
+    assert "Myrdae" in phrases
+    # No prefix leakage, no empty entries, no trailing-dot artifacts.
+    assert all(p and not p.endswith(".") and ":" not in p for p in phrases)
+    assert mod.parse_phrases("") == ()
+    assert mod.parse_phrases(None) == ()
+
+
 def test_claude_prompt_caching_is_on_by_default(monkeypatch):
     """Myra's ~6.4k-token prefix was reprocessed cold on every turn."""
     from schedule_agent.agent import build_llm
@@ -807,9 +882,10 @@ def test_stt_vocabulary_puts_the_speakers_own_campaign_and_party_first(monkeypat
     names = prompt.removeprefix("Names: ").rstrip(".").split(", ")
 
     assert names[0] == "Myrdae"
-    assert names[1] == "Heroes of Emberstran"
+    assert names[1] == "Suwanee Gamers"
+    assert names[2] == "Heroes of Emberstran"
     # That campaign's party follows immediately, before any other campaign.
-    assert "Aurelius Valeheart" in names[2:8]
+    assert "Aurelius Valeheart" in names[3:9]
     assert names.index("Aurelius Valeheart") < names.index("A New Adventure")
 
 

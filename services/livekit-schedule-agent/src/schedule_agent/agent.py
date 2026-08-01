@@ -32,6 +32,7 @@ from livekit.agents import (
     function_tool,
     llm,
     metrics,
+    stt,
 )
 from livekit.agents.llm import ToolFlag
 from livekit.plugins import anthropic, openai, silero
@@ -433,7 +434,9 @@ def stt_vocabulary_prompt(
     mine = [entry for entry in index if entry[0].casefold() in wanted]
     theirs = [entry for entry in index if entry[0].casefold() not in wanted]
 
-    ordered: list[str] = ["Myrdae"]
+    # "Myrdae" (the world) and "Suwanee Gamers" (the group) come first: both are
+    # said constantly and both are mangled unbiased ("Suwanee" -> "Sue Any").
+    ordered: list[str] = ["Myrdae", "Suwanee Gamers"]
     for campaign, characters in mine:
         ordered.append(campaign)
         ordered.extend(characters)
@@ -1465,6 +1468,63 @@ def tuning_float(tuning: dict[str, Any], key: str, env_name: str, default: float
 DEFAULT_CLAUDE_MODEL = "claude-haiku-4-5"
 
 
+def _stt_falsey(value: str) -> bool:
+    return value.strip().casefold() in {"", "off", "none", "0", "false"}
+
+
+def build_whisper_stt(vocabulary: str) -> openai.STT:
+    """CPU Whisper via Speaches — the fallback, and the sole engine if Parakeet
+    is not configured. The vocabulary rides in as an initial_prompt."""
+    return openai.STT(
+        model=os.getenv("LOCAL_STT_MODEL", "Systran/faster-whisper-small.en"),
+        language="en",
+        base_url=speech_base_url(),
+        api_key="local-only",
+        **({"prompt": vocabulary} if vocabulary else {}),
+    )
+
+
+def build_parakeet_stt(vocabulary: str) -> openai.STT:
+    """GPU Parakeet via the local NeMo service (services/parakeet-stt). It speaks
+    the OpenAI transcription API, so the same plugin and the same vocabulary
+    prompt work — the service turns the names into NeMo phrase boosting."""
+    return openai.STT(
+        model=os.getenv("PARAKEET_MODEL", "nvidia/parakeet-tdt-0.6b-v2"),
+        language="en",
+        base_url=os.getenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1"),
+        api_key="local-only",
+        **({"prompt": vocabulary} if vocabulary else {}),
+    )
+
+
+def build_stt(vocabulary: str, vad: Any) -> stt.STT:
+    """Parakeet (GPU) first, Whisper (CPU) as fallback.
+
+    Mirrors build_llm's Claude→Ollama pattern: the fast primary is tried first,
+    and stt.FallbackAdapter fails over to the local floor if the primary errors
+    (service down, out of memory, connection refused) so Myra keeps hearing.
+    Both engines are non-streaming, so the adapter needs a VAD to segment audio —
+    the same Silero instance the session uses for turn detection.
+
+    Parakeet is the default. Set STT_ENGINE=whisper (or leave PARAKEET_BASE_URL
+    unset) to run Whisper only — no fallback layer, the pre-Parakeet behaviour.
+    """
+    whisper = build_whisper_stt(vocabulary)
+    if _stt_falsey(os.getenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")):
+        return whisper
+    if os.getenv("STT_ENGINE", "parakeet").strip().casefold() == "whisper":
+        return whisper
+    parakeet = build_parakeet_stt(vocabulary)
+    return stt.FallbackAdapter(
+        [parakeet, whisper],
+        vad=vad,
+        # Bounds getting a response before failing over to Whisper. Parakeet
+        # answers in ~150ms when up and refuses fast when down, so a visitor
+        # never waits this long in practice.
+        attempt_timeout=env_float("STT_ATTEMPT_TIMEOUT", 5.0),
+    )
+
+
 PAGE_CONTEXT_TOPIC = "myra.page_context"
 
 
@@ -2491,24 +2551,29 @@ async def schedule_agent(ctx: JobContext):
         ", ".join(member_games) or "none",
     )
 
-    session = AgentSession(
-        stt=openai.STT(
-            # NON-DISTILLED, deliberately. distil-whisper is trained without
-            # previous-context conditioning, so it ignores `prompt` entirely and
-            # destabilizes on a long one — the vocabulary list below turned
-            # distil-small.en into "from Hoe, from Hoe, from Hoe...". The plain
-            # small.en costs ~240ms more per turn and can actually be biased.
-            model=os.getenv("LOCAL_STT_MODEL", "Systran/faster-whisper-small.en"),
-            language="en",
-            base_url=os.getenv(
-                "LOCAL_SPEECH_BASE_URL",
-                "http://127.0.0.1:8000/v1",
-            ),
-            api_key="local-only",
-            # Bias decoding toward this visitor's campaign and party names.
-            # Speaches passes `prompt` to faster-whisper as initial_prompt.
-            **({"prompt": vocabulary} if vocabulary else {}),
+    # One Silero VAD, shared by the session (turn detection + interruption) and,
+    # when Parakeet is primary, by the STT FallbackAdapter (which segments audio
+    # for its non-streaming children). Sharing one model instance is intended —
+    # each .stream() call is independent.
+    myra_vad = silero.VAD.load(
+        # How long to wait after speech stops before deciding the turn is over.
+        # Lower = snappier replies; too low risks cutting people off.
+        # Auto-tuned nightly (see scripts/autotune-assistant.ts).
+        min_silence_duration=tuning_float(tuning, "vadMinSilence", "VAD_MIN_SILENCE", 0.45),
+        # How loud a frame must be to count as speech. Higher = lower-energy
+        # background noise (chatter, TV, dice) is ignored, at the cost of the
+        # visitor needing to speak up a little. Raised above the 0.5 default
+        # because the mic often runs in a noisy room.
+        activation_threshold=tuning_float(
+            tuning, "vadActivationThreshold", "VAD_ACTIVATION_THRESHOLD", 0.6
         ),
+    )
+
+    session = AgentSession(
+        # GPU Parakeet first, CPU Whisper fallback (see build_stt). The
+        # per-visitor vocabulary flows to both; Parakeet turns it into phrase
+        # boosting, Whisper into an initial_prompt.
+        stt=build_stt(vocabulary, myra_vad),
         tts=openai.TTS(
             model=os.getenv(
                 "LOCAL_TTS_MODEL",
@@ -2526,19 +2591,7 @@ async def schedule_agent(ctx: JobContext):
             # is not present, resulting in a silent published track.
             response_format="pcm",
         ),
-        vad=silero.VAD.load(
-            # How long to wait after speech stops before deciding the turn is
-            # over. Lower = snappier replies; too low risks cutting people off.
-            # Auto-tuned nightly (see scripts/autotune-assistant.ts).
-            min_silence_duration=tuning_float(tuning, "vadMinSilence", "VAD_MIN_SILENCE", 0.45),
-            # How loud a frame must be to count as speech. Higher = lower-energy
-            # background noise (chatter, TV, dice) is ignored, at the cost of the
-            # visitor needing to speak up a little. Raised above the 0.5 default
-            # because the mic often runs in a noisy room.
-            activation_threshold=tuning_float(
-                tuning, "vadActivationThreshold", "VAD_ACTIVATION_THRESHOLD", 0.6
-            ),
-        ),
+        vad=myra_vad,
         turn_handling=TurnHandlingOptions(
             turn_detection="vad",
             # Guard against background noise barging in while Myra is speaking.
