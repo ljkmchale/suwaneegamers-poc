@@ -797,6 +797,56 @@ def test_canonicalizer_repairs_the_mangled_name_instead_of_deleting_it():
     assert "Valehart" not in fixed
 
 
+def test_stt_vocabulary_puts_the_speakers_own_campaign_and_party_first(monkeypatch):
+    """Biasing cost scales with length, so the visitor's own names come first."""
+    from schedule_agent.agent import stt_vocabulary_prompt
+
+    monkeypatch.delenv("STT_VOCABULARY", raising=False)
+    monkeypatch.delenv("STT_VOCABULARY_MAX_CHARS", raising=False)
+    prompt = stt_vocabulary_prompt(["Heroes of Emberstran"])
+    names = prompt.removeprefix("Names: ").rstrip(".").split(", ")
+
+    assert names[0] == "Myrdae"
+    assert names[1] == "Heroes of Emberstran"
+    # That campaign's party follows immediately, before any other campaign.
+    assert "Aurelius Valeheart" in names[2:8]
+    assert names.index("Aurelius Valeheart") < names.index("A New Adventure")
+
+
+def test_stt_vocabulary_excludes_archived_campaigns():
+    """15 of 22 roster rows are archived and sorted to the front of the budget."""
+    from schedule_agent.agent import load_campaign_roster_index, stt_vocabulary_prompt
+
+    live = {name for name, _ in load_campaign_roster_index()}
+    assert "Heroes of Emberstran" in live
+    assert "Beer & Dice I" not in live
+    assert "Crystal Bottle" not in live
+
+    prompt = stt_vocabulary_prompt([])
+    assert "Beer & Dice" not in prompt
+    assert "Heroes of Emberstran" in prompt
+
+
+def test_stt_vocabulary_respects_its_budget(monkeypatch):
+    from schedule_agent.agent import stt_vocabulary_prompt
+
+    monkeypatch.delenv("STT_VOCABULARY", raising=False)
+    monkeypatch.delenv("STT_VOCABULARY_MAX_CHARS", raising=False)
+    for budget in (350, 240, 120, 60, 8, 0):
+        assert len(stt_vocabulary_prompt([], max_chars=budget)) <= budget, budget
+    assert len(stt_vocabulary_prompt([])) <= 350
+    # Myrdae is first, so it survives any budget that fits a single name.
+    assert "Myrdae" in stt_vocabulary_prompt([], max_chars=120)
+
+
+def test_stt_vocabulary_can_be_switched_off_without_a_redeploy(monkeypatch):
+    from schedule_agent.agent import stt_vocabulary_prompt
+
+    for value in ("off", "none", "0", "false", "OFF"):
+        monkeypatch.setenv("STT_VOCABULARY", value)
+        assert stt_vocabulary_prompt(["Heroes of Emberstran"]) == ""
+
+
 def test_dungeon_master_is_not_mistaken_for_a_campaign_name():
     """"who is the dungeon master" became "who is the Dungeons III Master Thorne"."""
     from schedule_agent.agent import canonicalize_spoken_question, load_voice_entity_catalog

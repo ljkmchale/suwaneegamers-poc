@@ -9,7 +9,7 @@ import textwrap
 import time
 import urllib.error
 import urllib.request
-from collections.abc import AsyncGenerator, AsyncIterable
+from collections.abc import AsyncGenerator, AsyncIterable, Sequence
 from datetime import datetime
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -358,6 +358,107 @@ def load_active_character_names() -> tuple[str, ...]:
             seen.add(key)
             ordered.append(name)
     return tuple(ordered)
+
+
+@functools.lru_cache(maxsize=1)
+def load_campaign_roster_index() -> tuple[tuple[str, tuple[str, ...]], ...]:
+    """(campaign name, its active character names) pairs, in roster order."""
+    repo_root = Path(__file__).resolve().parents[4]
+    try:
+        roster = json.loads(
+            (repo_root / "content" / "campaign-roster.json").read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        return ()
+
+    index: list[tuple[str, tuple[str, ...]]] = []
+    campaigns = roster.get("campaigns", {}) if isinstance(roster, dict) else {}
+    for record in campaigns.values() if isinstance(campaigns, dict) else []:
+        if not isinstance(record, dict):
+            continue
+        # Archived campaigns are 15 of the 22 rows and nobody asks about them at
+        # the table. Left in, they sorted alphabetically to the front of the
+        # budget ("Beer & Dice I, II, III, Blisterfel...") and pushed out every
+        # live campaign and party.
+        if record.get("kind") != "active":
+            continue
+        name = str(record.get("name") or "").strip()
+        if not name:
+            continue
+        characters: list[str] = []
+        rows = record.get("characters")
+        for row in rows if isinstance(rows, list) else []:
+            if not isinstance(row, dict) or row.get("status") != "Active":
+                continue
+            # Only the base form here. Nicknames are already carried by the full
+            # name, and every entry spends budget that biasing is measured by.
+            variants = _spoken_name_variants(row.get("character"))
+            if variants:
+                characters.append(variants[0])
+        index.append((name, tuple(characters)))
+    return tuple(index)
+
+
+def stt_vocabulary_prompt(
+    games: Sequence[str] = (),
+    max_chars: int | None = None,
+) -> str:
+    """Proper nouns to bias Whisper toward, most valuable for THIS visitor first.
+
+    Myrdae's names are invented and hard to pronounce, so unbiased decoding
+    mangles them: "Aurelius Valeheart from Heroes of Emberstran" came back as
+    "Aurelius Veilheart from Heroes of Imberstrand". Biasing fixes both.
+
+    Ordered by who is speaking. A member's own campaigns and party come first,
+    because those are the names they actually say, and a short list is both more
+    accurate per character and measurably cheaper — biasing cost scales with
+    prompt length (measured 2026-08-01 on 4.8s of audio: 10 names 2155ms, 22
+    names 2397ms, 37 names 2717ms).
+
+    REQUIRES A NON-DISTILLED MODEL. distil-whisper is trained without
+    previous-context conditioning and cannot use a prompt at all: the same list
+    that works here collapsed distil-small.en into "from Hoe, from Hoe, from
+    Hoe...". See LOCAL_STT_MODEL. Set STT_VOCABULARY=off to disable.
+    """
+    if os.getenv("STT_VOCABULARY", "on").strip().casefold() in {"off", "none", "0", "false"}:
+        return ""
+    budget = max_chars if max_chars is not None else int(env_float("STT_VOCABULARY_MAX_CHARS", 350))
+    prefix = "Names: "
+    remaining = budget - len(prefix) - 1
+    if remaining <= 0:
+        return ""
+
+    index = load_campaign_roster_index()
+    wanted = {str(game).casefold().strip() for game in games if str(game).strip()}
+    mine = [entry for entry in index if entry[0].casefold() in wanted]
+    theirs = [entry for entry in index if entry[0].casefold() not in wanted]
+
+    ordered: list[str] = ["Myrdae"]
+    for campaign, characters in mine:
+        ordered.append(campaign)
+        ordered.extend(characters)
+    # Other campaigns by name before other parties: a campaign name is the
+    # coarsest thing anyone asks about, and there are far fewer of them.
+    ordered.extend(campaign for campaign, _ in theirs)
+    for _, characters in theirs:
+        ordered.extend(characters)
+
+    seen: set[str] = set()
+    kept: list[str] = []
+    used = 0
+    for name in ordered:
+        key = name.casefold()
+        if key in seen:
+            continue
+        cost = len(name) + (2 if kept else 0)
+        if used + cost > remaining:
+            continue
+        seen.add(key)
+        kept.append(name)
+        used += cost
+    if not kept:
+        return ""
+    return prefix + ", ".join(kept) + "."
 
 
 def soundex(value: str) -> str:
@@ -2379,27 +2480,34 @@ async def schedule_agent(ctx: JobContext):
         persona_voice(persona),
         persona_speed(persona),
     )
+    # Speech-recognition vocabulary, ordered for whoever is on the mic: their own
+    # campaigns and party first, then everyone else's, truncated to budget.
+    member_games = list((metadata.get("userProfile") or {}).get("games") or [])
+    vocabulary = stt_vocabulary_prompt(member_games)
+    logger.info(
+        "STT vocabulary: %d chars, %d names (member campaigns: %s)",
+        len(vocabulary),
+        vocabulary.count(",") + 1 if vocabulary else 0,
+        ", ".join(member_games) or "none",
+    )
 
     session = AgentSession(
         stt=openai.STT(
-            model=os.getenv(
-                "LOCAL_STT_MODEL",
-                "Systran/faster-distil-whisper-small.en",
-            ),
+            # NON-DISTILLED, deliberately. distil-whisper is trained without
+            # previous-context conditioning, so it ignores `prompt` entirely and
+            # destabilizes on a long one — the vocabulary list below turned
+            # distil-small.en into "from Hoe, from Hoe, from Hoe...". The plain
+            # small.en costs ~240ms more per turn and can actually be biased.
+            model=os.getenv("LOCAL_STT_MODEL", "Systran/faster-whisper-small.en"),
             language="en",
             base_url=os.getenv(
                 "LOCAL_SPEECH_BASE_URL",
                 "http://127.0.0.1:8000/v1",
             ),
             api_key="local-only",
-            # NOTE: do not add `prompt=` here to bias decoding toward campaign
-            # proper nouns. Measured against this model on 2026-08-01: a short
-            # prose prompt and a 10-name list changed nothing ("Valeheart" still
-            # came back "Valehart"), and a 20-name list collapsed the decoder
-            # into a repetition loop ("from Hoe, from Hoe, from Hoe..."), because
-            # Whisper treats initial_prompt as preceding transcript. Distilled
-            # models condition poorly on prompts. Name repair belongs in the
-            # entity canonicalizer instead, which runs on text after decoding.
+            # Bias decoding toward this visitor's campaign and party names.
+            # Speaches passes `prompt` to faster-whisper as initial_prompt.
+            **({"prompt": vocabulary} if vocabulary else {}),
         ),
         tts=openai.TTS(
             model=os.getenv(
