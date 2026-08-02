@@ -156,11 +156,24 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
 
       const match = findRosterCharacter(roster, record.props.name);
       if (!match) return cardItem;
+      const partyMember = campaign.party?.find(
+        (member) => member.name.localeCompare(record.props!.name as string, undefined, { sensitivity: "base" }) === 0,
+      );
 
       const role = [record.props.role || match.player, rosterDescriptor(match), rosterStatusLabel(match)]
         .filter(Boolean)
         .join(" · ");
-      return { ...record, props: { ...record.props, role } };
+      return {
+        ...record,
+        props: {
+          ...record.props,
+          role,
+          ...(partyMember ? {
+            href: partyLinks(partyMember).find((link) => link.type === "background")?.url ?? "",
+            links: cardLayoutItems(partyLinks(partyMember)),
+          } : {}),
+        },
+      };
     });
 
     return JSON.stringify(next, null, 2);
@@ -170,6 +183,61 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
     if (item.kind !== "block" || item.id !== rosterCardId) return item;
     if (typeof item.props.items !== "string") return item;
     return { ...item, props: { ...item.props, items: enrichCardItems(item.props.items) } };
+  });
+}
+
+/**
+ * Sends a signed-in player from the campaign's D&D Beyond button directly to
+ * their own character. Anonymous visitors, DMs who are not playing, and players
+ * without exactly one mapped sheet keep the ordinary campaign destination.
+ */
+export function personalizeCampaignDndBeyondLink(
+  items: PageItem[],
+  campaign: PortalCampaign,
+  playerName?: string,
+): PageItem[] {
+  if (!playerName) return items;
+
+  const sheetLinks = (campaign.party ?? [])
+    .filter((member) => member.player?.localeCompare(playerName, undefined, { sensitivity: "base" }) === 0)
+    .flatMap((member) => partyLinks(member).filter((link) => link.type === "sheet"));
+  if (sheetLinks.length !== 1) return items;
+
+  const campaignUrls = new Set(
+    (campaign.resources ?? [])
+      .map((resource) => resource.url)
+      .filter((url) => /^https:\/\/www\.dndbeyond\.com\/campaigns\/\d+\/?$/.test(url)),
+  );
+  const sheetUrl = sheetLinks[0].url;
+
+  function personalizeCardItems(json: string): string {
+    let cardItems: unknown;
+    try { cardItems = JSON.parse(json); } catch { return json; }
+    if (!Array.isArray(cardItems)) return json;
+
+    return JSON.stringify(cardItems.map((cardItem) => {
+      const record = cardItem as { type?: string; props?: Record<string, unknown> };
+      const props = record.props ?? {};
+      const nested = typeof props.items === "string"
+        ? { items: personalizeCardItems(props.items) }
+        : {};
+      const href = typeof props.href === "string" ? props.href : "";
+      const isCampaignLink = campaignUrls.has(href)
+        || (props.label === "D&D Beyond" && /^https:\/\/www\.dndbeyond\.com\/campaigns\//.test(href));
+      return {
+        ...record,
+        props: {
+          ...props,
+          ...nested,
+          ...(record.type === "link" && isCampaignLink ? { href: sheetUrl } : {}),
+        },
+      };
+    }), null, 2);
+  }
+
+  return items.map((item) => {
+    if (item.kind !== "block" || typeof item.props.items !== "string") return item;
+    return { ...item, props: { ...item.props, items: personalizeCardItems(item.props.items) } };
   });
 }
 

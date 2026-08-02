@@ -5,8 +5,14 @@ import type { PageItem } from "@/lib/pageBlocks";
 import type { PortalCampaign } from "@/lib/campaigns";
 import { activeCampaigns, findCampaign, getActiveCampaigns } from "@/lib/campaigns";
 import { findTrackedCampaign } from "@/lib/campaignTracking";
-import { enrichCampaignRosterCard, replaceCampaignSessionsCard } from "@/lib/campaignDetailLayouts";
+import {
+  enrichCampaignRosterCard,
+  personalizeCampaignDndBeyondLink,
+  replaceCampaignSessionsCard,
+} from "@/lib/campaignDetailLayouts";
 import { getPageLayout } from "@/lib/pageLayouts";
+import { getUserProfileContext } from "@/lib/userProfiles";
+import { getUserSession, isSignedIn } from "@/lib/userSession";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -65,8 +71,13 @@ export default async function CampaignDetailPage({ params }: Props) {
 
   if (!campaign) notFound();
 
+  const session = await getUserSession();
+  const playerName = isSignedIn(session)
+    ? getUserProfileContext(session).profile.playerName
+    : undefined;
   const trackedItems = replaceTrackedCampaignFields(getPageLayout(`/campaigns/${campaign.id}`), campaign);
-  const items = enrichCampaignRosterCard(replaceCampaignSessionsCard(trackedItems, campaign), campaign);
+  const refreshedItems = enrichCampaignRosterCard(replaceCampaignSessionsCard(trackedItems, campaign), campaign);
+  const items = personalizeCampaignDndBeyondLink(refreshedItems, campaign, playerName);
 
   return (
     <div className="relative min-h-screen pb-20 pt-20">

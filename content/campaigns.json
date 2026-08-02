@@ -886,6 +886,11 @@
         "player": "Sean Poole",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/143553500"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/1D1Ugxyxmmo8GeoIhyXylF30EHi25I6G_I1qL9_ByKG4/edit?usp=sharing"
@@ -897,6 +902,11 @@
         "player": "Larry McHale",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/143552470"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/1dfEYTFKPIF3IrmKXAMBdsRCznIQ4oqAtnPkMpZhR-vQ/edit?usp=sharing"
@@ -907,6 +917,11 @@
         "name": "Hap",
         "player": "Ty Cooper",
         "links": [
+          {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/143769194"
+          },
           {
             "label": "Background Sheet",
             "type": "background",
@@ -930,6 +945,11 @@
         "player": "Joshua John",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/143561088"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/1tnPfOKPbgomZqJoHRQwJaMO4lqknMVvWq6enxJMJoNw/edit?usp=sharing"
@@ -940,6 +960,11 @@
         "name": "Zymve",
         "player": "Emma Cooper",
         "links": [
+          {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/156341055"
+          },
           {
             "label": "Background Sheet",
             "type": "background",
@@ -1346,6 +1371,11 @@
         "player": "Brian",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/155842091"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/10QDbe0u0oDsCw0FmQuasZQqhyYzhurIZ7gPfmoeaL3s/edit?usp=sharing"
@@ -1356,6 +1386,11 @@
         "name": "Therric",
         "player": "Chip Poole",
         "links": [
+          {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/155805226"
+          },
           {
             "label": "Background Sheet",
             "type": "background",
@@ -1368,6 +1403,11 @@
         "player": "Jenny McHale",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/155697893"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/1WT_YH4B-vifhEie6ZC-XiqqWK_fZEj-RCFVWa8L1c54/edit?usp=sharing"
@@ -1378,6 +1418,11 @@
         "name": "Kenton",
         "player": "Larry McHale",
         "links": [
+          {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/155003694"
+          },
           {
             "label": "Background Sheet",
             "type": "background",
@@ -1390,6 +1435,11 @@
         "player": "Lesley Poole",
         "links": [
           {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/155866742"
+          },
+          {
             "label": "Background Sheet",
             "type": "background",
             "url": "https://docs.google.com/document/d/1NzosnUBovb6tplRPiZM125WQ6XS2LnUc-238idEVxR4/edit?usp=sharing"
@@ -1400,6 +1450,11 @@
         "name": "Lila",
         "player": "Tiffany Mulvihill",
         "links": [
+          {
+            "label": "D&D Beyond Character Sheet",
+            "type": "sheet",
+            "url": "https://www.dndbeyond.com/characters/157080305"
+          },
           {
             "label": "Background Sheet",
             "type": "background",

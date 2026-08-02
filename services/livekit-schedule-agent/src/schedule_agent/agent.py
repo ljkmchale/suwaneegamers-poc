@@ -452,6 +452,7 @@ def load_roster_facts() -> dict[str, Any]:
                 "subclass": str(row.get("subclass") or "").strip(),
                 "level": row.get("level"),
                 "campaign": campaign_name,
+                "sheet_url": "",
             }
             parties.setdefault(campaign_name, []).append(full)
             # Register the full name and each spoken variant (base + nickname) so
@@ -479,6 +480,44 @@ def load_roster_facts() -> dict[str, Any]:
             continue
         if record.get("id"):
             campaign_ids[name.casefold()] = str(record["id"])
+        # Individual character sheets are curated on each campaign party member.
+        # Merge them into the synced roster facts without putting a manually
+        # maintained URL into campaign-roster.json, which its daily sheet sync
+        # intentionally replaces.
+        campaign_facts = {
+            id(facts): facts
+            for facts in characters.values()
+            if str(facts.get("campaign") or "").casefold() == name.casefold()
+        }.values()
+        for member in record.get("party", []) if isinstance(record.get("party"), list) else []:
+            if not isinstance(member, dict):
+                continue
+            member_name = str(member.get("name") or "").strip().casefold()
+            sheet_url = next((
+                str(link.get("url") or "").strip()
+                for link in member.get("links", []) if isinstance(member.get("links"), list)
+                if isinstance(link, dict)
+                and link.get("type") == "sheet"
+                and re.fullmatch(r"https://www\.dndbeyond\.com/characters/\d+/?", str(link.get("url") or ""))
+            ), "")
+            if not member_name or not sheet_url:
+                continue
+            for facts in campaign_facts:
+                variants = {variant.casefold() for variant in _spoken_name_variants(str(facts["character"]))}
+                quoted_aliases = {
+                    (match[0] or match[1]).strip().casefold()
+                    for match in re.findall(
+                        r"[\"'â€œâ€]([^\"'â€œâ€]+)[\"'â€œâ€]|\(([^)]+)\)",
+                        str(facts["character"]),
+                    )
+                    if (match[0] or match[1]).strip()
+                }
+                # Campaign cards often use just the first name ("Aurelius")
+                # while the roster keeps the full name and nickname.
+                first_names = {variant.split()[0] for variant in variants if variant.split()}
+                if member_name in variants or member_name in first_names or member_name in quoted_aliases:
+                    facts["sheet_url"] = sheet_url
+                    characters.setdefault(member_name, facts)
         for resource in record.get("resources", []) if isinstance(record.get("resources"), list) else []:
             label = str(resource.get("label") or "").casefold()
             url = str(resource.get("url") or "")
@@ -606,6 +645,24 @@ def resolve_sheet_campaign(
     if len(games) == 1:
         return games[0]
     return ""
+
+
+def may_open_character_sheet(
+    facts: dict[str, Any],
+    user_profile: dict[str, Any],
+    dm_campaigns: str | Sequence[str],
+) -> bool:
+    """Only a character's player or that campaign's authorized DM may open it."""
+    player_names = {
+        str(user_profile.get("playerName") or "").strip().casefold(),
+        str(user_profile.get("displayName") or "").strip().casefold(),
+    }
+    owns_character = str(facts.get("player") or "").strip().casefold() in player_names
+    campaign = str(facts.get("campaign") or "").strip().casefold()
+    runs_campaign = dm_campaigns == "*" or campaign in {
+        str(item).strip().casefold() for item in dm_campaigns
+    }
+    return owns_character or runs_campaign
 
 
 def stt_vocabulary_prompt(
@@ -2873,6 +2930,15 @@ class Myra(Agent):
             topic="myra.ui_action",
         )
 
+    async def _publish_external(self, href: str, label: str) -> None:
+        if not re.fullmatch(r"https://www\.dndbeyond\.com/characters/\d+/?", href):
+            raise ValueError("Unsupported external navigation target")
+        await self.room.local_participant.publish_data(
+            json.dumps({"action": "open_external", "href": href, "label": label}),
+            reliable=True,
+            topic="myra.ui_action",
+        )
+
     async def run_self_diagnosis(self) -> tuple[str, str]:
         """Check each of Myra's subsystems and describe how she feels.
 
@@ -3054,6 +3120,24 @@ class Myra(Agent):
                 "character name and I'll open its sheet page."
             )
         data = load_roster_facts()
+        requested = name.strip().casefold()
+        facts = data["characters"].get(requested) if requested else None
+        if facts is None and not requested:
+            facts = next((
+                data["characters"].get(character.casefold())
+                for character in own_chars
+                if data["characters"].get(character.casefold())
+            ), None)
+        sheet_url = str((facts or {}).get("sheet_url") or "")
+        if facts and sheet_url:
+            if not may_open_character_sheet(facts, self.user_profile, self.dm_campaigns):
+                return (
+                    f"I can only open {facts['character']}'s character sheet for "
+                    "the player who plays that character or this campaign's DM."
+                )
+            await self._publish_external(sheet_url, f"{facts['character']} character sheet")
+            logger.info("open_character_sheet(%r) -> authorized D&D Beyond sheet", name)
+            return f"Opening {facts['character']}’s character sheet in D&D Beyond."
         slug = data["campaign_ids"].get(campaign.casefold())
         if not slug:
             return f"I couldn't find a site page for {campaign}."

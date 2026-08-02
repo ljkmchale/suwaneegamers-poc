@@ -192,7 +192,11 @@ def test_campaign_names_map_to_the_vault_index_names():
 
 
 def test_open_character_sheet_resolves_to_the_right_campaign():
-    from schedule_agent.agent import load_roster_facts, resolve_sheet_campaign
+    from schedule_agent.agent import (
+        load_roster_facts,
+        may_open_character_sheet,
+        resolve_sheet_campaign,
+    )
 
     # The visitor's own campaign, from their linked character.
     assert resolve_sheet_campaign("", ["Aurelius Valeheart"], []) == "Heroes of Emberstran"
@@ -206,6 +210,40 @@ def test_open_character_sheet_resolves_to_the_right_campaign():
 
     # Every active campaign resolves to a real /campaigns/<slug> page.
     data = load_roster_facts()
+    assert data["characters"]["aury"]["sheet_url"] == (
+        "https://www.dndbeyond.com/characters/143552470"
+    )
+    expected_sheets = {
+        "ains": "143553500",
+        "aury": "143552470",
+        "hap garemon": "143769194",
+        "og": "143561088",
+        "zymve inni": "156341055",
+        "escanor": "155842091",
+        "esylla fordevae": "155866742",
+        "kenton clawstar": "155003694",
+        "lila tealeaf": "157080305",
+        "therric balenfore": "155805226",
+        "zephyra maelstrom": "155697893",
+    }
+    for character, character_id in expected_sheets.items():
+        assert data["characters"][character]["sheet_url"] == (
+            f"https://www.dndbeyond.com/characters/{character_id}"
+        )
+    assert data["characters"]["ky'tha fawnborn"]["sheet_url"] == ""
+    aury = data["characters"]["aury"]
+    assert may_open_character_sheet(aury, {"playerName": "Larry McHale"}, [])
+    assert may_open_character_sheet(aury, {"playerName": "Chip Poole"}, "*")
+    assert may_open_character_sheet(
+        aury,
+        {"playerName": "Sean Poole"},
+        ["Heroes of Emberstran"],
+    )
+    assert not may_open_character_sheet(
+        aury,
+        {"playerName": "Sean Poole"},
+        ["A New Adventure"],
+    )
     for campaign in data["parties"]:
         assert data["campaign_ids"].get(campaign.casefold()), campaign
 

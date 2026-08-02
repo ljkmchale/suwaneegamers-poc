@@ -178,6 +178,12 @@ function AssistantRoom({
           !payload.href.startsWith("//")
         ) {
           router.push(payload.href);
+        } else if (
+          payload.action === "open_external" &&
+          typeof payload.href === "string" &&
+          /^https:\/\/www\.dndbeyond\.com\/characters\/\d+\/?$/.test(payload.href)
+        ) {
+          window.location.assign(payload.href);
         }
       } catch {
         // Ignore malformed or unsupported data-channel messages.

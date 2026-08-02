@@ -20,10 +20,61 @@ import {
   applyCampaignTrackingToActiveCampaigns,
   parseCampaignTrackingText,
 } from "@/lib/campaignTracking";
+import { personalizeCampaignDndBeyondLink } from "@/lib/campaignDetailLayouts";
+import { getPageLayout } from "@/lib/pageLayouts";
 
 afterEach(() => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
+});
+
+function nestedLinkHref(items: unknown[], label: string): string | undefined {
+  for (const item of items) {
+    if (!item || typeof item !== "object") continue;
+    const record = item as { type?: string; props?: Record<string, unknown> };
+    if (record.type === "link" && record.props?.label === label) {
+      return typeof record.props.href === "string" ? record.props.href : undefined;
+    }
+    if (typeof record.props?.items === "string") {
+      try {
+        const found = nestedLinkHref(JSON.parse(record.props.items), label);
+        if (found) return found;
+      } catch { /* malformed saved editor content is ignored */ }
+    }
+  }
+  return undefined;
+}
+
+describe("personalized campaign D&D Beyond links", () => {
+  it("takes a signed-in player to their own sheet", () => {
+    const campaign = findCampaign("heroes-of-emberstran")!;
+    const items = personalizeCampaignDndBeyondLink(
+      getPageLayout("/campaigns/heroes-of-emberstran"),
+      campaign,
+      "Larry McHale",
+    );
+    expect(nestedLinkHref(items, "D&D Beyond")).toBe(
+      "https://www.dndbeyond.com/characters/143552470",
+    );
+
+    const souls = findCampaign("souls-of-destiny")!;
+    expect(nestedLinkHref(personalizeCampaignDndBeyondLink(
+      getPageLayout("/campaigns/souls-of-destiny"),
+      souls,
+      "Larry McHale",
+    ), "D&D Beyond")).toBe("https://www.dndbeyond.com/characters/155003694");
+  });
+
+  it("keeps the campaign link for anonymous or unmapped members", () => {
+    const campaign = findCampaign("heroes-of-emberstran")!;
+    const original = getPageLayout("/campaigns/heroes-of-emberstran");
+    expect(nestedLinkHref(personalizeCampaignDndBeyondLink(original, campaign), "D&D Beyond"))
+      .toBe("https://www.dndbeyond.com/campaigns/6506738");
+    expect(nestedLinkHref(
+      personalizeCampaignDndBeyondLink(original, campaign, "Lesley Poole"),
+      "D&D Beyond",
+    )).toBe("https://www.dndbeyond.com/campaigns/6506738");
+  });
 });
 
 // ── Data shape ────────────────────────────────────────────────────────────────
@@ -76,8 +127,11 @@ describe("activeCampaigns party links", () => {
         for (const link of member.links ?? []) {
           expect(link.label).toBeTruthy();
           expect(validTypes.has(link.type)).toBe(true);
-          expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
-          expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
+          if (link.type === "sheet") {
+            expect(link.url).toMatch(/^https:\/\/www\.dndbeyond\.com\/characters\/\d+\/?$/);
+          } else {
+            expect(link.url).toMatch(/^https:\/\/docs\.google\.com\/document\/d\//);
+          }
         }
       }
     }
@@ -87,8 +141,12 @@ describe("activeCampaigns party links", () => {
     for (const campaign of activeCampaigns) {
       for (const member of campaign.party ?? []) {
         for (const link of member.links ?? []) {
-          expect(link.label).toBe("Background Sheet");
-          expect(link.type).toBe("background");
+          if (link.type === "sheet") {
+            expect(link.label).toBe("D&D Beyond Character Sheet");
+          } else {
+            expect(link.label).toBe("Background Sheet");
+            expect(link.type).toBe("background");
+          }
         }
       }
     }
