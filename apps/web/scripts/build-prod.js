@@ -20,6 +20,10 @@ if (fs.existsSync(activePointer)) {
 }
 const stagingName = activeSlot === ".next-prod-a" ? ".next-prod-b" : ".next-prod-a";
 const stagingDir = path.join(webDir, stagingName);
+// Capture source identity before Next rewrites generated files such as
+// next-env.d.ts for the selected distDir. Build-generated churn must not make a
+// clean source checkout look dirty in production metadata.
+const sourceMetadata = createBuildMetadata({ repoRoot, webDir, buildId: "pending" });
 
 if (path.dirname(stagingDir) !== webDir || !allowedSlots.has(stagingName)) {
   throw new Error(`Unsafe production staging directory: ${stagingDir}`);
@@ -42,7 +46,7 @@ if (!fs.existsSync(buildId)) {
   throw new Error(`Production staging build did not create ${buildId}`);
 }
 const id = fs.readFileSync(buildId, "utf8").trim();
-const metadata = createBuildMetadata({ repoRoot, webDir, buildId: id });
+const metadata = { ...sourceMetadata, buildId: id };
 fs.writeFileSync(
   path.join(stagingDir, "BUILD_METADATA.json"),
   `${JSON.stringify(metadata, null, 2)}\n`,
