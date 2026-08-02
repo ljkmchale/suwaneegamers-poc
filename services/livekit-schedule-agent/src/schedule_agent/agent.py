@@ -112,6 +112,10 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         "events": events if isinstance(events, list) else [],
         "aboutSuwaneeGamers": str(payload.get("aboutSuwaneeGamers") or ""),
         "knowledge": str(payload.get("knowledge") or ""),
+        "knowledgeVisibility": "dm" if payload.get("knowledgeVisibility") == "dm" else "players",
+        "brainAccessToken": str(payload.get("brainAccessToken") or ""),
+        "dmCampaigns": payload.get("dmCampaigns") if payload.get("dmCampaigns") == "*" or isinstance(payload.get("dmCampaigns"), list) else [],
+        "dmDefaultCampaigns": payload.get("dmDefaultCampaigns") if isinstance(payload.get("dmDefaultCampaigns"), list) else [],
         "websiteUpdates": (
             payload.get("websiteUpdates")
             if isinstance(payload.get("websiteUpdates"), dict)
@@ -1545,7 +1549,12 @@ def campaign_named_in_question(question: str) -> str:
     return ""
 
 
-def query_player_knowledge(question: str, campaign: str = "All") -> str:
+def query_player_knowledge(
+    question: str,
+    campaign: str = "All",
+    visibility: str = "players",
+    access_token: str = "",
+) -> str:
     endpoint = os.getenv(
         "BRAIN_ASK_URL",
         "http://127.0.0.1:4652/api/brain/ask",
@@ -1557,6 +1566,8 @@ def query_player_knowledge(question: str, campaign: str = "All") -> str:
     secret = os.getenv("LIVEKIT_API_SECRET")
     if secret:
         headers["Authorization"] = f"Bearer {secret}"
+    if access_token:
+        headers["x-sg-myra-brain-access"] = access_token
     request = urllib.request.Request(
         endpoint,
         data=json.dumps(
@@ -1570,7 +1581,7 @@ def query_player_knowledge(question: str, campaign: str = "All") -> str:
                 # questions, and world lore (gods, history, places) still answers
                 # under any scope.
                 "campaign": campaign or "All",
-                "visibility": "players",
+                "visibility": "dm" if visibility == "dm" and access_token else "players",
                 "answerMode": "direct",
                 "quality": "fast",
             }
@@ -2342,6 +2353,14 @@ class Myra(Agent):
         self.schedule = schedule
         self.room = room
         self.knowledge = str(schedule.get("knowledge") or "").strip()
+        self.knowledge_visibility = (
+            "dm" if schedule.get("knowledgeVisibility") == "dm" else "players"
+        )
+        self.brain_access_token = str(schedule.get("brainAccessToken") or "")
+        self.dm_campaigns = schedule.get("dmCampaigns", [])
+        self.dm_default_campaigns = [
+            str(name) for name in schedule.get("dmDefaultCampaigns", []) if str(name)
+        ]
         self.health = schedule.get("health") if isinstance(schedule.get("health"), dict) else {}
         self.website_updates = (
             schedule.get("websiteUpdates")
@@ -2428,6 +2447,13 @@ class Myra(Agent):
             {json.dumps(self.website_updates, ensure_ascii=False)}
             """
         )
+        chronicles_access_block = (
+            "This authenticated visitor has full DM Chronicles access across campaigns."
+            if self.dm_campaigns == "*"
+            else f"This authenticated visitor may use DM Chronicles sources only for these active campaigns: {', '.join(self.dm_default_campaigns)}. Other campaigns remain player-safe."
+            if self.knowledge_visibility == "dm"
+            else "search_knowledge_base is restricted to player-safe Chronicles sources. Never imply access to private DM notes."
+        )
         self.system_prompt = textwrap.dedent(
             f"""\
             You are Myra, the Suwanee Gamers assistant and voice guide for the entire
@@ -2445,6 +2471,7 @@ class Myra(Agent):
             {pantheon_block}
             {profile_block}
             {website_updates_block}
+            {chronicles_access_block}
 
             {personality_block}
 
@@ -2562,6 +2589,8 @@ class Myra(Agent):
         named = campaign_named_in_question(question)
         if named:
             return named
+        if self.knowledge_visibility == "dm" and len(self.dm_default_campaigns) == 1:
+            return self.dm_default_campaigns[0]
         games = [str(g).strip() for g in (self.user_profile.get("games") or []) if str(g).strip()]
         if len(games) == 1:
             return map_campaign_to_brain(games[0]) or "All"
@@ -2961,7 +2990,11 @@ class Myra(Agent):
             "I'm checking the Chronicles now. This search is still in progress."
         )
         answer = await asyncio.to_thread(
-            query_player_knowledge, question, self.knowledge_campaign_scope(question)
+            query_player_knowledge,
+            question,
+            self.knowledge_campaign_scope(question),
+            self.knowledge_visibility,
+            self.brain_access_token,
         )
         if not tool_result_is_current(started_turn, self._turn_revision):
             logger.info(

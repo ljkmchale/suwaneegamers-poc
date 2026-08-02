@@ -1,18 +1,27 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { ChevronDown, Home } from "lucide-react";
 import { headers } from "next/headers";
 import { logoutAction } from "./login/actions";
 
-const NAV_LINKS = [
+const NAV_LINKS_BEFORE_MYRA = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/store", label: "Store" },
-  { href: "/admin/analytics", label: "Usage & Connections" },
-  { href: "/admin/voice-assistant", label: "Myra" },
-  { href: "/admin/myra-health", label: "Myra Health" },
+];
+
+const MYRA_LINKS = [
+  { href: "/admin/voice-assistant", label: "Overview" },
+  { href: "/admin/myra-health", label: "Health" },
   { href: "/admin/pronunciations", label: "Pronunciations" },
-  { href: "/admin/security", label: "Security" },
+];
+
+const SECURITY_LINKS = [
+  { href: "/admin/security", label: "Overview" },
+  { href: "/admin/analytics", label: "Usage & Connections" },
+];
+
+const NAV_LINKS_AFTER_MYRA = [
   { href: "/admin/chronicles", label: "Chronicles" },
   { href: "/admin/map-editor", label: "Map Editor" },
   { href: "/admin/pages", label: "Pages" },
@@ -22,10 +31,52 @@ const NAV_LINKS = [
   { href: "/admin/media", label: "Media" },
 ];
 
+function AdminNavGroup({
+  label,
+  links,
+  adminPath,
+}: {
+  label: string;
+  links: { href: string; label: string }[];
+  adminPath: string;
+}) {
+  const activeGroup = links.some((link) => link.href === adminPath);
+  return (
+    <details className="group" open={activeGroup || undefined}>
+      <summary
+        className={`flex cursor-pointer list-none items-center justify-between px-6 py-2.5 text-sm transition-colors hover:bg-[#16161e] hover:text-[#f59e0b] [&::-webkit-details-marker]:hidden ${activeGroup ? "bg-[#16161e] text-[#f59e0b]" : ""}`}
+      >
+        <span>{label}</span>
+        <ChevronDown
+          size={15}
+          aria-hidden="true"
+          className="transition-transform group-open:rotate-180"
+        />
+      </summary>
+      <div className="border-y border-[#21182e] bg-[#0b0713] py-1">
+        {links.map((link) => {
+          const active = adminPath === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={active ? "page" : undefined}
+              className={`block border-l-2 py-2 pl-8 pr-4 text-sm transition-colors hover:bg-[#16161e] hover:text-[#f59e0b] ${active ? "border-[#8b5cf6] bg-[#16161e] text-[#e8dfc8]" : "border-transparent text-[#a89880]"}`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+      </div>
+    </details>
+  );
+}
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const requestHeaders = await headers();
   const isLoginPage = requestHeaders.get("x-admin-login-page") === "1";
-  const isMapEditor = requestHeaders.get("x-admin-path") === "/admin/map-editor";
+  const adminPath = requestHeaders.get("x-admin-path") ?? "/admin";
+  const isMapEditor = adminPath === "/admin/map-editor";
 
   if (isLoginPage) return children;
 
@@ -51,7 +102,18 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </div>
 
         <nav className="flex-1 py-4">
-          {NAV_LINKS.map((link) => (
+          {NAV_LINKS_BEFORE_MYRA.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block px-6 py-2.5 text-sm hover:text-[#f59e0b] hover:bg-[#16161e] transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <AdminNavGroup label="Myra" links={MYRA_LINKS} adminPath={adminPath} />
+          <AdminNavGroup label="Security" links={SECURITY_LINKS} adminPath={adminPath} />
+          {NAV_LINKS_AFTER_MYRA.map((link) => (
             <Link
               key={link.href}
               href={link.href}

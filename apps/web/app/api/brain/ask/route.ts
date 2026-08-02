@@ -6,6 +6,8 @@ import { hasIndex } from "@/lib/brain/vector-store";
 import { brainConfig } from "@/lib/brain/config";
 import path from "node:path";
 import fs from "node:fs/promises";
+import { getAdminSession } from "@/lib/adminSession";
+import { tokenAllowsCampaign, verifyMyraBrainAccessToken } from "@/lib/myraBrainAccess";
 
 export const dynamic = "force-dynamic";
 
@@ -40,9 +42,15 @@ export async function POST(request: NextRequest) {
     if (!question) return NextResponse.json({ error: "Missing question." }, { status: 400 });
     if (!(await hasIndex())) return NextResponse.json({ error: "Index not found. Run npm run index first." }, { status: 409 });
 
-    // Visibility: only allow "dm" if the caller explicitly requests it via header (admin surface)
+    // DM visibility requires either an authenticated admin session or the
+    // short-lived capability minted for an explicitly allowlisted Myra user.
     const requestedVisibility = String(body.visibility ?? "players");
-    const isDm = requestedVisibility === "dm" && request.headers.get("x-sg-admin") === "1";
+    const hasAdminSession = (await getAdminSession()).isAdmin === true;
+    const myraAccess = isMachineRequest(request)
+      ? verifyMyraBrainAccessToken(request.headers.get("x-sg-myra-brain-access"))
+      : null;
+    const hasMyraDmAccess = tokenAllowsCampaign(myraAccess, String(body.campaign ?? "All"));
+    const isDm = requestedVisibility === "dm" && (hasAdminSession || hasMyraDmAccess);
     const visibility = isDm ? "dm" : "players";
 
     const topK = Math.max(3, Math.min(20, Number.parseInt(String(body.topK ?? brainConfig.topK), 10)));

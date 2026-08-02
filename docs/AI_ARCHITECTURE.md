@@ -34,6 +34,13 @@ time. The same metadata is copied into the ready pointer, loaded by
 `start-prod.js`, and reported by `GET /api/version`. Treat that endpoint as the
 authoritative identity of the bundle actually running in production.
 
+Myra searches Chronicles through `/api/brain/ask`. Voice searches default to
+player-safe sources. Larry and Chip are configured in `MYRA_FULL_DM_EMAILS` for
+cross-campaign access. Other authenticated DMs receive a short-lived signed
+capability limited to campaigns currently assigned to them in
+`dungeon_masters` / `campaign_dms`; inactive or unrelated campaigns remain
+player-safe.
+
 `/images/...` is obsolete. Files under `apps/web/media/images/` must be referenced as `/media/images/...`. Do not put site media back under `public/` unless the architecture contract is deliberately migrated everywhere.
 
 ## Change-impact checklist

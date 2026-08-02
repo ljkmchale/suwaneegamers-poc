@@ -23,6 +23,9 @@ import { getUserProfileContext } from "@/lib/userProfiles";
 import { isStorefrontEnabled } from "@/lib/store";
 import { getMyraHealth, publicHealthSummary } from "@/lib/myraHealth";
 import { getWebsiteUpdates } from "@/lib/websiteUpdates";
+import { createMyraBrainAccessToken, mayUseFullMyraDm } from "@/lib/myraBrainAccess";
+import { getDungeonMasters } from "@/lib/dungeonMasters";
+import { getActiveCampaigns } from "@/lib/campaigns";
 
 export const dynamic = "force-dynamic";
 
@@ -131,6 +134,32 @@ export async function POST(request: NextRequest) {
       userProfile.profile.displayName.trim().split(/\s+/)[0] || "there";
     const memberKey = userSession.sub ?? userSession.email ?? randomUUID();
     const memberId = createHash("sha256").update(memberKey).digest("hex").slice(0, 12);
+    const fullDmAccess = mayUseFullMyraDm(userSession.email);
+    const memberDm = getDungeonMasters().find((dm) =>
+      [userProfile.profile.playerName, userProfile.profile.displayName].some((name) =>
+        name?.localeCompare(dm.name, undefined, { sensitivity: "base" }) === 0
+      )
+    );
+    const activeCampaigns = getActiveCampaigns();
+    const brainNameByCampaignId: Record<string, string> = {
+      "heroes-of-emberstran": "Heroes of Emberstran",
+      "souls-of-destiny": "Souls of Destiny",
+      "the-silent-vanguard": "The Silent Vanguard",
+      "bloody-endeavor": "Bloody Endeavor",
+      "dungeons-iii": "Dungeons III",
+      "the-crystal-bottle": "The Crystal Bottle",
+    };
+    const dmCampaigns = fullDmAccess
+      ? "*" as const
+      : Array.from(new Set((memberDm?.activeCampaignIds ?? []).flatMap((campaignId) => {
+          const campaign = activeCampaigns.find((item) => item.id === campaignId);
+          return [campaign?.name, brainNameByCampaignId[campaignId]].filter((name): name is string => Boolean(name));
+        })));
+    const dmDefaultCampaigns = fullDmAccess ? [] : (memberDm?.activeCampaignIds ?? []).map((campaignId) =>
+      brainNameByCampaignId[campaignId]
+      ?? activeCampaigns.find((item) => item.id === campaignId)?.name
+    ).filter((name): name is string => Boolean(name));
+    const dmBrainAccess = createMyraBrainAccessToken(memberKey, dmCampaigns, apiSecret);
     const schedule = events.map(({ title, start, end, allDay, location }) => ({
       title,
       start,
@@ -182,6 +211,10 @@ export async function POST(request: NextRequest) {
       navigation,
       aboutSuwaneeGamers: getAssistantAbout(),
       knowledge: getAssistantBrain(),
+      knowledgeVisibility: dmBrainAccess ? "dm" : "players",
+      dmCampaigns,
+      dmDefaultCampaigns,
+      brainAccessToken: dmBrainAccess,
       pronunciations: getAssistantPronunciations(),
       mishearings: getAssistantMishearings(),
       recaps: getAssistantRecaps(),
