@@ -1,5 +1,8 @@
-import { answerQuestion } from "../src/query.mjs";
-import { clearCache } from "../src/query-cache.mjs";
+// Exercises the live Chronicles endpoint (/api/brain/ask -> lib/brain/query.ts,
+// Claude Haiku 4.5), not the parallel Groq engine in ../src/query.mjs, so these
+// behavior checks validate exactly what visitors and the voice agent receive.
+// Point BRAIN_ASK_URL at a running server (defaults to the prod service on 4652).
+import { answerQuestion, askEndpoint } from "../src/ask-http.mjs";
 
 const tests = [
   {
@@ -177,7 +180,7 @@ const tests = [
   },
   {
     name: "Aury alias resolves to Aurelius",
-    question: "Who is Aury in HoE?",
+    question: "Who is Aury?",
     includes: ["Aury", "Aurelius"],
     excludes: ["not documented"],
     forbiddenSourcePaths: ["log.md"]
@@ -303,7 +306,7 @@ const tests = [
   }
 ];
 
-await clearCache();
+console.log(`Testing against ${askEndpoint}\n`);
 
 let failed = 0;
 

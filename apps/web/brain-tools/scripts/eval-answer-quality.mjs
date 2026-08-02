@@ -1,13 +1,15 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { answerQuestion } from "../src/query.mjs";
-import { clearCache } from "../src/query-cache.mjs";
+// Exercises the live Chronicles endpoint (/api/brain/ask -> lib/brain/query.ts,
+// Claude Haiku 4.5), not the parallel Groq engine in ../src/query.mjs, so the
+// golden-answer evals score exactly what production serves.
+import { answerQuestion, askEndpoint } from "../src/ask-http.mjs";
 
 const evalPath = path.resolve("tests", "golden-answers.json");
 const raw = await fs.readFile(evalPath, "utf8");
 const cases = JSON.parse(raw);
 
-await clearCache();
+console.log(`Evaluating against ${askEndpoint}\n`);
 
 let failures = 0;
 for (const testCase of cases) {

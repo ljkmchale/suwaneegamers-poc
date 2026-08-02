@@ -5,7 +5,9 @@ import { brainConfig } from "./config";
 const TTL_MS = 7 * 24 * 60 * 60 * 1000;
 // Increment whenever routing or answer-selection semantics change. Otherwise a
 // corrected query can keep serving its old seven-day answer after deployment.
-const QUERY_CACHE_VERSION = "v4";
+// v5: answer generation moved from Groq (llama-3.3-70b) to Claude Haiku 4.5;
+// without this bump, up to seven days of cached Groq answers would keep serving.
+const QUERY_CACHE_VERSION = "v5";
 const EXCLUDED_SOURCE_PATHS = new Set(["log.md"]);
 
 interface CacheEntry {

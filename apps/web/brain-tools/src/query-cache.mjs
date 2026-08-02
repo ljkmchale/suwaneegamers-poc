@@ -4,7 +4,9 @@ import { config } from "./config.mjs";
 
 const CACHE_PATH = path.join(config.dataDir, "query-cache.json");
 const TTL_MS = 7 * 24 * 60 * 60 * 1000;
-const QUERY_CACHE_VERSION = "v4";
+// Keep in sync with lib/brain/query-cache.ts. v5 retired cached Groq answers
+// when answer generation moved to Claude Haiku 4.5.
+const QUERY_CACHE_VERSION = "v5";
 const queryExcludedSourcePaths = new Set(["log.md"]);
 
 let _cache = null;
