@@ -22,6 +22,25 @@ export const brainConfig = {
   get chatModel(): string {
     return process.env.GROQ_CHAT_MODEL ?? "llama-3.3-70b-versatile";
   },
+  // Answer generation: Claude (Anthropic) is primary, Groq is the fallback.
+  // The old Groq-only client had no retry, so rate limits (429s) caused random
+  // "she didn't answer" failures. The Anthropic SDK auto-retries 429/5xx with
+  // backoff, and Groq stays as the floor if Anthropic is unreachable.
+  // Set BRAIN_LLM=groq to force the old behaviour.
+  get llmProvider(): "claude" | "groq" {
+    return process.env.BRAIN_LLM?.trim().toLowerCase() === "groq" ? "groq" : "claude";
+  },
+  get anthropicApiKey(): string {
+    return process.env.ANTHROPIC_API_KEY ?? "";
+  },
+  get anthropicChatModel(): string {
+    return process.env.BRAIN_ANTHROPIC_MODEL ?? "claude-haiku-4-5";
+  },
+  // Anthropic requires an explicit output cap. Chronicles answers are a sentence
+  // to a short paragraph, plus the occasional index list — 2048 is generous.
+  get chatMaxTokens(): number {
+    return num("BRAIN_CHAT_MAX_TOKENS", 2048);
+  },
   get embedModel(): string {
     return process.env.JINA_EMBED_MODEL ?? "jina-embeddings-v3";
   },
