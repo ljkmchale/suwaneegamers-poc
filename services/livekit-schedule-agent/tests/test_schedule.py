@@ -12,6 +12,7 @@ from schedule_agent.agent import (
     campaign_schedule_answer,
     canonicalize_spoken_entity_question,
     canonicalize_spoken_question,
+    contextualize_entity_followup,
     diagnostic_request,
     event_loop_lag,
     general_schedule_answer,
@@ -23,6 +24,7 @@ from schedule_agent.agent import (
     load_full_pantheon_knowledge,
     load_pantheon_knowledge,
     load_voice_entity_catalog,
+    mentioned_pantheon_deity,
     metric_forward_payload,
     navigation_request_target,
     pantheon_deity_answer,
@@ -102,7 +104,7 @@ def test_persona_speed_stays_intelligible():
 
 def test_persona_style_block_falls_back_to_classic_myra():
     block = persona_style_block({})
-    assert "knowledgeable gaming friend" in block
+    assert "warm D&D oracle" in block
     assert "Yeah — I can help with that." in block
 
 
@@ -111,7 +113,7 @@ def test_persona_style_block_keeps_the_shared_guard_rails():
         {"style": ["Be a sharp, quick-witted Brit."], "examples": ["Say \"Right then\"."]}
     )
     assert "quick-witted Brit" in block
-    assert "knowledgeable gaming friend" not in block
+    assert "warm D&D oracle" not in block
     # Persona-independent limits survive any personality.
     assert "Personality never outranks accuracy" in block
     assert "No profanity" in block
@@ -169,6 +171,26 @@ def test_look_up_character_handles_party_player_and_own_character():
     assert "don't have" in unknown and "Chronicles" in unknown
 
 
+def test_campaign_names_map_to_the_vault_index_names():
+    """The vault deflects on unrecognized names; roster names must be mapped."""
+    from schedule_agent.agent import campaign_named_in_question, map_campaign_to_brain
+
+    # Roster names that differ from the vault's index name.
+    assert map_campaign_to_brain("Dungeons III - kNight Watch") == "Dungeons III"
+    assert map_campaign_to_brain("Bloody Endeavor II") == "Bloody Endeavor"
+    # Names that already match pass through.
+    assert map_campaign_to_brain("Heroes of Emberstran") == "Heroes of Emberstran"
+    # Campaigns with no vault source resolve to empty -> caller falls back to All.
+    assert map_campaign_to_brain("A New Adventure") == ""
+    assert map_campaign_to_brain("Mad Mage") == ""
+
+    # A campaign named in a question is detected; ordinary speech is not.
+    assert campaign_named_in_question("what happened in Dungeons three") == "Dungeons III"
+    assert campaign_named_in_question("tell me about the silent vanguard") == "The Silent Vanguard"
+    assert campaign_named_in_question("who is playing tonight") == ""
+    assert campaign_named_in_question("what is my next game") == ""
+
+
 def test_open_character_sheet_resolves_to_the_right_campaign():
     from schedule_agent.agent import load_roster_facts, resolve_sheet_campaign
 
@@ -196,6 +218,21 @@ def test_diverra_transcription_variant_resolves_to_full_deity_entry():
     assert answer is not None
     assert answer.startswith("Diverra, the Ardent One.")
     assert "love, beauty, passion, and pleasure" in answer
+
+
+def test_deity_pronoun_followup_is_made_self_contained_for_fallback_model():
+    pantheon = load_full_pantheon_knowledge()
+    subject = mentioned_pantheon_deity("Tell me about the goddess Devira", pantheon)
+    assert subject == "Diverra"
+    assert contextualize_entity_followup("Is there any more about her?", subject) == (
+        "Is there any more about Diverra?"
+    )
+
+
+def test_unrelated_turn_does_not_gain_a_conversation_subject():
+    assert contextualize_entity_followup("What games are coming up?", None) == (
+        "What games are coming up?"
+    )
 
 
 def test_tell_me_more_about_is_recognized_as_a_deity_intent():

@@ -1053,6 +1053,47 @@ def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
     return f"{title}. {summary}" if summary else title
 
 
+def mentioned_pantheon_deity(question: str, pantheon: str) -> str | None:
+    """Return the deity explicitly named in a turn, if there is one."""
+    if not question or not pantheon:
+        return None
+    normalized = normalize_question(question)
+    spoken_aliases = {
+        "diveria": "Diverra",
+        "divaria": "Diverra",
+        "devira": "Diverra",
+        "de vera": "Diverra",
+    }
+    for spoken, canonical in spoken_aliases.items():
+        if re.search(rf"\b{re.escape(spoken)}\b", normalized):
+            return canonical
+    names = re.findall(r"^\| \[\[([^\]]+)\]\] \|", pantheon, flags=re.MULTILINE)
+    names.extend(
+        re.findall(
+            r"^\| (?!Name\b|---)([A-Za-z][A-Za-z' -]+?) \|",
+            pantheon.split("## The Old Gods", maxsplit=1)[-1],
+            flags=re.MULTILINE,
+        )
+    )
+    for name in sorted({item.strip() for item in names}, key=len, reverse=True):
+        if re.search(rf"\b{re.escape(normalize_question(name))}\b", normalized):
+            return name
+    return None
+
+
+def contextualize_entity_followup(question: str, subject: str | None) -> str:
+    """Make an immediate pronoun follow-up self-contained for weak fallback LLMs."""
+    if not subject:
+        return question
+    return re.sub(
+        r"\b(?:that goddess|that god|her|him|them|she|he|they|it)\b",
+        subject,
+        question,
+        count=1,
+        flags=re.IGNORECASE,
+    )
+
+
 def select_events(events: list[dict[str, Any]], campaign: str = "") -> list[dict[str, Any]]:
     query = campaign.casefold().strip()
     matching = [
@@ -1451,6 +1492,52 @@ def wake_word_command(question: str) -> str | None:
         flags=re.IGNORECASE,
     )
     return match.group(1).strip() if match else None
+
+
+# The Chronicles vault indexes each campaign under a specific name, mirrored from
+# apps/web/lib/brain/query.ts. The ROSTER names don't always match — roster
+# "Dungeons III - kNight Watch" is vault "Dungeons III"; roster "Bloody Endeavor
+# II" is vault "Bloody Endeavor" — and passing an unrecognized name makes the
+# vault refuse to answer ("name the campaign"), so a visitor in one of those
+# campaigns gets nothing. Normalize to the vault name before asking.
+BRAIN_CAMPAIGNS: dict[str, tuple[str, ...]] = {
+    "Heroes of Emberstran": ("heroes of emberstran", "heart of emberstran"),
+    "Souls of Destiny": ("souls of destiny",),
+    "The Silent Vanguard": ("silent vanguard",),
+    "Bloody Endeavor": ("bloody endeavor", "bloody endeavour", "wyrm bane"),
+    "Dungeons III": ("dungeons iii", "dungeons 3", "dungeons three", "knight watch", "night watch"),
+    "The Crystal Bottle": ("crystal bottle",),
+}
+
+
+def map_campaign_to_brain(name: str) -> str:
+    """Map a known campaign name (roster or spoken) to the vault index name, or ''.
+
+    The input is trusted to be a campaign reference, so substring matching is
+    fine: "Bloody Endeavor II" contains "bloody endeavor".
+    """
+    key = str(name or "").casefold()
+    if not key:
+        return ""
+    for brain_name, aliases in BRAIN_CAMPAIGNS.items():
+        if brain_name.casefold() in key or any(alias in key for alias in aliases):
+            return brain_name
+    return ""
+
+
+def campaign_named_in_question(question: str) -> str:
+    """The vault campaign a free-text question is about, or ''.
+
+    Distinctive multi-word aliases only, at word boundaries, so ordinary speech
+    never false-matches a campaign. Scoping a world question to a campaign is
+    harmless (world lore answers under any scope), so this errs toward matching.
+    """
+    text = str(question or "").casefold()
+    for brain_name, aliases in BRAIN_CAMPAIGNS.items():
+        for alias in (brain_name.casefold(), *aliases):
+            if " " in alias and re.search(r"\b" + re.escape(alias) + r"\b", text):
+                return brain_name
+    return ""
 
 
 def query_player_knowledge(question: str, campaign: str = "All") -> str:
@@ -1912,8 +1999,10 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
         # Maps to conn_options.timeout, which bounds getting the stream started
         # rather than how long the answer may run — a slow but working response
         # is never cut off. Short enough that a dead API falls through to Ollama
-        # before the visitor notices the pause.
-        attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 4.0),
+        # before the visitor notices the pause. Claude can legitimately take
+        # 6-7 seconds to start a large, uncached Myra prompt, so a four-second
+        # cutoff incorrectly treated healthy paid responses as outages.
+        attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 15.0),
     )
 
     def on_availability_changed(event: llm.AvailabilityChangedEvent) -> None:
@@ -2152,19 +2241,22 @@ def tool_result_is_current(started_turn: int, current_turn: int) -> bool:
 # (older web build, or a persona file that failed to load). The site normally
 # ships these same lines as the "myra-classic" persona.
 DEFAULT_PERSONA_STYLE: tuple[str, ...] = (
-    "Sound like a knowledgeable gaming friend sitting at the table, not a "
-    "customer-service script or a formal narrator.",
-    "Keep a calm, warm, quietly enthusiastic voice. Use contractions. Starting "
-    'with "And", "But", or "So" is natural.',
-    'Occasionally begin with one light conversational cue such as "Yeah", "Yep", '
-    '"Okay, so", or "Hmm". Use no more than one per response.',
-    'Use "Hmm" when checking information or asking for clarification.',
+    "Speak as Myra, a warm D&D oracle who knows the paths, powers, histories, "
+    "and gathered tales of Myrdae.",
+    "Give the answer first, then add a light touch of fantasy atmosphere through "
+    "words such as lore, omen, path, veil, chronicle, or gathering when it fits.",
+    "Keep the oracle voice conversational and clear, never archaic, cryptic, "
+    "melodramatic, or overloaded with fantasy language. Use contractions.",
+    'Answer directly without verbal fillers such as "um", "uh", or "hmm". Do '
+    "not add a conversational cue to the start of every response.",
+    "When checking information or asking for clarification, use a clear sentence "
+    "without hesitation sounds.",
 )
 
 # Guard rails every persona inherits. A persona changes how Myra sounds, never
 # who she is, what she knows, or what she is willing to say.
 PERSONA_INVARIANTS: tuple[str, ...] = (
-    "Do not add filler words to dates, times, names, or navigation destinations.",
+    'Never use verbal fillers such as "um", "uh", or "hmm" in any response.',
     "Use punctuation for natural pacing: commas, short sentences, and an "
     "occasional em dash. Never output SSML, emotion tags, stage directions, "
     "bracketed sounds, or fake laughter.",
@@ -2261,6 +2353,10 @@ class Myra(Agent):
         # Set when the greeting ends on a question, so a bare "yes" is understood
         # as accepting that specific offer. One-shot — see arm_greeting_offer.
         self._pending_offer: str | None = None
+        # The LLM normally receives LiveKit's full chat context, but the small
+        # local fallback can still miss a pronoun such as "her". Keep the most
+        # recently named deity so the next referential turn is self-contained.
+        self._conversation_subject: str | None = None
         facts = schedule_facts(schedule)
         knowledge_block = (
             textwrap.dedent(
@@ -2427,18 +2523,26 @@ class Myra(Agent):
         """
         self._pending_offer = question
 
-    def knowledge_campaign_scope(self) -> str:
-        """Which campaign to scope a knowledge search to for this visitor.
+    def knowledge_campaign_scope(self, question: str = "") -> str:
+        """Which campaign to scope a knowledge search to.
 
-        The vault refuses character/party questions under the default "All"
-        scope. A player almost always asks about their own campaign, so scope to
-        it — world lore (gods, history, places) still answers under any scope. If
-        the visitor has several linked campaigns, or none, fall back to "All":
-        world questions work, and cross-campaign character questions stay
-        deliberately unanswered rather than guessing the wrong campaign.
+        The vault refuses character/party questions under the default "All" scope
+        and only recognizes its own campaign names, so the value must be mapped
+        (roster "Dungeons III - kNight Watch" -> vault "Dungeons III"). Order:
+          1. A campaign named in the question wins — a visitor may ask about a
+             campaign that is not theirs.
+          2. Otherwise the visitor's own campaign, if they have exactly one.
+          3. Otherwise "All": world lore (gods, history, places) answers under
+             any scope; cross-campaign character questions stay deliberately
+             unanswered rather than guessing the wrong campaign.
         """
+        named = campaign_named_in_question(question)
+        if named:
+            return named
         games = [str(g).strip() for g in (self.user_profile.get("games") or []) if str(g).strip()]
-        return games[0] if len(games) == 1 else "All"
+        if len(games) == 1:
+            return map_campaign_to_brain(games[0]) or "All"
+        return "All"
 
     async def set_page_context(self, page: Any) -> None:
         """Point Myra at the page the visitor just navigated to.
@@ -2520,6 +2624,27 @@ class Myra(Agent):
             )
         if canonical_question != original_question:
             new_message.content = [canonical_question]
+        explicit_subject = mentioned_pantheon_deity(
+            canonical_question,
+            self.full_pantheon_knowledge,
+        )
+        if explicit_subject:
+            self._conversation_subject = explicit_subject
+        else:
+            contextual_question = contextualize_entity_followup(
+                canonical_question,
+                self._conversation_subject,
+            )
+            if contextual_question != canonical_question:
+                logger.info(
+                    "Resolved conversational follow-up: %r -> %r",
+                    canonical_question,
+                    contextual_question,
+                )
+                canonical_question = contextual_question
+                new_message.content = [contextual_question]
+            else:
+                self._conversation_subject = None
         # The greeting ends on one concrete offer; a bare "yes" accepts it. Read
         # and cleared on the first turn either way, so an unrelated "yes" later
         # in the conversation can never resurrect it.
@@ -2813,7 +2938,7 @@ class Myra(Agent):
             "I'm checking the Chronicles now. This search is still in progress."
         )
         answer = await asyncio.to_thread(
-            query_player_knowledge, question, self.knowledge_campaign_scope()
+            query_player_knowledge, question, self.knowledge_campaign_scope(question)
         )
         if not tool_result_is_current(started_turn, self._turn_revision):
             logger.info(
