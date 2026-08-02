@@ -87,6 +87,6 @@ if (!cover) {
 
     const prev = previousFileId ? `(was: ${previousFileId})` : "(first download)";
     console.log(`[${stamp}] DM Reference cover image updated: ${cover.title} ${prev}`);
-    console.log(`  Saved to: /images/guides-to-myrdae/${filename}`);
+    console.log(`  Saved to: /media/images/guides-to-myrdae/${filename}`);
   }
 }

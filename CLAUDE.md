@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Mandatory Architecture Preflight
+
+Before changing paths, content, images, audio/video, synchronization, voice,
+builds, or deployment, read `docs/AI_ARCHITECTURE.md` and run
+`pnpm arch:preflight`. Trace every writer, including scheduled scripts, and run
+the preflight again after editing.
+
 ## What This Site Is
 
 Suwanee Gamers is a **fantasy-themed portal** for a tabletop RPG group. It is a lightweight doorway — not a data store. All canonical campaign lore, characters, and session history lives at `http://kb.suwaneegamers.net`. The site surfaces the group calendar, campaign roster, DM/player profiles, and links to external tools.

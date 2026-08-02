@@ -2,6 +2,20 @@
 
 Use this as the fast orientation file before editing this repo.
 
+## Mandatory Architecture Preflight
+
+Before changing paths, content, images, audio/video, synchronization, voice,
+builds, or deployment, read `docs/AI_ARCHITECTURE.md` and run:
+
+```powershell
+pnpm arch:preflight
+```
+
+Trace the render, data, automation, asset, and activation paths described there.
+After editing, run the preflight again plus the relevant domain tests. If the
+guide disagrees with runtime code, stop and update the architecture contract as
+part of the same change.
+
 ## Servers and Builds
 
 - Dev server: `pnpm dev`, `http://localhost:3000`, normal `.next`.

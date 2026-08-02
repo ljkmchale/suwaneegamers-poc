@@ -5,8 +5,10 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const { createBuildMetadata } = require("./build-version");
 
 const contentDir = path.resolve(__dirname, "../../../content");
+const repoRoot = path.resolve(__dirname, "../../..");
 const webDir = path.resolve(__dirname, "..");
 const allowedSlots = new Set([".next-prod-a", ".next-prod-b"]);
 const activePointer = path.join(webDir, ".next-prod-active.json");
@@ -40,8 +42,13 @@ if (!fs.existsSync(buildId)) {
   throw new Error(`Production staging build did not create ${buildId}`);
 }
 const id = fs.readFileSync(buildId, "utf8").trim();
+const metadata = createBuildMetadata({ repoRoot, webDir, buildId: id });
+fs.writeFileSync(
+  path.join(stagingDir, "BUILD_METADATA.json"),
+  `${JSON.stringify(metadata, null, 2)}\n`,
+);
 fs.writeFileSync(
   readyPointer,
-  `${JSON.stringify({ slot: stagingName, buildId: id }, null, 2)}\n`,
+  `${JSON.stringify({ slot: stagingName, ...metadata }, null, 2)}\n`,
 );
-console.log(`Production bundle ready in immutable slot ${stagingDir}`);
+console.log(`Production bundle ${metadata.version} ready in immutable slot ${stagingDir}`);

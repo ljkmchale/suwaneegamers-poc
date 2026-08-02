@@ -100,7 +100,7 @@ suwaneegamers-poc/
 |       |-- app/                   Pages, layouts, and API routes
 |       |-- components/            Shared UI and page-block renderers
 |       |-- lib/                   Database, content, auth, analytics, and domain logic
-|       |-- public/                Images and other public assets
+|       |-- media/                 Images and session audio served by route handlers
 |       |-- brain-vault/           Chronicles source vault and generated wiki
 |       |-- brain-tools/           Chronicles ingestion/indexing tools
 |       |-- brain-data/            Generated Chronicles indexes and caches
@@ -226,6 +226,7 @@ table groups are:
 - Identity: `user_profiles`
 - Usage data: `analytics_sessions`, `analytics_events`, `security_events`
 - Voice data: `voice_sessions`, `voice_questions`, `voice_metrics`
+- Claude Platform usage: Anthropic Admin Usage API, filtered by `MYRA_ANTHROPIC_API_KEY_ID`; local voice metrics remain the fallback and source of request/session latency.
 - Store data: `store_products`, variants, settings, orders, order items, and
   webhook events
 
@@ -400,7 +401,7 @@ pnpm --filter web build:prod
 - Clears the production image optimization cache
 - Sets the repository content directory
 - Builds Next.js with webpack
-- Writes the result to `apps/web/.next-prod`
+- Writes the result to the inactive immutable `.next-prod-a` or `.next-prod-b` slot
 
 A plain `pnpm build` updates `.next`, not `.next-prod`, and therefore does not
 update the production service.
@@ -414,8 +415,9 @@ node apps/web/scripts/start-prod.js -p 4652
 ```
 
 `start-prod.js` launches the content scheduler and Next.js as child processes.
-The service must be restarted after a successful production build before the
-running process uses the new `.next-prod` bundle.
+The active slot comes from `apps/web/.next-prod-active.json`. Use
+`scripts/restart-and-verify.ps1` or `scripts/deploy-prod.ps1` to switch to a
+completed slot and restart the service; never rename a compiled Next directory.
 
 The restart requires an elevated PowerShell:
 
@@ -453,4 +455,3 @@ C:\EaselLocal\nssm.exe restart SuwaneeGamers
 | Myra cannot speak | Speaches TTS and configured voice |
 | Scheduled content is stale | `content_sync_jobs`, `content_sync_runs`, scheduler logs |
 | Analytics mismatch | `analytics_sessions`, `analytics_events`, dashboard query |
-

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "canonicalGuide": "docs/AI_ARCHITECTURE.md",
+  "runtime": {
+    "developmentUrl": "http://localhost:3000",
+    "productionUrl": "http://localhost:4652",
+    "productionService": "SuwaneeGamers",
+    "productionVersionEndpoint": "/api/version",
+    "productionBuildMetadata": "BUILD_METADATA.json",
+    "productionSlotPointer": "apps/web/.next-prod-active.json",
+    "productionSlots": ["apps/web/.next-prod-a", "apps/web/.next-prod-b"]
+  },
+  "content": {
+    "runtimeReader": "apps/web/lib/contentFiles.ts",
+    "fileMirror": "content",
+    "database": "content/suwaneegamers.db",
+    "databaseFirstTable": "content_documents",
+    "syncCommand": "pnpm content:sync-documents"
+  },
+  "media": {
+    "imageDiskRoot": "apps/web/media/images",
+    "imageUrlPrefix": "/media/images/",
+    "imageRoute": "apps/web/app/media/images/[...segments]/route.ts",
+    "audioDiskRoot": "apps/web/media/session-audio",
+    "audioUrlPrefix": "/media/session-audio/",
+    "audioRoute": "apps/web/app/media/session-audio/[...segments]/route.ts",
+    "forbiddenGeneratedPrefixes": ["/images/"]
+  },
+  "voice": {
+    "client": "apps/web/components/livekit/ScheduleVoiceAssistant.tsx",
+    "tokenRoute": "apps/web/app/api/livekit/token/route.ts",
+    "worker": "services/livekit-schedule-agent/src/schedule_agent/agent.py",
+    "healthRegistry": "apps/web/lib/myraHealth.ts",
+    "healthApi": "apps/web/app/api/myra/health/route.ts",
+    "healthDashboard": "apps/web/app/admin/myra-health/page.tsx",
+    "livekitPort": 7880,
+    "speachesPort": 8000,
+    "ollamaPort": 11434,
+    "analyticsRoute": "/admin/voice-assistant"
+  },
+  "automation": {
+    "scheduler": "scripts/content-scheduler.mjs",
+    "myraHealthMonitor": "scripts/myra-health-monitor.mjs",
+    "productionLauncher": "apps/web/scripts/start-prod.js"
+  }
+}

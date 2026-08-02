@@ -600,6 +600,23 @@ function initializeSchema(db: Database.Database): void {
       created_at    TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS myra_health_incidents (
+      id                TEXT PRIMARY KEY,
+      service           TEXT NOT NULL,
+      started_at        TEXT NOT NULL,
+      resolved_at       TEXT,
+      status            TEXT NOT NULL CHECK (status IN ('active', 'resolved')),
+      severity          TEXT NOT NULL CHECK (severity IN ('info', 'warning', 'critical')),
+      summary           TEXT NOT NULL,
+      technical_details TEXT,
+      user_impact       TEXT,
+      resolution        TEXT,
+      last_seen_at      TEXT NOT NULL,
+      occurrence_count  INTEGER NOT NULL DEFAULT 1
+    );
+    CREATE INDEX IF NOT EXISTS idx_myra_health_incidents_status
+      ON myra_health_incidents(status, started_at DESC);
+
     CREATE INDEX IF NOT EXISTS idx_voice_metrics_kind_created
       ON voice_metrics(kind, created_at DESC);
 

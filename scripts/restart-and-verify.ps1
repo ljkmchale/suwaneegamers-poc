@@ -112,13 +112,35 @@ function Get-SlotPath {
   return Join-Path $webRoot $Slot
 }
 
+function Get-BuildMetadata {
+  param([string]$Slot)
+  $metadataPath = Join-Path (Get-SlotPath $Slot) "BUILD_METADATA.json"
+  if (Test-Path -LiteralPath $metadataPath) {
+    return Get-Content -LiteralPath $metadataPath -Raw | ConvertFrom-Json
+  }
+  return $null
+}
+
 function Write-SlotPointer {
-  param([string]$Path, [string]$Slot, [string]$BuildId)
+  param(
+    [string]$Path,
+    [string]$Slot,
+    [string]$BuildId,
+    [object]$Metadata
+  )
   Assert-SafeSlot $Slot
-  $json = @{
+  $pointer = [ordered]@{
     slot = $Slot
     buildId = $BuildId
-  } | ConvertTo-Json
+  }
+  if ($Metadata) {
+    foreach ($name in @("version", "packageVersion", "commit", "branch", "dirty", "builtAt")) {
+      if ($null -ne $Metadata.$name) {
+        $pointer[$name] = $Metadata.$name
+      }
+    }
+  }
+  $json = $pointer | ConvertTo-Json
   [IO.File]::WriteAllText($Path, "$json`r`n")
 }
 
@@ -144,9 +166,14 @@ function Activate-StagedBuild {
   $oldSlot = Get-ActiveSlot
   $oldBuildPath = Get-SlotPath $oldSlot
   $oldBuildId = (Get-Content -LiteralPath (Join-Path $oldBuildPath "BUILD_ID") -Raw).Trim()
-  Write-Host "Activating immutable production slot $newSlot..." -ForegroundColor Cyan
-  Write-SlotPointer -Path $rollbackPointer -Slot $oldSlot -BuildId $oldBuildId
-  Write-SlotPointer -Path $activePointer -Slot $newSlot -BuildId $newBuildId
+  $newMetadata = Get-BuildMetadata $newSlot
+  if (-not $newMetadata -or [string]$newMetadata.buildId -ne $newBuildId) {
+    throw "The ready production slot is missing valid BUILD_METADATA.json."
+  }
+  $oldMetadata = Get-BuildMetadata $oldSlot
+  Write-Host "Activating immutable production slot $newSlot ($($newMetadata.version))..." -ForegroundColor Cyan
+  Write-SlotPointer -Path $rollbackPointer -Slot $oldSlot -BuildId $oldBuildId -Metadata $oldMetadata
+  Write-SlotPointer -Path $activePointer -Slot $newSlot -BuildId $newBuildId -Metadata $newMetadata
   Remove-Item -LiteralPath $readyPointer -Force
   return $true
 }
@@ -164,7 +191,7 @@ function Restore-RollbackBuild {
     return $false
   }
   Write-Host "Restoring previous production slot $slot..." -ForegroundColor Yellow
-  Write-SlotPointer -Path $activePointer -Slot $slot -BuildId $buildId
+  Write-SlotPointer -Path $activePointer -Slot $slot -BuildId $buildId -Metadata (Get-BuildMetadata $slot)
   return $true
 }
 
@@ -340,6 +367,16 @@ if (-not $SkipWebsite) {
       $signInResponse.Content -match "Google"
     Add-Result "Website sign-in" $signInOk $(
       if ($signInOk) { "HTTP 200 with Google sign-in" } else { "Unexpected sign-in response" }
+    )
+    $versionResponse = Invoke-RestMethod `
+      -Uri "$websiteBaseUrl/api/version" `
+      -TimeoutSec 15
+    $activePointerData = Get-Content -LiteralPath $activePointer -Raw | ConvertFrom-Json
+    $versionOk = $versionResponse.buildId -eq $activePointerData.buildId -and
+      $versionResponse.version -eq $activePointerData.version
+    Add-Result "Website version" $versionOk $(
+      if ($versionOk) { "$($versionResponse.version) ($($versionResponse.commit))" }
+      else { "Running version does not match the active production pointer" }
     )
     if (-not $signInOk -and $activatedStaging) {
       throw "The staged website failed its sign-in check; the previous bundle was restored."

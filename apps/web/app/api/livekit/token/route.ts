@@ -21,6 +21,8 @@ import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { startVoiceSession } from "@/lib/voiceAnalytics";
 import { getUserProfileContext } from "@/lib/userProfiles";
 import { isStorefrontEnabled } from "@/lib/store";
+import { getMyraHealth, publicHealthSummary } from "@/lib/myraHealth";
+import { getWebsiteUpdates } from "@/lib/websiteUpdates";
 
 export const dynamic = "force-dynamic";
 
@@ -149,6 +151,17 @@ export async function POST(request: NextRequest) {
           items.findIndex((candidate) => candidate.href === item.href) === index,
       )
       .map(({ label, href }) => ({ label, href }));
+    const websiteUpdates = getWebsiteUpdates(
+      process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_TIMEZONE ?? "America/New_York",
+    );
+    const health = publicHealthSummary(await getMyraHealth().catch(() => ({
+      overallStatus: "unknown" as const,
+      summary: "Myra can respond, but her diagnostic service is unavailable.",
+      checkedAt: new Date().toISOString(), cacheAgeMs: 0, uptime: 0,
+      version: "unknown", environment: process.env.NODE_ENV ?? "unknown",
+      capabilities: {}, diagnostics: [], activeIncidents: [], incidentHistory: [],
+      websiteUpdates,
+    })));
     const metadata = JSON.stringify({
       purpose: "Questions for Myra, the Suwanee Gamers assistant",
       timezone: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_TIMEZONE ?? "America/New_York",
@@ -174,6 +187,8 @@ export async function POST(request: NextRequest) {
       recaps: getAssistantRecaps(),
       faq: getLearnedFaqForAgent(),
       tuning: assistantTuningForAgent(),
+      health,
+      websiteUpdates: health.websiteUpdates,
     });
 
     const token = new AccessToken(apiKey, apiSecret, {

@@ -23,7 +23,7 @@ const MINOR_SETTLEMENTS_COUNT = 11;
 function versionHeraldryUrl(imageUrl: string): string {
   if (!imageUrl.startsWith("/media/images/gazetteer/cities/")) return imageUrl;
   try {
-    const imagePath = path.join(process.cwd(), "public", imageUrl.slice(1));
+    const imagePath = path.join(process.cwd(), imageUrl.slice(1));
     const fingerprint = createHash("sha256")
       .update(readFileSync(imagePath))
       .digest("hex")

@@ -32,7 +32,7 @@ const WEBP_QUALITY = 80;
 const MIN_SAVINGS = 0.1;
 
 // files that must keep their current format (e.g. apple-touch-icon needs PNG)
-const EXCLUDE = new Set(["/images/suwaneegamers-logo.png"]);
+const EXCLUDE = new Set(["/media/images/suwaneegamers-logo.png"]);
 
 const REFERENCE_DIRS = [
   { dir: path.join(root, "content"), exts: [".json"] },
@@ -55,7 +55,7 @@ const fmtKB = (b) => `${Math.round(b / 1024)}KB`;
 // Pass 1: re-encode images
 // ---------------------------------------------------------------------------
 
-const renames = []; // { from: "/images/x.png", to: "/images/x.webp" }
+const renames = []; // { from: "/media/images/x.png", to: "/media/images/x.webp" }
 let beforeTotal = 0;
 let afterTotal = 0;
 let converted = 0;
@@ -66,7 +66,7 @@ for await (const file of walk(imageDir)) {
   const ext = path.extname(file).toLowerCase();
   if (![".png", ".jpg", ".jpeg", ".webp"].includes(ext)) continue;
 
-  const relPath = "/" + path.relative(path.join(root, "apps", "web", "public"), file).split(path.sep).join("/");
+  const relPath = "/media/images/" + path.relative(imageDir, file).split(path.sep).join("/");
   if (EXCLUDE.has(relPath)) continue;
 
   const stat = await fs.stat(file);
@@ -125,8 +125,8 @@ for await (const file of walk(imageDir)) {
   beforeTotal += stat.size;
   afterTotal += buffer.length;
 
-  const rel = "/" + path.relative(path.join(root, "apps", "web", "public"), file).split(path.sep).join("/");
-  const relTarget = "/" + path.relative(path.join(root, "apps", "web", "public"), target).split(path.sep).join("/");
+  const rel = "/media/images/" + path.relative(imageDir, file).split(path.sep).join("/");
+  const relTarget = "/media/images/" + path.relative(imageDir, target).split(path.sep).join("/");
 
   if (DRY_RUN) {
     console.log(`${isWebp ? "recompress" : "convert"}  ${rel} -> ${relTarget}  ${fmtKB(stat.size)} -> ${fmtKB(buffer.length)}${longest > MAX_DIM ? ` (resize ${meta.width}x${meta.height})` : ""}`);

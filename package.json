@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
+    "arch:preflight": "node scripts/architecture-preflight.mjs",
     "images:prepare": "node scripts/prepare-images.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
     "images:audit-local": "node scripts/audit-local-images.mjs",

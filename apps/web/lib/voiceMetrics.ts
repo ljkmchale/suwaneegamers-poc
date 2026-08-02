@@ -163,6 +163,132 @@ export function getClaudeUsage(days: number) {
   };
 }
 
+interface AnthropicUsageResult {
+  uncached_input_tokens?: number;
+  cache_creation?: {
+    ephemeral_5m_input_tokens?: number;
+    ephemeral_1h_input_tokens?: number;
+  };
+  cache_read_input_tokens?: number;
+  output_tokens?: number;
+  model?: string;
+}
+
+interface AnthropicUsageResponse {
+  data?: Array<{ results?: AnthropicUsageResult[] }>;
+  has_more?: boolean;
+  next_page?: string | null;
+}
+
+export function aggregateClaudePlatformUsage(results: AnthropicUsageResult[]) {
+  const byModel = new Map<string, {
+    inputTokens: number;
+    outputTokens: number;
+    cacheReadTokens: number;
+    cacheCreationTokens: number;
+  }>();
+  for (const result of results) {
+    const model = result.model || "unknown";
+    const current = byModel.get(model) ?? {
+      inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheCreationTokens: 0,
+    };
+    current.inputTokens += Math.max(0, result.uncached_input_tokens ?? 0);
+    current.outputTokens += Math.max(0, result.output_tokens ?? 0);
+    current.cacheReadTokens += Math.max(0, result.cache_read_input_tokens ?? 0);
+    current.cacheCreationTokens += Math.max(
+      0,
+      (result.cache_creation?.ephemeral_5m_input_tokens ?? 0) +
+        (result.cache_creation?.ephemeral_1h_input_tokens ?? 0),
+    );
+    byModel.set(model, current);
+  }
+  return [...byModel.entries()].map(([model, usage]) => ({
+    model,
+    ...usage,
+    estimatedCostUsd:
+      (estimateClaudeCostMicrousd(model, {
+        ...usage,
+        inputTokens: usage.inputTokens + usage.cacheReadTokens + usage.cacheCreationTokens,
+      }) ?? 0) / 1_000_000,
+  }));
+}
+
+export async function getClaudePlatformUsage(days: number) {
+  const local = getClaudeUsage(days);
+  const adminKey = process.env.ANTHROPIC_ADMIN_API_KEY;
+  const apiKeyId = process.env.MYRA_ANTHROPIC_API_KEY_ID;
+  if (!adminKey || !apiKeyId) {
+    return {
+      ...local,
+      source: "local" as const,
+      configured: false,
+      message: "Add an Anthropic Admin API key and Myra API-key ID to use Claude Platform usage.",
+    };
+  }
+
+  const startingAt = new Date(Date.now() - (days - 1) * 86_400_000);
+  startingAt.setUTCHours(0, 0, 0, 0);
+  const allResults: AnthropicUsageResult[] = [];
+  let page: string | null = null;
+  try {
+    do {
+      const query = new URLSearchParams({
+        starting_at: startingAt.toISOString(),
+        bucket_width: "1d",
+        limit: "31",
+      });
+      query.append("api_key_ids[]", apiKeyId);
+      query.append("group_by[]", "model");
+      if (page) query.set("page", page);
+      const response = await fetch(
+        `https://api.anthropic.com/v1/organizations/usage_report/messages?${query}`,
+        {
+          headers: {
+            "x-api-key": adminKey,
+            "anthropic-version": "2023-06-01",
+          },
+          signal: AbortSignal.timeout(10_000),
+          cache: "no-store",
+        },
+      );
+      if (!response.ok) throw new Error(`Claude Platform returned HTTP ${response.status}`);
+      const payload = await response.json() as AnthropicUsageResponse;
+      for (const bucket of payload.data ?? []) allResults.push(...(bucket.results ?? []));
+      page = payload.has_more ? payload.next_page ?? null : null;
+    } while (page);
+
+    const models = aggregateClaudePlatformUsage(allResults).map((model) => ({
+      ...model,
+      requests: local.models.find((row) => row.model === model.model)?.requests ?? 0,
+    }));
+    const summary = models.reduce(
+      (total, model) => ({
+        requests: local.summary.requests,
+        inputTokens: total.inputTokens + model.inputTokens,
+        outputTokens: total.outputTokens + model.outputTokens,
+        cacheReadTokens: total.cacheReadTokens + model.cacheReadTokens,
+        cacheCreationTokens: total.cacheCreationTokens + model.cacheCreationTokens,
+        estimatedCostUsd: total.estimatedCostUsd + model.estimatedCostUsd,
+      }),
+      { requests: local.summary.requests, inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheCreationTokens: 0, estimatedCostUsd: 0 },
+    );
+    return {
+      summary,
+      models,
+      source: "claude-platform" as const,
+      configured: true,
+      message: "Token usage is reported by Claude Platform and scoped to Myra's API key.",
+    };
+  } catch (error) {
+    return {
+      ...local,
+      source: "local" as const,
+      configured: true,
+      message: error instanceof Error ? `${error.message}; showing local metrics.` : "Claude Platform is unavailable; showing local metrics.",
+    };
+  }
+}
+
 function percentile(values: number[], p: number): number {
   if (values.length === 0) return 0;
   const sorted = [...values].sort((a, b) => a - b);

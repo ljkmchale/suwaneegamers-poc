@@ -1,6 +1,52 @@
 {
   "entries": [
     {
+      "question": "Can you tell me about the gods?",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "evidence": [
+        "Pantheon of Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-f46d525b037c3a24",
+      "normalized": "can you tell me about the gods",
+      "status": "approved",
+      "createdAt": "2026-08-01T15:25:30.709Z",
+      "reviewedAt": "2026-08-01T17:57:28.301Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Can you tell me about the gods?",
+        "value": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-01T17:57:28.301Z"
+      }
+    },
+    {
+      "question": "Tell the gods.",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "evidence": [
+        "Pantheon of Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-9aba5976f3cb27d3",
+      "normalized": "tell the gods",
+      "status": "approved",
+      "createdAt": "2026-07-31T15:26:00.088Z",
+      "reviewedAt": "2026-07-31T15:38:31.924Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Tell the gods.",
+        "value": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-07-31T15:38:31.924Z"
+      }
+    },
+    {
       "question": "But I'm not part of Dungeons 3.",
       "category": "routing-correction",
       "proposedCorrection": "Review this member correction and update the relevant profile or campaign routing rule before teaching an answer.",
@@ -83,5 +129,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-07-30T00:24:20.346Z"
+  "updatedAt": "2026-08-01T17:57:28.301Z"
 }

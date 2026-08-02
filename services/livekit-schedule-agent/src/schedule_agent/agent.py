@@ -112,6 +112,11 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         "events": events if isinstance(events, list) else [],
         "aboutSuwaneeGamers": str(payload.get("aboutSuwaneeGamers") or ""),
         "knowledge": str(payload.get("knowledge") or ""),
+        "websiteUpdates": (
+            payload.get("websiteUpdates")
+            if isinstance(payload.get("websiteUpdates"), dict)
+            else {}
+        ),
         "navigation": (
             [
                 {
@@ -2338,6 +2343,11 @@ class Myra(Agent):
         self.room = room
         self.knowledge = str(schedule.get("knowledge") or "").strip()
         self.health = schedule.get("health") if isinstance(schedule.get("health"), dict) else {}
+        self.website_updates = (
+            schedule.get("websiteUpdates")
+            if isinstance(schedule.get("websiteUpdates"), dict)
+            else {}
+        )
         self.about_suwanee_gamers = str(
             schedule.get("aboutSuwaneeGamers") or ""
         ).strip()
@@ -2411,6 +2421,13 @@ class Myra(Agent):
             - Favorite Suwanee Gamers site locations, learned from page visits: {", ".join(user_profile.get("favoriteLocations") or []) or "Not enough visit history yet"}
             """
         )
+        website_updates_block = textwrap.dedent(
+            f"""\
+
+            Current website update snapshot (captured when this conversation started):
+            {json.dumps(self.website_updates, ensure_ascii=False)}
+            """
+        )
         self.system_prompt = textwrap.dedent(
             f"""\
             You are Myra, the Suwanee Gamers assistant and voice guide for the entire
@@ -2427,6 +2444,7 @@ class Myra(Agent):
             {knowledge_block}
             {pantheon_block}
             {profile_block}
+            {website_updates_block}
 
             {personality_block}
 
@@ -2442,6 +2460,11 @@ class Myra(Agent):
               GAMES SCHEDULED TODAY, including its time. Then briefly mention the next
               one or two games under NEXT UPCOMING GAMES.
             - "Today", "tonight", and "coming up" never require clarification.
+            - When asked whether the website, its images, files, or content changed
+              today, answer from the website update snapshot. If nothing changed
+              today, give latestUpdate and its exact date. Distinguish content,
+              image, and website file updates; never infer what changed from a
+              filename beyond the facts in the snapshot.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
             - For a player character's STATS — level, class, species, subclass,

@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/admin/store", label: "Store" },
   { href: "/admin/analytics", label: "Usage & Connections" },
   { href: "/admin/voice-assistant", label: "Myra" },
+  { href: "/admin/myra-health", label: "Myra Health" },
   { href: "/admin/pronunciations", label: "Pronunciations" },
   { href: "/admin/security", label: "Security" },
   { href: "/admin/chronicles", label: "Chronicles" },

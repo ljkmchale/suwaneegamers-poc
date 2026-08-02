@@ -140,12 +140,12 @@ for (const block of deityBlocks) {
   const fallbackPath = path.join(imageDir, fallbackFilename);
   const localCopy = ["webp", "png"].find((ext) => fs.existsSync(path.join(imageDir, `${basename}.${ext}`)));
   const imagePath = downloaded
-    ? `/images/pantheon/${filename}`
+    ? `/media/images/pantheon/${filename}`
     : localCopy
-      ? `/images/pantheon/${basename}.${localCopy}`
+      ? `/media/images/pantheon/${basename}.${localCopy}`
       : fs.existsSync(fallbackPath)
-        ? `/images/pantheon/${fallbackFilename}`
-        : `/images/pantheon/${basename}.webp`;
+        ? `/media/images/pantheon/${fallbackFilename}`
+        : `/media/images/pantheon/${basename}.webp`;
   if (block.props.image !== imagePath) {
     changes.push(`${deityName}: ${block.props.image ?? "(none)"} -> ${imagePath}`);
     block.props.image = imagePath;

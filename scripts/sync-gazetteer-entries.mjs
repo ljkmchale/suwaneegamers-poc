@@ -177,7 +177,7 @@ function existingLocalHeraldry(slug) {
   for (const extension of ["webp", "png", "jpg", "jpeg", "gif"]) {
     const filename = `${slug}.${extension}`;
     if (fs.existsSync(path.join(heraldryImageDir, filename))) {
-      return `/images/gazetteer/cities/${filename}`;
+      return `/media/images/gazetteer/cities/${filename}`;
     }
   }
   return null;
@@ -192,7 +192,7 @@ async function cacheHeraldry(heraldry, slug) {
   // size (tracked in the directory manifest — the stored file is re-encoded
   // WebP, so its own size can't be compared to Drive's).
   if (hasCachedImage(heraldryImageDir, slug, heraldry.size)) {
-    return `/images/gazetteer/cities/${slug}.webp`;
+    return `/media/images/gazetteer/cities/${slug}.webp`;
   }
 
   try {
@@ -202,7 +202,7 @@ async function cacheHeraldry(heraldry, slug) {
     const filename = await saveOptimizedImage(heraldryImageDir, slug, bytes, heraldry.size, {
       fallbackExtension: imageExtension(heraldry.mimeType),
     });
-    return `/images/gazetteer/cities/${filename}`;
+    return `/media/images/gazetteer/cities/${filename}`;
   } catch (error) {
     const cached = existingLocalHeraldry(slug);
     if (cached) return cached;

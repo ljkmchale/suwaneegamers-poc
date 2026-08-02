@@ -10,6 +10,8 @@ const PUBLIC_PATHS = [
   "/signin", // the gate itself
   "/api/auth/", // the sign-in round trip
   "/api/analytics/events", // visit beacon; it also fires on the sign-in page
+  "/api/myra/health/summary", // sanitized capability status used by Myra herself
+  "/api/version", // non-sensitive identity of the production bundle actually serving
 ];
 
 // Server-to-server callers that carry their own bearer secret and have no
@@ -18,6 +20,7 @@ const MACHINE_PATHS = [
   "/api/livekit/analytics",
   "/api/livekit/metrics",
   "/api/content-scheduler/",
+  "/api/myra/health/monitor",
   // Serves both signed-in members on /chronicles and the voice agent's
   // search_knowledge_base tool, so it authorizes both cases inside the route
   // rather than here. It is NOT public — see app/api/brain/ask/route.ts.

@@ -42,6 +42,9 @@ parallel, inspects the calendar snapshot and knowledge base she was handed, and
 speaks a plain-language summary — naming any part that is down. This runs
 deterministically, so it still works when the language model itself is unreachable.
 These turns are logged to voice analytics under the `self_diagnosis` category.
+The central registry, incident store, secure APIs, and admin dashboard are documented
+in `../../docs/MYRA_DIAGNOSTICS.md`. The worker's `get_myra_health` tool refreshes
+that structured status and falls back to the dispatch snapshot or local probes.
 
 ## Local services
 
@@ -64,7 +67,9 @@ ANTHROPIC_API_KEY=sk-ant-...
 With no key set the agent runs on Ollama alone and logs that it did, so the
 stack still works offline. Optional overrides: `ANTHROPIC_MODEL` (default
 `claude-haiku-4-5`), `ANTHROPIC_MAX_TOKENS` (512), `ANTHROPIC_TEMPERATURE`
-(0.3), and `LLM_ATTEMPT_TIMEOUT` (4.0s before failing over to Ollama).
+(0.3), and `LLM_ATTEMPT_TIMEOUT` (15.0s before failing over to Ollama). The
+timeout bounds an individual request; it does not indicate an Anthropic billing
+or account failure by itself.
 
 A `400 ... credit balance is too low` in the agent log means the API key is
 valid but the account has no credits — Myra silently falls back to Ollama and

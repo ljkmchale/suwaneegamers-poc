@@ -238,6 +238,9 @@ export async function answerQuestion(question: string, options: QueryOptions = {
   const acronymAnswer = answerAcronymQuestion(question);
   if (acronymAnswer) return finalizeResult(acronymAnswer);
 
+  const rosterAliasIdentityAnswer = answerRosterAliasIdentityQuestion(question, options);
+  if (rosterAliasIdentityAnswer) return finalizeResult(rosterAliasIdentityAnswer);
+
   const missingCampaignScopeAnswer = answerMissingCampaignScopeQuestion(question, options);
   if (missingCampaignScopeAnswer) return finalizeResult(missingCampaignScopeAnswer);
 
@@ -246,9 +249,6 @@ export async function answerQuestion(question: string, options: QueryOptions = {
 
   const rosterPlayerAnswer = answerRosterPlayerQuestion(question, options);
   if (rosterPlayerAnswer) return finalizeResult(rosterPlayerAnswer);
-
-  const rosterAliasIdentityAnswer = answerRosterAliasIdentityQuestion(question, options);
-  if (rosterAliasIdentityAnswer) return finalizeResult(rosterAliasIdentityAnswer);
 
   const sourceRequestAnswer = await answerSourceRequestQuestion(question, options);
   if (sourceRequestAnswer) return finalizeResult(sourceRequestAnswer);
@@ -344,6 +344,9 @@ export async function streamAnswer(
   const acronymAnswer = answerAcronymQuestion(question);
   if (acronymAnswer) { emitImmediate(acronymAnswer); return; }
 
+  const rosterAliasIdentityAnswer = answerRosterAliasIdentityQuestion(question, options);
+  if (rosterAliasIdentityAnswer) { emitImmediate(rosterAliasIdentityAnswer); return; }
+
   const missingCampaignScopeAnswer = answerMissingCampaignScopeQuestion(question, options);
   if (missingCampaignScopeAnswer) { emitImmediate(missingCampaignScopeAnswer); return; }
 
@@ -352,9 +355,6 @@ export async function streamAnswer(
 
   const rosterPlayerAnswer = answerRosterPlayerQuestion(question, options);
   if (rosterPlayerAnswer) { emitImmediate(rosterPlayerAnswer); return; }
-
-  const rosterAliasIdentityAnswer = answerRosterAliasIdentityQuestion(question, options);
-  if (rosterAliasIdentityAnswer) { emitImmediate(rosterAliasIdentityAnswer); return; }
 
   const sourceRequestAnswer = await answerSourceRequestQuestion(question, options);
   if (sourceRequestAnswer) { emitImmediate(sourceRequestAnswer); return; }
@@ -825,15 +825,22 @@ function answerRosterPlayerQuestion(question: string, options: QueryOptions = {}
 }
 
 function answerRosterAliasIdentityQuestion(question: string, options: QueryOptions = {}): QueryResult | null {
-  const campaign = resolveQuestionCampaign(question, options);
-  if (!campaign) return null;
-
   const match = String(question).match(/\b(?:who|what)\s+(?:is|are|was|were)\s+([A-Z][A-Za-z' -]{1,60}?)(?:\s+(?:in|for|from)\s+(?:HoE|SoD|D3|TSV|WB|Dungeons III|Dungeons 3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|Heroes of Emberstran|Souls of Destiny))?\??$/i);
   if (!match) return null;
 
   const rawName = match[1].replace(/[?.!,;:]+$/g, "").replace(/\b(in|from|for|about)\b.*$/i, "").replace(/^the\s+/i, "").trim();
   const canonicalName = canonicalEntityName(rawName);
   if (!rawName || normalize(rawName) === normalize(canonicalName)) return null;
+
+  let campaign = resolveQuestionCampaign(question, options);
+  if (!campaign) {
+    const matchingCampaigns = Object.values(campaignsByCode).filter((candidate) => {
+      const roster = campaignRosters[candidate.code];
+      return roster ? Boolean(findRosterMember(roster, canonicalName)) : false;
+    });
+    if (matchingCampaigns.length === 1) campaign = matchingCampaigns[0];
+  }
+  if (!campaign) return null;
 
   const roster = campaignRosters[campaign.code];
   if (!roster) return null;

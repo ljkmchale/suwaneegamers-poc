@@ -223,7 +223,7 @@ for (const campaign of campaigns) {
     fallbackExtension: ext,
   });
 
-  const imagePath = `/images/campaigns/${filename}`;
+  const imagePath = `/media/images/campaigns/${filename}`;
   if (campaign.headerImage !== imagePath) {
     changes.push(`${campaign.name}: ${campaign.headerImage ?? "(none)"} -> ${imagePath}`);
     campaign.headerImage = imagePath;
@@ -292,7 +292,7 @@ for (const card of archivedCards) {
     fallbackExtension: ext,
   });
 
-  const imagePath = `/images/campaigns/${filename}`;
+  const imagePath = `/media/images/campaigns/${filename}`;
   if (card.props.image !== imagePath) {
     changes.push(`${title} (archived): ${card.props.image || "(none)"} -> ${imagePath}`);
     card.props.image = imagePath;

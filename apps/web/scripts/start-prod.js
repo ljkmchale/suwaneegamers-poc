@@ -2,6 +2,7 @@
 // Extra args are passed through, e.g. npm run start:prod -- -p 3001
 const { randomUUID } = require("crypto");
 const { spawn } = require("child_process");
+const fs = require("fs");
 const path = require("path");
 
 const contentDir = path.resolve(__dirname, "../../../content");
@@ -10,14 +11,19 @@ const webRoot = path.resolve(__dirname, "..");
 const activePointer = path.join(webRoot, ".next-prod-active.json");
 const allowedDistDirs = new Set([".next-prod", ".next-prod-a", ".next-prod-b"]);
 let activeDistDir = ".next-prod";
-if (require("fs").existsSync(activePointer)) {
-  const parsed = JSON.parse(require("fs").readFileSync(activePointer, "utf8"));
+if (fs.existsSync(activePointer)) {
+  const parsed = JSON.parse(fs.readFileSync(activePointer, "utf8"));
   if (!allowedDistDirs.has(parsed.slot)) {
     throw new Error(`Unsafe production slot in ${activePointer}: ${parsed.slot}`);
   }
   activeDistDir = parsed.slot;
 }
+const metadataPath = path.join(webRoot, activeDistDir, "BUILD_METADATA.json");
+const buildMetadata = fs.existsSync(metadataPath)
+  ? JSON.parse(fs.readFileSync(metadataPath, "utf8"))
+  : {};
 const schedulerEnabled = process.env.SUWANEE_CONTENT_SCHEDULER !== "0";
+const healthMonitorEnabled = process.env.MYRA_HEALTH_MONITOR !== "0";
 const schedulerToken = process.env.SUWANEE_SCHEDULER_TOKEN || randomUUID();
 const forwardedArgs = process.argv.slice(2).filter((arg) => arg !== "--");
 const nextArgs = ["node_modules/next/dist/bin/next", "start", ...forwardedArgs];
@@ -41,7 +47,17 @@ const sharedEnv = {
   PORT: port,
   SUWANEE_CONTENT_DIR: contentDir,
   SUWANEE_SCHEDULER_TOKEN: schedulerToken,
+  SUWANEE_BUILD_VERSION: buildMetadata.version || "legacy",
+  SUWANEE_BUILD_ID: buildMetadata.buildId || "unknown",
+  SUWANEE_BUILD_COMMIT: buildMetadata.commit || "unknown",
+  SUWANEE_BUILD_BRANCH: buildMetadata.branch || "unknown",
+  SUWANEE_BUILD_DIRTY: String(buildMetadata.dirty ?? false),
+  SUWANEE_BUILD_TIME: buildMetadata.builtAt || "unknown",
 };
+
+console.log(
+  `Starting Suwanee Gamers ${sharedEnv.SUWANEE_BUILD_VERSION} from ${activeDistDir}`,
+);
 
 const children = [];
 let shuttingDown = false;
@@ -78,6 +94,10 @@ process.on("SIGTERM", () => shutdown(0));
 
 if (schedulerEnabled) {
   startChild("Content scheduler", process.execPath, ["scripts/content-scheduler.mjs"], { cwd: repoRoot });
+}
+
+if (healthMonitorEnabled) {
+  startChild("Myra health monitor", process.execPath, ["scripts/myra-health-monitor.mjs"], { cwd: repoRoot });
 }
 
 startChild("Next", process.execPath, nextArgs);

@@ -11,7 +11,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { getVoiceAnalytics } from "@/lib/voiceAnalytics";
-import { getClaudeUsage } from "@/lib/voiceMetrics";
+import { getClaudePlatformUsage } from "@/lib/voiceMetrics";
 import { readAssistantTuning } from "@/lib/assistantTuningStore";
 import { readLearned } from "@/lib/assistantLearned";
 import { readAssistantPersonas } from "@/lib/assistantPersonaStore";
@@ -132,7 +132,7 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
   const requestedDays = Number(params?.days ?? 30);
   const days = [7, 30, 90].includes(requestedDays) ? requestedDays : 30;
   const voice = getVoiceAnalytics(days);
-  const claude = getClaudeUsage(days);
+  const claude = await getClaudePlatformUsage(days);
   const tuning = readAssistantTuning();
   const learned = readLearned();
   const remediationStore = readRemediations();
@@ -283,9 +283,12 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
               Local Ollama fallback requests cost $0 and are excluded.
             </p>
           </div>
-          <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] uppercase tracking-widest text-amber-300">
-            {claude.summary.requests} Claude requests
-          </span>
+          <div className="flex items-center gap-2">
+            <a href="https://platform.claude.com/dashboard" target="_blank" rel="noreferrer" className="rounded-full border border-amber-500/30 px-3 py-1 text-[10px] uppercase tracking-widest text-amber-300 hover:bg-amber-500/10">Open Claude Platform</a>
+            <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] uppercase tracking-widest text-amber-300">
+              {claude.summary.requests} Claude requests
+            </span>
+          </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
@@ -336,8 +339,8 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           </p>
         )}
         <p className="mt-4 text-[10px] leading-relaxed text-[#5a5060]">
-          Cost is an estimate based on the configured model&apos;s published direct API token
-          rates. It excludes taxes, credits, negotiated pricing, and unrelated Anthropic usage.
+          {claude.message} Request counts remain Myra&apos;s local voice-session counts. Cost is
+          estimated from published model rates and excludes taxes, credits, and negotiated pricing.
         </p>
       </section>
 

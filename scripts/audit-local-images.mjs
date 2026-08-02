@@ -23,6 +23,7 @@ const imageKeys = /^(image|imageUrl|image_url|headerImage|header_image|logo|artw
 const imageBlockTypes = new Set(["image", "deity-card", "campaign-hero"]);
 const remote = [];
 const missing = [];
+const legacyGenerators = [];
 
 function inspectImage(value, location) {
   if (typeof value !== "string" || !value.trim()) return;
@@ -73,6 +74,14 @@ for (const relativePath of fs.readdirSync(contentDir, { recursive: true })) {
   }
 }
 
+const scriptsDir = path.join(root, "scripts");
+for (const filename of fs.readdirSync(scriptsDir)) {
+  if (!(filename.startsWith("sync-") || filename === "optimize-images.mjs")) continue;
+  if (!filename.endsWith(".mjs")) continue;
+  const source = fs.readFileSync(path.join(scriptsDir, filename), "utf8");
+  if (/['"`]\/images\//.test(source)) legacyGenerators.push(`scripts/${filename}`);
+}
+
 const db = getDb();
 for (const row of db.prepare("SELECT path, json FROM content_documents ORDER BY path").all()) {
   try {
@@ -93,7 +102,7 @@ for (const [table, idColumn, imageColumn] of tableImageColumns) {
   }
 }
 
-if (remote.length || missing.length) {
+if (remote.length || missing.length || legacyGenerators.length) {
   if (remote.length) {
     console.error("Remote site image references:");
     remote.forEach((item) => console.error(`  ${item.location}: ${item.value}`));
@@ -101,6 +110,10 @@ if (remote.length || missing.length) {
   if (missing.length) {
     console.error("Missing local site images:");
     missing.forEach((item) => console.error(`  ${item.location}: ${item.value}`));
+  }
+  if (legacyGenerators.length) {
+    console.error("Scripts that can generate obsolete /images/ URLs:");
+    legacyGenerators.forEach((filename) => console.error(`  ${filename}`));
   }
   process.exitCode = 1;
 } else {

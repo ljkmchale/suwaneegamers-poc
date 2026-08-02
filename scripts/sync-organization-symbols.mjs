@@ -154,7 +154,7 @@ for (const organization of organizations) {
     continue;
   }
 
-  const imagePath = `/images/organizations/${filename}`;
+  const imagePath = `/media/images/organizations/${filename}`;
   if (organization.image !== imagePath) {
     changes.push(`${organization.name}: ${organization.image ?? "(none)"} -> ${imagePath}`);
     organization.image = imagePath;
@@ -173,7 +173,7 @@ db.transaction(() => {
 
 const stamp = new Date().toISOString();
 console.log(`[${stamp}] Organization symbols synced from Drive folder ${driveRootFolderId}`);
-console.log(`Downloaded/verified ${organizations.filter((org) => org.image?.includes("/images/organizations/")).length} organization symbol reference(s).`);
+console.log(`Downloaded/verified ${organizations.filter((org) => org.image?.includes("/media/images/organizations/")).length} organization symbol reference(s).`);
 
 if (changes.length) {
   console.log("Changes:");
