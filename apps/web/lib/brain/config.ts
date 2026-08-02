@@ -36,10 +36,13 @@ export const brainConfig = {
   get anthropicChatModel(): string {
     return process.env.BRAIN_ANTHROPIC_MODEL ?? "claude-haiku-4-5";
   },
-  // Anthropic requires an explicit output cap. Chronicles answers are a sentence
-  // to a short paragraph, plus the occasional index list — 2048 is generous.
+  // Anthropic requires an explicit output cap; the old Groq path sent none and
+  // used the provider default (~8k). Most Chronicles answers are a sentence to a
+  // short paragraph, but recap/analysis modes on a broad campaign question can
+  // run long, so 4096 keeps them from truncating mid-thought. Output tokens are
+  // pay-per-use, so a higher ceiling costs nothing on the common short answers.
   get chatMaxTokens(): number {
-    return num("BRAIN_CHAT_MAX_TOKENS", 2048);
+    return num("BRAIN_CHAT_MAX_TOKENS", 4096);
   },
   get embedModel(): string {
     return process.env.JINA_EMBED_MODEL ?? "jina-embeddings-v3";
