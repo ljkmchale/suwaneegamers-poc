@@ -52,9 +52,20 @@ in production regardless of these values.
 
 `myra_health_incidents` groups repeated failures by service. A failure opens one
 incident, repeated checks update its count/severity, and a successful check resolves
-it with a timestamp and automatic-recovery note. The admin dashboard is the built-in
-alert channel. Email, Discord, Slack, and SMS require a future configured notifier;
-no credentials or outbound messages are assumed.
+it with a timestamp and automatic-recovery note. The admin dashboard is always on;
+`/admin/myra-health` shows every incident.
+
+Email alerts are wired through `lib/healthNotifier.ts`. When `reconcileIncidents`
+first opens a **critical** incident (a critical service is unavailable — the site,
+database, Cloudflare route, or local AI) or resolves one, `getMyraHealth` fires a
+fire-and-forget email. Because the alert triggers on the DB state *transition*, it
+sends exactly once per outage and once per recovery, no matter which check (the
+24/7 monitor or a live "how do you feel") detected it. A send failure is logged and
+never fails the health check. Configure Gmail SMTP with `MYRA_ALERT_SMTP_USER`,
+`MYRA_ALERT_SMTP_PASS` (a Google App Password), and `MYRA_ALERT_TO` in the web
+process env; unset any of them and alerts stay on the dashboard only
+(`myra_health_alert_skipped` is logged). Only critical transitions email; warnings
+stay on the dashboard. Discord, Slack, and SMS remain future notifiers.
 
 ## API and security
 

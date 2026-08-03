@@ -5,6 +5,7 @@ import path from "node:path";
 import { contentDir } from "@/lib/contentFiles";
 import { getDb } from "@/lib/db";
 import { getWebsiteUpdates, type WebsiteUpdateSnapshot } from "@/lib/websiteUpdates";
+import { dispatchHealthAlerts, type IncidentTransition } from "@/lib/healthNotifier";
 
 export type HealthState = "healthy" | "degraded" | "unavailable" | "unknown";
 export type DiagnosticDepth = "quick" | "full" | "component";
@@ -190,11 +191,12 @@ function severityFor(check: HealthCheck, result: DiagnosticResult): IncidentReco
   return "warning";
 }
 
-function reconcileIncidents(results: DiagnosticResult[]): void {
+function reconcileIncidents(results: DiagnosticResult[]): IncidentTransition[] {
   const db = getDb();
-  const active = db.prepare("SELECT id, service FROM myra_health_incidents WHERE status = 'active'").all() as Array<{ id: string; service: string }>;
+  const active = db.prepare("SELECT id, service, severity, started_at AS startedAt FROM myra_health_incidents WHERE status = 'active'").all() as Array<{ id: string; service: string; severity: IncidentTransition["severity"]; startedAt: string }>;
   const activeByService = new Map(active.map((row) => [row.service, row]));
   const now = new Date().toISOString();
+  const transitions: IncidentTransition[] = [];
   const insert = db.prepare(`INSERT INTO myra_health_incidents (id, service, started_at, status, severity, summary, technical_details, user_impact, last_seen_at) VALUES (?, ?, ?, 'active', ?, ?, ?, ?, ?)`);
   const update = db.prepare(`UPDATE myra_health_incidents SET last_seen_at = ?, occurrence_count = occurrence_count + 1, severity = ?, summary = ?, technical_details = ?, user_impact = ? WHERE id = ?`);
   const resolve = db.prepare(`UPDATE myra_health_incidents SET status = 'resolved', resolved_at = ?, last_seen_at = ?, resolution = ? WHERE id = ?`);
@@ -202,14 +204,22 @@ function reconcileIncidents(results: DiagnosticResult[]): void {
     for (const result of results) {
       const existing = activeByService.get(result.service);
       if (result.status === "healthy") {
-        if (existing) resolve.run(now, now, `${result.displayName} recovered automatically.`, existing.id);
+        if (existing) {
+          resolve.run(now, now, `${result.displayName} recovered automatically.`, existing.id);
+          transitions.push({ kind: "resolved", service: result.service, displayName: result.displayName, severity: existing.severity, summary: `${result.displayName} recovered automatically.`, startedAt: existing.startedAt, resolvedAt: now });
+        }
       } else if (result.status !== "unknown") {
         const check = healthRegistry.find((item) => item.id === result.service)!;
-        if (existing) update.run(now, severityFor(check, result), result.message, result.technicalDetails ?? null, result.userImpact ?? null, existing.id);
-        else insert.run(randomUUID(), result.service, now, severityFor(check, result), result.message, result.technicalDetails ?? null, result.userImpact ?? null, now);
+        const severity = severityFor(check, result);
+        if (existing) update.run(now, severity, result.message, result.technicalDetails ?? null, result.userImpact ?? null, existing.id);
+        else {
+          insert.run(randomUUID(), result.service, now, severity, result.message, result.technicalDetails ?? null, result.userImpact ?? null, now);
+          transitions.push({ kind: "opened", service: result.service, displayName: result.displayName, severity, summary: result.message, technicalDetails: result.technicalDetails, userImpact: result.userImpact, startedAt: now });
+        }
       }
     }
   })();
+  return transitions;
 }
 
 export function listHealthIncidents(limit = 100): IncidentRecord[] {
@@ -223,12 +233,70 @@ export function calculateOverall(results: DiagnosticResult[]): HealthState {
   return "healthy";
 }
 
-export function conversationalSummary(overall: HealthState, results: DiagnosticResult[]): string {
+export interface HealthNarrativeContext {
+  uptimeSeconds?: number;
+  incidents?: IncidentRecord[];
+  now?: number;
+}
+
+// Spoken-friendly "2 days", "about 3 hours", "45 minutes". Largest unit only, so
+// Myra never rattles off "2 days, 4 hours, 11 minutes, 6 seconds".
+function humanizeDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  const day = 86_400;
+  const hour = 3_600;
+  const minute = 60;
+  if (s >= day) { const d = Math.round(s / day); return `${d} day${d === 1 ? "" : "s"}`; }
+  if (s >= hour) { const h = Math.round(s / hour); return `${h} hour${h === 1 ? "" : "s"}`; }
+  if (s >= minute) { const m = Math.round(s / minute); return `${m} minute${m === 1 ? "" : "s"}`; }
+  return "less than a minute";
+}
+
+// A short spoken clause about critical incidents that resolved within the last
+// day, so a healthy answer still reflects the monitor's overnight work instead of
+// repeating one canned sentence.
+function recentRecoveryNote(incidents: IncidentRecord[], now: number): string {
+  const dayAgo = now - 86_400_000;
+  const recovered = incidents.filter(
+    (i) => i.status === "resolved" && i.severity === "critical" && i.resolvedAt && Date.parse(i.resolvedAt) >= dayAgo,
+  );
+  if (recovered.length === 0) return "";
+  if (recovered.length === 1) {
+    const name = friendlyServiceName(recovered[0].service);
+    return ` Earlier today I had a brief issue with ${name}, but it recovered on its own.`;
+  }
+  return ` I had a couple of brief hiccups earlier today, but everything recovered on its own.`;
+}
+
+function friendlyServiceName(service: string): string {
+  return healthRegistry.find((c) => c.id === service)?.name ?? service;
+}
+
+export function conversationalSummary(
+  overall: HealthState,
+  results: DiagnosticResult[],
+  context: HealthNarrativeContext = {},
+): string {
+  const now = context.now ?? Date.now();
   const bad = results.filter((r) => r.status !== "healthy" && r.status !== "unknown");
-  if (overall === "healthy") return "I'm feeling great. My AI, memory, voice, website, and connected services are all responding normally.";
   if (overall === "unknown") return "I'm able to respond, but my diagnostic service could not verify the condition of my internal systems.";
+  if (overall === "healthy") {
+    let line = "I'm feeling great. My AI, memory, voice, website, and connected services are all responding normally.";
+    if (context.uptimeSeconds && context.uptimeSeconds >= 120) {
+      line += ` I've been running smoothly for ${humanizeDuration(context.uptimeSeconds)}.`;
+    }
+    line += recentRecoveryNote(context.incidents ?? [], now);
+    return line;
+  }
   const impacts = bad.map((r) => r.userImpact ?? r.message).slice(0, 3).join(" ");
-  return overall === "unavailable" ? `I'm having a major system problem. ${impacts}` : `I'm mostly okay, but part of my system is degraded. ${impacts}`;
+  // When did the trouble start? The oldest still-active incident anchors it.
+  const active = (context.incidents ?? [])
+    .filter((i) => i.status === "active")
+    .sort((a, b) => Date.parse(a.startedAt) - Date.parse(b.startedAt));
+  const since = active[0] ? ` This started about ${humanizeDuration((now - Date.parse(active[0].startedAt)) / 1000)} ago.` : "";
+  return overall === "unavailable"
+    ? `I'm having a major system problem. ${impacts}${since}`
+    : `I'm mostly okay, but part of my system is degraded. ${impacts}${since}`;
 }
 
 export async function getMyraHealth(options: { depth?: DiagnosticDepth; service?: string; force?: boolean } = {}): Promise<MyraHealthStatus> {
@@ -240,16 +308,20 @@ export async function getMyraHealth(options: { depth?: DiagnosticDepth; service?
   const checks = options.service ? healthRegistry.filter((check) => check.id === options.service || check.group === options.service) : healthRegistry.filter((check) => depth === "full" || !check.depths || check.depths.includes(depth));
   if (!checks.length) throw Object.assign(new Error("Unknown diagnostic service."), { code: "UNKNOWN_SERVICE" });
   const diagnostics = await Promise.all(checks.map(runOne));
-  reconcileIncidents(diagnostics);
+  const transitions = reconcileIncidents(diagnostics);
+  // Fire-and-forget: a newly-opened or recovered critical outage emails a human.
+  // Never awaited, never allowed to fail the check that produced it.
+  void dispatchHealthAlerts(transitions).catch((error) => console.error(JSON.stringify({ event: "myra_health_alert_dispatch_error", errorCode: error instanceof Error ? error.name : "UNKNOWN" })));
   const overallStatus = calculateOverall(diagnostics);
   const incidentHistory = listHealthIncidents();
   const websiteUpdates = getWebsiteUpdates();
+  const uptimeSeconds = Math.round((Date.now() - startedAt) / 1000);
   const value: MyraHealthStatus = {
     overallStatus,
-    summary: conversationalSummary(overallStatus, diagnostics),
+    summary: conversationalSummary(overallStatus, diagnostics, { uptimeSeconds, incidents: incidentHistory }),
     checkedAt: new Date().toISOString(),
     cacheAgeMs: 0,
-    uptime: Math.round((Date.now() - startedAt) / 1000),
+    uptime: uptimeSeconds,
     version: process.env.SUWANEE_BUILD_VERSION ?? process.env.NEXT_PUBLIC_APP_VERSION ?? process.env.npm_package_version ?? "development",
     environment: process.env.NODE_ENV ?? "development",
     capabilities: {

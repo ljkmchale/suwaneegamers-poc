@@ -29,4 +29,34 @@ describe("Myra health aggregation", () => {
     expect(calculateOverall([])).toBe("unknown");
     expect(conversationalSummary("unknown", [])).toContain("could not verify");
   });
+
+  it("folds uptime and a recent recovery into the healthy answer", () => {
+    const spoken = conversationalSummary("healthy", [result("database", "healthy")], {
+      uptimeSeconds: 2 * 86_400,
+      now: Date.parse("2026-08-03T18:00:00.000Z"),
+      incidents: [
+        {
+          id: "i1", service: "cloudflare", startedAt: "2026-08-03T09:00:00.000Z",
+          resolvedAt: "2026-08-03T09:05:00.000Z", status: "resolved", severity: "critical",
+          summary: "Public website through Cloudflare recovered automatically.",
+        },
+      ],
+    });
+    expect(spoken).toContain("2 days");
+    expect(spoken.toLowerCase()).toContain("recovered on its own");
+  });
+
+  it("says how long an active outage has been going", () => {
+    const spoken = conversationalSummary("unavailable", [result("cloudflare", "unavailable")], {
+      now: Date.parse("2026-08-03T12:20:00.000Z"),
+      incidents: [
+        {
+          id: "i2", service: "cloudflare", startedAt: "2026-08-03T12:00:00.000Z",
+          status: "active", severity: "critical",
+          summary: "The public website is not reachable.",
+        },
+      ],
+    });
+    expect(spoken).toContain("20 minutes ago");
+  });
 });
