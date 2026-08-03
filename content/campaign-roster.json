@@ -1,6 +1,6 @@
 {
   "sourceUrl": "https://docs.google.com/spreadsheets/d/18dJmPar88AcVipVvmKesSQDkSi9dzpsYkUngUHpg6z0/edit?gid=1198014666",
-  "syncedAt": "2026-08-01T14:32:30.336Z",
+  "syncedAt": "2026-08-02T14:32:33.560Z",
   "campaigns": {
     "a-new-adventure": {
       "name": "A New Adventure",
@@ -126,7 +126,7 @@
           "player": "Sean Poole",
           "status": "Deceased",
           "deathDate": "7/21/2017",
-          "notes": "First character to die"
+          "notes": "killed by Carrion Crawler"
         },
         {
           "character": "Lexandyr Calen Stormborne \"Lex\"",
@@ -146,8 +146,7 @@
           "subclass": "Life Domain",
           "level": 16,
           "status": "Deceased",
-          "deathDate": "4/21/2023",
-          "notes": "died in Beer & Dice III"
+          "deathDate": "4/21/2023"
         },
         {
           "character": "Rigurd Claud",
@@ -231,8 +230,7 @@
           "species": "FeralTiefling",
           "class": "Barbarian",
           "subclass": "Path of the Berserker",
-          "level": 17,
-          "notes": "only player to survive fight"
+          "level": 17
         },
         {
           "character": "Balthus Eboncrest",
@@ -1028,7 +1026,8 @@
           "class": "Fighter",
           "subclass": "Battle Master",
           "level": 16,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Cecily Scryre",
@@ -1046,7 +1045,8 @@
           "class": "Druid",
           "subclass": "Circle of Dreams",
           "level": 16,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Lejla",
@@ -1063,7 +1063,8 @@
           "class": "Barbarian/Fighter",
           "subclass": "Path of the Ancestrial Guardian",
           "level": 17,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Nipsy Ningel",
@@ -1072,7 +1073,8 @@
           "class": "Rogue",
           "subclass": "Arcane Trickster",
           "level": 16,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Rennigis Fynswallow",
@@ -1081,7 +1083,8 @@
           "class": "Warlock",
           "subclass": "The Celestial",
           "level": 16,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Rexan Houndsley",
@@ -1099,7 +1102,8 @@
           "class": "Bard",
           "subclass": "College of Lore",
           "level": 16,
-          "status": "Deceased"
+          "status": "Deceased",
+          "notes": "killed in Sutherin fight at Assembly of Essence"
         },
         {
           "character": "Vekol",
@@ -1322,8 +1326,7 @@
         {
           "character": "Acosta",
           "player": "Brian Winneford",
-          "status": "Deceased",
-          "notes": "died in Call for Heroes"
+          "status": "Deceased"
         },
         {
           "character": "Aria",
@@ -1385,8 +1388,7 @@
           "class": "Rogue/Artificer",
           "subclass": "Mastermind",
           "level": 17,
-          "status": "Retired",
-          "notes": "transformed into a gold dragon named C'mey"
+          "status": "Retired"
         }
       ]
     },
@@ -1429,7 +1431,7 @@
           "level": 14,
           "status": "Deceased",
           "deathDate": "1/12/2019",
-          "notes": "taken to hell"
+          "notes": "taken to hell by Tiamat"
         },
         {
           "character": "Orsik Umberfist",
@@ -1440,7 +1442,7 @@
           "player": "Sean Poole",
           "status": "Deceased",
           "deathDate": "1/12/2019",
-          "notes": "taken to hell"
+          "notes": "taken to hell by Tiamat"
         },
         {
           "character": "Quin Niuq",
@@ -1480,8 +1482,7 @@
           "species": "Elf",
           "class": "Monk",
           "subclass": "Way of the Astral Self",
-          "level": 17,
-          "notes": "died in Call for Heroes"
+          "level": 17
         },
         {
           "character": "Lightbrand",
@@ -1513,8 +1514,7 @@
           "species": "Dragonborn",
           "class": "Cleric",
           "subclass": "Forge Domain",
-          "level": 17,
-          "notes": "died in Call for Heroes"
+          "level": 17
         },
         {
           "character": "Tadg mac Nuadat \"Twiggy\"",
@@ -1531,8 +1531,7 @@
           "species": "Elf",
           "class": "Rogue",
           "subclass": "Assassin",
-          "level": 18,
-          "notes": "Call for Heroes"
+          "level": 18
         }
       ]
     }
@@ -1582,20 +1581,20 @@
     ],
     "Waves Edge": [
       {
-        "character": "Calliope",
-        "player": "Jenny McHale",
-        "species": "Changeling",
-        "class": "Fighter",
-        "subclass": "Battle Master",
-        "level": 3
-      },
-      {
         "character": "Ozirus \"Ozzie\" Mixen",
         "player": "Sean Poole",
         "species": "Cambion",
         "class": "Fighter",
         "subclass": "Echo Knight",
         "level": 6
+      },
+      {
+        "character": "Calliope",
+        "player": "Jenny McHale",
+        "species": "Changeling",
+        "class": "Fighter",
+        "subclass": "Battle Master",
+        "level": 3
       },
       {
         "character": "Trislan",
@@ -1608,15 +1607,12 @@
     ],
     "(unspecified)": [
       {
-        "character": "Arecibo",
-        "status": "Deceased",
-        "deathDate": "3/22/2019",
-        "notes": "yellow/green/white dice also retired that day"
-      },
-      {
-        "character": "Belros",
-        "status": "Deceased",
-        "deathDate": "1/19/2024"
+        "character": "Kashmir",
+        "player": "Steven Zimmerman",
+        "species": "Aasimar",
+        "class": "Sorcerer",
+        "subclass": "Draconic Bloodline",
+        "level": 5
       },
       {
         "character": "Garrik",
@@ -1627,14 +1623,37 @@
         "level": 5
       },
       {
+        "character": "Nestor Rotspiddle",
+        "player": "Nolan Brown",
+        "species": "Gnome",
+        "class": "Druid",
+        "subclass": "Circle of the Moon",
+        "level": 5
+      },
+      {
+        "character": "Scrap",
+        "player": "Kalin McHale",
+        "species": "Goblin",
+        "class": "Rogue",
+        "subclass": "Assassin",
+        "level": 5
+      },
+      {
         "character": "Gulkta",
         "player": "Sean Poole",
         "species": "Half-Orc",
         "class": "Fighter",
         "subclass": "Battle Master",
         "level": 20,
-        "status": "NPC",
-        "notes": "Leader of the Mahruud"
+        "status": "NPC"
+      },
+      {
+        "character": "Hewie",
+        "player": "Sean Poole",
+        "species": "Human",
+        "class": "Cleric",
+        "subclass": "Twilight Domain",
+        "level": 3
       },
       {
         "character": "Hashir Suflete",
@@ -1644,12 +1663,14 @@
         "level": 10
       },
       {
-        "character": "Hewie",
-        "player": "Sean Poole",
-        "species": "Human",
-        "class": "Cleric",
-        "subclass": "Twilight Domain",
-        "level": 3
+        "character": "Arecibo",
+        "status": "Deceased",
+        "deathDate": "3/22/2019"
+      },
+      {
+        "character": "Belros",
+        "status": "Deceased",
+        "deathDate": "1/19/2024"
       },
       {
         "character": "Hob",
@@ -1670,14 +1691,6 @@
         "character": "Kablahm",
         "status": "Deceased",
         "deathDate": "9/15/2023"
-      },
-      {
-        "character": "Kashmir",
-        "player": "Steven Zimmerman",
-        "species": "Aasimar",
-        "class": "Sorcerer",
-        "subclass": "Draconic Bloodline",
-        "level": 5
       },
       {
         "character": "Kharas",
@@ -1706,25 +1719,9 @@
         "deathDate": "3/26/2024"
       },
       {
-        "character": "Nestor Rotspiddle",
-        "player": "Nolan Brown",
-        "species": "Gnome",
-        "class": "Druid",
-        "subclass": "Circle of the Moon",
-        "level": 5
-      },
-      {
         "character": "Reece",
         "status": "Deceased",
         "deathDate": "9/30/2020"
-      },
-      {
-        "character": "Scrap",
-        "player": "Kalin McHale",
-        "species": "Goblin",
-        "class": "Rogue",
-        "subclass": "Assassin",
-        "level": 5
       },
       {
         "character": "Silas",
