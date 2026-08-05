@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "id": "audit-rem-d5f1f7e87dfbf4f3-1785849483107",
+      "remediationId": "rem-d5f1f7e87dfbf4f3",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:18:03.104Z"
+      },
+      "previousValue": "Diverra",
+      "createdAt": "2026-08-04T13:18:03.104Z"
+    },
+    {
+      "id": "audit-rem-9783de6786884333-1785849478528",
+      "remediationId": "rem-9783de6786884333",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "De Vera",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:17:58.525Z"
+      },
+      "previousValue": "Diverra",
+      "createdAt": "2026-08-04T13:17:58.525Z"
+    },
+    {
+      "id": "audit-rem-1d59a69e49be1dca-1785849453744",
+      "remediationId": "rem-1d59a69e49be1dca",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:17:33.741Z"
+      },
+      "createdAt": "2026-08-04T13:17:33.741Z"
+    },
+    {
       "id": "audit-rem-f46d525b037c3a24-1785607048304",
       "remediationId": "rem-f46d525b037c3a24",
       "action": "applied",

@@ -1727,7 +1727,7 @@
       "id": "heroes-of-emberstran",
       "name": "Heroes of Emberstran",
       "color": "#ff9f43",
-      "status": "At Basctdelm",
+      "status": "At Emberstran",
       "campaignHref": "/campaigns/heroes-of-emberstran",
       "stops": [
         {
@@ -2610,6 +2610,40 @@
           },
           "sourceKey": "heroes-of-emberstran:session-31",
           "sourceHash": "012b306217c130b1865718034a0021d22043779dd465b10e277ca864e6288159",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-32",
+          "locationId": "emberstran",
+          "location": "Emberstran",
+          "x": 60.75,
+          "y": 58.23,
+          "session": "Session 32",
+          "title": "Claim Your Slaad",
+          "summary": "The Heroes of Emberstran pressed deeper into the flooded Guigzien Mire-shrine intent on recovering Zabeek’s body and clearing whatever still lurked in its black waters so they might learn more of Phira’s captors. Proceeding deeper into the dungeon, they slew a Slaad disguised as Zabeek. Pushing onward they entered a chamber with a vined altar and fought cultists and more Slaad until the bound figure rose as Blackrend, the undead blight-bringer who declared he had summoned Guigzien and intended to claim the sludge god’s power. The session ended with the party locked in combat against Blackrend and the remaining creatures while the knowledge settled that Guigzien himself now walked free somewhere in Myrdae.",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Emberstran",
+            "description": "Proceeding deeper into the dungeon, they slew a Slaad disguised as Zabeek."
+          },
+          "automatic": true,
+          "confidence": 0.85,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 57.72,
+                "y": 31.66
+              },
+              {
+                "x": 60.75,
+                "y": 58.23
+              }
+            ],
+            "miles": 668.6
+          },
+          "sourceKey": "heroes-of-emberstran:session-32",
+          "sourceHash": "c8c65e836bb924a8145156de3fdbf74ee318e6f30fc63ad0efe5c5baa2f8adb8",
           "current": true
         }
       ],
@@ -3097,11 +3131,11 @@
           "precision": "off-map",
           "session": "Session 5",
           "title": "The A-Team",
-          "summary": "The \"A-Team\" adventurers infiltrated \"The Long Night\" tavern to investigate an illicit drug production facility located in the basement. The facility is allegedly smuggling performance-enhancing drugs to gladiators in the Colosseum. ### Combat Engagement: The Bakery & Production Office The session opened with the party split between the bakery and the alleyway. A high-intensity skirmish ensued against guards, a hobgoblin spellcaster, and a bugbear overseer. ### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…",
+          "summary": "The \"A-Team\" adventurers infiltrated \"The Long Night\" tavern to investigate an illicit drug production facility located in the basement. The facility is allegedly smuggling performance-enhancing drugs to gladiators in the Colosseum. Combat Engagement: The Bakery & Production Office The session opened with the party split between the bakery and the alleyway. A high-intensity skirmish ensued against guards, a hobgoblin spellcaster, and a bugbear overseer. Intelligence Recovered – The party successfully cleared the facility and gathered the following high-signal intelligence: * *The Substance: Recovered vials of \"Troll's Blood.…",
           "impact": {
             "type": "discovery",
             "title": "A new truth surfaced",
-            "description": "### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…"
+            "description": "Intelligence Recovered – The party successfully cleared the facility and gathered the following high-signal intelligence: * *The Substance: Recovered vials of \"Troll's Blood.…"
           },
           "automatic": true,
           "confidence": 0.79,
@@ -3119,7 +3153,7 @@
             ]
           },
           "sourceKey": "the-silent-vanguard:session-5",
-          "sourceHash": "ee623061e5550888405fab4e2512b133313550b6594063b0376a9cd595d185c1",
+          "sourceHash": "92efde431469dbd5eee55225cb3b6f8d8745a4f1c89e450b321b711c66ef75aa",
           "current": true
         }
       ],
@@ -3173,10 +3207,10 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-02T14:50:33.484Z",
+    "lastGeneratedAt": "2026-08-05T14:50:25.327Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 105,
+    "generatedStops": 106,
     "routedSegments": 6,
     "impactLocations": 29
   },
@@ -3319,6 +3353,14 @@
           "title": "A new truth surfaced",
           "type": "discovery",
           "description": "The party left Emberstran behind, camped with the colorful Weftirin wayfarers where a dreamcatcher revealed visions of ancient clan conflict tied to Ky'tha."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 32",
+          "title": "Conflict reshaped Emberstran",
+          "type": "battle",
+          "description": "Proceeding deeper into the dungeon, they slew a Slaad disguised as Zabeek."
         }
       ],
       "crossCampaign": false
@@ -4413,7 +4455,7 @@
           "session": "Session 5",
           "title": "A new truth surfaced",
           "type": "discovery",
-          "description": "### Intelligence Recovered The party successfully cleared the facility and gathered the following high-signal intelligence: * The Substance: Recovered vials of \"Troll's Blood.…"
+          "description": "Intelligence Recovered – The party successfully cleared the facility and gathered the following high-signal intelligence: * *The Substance: Recovered vials of \"Troll's Blood.…"
         }
       ],
       "crossCampaign": false

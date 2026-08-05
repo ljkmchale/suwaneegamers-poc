@@ -1,13 +1,13 @@
 {
-  "minEndpointingDelay": 0.4,
+  "minEndpointingDelay": 0.3,
   "maxEndpointingDelay": 5,
   "vadMinSilence": 0.45,
   "vadActivationThreshold": 0.6,
-  "minInterruptionDuration": 1.2,
+  "minInterruptionDuration": 1,
   "minInterruptionWords": 3,
   "ollamaTemperature": 0.3,
   "ollamaTopP": 0.9,
-  "updatedAt": "",
-  "updatedBy": "manual",
-  "note": "Raised interruption guard to reject speaker echo and short background speech."
+  "updatedAt": "2026-08-05T15:10:25.181Z",
+  "updatedBy": "autotune",
+  "note": "lowered endpointing to 0.3s (interruptions near zero over 38 turns); lowered interruption guard to 1s (interruptions near zero over 38 turns); recommendation: TTFT p95 is 6001ms even when warm — consider a smaller/faster OLLAMA_MODEL"
 }

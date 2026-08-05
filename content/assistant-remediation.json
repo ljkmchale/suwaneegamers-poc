@@ -12,7 +12,7 @@
       "id": "rem-1d59a69e49be1dca",
       "normalized": "can you tell me more about devira",
       "status": "pending",
-      "createdAt": "2026-08-02T15:25:33.930Z"
+      "createdAt": "2026-08-04T15:25:16.620Z"
     },
     {
       "question": "What do you know about De Vera?",
@@ -26,7 +26,7 @@
       "id": "rem-9783de6786884333",
       "normalized": "what do you know about de vera",
       "status": "pending",
-      "createdAt": "2026-08-02T15:25:33.928Z"
+      "createdAt": "2026-08-04T15:25:16.619Z"
     },
     {
       "question": "So tell me about the goddess Devira.",
@@ -40,7 +40,73 @@
       "id": "rem-d5f1f7e87dfbf4f3",
       "normalized": "so tell me about the goddess devira",
       "status": "pending",
-      "createdAt": "2026-08-02T15:25:33.926Z"
+      "createdAt": "2026-08-04T15:25:16.616Z"
+    },
+    {
+      "question": "Can you tell me more about DeVira?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-1d59a69e49be1dca",
+      "normalized": "can you tell me more about devira",
+      "status": "approved",
+      "createdAt": "2026-08-02T15:25:33.930Z",
+      "reviewedAt": "2026-08-04T13:17:33.741Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:17:33.741Z"
+      }
+    },
+    {
+      "question": "What do you know about De Vera?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-9783de6786884333",
+      "normalized": "what do you know about de vera",
+      "status": "approved",
+      "createdAt": "2026-08-02T15:25:33.928Z",
+      "reviewedAt": "2026-08-04T13:17:58.525Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "De Vera",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:17:58.525Z"
+      }
+    },
+    {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
+      "status": "approved",
+      "createdAt": "2026-08-02T15:25:33.926Z",
+      "reviewedAt": "2026-08-04T13:18:03.104Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-04T13:18:03.104Z"
+      }
     },
     {
       "question": "Can you tell me about the gods?",
@@ -171,5 +237,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-02T15:25:33.930Z"
+  "updatedAt": "2026-08-05T15:25:26.338Z"
 }
