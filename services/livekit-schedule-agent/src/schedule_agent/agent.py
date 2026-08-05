@@ -112,6 +112,9 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         "events": events if isinstance(events, list) else [],
         "aboutSuwaneeGamers": str(payload.get("aboutSuwaneeGamers") or ""),
         "knowledge": str(payload.get("knowledge") or ""),
+        # Out-of-world website roadmap block (site features requested / built /
+        # ideated). Kept separate from in-world Myrdae lore on purpose.
+        "roadmap": str(payload.get("roadmap") or ""),
         "knowledgeVisibility": "dm" if payload.get("knowledgeVisibility") == "dm" else "players",
         "brainAccessToken": str(payload.get("brainAccessToken") or ""),
         "dmCampaigns": payload.get("dmCampaigns") if payload.get("dmCampaigns") == "*" or isinstance(payload.get("dmCampaigns"), list) else [],
@@ -2427,6 +2430,9 @@ class Myra(Agent):
         self.about_suwanee_gamers = str(
             schedule.get("aboutSuwaneeGamers") or ""
         ).strip()
+        # Website roadmap — its own out-of-world compartment, already framed by
+        # the server as real-world site-development info (not game lore).
+        self.roadmap = str(schedule.get("roadmap") or "").strip()
         self.pantheon_knowledge = load_pantheon_knowledge()
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
@@ -2504,6 +2510,12 @@ class Myra(Agent):
             {json.dumps(self.website_updates, ensure_ascii=False)}
             """
         )
+        # Kept as its own compartment, distinct from the in-world knowledge and
+        # Pantheon blocks above. The text is already self-labeling as real-world
+        # website-development information.
+        roadmap_block = (
+            "\n" + self.roadmap + "\n" if self.roadmap else ""
+        )
         chronicles_access_block = (
             "This authenticated visitor has full DM Chronicles access across campaigns."
             if self.dm_campaigns == "*"
@@ -2528,6 +2540,7 @@ class Myra(Agent):
             {pantheon_block}
             {profile_block}
             {website_updates_block}
+            {roadmap_block}
             {chronicles_access_block}
 
             {personality_block}
@@ -2549,6 +2562,15 @@ class Myra(Agent):
               today, give latestUpdate and its exact date. Distinguish content,
               image, and website file updates; never infer what changed from a
               filename beyond the facts in the snapshot.
+            - The site roadmap block, when present, is real-world information about
+              the WEBSITE's development — features the group has requested, already
+              built, or is considering. Use it ONLY to answer questions about what
+              site features are planned, requested, in progress, or already done
+              (e.g. "is a name generator planned?", "did search get added yet?").
+              It is separate from the game world: never fold roadmap items into
+              in-world Myrdae lore, and never treat lore, campaigns, or Chronicles
+              content as roadmap. If it is absent or does not cover something, say
+              you don't have that on the site's list rather than guessing.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
             - For a player character's STATS — level, class, species, subclass,

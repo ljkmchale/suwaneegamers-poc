@@ -12,6 +12,7 @@ import {
   getAssistantPronunciations,
   getAssistantRecaps,
 } from "@/lib/assistantBrain";
+import { getAssistantRoadmap } from "@/lib/assistantRoadmap";
 import { getLearnedFaqForAgent } from "@/lib/assistantLearned";
 import { personaForAgentMember } from "@/lib/assistantPersonaStore";
 import { assistantTuningForAgent } from "@/lib/assistantTuningStore";
@@ -211,6 +212,9 @@ export async function POST(request: NextRequest) {
       navigation,
       aboutSuwaneeGamers: getAssistantAbout(),
       knowledge: getAssistantBrain(),
+      // Separate out-of-world compartment: the website roadmap (site features
+      // requested / built / ideated), never mixed with in-world Myrdae lore.
+      roadmap: getAssistantRoadmap(),
       knowledgeVisibility: dmBrainAccess ? "dm" : "players",
       dmCampaigns,
       dmDefaultCampaigns,

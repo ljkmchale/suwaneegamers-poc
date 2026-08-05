@@ -1,0 +1,91 @@
+{
+  "source": "https://docs.google.com/document/d/10hQeSzBCwnsvq1FGT4r3CG5UR_nBAx8nqMAf4DbHIGI/edit",
+  "syncedAt": "2026-08-05T16:55:43.212Z",
+  "actionItems": [
+    {
+      "section": "Miscellaneous",
+      "text": "Move the \"Who's been on the site\" card on the Usage dashboard closer to the top 🙂",
+      "done": true
+    },
+    {
+      "section": "Login",
+      "text": "Add Terms of Service to check off when using Google account login",
+      "done": true
+    },
+    {
+      "section": "Header",
+      "text": "Added search, need to discuss the search specifics…",
+      "done": false
+    },
+    {
+      "section": "Footer",
+      "text": "Fix the cut off wings on the logo in the bottom",
+      "done": true
+    },
+    {
+      "section": "Campaigns Page",
+      "text": "Add how long Campaigns have run or have been running",
+      "done": false
+    },
+    {
+      "section": "Chronicles Page",
+      "text": "Backburner item … got some ideas",
+      "done": false
+    },
+    {
+      "section": "Map Page",
+      "text": "Discussing combining cards on main screen",
+      "done": false
+    },
+    {
+      "section": "Setting – Bestiary Page",
+      "text": "Stats table missing - (Chip to fix)",
+      "done": false
+    },
+    {
+      "section": "Setting – Gazetteer Page",
+      "text": "Change the purple \"GAZETTEER\" to \"SETTLEMENT REFERENCES\"",
+      "done": true
+    },
+    {
+      "section": "Setting – Guides Page",
+      "text": "Update the heading to say Myrdae Setting Guides",
+      "done": true
+    },
+    {
+      "section": "Setting – Guides Page",
+      "text": "Consider a different layout that will work well on the phone.",
+      "done": true
+    },
+    {
+      "section": "Setting – Guides Page",
+      "text": "Add The Register - [The Register](https://docs.google.com/document/d/1Gn23Jp-2cXLR-WeLkdBuuC7rRhaFKXHxH2mUIiQrKXY/edit?usp=sharing) (I know its a DM guide, but I'm okay with Players having access)",
+      "done": true
+    },
+    {
+      "section": "Setting – Legends & Lore",
+      "text": "Chip to create narrated audio files",
+      "done": false
+    },
+    {
+      "section": "Setting – Legends & Lore",
+      "text": "Larry to Include \"play\" link for narrated items",
+      "done": false
+    },
+    {
+      "section": "Setting – Pantheon",
+      "text": "Discuss card for Old Gods / Assembly of Essence",
+      "done": false
+    },
+    {
+      "section": "Toolset – Adventures",
+      "text": "Chip to get art for adventure cards",
+      "done": false
+    }
+  ],
+  "ideas": [
+    "Add a In Memoriam or Fallen Heroes section",
+    "Chronicle",
+    "Myrdae Name Generator based on surnames?"
+  ]
+}

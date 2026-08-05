@@ -156,6 +156,18 @@ const jobs = [
     revalidatePaths: ["/campaign-journeys"],
   },
   {
+    id: "site-roadmap",
+    label: "Website roadmap (Myra out-of-world)",
+    schedule: { kind: "daily", time: "10:51" },
+    command: [node, [
+      path.join("apps", "web", "node_modules", "tsx", "dist", "cli.mjs"),
+      "--tsconfig", "apps/web/tsconfig.json",
+      "apps/web/scripts/sync-site-roadmap.ts",
+    ]],
+    timeoutMs: 3 * 60_000,
+    revalidatePaths: [],
+  },
+  {
     id: "assistant-brain",
     label: "Voice assistant knowledge base",
     schedule: { kind: "daily", time: "10:52" },
