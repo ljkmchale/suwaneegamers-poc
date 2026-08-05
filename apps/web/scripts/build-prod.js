@@ -101,3 +101,16 @@ fs.writeFileSync(
   `${JSON.stringify({ slot: stagingName, ...metadata }, null, 2)}\n`,
 );
 console.log(`Production bundle ${metadata.version} ready in immutable slot ${stagingDir}`);
+
+// The A/B slot alternation makes `next build` rewrite next-env.d.ts to import
+// the slot it just built (./.next-prod-a vs ./.next-prod-b/types/routes.d.ts).
+// That flip leaves the file modified after every other build, which would stamp
+// the NEXT build .dirty even with a clean source tree. Restore it to the
+// committed version so the working tree stays clean between builds. The file
+// stays tracked (CI typecheck needs its Next type references present) and the
+// next `next build` regenerates it. Failure here is cosmetic, so never throw.
+try {
+  execFileSync("git", ["checkout", "--", "next-env.d.ts"], { cwd: webDir, stdio: "ignore" });
+} catch {
+  /* not a git checkout or git unavailable — a leftover next-env.d.ts diff is harmless */
+}
