@@ -939,10 +939,25 @@ def test_llm_is_local_only_when_no_anthropic_key_is_configured(monkeypatch):
     assert built.model == "suwanee-schedule"
 
 
-def test_llm_falls_back_from_claude_to_local_ollama(monkeypatch):
+def test_llm_is_claude_only_when_a_key_is_present(monkeypatch):
+    # The Ollama fallback was retired: with a key, Myra thinks with Claude and
+    # nothing else (no FallbackAdapter, no local second-guess).
     from schedule_agent.agent import build_llm
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    monkeypatch.delenv("MYRA_ENABLE_OLLAMA", raising=False)
+    built = build_llm({})
+    assert not isinstance(built, FallbackAdapter)
+    assert built.model == "claude-haiku-4-5"
+
+
+def test_ollama_fallback_is_restorable_with_one_flag(monkeypatch):
+    # The retired fallback comes back with MYRA_ENABLE_OLLAMA=1 (same flag the
+    # launcher uses to start the service) — no code revert needed.
+    from schedule_agent.agent import build_llm
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    monkeypatch.setenv("MYRA_ENABLE_OLLAMA", "1")
     built = build_llm({})
     assert isinstance(built, FallbackAdapter)
     primary, secondary = built._llm_instances
@@ -956,8 +971,7 @@ def test_claude_temperature_ignores_the_ollama_autotuner(monkeypatch):
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
     monkeypatch.delenv("ANTHROPIC_TEMPERATURE", raising=False)
-    claude, ollama = build_llm({"ollamaTemperature": 0.95})._llm_instances
-    assert ollama._opts.temperature == 0.95
+    claude = build_llm({"ollamaTemperature": 0.95})
     assert claude._opts.temperature == 0.3
 
 
@@ -970,22 +984,19 @@ def _fake_vad():
     return _VAD()
 
 
-def test_stt_uses_parakeet_primary_with_whisper_fallback(monkeypatch):
-    from livekit.agents.stt import FallbackAdapter as STTFallbackAdapter
+def test_stt_is_parakeet_only_wrapped_in_a_stream_adapter(monkeypatch):
+    from livekit.agents.stt import StreamAdapter
 
     from schedule_agent.agent import build_stt
 
     monkeypatch.setenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")
     monkeypatch.delenv("STT_ENGINE", raising=False)
     built = build_stt("Names: Aurelius Valeheart.", _fake_vad())
-    assert isinstance(built, STTFallbackAdapter)
-    # Non-streaming children get wrapped in a StreamAdapter by the FallbackAdapter.
-    primary, secondary = (getattr(t, "wrapped_stt", t) for t in built._stt_instances)
-    assert primary._opts.model == "nvidia/parakeet-tdt-0.6b-v2"
-    assert secondary._opts.model == "Systran/faster-whisper-small.en"
-    # The vocabulary reaches BOTH engines.
-    assert primary._opts.prompt == "Names: Aurelius Valeheart."
-    assert secondary._opts.prompt == "Names: Aurelius Valeheart."
+    # Parakeet only now — no Whisper fallback layer. StreamAdapter gives the
+    # non-streaming engine VAD-based segmentation.
+    assert isinstance(built, StreamAdapter)
+    assert built._stt._opts.model == "nvidia/parakeet-tdt-0.6b-v2"
+    assert built._stt._opts.prompt == "Names: Aurelius Valeheart."
 
 
 def test_stt_falls_back_to_whisper_only_when_parakeet_disabled(monkeypatch):
@@ -1042,7 +1053,7 @@ def test_claude_prompt_caching_is_on_by_default(monkeypatch):
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
     monkeypatch.delenv("ANTHROPIC_CACHING", raising=False)
-    claude, _ = build_llm({})._llm_instances
+    claude = build_llm({})
     assert claude._opts.caching == "ephemeral"
 
 
@@ -1052,7 +1063,7 @@ def test_claude_prompt_caching_can_be_switched_off_without_a_redeploy(monkeypatc
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
     for value in ("off", "none", "0", "false", "OFF"):
         monkeypatch.setenv("ANTHROPIC_CACHING", value)
-        claude, _ = build_llm({})._llm_instances
+        claude = build_llm({})
         # NOT_GIVEN, never the string "off" — the plugin only checks == "ephemeral".
         assert claude._opts.caching != "ephemeral"
 

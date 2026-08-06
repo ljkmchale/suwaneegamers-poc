@@ -1918,31 +1918,27 @@ def build_parakeet_stt(vocabulary: str) -> openai.STT:
 
 
 def build_stt(vocabulary: str, vad: Any) -> stt.STT:
-    """Parakeet (GPU) first, Whisper (CPU) as fallback.
+    """Parakeet (GPU) only, VAD-segmented. Whisper stays an explicit opt-in.
 
-    Mirrors build_llm's Claude→Ollama pattern: the fast primary is tried first,
-    and stt.FallbackAdapter fails over to the local floor if the primary errors
-    (service down, out of memory, connection refused) so Myra keeps hearing.
-    Both engines are non-streaming, so the adapter needs a VAD to segment audio —
-    the same Silero instance the session uses for turn detection.
+    The CPU Whisper fallback was retired: once Parakeet went primary it never
+    fired once (measured ~250ms and reliable), and carrying it as a
+    FallbackAdapter child only added a slow CPU second-guess and held the model
+    resident for nothing. Whisper is still reachable on demand — set
+    STT_ENGINE=whisper, or leave PARAKEET_BASE_URL blank — for the pre-Parakeet
+    behaviour or if the GPU service is down.
 
-    Parakeet is the default. Set STT_ENGINE=whisper (or leave PARAKEET_BASE_URL
-    unset) to run Whisper only — no fallback layer, the pre-Parakeet behaviour.
+    Parakeet is non-streaming, so it is wrapped in a StreamAdapter with the
+    session VAD to segment audio — the job the retired FallbackAdapter's `vad=`
+    used to do. Trade-off accepted with this change: no automatic failover, so a
+    Parakeet outage now drops the turn (deterministic answers still work) until
+    STT_ENGINE=whisper is set.
     """
-    whisper = build_whisper_stt(vocabulary)
-    if _stt_falsey(os.getenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")):
-        return whisper
-    if os.getenv("STT_ENGINE", "parakeet").strip().casefold() == "whisper":
-        return whisper
+    if os.getenv("STT_ENGINE", "parakeet").strip().casefold() == "whisper" or _stt_falsey(
+        os.getenv("PARAKEET_BASE_URL", "http://127.0.0.1:8767/v1")
+    ):
+        return build_whisper_stt(vocabulary)
     parakeet = build_parakeet_stt(vocabulary)
-    return stt.FallbackAdapter(
-        [parakeet, whisper],
-        vad=vad,
-        # Bounds getting a response before failing over to Whisper. Parakeet
-        # answers in ~150ms when up and refuses fast when down, so a visitor
-        # never waits this long in practice.
-        attempt_timeout=env_float("STT_ATTEMPT_TIMEOUT", 5.0),
-    )
+    return stt.StreamAdapter(stt=parakeet, vad=vad)
 
 
 PAGE_CONTEXT_TOPIC = "myra.page_context"
@@ -2017,23 +2013,25 @@ def build_ollama_llm(tuning: dict[str, Any]) -> openai.LLM:
 
 
 def build_llm(tuning: dict[str, Any]) -> llm.LLM:
-    """Claude Haiku for thinking, local Ollama for when the API can't be reached.
+    """Claude Haiku only when a key is set; local Ollama is the keyless floor.
 
     Only questions that fall past every deterministic intercept in
     on_user_turn_completed reach a model at all, and the job they land on is
     mostly one decision: call search_knowledge_base, or answer from the compact
-    knowledge already in the prompt. A 3B model gets that call wrong often
-    enough to be the weak link in the lore path, which is what this swap buys.
+    knowledge already in the prompt.
 
-    Ollama stays installed as the floor rather than being replaced. If the
-    network or the API is unreachable, FallbackAdapter skips to it and Myra
-    keeps answering. Schedule, recap, navigation, and learned answers never
-    reach either model, so they are unaffected either way.
+    The Ollama fallback was retired from the keyed path: over the whole recorded
+    history it answered ~2 questions, it shared the GPU with Parakeet, and its
+    cold start was the worst LLM latency tail (~13s). With a key set, Myra thinks
+    with Claude and nothing else — an API outage now degrades to deterministic
+    answers only (schedule, recap, navigation, learned) rather than falling
+    through to a rarely-right 3B model. Ollama remains the floor ONLY when no key
+    is configured (keyless local dev); set MYRA_ENABLE_OLLAMA=1 in the launcher
+    to actually run the service again.
     """
-    local = build_ollama_llm(tuning)
     if not os.getenv("ANTHROPIC_API_KEY"):
         logger.info("ANTHROPIC_API_KEY is not set; Myra is thinking with local Ollama only")
-        return local
+        return build_ollama_llm(tuning)
 
     claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
     remote_kwargs: dict[str, Any] = {}
@@ -2071,27 +2069,28 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
         **remote_kwargs,
     )
 
-    adapter = llm.FallbackAdapter(
-        [remote, local],
-        # Maps to conn_options.timeout, which bounds getting the stream started
-        # rather than how long the answer may run — a slow but working response
-        # is never cut off. Short enough that a dead API falls through to Ollama
-        # before the visitor notices the pause. Claude can legitimately take
-        # 6-7 seconds to start a large, uncached Myra prompt, so a four-second
-        # cutoff incorrectly treated healthy paid responses as outages.
-        attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 15.0),
-    )
-
-    def on_availability_changed(event: llm.AvailabilityChangedEvent) -> None:
-        logger.warning(
-            "Myra's %s model is now %s",
-            getattr(event.llm, "label", type(event.llm).__name__),
-            "available" if event.available else "unavailable",
+    if os.getenv("MYRA_ENABLE_OLLAMA") == "1":
+        # Opt the retired local floor back in with one flag (the launcher's
+        # matching MYRA_ENABLE_OLLAMA=1 starts the service). FallbackAdapter tries
+        # Claude first and skips to Ollama only on an outage.
+        adapter = llm.FallbackAdapter(
+            [remote, build_ollama_llm(tuning)],
+            attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 15.0),
         )
 
-    adapter.on("llm_availability_changed", on_availability_changed)
-    logger.info("Myra thinking with %s, falling back to local Ollama", claude_model)
-    return adapter
+        def on_availability_changed(event: llm.AvailabilityChangedEvent) -> None:
+            logger.warning(
+                "Myra's %s model is now %s",
+                getattr(event.llm, "label", type(event.llm).__name__),
+                "available" if event.available else "unavailable",
+            )
+
+        adapter.on("llm_availability_changed", on_availability_changed)
+        logger.info("Myra thinking with %s, Ollama fallback re-enabled", claude_model)
+        return adapter
+
+    logger.info("Myra thinking with %s (no local fallback)", claude_model)
+    return remote
 
 
 def preload_ollama_model(timeout: float = 120.0) -> float:
@@ -3316,8 +3315,7 @@ def prewarm(proc: Any) -> None:
     which calls it even on turns a deterministic path ends up answering) and for
     the Kokoro synth of the greeting. Runs in a background thread so a slow
     warm-up can never trip the process-init timeout; both halves are best-effort
-    and independent (no Claude key still warms TTS, and vice versa). Ollama is
-    warmed separately in __main__.
+    and independent (no Claude key still warms TTS, and vice versa).
     """
 
     def _warm_all() -> None:
@@ -3551,16 +3549,7 @@ async def schedule_agent(ctx: JobContext):
 
 
 if __name__ == "__main__":
-    # Pay the cold-load cost once when the worker starts, never when a visitor
-    # taps the microphone. Ollama may be starting at the same time after reboot.
-    for attempt in range(1, 13):
-        try:
-            load_seconds = preload_ollama_model()
-            logger.info("Ollama model preloaded in %.2fs and kept resident", load_seconds)
-            break
-        except Exception as exc:
-            if attempt == 12:
-                logger.warning("Ollama preload failed; worker will continue cold: %s", exc)
-                break
-            time.sleep(2)
+    # Claude and Kokoro are warmed per job process in prewarm(); Ollama is retired
+    # from the keyed path, so there is no model to preload here anymore. (When run
+    # keyless, build_ollama_llm loads the local model lazily on the first turn.)
     cli.run_app(server)

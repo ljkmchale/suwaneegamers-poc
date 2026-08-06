@@ -84,7 +84,12 @@ if (-not (Test-TcpPort 8000)) {
   }
 }
 
-if (-not (Test-TcpPort 11434)) {
+# Ollama (the LLM fallback) is retired: it answered ~2 questions in all recorded
+# history, held a GPU grant next to Parakeet, and its cold start was the worst
+# LLM latency tail (~13s). With a key set the agent thinks with Claude only and
+# never touches it. Set MYRA_ENABLE_OLLAMA=1 to bring it back as the keyless
+# offline floor (also re-enable it in build_llm's keyless path).
+if ($env:MYRA_ENABLE_OLLAMA -eq "1" -and -not (Test-TcpPort 11434)) {
   $ollama = Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"
   $env:OLLAMA_KEEP_ALIVE = "-1"
   # Grant the GPU to Ollama only (the model runs 100% on the RTX 5060).
