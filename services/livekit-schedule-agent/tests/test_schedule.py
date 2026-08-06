@@ -917,6 +917,16 @@ def test_cancelled_metrics_forward_nothing():
     assert metric_forward_payload(tts, "s") == []
 
 
+def test_claude_warmup_skips_cleanly_without_a_key(monkeypatch):
+    # No key -> local-only deployment. The warm-up must return without touching
+    # the network or raising, so process init is never blocked.
+    from schedule_agent.agent import _warm_claude, prewarm
+
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    _warm_claude()  # returns immediately; no exception is the assertion
+    prewarm(object())  # spawns its daemon thread without raising
+
+
 def test_llm_is_local_only_when_no_anthropic_key_is_configured(monkeypatch):
     from schedule_agent.agent import build_llm
 

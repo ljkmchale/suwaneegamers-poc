@@ -6,6 +6,7 @@ import logging
 import os
 import re
 import textwrap
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -3232,7 +3233,47 @@ class Myra(Agent):
         )
 
 
+def _warm_claude() -> None:
+    """One throwaway 1-token Claude call to pay the process's cold-start cost.
+
+    The first Anthropic request in a fresh process resolves DNS, builds the TLS /
+    CA-bundle machinery, and opens the connection; measured, that first call
+    spikes `llm_ttft` to ~13s while warm calls sit near ~1s. A minimal call pays
+    it up front. Discards the result, never raises — a failed warm-up just leaves
+    the process to warm on its first real turn, exactly as before.
+    """
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        return
+    try:
+        import anthropic as anthropic_sdk
+
+        started = time.perf_counter()
+        anthropic_sdk.Anthropic(api_key=api_key, max_retries=0, timeout=25.0).messages.create(
+            model=os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL),
+            max_tokens=1,
+            messages=[{"role": "user", "content": "ok"}],
+        )
+        logger.info("Claude warm-up primed the process in %.2fs", time.perf_counter() - started)
+    except Exception as exc:
+        logger.warning("Claude warm-up skipped; first turn may be cold: %s", exc)
+
+
+def prewarm(proc: Any) -> None:
+    """Pay Claude's cold-start once per job process, off the visitor's path.
+
+    LiveKit runs this on idle processes before they pick up a job, so a visitor's
+    first real turn — including `preemptive_generation`, which calls Claude even
+    on turns a deterministic path ends up answering — lands warm. Runs in a
+    background thread so a slow warm-up can never trip the process-init timeout;
+    local-only deploys (no key) skip it, and Ollama is warmed separately in
+    __main__.
+    """
+    threading.Thread(target=_warm_claude, name="claude-warmup", daemon=True).start()
+
+
 server = AgentServer()
+server.setup_fnc = prewarm
 
 
 @server.rtc_session(agent_name=AGENT_NAME)
