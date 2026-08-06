@@ -65,6 +65,13 @@ if (-not (Test-TcpPort 8000)) {
   # component of Myra's response time, so this comes straight off the top.
   $env:WHISPER__COMPUTE_TYPE = "int8"
   $env:WHISPER__CPU_THREADS = "16"
+  # Keep the STT and TTS models resident. Both default to a 300s idle unload, and
+  # Myra's sessions are sporadic (usually >5 min apart), so nearly every first
+  # turn was paying a cold model reload — measured as a 2-3s spike on the first
+  # Kokoro synth of a session. -1 = never unload; the models are small on CPU
+  # (Kokoro ~325MB, distil-small ~330MB), so residency is cheap RAM.
+  $env:TTS_MODEL_TTL = "-1"
+  $env:STT_MODEL_TTL = "-1"
   Start-Logged "speaches" @{
     FilePath = (Join-Path $speachesRoot ".venv\Scripts\uvicorn.exe")
     ArgumentList = @(

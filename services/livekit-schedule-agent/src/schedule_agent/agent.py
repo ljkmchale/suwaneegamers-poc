@@ -3259,17 +3259,55 @@ def _warm_claude() -> None:
         logger.warning("Claude warm-up skipped; first turn may be cold: %s", exc)
 
 
+def _warm_tts() -> None:
+    """Load the Kokoro TTS model server-side so no session pays the reload spike.
+
+    Speaches unloads idle models after `tts_model_ttl` seconds; the launcher now
+    sets that to -1 so the model stays resident, and this one throwaway synth
+    loads it before the first visitor so even the first session after a boot is
+    warm. Discards the audio, never raises.
+    """
+    url = speech_base_url().rstrip("/") + "/audio/speech"
+    payload = json.dumps(
+        {
+            "model": os.getenv("LOCAL_TTS_MODEL", "speaches-ai/Kokoro-82M-v1.0-ONNX"),
+            "input": "ok",
+            "voice": os.getenv("LOCAL_TTS_VOICE", "af_heart"),
+            "response_format": "pcm",
+        }
+    ).encode()
+    try:
+        started = time.perf_counter()
+        request = urllib.request.Request(
+            url,
+            data=payload,
+            headers={"Content-Type": "application/json", "Authorization": "Bearer local-only"},
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=30) as response:
+            response.read()
+        logger.info("Kokoro TTS warm-up primed the model in %.2fs", time.perf_counter() - started)
+    except Exception as exc:
+        logger.warning("TTS warm-up skipped; first synth may be cold: %s", exc)
+
+
 def prewarm(proc: Any) -> None:
-    """Pay Claude's cold-start once per job process, off the visitor's path.
+    """Pay the model cold-starts once per job process, off the visitor's path.
 
     LiveKit runs this on idle processes before they pick up a job, so a visitor's
-    first real turn — including `preemptive_generation`, which calls Claude even
-    on turns a deterministic path ends up answering — lands warm. Runs in a
-    background thread so a slow warm-up can never trip the process-init timeout;
-    local-only deploys (no key) skip it, and Ollama is warmed separately in
-    __main__.
+    first real turn lands warm — for Claude (including `preemptive_generation`,
+    which calls it even on turns a deterministic path ends up answering) and for
+    the Kokoro synth of the greeting. Runs in a background thread so a slow
+    warm-up can never trip the process-init timeout; both halves are best-effort
+    and independent (no Claude key still warms TTS, and vice versa). Ollama is
+    warmed separately in __main__.
     """
-    threading.Thread(target=_warm_claude, name="claude-warmup", daemon=True).start()
+
+    def _warm_all() -> None:
+        _warm_claude()
+        _warm_tts()
+
+    threading.Thread(target=_warm_all, name="myra-warmup", daemon=True).start()
 
 
 server = AgentServer()

@@ -917,13 +917,15 @@ def test_cancelled_metrics_forward_nothing():
     assert metric_forward_payload(tts, "s") == []
 
 
-def test_claude_warmup_skips_cleanly_without_a_key(monkeypatch):
-    # No key -> local-only deployment. The warm-up must return without touching
-    # the network or raising, so process init is never blocked.
-    from schedule_agent.agent import _warm_claude, prewarm
+def test_model_warmups_are_best_effort_and_never_raise(monkeypatch):
+    # Warm-ups run at process init and must never block it or throw: no key skips
+    # Claude, and an unreachable speech server must be swallowed, not raised.
+    from schedule_agent.agent import _warm_claude, _warm_tts, prewarm
 
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    _warm_claude()  # returns immediately; no exception is the assertion
+    monkeypatch.setenv("LOCAL_SPEECH_BASE_URL", "http://127.0.0.1:1/v1")  # refused fast
+    _warm_claude()  # no key -> returns immediately
+    _warm_tts()  # endpoint refused -> caught, returns
     prewarm(object())  # spawns its daemon thread without raising
 
 
