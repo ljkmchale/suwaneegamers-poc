@@ -843,7 +843,7 @@ def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
         },
     )()
 
-    assert metric_forward_payload(metric, "session-1") == {
+    assert metric_forward_payload(metric, "session-1") == [{
         "sessionId": "session-1",
         "kind": "llm_ttft",
         "valueMs": 420,
@@ -854,7 +854,67 @@ def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
         "outputTokens": 800,
         "cacheReadTokens": 2_000,
         "cacheCreationTokens": 0,
-    }
+    }]
+
+
+def test_stt_metric_captures_recognition_time_and_engine():
+    # Non-streaming STT reports real processing time in `duration`; model_name
+    # is what tells Parakeet apart from the Whisper fallback.
+    metric = type(
+        "STTMetrics",
+        (),
+        {
+            "duration": 0.153,
+            "label": "openai.STT",
+            "metadata": SimpleNamespace(
+                model_provider=None,
+                model_name="nvidia/parakeet-tdt-0.6b-v2",
+            ),
+        },
+    )()
+
+    assert metric_forward_payload(metric, "session-1") == [{
+        "sessionId": "session-1",
+        "kind": "stt",
+        "valueMs": 153,
+        "provider": None,
+        "model": "nvidia/parakeet-tdt-0.6b-v2",
+    }]
+
+
+def test_stt_metric_falls_back_to_label_when_metadata_absent():
+    metric = type(
+        "STTMetrics",
+        (),
+        {"duration": 2.4, "label": "openai.STT", "metadata": None},
+    )()
+
+    assert metric_forward_payload(metric, "s")[0]["model"] == "openai.STT"
+
+
+def test_eou_metric_splits_into_endpointing_transcription_and_callback():
+    metric = type(
+        "EOUMetrics",
+        (),
+        {
+            "end_of_utterance_delay": 1.9,
+            "transcription_delay": 0.6,
+            "on_user_turn_completed_delay": 0.05,
+        },
+    )()
+
+    assert metric_forward_payload(metric, "session-1") == [
+        {"sessionId": "session-1", "kind": "eou_delay", "valueMs": 1_900},
+        {"sessionId": "session-1", "kind": "transcription_delay", "valueMs": 600},
+        {"sessionId": "session-1", "kind": "turn_completed_delay", "valueMs": 50},
+    ]
+
+
+def test_cancelled_metrics_forward_nothing():
+    llm = type("LLMMetrics", (), {"cancelled": True})()
+    tts = type("TTSMetrics", (), {"cancelled": True})()
+    assert metric_forward_payload(llm, "s") == []
+    assert metric_forward_payload(tts, "s") == []
 
 
 def test_llm_is_local_only_when_no_anthropic_key_is_configured(monkeypatch):

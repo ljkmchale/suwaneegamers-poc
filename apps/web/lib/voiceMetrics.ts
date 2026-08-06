@@ -5,7 +5,21 @@ import type { TuningSignals } from "@/lib/assistantTuning";
 import { estimateClaudeCostMicrousd } from "@/lib/claudeCost";
 import { pruneExpired } from "@/lib/retention";
 
-const METRIC_KINDS = ["llm_ttft", "eou_delay", "tts_ttfb", "interruption"] as const;
+// Phase 0 latency instrumentation added `stt` (recognition time, labelled by
+// engine so Parakeet and the Whisper fallback are distinguishable),
+// `transcription_delay` and `turn_completed_delay` (the EOU event split into its
+// real parts), and `response_latency` (end-to-end felt gap: user stops speaking
+// → Myra's first audio). The autotuner still reasons only over the original four.
+const METRIC_KINDS = [
+  "llm_ttft",
+  "eou_delay",
+  "tts_ttfb",
+  "interruption",
+  "stt",
+  "transcription_delay",
+  "turn_completed_delay",
+  "response_latency",
+] as const;
 type MetricKind = (typeof METRIC_KINDS)[number];
 
 // The autotuner and the cost panel both look back over days, not months.

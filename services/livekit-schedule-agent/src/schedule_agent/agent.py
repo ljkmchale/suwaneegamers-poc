@@ -2238,21 +2238,24 @@ def post_voice_metric(payload: dict[str, Any]) -> None:
         logger.debug("Unable to record voice metric", exc_info=True)
 
 
-def metric_forward_payload(metric: Any, session_id: str | None) -> dict[str, Any] | None:
-    """Map a LiveKit metrics object to a compact record for the autotuner.
+def metric_forward_payload(metric: Any, session_id: str | None) -> list[dict[str, Any]]:
+    """Map a LiveKit metrics object to compact records for the autotuner.
 
-    Returns None for metrics the tuner doesn't use (or cancelled requests).
+    Returns an empty list for metrics the tuner doesn't use (or cancelled
+    requests). A single LiveKit metric can expand into several rows: one EOU
+    event, for instance, carries the endpointing wait, the STT transcription
+    delay, and the callback delay — three numbers worth tracking apart.
     """
     name = type(metric).__name__
     if name == "LLMMetrics":
         if getattr(metric, "cancelled", False):
-            return None
+            return []
         metadata = getattr(metric, "metadata", None)
         provider = getattr(metadata, "model_provider", None)
         model = getattr(metadata, "model_name", None)
         prompt_tokens = getattr(metric, "prompt_tokens", 0) or 0
         cache_read_tokens = getattr(metric, "prompt_cached_tokens", 0) or 0
-        return {
+        return [{
             "sessionId": session_id,
             "kind": "llm_ttft",
             "valueMs": round((getattr(metric, "ttft", 0) or 0) * 1000),
@@ -2266,24 +2269,53 @@ def metric_forward_payload(metric: Any, session_id: str | None) -> dict[str, Any
             # creation. Myra does not enable Anthropic prompt caching today, so
             # this is correctly zero and the field is ready if that changes.
             "cacheCreationTokens": 0,
-        }
-    if name == "EOUMetrics":
-        return {
+        }]
+    if name == "STTMetrics":
+        # `duration` is 0.0 for streaming engines; Parakeet and Whisper are both
+        # non-streaming, so this is the real recognition time. `model_name` tells
+        # Parakeet apart from the Whisper fallback, so a window of these rows
+        # shows how often each engine actually served and how long it took.
+        metadata = getattr(metric, "metadata", None)
+        return [{
             "sessionId": session_id,
-            "kind": "eou_delay",
-            "valueMs": round((getattr(metric, "end_of_utterance_delay", 0) or 0) * 1000),
-        }
+            "kind": "stt",
+            "valueMs": round((getattr(metric, "duration", 0) or 0) * 1000),
+            "provider": getattr(metadata, "model_provider", None),
+            "model": getattr(metadata, "model_name", None) or getattr(metric, "label", None),
+        }]
+    if name == "EOUMetrics":
+        # One EOU event bundles three distinct waits. Splitting them is the point
+        # of this pass: the endpointing delay is a tuning knob, the transcription
+        # delay is really the STT cost, and until now they were summed into one
+        # opaque ~2s number that looked like endpointing but wasn't.
+        return [
+            {
+                "sessionId": session_id,
+                "kind": "eou_delay",
+                "valueMs": round((getattr(metric, "end_of_utterance_delay", 0) or 0) * 1000),
+            },
+            {
+                "sessionId": session_id,
+                "kind": "transcription_delay",
+                "valueMs": round((getattr(metric, "transcription_delay", 0) or 0) * 1000),
+            },
+            {
+                "sessionId": session_id,
+                "kind": "turn_completed_delay",
+                "valueMs": round((getattr(metric, "on_user_turn_completed_delay", 0) or 0) * 1000),
+            },
+        ]
     if name == "TTSMetrics":
         if getattr(metric, "cancelled", False):
-            return None
-        return {
+            return []
+        return [{
             "sessionId": session_id,
             "kind": "tts_ttfb",
             "valueMs": round((getattr(metric, "ttfb", 0) or 0) * 1000),
-        }
+        }]
     if name == "InterruptionMetrics":
-        return {"sessionId": session_id, "kind": "interruption", "valueMs": 0}
-    return None
+        return [{"sessionId": session_id, "kind": "interruption", "valueMs": 0}]
+    return []
 
 
 def event_loop_lag(expected_tick: float, actual_tick: float) -> float:
@@ -3313,15 +3345,42 @@ async def schedule_agent(ctx: JobContext):
     # cache working.
     metric_tasks: set[asyncio.Task[Any]] = set()
 
-    @session.on("metrics_collected")
-    def _on_metrics(ev: MetricsCollectedEvent) -> None:
-        metrics.log_metrics(ev.metrics)
-        payload = metric_forward_payload(ev.metrics, voice_session_id)
-        if payload is None:
-            return
+    def _forward_metric(payload: dict[str, Any]) -> None:
         task = asyncio.create_task(asyncio.to_thread(post_voice_metric, payload))
         metric_tasks.add(task)
         task.add_done_callback(metric_tasks.discard)
+
+    @session.on("metrics_collected")
+    def _on_metrics(ev: MetricsCollectedEvent) -> None:
+        metrics.log_metrics(ev.metrics)
+        for payload in metric_forward_payload(ev.metrics, voice_session_id):
+            _forward_metric(payload)
+
+    # End-to-end felt latency: the wall-clock gap between the visitor finishing
+    # speaking (user state falls from "speaking" to "listening") and Myra's first
+    # audio (agent state rises to "speaking"). This is the one number a visitor
+    # actually feels; the per-stage metrics above explain where it goes. The
+    # opening greeting is excluded because its "listening" transition comes from
+    # connect, not from the user having just spoken (old_state != "speaking").
+    pending_user_stop: dict[str, float] = {}
+
+    @session.on("user_state_changed")
+    def _on_user_state(ev: Any) -> None:
+        if getattr(ev, "new_state", None) == "listening" and getattr(ev, "old_state", None) == "speaking":
+            pending_user_stop["at"] = time.perf_counter()
+
+    @session.on("agent_state_changed")
+    def _on_agent_state(ev: Any) -> None:
+        if getattr(ev, "new_state", None) != "speaking":
+            return
+        started = pending_user_stop.pop("at", None)
+        if started is None:
+            return
+        _forward_metric({
+            "sessionId": voice_session_id,
+            "kind": "response_latency",
+            "valueMs": round((time.perf_counter() - started) * 1000),
+        })
 
     agent = Myra(metadata, ctx.room)
 
