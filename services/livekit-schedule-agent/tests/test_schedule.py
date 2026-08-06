@@ -924,8 +924,9 @@ def test_model_warmups_are_best_effort_and_never_raise(monkeypatch):
 
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.setenv("LOCAL_SPEECH_BASE_URL", "http://127.0.0.1:1/v1")  # refused fast
+    monkeypatch.setenv("TTS_WARMUP_MAX_WAIT", "0")  # don't spin on the retry loop
     _warm_claude()  # no key -> returns immediately
-    _warm_tts()  # endpoint refused -> caught, returns
+    _warm_tts()  # endpoint refused, no wait budget -> returns at once
     prewarm(object())  # spawns its daemon thread without raising
 
 

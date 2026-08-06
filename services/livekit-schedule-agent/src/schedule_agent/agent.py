@@ -3276,19 +3276,36 @@ def _warm_tts() -> None:
             "response_format": "pcm",
         }
     ).encode()
-    try:
-        started = time.perf_counter()
-        request = urllib.request.Request(
-            url,
-            data=payload,
-            headers={"Content-Type": "application/json", "Authorization": "Bearer local-only"},
-            method="POST",
-        )
-        with urllib.request.urlopen(request, timeout=30) as response:
-            response.read()
-        logger.info("Kokoro TTS warm-up primed the model in %.2fs", time.perf_counter() - started)
-    except Exception as exc:
-        logger.warning("TTS warm-up skipped; first synth may be cold: %s", exc)
+    # Speaches boots slower than the agent (heavy torch/onnx imports + model
+    # load), so on a simultaneous stack start the first attempts race ahead of it
+    # and get connection-refused. Retry until it is ready rather than giving up,
+    # so the warm-up actually lands post-reboot.
+    deadline = time.perf_counter() + env_float("TTS_WARMUP_MAX_WAIT", 40.0)
+    while True:
+        try:
+            started = time.perf_counter()
+            request = urllib.request.Request(
+                url,
+                data=payload,
+                headers={"Content-Type": "application/json", "Authorization": "Bearer local-only"},
+                method="POST",
+            )
+            with urllib.request.urlopen(request, timeout=30) as response:
+                response.read()
+            logger.info("Kokoro TTS warm-up primed the model in %.2fs", time.perf_counter() - started)
+            return
+        except urllib.error.HTTPError as exc:
+            # Speaches answered — it is up, the request shape is just off. No point
+            # retrying a 4xx/5xx; leave the model to load on the first real synth.
+            logger.warning("TTS warm-up got HTTP %s; first synth may be cold: %s", exc.code, exc)
+            return
+        except Exception as exc:
+            # Connection refused / not ready yet — wait for Speaches to come up.
+            if time.perf_counter() < deadline:
+                time.sleep(2)
+                continue
+            logger.warning("TTS warm-up gave up waiting for Speaches; first synth may be cold: %s", exc)
+            return
 
 
 def prewarm(proc: Any) -> None:
