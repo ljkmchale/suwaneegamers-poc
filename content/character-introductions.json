@@ -54,6 +54,13 @@
     "character": "Hap",
     "image": "/media/images/characters/hap-garemon/portrait.png",
     "audio": "/media/images/characters/hap-garemon/introduction.mp3",
-    "transcript": "Hap Garemon. Me, I come up from the swamps, where you learn quick: keep your feet steady, your blade clean, and your people close. Folks see the horns and make up their minds. That's all right. I know what kind of man I am. My father Benoit was murdered, his ring taken, and somebody buried the truth with him. I'm gonna find who did it, keep my sister Phira safe, and settle what the Cloak of Defiance started. Diverra sent me to this company for a reason, yeah. Till I know that reason, I stand with my friends, and nobody gets through me."
+    "transcript": "Hap Garemon. Me, I come up from the swamps, where you learn quick: keep your feet steady, your blade clean, and your people close. Folks see the horns and make up their minds. Mais, that's all right. I know what kind of man I am. My father Benoit was murdered, his ring taken, and somebody buried the truth with him. I'm gonna find who did it, keep my sister Phira safe, and settle what the Cloak of Defiance started. Diverra sent me to this company for a reason, yeah. Till I know that reason, I stand with my friends, and nobody gets through me."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Zymve",
+    "image": "/media/images/characters/zymve-inni/portrait.png",
+    "audio": "/media/images/characters/zymve-inni/introduction.mp3",
+    "transcript": "Zymve Inni. Glamour bard, performer, and living proof that beauty can have teeth. I fled the Underdark, its cult, and a family I despise. They called obedience love. I call it a cage. Music speaks truths people are too cowardly to say aloud, and Ainslie's journal is singing something meant for me. I protect those I choose, and I do not forgive betrayal. If you hunt me, control me, or threaten my friends, I will ask you to stop. Once. After that, the conversation ends. Permanently."
   }
 ]
