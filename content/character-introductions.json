@@ -69,5 +69,12 @@
     "image": "/media/images/characters/kytha-fawnborn/portrait.png",
     "audio": "/media/images/characters/kytha-fawnborn/introduction.mp3",
     "transcript": "Ky'tha Fawnborn. Scout, investigator, and, if you've heard otherwise, someone has been talking too much. Every city has two maps: the streets respectable folk use, and the paths that actually lead somewhere. I know the second. A missing half-locket, old names from Dunduar and Cragfury, favors owed beneath Emberstran... pieces of a story I intend to finish. Lady Rook has an agenda. Irragosa has asked something of me. Ainslie bears watching. That is all you need to know. For now. Stay behind me, step where I step, and kindly keep my secrets out of your mouth."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Ainslie",
+    "image": "/media/images/characters/ainslie-anaerin/portrait.png",
+    "audio": "/media/images/characters/ainslie-anaerin/introduction.mp3",
+    "transcript": "Ainslie Anaerin. Sorcerer, scholar, and apparently heir to a history no one saw fit to explain. The Journal of Tsulanan knows my blood. The vault beneath Mount Emberstran opened for me, and Irragosa says I was meant to claim what waited inside. Zymve hears music in the book that I cannot, though it seems to know both our histories better than either of us would like. Was Tsulanan a dragon rider? Yes. Does that make me one? Not yet. But blood remembers, dragons remember, and I intend to learn what they have been keeping from me."
   }
 ]
