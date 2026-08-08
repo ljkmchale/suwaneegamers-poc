@@ -1,9 +1,36 @@
 {
+  "_comment": "Per-persona ElevenLabs voice. A value is either a voice_id string (inherits _default_settings) or an object {voice, stability, similarity_boost, style, use_speaker_boost} to override delivery for that persona. Playback speed comes from the persona itself, not here. Lower stability + higher style = more expressive/emotional; higher stability + style 0 = flatter/steadier.",
+  "_default_settings": {
+    "stability": 0.4,
+    "similarity_boost": 0.8,
+    "style": 0.35,
+    "use_speaker_boost": true
+  },
   "myra-classic": "XrExE9yKIg1WjnnlVkGX",
   "british-cheeky": "pFZP5JQG7iQjIQuC4Bku",
-  "spirited-warm": "FGY2WhTYpPnrIDTdsKH5",
-  "sassy-wit": "iP95p4xoKVk53GoZ742B",
-  "storyteller": "JBFqnCBsd6RMkjVDRZzb",
-  "deadpan-tactician": "Xb7hH8MSUJpSbSDYk0k2",
+  "spirited-warm": {
+    "voice": "FGY2WhTYpPnrIDTdsKH5",
+    "stability": 0.35,
+    "style": 0.5,
+    "use_speaker_boost": true
+  },
+  "sassy-wit": {
+    "voice": "iP95p4xoKVk53GoZ742B",
+    "stability": 0.4,
+    "style": 0.5,
+    "use_speaker_boost": true
+  },
+  "storyteller": {
+    "voice": "JBFqnCBsd6RMkjVDRZzb",
+    "stability": 0.5,
+    "style": 0.3,
+    "use_speaker_boost": true
+  },
+  "deadpan-tactician": {
+    "voice": "Xb7hH8MSUJpSbSDYk0k2",
+    "stability": 0.75,
+    "style": 0.0,
+    "use_speaker_boost": true
+  },
   "_default": "XrExE9yKIg1WjnnlVkGX"
 }

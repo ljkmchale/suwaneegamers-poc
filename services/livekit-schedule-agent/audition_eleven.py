@@ -153,9 +153,23 @@ def main() -> int:
                       f"{e.read().decode(errors='ignore')[:160]}")
         print()
 
-    # Seed map keyed by persona id (agent.py falls back to _default, then env).
-    chosen["_default"] = chosen.get("myra-classic", next(iter(chosen.values()), ""))
-    VOICE_MAP_OUT.write_text(json.dumps(chosen, indent=2) + "\n", encoding="utf-8")
+    # Merge into any existing map so _default_settings, _comment, and per-persona
+    # voice_settings overrides survive a re-audition -- only the voice ids change.
+    existing: dict = {}
+    if VOICE_MAP_OUT.exists():
+        try:
+            existing = json.loads(VOICE_MAP_OUT.read_text(encoding="utf-8"))
+        except Exception:
+            existing = {}
+    for pid, vid in chosen.items():
+        prev = existing.get(pid)
+        if isinstance(prev, dict):
+            prev["voice"] = vid  # keep the persona's delivery overrides
+            existing[pid] = prev
+        else:
+            existing[pid] = vid
+    existing["_default"] = chosen.get("myra-classic", next(iter(chosen.values()), ""))
+    VOICE_MAP_OUT.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
 
     print(f"~{total_chars} characters synthesized "
           f"(~{round(total_chars * 0.5)} Flash credits).")

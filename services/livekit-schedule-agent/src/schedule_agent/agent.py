@@ -2478,11 +2478,44 @@ def _eleven_voice_map() -> dict[str, str]:
     return _ELEVEN_VOICE_MAP
 
 
-def eleven_voice_id(persona: dict[str, Any]) -> str:
-    """The ElevenLabs voice for this persona: its own mapping, then _default, then env."""
+# ElevenLabs VoiceSettings fields build_tts is allowed to pass through from the
+# JSON map, so a hand-edited file can't inject an unknown kwarg. `speed` is added
+# from the persona, not this map.
+_ELEVEN_SETTING_KEYS = ("stability", "similarity_boost", "style", "use_speaker_boost")
+
+
+def _eleven_entry(persona: dict[str, Any]) -> Any:
+    """This persona's raw map entry (str voice id or dict), falling back to _default."""
     m = _eleven_voice_map()
     pid = str(persona.get("id") or "") if isinstance(persona, dict) else ""
-    return m.get(pid) or m.get("_default") or os.getenv("ELEVEN_VOICE_ID", "")
+    entry = m.get(pid)
+    return entry if entry is not None else m.get("_default")
+
+
+def eleven_voice_id(persona: dict[str, Any]) -> str:
+    """The ElevenLabs voice for this persona: its own mapping, then _default, then env."""
+    entry = _eleven_entry(persona)
+    vid = entry.get("voice", "") if isinstance(entry, dict) else (entry or "")
+    return vid or os.getenv("ELEVEN_VOICE_ID", "")
+
+
+def eleven_voice_settings(persona: dict[str, Any], speed: float) -> dict[str, Any]:
+    """Delivery settings for this persona: expressive _default_settings, overridden by
+    any per-persona object in the map. Lower stability + higher style = more emotional;
+    high stability + style 0 keeps a persona (e.g. the deadpan tactician) deliberately flat."""
+    m = _eleven_voice_map()
+    settings = {k: v for k, v in (m.get("_default_settings") or {}).items()
+                if k in _ELEVEN_SETTING_KEYS}
+    entry = _eleven_entry(persona)
+    if isinstance(entry, dict):
+        for k in _ELEVEN_SETTING_KEYS:
+            if k in entry:
+                settings[k] = entry[k]
+    # Sane floors if the map omits them entirely.
+    settings.setdefault("stability", 0.4)
+    settings.setdefault("similarity_boost", 0.8)
+    settings["speed"] = speed
+    return settings
 
 
 def build_kokoro_tts(persona: dict[str, Any]) -> openai.TTS:
@@ -2521,17 +2554,15 @@ def build_tts(persona: dict[str, Any]) -> tts.TTS:
     if elevenlabs is None:
         logger.warning("livekit-plugins-elevenlabs not importable; using Kokoro")
         return kokoro
-    # ElevenLabs exposes rate through voice_settings.speed (0.8-1.2); reuse the
-    # persona's rate, clamped to that range. stability/similarity are mid defaults
-    # that keep speech natural without over-smoothing the delivery.
+    # Rate rides voice_settings.speed (ElevenLabs range 0.8-1.2); stability/style
+    # come per-persona from eleven-voices.json (expressive by default).
     speed = min(1.2, max(0.8, persona_speed(persona)))
+    settings = eleven_voice_settings(persona, speed)
     try:
         eleven = elevenlabs.TTS(
             voice_id=voice_id,
             model=os.getenv("ELEVEN_MODEL", "eleven_flash_v2_5"),
-            voice_settings=elevenlabs.VoiceSettings(
-                stability=0.5, similarity_boost=0.75, speed=speed,
-            ),
+            voice_settings=elevenlabs.VoiceSettings(**settings),
             api_key=os.getenv("ELEVEN_API_KEY"),
         )
     except Exception as exc:
@@ -2539,7 +2570,10 @@ def build_tts(persona: dict[str, Any]) -> tts.TTS:
         return kokoro
     # Primary ElevenLabs, Kokoro local floor: an outage or exhausted credits drops
     # to local instead of silence.
-    logger.info("Myra speaking with ElevenLabs voice %s (Kokoro fallback)", voice_id)
+    logger.info(
+        "Myra speaking with ElevenLabs voice %s (stability=%.2f style=%.2f, Kokoro fallback)",
+        voice_id, settings.get("stability", 0.0), settings.get("style", 0.0),
+    )
     return tts.FallbackAdapter([eleven, kokoro])
 
 
