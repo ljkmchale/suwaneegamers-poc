@@ -34,9 +34,19 @@ from livekit.agents import (
     llm,
     metrics,
     stt,
+    tts,
 )
 from livekit.agents.llm import ToolFlag
 from livekit.plugins import anthropic, openai, silero
+
+# ElevenLabs is optional (opt-in via MYRA_TTS). Import it at module load so the
+# plugin registers on the MAIN thread. LiveKit refuses plugin registration from
+# the job/worker thread where build_tts runs, so a lazy import there fails with
+# "Plugins must be registered on the main thread" and silently drops to Kokoro.
+try:
+    from livekit.plugins import elevenlabs
+except Exception:  # plugin absent -> build_tts degrades to Kokoro
+    elevenlabs = None
 
 logger = logging.getLogger("suwanee-schedule-agent")
 
@@ -2440,6 +2450,99 @@ def persona_speed(persona: dict[str, Any]) -> float:
     return min(1.25, max(0.7, speed))
 
 
+# --- TTS: local Kokoro by default, optional ElevenLabs Flash (Kokoro floor) ----
+#
+# MYRA_TTS=elevenlabs swaps in ElevenLabs Flash v2.5 as the primary voice while
+# keeping local Kokoro as a FallbackAdapter floor, so an API outage or spent
+# credits drops to local instead of leaving Myra mute -- the same pattern
+# build_llm() used for Claude -> Ollama. Unset (the default) keeps the all-local
+# Kokoro path byte-for-byte unchanged.
+#
+# The persona-id -> ElevenLabs voice_id map is produced by audition_eleven.py
+# (which resolves ids from *your* account) and lives in eleven-voices.json next
+# to this service. Edit that file to swap a voice after auditioning -- no code
+# change, effective on the next voice session.
+_ELEVEN_VOICE_MAP: dict[str, str] | None = None
+
+
+def _eleven_voice_map() -> dict[str, str]:
+    global _ELEVEN_VOICE_MAP
+    if _ELEVEN_VOICE_MAP is None:
+        path = SERVICE_ROOT / "eleven-voices.json"
+        try:
+            _ELEVEN_VOICE_MAP = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logger.warning("eleven-voices.json not loaded (%s); ElevenLabs uses "
+                           "ELEVEN_VOICE_ID / _default only", exc)
+            _ELEVEN_VOICE_MAP = {}
+    return _ELEVEN_VOICE_MAP
+
+
+def eleven_voice_id(persona: dict[str, Any]) -> str:
+    """The ElevenLabs voice for this persona: its own mapping, then _default, then env."""
+    m = _eleven_voice_map()
+    pid = str(persona.get("id") or "") if isinstance(persona, dict) else ""
+    return m.get(pid) or m.get("_default") or os.getenv("ELEVEN_VOICE_ID", "")
+
+
+def build_kokoro_tts(persona: dict[str, Any]) -> openai.TTS:
+    """The local Kokoro voice via Speaches -- Myra's default engine and her floor."""
+    return openai.TTS(
+        model=os.getenv("LOCAL_TTS_MODEL", "speaches-ai/Kokoro-82M-v1.0-ONNX"),
+        voice=persona_voice(persona),
+        speed=persona_speed(persona),
+        base_url=os.getenv("LOCAL_SPEECH_BASE_URL", "http://127.0.0.1:8000/v1"),
+        api_key="local-only",
+        # Speaches streams headerless PCM for OpenAI-compatible streaming
+        # responses. Declaring WAV makes LiveKit wait for a RIFF header that is
+        # not present, resulting in a silent published track.
+        response_format="pcm",
+    )
+
+
+def build_tts(persona: dict[str, Any]) -> tts.TTS:
+    """Persona TTS. Kokoro-only by default; ElevenLabs Flash primary with a Kokoro
+    fallback floor when MYRA_TTS=elevenlabs and a key + voice are configured.
+
+    Every failure path returns plain Kokoro, so a misconfigured ElevenLabs opt-in
+    degrades to the working local voice rather than breaking the session.
+    """
+    kokoro = build_kokoro_tts(persona)
+    if os.getenv("MYRA_TTS", "").strip().lower() != "elevenlabs":
+        return kokoro
+    if not os.getenv("ELEVEN_API_KEY"):
+        logger.warning("MYRA_TTS=elevenlabs but ELEVEN_API_KEY is not set; using Kokoro")
+        return kokoro
+    voice_id = eleven_voice_id(persona)
+    if not voice_id:
+        logger.warning("No ElevenLabs voice mapped for persona %s (run audition_eleven.py "
+                       "or set ELEVEN_VOICE_ID); using Kokoro", persona.get("id"))
+        return kokoro
+    if elevenlabs is None:
+        logger.warning("livekit-plugins-elevenlabs not importable; using Kokoro")
+        return kokoro
+    # ElevenLabs exposes rate through voice_settings.speed (0.8-1.2); reuse the
+    # persona's rate, clamped to that range. stability/similarity are mid defaults
+    # that keep speech natural without over-smoothing the delivery.
+    speed = min(1.2, max(0.8, persona_speed(persona)))
+    try:
+        eleven = elevenlabs.TTS(
+            voice_id=voice_id,
+            model=os.getenv("ELEVEN_MODEL", "eleven_flash_v2_5"),
+            voice_settings=elevenlabs.VoiceSettings(
+                stability=0.5, similarity_boost=0.75, speed=speed,
+            ),
+            api_key=os.getenv("ELEVEN_API_KEY"),
+        )
+    except Exception as exc:
+        logger.warning("ElevenLabs TTS init failed (%s); using Kokoro", exc)
+        return kokoro
+    # Primary ElevenLabs, Kokoro local floor: an outage or exhausted credits drops
+    # to local instead of silence.
+    logger.info("Myra speaking with ElevenLabs voice %s (Kokoro fallback)", voice_id)
+    return tts.FallbackAdapter([eleven, kokoro])
+
+
 class Myra(Agent):
     def __init__(self, schedule: dict[str, Any], room: rtc.Room) -> None:
         self.schedule = schedule
@@ -3389,23 +3492,9 @@ async def schedule_agent(ctx: JobContext):
         # per-visitor vocabulary flows to both; Parakeet turns it into phrase
         # boosting, Whisper into an initial_prompt.
         stt=build_stt(vocabulary, myra_vad),
-        tts=openai.TTS(
-            model=os.getenv(
-                "LOCAL_TTS_MODEL",
-                "speaches-ai/Kokoro-82M-v1.0-ONNX",
-            ),
-            voice=persona_voice(persona),
-            speed=persona_speed(persona),
-            base_url=os.getenv(
-                "LOCAL_SPEECH_BASE_URL",
-                "http://127.0.0.1:8000/v1",
-            ),
-            api_key="local-only",
-            # Speaches streams headerless PCM for OpenAI-compatible streaming
-            # responses. Declaring WAV makes LiveKit wait for a RIFF header that
-            # is not present, resulting in a silent published track.
-            response_format="pcm",
-        ),
+        # Local Kokoro by default; ElevenLabs Flash (with Kokoro as the fallback
+        # floor) when MYRA_TTS=elevenlabs. See build_tts / eleven-voices.json.
+        tts=build_tts(persona),
         vad=myra_vad,
         turn_handling=TurnHandlingOptions(
             turn_detection="vad",

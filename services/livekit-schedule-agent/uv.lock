@@ -1022,6 +1022,9 @@ codecs = [
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
     { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
+elevenlabs = [
+    { name = "livekit-plugins-elevenlabs" },
+]
 images = [
     { name = "pillow" },
 ]
@@ -1129,6 +1132,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b1/86/6d03b07bb1fe8da91988b21f4b9830151a6ba557c26be2c1b391e06e73e3/livekit_plugins_anthropic-1.6.7.tar.gz", hash = "sha256:ec049d6fc89b431a9b51529bbc25b4347d1524831bcce393a3e23a546678e12d", size = 9306, upload-time = "2026-07-25T02:04:13.926Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e8/e0/69ade4e968d6b459a81fac745c49933ab13d8638782abc68d7663ac0d1c1/livekit_plugins_anthropic-1.6.7-py3-none-any.whl", hash = "sha256:909171805db215010e0ecae8fd28c6a63bb74aa112247a337e31c0d620604874", size = 11061, upload-time = "2026-07-25T02:04:12.546Z" },
+]
+
+[[package]]
+name = "livekit-plugins-elevenlabs"
+version = "1.6.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "livekit-agents", extra = ["codecs"] },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/cb/a4/6aa486e63c10872463e76bdb429ec395e0840baf09d05aa0f03066da3b53/livekit_plugins_elevenlabs-1.6.7.tar.gz", hash = "sha256:d1b739426c15ab49ebef5a061c62488323625b637011bba549e4d8b48cba9aee", size = 18692, upload-time = "2026-07-25T02:04:43.418Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/08/b4/145907f350f935d736ccc6a3d3c2d5c6302c35fc317cf3107c3894bec442/livekit_plugins_elevenlabs-1.6.7-py3-none-any.whl", hash = "sha256:9dd59e9feded84f2531ee80150e7e6029046bdadb14cefe033ba939f980a6073", size = 21433, upload-time = "2026-07-25T02:04:42.293Z" },
 ]
 
 [[package]]
@@ -2403,7 +2418,7 @@ name = "suwanee-livekit-schedule-agent"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "livekit-agents", extra = ["anthropic", "openai", "silero"] },
+    { name = "livekit-agents", extra = ["anthropic", "elevenlabs", "openai", "silero"] },
     { name = "python-dotenv" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
@@ -2417,7 +2432,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "livekit-agents", extras = ["anthropic", "openai", "silero"], specifier = ">=1.6.1" },
+    { name = "livekit-agents", extras = ["anthropic", "elevenlabs", "openai", "silero"], specifier = ">=1.6.1" },
     { name = "python-dotenv" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
