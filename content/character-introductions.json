@@ -76,5 +76,12 @@
     "image": "/media/images/characters/ainslie-anaerin/portrait.png",
     "audio": "/media/images/characters/ainslie-anaerin/introduction.mp3",
     "transcript": "Ainslie Anaerin. Sorcerer, scholar, and apparently heir to a history no one saw fit to explain. The Journal of Tsulanan knows my blood. The vault beneath Mount Emberstran opened for me, and Irragosa says I was meant to claim what waited inside. Zymve hears music in the book that I cannot, though it seems to know both our histories better than either of us would like. Was Tsulanan a dragon rider? Yes. Does that make me one? Not yet. But blood remembers, dragons remember, and I intend to learn what they have been keeping from me."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Og",
+    "image": "/media/images/characters/ogmund-crag/portrait.png",
+    "audio": "/media/images/characters/ogmund-crag/introduction.mp3",
+    "transcript": "Ogmund Crag. Most call me Og. I stand in front. That is usually enough. The Life Tree named me E'erspan, thorn-bearer, and gave me Thornleaf. I do not yet know what Alferumn means, or why one thorn turned black after Petal died. I only know the blight must not reach another sacred tree. I have died holding the line. Aury called me back. When Ainslie could no longer walk, I carried him home. Strength is not about how hard you strike. It is about what you refuse to let fall."
   }
 ]
