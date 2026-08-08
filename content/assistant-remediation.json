@@ -11,8 +11,16 @@
       "timesSeen": 1,
       "id": "rem-1d59a69e49be1dca",
       "normalized": "can you tell me more about devira",
-      "status": "pending",
-      "createdAt": "2026-08-04T15:25:16.620Z"
+      "status": "approved",
+      "createdAt": "2026-08-04T15:25:16.620Z",
+      "reviewedAt": "2026-08-08T17:30:30.612Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-08T17:30:30.612Z"
+      }
     },
     {
       "question": "What do you know about De Vera?",
@@ -25,8 +33,9 @@
       "timesSeen": 1,
       "id": "rem-9783de6786884333",
       "normalized": "what do you know about de vera",
-      "status": "pending",
-      "createdAt": "2026-08-04T15:25:16.619Z"
+      "status": "dismissed",
+      "createdAt": "2026-08-04T15:25:16.619Z",
+      "reviewedAt": "2026-08-08T17:30:39.258Z"
     },
     {
       "question": "So tell me about the goddess Devira.",
@@ -39,8 +48,9 @@
       "timesSeen": 1,
       "id": "rem-d5f1f7e87dfbf4f3",
       "normalized": "so tell me about the goddess devira",
-      "status": "pending",
-      "createdAt": "2026-08-04T15:25:16.616Z"
+      "status": "dismissed",
+      "createdAt": "2026-08-04T15:25:16.616Z",
+      "reviewedAt": "2026-08-08T17:30:41.121Z"
     },
     {
       "question": "Can you tell me more about DeVira?",
@@ -237,5 +247,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-08T15:25:24.634Z"
+  "updatedAt": "2026-08-08T17:30:41.121Z"
 }

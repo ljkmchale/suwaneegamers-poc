@@ -13,6 +13,7 @@ const NAV_LINKS_BEFORE_MYRA = [
 const MYRA_LINKS = [
   { href: "/admin/voice-assistant", label: "Overview" },
   { href: "/admin/myra-health", label: "Health" },
+  { href: "/admin/feedback", label: "User Feedback" },
   { href: "/admin/pronunciations", label: "Pronunciations" },
 ];
 

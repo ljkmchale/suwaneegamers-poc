@@ -40,6 +40,8 @@ export interface PortalCampaign {
   name: string;
   dm: string;
   schedule: string;
+  startDate?: string;
+  endDate?: string;
   description: string;
   headerImage?: string;
   headerImagePosition?: string;
@@ -64,6 +66,8 @@ interface DbCampaignRow {
   name: string;
   dm: string;
   schedule: string;
+  start_date: string | null;
+  end_date: string | null;
   description: string;
   header_image: string | null;
   header_image_position: string;
@@ -94,6 +98,8 @@ function rowToCampaign(c: DbCampaignRow, summaries: CampaignSessionSummary[]): P
     name: c.name,
     dm: c.dm,
     schedule: c.schedule,
+    startDate: c.start_date ?? undefined,
+    endDate: c.end_date ?? undefined,
     description: c.description,
     headerImage: c.header_image ?? undefined,
     headerImagePosition: c.header_image_position ?? undefined,
@@ -411,4 +417,3 @@ export function parseLegacyCampaignSessionSummariesFromHtml(html: string) {
 
   return parseLegacySessionSummaries(legacyHtmlToLines(html));
 }
-

@@ -18,6 +18,7 @@ const PUBLIC_PATHS = [
 // browser session: the LiveKit agent posting metrics, and the content scheduler.
 const MACHINE_PATHS = [
   "/api/livekit/analytics",
+  "/api/livekit/feedback",
   "/api/livekit/metrics",
   "/api/content-scheduler/",
   "/api/myra/health/monitor",

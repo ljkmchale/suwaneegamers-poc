@@ -21,6 +21,8 @@ export interface ArchivedCampaign {
   id: string;
   name: string;
   status: string;
+  startDate?: string;
+  endDate?: string;
   dm: string;
   description: string;
   referenceUrl?: string;
@@ -53,6 +55,8 @@ export function getArchivedCampaigns(): ArchivedCampaign[] {
       id,
       name,
       status: (item.props.status as string | undefined) ?? "Completed",
+      startDate: item.props.startDate as string | undefined,
+      endDate: item.props.endDate as string | undefined,
       dm: (item.props.dm as string | undefined) ?? "",
       description: (item.props.description as string | undefined) ?? "",
       referenceUrl: item.props.referenceUrl as string | undefined,

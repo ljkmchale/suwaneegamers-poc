@@ -41,6 +41,15 @@ capability limited to campaigns currently assigned to them in
 `dungeon_masters` / `campaign_dms`; inactive or unrelated campaigns remain
 player-safe.
 
+Passive usage-purpose learning is first-party analytics, not model training.
+`AnalyticsTracker.tsx` sends the existing interaction stream through
+`/api/analytics/events`; `apps/web/lib/usagePurpose.ts` classifies meaningful
+page, engagement, action, search, and media signals into durable
+`analytics_purpose_signals` rows. Myra voice-question categories write into the
+same purpose vocabulary without copying the question text. Future metrics must
+aggregate these confidence-tagged signals by distinct visit rather than treating
+every low-confidence page view as a separate user intent.
+
 `/images/...` is obsolete. Files under `apps/web/media/images/` must be referenced as `/media/images/...`. Do not put site media back under `public/` unless the architecture contract is deliberately migrated everywhere.
 
 ## Change-impact checklist

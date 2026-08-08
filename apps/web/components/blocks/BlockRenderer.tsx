@@ -11,6 +11,7 @@ import {
   normalizeCampaignTitle,
 } from "@/lib/campaigns";
 import { findTrackedCampaign, getTrackedActiveCampaigns } from "@/lib/campaignTracking";
+import { formatCampaignDuration } from "@/lib/campaignDuration";
 import { getPlayerProfiles, assignmentsForPlayer } from "@/lib/players";
 import { getDungeonMasters, campaignsForDm } from "@/lib/dungeonMasters";
 import { getOrganizations } from "@/lib/organizations";
@@ -702,12 +703,13 @@ async function CampaignMetaBlock({ props }: { props: Record<string, unknown> }) 
   const schedule = props.schedule as string | undefined;
   const dm = props.dm as string | undefined;
   const campaignName = props.campaignName as string | undefined;
+  const runtime = formatCampaignDuration(props.startDate as string | undefined, new Date());
   const dateStr = campaignName ? await resolveNextDate(campaignName) : null;
 
   return (
     <section className="max-w-4xl mx-auto px-6">
       <div className="fantasy-card p-6 mb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <p className="font-cinzel text-xs tracking-widest uppercase mb-2" style={{ color: "var(--color-text-muted)" }}>
               Schedule
@@ -725,6 +727,14 @@ async function CampaignMetaBlock({ props }: { props: Record<string, unknown> }) 
               Next Session
             </p>
             <p style={{ color: "var(--color-accent-gold)" }}>{dateStr ?? "See the shared calendar"}</p>
+          </div>
+          <div>
+            <p className="font-cinzel text-xs tracking-widest uppercase mb-2" style={{ color: "var(--color-text-muted)" }}>
+              Running For
+            </p>
+            <p style={{ color: runtime ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+              {runtime ?? "Start date not recorded"}
+            </p>
           </div>
         </div>
       </div>
@@ -1318,6 +1328,9 @@ async function CampaignsGridBlock() {
                 style={{ color: "var(--color-text-primary)" }}>{campaign.name}</h3>
               <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>{campaign.schedule}</p>
               <p className="text-xs mt-1" style={{ color: "var(--color-accent-gold)" }}>DM: {campaign.dm}</p>
+              <p className="text-xs mt-2" style={{ color: "var(--color-text-secondary)" }}>
+                Running for {formatCampaignDuration(campaign.startDate, new Date()) ?? "an unrecorded time"}
+              </p>
             </div>
           </Link>
         ))}
@@ -1616,6 +1629,7 @@ async function CampaignCardBlock({
   const dateStr = campaign.schedule !== "No cadence"
     ? await resolveNextDate(campaign.name)
     : null;
+  const runtime = formatCampaignDuration(campaign.startDate, new Date());
 
   const inner = (
     <article className="fantasy-card overflow-hidden h-full">
@@ -1662,6 +1676,14 @@ async function CampaignCardBlock({
               {dateStr ?? "See calendar"}
             </p>
           </div>
+          <div>
+            <p className="font-cinzel tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>
+              Running For
+            </p>
+            <p style={{ color: runtime ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+              {runtime ?? "Start date not recorded"}
+            </p>
+          </div>
         </div>
       </div>
     </article>
@@ -1690,6 +1712,10 @@ function ArchivedCampaignCardBlock({
   const dm = props.dm as string | undefined;
   const id = props.id as string | undefined;
   const image = props.image as string | undefined;
+  const runtime = formatCampaignDuration(
+    props.startDate as string | undefined,
+    props.endDate as string | undefined,
+  );
   const inGrid = variant === "grid-item";
 
   const inner = (
@@ -1719,6 +1745,14 @@ function ArchivedCampaignCardBlock({
         </div>
         <div className="space-y-4 pt-4 border-t text-sm" style={{ borderColor: "var(--color-bg-border)" }}>
           {dm && <p style={{ color: "var(--color-accent-gold)" }}>DM: {dm}</p>}
+          <div>
+            <p className="font-cinzel tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>
+              Runtime
+            </p>
+            <p style={{ color: runtime ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+              {runtime ?? "Not recorded"}
+            </p>
+          </div>
           {id && (
             <Link
               href={`/previous-campaigns/${id}`}

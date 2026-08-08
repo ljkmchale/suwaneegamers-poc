@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { findArchivedCampaign, getArchivedCampaigns } from "@/lib/archivedCampaigns";
 import { getTrackedArchivedCampaigns } from "@/lib/campaignTracking";
+import { formatCampaignDuration } from "@/lib/campaignDuration";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -27,6 +28,7 @@ export default async function ArchivedCampaignDetailPage({ params }: Props) {
   const campaign = (await getTrackedArchivedCampaigns(getArchivedCampaigns()))
     .find((campaign) => campaign.id === id) ?? findArchivedCampaign(id);
   if (!campaign) notFound();
+  const runtime = formatCampaignDuration(campaign.startDate, campaign.endDate);
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-20">
@@ -61,7 +63,7 @@ export default async function ArchivedCampaignDetailPage({ params }: Props) {
         </section>
 
         <div className="fantasy-card p-6 mb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <p className="font-cinzel text-xs tracking-widest uppercase mb-2" style={{ color: "var(--color-text-muted)" }}>
                 Status
@@ -73,6 +75,14 @@ export default async function ArchivedCampaignDetailPage({ params }: Props) {
                 Dungeon Master
               </p>
               <p style={{ color: "var(--color-accent-gold)" }}>{campaign.dm}</p>
+            </div>
+            <div>
+              <p className="font-cinzel text-xs tracking-widest uppercase mb-2" style={{ color: "var(--color-text-muted)" }}>
+                Runtime
+              </p>
+              <p style={{ color: runtime ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+                {runtime ?? "Not recorded"}
+              </p>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import "server-only";
 
 import { getDb } from "@/lib/db";
+import { pruneExpired } from "@/lib/retention";
+import { classifyVoicePurpose } from "@/lib/usagePurpose";
 
 function clean(value: unknown, length: number): string {
   return typeof value === "string"
@@ -55,22 +57,37 @@ export function recordVoiceQuestion(input: {
   const question = clean(input.question, 800);
   if (!sessionId || !question) throw new Error("Missing voice session or question");
   const success = input.success !== false;
+  const category = clean(input.category, 50) || "unknown";
+  const askedAt = new Date().toISOString();
   getDb().transaction(() => {
-    getDb().prepare(`
+    const inserted = getDb().prepare(`
       INSERT INTO voice_questions
         (session_id, asked_at, question, answer, category, response_mode, model, response_ms, success, error_message)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       sessionId,
-      new Date().toISOString(),
+      askedAt,
       question,
       clean(input.answer, 1200) || null,
-      clean(input.category, 50) || "unknown",
+      category,
       clean(input.responseMode, 50) || "unknown",
       clean(input.model, 40) || null,
       Math.min(600_000, Math.max(0, Math.round(Number(input.responseMs) || 0))),
       success ? 1 : 0,
       clean(input.errorMessage, 500) || null,
+    );
+    const signal = classifyVoicePurpose(category);
+    getDb().prepare(`
+      INSERT OR IGNORE INTO analytics_purpose_signals
+        (session_id, source, source_id, purpose, signal_type, confidence, path, created_at)
+      VALUES (?, 'voice_question', ?, ?, ?, ?, '/myra', ?)
+    `).run(
+      sessionId,
+      Number(inserted.lastInsertRowid),
+      signal.purpose,
+      signal.signalType,
+      signal.confidence,
+      askedAt,
     );
     getDb().prepare(`
       UPDATE voice_sessions
@@ -80,6 +97,7 @@ export function recordVoiceQuestion(input: {
       WHERE session_id = ?
     `).run(success ? 0 : 1, sessionId);
   })();
+  pruneExpired([{ table: "analytics_purpose_signals", column: "created_at", days: 90 }]);
 }
 
 export function getVoiceAnalytics(days: number) {

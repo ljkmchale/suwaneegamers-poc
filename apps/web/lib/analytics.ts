@@ -3,6 +3,7 @@ import "server-only";
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
 import { pruneExpired } from "@/lib/retention";
+import { classifySitePurpose, type UsagePurpose } from "@/lib/usagePurpose";
 
 // The dashboard only ever looks back over a bounded window, so rows past this
 // age are dead weight on every /admin/analytics query.
@@ -353,6 +354,11 @@ export function recordUsageEvents(input: {
       (session_id, event_type, path, content_type, content_id, content_label, duration_seconds, created_at)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `);
+  const insertPurposeSignal = db.prepare(`
+    INSERT OR IGNORE INTO analytics_purpose_signals
+      (session_id, source, source_id, purpose, signal_type, confidence, path, created_at)
+    VALUES (?, 'site_event', ?, ?, ?, ?, ?, ?)
+  `);
 
   db.transaction(() => {
     insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName);
@@ -363,7 +369,7 @@ export function recordUsageEvents(input: {
     }
     for (const event of input.events) {
       if (event.eventType !== "heartbeat") {
-        insertEvent.run(
+        const inserted = insertEvent.run(
           sessionId,
           event.eventType,
           event.path,
@@ -373,6 +379,18 @@ export function recordUsageEvents(input: {
           event.durationSeconds ?? 0,
           now,
         );
+        const signal = classifySitePurpose(event);
+        if (signal) {
+          insertPurposeSignal.run(
+            sessionId,
+            Number(inserted.lastInsertRowid),
+            signal.purpose,
+            signal.signalType,
+            signal.confidence,
+            event.path,
+            now,
+          );
+        }
       }
     }
     updateSession.run(
@@ -393,7 +411,34 @@ export function recordUsageEvents(input: {
   pruneExpired([
     { table: "analytics_sessions", column: "last_seen_at", days: RETENTION_DAYS },
     { table: "analytics_events", column: "created_at", days: RETENTION_DAYS },
+    { table: "analytics_purpose_signals", column: "created_at", days: RETENTION_DAYS },
   ]);
+}
+
+export function getUsagePurposeMetrics(days: number): Array<{
+  purpose: UsagePurpose;
+  signals: number;
+  visits: number;
+  averageConfidence: number;
+}> {
+  const safeDays = [7, 30, 90].includes(days) ? days : 30;
+  const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
+  since.setHours(0, 0, 0, 0);
+  return getDb().prepare(`
+    SELECT purpose,
+      COUNT(*) AS signals,
+      COUNT(DISTINCT session_id) AS visits,
+      ROUND(AVG(confidence)) AS averageConfidence
+    FROM analytics_purpose_signals
+    WHERE created_at >= ?
+    GROUP BY purpose
+    ORDER BY visits DESC, signals DESC
+  `).all(since.toISOString()) as Array<{
+    purpose: UsagePurpose;
+    signals: number;
+    visits: number;
+    averageConfidence: number;
+  }>;
 }
 
 export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData {

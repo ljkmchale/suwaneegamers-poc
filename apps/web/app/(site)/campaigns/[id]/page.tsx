@@ -48,6 +48,7 @@ function replaceTrackedCampaignFields(items: PageItem[], campaign: PortalCampaig
           schedule: campaign.schedule,
           dm: campaign.dm,
           campaignName: campaign.name,
+          startDate: campaign.startDate ?? "",
         },
       };
     }

@@ -1,6 +1,20 @@
 {
   "entries": [
     {
+      "id": "audit-rem-1d59a69e49be1dca-1786210230615",
+      "remediationId": "rem-1d59a69e49be1dca",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-08T17:30:30.612Z"
+      },
+      "previousValue": "Diverra",
+      "createdAt": "2026-08-08T17:30:30.612Z"
+    },
+    {
       "id": "audit-rem-d5f1f7e87dfbf4f3-1785849483107",
       "remediationId": "rem-d5f1f7e87dfbf4f3",
       "action": "applied",

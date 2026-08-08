@@ -9,6 +9,7 @@ import textwrap
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections.abc import AsyncGenerator, AsyncIterable, Sequence
 from datetime import datetime
@@ -1236,6 +1237,7 @@ def schedule_facts(schedule: dict[str, Any], now: datetime | None = None) -> str
     return textwrap.dedent(
         f"""\
         CURRENT LOCAL DATE: {local_now.strftime("%A, %B")} {local_now.day}, {local_now.year}
+        CURRENT LOCAL TIME: {local_now.strftime("%I:%M %p").lstrip("0")}
 
         GAMES SCHEDULED TODAY:
         {today_lines}
@@ -1287,6 +1289,410 @@ def general_schedule_answer(schedule: dict[str, Any], now: datetime | None = Non
     else:
         answer += " And I don't see any later games listed right now."
     return answer
+
+
+# Schedule nouns. When any of these is present, a "what time / what day" turn is
+# about a game, not the wall clock, so the plain time handler steps aside and the
+# schedule handlers (or the LLM) answer it.
+SCHEDULE_CONTEXT_WORDS = frozenset(
+    {
+        "game",
+        "games",
+        "session",
+        "sessions",
+        "campaign",
+        "campaigns",
+        "play",
+        "playing",
+        "scheduled",
+        "schedule",
+        "event",
+        "events",
+        "meet",
+        "meeting",
+    }
+)
+
+# Spoken place / zone names Myra can answer "what time is it in X" for directly.
+# Deliberately small and hand-picked: an unrecognized place falls through to the
+# language model, which answers from general knowledge, rather than guessing a
+# zone here and stating it as fact. (display name, IANA zone).
+TIME_ZONE_ALIASES: dict[str, tuple[str, str]] = {
+    "utc": ("UTC", "UTC"),
+    "gmt": ("GMT", "Etc/GMT"),
+    "london": ("London", "Europe/London"),
+    "england": ("England", "Europe/London"),
+    "uk": ("the UK", "Europe/London"),
+    "paris": ("Paris", "Europe/Paris"),
+    "berlin": ("Berlin", "Europe/Berlin"),
+    "rome": ("Rome", "Europe/Rome"),
+    "madrid": ("Madrid", "Europe/Madrid"),
+    "tokyo": ("Tokyo", "Asia/Tokyo"),
+    "japan": ("Japan", "Asia/Tokyo"),
+    "sydney": ("Sydney", "Australia/Sydney"),
+    "los angeles": ("Los Angeles", "America/Los_Angeles"),
+    "california": ("California", "America/Los_Angeles"),
+    "seattle": ("Seattle", "America/Los_Angeles"),
+    "pacific": ("the Pacific time zone", "America/Los_Angeles"),
+    "denver": ("Denver", "America/Denver"),
+    "mountain": ("the Mountain time zone", "America/Denver"),
+    "chicago": ("Chicago", "America/Chicago"),
+    "central": ("the Central time zone", "America/Chicago"),
+    "new york": ("New York", "America/New_York"),
+    "eastern": ("the Eastern time zone", "America/New_York"),
+}
+
+# Phrases are matched against normalize_question output, where apostrophes become
+# spaces ("what's" -> "what s", "today's" -> "today s").
+TIME_INTENT_PHRASES = (
+    "what time is it",
+    "what s the time",
+    "what is the time",
+    "time is it",
+    "current time",
+    "time right now",
+    "time now",
+    "got the time",
+    "have the time",
+    "tell me the time",
+    "do you know the time",
+)
+
+DATE_INTENT_PHRASES = (
+    "what day is it",
+    "what day of the week",
+    "what is the day",
+    "what is the date",
+    "what s the date",
+    "today s date",
+    "the date today",
+    "current date",
+    "what year is it",
+    "what is the year",
+    "what month is it",
+    "what is the month",
+)
+
+
+def _named_time_zone(normalized: str) -> tuple[str, ZoneInfo] | None:
+    """The (display name, zone) a time question names, or None for local time."""
+    for alias in sorted(TIME_ZONE_ALIASES, key=len, reverse=True):
+        if re.search(rf"\b{re.escape(alias)}\b", normalized):
+            display, iana = TIME_ZONE_ALIASES[alias]
+            with contextlib.suppress(Exception):
+                return display, ZoneInfo(iana)
+    return None
+
+
+def is_time_or_date_question(question: str) -> bool:
+    """True for a real wall-clock or calendar question, not a schedule question.
+
+    "What time is it" must be answered literally instead of reciting games — the
+    old schedule matcher swallowed it on the bare word "time". A schedule noun
+    (game, session, campaign...) means the turn is about the calendar, so the
+    plain time handler steps aside for the schedule handlers.
+    """
+    normalized = normalize_question(question)
+    if not normalized:
+        return False
+    words = set(normalized.split())
+    if words & SCHEDULE_CONTEXT_WORDS:
+        return False
+    if any(phrase in normalized for phrase in ("next game", "next session", "coming up")):
+        return False
+    return any(phrase in normalized for phrase in TIME_INTENT_PHRASES) or any(
+        phrase in normalized for phrase in DATE_INTENT_PHRASES
+    )
+
+
+def current_time_answer(
+    question: str,
+    schedule: dict[str, Any],
+    now: datetime | None = None,
+) -> str:
+    """Speak the real current time and/or date, in the named zone if recognized.
+
+    Runs before the schedule matcher so a bare time question is answered from the
+    actual clock rather than the game calendar.
+    """
+    home_zone = ZoneInfo(schedule.get("timezone") or "America/New_York")
+    base_now = now.astimezone(home_zone) if now else datetime.now(home_zone)
+    normalized = normalize_question(question)
+
+    named = _named_time_zone(normalized)
+    target = base_now.astimezone(named[1]) if named else base_now
+    where = f" in {named[0]}" if named else ""
+
+    wants_date = any(phrase in normalized for phrase in DATE_INTENT_PHRASES)
+    wants_time = any(phrase in normalized for phrase in TIME_INTENT_PHRASES)
+
+    time_str = target.strftime("%I:%M %p").lstrip("0")
+    date_str = f"{target.strftime('%A, %B')} {target.day}, {target.year}"
+
+    if wants_date and not wants_time:
+        if "year" in normalized:
+            return f"It's {target.year}."
+        if "month" in normalized:
+            return f"It's {target.strftime('%B %Y')}."
+        if "day of the week" in normalized or normalized.startswith("what day"):
+            return f"Today is {target.strftime('%A')}, {target.strftime('%B')} {target.day}."
+        return f"Today is {date_str}."
+    if wants_date:
+        return f"It's {time_str}{where}, on {date_str}."
+    return f"It's {time_str}{where}."
+
+
+# Site-feedback detection. Phrases are matched against normalize_question output,
+# where apostrophes become spaces ("I don't" -> "i don t", "I'd" -> "i d").
+# Complaints are checked first so "I wish it wasn't broken" is filed as a
+# complaint, not a wish.
+FEEDBACK_COMPLAINT_PHRASES = (
+    "i don t like",
+    "i dont like",
+    "i do not like",
+    "i really don t like",
+    "i hate",
+    "is broken",
+    "is really confusing",
+    "is confusing",
+    "doesn t work",
+    "does not work",
+    "isn t working",
+    "not working",
+    "too hard to",
+    "hard to find",
+    "hard to use",
+    "really annoying",
+    "so annoying",
+    "i can t find",
+    "i cannot find",
+)
+
+FEEDBACK_WISH_PHRASES = (
+    "i wish",
+    "wish the site",
+    "wish this site",
+    "wish the website",
+    "wish you",
+    "wish myra",
+    "would be nice",
+    "would be cool",
+    "would be great",
+    "would be helpful",
+    "would be awesome",
+    "it would help if",
+    "you should add",
+    "you could add",
+    "you guys should",
+    "please add",
+    "can you add",
+    "could you add",
+    "i d love if",
+    "i would love if",
+    "i d love it if",
+    "feature request",
+    "the site needs",
+    "this site needs",
+    "the website needs",
+    "site should have",
+    "add a feature",
+)
+
+# Deliberately narrow: praise must reference the site, so "I love this campaign"
+# is left alone.
+FEEDBACK_PRAISE_PHRASES = (
+    "i love the site",
+    "i love this site",
+    "i love the website",
+    "love the website",
+    "the site is great",
+    "this site is great",
+    "the site looks great",
+    "site looks great",
+    "great job on the site",
+    "the site is awesome",
+)
+
+
+def detect_site_feedback(question: str) -> tuple[str, str] | None:
+    """Classify a turn as site feedback: (kind, verbatim message), or None.
+
+    kind is 'complaint', 'wish', or 'praise'. The message is the visitor's own
+    words, kept as spoken so the admin feedback page reads naturally.
+    """
+    normalized = normalize_question(question)
+    if not normalized:
+        return None
+    message = " ".join(question.split()).strip()
+    if any(phrase in normalized for phrase in FEEDBACK_COMPLAINT_PHRASES):
+        return ("complaint", message)
+    if any(phrase in normalized for phrase in FEEDBACK_WISH_PHRASES):
+        return ("wish", message)
+    if any(phrase in normalized for phrase in FEEDBACK_PRAISE_PHRASES):
+        return ("praise", message)
+    return None
+
+
+def feedback_acknowledgement(kind: str) -> str:
+    """A short, warm spoken reply confirming Myra logged the feedback."""
+    if kind == "complaint":
+        return (
+            "Sorry that's been frustrating. I've passed that along to the team "
+            "so they can look at it. Thanks for flagging it."
+        )
+    if kind == "praise":
+        return "That's great to hear. I'll pass that along to the team, thank you."
+    return (
+        "Good idea. I've noted that for the team to consider for the site. "
+        "Anything else I can help with?"
+    )
+
+
+# --- Weather -----------------------------------------------------------------
+# Answered live from Open-Meteo (open-meteo.com): a free, keyless public API, so
+# no credential is stored anywhere. The group is in Suwanee, GA, which is the
+# default location; a named place ("weather in London") is resolved through
+# Open-Meteo's geocoder. Overridable via MYRA_WEATHER_LAT / _LON / _PLACE.
+# WMO weather interpretation codes -> a spoken phrase.
+WMO_WEATHER: dict[int, str] = {
+    0: "clear",
+    1: "mainly clear",
+    2: "partly cloudy",
+    3: "overcast",
+    45: "foggy",
+    48: "foggy",
+    51: "drizzling lightly",
+    53: "drizzling",
+    55: "drizzling heavily",
+    56: "freezing drizzle",
+    57: "freezing drizzle",
+    61: "raining lightly",
+    63: "raining",
+    65: "raining heavily",
+    66: "freezing rain",
+    67: "freezing rain",
+    71: "snowing lightly",
+    73: "snowing",
+    75: "snowing heavily",
+    77: "snow grains",
+    80: "with rain showers",
+    81: "with rain showers",
+    82: "with heavy rain showers",
+    85: "with snow showers",
+    86: "with snow showers",
+    95: "thunderstorming",
+    96: "thunderstorming with hail",
+    99: "thunderstorming with hail",
+}
+
+
+def is_weather_question(question: str) -> bool:
+    normalized = normalize_question(question)
+    return any(
+        phrase in normalized
+        for phrase in (
+            "weather",
+            "temperature",
+            "how hot",
+            "how cold",
+            "how warm",
+            "is it raining",
+            "is it going to rain",
+            "is it snowing",
+            "raining outside",
+            "forecast",
+            "like outside",
+        )
+    )
+
+
+def extract_weather_place(question: str) -> str | None:
+    """The place a weather question names, or None for the default location."""
+    normalized = normalize_question(question)
+    match = re.search(r"\b(?:in|at|for|near|around)\s+([a-z][a-z '-]+)$", normalized)
+    if not match:
+        return None
+    place = re.sub(
+        r"\b(right now|now|today|tonight|please|like|currently)\b",
+        " ",
+        match.group(1),
+    ).strip()
+    if not place or place in {"outside", "here", "there", "the area"}:
+        return None
+    return place
+
+
+def describe_weather(display: str, temp_f: float, code: int) -> str:
+    """One spoken sentence for a current-conditions reading. TTS-friendly."""
+    condition = WMO_WEATHER.get(code, "")
+    temp = round(temp_f)
+    if condition.startswith("with "):
+        return f"Right now in {display} it's {temp} degrees {condition}."
+    if condition:
+        return f"Right now in {display} it's {temp} degrees and {condition}."
+    return f"Right now in {display} it's {temp} degrees."
+
+
+def _geocode_place(name: str) -> tuple[str, float, float] | None:
+    url = (
+        "https://geocoding-api.open-meteo.com/v1/search?count=1&language=en&name="
+        + urllib.parse.quote(name)
+    )
+    try:
+        with urllib.request.urlopen(url, timeout=6) as response:
+            payload = json.loads(response.read().decode())
+        results = payload.get("results") or []
+        if not results:
+            return None
+        top = results[0]
+        return (
+            str(top.get("name") or name.title()),
+            float(top["latitude"]),
+            float(top["longitude"]),
+        )
+    except Exception:
+        logger.exception("Weather geocode failed for %r", name)
+        return None
+
+
+def _fetch_current_weather(lat: float, lon: float) -> tuple[float, int] | None:
+    url = (
+        f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+        "&current=temperature_2m,weather_code&temperature_unit=fahrenheit"
+    )
+    try:
+        with urllib.request.urlopen(url, timeout=6) as response:
+            payload = json.loads(response.read().decode())
+        current = payload.get("current") or {}
+        return float(current["temperature_2m"]), int(current["weather_code"])
+    except Exception:
+        logger.exception("Weather fetch failed")
+        return None
+
+
+def default_weather_location() -> tuple[str, float, float]:
+    """The group's home location for weather, overridable via env."""
+    return (
+        os.getenv("MYRA_WEATHER_PLACE", "Suwanee"),
+        env_float("MYRA_WEATHER_LAT", 34.0515),
+        env_float("MYRA_WEATHER_LON", -84.0713),
+    )
+
+
+def weather_answer(question: str) -> str:
+    """Live current-conditions answer, for the named place or the default."""
+    place = extract_weather_place(question)
+    if place:
+        geo = _geocode_place(place)
+        if not geo:
+            return f"I couldn't find a place called {place} to check the weather for."
+        display, lat, lon = geo
+    else:
+        display, lat, lon = default_weather_location()
+    reading = _fetch_current_weather(lat, lon)
+    if not reading:
+        return "I couldn't reach the weather service just now. Try again in a moment."
+    return describe_weather(display, reading[0], reading[1])
 
 
 AFFIRMATIONS = frozenset(
@@ -1472,7 +1878,11 @@ def is_schedule_question(question: str) -> bool:
             "when is",
             "when does",
             "when do",
-            "what time",
+            # Schedule-specific time phrasings only. A bare "what time is it" is a
+            # wall-clock question handled by current_time_answer before this runs.
+            "what time is the",
+            "what time does",
+            "what time do",
             "playing next",
             "play next",
         )
@@ -2224,6 +2634,35 @@ def post_voice_analytics(payload: dict[str, Any]) -> None:
         logger.exception("Unable to record voice analytics")
 
 
+def post_voice_feedback(payload: dict[str, Any]) -> None:
+    """Send a captured piece of site feedback to the members-only feedback API.
+
+    Authenticates with the shared machine secret, exactly as the analytics and
+    metrics posts do. Silently no-ops without a secret or an empty message.
+    """
+    secret = os.getenv("LIVEKIT_API_SECRET")
+    endpoint = os.getenv(
+        "VOICE_FEEDBACK_URL",
+        "http://127.0.0.1:4652/api/livekit/feedback",
+    )
+    if not secret or not str(payload.get("message") or "").strip():
+        return
+    request = urllib.request.Request(
+        endpoint,
+        data=json.dumps(payload).encode(),
+        headers={
+            "Authorization": f"Bearer {secret}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=3):
+            pass
+    except Exception:
+        logger.exception("Unable to record voice feedback")
+
+
 def post_voice_metric(payload: dict[str, Any]) -> None:
     secret = os.getenv("LIVEKIT_API_SECRET")
     endpoint = os.getenv(
@@ -2715,9 +3154,27 @@ class Myra(Agent):
             {personality_block}
 
             Rules:
-            - Treat the schedule context and knowledge base above as your only sources
-              of truth. Never invent, estimate, or infer campaigns, people, dates,
-              times, or links that are not written above.
+            - For anything about Suwanee Gamers — its campaigns, people, sessions,
+              dates, times, links, or Myrdae lore — the schedule context and
+              knowledge base above are your ONLY sources of truth. Never invent,
+              estimate, or infer a campaign, person, date, time, or link that is
+              not written above.
+            - You are also a general personal assistant. For questions that are NOT
+              about Suwanee Gamers — general knowledge, everyday facts, simple
+              arithmetic or unit conversions, definitions, or friendly small talk —
+              answer helpfully and briefly from your own knowledge. Never dress a
+              general-knowledge answer up as a Suwanee Gamers fact, and if you are
+              unsure of a general fact, say so rather than guessing.
+            - You know the real current date and time from the CURRENT LOCAL DATE
+              and CURRENT LOCAL TIME lines above. Answer "what time is it" or
+              "what's today's date" directly and literally from them; never turn a
+              clock or calendar question into the game schedule.
+            - When a visitor expresses a wish, request, complaint, or dislike about
+              the WEBSITE itself — a feature they want, something broken or
+              confusing, or praise for the site — call record_site_feedback with
+              their own words so the team can see it. Then briefly acknowledge that
+              you have noted it. Do not use it for questions, in-world lore, or
+              feelings about a campaign or character.
             - You know the current visitor only from the signed-in profile above. Use
               their first name naturally when helpful. If they ask which games they
               play, who they are, their characters, or their favorite locations,
@@ -2796,6 +3253,14 @@ class Myra(Agent):
         self._static_prompt = self.system_prompt
         self._page_block = page_context_block(schedule.get("page"))
         self.system_prompt = self._static_prompt + self._page_block
+        # The page the visitor is currently on, tracked so captured feedback
+        # records where they were. Updated on every navigation.
+        initial_page = schedule.get("page")
+        self._current_page_path = (
+            str(initial_page.get("path") or "")
+            if isinstance(initial_page, dict)
+            else ""
+        )
 
         # Which model actually answered the current turn. FallbackAdapter
         # re-emits the underlying LLM's metrics unchanged, so the label on the
@@ -2852,6 +3317,8 @@ class Myra(Agent):
         immediately after she opens something.
         """
         block = page_context_block(page)
+        if isinstance(page, dict) and str(page.get("path") or ""):
+            self._current_page_path = str(page.get("path") or "")
         if block == self._page_block:
             return
         self._page_block = block
@@ -3017,6 +3484,56 @@ class Myra(Agent):
                     started=started,
                 )
                 raise StopResponse()
+        if is_time_or_date_question(question):
+            # A real wall-clock / calendar question. Answered from the actual
+            # clock, before the schedule matcher, so "what time is it" no longer
+            # recites the game calendar.
+            answer = current_time_answer(canonical_question, self.schedule)
+            self.session.say(answer, allow_interruptions=True)
+            self._record_analytics(
+                question=original_question,
+                answer=answer,
+                category="time_and_date",
+                response_mode="deterministic",
+                started=started,
+            )
+            raise StopResponse()
+        feedback = detect_site_feedback(canonical_question)
+        if feedback:
+            # The visitor voiced a wish, complaint, or praise about the site.
+            # Capture it for the admin feedback page, acknowledge warmly, and stop.
+            kind, message = feedback
+            member_name = (
+                str(self.user_profile.get("displayName") or "").strip()
+                or str(self.schedule.get("memberName") or "").strip()
+            )
+            if member_name.casefold() == "there":
+                member_name = ""
+            self._record_feedback(kind=kind, message=message, member_name=member_name)
+            answer = feedback_acknowledgement(kind)
+            self.session.say(answer, allow_interruptions=True)
+            self._record_analytics(
+                question=original_question,
+                answer=answer,
+                category=f"feedback_{kind}",
+                response_mode="deterministic",
+                started=started,
+            )
+            logger.info("Captured %s feedback: %r", kind, message[:80])
+            raise StopResponse()
+        if is_weather_question(question):
+            # Live weather from a free, keyless public API. Off the game calendar
+            # entirely — a real personal-assistant answer.
+            answer = await asyncio.to_thread(weather_answer, canonical_question)
+            self.session.say(answer, allow_interruptions=True)
+            self._record_analytics(
+                question=original_question,
+                answer=answer,
+                category="weather",
+                response_mode="deterministic",
+                started=started,
+            )
+            raise StopResponse()
         about_answer = (
             about_suwanee_gamers_answer(
                 self.about_suwanee_gamers,
@@ -3107,6 +3624,22 @@ class Myra(Agent):
         )
         self._analytics_tasks.add(analytics_task)
         analytics_task.add_done_callback(self._analytics_tasks.discard)
+
+    def _record_feedback(self, *, kind: str, message: str, member_name: str) -> None:
+        feedback_task = asyncio.create_task(
+            asyncio.to_thread(
+                post_voice_feedback,
+                {
+                    "sessionId": self.schedule.get("voiceSessionId"),
+                    "kind": kind,
+                    "message": message,
+                    "memberName": member_name or None,
+                    "pagePath": self._current_page_path or None,
+                },
+            )
+        )
+        self._analytics_tasks.add(feedback_task)
+        feedback_task.add_done_callback(self._analytics_tasks.discard)
 
     async def _publish_navigation(self, match: dict[str, str]) -> None:
         await self.room.local_participant.publish_data(
@@ -3285,6 +3818,42 @@ class Myra(Agent):
             return "I couldn't match that request to an available site page."
         await self._publish_navigation(match)
         return f"Opened {match['label']}."
+
+    @function_tool
+    async def record_site_feedback(
+        self,
+        context: RunContext,
+        message: str,
+        kind: str = "wish",
+    ) -> str:
+        """Record a visitor's feedback about the WEBSITE for the team to review.
+
+        Use whenever a visitor expresses a wish, request, complaint, or dislike
+        about the website itself — a feature they want ("I wish the site had a
+        dark mode", "you should add a search box"), something they find broken or
+        confusing, or praise for the site. Do NOT use it for questions, for
+        in-world lore, or for feelings about a campaign or character. Capture the
+        visitor's own words in `message`.
+
+        Args:
+            message: The visitor's feedback, in their own words.
+            kind: One of "wish" (a request or idea), "complaint" (a dislike or
+                problem), or "praise".
+        """
+        del context
+        text = " ".join(str(message).split()).strip()
+        if not text:
+            return "There was nothing to record."
+        chosen = kind if kind in {"wish", "complaint", "praise"} else "wish"
+        member_name = (
+            str(self.user_profile.get("displayName") or "").strip()
+            or str(self.schedule.get("memberName") or "").strip()
+        )
+        if member_name.casefold() == "there":
+            member_name = ""
+        self._record_feedback(kind=chosen, message=text, member_name=member_name)
+        logger.info("Captured %s feedback via tool: %r", chosen, text[:80])
+        return "Recorded. I've noted that for the team."
 
     @function_tool
     async def open_character_sheet(self, context: RunContext, name: str = "") -> str:

@@ -33,6 +33,8 @@ db.exec(`
     name                         TEXT NOT NULL,
     dm                           TEXT NOT NULL,
     schedule                     TEXT NOT NULL,
+    start_date                   TEXT,
+    end_date                     TEXT,
     description                  TEXT NOT NULL,
     header_image                 TEXT,
     header_image_position        TEXT NOT NULL DEFAULT 'center',
@@ -156,6 +158,10 @@ db.exec(`
   );
 `);
 
+const campaignColumns = new Set(db.prepare(`PRAGMA table_info(campaigns)`).all().map((column) => column.name));
+if (!campaignColumns.has("start_date")) db.exec(`ALTER TABLE campaigns ADD COLUMN start_date TEXT`);
+if (!campaignColumns.has("end_date")) db.exec(`ALTER TABLE campaigns ADD COLUMN end_date TEXT`);
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -185,12 +191,12 @@ migrate("campaigns + session_summaries", () => {
 
   const upsertCampaign = db.prepare(`
     INSERT OR REPLACE INTO campaigns
-      (id, name, dm, schedule, description,
+      (id, name, dm, schedule, start_date, end_date, description,
        header_image, header_image_position,
        header_image_source_folder, header_image_source_file_id, header_image_source_file_name,
        official, player_notes_url, aliases, resources, party)
     VALUES
-      (@id, @name, @dm, @schedule, @description,
+      (@id, @name, @dm, @schedule, @start_date, @end_date, @description,
        @header_image, @header_image_position,
        @header_image_source_folder, @header_image_source_file_id, @header_image_source_file_name,
        @official, @player_notes_url, @aliases, @resources, @party)
@@ -212,6 +218,8 @@ migrate("campaigns + session_summaries", () => {
       name: c.name,
       dm: c.dm,
       schedule: c.schedule,
+      start_date: c.startDate ?? null,
+      end_date: c.endDate ?? null,
       description: c.description,
       header_image: c.headerImage ?? null,
       header_image_position: c.headerImagePosition ?? "center",

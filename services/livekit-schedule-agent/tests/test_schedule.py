@@ -13,13 +13,19 @@ from schedule_agent.agent import (
     canonicalize_spoken_entity_question,
     canonicalize_spoken_question,
     contextualize_entity_followup,
+    current_time_answer,
+    describe_weather,
+    detect_site_feedback,
     diagnostic_request,
+    extract_weather_place,
+    is_weather_question,
     event_loop_lag,
     general_schedule_answer,
     is_about_suwanee_gamers_question,
     is_personal_schedule_question,
     is_recap_question,
     is_schedule_question,
+    is_time_or_date_question,
     is_self_diagnosis_question,
     load_full_pantheon_knowledge,
     load_pantheon_knowledge,
@@ -542,6 +548,93 @@ def test_schedule_facts_resolves_today_and_upcoming_in_calendar_timezone():
     assert "CURRENT LOCAL DATE: Sunday, July 26, 2026" in facts
     assert "Souls of Destiny: Sunday, July 26 at 1:00 PM to 6:00 PM" in facts
     assert "Dungeons III: Monday, July 27 at 6:00 PM to 10:00 PM" in facts
+
+
+def test_schedule_facts_includes_the_current_local_time():
+    schedule = {"timezone": "America/New_York", "events": []}
+    now = datetime(2026, 7, 26, 14, 5, tzinfo=ZoneInfo("America/New_York"))
+
+    assert "CURRENT LOCAL TIME: 2:05 PM" in schedule_facts(schedule, now)
+
+
+def test_time_question_is_not_treated_as_a_schedule_question():
+    # The reported bug: "what time is it" was swallowed by the schedule matcher.
+    assert is_time_or_date_question("What time is it?")
+    assert is_time_or_date_question("What's the time right now?")
+    assert is_time_or_date_question("What day is it today?")
+    assert is_time_or_date_question("What's today's date?")
+    assert not is_schedule_question("What time is it?")
+
+
+def test_schedule_time_questions_stay_with_the_schedule():
+    # A time question that names a game is still about the calendar.
+    assert not is_time_or_date_question("What time is the Souls of Destiny game?")
+    assert not is_time_or_date_question("What time is my next session?")
+    assert is_schedule_question("What time is the game tonight?")
+
+
+def test_current_time_answer_speaks_the_real_clock_not_the_schedule():
+    schedule = {"timezone": "America/New_York", "events": []}
+    now = datetime(2026, 7, 26, 14, 5, tzinfo=ZoneInfo("America/New_York"))
+
+    assert current_time_answer("What time is it?", schedule, now) == "It's 2:05 PM."
+    assert (
+        current_time_answer("What's today's date?", schedule, now)
+        == "Today is Sunday, July 26, 2026."
+    )
+
+
+def test_current_time_answer_resolves_a_named_time_zone():
+    schedule = {"timezone": "America/New_York", "events": []}
+    now = datetime(2026, 7, 26, 14, 5, tzinfo=ZoneInfo("America/New_York"))
+
+    # 2:05 PM Eastern is 7:05 PM in London (BST, UTC+1).
+    assert (
+        current_time_answer("What time is it in London?", schedule, now)
+        == "It's 7:05 PM in London."
+    )
+
+
+def test_detect_site_feedback_classifies_wishes_complaints_and_praise():
+    assert detect_site_feedback("I wish the site had a dark mode") == (
+        "wish",
+        "I wish the site had a dark mode",
+    )
+    assert detect_site_feedback("You should add a search box") == (
+        "wish",
+        "You should add a search box",
+    )
+    assert detect_site_feedback("I don't like the new navigation") == (
+        "complaint",
+        "I don't like the new navigation",
+    )
+    assert detect_site_feedback("I love this site") == ("praise", "I love this site")
+
+
+def test_detect_site_feedback_ignores_questions_lore_and_campaign_feelings():
+    assert detect_site_feedback("When is my next game?") is None
+    assert detect_site_feedback("Tell me about Diverra") is None
+    # Praise about a campaign is not site feedback.
+    assert detect_site_feedback("I love this campaign") is None
+
+
+def test_weather_intent_and_place_extraction():
+    assert is_weather_question("What's the weather like?")
+    assert is_weather_question("Is it going to rain today?")
+    assert not is_weather_question("When is my next game?")
+    assert extract_weather_place("what's the weather in New York") == "new york"
+    assert extract_weather_place("how's the weather") is None
+    assert extract_weather_place("what's the weather like outside") is None
+
+
+def test_describe_weather_speaks_temp_and_condition():
+    assert describe_weather("Suwanee", 72.4, 2) == (
+        "Right now in Suwanee it's 72 degrees and partly cloudy."
+    )
+    # A "with ..." condition reads without the extra "and".
+    assert describe_weather("Suwanee", 68.0, 80) == (
+        "Right now in Suwanee it's 68 degrees with rain showers."
+    )
 
 
 def test_general_schedule_answer_is_immediate_and_specific():

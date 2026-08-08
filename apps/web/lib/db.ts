@@ -27,6 +27,12 @@ export function getDb(): Database.Database {
 }
 
 function migrateSchema(db: Database.Database): void {
+  const campaignColumns = new Set(
+    (db.prepare(`PRAGMA table_info(campaigns)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!campaignColumns.has("start_date")) db.exec(`ALTER TABLE campaigns ADD COLUMN start_date TEXT`);
+  if (!campaignColumns.has("end_date")) db.exec(`ALTER TABLE campaigns ADD COLUMN end_date TEXT`);
+
   const hasRefUrl = db
     .prepare(`SELECT COUNT(*) AS n FROM pragma_table_info('campaigns') WHERE name = 'reference_url'`)
     .get() as { n: number };
@@ -200,12 +206,28 @@ function migrateSchema(db: Database.Database): void {
   addVoiceMetricColumn("cache_creation_tokens", "INTEGER");
   addVoiceMetricColumn("estimated_cost_microusd", "INTEGER");
   db.exec(`
+    CREATE TABLE IF NOT EXISTS analytics_purpose_signals (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id TEXT NOT NULL,
+      source TEXT NOT NULL,
+      source_id INTEGER NOT NULL,
+      purpose TEXT NOT NULL,
+      signal_type TEXT NOT NULL,
+      confidence INTEGER NOT NULL,
+      path TEXT,
+      created_at TEXT NOT NULL,
+      UNIQUE(source, source_id)
+    );
     CREATE INDEX IF NOT EXISTS idx_analytics_sessions_visitor
       ON analytics_sessions(visitor_id, last_seen_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_sessions_email
       ON analytics_sessions(visitor_email, last_seen_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_events_session_created
       ON analytics_events(session_id, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_purpose_created
+      ON analytics_purpose_signals(purpose, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_purpose_session
+      ON analytics_purpose_signals(session_id, created_at DESC);
     CREATE UNIQUE INDEX IF NOT EXISTS idx_user_profiles_email
       ON user_profiles(email);
     CREATE INDEX IF NOT EXISTS idx_voice_metrics_provider_created
@@ -328,6 +350,8 @@ function initializeSchema(db: Database.Database): void {
       name                         TEXT NOT NULL,
       dm                           TEXT NOT NULL,
       schedule                     TEXT NOT NULL,
+      start_date                   TEXT,
+      end_date                     TEXT,
       description                  TEXT NOT NULL,
       header_image                 TEXT,
       header_image_position        TEXT NOT NULL DEFAULT 'center',
@@ -531,12 +555,29 @@ function initializeSchema(db: Database.Database): void {
       created_at       TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS analytics_purpose_signals (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id TEXT NOT NULL,
+      source TEXT NOT NULL,
+      source_id INTEGER NOT NULL,
+      purpose TEXT NOT NULL,
+      signal_type TEXT NOT NULL,
+      confidence INTEGER NOT NULL,
+      path TEXT,
+      created_at TEXT NOT NULL,
+      UNIQUE(source, source_id)
+    );
+
     CREATE INDEX IF NOT EXISTS idx_analytics_events_created
       ON analytics_events(created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_events_type_created
       ON analytics_events(event_type, created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_events_path_created
       ON analytics_events(path, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_purpose_created
+      ON analytics_purpose_signals(purpose, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_analytics_purpose_session
+      ON analytics_purpose_signals(session_id, created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_analytics_sessions_last_seen
       ON analytics_sessions(last_seen_at DESC);
 
@@ -619,6 +660,29 @@ function initializeSchema(db: Database.Database): void {
 
     CREATE INDEX IF NOT EXISTS idx_voice_metrics_kind_created
       ON voice_metrics(kind, created_at DESC);
+
+    -- ----------------------------------------------------------------
+    -- Voice-assistant user feedback: site wishes, complaints, and praise a
+    -- visitor voiced to Myra ("I wish the site had...", "I don't like...").
+    -- Surfaced in /admin/feedback so the group can see what to improve.
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS voice_feedback (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      session_id    TEXT,
+      created_at    TEXT NOT NULL,
+      -- 'wish' (feature request) | 'complaint' | 'praise'.
+      kind          TEXT NOT NULL,
+      -- The visitor's own words, kept verbatim so the ask is legible.
+      message       TEXT NOT NULL,
+      member_name   TEXT,
+      member_email  TEXT,
+      -- Where the visitor was when they said it, for context.
+      page_path     TEXT,
+      -- 'new' | 'reviewed' | 'done' | 'dismissed', driven from the admin page.
+      status        TEXT NOT NULL DEFAULT 'new'
+    );
+    CREATE INDEX IF NOT EXISTS idx_voice_feedback_created
+      ON voice_feedback(status, created_at DESC);
 
     -- ----------------------------------------------------------------
     -- Custom pages (admin-created pages with slugs)
