@@ -12,5 +12,12 @@
     "image": "/media/images/characters/therric-balenfore/portrait.png",
     "audio": "/media/images/characters/therric-balenfore/introduction.mp3",
     "transcript": "Therric Balenfore. Ranger, monk, and the one who checks the tracks before everyone else walks into trouble. I trust the ground, the wind, and what a frightened man leaves unsaid. I move ahead, I bring my friends home, and when Kenton has a plan... I make sure someone packs bandages. If the wilds are watching us, I intend to notice first."
+  },
+  {
+    "campaignId": "souls-of-destiny",
+    "character": "Esylla",
+    "image": "/media/images/characters/esylla-fordevae/portrait.png",
+    "audio": "/media/images/characters/esylla-fordevae/introduction.mp3",
+    "transcript": "Esylla Fordevae. Warlock, investigator, and, despite appearances, not merely another pretty face at court. Secrets travel like cargo: every mark has a maker, every bargain a price, and every polished lie leaves a trace. I ask the question others overlook, and when diplomacy fails... eldritch persuasion is remarkably effective. Stay close. I usually know which door is hiding the trouble."
   }
 ]
