@@ -5,5 +5,12 @@
     "image": "/media/images/characters/kenton-clawstar/portrait.png",
     "audio": "/media/images/characters/kenton-clawstar/introduction.mp3",
     "transcript": "Kenton Clawstar. Designer, artiste, and, when absolutely necessary, adventurer. I deal in fine silks, finer entrances, and problems best handled at the end of a whip. If our group is in danger or if there is money to be had, naturally I’ll be there. Someone has to make survival look fashionable."
+  },
+  {
+    "campaignId": "souls-of-destiny",
+    "character": "Therric",
+    "image": "/media/images/characters/therric-balenfore/portrait.png",
+    "audio": "/media/images/characters/therric-balenfore/introduction.mp3",
+    "transcript": "Therric Balenfore. Ranger, monk, and the one who checks the tracks before everyone else walks into trouble. I trust the ground, the wind, and what a frightened man leaves unsaid. I move ahead, I bring my friends home, and when Kenton has a plan... I make sure someone packs bandages. If the wilds are watching us, I intend to notice first."
   }
 ]
