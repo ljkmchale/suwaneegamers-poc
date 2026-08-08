@@ -48,5 +48,12 @@
     "image": "/media/images/characters/aurelius-valeheart/portrait.png",
     "audio": "/media/images/characters/aurelius-valeheart/introduction.mp3",
     "transcript": "Aurelius Valeheart. Cleric of the Light, servant of Diverra, and keeper of her sacred flame. Some believe devotion is quiet, a prayer whispered behind temple walls. Mine walks into darkness beside my companions. I heal the wounded, shield the innocent, and carry the Bloom Aeterna so her lost truth will not fade again. My heart, my light, and my life belong to Diverra. Where she leads, I follow."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Hap",
+    "image": "/media/images/characters/hap-garemon/portrait.png",
+    "audio": "/media/images/characters/hap-garemon/introduction.mp3",
+    "transcript": "Hap Garemon. Me, I come up from the swamps, where you learn quick: keep your feet steady, your blade clean, and your people close. Folks see the horns and make up their minds. That's all right. I know what kind of man I am. My father Benoit was murdered, his ring taken, and somebody buried the truth with him. I'm gonna find who did it, keep my sister Phira safe, and settle what the Cloak of Defiance started. Diverra sent me to this company for a reason, yeah. Till I know that reason, I stand with my friends, and nobody gets through me."
   }
 ]
