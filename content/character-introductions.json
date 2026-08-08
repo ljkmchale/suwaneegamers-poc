@@ -19,5 +19,12 @@
     "image": "/media/images/characters/esylla-fordevae/portrait.png",
     "audio": "/media/images/characters/esylla-fordevae/introduction.mp3",
     "transcript": "Esylla Fordevae. Warlock, investigator, and, despite appearances, not merely another pretty face at court. Secrets travel like cargo: every mark has a maker, every bargain a price, and every polished lie leaves a trace. I ask the question others overlook, and when diplomacy fails... eldritch persuasion is remarkably effective. Stay close. I usually know which door is hiding the trouble."
+  },
+  {
+    "campaignId": "souls-of-destiny",
+    "character": "Zephyra",
+    "image": "/media/images/characters/zephyra-maelstrom/portrait.png",
+    "audio": "/media/images/characters/zephyra-maelstrom/introduction.mp3",
+    "transcript": "Zephyra Maelstrom. Soldier, zealot, and the wall between danger and the people I protect. I have spent my life being told what my blood makes me. They were wrong. My rage is mine. I decide where it burns. Threaten Adsuren, touch my friends, or try to command me again... and you will learn exactly how hot it gets. Stand behind me, or stand aside."
   }
 ]
