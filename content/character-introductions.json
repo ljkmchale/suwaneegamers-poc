@@ -41,5 +41,12 @@
     "image": "/media/images/characters/escanor/portrait.png",
     "audio": "/media/images/characters/escanor/introduction.mp3",
     "transcript": "Escanor. Cleric, guardian, and the man who asks whether a thing should be done before asking whether it can be. My faith is not a shield from darkness. It is the light by which I name it. I mend wounds, bless the fallen, and keep this company pointed toward something resembling decency. If evil comes for Adsuren, it will find me standing in the way. Amriel willing, no one stands alone."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Aurelius",
+    "image": "/media/images/characters/aurelius-valeheart/portrait.png",
+    "audio": "/media/images/characters/aurelius-valeheart/introduction.mp3",
+    "transcript": "Aurelius Valeheart. Cleric of the Light, servant of Diverra, and keeper of her sacred flame. Some believe devotion is quiet, a prayer whispered behind temple walls. Mine walks into darkness beside my companions. I heal the wounded, shield the innocent, and carry the Bloom Aeterna so her lost truth will not fade again. My heart, my light, and my life belong to Diverra. Where she leads, I follow."
   }
 ]
