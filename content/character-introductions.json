@@ -62,5 +62,12 @@
     "image": "/media/images/characters/zymve-inni/portrait.png",
     "audio": "/media/images/characters/zymve-inni/introduction.mp3",
     "transcript": "Zymve Inni. Glamour bard, performer, and living proof that beauty can have teeth. I fled the Underdark, its cult, and a family I despise. They called obedience love. I call it a cage. Music speaks truths people are too cowardly to say aloud, and Ainslie's journal is singing something meant for me. I protect those I choose, and I do not forgive betrayal. If you hunt me, control me, or threaten my friends, I will ask you to stop. Once. After that, the conversation ends. Permanently."
+  },
+  {
+    "campaignId": "heroes-of-emberstran",
+    "character": "Ky'tha",
+    "image": "/media/images/characters/kytha-fawnborn/portrait.png",
+    "audio": "/media/images/characters/kytha-fawnborn/introduction.mp3",
+    "transcript": "Ky'tha Fawnborn. Scout, investigator, and, if you've heard otherwise, someone has been talking too much. Every city has two maps: the streets respectable folk use, and the paths that actually lead somewhere. I know the second. A missing half-locket, old names from Dunduar and Cragfury, favors owed beneath Emberstran... pieces of a story I intend to finish. Lady Rook has an agenda. Irragosa has asked something of me. Ainslie bears watching. That is all you need to know. For now. Stay behind me, step where I step, and kindly keep my secrets out of your mouth."
   }
 ]
