@@ -1,6 +1,112 @@
 {
   "entries": [
     {
+      "question": "What do you know about De Vera?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-9783de6786884333",
+      "normalized": "what do you know about de vera",
+      "status": "dismissed",
+      "createdAt": "2026-08-09T15:25:14.021Z",
+      "reviewedAt": "2026-08-09T16:25:10.477Z"
+    },
+    {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
+      "status": "approved",
+      "createdAt": "2026-08-09T15:25:14.019Z",
+      "reviewedAt": "2026-08-09T16:25:13.650Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-09T16:25:13.650Z"
+      }
+    },
+    {
+      "question": "The Pantheon, then, mind the gods with the sharper tempers.",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "evidence": [
+        "Pantheon of Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-461228dfa6d751b4",
+      "normalized": "the pantheon then mind the gods with the sharper tempers",
+      "status": "approved",
+      "createdAt": "2026-08-09T15:25:14.000Z",
+      "reviewedAt": "2026-08-09T16:25:18.249Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "The Pantheon, then, mind the gods with the sharper tempers.",
+        "value": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-09T16:25:18.249Z"
+      }
+    },
+    {
+      "question": "Can you tell me a little bit about the 28 gods?",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "evidence": [
+        "Pantheon of Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-7608f3c591ebdced",
+      "normalized": "can you tell me a little bit about the 28 gods",
+      "status": "approved",
+      "createdAt": "2026-08-09T15:25:13.997Z",
+      "reviewedAt": "2026-08-09T16:25:19.368Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Can you tell me a little bit about the 28 gods?",
+        "value": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-09T16:25:19.368Z"
+      }
+    },
+    {
+      "question": "No, I want to know what the bad gods are. Can you tell me who the bad gods are in our world?",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "evidence": [
+        "Pantheon of Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-2c0f46803c7d5d3d",
+      "normalized": "no i want to know what the bad gods are can you tell me who the bad gods are in our world",
+      "status": "approved",
+      "createdAt": "2026-08-09T15:25:13.993Z",
+      "reviewedAt": "2026-08-09T16:25:20.209Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "No, I want to know what the bad gods are. Can you tell me who the bad gods are in our world?",
+        "value": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-09T16:25:20.209Z"
+      }
+    },
+    {
       "question": "Can you tell me more about DeVira?",
       "category": "pronunciation-fix",
       "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
@@ -247,5 +353,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-08T17:30:41.121Z"
+  "updatedAt": "2026-08-09T16:25:20.209Z"
 }

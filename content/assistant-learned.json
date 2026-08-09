@@ -1,6 +1,36 @@
 {
   "answers": [
     {
+      "question": "No, I want to know what the bad gods are. Can you tell me who the bad gods are in our world?",
+      "normalized": "no i want to know what the bad gods are can you tell me who the bad gods are in our world",
+      "answer": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "sources": [
+        "Pantheon of Myrdae"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-09T16:25:20.209Z"
+    },
+    {
+      "question": "Can you tell me a little bit about the 28 gods?",
+      "normalized": "can you tell me a little bit about the 28 gods",
+      "answer": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "sources": [
+        "Pantheon of Myrdae"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-09T16:25:19.368Z"
+    },
+    {
+      "question": "The Pantheon, then, mind the gods with the sharper tempers.",
+      "normalized": "the pantheon then mind the gods with the sharper tempers",
+      "answer": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
+      "sources": [
+        "Pantheon of Myrdae"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-09T16:25:18.249Z"
+    },
+    {
       "question": "Can you tell me about the gods?",
       "normalized": "can you tell me about the gods",
       "answer": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
@@ -25,5 +55,5 @@
   "blocked": [
     "is there any other questions you can ask be asked"
   ],
-  "updatedAt": "2026-08-08T15:25:23.898Z"
+  "updatedAt": "2026-08-09T16:25:20.209Z"
 }
