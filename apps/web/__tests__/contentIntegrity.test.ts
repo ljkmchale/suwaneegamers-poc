@@ -13,7 +13,11 @@ import { getNavConfig } from "@/lib/nav";
 import { getPageLayout, getStoredPageLayoutIds } from "@/lib/pageLayouts";
 import { PAGE_SECTIONS } from "@/lib/pageSections";
 import { getPortalLinks } from "@/lib/portal";
-import { buildCampaignDetailLayout, getManagedCampaignDetailPaths } from "@/lib/campaignDetailLayouts";
+import {
+  buildCampaignDetailLayout,
+  enrichCampaignRosterCard,
+  getManagedCampaignDetailPaths,
+} from "@/lib/campaignDetailLayouts";
 import { getActiveCustomPages } from "@/lib/customPages";
 import { parsePantheonMarkdown } from "@/lib/pantheon";
 import { getAutoManagedPages, setManagedSourceUrl } from "@/lib/autoManagedPagesData";
@@ -408,6 +412,74 @@ describe("Editable campaign detail pages", () => {
         expect(parseLinks(person?.props.links)).toEqual(member.links ?? []);
       }
     }
+  });
+
+  it("adds character introductions to configured campaign roster tiles only", () => {
+    const campaign = campaigns.find((entry) => entry.id === "souls-of-destiny")!;
+    const enriched = enrichCampaignRosterCard(detailBlocksFor(campaign.id), campaign)
+      .filter((item): item is BlockItem => item.kind === "block");
+    const souls = nestedPeople(enriched);
+    const kenton = souls.find((item) => item.props.name === "Kenton");
+    const therric = souls.find((item) => item.props.name === "Therric");
+    const esylla = souls.find((item) => item.props.name === "Esylla");
+    const zephyra = souls.find((item) => item.props.name === "Zephyra");
+    const lila = souls.find((item) => item.props.name === "Lila");
+    const escanor = souls.find((item) => item.props.name === "Escanor");
+
+    expect(kenton?.props.img).toBe("/media/images/characters/kenton-clawstar/portrait.png");
+    expect(kenton?.props.introductionAudio).toBe("/media/images/characters/kenton-clawstar/introduction.mp3");
+    expect(kenton?.props.introductionVideo).toBe("/media/images/characters/kenton-clawstar/introduction-alive.mp4");
+    expect(kenton?.props.introductionText).toContain("If our group is in danger or if there is money to be had");
+    expect(therric?.props.img).toBe("/media/images/characters/therric-balenfore/portrait.png");
+    expect(therric?.props.introductionAudio).toBe("/media/images/characters/therric-balenfore/introduction.mp3");
+    expect(therric?.props.introductionText).toContain("when Kenton has a plan");
+    expect(esylla?.props.img).toBe("/media/images/characters/esylla-fordevae/portrait.png");
+    expect(esylla?.props.introductionAudio).toBe("/media/images/characters/esylla-fordevae/introduction.mp3");
+    expect(esylla?.props.introductionText).toContain("every bargain a price");
+    expect(zephyra?.props.img).toBe("/media/images/characters/zephyra-maelstrom/portrait.png");
+    expect(zephyra?.props.introductionAudio).toBe("/media/images/characters/zephyra-maelstrom/introduction.mp3");
+    expect(zephyra?.props.introductionText).toContain("My rage is mine");
+    expect(lila?.props.img).toBe("/media/images/characters/lila-tealeaf/portrait.png");
+    expect(lila?.props.introductionAudio).toBe("/media/images/characters/lila-tealeaf/introduction-sunny.mp3");
+    expect(lila?.props.introductionText).toContain("It would be very rude of you");
+    expect(escanor?.props.img).toBe("/media/images/characters/escanor/portrait.png");
+    expect(escanor?.props.introductionAudio).toBe("/media/images/characters/escanor/introduction.mp3");
+    expect(escanor?.props.introductionText).toContain("something resembling decency");
+    expect(souls.every((item) => item.props.introductionAudio)).toBe(true);
+
+    const heroesCampaign = campaigns.find((entry) => entry.id === "heroes-of-emberstran")!;
+    const heroes = nestedPeople(
+      enrichCampaignRosterCard(detailBlocksFor(heroesCampaign.id), heroesCampaign)
+        .filter((item): item is BlockItem => item.kind === "block"),
+    );
+    const aurelius = heroes.find((item) => item.props.name === "Aurelius");
+    const hap = heroes.find((item) => item.props.name === "Hap");
+    const zymve = heroes.find((item) => item.props.name === "Zymve");
+    const kytha = heroes.find((item) => item.props.name === "Ky'tha");
+    const ainslie = heroes.find((item) => item.props.name === "Ainslie");
+    const og = heroes.find((item) => item.props.name === "Og");
+
+    expect(aurelius?.props.img).toBe("/media/images/characters/aurelius-valeheart/portrait.png");
+    expect(aurelius?.props.introductionAudio)
+      .toBe("/media/images/characters/aurelius-valeheart/introduction.mp3");
+    expect(aurelius?.props.introductionText).toContain("My heart, my light, and my life belong to Diverra");
+    expect(hap?.props.img).toBe("/media/images/characters/hap-garemon/portrait.png");
+    expect(hap?.props.introductionAudio).toBe("/media/images/characters/hap-garemon/introduction.mp3");
+    expect(hap?.props.introductionText).toContain("My father Benoit was murdered");
+    expect(zymve?.props.img).toBe("/media/images/characters/zymve-inni/portrait.png");
+    expect(zymve?.props.introductionAudio).toBe("/media/images/characters/zymve-inni/introduction.mp3");
+    expect(zymve?.props.introductionText).toContain("a family I despise");
+    expect(kytha?.props.img).toBe("/media/images/characters/kytha-fawnborn/portrait.png");
+    expect(kytha?.props.introductionAudio)
+      .toBe("/media/images/characters/kytha-fawnborn/introduction.mp3");
+    expect(kytha?.props.introductionText).toContain("kindly keep my secrets out of your mouth");
+    expect(ainslie?.props.img).toBe("/media/images/characters/ainslie-anaerin/portrait.png");
+    expect(ainslie?.props.introductionAudio)
+      .toBe("/media/images/characters/ainslie-anaerin/introduction.mp3");
+    expect(ainslie?.props.introductionText).toContain("Does that make me one? Not yet");
+    expect(og?.props.img).toBe("/media/images/characters/ogmund-crag/portrait.png");
+    expect(og?.props.introductionAudio).toBe("/media/images/characters/ogmund-crag/introduction.mp3");
+    expect(og?.props.introductionText).toContain("what you refuse to let fall");
   });
 
   it("stores each campaign detail page as individually editable assets", () => {

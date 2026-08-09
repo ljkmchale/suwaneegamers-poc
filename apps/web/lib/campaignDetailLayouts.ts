@@ -1,7 +1,30 @@
 import { findCampaign, getActiveCampaigns, type CampaignPartyMember, type PortalCampaign } from "@/lib/campaigns";
 import { findRosterCharacter, rosterDescriptor, rosterStatusLabel } from "@/lib/campaignRoster";
 import { getCampaignRoster } from "@/lib/campaignRosterData";
+import { readContent } from "@/lib/contentFiles";
 import type { PageItem } from "@/lib/pageBlocks";
+
+interface CharacterIntroduction {
+  campaignId: string;
+  character: string;
+  image: string;
+  video?: string;
+  audio: string;
+  transcript: string;
+}
+
+function characterIntroduction(campaignId: string, character: string) {
+  let introductions: CharacterIntroduction[] = [];
+  try {
+    introductions = readContent<CharacterIntroduction[]>("character-introductions.json");
+  } catch {
+    return undefined;
+  }
+  return introductions.find((entry) =>
+    entry.campaignId.localeCompare(campaignId, undefined, { sensitivity: "base" }) === 0
+      && entry.character.localeCompare(character, undefined, { sensitivity: "base" }) === 0
+  );
+}
 
 function resourceLinks(campaign: PortalCampaign) {
   return [...(campaign.resources ?? [])];
@@ -159,6 +182,7 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
       const partyMember = campaign.party?.find(
         (member) => member.name.localeCompare(record.props!.name as string, undefined, { sensitivity: "base" }) === 0,
       );
+      const introduction = characterIntroduction(campaign.id, record.props.name);
 
       const role = [record.props.role || match.player, rosterDescriptor(match), rosterStatusLabel(match)]
         .filter(Boolean)
@@ -168,6 +192,12 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
         props: {
           ...record.props,
           role,
+          ...(introduction ? {
+            img: introduction.image,
+            introductionVideo: introduction.video,
+            introductionAudio: introduction.audio,
+            introductionText: introduction.transcript,
+          } : {}),
           ...(partyMember ? {
             href: partyLinks(partyMember).find((link) => link.type === "background")?.url ?? "",
             links: cardLayoutItems(partyLinks(partyMember)),

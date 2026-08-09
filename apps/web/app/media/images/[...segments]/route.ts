@@ -29,7 +29,9 @@ const CONTENT_TYPES: Record<string, string> = {
   ".ico": "image/x-icon",
   ".svg": "image/svg+xml",
   ".json": "application/json",
+  ".mp3": "audio/mpeg",
   ".wav": "audio/wav",
+  ".mp4": "video/mp4",
 };
 
 // Artwork is replaced in place by the sync scripts rather than versioned in the

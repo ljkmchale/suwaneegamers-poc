@@ -22,6 +22,7 @@ import { parseGridSectionItems, resolveMediaPlayerSource } from "@/lib/pageBlock
 import { OrganizationFolds } from "@/app/(site)/organizations/OrganizationFolds";
 import { TerritoryFolds } from "@/app/(site)/territories/TerritoryFolds";
 import { readContent } from "@/lib/contentFiles";
+import { CharacterIntroduction } from "@/components/blocks/CharacterIntroduction";
 
 const CARD_LAYOUT_MAX_ROWS = 120;
 
@@ -1626,9 +1627,7 @@ async function CampaignCardBlock({
   if (!campaign) return null;
 
   const inGrid = variant === "grid-item";
-  const dateStr = campaign.schedule !== "No cadence"
-    ? await resolveNextDate(campaign.name)
-    : null;
+  const dateStr = await resolveNextDate(campaign.name);
   const runtime = formatCampaignDuration(campaign.startDate, new Date());
 
   const inner = (
@@ -2042,10 +2041,11 @@ function CardLayoutGrid({ item }: { item: CardLayoutItem }) {
   const gap = (item.props.gap as string | undefined) ?? "md";
   const gapClass = gap === "sm" ? "gap-2" : gap === "lg" ? "gap-5" : "gap-3";
   const children = parseCardLayoutItems(item.props.items);
+  const isCampaignRoster = item.id === "notes_roster_grid";
 
   return (
     <div
-      className={`grid ${gapClass}`}
+      className={`grid ${gapClass}${isCampaignRoster ? " campaign-roster-grid" : ""}`}
       style={{
         gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
         gridTemplateRows: `repeat(${rows}, minmax(0, auto))`,
@@ -2230,6 +2230,9 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const name = item.props.name as string | undefined;
       const role = item.props.role as string | undefined;
       const img  = item.props.img  as string | undefined;
+      const introductionVideo = item.props.introductionVideo as string | undefined;
+      const introductionAudio = item.props.introductionAudio as string | undefined;
+      const introductionText = item.props.introductionText as string | undefined;
       const href = item.props.href as string | undefined;
       const links = [
         ...parseLinks(item.props.links),
@@ -2239,16 +2242,30 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       );
       const variant = (item.props.variant as string | undefined) ?? "portrait";
       if (variant === "tile") {
+        const hasIntroduction = Boolean(name && img && introductionAudio && introductionText);
         const tile = (
           <span
-            className="block rounded-md border px-3 py-2 text-sm"
+            className="block min-w-0 rounded-md border px-3 py-3 text-sm"
             style={{ borderColor: "var(--color-bg-border)", color: "var(--color-text-secondary)" }}
           >
-            <span className="block">{name}</span>
-            {role && (
-              <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>
-                {role}
-              </span>
+            {hasIntroduction ? (
+              <CharacterIntroduction
+                name={name!}
+                role={role}
+                image={img!}
+                video={introductionVideo}
+                audio={introductionAudio!}
+                transcript={introductionText!}
+              />
+            ) : (
+              <>
+                <span className="block">{name}</span>
+                {role && (
+                  <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>
+                    {role}
+                  </span>
+                )}
+              </>
             )}
             {links.length > 0 && (
               <span className="mt-2 flex flex-wrap gap-2">
