@@ -2233,6 +2233,7 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const introductionVideo = item.props.introductionVideo as string | undefined;
       const introductionAudio = item.props.introductionAudio as string | undefined;
       const introductionText = item.props.introductionText as string | undefined;
+      const campaignName = item.props.campaignName as string | undefined;
       const href = item.props.href as string | undefined;
       const links = [
         ...parseLinks(item.props.links),
@@ -2256,6 +2257,7 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
                 video={introductionVideo}
                 audio={introductionAudio!}
                 transcript={introductionText!}
+                campaignName={campaignName}
               />
             ) : (
               <>

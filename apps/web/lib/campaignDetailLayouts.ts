@@ -193,6 +193,7 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
           ...record.props,
           role,
           ...(introduction ? {
+            campaignName: campaign.name,
             img: introduction.image,
             introductionVideo: introduction.video,
             introductionAudio: introduction.audio,

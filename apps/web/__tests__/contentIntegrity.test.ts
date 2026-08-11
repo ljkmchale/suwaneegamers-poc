@@ -446,6 +446,7 @@ describe("Editable campaign detail pages", () => {
     expect(escanor?.props.introductionAudio).toBe("/media/images/characters/escanor/introduction.mp3");
     expect(escanor?.props.introductionText).toContain("something resembling decency");
     expect(souls.every((item) => item.props.introductionAudio)).toBe(true);
+    expect(souls.every((item) => item.props.campaignName === "Souls of Destiny")).toBe(true);
 
     const heroesCampaign = campaigns.find((entry) => entry.id === "heroes-of-emberstran")!;
     const heroes = nestedPeople(
@@ -480,6 +481,7 @@ describe("Editable campaign detail pages", () => {
     expect(og?.props.img).toBe("/media/images/characters/ogmund-crag/portrait.png");
     expect(og?.props.introductionAudio).toBe("/media/images/characters/ogmund-crag/introduction.mp3");
     expect(og?.props.introductionText).toContain("what you refuse to let fall");
+    expect(heroes.every((item) => item.props.campaignName === "Heroes of Emberstran")).toBe(true);
   });
 
   it("stores each campaign detail page as individually editable assets", () => {

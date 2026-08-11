@@ -11,6 +11,7 @@ interface CharacterIntroductionProps {
   video?: string;
   audio: string;
   transcript: string;
+  campaignName?: string;
 }
 
 export function CharacterIntroduction({
@@ -20,6 +21,7 @@ export function CharacterIntroduction({
   video,
   audio,
   transcript,
+  campaignName,
 }: CharacterIntroductionProps) {
   const [open, setOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -101,7 +103,7 @@ export function CharacterIntroduction({
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/75 to-transparent px-5 pb-5 pt-20 sm:px-8 sm:pb-7">
                 <p className="font-cinzel text-xs uppercase tracking-widest" style={{ color: "var(--color-accent-gold)" }}>
-                  Souls of Destiny
+                  {campaignName ?? "Campaign"}
                 </p>
                 <h2 id="character-introduction-title" className="mt-1 font-cinzel text-2xl sm:text-4xl" style={{ color: "var(--color-text-primary)" }}>
                   {name}
@@ -116,7 +118,7 @@ export function CharacterIntroduction({
           {video && (
             <div>
               <p className="font-cinzel text-xs uppercase tracking-widest" style={{ color: "var(--color-accent-gold)" }}>
-                Souls of Destiny
+                {campaignName ?? "Campaign"}
               </p>
               <h2 id="character-introduction-title" className="mt-1 font-cinzel text-2xl sm:text-3xl" style={{ color: "var(--color-text-primary)" }}>
                 {name}
