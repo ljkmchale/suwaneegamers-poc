@@ -1,6 +1,35 @@
 {
   "entries": [
     {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
+      "status": "pending",
+      "createdAt": "2026-08-10T15:25:16.667Z"
+    },
+    {
+      "question": "I mean, the campaign was the Crystal Bottle.",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "The Crystal Bottle is the campaign documented in these excerpts. The party followed a map across a windswept desert, where visibility dropped to 30 feet due to powerful winds and stinging sand. They tracked petrified tree stumps from when the map was first made. The earth then split open, and Scarlytt, Sigil, and Yvaine fell into a chasm.",
+      "evidence": [
+        "The Crystal Bottle - Campaign Player Notes"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-c11b926c1ef1987f",
+      "normalized": "i mean the campaign was the crystal bottle",
+      "status": "pending",
+      "createdAt": "2026-08-10T15:25:16.644Z"
+    },
+    {
       "question": "What do you know about De Vera?",
       "category": "pronunciation-fix",
       "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
@@ -353,5 +382,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-09T16:25:20.209Z"
+  "updatedAt": "2026-08-10T15:25:16.667Z"
 }

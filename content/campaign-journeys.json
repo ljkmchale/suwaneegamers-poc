@@ -887,6 +887,30 @@
           },
           "sourceKey": "a-new-adventure:session-31",
           "sourceHash": "0b8242f51e2ccbd333f103fbc17579c355308363545063dbc44e5b66f35c14e5",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-32",
+          "locationId": "caelora",
+          "location": "Caelora",
+          "x": 53.13,
+          "y": 36.23,
+          "session": "Session 32",
+          "title": "Adore Is Up In Flames",
+          "summary": "The party left Caelora determined to catch Pa’s caravan and learn the truth of the corruption Kaizo feared at the monastery of Adore. At the Rustlight campsite they encountered a wary band of Adore monks who admitted the monastery was dividing and advised them to stay away, while Affy received a chilling contract from the devil Ducrurith offering to free her soul in exchange for one of greater value. The next day they found Adore itself in flames and fought through waves of corrupted monks that poured from the smoke. When the last of the corrupted fell, Rueh’unar Heildove stepped into the clearing and declared that he was not their enemy.",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Caelora",
+            "description": "The next day they found Adore itself in flames and fought through waves of corrupted monks that poured from the smoke."
+          },
+          "automatic": true,
+          "confidence": 0.88,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "a-new-adventure:session-32",
+          "sourceHash": "b4cfa492d890db9dfbf586bb7261435d14d7c3891085db0645268af03cdaf161",
           "current": true
         }
       ],
@@ -1693,6 +1717,30 @@
           },
           "sourceKey": "dungeons-iii:session-14",
           "sourceHash": "6a4cbcdc6a0816a396b82cdf2588c0e3a3acadcbb557af6d88dcd9691890f384",
+          "current": false
+        },
+        {
+          "id": "auto-dungeons-iii-session-15",
+          "locationId": "jagged-waste-crags",
+          "location": "Jagged Waste Crags",
+          "x": 73.37,
+          "y": 49.4,
+          "session": "Session 15",
+          "title": "Wax On, Wax Off",
+          "summary": "In Session 15 the party pressed deeper into the Jagged Waste Crags in search of the Radiant Eye cult and the lost celestial instruments of the ancient Osmanae. Climbing a hidden stair from the Cave of Rot, they entered the long-buried Last Watchtower and discovered a mechanical observatory built around a great pedestal of sky symbols. By fitting Nixie’s Clockwork Amulet into the broken mechanism they opened successive passages, recovered bronze star templates and sealed observation scrolls that spoke of a risky “retrieval,” and restored a chain bridge to reach an engineering workshop.…",
+          "impact": {
+            "type": "rescue",
+            "title": "Lives changed at Jagged Waste Crags",
+            "description": "By fitting Nixie’s Clockwork Amulet into the broken mechanism they opened successive passages, recovered bronze star templates and sealed observation scrolls that spoke of a risky “retrieval,” and restored a chain bridge to reach an engineering workshop."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "dungeons-iii:session-15",
+          "sourceHash": "ec063d1bde2f33239e1de63e96c51ba3305aa002f1020d037831add3223a5b70",
           "current": true
         }
       ],
@@ -3207,10 +3255,10 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-09T14:50:07.530Z",
+    "lastGeneratedAt": "2026-08-10T14:50:06.532Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 106,
+    "generatedStops": 108,
     "routedSegments": 6,
     "impactLocations": 29
   },
@@ -3727,6 +3775,14 @@
           "title": "A new truth surfaced",
           "type": "discovery",
           "description": "Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 15",
+          "title": "Lives changed at Jagged Waste Crags",
+          "type": "rescue",
+          "description": "By fitting Nixie’s Clockwork Amulet into the broken mechanism they opened successive passages, recovered bronze star templates and sealed observation scrolls that spoke of a risky “retrieval,” and restored a chain bridge to reach an engineering workshop."
         }
       ],
       "crossCampaign": false
@@ -3840,6 +3896,52 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-caelora",
+      "locationId": "caelora",
+      "location": "Caelora",
+      "x": 53.13,
+      "y": 36.23,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 28",
+          "title": "Danger remains at Caelora",
+          "type": "warning",
+          "description": "The party continued to help Affy follow a lead in Basctdelm and help Ridley with business in Caelora."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 30",
+          "title": "Arcane consequences at Caelora",
+          "type": "arcane",
+          "description": "Standing in the frozen hellscape of Stygia after pursuing Urovil through the portal, the party sought to defeat the guarding fiends, rescue the chained prisoner, confront Urovil, and escape back to the material plane."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 31",
+          "title": "Caelora's balance shifted",
+          "type": "political",
+          "description": "They severed the connection, learned an entire day had been lost, and split to pursue personal leads while Kaizo aided the monk Taelis, Relys learned her lantern stone held the spirit of her grandmother, and Kulv Farbreak pressed both Fungus and Affy to abandon Shotty Nell for the fey lord Selbranan…"
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 32",
+          "title": "Conflict reshaped Caelora",
+          "type": "battle",
+          "description": "The next day they found Adore itself in flames and fought through waves of corrupted monks that poured from the smoke."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -3927,44 +4029,6 @@
           "title": "Danger remains at Tratta",
           "type": "warning",
           "description": "No session summary has been recorded for this session yet."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-caelora",
-      "locationId": "caelora",
-      "location": "Caelora",
-      "x": 53.13,
-      "y": 36.23,
-      "realm": "surface",
-      "campaignIds": [
-        "a-new-adventure"
-      ],
-      "impacts": [
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 28",
-          "title": "Danger remains at Caelora",
-          "type": "warning",
-          "description": "The party continued to help Affy follow a lead in Basctdelm and help Ridley with business in Caelora."
-        },
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 30",
-          "title": "Arcane consequences at Caelora",
-          "type": "arcane",
-          "description": "Standing in the frozen hellscape of Stygia after pursuing Urovil through the portal, the party sought to defeat the guarding fiends, rescue the chained prisoner, confront Urovil, and escape back to the material plane."
-        },
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 31",
-          "title": "Caelora's balance shifted",
-          "type": "political",
-          "description": "They severed the connection, learned an entire day had been lost, and split to pursue personal leads while Kaizo aided the monk Taelis, Relys learned her lantern stone held the spirit of her grandmother, and Kulv Farbreak pressed both Fungus and Affy to abandon Shotty Nell for the fey lord Selbranan…"
         }
       ],
       "crossCampaign": false
