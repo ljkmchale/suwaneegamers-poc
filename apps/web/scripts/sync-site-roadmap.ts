@@ -8,14 +8,42 @@
  *
  *   npx tsx apps/web/scripts/sync-site-roadmap.ts
  *
- * The doc must be link-viewable ("anyone with the link can view"), like every
- * other synced Google Doc — the scheduler has no per-user Google auth. For
- * offline seeding/testing, point SITE_ROADMAP_DOC_MD_FILE at a local markdown
- * export instead of hitting Google.
+ * Read path, in order of preference:
+ *   1. SITE_ROADMAP_DOC_MD_FILE — a local markdown export (offline/testing).
+ *   2. A configured Google service account — reads privately-shared docs
+ *      (share the doc with the service account email; see lib/googleServiceAccount).
+ *   3. Anonymous export — only works if the doc is "anyone with the link can view".
  */
 import fs from "fs";
+import path from "path";
 import { writeContent } from "@/lib/contentFiles";
 import { parseRoadmapDoc } from "@/lib/assistantRoadmap";
+import {
+  isServiceAccountConfigured,
+  exportGoogleDocMarkdown,
+  serviceAccountEmail,
+} from "@/lib/googleServiceAccount";
+import {
+  isUserDriveConnected,
+  exportGoogleDocMarkdownAsUser,
+} from "@/lib/googleUserToken";
+
+// The scheduler spawns this under tsx with no .env file loaded, so pull in the
+// local env ourselves. This job reads config the other syncs don't need:
+// SITE_ROADMAP_DOC_MD_FILE (the manual Markdown export the job reads), plus
+// GOOGLE_CLIENT_ID/SECRET and a service account key if the parked OAuth/SA read
+// paths are ever enabled. Paths resolve from this file's own location
+// (apps/web/scripts) so it works regardless of the cwd.
+for (const candidate of [
+  path.resolve(__dirname, "..", ".env.local"), // apps/web/.env.local
+  path.resolve(__dirname, "../../..", ".env.local"), // repo-root .env.local
+]) {
+  try {
+    process.loadEnvFile(candidate);
+  } catch {
+    // Missing file — fine; the read paths below degrade gracefully.
+  }
+}
 
 const DOC_ID = process.env.SITE_ROADMAP_DOC_ID
   ?? "10hQeSzBCwnsvq1FGT4r3CG5UR_nBAx8nqMAf4DbHIGI";
@@ -24,16 +52,36 @@ const DOC_URL = `https://docs.google.com/document/d/${DOC_ID}/edit`;
 async function loadMarkdown(): Promise<string> {
   const localFile = process.env.SITE_ROADMAP_DOC_MD_FILE;
   if (localFile) {
+    if (!fs.existsSync(localFile)) {
+      throw new Error(
+        `SITE_ROADMAP_DOC_MD_FILE points at "${localFile}", which does not exist. `
+          + `Export the roadmap doc (File -> Download -> Markdown) to that path.`,
+      );
+    }
     return fs.readFileSync(localFile, "utf-8");
   }
+
+  // Preferred: read as the connected owner account (reads docs shared privately
+  // with that person — e.g. docs Chip shares only with the owner).
+  if (isUserDriveConnected()) {
+    return exportGoogleDocMarkdownAsUser(DOC_ID);
+  }
+
+  // Next: a service account, for docs that can be shared with its robot email.
+  if (isServiceAccountConfigured()) {
+    return exportGoogleDocMarkdown(DOC_ID);
+  }
+
   const res = await fetch(
     `https://docs.google.com/document/d/${DOC_ID}/export?format=md`,
     { redirect: "follow" },
   );
   if (!res.ok) {
     throw new Error(
-      `Roadmap doc export failed: HTTP ${res.status}. The doc must be shared `
-        + `"anyone with the link can view" for the scheduler to read it.`,
+      `Roadmap doc export failed: HTTP ${res.status}. Connect the owner's Google `
+        + `account at /api/admin/google-drive/connect, or share the doc with the `
+        + `service account (${serviceAccountEmail() ?? "not configured"}), set it `
+        + `link-viewable, or point SITE_ROADMAP_DOC_MD_FILE at a local export.`,
     );
   }
   return res.text();

@@ -1,6 +1,6 @@
 {
   "source": "https://docs.google.com/document/d/10hQeSzBCwnsvq1FGT4r3CG5UR_nBAx8nqMAf4DbHIGI/edit",
-  "syncedAt": "2026-08-05T16:55:43.212Z",
+  "syncedAt": "2026-08-12T18:12:46.192Z",
   "actionItems": [
     {
       "section": "Miscellaneous",
@@ -25,11 +25,21 @@
     {
       "section": "Campaigns Page",
       "text": "Add how long Campaigns have run or have been running",
-      "done": false
+      "done": true
     },
     {
       "section": "Chronicles Page",
       "text": "Backburner item … got some ideas",
+      "done": false
+    },
+    {
+      "section": "Chronicles Page",
+      "text": "Have one click to see Non-player characters? - Done",
+      "done": false
+    },
+    {
+      "section": "Chronicles Page",
+      "text": "Have one click to see open objectives / quests by campaign? - Done",
       "done": false
     },
     {
@@ -59,7 +69,7 @@
     },
     {
       "section": "Setting – Guides Page",
-      "text": "Add The Register - [The Register](https://docs.google.com/document/d/1Gn23Jp-2cXLR-WeLkdBuuC7rRhaFKXHxH2mUIiQrKXY/edit?usp=sharing) (I know its a DM guide, but I'm okay with Players having access)",
+      "text": "Add The Register - The Register (I know its a DM guide, but I'm okay with Players having access)",
       "done": true
     },
     {
