@@ -126,7 +126,7 @@ export function CharacterIntroduction({
               {role && <p className="mt-1 text-sm" style={{ color: "var(--color-text-secondary)" }}>{role}</p>}
             </div>
           )}
-          <p className="text-sm leading-7 sm:text-base" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="whitespace-pre-line text-sm leading-7 sm:text-base" style={{ color: "var(--color-text-secondary)" }}>
             &ldquo;{transcript}&rdquo;
           </p>
           {!video && (

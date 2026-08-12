@@ -24,11 +24,30 @@ import { getAutoManagedPages, setManagedSourceUrl } from "@/lib/autoManagedPages
 import type { BlockItem } from "@/lib/pageBlocks";
 import { readContent, writeContent } from "@/lib/contentFiles";
 import type { AutoManagedPage } from "@/lib/autoManagedPages";
+import { getDmIntroduction } from "@/lib/dmIntroductions";
 
 const campaigns  = getActiveCampaigns();
 const dms        = getDungeonMasters();
 const players    = getPlayerProfileSeeds();
 const ALLOWED_SPECIAL_DM_NAMES = new Set(["Rotating DMs"]);
+
+describe("Dungeon Master introductions", () => {
+  it("provides introductions for each named Dungeon Master profile", () => {
+    const namedDms = dms.filter((dm) => dm.id !== "rotating-dms");
+    for (const dm of namedDms) {
+      const introduction = getDmIntroduction(dm.name);
+      expect(introduction, dm.name).toBeDefined();
+      expect(introduction?.audio).toMatch(/^\/media\/images\/dungeon-masters\/.+\/introduction(?:-[a-z]+)?\.mp3$/);
+      expect(introduction?.transcript.length).toBeGreaterThan(100);
+    }
+  });
+
+  it("grounds Larry's introduction in his DM and player history", () => {
+    const introduction = getDmIntroduction("Larry McHale");
+    expect(introduction?.transcript).toContain("both sides of the screen");
+    expect(introduction?.transcript).toContain("I ran The Crystal Bottle");
+  });
+});
 
 function findRepoRootForTest() {
   let dir = process.cwd();

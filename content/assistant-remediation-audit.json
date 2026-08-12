@@ -1,6 +1,33 @@
 {
   "entries": [
     {
+      "id": "audit-rem-c11b926c1ef1987f-1786476084930",
+      "remediationId": "rem-c11b926c1ef1987f",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "I mean, the campaign was the Crystal Bottle.",
+        "value": "The Crystal Bottle is the campaign documented in these excerpts. The party followed a map across a windswept desert, where visibility dropped to 30 feet due to powerful winds and stinging sand. They tracked petrified tree stumps from when the map was first made. The earth then split open, and Scarlytt, Sigil, and Yvaine fell into a chasm.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-11T19:21:24.928Z"
+      },
+      "createdAt": "2026-08-11T19:21:24.928Z"
+    },
+    {
+      "id": "audit-rem-d5f1f7e87dfbf4f3-1786476079895",
+      "remediationId": "rem-d5f1f7e87dfbf4f3",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-11T19:21:19.892Z"
+      },
+      "previousValue": "Diverra",
+      "createdAt": "2026-08-11T19:21:19.892Z"
+    },
+    {
       "id": "audit-rem-2c0f46803c7d5d3d-1786292720211",
       "remediationId": "rem-2c0f46803c7d5d3d",
       "action": "applied",

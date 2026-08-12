@@ -23,6 +23,7 @@ import { OrganizationFolds } from "@/app/(site)/organizations/OrganizationFolds"
 import { TerritoryFolds } from "@/app/(site)/territories/TerritoryFolds";
 import { readContent } from "@/lib/contentFiles";
 import { CharacterIntroduction } from "@/components/blocks/CharacterIntroduction";
+import { getDmIntroduction } from "@/lib/dmIntroductions";
 
 const CARD_LAYOUT_MAX_ROWS = 120;
 
@@ -2688,6 +2689,7 @@ function ProfileCardBlock({
 
   const portraitSrc  = portraitItem?.props.src  as string | undefined;
   const portraitName = portraitItem?.props.name as string | undefined;
+  const dmIntroduction = layout === "top" ? getDmIntroduction(portraitName) : undefined;
   const portraitCrop = (portraitItem?.props.cropPosition as string | undefined) ?? "center";
   const nameInitials = portraitName
     ? portraitName.split(" ").map((p) => p[0]).join("").slice(0, 2).toUpperCase()
@@ -2771,6 +2773,18 @@ function ProfileCardBlock({
             )}
           </div>
           <div className="p-5">
+            {dmIntroduction && (
+              <div className="mb-4 border-b pb-4" style={{ borderColor: "var(--color-bg-border)" }}>
+                <CharacterIntroduction
+                  name={dmIntroduction.name}
+                  role="Dungeon Master"
+                  image={dmIntroduction.image}
+                  audio={dmIntroduction.audio}
+                  transcript={dmIntroduction.transcript}
+                  campaignName="Suwanee Gamers"
+                />
+              </div>
+            )}
             {renderContent()}
           </div>
         </article>
