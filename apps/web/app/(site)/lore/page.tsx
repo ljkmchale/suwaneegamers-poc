@@ -3,6 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { LoreFolds, type LoreBlock, type LoreEntry, type LoreInline } from "./LoreFolds";
 import { getAutoManagedPages, googleDocExportUrl } from "@/lib/autoManagedPagesData";
+import { readContent } from "@/lib/contentFiles";
 
 const LORE_CACHE_PATH = path.join(process.cwd(), "..", "..", "content", "lore-doc-cache.html");
 
@@ -83,6 +84,16 @@ interface ExtractedLoreSection {
   title: string;
   body: string;
   blocks?: LoreBlock[];
+}
+
+interface LoreNarrationConfig {
+  entries: Array<{
+    title: string;
+    status: string;
+    originalText: string;
+    script: string;
+    audioUrl: string;
+  }>;
 }
 
 function isLikelyLoreTitle(line: string) {
@@ -406,10 +417,23 @@ async function getLoreEntries(): Promise<LoreEntry[]> {
           body: "",
         }));
 
+  let narrationEntries: LoreNarrationConfig["entries"] = [];
+  try {
+    narrationEntries = readContent<LoreNarrationConfig>("legends-lore-narrations.json").entries;
+  } catch {
+    narrationEntries = [];
+  }
+
   return sources.map((source, index) => {
     const image =
       knownLoreImageByTitle.get(source.title) ??
       fallbackLoreImages[index % fallbackLoreImages.length];
+
+    const narration = narrationEntries.find(
+      (candidate) =>
+        candidate.title === source.title &&
+        (candidate.status === "voice-test" || candidate.status === "approved"),
+    );
 
     return {
       title: source.title,
@@ -417,6 +441,9 @@ async function getLoreEntries(): Promise<LoreEntry[]> {
       body: source.body,
       bodyBlocks: source.blocks,
       summary: getSummary(source.body),
+      narration: narration
+        ? { script: narration.script, audioUrl: narration.audioUrl }
+        : undefined,
     };
   });
 }

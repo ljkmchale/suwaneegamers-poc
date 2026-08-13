@@ -15,7 +15,17 @@ function canUseNativeAudio(url: string) {
   return /\.(mp3|m4a|wav|ogg|aac)(?:[?#].*)?$/i.test(url);
 }
 
-export function SessionRecordingPlayer({ url, label = "Session recording" }: { url: string; label?: string }) {
+export function SessionRecordingPlayer({
+  url,
+  label = "Session recording",
+  controlLabel = "session recording",
+  contentType = "session recording",
+}: {
+  url: string;
+  label?: string;
+  controlLabel?: string;
+  contentType?: string;
+}) {
   const rootRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [open, setOpen] = useState(false);
@@ -42,7 +52,7 @@ export function SessionRecordingPlayer({ url, label = "Session recording" }: { u
     if (!useNativeAudio) {
       recordUsageEvent({
         eventType: "media_play",
-        contentType: "session recording",
+        contentType,
         contentId: url,
         contentLabel: label,
       });
@@ -86,8 +96,8 @@ export function SessionRecordingPlayer({ url, label = "Session recording" }: { u
         type="button"
         data-media-control="true"
         onClick={handleClick}
-        title={open ? "Close session recording" : "Play session recording"}
-        aria-label={open ? "Close session recording" : "Play session recording"}
+        title={open ? `Close ${controlLabel}` : `Play ${controlLabel}`}
+        aria-label={open ? `Close ${controlLabel}` : `Play ${controlLabel}`}
         aria-expanded={open}
         className="grid h-9 w-9 place-items-center overflow-hidden rounded-full border transition-colors hover:opacity-80"
         style={{

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { SessionRecordingPlayer } from "../calendar/SessionRecordingPlayer";
 
 export interface LoreEntry {
   title: string;
@@ -10,6 +11,10 @@ export interface LoreEntry {
   body: string;
   bodyBlocks?: LoreBlock[];
   image: string;
+  narration?: {
+    script: string;
+    audioUrl: string;
+  };
 }
 
 export type LoreInline = {
@@ -178,13 +183,14 @@ function LoreFold({ entry }: { entry: LoreEntry }) {
   return (
     <section className="py-2">
       <div className="fantasy-card overflow-hidden">
-        <button
-          type="button"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((open) => !open)}
-          className="grid w-full cursor-pointer overflow-hidden text-left sm:grid-cols-[13rem_1fr]"
-        >
-          <div className="relative flex min-h-24 items-center justify-center p-4 sm:min-h-full">
+        <div className="grid w-full overflow-hidden sm:grid-cols-[13rem_1fr]">
+          <button
+            type="button"
+            aria-label={`${isOpen ? "Close" : "Open"} ${entry.title} details`}
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((open) => !open)}
+            className="relative flex min-h-24 cursor-pointer items-center justify-center p-4 sm:min-h-full"
+          >
             <Image
               src={entry.image}
               alt=""
@@ -195,10 +201,15 @@ function LoreFold({ entry }: { entry: LoreEntry }) {
                 filter: "drop-shadow(0 0 14px rgba(139,92,246,.28))",
               }}
             />
-          </div>
+          </button>
 
           <div className="flex items-center justify-between gap-5 px-6 py-5">
-            <div className="min-w-0">
+            <button
+              type="button"
+              aria-expanded={isOpen}
+              onClick={() => setIsOpen((open) => !open)}
+              className="min-w-0 flex-1 cursor-pointer text-left"
+            >
               <p
                 className="font-cinzel mb-1 text-[0.65rem] uppercase tracking-[0.35em]"
                 style={{ color: "var(--color-accent-arcane)" }}
@@ -217,19 +228,33 @@ function LoreFold({ entry }: { entry: LoreEntry }) {
               >
                 {entry.summary}
               </p>
+            </button>
+            <div className="flex shrink-0 items-center gap-3">
+              {entry.narration && (
+                <SessionRecordingPlayer
+                  url={entry.narration.audioUrl}
+                  label={`${entry.title} — The Historian voice test`}
+                  controlLabel={`${entry.title} Historian narration`}
+                  contentType="Legends & Lore narration"
+                />
+              )}
+              <button
+                type="button"
+                aria-label={`${isOpen ? "Close" : "Open"} ${entry.title} details`}
+                aria-expanded={isOpen}
+                onClick={() => setIsOpen((open) => !open)}
+                className="font-cinzel inline-flex items-center gap-2 text-xs uppercase tracking-widest transition-opacity hover:opacity-75"
+                style={{ color: "var(--color-accent-gold)" }}
+              >
+                Open Details
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
             </div>
-            <span
-              className="font-cinzel inline-flex shrink-0 items-center gap-2 text-xs uppercase tracking-widest"
-              style={{ color: "var(--color-accent-gold)" }}
-            >
-              Open Details
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                aria-hidden="true"
-              />
-            </span>
           </div>
-        </button>
+        </div>
 
         {isOpen && (
           <div
