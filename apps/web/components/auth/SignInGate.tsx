@@ -66,7 +66,9 @@ export function SignInGate({ error, returnTo }: { error?: string; returnTo?: str
             alt="Suwanee Gamers"
             width={768}
             height={775}
-            priority
+            sizes="(min-width: 1024px) 288px, (min-width: 640px) 224px, 192px"
+            loading="eager"
+            fetchPriority="high"
             className="mb-5 h-auto w-48 drop-shadow-[0_0_32px_rgba(245,158,11,0.24)] sm:w-56 lg:w-72"
           />
           <p className="mb-4 font-cinzel text-xs font-semibold uppercase tracking-[0.32em] text-amber-400">
