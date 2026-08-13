@@ -12,10 +12,13 @@ export function GoogleSignInButton({ returnTo }: { returnTo?: string } = {}) {
       ? `/api/auth/google/login?from=${encodeURIComponent(returnTo)}`
       : "/api/auth/google/login";
   const buttonClasses =
-    "inline-flex w-full items-center justify-center gap-3 rounded-lg px-5 py-3 font-medium shadow-sm transition-opacity";
+    "inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-lg px-5 py-3 font-semibold shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#16121d]";
 
   useEffect(() => {
-    setTermsAccepted(window.localStorage.getItem(TERMS_ACCEPTANCE_KEY) === "true");
+    const restoreAcceptance = window.setTimeout(() => {
+      setTermsAccepted(window.localStorage.getItem(TERMS_ACCEPTANCE_KEY) === "true");
+    }, 0);
+    return () => window.clearTimeout(restoreAcceptance);
   }, []);
 
   function updateTermsAcceptance(accepted: boolean) {
@@ -29,67 +32,42 @@ export function GoogleSignInButton({ returnTo }: { returnTo?: string } = {}) {
 
   return (
     <div className="text-left">
-      <div
-        className="mb-5 space-y-3 rounded-lg border p-4 text-xs leading-relaxed"
-        style={{
-          borderColor: "var(--color-bg-border)",
-          background: "rgba(0,0,0,0.2)",
-          color: "var(--color-text-secondary)",
-        }}
-      >
-        <p>
-          When using this site, you agree to our{" "}
-          <Link
-            href="/terms-of-use"
-            className="underline underline-offset-2"
-            style={{ color: "var(--color-accent-arcane)" }}
-          >
-            Terms of Service
-          </Link>
-          :
-        </p>
-        <p>
-          Users are granted a limited license to view, download, and print materials for
-          personal, non-commercial tabletop gaming use only.
-        </p>
-        <p>
-          Users are strictly prohibited from republishing, selling, licensing, or
-          commercially distributing any text, imagery, or files from the site.
-        </p>
-        <p>
-          Any commercial exploitation will result in immediate termination of access and
-          potential legal action.
-        </p>
-      </div>
-
-      <label className="mb-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed">
+      <label className="mb-5 flex cursor-pointer items-start gap-3 rounded-lg border border-[#35303c] bg-black/20 p-4 text-sm leading-6 transition-colors hover:border-[#52475d]">
         <input
           type="checkbox"
           checked={termsAccepted}
           onChange={(event) => updateTermsAcceptance(event.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 accent-[#8b5cf6]"
+          className="mt-1 h-4 w-4 shrink-0 accent-[#f59e0b]"
         />
-        <span style={{ color: "var(--color-text-secondary)" }}>
-          I have read and agree to the Terms of Service.
+        <span className="text-[#b9ab93]">
+          I have read and agree to the{" "}
+          <Link
+            href="/terms-of-use"
+            target="_blank"
+            className="font-semibold text-violet-300 underline decoration-violet-400/60 underline-offset-4 transition-colors hover:text-violet-200"
+          >
+            Terms of Use
+          </Link>
+          .
         </span>
       </label>
 
       {termsAccepted ? (
         <a
           href={href}
-          className={`${buttonClasses} bg-white text-[#1f1f1f] hover:opacity-90`}
+          className={`${buttonClasses} bg-[#f7f3ea] text-[#211b25] hover:-translate-y-0.5 hover:bg-white hover:shadow-lg`}
         >
           <GoogleGlyph />
-          <span className="text-sm">Continue with Google</span>
+          <span className="text-sm">Sign in with Google</span>
         </a>
       ) : (
         <button
           type="button"
           disabled
-          className={`${buttonClasses} cursor-not-allowed bg-white text-[#1f1f1f] opacity-45`}
+          className={`${buttonClasses} cursor-not-allowed bg-[#f7f3ea] text-[#211b25] opacity-40`}
         >
           <GoogleGlyph />
-          <span className="text-sm">Continue with Google</span>
+          <span className="text-sm">Sign in with Google</span>
         </button>
       )}
     </div>

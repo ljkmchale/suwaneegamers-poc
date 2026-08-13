@@ -8,6 +8,8 @@ import { clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/li
 // — requires Google sign-in.
 const PUBLIC_PATHS = [
   "/signin", // the gate itself
+  "/terms-of-use", // must be readable before a visitor can consent at the gate
+  "/privacy-policy", // privacy practices must be readable before Google sign-in
   "/api/auth/", // the sign-in round trip
   "/api/analytics/events", // visit beacon; it also fires on the sign-in page
   "/api/myra/health/summary", // sanitized capability status used by Myra herself
@@ -78,7 +80,11 @@ export async function proxy(request: NextRequest) {
     }
 
     if (!googleAuthConfigured() || isPublicPath(pathname)) {
-      return NextResponse.next();
+      const requestHeaders = new Headers(request.headers);
+      if (pathname === "/terms-of-use" || pathname === "/privacy-policy") {
+        requestHeaders.set("x-sg-public-legal-page", "1");
+      }
+      return NextResponse.next({ request: { headers: requestHeaders } });
     }
 
     // The whole site is members-only. This has to happen here rather than in a

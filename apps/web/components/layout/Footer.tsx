@@ -93,13 +93,22 @@ export function Footer() {
               <SocialIcon name="Discord" />
             </a>
           </div>
-          <Link
-            href="/terms-of-use"
-            className="text-xs underline-offset-4 transition-opacity hover:underline hover:opacity-80"
-            style={{ color: "var(--color-accent-arcane)" }}
-          >
-            Terms of Use
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/terms-of-use"
+              className="text-xs underline-offset-4 transition-opacity hover:underline hover:opacity-80"
+              style={{ color: "var(--color-accent-arcane)" }}
+            >
+              Terms of Use
+            </Link>
+            <Link
+              href="/privacy-policy"
+              className="text-xs underline-offset-4 transition-opacity hover:underline hover:opacity-80"
+              style={{ color: "var(--color-accent-arcane)" }}
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

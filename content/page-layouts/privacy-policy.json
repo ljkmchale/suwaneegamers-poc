@@ -1,0 +1,162 @@
+[
+  {
+    "kind": "block",
+    "id": "privacy-policy-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Suwanee Gamers",
+      "title": "Privacy Policy",
+      "description": "How we collect, use, protect, and retain information when you use the Suwanee Gamers website.",
+      "align": "center"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-effective-date",
+    "type": "text",
+    "props": {
+      "content": "Effective date: August 13, 2026\n\nSuwanee Gamers operates a private community and campaign portal. This Privacy Policy applies to information collected through the Suwanee Gamers website and its member features.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-information-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Information",
+      "title": "What We Collect",
+      "description": "We collect only the information needed to operate, secure, and improve the private community portal.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-information",
+    "type": "text",
+    "props": {
+      "content": "Google sign-in information. When you sign in, Google provides your Google account identifier, name, email address, and profile picture. We do not receive your Google password.\n\nMember and visitor information. We maintain a profile that may include your display name, email address, roster association, member or visitor status, Myra preferences, account creation date, and most recent activity.\n\nWebsite usage information. Our first-party analytics record information such as pages viewed, interactions, searches, media activity, visit duration, referring website, device type, and browser-generated visitor and visit identifiers. Signed-in activity may be associated with your name and email address.\n\nMyra voice information. If you use Myra, we may store your voice-session details, transcribed questions, responses, categories, performance information, and feedback so Myra can answer, improve, and be diagnosed.\n\nSecurity information. We may record an IP address, browser or device information, requested path, request method, failed administrative sign-ins, and suspicious requests to protect the website and its members.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-use-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Purpose",
+      "title": "How We Use Information",
+      "description": "Information is used for operation of the Suwanee Gamers community—not for advertising or data brokerage.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-use",
+    "type": "text",
+    "props": {
+      "content": "We use information to authenticate visitors; determine member, visitor, active, or inactive status; provide campaign and community features; personalize appropriate site and Myra experiences; maintain calendars, rosters, chronicles, and related tools; understand and improve website use; troubleshoot technical problems; prevent misuse; and protect the website and community.\n\nWe do not sell your personal information. We do not share your personal information for advertising. We do not contact you for marketing or other unsolicited reasons. We will contact you only when you ask us to or when communication is reasonably necessary to respond to your request or protect the security of your account or the website.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-sharing-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Protection",
+      "title": "Sharing and Service Providers",
+      "description": "We limit disclosure and use service providers only where needed to operate the portal.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-sharing",
+    "type": "text",
+    "props": {
+      "content": "We do not give out your personal information to other organizations or individuals for their own marketing or commercial use. Information may be processed by service providers that support website authentication, hosting, security, media delivery, or optional voice features, including Google for account sign-in and Cloudflare for website delivery and protection. Those providers process information under their own terms and privacy policies.\n\nWe may disclose information when required by law, to respond to valid legal process, or when reasonably necessary to protect the rights, safety, and security of Suwanee Gamers, its members, or others.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-cookies-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Technology",
+      "title": "Cookies and Local Storage",
+      "description": "The website uses essential browser storage for sign-in, consent, and first-party visit measurement.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-cookies",
+    "type": "text",
+    "props": {
+      "content": "The website uses a secure, HTTP-only authentication cookie to keep you signed in. The member sign-in session is configured to last up to 30 days. Temporary cookies may also preserve your intended destination during Google sign-in.\n\nBrowser local storage remembers your acceptance of the Terms of Use and creates first-party visitor and visit identifiers used for site analytics. These identifiers do not provide access to your Google password or account.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-retention-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Control",
+      "title": "Retention and Your Choices",
+      "description": "We retain information only for community operation, historical continuity, security, and reasonable administrative needs.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-retention",
+    "type": "text",
+    "props": {
+      "content": "First-party usage analytics and security-event records are generally retained for 90 days. Member profiles, roster associations, preferences, campaign records, and Myra voice records may be retained longer while needed for community administration, campaign continuity, troubleshooting, or historical records.\n\nYou may sign out at any time and may disable Myra in your profile. You may also ask a Suwanee Gamers administrator to explain, correct, or delete personal information associated with you, subject to information that must be retained for security, legal, or legitimate campaign-history purposes. Removing browser local storage or site cookies will clear local identifiers and sign-in state, but it does not automatically delete server records.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-security-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Security",
+      "title": "How We Protect Information",
+      "description": "Access controls, secure cookies, authentication, monitoring, and restricted administrative tools help protect member information.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-security",
+    "type": "text",
+    "props": {
+      "content": "We use reasonable technical and administrative safeguards appropriate to a private community website. No internet service or storage system can guarantee absolute security. Members should protect their Google accounts and notify a Suwanee Gamers administrator if they believe their access has been misused.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-changes-heading",
+    "type": "section-heading",
+    "props": {
+      "eyebrow": "Policy",
+      "title": "Changes and Questions",
+      "description": "This policy may be updated as the website and its community features change.",
+      "align": "left"
+    }
+  },
+  {
+    "kind": "block",
+    "id": "privacy-policy-changes",
+    "type": "text",
+    "props": {
+      "content": "The effective date at the top of this page identifies the current version. Material changes will be posted on this page. Questions or requests concerning this policy or your information may be directed to a Suwanee Gamers administrator through the community's established communication channels.",
+      "align": "left"
+    }
+  }
+]

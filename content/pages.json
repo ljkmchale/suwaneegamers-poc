@@ -40,5 +40,12 @@
     "title": "Terms of Use",
     "status": "active",
     "createdAt": "2026-07-28"
+  },
+  {
+    "id": "privacy-policy-page",
+    "slug": "privacy-policy",
+    "title": "Privacy Policy",
+    "status": "active",
+    "createdAt": "2026-08-13"
   }
 ]
