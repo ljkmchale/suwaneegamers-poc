@@ -11,6 +11,78 @@
       "timesSeen": 1,
       "id": "rem-d5f1f7e87dfbf4f3",
       "normalized": "so tell me about the goddess devira",
+      "status": "pending",
+      "createdAt": "2026-08-13T15:25:24.473Z"
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "pending",
+      "createdAt": "2026-08-13T15:25:23.742Z"
+    },
+    {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
+      "status": "approved",
+      "createdAt": "2026-08-12T15:25:54.418Z",
+      "reviewedAt": "2026-08-13T12:28:00.329Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-13T12:28:00.329Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-12T15:25:53.662Z",
+      "reviewedAt": "2026-08-13T12:28:02.640Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-13T12:28:02.640Z"
+      }
+    },
+    {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
       "status": "approved",
       "createdAt": "2026-08-10T15:25:16.667Z",
       "reviewedAt": "2026-08-11T19:21:19.892Z",
@@ -398,5 +470,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-11T19:21:24.928Z"
+  "updatedAt": "2026-08-13T15:25:24.473Z"
 }
