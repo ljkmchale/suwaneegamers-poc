@@ -19,9 +19,16 @@ describe("Advents of Harmony library", () => {
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
     expect(scene).toContain("<video");
-    expect(scene).toContain("advents-harmony-entrance-web-v2.mp4");
-    expect(scene).toContain("onEnded={() => setEntranceState(\"inside\")}");
+    expect(scene).toContain("advents-harmony-entrance-flova-v1.mp4");
+    expect(scene).toContain("advents-harmony-exit-web-v1.mp4");
+    expect(scene).toContain("onEnded={() => setEntranceState(\"blacking\")}");
+    expect(scene).toContain("setEntranceState(\"revealing\")");
+    expect(scene).toContain("styles.libraryBlackout");
+    expect(scene).toContain("onEnded={() => setEntranceState(\"closed\")}");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"inside\")");
+    expect(scene).not.toContain("setTimeout(() => setEntranceState(\"closed\")");
+    expect(scene).not.toContain("styles.entranceOpen");
+    expect(scene).not.toContain("styles.entranceClosing");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {
