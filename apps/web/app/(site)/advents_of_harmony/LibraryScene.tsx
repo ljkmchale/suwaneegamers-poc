@@ -145,7 +145,7 @@ function LibraryAisle({ chamber, chamberIndex, aisleIndex, catalogue, archiveSiz
 
   return <div className={styles.aisle} ref={containerRef}>
     <div className={`${styles.libraryWall} ${shelfSize}`}>
-      <p className={styles.aisleMarker}><span>Aisle {String(aisleIndex + 1).padStart(2, "0")}<strong>{catalogue.label}</strong></span><em>{catalogue.range}</em>{catalogue.books.length} volumes · {archiveSize} in this archive</p>
+      <p className={styles.aisleMarker}><span>Aisle {String(aisleIndex + 1).padStart(2, "0")}<strong>{catalogue.label}</strong></span><em>{catalogue.range}</em><b className={styles.aisleCount}>{catalogue.books.length} volumes <small>· {archiveSize} in this archive</small></b></p>
       {isNearViewport
         ? <div className={styles.cabinets} style={{ "--shelf-art": `url("${chamber.shelfArt}")` } as CSSProperties}>{bayBooks.map((bay, bayIndex) => <CabinetBay key={bayIndex} books={bay} chamberIndex={(chamberIndex * 100) + aisleIndex} bayIndex={bayIndex} withdrawingId={withdrawingId} onWithdraw={onWithdraw} />)}</div>
         : <div className={styles.lazyAislePlaceholder} aria-hidden="true" />}

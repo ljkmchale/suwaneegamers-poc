@@ -52,6 +52,8 @@ describe("Advents of Harmony library", () => {
     expect(scene).not.toContain("styles.entranceOpen");
     expect(scene).not.toContain("styles.entranceClosing");
     expect(scene).toContain("Exit the Library");
+    expect(scene).toContain("styles.aisleCount");
+    expect(css).toContain("overflow-x:clip");
     expect(scene).not.toContain("Return through the doors");
   });
 

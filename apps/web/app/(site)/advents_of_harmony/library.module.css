@@ -38,7 +38,7 @@
 .shelfRow:nth-child(2){top:34%;height:15.8%}
 .shelfRow:nth-child(3){top:51.7%;height:15.9%}
 .shelfRow:nth-child(4){top:69.4%;height:16.4%}
-.booksOnShelf{inset:3% 2% 0;gap:2px;padding-left:0;overflow:visible}
+.booksOnShelf{inset:3% 2% 0;gap:2px;padding-left:0;overflow-x:clip;overflow-y:visible}
 .libraryWall:before,.wallSconce,.cabinetCrown,.woodShelf,.cabinetBase,.rollingLadder{display:none}
 
 @media(max-width:900px){.libraryWall{padding-left:1%;padding-right:1%}.cabinets{gap:4.15%;padding-left:6.6%;padding-right:6.6%}.booksOnShelf{gap:1px}}
@@ -97,11 +97,12 @@
 
 /* The bookcase image supplies its own frame; no CSS box surrounds the furniture. */
 .libraryWall,.compactShelf.libraryWall,.mediumShelf.libraryWall{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
-.libraryWall .aisleMarker{position:absolute;z-index:3;left:9%;right:9%;top:3.4%;width:auto;max-width:none;min-height:8%;aspect-ratio:auto;margin:0;padding:0 1.5%;gap:.7rem;background:none;border:0;box-shadow:none;color:#f3dfb8;font-family:var(--font-heading),var(--font-cinzel),serif;font-size:clamp(.68rem,.85vw,.95rem);white-space:nowrap}.libraryWall .aisleMarker span{font-family:inherit;font-size:clamp(.58rem,.7vw,.78rem)}.libraryWall .aisleMarker span strong{font-family:inherit;font-size:clamp(.76rem,1vw,1.05rem);font-weight:700;letter-spacing:.035em}.libraryWall .aisleMarker>em{padding:.12rem .35rem;background:transparent;border:0;font-family:inherit;font-size:clamp(.55rem,.62vw,.68rem)}
+.libraryWall .aisleMarker{position:absolute;z-index:3;left:9%;right:9%;top:3.4%;width:auto;max-width:none;min-height:8%;aspect-ratio:auto;margin:0;padding:0 1.5%;gap:.55rem;overflow:hidden;background:none;border:0;box-shadow:none;color:#f3dfb8;font-family:var(--font-heading),var(--font-cinzel),serif;font-size:clamp(.62rem,.75vw,.86rem);white-space:nowrap}.libraryWall .aisleMarker span{min-width:0;overflow:hidden;font-family:inherit;font-size:clamp(.52rem,.62vw,.7rem)}.libraryWall .aisleMarker span strong{overflow:hidden;min-width:0;margin-left:.65rem;padding-left:.65rem;font-family:inherit;font-size:clamp(.66rem,.85vw,.92rem);font-weight:700;letter-spacing:.025em;text-overflow:ellipsis;white-space:nowrap}.libraryWall .aisleMarker>em{padding:.12rem .3rem;background:transparent;border:0;font-family:inherit;font-size:clamp(.5rem,.55vw,.62rem)}.libraryWall .aisleCount{font:600 clamp(.52rem,.62vw,.7rem) var(--font-heading),serif;letter-spacing:.015em;white-space:nowrap}.libraryWall .aisleCount small{font:inherit}
 .libraryWall .cabinets{z-index:auto}.libraryWall .booksOnShelf:has(.realBook:hover),.libraryWall .booksOnShelf:has(.realBook:focus-visible){z-index:6}
 .libraryWall .lazyAislePlaceholder{width:100%;max-width:none;margin:0;background:linear-gradient(180deg,rgba(24,12,7,.2),rgba(8,4,3,.5))}
 .catalogCard strong{font-family:var(--font-heading),var(--font-cinzel),serif;font-weight:700;letter-spacing:.025em}
-@media(max-width:700px){.libraryWall .aisleMarker{left:7%;right:7%;top:3%;min-height:10%;grid-template-columns:1fr auto;padding:0;font-size:.55rem;white-space:normal}.libraryWall .aisleMarker span strong{font-size:.64rem}.libraryWall .aisleMarker>em{font-size:.5rem}}
+@media(max-width:900px){.libraryWall .aisleCount small{display:none}}
+@media(max-width:700px){.libraryWall .aisleMarker{left:7%;right:7%;top:3%;min-height:10%;grid-template-columns:minmax(0,1fr) auto auto;padding:0;gap:.25rem;font-size:.5rem;white-space:nowrap}.libraryWall .aisleMarker span strong{margin-left:.3rem;padding-left:.3rem;font-size:.58rem}.libraryWall .aisleMarker>em{font-size:.45rem}.libraryWall .aisleCount{font-size:.48rem}}
 
 /* Cinematic threshold: the architecture stays put while only the door leaves move. */
 .libraryEntrance{--door-top:32%;--door-bottom:4%;--door-side:17%;--door-top-offset:-32vh;--door-side-offset:-17vw;opacity:1;background:transparent;transform:translateZ(0) scale(1);transform-origin:50% 48%;will-change:transform,opacity;transition:visibility 0s linear 2.45s,opacity .32s ease 2.08s,transform 2.35s cubic-bezier(.2,.72,.18,1)}
