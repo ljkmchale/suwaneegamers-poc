@@ -142,6 +142,7 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
 function paginateSource(markdown: string, bookTitle: string): string[] {
   const clean = prepareBookText(markdown, bookTitle)
     .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target: string, label?: string) => label || target)
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .trim();
   if (!clean) return ["This volume contains no player-safe leaves yet."];
@@ -150,7 +151,7 @@ function paginateSource(markdown: string, bookTitle: string): string[] {
   let pageParts: string[] = [];
   let pageLength = 0;
   for (const paragraph of paragraphs) {
-    if (pageParts.length && (pageLength + paragraph.length > 310 || pageParts.length >= 3)) {
+    if (pageParts.length && (pageLength + paragraph.length > 430 || pageParts.length >= 5)) {
       pages.push(pageParts.join("\n"));
       pageParts = [paragraph];
       pageLength = paragraph.length;
@@ -163,7 +164,7 @@ function paginateSource(markdown: string, bookTitle: string): string[] {
   return pages;
 }
 
-const NON_READER_SECTIONS = /^(source grounding|source anchors?|source notes?|sources?|maintenance(?: rule)?|roster interpretation|audit(?: notes?| status)?|raw sources?|technical notes?|document notes?)$/i;
+const NON_READER_SECTIONS = /^(source grounding|source anchors?|source notes?|sources?|reference|citation pattern|maintenance(?: rule)?|roster interpretation|audit(?: notes?| status)?|raw sources?|technical notes?|document notes?)$/i;
 
 function prepareBookText(markdown: string, bookTitle: string): string {
   const lines = markdown.replace(/^---\s*\n[\s\S]*?\n---\s*\n/, "").split(/\r?\n/);
@@ -176,7 +177,7 @@ function prepareBookText(markdown: string, bookTitle: string): string {
       const headingText = heading[2].trim();
       if (heading[1].length === 1 && normalizeBookText(headingText) === normalizeBookText(bookTitle)) continue;
       if (heading[1].length <= 2) skipSection = NON_READER_SECTIONS.test(headingText);
-      if (!skipSection) output.push(headingText);
+      if (!skipSection && !/^imported notes$/i.test(headingText)) output.push(headingText);
       continue;
     }
     if (skipSection) continue;
@@ -185,6 +186,7 @@ function prepareBookText(markdown: string, bookTitle: string): string {
       continue;
     }
     if (/^campaign:\s*/i.test(line)) continue;
+    if (/^(?:source|raw source|raw hash|imported|pulled):\s*/i.test(line)) continue;
     if (/^\|?\s*:?-{3,}/.test(line)) continue;
     if (/\b(?:fast-lookup reference|living document|update after each session|do not merge events?|do not list the players|use the .* table above when answering|generated index of wiki pages|regenerate with|raw source:|current progress is tracked|source-session evidence)\b/i.test(line)) continue;
     if (line.startsWith("|") && line.endsWith("|")) {
@@ -193,6 +195,14 @@ function prepareBookText(markdown: string, bookTitle: string): string {
       continue;
     }
     output.push(line.replace(/`([^`]+)`/g, "$1"));
+  }
+  if (/campaign player notes/i.test(bookTitle)) {
+    const firstSession = output.findIndex((line) => /^\d{2}\s*[–—-]/.test(line));
+    if (firstSession > 0) {
+      return [...output.slice(firstSession), "", "Appendix: Party Reference", ...output.slice(0, firstSession)]
+        .join("\n")
+        .replace(/\n{3,}/g, "\n\n");
+    }
   }
   return output.join("\n").replace(/\n{3,}/g, "\n\n");
 }

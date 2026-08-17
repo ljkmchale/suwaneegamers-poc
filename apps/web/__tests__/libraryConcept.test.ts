@@ -26,6 +26,9 @@ describe("Advents of Harmony library", () => {
     expect(experience).toContain('(max-width: 620px)');
     expect(experience).toContain("singlePageBook");
     expect(experience).toContain("book.sourcePaths");
+    expect(experience).toContain("citation pattern");
+    expect(experience).toContain("raw hash");
+    expect(experience).toContain("Appendix: Party Reference");
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
     expect(scene).toContain("<video");
@@ -57,6 +60,8 @@ describe("Advents of Harmony library", () => {
     expect(page).not.toContain("sessionSummaries?.slice(0, 2)");
     expect(page).not.toContain("journey.stops.slice(0, 4)");
     expect(page).toContain("attachRelatedSources");
+    expect(page).toContain("sourceByTitle");
+    expect(page).toContain("preferredSourcePath ?? page.path");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {

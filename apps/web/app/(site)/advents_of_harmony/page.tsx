@@ -105,6 +105,11 @@ async function getChroniclesBooks(): Promise<{ adventure: LibraryBook[]; world: 
   try {
     const catalog = await loadLibraryCatalog();
     const playerPages = catalog.pages;
+    const sourceByTitle = new Map(
+      playerPages
+        .filter((page) => page.visibility !== "dm" && /(?:^|\/)sources\//i.test(page.path.replaceAll("\\", "/")))
+        .map((page) => [`${page.campaign}:${normalizeTitle(page.title)}`, page.path]),
+    );
 
     const readablePages = playerPages.filter((page) => {
       const sourcePath = page.path.replaceAll("\\", "/");
@@ -120,8 +125,8 @@ async function getChroniclesBooks(): Promise<{ adventure: LibraryBook[]; world: 
     const adventurePages = uniquePages(readablePages.filter((page) => !worldPaths.has(page.path)));
 
     return {
-      adventure: adventurePages.map((page, index) => sourceBook(page, "Chronicles Archive", index)),
-      world: worldPages.map((page, index) => sourceBook(page, "World Archive", index)),
+      adventure: adventurePages.map((page, index) => sourceBook(page, "Chronicles Archive", index, sourceByTitle.get(`${page.campaign}:${normalizeTitle(page.title)}`))),
+      world: worldPages.map((page, index) => sourceBook(page, "World Archive", index, sourceByTitle.get(`${page.campaign}:${normalizeTitle(page.title)}`))),
     };
   } catch {
     return { adventure: [], world: [] };
@@ -151,7 +156,7 @@ function uniquePages(pages: Array<Pick<PageEntry, "path" | "title" | "campaign" 
   return [...new Map(pages.map((page) => [page.path, page])).values()];
 }
 
-function sourceBook(page: Pick<PageEntry, "path" | "title" | "campaign" | "visibility">, collection: string, index: number): LibraryBook {
+function sourceBook(page: Pick<PageEntry, "path" | "title" | "campaign" | "visibility">, collection: string, index: number, preferredSourcePath?: string): LibraryBook {
   const category = page.path.replaceAll("\\", "/").split("/")[1] ?? "archive";
   return {
     id: `chronicles-${page.path}`,
@@ -161,6 +166,6 @@ function sourceBook(page: Pick<PageEntry, "path" | "title" | "campaign" | "visib
     color: ["#603028", "#273e55", "#425037", "#574020", "#46345b"][index % 5],
     image: collection === "World Archive" ? "/media/images/maps-of-myrdae/locations-map.webp" : "/media/images/guides-to-myrdae/campaign-setting.jpg",
     pages: [],
-    sourcePath: page.path,
+    sourcePath: preferredSourcePath ?? page.path,
   };
 }
