@@ -251,8 +251,8 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       <video
         ref={transitionVideo}
         className={styles.entranceVideo}
-        src="/media/images/library/advents-harmony-entrance-flova-v1.mp4"
-        poster="/media/images/library/advents-harmony-entrance-flova-poster-v1.webp"
+        src="/media/images/library/advents-harmony-entrance-flova-v2.mp4"
+        poster="/media/images/library/advents-harmony-entrance-flova-poster-v2.webp"
         preload="auto"
         muted
         playsInline

@@ -32,7 +32,9 @@ describe("Advents of Harmony library", () => {
     expect(scene).not.toContain("<div className={styles.entranceGlow}");
     expect(scene).not.toContain("<div className={styles.entrancePortal}");
     expect(css).toContain("object-fit:contain");
-    expect(scene).toContain("advents-harmony-entrance-flova-v1.mp4");
+    expect(scene).toContain("advents-harmony-entrance-flova-v2.mp4");
+    expect(scene).toContain("advents-harmony-entrance-flova-poster-v2.webp");
+    expect(scene).not.toContain("advents-harmony-entrance-flova-v1.mp4");
     expect(scene).toContain("styles.entranceDirectReveal");
     expect(scene).toContain("styles.entranceReturnReveal");
     expect(scene).toContain("setEntranceState(\"returning\")");
