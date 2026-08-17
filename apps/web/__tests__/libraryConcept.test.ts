@@ -14,17 +14,21 @@ describe("Advents of Harmony library", () => {
   it("includes interactive reading and bookmark affordances", () => {
     const experience = fs.readFileSync(path.join(routeDir, "LibraryExperience.tsx"), "utf8");
     const scene = fs.readFileSync(path.join(routeDir, "LibraryScene.tsx"), "utf8");
+    const css = fs.readFileSync(path.join(routeDir, "library.module.css"), "utf8");
     expect(experience).toContain("Place ribbon");
     expect(experience).toContain("localStorage");
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
     expect(scene).toContain("<video");
+    expect(scene.match(/<video/g)).toHaveLength(1);
+    expect(scene).not.toContain("<div className={styles.entranceGlow}");
+    expect(scene).not.toContain("<div className={styles.entrancePortal}");
+    expect(css).toContain("object-fit:contain");
     expect(scene).toContain("advents-harmony-entrance-flova-v1.mp4");
     expect(scene).toContain("advents-harmony-exit-web-v1.mp4");
-    expect(scene).toContain("onEnded={() => setEntranceState(\"blacking\")}");
     expect(scene).toContain("setEntranceState(\"revealing\")");
     expect(scene).toContain("styles.libraryBlackout");
-    expect(scene).toContain("onEnded={() => setEntranceState(\"closed\")}");
+    expect(scene).toContain("entranceState === \"closing\" ? \"closed\" : \"blacking\"");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"inside\")");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"closed\")");
     expect(scene).not.toContain("styles.entranceOpen");

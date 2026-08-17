@@ -196,50 +196,37 @@ function CardCatalog({ books, onSelect }: { books: LibraryBook[]; onSelect: (boo
 export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSelect: (book: LibraryBook) => void }) {
   const [withdrawingId, setWithdrawingId] = useState<string | null>(null);
   const [entranceState, setEntranceState] = useState<"closed" | "opening" | "blacking" | "revealing" | "inside" | "closing">("closed");
-  const entranceVideo = useRef<HTMLVideoElement | null>(null);
-  const exitVideo = useRef<HTMLVideoElement | null>(null);
+  const transitionVideo = useRef<HTMLVideoElement | null>(null);
   const insideLibrary = entranceState === "revealing" || entranceState === "inside";
   useEffect(() => {
     document.body.style.overflow = insideLibrary ? "" : "hidden";
     return () => { document.body.style.overflow = ""; };
   }, [insideLibrary]);
   useEffect(() => () => { document.body.style.cursor = "auto"; document.body.style.overflow = ""; }, []);
-  async function openEntrance() {
+  useEffect(() => {
+    if (entranceState !== "opening" && entranceState !== "closing") return;
+    const video = transitionVideo.current;
+    if (!video) {
+      setEntranceState(entranceState === "opening" ? "blacking" : "closed");
+      return;
+    }
+    video.currentTime = 0;
+    void video.play().catch(() => setEntranceState(entranceState === "opening" ? "blacking" : "closed"));
+  }, [entranceState]);
+  function openEntrance() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntranceState("inside");
       return;
     }
     setEntranceState("opening");
-    const video = entranceVideo.current;
-    if (!video) {
-      setEntranceState("inside");
-      return;
-    }
-    video.currentTime = 0;
-    try {
-      await video.play();
-    } catch {
-      setEntranceState("inside");
-    }
   }
-  async function leaveLibrary() {
+  function leaveLibrary() {
     window.scrollTo({ top: 0, behavior: "auto" });
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntranceState("closed");
       return;
     }
     setEntranceState("closing");
-    const video = exitVideo.current;
-    if (!video) {
-      setEntranceState("closed");
-      return;
-    }
-    video.currentTime = 0;
-    try {
-      await video.play();
-    } catch {
-      setEntranceState("closed");
-    }
   }
   function withdraw(book: LibraryBook) {
     if (withdrawingId) return;
@@ -249,37 +236,17 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
   return <div className={styles.libraryJourney}>
     <section className={`${styles.libraryEntrance} ${entranceState === "opening" || entranceState === "blacking" || entranceState === "closing" ? styles.entranceVideoPlaying : ""} ${entranceState === "revealing" || entranceState === "inside" ? styles.entranceInside : ""}`} aria-label="Entrance to the Grand Library of Myrdae" aria-hidden={entranceState !== "closed"}>
       <video
-        ref={entranceVideo}
-        className={`${styles.entranceVideo} ${entranceState === "opening" || entranceState === "blacking" ? styles.entranceVideoActive : ""}`}
-        src="/media/images/library/advents-harmony-entrance-flova-v1.mp4"
-        poster="/media/images/library/advents-harmony-entrance-v2.webp"
+        ref={transitionVideo}
+        className={styles.entranceVideo}
+        src={entranceState === "closing" ? "/media/images/library/advents-harmony-exit-web-v1.mp4" : "/media/images/library/advents-harmony-entrance-flova-v1.mp4"}
+        poster="/media/images/library/advents-harmony-entrance-flova-poster-v1.webp"
         preload="auto"
         muted
         playsInline
-        onEnded={() => setEntranceState("blacking")}
-        onError={() => entranceState === "opening" && setEntranceState("blacking")}
+        onEnded={() => setEntranceState(entranceState === "closing" ? "closed" : "blacking")}
+        onError={() => setEntranceState(entranceState === "closing" ? "closed" : "blacking")}
         aria-hidden="true"
       />
-      <video
-        ref={exitVideo}
-        className={`${styles.entranceVideo} ${entranceState === "closing" ? styles.entranceVideoActive : ""}`}
-        src="/media/images/library/advents-harmony-exit-web-v1.mp4"
-        poster="/media/images/library/advents-harmony-entrance-v2.webp"
-        preload="auto"
-        muted
-        playsInline
-        onEnded={() => setEntranceState("closed")}
-        onError={() => setEntranceState("closed")}
-        aria-hidden="true"
-      />
-      <div className={styles.entranceGlow} aria-hidden="true" />
-      <div className={styles.entrancePortal} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceFramePiece} ${styles.entranceFrameTop}`} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceFramePiece} ${styles.entranceFrameLeft}`} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceFramePiece} ${styles.entranceFrameRight}`} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceFramePiece} ${styles.entranceFrameBottom}`} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceDoor} ${styles.entranceDoorLeft}`} aria-hidden="true"><span /></div>
-      <div className={`${styles.entranceDoor} ${styles.entranceDoorRight}`} aria-hidden="true"><span /></div>
       <h1 className="sr-only">Advents of Harmony — Knowledge &amp; Lore</h1>
       <button type="button" className={styles.enterLibrary} onClick={openEntrance} tabIndex={entranceState === "closed" ? 0 : -1}>
         <span>✦</span> Open the doors <span>✦</span>
