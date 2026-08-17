@@ -44,7 +44,7 @@ const BUILTIN_LABELS: Record<string, string> = {
   "/reference-for-dungeon-masters": "Reference for DMs",
   "/territories": "Territories",
   "/calendar": "Calendar",
-  "/chronicles": "Chronicles",
+  "/advents_of_harmony": "Advents of Harmony",
   "/maps-of-myrdae": "Maps of Myrdae",
   "/previous-campaigns": "Previous Campaigns",
   "/test-page": "Test Page",

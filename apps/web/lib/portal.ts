@@ -1,7 +1,7 @@
 import { readContent } from "@/lib/contentFiles";
 
 export const PORTAL_URLS = {
-  chronicles: "https://kb.suwaneegamers.net/",
+  chronicles: "/advents_of_harmony",
   referenceSite: "https://sites.google.com/view/suwanee-gamers/",
   dndBeyond: "https://www.dndbeyond.com/",
   calendar: "/calendar",
@@ -22,10 +22,10 @@ export function getPortalLinks(): PortalLink[] {
 
 export function chroniclesLink(description: string): PortalLink {
   return {
-    title: "Suwanee Gamers Chronicles",
+    title: "Advents of Harmony",
     description,
     href: PORTAL_URLS.chronicles,
-    label: "Open Chronicles",
+    label: "Enter the Library",
   };
 }
 

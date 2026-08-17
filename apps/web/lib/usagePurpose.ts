@@ -30,7 +30,7 @@ interface SitePurposeInput {
 function purposeForPath(path: string): UsagePurpose | null {
   if (/^\/calendar(?:\/|$)/.test(path)) return "schedule_planning";
   if (/^\/(?:campaigns|campaign-journeys)(?:\/|$)/.test(path)) return "campaign_followup";
-  if (/^\/(?:chronicles|lore|pantheon|bestiary|reference-for-dungeon-masters)(?:\/|$)/.test(path)) return "lore_research";
+  if (/^\/(?:advents_of_harmony|lore|pantheon|bestiary|reference-for-dungeon-masters)(?:\/|$)/.test(path)) return "lore_research";
   if (/^\/(?:gazetteer|maps-of-myrdae|organizations|territories|setting|campaign-setting)(?:\/|$)/.test(path)) return "world_exploration";
   if (/^\/(?:players|profile|dungeon-masters)(?:\/|$)/.test(path)) return "character_roster";
   if (/^\/store(?:\/|$)/.test(path)) return "merchandise";
@@ -83,4 +83,3 @@ export function classifyVoicePurpose(category: string): UsagePurposeSignal {
   else if (value.includes("navigation")) purpose = "community_information";
   return { purpose, signalType: "voice_question", confidence: purpose === "myra_assistance" ? 70 : 95 };
 }
-

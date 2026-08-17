@@ -144,7 +144,7 @@ function buildAutoBlock() {
   );
   lines.push("");
   lines.push("- **Campaigns and session history**: search Chronicles by campaign; site page `/campaigns`.");
-  lines.push("- **Characters, NPCs, factions, items, quests, and open threads**: search Chronicles; site page `/chronicles`.");
+  lines.push("- **Characters, NPCs, factions, items, quests, and open threads**: search Chronicles; site page `/advents_of_harmony`.");
   lines.push("- **Gods and religion**: use the Pantheon roster for names, titles, and domains; search Chronicles for a specific deity's rites, commandments, myths, faith, or campaign connections; site page `/pantheon`.");
   lines.push("- **Settlements and local references**: search Chronicles and Gazetteer sources; site page `/gazetteer`.");
   lines.push("- **Territories, regions, and travel context**: search Chronicles; site pages `/territories`, `/maps-of-myrdae`, and `/campaign-journeys`.");

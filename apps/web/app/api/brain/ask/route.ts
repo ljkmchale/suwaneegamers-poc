@@ -30,7 +30,7 @@ function logQuestion(campaign: string, question: string, answer: string, sources
 
 export async function POST(request: NextRequest) {
   // This route is exempt from the proxy's site-wide sign-in gate because it has
-  // two kinds of caller: signed-in members on /chronicles, and the LiveKit voice
+  // two kinds of caller: signed-in members in /advents_of_harmony, and the LiveKit voice
   // agent, which has no browser session. Authorization therefore happens here.
   if (!isMachineRequest(request) && !isSignedIn(await getUserSession())) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });

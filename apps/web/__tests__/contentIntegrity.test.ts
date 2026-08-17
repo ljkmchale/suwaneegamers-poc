@@ -185,7 +185,7 @@ describe("DM names → players.json", () => {
 // ── Nav → internal pages exist ───────────────────────────────────────────────
 
 const KNOWN_INTERNAL_ROUTES = new Set([
-  "/", "/calendar", "/campaigns", "/chronicles", "/dungeon-masters", "/players",
+  "/", "/calendar", "/campaigns", "/advents_of_harmony", "/dungeon-masters", "/players",
   "/bestiary", "/setting", "/territories", "/pantheon",
   "/history", "/lore", "/gazetteer", "/maps-of-myrdae",
   "/campaign-setting", "/campaign-journeys", "/organizations", "/adventures", "/reference-for-dungeon-masters",

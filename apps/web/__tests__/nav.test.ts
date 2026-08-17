@@ -114,10 +114,10 @@ describe("nav item ID uniqueness", () => {
 describe("Chronicles navigation", () => {
   it("uses one embedded Chronicles doorway with no Knowledge Base duplicate", () => {
     const items = getNavConfig().sections.flatMap((section) => section.items);
-    const chronicles = items.filter((item) => item.label === "Chronicles");
+    const chronicles = items.filter((item) => item.label === "Library");
 
     expect(chronicles).toEqual([
-      expect.objectContaining({ href: "/chronicles" }),
+      expect.objectContaining({ href: "/advents_of_harmony" }),
     ]);
     expect(items.some((item) => item.label === "Knowledge Base")).toBe(false);
   });

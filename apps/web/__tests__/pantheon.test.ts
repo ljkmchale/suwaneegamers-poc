@@ -3,10 +3,19 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { revalidate } from "@/app/(site)/pantheon/page";
 import {
   getPantheonDeities,
+  getOldPantheonDeities,
   PANTHEON_REVALIDATE_SECONDS,
 } from "@/lib/pantheon";
 
 const pantheonMarkdown = `
+## The Assembly of Essence (Old Gods)
+
+| Name | Domain | Symbol |
+| --- | --- | --- |
+| Athuel | Knowledge | An all-seeing eye |
+
+## Deities of the New Order
+
 | Name | Title | Domain(s) |
 | --- | --- | --- |
 | Addan | Eternal Guardian | Protection |
@@ -38,6 +47,18 @@ describe("Pantheon source loading", () => {
       details: "Guardian details.",
     });
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("keeps the documented Old Gods separate from the New Order", async () => {
+    const realReadFileSync = fs.readFileSync.bind(fs);
+    vi.spyOn(fs, "readFileSync").mockImplementation((path, ...args) => {
+      if (String(path).includes("history-doc-cache")) return pantheonMarkdown;
+      return realReadFileSync(path, ...args as [never]);
+    });
+    const oldGods = await getOldPantheonDeities();
+    expect(oldGods).toEqual([
+      expect.objectContaining({ name: "Athuel", domain: "Knowledge", details: "Sacred symbol: An all-seeing eye." }),
+    ]);
   });
 
   it("uses the page revalidation window when the local source is unavailable", async () => {

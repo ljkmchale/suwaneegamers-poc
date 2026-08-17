@@ -5,7 +5,7 @@ describe("usage purpose classification", () => {
   it("classifies passive page and engagement signals", () => {
     expect(classifySitePurpose({ eventType: "page_view", path: "/calendar" }))
       .toEqual({ purpose: "schedule_planning", signalType: "page", confidence: 60 });
-    expect(classifySitePurpose({ eventType: "page_engagement", path: "/chronicles", durationSeconds: 30 }))
+    expect(classifySitePurpose({ eventType: "page_engagement", path: "/advents_of_harmony", durationSeconds: 30 }))
       .toEqual({ purpose: "lore_research", signalType: "engagement", confidence: 75 });
   });
 
@@ -27,4 +27,3 @@ describe("usage purpose classification", () => {
     expect(classifyVoicePurpose("self_diagnosis").purpose).toBe("myra_assistance");
   });
 });
-

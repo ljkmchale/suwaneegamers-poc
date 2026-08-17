@@ -24,6 +24,11 @@ export async function saveIndex(chunks, embeddings, browseOnlyDocuments = [], fi
   };
 
   await fs.writeFile(config.indexPath, JSON.stringify(index, null, 2));
+  const libraryCatalogPath = path.join(path.dirname(config.indexPath), "library-catalog.json");
+  const playerPages = Object.values(index.pages)
+    .filter((page) => page.visibility !== "dm")
+    .map(({ path, title, campaign, visibility }) => ({ path, title, campaign, visibility }));
+  await fs.writeFile(libraryCatalogPath, JSON.stringify({ version: 1, createdAt, pages: playerPages }, null, 2));
   return index;
 }
 

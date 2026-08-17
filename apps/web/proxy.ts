@@ -24,7 +24,7 @@ const MACHINE_PATHS = [
   "/api/livekit/metrics",
   "/api/content-scheduler/",
   "/api/myra/health/monitor",
-  // Serves both signed-in members on /chronicles and the voice agent's
+  // Serves both signed-in members in /advents_of_harmony and the voice agent's
   // search_knowledge_base tool, so it authorizes both cases inside the route
   // rather than here. It is NOT public — see app/api/brain/ask/route.ts.
   "/api/brain/ask",

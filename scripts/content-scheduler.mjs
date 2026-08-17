@@ -145,7 +145,7 @@ const jobs = [
     schedule: { kind: "daily", time: "10:45" },
     command: [node, [path.join("apps", "web", "brain-tools", "src", "refresh-sources.mjs")]],
     timeoutMs: 20 * 60_000,
-    revalidatePaths: ["/chronicles", "/admin/chronicles"],
+    revalidatePaths: ["/advents_of_harmony", "/admin/chronicles"],
   },
   {
     id: "campaign-journeys",

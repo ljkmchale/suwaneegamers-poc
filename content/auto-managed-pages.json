@@ -37,8 +37,8 @@
     "editNote": "Add or update events directly in Google Calendar. Update the Session Summaries Google Doc to change the Previous Adventures notes."
   },
   {
-    "path": "/chronicles",
-    "label": "Chronicles",
+    "path": "/advents_of_harmony",
+    "label": "Advents of Harmony",
     "sourceName": "Brain Vault",
     "sourceUrl": "https://kb.suwaneegamers.net/",
     "managedSources": [
@@ -86,7 +86,7 @@
       }
     ],
     "refreshLabel": "Pulls configured Chronicles Google Docs into the Brain Vault, processes stale raw sources, and rebuilds the index when needed.",
-    "editNote": "Update the Google Docs listed here or maintained wiki pages in apps/web/brain-vault. Public /chronicles uses player-safe sources; /admin/chronicles can use DM-visible sources."
+    "editNote": "Update the Google Docs listed here or maintained wiki pages in apps/web/brain-vault. Public /advents_of_harmony uses player-safe sources; /admin/chronicles can use DM-visible sources."
   },
   {
     "path": "/organizations",

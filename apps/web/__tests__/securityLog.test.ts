@@ -27,7 +27,7 @@ describe("isSuspiciousPath", () => {
       "/campaigns",
       "/campaigns/mad-mage",
       "/gazetteer",
-      "/chronicles",
+      "/advents_of_harmony",
       "/admin",
       "/admin/login",
       "/api/calendar/events",

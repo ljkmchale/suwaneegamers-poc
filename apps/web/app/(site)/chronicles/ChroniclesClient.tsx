@@ -114,7 +114,7 @@ export function ChroniclesClient({
   const allowDmControls = surface === "admin" && isAdmin;
   const dmAvailable = allowDmControls && Boolean(config?.dmModeEnabled);
   const canUseDm = visibility === "players" || dmAvailable;
-  const chroniclesPath = surface === "admin" ? "/admin/chronicles" : "/chronicles";
+  const chroniclesPath = surface === "admin" ? "/admin/chronicles" : "/advents_of_harmony";
 
   useEffect(() => {
     let cancelled = false;

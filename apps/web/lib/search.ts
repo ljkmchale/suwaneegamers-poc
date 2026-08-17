@@ -32,7 +32,7 @@ const SITE_PAGES: { path: string; label: string }[] = [
   { path: "/reference-for-dungeon-masters", label: "Reference for DMs" },
   { path: "/territories", label: "Territories" },
   { path: "/calendar", label: "Calendar" },
-  { path: "/chronicles", label: "Chronicles" },
+  { path: "/advents_of_harmony", label: "Advents of Harmony" },
   { path: "/maps-of-myrdae", label: "Maps of Myrdae" },
   { path: "/previous-campaigns", label: "Previous Campaigns" },
 ];

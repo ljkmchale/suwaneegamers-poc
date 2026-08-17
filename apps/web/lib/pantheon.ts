@@ -126,6 +126,30 @@ function extractNewOrderTable(markdown: string): PantheonDeity[] {
   return rows;
 }
 
+function extractOldOrderTable(markdown: string): PantheonDeity[] {
+  const sectionStart = markdown.indexOf("## The Assembly of Essence (Old Gods)");
+  if (sectionStart < 0) return [];
+  const section = markdown.slice(sectionStart, markdown.indexOf("## Deities of the New Order", sectionStart));
+  const tableStart = section.indexOf("| Name | Domain | Symbol |");
+  if (tableStart < 0) return [];
+  const rows: PantheonDeity[] = [];
+  for (const line of section.slice(tableStart).split("\n").slice(2)) {
+    if (!line.startsWith("|")) break;
+    const cells = line.split("|").slice(1, -1).map((cell) => stripMarkdown(cell));
+    if (cells.length < 3 || !cells[0]) continue;
+    rows.push({
+      id: `old-${slug(cells[0])}`,
+      name: cells[0],
+      title: "of the Assembly of Essence",
+      domain: cells[1] || null,
+      image: null,
+      href: getPantheonSourceUrl(),
+      details: cells[2] ? `Sacred symbol: ${cells[2]}.` : null,
+    });
+  }
+  return rows;
+}
+
 function extractDetailSections(markdown: string): Map<string, string> {
   const sections = new Map<string, string>();
   const tableStart = markdown.indexOf("| Name | Title | Domain(s) |");
@@ -201,4 +225,18 @@ export async function getPantheonDeities(): Promise<PantheonDeity[]> {
   }
 
   return readLocalPantheonCards();
+}
+
+export async function getOldPantheonDeities(): Promise<PantheonDeity[]> {
+  const cached = readCachedPantheonMarkdown();
+  if (cached) return extractOldOrderTable(cached);
+  try {
+    const response = await fetch(getPantheonExportUrl(), {
+      next: { revalidate: PANTHEON_REVALIDATE_SECONDS },
+    });
+    if (response.ok) return extractOldOrderTable(await response.text());
+  } catch {
+    // The Old Gods archive remains empty until the synchronized source is available.
+  }
+  return [];
 }

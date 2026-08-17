@@ -43,7 +43,7 @@ export const PAGE_SECTIONS: Record<string, SectionMeta[]> = {
   "/reference-for-dungeon-masters": [],
   "/territories":        [],
   "/calendar":           [],
-  "/chronicles":         [],
+  "/advents_of_harmony": [],
   "/maps-of-myrdae":     [],
   "/previous-campaigns": [],
   "/test-page":          [],
