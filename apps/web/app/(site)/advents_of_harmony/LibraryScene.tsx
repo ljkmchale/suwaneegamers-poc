@@ -197,15 +197,30 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
   const [withdrawingId, setWithdrawingId] = useState<string | null>(null);
   const [entranceState, setEntranceState] = useState<"closed" | "opening" | "inside" | "closing">("closed");
   const entranceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const entranceVideo = useRef<HTMLVideoElement | null>(null);
   const insideLibrary = entranceState === "inside";
   useEffect(() => {
     document.body.style.overflow = insideLibrary ? "" : "hidden";
     return () => { document.body.style.overflow = ""; };
   }, [insideLibrary]);
   useEffect(() => () => { if (entranceTimer.current) clearTimeout(entranceTimer.current); document.body.style.cursor = "auto"; document.body.style.overflow = ""; }, []);
-  function openEntrance() {
+  async function openEntrance() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setEntranceState("inside");
+      return;
+    }
     setEntranceState("opening");
-    entranceTimer.current = setTimeout(() => setEntranceState("inside"), 6800);
+    const video = entranceVideo.current;
+    if (!video) {
+      setEntranceState("inside");
+      return;
+    }
+    video.currentTime = 0;
+    try {
+      await video.play();
+    } catch {
+      setEntranceState("inside");
+    }
   }
   function leaveLibrary() {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -218,7 +233,19 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
     window.setTimeout(() => { onSelect(book); setWithdrawingId(null); }, 620);
   }
   return <div className={styles.libraryJourney}>
-    <section className={`${styles.libraryEntrance} ${entranceState === "opening" ? styles.entranceOpen : ""} ${entranceState === "inside" ? styles.entranceInside : ""} ${entranceState === "closing" ? styles.entranceClosing : ""}`} aria-label="Entrance to the Grand Library of Myrdae" aria-hidden={entranceState !== "closed"}>
+    <section className={`${styles.libraryEntrance} ${entranceState === "opening" ? `${styles.entranceOpen} ${styles.entranceVideoPlaying}` : ""} ${entranceState === "inside" ? styles.entranceInside : ""} ${entranceState === "closing" ? styles.entranceClosing : ""}`} aria-label="Entrance to the Grand Library of Myrdae" aria-hidden={entranceState !== "closed"}>
+      <video
+        ref={entranceVideo}
+        className={styles.entranceVideo}
+        src="/media/images/library/advents-harmony-entrance-web-v2.mp4"
+        poster="/media/images/library/advents-harmony-entrance-v2.webp"
+        preload="auto"
+        muted
+        playsInline
+        onEnded={() => setEntranceState("inside")}
+        onError={() => entranceState === "opening" && setEntranceState("inside")}
+        aria-hidden="true"
+      />
       <div className={styles.entranceGlow} aria-hidden="true" />
       <div className={styles.entrancePortal} aria-hidden="true"><span /></div>
       <div className={`${styles.entranceFramePiece} ${styles.entranceFrameTop}`} aria-hidden="true"><span /></div>

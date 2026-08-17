@@ -13,10 +13,15 @@ describe("Advents of Harmony library", () => {
 
   it("includes interactive reading and bookmark affordances", () => {
     const experience = fs.readFileSync(path.join(routeDir, "LibraryExperience.tsx"), "utf8");
+    const scene = fs.readFileSync(path.join(routeDir, "LibraryScene.tsx"), "utf8");
     expect(experience).toContain("Place ribbon");
     expect(experience).toContain("localStorage");
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
+    expect(scene).toContain("<video");
+    expect(scene).toContain("advents-harmony-entrance-web-v2.mp4");
+    expect(scene).toContain("onEnded={() => setEntranceState(\"inside\")}");
+    expect(scene).not.toContain("setTimeout(() => setEntranceState(\"inside\")");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {
