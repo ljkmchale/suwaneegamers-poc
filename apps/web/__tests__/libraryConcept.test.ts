@@ -26,9 +26,10 @@ describe("Advents of Harmony library", () => {
     expect(css).toContain("object-fit:contain");
     expect(scene).toContain("advents-harmony-entrance-flova-v1.mp4");
     expect(scene).toContain("advents-harmony-exit-web-v1.mp4");
-    expect(scene).toContain("setEntranceState(\"revealing\")");
-    expect(scene).toContain("styles.libraryBlackout");
-    expect(scene).toContain("entranceState === \"closing\" ? \"closed\" : \"blacking\"");
+    expect(scene).toContain("styles.entranceDirectReveal");
+    expect(scene).toContain("entranceState === \"closing\" ? \"closed\" : \"revealing\"");
+    expect(scene).not.toContain("styles.libraryBlackout");
+    expect(scene).not.toContain("\"blacking\"");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"inside\")");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"closed\")");
     expect(scene).not.toContain("styles.entranceOpen");

@@ -195,7 +195,7 @@ function CardCatalog({ books, onSelect }: { books: LibraryBook[]; onSelect: (boo
 
 export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSelect: (book: LibraryBook) => void }) {
   const [withdrawingId, setWithdrawingId] = useState<string | null>(null);
-  const [entranceState, setEntranceState] = useState<"closed" | "opening" | "blacking" | "revealing" | "inside" | "closing">("closed");
+  const [entranceState, setEntranceState] = useState<"closed" | "opening" | "revealing" | "inside" | "closing">("closed");
   const transitionVideo = useRef<HTMLVideoElement | null>(null);
   const insideLibrary = entranceState === "revealing" || entranceState === "inside";
   useEffect(() => {
@@ -207,11 +207,11 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
     if (entranceState !== "opening" && entranceState !== "closing") return;
     const video = transitionVideo.current;
     if (!video) {
-      setEntranceState(entranceState === "opening" ? "blacking" : "closed");
+      setEntranceState(entranceState === "opening" ? "revealing" : "closed");
       return;
     }
     video.currentTime = 0;
-    void video.play().catch(() => setEntranceState(entranceState === "opening" ? "blacking" : "closed"));
+    void video.play().catch(() => setEntranceState(entranceState === "opening" ? "revealing" : "closed"));
   }, [entranceState]);
   function openEntrance() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -234,7 +234,14 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
     window.setTimeout(() => { onSelect(book); setWithdrawingId(null); }, 620);
   }
   return <div className={styles.libraryJourney}>
-    <section className={`${styles.libraryEntrance} ${entranceState === "opening" || entranceState === "blacking" || entranceState === "closing" ? styles.entranceVideoPlaying : ""} ${entranceState === "revealing" || entranceState === "inside" ? styles.entranceInside : ""}`} aria-label="Entrance to the Grand Library of Myrdae" aria-hidden={entranceState !== "closed"}>
+    <section
+      className={`${styles.libraryEntrance} ${entranceState === "opening" || entranceState === "closing" ? styles.entranceVideoPlaying : ""} ${entranceState === "revealing" ? styles.entranceDirectReveal : ""} ${entranceState === "inside" ? styles.entranceInside : ""}`}
+      aria-label="Entrance to the Grand Library of Myrdae"
+      aria-hidden={entranceState !== "closed"}
+      onTransitionEnd={(event) => {
+        if (entranceState === "revealing" && event.propertyName === "opacity") setEntranceState("inside");
+      }}
+    >
       <video
         ref={transitionVideo}
         className={styles.entranceVideo}
@@ -243,8 +250,8 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
         preload="auto"
         muted
         playsInline
-        onEnded={() => setEntranceState(entranceState === "closing" ? "closed" : "blacking")}
-        onError={() => setEntranceState(entranceState === "closing" ? "closed" : "blacking")}
+        onEnded={() => setEntranceState(entranceState === "closing" ? "closed" : "revealing")}
+        onError={() => setEntranceState(entranceState === "closing" ? "closed" : "revealing")}
         aria-hidden="true"
       />
       <h1 className="sr-only">Advents of Harmony — Knowledge &amp; Lore</h1>
@@ -252,15 +259,6 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
         <span>✦</span> Open the doors <span>✦</span>
       </button>
     </section>
-    <div
-      className={`${styles.libraryBlackout} ${entranceState === "blacking" ? styles.libraryBlackoutActive : ""} ${entranceState === "revealing" ? styles.libraryBlackoutReveal : ""}`}
-      onTransitionEnd={(event) => {
-        if (event.propertyName !== "opacity") return;
-        if (entranceState === "blacking") setEntranceState("revealing");
-        else if (entranceState === "revealing") setEntranceState("inside");
-      }}
-      aria-hidden="true"
-    />
     <div className={`${styles.libraryInterior} ${insideLibrary ? styles.interiorRevealed : ""}`} id="grand-library-collection">
       {insideLibrary && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Return through the doors <span aria-hidden="true">✦</span></button>}
       <CardCatalog books={books} onSelect={onSelect} />
