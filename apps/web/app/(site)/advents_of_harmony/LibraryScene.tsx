@@ -196,6 +196,7 @@ function CardCatalog({ books, onSelect }: { books: LibraryBook[]; onSelect: (boo
 export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSelect: (book: LibraryBook) => void }) {
   const [withdrawingId, setWithdrawingId] = useState<string | null>(null);
   const [entranceState, setEntranceState] = useState<"closed" | "opening" | "revealing" | "inside" | "returning">("closed");
+  const [entranceClip, setEntranceClip] = useState<0 | 1>(0);
   const transitionVideo = useRef<HTMLVideoElement | null>(null);
   const insideLibrary = entranceState === "revealing" || entranceState === "inside" || entranceState === "returning";
   useEffect(() => {
@@ -210,14 +211,17 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       setEntranceState("revealing");
       return;
     }
+    video.load();
     video.currentTime = 0;
     void video.play().catch(() => setEntranceState("revealing"));
-  }, [entranceState]);
+  }, [entranceClip, entranceState]);
   function openEntrance() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntranceState("inside");
       return;
     }
+    setEntranceClip(0);
+    void fetch("/media/images/library/advents-harmony-inside-library-v1.mp4", { cache: "force-cache" }).catch(() => undefined);
     setEntranceState("opening");
   }
   function leaveLibrary() {
@@ -231,6 +235,7 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       video.pause();
       video.currentTime = 0;
     }
+    setEntranceClip(0);
     setEntranceState("returning");
   }
   function withdraw(book: LibraryBook) {
@@ -251,13 +256,13 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       <video
         ref={transitionVideo}
         className={styles.entranceVideo}
-        src="/media/images/library/advents-harmony-entrance-flova-v2.mp4"
-        poster="/media/images/library/advents-harmony-entrance-flova-poster-v2.webp"
+        src={entranceClip === 0 ? "/media/images/library/advents-harmony-entrance-flova-v2.mp4" : "/media/images/library/advents-harmony-inside-library-v1.mp4"}
+        poster={entranceClip === 0 ? "/media/images/library/advents-harmony-entrance-flova-poster-v2.webp" : "/media/images/library/advents-harmony-inside-library-poster-v1.webp"}
         preload="auto"
         muted
         playsInline
-        onEnded={() => setEntranceState("revealing")}
-        onError={() => setEntranceState("revealing")}
+        onEnded={() => entranceClip === 0 ? setEntranceClip(1) : setEntranceState("revealing")}
+        onError={() => entranceClip === 0 ? setEntranceClip(1) : setEntranceState("revealing")}
         aria-hidden="true"
       />
       <h1 className="sr-only">Advents of Harmony — Knowledge &amp; Lore</h1>
