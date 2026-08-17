@@ -25,9 +25,12 @@ describe("Advents of Harmony library", () => {
     expect(scene).not.toContain("<div className={styles.entrancePortal}");
     expect(css).toContain("object-fit:contain");
     expect(scene).toContain("advents-harmony-entrance-flova-v1.mp4");
-    expect(scene).toContain("advents-harmony-exit-web-v1.mp4");
     expect(scene).toContain("styles.entranceDirectReveal");
-    expect(scene).toContain("entranceState === \"closing\" ? \"closed\" : \"revealing\"");
+    expect(scene).toContain("styles.entranceReturnReveal");
+    expect(scene).toContain("setEntranceState(\"returning\")");
+    expect(scene).toContain("video.currentTime = 0");
+    expect(scene).not.toContain("advents-harmony-exit-web-v1.mp4");
+    expect(scene).not.toContain("\"closing\"");
     expect(scene).not.toContain("styles.libraryBlackout");
     expect(scene).not.toContain("\"blacking\"");
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"inside\")");

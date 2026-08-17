@@ -194,3 +194,4 @@
 .entranceVideo{position:absolute;z-index:5;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;visibility:visible;background:#000;pointer-events:none}
 .entranceVideoPlaying{opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important}
 .entranceDirectReveal{opacity:0;pointer-events:none;transition:opacity 1.1s ease!important}
+.entranceReturnReveal{opacity:1;visibility:visible;pointer-events:none;transform:none;transition:opacity 1.8s ease!important}

@@ -195,23 +195,23 @@ function CardCatalog({ books, onSelect }: { books: LibraryBook[]; onSelect: (boo
 
 export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSelect: (book: LibraryBook) => void }) {
   const [withdrawingId, setWithdrawingId] = useState<string | null>(null);
-  const [entranceState, setEntranceState] = useState<"closed" | "opening" | "revealing" | "inside" | "closing">("closed");
+  const [entranceState, setEntranceState] = useState<"closed" | "opening" | "revealing" | "inside" | "returning">("closed");
   const transitionVideo = useRef<HTMLVideoElement | null>(null);
-  const insideLibrary = entranceState === "revealing" || entranceState === "inside";
+  const insideLibrary = entranceState === "revealing" || entranceState === "inside" || entranceState === "returning";
   useEffect(() => {
     document.body.style.overflow = insideLibrary ? "" : "hidden";
     return () => { document.body.style.overflow = ""; };
   }, [insideLibrary]);
   useEffect(() => () => { document.body.style.cursor = "auto"; document.body.style.overflow = ""; }, []);
   useEffect(() => {
-    if (entranceState !== "opening" && entranceState !== "closing") return;
+    if (entranceState !== "opening") return;
     const video = transitionVideo.current;
     if (!video) {
-      setEntranceState(entranceState === "opening" ? "revealing" : "closed");
+      setEntranceState("revealing");
       return;
     }
     video.currentTime = 0;
-    void video.play().catch(() => setEntranceState(entranceState === "opening" ? "revealing" : "closed"));
+    void video.play().catch(() => setEntranceState("revealing"));
   }, [entranceState]);
   function openEntrance() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -226,7 +226,12 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       setEntranceState("closed");
       return;
     }
-    setEntranceState("closing");
+    const video = transitionVideo.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    setEntranceState("returning");
   }
   function withdraw(book: LibraryBook) {
     if (withdrawingId) return;
@@ -235,23 +240,24 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
   }
   return <div className={styles.libraryJourney}>
     <section
-      className={`${styles.libraryEntrance} ${entranceState === "opening" || entranceState === "closing" ? styles.entranceVideoPlaying : ""} ${entranceState === "revealing" ? styles.entranceDirectReveal : ""} ${entranceState === "inside" ? styles.entranceInside : ""}`}
+      className={`${styles.libraryEntrance} ${entranceState === "opening" ? styles.entranceVideoPlaying : ""} ${entranceState === "revealing" ? styles.entranceDirectReveal : ""} ${entranceState === "returning" ? styles.entranceReturnReveal : ""} ${entranceState === "inside" ? styles.entranceInside : ""}`}
       aria-label="Entrance to the Grand Library of Myrdae"
       aria-hidden={entranceState !== "closed"}
       onTransitionEnd={(event) => {
         if (entranceState === "revealing" && event.propertyName === "opacity") setEntranceState("inside");
+        else if (entranceState === "returning" && event.propertyName === "opacity") setEntranceState("closed");
       }}
     >
       <video
         ref={transitionVideo}
         className={styles.entranceVideo}
-        src={entranceState === "closing" ? "/media/images/library/advents-harmony-exit-web-v1.mp4" : "/media/images/library/advents-harmony-entrance-flova-v1.mp4"}
+        src="/media/images/library/advents-harmony-entrance-flova-v1.mp4"
         poster="/media/images/library/advents-harmony-entrance-flova-poster-v1.webp"
         preload="auto"
         muted
         playsInline
-        onEnded={() => setEntranceState(entranceState === "closing" ? "closed" : "revealing")}
-        onError={() => setEntranceState(entranceState === "closing" ? "closed" : "revealing")}
+        onEnded={() => setEntranceState("revealing")}
+        onError={() => setEntranceState("revealing")}
         aria-hidden="true"
       />
       <h1 className="sr-only">Advents of Harmony — Knowledge &amp; Lore</h1>
@@ -260,7 +266,7 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       </button>
     </section>
     <div className={`${styles.libraryInterior} ${insideLibrary ? styles.interiorRevealed : ""}`} id="grand-library-collection">
-      {insideLibrary && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Return through the doors <span aria-hidden="true">✦</span></button>}
+      {entranceState === "inside" && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Return through the doors <span aria-hidden="true">✦</span></button>}
       <CardCatalog books={books} onSelect={onSelect} />
       {CHAMBERS.map((chamber, index) => <LibraryChamber key={chamber.name} chamber={chamber} index={index} books={books.filter((book) => chamber.collections.includes(book.collection))} withdrawingId={withdrawingId} onWithdraw={withdraw} />)}
       <footer className={styles.libraryEnd}><span>✦</span><p>The collection grows with every tale told in Myrdae.</p></footer>
