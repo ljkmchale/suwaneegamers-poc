@@ -3,6 +3,7 @@
 import { Bookmark, ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { RunicBackground } from "../calendar/RunicBackground";
 import { LibraryScene } from "./LibraryScene";
 import styles from "./library.module.css";
 
@@ -22,6 +23,14 @@ const BOOKMARK_KEY = "myrdae-library-bookmarks";
 function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void }) {
   const [sourcePages, setSourcePages] = useState<string[] | null>(null);
   const [sourceError, setSourceError] = useState("");
+  const [singlePage, setSinglePage] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 620px)");
+    const update = () => setSinglePage(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   useEffect(() => {
     if (!book.sourcePath) {
       setSourcePages(null);
@@ -48,11 +57,12 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
       ...(book.sourcePath ? sourcePages ?? [sourceError || "The archivists are retrieving this volume..."] : staticPages),
     ];
     const result: Array<[string, string]> = [];
-    for (let index = 0; index < bookPages.length; index += 2) {
-      result.push([bookPages[index] ?? "", bookPages[index + 1] ?? ""]);
+    const leavesPerView = singlePage ? 1 : 2;
+    for (let index = 0; index < bookPages.length; index += leavesPerView) {
+      result.push([bookPages[index] ?? "", singlePage ? "" : bookPages[index + 1] ?? ""]);
     }
     return result;
-  }, [book, sourcePages, sourceError]);
+  }, [book, singlePage, sourcePages, sourceError]);
   const [spread, setSpread] = useState(0);
   const [turning, setTurning] = useState<"next" | "previous" | null>(null);
   const [bookmarked, setBookmarked] = useState(false);
@@ -90,7 +100,7 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
         <span>{book.collection}</span>
         <h2>{book.title}</h2>
       </div>
-      <div className={`${styles.openBook} ${turning ? styles[turning] : ""}`}>
+      <div className={`${styles.openBook} ${singlePage ? styles.singlePageBook : ""} ${turning ? styles[turning] : ""}`}>
         <article className={styles.page}>
           <div className={styles.illuminatedBorder} aria-hidden="true" />
           {spreads[spread][0] === "__TITLE_PAGE__" ? (
@@ -105,13 +115,13 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
           ) : <BookPageText text={spreads[spread][0]} />}
           <span className={styles.pageNumber}>{spread * 2 + 1}</span>
         </article>
-        <div className={styles.binding} />
-        <article className={styles.page}>
+        {!singlePage && <div className={styles.binding} />}
+        {!singlePage && <article className={styles.page}>
           <div className={styles.illuminatedBorder} aria-hidden="true" />
           <div className={styles.pageOrnament} aria-hidden="true">☙ ✦ ❧</div>
           <BookPageText text={spreads[spread][1]} />
           <span className={styles.pageNumber}>{spread * 2 + 2}</span>
-        </article>
+        </article>}
         {turning && <div className={styles.turningPage} aria-hidden="true" />}
         {bookmarked && <span className={styles.ribbon} aria-label="Bookmarked page" />}
       </div>
@@ -120,7 +130,7 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
         <button type="button" className={bookmarked ? styles.savedBookmark : ""} onClick={saveBookmark}><Bookmark /> {bookmarked ? "Ribbon placed" : "Place ribbon"}</button>
         <button type="button" onClick={() => turn("next")} disabled={spread === spreads.length - 1 || Boolean(turning)}>Next <ChevronRight /></button>
       </div>
-      <p className={styles.readerProgress}>Leaves {spread * 2 + 1}–{Math.min(spread * 2 + 2, spreads.length * 2)} of {spreads.length * 2}</p>
+      <p className={styles.readerProgress}>{singlePage ? `Leaf ${spread + 1} of ${spreads.length}` : `Leaves ${spread * 2 + 1}–${Math.min(spread * 2 + 2, spreads.length * 2)} of ${spreads.length * 2}`}</p>
     </div>
   );
 }
@@ -213,6 +223,7 @@ export function LibraryExperience({ books }: { books: LibraryBook[] }) {
 
   return (
     <div className={styles.libraryPage}>
+      <RunicBackground />
       <LibraryScene books={books} onSelect={setSelected} />
       {selected && <BookReader key={selected.id} book={selected} onClose={() => setSelected(null)} />}
     </div>

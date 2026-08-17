@@ -5,6 +5,12 @@ import path from "node:path";
 const routeDir = path.join(process.cwd(), "app", "(site)", "advents_of_harmony");
 
 describe("Advents of Harmony library", () => {
+  it("uses the same runic background as the home page", () => {
+    const experience = fs.readFileSync(path.join(routeDir, "LibraryExperience.tsx"), "utf8");
+    expect(experience).toContain('import { RunicBackground } from "../calendar/RunicBackground"');
+    expect(experience).toContain("<RunicBackground />");
+  });
+
   it("exists as the public replacement for Chronicles", () => {
     expect(fs.existsSync(path.join(routeDir, "page.tsx"))).toBe(true);
     const nav = fs.readFileSync(path.join(process.cwd(), "lib", "nav.ts"), "utf8");
@@ -17,6 +23,8 @@ describe("Advents of Harmony library", () => {
     const css = fs.readFileSync(path.join(routeDir, "library.module.css"), "utf8");
     expect(experience).toContain("Place ribbon");
     expect(experience).toContain("localStorage");
+    expect(experience).toContain('(max-width: 620px)');
+    expect(experience).toContain("singlePageBook");
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
     expect(scene).toContain("<video");
