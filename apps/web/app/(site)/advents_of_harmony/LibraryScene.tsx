@@ -266,7 +266,7 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       </button>
     </section>
     <div className={`${styles.libraryInterior} ${insideLibrary ? styles.interiorRevealed : ""}`} id="grand-library-collection">
-      {entranceState === "inside" && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Return through the doors <span aria-hidden="true">✦</span></button>}
+      {entranceState === "inside" && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Exit the Library <span aria-hidden="true">✦</span></button>}
       <CardCatalog books={books} onSelect={onSelect} />
       {CHAMBERS.map((chamber, index) => <LibraryChamber key={chamber.name} chamber={chamber} index={index} books={books.filter((book) => chamber.collections.includes(book.collection))} withdrawingId={withdrawingId} onWithdraw={withdraw} />)}
       <footer className={styles.libraryEnd}><span>✦</span><p>The collection grows with every tale told in Myrdae.</p></footer>

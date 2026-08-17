@@ -25,6 +25,7 @@ describe("Advents of Harmony library", () => {
     expect(experience).toContain("localStorage");
     expect(experience).toContain('(max-width: 620px)');
     expect(experience).toContain("singlePageBook");
+    expect(experience).toContain("book.sourcePaths");
     expect(experience).toContain("LibraryScene");
     expect(experience).toContain("/api/brain/source");
     expect(scene).toContain("<video");
@@ -47,6 +48,15 @@ describe("Advents of Harmony library", () => {
     expect(scene).not.toContain("setTimeout(() => setEntranceState(\"closed\")");
     expect(scene).not.toContain("styles.entranceOpen");
     expect(scene).not.toContain("styles.entranceClosing");
+    expect(scene).toContain("Exit the Library");
+    expect(scene).not.toContain("Return through the doors");
+  });
+
+  it("does not truncate campaign histories in their library volumes", () => {
+    const page = fs.readFileSync(path.join(routeDir, "page.tsx"), "utf8");
+    expect(page).not.toContain("sessionSummaries?.slice(0, 2)");
+    expect(page).not.toContain("journey.stops.slice(0, 4)");
+    expect(page).toContain("attachRelatedSources");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {

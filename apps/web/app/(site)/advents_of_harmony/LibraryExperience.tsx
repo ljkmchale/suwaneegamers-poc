@@ -16,6 +16,7 @@ export type LibraryBook = {
   image?: string | null;
   pages: string[];
   sourcePath?: string;
+  sourcePaths?: string[];
 };
 
 const BOOKMARK_KEY = "myrdae-library-bookmarks";
@@ -32,29 +33,32 @@ function BookReader({ book, onClose }: { book: LibraryBook; onClose: () => void 
     return () => media.removeEventListener("change", update);
   }, []);
   useEffect(() => {
-    if (!book.sourcePath) {
+    const sourcePaths = [...new Set([book.sourcePath, ...(book.sourcePaths ?? [])].filter((value): value is string => Boolean(value)))];
+    if (!sourcePaths.length) {
       setSourcePages(null);
       return;
     }
     let cancelled = false;
     setSourcePages(null);
     setSourceError("");
-    fetch(`/api/brain/source?${new URLSearchParams({ path: book.sourcePath, visibility: "players" })}`)
-      .then(async (response) => {
-        const payload = await response.json() as { markdown?: string; error?: string };
-        if (!response.ok) throw new Error(payload.error || "The volume could not be opened.");
-        return paginateSource(payload.markdown ?? "", book.title);
-      })
-      .then((pages) => { if (!cancelled) setSourcePages(pages); })
+    Promise.all(sourcePaths.map(async (sourcePath) => {
+      const response = await fetch(`/api/brain/source?${new URLSearchParams({ path: sourcePath, visibility: "players" })}`);
+      const payload = await response.json() as { markdown?: string; error?: string };
+      if (!response.ok) throw new Error(payload.error || "The volume could not be opened.");
+      return paginateSource(payload.markdown ?? "", book.title);
+    }))
+      .then((sourceLeaves) => { if (!cancelled) setSourcePages(sourceLeaves.flat()); })
       .catch((error) => { if (!cancelled) setSourceError(error instanceof Error ? error.message : "The volume could not be opened."); });
     return () => { cancelled = true; };
-  }, [book.sourcePath]);
+  }, [book.sourcePath, book.sourcePaths, book.title]);
 
   const spreads = useMemo(() => {
-    const staticPages = book.sourcePath ? [] : paginateSource(book.pages.join("\n\n"), book.title);
+    const staticPages = book.pages.length ? paginateSource(book.pages.join("\n\n"), book.title) : [];
+    const hasSources = Boolean(book.sourcePath || book.sourcePaths?.length);
     const bookPages = [
       "__TITLE_PAGE__",
-      ...(book.sourcePath ? sourcePages ?? [sourceError || "The archivists are retrieving this volume..."] : staticPages),
+      ...staticPages,
+      ...(hasSources ? sourcePages ?? [sourceError || "The archivists are retrieving this volume..."] : []),
     ];
     const result: Array<[string, string]> = [];
     const leavesPerView = singlePage ? 1 : 2;

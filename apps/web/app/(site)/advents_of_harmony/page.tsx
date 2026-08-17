@@ -33,7 +33,7 @@ export default async function AdventsOfHarmonyPage() {
 
   const campaignBooks: LibraryBook[] = campaigns.map((campaign, index) => {
     const journey = journeys.campaigns.find((item) => item.id === campaign.id);
-    const recent = campaign.sessionSummaries?.slice(0, 2) ?? [];
+    const recordedSessions = campaign.sessionSummaries ?? [];
     return {
       id: `campaign-${campaign.id}`,
       title: campaign.name,
@@ -44,9 +44,9 @@ export default async function AdventsOfHarmonyPage() {
       pages: pages(
         campaign.description,
         journey?.stops.length
-          ? `This company has left ${journey.stops.length} recorded marks upon the map of Myrdae. Its path winds through ${journey.stops.slice(0, 4).map((stop) => stop.location).join(", ")}.`
+          ? `This company has left ${journey.stops.length} recorded marks upon the map of Myrdae. Its path winds through ${journey.stops.map((stop) => stop.location).join(", ")}.`
           : "The route of this company has not yet been fully entered into the cartographers' ledger.",
-        ...recent.flatMap((entry) => [entry.title, entry.summary]),
+        ...recordedSessions.flatMap((entry) => [entry.title, entry.summary]),
       ),
     };
   });
@@ -93,8 +93,11 @@ export default async function AdventsOfHarmonyPage() {
     ),
   }));
 
+  const archiveBooks = [...chroniclesBooks.adventure, ...chroniclesBooks.world];
+  const enrichedDeities = attachRelatedSources([...deityBooks, ...oldGodBooks], archiveBooks);
+  const enrichedPlaces = attachRelatedSources(placeBooks, archiveBooks);
   const adventureBooks = uniqueBooks([...campaignBooks, ...chroniclesBooks.adventure]);
-  const worldBooks = uniqueBooks([...deityBooks, ...oldGodBooks, ...placeBooks, ...chroniclesBooks.world]);
+  const worldBooks = uniqueBooks([...enrichedDeities, ...enrichedPlaces, ...chroniclesBooks.world]);
   return <LibraryExperience books={[...adventureBooks, ...worldBooks]} />;
 }
 
@@ -129,6 +132,17 @@ function uniqueBooks(books: LibraryBook[]): LibraryBook[] {
   return [...new Map(books.map((book) => [`${book.collection === "Chronicles Archive" || book.collection === "Campaign Chronicles" ? "adventure" : "world"}:${normalizeTitle(book.title)}`, book])).values()];
 }
 
+function attachRelatedSources(books: LibraryBook[], archiveBooks: LibraryBook[]): LibraryBook[] {
+  return books.map((book) => {
+    const needle = ` ${normalizeTitle(book.title)} `;
+    const sourcePaths = archiveBooks
+      .filter((archiveBook) => ` ${normalizeTitle(archiveBook.title)} `.includes(needle))
+      .map((archiveBook) => archiveBook.sourcePath)
+      .filter((sourcePath): sourcePath is string => Boolean(sourcePath));
+    return sourcePaths.length ? { ...book, sourcePaths: [...new Set(sourcePaths)] } : book;
+  });
+}
+
 function normalizeTitle(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
@@ -146,7 +160,7 @@ function sourceBook(page: Pick<PageEntry, "path" | "title" | "campaign" | "visib
     collection,
     color: ["#603028", "#273e55", "#425037", "#574020", "#46345b"][index % 5],
     image: collection === "World Archive" ? "/media/images/maps-of-myrdae/locations-map.webp" : "/media/images/guides-to-myrdae/campaign-setting.jpg",
-    pages: ["A maintained volume from the player-safe Chronicles archive."],
+    pages: [],
     sourcePath: page.path,
   };
 }
