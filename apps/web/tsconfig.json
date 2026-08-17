@@ -31,15 +31,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    ".next/dev/types/**/*.ts",
     ".next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next-prod/types/**/*.ts",
-    ".next-prod/dev/types/**/*.ts",
-    ".next-prod-a/types/**/*.ts",
-    ".next-prod-a/dev/types/**/*.ts",
-    ".next-prod-b/types/**/*.ts",
-    ".next-prod-b/dev/types/**/*.ts"
+    "next-env.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -29,8 +29,8 @@ describe("getPortalLinks", () => {
 });
 
 describe("PORTAL_URLS", () => {
-  it("chronicles uses the secure kb URL", () => {
-    expect(PORTAL_URLS.chronicles).toBe("https://kb.suwaneegamers.net/");
+  it("uses the Advents of Harmony library route", () => {
+    expect(PORTAL_URLS.chronicles).toBe("/advents_of_harmony");
   });
 
   it("referenceSite is an https Google Sites URL", () => {

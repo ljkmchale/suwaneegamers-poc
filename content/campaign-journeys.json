@@ -969,7 +969,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "At Nurador",
+      "status": "At Gevakaln",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1301,6 +1301,122 @@
           },
           "sourceKey": "bloody-endeavor:session-40",
           "sourceHash": "2936427ffe15152f50bce1739b5e07531d07b9ec9fb002b7dbd8b7d62589fdaa",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-41",
+          "locationId": "gevakaln",
+          "location": "Gevakaln",
+          "x": 46.88,
+          "y": 64.68,
+          "session": "Session 41",
+          "title": "The Mighty Jungle",
+          "summary": "The teleported group found themselves stranded on a rocky shore under dark rain and fog, nowhere near Gevakaln, and set out to learn where they were and how to escape. A living vine and acid-spitting giant lizard nearly killed Pagern before Rhody and the others drove the lizard off and met Kibbit, a goblinoid who revealed they stood on Scidogost, the notorious prisoner island. Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life.…",
+          "impact": {
+            "type": "political",
+            "title": "Gevakaln's balance shifted",
+            "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
+          },
+          "automatic": true,
+          "confidence": 0.99,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 55.21,
+                "y": 67.71
+              },
+              {
+                "x": 54.48,
+                "y": 67.48
+              },
+              {
+                "x": 54.36,
+                "y": 69.42
+              },
+              {
+                "x": 54.06,
+                "y": 69.9
+              },
+              {
+                "x": 53.02,
+                "y": 69.69
+              },
+              {
+                "x": 52.09,
+                "y": 70.3
+              },
+              {
+                "x": 51.6,
+                "y": 69.97
+              },
+              {
+                "x": 50.82,
+                "y": 70
+              },
+              {
+                "x": 50.21,
+                "y": 70.85
+              },
+              {
+                "x": 49.9,
+                "y": 70.9
+              },
+              {
+                "x": 49.31,
+                "y": 70.8
+              },
+              {
+                "x": 48.43,
+                "y": 71.13
+              },
+              {
+                "x": 48.18,
+                "y": 70.67
+              },
+              {
+                "x": 47.73,
+                "y": 70.8
+              },
+              {
+                "x": 48.19,
+                "y": 68.87
+              },
+              {
+                "x": 47.93,
+                "y": 68.2
+              },
+              {
+                "x": 47.39,
+                "y": 67.36
+              },
+              {
+                "x": 47.3,
+                "y": 65.53
+              },
+              {
+                "x": 46.63,
+                "y": 65.14
+              },
+              {
+                "x": 46.88,
+                "y": 64.68
+              }
+            ],
+            "miles": 438.6,
+            "days": 21.9,
+            "roadIds": [
+              "nurador-road-west",
+              "unknown-road-10",
+              "climbor-road-northwest",
+              "witguard-road-west",
+              "tyrynder-road-north",
+              "valenlun-road-northwest"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "bloody-endeavor:session-41",
+          "sourceHash": "49d98e59ee7306e86ef6e9ee0727712f16e3019769964897668abe57c3d0f37d",
           "current": true
         }
       ],
@@ -2692,6 +2808,30 @@
           },
           "sourceKey": "heroes-of-emberstran:session-32",
           "sourceHash": "c8c65e836bb924a8145156de3fdbf74ee318e6f30fc63ad0efe5c5baa2f8adb8",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-33",
+          "locationId": "emberstran",
+          "location": "Emberstran",
+          "x": 60.75,
+          "y": 58.23,
+          "session": "Session 33",
+          "title": "We Shall Prevail",
+          "summary": "The Heroes of Emberstran fought desperately to prevail against Blackrend and the remaining slaad within the flooded Lost Shrine to Guigzien. After a grueling battle that saw Og lose his Thornleaf and Hap fall, Zymve’s phantasmal killer ended Blackrend while Ky’tha’s final crossbow bolt slew the emerging aboleth. Ky’tha and Zymve then explored the flooded tomb beyond the altar, discovering open sarcophagi, a collapsed wall leading to the pond where the hunter had seen the red slaad, and various treasures before reuniting with the others on the upper level. With the immediate threats destroyed the party turned their attention to whether they could still bring Hap back from the brink.",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Emberstran",
+            "description": "With the immediate threats destroyed the party turned their attention to whether they could still bring Hap back from the brink."
+          },
+          "automatic": true,
+          "confidence": 0.88,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "heroes-of-emberstran:session-33",
+          "sourceHash": "5249bce35cf9db43df54f3d2ad260182e34e742182be19a366725d5999c5200d",
           "current": true
         }
       ],
@@ -3040,6 +3180,30 @@
           },
           "sourceKey": "souls-of-destiny:session-12",
           "sourceHash": "10a486fb02e29489f08c529a6e45b5c89dd26ebff1aa29309cf7f93605b0f3ea",
+          "current": false
+        },
+        {
+          "id": "auto-souls-of-destiny-session-13",
+          "locationId": "adsuren",
+          "location": "Adsuren",
+          "x": 24.1,
+          "y": 28.6,
+          "session": "Session 13",
+          "title": "Cockroach in the Keep",
+          "summary": "After the assassination attempt on Mollywop, the Souls of Destiny rode north from Adsuren determined to track the fleeing assassin, Esylla’s uncle Ifryn, and uncover whatever larger threat still moved in the shadows. They followed the blood trail through the woods to a ruined keep once held by the cutthroat Scyldgar family, a place that stirred both Lila’s visions and Therric’s recurring dreams of a great cat protecting a younger Areana Duskwhisper. Inside they faced rising undead skeletons that Escanor banished in a single radiant command, then battled living gargoyles that took flight from the rooftop statues, with Zephyra’s rage, Lila’s magic, and Kenton’s whip ending the fight.…",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Adsuren",
+            "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
+          },
+          "automatic": true,
+          "confidence": 0.88,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "souls-of-destiny:session-13",
+          "sourceHash": "72a58280cb382674f01d25fdc17add51249c7625c9003a3fbb4bfacb0dd2e49c",
           "current": true
         }
       ],
@@ -3255,12 +3419,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-13T14:50:21.768Z",
+    "lastGeneratedAt": "2026-08-17T14:50:42.331Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 108,
-    "routedSegments": 6,
-    "impactLocations": 29
+    "generatedStops": 111,
+    "routedSegments": 7,
+    "impactLocations": 30
   },
   "locationImpacts": [
     {
@@ -3409,6 +3573,14 @@
           "title": "Conflict reshaped Emberstran",
           "type": "battle",
           "description": "Proceeding deeper into the dungeon, they slew a Slaad disguised as Zabeek."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 33",
+          "title": "Conflict reshaped Emberstran",
+          "type": "battle",
+          "description": "With the immediate threats destroyed the party turned their attention to whether they could still bring Hap back from the brink."
         }
       ],
       "crossCampaign": false
@@ -3500,6 +3672,14 @@
           "campaignId": "souls-of-destiny",
           "campaignName": "Souls of Destiny",
           "session": "Session 12",
+          "title": "Arcane consequences at Adsuren",
+          "type": "arcane",
+          "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 13",
           "title": "Arcane consequences at Adsuren",
           "type": "arcane",
           "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
@@ -4434,6 +4614,28 @@
           "title": "Conflict reshaped Featherfall campsite",
           "type": "battle",
           "description": "They fought through charms, performed desperate leaps to catch falling campers, sent fireballs that lit both foes and trees, and used a dimension door to pursue the last harpy."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-gevakaln",
+      "locationId": "gevakaln",
+      "location": "Gevakaln",
+      "x": 46.88,
+      "y": 64.68,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 41",
+          "title": "Gevakaln's balance shifted",
+          "type": "political",
+          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
         }
       ],
       "crossCampaign": false
