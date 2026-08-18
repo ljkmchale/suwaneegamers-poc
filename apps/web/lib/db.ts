@@ -470,6 +470,42 @@ function initializeSchema(db: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_campaign_dms_dm ON campaign_dms(dm_id);
 
     -- ----------------------------------------------------------------
+    -- Advents Guide to Myrdae
+    -- ----------------------------------------------------------------
+    CREATE TABLE IF NOT EXISTS advents_guide_subjects (
+      id                 TEXT PRIMARY KEY,
+      kind               TEXT NOT NULL CHECK (kind IN ('location', 'business')),
+      map_location_id    TEXT NOT NULL,
+      parent_subject_id  TEXT REFERENCES advents_guide_subjects(id) ON DELETE CASCADE,
+      name               TEXT NOT NULL,
+      created_by_user_id TEXT REFERENCES user_profiles(id) ON DELETE SET NULL,
+      created_at         TEXT NOT NULL,
+      updated_at         TEXT NOT NULL
+    );
+
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_advents_guide_location_subject
+      ON advents_guide_subjects(map_location_id) WHERE kind = 'location';
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_advents_guide_business_subject
+      ON advents_guide_subjects(map_location_id, lower(name)) WHERE kind = 'business';
+    CREATE INDEX IF NOT EXISTS idx_advents_guide_subject_parent
+      ON advents_guide_subjects(parent_subject_id);
+
+    CREATE TABLE IF NOT EXISTS advents_guide_reviews (
+      id              TEXT PRIMARY KEY,
+      subject_id      TEXT NOT NULL REFERENCES advents_guide_subjects(id) ON DELETE CASCADE,
+      user_profile_id TEXT NOT NULL REFERENCES user_profiles(id) ON DELETE CASCADE,
+      character_name  TEXT NOT NULL,
+      rating          INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+      comment         TEXT NOT NULL DEFAULT '',
+      created_at      TEXT NOT NULL,
+      updated_at      TEXT NOT NULL,
+      UNIQUE (subject_id, user_profile_id)
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_advents_guide_reviews_subject
+      ON advents_guide_reviews(subject_id, updated_at DESC);
+
+    -- ----------------------------------------------------------------
     -- Gazetteer entries
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS gazetteer (
