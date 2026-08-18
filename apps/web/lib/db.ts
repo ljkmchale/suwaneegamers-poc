@@ -205,6 +205,15 @@ function migrateSchema(db: Database.Database): void {
   addVoiceMetricColumn("cache_read_tokens", "INTEGER");
   addVoiceMetricColumn("cache_creation_tokens", "INTEGER");
   addVoiceMetricColumn("estimated_cost_microusd", "INTEGER");
+
+  // Moderator censorship of an Advents Guide review keeps the rating but hides
+  // the comment; the original text is retained so a DM/admin can restore it.
+  const adventsReviewColumns = new Set(
+    (db.prepare(`PRAGMA table_info(advents_guide_reviews)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!adventsReviewColumns.has("censored")) {
+    db.exec(`ALTER TABLE advents_guide_reviews ADD COLUMN censored INTEGER NOT NULL DEFAULT 0`);
+  }
   db.exec(`
     CREATE TABLE IF NOT EXISTS analytics_purpose_signals (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -497,6 +506,7 @@ function initializeSchema(db: Database.Database): void {
       character_name  TEXT NOT NULL,
       rating          INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
       comment         TEXT NOT NULL DEFAULT '',
+      censored        INTEGER NOT NULL DEFAULT 0,
       created_at      TEXT NOT NULL,
       updated_at      TEXT NOT NULL,
       UNIQUE (subject_id, user_profile_id)

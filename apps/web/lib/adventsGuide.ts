@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getDb } from "@/lib/db";
+import { containsProfanity } from "@/lib/profanity";
 
 export type GuideSubjectKind = "location" | "business";
 
@@ -9,6 +10,7 @@ export interface GuideReview {
   characterName: string;
   rating: number;
   comment: string;
+  censored: boolean;
   createdAt: string;
   updatedAt: string;
   isMine: boolean;
@@ -101,21 +103,26 @@ function getSubjectRows(locationIdInput: string): SubjectRow[] {
   `).all(locationId) as SubjectRow[];
 }
 
+export interface LocationRatingSummary {
+  averageRating: number | null;
+  reviewCount: number;
+}
+
 export function getLocationGuide(
   locationId: string,
   locationName: string,
   viewerProfileId?: string,
-): { location: GuideSubject; businesses: GuideSubject[] } {
+): { location: GuideSubject; businesses: GuideSubject[]; locationSummary: LocationRatingSummary } {
   const locationSubjectId = ensureLocationSubject(locationId, locationName);
   const rows = getSubjectRows(locationId);
   const reviewRows = getDb().prepare(`
-    SELECT id, subject_id, character_name, rating, comment, created_at, updated_at, user_profile_id
+    SELECT id, subject_id, character_name, rating, comment, censored, created_at, updated_at, user_profile_id
       FROM advents_guide_reviews
      WHERE subject_id IN (SELECT id FROM advents_guide_subjects WHERE map_location_id = ?)
      ORDER BY updated_at DESC
   `).all(normalizeLocationId(locationId)) as Array<{
     id: string; subject_id: string; character_name: string; rating: number; comment: string;
-    created_at: string; updated_at: string; user_profile_id: string;
+    censored: number; created_at: string; updated_at: string; user_profile_id: string;
   }>;
   const mapSubject = (row: SubjectRow): GuideSubject => ({
     id: row.id,
@@ -130,7 +137,10 @@ export function getLocationGuide(
       subjectId: review.subject_id,
       characterName: review.character_name,
       rating: review.rating,
-      comment: review.comment,
+      // A censored comment is hidden from everyone; the original stays in the DB
+      // so a moderator can restore it.
+      comment: review.censored ? "" : review.comment,
+      censored: review.censored === 1,
       createdAt: review.created_at,
       updatedAt: review.updated_at,
       isMine: review.user_profile_id === viewerProfileId,
@@ -139,7 +149,18 @@ export function getLocationGuide(
   const subjects = rows.map(mapSubject);
   const location = subjects.find((subject) => subject.id === locationSubjectId);
   if (!location) throw new Error("Location guide could not be loaded.");
-  return { location, businesses: subjects.filter((subject) => subject.kind === "business") };
+  // The map tooltip shows one rating per location, so aggregate every review
+  // under it — the location itself and all of its places — not just reviews
+  // attached to the bare location subject.
+  const reviewCount = reviewRows.length;
+  const averageRating = reviewCount > 0
+    ? Math.round((reviewRows.reduce((sum, review) => sum + review.rating, 0) / reviewCount) * 10) / 10
+    : null;
+  return {
+    location,
+    businesses: subjects.filter((subject) => subject.kind === "business"),
+    locationSummary: { averageRating, reviewCount },
+  };
 }
 
 export function saveReview(input: {
@@ -147,14 +168,18 @@ export function saveReview(input: {
   userProfileId: string;
   characterName: string;
   allowedCharacters: string[];
+  /** DMs may review as anyone — a party member or an NPC. */
+  allowAnyCharacter?: boolean;
   rating: number;
   comment: string;
 }): void {
   const characterName = normalizeName(input.characterName, "Character name");
-  if (!input.allowedCharacters.includes(characterName)) throw new Error("Choose one of your assigned characters.");
+  if (!input.allowAnyCharacter && !input.allowedCharacters.includes(characterName)) throw new Error("Choose one of your assigned characters.");
+  if (containsProfanity(characterName)) throw new Error("Please choose a name without foul language.");
   if (!Number.isInteger(input.rating) || input.rating < 1 || input.rating > 5) throw new Error("Rating must be 1–5 stars.");
   const comment = input.comment.trim();
   if (comment.length > 1200) throw new Error("Comment must be 1,200 characters or fewer.");
+  if (containsProfanity(comment)) throw new Error("Please remove foul language from your review before publishing.");
   const subject = getDb().prepare(`SELECT id FROM advents_guide_subjects WHERE id = ?`).get(input.subjectId);
   if (!subject) throw new Error("Review subject not found.");
   const now = new Date().toISOString();
@@ -170,12 +195,21 @@ export function saveReview(input: {
   `).run(randomUUID(), input.subjectId, input.userProfileId, characterName, input.rating, comment, now, now);
 }
 
+// Moderator (DM/admin) actions. Callers must authorize before invoking these.
+export function deleteReview(reviewId: string): void {
+  getDb().prepare(`DELETE FROM advents_guide_reviews WHERE id = ?`).run(reviewId);
+}
+
+export function setReviewCensored(reviewId: string, censored: boolean): void {
+  getDb().prepare(`UPDATE advents_guide_reviews SET censored = ?, updated_at = ? WHERE id = ?`)
+    .run(censored ? 1 : 0, new Date().toISOString(), reviewId);
+}
+
 export function listRatingSummaries(): Record<string, { averageRating: number; reviewCount: number }> {
   const rows = getDb().prepare(`
     SELECT s.map_location_id, ROUND(AVG(r.rating), 1) AS average_rating, COUNT(r.id) AS review_count
       FROM advents_guide_subjects s
       JOIN advents_guide_reviews r ON r.subject_id = s.id
-     WHERE s.kind = 'location'
      GROUP BY s.map_location_id
   `).all() as Array<{ map_location_id: string; average_rating: number; review_count: number }>;
   return Object.fromEntries(rows.map((row) => [row.map_location_id, {

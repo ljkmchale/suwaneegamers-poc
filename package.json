@@ -12,6 +12,7 @@
     "audio:audit-local": "node scripts/audit-local-audio.mjs",
     "sync-campaign-headers": "node scripts/sync-campaign-headers.mjs",
     "sync-campaign-journeys": "node scripts/sync-campaign-journeys.mjs",
+    "sync-advents-guide-places": "node scripts/sync-advents-guide-places.mjs",
     "sync-organization-symbols": "node scripts/sync-organization-symbols.mjs",
     "sync-pantheon-symbols": "node scripts/sync-pantheon-symbols.mjs",
     "content:scheduler": "node scripts/content-scheduler.mjs",

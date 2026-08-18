@@ -20,6 +20,8 @@ export interface UserProfileContext {
   profile: UserProfile;
   games: string[];
   characters: string[];
+  /** True when this member runs at least one active campaign as DM. */
+  isDm: boolean;
   favoriteLocations: FavoriteSiteLocation[];
 }
 
@@ -229,6 +231,7 @@ export function getUserProfileContext(session: UserSessionData): UserProfileCont
   const characters = [...new Set(assignments.map(({ character }) => character.name))];
 
   // Include games they run as a DM, even when they are not listed in the party.
+  let isDm = false;
   if (profile.playerName) {
     for (const campaign of getActiveCampaigns()) {
       if (
@@ -237,6 +240,7 @@ export function getUserProfileContext(session: UserSessionData): UserProfileCont
           .some((dm) => dm.localeCompare(profile.playerName!, undefined, { sensitivity: "base" }) === 0)
       ) {
         games.push(campaign.name);
+        isDm = true;
       }
     }
   }
@@ -245,6 +249,7 @@ export function getUserProfileContext(session: UserSessionData): UserProfileCont
     profile,
     games: [...new Set(games)],
     characters,
+    isDm,
     favoriteLocations: getFavoriteSiteLocations(profile.email),
   };
 }
