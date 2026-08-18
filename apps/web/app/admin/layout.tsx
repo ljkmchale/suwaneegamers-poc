@@ -25,6 +25,7 @@ const SECURITY_LINKS = [
 const NAV_LINKS_AFTER_MYRA = [
   { href: "/admin/chronicles", label: "Chronicles" },
   { href: "/admin/map-editor", label: "Map Editor" },
+  { href: "/admin/advents-guide", label: "Advents Guide" },
   { href: "/admin/pages", label: "Pages" },
   { href: "/admin/source-managed", label: "Source Managed" },
   { href: "/admin/page-layout", label: "Navigation Layout" },

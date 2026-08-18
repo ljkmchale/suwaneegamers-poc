@@ -205,6 +205,108 @@ export function setReviewCensored(reviewId: string, censored: boolean): void {
     .run(censored ? 1 : 0, new Date().toISOString(), reviewId);
 }
 
+// ── Admin moderation dashboard ───────────────────────────────────────────────
+// Every review across the whole world, grouped by location, for /admin/advents-guide.
+// `flagged` re-runs the profanity check on the raw text so a moderator can spot
+// anything that slipped through (e.g. added to the word list after the fact).
+
+export interface AdminGuideReview {
+  id: string;
+  placeName: string | null; // null = the location itself; otherwise the business/place
+  characterName: string;
+  memberName: string | null; // the real member behind the in-character review
+  memberEmail: string | null;
+  rating: number;
+  comment: string;
+  censored: boolean;
+  flagged: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminGuideLocation {
+  locationId: string;
+  locationName: string;
+  averageRating: number | null;
+  reviewCount: number;
+  flaggedCount: number;
+  censoredCount: number;
+  latestReviewAt: string;
+  reviews: AdminGuideReview[];
+}
+
+export type AdminGuideSort = "recent" | "lowest" | "most";
+
+export function listGuideRatingsForAdmin(sort: AdminGuideSort = "recent"): AdminGuideLocation[] {
+  const rows = getDb().prepare(`
+    SELECT r.id, r.rating, r.comment, r.censored, r.character_name,
+           r.created_at, r.updated_at,
+           s.map_location_id, s.kind AS subject_kind, s.name AS subject_name,
+           loc.name AS location_name,
+           up.display_name AS member_name, up.email AS member_email
+      FROM advents_guide_reviews r
+      JOIN advents_guide_subjects s ON s.id = r.subject_id
+      LEFT JOIN advents_guide_subjects loc
+             ON loc.map_location_id = s.map_location_id AND loc.kind = 'location'
+      LEFT JOIN user_profiles up ON up.id = r.user_profile_id
+     ORDER BY r.updated_at DESC
+  `).all() as Array<{
+    id: string; rating: number; comment: string; censored: number; character_name: string;
+    created_at: string; updated_at: string; map_location_id: string; subject_kind: GuideSubjectKind;
+    subject_name: string; location_name: string | null; member_name: string | null; member_email: string | null;
+  }>;
+
+  const byLocation = new Map<string, AdminGuideLocation>();
+  for (const row of rows) {
+    const locationName = row.location_name ?? row.subject_name;
+    let group = byLocation.get(row.map_location_id);
+    if (!group) {
+      group = {
+        locationId: row.map_location_id,
+        locationName,
+        averageRating: null,
+        reviewCount: 0,
+        flaggedCount: 0,
+        censoredCount: 0,
+        latestReviewAt: row.updated_at,
+        reviews: [],
+      };
+      byLocation.set(row.map_location_id, group);
+    }
+    // Rows arrive newest-first, so the first one seen per location is the latest.
+    group.reviews.push({
+      id: row.id,
+      placeName: row.subject_kind === "business" ? row.subject_name : null,
+      characterName: row.character_name,
+      memberName: row.member_name,
+      memberEmail: row.member_email,
+      rating: row.rating,
+      comment: row.comment,
+      censored: row.censored === 1,
+      flagged: containsProfanity(row.comment) || containsProfanity(row.character_name),
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    });
+  }
+
+  const groups = [...byLocation.values()];
+  for (const group of groups) {
+    group.reviewCount = group.reviews.length;
+    group.flaggedCount = group.reviews.filter((review) => review.flagged).length;
+    group.censoredCount = group.reviews.filter((review) => review.censored).length;
+    group.averageRating = group.reviewCount > 0
+      ? Math.round((group.reviews.reduce((sum, review) => sum + review.rating, 0) / group.reviewCount) * 10) / 10
+      : null;
+  }
+
+  const sorters: Record<AdminGuideSort, (a: AdminGuideLocation, b: AdminGuideLocation) => number> = {
+    recent: (a, b) => b.latestReviewAt.localeCompare(a.latestReviewAt),
+    lowest: (a, b) => (a.averageRating ?? 6) - (b.averageRating ?? 6),
+    most: (a, b) => b.reviewCount - a.reviewCount,
+  };
+  return groups.sort(sorters[sort] ?? sorters.recent);
+}
+
 export function listRatingSummaries(): Record<string, { averageRating: number; reviewCount: number }> {
   const rows = getDb().prepare(`
     SELECT s.map_location_id, ROUND(AVG(r.rating), 1) AS average_rating, COUNT(r.id) AS review_count

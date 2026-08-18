@@ -6,6 +6,7 @@ const SECTIONS = [
   { href: "/admin/voice-assistant", title: "Myra", desc: "Review Myra's usage, response performance, questions, errors, and capability gaps." },
   { href: "/admin/chronicles", title: "Chronicles", desc: "Open the DM-only Chronicles workspace for private sources and deeper answers." },
   { href: "/admin/map-editor", title: "Map Editor", desc: "Open the hosted Myrdae map editor inside the admin toolset." },
+  { href: "/admin/advents-guide", title: "Advents Guide", desc: "Monitor map ratings and reviews; censor or remove entries." },
   { href: "/admin/pages", title: "Pages", desc: "Create custom pages and build them with blocks." },
   { href: "/admin/source-managed", title: "Source Managed", desc: "Lock pages and link Google Docs as authoritative sources." },
   { href: "/admin/page-layout", title: "Navigation Layout", desc: "Add, remove, rename, and reorder navigation menus and links." },
