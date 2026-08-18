@@ -969,7 +969,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "At Gevakaln",
+      "status": "At Sciogost",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1417,6 +1417,40 @@
           },
           "sourceKey": "bloody-endeavor:session-41",
           "sourceHash": "49d98e59ee7306e86ef6e9ee0727712f16e3019769964897668abe57c3d0f37d",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-42",
+          "locationId": "sciogost",
+          "location": "Sciogost",
+          "x": 46.6,
+          "y": 63.8,
+          "session": "Session 42",
+          "title": "I Believe I Can Fly",
+          "summary": "In Session 42, titled I Believe I Can Fly, the party stood at the edge of a jungle pit on Sciogost, seeking a path off the prisoner island that avoided the heavily guarded prison. A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past. Deeper in they met Zeldrigos the Indomitable Serpent, a dragon of living jacinth who claimed the island, kept Maw as collateral, and gave them a bag of wind to confront the storm witch Esadi the Herrying in her cloud tower.…",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Sciogost",
+            "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 46.88,
+                "y": 64.68
+              },
+              {
+                "x": 46.6,
+                "y": 63.8
+              }
+            ],
+            "miles": 23.1
+          },
+          "sourceKey": "bloody-endeavor:session-42",
+          "sourceHash": "85cb8a03016ab2ac1f6168196463b5cd09382409700c289eeb1dc65693edb22b",
           "current": true
         }
       ],
@@ -3419,12 +3453,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-17T14:50:42.331Z",
+    "lastGeneratedAt": "2026-08-18T14:50:11.497Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 111,
+    "generatedStops": 112,
     "routedSegments": 7,
-    "impactLocations": 30
+    "impactLocations": 31
   },
   "locationImpacts": [
     {
@@ -4680,6 +4714,28 @@
           "title": "Nurador's balance shifted",
           "type": "political",
           "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-sciogost",
+      "locationId": "sciogost",
+      "location": "Sciogost",
+      "x": 46.6,
+      "y": 63.8,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 42",
+          "title": "Conflict reshaped Sciogost",
+          "type": "battle",
+          "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
         }
       ],
       "crossCampaign": false
