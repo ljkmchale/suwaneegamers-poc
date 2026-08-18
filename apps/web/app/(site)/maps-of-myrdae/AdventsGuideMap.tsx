@@ -41,6 +41,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
   const [comment, setComment] = useState("");
   const [characterName, setCharacterName] = useState("");
   const [businessName, setBusinessName] = useState("");
+  const [useCustomReviewer, setUseCustomReviewer] = useState(false);
   const [notice, setNotice] = useState("");
   const [ratings, setRatings] = useState(initialRatings);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -57,6 +58,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
     setLoading(true);
     setError("");
     setNotice("");
+    setUseCustomReviewer(false);
     try {
       const response = await fetch(`/api/advents-guide/${encodeURIComponent(location.id)}?name=${encodeURIComponent(location.name)}`, { cache: "no-store" });
       const data = await response.json() as GuidePayload;
@@ -220,14 +222,18 @@ export function AdventsGuideMap({ src, initialRatings }: {
           <h2 className="font-cinzel text-sm uppercase tracking-wider text-amber-300">Rate &amp; Review</h2>
           {payload && (payload.characters.length > 0 || payload.canReviewAsAnyone) ? <>
             <label className="block text-xs uppercase tracking-wider text-[#a89880]">Reviewing as
-              {payload.canReviewAsAnyone ? <>
-                <input list="advents-guide-characters" value={characterName} maxLength={100} onChange={(event) => setCharacterName(event.target.value)} placeholder="Character or NPC name" className="mt-1 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm normal-case tracking-normal text-[#e8dfc8] outline-none focus:border-amber-400" />
-                <datalist id="advents-guide-characters">{payload.characters.map((character) => <option key={character} value={character} />)}</datalist>
-              </> : <select value={characterName} onChange={(event) => setCharacterName(event.target.value)} className="mt-1 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm normal-case tracking-normal text-[#e8dfc8]">
-                {payload.characters.map((character) => <option key={character}>{character}</option>)}
-              </select>}
+              {payload.canReviewAsAnyone && payload.characters.length === 0
+                ? <input value={characterName} maxLength={100} onChange={(event) => setCharacterName(event.target.value)} placeholder="Character or NPC name" className="mt-1 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm normal-case tracking-normal text-[#e8dfc8] outline-none focus:border-amber-400" />
+                : <select value={payload.canReviewAsAnyone && useCustomReviewer ? "__custom__" : characterName} onChange={(event) => {
+                    if (event.target.value === "__custom__") { setUseCustomReviewer(true); setCharacterName(""); }
+                    else { setUseCustomReviewer(false); setCharacterName(event.target.value); }
+                  }} className="mt-1 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm normal-case tracking-normal text-[#e8dfc8]">
+                    {payload.characters.map((character) => <option key={character}>{character}</option>)}
+                    {payload.canReviewAsAnyone && <option value="__custom__">Someone else…</option>}
+                  </select>}
+              {payload.canReviewAsAnyone && useCustomReviewer && payload.characters.length > 0 && <input value={characterName} maxLength={100} autoFocus onChange={(event) => setCharacterName(event.target.value)} placeholder="Character or NPC name" className="mt-2 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm normal-case tracking-normal text-[#e8dfc8] outline-none focus:border-amber-400" />}
             </label>
-            {payload.canReviewAsAnyone && <p className="text-xs italic text-[#7f748a]">You may review as any character or NPC.</p>}
+            {payload.canReviewAsAnyone && <p className="text-xs italic text-[#7f748a]">You may review as one of your characters or someone else (NPC).</p>}
             <fieldset><legend className="text-xs uppercase tracking-wider text-[#a89880]">Rating</legend><div className="mt-1 flex gap-1">
               {[1,2,3,4,5].map((star) => <button type="button" key={star} aria-label={`${star} stars`} onClick={() => setRating(star)} className={`text-3xl ${star <= rating ? "text-amber-400" : "text-[#51485b]"}`}>★</button>)}
             </div></fieldset>
