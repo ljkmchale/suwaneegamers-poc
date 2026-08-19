@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { calculateOverall, conversationalSummary, type DiagnosticResult } from "@/lib/myraHealth";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { calculateOverall, cloudflareWebsiteCheck, conversationalSummary, type DiagnosticResult } from "@/lib/myraHealth";
 
 const result = (service: string, status: DiagnosticResult["status"]): DiagnosticResult => ({
   service, displayName: service, status, message: `${service} is ${status}`,
@@ -58,5 +58,32 @@ describe("Myra health aggregation", () => {
       ],
     });
     expect(spoken).toContain("20 minutes ago");
+  });
+});
+
+describe("Cloudflare health confirmation", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("absorbs a brief probe failure before it can create an incident", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(new Response("bad gateway", { status: 502 }))
+      .mockResolvedValueOnce(new Response("ok", { status: 200, headers: { "cf-ray": "test-ray" } }));
+
+    const result = await cloudflareWebsiteCheck();
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(result.status).toBe("healthy");
+  });
+
+  it("returns an unavailable result promptly when the outage is sustained", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+      .mockResolvedValue(new Response("bad gateway", { status: 502 }));
+
+    const result = await cloudflareWebsiteCheck();
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(result.status).toBe("unavailable");
+    expect(result.errorCode).toBe("HTTP_502");
+    expect(result.technicalDetails).toContain("after 2 probes");
   });
 });

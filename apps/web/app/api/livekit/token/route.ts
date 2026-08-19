@@ -13,6 +13,7 @@ import {
   getAssistantRecaps,
 } from "@/lib/assistantBrain";
 import { getAssistantRoadmap } from "@/lib/assistantRoadmap";
+import { getAssistantUpdates } from "@/lib/assistantUpdates";
 import { getLearnedFaqForAgent } from "@/lib/assistantLearned";
 import { personaForAgentMember } from "@/lib/assistantPersonaStore";
 import { assistantTuningForAgent } from "@/lib/assistantTuningStore";
@@ -215,6 +216,11 @@ export async function POST(request: NextRequest) {
       // Separate out-of-world compartment: the website roadmap (site features
       // requested / built / ideated), never mixed with in-world Myrdae lore.
       roadmap: getAssistantRoadmap(),
+      // Curated "what's new" changelog — a separate out-of-world compartment so
+      // Myra can answer "what changed recently?" / "when were you last updated?"
+      // in plain terms, distinct from raw file freshness (websiteUpdates) and the
+      // roadmap planning list.
+      updates: getAssistantUpdates(),
       knowledgeVisibility: dmBrainAccess ? "dm" : "players",
       dmCampaigns,
       dmDefaultCampaigns,

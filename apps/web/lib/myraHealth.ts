@@ -94,35 +94,53 @@ async function fetchCheck(id: string, name: string, url: string, okay: (r: Respo
   }
 }
 
-async function cloudflareWebsiteCheck(): Promise<DiagnosticResult> {
+const CLOUDFLARE_CONFIRM_ATTEMPTS = 2;
+const CLOUDFLARE_ATTEMPT_TIMEOUT_MS = 3_500;
+const CLOUDFLARE_RETRY_DELAY_MS = 500;
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function cloudflareWebsiteCheck(): Promise<DiagnosticResult> {
   const id = "cloudflare";
   const name = "Public website through Cloudflare";
   const url = process.env.MYRA_CLOUDFLARE_HEALTH_URL ?? "https://www.suwaneegamers.net/signin";
   const began = performance.now();
-  const checkedAt = new Date().toISOString();
-  try {
-    const probeUrl = new URL(url);
-    probeUrl.searchParams.set("myra-health", String(Date.now()));
-    const response = await fetch(probeUrl, {
-      signal: AbortSignal.timeout(7_500),
-      cache: "no-store",
-      redirect: "follow",
-      headers: { "cache-control": "no-cache" },
-    });
-    const responseTimeMs = Math.round(performance.now() - began);
-    if (!response.ok) {
-      return { service: id, displayName: name, status: "unavailable", message: "The public Suwanee Gamers website is not reachable through Cloudflare.", technicalDetails: `HTTP ${response.status}`, errorCode: `HTTP_${response.status}`, checkedAt, responseTimeMs, lastSuccessfulAt: lastSuccess.get(id), userImpact: "Visitors may be unable to reach the public website." };
+  let failedResult: DiagnosticResult | undefined;
+
+  for (let attempt = 1; attempt <= CLOUDFLARE_CONFIRM_ATTEMPTS; attempt += 1) {
+    const checkedAt = new Date().toISOString();
+    try {
+      const probeUrl = new URL(url);
+      probeUrl.searchParams.set("myra-health", `${Date.now()}-${attempt}`);
+      const response = await fetch(probeUrl, {
+        signal: AbortSignal.timeout(CLOUDFLARE_ATTEMPT_TIMEOUT_MS),
+        cache: "no-store",
+        redirect: "follow",
+        headers: { "cache-control": "no-cache" },
+      });
+      const responseTimeMs = Math.round(performance.now() - began);
+      if (!response.ok) {
+        failedResult = { service: id, displayName: name, status: "unavailable", message: "The public Suwanee Gamers website is not reachable through Cloudflare.", technicalDetails: `HTTP ${response.status} after ${attempt} probe${attempt === 1 ? "" : "s"}`, errorCode: `HTTP_${response.status}`, checkedAt, responseTimeMs, lastSuccessfulAt: lastSuccess.get(id), userImpact: "Visitors may be unable to reach the public website." };
+      } else {
+        const server = response.headers.get("server") ?? "";
+        const cfRay = response.headers.get("cf-ray") ?? "";
+        if (!cfRay && !server.toLowerCase().includes("cloudflare")) {
+          failedResult = { service: id, displayName: name, status: "degraded", message: "The public website responded, but its Cloudflare route could not be verified.", technicalDetails: `The response did not include a Cloudflare server or cf-ray header after ${attempt} probe${attempt === 1 ? "" : "s"}.`, errorCode: "CLOUDFLARE_HEADERS_MISSING", checkedAt, responseTimeMs, lastSuccessfulAt: lastSuccess.get(id), userImpact: "The public site is responding, but Cloudflare protection and tunnel routing are uncertain." };
+        } else {
+          lastSuccess.set(id, checkedAt);
+          return { service: id, displayName: name, status: "healthy", message: "The public website is active and responding through Cloudflare.", technicalDetails: `HTTP ${response.status}; Cloudflare ray ${cfRay || "present via server header"}`, checkedAt, responseTimeMs, lastSuccessfulAt: checkedAt };
+        }
+      }
+    } catch (error) {
+      failedResult = { service: id, displayName: name, status: "unavailable", message: "The public Suwanee Gamers website is not reachable through Cloudflare.", technicalDetails: `${sanitized(error)} after ${attempt} probe${attempt === 1 ? "" : "s"}`, errorCode: error instanceof DOMException && error.name === "TimeoutError" ? "TIMEOUT" : "CONNECTION_FAILED", checkedAt, responseTimeMs: Math.round(performance.now() - began), lastSuccessfulAt: lastSuccess.get(id), userImpact: "Visitors may be unable to reach the public website." };
     }
-    const server = response.headers.get("server") ?? "";
-    const cfRay = response.headers.get("cf-ray") ?? "";
-    if (!cfRay && !server.toLowerCase().includes("cloudflare")) {
-      return { service: id, displayName: name, status: "degraded", message: "The public website responded, but its Cloudflare route could not be verified.", technicalDetails: "The response did not include a Cloudflare server or cf-ray header.", errorCode: "CLOUDFLARE_HEADERS_MISSING", checkedAt, responseTimeMs, lastSuccessfulAt: lastSuccess.get(id), userImpact: "The public site is responding, but Cloudflare protection and tunnel routing are uncertain." };
-    }
-    lastSuccess.set(id, checkedAt);
-    return { service: id, displayName: name, status: "healthy", message: "The public website is active and responding through Cloudflare.", technicalDetails: `HTTP ${response.status}; Cloudflare ray ${cfRay || "present via server header"}`, checkedAt, responseTimeMs, lastSuccessfulAt: checkedAt };
-  } catch (error) {
-    return { service: id, displayName: name, status: "unavailable", message: "The public Suwanee Gamers website is not reachable through Cloudflare.", technicalDetails: sanitized(error), errorCode: error instanceof DOMException && error.name === "TimeoutError" ? "TIMEOUT" : "CONNECTION_FAILED", checkedAt, responseTimeMs: Math.round(performance.now() - began), lastSuccessfulAt: lastSuccess.get(id), userImpact: "Visitors may be unable to reach the public website." };
+
+    if (attempt < CLOUDFLARE_CONFIRM_ATTEMPTS) await delay(CLOUDFLARE_RETRY_DELAY_MS);
   }
+
+  return failedResult!;
 }
 
 async function tcpCheck(id: string, name: string, port: number): Promise<DiagnosticResult> {

@@ -127,6 +127,8 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         # Out-of-world website roadmap block (site features requested / built /
         # ideated). Kept separate from in-world Myrdae lore on purpose.
         "roadmap": str(payload.get("roadmap") or ""),
+        # Curated "what's new" changelog of recently shipped site/Myra changes.
+        "updates": str(payload.get("updates") or ""),
         "knowledgeVisibility": "dm" if payload.get("knowledgeVisibility") == "dm" else "players",
         "brainAccessToken": str(payload.get("brainAccessToken") or ""),
         "dmCampaigns": payload.get("dmCampaigns") if payload.get("dmCampaigns") == "*" or isinstance(payload.get("dmCampaigns"), list) else [],
@@ -3041,6 +3043,9 @@ class Myra(Agent):
         # Website roadmap — its own out-of-world compartment, already framed by
         # the server as real-world site-development info (not game lore).
         self.roadmap = str(schedule.get("roadmap") or "").strip()
+        # Curated "what's new" changelog — recent shipped site/Myra changes.
+        # Server-framed as real-world; surfaced only when the visitor asks.
+        self.updates = str(schedule.get("updates") or "").strip()
         self.pantheon_knowledge = load_pantheon_knowledge()
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
@@ -3124,6 +3129,11 @@ class Myra(Agent):
         roadmap_block = (
             "\n" + self.roadmap + "\n" if self.roadmap else ""
         )
+        # "What's new" changelog — self-labeling real-world block, same treatment
+        # as the roadmap. Only surfaced when the visitor asks (see rules below).
+        updates_block = (
+            "\n" + self.updates + "\n" if self.updates else ""
+        )
         chronicles_access_block = (
             "This authenticated visitor has full DM Chronicles access across campaigns."
             if self.dm_campaigns == "*"
@@ -3149,6 +3159,7 @@ class Myra(Agent):
             {profile_block}
             {website_updates_block}
             {roadmap_block}
+            {updates_block}
             {chronicles_access_block}
 
             {personality_block}
@@ -3197,6 +3208,16 @@ class Myra(Agent):
               in-world Myrdae lore, and never treat lore, campaigns, or Chronicles
               content as roadmap. If it is absent or does not cover something, say
               you don't have that on the site's list rather than guessing.
+            - The "what's new" changelog block, when present, lists recent changes
+              that have actually SHIPPED — new website features and new Myra
+              capabilities, each with the date it landed. Use it ONLY when the
+              visitor asks what is new, what changed recently, what you added, or
+              when the site or you were last updated. Lead with the most recent
+              change and its date, and keep it short. Never volunteer it unprompted,
+              never treat it as in-world lore, and if it does not cover what they
+              ask, say you don't have that in your recent-changes list. It is
+              distinct from the raw website update snapshot above (which only knows
+              file timestamps) and from the roadmap (which is what is planned).
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
             - For a player character's STATS — level, class, species, subclass,
