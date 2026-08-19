@@ -14,6 +14,9 @@ import {
 } from "@/lib/assistantBrain";
 import { getAssistantRoadmap } from "@/lib/assistantRoadmap";
 import { getAssistantUpdates } from "@/lib/assistantUpdates";
+import { getAdminSnapshotForAgent } from "@/lib/adminSnapshot";
+import { getAdminSession } from "@/lib/adminSession";
+import { isAllowedAdminEmail } from "@/lib/adminAllowlist";
 import { getLearnedFaqForAgent } from "@/lib/assistantLearned";
 import { personaForAgentMember } from "@/lib/assistantPersonaStore";
 import { assistantTuningForAgent } from "@/lib/assistantTuningStore";
@@ -137,6 +140,14 @@ export async function POST(request: NextRequest) {
     const memberKey = userSession.sub ?? userSession.email ?? randomUUID();
     const memberId = createHash("sha256").update(memberKey).digest("hex").slice(0, 12);
     const fullDmAccess = mayUseFullMyraDm(userSession.email);
+    // Verified admin: the visitor authenticated to the admin panel (sg-admin
+    // session) AND — belt and suspenders — their Google account is still on the
+    // ADMIN_EMAILS allowlist, so a stale admin cookie on a de-listed account
+    // leaks nothing. Only then does the admin operations snapshot ride along;
+    // for everyone else it is an empty string and never present in metadata.
+    const adminSession = await getAdminSession();
+    const isVerifiedAdmin =
+      adminSession.isAdmin === true && isAllowedAdminEmail(userSession.email);
     const memberDm = getDungeonMasters().find((dm) =>
       [userProfile.profile.playerName, userProfile.profile.displayName].some((name) =>
         name?.localeCompare(dm.name, undefined, { sensitivity: "base" }) === 0
@@ -221,6 +232,10 @@ export async function POST(request: NextRequest) {
       // in plain terms, distinct from raw file freshness (websiteUpdates) and the
       // roadmap planning list.
       updates: getAssistantUpdates(),
+      // Admin-only, read-only operations snapshot. Empty for non-admins, so the
+      // data is simply absent from metadata unless a verified admin is signed in.
+      isAdmin: isVerifiedAdmin,
+      adminSnapshot: getAdminSnapshotForAgent(isVerifiedAdmin),
       knowledgeVisibility: dmBrainAccess ? "dm" : "players",
       dmCampaigns,
       dmDefaultCampaigns,

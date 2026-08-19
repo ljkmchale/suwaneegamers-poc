@@ -129,6 +129,10 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         "roadmap": str(payload.get("roadmap") or ""),
         # Curated "what's new" changelog of recently shipped site/Myra changes.
         "updates": str(payload.get("updates") or ""),
+        # Admin-only operations snapshot. Present (non-empty) ONLY when the token
+        # route verified a signed-in admin; empty for everyone else.
+        "isAdmin": bool(payload.get("isAdmin")),
+        "adminSnapshot": str(payload.get("adminSnapshot") or ""),
         "knowledgeVisibility": "dm" if payload.get("knowledgeVisibility") == "dm" else "players",
         "brainAccessToken": str(payload.get("brainAccessToken") or ""),
         "dmCampaigns": payload.get("dmCampaigns") if payload.get("dmCampaigns") == "*" or isinstance(payload.get("dmCampaigns"), list) else [],
@@ -3046,6 +3050,11 @@ class Myra(Agent):
         # Curated "what's new" changelog — recent shipped site/Myra changes.
         # Server-framed as real-world; surfaced only when the visitor asks.
         self.updates = str(schedule.get("updates") or "").strip()
+        # Admin operations snapshot — non-empty ONLY for a token-route-verified
+        # admin. The server is the sole authority on who is an admin; this string
+        # simply is or isn't here. Never infer admin status from anything else.
+        self.is_admin = bool(schedule.get("isAdmin"))
+        self.admin_snapshot = str(schedule.get("adminSnapshot") or "").strip()
         self.pantheon_knowledge = load_pantheon_knowledge()
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
@@ -3134,6 +3143,11 @@ class Myra(Agent):
         updates_block = (
             "\n" + self.updates + "\n" if self.updates else ""
         )
+        # Admin operations snapshot — only ever non-empty for a verified admin.
+        # Self-labeling as admin-only; the rules below forbid sharing it otherwise.
+        admin_block = (
+            "\n" + self.admin_snapshot + "\n" if self.admin_snapshot else ""
+        )
         chronicles_access_block = (
             "This authenticated visitor has full DM Chronicles access across campaigns."
             if self.dm_campaigns == "*"
@@ -3160,6 +3174,7 @@ class Myra(Agent):
             {website_updates_block}
             {roadmap_block}
             {updates_block}
+            {admin_block}
             {chronicles_access_block}
 
             {personality_block}
@@ -3218,6 +3233,18 @@ class Myra(Agent):
               ask, say you don't have that in your recent-changes list. It is
               distinct from the raw website update snapshot above (which only knows
               file timestamps) and from the roadmap (which is what is planned).
+            - The "ADMIN-ONLY website operations status" block, when present, means
+              the server has already verified that a signed-in Suwanee Gamers admin
+              is talking to you. Only then may you answer back-office questions —
+              pending site feedback, nightly content-sync failures, security events
+              and failed logins, and map ratings awaiting moderation — using those
+              exact numbers. If that block is ABSENT, you have no admin data: treat
+              all of that as private and refuse plainly (e.g. "That's admin-only and
+              you're not signed in as an admin, so I can't share it"), and never
+              guess, estimate, or reveal operational, security, or moderation
+              details. Do not announce admin status or read the snapshot unprompted;
+              answer only when the admin asks. It is real-world site operations,
+              never in-world lore.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
             - For a player character's STATS — level, class, species, subclass,
