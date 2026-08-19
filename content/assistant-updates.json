@@ -1,0 +1,34 @@
+{
+  "updates": [
+    {
+      "date": "2026-08-18",
+      "area": "site",
+      "title": "Location & business ratings on the Map of Myrdae",
+      "detail": "You can now leave an in-character review and star rating for places and businesses on the Map of Myrdae. Each of your characters gets one review per place. DMs and admins can moderate reviews from the Advents Guide dashboard."
+    },
+    {
+      "date": "2026-08-18",
+      "area": "site",
+      "title": "Ships now sail across the Map of Myrdae",
+      "detail": "Watercraft move along the world map in real time, so everyone viewing the map sees the ships in the same position."
+    },
+    {
+      "date": "2026-08-08",
+      "area": "myra",
+      "title": "Myra has her own voice and can sound like different members",
+      "detail": "Myra now speaks with a natural voice, and members can pick a persona for how she sounds and talks from their profile page."
+    },
+    {
+      "date": "2026-08-08",
+      "area": "myra",
+      "title": "Myra can help beyond the schedule",
+      "detail": "Myra can now answer the current time and date, the weather, and general questions like quick math, and she can pass along feedback about the site to the team."
+    },
+    {
+      "date": "2026-08-05",
+      "area": "myra",
+      "title": "Myra knows the website roadmap",
+      "detail": "Myra can now tell you what site features the group has requested, already built, or is considering, kept separate from in-world Myrdae lore."
+    }
+  ]
+}
