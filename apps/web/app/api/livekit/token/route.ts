@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import { gzipSync } from "node:zlib";
 import { NextRequest, NextResponse } from "next/server";
 import {
   AccessToken,
@@ -281,13 +282,20 @@ export async function POST(request: NextRequest) {
       canPublishData: true,
       canSubscribe: true,
     });
+    // The dispatch metadata rides inside the participant JWT, and that JWT is sent
+    // in the LiveKit connect request. The full context (brain, recaps, self-model,
+    // admin blocks) is tens of KB — large enough that the JWT exceeds the request
+    // size the LiveKit front-end accepts, so the browser's connect fails with
+    // "could not establish signal connection: Failed to fetch". JSON text
+    // compresses ~3-4x, so gzip it (marked "gz:") and let the agent inflate it.
+    const metadataForDispatch = `gz:${gzipSync(Buffer.from(metadata, "utf8")).toString("base64")}`;
     token.roomConfig = new RoomConfiguration({
       name: roomName,
       maxParticipants: 2,
       agents: [
         new RoomAgentDispatch({
           agentName,
-          metadata,
+          metadata: metadataForDispatch,
         }),
       ],
     });

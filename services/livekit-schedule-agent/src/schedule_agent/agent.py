@@ -1,6 +1,8 @@
 import asyncio
 import contextlib
 import functools
+import base64
+import gzip
 import json
 import logging
 import os
@@ -77,6 +79,16 @@ DEFAULT_PANTHEON_PATH = (
 def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
     if not raw_metadata:
         return {"timezone": "America/New_York", "events": []}
+
+    # The token route gzips the metadata ("gz:" + base64) so the participant JWT
+    # stays small enough for the LiveKit front-end to accept the connect request.
+    # Inflate it here; fall back to treating the string as raw JSON (older tokens).
+    if raw_metadata.startswith("gz:"):
+        try:
+            raw_metadata = gzip.decompress(base64.b64decode(raw_metadata[3:])).decode("utf-8")
+        except Exception:
+            logger.warning("LiveKit dispatch metadata could not be inflated")
+            return {"timezone": "America/New_York", "events": []}
 
     try:
         payload = json.loads(raw_metadata)
