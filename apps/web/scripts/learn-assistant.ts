@@ -25,6 +25,7 @@ import {
   type LearnedGap,
 } from "@/lib/assistantLearned";
 import { enqueueRemediation } from "@/lib/assistantRemediation";
+import { getMisrouteCandidates } from "@/lib/assistantMisroutes";
 
 // The scheduler launches this script from the repository root, outside Next's
 // normal boot path. Load apps/web/.env.local explicitly so the Brain vault,
@@ -38,6 +39,35 @@ for (const line of fs.readFileSync(path.join(webRoot, ".env.local"), "utf8").spl
 
 const WINDOW_DAYS = Number(process.env.ASSISTANT_LEARN_DAYS ?? 30);
 const MAX_NEW_PER_RUN = Number(process.env.ASSISTANT_LEARN_MAX ?? 25);
+const MAX_MISROUTES_PER_RUN = Number(process.env.ASSISTANT_MISROUTE_MAX ?? 15);
+
+// Flag turns where Myra's deterministic router likely picked the wrong handler
+// (a member corrected her, or a question about herself was answered from a
+// shortcut) into the remediation queue, so the system surfaces its own routing
+// gaps instead of a human noticing them by ear.
+function queueMisroutes(stamp: string): number {
+  let queued = 0;
+  for (const candidate of getMisrouteCandidates(WINDOW_DAYS, MAX_MISROUTES_PER_RUN)) {
+    const proposedCorrection =
+      candidate.reason === "correction"
+        ? `Myra answered this from the "${candidate.category}" shortcut, then the member corrected or re-asked ("${candidate.followup}"). Review whether this intent is routed to the wrong handler; when in doubt it should fall through to the model.`
+        : `Myra answered this from the "${candidate.category}" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.`;
+    enqueueRemediation({
+      question: candidate.question,
+      category: "routing-correction",
+      proposedCorrection,
+      evidence: [
+        `Answered as ${candidate.category}`,
+        candidate.followup ? `Member follow-up: ${candidate.followup}` : "",
+      ].filter(Boolean),
+      source: "voice-analytics",
+      timesSeen: candidate.timesSeen,
+    });
+    queued += 1;
+    console.log(`[${stamp}] learn: QUEUED routing-correction (${candidate.reason}) "${candidate.question}"`);
+  }
+  return queued;
+}
 
 function transcriptRemediation(question: string): {
   category: "pronunciation-fix" | "routing-correction";
@@ -164,9 +194,11 @@ async function main(): Promise<void> {
     updatedAt: stamp,
   });
 
+  const misroutes = queueMisroutes(stamp);
+
   console.log(
     `[${stamp}] learn: done — ${proposed} proposal(s) queued, ${gaps.length} unanswered gap(s), ` +
-      `${knownAnswers.size} total answers.`,
+      `${misroutes} misroute(s) flagged, ${knownAnswers.size} total answers.`,
   );
 }
 
