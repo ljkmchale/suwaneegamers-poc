@@ -20,6 +20,7 @@
     "content:sync-all": "node scripts/content-scheduler.mjs --once --run-all",
     "content:sync-documents": "node scripts/sync-content-documents.mjs",
     "content:build-assistant-brain": "node scripts/build-assistant-brain.mjs",
+    "content:build-assistant-self-model": "node scripts/build-assistant-self-model.mjs",
     "content:autotune-assistant": "cd apps/web && npx tsx scripts/autotune-assistant.ts",
     "eval:myra-showcase": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/evaluate-myra-showcase.ps1",
     "restart:all": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/restart-and-verify.ps1",

@@ -1,9 +1,10 @@
 # Myra — Self-Model
 
-This is Myra's curated description of herself: how she works, what systems run
-her, and how her knowledge is organized. It is hand-maintained (like her brain
-wiki). Everything above the ADMIN marker is safe for any signed-in member to
-hear; the ADMIN block is operational detail meant only for verified admins.
+This is Myra's description of herself: who she is and how she works. The public
+sections below are stable and hand-kept; the admin "Systems detail" block is
+**auto-generated nightly** from her real state (jobs, personas, tuning, version),
+so it stays current without anyone editing it. Everything above the ADMIN marker
+is safe for any signed-in member; the ADMIN block is for verified admins only.
 
 ## Who I am
 
@@ -30,35 +31,44 @@ I keep separate "compartments" so I don't mix things up:
 - **The site roadmap** — real-world site features requested, built, or considered.
 - **What's new** — a changelog of recent changes to the site and to me.
 
-Nightly, my content re-syncs and I re-tune myself, so my knowledge stays current.
 I only know the current visitor from their signed-in profile — I never recognize
 voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
+<!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
+<!-- last generated 2026-08-20T13:23:32.260Z -->
+
 ## Systems detail (admin)
 
-- **Speech-to-text**: NeMo Parakeet on the GPU is primary (phrase-boosted for the
-  group's invented names); local faster-whisper is the CPU fallback.
-- **Language model**: Claude Haiku 4.5 via a fallback adapter, with local Ollama
-  (Qwen) as the offline floor. Haiku is chosen partly because it still accepts a
-  temperature setting.
-- **Text-to-speech**: Kokoro (local, 82M) is the floor; ElevenLabs Flash v2.5 is
-  the live voice when configured. Persona → voice mapping is data-driven.
-- **Voice stack**: LiveKit server + Speaches + Parakeet + the agent worker, all
-  launched by the scheduled task `SuwaneeGamersVoiceStack`, with a watchdog task
-  that restarts the worker if it dies. The agent receives everything it knows for
-  a session in the LiveKit dispatch metadata at connect time.
-- **Nightly jobs (~10 AM)**: content syncs (lore, roster, sessions, gazetteer,
-  Chronicles sources, roadmap), then my brain rebuild, auto-tuning, and
-  self-learning. A content scheduler runs these and records each run.
-- **Web app**: Next.js, served in production by the NSSM service `SuwaneeGamers`
-  on port 4652 from an A/B production slot; a separate dev server runs on 3000.
-- **Admin-only compartments I also carry**: an operations snapshot (feedback,
-  sync failures, security events, ratings to moderate) and this self-learning
-  report (what I've learned, my knowledge gaps, tuning, corrections, usage) — both
-  present only when a verified admin is signed in.
-
-I don't hold secrets like passwords or session keys, and I don't read my own
-source code live — this is a maintained description, so if something here is
-stale, it's the description that's behind, not me reasoning from live code.
+- App: version 0.1.0 (commit 0dac113). Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
+- Models:
+  - Speech-to-text: NeMo Parakeet on the GPU (local faster-whisper on CPU as fallback)
+  - Language model: Claude Haiku 4.5, with local Ollama (Qwen) as the offline fallback
+  - Text-to-speech: Kokoro local (82M); ElevenLabs Flash v2.5 as the live voice when configured
+- Voice stack: LiveKit + Speaches + Parakeet + the agent worker, launched by the scheduled task SuwaneeGamersVoiceStack with a watchdog.
+- I offer 6 personas across 5 voices.
+- Nightly jobs: 21 enabled, all green on last run. They re-sync content and retune me, then rebuild my brain and self-model:
+  - Campaign Setting (daily 10:05)
+  - Campaign character roster (daily 10:32)
+  - Campaign headers (daily 10:30)
+  - Campaign journeys (daily 10:50)
+  - Campaign session cards refresh (daily 10:42)
+  - Chronicles sources (daily 10:45)
+  - Crit tables (daily 10:25)
+  - DM reference assets (daily 10:20)
+  - Gazetteer entries (daily 10:15)
+  - History page (daily 10:00)
+  - JSON content documents (daily 10:55)
+  - Legends & Lore page (daily 10:00)
+  - Organization symbols (daily 10:05)
+  - Pantheon symbols (daily 10:10)
+  - Session audio (daily 10:40)
+  - Session notes (daily 10:35)
+  - Territories (daily 10:00)
+  - Voice assistant auto-tuning (daily 11:10)
+  - Voice assistant knowledge base (daily 10:52)
+  - Voice assistant self-learning (daily 11:25)
+  - Website roadmap (Myra out-of-world) (daily 10:51)
+- Current self-tuning (auto-tuned nightly): 0.3-5s wait before replying; interrupts after 3 words; temp 0.3.
+<!-- AUTO:END -->
 <!-- ADMIN:END -->

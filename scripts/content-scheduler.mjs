@@ -176,6 +176,14 @@ const jobs = [
     revalidatePaths: ["/"],
   },
   {
+    id: "assistant-self-model",
+    label: "Voice assistant self-model",
+    schedule: { kind: "daily", time: "10:53" },
+    command: [node, ["scripts/build-assistant-self-model.mjs"]],
+    timeoutMs: 2 * 60_000,
+    revalidatePaths: ["/"],
+  },
+  {
     id: "assistant-autotune",
     label: "Voice assistant auto-tuning",
     schedule: { kind: "daily", time: "11:10" },
