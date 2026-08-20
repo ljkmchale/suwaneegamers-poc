@@ -133,6 +133,10 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         # route verified a signed-in admin; empty for everyone else.
         "isAdmin": bool(payload.get("isAdmin")),
         "adminSnapshot": str(payload.get("adminSnapshot") or ""),
+        # Admin-only self-learning report (empty for non-admins).
+        "adminLearning": str(payload.get("adminLearning") or ""),
+        # Curated self-model: public overview for all, + admin detail for admins.
+        "selfModel": str(payload.get("selfModel") or ""),
         "knowledgeVisibility": "dm" if payload.get("knowledgeVisibility") == "dm" else "players",
         "brainAccessToken": str(payload.get("brainAccessToken") or ""),
         "dmCampaigns": payload.get("dmCampaigns") if payload.get("dmCampaigns") == "*" or isinstance(payload.get("dmCampaigns"), list) else [],
@@ -3055,6 +3059,11 @@ class Myra(Agent):
         # simply is or isn't here. Never infer admin status from anything else.
         self.is_admin = bool(schedule.get("isAdmin"))
         self.admin_snapshot = str(schedule.get("adminSnapshot") or "").strip()
+        # Admin-only self-learning report — non-empty only for a verified admin.
+        self.admin_learning = str(schedule.get("adminLearning") or "").strip()
+        # Curated self-model (how she works / her systems). Public overview for
+        # everyone; the server appends admin detail only for a verified admin.
+        self.self_model = str(schedule.get("selfModel") or "").strip()
         self.pantheon_knowledge = load_pantheon_knowledge()
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
@@ -3148,6 +3157,17 @@ class Myra(Agent):
         admin_block = (
             "\n" + self.admin_snapshot + "\n" if self.admin_snapshot else ""
         )
+        # Admin-only self-learning report (non-empty only for a verified admin).
+        admin_learning_block = (
+            "\n" + self.admin_learning + "\n" if self.admin_learning else ""
+        )
+        # Self-model — how she works. Public overview for everyone; admin detail
+        # already appended server-side for verified admins.
+        self_model_block = (
+            "\n\nAbout yourself (how you work — this is real-world information about\n"
+            "you, the assistant, not the game world):\n" + self.self_model + "\n"
+            if self.self_model else ""
+        )
         chronicles_access_block = (
             "This authenticated visitor has full DM Chronicles access across campaigns."
             if self.dm_campaigns == "*"
@@ -3174,7 +3194,9 @@ class Myra(Agent):
             {website_updates_block}
             {roadmap_block}
             {updates_block}
+            {self_model_block}
             {admin_block}
+            {admin_learning_block}
             {chronicles_access_block}
 
             {personality_block}
@@ -3214,6 +3236,18 @@ class Myra(Agent):
               today, give latestUpdate and its exact date. Distinguish content,
               image, and website file updates; never infer what changed from a
               filename beyond the facts in the snapshot.
+            - Time-relative "did anything happen / change" questions — "last night",
+              "overnight", "recently", "lately", "since yesterday", "while I was
+              away", "anything new" — are real questions about the site's own
+              activity, not the game world. Answer them: for a verified admin, from
+              the "Overnight & recent activity" lines in the admin operations block
+              (last content sync time and any failures, security events in the last
+              24 hours, most recent content change) plus the "what's new" changelog;
+              for everyone else, from the website update snapshot and the "what's
+              new" changelog. Use the local timestamps to decide what falls in "last
+              night". If nothing recent is recorded, say so plainly and give the most
+              recent thing you do have — do not treat the question as unanswerable
+              and do not turn it into the game schedule.
             - The site roadmap block, when present, is real-world information about
               the WEBSITE's development — features the group has requested, already
               built, or is considering. Use it ONLY to answer questions about what
@@ -3245,6 +3279,26 @@ class Myra(Agent):
               details. Do not announce admin status or read the snapshot unprompted;
               answer only when the admin asks. It is real-world site operations,
               never in-world lore.
+            - When asked how you work, what models or systems run you, what your
+              architecture is, or to describe yourself, answer from the "About
+              yourself" self-model block. It is a maintained description of you —
+              accurate real-world information, not the game world. Every signed-in
+              member gets the overview; a verified admin's block also carries a
+              systems-detail section, so answer at the level of detail actually
+              present. Do not claim to read your own live source code, and if the
+              block does not cover something, say it isn't in your self-description
+              rather than inventing an internal detail.
+            - The ADMIN-ONLY "self-learning report" block, when present, is you
+              reflecting on your own learning for a verified admin: how many answers
+              you have auto-learned and the most-asked ones, the knowledge gaps you
+              keep hitting (questions you could not answer), how you have been
+              auto-tuned, your pending corrections, and what pages visitors use. Use
+              it to answer "what have you learned?", "what are you missing / what
+              can't you answer?", "how have you tuned yourself?", "what do people
+              ask?" — with exact numbers. If the block is ABSENT, treat this as
+              private admin data and say you can only share your learning report
+              with a signed-in admin; never guess at it. Do not bring it up
+              unprompted. It is real-world information about you, never in-world lore.
             - Never ask which game or campaign the visitor means for a general schedule question.
             - Use the get_upcoming_games tool only when filtering for a specifically named campaign.
             - For a player character's STATS — level, class, species, subclass,

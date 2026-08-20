@@ -15,6 +15,8 @@ import {
 import { getAssistantRoadmap } from "@/lib/assistantRoadmap";
 import { getAssistantUpdates } from "@/lib/assistantUpdates";
 import { getAdminSnapshotForAgent } from "@/lib/adminSnapshot";
+import { getAdminLearningReportForAgent } from "@/lib/adminLearningReport";
+import { getAssistantSelfModel } from "@/lib/assistantSelfModel";
 import { getAdminSession } from "@/lib/adminSession";
 import { isAllowedAdminEmail } from "@/lib/adminAllowlist";
 import { getLearnedFaqForAgent } from "@/lib/assistantLearned";
@@ -235,7 +237,16 @@ export async function POST(request: NextRequest) {
       // Admin-only, read-only operations snapshot. Empty for non-admins, so the
       // data is simply absent from metadata unless a verified admin is signed in.
       isAdmin: isVerifiedAdmin,
-      adminSnapshot: getAdminSnapshotForAgent(isVerifiedAdmin),
+      adminSnapshot: getAdminSnapshotForAgent(
+        isVerifiedAdmin,
+        process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_TIMEZONE ?? "America/New_York",
+      ),
+      // Admin-only self-learning report (what she's learned, gaps, tuning,
+      // corrections, usage). Empty for non-admins.
+      adminLearning: getAdminLearningReportForAgent(isVerifiedAdmin),
+      // Curated self-model: public overview for everyone, plus operational-detail
+      // appended only for verified admins.
+      selfModel: getAssistantSelfModel(isVerifiedAdmin),
       knowledgeVisibility: dmBrainAccess ? "dm" : "players",
       dmCampaigns,
       dmDefaultCampaigns,
