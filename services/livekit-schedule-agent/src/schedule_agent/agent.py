@@ -1874,17 +1874,19 @@ def about_suwanee_gamers_answer(
 
 def is_schedule_question(question: str) -> bool:
     normalized = question.casefold()
-    return any(
+    # Explicit schedule anchors — unambiguous on their own.
+    if any(
         phrase in normalized
         for phrase in (
             "schedule",
             "scheduled",
             "what games",
-            "today",
-            "tonight",
-            "coming up",
+            "what game",
             "next game",
             "next session",
+            "playing next",
+            "play next",
+            "plays next",
             "when is",
             "when does",
             "when do",
@@ -1893,8 +1895,74 @@ def is_schedule_question(question: str) -> bool:
             "what time is the",
             "what time does",
             "what time do",
-            "playing next",
-            "play next",
+            "what's on",
+            "whats on",
+            "what is on",
+        )
+    ):
+        return True
+    # A bare temporal word ("today", "tonight") only means the GAME schedule when
+    # it sits next to a game/play concept. On its own — "what did you learn today",
+    # "what changed today" — it does NOT, so the question falls through to the
+    # grounded language model instead of reciting the calendar. This kills the
+    # whole class of temporal-word collisions structurally, rather than
+    # blacklisting each colliding phrase one at a time.
+    has_temporal = any(
+        word in normalized
+        for word in ("today", "tonight", "coming up", "this week", "this weekend")
+    )
+    has_game_concept = any(
+        word in normalized
+        for word in ("game", "games", "session", "sessions", "play", "playing", "plays", "campaign")
+    )
+    return has_temporal and has_game_concept
+
+
+def is_self_report_question(question: str) -> bool:
+    """Questions about Myra herself — what she has learned, what changed, how she
+    works — which must NOT be captured by the deterministic schedule matcher just
+    because they contain a word like "today". These fall through to the language
+    model, which answers from the what's-new, self-model, and (for admins) the
+    self-learning / admin-ops blocks."""
+    normalized = question.casefold()
+    return any(
+        phrase in normalized
+        for phrase in (
+            # Self-learning: "what did you learn today", "what have you learned"
+            "you learn",
+            "you learned",
+            "you've learned",
+            "youve learned",
+            "are you missing",
+            "can't you answer",
+            "cant you answer",
+            "tuned yourself",
+            "tuning yourself",
+            # What's new / changes: "what's new today", "what changed today"
+            "what's new",
+            "whats new",
+            "what is new",
+            "anything new",
+            "what changed",
+            "what has changed",
+            "what have you changed",
+            "what did you change",
+            "any updates",
+            "what updates",
+            # Recent-activity self-awareness: "did anything happen today/last night"
+            "anything happen",
+            "did anything change",
+            "happen last night",
+            "happen overnight",
+            # Self-model: "how do you work", "what systems", "describe yourself"
+            "how do you work",
+            "how you work",
+            "how were you built",
+            "how are you built",
+            "what models",
+            "your systems",
+            "your architecture",
+            "describe yourself",
         )
     )
 
@@ -3525,7 +3593,15 @@ class Myra(Agent):
         del turn_ctx
         started = time.perf_counter()
         question = canonical_question.casefold()
-        if is_self_diagnosis_question(question):
+        # Questions about Myra herself — what she has learned, what changed, how she
+        # works — must reach the language model, which is grounded on ALL of her
+        # compartments (schedule, knowledge, what's-new, self-model, and the admin
+        # blocks). The deterministic shortcuts below match on incidental words
+        # ("today", "how are you") and would otherwise capture these wrongly, so a
+        # self-referential question vetoes every one of them. This keeps intent
+        # routing in the model's hands instead of a growing list of keyword patches.
+        self_report_question = is_self_report_question(question)
+        if is_self_diagnosis_question(question) and not self_report_question:
             depth, component = diagnostic_request(question)
             result = await self._get_myra_health(depth=depth, component=component or "")
             spoken = str(result.get("summary") or "I'm able to respond, but I cannot verify my current health.")
@@ -3641,12 +3717,16 @@ class Myra(Agent):
                 self.about_suwanee_gamers,
                 self.knowledge,
             )
-            if is_about_suwanee_gamers_question(question)
+            if is_about_suwanee_gamers_question(question) and not self_report_question
             else None
         )
         deity_answer = pantheon_deity_answer(question, self.full_pantheon_knowledge)
-        personal_schedule_question = is_personal_schedule_question(question)
-        general_schedule_question = is_schedule_question(question)
+        personal_schedule_question = (
+            is_personal_schedule_question(question) and not self_report_question
+        )
+        general_schedule_question = (
+            is_schedule_question(question) and not self_report_question
+        )
         campaign_answer = (
             campaign_schedule_answer(self.schedule, question)
             if general_schedule_question
@@ -3669,7 +3749,7 @@ class Myra(Agent):
         elif general_schedule_question:
             answer = general_schedule_answer(self.schedule)
             category = "general_schedule"
-        elif (faq_answer := match_faq(question, self.faq)):
+        elif not self_report_question and (faq_answer := match_faq(question, self.faq)):
             # A question Myra learned the answer to on a previous night (see
             # scripts/learn-assistant.ts). Answered deterministically — fast and
             # consistent — instead of falling through to the language model.

@@ -25,6 +25,7 @@ from schedule_agent.agent import (
     is_personal_schedule_question,
     is_recap_question,
     is_schedule_question,
+    is_self_report_question,
     is_time_or_date_question,
     is_self_diagnosis_question,
     load_full_pantheon_knowledge,
@@ -48,6 +49,43 @@ from schedule_agent.agent import (
     tool_result_is_current,
     wake_word_command,
 )
+
+
+def test_self_report_questions_route_to_the_model_not_the_calendar():
+    # Questions about Myra herself must reach the grounded language model, not any
+    # deterministic shortcut. They are flagged as self-report...
+    for q in (
+        "what did you learn today",
+        "what have you learned",
+        "what changed today",
+        "what's new today",
+        "did anything happen today",
+        "how do you work",
+        "what models do you use",
+        "how are you built",
+        "describe yourself",
+    ):
+        assert is_self_report_question(q), q
+    # ...and, structurally, a bare temporal word no longer makes them look like a
+    # schedule question in the first place (no game/play concept present).
+    assert not is_schedule_question("what did you learn today")
+    assert not is_schedule_question("what changed today")
+    assert not is_schedule_question("what's new today")
+
+
+def test_ordinary_schedule_questions_are_still_schedule_questions():
+    # Explicit anchors, and temporal words paired with a game concept, still route
+    # to the deterministic calendar answer.
+    for q in (
+        "what's on today",
+        "anything scheduled tonight",
+        "what games are today",
+        "any games today",
+        "do we play tonight",
+        "when does mad mage play next",
+    ):
+        assert is_schedule_question(q), q
+        assert not is_self_report_question(q), q
 
 
 def test_parse_dispatch_metadata_defaults_safely():
