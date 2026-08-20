@@ -27,6 +27,32 @@ export function getDb(): Database.Database {
 }
 
 function migrateSchema(db: Database.Database): void {
+  const securityBlocksSchema = db
+    .prepare(`SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'security_blocks'`)
+    .get() as { sql: string } | undefined;
+  if (securityBlocksSchema && !securityBlocksSchema.sql.includes("'pending'")) {
+    db.transaction(() => {
+      db.exec(`
+        ALTER TABLE security_blocks RENAME TO security_blocks_legacy;
+        CREATE TABLE security_blocks (
+          ip                 TEXT PRIMARY KEY,
+          cloudflare_rule_id TEXT,
+          status             TEXT NOT NULL CHECK (status IN ('pending', 'active', 'failed', 'removed')),
+          source             TEXT NOT NULL CHECK (source IN ('automatic', 'manual')),
+          reason             TEXT NOT NULL,
+          created_at         TEXT NOT NULL,
+          updated_at         TEXT NOT NULL,
+          removed_at         TEXT,
+          last_error         TEXT
+        );
+        INSERT INTO security_blocks SELECT * FROM security_blocks_legacy;
+        DROP TABLE security_blocks_legacy;
+        CREATE INDEX IF NOT EXISTS idx_security_blocks_status_updated
+          ON security_blocks(status, updated_at DESC);
+      `);
+    })();
+  }
+
   const campaignColumns = new Set(
     (db.prepare(`PRAGMA table_info(campaigns)`).all() as { name: string }[]).map((c) => c.name),
   );
@@ -769,6 +795,23 @@ function initializeSchema(db: Database.Database): void {
       ON security_events(created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_security_events_kind_created
       ON security_events(kind, created_at DESC);
+
+    -- Cloudflare edge blocks created by automatic detection or an admin.
+    -- Keeping the provider rule id makes every block reversible from the UI.
+    CREATE TABLE IF NOT EXISTS security_blocks (
+      ip                 TEXT PRIMARY KEY,
+      cloudflare_rule_id TEXT,
+      status             TEXT NOT NULL CHECK (status IN ('pending', 'active', 'failed', 'removed')),
+      source             TEXT NOT NULL CHECK (source IN ('automatic', 'manual')),
+      reason             TEXT NOT NULL,
+      created_at         TEXT NOT NULL,
+      updated_at         TEXT NOT NULL,
+      removed_at         TEXT,
+      last_error         TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_security_blocks_status_updated
+      ON security_blocks(status, updated_at DESC);
 
     -- ----------------------------------------------------------------
     -- JSON content documents

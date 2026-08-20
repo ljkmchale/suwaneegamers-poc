@@ -7,6 +7,8 @@ import {
   ShieldCheck,
   TriangleAlert,
   UserRound,
+  Ban,
+  CircleOff,
 } from "lucide-react";
 import {
   getRecentSecurityEvents,
@@ -14,6 +16,9 @@ import {
   getSecuritySummary,
 } from "@/lib/securityLog";
 import type { ThreatLevel } from "@/lib/securityClassifier";
+import { cloudflareSecurityConfigured, getSecurityBlocks } from "@/lib/cloudflareSecurity";
+import { blockIpAction, unblockIpAction } from "./actions";
+import { ConfirmSecurityAction } from "./ConfirmSecurityAction";
 
 export const dynamic = "force-dynamic";
 
@@ -88,6 +93,11 @@ export default function SecurityPage() {
   const summary = getSecuritySummary(DAYS);
   const situation = getSecuritySituation();
   const events = getRecentSecurityEvents({ days: DAYS, limit: 200 });
+  const blocks = getSecurityBlocks();
+  const activeBlocks = blocks.filter((block) => block.status === "active");
+  const inactiveBlockHistory = blocks.filter((block) => block.status !== "active");
+  const blocksByIp = new Map(blocks.map((block) => [block.ip, block]));
+  const cloudflareConfigured = cloudflareSecurityConfigured();
   const threat = THREAT_DISPLAY[situation.level];
   const ThreatIcon = threat.icon;
 
@@ -137,7 +147,24 @@ export default function SecurityPage() {
         </div>
       </section>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className={`mt-4 rounded-lg border px-5 py-4 ${cloudflareConfigured ? "border-emerald-800/60 bg-emerald-950/15" : "border-amber-800/60 bg-amber-950/20"}`}>
+        <div className="flex items-start gap-3">
+          {cloudflareConfigured ? <Ban className="mt-0.5 text-emerald-300" size={20} /> : <CircleOff className="mt-0.5 text-amber-300" size={20} />}
+          <div>
+            <h2 className="text-sm font-semibold text-[#e8dfc8]">
+              Automatic Cloudflare blocking {cloudflareConfigured ? "is active" : "needs configuration"}
+            </h2>
+            <p className="mt-1 text-xs leading-relaxed text-[#9080a0]">
+              Public sources are blocked at the Cloudflare edge after 5 failed admin logins in 15 minutes,
+              30 scanner probes in 15 minutes, or 15 distinct vulnerability paths in one hour.
+              Credential-file, installer, web-shell, and suspicious write attempts are blocked immediately.
+              {!cloudflareConfigured && " Add the dedicated security API token and zone ID to enable enforcement."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <div className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-5 py-4">
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#9080a0]">
             <UserRound size={14} aria-hidden="true" />
@@ -174,7 +201,66 @@ export default function SecurityPage() {
           </p>
           <p className="mt-2 text-xs text-[#6a5a78]">Last hour · 5 in 15 minutes triggers attack</p>
         </div>
+        <div className="rounded-lg border border-red-900/70 bg-red-950/20 px-5 py-4">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-red-300">
+            <Ban size={14} aria-hidden="true" />
+            Blocked at Cloudflare
+          </div>
+          <p className="mt-2 text-3xl font-semibold text-red-300">{activeBlocks.length}</p>
+          <p className="mt-2 text-xs text-red-300/60">Cannot reach the site through this zone</p>
+        </div>
       </div>
+
+      <section className="mt-8">
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="text-sm uppercase tracking-wider text-red-300">Currently blocked at Cloudflare</h2>
+            <p className="mt-2 text-xs text-[#6a5a78]">
+              These sources are stopped at the Cloudflare edge before their requests reach Suwanee Gamers.
+            </p>
+          </div>
+          <p className="text-xs text-[#9080a0]">{activeBlocks.length} active block{activeBlocks.length === 1 ? "" : "s"}</p>
+        </div>
+        {activeBlocks.length === 0 ? (
+          <p className="mt-3 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-5 py-6 text-sm text-[#9080a0]">
+            No IP addresses are currently blocked by Suwanee Gamers.
+          </p>
+        ) : (
+          <div className="mt-3 overflow-x-auto rounded-lg border border-red-900/50 bg-[#0f0a1a]">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-[#2a2a35] text-xs uppercase tracking-wider text-[#9080a0]">
+                  <th className="px-4 py-3">IP address</th>
+                  <th className="px-4 py-3">Why it was blocked</th>
+                  <th className="px-4 py-3">Source</th>
+                  <th className="px-4 py-3">Blocked</th>
+                  <th className="px-4 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#2a2a35]">
+                {activeBlocks.map((block) => (
+                  <tr key={block.ip}>
+                    <td className="whitespace-nowrap px-4 py-3">
+                      <span className="rounded border border-red-800 bg-red-950/30 px-2 py-1 font-mono text-xs text-red-300">
+                        {block.ip}
+                      </span>
+                    </td>
+                    <td className="max-w-xl px-4 py-3 text-xs text-[#c8bda8]">{block.reason}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-xs capitalize text-[#9080a0]">{block.source}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-xs text-[#9080a0]">{dateTime(block.updatedAt)}</td>
+                    <td className="px-4 py-3">
+                      <form action={unblockIpAction}>
+                        <input type="hidden" name="ip" value={block.ip} />
+                        <ConfirmSecurityAction action="unblock" ip={block.ip} />
+                      </form>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
 
       <section className="mt-8">
         <div className="flex flex-wrap items-end justify-between gap-2">
@@ -210,7 +296,14 @@ export default function SecurityPage() {
                         {actor.label}
                       </span>
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-[#e8dfc8]">{actor.ip}</td>
+                    <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-[#e8dfc8]">
+                      {actor.ip}
+                      {blocksByIp.get(actor.ip)?.status === "active" && (
+                        <span className="mt-1 block w-fit rounded border border-red-800 bg-red-950/30 px-2 py-0.5 font-sans text-[10px] text-red-300">
+                          Blocked at Cloudflare
+                        </span>
+                      )}
+                    </td>
                     <td className="min-w-72 px-4 py-3">
                       <p className="text-xs text-[#c8bda8]">{actor.explanation}</p>
                       <p className="mt-1 text-[10px] text-[#6a5a78]">{actor.evidence.join(" · ")}</p>
@@ -220,7 +313,25 @@ export default function SecurityPage() {
                       <br />
                       {actor.uniquePaths} path{actor.uniquePaths === 1 ? "" : "s"}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-xs text-[#9080a0]">{dateTime(actor.lastSeenAt)}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-xs text-[#9080a0]">
+                      {dateTime(actor.lastSeenAt)}
+                      <div className="mt-2">
+                        {blocksByIp.get(actor.ip)?.status === "active" ? (
+                          <form action={unblockIpAction}>
+                            <input type="hidden" name="ip" value={actor.ip} />
+                            <ConfirmSecurityAction action="unblock" ip={actor.ip} />
+                          </form>
+                        ) : (
+                          <form action={blockIpAction}>
+                            <input type="hidden" name="ip" value={actor.ip} />
+                            <ConfirmSecurityAction action="block" ip={actor.ip} disabled={!cloudflareConfigured || actor.ip === "Unknown IP"} />
+                          </form>
+                        )}
+                        {blocksByIp.get(actor.ip)?.status === "failed" && (
+                          <p className="mt-1 max-w-48 whitespace-normal text-[10px] text-red-300">Block failed: {blocksByIp.get(actor.ip)?.lastError}</p>
+                        )}
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -228,6 +339,20 @@ export default function SecurityPage() {
           </div>
         )}
       </section>
+
+      {inactiveBlockHistory.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-sm uppercase tracking-wider text-[#9080a0]">Previous and failed block attempts</h2>
+          <div className="mt-3 overflow-x-auto rounded-lg border border-[#2a2a35] bg-[#0f0a1a]">
+            <table className="w-full text-left text-sm">
+              <thead><tr className="border-b border-[#2a2a35] text-xs uppercase tracking-wider text-[#9080a0]"><th className="px-4 py-3">IP</th><th className="px-4 py-3">Status</th><th className="px-4 py-3">Source</th><th className="px-4 py-3">Reason</th><th className="px-4 py-3">Updated</th><th className="px-4 py-3">Action</th></tr></thead>
+              <tbody className="divide-y divide-[#2a2a35]">
+                {inactiveBlockHistory.map((block) => <tr key={block.ip}><td className="px-4 py-3 font-mono text-xs">{block.ip}</td><td className="px-4 py-3 text-xs">{block.status}</td><td className="px-4 py-3 text-xs text-[#9080a0]">{block.source}</td><td className="px-4 py-3 text-xs text-[#9080a0]">{block.reason}{block.lastError ? <span className="block text-red-300">{block.lastError}</span> : null}</td><td className="px-4 py-3 text-xs text-[#9080a0]">{dateTime(block.updatedAt)}</td><td className="px-4 py-3">—</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       <h2 className="mt-8 text-sm uppercase tracking-wider text-[#9080a0]">Seven-day totals</h2>
       <div className="mt-3 grid gap-4 sm:grid-cols-3">

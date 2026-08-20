@@ -6,7 +6,12 @@ import { getAdminSession } from "@/lib/adminSession";
 import { adminAllowlistActive, isAllowedAdminEmail } from "@/lib/adminAllowlist";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { isGoogleAuthConfigured } from "@/lib/googleOAuth";
-import { clientIpFromHeaders, isLoginLockedOut, recordSecurityEvent } from "@/lib/securityLog";
+import { automaticallyBlockThreat, clientIpFromHeaders, isLoginLockedOut, recordSecurityEvent } from "@/lib/securityLog";
+import { isVerifiedCloudflareRequest } from "@/lib/cloudflareSecurity";
+
+async function enforceFailedLogin(requestHeaders: Headers, ip: string | null) {
+  if (isVerifiedCloudflareRequest(requestHeaders)) await automaticallyBlockThreat(ip);
+}
 
 function safeRedirectPath(from: string | null, fallback = "/admin") {
   if (!from || !from.startsWith("/")) return fallback;
@@ -31,6 +36,7 @@ export async function loginAction(formData: FormData) {
       ip,
       userAgent: requestHeaders.get("user-agent"),
     });
+    await enforceFailedLogin(requestHeaders, ip);
     const params = new URLSearchParams({ error: "locked", from });
     if (wantsEditMode) params.set("editMode", "1");
     redirect(`/admin/login?${params.toString()}`);
@@ -54,6 +60,7 @@ export async function loginAction(formData: FormData) {
         ip,
         userAgent: `not-allowlisted:${userSession.email} ${requestHeaders.get("user-agent") ?? ""}`,
       });
+      await enforceFailedLogin(requestHeaders, ip);
       const params = new URLSearchParams({ error: "forbidden", from });
       if (wantsEditMode) params.set("editMode", "1");
       redirect(`/admin/login?${params.toString()}`);
@@ -68,6 +75,7 @@ export async function loginAction(formData: FormData) {
       ip,
       userAgent: requestHeaders.get("user-agent"),
     });
+    await enforceFailedLogin(requestHeaders, ip);
     const params = new URLSearchParams({ error: "1", from });
     if (wantsEditMode) params.set("editMode", "1");
     redirect(`/admin/login?${params.toString()}`);

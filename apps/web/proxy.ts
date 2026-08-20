@@ -2,7 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getIronSession } from "iron-session";
 import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
 import { USER_SESSION_OPTIONS, isSignedIn, type UserSessionData } from "@/lib/userSession";
-import { clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/lib/securityLog";
+import { automaticallyBlockThreat, clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/lib/securityLog";
+import { isVerifiedCloudflareRequest } from "@/lib/cloudflareSecurity";
 
 // Reachable without a signed-in visitor. Everything else — pages and APIs alike
 // — requires Google sign-in.
@@ -70,13 +71,15 @@ export async function proxy(request: NextRequest) {
     // Site-wide watch: only vulnerability-scanner-looking paths are logged,
     // so normal page traffic never touches the database.
     if (isSuspiciousPath(pathname)) {
+      const ip = clientIpFromHeaders(request.headers);
       recordSecurityEvent({
         kind: "suspicious_request",
         path: pathname,
         method: request.method,
-        ip: clientIpFromHeaders(request.headers),
+        ip,
         userAgent: request.headers.get("user-agent"),
       });
+      if (isVerifiedCloudflareRequest(request.headers)) await automaticallyBlockThreat(ip);
     }
 
     if (!googleAuthConfigured() || isPublicPath(pathname)) {

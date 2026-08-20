@@ -8,6 +8,7 @@ import {
   type ThreatActor,
   type ThreatLevel,
 } from "@/lib/securityClassifier";
+import { blockIp, cloudflareSecurityConfigured, isBlockableSourceIp } from "@/lib/cloudflareSecurity";
 
 export const SECURITY_EVENT_KINDS = ["failed_login", "admin_request", "suspicious_request"] as const;
 
@@ -28,7 +29,7 @@ const RETENTION_DAYS = 90;
 // Common vulnerability-scanner probes: PHP/WordPress endpoints, dotfiles,
 // config/backup files, database consoles, shell upload paths.
 const SUSPICIOUS_PATH_RE =
-  /\.(php|asp|aspx|jsp|cgi|env|sql|bak|ini|yml|yaml|pem|key)$|^\/(wp-|wordpress|phpmyadmin|pma|mysql|xmlrpc|cgi-bin|vendor\/|\.git|\.svn|\.aws|\.ssh|\.env|admin\.php|shell|config\.)|\/\.(git|env|aws|ssh)(\/|$)/i;
+  /\.(php|asp|aspx|jsp|cgi|env|sql|bak|ini|yml|yaml|pem|key)$|^\/(wp-|wordpress|phpmyadmin|pma|mysql|xmlrpc|cgi-bin|vendor\/|\.git|\.svn|\.aws|\.ssh|\.env|admin\.php|shell|config\.|install(?:\/|$)|setup(?:\/|$))|\/\.(git|env|aws|ssh)(\/|$)/i;
 
 export function isSuspiciousPath(pathname: string): boolean {
   return SUSPICIOUS_PATH_RE.test(pathname);
@@ -70,6 +71,78 @@ export function recordSecurityEvent(input: {
   } catch (error) {
     // Logging must never break request handling.
     console.error("[securityLog] failed to record event", error);
+  }
+}
+
+export interface AutomaticBlockDecision {
+  shouldBlock: boolean;
+  reason: string | null;
+}
+
+const CREDENTIAL_THEFT_PATH_RE =
+  /(^|\/)(\.env(?:\.|\/|$)|credentials(?:\.|\/|$)|secrets?\.(?:ya?ml|json|env)|id_rsa(?:\.|$)|\.aws(?:\/|$)|\.ssh(?:\/|$)|[^/]+\.(?:pem|key)$)/i;
+const INSTALL_OR_SHELL_PATH_RE =
+  /(^|\/)(?:wp-admin\/)?(?:setup-config|install|setup)(?:\.php|\/|$)|(^|\/)(?:web)?shell(?:\.|\/|$)|(^|\/)(?:cmd|upload)\.php$|\/vendor\/phpunit(?:\/|$)/i;
+
+export function immediateBlockReason(path: string, method?: string | null): string | null {
+  if (CREDENTIAL_THEFT_PATH_RE.test(path)) return `credential or secret-file probe: ${path}`;
+  if (INSTALL_OR_SHELL_PATH_RE.test(path)) return `installer or web-shell probe: ${path}`;
+  if (method && !["GET", "HEAD", "OPTIONS"].includes(method.toUpperCase()) && isSuspiciousPath(path)) {
+    return `${method.toUpperCase()} write attempt against suspicious path: ${path}`;
+  }
+  return null;
+}
+
+export function automaticBlockDecision(
+  events: Array<{ createdAt: string; kind: SecurityEventKind; path: string; method?: string | null }>,
+  now = Date.now(),
+): AutomaticBlockDecision {
+  const immediate = events.find(
+    (event) => event.kind === "suspicious_request" && immediateBlockReason(event.path, event.method),
+  );
+  if (immediate) {
+    return { shouldBlock: true, reason: immediateBlockReason(immediate.path, immediate.method) };
+  }
+  const cutoff15m = now - 15 * 60_000;
+  const cutoff60m = now - 60 * 60_000;
+  const recent15 = events.filter((event) => new Date(event.createdAt).getTime() >= cutoff15m);
+  const recent60Scans = events.filter(
+    (event) => event.kind === "suspicious_request" && new Date(event.createdAt).getTime() >= cutoff60m,
+  );
+  const failed15 = recent15.filter((event) => event.kind === "failed_login").length;
+  const scans15 = recent15.filter((event) => event.kind === "suspicious_request").length;
+  const uniqueScannerPaths60 = new Set(recent60Scans.map((event) => event.path.toLowerCase())).size;
+  if (failed15 >= 5) return { shouldBlock: true, reason: `${failed15} failed admin logins in 15 minutes` };
+  if (scans15 >= 30) return { shouldBlock: true, reason: `${scans15} scanner probes in 15 minutes` };
+  if (uniqueScannerPaths60 >= 15) {
+    return { shouldBlock: true, reason: `${uniqueScannerPaths60} distinct vulnerability paths in 60 minutes` };
+  }
+  return { shouldBlock: false, reason: null };
+}
+
+export async function automaticallyBlockThreat(ip: string | null): Promise<void> {
+  if (!isBlockableSourceIp(ip) || !cloudflareSecurityConfigured()) return;
+  const cutoff = new Date(Date.now() - 60 * 60_000).toISOString();
+  const events = getDb().prepare(`
+    SELECT created_at, kind, path, method FROM security_events
+    WHERE ip = ? AND created_at >= ? AND kind IN ('failed_login', 'suspicious_request')
+    ORDER BY created_at DESC LIMIT 500
+  `).all(ip, cutoff) as Array<{ created_at: string; kind: SecurityEventKind; path: string; method: string | null }>;
+  const decision = automaticBlockDecision(
+    events.map((event) => ({
+      createdAt: event.created_at,
+      kind: event.kind,
+      path: event.path,
+      method: event.method,
+    })),
+  );
+  if (!decision.shouldBlock || !decision.reason) return;
+  try {
+    await blockIp(ip, { source: "automatic", reason: decision.reason });
+  } catch (error) {
+    // Enforcement failure is recorded for the admin page, but must never make
+    // an attacker request capable of breaking the site for normal visitors.
+    console.error("[securityLog] automatic Cloudflare block failed", error);
   }
 }
 

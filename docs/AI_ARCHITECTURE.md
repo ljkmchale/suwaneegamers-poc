@@ -25,6 +25,7 @@ The machine-readable companion is `docs/architecture-contract.json`. If this gui
 | Myra web client | `apps/web/components/livekit/ScheduleVoiceAssistant.tsx` | Requests `/api/livekit/token` |
 | Myra worker | `services/livekit-schedule-agent/src/schedule_agent/agent.py` | LiveKit 7880, Speaches 8000, Ollama 11434 |
 | Myra diagnostics | `apps/web/lib/myraHealth.ts` | `/api/myra/health/*` and `/admin/myra-health` |
+| Security enforcement | `apps/web/lib/securityLog.ts`, `apps/web/lib/cloudflareSecurity.ts` | `/admin/security` -> zone-scoped Cloudflare IP Access rules |
 | Production build | inactive `.next-prod-a` or `.next-prod-b` | active slot selected by `.next-prod-active.json` |
 | Production service | `apps/web/scripts/start-prod.js` | NSSM `SuwaneeGamers`, port 4652 |
 
@@ -50,6 +51,18 @@ same purpose vocabulary without copying the question text. Future metrics must
 aggregate these confidence-tagged signals by distinct visit rather than treating
 every low-confidence page view as a separate user intent.
 
+Security events are recorded in `security_events`. High-confidence public
+scanner and failed-login bursts can create reversible Cloudflare edge blocks in
+`security_blocks`; automatic enforcement only trusts requests carrying both
+`CF-Connecting-IP` and `CF-Ray`. Cloudflare writes require the dedicated
+`CLOUDFLARE_SECURITY_API_TOKEN` and `CLOUDFLARE_SECURITY_ZONE_ID`; never reuse
+the DNS/TURN token. Restrict that token to `Zone > Firewall Services > Edit`
+for only `suwaneegamers.net`. Manual Block/Unblock controls live at
+`/admin/security`.
+Credential/secret-file probes, installer or web-shell paths, and non-read
+requests to suspicious paths block immediately. Never block Cloudflare's shared
+cross-zone Worker source `2a06:98c0:3600::103`; it is not a visitor identity.
+
 `/images/...` is obsolete. Files under `apps/web/media/images/` must be referenced as `/media/images/...`. Do not put site media back under `public/` unless the architecture contract is deliberately migrated everywhere.
 
 ## Change-impact checklist
@@ -64,6 +77,7 @@ Before editing, identify every applicable row:
 | Campaign content | `campaigns` table, campaign layout, archive layout, header/session/roster jobs | focused campaign/content-integrity tests |
 | Voice/Myra | client, token route, LiveKit, worker, Speaches, Ollama, analytics | token, room/worker, transcription, non-silent TTS, analytics separately |
 | Production UI/code | source, inactive production slot, active pointer, NSSM process | distinctive live result on port 4652, not only HTTP 200 |
+| Security enforcement | proxy/login source, trusted Cloudflare headers, thresholds, provider rule id, admin recovery | focused security tests, configured-state UI, reversible provider operation |
 
 ## Required completion rule
 
