@@ -1,6 +1,62 @@
 {
   "entries": [
     {
+      "id": "audit-rem-f65388ab26a8e5da-1787240177874",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T15:36:17.870Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-20T15:36:17.870Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1787239530354",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T15:25:30.351Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-20T15:25:30.351Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1787236422660",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T14:33:42.657Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-20T14:33:42.657Z"
+    },
+    {
+      "id": "audit-rem-d5f1f7e87dfbf4f3-1787236422654",
+      "remediationId": "rem-d5f1f7e87dfbf4f3",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T14:33:42.650Z"
+      },
+      "previousValue": "Diverra",
+      "createdAt": "2026-08-20T14:33:42.650Z"
+    },
+    {
       "id": "audit-rem-f65388ab26a8e5da-1786624082643",
       "remediationId": "rem-f65388ab26a8e5da",
       "action": "applied",

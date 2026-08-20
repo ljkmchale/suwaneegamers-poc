@@ -1,7 +1,7 @@
 {
   "entries": [
     {
-      "question": "So tell me about the goddess Devira.",
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
       "category": "pronunciation-fix",
       "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
       "evidence": [
@@ -9,10 +9,18 @@
       ],
       "source": "voice-analytics",
       "timesSeen": 1,
-      "id": "rem-d5f1f7e87dfbf4f3",
-      "normalized": "so tell me about the goddess devira",
-      "status": "pending",
-      "createdAt": "2026-08-13T15:25:24.473Z"
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-20T15:36:17.839Z",
+      "reviewedAt": "2026-08-20T15:36:17.870Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T15:36:17.870Z"
+      }
     },
     {
       "question": "Hey Mara, what do you know about the Abbey of Light?",
@@ -25,8 +33,88 @@
       "timesSeen": 1,
       "id": "rem-f65388ab26a8e5da",
       "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-20T15:25:30.322Z",
+      "reviewedAt": "2026-08-20T15:25:30.351Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T15:25:30.351Z"
+      }
+    },
+    {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
       "status": "pending",
-      "createdAt": "2026-08-13T15:25:23.742Z"
+      "createdAt": "2026-08-20T14:28:46.260Z"
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-08-20T14:28:46.258Z"
+    },
+    {
+      "question": "So tell me about the goddess Devira.",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d5f1f7e87dfbf4f3",
+      "normalized": "so tell me about the goddess devira",
+      "status": "approved",
+      "createdAt": "2026-08-13T15:25:24.473Z",
+      "reviewedAt": "2026-08-20T14:33:42.650Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Devira",
+        "value": "Diverra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T14:33:42.650Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-13T15:25:23.742Z",
+      "reviewedAt": "2026-08-20T14:33:42.657Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-20T14:33:42.657Z"
+      }
     },
     {
       "question": "So tell me about the goddess Devira.",
@@ -470,5 +558,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-19T15:25:58.957Z"
+  "updatedAt": "2026-08-20T15:36:17.870Z"
 }

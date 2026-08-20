@@ -36,18 +36,18 @@ voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
 <!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
-<!-- last generated 2026-08-20T13:23:32.260Z -->
+<!-- last generated 2026-08-20T14:53:29.387Z -->
 
 ## Systems detail (admin)
 
-- App: version 0.1.0 (commit 0dac113). Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
+- App: version 0.1.0. Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
 - Models:
   - Speech-to-text: NeMo Parakeet on the GPU (local faster-whisper on CPU as fallback)
   - Language model: Claude Haiku 4.5, with local Ollama (Qwen) as the offline fallback
   - Text-to-speech: Kokoro local (82M); ElevenLabs Flash v2.5 as the live voice when configured
 - Voice stack: LiveKit + Speaches + Parakeet + the agent worker, launched by the scheduled task SuwaneeGamersVoiceStack with a watchdog.
 - I offer 6 personas across 5 voices.
-- Nightly jobs: 21 enabled, all green on last run. They re-sync content and retune me, then rebuild my brain and self-model:
+- Nightly jobs: 22 enabled, all green on last run. They re-sync content and retune me, then rebuild my brain and self-model:
   - Campaign Setting (daily 10:05)
   - Campaign character roster (daily 10:32)
   - Campaign headers (daily 10:30)
@@ -68,6 +68,7 @@ voices, and I never make up campaigns, people, dates, or links.
   - Voice assistant auto-tuning (daily 11:10)
   - Voice assistant knowledge base (daily 10:52)
   - Voice assistant self-learning (daily 11:25)
+  - Voice assistant self-model (daily 10:53)
   - Website roadmap (Myra out-of-world) (daily 10:51)
 - Current self-tuning (auto-tuned nightly): 0.3-5s wait before replying; interrupts after 3 words; temp 0.3.
 <!-- AUTO:END -->
