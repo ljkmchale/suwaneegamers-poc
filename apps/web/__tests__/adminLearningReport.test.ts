@@ -25,6 +25,7 @@ const report: LearningReport = {
   },
   corrections: { pending: 2, appliedRecently: 1 },
   usage: { days: 7, topPages: [{ path: "/campaigns", views: 210 }] },
+  selfHealed: { last7Days: 3, recent: [{ kind: "mishearing", question: "tell me about Diverra" }] },
 };
 
 describe("getAdminLearningReportForAgent gate", () => {
@@ -49,5 +50,7 @@ describe("formatLearningReport", () => {
     expect(block).toContain("0.4-6s wait before replying");
     expect(block).toContain("2 pending in the remediation queue, 1 applied");
     expect(block).toContain("/campaigns (210)");
+    expect(block).toContain("Self-healed (last 7 days): 3 fix(es)");
+    expect(block).toContain('mishearing for "tell me about Diverra"');
   });
 });

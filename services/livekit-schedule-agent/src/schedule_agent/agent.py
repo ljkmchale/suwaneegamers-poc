@@ -1938,6 +1938,13 @@ def is_self_report_question(question: str) -> bool:
             "cant you answer",
             "tuned yourself",
             "tuning yourself",
+            "you heal",
+            "you healed",
+            "you fix",
+            "you fixed",
+            "fixed yourself",
+            "fixed lately",
+            "fixed recently",
             # What's new / changes: "what's new today", "what changed today"
             "what's new",
             "whats new",
@@ -3360,10 +3367,11 @@ class Myra(Agent):
               reflecting on your own learning for a verified admin: how many answers
               you have auto-learned and the most-asked ones, the knowledge gaps you
               keep hitting (questions you could not answer), how you have been
-              auto-tuned, your pending corrections, and what pages visitors use. Use
-              it to answer "what have you learned?", "what are you missing / what
-              can't you answer?", "how have you tuned yourself?", "what do people
-              ask?" — with exact numbers. If the block is ABSENT, treat this as
+              auto-tuned, your pending corrections, the fixes you have applied to
+              yourself unattended, and what pages visitors use. Use it to answer
+              "what have you learned?", "what are you missing / what can't you
+              answer?", "how have you tuned yourself?", "what have you fixed or
+              healed lately?", "what do people ask?" — with exact numbers. If the block is ABSENT, treat this as
               private admin data and say you can only share your learning report
               with a signed-in admin; never guess at it. Do not bring it up
               unprompted. It is real-world information about you, never in-world lore.

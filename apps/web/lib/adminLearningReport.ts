@@ -2,6 +2,7 @@ import { readLearned } from "@/lib/assistantLearned";
 import { readAssistantTuning } from "@/lib/assistantTuningStore";
 import { readRemediations, readRemediationAudit } from "@/lib/assistantRemediation";
 import { getAnalyticsDashboardData } from "@/lib/analytics";
+import { getRecentHeals, healsSince } from "@/lib/assistantHealLog";
 
 // Myra's SELF-LEARNING REPORT — an admin-only window into what she has taught
 // herself and the patterns she tracks: auto-learned answers, the knowledge gaps
@@ -23,6 +24,7 @@ export interface LearningReport {
   tuning: { endpointing: string; interruption: string; llm: string };
   corrections: { pending: number; appliedRecently: number };
   usage: { days: number; topPages: Array<{ path: string; views: number }> };
+  selfHealed: { last7Days: number; recent: Array<{ kind: string; question: string }> };
 }
 
 export function gatherLearningReport(): LearningReport {
@@ -80,7 +82,15 @@ export function gatherLearningReport(): LearningReport {
     };
   } catch { /* leave empty */ }
 
-  return { learned, gaps, tuning, corrections, usage };
+  let selfHealed = { last7Days: 0, recent: [] as Array<{ kind: string; question: string }> };
+  try {
+    selfHealed = {
+      last7Days: healsSince(7),
+      recent: getRecentHeals(5).map((heal) => ({ kind: heal.kind, question: heal.question })),
+    };
+  } catch { /* leave empty */ }
+
+  return { learned, gaps, tuning, corrections, usage, selfHealed };
 }
 
 /** Format the report as a compact, admin-only, out-of-world block. Pure over its
@@ -124,6 +134,14 @@ export function formatLearningReport(report: LearningReport): string {
         .join(", ")}.`,
     );
   }
+
+  lines.push(
+    `- Self-healed (last 7 days): ${report.selfHealed.last7Days} fix(es) I applied on my own${
+      report.selfHealed.recent.length > 0
+        ? `; most recent: ${report.selfHealed.recent.map((h) => `${h.kind} for "${h.question}"`).join("; ")}`
+        : ""
+    }.`,
+  );
 
   return lines.join("\n");
 }

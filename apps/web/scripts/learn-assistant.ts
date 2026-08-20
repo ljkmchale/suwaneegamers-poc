@@ -31,6 +31,7 @@ import {
 } from "@/lib/assistantRemediation";
 import { getMisrouteCandidates } from "@/lib/assistantMisroutes";
 import { autoApplicableKind } from "@/lib/assistantAutoHeal";
+import { appendHealLog } from "@/lib/assistantHealLog";
 
 // The scheduler launches this script from the repository root, outside Next's
 // normal boot path. Load apps/web/.env.local explicitly so the Brain vault,
@@ -118,6 +119,7 @@ async function autoHeal(stamp: string): Promise<{ applied: number; verifyFailed:
     return { applied: 0, verifyFailed: 0 };
   }
   const blocked = new Set(readLearned().blocked);
+  const healed: Array<{ kind: string; question: string }> = [];
   let applied = 0;
   let verifyFailed = 0;
 
@@ -147,9 +149,12 @@ async function autoHeal(stamp: string): Promise<{ applied: number; verifyFailed:
       approveRemediation(entry.id);
     }
     applied += 1;
+    healed.push({ kind, question: entry.question });
     console.log(`[${stamp}] learn: AUTO-HEALED ${kind} "${entry.question}"`);
   }
 
+  // Persist the digest so Myra can report what she fixed (no email/push).
+  appendHealLog(healed, stamp);
   return { applied, verifyFailed };
 }
 
