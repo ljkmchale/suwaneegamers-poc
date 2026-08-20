@@ -16,6 +16,7 @@ import { getAssistantRoadmap } from "@/lib/assistantRoadmap";
 import { getAssistantUpdates } from "@/lib/assistantUpdates";
 import { getAdminSnapshotForAgent } from "@/lib/adminSnapshot";
 import { getAdminLearningReportForAgent } from "@/lib/adminLearningReport";
+import { getRoutingOverridesForAgent } from "@/lib/assistantRoutingOverrides";
 import { getAssistantSelfModel } from "@/lib/assistantSelfModel";
 import { getAdminSession } from "@/lib/adminSession";
 import { isAllowedAdminEmail } from "@/lib/adminAllowlist";
@@ -253,6 +254,10 @@ export async function POST(request: NextRequest) {
       brainAccessToken: dmBrainAccess,
       pronunciations: getAssistantPronunciations(),
       mishearings: getAssistantMishearings(),
+      // Data-driven routing overrides — questions that must bypass the
+      // deterministic shortcuts and be answered by the grounded model. Self-healed
+      // from confirmed misroutes; can only ever route to the model (bounded-safe).
+      routingOverrides: getRoutingOverridesForAgent(),
       recaps: getAssistantRecaps(),
       faq: getLearnedFaqForAgent(),
       tuning: assistantTuningForAgent(),

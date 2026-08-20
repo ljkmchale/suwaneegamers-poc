@@ -193,6 +193,13 @@ def parse_dispatch_metadata(raw_metadata: str | None) -> dict[str, Any]:
         ),
         "tuning": tuning if isinstance(tuning, dict) else {},
         "persona": sanitize_persona(payload.get("persona")),
+        # Questions that must bypass the deterministic shortcuts and be answered by
+        # the grounded model. Raw strings; the agent re-normalizes and matches.
+        "routingOverrides": [
+            str(item)
+            for item in (payload.get("routingOverrides") or [])
+            if isinstance(item, str) and str(item).strip()
+        ][:100],
     }
 
 
@@ -3139,6 +3146,14 @@ class Myra(Agent):
         # Curated self-model (how she works / her systems). Public overview for
         # everyone; the server appends admin detail only for a verified admin.
         self.self_model = str(schedule.get("selfModel") or "").strip()
+        # Data-driven routing overrides — normalized questions that must bypass the
+        # deterministic shortcuts and go to the grounded model. Self-healed from
+        # confirmed misroutes; can only ever route TO the model (bounded-safe).
+        self.routing_overrides = {
+            normalize_question(str(q))
+            for q in schedule.get("routingOverrides", [])
+            if normalize_question(str(q))
+        }
         self.pantheon_knowledge = load_pantheon_knowledge()
         self.full_pantheon_knowledge = load_full_pantheon_knowledge()
         self.voice_entities = load_voice_entity_catalog()
@@ -3609,7 +3624,12 @@ class Myra(Agent):
         # self-referential question vetoes every one of them. This keeps intent
         # routing in the model's hands instead of a growing list of keyword patches.
         self_report_question = is_self_report_question(question)
-        if is_self_diagnosis_question(question) and not self_report_question:
+        # A data-driven routing override (self-healed from a confirmed misroute)
+        # forces this exact question past every deterministic shortcut to the model.
+        route_to_model = self_report_question or (
+            normalize_question(canonical_question) in self.routing_overrides
+        )
+        if is_self_diagnosis_question(question) and not route_to_model:
             depth, component = diagnostic_request(question)
             result = await self._get_myra_health(depth=depth, component=component or "")
             spoken = str(result.get("summary") or "I'm able to respond, but I cannot verify my current health.")
@@ -3725,15 +3745,15 @@ class Myra(Agent):
                 self.about_suwanee_gamers,
                 self.knowledge,
             )
-            if is_about_suwanee_gamers_question(question) and not self_report_question
+            if is_about_suwanee_gamers_question(question) and not route_to_model
             else None
         )
         deity_answer = pantheon_deity_answer(question, self.full_pantheon_knowledge)
         personal_schedule_question = (
-            is_personal_schedule_question(question) and not self_report_question
+            is_personal_schedule_question(question) and not route_to_model
         )
         general_schedule_question = (
-            is_schedule_question(question) and not self_report_question
+            is_schedule_question(question) and not route_to_model
         )
         campaign_answer = (
             campaign_schedule_answer(self.schedule, question)
@@ -3757,7 +3777,7 @@ class Myra(Agent):
         elif general_schedule_question:
             answer = general_schedule_answer(self.schedule)
             category = "general_schedule"
-        elif not self_report_question and (faq_answer := match_faq(question, self.faq)):
+        elif not route_to_model and (faq_answer := match_faq(question, self.faq)):
             # A question Myra learned the answer to on a previous night (see
             # scripts/learn-assistant.ts). Answered deterministically — fast and
             # consistent — instead of falling through to the language model.

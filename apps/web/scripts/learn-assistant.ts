@@ -29,9 +29,10 @@ import {
   enqueueRemediation,
   readRemediations,
 } from "@/lib/assistantRemediation";
-import { getMisrouteCandidates } from "@/lib/assistantMisroutes";
+import { getMisrouteCandidates, type MisrouteCandidate } from "@/lib/assistantMisroutes";
 import { autoApplicableKind } from "@/lib/assistantAutoHeal";
 import { appendHealLog } from "@/lib/assistantHealLog";
+import { addRoutingOverride } from "@/lib/assistantRoutingOverrides";
 
 // The scheduler launches this script from the repository root, outside Next's
 // normal boot path. Load apps/web/.env.local explicitly so the Brain vault,
@@ -56,9 +57,9 @@ const AUTO_HEAL = process.env.ASSISTANT_AUTO_HEAL !== "0";
 // (a member corrected her, or a question about herself was answered from a
 // shortcut) into the remediation queue, so the system surfaces its own routing
 // gaps instead of a human noticing them by ear.
-function queueMisroutes(stamp: string): number {
-  let queued = 0;
-  for (const candidate of getMisrouteCandidates(WINDOW_DAYS, MAX_MISROUTES_PER_RUN)) {
+function queueMisroutes(stamp: string): MisrouteCandidate[] {
+  const candidates = getMisrouteCandidates(WINDOW_DAYS, MAX_MISROUTES_PER_RUN);
+  for (const candidate of candidates) {
     const proposedCorrection =
       candidate.reason === "correction"
         ? `Myra answered this from the "${candidate.category}" shortcut, then the member corrected or re-asked ("${candidate.followup}"). Review whether this intent is routed to the wrong handler; when in doubt it should fall through to the model.`
@@ -74,10 +75,9 @@ function queueMisroutes(stamp: string): number {
       source: "voice-analytics",
       timesSeen: candidate.timesSeen,
     });
-    queued += 1;
     console.log(`[${stamp}] learn: QUEUED routing-correction (${candidate.reason}) "${candidate.question}"`);
   }
-  return queued;
+  return candidates;
 }
 
 function transcriptRemediation(question: string): {
@@ -113,7 +113,10 @@ function transcriptRemediation(question: string): {
 // brain-source and routing corrections are never auto-applied (they need real
 // content or a code change) and stay pending. Every apply is written to the
 // remediation audit log and can be undone.
-async function autoHeal(stamp: string): Promise<{ applied: number; verifyFailed: number }> {
+async function autoHeal(
+  stamp: string,
+  misroutes: MisrouteCandidate[],
+): Promise<{ applied: number; verifyFailed: number }> {
   if (!AUTO_HEAL) {
     console.log(`[${stamp}] learn: auto-heal disabled (ASSISTANT_AUTO_HEAL=0)`);
     return { applied: 0, verifyFailed: 0 };
@@ -122,6 +125,21 @@ async function autoHeal(stamp: string): Promise<{ applied: number; verifyFailed:
   const healed: Array<{ kind: string; question: string }> = [];
   let applied = 0;
   let verifyFailed = 0;
+
+  // Routing self-heal: a member-CONFIRMED misroute (they corrected or re-asked)
+  // gets a data-driven override so that exact question bypasses the wrong shortcut
+  // next time. An override can only route TO the grounded model, never to a wrong
+  // answer — so this is safe to apply unattended. Self-referential misroutes are
+  // already handled by the code veto, so only the "correction" signal overrides.
+  for (const candidate of misroutes) {
+    if (candidate.reason !== "correction") continue;
+    if (blocked.has(candidate.normalized)) continue;
+    if (addRoutingOverride(candidate.question, `misroute-from-${candidate.category}`)) {
+      applied += 1;
+      healed.push({ kind: "routing-override", question: candidate.question });
+      console.log(`[${stamp}] learn: AUTO-HEALED routing-override "${candidate.question}" (was ${candidate.category})`);
+    }
+  }
 
   for (const entry of readRemediations().entries) {
     if (applied >= MAX_AUTOHEAL_PER_RUN) break;
@@ -258,11 +276,11 @@ async function main(): Promise<void> {
   });
 
   const misroutes = queueMisroutes(stamp);
-  const healed = await autoHeal(stamp);
+  const healed = await autoHeal(stamp, misroutes);
 
   console.log(
     `[${stamp}] learn: done — ${proposed} proposal(s) queued, ${gaps.length} unanswered gap(s), ` +
-      `${misroutes} misroute(s) flagged, ${healed.applied} auto-healed` +
+      `${misroutes.length} misroute(s) flagged, ${healed.applied} auto-healed` +
       `${healed.verifyFailed ? ` (${healed.verifyFailed} left for review)` : ""}, ` +
       `${knownAnswers.size} total answers.`,
   );
