@@ -24,8 +24,13 @@ import {
   writeLearned,
   type LearnedGap,
 } from "@/lib/assistantLearned";
-import { enqueueRemediation } from "@/lib/assistantRemediation";
+import {
+  approveRemediation,
+  enqueueRemediation,
+  readRemediations,
+} from "@/lib/assistantRemediation";
 import { getMisrouteCandidates } from "@/lib/assistantMisroutes";
+import { autoApplicableKind } from "@/lib/assistantAutoHeal";
 
 // The scheduler launches this script from the repository root, outside Next's
 // normal boot path. Load apps/web/.env.local explicitly so the Brain vault,
@@ -40,6 +45,11 @@ for (const line of fs.readFileSync(path.join(webRoot, ".env.local"), "utf8").spl
 const WINDOW_DAYS = Number(process.env.ASSISTANT_LEARN_DAYS ?? 30);
 const MAX_NEW_PER_RUN = Number(process.env.ASSISTANT_LEARN_MAX ?? 25);
 const MAX_MISROUTES_PER_RUN = Number(process.env.ASSISTANT_MISROUTE_MAX ?? 15);
+const MAX_AUTOHEAL_PER_RUN = Number(process.env.ASSISTANT_AUTOHEAL_MAX ?? 20);
+// Self-healing is on by default — nobody monitors the queue, so Myra applies the
+// safe, reversible fixes herself. Set ASSISTANT_AUTO_HEAL=0 to fall back to
+// human review. Per-question opt-out lives in the learned store's `blocked` list.
+const AUTO_HEAL = process.env.ASSISTANT_AUTO_HEAL !== "0";
 
 // Flag turns where Myra's deterministic router likely picked the wrong handler
 // (a member corrected her, or a question about herself was answered from a
@@ -93,6 +103,54 @@ function transcriptRemediation(question: string): {
     };
   }
   return null;
+}
+
+// Apply the safe, reversible remediations unattended. A learned answer is
+// re-verified against the RAG engine right before it is applied — if the
+// knowledge base no longer grounds it, it is left for review rather than taught.
+// Pronunciation/mishearing fixes are applied directly (concrete, reversible).
+// brain-source and routing corrections are never auto-applied (they need real
+// content or a code change) and stay pending. Every apply is written to the
+// remediation audit log and can be undone.
+async function autoHeal(stamp: string): Promise<{ applied: number; verifyFailed: number }> {
+  if (!AUTO_HEAL) {
+    console.log(`[${stamp}] learn: auto-heal disabled (ASSISTANT_AUTO_HEAL=0)`);
+    return { applied: 0, verifyFailed: 0 };
+  }
+  const blocked = new Set(readLearned().blocked);
+  let applied = 0;
+  let verifyFailed = 0;
+
+  for (const entry of readRemediations().entries) {
+    if (applied >= MAX_AUTOHEAL_PER_RUN) break;
+    if (blocked.has(entry.normalized)) continue;
+    const kind = autoApplicableKind(entry);
+    if (!kind) continue;
+
+    if (kind === "learned-answer") {
+      // Verify grounding one more time against the live knowledge base before
+      // teaching it to herself. This is the safety gate for unattended apply.
+      let result: { answer: string; sources: Array<{ title?: string }> };
+      try {
+        result = await answerQuestion(entry.question, { visibility: "players" });
+      } catch (error) {
+        console.warn(`[${stamp}] learn: auto-heal verify errored for "${entry.question}": ${String(error)}`);
+        continue;
+      }
+      if (!isGroundedResult(result)) {
+        verifyFailed += 1;
+        console.log(`[${stamp}] learn: auto-heal SKIPPED (no longer grounded) "${entry.question}"`);
+        continue;
+      }
+      approveRemediation(entry.id, { value: trimForVoice(result.answer) });
+    } else {
+      approveRemediation(entry.id);
+    }
+    applied += 1;
+    console.log(`[${stamp}] learn: AUTO-HEALED ${kind} "${entry.question}"`);
+  }
+
+  return { applied, verifyFailed };
 }
 
 async function main(): Promise<void> {
@@ -195,10 +253,13 @@ async function main(): Promise<void> {
   });
 
   const misroutes = queueMisroutes(stamp);
+  const healed = await autoHeal(stamp);
 
   console.log(
     `[${stamp}] learn: done — ${proposed} proposal(s) queued, ${gaps.length} unanswered gap(s), ` +
-      `${misroutes} misroute(s) flagged, ${knownAnswers.size} total answers.`,
+      `${misroutes} misroute(s) flagged, ${healed.applied} auto-healed` +
+      `${healed.verifyFailed ? ` (${healed.verifyFailed} left for review)` : ""}, ` +
+      `${knownAnswers.size} total answers.`,
   );
 }
 
