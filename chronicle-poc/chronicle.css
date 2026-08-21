@@ -34,6 +34,12 @@ body{
   padding:34px 26px 40px;
   display:flex;flex-direction:column;gap:22px;
 }
+.rail-back{display:inline-flex;align-items:center;gap:8px;width:fit-content;
+  color:var(--gilt);font-family:var(--disp);font-size:.7rem;letter-spacing:.12em;
+  line-height:1.35;text-transform:uppercase;text-decoration:none;
+  transition:color .2s ease,transform .2s ease}
+.rail-back:hover{color:var(--ember);transform:translateX(-3px)}
+.rail-back:focus-visible{outline:2px solid var(--ember);outline-offset:5px;border-radius:2px}
 .rail-head{border-bottom:1px solid var(--border-soft);padding-bottom:20px}
 .rail-title{font-family:var(--decor);font-weight:900;font-size:1.55rem;line-height:1.05;
   color:var(--ink);letter-spacing:.02em}
@@ -228,6 +234,7 @@ table.ledger td strong{color:var(--gilt)}
   .rail{width:auto;height:auto;position:sticky;top:0;z-index:20;
     flex-direction:row;align-items:center;gap:16px;padding:14px 18px;
     border-right:none;border-bottom:1px solid var(--border);overflow:visible}
+  .rail-back{font-size:.64rem;letter-spacing:.08em;flex:none}
   .rail nav,.rail-foot{display:none}
   .rail-head{border:none;padding:0}
   .rail-title{font-size:1.1rem}.rail-sub{display:none}

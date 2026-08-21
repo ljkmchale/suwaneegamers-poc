@@ -162,6 +162,7 @@ ${artSeed}
 
 <div class="chronicle">
   <aside class="rail">
+    <a class="rail-back" href="/campaigns/heroes-of-emberstran" aria-label="Back to Heroes of Emberstran campaign">&larr; <span>Heroes of Emberstran</span></a>
     <div class="rail-head">
       <div class="rail-title">The Emberstran<br>Chronicle</div>
       <div class="rail-sub">A living account, as the party tells it</div>
@@ -178,16 +179,43 @@ ${artSeed}
 
 <script>
 (function(){
-  // apply per-session hero art from the editable SESSION_ART map above
+  var bar=document.getElementById('pbar');
+  var scroller=document.querySelector('.scroll');
+
+  // Load only nearby chapter art. Assigning all 33 background URLs at startup
+  // makes the browser download the full chronicle gallery before it is needed.
   var art=window.SESSION_ART||{};
+  var artEntries=[];
   Object.keys(art).forEach(function(n){
     var url=art[n]; if(!url) return;
     var sec=document.getElementById('s'+n); if(!sec) return;
     var photo=sec.querySelector('.hero-photo'), holder=sec.querySelector('.hero-art');
-    if(photo){photo.style.backgroundImage="url('"+url.replace(/'/g,"%27")+"')"; holder.classList.add('has-photo');}
+    if(photo) artEntries.push({sec:sec,photo:photo,holder:holder,url:url,loaded:false});
   });
-  var bar=document.getElementById('pbar');
-  var scroller=document.querySelector('.scroll');
+  function loadArt(entry){
+    if(entry.loaded) return;
+    entry.loaded=true;
+    var img=new Image();
+    img.decoding='async';
+    img.onload=function(){
+      entry.photo.style.backgroundImage="url('"+entry.url.replace(/'/g,"%27")+"')";
+      entry.holder.classList.add('has-photo');
+    };
+    img.onerror=function(){entry.loaded=false;};
+    img.src=entry.url;
+  }
+  if('IntersectionObserver' in window){
+    var artObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(observed){
+        if(!observed.isIntersecting) return;
+        var entry=artEntries.find(function(candidate){return candidate.sec===observed.target;});
+        if(entry){loadArt(entry);artObserver.unobserve(entry.sec);}
+      });
+    },{root:scroller,rootMargin:'125% 0px',threshold:0.01});
+    artEntries.forEach(function(entry){artObserver.observe(entry.sec);});
+  }else{
+    artEntries.forEach(loadArt);
+  }
   function upd(){var h=scroller.scrollHeight-scroller.clientHeight;bar.style.transform='scaleX('+(h>0?scroller.scrollTop/h:0)+')';}
   scroller.addEventListener('scroll',upd,{passive:true});upd();
   var links=[].slice.call(document.querySelectorAll('.rail-list a'));

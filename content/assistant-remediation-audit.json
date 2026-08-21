@@ -1,6 +1,20 @@
 {
   "entries": [
     {
+      "id": "audit-rem-f65388ab26a8e5da-1787325944571",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-21T15:25:44.568Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-21T15:25:44.568Z"
+    },
+    {
       "id": "audit-rem-f65388ab26a8e5da-1787240177874",
       "remediationId": "rem-f65388ab26a8e5da",
       "action": "applied",

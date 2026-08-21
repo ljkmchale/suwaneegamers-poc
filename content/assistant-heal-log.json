@@ -1,6 +1,11 @@
 {
   "entries": [
     {
+      "healedAt": "2026-08-21T15:25:44.507Z",
+      "kind": "mishearing",
+      "question": "Hey Mara, what do you know about the Abbey of Light?"
+    },
+    {
       "healedAt": "2026-08-20T15:36:17.806Z",
       "kind": "mishearing",
       "question": "Hey Mara, what do you know about the Abbey of Light?"
@@ -11,5 +16,5 @@
       "question": "Hey Mara, what do you know about the Abbey of Light?"
     }
   ],
-  "updatedAt": "2026-08-20T15:36:17.806Z"
+  "updatedAt": "2026-08-21T15:25:44.507Z"
 }

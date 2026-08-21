@@ -1,6 +1,56 @@
 {
   "entries": [
     {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-08-21T15:25:44.565Z"
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-08-21T15:25:44.563Z"
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-21T15:25:44.541Z",
+      "reviewedAt": "2026-08-21T15:25:44.568Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-21T15:25:44.568Z"
+      }
+    },
+    {
       "question": "Hey Mara, what do you know about the Abbey of Light?",
       "category": "pronunciation-fix",
       "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
@@ -560,5 +610,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-20T16:28:12.361Z"
+  "updatedAt": "2026-08-21T15:25:44.568Z"
 }
