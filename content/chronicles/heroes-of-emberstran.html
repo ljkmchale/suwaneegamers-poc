@@ -121,9 +121,15 @@ body{
   animation:rise 9s linear infinite}
 @keyframes rise{from{transform:translateY(14px)}to{transform:translateY(-14px)}}
 
-/* legibility wash + bottom fade into reading ground */
+/* Soft chapter handoff at the top; legibility wash + fade into reading ground. */
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(10,8,6,.55) 0%,transparent 32%,transparent 55%,var(--ash) 100%)}
+  background:linear-gradient(180deg,
+    var(--ash) 0%,
+    rgba(19,16,14,.9) 5%,
+    rgba(10,8,6,.52) 16%,
+    transparent 32%,
+    transparent 55%,
+    var(--ash) 100%)}
 
 .hero-inner{position:relative;padding:0 8vw 8vh;max-width:1100px}
 .kicker{font-family:var(--disp);letter-spacing:.34em;text-transform:uppercase;
