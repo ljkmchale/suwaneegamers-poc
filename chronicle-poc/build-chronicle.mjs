@@ -105,7 +105,7 @@ function renderSession(s){
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter ${parseInt(s.num,10)}</div>
-      <div class="numeral">${esc(s.num)}</div>
+      <div class="numeral">${parseInt(s.num,10)}</div>
       <h1>${inline(s.title)}</h1>
       <div class="hero-meta">
         ${s.idate?`<span class="mi"><i>In-World</i>${esc(s.idate)}</span>`:''}
@@ -131,7 +131,7 @@ let appendix=lines.length;
 for(let i=starts[0]+1;i<lines.length;i++){ if(/^#\s/.test(lines[i]) && !isSessionHead(lines[i])){appendix=i;break;} }
 const sessions=starts.map((st,k)=>parseSession(lines.slice(st, Math.min(starts[k+1]??lines.length, appendix))));
 
-const rail=sessions.map(s=>`<li class="on"><a href="#s${s.num}"><span class="rn">${esc(s.num)}</span><span class="rt">${inline(s.title)}</span></a></li>`).join('\n');
+const rail=sessions.map(s=>`<li class="on"><a href="#s${s.num}"><span class="rn">${parseInt(s.num,10)}</span><span class="rt">${inline(s.title)}</span></a></li>`).join('\n');
 const css=fs.readFileSync(DIR+'/chronicle.css','utf8');
 
 // Persistent per-session art. Seed the in-file editable map from session-images.json (if present)

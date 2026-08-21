@@ -132,8 +132,15 @@ body{
   line-height:.8;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--gilt) 70%,transparent);
   opacity:.55;margin-bottom:-.12em;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,5.5vw,4.2rem);
-  margin:.1em 0 0;line-height:1.02;color:var(--ink);text-wrap:balance;
-  text-shadow:0 2px 24px rgba(0,0,0,.6)}
+  margin:.1em 0 0;line-height:1.02;color:transparent;text-wrap:balance;
+  background:linear-gradient(90deg,var(--gilt) 0%,#fde68a 45%,var(--gilt) 55%,#d97706 100%);
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:chronicleShimmer 3s linear infinite;
+  filter:drop-shadow(0 2px 12px rgba(0,0,0,.72))}
+@keyframes chronicleShimmer{
+  from{background-position:200% center}
+  to{background-position:-200% center}
+}
 .hero-meta{display:flex;flex-wrap:wrap;gap:14px 30px;margin-top:26px}
 .hero-meta .mi{display:flex;flex-direction:column;gap:3px;
   border-left:2px solid color-mix(in srgb,var(--gilt) 55%,transparent);padding-left:13px}
@@ -237,39 +244,39 @@ table.ledger td strong{color:var(--gilt)}
      ============================================================ -->
 <script>
 window.SESSION_ART = {
-    "01": "",
-    "02": "",
-    "03": "",
-    "04": "",
-    "05": "",
-    "06": "",
-    "07": "",
-    "08": "",
-    "09": "",
-    "10": "",
-    "11": "",
-    "12": "",
-    "13": "",
-    "14": "",
-    "15": "",
-    "16": "",
-    "17": "",
-    "18": "",
-    "19": "",
-    "20": "",
-    "21": "",
-    "22": "",
-    "23": "",
-    "24": "",
-    "25": "",
-    "26": "",
-    "27": "",
-    "28": "",
-    "29": "",
-    "30": "",
-    "31": "",
-    "32": "",
-    "33": ""
+    "01": "/media/images/chronicles/heroes-of-emberstran/session-01-dyed-cane-tablet-v2.webp",
+    "02": "/media/images/chronicles/heroes-of-emberstran/session-02-bad-wine-v2.webp",
+    "03": "/media/images/chronicles/heroes-of-emberstran/session-03-the-egd-v3.webp",
+    "04": "/media/images/chronicles/heroes-of-emberstran/session-04-giant-tick-v3.webp",
+    "05": "/media/images/chronicles/heroes-of-emberstran/session-05-jae-records-v2.webp",
+    "06": "/media/images/chronicles/heroes-of-emberstran/session-06-diverras-grove-v3.webp",
+    "07": "/media/images/chronicles/heroes-of-emberstran/session-07-divine-waypoint-v3.webp",
+    "08": "/media/images/chronicles/heroes-of-emberstran/session-08-cemetery-mystery-v3.webp",
+    "09": "/media/images/chronicles/heroes-of-emberstran/session-09-third-piece-v3.webp",
+    "10": "/media/images/chronicles/heroes-of-emberstran/session-10-gelatinous-cube-v2.webp",
+    "11": "/media/images/chronicles/heroes-of-emberstran/session-11-confronting-whisper-v2.webp",
+    "12": "/media/images/chronicles/heroes-of-emberstran/session-12-eradic-infiltration-v2.webp",
+    "13": "/media/images/chronicles/heroes-of-emberstran/session-13-emberheart-tablet-v3.webp",
+    "14": "/media/images/chronicles/heroes-of-emberstran/session-14-drowned-waypoint-v4.webp",
+    "15": "/media/images/chronicles/heroes-of-emberstran/session-15-spitespirit-guardian-v3.webp",
+    "16": "/media/images/chronicles/heroes-of-emberstran/session-16-favor-bead-v2.webp",
+    "17": "/media/images/chronicles/heroes-of-emberstran/session-17-giants-silver-v2.webp",
+    "18": "/media/images/chronicles/heroes-of-emberstran/session-18-bimblefol-map-v2.webp",
+    "19": "/media/images/chronicles/heroes-of-emberstran/session-19-life-tree-calling-v2.webp",
+    "20": "/media/images/chronicles/heroes-of-emberstran/session-20-first-sunlight-v2.webp",
+    "21": "/media/images/chronicles/heroes-of-emberstran/session-21-red-rider-v1.webp",
+    "22": "/media/images/chronicles/heroes-of-emberstran/session-22-tracker-petal-v1.webp",
+    "23": "/media/images/chronicles/heroes-of-emberstran/session-23-fire-giant-bows-v1.webp",
+    "24": "/media/images/chronicles/heroes-of-emberstran/session-24-aury-revivifies-og-v1.webp",
+    "25": "/media/images/chronicles/heroes-of-emberstran/session-25-emberheart-exhaustion-v1.webp",
+    "26": "/media/images/chronicles/heroes-of-emberstran/session-26-shadow-sovereign-gift-v1.webp",
+    "27": "/media/images/chronicles/heroes-of-emberstran/session-27-dreamcatcher-vision-v1.webp",
+    "28": "/media/images/chronicles/heroes-of-emberstran/session-28-zymve-mends-boot-v1.webp",
+    "29": "/media/images/chronicles/heroes-of-emberstran/session-29-gilded-vulture-mark-v1.webp",
+    "30": "/media/images/chronicles/heroes-of-emberstran/session-30-paeris-crumb-cake-v1.webp",
+    "31": "/media/images/chronicles/heroes-of-emberstran/session-31-zabeek-blue-slaad-v1.webp",
+    "32": "/media/images/chronicles/heroes-of-emberstran/session-32-toll-dead-poison-cloud-v2.webp",
+    "33": "/media/images/chronicles/heroes-of-emberstran/session-33-aury-carries-hap-v1.webp"
 };
 </script>
 
@@ -281,15 +288,15 @@ window.SESSION_ART = {
       <div class="rail-title">The Emberstran<br>Chronicle</div>
       <div class="rail-sub">A living account, as the party tells it</div>
     </div>
-    <nav><ol class="rail-list"><li class="on"><a href="#s01"><span class="rn">01</span><span class="rt">Dock Troubles</span></a></li>
-<li class="on"><a href="#s02"><span class="rn">02</span><span class="rt">Bad Wine</span></a></li>
-<li class="on"><a href="#s03"><span class="rn">03</span><span class="rt">The EGD</span></a></li>
-<li class="on"><a href="#s04"><span class="rn">04</span><span class="rt">Beneath the City</span></a></li>
-<li class="on"><a href="#s05"><span class="rn">05</span><span class="rt">Beneath the City</span></a></li>
-<li class="on"><a href="#s06"><span class="rn">06</span><span class="rt">Diverra’s Grove</span></a></li>
-<li class="on"><a href="#s07"><span class="rn">07</span><span class="rt">Divine Waypoint</span></a></li>
-<li class="on"><a href="#s08"><span class="rn">08</span><span class="rt">Cemetery Mystery</span></a></li>
-<li class="on"><a href="#s09"><span class="rn">09</span><span class="rt">Sides &amp; 3rd Piece</span></a></li>
+    <nav><ol class="rail-list"><li class="on"><a href="#s01"><span class="rn">1</span><span class="rt">Dock Troubles</span></a></li>
+<li class="on"><a href="#s02"><span class="rn">2</span><span class="rt">Bad Wine</span></a></li>
+<li class="on"><a href="#s03"><span class="rn">3</span><span class="rt">The EGD</span></a></li>
+<li class="on"><a href="#s04"><span class="rn">4</span><span class="rt">Beneath the City</span></a></li>
+<li class="on"><a href="#s05"><span class="rn">5</span><span class="rt">Beneath the City</span></a></li>
+<li class="on"><a href="#s06"><span class="rn">6</span><span class="rt">Diverra’s Grove</span></a></li>
+<li class="on"><a href="#s07"><span class="rn">7</span><span class="rt">Divine Waypoint</span></a></li>
+<li class="on"><a href="#s08"><span class="rn">8</span><span class="rt">Cemetery Mystery</span></a></li>
+<li class="on"><a href="#s09"><span class="rn">9</span><span class="rt">Sides &amp; 3rd Piece</span></a></li>
 <li class="on"><a href="#s10"><span class="rn">10</span><span class="rt">The Sewers</span></a></li>
 <li class="on"><a href="#s11"><span class="rn">11</span><span class="rt">Confronting Cloak</span></a></li>
 <li class="on"><a href="#s12"><span class="rn">12</span><span class="rt">The Eradic</span></a></li>
@@ -328,7 +335,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 1</div>
-      <div class="numeral">01</div>
+      <div class="numeral">1</div>
       <h1>Dock Troubles</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>14th of Talil, 1246</span>
@@ -372,7 +379,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 2</div>
-      <div class="numeral">02</div>
+      <div class="numeral">2</div>
       <h1>Bad Wine</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>14th of Talil, 1246</span>
@@ -418,7 +425,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 3</div>
-      <div class="numeral">03</div>
+      <div class="numeral">3</div>
       <h1>The EGD</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>15th of Talil, 1246</span>
@@ -474,7 +481,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 4</div>
-      <div class="numeral">04</div>
+      <div class="numeral">4</div>
       <h1>Beneath the City</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>15th of Talil, 1246</span>
@@ -517,7 +524,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 5</div>
-      <div class="numeral">05</div>
+      <div class="numeral">5</div>
       <h1>Beneath the City</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>16th of Talil, 1246</span>
@@ -579,7 +586,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 6</div>
-      <div class="numeral">06</div>
+      <div class="numeral">6</div>
       <h1>Diverra’s Grove</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>16th of Talil, 1246</span>
@@ -632,7 +639,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 7</div>
-      <div class="numeral">07</div>
+      <div class="numeral">7</div>
       <h1>Divine Waypoint</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>17th of Talil, 1246</span>
@@ -683,7 +690,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 8</div>
-      <div class="numeral">08</div>
+      <div class="numeral">8</div>
       <h1>Cemetery Mystery</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>18th of Talil, 1246</span>
@@ -734,7 +741,7 @@ window.SESSION_ART = {
     </div>
     <div class="hero-inner">
       <div class="kicker">The Chronicle of Emberstran · Chapter 9</div>
-      <div class="numeral">09</div>
+      <div class="numeral">9</div>
       <h1>Sides &amp; 3rd Piece</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>18th of Talil, 1246</span>

@@ -15,6 +15,10 @@ apps/web/.next-prod.incomplete-*
 apps/web/out/
 apps/web/media/session-audio/
 
+# HOE chronicle PNG masters and superseded drafts stay local; the site serves
+# the tracked, optimized WebP session headers from this directory.
+apps/web/media/images/chronicles/heroes-of-emberstran/*.png
+
 # Environment files (never commit secrets)
 .env
 .env.local

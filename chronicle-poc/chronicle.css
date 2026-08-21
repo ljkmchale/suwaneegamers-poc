@@ -128,8 +128,15 @@ body{
   line-height:.8;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--gilt) 70%,transparent);
   opacity:.55;margin-bottom:-.12em;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,5.5vw,4.2rem);
-  margin:.1em 0 0;line-height:1.02;color:var(--ink);text-wrap:balance;
-  text-shadow:0 2px 24px rgba(0,0,0,.6)}
+  margin:.1em 0 0;line-height:1.02;color:transparent;text-wrap:balance;
+  background:linear-gradient(90deg,var(--gilt) 0%,#fde68a 45%,var(--gilt) 55%,#d97706 100%);
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:chronicleShimmer 3s linear infinite;
+  filter:drop-shadow(0 2px 12px rgba(0,0,0,.72))}
+@keyframes chronicleShimmer{
+  from{background-position:200% center}
+  to{background-position:-200% center}
+}
 .hero-meta{display:flex;flex-wrap:wrap;gap:14px 30px;margin-top:26px}
 .hero-meta .mi{display:flex;flex-direction:column;gap:3px;
   border-left:2px solid color-mix(in srgb,var(--gilt) 55%,transparent);padding-left:13px}
