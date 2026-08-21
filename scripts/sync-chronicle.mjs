@@ -1,59 +1,94 @@
-// Chronicle sync: pulls the HOE session-notes Google Doc (markdown export),
-// refreshes chronicle-poc/hoe-chronicle.md, and rebuilds the self-contained
-// emberstran-chronicle.html. Per-session images (session-images.json) are
-// re-injected by the builder, so artwork survives every sync.
+// Living Chronicle sync: refreshes each campaign's player-notes source,
+// rebuilds its self-contained HTML, and publishes it under content/chronicles.
+// Per-session artwork remains in each chronicle's session-images.json.
 //
-// Conservative: if the fetched export does not parse into a sensible number
-// of chapters, the local copy is LEFT UNTOUCHED and the run reports an error,
-// so a bad/redirected fetch can never blank the page.
+// Conservative: each campaign has an independent minimum-chapter guard. A bad
+// export cannot overwrite its last good source or published chronicle, and one
+// campaign's failure does not prevent the others from attempting their sync.
 //
 // Run manually:  node scripts/sync-chronicle.mjs
-// Scheduled:     scripts/sync-chronicle.cmd  ("SuwaneeGamers Chronicle Sync" task)
+// Scheduled:     scripts/sync-chronicle.cmd  ("SuwaneeGamers Chronicle Sync")
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const POC = path.join(root, "chronicle-poc");
-const MD = path.join(POC, "hoe-chronicle.md");
 
-// HOE "Session Notes" Google Doc. Must stay link-viewable for the headless
-// export fetch to work without auth.
-const DOC_ID = "1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4";
-const EXPORT_URL = `https://docs.google.com/document/d/${DOC_ID}/export?format=md`;
+const chronicles = [
+  {
+    id: "heroes-of-emberstran",
+    name: "Heroes of Emberstran",
+    dir: path.join(root, "chronicle-poc"),
+    source: "hoe-chronicle.md",
+    output: "emberstran-chronicle.html",
+    served: "heroes-of-emberstran.html",
+    exportUrl: "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/export?format=md",
+    isSessionHead: (line) => /^#\s+\*\*\d+\s*\\?-/.test(line),
+    minimumChapters: 20,
+  },
+  {
+    id: "souls-of-destiny",
+    name: "Souls of Destiny",
+    dir: path.join(root, "sod-chronicle-poc"),
+    source: "sod-chronicle.md",
+    output: "souls-of-destiny-chronicle.html",
+    served: "souls-of-destiny.html",
+    exportUrl: "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/export?format=txt",
+    isSessionHead: (line) => /^\d+\s*[–-]\s*\S/.test(line.trim()),
+    minimumChapters: 10,
+  },
+];
 
-// Session headers appear as "# **01 - Title**" (Drive) or "# **01 \\- Title**" (md export).
-const isSessionHead = (l) => /^#\s+\*\*\d+\s*\\?-/.test(l);
-const stamp = new Date().toISOString();
+async function syncChronicle(config) {
+  const stamp = new Date().toISOString();
+  const sourcePath = path.join(config.dir, config.source);
+  const response = await fetch(config.exportUrl, { redirect: "follow" });
+  if (!response.ok) {
+    throw new Error(`${config.name}: document export failed HTTP ${response.status} (is the document link-viewable?)`);
+  }
 
-const res = await fetch(EXPORT_URL, { redirect: "follow" });
-if (!res.ok) throw new Error(`[${stamp}] Chronicle sync: doc export failed HTTP ${res.status} (is the doc link-viewable?)`);
-const md = await res.text();
+  const source = await response.text();
+  const chapters = source.split(/\r?\n/).filter(config.isSessionHead).length;
+  if (chapters < config.minimumChapters) {
+    throw new Error(
+      `${config.name}: export parsed only ${chapters} chapters; refusing to overwrite ${path.relative(root, sourcePath)}. ` +
+      "The document format may have changed or the fetch may have reached a login page.",
+    );
+  }
 
-const chapters = md.split("\n").filter(isSessionHead).length;
-if (chapters < 20) {
-  throw new Error(
-    `[${stamp}] Chronicle sync: export parsed only ${chapters} chapters — refusing to overwrite ${path.relative(root, MD)}. ` +
-    `The doc format may have changed or the fetch was redirected to a login page.`,
-  );
+  const previous = fs.existsSync(sourcePath) ? fs.readFileSync(sourcePath, "utf-8") : "";
+  if (source === previous) {
+    console.log(`[${stamp}] ${config.name}: up to date (${chapters} chapters, no changes).`);
+    return;
+  }
+
+  fs.writeFileSync(sourcePath, source, "utf-8");
+  execFileSync(process.execPath, [path.join(config.dir, "build-chronicle.mjs")], { stdio: "inherit" });
+
+  const servedPath = path.join(root, "content", "chronicles", config.served);
+  fs.mkdirSync(path.dirname(servedPath), { recursive: true });
+  fs.copyFileSync(path.join(config.dir, config.output), servedPath);
+  console.log(`[${stamp}] ${config.name}: updated to ${chapters} chapters, rebuilt, and published.`);
 }
 
-const prev = fs.existsSync(MD) ? fs.readFileSync(MD, "utf-8") : "";
-if (md === prev) {
-  console.log(`[${stamp}] Chronicle sync: up to date (${chapters} chapters, no changes).`);
-  process.exit(0);
+const failures = [];
+const requestedId = process.argv[2];
+const selectedChronicles = requestedId
+  ? chronicles.filter((config) => config.id === requestedId)
+  : chronicles;
+if (requestedId && selectedChronicles.length === 0) {
+  throw new Error(`Unknown chronicle id: ${requestedId}`);
 }
 
-fs.writeFileSync(MD, md, "utf-8");
+for (const config of selectedChronicles) {
+  try {
+    await syncChronicle(config);
+  } catch (error) {
+    failures.push(error instanceof Error ? error.message : String(error));
+  }
+}
 
-// Rebuild the self-contained page (re-injects images from session-images.json).
-execFileSync(process.execPath, [path.join(POC, "build-chronicle.mjs")], { stdio: "inherit" });
-
-// Publish the built page to the location the site route serves (read at request
-// time, so this reflects live without a rebuild). content/ is prod-safe.
-const served = path.join(root, "content", "chronicles", "heroes-of-emberstran.html");
-fs.mkdirSync(path.dirname(served), { recursive: true });
-fs.copyFileSync(path.join(POC, "emberstran-chronicle.html"), served);
-
-console.log(`[${stamp}] Chronicle sync: updated to ${chapters} chapters, rebuilt, and published to the site route.`);
+if (failures.length) {
+  throw new Error(`Chronicle sync completed with ${failures.length} failure(s):\n- ${failures.join("\n- ")}`);
+}

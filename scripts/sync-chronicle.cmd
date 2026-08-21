@@ -1,8 +1,7 @@
 @echo off
 rem Daily chronicle sync - run by the "SuwaneeGamers Chronicle Sync" scheduled
-rem task. Pulls the HOE session-notes Google Doc and rebuilds the living
-rem chronicle page (chronicle-poc\emberstran-chronicle.html). Per-session
-rem images in chronicle-poc\session-images.json are preserved.
+rem task. Pulls the HOE and SoD session-notes Google Docs and rebuilds both
+rem living chronicle pages. Each campaign's session-images.json is preserved.
 rem Logs to logs\sync-chronicle.log at the repo root.
 cd /d "%~dp0.."
 if not exist "logs" mkdir "logs"

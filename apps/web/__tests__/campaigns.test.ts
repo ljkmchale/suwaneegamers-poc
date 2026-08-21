@@ -100,10 +100,10 @@ describe("activeCampaigns — data shape", () => {
 });
 
 describe("activeCampaigns resources", () => {
-  it("uses real resource URLs", () => {
+  it("uses real external or root-relative resource URLs", () => {
     for (const campaign of activeCampaigns) {
       for (const resource of campaign.resources ?? []) {
-        expect(resource.url).toMatch(/^https:\/\//);
+        expect(resource.url).toMatch(/^(https:\/\/|\/(?!\/))/);
       }
     }
   });

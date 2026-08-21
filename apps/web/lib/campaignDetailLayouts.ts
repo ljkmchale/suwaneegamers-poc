@@ -217,6 +217,41 @@ export function enrichCampaignRosterCard(items: PageItem[], campaign: PortalCamp
   });
 }
 
+function buildCampaignResourcesCard(campaign: PortalCampaign): PageItem {
+  const resourceCardId = `${campaign.id}-resources-card`;
+  const links = resourceLinks(campaign);
+  return layoutCard(resourceCardId, [
+    {
+      id: "resources_grid",
+      type: "grid",
+      props: {
+        columns: String(Math.max(links.length, 1)),
+        rows: "1",
+        gap: "md",
+        items: cardLayoutItems(links.map((link, index) => ({
+          id: `resource_${slugPart(link.label, "link")}_${index + 1}`,
+          type: "link",
+          props: {
+            label: link.label,
+            href: link.url,
+            variant: index === links.length - 1 ? "secondary" : "primary",
+            col: String(index + 1),
+            row: "1",
+            colSpan: "1",
+            rowSpan: "1",
+          },
+        }))),
+      },
+    },
+  ]);
+}
+
+export function replaceCampaignResourcesCard(items: PageItem[], campaign: PortalCampaign): PageItem[] {
+  const resourceCardId = `${campaign.id}-resources-card`;
+  const replacement = buildCampaignResourcesCard(campaign);
+  return items.map((item) => item.id === resourceCardId ? replacement : item);
+}
+
 /**
  * Sends a signed-in player from the campaign's D&D Beyond button directly to
  * their own character. Anonymous visitors, DMs who are not playing, and players
@@ -273,34 +308,6 @@ export function personalizeCampaignDndBeyondLink(
 }
 
 export function buildCampaignDetailLayout(campaign: PortalCampaign): PageItem[] {
-  function resourceCard(): PageItem {
-    const links = resourceLinks(campaign);
-    return layoutCard(`${campaign.id}-resources-card`, [
-      {
-        id: "resources_grid",
-        type: "grid",
-        props: {
-          columns: String(Math.max(links.length, 1)),
-          rows: "1",
-          gap: "md",
-          items: cardLayoutItems(links.map((link, index) => ({
-            id: `resource_${slugPart(link.label, "link")}_${index + 1}`,
-            type: "link",
-            props: {
-              label: link.label,
-              href: link.url,
-              variant: index === links.length - 1 ? "secondary" : "primary",
-              col: String(index + 1),
-              row: "1",
-              colSpan: "1",
-              rowSpan: "1",
-            },
-          }))),
-        },
-      },
-    ]);
-  }
-
   function notesRosterCard(): PageItem {
     const roster = (campaign.party ?? []).map((member, index) => ({
       id: `member_${slugPart(member.name, "member")}_${index + 1}`,
@@ -393,7 +400,7 @@ export function buildCampaignDetailLayout(campaign: PortalCampaign): PageItem[] 
         campaignName: campaign.name,
       },
     },
-    resourceCard(),
+    buildCampaignResourcesCard(campaign),
     notesRosterCard(),
   ];
 

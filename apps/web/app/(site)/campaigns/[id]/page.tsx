@@ -8,6 +8,7 @@ import { findTrackedCampaign } from "@/lib/campaignTracking";
 import {
   enrichCampaignRosterCard,
   personalizeCampaignDndBeyondLink,
+  replaceCampaignResourcesCard,
   replaceCampaignSessionsCard,
 } from "@/lib/campaignDetailLayouts";
 import { getPageLayout } from "@/lib/pageLayouts";
@@ -77,7 +78,10 @@ export default async function CampaignDetailPage({ params }: Props) {
     ? getUserProfileContext(session).profile.playerName
     : undefined;
   const trackedItems = replaceTrackedCampaignFields(getPageLayout(`/campaigns/${campaign.id}`), campaign);
-  const refreshedItems = enrichCampaignRosterCard(replaceCampaignSessionsCard(trackedItems, campaign), campaign);
+  const refreshedItems = enrichCampaignRosterCard(
+    replaceCampaignSessionsCard(replaceCampaignResourcesCard(trackedItems, campaign), campaign),
+    campaign,
+  );
   const items = personalizeCampaignDndBeyondLink(refreshedItems, campaign, playerName);
 
   return (
