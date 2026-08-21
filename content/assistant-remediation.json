@@ -55,8 +55,9 @@
       "timesSeen": 1,
       "id": "rem-406c5652311982fc",
       "normalized": "what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-08-20T14:28:46.260Z"
+      "status": "dismissed",
+      "createdAt": "2026-08-20T14:28:46.260Z",
+      "reviewedAt": "2026-08-20T16:28:09.552Z"
     },
     {
       "question": "Hey Mara, what have you learned today?",
@@ -69,8 +70,9 @@
       "timesSeen": 1,
       "id": "rem-533900afc79b79af",
       "normalized": "hey mara what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-08-20T14:28:46.258Z"
+      "status": "dismissed",
+      "createdAt": "2026-08-20T14:28:46.258Z",
+      "reviewedAt": "2026-08-20T16:28:12.361Z"
     },
     {
       "question": "So tell me about the goddess Devira.",
@@ -558,5 +560,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-20T15:36:17.870Z"
+  "updatedAt": "2026-08-20T16:28:12.361Z"
 }

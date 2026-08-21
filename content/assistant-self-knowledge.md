@@ -36,7 +36,7 @@ voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
 <!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
-<!-- last generated 2026-08-20T14:53:29.387Z -->
+<!-- last generated 2026-08-21T14:53:29.730Z -->
 
 ## Systems detail (admin)
 

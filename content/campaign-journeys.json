@@ -7,7 +7,7 @@
       "id": "a-new-adventure",
       "name": "A New Adventure",
       "color": "#f4c95d",
-      "status": "At Caelora",
+      "status": "At Southern Arch",
       "campaignHref": "/campaigns/a-new-adventure",
       "stops": [
         {
@@ -911,6 +911,53 @@
           },
           "sourceKey": "a-new-adventure:session-32",
           "sourceHash": "b4cfa492d890db9dfbf586bb7261435d14d7c3891085db0645268af03cdaf161",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-33",
+          "locationId": "southern-arch",
+          "location": "Southern Arch",
+          "x": 54.9,
+          "y": 36.01,
+          "session": "Session 33",
+          "title": "Two Heads are Not Better Than One",
+          "summary": "The party stood in the smoky ruins of Adore determined to learn what had destroyed the monastery, to settle matters with the unexpected arrival of the wizard Rueh’unar Heildove, and to continue toward the Southern Arch where Pa waited. Heildove revealed his estranged brother had ties to the Rel’Udomina and had likely ridden a burning horse through the site before a monk leader set the place ablaze, while the party recovered gold and a few useful items and Cerul scried upon Pa to confirm the caravan was safe.…",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Southern Arch",
+            "description": "The party stood in the smoky ruins of Adore determined to learn what had destroyed the monastery, to settle matters with the unexpected arrival of the wizard Rueh’unar Heildove, and to continue toward the Southern Arch where Pa waited."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 53.13,
+                "y": 36.23
+              },
+              {
+                "x": 53.58,
+                "y": 35.81
+              },
+              {
+                "x": 54.35,
+                "y": 35.73
+              },
+              {
+                "x": 54.9,
+                "y": 36.01
+              }
+            ],
+            "miles": 50.2,
+            "days": 2.5,
+            "roadIds": [
+              "southernarch-road-west"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "a-new-adventure:session-33",
+          "sourceHash": "59f55a6bd860d107035219589187e6ce9de88a49658fd03b300059d5ec603041",
           "current": true
         }
       ],
@@ -3453,12 +3500,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-20T14:50:29.930Z",
+    "lastGeneratedAt": "2026-08-21T14:50:30.339Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 112,
-    "routedSegments": 7,
-    "impactLocations": 31
+    "generatedStops": 113,
+    "routedSegments": 8,
+    "impactLocations": 32
   },
   "locationImpacts": [
     {
@@ -4736,6 +4783,28 @@
           "title": "Conflict reshaped Sciogost",
           "type": "battle",
           "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-southern-arch",
+      "locationId": "southern-arch",
+      "location": "Southern Arch",
+      "x": 54.9,
+      "y": 36.01,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 33",
+          "title": "Conflict reshaped Southern Arch",
+          "type": "battle",
+          "description": "The party stood in the smoky ruins of Adore determined to learn what had destroyed the monastery, to settle matters with the unexpected arrival of the wizard Rueh’unar Heildove, and to continue toward the Southern Arch where Pa waited."
         }
       ],
       "crossCampaign": false
