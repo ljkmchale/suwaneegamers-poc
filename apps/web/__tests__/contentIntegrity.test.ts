@@ -138,6 +138,27 @@ describe("Campaign party → players.json", () => {
   });
 });
 
+describe("Living Chronicle campaign links", () => {
+  it("keeps HOE raw Notes and Living Chronicle as separate adjacent resources", () => {
+    const campaign = campaigns.find((item) => item.id === "heroes-of-emberstran");
+    const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;
+    const chroniclesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Chronicles") ?? -1;
+
+    expect(campaign?.resources?.[notesIndex]?.url).toBe(
+      "https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit?usp=sharing",
+    );
+    expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/heroes-of-emberstran/chronicle");
+    expect(chroniclesIndex).toBe(notesIndex + 1);
+  });
+
+  it("keeps SoD Notes pointed at its Living Chronicle", () => {
+    const campaign = campaigns.find((item) => item.id === "souls-of-destiny");
+    const notes = campaign?.resources?.find((resource) => resource.label === "Notes");
+
+    expect(notes?.url).toBe("/campaigns/souls-of-destiny/chronicle");
+  });
+});
+
 // ── Player profile completeness ───────────────────────────────────────────────
 
 describe("Player profile completeness", () => {
