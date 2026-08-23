@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "audit-rem-f65388ab26a8e5da-1787498709615",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-23T15:25:09.612Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-23T15:25:09.612Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1787412360123",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-22T15:26:00.120Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-22T15:26:00.120Z"
+    },
+    {
       "id": "audit-rem-f65388ab26a8e5da-1787325944571",
       "remediationId": "rem-f65388ab26a8e5da",
       "action": "applied",

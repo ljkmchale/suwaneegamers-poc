@@ -1,6 +1,50 @@
 {
   "entries": [
     {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-23T15:25:09.584Z",
+      "reviewedAt": "2026-08-23T15:25:09.612Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-23T15:25:09.612Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-22T15:26:00.093Z",
+      "reviewedAt": "2026-08-22T15:26:00.120Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-22T15:26:00.120Z"
+      }
+    },
+    {
       "question": "What have you learned today?",
       "category": "routing-correction",
       "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
@@ -610,5 +654,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-21T15:25:44.568Z"
+  "updatedAt": "2026-08-23T15:25:09.612Z"
 }
