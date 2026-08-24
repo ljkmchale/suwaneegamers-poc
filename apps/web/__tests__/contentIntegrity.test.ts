@@ -151,11 +151,16 @@ describe("Living Chronicle campaign links", () => {
     expect(chroniclesIndex).toBe(notesIndex + 1);
   });
 
-  it("keeps SoD Notes pointed at its Living Chronicle", () => {
+  it("keeps SoD raw Notes and Living Chronicle as separate adjacent resources", () => {
     const campaign = campaigns.find((item) => item.id === "souls-of-destiny");
-    const notes = campaign?.resources?.find((resource) => resource.label === "Notes");
+    const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;
+    const chroniclesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Chronicles") ?? -1;
 
-    expect(notes?.url).toBe("/campaigns/souls-of-destiny/chronicle");
+    expect(campaign?.resources?.[notesIndex]?.url).toBe(
+      "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit",
+    );
+    expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/souls-of-destiny/chronicle");
+    expect(chroniclesIndex).toBe(notesIndex + 1);
   });
 });
 
