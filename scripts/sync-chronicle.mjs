@@ -38,6 +38,22 @@ const chronicles = [
     isSessionHead: (line) => /^\d+\s*[–-]\s*\S/.test(line.trim()),
     minimumChapters: 10,
   },
+  {
+    id: "a-new-adventure",
+    name: "A New Adventure",
+    dir: path.join(root, "ana-chronicle-poc"),
+    source: "a-new-adventure-chronicle.md",
+    output: "a-new-adventure-chronicle.html",
+    served: "a-new-adventure.html",
+    exportUrl: "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/export?format=txt",
+    isSessionHead: (line) => /^\d+\s*[–-]\s*\S/.test(line.trim()),
+    countChapters: (lines) => new Set(
+      lines.filter((line) => /^\d+\s*[–-]\s*\S/.test(line.trim()))
+        .map((line) => line.trim().match(/^(\d+)/)?.[1]),
+    ).size,
+    normalizeSource: (source) => source.split(/\r?\n/).map((line) => line.trimEnd()).join("\n"),
+    minimumChapters: 30,
+  },
 ];
 
 async function syncChronicle(config) {
@@ -48,8 +64,12 @@ async function syncChronicle(config) {
     throw new Error(`${config.name}: document export failed HTTP ${response.status} (is the document link-viewable?)`);
   }
 
-  const source = await response.text();
-  const chapters = source.split(/\r?\n/).filter(config.isSessionHead).length;
+  const exportedSource = await response.text();
+  const source = config.normalizeSource ? config.normalizeSource(exportedSource) : exportedSource;
+  const sourceLines = source.split(/\r?\n/);
+  const chapters = config.countChapters
+    ? config.countChapters(sourceLines)
+    : sourceLines.filter(config.isSessionHead).length;
   if (chapters < config.minimumChapters) {
     throw new Error(
       `${config.name}: export parsed only ${chapters} chapters; refusing to overwrite ${path.relative(root, sourcePath)}. ` +

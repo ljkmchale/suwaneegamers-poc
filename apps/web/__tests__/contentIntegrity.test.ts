@@ -139,6 +139,18 @@ describe("Campaign party → players.json", () => {
 });
 
 describe("Living Chronicle campaign links", () => {
+  it("keeps A New Adventure raw Notes and Living Chronicle as separate adjacent resources", () => {
+    const campaign = campaigns.find((item) => item.id === "a-new-adventure");
+    const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;
+    const chroniclesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Chronicles") ?? -1;
+
+    expect(campaign?.resources?.[notesIndex]?.url).toBe(
+      "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit?usp=sharing",
+    );
+    expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/a-new-adventure/chronicle");
+    expect(chroniclesIndex).toBe(notesIndex + 1);
+  });
+
   it("keeps HOE raw Notes and Living Chronicle as separate adjacent resources", () => {
     const campaign = campaigns.find((item) => item.id === "heroes-of-emberstran");
     const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;

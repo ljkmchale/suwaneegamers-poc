@@ -32,7 +32,7 @@ function getAnthropic(): Anthropic {
   return anthropicClient;
 }
 
-function useClaude(): boolean {
+function isClaudeConfigured(): boolean {
   return brainConfig.llmProvider === "claude" && Boolean(brainConfig.anthropicApiKey);
 }
 
@@ -127,7 +127,7 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
 }
 
 export async function chat(messages: ChatMessage[], options: ChatOptions = {}): Promise<string> {
-  if (useClaude()) {
+  if (isClaudeConfigured()) {
     try {
       return await chatClaude(messages, options);
     } catch (error) {
@@ -174,7 +174,7 @@ export async function* chatStream(
   messages: ChatMessage[],
   options: ChatOptions = {},
 ): AsyncGenerator<string> {
-  if (useClaude()) {
+  if (isClaudeConfigured()) {
     let emitted = false;
     try {
       for await (const token of chatStreamClaude(messages, options)) {
@@ -249,7 +249,7 @@ async function* chatStreamGroq(
 
 export async function aiHealth(): Promise<{ ok: boolean; chatModel?: string; embedModel?: string; error?: string }> {
   if (!brainConfig.jinaApiKey) return { ok: false, error: "JINA_API_KEY not set" };
-  if (useClaude()) {
+  if (isClaudeConfigured()) {
     // Groq may be blank when Claude is primary; that only removes the fallback.
     return { ok: true, chatModel: brainConfig.anthropicChatModel, embedModel: brainConfig.embedModel };
   }
