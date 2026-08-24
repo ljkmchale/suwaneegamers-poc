@@ -54,6 +54,22 @@ const chronicles = [
     normalizeSource: (source) => source.split(/\r?\n/).map((line) => line.trimEnd()).join("\n"),
     minimumChapters: 30,
   },
+  {
+    id: "dungeons-iii",
+    name: "Dungeons III - kNight Watch",
+    dir: path.join(root, "dungeons-iii-chronicle-poc"),
+    source: "dungeons-iii-chronicle.md",
+    output: "dungeons-iii-chronicle.html",
+    served: "dungeons-iii.html",
+    exportUrl: "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/export?format=txt",
+    isSessionHead: (line) => /^\d+\s*[–-]\s*\S/.test(line.trim()),
+    countChapters: (lines) => new Set(
+      lines.filter((line) => /^\d+\s*[–-]\s*\S/.test(line.trim()))
+        .map((line) => line.trim().match(/^(\d+)/)?.[1]),
+    ).size,
+    normalizeSource: (source) => source.split(/\r?\n/).map((line) => line.trimEnd()).join("\n"),
+    minimumChapters: 15,
+  },
 ];
 
 async function syncChronicle(config) {

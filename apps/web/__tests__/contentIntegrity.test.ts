@@ -174,6 +174,18 @@ describe("Living Chronicle campaign links", () => {
     expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/souls-of-destiny/chronicle");
     expect(chroniclesIndex).toBe(notesIndex + 1);
   });
+
+  it("keeps Dungeons III raw Notes and Living Chronicle as separate adjacent resources", () => {
+    const campaign = campaigns.find((item) => item.id === "dungeons-iii");
+    const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;
+    const chroniclesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Chronicles") ?? -1;
+
+    expect(campaign?.resources?.[notesIndex]?.url).toBe(
+      "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit?usp=sharing",
+    );
+    expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/dungeons-iii/chronicle");
+    expect(chroniclesIndex).toBe(notesIndex + 1);
+  });
 });
 
 // ── Player profile completeness ───────────────────────────────────────────────
