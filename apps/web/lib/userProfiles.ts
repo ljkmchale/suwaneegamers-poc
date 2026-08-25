@@ -206,6 +206,49 @@ export function listUserProfiles(): UserProfile[] {
   return rows.map(mapProfile);
 }
 
+/** How recently a member must have first signed in to count as "new". */
+export const NEW_MEMBER_DAYS = 7;
+
+export interface SiteMemberSummary {
+  id: string;
+  name: string;
+  email: string;
+  /** Matched roster player name, if this member lines up with the PC roster. */
+  playerName?: string;
+  onRoster: boolean;
+  /** First sign-in (the "joined" moment) — stable, unlike a session count. */
+  joinedAt: string;
+  lastSeenAt: string;
+  /** Joined within NEW_MEMBER_DAYS — a durable "new member" flag. */
+  isNew: boolean;
+}
+
+/**
+ * The site's members, derived from the profile row created at each person's
+ * first signed-in page load. Newest sign-ups first, so the admin can see who
+ * has joined recently. `isNew` is anchored to the join DATE (first sign-in),
+ * not a session count, so it does not vanish the moment they visit a second
+ * time (which is what the analytics "First time" badge does). Test/synthetic
+ * accounts (…@*.invalid) are excluded.
+ */
+export function listSiteMembers(newWithinDays = NEW_MEMBER_DAYS): SiteMemberSummary[] {
+  const rosterNames = new Set(getPlayerProfiles().map((player) => player.name.trim().toLowerCase()));
+  const cutoff = Date.now() - newWithinDays * 86_400_000;
+  return listUserProfiles()
+    .filter((profile) => !/\.invalid$/i.test(profile.email))
+    .map((profile) => ({
+      id: profile.id,
+      name: profile.displayName,
+      email: profile.email,
+      playerName: profile.playerName,
+      onRoster: Boolean(profile.playerName) || rosterNames.has(profile.displayName.trim().toLowerCase()),
+      joinedAt: profile.createdAt,
+      lastSeenAt: profile.lastSeenAt,
+      isNew: Date.parse(profile.createdAt) >= cutoff,
+    }))
+    .sort((a, b) => b.joinedAt.localeCompare(a.joinedAt));
+}
+
 function getFavoriteSiteLocations(email: string): FavoriteSiteLocation[] {
   const rows = getDb().prepare(
     `SELECT e.path, COUNT(*) AS visits

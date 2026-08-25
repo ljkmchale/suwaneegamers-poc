@@ -3,6 +3,7 @@ import Link from "next/link";
 const SECTIONS = [
   { href: "/admin/store", title: "Store", desc: "Manage products, inventory, checkout readiness, and orders." },
   { href: "/admin/analytics", title: "Usage & Connections", desc: "Track page traffic, reading and listening activity, visitor connections, and scheduled job history." },
+  { href: "/admin/members", title: "Members", desc: "See everyone who has signed in, when they joined, and who is new." },
   { href: "/admin/voice-assistant", title: "Myra", desc: "Review Myra's usage, response performance, questions, errors, and capability gaps." },
   { href: "/admin/chronicles", title: "Chronicles", desc: "Open the DM-only Chronicles workspace for private sources and deeper answers." },
   { href: "/admin/map-editor", title: "Map Editor", desc: "Open the hosted Myrdae map editor inside the admin toolset." },

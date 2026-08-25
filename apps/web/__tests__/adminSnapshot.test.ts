@@ -34,6 +34,11 @@ const snapshot: AdminSnapshot = {
     days: 7,
     memberCount: 2,
     activeNow: 1,
+    totalMembers: 19,
+    newMemberDays: 7,
+    newMembers: [
+      { name: "Duffy James", joinedAt: "2026-08-25T17:09:07.540Z", onRoster: false },
+    ],
     list: [
       {
         name: "Michael Hewson",
@@ -98,12 +103,31 @@ describe("formatAdminSnapshot", () => {
     expect(block).toContain("Jane Roe");
   });
 
+  it("reports new sign-ups by join date, flagging off-roster joiners", () => {
+    expect(block).toContain("19 members total");
+    expect(block).toContain("New sign-ups in the last 7 days");
+    expect(block).toContain("Duffy James (joined Aug 25");
+    expect(block).toContain("not on the roster");
+  });
+
   it("says no members when none were active in the window", () => {
     const quiet = formatAdminSnapshot(
-      { ...snapshot, members: { days: 7, memberCount: 0, activeNow: 0, list: [] } },
+      {
+        ...snapshot,
+        members: {
+          days: 7,
+          memberCount: 0,
+          activeNow: 0,
+          list: [],
+          totalMembers: 19,
+          newMemberDays: 7,
+          newMembers: [],
+        },
+      },
       "America/New_York",
     );
     expect(quiet).toContain("No signed-in members have been active in this window.");
+    expect(quiet).toContain("No new members have joined in the last 7 days.");
   });
 
   it("says all-green when no sync jobs failed", () => {

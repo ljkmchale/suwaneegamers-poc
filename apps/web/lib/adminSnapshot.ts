@@ -3,6 +3,7 @@ import { getContentSyncJobStatuses } from "@/lib/contentScheduler";
 import { getSecuritySummary } from "@/lib/securityLog";
 import { listGuideRatingsForAdmin } from "@/lib/adventsGuide";
 import { getSignedInMemberActivity, type SignedInMemberActivity } from "@/lib/analytics";
+import { listSiteMembers, NEW_MEMBER_DAYS } from "@/lib/userProfiles";
 import { getDb } from "@/lib/db";
 
 // Myra's ADMIN compartment — a read-only operational snapshot of the site's
@@ -51,6 +52,11 @@ export interface AdminSnapshot {
     memberCount: number;
     activeNow: number;
     list: SignedInMemberActivity[];
+    /** Total members ever recorded (join-based, from user_profiles). */
+    totalMembers: number;
+    /** Members who first signed in within the last newMemberDays. */
+    newMemberDays: number;
+    newMembers: Array<{ name: string; joinedAt: string; onRoster: boolean }>;
   };
 }
 
@@ -125,14 +131,28 @@ export function gatherAdminSnapshot(): AdminSnapshot {
     if (row) latestContentChange = { name: row.path, at: row.updated_at };
   } catch { /* leave null */ }
 
-  let members = { days: MEMBER_WINDOW_DAYS, memberCount: 0, activeNow: 0, list: [] as SignedInMemberActivity[] };
+  let members = {
+    days: MEMBER_WINDOW_DAYS,
+    memberCount: 0,
+    activeNow: 0,
+    list: [] as SignedInMemberActivity[],
+    totalMembers: 0,
+    newMemberDays: NEW_MEMBER_DAYS,
+    newMembers: [] as Array<{ name: string; joinedAt: string; onRoster: boolean }>,
+  };
   try {
     const usage = getSignedInMemberActivity(MEMBER_WINDOW_DAYS);
+    const roster = listSiteMembers();
     members = {
       days: usage.days,
       memberCount: usage.memberCount,
       activeNow: usage.activeNow,
       list: usage.members,
+      totalMembers: roster.length,
+      newMemberDays: NEW_MEMBER_DAYS,
+      newMembers: roster
+        .filter((member) => member.isNew)
+        .map((member) => ({ name: member.name, joinedAt: member.joinedAt, onRoster: member.onRoster })),
     };
   } catch { /* leave empty */ }
 
@@ -198,7 +218,13 @@ export function formatAdminSnapshot(snapshot: AdminSnapshot, timezone = DEFAULT_
     `the site", "who's been on lately", "who's on right now", and "what has <member>`,
     `been doing / looking at". ${snapshot.members.memberCount} member(s) active${
       snapshot.members.activeNow > 0 ? `, ${snapshot.members.activeNow} on right now` : ""
-    } (full detail at /admin/analytics):`,
+    }; ${snapshot.members.totalMembers} members total. ${
+      snapshot.members.newMembers.length > 0
+        ? `New sign-ups in the last ${snapshot.members.newMemberDays} days (answer "who's new / any new members / who just joined" from these): ${snapshot.members.newMembers
+            .map((member) => `${member.name} (joined ${localMoment(member.joinedAt, timezone)}${member.onRoster ? "" : ", not on the roster"})`)
+            .join("; ")}.`
+        : `No new members have joined in the last ${snapshot.members.newMemberDays} days.`
+    } Full member list at /admin/members; usage detail at /admin/analytics:`,
     ...(snapshot.members.list.length > 0
       ? snapshot.members.list.map((member) => {
           const pages = member.topPages.length > 0 ? member.topPages.join(", ") : "no pages recorded";
