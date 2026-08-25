@@ -2260,6 +2260,26 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
                 transcript={introductionText!}
                 campaignName={campaignName}
               />
+            ) : img ? (
+              <span className="flex min-w-0 items-start gap-3 sm:items-center">
+                <span
+                  className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 sm:h-16 sm:w-16"
+                  style={{ borderColor: "var(--color-accent-gold)" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img}
+                    alt={`${name ?? "Character"} portrait`}
+                    className="h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-cinzel" style={{ color: "var(--color-accent-gold)" }}>{name}</span>
+                  {role && <span className="mt-1 block text-xs" style={{ color: "var(--color-text-muted)" }}>{role}</span>}
+                </span>
+              </span>
             ) : (
               <>
                 <span className="block">{name}</span>

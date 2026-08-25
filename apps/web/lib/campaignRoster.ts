@@ -30,7 +30,12 @@ export interface CampaignRosterFile {
 }
 
 function normalizeCharacterName(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  return value
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/æ/g, "ae")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
 /**

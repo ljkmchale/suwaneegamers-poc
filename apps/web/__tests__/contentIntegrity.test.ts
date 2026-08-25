@@ -551,6 +551,18 @@ describe("Editable campaign detail pages", () => {
     expect(og?.props.introductionAudio).toBe("/media/images/characters/ogmund-crag/introduction.mp3");
     expect(og?.props.introductionText).toContain("what you refuse to let fall");
     expect(heroes.every((item) => item.props.campaignName === "Heroes of Emberstran")).toBe(true);
+
+    for (const campaignId of ["a-new-adventure", "dungeons-iii"]) {
+      const portraitCampaign = campaigns.find((entry) => entry.id === campaignId)!;
+      const portraits = nestedPeople(
+        enrichCampaignRosterCard(detailBlocksFor(portraitCampaign.id), portraitCampaign)
+          .filter((item): item is BlockItem => item.kind === "block"),
+      );
+
+      expect(portraits).toHaveLength(6);
+      expect(portraits.every((item) => typeof item.props.img === "string")).toBe(true);
+      expect(portraits.every((item) => !item.props.introductionAudio)).toBe(true);
+    }
   });
 
   it("stores each campaign detail page as individually editable assets", () => {

@@ -67,7 +67,10 @@ function parseSession(lines){
       blocks.push({t:'ul',v:items}); continue;
     }
     if(/^COMBAT\s*[–-]\s*IT IS INITIATIVE/i.test(line.trim())){blocks.push({t:'combat',v:line.trim()});i++;continue;}
-    if(/^[–\-]{1,2}\s*The End of the Session/i.test(line.trim())){blocks.push({t:'end',v:line.trim()});i++;continue;}
+    if(/^[–\-]{1,2}\s*(?:The End of the Session|The Session Ends Here)\b/i.test(line.trim())){
+      blocks.push({t:'end',v:line.trim()});
+      break;
+    }
     if(line.trim().length<=64 && !/[.!?…:]$/.test(line.trim()) && !/^WE STOP HERE/i.test(line.trim())){blocks.push({t:'h2',v:line.trim()});i++;continue;}
     blocks.push({t:'p',v:line.trim(),drop:firstPara}); firstPara=false; i++;
   }

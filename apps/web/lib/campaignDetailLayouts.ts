@@ -9,8 +9,8 @@ interface CharacterIntroduction {
   character: string;
   image: string;
   video?: string;
-  audio: string;
-  transcript: string;
+  audio?: string;
+  transcript?: string;
 }
 
 function characterIntroduction(campaignId: string, character: string) {
