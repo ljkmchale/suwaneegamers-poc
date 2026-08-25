@@ -415,6 +415,100 @@ export function recordUsageEvents(input: {
   ]);
 }
 
+export interface SignedInMemberActivity {
+  /** Display name (falls back to email if a name was never captured). */
+  name: string;
+  email: string;
+  /** ISO timestamp of this member's most recent activity in the window. */
+  lastSeenAt: string;
+  /** True when the member has been active in the last two minutes. */
+  activeNow: boolean;
+  sessions: number;
+  pageViews: number;
+  engagedMinutes: number;
+  /** The paths they viewed most, most-visited first (up to five). */
+  topPages: string[];
+}
+
+export interface SignedInMemberUsage {
+  days: number;
+  /** How many distinct signed-in members were active in the window. */
+  memberCount: number;
+  /** Members active in the last two minutes. */
+  activeNow: number;
+  /** Per-member activity, most-recently-active first. */
+  members: SignedInMemberActivity[];
+}
+
+/**
+ * Who has been USING the site (signed-in members only) and what pages they have
+ * been on, over the last `days`. This is the sign-in / usage view — deliberately
+ * NOT the security log. Only sessions carrying a resolved Google identity
+ * (visitor_email) are included, so anonymous/unidentified visitors are excluded.
+ */
+export function getSignedInMemberActivity(days: number, limit = 12): SignedInMemberUsage {
+  const db = getDb();
+  const safeDays = [1, 7, 30, 90].includes(days) ? days : 7;
+  const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
+  since.setHours(0, 0, 0, 0);
+  const sinceIso = since.toISOString();
+  const activeThreshold = new Date(Date.now() - 2 * 60_000).toISOString();
+
+  const rows = db.prepare(`
+    SELECT
+      s.visitor_email AS email,
+      COALESCE(MAX(s.visitor_name), s.visitor_email) AS name,
+      COUNT(DISTINCT s.session_id) AS sessions,
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds,
+      MAX(e.created_at) AS last_seen_at
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+      AND s.visitor_email IS NOT NULL
+    GROUP BY s.visitor_email
+    ORDER BY last_seen_at DESC
+    LIMIT ?
+  `).all(sinceIso, limit) as Array<{
+    email: string;
+    name: string;
+    sessions: number;
+    page_views: number;
+    engaged_seconds: number;
+    last_seen_at: string;
+  }>;
+
+  const topPagesStmt = db.prepare(`
+    SELECT e.path AS path, COUNT(*) AS views
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ?
+      AND s.visitor_email = ?
+      AND e.event_type = 'page_view'
+    GROUP BY e.path
+    ORDER BY views DESC, e.path
+    LIMIT 5
+  `);
+
+  const members: SignedInMemberActivity[] = rows.map((row) => ({
+    name: row.name,
+    email: row.email,
+    lastSeenAt: row.last_seen_at,
+    activeNow: row.last_seen_at >= activeThreshold,
+    sessions: row.sessions,
+    pageViews: row.page_views ?? 0,
+    engagedMinutes: Math.round((row.engaged_seconds ?? 0) / 60),
+    topPages: (topPagesStmt.all(sinceIso, row.email) as Array<{ path: string }>).map((page) => page.path),
+  }));
+
+  return {
+    days: safeDays,
+    memberCount: members.length,
+    activeNow: members.filter((member) => member.activeNow).length,
+    members,
+  };
+}
+
 export function getUsagePurposeMetrics(days: number): Array<{
   purpose: UsagePurpose;
   signals: number;

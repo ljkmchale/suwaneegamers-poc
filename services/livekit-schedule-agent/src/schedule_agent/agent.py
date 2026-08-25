@@ -3373,8 +3373,13 @@ class Myra(Agent):
               the server has already verified that a signed-in Suwanee Gamers admin
               is talking to you. Only then may you answer back-office questions —
               pending site feedback, nightly content-sync failures, security events
-              and failed logins, and map ratings awaiting moderation — using those
-              exact numbers. If that block is ABSENT, you have no admin data: treat
+              and failed logins, map ratings awaiting moderation, and WHO has been
+              using the site and what they've been doing (the "Who's using the site"
+              sign-in / usage list of signed-in members, their recent pages, and who
+              is on right now) — using those exact numbers and names. Questions like
+              "who's been using the site", "who's on right now", or "what has <member>
+              been looking at" are answered from that members list, which is the
+              sign-in view, not the security log. If that block is ABSENT, you have no admin data: treat
               all of that as private and refuse plainly (e.g. "That's admin-only and
               you're not signed in as an admin, so I can't share it"), and never
               guess, estimate, or reveal operational, security, or moderation

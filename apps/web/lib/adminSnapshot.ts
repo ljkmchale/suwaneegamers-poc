@@ -2,6 +2,7 @@ import { feedbackCounts } from "@/lib/voiceFeedback";
 import { getContentSyncJobStatuses } from "@/lib/contentScheduler";
 import { getSecuritySummary } from "@/lib/securityLog";
 import { listGuideRatingsForAdmin } from "@/lib/adventsGuide";
+import { getSignedInMemberActivity, type SignedInMemberActivity } from "@/lib/analytics";
 import { getDb } from "@/lib/db";
 
 // Myra's ADMIN compartment — a read-only operational snapshot of the site's
@@ -17,6 +18,7 @@ import { getDb } from "@/lib/db";
 // module never reads cookies or decides authorization itself — it only formats.
 
 const SECURITY_WINDOW_DAYS = 7;
+const MEMBER_WINDOW_DAYS = 7;
 const DEFAULT_TIMEZONE = "America/New_York";
 
 export interface AdminSnapshot {
@@ -42,6 +44,14 @@ export interface AdminSnapshot {
   };
   /** Most recently changed content document, for "what changed overnight". */
   latestContentChange: { name: string; at: string } | null;
+  /** Who has been USING the site (signed-in members) and what pages they viewed,
+   *  over the last MEMBER_WINDOW_DAYS. Sign-in / usage view, NOT the security log. */
+  members: {
+    days: number;
+    memberCount: number;
+    activeNow: number;
+    list: SignedInMemberActivity[];
+  };
 }
 
 /** Gather the admin snapshot. Each source is isolated so a missing table or a
@@ -115,6 +125,17 @@ export function gatherAdminSnapshot(): AdminSnapshot {
     if (row) latestContentChange = { name: row.path, at: row.updated_at };
   } catch { /* leave null */ }
 
+  let members = { days: MEMBER_WINDOW_DAYS, memberCount: 0, activeNow: 0, list: [] as SignedInMemberActivity[] };
+  try {
+    const usage = getSignedInMemberActivity(MEMBER_WINDOW_DAYS);
+    members = {
+      days: usage.days,
+      memberCount: usage.memberCount,
+      activeNow: usage.activeNow,
+      list: usage.members,
+    };
+  } catch { /* leave empty */ }
+
   return {
     capturedAt: new Date().toISOString(),
     feedback,
@@ -122,6 +143,7 @@ export function gatherAdminSnapshot(): AdminSnapshot {
     security,
     ratings,
     latestContentChange,
+    members,
   };
 }
 
@@ -170,6 +192,22 @@ export function formatAdminSnapshot(snapshot: AdminSnapshot, timezone = DEFAULT_
     `- Content sync jobs: ${snapshot.sync.total} enabled${snapshot.sync.failed.length > 0 ? `, ${snapshot.sync.failed.length} currently failing` : ", all green"} (see /admin/source-managed).`,
     `- Security (last ${snapshot.security.days} days): ${snapshot.security.failedLogins} failed admin logins, ${snapshot.security.suspiciousRequests} suspicious requests, ${snapshot.security.adminRequests} unauthorized admin hits${snapshot.security.topOffenderIp ? `, top source ${snapshot.security.topOffenderIp}` : ""} (see /admin/security).`,
     `- Map ratings to moderate: ${snapshot.ratings.reviews} reviews across ${snapshot.ratings.locations} locations, ${snapshot.ratings.flagged} flagged, ${snapshot.ratings.censored} hidden${snapshot.ratings.latestReviewAt ? `; newest ${localMoment(snapshot.ratings.latestReviewAt, timezone)}` : ""} (see /admin/advents-guide).`,
+    "",
+    `Who's using the site (signed-in members, last ${snapshot.members.days} days — this is the`,
+    `sign-in / usage view, NOT the security log). Use it to answer "who has been using`,
+    `the site", "who's been on lately", "who's on right now", and "what has <member>`,
+    `been doing / looking at". ${snapshot.members.memberCount} member(s) active${
+      snapshot.members.activeNow > 0 ? `, ${snapshot.members.activeNow} on right now` : ""
+    } (full detail at /admin/analytics):`,
+    ...(snapshot.members.list.length > 0
+      ? snapshot.members.list.map((member) => {
+          const pages = member.topPages.length > 0 ? member.topPages.join(", ") : "no pages recorded";
+          return `- ${member.name}${member.activeNow ? " (on now)" : ""}: last seen ${localMoment(
+            member.lastSeenAt,
+            timezone,
+          )}, ${member.sessions} visit(s), ${member.pageViews} page views, ~${member.engagedMinutes} min engaged; most-viewed pages: ${pages}.`;
+        })
+      : ["- No signed-in members have been active in this window."]),
   ];
 
   return lines.join("\n");

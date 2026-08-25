@@ -30,6 +30,33 @@ const snapshot: AdminSnapshot = {
     latestReviewAt: "2026-08-19T22:14:00.000Z",
   },
   latestContentChange: { name: "content/campaign-roster.json", at: "2026-08-20T02:05:03.000Z" },
+  members: {
+    days: 7,
+    memberCount: 2,
+    activeNow: 1,
+    list: [
+      {
+        name: "Michael Hewson",
+        email: "michael@example.com",
+        lastSeenAt: "2026-08-20T13:29:00.000Z",
+        activeNow: true,
+        sessions: 3,
+        pageViews: 12,
+        engagedMinutes: 8,
+        topPages: ["/campaigns/heroes-of-emberstran", "/chronicles"],
+      },
+      {
+        name: "Jane Roe",
+        email: "jane@example.com",
+        lastSeenAt: "2026-08-19T20:00:00.000Z",
+        activeNow: false,
+        sessions: 1,
+        pageViews: 4,
+        engagedMinutes: 2,
+        topPages: ["/calendar"],
+      },
+    ],
+  },
 };
 
 describe("getAdminSnapshotForAgent gate", () => {
@@ -60,6 +87,23 @@ describe("formatAdminSnapshot", () => {
     expect(block).toContain("Gazetteer entries");
     expect(block).toContain("3 failed admin logins");
     expect(block).toContain("18 reviews across 6 locations");
+  });
+
+  it("lists who's using the site from the sign-in view, with names and pages", () => {
+    expect(block).toContain("Who's using the site (signed-in members, last 7 days");
+    expect(block).toContain("NOT the security log");
+    expect(block).toContain("2 member(s) active, 1 on right now");
+    expect(block).toContain("Michael Hewson (on now)");
+    expect(block).toContain("/campaigns/heroes-of-emberstran, /chronicles");
+    expect(block).toContain("Jane Roe");
+  });
+
+  it("says no members when none were active in the window", () => {
+    const quiet = formatAdminSnapshot(
+      { ...snapshot, members: { days: 7, memberCount: 0, activeNow: 0, list: [] } },
+      "America/New_York",
+    );
+    expect(quiet).toContain("No signed-in members have been active in this window.");
   });
 
   it("says all-green when no sync jobs failed", () => {
