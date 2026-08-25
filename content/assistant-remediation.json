@@ -12,6 +12,50 @@
       "id": "rem-f65388ab26a8e5da",
       "normalized": "hey mara what do you know about the abbey of light",
       "status": "approved",
+      "createdAt": "2026-08-25T15:25:57.242Z",
+      "reviewedAt": "2026-08-25T15:25:57.272Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-25T15:25:57.272Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-24T15:25:48.152Z",
+      "reviewedAt": "2026-08-24T15:26:01.831Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-24T15:26:01.831Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
       "createdAt": "2026-08-23T15:25:09.584Z",
       "reviewedAt": "2026-08-23T15:25:09.612Z",
       "application": {
@@ -654,5 +698,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-23T15:25:09.612Z"
+  "updatedAt": "2026-08-25T15:25:57.272Z"
 }
