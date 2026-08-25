@@ -83,5 +83,65 @@
     "image": "/media/images/characters/ogmund-crag/portrait.png",
     "audio": "/media/images/characters/ogmund-crag/introduction.mp3",
     "transcript": "Ogmund Crag. Most call me Og. I stand in front. That is usually enough. The Life Tree named me E'erspan, thorn-bearer, and gave me Thornleaf. I do not yet know what Alferumn means, or why one thorn turned black after Petal died. I only know the blight must not reach another sacred tree. I have died holding the line. Aury called me back. When Ainslie could no longer walk, I carried him home. Strength is not about how hard you strike. It is about what you refuse to let fall."
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Az'efal",
+    "image": "/media/images/characters/azefal-affy-fairhand/portrait.png"
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Cerul",
+    "image": "/media/images/characters/cerul-slate/portrait.png"
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Fungus",
+    "image": "/media/images/characters/fungus-roundbelly/portrait.png"
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Kaizo",
+    "image": "/media/images/characters/kaizo/portrait.png"
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Relys",
+    "image": "/media/images/characters/relys/portrait.png"
+  },
+  {
+    "campaignId": "a-new-adventure",
+    "character": "Ridley",
+    "image": "/media/images/characters/ridley/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Æon",
+    "image": "/media/images/characters/aeon/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Draelith",
+    "image": "/media/images/characters/draelith/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Meles",
+    "image": "/media/images/characters/meles/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Nixie",
+    "image": "/media/images/characters/nixie/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Nova",
+    "image": "/media/images/characters/nova/portrait.png"
+  },
+  {
+    "campaignId": "dungeons-iii",
+    "character": "Seraphine",
+    "image": "/media/images/characters/seraphine-veyne/portrait.png"
   }
 ]
