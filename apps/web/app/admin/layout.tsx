@@ -20,6 +20,7 @@ const MYRA_LINKS = [
 const SECURITY_LINKS = [
   { href: "/admin/security", label: "Overview" },
   { href: "/admin/analytics", label: "Usage & Connections" },
+  { href: "/admin/members", label: "Members" },
 ];
 
 const NAV_LINKS_AFTER_MYRA = [
