@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { getActiveCampaigns } from "@/lib/campaigns";
 import { getDb } from "@/lib/db";
 import { getPlayerProfiles } from "@/lib/players";
+import { getRosterPlayerNames } from "@/lib/campaignRosterData";
 import type { UserSessionData } from "@/lib/userSession";
 
 export interface UserProfile {
@@ -223,6 +224,43 @@ export interface SiteMemberSummary {
   isNew: boolean;
 }
 
+/** Split a person's name into normalized first/last/full tokens for matching. */
+function nameParts(name: string): { first: string; last: string; full: string } {
+  const tokens = name
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+  return {
+    first: tokens[0] ?? "",
+    last: tokens.length > 1 ? tokens[tokens.length - 1] : "",
+    full: tokens.join(" "),
+  };
+}
+
+/**
+ * Whether a signed-in member's display name lines up with a known roster player.
+ * Google sign-in names rarely match the roster exactly — the sheet has "Tom
+ * Chernetsky" while the account is "Thomas Chernetsky", and players.json stores
+ * a bare "Brian" while the sheet has "Brian Winniford". So beyond an exact match
+ * we accept a surname match with the same first initial, which links Tom/Thomas
+ * without ever collapsing two different people who share a surname (e.g. Tom vs
+ * Suzanne Chernetsky stay distinct because their first initials differ).
+ */
+export function matchesRosterName(displayName: string, rosterNames: string[]): boolean {
+  const person = nameParts(displayName);
+  if (!person.full) return false;
+  return rosterNames.some((rosterName) => {
+    const roster = nameParts(rosterName);
+    if (roster.full === person.full) return true;
+    return Boolean(person.last)
+      && roster.last === person.last
+      && roster.first.charAt(0) === person.first.charAt(0);
+  });
+}
+
 /**
  * The site's members, derived from the profile row created at each person's
  * first signed-in page load. Newest sign-ups first, so the admin can see who
@@ -232,7 +270,12 @@ export interface SiteMemberSummary {
  * accounts (…@*.invalid) are excluded.
  */
 export function listSiteMembers(newWithinDays = NEW_MEMBER_DAYS): SiteMemberSummary[] {
-  const rosterNames = new Set(getPlayerProfiles().map((player) => player.name.trim().toLowerCase()));
+  // Draw roster identities from BOTH the curated players list and the synced PC
+  // roster sheet — the latter carries fuller player names.
+  const rosterNames = [
+    ...getPlayerProfiles().map((player) => player.name),
+    ...getRosterPlayerNames(),
+  ];
   const cutoff = Date.now() - newWithinDays * 86_400_000;
   return listUserProfiles()
     .filter((profile) => !/\.invalid$/i.test(profile.email))
@@ -241,7 +284,7 @@ export function listSiteMembers(newWithinDays = NEW_MEMBER_DAYS): SiteMemberSumm
       name: profile.displayName,
       email: profile.email,
       playerName: profile.playerName,
-      onRoster: Boolean(profile.playerName) || rosterNames.has(profile.displayName.trim().toLowerCase()),
+      onRoster: Boolean(profile.playerName) || matchesRosterName(profile.displayName, rosterNames),
       joinedAt: profile.createdAt,
       lastSeenAt: profile.lastSeenAt,
       isNew: Date.parse(profile.createdAt) >= cutoff,

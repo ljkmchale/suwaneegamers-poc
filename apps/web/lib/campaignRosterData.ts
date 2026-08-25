@@ -26,3 +26,24 @@ export function getAllCampaignRosters(): Record<string, RosterCharacter[]> {
     Object.entries(file.campaigns).map(([id, entry]) => [id, entry.characters])
   );
 }
+
+/**
+ * Every distinct player name that appears in the synced roster (across all
+ * campaigns, plus unmatched rows). The sheet carries fuller names than
+ * players.json (e.g. "Brian Winniford" vs "Brian"), so this is the better
+ * source for deciding whether a signed-in member is a known roster player.
+ */
+export function getRosterPlayerNames(): string[] {
+  const file = readRosterFile();
+  if (!file) return [];
+  const names = new Set<string>();
+  const collect = (characters: RosterCharacter[]) => {
+    for (const character of characters) {
+      const player = character.player?.trim();
+      if (player) names.add(player);
+    }
+  };
+  for (const entry of Object.values(file.campaigns)) collect(entry.characters);
+  for (const characters of Object.values(file.unmatched ?? {})) collect(characters);
+  return [...names];
+}

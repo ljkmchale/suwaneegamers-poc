@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { favoriteLocationLabel, rankFavoriteLocations } from "@/lib/userProfiles";
+import { favoriteLocationLabel, matchesRosterName, rankFavoriteLocations } from "@/lib/userProfiles";
 
 describe("user profile settings", () => {
   it("turns visited paths into readable location names", () => {
@@ -25,5 +25,30 @@ describe("user profile settings", () => {
       "/history",
       "/lore",
     ]);
+  });
+});
+
+describe("matchesRosterName", () => {
+  // The real roster mixes short curated names with fuller sheet names.
+  const roster = ["Tom Chernetsky", "Suzanne Chernetsky", "Brian", "Brian Winniford", "Michael Hewson"];
+
+  it("matches an exact full name (case/spacing-insensitive)", () => {
+    expect(matchesRosterName("Brian Winniford", roster)).toBe(true);
+    expect(matchesRosterName("  michael   hewson ", roster)).toBe(true);
+  });
+
+  it("matches a first-name variant by surname + first initial (Thomas -> Tom)", () => {
+    expect(matchesRosterName("Thomas Chernetsky", roster)).toBe(true);
+  });
+
+  it("does not collapse two different people who share a surname", () => {
+    // Suzanne must not be matched to Tom just because both are Chernetsky.
+    expect(matchesRosterName("Suzanne Chernetsky", ["Tom Chernetsky"])).toBe(false);
+  });
+
+  it("leaves genuinely unknown or ambiguous names off the roster", () => {
+    expect(matchesRosterName("Duffy James", roster)).toBe(false);
+    // A single initial-only token has no surname to match on.
+    expect(matchesRosterName("C M", roster)).toBe(false);
   });
 });
