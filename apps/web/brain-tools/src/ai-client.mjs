@@ -9,7 +9,7 @@ function withTimeout(ms) {
   return { signal: controller.signal, clear: () => clearTimeout(timer) };
 }
 
-export async function embedTexts(texts) {
+async function embedOnce(texts) {
   const { signal, clear } = withTimeout(30000);
   try {
     const response = await fetch("https://api.jina.ai/v1/embeddings", {
@@ -23,16 +23,39 @@ export async function embedTexts(texts) {
     });
     if (!response.ok) {
       const detail = await response.text();
-      throw new Error(`Jina embed failed (${response.status}): ${detail}`);
+      const error = new Error(`Jina embed failed (${response.status}): ${detail}`);
+      // 429/5xx are worth retrying; 4xx (bad key, bad input) are not.
+      error.retryable = response.status === 429 || response.status >= 500;
+      throw error;
     }
     const payload = await response.json();
     return payload.data.map((item) => item.embedding);
   } catch (error) {
-    if (error.name === "AbortError") throw Object.assign(new Error("Jina embed timed out."), { statusCode: 504 });
+    if (error.name === "AbortError") throw Object.assign(new Error("Jina embed timed out."), { statusCode: 504, retryable: true });
+    // Transient network faults (connect timeout, reset, DNS) are retryable — a
+    // single flaky Jina call (seen: intermittent IPv6 connect timeouts to
+    // api.jina.ai) must not abort a 7000+ chunk reindex.
+    if (error.retryable === undefined) error.retryable = true;
     throw error;
   } finally {
     clear();
   }
+}
+
+export async function embedTexts(texts, { retries = 4 } = {}) {
+  let lastError;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await embedOnce(texts);
+    } catch (error) {
+      lastError = error;
+      if (!error.retryable || attempt === retries) throw error;
+      const backoffMs = Math.min(1000 * 2 ** attempt, 15000);
+      console.warn(`Jina embed attempt ${attempt + 1} failed (${error.message}); retrying in ${backoffMs}ms…`);
+      await new Promise((resolve) => setTimeout(resolve, backoffMs));
+    }
+  }
+  throw lastError;
 }
 
 export async function chat(messages, options = {}) {
