@@ -631,10 +631,35 @@ function pruneRunHistory(db) {
   }
 }
 
+let lastWalCheckpointAt = 0;
+
+// WAL mode never shrinks the -wal sidecar on its own: SQLite's automatic
+// PASSIVE checkpoints copy committed frames back into the main db but leave the
+// -wal file at its high-water mark (a bulk content-documents rewrite pushes it
+// past 5MB), and a PASSIVE checkpoint blocked by a concurrent reader can leave
+// frames stranded. A daily TRUNCATE checkpoint reclaims the space and bounds
+// the file. It is best-effort: if a reader holds the lock, SQLite checkpoints
+// what it can and reports busy=1 rather than throwing.
+function checkpointWal(db) {
+  const now = Date.now();
+  if (now - lastWalCheckpointAt < PRUNE_INTERVAL_MS) return;
+  lastWalCheckpointAt = now;
+  try {
+    const [{ busy, log, checkpointed }] = db.pragma("wal_checkpoint(TRUNCATE)");
+    if (busy) {
+      console.log(`[${iso()}] WAL checkpoint partial (busy): ${checkpointed}/${log} frames.`);
+    }
+  } catch (error) {
+    // Housekeeping must never stop the scheduler from running its jobs.
+    console.error(`[${iso()}] WAL checkpoint failed:`, error);
+  }
+}
+
 async function tick(db) {
   upsertJobs(db);
   reclaimStaleRunning(db);
   pruneRunHistory(db);
+  checkpointWal(db);
   const pending = dueJobs(db);
   for (const job of pending) {
     await runJob(db, job);
