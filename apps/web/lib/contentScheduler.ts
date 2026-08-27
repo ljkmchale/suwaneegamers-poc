@@ -18,7 +18,7 @@ export const JOB_PATHS: Record<string, string[]> = {
   "campaign-roster":      ["/campaigns"],
   "session-audio":        ["/campaigns", "/calendar"],
   "session-notes":        ["/campaigns", "/calendar"],
-  "chronicles-sources":   ["/advents_of_harmony", "/admin/chronicles"],
+  "chronicles-sources":   ["/advents_of_harmony"],
   "assistant-brain":      ["/"],
   "assistant-autotune":   ["/"],
   "content-documents":    ["/", "/admin/source-managed", "/bestiary", "/campaigns", "/dungeon-masters", "/gazetteer", "/organizations", "/pantheon", "/players", "/previous-campaigns", "/reference-for-dungeon-masters", "/territories"],

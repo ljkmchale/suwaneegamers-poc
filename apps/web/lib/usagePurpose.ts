@@ -52,7 +52,7 @@ function purposeForSearch(input: SitePurposeInput): UsagePurpose | null {
 export function classifySitePurpose(input: SitePurposeInput): UsagePurposeSignal | null {
   if (input.eventType === "heartbeat" || input.eventType === "page_load" || input.eventType === "client_error") return null;
 
-  if (["search_query", "search_result_click", "search_no_results"].includes(input.eventType)) {
+  if (["search_query", "search_result_click", "search_no_results", "search_to_library"].includes(input.eventType)) {
     const purpose = purposeForSearch(input);
     return purpose ? { purpose, signalType: "search", confidence: 90 } : null;
   }

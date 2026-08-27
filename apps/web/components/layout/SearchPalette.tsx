@@ -129,6 +129,22 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
     [onClose, query, router],
   );
 
+  // Take the typed query to the Library, where lore lives to be browsed. This is
+  // the deliberate second path alongside asking Myra by voice: the site search no
+  // longer hosts its own Q&A, it hands off to the Library's card catalog.
+  const askLibrary = useCallback(() => {
+    const q = query.trim();
+    if (q.length < 2) return;
+    recordUsageEvent({
+      eventType: "search_to_library",
+      contentType: "site search",
+      contentId: q,
+      contentLabel: q,
+    });
+    onClose();
+    router.push(`/advents_of_harmony?q=${encodeURIComponent(q)}`);
+  }, [query, onClose, router]);
+
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -145,11 +161,13 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
         setActiveIndex((i) => Math.max(i - 1, -1));
         return;
       }
-      if (e.key === "Enter" && activeIndex >= 0 && results[activeIndex]) {
-        navigate(results[activeIndex]);
+      if (e.key === "Enter") {
+        if (activeIndex >= 0 && results[activeIndex]) navigate(results[activeIndex]);
+        // Enter with nothing selected takes the whole query to the Library.
+        else askLibrary();
       }
     },
-    [results, activeIndex, navigate, onClose],
+    [results, activeIndex, navigate, askLibrary, onClose],
   );
 
   if (!mounted || !open) return null;
@@ -206,6 +224,31 @@ export function SearchPalette({ open, onClose }: SearchPaletteProps) {
             <X size={15} />
           </button>
         </div>
+
+        {/* Take the query to the Library (the browse path; Myra is the voice path) */}
+        {query.trim().length >= 2 && (
+          <button
+            onClick={askLibrary}
+            className="flex w-full items-center gap-3 px-4 py-3 text-left shrink-0 border-b transition-colors"
+            style={{
+              borderColor: "var(--color-bg-border)",
+              background: "rgba(139,92,246,0.06)",
+            }}
+          >
+            <BookOpen size={15} style={{ color: "var(--color-accent-arcane)", flexShrink: 0 }} aria-hidden />
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-cinzel tracking-wide" style={{ color: "var(--color-text-primary)" }}>
+                Search the Library for &ldquo;{query.trim()}&rdquo;
+              </div>
+              <div className="text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>
+                Browse the chronicles &amp; lore — or ask Myra by voice
+              </div>
+            </div>
+            <span className="text-xs shrink-0" style={{ color: "var(--color-text-muted)" }} aria-hidden>
+              ↵
+            </span>
+          </button>
+        )}
 
         {/* Results */}
         <div ref={listRef} className="overflow-y-auto flex-1">

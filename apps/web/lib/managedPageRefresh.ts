@@ -79,7 +79,7 @@ function scriptsForPath(pagePath: string): RefreshScript[] {
       { label: "session audio", file: "scripts/sync-session-audio.mjs", jobId: "session-audio" },
     ];
   }
-  if (pagePath === "/advents_of_harmony" || pagePath === "/admin/chronicles") {
+  if (pagePath === "/advents_of_harmony") {
     return [
       { label: "Chronicles sources", file: "apps/web/brain-tools/src/refresh-sources.mjs", jobId: "chronicles-sources" },
     ];

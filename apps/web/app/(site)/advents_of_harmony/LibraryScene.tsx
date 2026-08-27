@@ -168,6 +168,23 @@ function LibraryChamber({ chamber, index, books, withdrawingId, onWithdraw }: { 
 function CardCatalog({ books, onSelect }: { books: LibraryBook[]; onSelect: (book: LibraryBook) => void }) {
   const [query, setQuery] = useState("");
   const [wing, setWing] = useState<"all" | "chronicles" | "world">("all");
+
+  // Site search routes lore lookups here: /advents_of_harmony?q=<term> arrives
+  // with the term prefilled, and the catalog scrolls into view so the matching
+  // cards are the first thing the visitor sees.
+  useEffect(() => {
+    try {
+      const q = new URLSearchParams(window.location.search).get("q");
+      if (q && q.trim().length >= 2) {
+        setQuery(q);
+        requestAnimationFrame(() =>
+          document.getElementById("card-catalog-title")?.scrollIntoView({ behavior: "smooth", block: "center" }),
+        );
+      }
+    } catch {
+      /* no query param, or search unavailable */
+    }
+  }, []);
   const matches = useMemo(() => {
     const needle = query.trim().toLowerCase();
     if (needle.length < 2) return [];

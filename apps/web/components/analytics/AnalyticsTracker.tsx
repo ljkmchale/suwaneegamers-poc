@@ -17,6 +17,7 @@ type ClientUsageEvent = {
     | "search_query"
     | "search_result_click"
     | "search_no_results"
+    | "search_to_library"
     | "scroll_depth"
     | "page_exit"
     | "page_load"

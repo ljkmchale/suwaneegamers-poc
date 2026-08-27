@@ -99,11 +99,13 @@ Do not commit multi-megabyte originals; `/images/suwaneegamers-logo.png` intenti
 
 `/admin/source-managed` reads `content/auto-managed-pages.json` through `lib/contentFiles.ts`, so remember the DB-first rule above. If the JSON file is correct but the admin UI is stale, inspect `content_documents.path = 'auto-managed-pages.json'` in `content/suwaneegamers.db`.
 
-`/chronicles` is a Brain Vault page. Its managed source rows should mirror `apps/web/brain-tools/google-doc-sources.json`; the scheduler job id is `chronicles-sources`, which runs `apps/web/brain-tools/src/refresh-sources.mjs`. Public `/chronicles` is player-safe; `/admin/chronicles` can expose DM-visible sources behind admin auth.
+The Chronicles managed source rows mirror `apps/web/brain-tools/google-doc-sources.json`; the scheduler job id is `chronicles-sources`, which runs `apps/web/brain-tools/src/refresh-sources.mjs` and revalidates `/advents_of_harmony`.
 
 ### Chronicles / Brain Vault
 
-Chronicles (`/chronicles`, `/admin/chronicles`) is a RAG-backed wiki for the group's D&D campaigns, fully embedded in this app — no separate server. `lib/brain/` holds the TypeScript query engine; `brain-vault/` holds the actual Markdown content it answers questions from. See [apps/web/brain-vault/CLAUDE.md](apps/web/brain-vault/CLAUDE.md) for vault conventions (campaign isolation, wiki structure, ingest workflow). `brain-tools/` contains the indexer and CLI scripts (`npm run index`, `npm run pull-doc`, `npm run mark-processed`, etc.) used to maintain the vault and rebuild `brain-data/brain-index.json`.
+The Chronicles RAG engine is a wiki over the group's D&D campaigns, fully embedded in this app — no separate server. `lib/brain/` holds the TypeScript query engine; `brain-vault/` holds the actual Markdown content it answers questions from. See [apps/web/brain-vault/CLAUDE.md](apps/web/brain-vault/CLAUDE.md) for vault conventions (campaign isolation, wiki structure, ingest workflow). `brain-tools/` contains the indexer and CLI scripts (`npm run index`, `npm run pull-doc`, `npm run mark-processed`, etc.) used to maintain the vault and rebuild `brain-data/brain-index.json`.
+
+**There is no standalone Chronicles chat page.** The old `/chronicles` and `/admin/chronicles` ask-box UIs were retired — members reach the vault two ways: **ask Myra** (the voice agent's `search_knowledge_base` tool calls `POST /api/brain/ask`, see `query_player_knowledge` in `agent.py`) or **browse the Library** (`/advents_of_harmony`, whose `BookReader` reads vault sources via `GET /api/brain/source`). Site search (`SearchPalette`) hands lore queries to the Library at `/advents_of_harmony?q=<term>` rather than hosting its own Q&A. The backend (`/api/brain/ask`, `/api/brain/source`, the vault, the index, and the nightly `chronicles-sources` reindex) stays; the `app/api/brain/admin/*` routes that only the retired admin UI called are now orphaned (safe to prune later).
 
 ---
 
