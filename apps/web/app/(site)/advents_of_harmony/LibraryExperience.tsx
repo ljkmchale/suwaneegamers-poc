@@ -164,7 +164,7 @@ function paginateSource(markdown: string, bookTitle: string): string[] {
   return pages;
 }
 
-const NON_READER_SECTIONS = /^(source grounding|source anchors?|source notes?|sources?|reference|citation pattern|maintenance(?: rule)?|roster interpretation|audit(?: notes?| status)?|raw sources?|technical notes?|document notes?)$/i;
+const NON_READER_SECTIONS = /^(session metadata|source grounding|source anchors?|source notes?|sources?|reference|citation pattern|maintenance(?: rule)?|roster interpretation|audit(?: notes?| status)?|raw sources?|technical notes?|document notes?)$/i;
 
 function prepareBookText(markdown: string, bookTitle: string): string {
   const lines = markdown.replace(/^---\s*\n[\s\S]*?\n---\s*\n/, "").split(/\r?\n/);
@@ -177,7 +177,7 @@ function prepareBookText(markdown: string, bookTitle: string): string {
       const headingText = heading[2].trim();
       if (heading[1].length === 1 && normalizeBookText(headingText) === normalizeBookText(bookTitle)) continue;
       if (heading[1].length <= 2) skipSection = NON_READER_SECTIONS.test(headingText);
-      if (!skipSection && !/^imported notes$/i.test(headingText)) output.push(headingText);
+      if (!skipSection && !/^imported notes$/i.test(headingText)) output.push(`§ ${headingText}`);
       continue;
     }
     if (skipSection) continue;
@@ -229,7 +229,11 @@ function splitLongPassage(passage: string): string[] {
 }
 
 function BookPageText({ text }: { text: string }) {
-  return <>{text.split(/\n+/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</>;
+  return <>{text.split(/\n+/).filter(Boolean).map((paragraph, index) => {
+    if (paragraph.startsWith("§ ")) return <h4 className={styles.bookSectionHeading} key={index}>{paragraph.slice(2)}</h4>;
+    if (paragraph.startsWith("- ")) return <p className={styles.bookBullet} key={index}>{paragraph.slice(2)}</p>;
+    return <p key={index}>{paragraph}</p>;
+  })}</>;
 }
 
 export function LibraryExperience({ books }: { books: LibraryBook[] }) {

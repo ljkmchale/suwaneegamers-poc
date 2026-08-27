@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import { uniqueBooks } from "@/app/(site)/advents_of_harmony/libraryBooks";
+import { findSessionArtwork, uniqueBooks } from "@/app/(site)/advents_of_harmony/libraryBooks";
 
 const routeDir = path.join(process.cwd(), "app", "(site)", "advents_of_harmony");
 
@@ -108,6 +108,19 @@ describe("Advents of Harmony library", () => {
     expect(book.image).toBe("/media/images/locations/adsuren.webp");
     expect(book.pages).toEqual(["Complete Gazetteer text"]);
     expect(book.sourcePath).toBe("wiki/locations/adsuren.md");
+  });
+
+  it("opens session volumes on story sections with their available artwork", () => {
+    const experience = fs.readFileSync(path.join(routeDir, "LibraryExperience.tsx"), "utf8");
+    const css = fs.readFileSync(path.join(routeDir, "library.module.css"), "utf8");
+    expect(experience).toContain("session metadata|source grounding");
+    expect(experience).toContain('output.push(`§ ${headingText}`)');
+    expect(experience).toContain("styles.bookSectionHeading");
+    expect(experience).toContain("styles.bookBullet");
+    expect(css).toContain(".bookSectionHeading");
+    expect(css).toContain(".bookBullet");
+    expect(findSessionArtwork("SoD Session 07 - A Solid Plan", "SoD"))
+      .toBe("/media/images/chronicles/souls-of-destiny/session-07-secret-cellar-passage-v1.webp");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {

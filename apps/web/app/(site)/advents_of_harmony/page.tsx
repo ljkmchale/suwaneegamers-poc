@@ -6,7 +6,7 @@ import { getOldPantheonDeities, getPantheonDeities } from "@/lib/pantheon";
 import type { PageEntry } from "@/lib/brain/vector-store";
 import { loadLibraryCatalog } from "@/lib/brain/library-catalog";
 import { LibraryExperience, type LibraryBook } from "./LibraryExperience";
-import { uniqueBooks } from "./libraryBooks";
+import { findSessionArtwork, uniqueBooks } from "./libraryBooks";
 
 export const metadata: Metadata = {
   title: "Advents of Harmony — Knowledge & Lore",
@@ -154,7 +154,8 @@ function sourceBook(page: Pick<PageEntry, "path" | "title" | "campaign" | "visib
     subtitle: `${page.campaign === "All" ? "Myrdae" : page.campaign} · ${category.replace(/(^|-)\w/g, (value) => value.toUpperCase())}`,
     collection,
     color: ["#603028", "#273e55", "#425037", "#574020", "#46345b"][index % 5],
-    image: collection === "World Archive" ? "/media/images/maps-of-myrdae/locations-map.webp" : "/media/images/guides-to-myrdae/campaign-setting.jpg",
+    image: findSessionArtwork(page.title, page.campaign)
+      ?? (collection === "World Archive" ? "/media/images/maps-of-myrdae/locations-map.webp" : "/media/images/guides-to-myrdae/campaign-setting.jpg"),
     pages: [],
     sourcePath: preferredSourcePath ?? page.path,
   };

@@ -48,7 +48,8 @@
 /* Keep every word reachable even when a font or viewport needs more room than pagination predicted. */
 .page{overflow-x:hidden;overflow-y:auto;scrollbar-color:#9e712d66 transparent;scrollbar-width:thin}
 .page>p{margin:0 0 .72em}
-.titlePage>p:first-letter{float:none;font:inherit;color:inherit;padding:0;text-shadow:none}
+.bookSectionHeading{position:relative;z-index:2;margin:0 0 .8rem;color:#702c2f;font:600 1.12rem/1.25 var(--font-uncial),var(--font-heading),serif;border-bottom:1px solid rgba(128,83,37,.35);padding-bottom:.35rem}.bookBullet{padding-left:1.15rem;text-indent:-.85rem}.bookBullet:before{content:"✦";margin-right:.45rem;color:#966a2c;font-size:.62em}.page p.bookBullet:first-of-type:first-letter{float:none;font:inherit;color:inherit;padding:0;text-shadow:none}
+.page .titlePage>p:first-letter{float:none;font:inherit;color:inherit;padding:0;text-shadow:none}
 
 .aisle{position:relative}
 .aisleMarker{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto auto;max-width:1180px;min-height:58px;margin:2rem auto 1.35rem;padding:.8rem 3.4rem;align-items:center;gap:1.25rem;color:#d9c7a3;background:repeating-linear-gradient(2deg,transparent 0 7px,rgba(255,210,140,.025) 8px,transparent 9px),radial-gradient(ellipse at 50% 0,rgba(173,104,45,.28),transparent 55%),linear-gradient(90deg,#1a0b06,#4a2512 16%,#2b140a 50%,#4a2512 84%,#1a0b06);border:3px ridge #70421f;border-radius:4px;box-shadow:inset 0 0 0 2px #120704,inset 0 0 20px #080302,0 10px 22px #000;text-shadow:0 2px 3px #000;font:500 .92rem var(--font-im-fell),Georgia,serif;letter-spacing:.055em}

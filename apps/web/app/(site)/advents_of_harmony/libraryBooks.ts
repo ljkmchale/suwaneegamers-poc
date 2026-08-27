@@ -1,4 +1,29 @@
+import fs from "fs";
+import path from "path";
 import type { LibraryBook } from "./LibraryExperience";
+
+const SESSION_ART_DIRECTORIES: Record<string, string> = {
+  "dungeons iii": "dungeons-iii",
+  hoe: "heroes-of-emberstran",
+  sod: "souls-of-destiny",
+};
+
+export function findSessionArtwork(title: string, campaign: string): string | undefined {
+  const sessionMatch = title.match(/\bsession\s+(\d{1,2})\b/i);
+  const directory = SESSION_ART_DIRECTORIES[campaign.toLowerCase()];
+  if (!sessionMatch || !directory) return undefined;
+
+  const sessionNumber = sessionMatch[1].padStart(2, "0");
+  const diskDirectory = path.join(process.cwd(), "media", "images", "chronicles", directory);
+  try {
+    const fileName = fs.readdirSync(diskDirectory)
+      .sort()
+      .find((candidate) => candidate.startsWith(`session-${sessionNumber}-`) && /\.(?:avif|jpe?g|png|webp)$/i.test(candidate));
+    return fileName ? `/media/images/chronicles/${directory}/${fileName}` : undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 export function uniqueBooks(books: LibraryBook[]): LibraryBook[] {
   const merged = new Map<string, LibraryBook>();
