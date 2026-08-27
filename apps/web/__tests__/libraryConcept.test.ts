@@ -45,6 +45,10 @@ describe("Advents of Harmony library", () => {
     expect(scene).toContain("styles.entranceReturnReveal");
     expect(scene).toContain("setEntranceState(\"returning\")");
     expect(scene).toContain("video.currentTime = 0");
+    expect(scene).toContain("Skip intro");
+    expect(scene).toContain("styles.skipEntrance");
+    expect(scene).toContain("function skipEntrance()");
+    expect(css).toContain(".skipEntrance");
     expect(scene).not.toContain("advents-harmony-exit-web-v1.mp4");
     expect(scene).not.toContain("\"closing\"");
     expect(scene).not.toContain("styles.libraryBlackout");
