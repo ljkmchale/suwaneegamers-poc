@@ -86,7 +86,7 @@
       }
     ],
     "refreshLabel": "Pulls configured Chronicles Google Docs into the Brain Vault, processes stale raw sources, and rebuilds the index when needed.",
-    "editNote": "Update the Google Docs listed here or maintained wiki pages in apps/web/brain-vault. Public /advents_of_harmony uses player-safe sources; /admin/chronicles can use DM-visible sources."
+    "editNote": "Update the Google Docs listed here or maintained wiki pages in apps/web/brain-vault. Members reach these sources by asking Myra or browsing the Library at /advents_of_harmony (player-safe sources)."
   },
   {
     "path": "/organizations",

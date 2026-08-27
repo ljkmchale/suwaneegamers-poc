@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RunNowForm } from "./source-managed/RunNowForm";
 
 const SECTIONS = [
   { href: "/admin/store", title: "Store", desc: "Manage products, inventory, checkout readiness, and orders." },
@@ -33,6 +34,16 @@ export default function AdminDashboard() {
             <p className="text-sm text-[#a89880]">{s.desc}</p>
           </Link>
         ))}
+      </div>
+
+      <div className="mt-10 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-6">
+        <h2 className="font-cinzel text-lg tracking-widest uppercase mb-2">Chronicles knowledge</h2>
+        <p className="text-sm text-[#a89880] mb-4">
+          The campaign lore members reach by asking Myra or browsing the Library. This resync pulls the
+          configured Chronicles Google Docs into the Brain Vault, processes stale sources, and rebuilds
+          the search index that both Myra and the Library read from. It also runs automatically every day.
+        </p>
+        <RunNowForm jobId="chronicles-sources" label="Resync Chronicles sources" />
       </div>
     </div>
   );
