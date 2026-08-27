@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { config } from "./config.mjs";
-import { chat, chatStream, embedTexts } from "./ollama.mjs";
+import { chat, chatStream, embedTexts } from "./ai-client.mjs";
 import { loadIndex, searchIndex } from "./vector-store.mjs";
 import { campaignLine, resolveCampaignAcronym } from "./campaigns.mjs";
 import { lookupCache, storeCache } from "./query-cache.mjs";

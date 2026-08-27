@@ -3,7 +3,7 @@ loadDotEnv();
 
 import { createHash } from "node:crypto";
 import { config } from "./config.mjs";
-import { embedTexts } from "./ollama.mjs";
+import { embedTexts } from "./ai-client.mjs";
 import { chunkDocuments, loadVaultDocuments } from "./vault.mjs";
 import { hasIndex, loadIndex, saveIndex } from "./vector-store.mjs";
 

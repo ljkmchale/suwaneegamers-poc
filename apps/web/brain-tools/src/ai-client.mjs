@@ -1,3 +1,6 @@
+// Chronicles Brain AI client (CLI/indexer side; the runtime twin is
+// apps/web/lib/brain/ai-client.ts). Despite this file's history it does NOT use
+// Ollama: embeddings go to Jina (jina-embeddings-v3) and chat goes to Groq.
 import { config } from "./config.mjs";
 
 function withTimeout(ms) {
