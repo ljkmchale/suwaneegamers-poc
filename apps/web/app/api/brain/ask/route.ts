@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { isMachineRequest } from "@/lib/machineAuth";
-import { answerQuestion } from "@/lib/brain/query";
+import { answerQuestion, retrieve } from "@/lib/brain/query";
 import { hasIndex } from "@/lib/brain/vector-store";
 import { brainConfig } from "@/lib/brain/config";
 import path from "node:path";
@@ -54,6 +54,30 @@ export async function POST(request: NextRequest) {
     const visibility = isDm ? "dm" : "players";
 
     const topK = Math.max(3, Math.min(20, Number.parseInt(String(body.topK ?? brainConfig.topK), 10)));
+
+    // Retrieval-only mode: return the ranked source excerpts WITHOUT running the
+    // Brain's own chat model to compose an answer. This is the lean path a caller
+    // that already has an LLM (Myra) can use — she retrieves here and composes the
+    // spoken answer in her own Claude turn, dropping one model call per question.
+    if (body.retrieveOnly === true || body.mode === "retrieve") {
+      const matches = await retrieve(question, {
+        campaign: String(body.campaign ?? "All"),
+        topK,
+        visibility,
+      });
+      const trimmed = matches.slice(0, topK).map((m) => ({
+        text: m.text,
+        score: Number((m.score ?? 0).toFixed(4)),
+        source: {
+          title: m.metadata.title,
+          path: m.metadata.path,
+          heading: m.metadata.heading,
+          campaign: m.metadata.campaign,
+        },
+      }));
+      return NextResponse.json({ matches: trimmed, sources: trimmed.map((t) => t.source) });
+    }
+
     const result = await answerQuestion(question, {
       campaign: String(body.campaign ?? "All"),
       topK,
