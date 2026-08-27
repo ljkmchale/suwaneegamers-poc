@@ -1,7 +1,7 @@
 {
   "_comment": "The one part of Myra's self-model only a human knows: which models run her. Everything else in her Systems detail block is auto-derived. Update this only when you actually swap a model or move the service.",
   "stt": "NeMo Parakeet on the GPU (local faster-whisper on CPU as fallback)",
-  "llm": "Claude Haiku 4.5, with local Ollama (Qwen) as the offline fallback",
+  "llm": "Claude Haiku 4.5 (no local fallback; an API outage degrades to deterministic schedule and lookup answers)",
   "tts": "Kokoro local (82M); ElevenLabs Flash v2.5 as the live voice when configured",
   "voiceStack": "LiveKit + Speaches + Parakeet + the agent worker, launched by the scheduled task SuwaneeGamersVoiceStack with a watchdog",
   "webService": "Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000"

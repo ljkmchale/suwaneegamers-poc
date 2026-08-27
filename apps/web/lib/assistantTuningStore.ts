@@ -33,7 +33,5 @@ export function assistantTuningForAgent(): Record<string, number | string> {
     vadActivationThreshold: t.vadActivationThreshold,
     minInterruptionDuration: t.minInterruptionDuration,
     minInterruptionWords: t.minInterruptionWords,
-    ollamaTemperature: t.ollamaTemperature,
-    ollamaTopP: t.ollamaTopP,
   };
 }

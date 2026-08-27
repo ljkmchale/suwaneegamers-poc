@@ -3,9 +3,9 @@
 This Python service is the fully local realtime voice backend for Myra,
 the Suwanee Gamers assistant displayed on the Suwanee Gamers homepage.
 LiveKit handles microphone audio,
-turn-taking, interruptions, and room dispatch. Ollama provides the language
-model, while the local Speaches server provides speech recognition and speech
-generation.
+turn-taking, interruptions, and room dispatch. Claude Haiku (Anthropic API)
+provides the language model, while the local Speaches server provides speech
+recognition and speech generation.
 
 The Next.js token endpoint places a current public-calendar snapshot in the
 LiveKit agent dispatch metadata. The agent's `get_upcoming_games` tool uses that
@@ -19,10 +19,10 @@ answered by the language model grounded on that knowledge base.
 
 ## Response timing & auto-tuning
 
-Timing knobs (endpointing delay, VAD silence, Ollama temperature/top-p)
-come from `content/assistant-tuning.json`, shipped to the agent in dispatch metadata
-as `tuning` (env vars remain manual overrides). The worker preloads Ollama at startup
-(`preload_ollama_model`) and keeps the model resident (`keep_alive: -1`) so visitors
+Timing knobs (endpointing delay, VAD silence, interruption guard) come from
+`content/assistant-tuning.json`, shipped to the agent in dispatch metadata
+as `tuning` (env vars remain manual overrides). The worker warms Claude and the
+TTS voice per job process (`_warm_claude` / `_warm_tts` in `prewarm`) so visitors
 never pay cold-start latency. It logs real per-turn metrics via a `metrics_collected`
 listener, forwarding TTFT / end-of-utterance / TTS-TTFB / interruption records to
 `POST /api/livekit/metrics`.
@@ -37,7 +37,7 @@ log, never applied. See `apps/web/lib/assistantTuning.ts` for the (unit-tested) 
 
 Ask Myra "how do you feel?", "are you okay?", or "run a diagnostic" and
 she performs a live self-check (`run_self_diagnosis` in `agent.py`): she probes the
-speech server (hearing/voice) and the Ollama model (thinking) over the network in
+speech server (hearing/voice) and Claude reachability (thinking) over the network in
 parallel, inspects the calendar snapshot and knowledge base she was handed, and
 speaks a plain-language summary — naming any part that is down. This runs
 deterministically, so it still works when the language model itself is unreachable.
@@ -51,29 +51,30 @@ that structured status and falls back to the dispatch snapshot or local probes.
 The default development configuration expects:
 
 - LiveKit Server: `ws://127.0.0.1:7880`
-- Ollama: `http://127.0.0.1:11434`
 - Speaches: `http://127.0.0.1:8000`
+- Parakeet STT: `http://127.0.0.1:8767`
 
 ## Language model
 
-Myra thinks with **Claude Haiku 4.5**, falling back to the local Ollama model
-when the API cannot be reached. Set the key in `.env.local` (either this
-directory or the repo root — both are loaded by absolute path, service first):
+Myra thinks with **Claude Haiku 4.5** — the sole thinking engine (there is no
+local fallback model). Set the key in `.env.local` (either this directory or the
+repo root — both are loaded by absolute path, service first):
 
 ```
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-With no key set the agent runs on Ollama alone and logs that it did, so the
-stack still works offline. Optional overrides: `ANTHROPIC_MODEL` (default
-`claude-haiku-4-5`), `ANTHROPIC_MAX_TOKENS` (512), `ANTHROPIC_TEMPERATURE`
-(0.3), and `LLM_ATTEMPT_TIMEOUT` (15.0s before failing over to Ollama). The
-timeout bounds an individual request; it does not indicate an Anthropic billing
-or account failure by itself.
+**With no key set the agent raises on startup** — there is no offline floor.
+When the API is unreachable at runtime, Myra degrades to deterministic answers
+only (schedule, recap, navigation, learned). Optional overrides: `ANTHROPIC_MODEL`
+(default `claude-haiku-4-5`), `ANTHROPIC_MAX_TOKENS` (512), `ANTHROPIC_TEMPERATURE`
+(0.3), and the per-attempt bound `ANTHROPIC_ATTEMPT_TIMEOUT` (8.0s) /
+`ANTHROPIC_MAX_RETRY` (1) applied via the session's `llm_conn_options`, so a
+stalled request fails fast instead of stacking framework retries.
 
 A `400 ... credit balance is too low` in the agent log means the API key is
-valid but the account has no credits — Myra silently falls back to Ollama and
-keeps working. Add credits at console.anthropic.com under Plans &amp; Billing.
+valid but the account has no credits — Myra falls back to deterministic answers.
+Add credits at console.anthropic.com under Plans &amp; Billing.
 
 Copy `.env.example` to `.env.local` if it is not already present. Then:
 
@@ -95,7 +96,7 @@ website token route.
 ## Restarting the agent
 
 The agent runs as a bare detached process (not a Windows service). After changing
-`agent.py`, restart just the agent — leaving LiveKit, Speaches, and Ollama up — with:
+`agent.py`, restart just the agent — leaving LiveKit, Speaches, and Parakeet up — with:
 
 ```powershell
 pnpm voice:restart-agent

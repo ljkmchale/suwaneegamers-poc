@@ -15,8 +15,8 @@ lore, and finding things on the site.
 ## How I hear, think, and speak
 
 - I hear you with a local speech-to-text model running on this machine.
-- I think with Claude (Anthropic), with a small local model as an offline fallback
-  so I keep working even if the network or API is down.
+- I think with Claude (Anthropic). If the network or API is down I can't reason
+  freely, but I still answer schedule, recap, and navigation questions directly.
 - I speak with a local text-to-speech voice, and members can pick a persona that
   changes how I sound.
 
@@ -36,14 +36,14 @@ voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
 <!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
-<!-- last generated 2026-08-25T14:53:54.569Z -->
+<!-- last generated 2026-08-27T12:51:42.071Z -->
 
 ## Systems detail (admin)
 
-- App: version 0.1.0. Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
+- App: version 0.1.0 (commit 496e315). Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
 - Models:
   - Speech-to-text: NeMo Parakeet on the GPU (local faster-whisper on CPU as fallback)
-  - Language model: Claude Haiku 4.5, with local Ollama (Qwen) as the offline fallback
+  - Language model: Claude Haiku 4.5 (no local fallback; an API outage degrades to deterministic schedule and lookup answers)
   - Text-to-speech: Kokoro local (82M); ElevenLabs Flash v2.5 as the live voice when configured
 - Voice stack: LiveKit + Speaches + Parakeet + the agent worker, launched by the scheduled task SuwaneeGamersVoiceStack with a watchdog.
 - I offer 6 personas across 5 voices.
@@ -70,6 +70,6 @@ voices, and I never make up campaigns, people, dates, or links.
   - Voice assistant self-learning (daily 11:25)
   - Voice assistant self-model (daily 10:53)
   - Website roadmap (Myra out-of-world) (daily 10:51)
-- Current self-tuning (auto-tuned nightly): 0.3-5s wait before replying; interrupts after 3 words; temp 0.3.
+- Current self-tuning (auto-tuned nightly): 0.3-5s wait before replying; interrupts after 3 words.
 <!-- AUTO:END -->
 <!-- ADMIN:END -->

@@ -11,7 +11,7 @@ is down Myra still hears. See `services/livekit-schedule-agent` (`build_stt`).
 ## Why a separate process
 
 NeMo needs Python 3.12 and a large dependency tree that doesn't belong in the
-agent's venv. Like Speaches and Ollama, this runs standalone and speaks the
+agent's venv. Like Speaches, this runs standalone and speaks the
 OpenAI transcription API, so the agent's existing `openai.STT` plugin talks to
 it unchanged — same `POST /v1/audio/transcriptions`, same `prompt` field.
 
@@ -42,8 +42,8 @@ the model, ~5 min).
 
 The machine sets `CUDA_VISIBLE_DEVICES=-1` at User+Machine scope to keep
 CTranslate2 (Speaches) off the Blackwell card, which it crashes on. This service
-**must** be launched with a per-process `CUDA_VISIBLE_DEVICES=0` — exactly how
-Ollama gets the GPU. The global mask stays; never change it.
+**must** be launched with a per-process `CUDA_VISIBLE_DEVICES=0`. The global
+mask stays; never change it.
 
 ## Phrase boosting
 

@@ -819,7 +819,7 @@ def test_recap_answer_returns_none_when_no_campaign_named():
     assert recap_answer(recaps, "what happened last time") is None
 
 
-def test_campaign_question_is_answered_without_ollama():
+def test_campaign_question_is_answered_without_a_model():
     schedule = {
         "timezone": "America/New_York",
         "events": [
@@ -1061,48 +1061,37 @@ def test_model_warmups_are_best_effort_and_never_raise(monkeypatch):
     prewarm(object())  # spawns its daemon thread without raising
 
 
-def test_llm_is_local_only_when_no_anthropic_key_is_configured(monkeypatch):
+def test_llm_raises_when_no_anthropic_key_is_configured(monkeypatch):
+    # Claude is the sole thinking engine now (the local model fallback was
+    # removed). With no key there is nothing to think with, so build_llm fails
+    # loudly rather than returning a dead adapter.
+    import pytest
+
     from schedule_agent.agent import build_llm
 
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    built = build_llm({})
-    assert not isinstance(built, FallbackAdapter)
-    assert built.model == "suwanee-schedule"
+    with pytest.raises(RuntimeError):
+        build_llm({})
 
 
 def test_llm_is_claude_only_when_a_key_is_present(monkeypatch):
-    # The Ollama fallback was retired: with a key, Myra thinks with Claude and
-    # nothing else (no FallbackAdapter, no local second-guess).
+    # With a key, Myra thinks with Claude and nothing else (no FallbackAdapter,
+    # no local second-guess).
     from schedule_agent.agent import build_llm
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
-    monkeypatch.delenv("MYRA_ENABLE_OLLAMA", raising=False)
     built = build_llm({})
     assert not isinstance(built, FallbackAdapter)
     assert built.model == "claude-haiku-4-5"
 
 
-def test_ollama_fallback_is_restorable_with_one_flag(monkeypatch):
-    # The retired fallback comes back with MYRA_ENABLE_OLLAMA=1 (same flag the
-    # launcher uses to start the service) — no code revert needed.
-    from schedule_agent.agent import build_llm
-
-    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
-    monkeypatch.setenv("MYRA_ENABLE_OLLAMA", "1")
-    built = build_llm({})
-    assert isinstance(built, FallbackAdapter)
-    primary, secondary = built._llm_instances
-    assert primary.model == "claude-haiku-4-5"
-    assert secondary.model == "suwanee-schedule"
-
-
-def test_claude_temperature_ignores_the_ollama_autotuner(monkeypatch):
-    """The nightly tuner calibrates against Qwen; it must not steer Claude too."""
+def test_claude_temperature_is_independent_of_tuning(monkeypatch):
+    """The nightly tuner's values must not steer Claude's temperature."""
     from schedule_agent.agent import build_llm
 
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
     monkeypatch.delenv("ANTHROPIC_TEMPERATURE", raising=False)
-    claude = build_llm({"ollamaTemperature": 0.95})
+    claude = build_llm({"strayTuningKey": 0.95})
     assert claude._opts.temperature == 0.3
 
 
@@ -1407,10 +1396,10 @@ def test_dispatch_metadata_defaults_page_to_empty_when_malformed():
     )["page"] == {"path": "/lore"}
 
 
-def test_llm_short_name_distinguishes_claude_from_the_local_model():
+def test_llm_short_name_maps_anthropic_to_claude():
     from schedule_agent.agent import llm_short_name
 
     assert llm_short_name("livekit.plugins.anthropic.llm.LLM") == "claude"
-    # The openai plugin is pointed at Ollama, so it means "local" here.
-    assert llm_short_name("livekit.plugins.openai.llm.LLM") == "ollama"
+    # Any non-Claude label falls through to a truncated label, not a name.
+    assert llm_short_name("livekit.plugins.openai.llm.LLM") == "livekit.plugins.openai.llm.LLM"
     assert llm_short_name("") == "unknown"

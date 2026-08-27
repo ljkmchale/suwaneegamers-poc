@@ -16,7 +16,7 @@
   <rect class="b" x="915" y="105" width="205" height="135" fill="#fff" stroke="#64748b"/>
   <text x="1018" y="150" class="l">Speaches</text><text x="1018" y="185" class="d">Voice ↔ text</text>
   <rect class="b" x="915" y="295" width="205" height="135" fill="#fff" stroke="#64748b"/>
-  <text x="1018" y="340" class="l">Ollama</text><text x="1018" y="375" class="d">Grounded local AI</text>
+  <text x="1018" y="340" class="l">Claude</text><text x="1018" y="375" class="d">Anthropic API</text>
   <rect class="b" x="1190" y="145" width="165" height="145" fill="#ecfdf5" stroke="#059669"/>
   <text x="1273" y="190" class="l">Answer</text><text x="1273" y="225" class="d">Spoken back</text><text x="1273" y="253" class="d">through LiveKit</text>
   <path class="bi" d="M267 218h36"/><path class="bi" d="M537 218h36"/><path class="bi" d="M842 177h61"/><path class="ar" d="M830 260c55 0 45 102 73 102"/><path class="ar" d="M1120 218h58"/>

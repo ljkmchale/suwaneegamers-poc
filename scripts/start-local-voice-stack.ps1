@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
-# GPU policy for this stack: Parakeet (STT) and Ollama (the LLM fallback) run on
-# the RTX 5060; everything else stays on CPU. faster-whisper / CTranslate2 in
+# GPU policy for this stack: Parakeet (STT) runs on the RTX 5060; everything
+# else stays on CPU. faster-whisper / CTranslate2 in
 # Speaches does NOT run on this Blackwell card and crashes on model load if the
 # GPU is visible, so the default here is CPU-only and we grant the GPU to each
 # GPU process individually, just before it launches. Do NOT set
@@ -84,30 +84,11 @@ if (-not (Test-TcpPort 8000)) {
   }
 }
 
-# Ollama (the LLM fallback) is retired: it answered ~2 questions in all recorded
-# history, held a GPU grant next to Parakeet, and its cold start was the worst
-# LLM latency tail (~13s). With a key set the agent thinks with Claude only and
-# never touches it. Set MYRA_ENABLE_OLLAMA=1 to bring it back as the keyless
-# offline floor (also re-enable it in build_llm's keyless path).
-if ($env:MYRA_ENABLE_OLLAMA -eq "1" -and -not (Test-TcpPort 11434)) {
-  $ollama = Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"
-  $env:OLLAMA_KEEP_ALIVE = "-1"
-  # Grant the GPU to Ollama only (the model runs 100% on the RTX 5060).
-  $env:CUDA_VISIBLE_DEVICES = "0"
-  Start-Logged "ollama" @{
-    FilePath = $ollama
-    ArgumentList = "serve"
-    WorkingDirectory = (Split-Path -Parent $ollama)
-  }
-  # Restore CPU-only for anything launched after this (the agent).
-  $env:CUDA_VISIBLE_DEVICES = "-1"
-}
-
 if ((Test-Path $parakeetVenv) -and -not (Test-TcpPort 8767)) {
   # GPU speech recognition (NeMo Parakeet). ~15-25x faster than CPU Whisper and,
   # with phrase boosting, more accurate on the campaign's invented names. The
   # agent uses it as primary STT and falls back to Speaches/Whisper if it is
-  # down. Needs the GPU, same per-process grant as Ollama; the global mask stays.
+  # down. Needs the GPU via a per-process grant; the global mask stays CPU-only.
   $env:CUDA_VISIBLE_DEVICES = "0"
   Start-Logged "parakeet" @{
     FilePath = $parakeetVenv

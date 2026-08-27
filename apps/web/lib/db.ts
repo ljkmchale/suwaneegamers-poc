@@ -203,9 +203,9 @@ function migrateSchema(db: Database.Database): void {
     db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_id TEXT`);
   }
 
-  // Records which model answered each voice question. Added when Myra moved
-  // from Ollama-only to Claude-with-Ollama-fallback: without it a fallback is
-  // invisible, because both paths write response_mode = 'llm'.
+  // Records which model answered each voice question. Historically this
+  // distinguished Claude from the retired local fallback; today it is "claude"
+  // for LLM answers and null for deterministic ones.
   const voiceQuestionColumns = new Set(
     (db.prepare(`PRAGMA table_info(voice_questions)`).all() as { name: string }[]).map((c) => c.name),
   );
@@ -678,10 +678,9 @@ function initializeSchema(db: Database.Database): void {
       answer         TEXT,
       category       TEXT NOT NULL,
       response_mode  TEXT NOT NULL,
-      -- Which language model actually answered ("claude" / "ollama"), so a
-      -- silent fallback to the local model is visible instead of both paths
-      -- looking identical under response_mode = 'llm'. Null for deterministic
-      -- answers, which never reach a model at all.
+      -- Which language model actually answered ("claude"; older rows may hold
+      -- the retired local model's name). Null for deterministic answers, which
+      -- never reach a model at all.
       model          TEXT,
       response_ms    INTEGER,
       success        INTEGER NOT NULL DEFAULT 1,

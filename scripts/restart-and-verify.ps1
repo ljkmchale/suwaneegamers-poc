@@ -224,9 +224,6 @@ function Get-VoiceStackProcesses {
       $_.CommandLine -match "schedule_agent\.agent|speaches\.main:create_app|uvicorn\.exe.*--port 8000|parakeet-stt") -or
     $_.Name -in @(
       "livekit-server.exe",
-      "ollama.exe",
-      "ollama app.exe",
-      "llama-server.exe",
       "uvicorn.exe"
     )
   }
@@ -280,7 +277,6 @@ if (-not $SkipVoice) {
     -not (Test-ListeningPort 7880) -and
     -not (Test-ListeningPort 8000) -and
     -not (Test-ListeningPort 8767) -and
-    -not (Test-ListeningPort 11434) -and
     -not (Get-MyraProcesses)
   }
   if (-not $voiceStopped) {
@@ -406,13 +402,6 @@ if (-not $SkipVoice) {
   }
   Add-Result "Speaches" $speachesOk $(
     if ($speachesOk) { "Models endpoint responding" } else { "Models endpoint did not become ready" }
-  )
-
-  $ollamaOk = Wait-Until -Description "Ollama model registry" -Condition {
-    Test-HttpOk "http://127.0.0.1:11434/api/tags"
-  }
-  Add-Result "Ollama" $ollamaOk $(
-    if ($ollamaOk) { "Model registry responding" } else { "Model registry did not become ready" }
   )
 
   # Parakeet is the primary STT but the agent falls back to Whisper if it is

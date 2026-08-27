@@ -38,7 +38,7 @@
     "campaignDmVoiceAssignments": "dungeon_masters / campaign_dms",
     "livekitPort": 7880,
     "speachesPort": 8000,
-    "ollamaPort": 11434,
+    "parakeetPort": 8767,
     "analyticsRoute": "/admin/voice-assistant"
   },
   "automation": {

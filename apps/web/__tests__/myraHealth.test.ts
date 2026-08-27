@@ -9,7 +9,7 @@ const result = (service: string, status: DiagnosticResult["status"]): Diagnostic
 
 describe("Myra health aggregation", () => {
   it("reports healthy when every checked system is healthy", () => {
-    expect(calculateOverall([result("database", "healthy"), result("ollama", "healthy")])).toBe("healthy");
+    expect(calculateOverall([result("database", "healthy"), result("anthropic", "healthy")])).toBe("healthy");
   });
   it("reports degraded for a noncritical outage", () => {
     expect(calculateOverall([result("database", "healthy"), result("speaches", "unavailable")])).toBe("degraded");

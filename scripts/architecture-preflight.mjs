@@ -70,7 +70,7 @@ console.log(`  Guide: ${contract.canonicalGuide}`);
 console.log(`  Content: ${contract.content.database} -> ${contract.content.databaseFirstTable} -> ${contract.content.fileMirror}/ fallback`);
 console.log(`  Images: ${contract.media.imageUrlPrefix} -> ${contract.media.imageDiskRoot}`);
 console.log(`  Audio: ${contract.media.audioUrlPrefix} -> ${contract.media.audioDiskRoot}`);
-console.log(`  Voice: LiveKit ${contract.voice.livekitPort}, Speaches ${contract.voice.speachesPort}, Ollama ${contract.voice.ollamaPort}`);
+console.log(`  Voice: LiveKit ${contract.voice.livekitPort}, Speaches ${contract.voice.speachesPort}, Parakeet ${contract.voice.parakeetPort}`);
 console.log(`  Production: ${contract.runtime.productionService} on ${contract.runtime.productionUrl}, active slot via ${contract.runtime.productionSlotPointer}`);
 
 if (failures.length) {

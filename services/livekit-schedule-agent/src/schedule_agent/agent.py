@@ -26,6 +26,7 @@ from livekit.agents import (
     Agent,
     AgentServer,
     AgentSession,
+    APIConnectOptions,
     JobContext,
     MetricsCollectedEvent,
     ModelSettings,
@@ -40,6 +41,7 @@ from livekit.agents import (
     tts,
 )
 from livekit.agents.llm import ToolFlag
+from livekit.agents.voice.agent_session import SessionConnectOptions
 from livekit.plugins import anthropic, openai, silero
 
 # ElevenLabs is optional (opt-in via MYRA_TTS). Import it at module load so the
@@ -2278,7 +2280,7 @@ def diagnostic_request(question: str) -> tuple[str, str | None]:
         "memory": ("memory", "remember", "brain", "wiki"),
         "voice": ("hear", "voice", "microphone", "audio", "livekit", "speech"),
         "website": ("site", "website", "database", "api"),
-        "ai": ("think", "model", "ai", "claude", "ollama"),
+        "ai": ("think", "model", "ai", "claude"),
     }
     for component, terms in components.items():
         if any(term in normalized for term in terms):
@@ -2384,8 +2386,8 @@ def speech_base_url() -> str:
     return os.getenv("LOCAL_SPEECH_BASE_URL", "http://127.0.0.1:8000/v1")
 
 
-def ollama_base_url() -> str:
-    return os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434/v1")
+def anthropic_base_url() -> str:
+    return os.getenv("ANTHROPIC_BASE_URL", "https://api.anthropic.com/v1")
 
 
 def env_float(name: str, default: float) -> float:
@@ -2502,60 +2504,33 @@ def page_context_block(page: Any) -> str:
 
 
 def llm_short_name(label: str) -> str:
-    """Map a LiveKit LLM label to the short name recorded in analytics.
-
-    The openai plugin is pointed at the local Ollama endpoint, so its label
-    means "the local model" here, not a call to OpenAI.
-    """
+    """Map a LiveKit LLM label to the short name recorded in analytics."""
     lowered = label.casefold()
     if "anthropic" in lowered:
         return "claude"
-    if "openai" in lowered:
-        return "ollama"
     return label[:40] or "unknown"
 
 
-def build_ollama_llm(tuning: dict[str, Any]) -> openai.LLM:
-    """The local model — no network, no cost, and Myra's floor when the API is down."""
-    return openai.LLM(
-        model=os.getenv("OLLAMA_MODEL", "suwanee-schedule"),
-        api_key="ollama",
-        base_url=ollama_base_url(),
-        # keep_alive -1 pins the model resident (never a cold start).
-        # reasoning_effort "none" disables the model's chain-of-thought:
-        # this is a reasoning model, and for a voice assistant the silent
-        # thinking phase was ~2.5s of pure latency before the first spoken
-        # word. Grounded lookup answers don't need it. (Ollama honors
-        # reasoning_effort on its OpenAI-compatible endpoint; think:false
-        # and chat_template_kwargs are ignored there.)
-        extra_body={"keep_alive": -1, "reasoning_effort": "none"},
-        # Low temperature keeps answers accurate and consistent (and lets
-        # the model commit to tokens sooner). Tunable without a redeploy.
-        temperature=tuning_float(tuning, "ollamaTemperature", "OLLAMA_TEMPERATURE", 0.3),
-        top_p=tuning_float(tuning, "ollamaTopP", "OLLAMA_TOP_P", 0.9),
-    )
-
-
 def build_llm(tuning: dict[str, Any]) -> llm.LLM:
-    """Claude Haiku only when a key is set; local Ollama is the keyless floor.
+    """Claude Haiku, the sole thinking engine. Requires ANTHROPIC_API_KEY.
 
     Only questions that fall past every deterministic intercept in
     on_user_turn_completed reach a model at all, and the job they land on is
     mostly one decision: call search_knowledge_base, or answer from the compact
     knowledge already in the prompt.
 
-    The Ollama fallback was retired from the keyed path: over the whole recorded
-    history it answered ~2 questions, it shared the GPU with Parakeet, and its
-    cold start was the worst LLM latency tail (~13s). With a key set, Myra thinks
-    with Claude and nothing else — an API outage now degrades to deterministic
+    There is no local fallback model. Over the whole recorded history the retired
+    local floor answered ~2 questions, shared the GPU with Parakeet, and owned
+    the worst LLM latency tail — so an API outage now degrades to deterministic
     answers only (schedule, recap, navigation, learned) rather than falling
-    through to a rarely-right 3B model. Ollama remains the floor ONLY when no key
-    is configured (keyless local dev); set MYRA_ENABLE_OLLAMA=1 in the launcher
-    to actually run the service again.
+    through to a rarely-right 3B model. A stalled Claude call is bounded by the
+    session's llm_conn_options (see AgentSession), not by a second provider.
     """
     if not os.getenv("ANTHROPIC_API_KEY"):
-        logger.info("ANTHROPIC_API_KEY is not set; Myra is thinking with local Ollama only")
-        return build_ollama_llm(tuning)
+        raise RuntimeError(
+            "ANTHROPIC_API_KEY is not set. Myra's thinking engine is Claude only "
+            "(the local model fallback was removed); set the key to enable it."
+        )
 
     claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
     remote_kwargs: dict[str, Any] = {}
@@ -2586,60 +2561,14 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
         # A ceiling, not a target: Myra answers in one or two sentences, so this
         # bounds a runaway response without truncating a normal one or a tool call.
         max_tokens=int(env_float("ANTHROPIC_MAX_TOKENS", 512)),
-        # Deliberately NOT wired to the nightly autotuner's ollamaTemperature.
-        # That value is tuned against Qwen's behaviour; pointing it at Claude
-        # would let one model's tuning run silently steer the other.
+        # Haiku is the one current Claude model that still accepts `temperature`
+        # (Sonnet 5 and Opus 5 reject it with a 400).
         temperature=env_float("ANTHROPIC_TEMPERATURE", 0.3),
         **remote_kwargs,
     )
 
-    if os.getenv("MYRA_ENABLE_OLLAMA") == "1":
-        # Opt the retired local floor back in with one flag (the launcher's
-        # matching MYRA_ENABLE_OLLAMA=1 starts the service). FallbackAdapter tries
-        # Claude first and skips to Ollama only on an outage.
-        adapter = llm.FallbackAdapter(
-            [remote, build_ollama_llm(tuning)],
-            attempt_timeout=env_float("LLM_ATTEMPT_TIMEOUT", 15.0),
-        )
-
-        def on_availability_changed(event: llm.AvailabilityChangedEvent) -> None:
-            logger.warning(
-                "Myra's %s model is now %s",
-                getattr(event.llm, "label", type(event.llm).__name__),
-                "available" if event.available else "unavailable",
-            )
-
-        adapter.on("llm_availability_changed", on_availability_changed)
-        logger.info("Myra thinking with %s, Ollama fallback re-enabled", claude_model)
-        return adapter
-
-    logger.info("Myra thinking with %s (no local fallback)", claude_model)
+    logger.info("Myra thinking with %s (Claude only)", claude_model)
     return remote
-
-
-def preload_ollama_model(timeout: float = 120.0) -> float:
-    """Load the model before worker registration and keep it resident."""
-    url = ollama_base_url().removesuffix("/v1").rstrip("/") + "/api/generate"
-    body = json.dumps(
-        {
-            "model": os.getenv("OLLAMA_MODEL", "suwanee-schedule"),
-            "prompt": "",
-            "stream": False,
-            "keep_alive": -1,
-        }
-    ).encode()
-    request = urllib.request.Request(
-        url,
-        data=body,
-        headers={
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-    started = time.perf_counter()
-    with urllib.request.urlopen(request, timeout=timeout):
-        pass
-    return time.perf_counter() - started
 
 
 def probe_service(base_url: str, timeout: float = 2.5) -> bool:
@@ -2997,9 +2926,8 @@ def persona_speed(persona: dict[str, Any]) -> float:
 #
 # MYRA_TTS=elevenlabs swaps in ElevenLabs Flash v2.5 as the primary voice while
 # keeping local Kokoro as a FallbackAdapter floor, so an API outage or spent
-# credits drops to local instead of leaving Myra mute -- the same pattern
-# build_llm() used for Claude -> Ollama. Unset (the default) keeps the all-local
-# Kokoro path byte-for-byte unchanged.
+# credits drops to local instead of leaving Myra mute. Unset (the default) keeps
+# the all-local Kokoro path byte-for-byte unchanged.
 #
 # The persona-id -> ElevenLabs voice_id map is produced by audition_eleven.py
 # (which resolves ids from *your* account) and lives in eleven-voices.json next
@@ -3901,10 +3829,16 @@ class Myra(Agent):
         knowledge base she was handed at dispatch. Returns a spoken summary plus a
         status label ("healthy" / "degraded" / "impaired").
         """
-        speech_ok, thinking_ok = await asyncio.gather(
+        # Thinking is Claude only now: a key must be set, and the API must be
+        # reachable. probe_service treats an HTTP error (the 401 you get hitting
+        # /models unauthenticated) as "reachable", so this checks the network
+        # path without exposing the key.
+        has_key = bool(os.getenv("ANTHROPIC_API_KEY"))
+        speech_ok, api_reachable = await asyncio.gather(
             asyncio.to_thread(probe_service, speech_base_url()),
-            asyncio.to_thread(probe_service, ollama_base_url()),
+            asyncio.to_thread(probe_service, anthropic_base_url()),
         )
+        thinking_ok = has_key and api_reachable
         calendar_ok = self.schedule.get("generatedAt") is not None or isinstance(
             self.schedule.get("events"), list
         )
@@ -4353,6 +4287,17 @@ async def schedule_agent(ctx: JobContext):
         min_endpointing_delay=tuning_float(tuning, "minEndpointingDelay", "MIN_ENDPOINTING_DELAY", 0.4),
         max_endpointing_delay=tuning_float(tuning, "maxEndpointingDelay", "MAX_ENDPOINTING_DELAY", 5.0),
         preemptive_generation=True,
+        # Bound a stalled Claude call. With no fallback model left, the only thing
+        # standing between a hung request and the visitor is this: cap each attempt
+        # and cut the retry count so a bad turn fails to deterministic-only in a few
+        # seconds instead of stacking three ~10s framework retries (the measured
+        # ~56s TTFT tail). Tunable without a redeploy.
+        conn_options=SessionConnectOptions(
+            llm_conn_options=APIConnectOptions(
+                timeout=env_float("ANTHROPIC_ATTEMPT_TIMEOUT", 8.0),
+                max_retry=int(env_float("ANTHROPIC_MAX_RETRY", 1)),
+            ),
+        ),
     )
 
     # Log real per-turn latency (STT, end-of-utterance, LLM time-to-first-token,
@@ -4471,7 +4416,6 @@ async def schedule_agent(ctx: JobContext):
 
 
 if __name__ == "__main__":
-    # Claude and Kokoro are warmed per job process in prewarm(); Ollama is retired
-    # from the keyed path, so there is no model to preload here anymore. (When run
-    # keyless, build_ollama_llm loads the local model lazily on the first turn.)
+    # Claude and Kokoro are warmed per job process in prewarm(); there is no local
+    # model to preload (Myra thinks with Claude only).
     cli.run_app(server)

@@ -221,8 +221,8 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
     },
     {
       label: "Model temperature",
-      value: tuning.ollamaTemperature.toFixed(2),
-      hint: "Answer randomness. Lower is more consistent and commits to words sooner.",
+      value: (Number(process.env.ANTHROPIC_TEMPERATURE) || 0.3).toFixed(2),
+      hint: "Claude answer randomness. Lower is more consistent and commits to words sooner.",
       auto: false,
     },
   ];
@@ -280,7 +280,6 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             </h2>
             <p className="mt-2 max-w-3xl text-xs leading-relaxed text-[#6a5a78]">
               Provider-reported usage for Myra&apos;s Claude requests in this period.
-              Local Ollama fallback requests cost $0 and are excluded.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -771,9 +770,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
                       <span
                         className="mt-1 block text-[0.65rem] uppercase tracking-wider text-[#6a5a78]"
                         title={
-                          question.model === "ollama"
-                            ? "Answered by the local fallback model — Claude was unreachable"
-                            : "Answered by Claude"
+                          question.model === "claude"
+                            ? "Answered by Claude"
+                            : `Answered by ${question.model}`
                         }
                       >
                         {question.model}

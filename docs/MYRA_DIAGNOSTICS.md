@@ -3,15 +3,15 @@
 Myra's health system is centralized in `apps/web/lib/myraHealth.ts`. It exposes a
 typed registry, parallel timeout-isolated checks, short-lived caches, capability
 flags, sanitized structured logs, and SQLite-backed incident history. The older
-worker-local speech/Ollama check remains a fallback if the central service cannot
-be reached.
+worker-local speech/Anthropic reachability check remains a fallback if the
+central service cannot be reached.
 
 ## Monitored services
 
 | Service | Critical | Test | Default timeout |
 | --- | --- | --- | --- |
 | Suwanee Gamers database | Yes | SQLite read plus temporary-table write | 2 seconds |
-| Local fallback AI | Yes | Ollama model-list endpoint | 4 seconds |
+| Claude thinking engine | No | `ANTHROPIC_API_KEY` presence (live use tracked by the voice worker) | 2 seconds |
 | Website API | Yes | Calendar API request | 5 seconds |
 | Karpathy LLM Wiki and memory | No | learned-memory row and storage access | 2 seconds |
 | Chronicles search | No | brain-data storage access | 2 seconds |
@@ -89,6 +89,6 @@ marking it critical.
 ## Troubleshooting
 
 Use `/admin/myra-health` for quick/full checks and details. Confirm database access,
-then LiveKit 7880, Speaches 8000, Ollama 11434, and the website API independently.
+then LiveKit 7880, Speaches 8000, Parakeet 8767, and the website API independently.
 For a real voice failure, also verify browser microphone permission, room join,
 transcription, and non-silent TTS; a healthy server port alone is insufficient.

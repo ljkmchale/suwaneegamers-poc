@@ -1,5 +1,5 @@
 # Restarts ONLY the Suwanee Gamers LiveKit voice agent, leaving the rest of the
-# local voice stack (LiveKit server, Speaches, Ollama) untouched.
+# local voice stack (LiveKit server, Speaches, Parakeet) untouched.
 #
 # The agent runs as a bare detached process (python -m schedule_agent.agent start),
 # not a Windows service, so "restart" = stop it, then re-run the idempotent stack
@@ -50,7 +50,7 @@ if ($after) {
   Write-Host "Voice agent restarted (PIDs: $($after.ProcessId -join ', '))."
   # 8767 is Parakeet STT (primary). If it is not listening the agent still works
   # via the Whisper fallback, but it is worth seeing in the readout.
-  foreach ($port in @(7880, 8000, 8767, 11434)) {
+  foreach ($port in @(7880, 8000, 8767)) {
     $up = [bool](Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue)
     Write-Host ("  stack port {0} listening: {1}" -f $port, $up)
   }

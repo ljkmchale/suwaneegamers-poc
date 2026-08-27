@@ -5,9 +5,7 @@
   "vadActivationThreshold": 0.6,
   "minInterruptionDuration": 0.8,
   "minInterruptionWords": 3,
-  "ollamaTemperature": 0.3,
-  "ollamaTopP": 0.9,
   "updatedAt": "2026-08-07T15:10:11.833Z",
   "updatedBy": "autotune",
-  "note": "lowered interruption guard to 0.8s (interruptions near zero over 26 turns); recommendation: TTFT p95 is 12436ms even when warm — consider a smaller/faster OLLAMA_MODEL"
+  "note": "lowered interruption guard to 0.8s (interruptions near zero over 26 turns)"
 }

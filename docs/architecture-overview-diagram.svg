@@ -84,7 +84,7 @@
   <text x="995" y="678" class="detail">Uses current site context</text>
 
   <rect class="box" x="1190" y="540" width="160" height="88" fill="#ffffff" stroke="#64748b"/>
-  <text x="1270" y="578" class="label">Ollama</text>
+  <text x="1270" y="578" class="label">Claude</text>
   <text x="1270" y="606" class="detail">Local AI</text>
 
   <rect class="box" x="1190" y="670" width="160" height="88" fill="#ffffff" stroke="#64748b"/>

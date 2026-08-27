@@ -23,7 +23,7 @@ The machine-readable companion is `docs/architecture-contract.json`. If this gui
 | Main database | `content/suwaneegamers.db` | SQLite via `better-sqlite3` |
 | Scheduled rewrites | `scripts/content-scheduler.mjs` | Runs beside production Next.js |
 | Myra web client | `apps/web/components/livekit/ScheduleVoiceAssistant.tsx` | Requests `/api/livekit/token` |
-| Myra worker | `services/livekit-schedule-agent/src/schedule_agent/agent.py` | LiveKit 7880, Speaches 8000, Ollama 11434 |
+| Myra worker | `services/livekit-schedule-agent/src/schedule_agent/agent.py` | LiveKit 7880, Speaches 8000, Parakeet 8767, Claude (Anthropic API) |
 | Myra diagnostics | `apps/web/lib/myraHealth.ts` | `/api/myra/health/*` and `/admin/myra-health` |
 | Security enforcement | `apps/web/lib/securityLog.ts`, `apps/web/lib/cloudflareSecurity.ts` | `/admin/security` -> zone-scoped Cloudflare IP Access rules |
 | Production build | inactive `.next-prod-a` or `.next-prod-b` | active slot selected by `.next-prod-active.json` |
@@ -75,7 +75,7 @@ Before editing, identify every applicable row:
 | Image/media | stored URL, route handler, disk file, generator, optimizer | `pnpm images:audit-local` and exact asset HTTP content type |
 | Session audio | `session_summaries.audio_links`, cache file, audio sync, player | `pnpm audio:audit-local` and playable route |
 | Campaign content | `campaigns` table, campaign layout, archive layout, header/session/roster jobs | focused campaign/content-integrity tests |
-| Voice/Myra | client, token route, LiveKit, worker, Speaches, Ollama, analytics | token, room/worker, transcription, non-silent TTS, analytics separately |
+| Voice/Myra | client, token route, LiveKit, worker, Speaches, Claude (Anthropic), analytics | token, room/worker, transcription, non-silent TTS, analytics separately |
 | Production UI/code | source, inactive production slot, active pointer, NSSM process | distinctive live result on port 4652, not only HTTP 200 |
 | Security enforcement | proxy/login source, trusted Cloudflare headers, thresholds, provider rule id, admin recovery | focused security tests, configured-state UI, reversible provider operation |
 

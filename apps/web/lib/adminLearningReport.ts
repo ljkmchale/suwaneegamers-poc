@@ -56,7 +56,7 @@ export function gatherLearningReport(): LearningReport {
     tuning = {
       endpointing: `${t.minEndpointingDelay}-${t.maxEndpointingDelay}s wait before replying`,
       interruption: `interrupts after ${t.minInterruptionWords} words / ${t.minInterruptionDuration}s`,
-      llm: `temp ${t.ollamaTemperature}, top-p ${t.ollamaTopP}`,
+      llm: `Claude temp ${process.env.ANTHROPIC_TEMPERATURE ?? "0.3"}`,
     };
   } catch { /* leave defaults label */ }
 

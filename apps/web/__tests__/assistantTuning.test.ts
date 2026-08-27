@@ -18,9 +18,8 @@ const NO_SIGNAL: TuningSignals = {
 
 describe("clampTuning", () => {
   it("fills defaults and clamps out-of-range values into bounds", () => {
-    const t = clampTuning({ minEndpointingDelay: 99, ollamaTemperature: -5 });
+    const t = clampTuning({ minEndpointingDelay: 99 });
     expect(t.minEndpointingDelay).toBe(0.6); // ceiling
-    expect(t.ollamaTemperature).toBe(0); // floor
     expect(t.maxEndpointingDelay).toBe(TUNING_DEFAULTS.maxEndpointingDelay);
   });
 

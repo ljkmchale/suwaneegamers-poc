@@ -10,7 +10,7 @@ campaign's invented names than Whisper+vocabulary (it got "Basctdelm" and
 
 NeMo needs Python 3.12 and a large dependency tree, so it cannot live in the
 agent's 3.12+ venv cleanly and certainly not its 3.13 one. This runs as its own
-process — like Speaches and Ollama — and speaks an OpenAI-compatible
+process — like Speaches — and speaks an OpenAI-compatible
 transcription API so the agent's existing `openai.STT` plugin talks to it with
 no new client code: same `POST /v1/audio/transcriptions`, same `prompt` field.
 
@@ -23,8 +23,7 @@ per turn.
 
 GPU: the box masks the GPU globally with CUDA_VISIBLE_DEVICES=-1 to keep
 CTranslate2 (Speaches) off it. This service must be launched with an explicit
-per-process CUDA_VISIBLE_DEVICES=0, exactly like the Ollama launcher. See
-scripts/start-local-voice-stack.ps1.
+per-process CUDA_VISIBLE_DEVICES=0. See scripts/start-local-voice-stack.ps1.
 """
 
 from __future__ import annotations

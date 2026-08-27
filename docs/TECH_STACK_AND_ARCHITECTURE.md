@@ -39,7 +39,7 @@ voice behavior through LiveKit.
 | --- | --- |
 | Realtime rooms and audio | LiveKit |
 | Voice worker | Python 3.10+ and LiveKit Agents |
-| Language model | Local Ollama |
+| Language model | Claude Haiku 4.5 (Anthropic API) |
 | Speech recognition and synthesis | Local Speaches server |
 | Voice activity detection | LiveKit/Silero integration |
 | Python dependency management | `uv` |
@@ -72,7 +72,7 @@ flowchart TD
     Map["World map API"]
     LK["LiveKit server"]
     Agent["Myra Python worker"]
-    Ollama["Local Ollama"]
+    Claude["Claude Haiku (Anthropic API)"]
     Speech["Local Speaches STT/TTS"]
 
     Browser --> Edge --> Next
@@ -86,7 +86,7 @@ flowchart TD
     Browser <--> LK
     Next --> LK
     LK <--> Agent
-    Agent <--> Ollama
+    Agent <--> Claude
     Agent <--> Speech
     Next --> Agent
 ```
@@ -306,7 +306,7 @@ sequenceDiagram
     participant L as LiveKit
     participant M as Myra worker
     participant S as Speaches
-    participant O as Ollama
+    participant O as Claude (Anthropic)
 
     U->>W: Start Myra
     W->>W: Verify Google session
@@ -332,14 +332,14 @@ The token endpoint supplies the worker with:
 
 Schedule questions are answered from the dispatched calendar snapshot.
 Non-schedule questions are grounded on the compact assistant brain. The worker
-uses local Speaches for hearing and voice, and local Ollama for language-model
-reasoning.
+uses local Speaches for hearing and voice, and Claude Haiku (Anthropic API) for
+language-model reasoning.
 
 Default local service addresses are:
 
 - LiveKit: `ws://127.0.0.1:7880`
 - Speaches: `http://127.0.0.1:8000`
-- Ollama: `http://127.0.0.1:11434`
+- Parakeet STT: `http://127.0.0.1:8767`
 
 ## 11. Chronicles architecture
 
@@ -451,7 +451,7 @@ C:\EaselLocal\nssm.exe restart SuwaneeGamers
 | Missing calendar/session data | calendar feed, `session_summaries`, sync job runs |
 | Missing or stale image | rendered URL, public asset bytes, optimization/CDN cache |
 | Myra cannot hear | LiveKit room, worker, Speaches STT |
-| Myra cannot think | Ollama health/model, worker metadata |
+| Myra cannot think | Anthropic API reachability, `ANTHROPIC_API_KEY`, worker metadata |
 | Myra cannot speak | Speaches TTS and configured voice |
 | Scheduled content is stale | `content_sync_jobs`, `content_sync_runs`, scheduler logs |
 | Analytics mismatch | `analytics_sessions`, `analytics_events`, dashboard query |

@@ -22,8 +22,6 @@ export interface AssistantTuning {
   minInterruptionDuration: number;
   /** Minimum recognized words before an interruption counts (noise guard). */
   minInterruptionWords: number;
-  ollamaTemperature: number;
-  ollamaTopP: number;
   updatedAt: string;
   updatedBy: TuningSource;
   note: string;
@@ -47,8 +45,6 @@ export const TUNING_DEFAULTS: AssistantTuning = {
   vadActivationThreshold: 0.6,
   minInterruptionDuration: 1.2,
   minInterruptionWords: 3,
-  ollamaTemperature: 0.3,
-  ollamaTopP: 0.9,
   updatedAt: "",
   updatedBy: "default",
   note: "",
@@ -116,8 +112,6 @@ export function clampTuning(raw: Partial<AssistantTuning> | null | undefined): A
         TUNING_DEFAULTS.minInterruptionWords,
       ),
     ),
-    ollamaTemperature: round2(clampNumber(t.ollamaTemperature, 0, 1, TUNING_DEFAULTS.ollamaTemperature)),
-    ollamaTopP: round2(clampNumber(t.ollamaTopP, 0.1, 1, TUNING_DEFAULTS.ollamaTopP)),
     updatedAt: typeof t.updatedAt === "string" ? t.updatedAt : "",
     updatedBy: (["default", "autotune", "manual"] as const).includes(t.updatedBy as TuningSource)
       ? (t.updatedBy as TuningSource)
@@ -191,7 +185,7 @@ export function computeTuning(
   // --- Model recommendation (never auto-applied) ---
   if (signals.llmResponses >= 20 && signals.ttftP95Ms > VERY_SLOW_TTFT_P95_MS) {
     changes.push(
-      `recommendation: TTFT p95 is ${signals.ttftP95Ms}ms even when warm — consider a smaller/faster OLLAMA_MODEL`,
+      `recommendation: TTFT p95 is ${signals.ttftP95Ms}ms even when warm — check the Claude API path (network, model tier, ANTHROPIC_ATTEMPT_TIMEOUT)`,
     );
   }
 

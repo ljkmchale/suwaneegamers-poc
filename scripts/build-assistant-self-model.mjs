@@ -116,7 +116,6 @@ function buildAutoBlock() {
     if (t.minInterruptionWords != null) {
       parts.push(`interrupts after ${t.minInterruptionWords} words`);
     }
-    if (t.ollamaTemperature != null) parts.push(`temp ${t.ollamaTemperature}`);
     if (parts.length > 0) {
       lines.push(`- Current self-tuning (auto-tuned nightly): ${parts.join("; ")}.`);
     }
