@@ -24,44 +24,42 @@ async function main() {
     currentFileHashes[doc.relativePath] = hashContent(doc.body);
   }
 
-  // Load previous index so unchanged files can reuse their embeddings
-  let previousEmbeddings = new Map();
-  let previousFileHashes = {};
+  // Reuse embeddings by the hash of the EXACT text sent to the embedder
+  // (renderChunkForEmbedding — title/campaign/heading/path/body). Identical input
+  // always yields the same vector, so any prior index that stored {text, metadata,
+  // embedding} lets us skip re-embedding unchanged chunks — reconstructing the
+  // render string from each prior item.
+  //
+  // The previous logic keyed reuse on a per-file `fileHashes` map that older
+  // indexes never stored, so reuse was silently 0 and every rebuild re-embedded
+  // all 7000+ chunks. With a 6s delay between 16-chunk batches that is ~40 min,
+  // which overran the nightly job's 20-min timeout — so the index could never
+  // refresh and went stale for months. Content-hash reuse fixes both: the catch-up
+  // rebuild reuses everything unchanged and only embeds genuinely new chunks.
+  const previousByRender = new Map();
 
   if (await hasIndex()) {
     const prevIndex = await loadIndex();
     if (prevIndex.embedModel === config.embedModel) {
-      previousFileHashes = prevIndex.fileHashes ?? {};
       for (const item of prevIndex.items) {
-        // Key by path+heading+chunkIndex (all stored in metadata) so the lookup
-        // matches regardless of how stableId transforms the raw chunk id.
-        const key = `${item.metadata.path}#${item.metadata.heading}#${item.metadata.chunkIndex}`;
-        previousEmbeddings.set(key, item.embedding);
+        if (item.text && Array.isArray(item.embedding)) {
+          previousByRender.set(hashContent(renderChunkForEmbedding(item)), item.embedding);
+        }
       }
-      const unchangedCount = Object.keys(previousFileHashes).filter(
-        (f) => previousFileHashes[f] === currentFileHashes[f]
-      ).length;
-      console.log(`Previous index: ${prevIndex.chunkCount} chunks, ${unchangedCount} files unchanged.`);
+      console.log(`Previous index: ${prevIndex.items.length} chunks available for reuse.`);
     } else {
       console.log(`Embed model changed (${prevIndex.embedModel} → ${config.embedModel}), full reindex.`);
     }
   }
 
-  // Split chunks into reuse (file hash unchanged) vs embed (new or changed)
+  // Split chunks into reuse (identical embedding input seen before) vs embed (new).
   const embeddings = new Array(chunks.length).fill(null);
   const toEmbedIndices = [];
 
   for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i];
-    const filePath = chunk.metadata.path;
-    const key = `${chunk.metadata.path}#${chunk.metadata.heading}#${chunk.metadata.chunkIndex}`;
-    const prevEmbedding = previousEmbeddings.get(key);
-
-    if (prevEmbedding && previousFileHashes[filePath] === currentFileHashes[filePath]) {
-      embeddings[i] = prevEmbedding;
-    } else {
-      toEmbedIndices.push(i);
-    }
+    const reused = previousByRender.get(hashContent(renderChunkForEmbedding(chunks[i])));
+    if (reused) embeddings[i] = reused;
+    else toEmbedIndices.push(i);
   }
 
   const reuseCount = chunks.length - toEmbedIndices.length;
