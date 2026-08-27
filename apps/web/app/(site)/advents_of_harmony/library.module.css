@@ -45,8 +45,8 @@
 @media(max-width:620px){.cabinets{display:grid;aspect-ratio:3/2;grid-template-columns:minmax(0,.79fr) minmax(0,1fr) minmax(0,.79fr);padding:0 6.75%;gap:4.45%}.cabinetBay{margin:0}.booksOnShelf{inset:2% 1% 0}.fillerBook,.realBook{--spine-width:clamp(7px,2.5vw,18px)!important}.spineTitle,.spineMark{display:none}}
 .importantBook{--spine-width:40px}
 
-/* A leaf is a fixed typesetting surface, never a scroll container. */
-.page{overflow:hidden}
+/* Keep every word reachable even when a font or viewport needs more room than pagination predicted. */
+.page{overflow-x:hidden;overflow-y:auto;scrollbar-color:#9e712d66 transparent;scrollbar-width:thin}
 .page>p{margin:0 0 .72em}
 .titlePage>p:first-letter{float:none;font:inherit;color:inherit;padding:0;text-shadow:none}
 

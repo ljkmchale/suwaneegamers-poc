@@ -151,7 +151,7 @@ function paginateSource(markdown: string, bookTitle: string): string[] {
   let pageParts: string[] = [];
   let pageLength = 0;
   for (const paragraph of paragraphs) {
-    if (pageParts.length && (pageLength + paragraph.length > 430 || pageParts.length >= 5)) {
+    if (pageParts.length && (pageLength + paragraph.length > 320 || pageParts.length >= 4)) {
       pages.push(pageParts.join("\n"));
       pageParts = [paragraph];
       pageLength = paragraph.length;

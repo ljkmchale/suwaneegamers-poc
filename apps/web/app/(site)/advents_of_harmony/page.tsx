@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
-import { readContent } from "@/lib/contentFiles";
 import { getCampaignJourneys } from "@/lib/campaignJourneys";
+import { getActiveCampaigns } from "@/lib/campaigns";
 import { getGazetteerEntries } from "@/lib/gazetteer";
 import { getOldPantheonDeities, getPantheonDeities } from "@/lib/pantheon";
 import type { PageEntry } from "@/lib/brain/vector-store";
 import { loadLibraryCatalog } from "@/lib/brain/library-catalog";
 import { LibraryExperience, type LibraryBook } from "./LibraryExperience";
+import { uniqueBooks } from "./libraryBooks";
 
 export const metadata: Metadata = {
   title: "Advents of Harmony — Knowledge & Lore",
   description: "Explore the collected campaigns, histories, gods, places, and lore of Myrdae.",
-};
-
-type CampaignRecord = {
-  id: string;
-  name: string;
-  description?: string;
-  headerImage?: string;
-  dm?: string;
-  sessionSummaries?: Array<{ title?: string; summary?: string }>;
 };
 
 function pages(...values: Array<string | null | undefined>): string[] {
@@ -26,7 +18,9 @@ function pages(...values: Array<string | null | undefined>): string[] {
 }
 
 export default async function AdventsOfHarmonyPage() {
-  const campaigns = readContent<CampaignRecord[]>("campaigns.json");
+  // Campaign books must use the normalized campaign/session tables. The
+  // campaigns.json content document can lag behind newly posted sessions.
+  const campaigns = getActiveCampaigns();
   const journeys = getCampaignJourneys();
   const [deities, oldGods, chroniclesBooks] = await Promise.all([getPantheonDeities(), getOldPantheonDeities(), getChroniclesBooks()]);
   const places = getGazetteerEntries();
@@ -131,10 +125,6 @@ async function getChroniclesBooks(): Promise<{ adventure: LibraryBook[]; world: 
   } catch {
     return { adventure: [], world: [] };
   }
-}
-
-function uniqueBooks(books: LibraryBook[]): LibraryBook[] {
-  return [...new Map(books.map((book) => [`${book.collection === "Chronicles Archive" || book.collection === "Campaign Chronicles" ? "adventure" : "world"}:${normalizeTitle(book.title)}`, book])).values()];
 }
 
 function attachRelatedSources(books: LibraryBook[], archiveBooks: LibraryBook[]): LibraryBook[] {

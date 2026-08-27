@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { uniqueBooks } from "@/app/(site)/advents_of_harmony/libraryBooks";
 
 const routeDir = path.join(process.cwd(), "app", "(site)", "advents_of_harmony");
 
@@ -68,11 +69,45 @@ describe("Advents of Harmony library", () => {
 
   it("does not truncate campaign histories in their library volumes", () => {
     const page = fs.readFileSync(path.join(routeDir, "page.tsx"), "utf8");
+    const css = fs.readFileSync(path.join(routeDir, "library.module.css"), "utf8");
     expect(page).not.toContain("sessionSummaries?.slice(0, 2)");
     expect(page).not.toContain("journey.stops.slice(0, 4)");
+    expect(page).toContain('import { getActiveCampaigns } from "@/lib/campaigns"');
+    expect(page).toContain("const campaigns = getActiveCampaigns()");
+    expect(page).not.toContain('readContent<CampaignRecord[]>("campaigns.json")');
     expect(page).toContain("attachRelatedSources");
     expect(page).toContain("sourceByTitle");
     expect(page).toContain("preferredSourcePath ?? page.path");
+    expect(css).toContain(".page{overflow-x:hidden;overflow-y:auto");
+    expect(css).not.toContain(".page{overflow:hidden}");
+  });
+
+  it("keeps curated artwork and text when an archive title matches", () => {
+    const [book] = uniqueBooks([
+      {
+        id: "place-adsuren",
+        title: "Adsuren",
+        subtitle: "Capital city",
+        collection: "Atlas & Gazetteer",
+        color: "#123456",
+        image: "/media/images/locations/adsuren.webp",
+        pages: ["Complete Gazetteer text"],
+      },
+      {
+        id: "chronicles-wiki-adsuren",
+        title: "Adsuren",
+        subtitle: "World archive",
+        collection: "World Archive",
+        color: "#654321",
+        image: "/media/images/maps-of-myrdae/locations-map.webp",
+        pages: [],
+        sourcePath: "wiki/locations/adsuren.md",
+      },
+    ]);
+
+    expect(book.image).toBe("/media/images/locations/adsuren.webp");
+    expect(book.pages).toEqual(["Complete Gazetteer text"]);
+    expect(book.sourcePath).toBe("wiki/locations/adsuren.md");
   });
 
   it("uses immersive shelves instead of a catalog or checkout grid", () => {
