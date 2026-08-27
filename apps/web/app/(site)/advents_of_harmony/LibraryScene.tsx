@@ -227,7 +227,7 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       video.pause();
       video.currentTime = 0;
     }
-    setEntranceState("revealing");
+    setEntranceState("inside");
   }
   function leaveLibrary() {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -273,7 +273,7 @@ export function LibraryScene({ books, onSelect }: { books: LibraryBook[]; onSele
       <button type="button" className={styles.enterLibrary} onClick={openEntrance} tabIndex={entranceState === "closed" ? 0 : -1}>
         <span>✦</span> Open the doors <span>✦</span>
       </button>
-      {entranceState === "opening" && <button type="button" className={styles.skipEntrance} onClick={skipEntrance}>Skip intro</button>}
+      {(entranceState === "closed" || entranceState === "opening") && <button type="button" className={styles.skipEntrance} onClick={skipEntrance}>Skip intro</button>}
     </section>
     <div className={`${styles.libraryInterior} ${insideLibrary ? styles.interiorRevealed : ""}`} id="grand-library-collection">
       {entranceState === "inside" && <button type="button" className={styles.returnToEntrance} onClick={leaveLibrary}><span aria-hidden="true">✦</span> Exit the Library <span aria-hidden="true">✦</span></button>}
