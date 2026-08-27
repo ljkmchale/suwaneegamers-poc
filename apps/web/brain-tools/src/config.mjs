@@ -1,5 +1,18 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadDotEnv } from "./env.mjs";
+
+// Load brain-tools/.env HERE, before any path constant below is computed.
+// ES modules evaluate an imported module fully the first time it is imported,
+// and imports are hoisted above body code — so an entry point like
+// refresh-sources.mjs that calls loadDotEnv() in its body runs it AFTER this
+// module has already frozen vaultRoot from an unset BRAIN_VAULT_ROOT. That made
+// writes target apps/web/raw (which doesn't exist) instead of the vault, so every
+// Google Doc pull failed with ENOENT and the index silently went stale. Loading
+// the env here guarantees BRAIN_VAULT_ROOT / BRAIN_DATA_DIR / BRAIN_INDEX_PATH
+// are applied no matter which script imports config first. loadDotEnv only fills
+// vars that are still undefined, so a real process env still wins.
+loadDotEnv();
 
 const srcDir = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(srcDir, "..");
