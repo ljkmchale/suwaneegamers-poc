@@ -36,11 +36,11 @@ voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
 <!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
-<!-- last generated 2026-08-27T12:51:42.071Z -->
+<!-- last generated 2026-08-27T14:53:44.946Z -->
 
 ## Systems detail (admin)
 
-- App: version 0.1.0 (commit 496e315). Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
+- App: version 0.1.0. Next.js, served in production by the NSSM service SuwaneeGamers on port 4652 from an A/B slot; dev runs on port 3000
 - Models:
   - Speech-to-text: NeMo Parakeet on the GPU (local faster-whisper on CPU as fallback)
   - Language model: Claude Haiku 4.5 (no local fallback; an API outage degrades to deterministic schedule and lookup answers)

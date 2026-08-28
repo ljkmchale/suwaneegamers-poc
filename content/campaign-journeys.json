@@ -2807,7 +2807,7 @@
           "y": 60.92,
           "session": "Session 30",
           "title": "We Don’t Like Wizards",
-          "summary": "At the Riverdog Inn in Ulgrey, the party encountered a Meridian soldier and the wizard Thalex who they spent a little time getting to know before offering aid to Basctdelm. Shanna provided Phira’s abandoned pack and Og recognized the Gilded Vultures from his mercenary past while Ainslie infiltrated Paeris’s tower only to be knocked out by cake after Zabeek had revealed some of their secrets. Some members experienced vivid dreams before the morning of the third of Paramor and the magical cat Tatters provided his collar as a gift. They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore.…",
+          "summary": "At the Riverdog Inn in Ulgrey, the party encountered a Meridian soldier and the wizard Thaelex who they spent a little time getting to know before offering aid to Basctdelm. Shanna provided Phira’s abandoned pack and Og recognized the Gilded Vultures from his mercenary past while Ainslie infiltrated Paeris’s tower only to be knocked out by cake after Zabeek had revealed some of their secrets. Some members experienced vivid dreams before the morning of the third of Paramor and the magical cat Tatters provided his collar as a gift. They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore.…",
           "impact": {
             "type": "arcane",
             "title": "Arcane consequences at Ulgrey",
@@ -2820,7 +2820,7 @@
             "points": []
           },
           "sourceKey": "heroes-of-emberstran:session-30",
-          "sourceHash": "24547b0007206ef58401ef5dc3b441cd70e84c9d2f9b1ab0a3a75ca7b1d3b311",
+          "sourceHash": "cfa99bff995d347209a8bb65edb9154c89d60314ae7c4e0333b5100e72da6a60",
           "current": false
         },
         {
@@ -3500,7 +3500,7 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-08-25T14:50:55.097Z",
+    "lastGeneratedAt": "2026-08-27T14:50:45.465Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
     "generatedStops": 113,

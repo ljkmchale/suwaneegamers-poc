@@ -1,31 +1,7 @@
----
-title: "Bloody Endeavor - Campaign Player Notes"
-campaign: "Bloody Endeavor"
-visibility: players
-tags: [source, google-doc, player-notes]
-source_raw: "raw/bloody-endeavor-campaign-player-notes.md"
-source_url: "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit"
-source_hash: "88c2b60dab68015a11a21107caaf835cd267f0c25e038367e84bdc9596437b51"
-source_status: processed
-raw_status_before_import: "stale"
-imported_at: "2026-08-27T13:46:52.535Z"
-pulled_at: "2026-08-27T13:46:45.061Z"
----
-
-# Bloody Endeavor - Campaign Player Notes
-
-Campaign: Bloody Endeavor
-Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
-Raw source: [[raw/bloody-endeavor-campaign-player-notes.md]]
-Raw hash: `88c2b60dab68015a11a21107caaf835cd267f0c25e038367e84bdc9596437b51`
-Imported: 2026-08-27T13:46:52.535Z
-
-## Imported Notes
-
 # Bloody Endeavor - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
-Pulled: 2026-08-27T13:46:45.061Z
+Pulled: 2026-06-16T14:00:14.824Z
 
 🫅 Players
 Players
@@ -64,7 +40,7 @@ Players
 	15 (18)
 	18 (20)
 	15
-	17(20)
+	19(21)
 	Perception
 	11
 	15
@@ -125,35 +101,30 @@ Sylvan
 
 	Muerg
 	Magic Items
-	Tome of Leadership 
-Bowl of Commanding Water Elementals
-Leather +1
+	Leather +1
 Ring of Warmth (a)
 Luckstone (a)
 	Necklace of Prayer Beads (a)
 Gem of Brightness
 Pearl of Power (a)
 +1 Shield
-Bag of Holding*
-	Kretopulus The Broken Blade (a)
-Amulet of Health (a)
+	Amulet of Health (a)
 Ring of Protection (a)
 Periapt of Wound (a)
-Scimitar +2
-	Staff of Frost (a)
-Boots of Levitation (a)
+Vicious Shortsword
+	Boots of Levitation (a)
 Medallion of Thoughts (a)
 	Rune of Sennogin (a)
 OrcReaver (a)
 ½ Plate of Nec.Res. (a)
 Returning Pitchfork
+Thornfeeder
 Mabel’s Monocle
 +1 Shield
-
-
+Clawed Glove
 	Alive
-	* 	* 	* 	* 	* 	Party Inventory Magic Items:
-Bag of Holding, Thornfeeder, Clawed Glove
+	* 	* 	* 	* 	* 	
+
 📜 Sessions
 01 - Prisoners
 Session Date:  September 9, 2024
@@ -2175,187 +2146,6 @@ INITIATIVE – Combat vs Hand of the Cold Breath and a summoned Translucent Brot
          * ROUND FOUR:  We move over, Lucerion uses Channel Divinity to increase his Athletics and pull Albross up.
 We take piece 1 of the snowflake amulet and attach it.  The Hand had a tome.  We went to the last building that the Icy Sow is in and we found the Sacred Crows had gotten there.
 – The Session Ends Here – 
-38 - Just the Tip
-Session Date:  June 22nd, 2026
-In-game Date:  22nd of Paramor, 1246
-Starting Location:  Iohir Monastery
-Iohir Monastery 
-We proceed to the building where we believe the Icy Sow to be in, and we hear the sound of fighting; we presume it's the Sacred Crows and the monks fighting.  Rhody kicks the door in.  We notice most of the Sacred Crows are covered in blood, with a pile of dead monks.  We enter at the last moment of the battle, with the Sacred Crows having won the fight.  We catch up with Sacred Crows and get the last piece of the necklace we need.  The room is full of weapons and sparring rings.  
-We find a magical scimitar (+2) that Lucerion takes.  We find out that Pagern’s staff is a Staff of Frost.
-Beneath the Monastery
-We put the necklace together, hit the bell and a 15 foot wide pit with stairs that spiral along the wall.  Albross turns invisible and scouts ahead.  The pit descends 100 feet.  The floor is ice.  There is a long dark hallway and a statue in a monk pose holding unlit lanterns in each hand.  We head down the stairs with care, as it’s getting slippery.  The hallway is 50 feet before we get to the monk. Lucerion and Rhody lead the way as we go down the hall. 
-We move down the hallway.  The walls are covered with about a foot of ice.  The floor has crushed ice where there are footprints.  As we get close to the lanterns, they light up with blue light.  We find the statue is standing at a fork, with a hallway going left and one going right.  The Sacred Crows go left and we go right.  As we pass the statue, the lanterns snuff out and a cold wind rushes through us.  The hallway behind us, up to the statue, is filled with ice.  We move forward.
-Room of Detachment
-Ahead, a room opens up to a 50 feet room and a large still pool, being fed by a waterfall on the other side of the room.  There is a tunnel off to the left, about 15 feet or 20 feet away from where we enter.  There is a flat stone rock near the center edge of the pool.  It appears to be a bundle of twigs with berries on it.  The pool is about 5 to 10 feet deep.  Caelion feels a sense of comfort, and he notices writing behind the fall that says “Detach yourself from attachments to be at peace”.  The stone is sacrificing for a boon.  Pagern gives and gets a short rest.  Caelion gives all his money (40p, 1369g, 2234s, 89c) and gets the benefits of a long rest.
-The Room of Bells
-The hallway leading out heads down a hallway to a large square room.  There is debris, stones, ice, dead snakes, etc.  There are bells in each corner. There is a large archway on the wall to the left.  Rhody checks for traps and things feel off.  Pagern floats up to the bell and notices runes that nobody can read.  Lucerion piles up the snakes in the far corner and heads to the archway.  Lucerion pushes his hand through and it closes with stone, blocking the path.  Stone also blocks the other path.  Things get tense and it’s Initiative.
-         * ROUND 1:  Caelion sprouts wings and flies up. We all take damage; different types.  Albross picks up a rock and takes damage.  Rhody runs to stand under a bell that is giving off greenish light.  Pagern shoots a firebolt at the bell that is glowing light blue.  Lucerion moves to the bell glowing slightly red.
-         * ROUND 2:  Caelion moves to the red bell too and tries to dong the bell.  We run around doing damage to the bells
-         * ROUND 3:  More of the same … need to hit the bells with the type of damage they do.  Albross gets the last one.
-The doors open.  Caelion heals us with Mass Healing Word.  We head down the hallway past the arch.  The hallway curves.  We see a shadowy mound sitting in the middle of the hallway.  Rhody notices the mound moving in a pulsing way.  We move up and see a large black fox with a saddle.  Rhody starts talking to the fox.  The fox reveals that he’s the mount of the Coldbreath.  The fox is named Dearth.  We attack the fox.
-         * ROUND 1:  The fox charges and hits Rhody and Lucerion, knocking us prone. Rhody attacks, hitting once.  Caelion heals Lucerion and attacks with necrotic damage.  Alboss hits with Edritch Blast, knocking him back.  Lucerion drinks his potion of Giant Strength and attacks, hitting three times.  Pagern hits with a Fire Bolt.
-         * ROUND 2:  The fox claws and bites Lucerion, double Critical Hitting, and dropping Lucerion to the ground (with zero hitpoints).  Rhody attacks and hits.  Caelion heals Lucerion and uses Sacred Flame to hit the fox.  Pagern drops the fox.
-The fox died in ichor. We proceed down the hall. We enter a room that I can’t hardly describe. The room is about 100 feet across, a natural circular room.  At the top is a statue of monk arms holding two large saucers held by chains from the arms. There is a wind bridge leading to the first saucer. We move to the first saucer.  Coldbreath is far across and makes some claim about taking over the world with cold.  We attacked him.
-         * ROUND 1:  He grabs the Rimestone and unfreezes the plates, making them seem like we are on scales.  He moves to the opposite plate.  Albross drinks a potion of flying, moves to the side and fumbles an Eldritch Blast.  The plate the party is on drops 30 feet down.  Pagern levitates and casts Wall of Fire around Coldbreath.  Lucerion and Rhody hold their attack.  Caelion casts Freedom of Movement and tries to climb the chain but falls.
-         * ROUND 2:  Huldi (Coldbreath) escapes the ring of fire. He hurls a blade of ice at Albross, hitting.  Albross shoots Eldritch Blasts, hitting.  The plates drop, dropping 30 feet and being colder.  Pagern casts Fireball.  Huldi throws an Ice Blade at Albross.  Lucerion casts Haste and climbs the chain.  Rhody uses a potion of Gaseous Form.
-         * ROUND 3:  Huldi uses the Rimestone to attack Albross, but misses.  Albross summons a Celestial defender next to Huldi.  The celestial attacks Huldi, who parries the blow.  Pagern levitates and casts Chromatic Orb and misses.  Huldi hits the Celestial, killing it.  Lucerion climbs up and moves across the arms towards the other platform.  Caelion climbs the chain he is on.  Huldi throws and ice blade at Albross and hits.  Albross moves and uses Eldritch Blast, and Huldi deflects.  Pagern shoots a Firebolt.  Lucerion climbs down a hits once.  Rhody moved.  Huldi hits Lucerion.  
-         * ROUND 4:  Huldi moves around and freezes Lucerion.  Albross misses with Eldritch Blast.  Huldi backhands Lucerion. The other plateau moves up.  Albross, who moved close to the walls, is affected by tendrils that emerge from the far wall as a floating mass of tendrils with eyes (similar to a Beholder without a central eye).  Pagern shoots Huldi with a Firebold.  Lucerion breaks free of the paralysis.  Rhody casts Hunters Mark on Huldi and attacks.  Caleion climbs on the arms holding the chain, heals Lucerion with Healing Word and hits Huldi with Sacred Flame.
-         * ROUND 5:  Cone of Cold was cast from Huldi’s Rimestone, damaging Pagern and Rhody.  The plateaus shift.  The Eldritch Horror  attacks.  Lucerion Crits and uses Divine Smite.  Huldi grabs Lucerion’s Vicious Shortsword, striking the blade.  Rhody hits.  Huldi goes after Lucerion’s blade and beats on it.  Caelion moves towards Pagern and heals him, but takes damage from the curse.  Huldi strikes the Vicious Blade and breaks it.  
-         * ROUND 6:  Huldi reaches out at Rhody and hits.  Albross Critical Fails.  The plateau drops.  The Eldritch Horror attacks, beams fly.  Pagern banishes the Eldritch Horror.  Lucerion hits a couple of times.  Huldi hits Rhody.  Rhody drops a Hunter’s Mark and then Critically Hits Huldi, and comes across with another hit.  Huldi hits Rhody, dropping Rhody.  Caelion heals himself.    He hits Lucerion.
-         * ROUND 7:  Huldi hits Lucerion again and again and again.  He punches Rhody while he’s down and hits.  He misses Lucerion while Lucerion.  Albross attacks and falls down to our plateau.  Pagern moves forward and kills Huldi.  Lucerion losses his turn being stunned
-         * ROUND 8: We move around. Albross and Rhody are down. The cold bites at the 3 on the lower platform as The Sacred Crows arrive through the other entrance. Lucerion finds out Rhody is dead and moves to give Albross 1 hit point. Caelion shouts down to the bottom, telling everyone to stay on the platform. 
-         * Round 9: The platform rises 45 feet. The Sacred Crows move to the edge of the platform ready to follow directions. Lucerion runs and grabs the Rimestone.                                        
-         * Round 10: the platform rises another 45 feet, leaving the cold wind. Caelion rushes to cast revivify on Rhody
-
-
-– The Session Ends Here – 
-39 - Why'd You Want To Hit Me With A Slushball, Man?
-Session Date:  July 13th, 2026
-In-game Date:  22nd of Paramor, 1246
-Starting Location:  Iohir Monastery
-Iohir Monastery 
-Caelion asks the Crows if they can revive Rhody, but they decline. Caelion casts Revivify on Rhody, bringing Rhody back up. Rhody wakes up and sees Lucerion and Caelion. Caelion also casts Mass Healing Word, healing the party up. Pagern has his staff identified by Armaros the Wizard, revealing that it’s a Staff of Frost. His book is also identified as a Tome of Leadership and Influence. Lucerion attempts to break the Rimestone with his bare hands, but he’s unsuccessful. It’s freezing to the touch, so Lucerion puts it into his bag. The two parties leave via the route that the Sacred Crows took. It mirrors the route that Wyrm’s Bane took. There are freezing cold winds in one room, indentations of giants in the walls, and one room full of ice. They arrive at the main hall with the wall of ice gone. 
-Back in Khagdaruhl
-They make their way out towards Khagdaruhl via the teleportation circle. They enter the great hall and are escorted to the Lord Emperor’s throne room. The Rimestone is covering everything around them in frost. The Lord Emperor agrees to smash the Rimestone and place the pieces back. Lucerion is given a new sword from a guard. Purple blood and ichor cover the walls, Khagdaruhl has been under attack. A duergar knight volunteered to let his home be used by Wyrm’s Bane and the Sacred Crows, and they get a long rest. Pagern gives Albross the Tome of Leadership and Influence. 
-We are not summoned on the first day. Lucerion and Caelion go to the gem shop to buy diamonds, then visit the blacksmith to check on his armor (it’s a work in progress). Albross goes to the weaponsmith to see if Lucerion’s vicious weapon could be reforged. The Weaponsmith recommends going to the Great Forge. Pagern and Rhody visit the magic component shop. Rhody asks for a component for the Summon Fey spell, and pays for it in advance to get it the next day. Pagern orders some paper and ink for spell scribing. Albross goes to the Great Forge, where he sees a massive black anvil the size of his daddy’s covered wagon. He asks forge master Hultgrum to repair Lucerion’s sword as he’s currently working on an axe. He provides the weapon to him, and the forge master lets him know it would take time. He describes a magic sword that was destroyed and his goal of restoring it to its former glory, though he only has the hilt currently. The silver hilt is wrapped in red leather, with what remains of the blade being black. It’s the sword of the Orc Flayer who slayed Orcs which paired with Orc Reaver. Holtgrum says the name of the sword is Kretopulus. 
-It’s the 24th of Paramor
-Albross returns and lets the party know about what the Blacksmith said. They get the pieces and agree to take them to Hultgrum tomorrow. We get a long rest, and split up to get our things. Pagern and Rhody go to the magic shop to get their components, Caelion and Albross go to the great forge to show off the pieces of the sword. Caelion pulls the pieces out and Hultgrum immediately recognizes them as authentic, putting them together. Caelion asks about the sword, Hultgrum says it was the Flayer’s primary weapon that was used to slay thousands of orcs. Caelion asks to hold on to the pieces, Hultgrum offers that Caelion leave the pieces here so he can repair what he does have. Caelion agrees, leaving the shards with him and asking the forgemaster to spread word of this action. Hultgrum begins the work of repairing Kretopulus.
-Later that night, Armaros speaks with Pagern about the Rimestone. He lets Wyrm’s Bane know about the blizzard around the Foothills. Pagern goes to cast Identify. It is the strongest magical item he’s ever identified, with multiple schools of magic sensed. He also sensed that the attunement process is incredibly dangerous. Pagern casts Divination to see if attuning to it would be the correct move. He receives a vision of him standing with the Rimestone, and making a blizzard using it then removing it. Pagern hands Lucerion the Rimestone, and he begins attuning to it. His red hand starts turning pitch black like frostbite, but is able to successfully attune to it. Lucerion emits a cold aura that snuffs out flames. He performs a ritual with the Rimestone, as we all wait to see what happens. 
-We debate whether or not to get the Rimestone to the Lord Emperor. Pagern identifies the scroll case and sees there is intense abjuration magic defending. We realize there are invisible roots growing around everything. We bring the Rimestone to the great hall and show the captain of the guard the invisible roots. We enter the Throne Room and see the armorsmith Moltenfist with his completed Plate Armor, which he gives to him. The Lord Emperor explains that if the pedestal and the Rimestone is placed closer to Zyvic’Noc, it’ll help keep the eldritch threat contained. The throne is moved and we make our way down again.
-Lucerion pauses to perform another ritual with the Rimestone. Wyrm’s Bane sees Albross’s brother through the Rimestone, he seems to be in Gevakaln but he’s ok. We continue down, seeing all the golems that have broken out of the ice. Fortunately they were on standby mode and were not aggressive. We move past them, and go down to see the ancient dwarven city, revealed by the melted ice. We continue down the room to where the aberration was. We see that there are drag marks from where the pedestal once was, towards where the creature was. We see 3 dead dwarves. Every couple of feet as we continue forward we walk over dead dwarves,  noticing cuts and holes around their bodies, blood coming out of their bodies. Invisible roots continue to writhe around in the dead bodies. We hear creepy whispering. Albross goes invisible and sneaks ahead, with a flaming golem going up ahead with him. He feels an energy approaching, as suddenly the whispering becomes screaming in his head. Albross and Rhody feel brain splitting pain, Lucerion suddenly can’t see anyone else, Caelion’s perspective from his right eye becomes Rhody’s perspective. Lucerion goes charging down the hallway, running 600 feet. We notice a large 50 foot long stone bridge overlooking a stone chasm. On the other end of the bridge we see what looks like a large igloo. Down at the bottom of the pit are old skeletons  that seem like they were running from the igloo when they fell in. 
-Suddenly Lucerion starts casting spells (Detect Magic, Divine Favor and Cure Wounds), Rhody casts Cure Wounds, Cure Wounds, Hunter’s Mark, Charm Person, Cure Wounds, then Misty Step, which sends him off the edge into the spikes. Albross casts Cure Wounds on himself multiple times. Caelion casts Shield of Faith, Command, and Guiding Bolt. We move on to the other side of the bridge, Albross attempts to recover using magical cunning, though its difficult with Lucerion dragging him along. We walk forward slowly, passing by dwarven bodies. Everything around us is made of ice. A few hundred feet ahead of us we see a dome like area.
- Inside we see a tipped over pedestal and a lot of dead dwarves. We see a large insectoid creature, about 12 ft tall, with branch-like features. It makes clicking noises while holding a body. Pagern goes to cast detect thoughts, but feels as if his thoughts are shielded until the creature looks at him and communicates with him mentally. He says we’ve been corrupted by his master and sees a flowerpot with a large eyeball, though the creature says he’s all around him with the roots. He introduces himself as Admiral Xezev from the Astral Plane. He’s curious how such a powerful creature was frozen, and says his master wants it free. 
-Lucerion sets the pedestal upright and Xezev tells him to place the Rimestone. Xezev goes to cast a spell on Lucerion and we roll initiative. 
-         * ROUND 1: Xezev attempts to modify Lucerion’s memory but fails. He swings at Lucerion and Rhody trying to grab them, and grabs Lucerion with a critical hit. Caelion casts Dust of Suleiman, Albross gets grappled and misses a chill touch. Rhody strikes with Orc Reaver, and Pagern attempts to cast Banishment but it fails. Lucerion uses the Rimestone to cast Wall of Ice, forcing the creature into the middle
-         * ROUND 2: Xezev attacks Albross and Lucerion, then hits Albross with a psychic branch attack. He then vanishes from their view. Caelion maintains concentration on his spell. Albross drinks a potion, Rhody summons a Fey Spirit that looks like a Fowl.
-         *  ROUND 3: Lucerion attacks Albross, possessed by the creature. Albross uses Hellish Rebuke, causing Lucerion to drop the Wall of Ice. Caelion casts Mass Healing Word, raising Albross. Albross casts darkness and runs out, claiming Lucerion is possessed. Rhody holds an attack for when things become clearer. Pagern holds his attack. Possessed Lucerion runs out and says we simply have to end the possession on Albross and fix the pedestal.
-         * ROUND 4: Caelion tries to figure out who’s possessed, but can’t tell.  Rhody approaches Albross, to grapple him, thinking he’s possessed.  Rhody got hurt by Albross’ armor.  Rhody then moves to Lucerion to grapple him to start tying him up.  Albross says “Read our thoughts to know who’s real”.  Albross then takes the Dodge action.  Pagern casts Detect Thoughts to sense the thoughts.  Lucerion is still possessed and holds his action for Cone of Cold
-         * ROUND 5:  Caelion takes the Dodge action.  Rhody moves Lucerion and the Cone of Cold goes off, hitting Caelion and Pagern.  Rhody’s fey creature hits Lucerion.  Albross moves into the sphere of darkness and casts Eldritch Blast, missing Lucerion.  Pagern casts Fireball, focusing on hitting Lucerion.  Lucerion Lays on Hands and then activates the Rimestone to Conjure Elemental
-         * ROUND 6:  Caelion casts Mass Healing Word to heal Pagern, Rhody and the fey creature.  Caelion then moves down the hall.  Albross moves to the wall to unfreeze the ice wall and fill his water elemental summoning.  Pagern casts Dispel Magic to disrupt the Conjure Elemental spell.  Lucerion moves up to Rhody and tries to hit with the Rimestone.
-         * ROUND 7:  Caelion asks Albross to drop the Darkness Sphere.  Albross casts firebolt to get water for his Conjure Water Elementals basin.  Rhody hits Lucerion as does his fey creature.  Pagern casts Fireball to hit Lucerion. Lucerion goes down and the Admiral reappears above his body.
-– The Session Ends Here – 
-9
-	Character level at end of the session
-	3
-	Sessions played at that level
-	40 - The Zeroes of Khagdaruhl
-Session Date:  July 20th, 2026
-In-game Date:  24th of Paramor, 1246
-Starting Location:  Khagdaruhl
-Beneath the Throneroom 
-Lucerion feels the power of Death Ward and pops up.
-Lucerion is in the Admiral’s body, surrounded by a blood red molasses type substance.  I feel the presence of Natafe. A hand pulls Lucerion out of the substance into open space, floating around. He sticks his head in and the walls start closing in. Black teeth form and go to bite down, but Lucerion snaps back to reality. 
-We pick up with the fight against Admiral Xezev.
-         * ROUND 7 (cont.):  Lucerion grabs his scimitar and stands up, casting Cure Wounds.
-         * ROUND 8:  Xezev reaches out and attacks Rhody.  Rhody is Grappled.  Caelion casts Guiding Bolt on Admiral Xezev.  Rhody hits Admiral Xezev with Orc-cleaver twice, Critically Hitting once.  Albross hits with an Eldritch Blast.  Pagern moves up, using Misty Step to get in range and fires Firebolt, hitting Admiral Xezev.  Lucerion stands up the pedestal.  
-         * ROUND 9:  Admiral Xezev pinches Rhody and follows up with an attack using his branch like mandibles.  Admiral Xezev follows up with another attack, dropping Rhody.  Admiral Xezev then moves towards Albross.  Caelion, half blinded, moves forward and casts Mass Healing Word on Rhody.  Caelion then casts Toll the Dead on Admiral Xezev, but it does not affect him.  Rhody stands up, casts Hunters Mark, and throws his pitch fork, hitting Admiral Xezev.  Albross uses Chill Touch to damage Admiral Xezev.  Pagern casts Fireball, sculpting it around the party.  A branch emerges from the wall when then hits Rhody, dropping Rhody.  Lucerion uses his action to put the Rimestone on the pedestal.  Blinding white light flashes across the room, knocking everyone unconscious.
-It’s the 27th of Paramor
-Pagern wakes up to see the mage from the Sacred Crows freeing the party from the ice. He looks around and finds the rest of the party is frozen in ice and unconscious. The Sacred Crows are chiseling the rest of the party out of the ice. Hours later the rest of the party is free and awoken. All except Rhody, who is now dead. The Crows say that the party has been missing for 3 days. Caelion casts Gentle Riposte on Rhody.  
-We make it out and to the throne room. The throne has been moved temporarily. The Lord Emperor is glad to see our return. Lucerion asks if it would be possible to have a cleric revive Rhody, and he agrees to summon the clerics from the clerical hall. 
-We go to get a long rest.  As the party prepares to revive Rhody, Lucerion questions if Rhody’s deal with Madam Mabel is still active.
-It’s the 28th of Paramor and Albross Contacts His Patron
-Albross prepares to contact his patron. Albross looks around as everyone but Rhody disappears, and then Rhody is replaced with the fey spirit he had summoned earlier, but winged. Question 1: Is Rhody still bound to his contract with Madam Mabel. One of the wings turns into a vine and stabs its own eye, the eye where Rhody usually wears his Monocle. Answer: Certain. Question 2: Does Rhody want to come back. Answer: uncertain. Question 3: How many days does my brother have? Answer: Stretch. Question 4: Has the Rimestone stopped Ziv’ik’nok from being a problem for now? Answer: Possibly. Question 5: Do the Sable Shadows know we’re coming? Answer: uncertain. The spell fades and Albross sees everyone again.  
-Pagern casts Divination. He asks if Rhody will still be bound to Mabel. His god says that the contract is a part of his soul. 
-Rhody in the Afterlife
-FLASHBACK - 4 DAYS AGO (when Rhody died):  Rhody opens his eyes in a field of grass, with many people walking around.  He sees the meadow he is in surrounded by a fence.  There is a pond there, with a lady he’s drawn to cleaning her feet in the pond.  They chat.  He finds out the woman is Madam Mabel.  She tells him that his soul is bound to the Feywild.  Time passes.  Later, he sees a unicorn on the other side of the fence.  Madam Mabel says she’s going to need something from Rhody soon.  Rhody gets on the unicorn.  The unicorn runs off … into the light, bringing Rhody back.
-The Celebration
-A guard comes to our door and invites us to the Lord Emperor’s Throne room, telling us to dress nice. We make our way to the Great Hall, where hundreds await our celebration. The Lord Emperor greets us and thanks us for our help. He lets us know Khagdaruhl will stay out of the war, that we’re welcome into Khagdaruhl at any time, and that his builders will help construct a tower anywhere in Orbansia. Finally, he gifts the party with the Legendary sword pieces, where it’s almost fully reforged except for the tip. He hands it to Lucerion, who feels that the sword is magically lighter than expected. Lucerion accepts Kretopolus.
-We celebrate.
-Where to Go Next & Contacting Allies
-After the party, we discuss what we want to be doing. Ambassador Graythane has offered to use a scroll of Teleport that he has been working on, although he is unsure of how effective it will be.  The party discusses if Saildreith the Copper Dragon (whom we rescued stretches ago) may be able to help. 
-Caelion casts Sending to Saildreith the Dragon:
-         * His message: “Great Saildreth, Orcs are invading. Request surveillance of Verallein, Nurador. Report back, we would owe you great favor”
-         * The dragon’s response: “Greetings. It's been a while. If you would like to redeem the horn for that blow, Witguard has gotten busy. It would be couple days”
-The next task is to try and warn the people of Nurador of the orc threat.  Lucerion describes Lady Phéhldra Lightgarde, the leader of Nurador, to Caelion in hopes that the Sending spell will reach her.
-Caelion casts Sending to Lady Phéhldra Lightgarde of Nurador:
-         * His message:  “This is Caelion,  Lucerion's friend. We have word that orc forces are on route to Nurador. Prepare your defenses, we are not able to aid.”
-         * The lady’s response:  “Very well. Orc forces are already on the horizon, we have already repelled attacks and taken refugees. Why would you send word if you are of no aid?”
-The party thinks it may be best to get the dragon to go to Nurador to help, so Caelion uses his Sending spell to reach out again.
-Caelion casts Sending to Saildreith the Dragon:
-         * His message: “Thank you will use horn, please aid Nurador. Signed deal with Lord Emperor to stay out of war. Lady Lightguard leads Nurador.”
-         * The dragon’s response: “Very well. You can blow the horn. As for the deal, the magistrate is needing signed proof. Have you met with the Sacred Crows? I await the horn.”
-Caelion casts Sending to Saildreith the Dragon:
-         * His message: “Will send document signed to Witguard, possibly crows, possibly messenger.”
-         * The dragon’s response: “Good. Witguard was planning an assault if needed into Sierra. The sooner the better.”
-With the new plan in place, Caelion reaches back out to the leader of Nurador.
-Caelion casts Sending to Lady Phéhldra Lightgarde of Nurador:
-         * His message:  “Your leadership is invaluable. We are calling in a favor. Saildreath the Copper will aid. May the gods have your back.”
-         * The lady’s response:  “I don't know who that is, I appreciate your assistance. When will he arrive? I know not how long we can hold out for.”
-Albross and Rhody go to get the Sacred Crows to discuss getting their assistance. We learn that the Crows were planning on heading to Witguard. When we tell the Crows we are going to Gevakaln, it seems to stress out Hefeic.  We learn that Armaros knows of a teleportation sigil  in Gevakaln, though it appears to be secret and through a painting in a thieves guild. 
-A Decision on How to Move Forward
-The consensus seems to be that the party heads to Gevakaln, though Lucerion wants to split and head to Nurador to protect his town. Caelion blows Saildreth’s horn and says “engage” as that echoes in the room. We get a long rest.
-The next morning, we leave our abode to find Ambassador Graythane. We find him eating a scone, and ask him about his scroll of Teleport, if he could send us to separate locations. He casts the spell, unfortunately not affecting the cleric and the rogue. The wizard now has the Witguard paperwork. The teleport has very unexpected results:
-         * Caelion, Albross, Rhody, Pagern, and Mawl arrive on an unrecognizable beach. 
-         * Lucerion, Armaros and Kotio arrive at a hill overlooking Nurador, with orc encampments to the side. 
-         * It is unclear where Ambassador Graythane ended up.
-– The Session Ends Here – 
-9
-	Character level at end of the session
-	4
-	Sessions played at that level
-	41 - The Mighty Jungle
-(🎶 A Weema Weh, A Weema Weh, In The Jungle, The Mighty Jungle, The Lion Sleeps Tonight…. 🎶)
-Session Date:  August 10th, 2026
-In-game Date:  29th of Paramor, 1246
-Starting Location:  Unknown
-Picking Up With the Teleported Crew on the Shore
-We’re on the shore, dark pillars of rock jutting out of the water. In the distance is a heavy fog and dark rain clouds. We are not in Gevakaln. Pagern doesn’t know of anywhere with a jungle by a beach. Caelion goes to heal us, but his healing spell feels slightly dampened. Albross feels the dark rocks are geometrically shaped but natural, like a cracked open geode. Caelion casts Sending to Ambassador Graythane:
-
-
-Message:  “We’re not in Gevakaln, you’re not here, we have Maw, What Happened?”
-Response:  “Oh no, the teleport failed, I wanted to stay in Khagdaruhl. Where-”
-We start walking along the side of the shore, going right. Rhody leads the way, looking for signs of life. As we’re travelling, a vine comes to life and grabs Pagern, throwing him into the ocean and we roll initiative. 
-         * ROUND 1: A large lizard with large flesh protrusions swims in the water, biting Pagern and pulling him unconscious into the water. Maw casts Hunter’s Mark on the Lizard and shoots it with an arrow. The vine attempts to grab Rhody, who dodges. Pagern is dying. Caelion sprouts his wings and begins to fly away, but the vine grabs him and throws him into the water. A Goblinoid sneaks up to the vine and stabs it. Rhody moves up to the tentacle and Crits it, killing it with his second attack.  Albross casts Healing Light on Pagern, then hit with Eldritch Blast.  
-         * Round 2: The Lizard releases a blast of acid, knocking down Pagern and Albross. Maw shoots again at the lizard. Pagern in dying. Caelion casts Mass Healing Word and Toll the Dead. The goblin steps out of the jungle and runs to the shore. Rhody teleports into the water and throws his pitchfork, which misses. Albross pulls out his Bowl of Commanding Water Elementals from his backpack and casts Armor of Agathys.
-         * Round 3: The lizard releases another blast of acid, knocking down Albross and Pagern again. Maw shoots, Pagern continues dying, Caelion casts Mass Healing Word and Toll the Dead again. The goblin runs to the beast. Rhody moves in on the giant lizard and stabs it with his pitch fork and slashes with Orcreaver, bloodying the creature. Albross casts a spell, but the lizard resists the effect. The lizard still swims away, ending the combat.
-We swim back to shore. Caelion heals Pagern and Albross. We tell the Gabuk what happened, he tells us we missed Gevakaln by a lot. He says we left by accident. The Gabuk introduces himself as Mr. Drimboort, his friends call him Kibbit. He lets us know we’re on the prisoner island just off of Gevakaln, known as Sciogost. Pagern knows that the island is uninhabitable except for the prison where powerful creatures like a Lich and a Pit Fiend reside. Maw lets us know Hefeic was here before becoming a cleric. Caelion asks Kibbit how long he’s been here, he says for about a stretch. Rhody asks Kibbit how he got here, he just said it involved swimming. Kibbit discusses plans to escape, including sneaking onto the ship the guards use. Pagern starts casting mending and prestidigitation, Kibbit strips. The Prison has 4 watchtowers, we discuss potential plans to escape potentially using things like Scroll of Polymorph or Summon Fey. Albross reaches out to his patron, who speaks through a crab. He asks if his brother is on the island, to which he hears no. He asks a clarifying question, he hears yes. He asks if there is another way off the island, it shines light into the jungle. We’re sceptical about going into the jungle, which Albross wants to do. 
-Rhody casts speak with plants, speaking to the trees by the shore. They are very animated and aggressive and Jamaican. The tree named Coco lets us know about the Lord of the Jungle and how he brought the trees to life. We argue between going into the jungle and into the prison. After a Short Rest, we decide to go into the Jungle. Rhody notices very large prints of wild cats. The plants are very large as well. We come across a stream, near a hunting ground for the animals. There are the same weird rocks by the stream. They’re gemlike. We ignore them for now and follow the stream. As we venture into the jungle, we get attacked by a giant snake. 
-         * ROUND 1: Rhody throws his pitchfork at the snake, critting and knocking it prone. It gets up and bites Rhody and attempts to poison Caelion. Kibbit hides and stabs the snake. Caelion attempts to cast Toll the Dead but fails. Maw crits in both ways. Albross casts Chill Touch, hitting. Pagern casts Misty Step.
-         * Round 2: Rhody slashes at the snake with Orcreaver. The snake breathes a poisonous spray on Caelion, Rhody and Albross, knocking out Caelion and blinding Rhody. Kibbit stabs the creature, killing it. Caelion wakes up with a nat 20. Combat ends
-Kibbit investigates the snake scales, which appear odd. He also takes a giant snake fang as a dagger. We continue by the stream, avoiding some plants fighting each other. We find a cave going down into the ground, with an orange-blueish bonsai tree above the tree. Albross looks out into the pit when a large vine with a flower blooming at the top that's the same color as the tree. 
-– The Session Ends Here – 
-9
-	Character level at end of the session
-	5
-	Sessions played at that level
-	42 - I Believe I Can Fly
-Session Date:  August 17th, 2026
-In-game Date:  29th of Paramor, 1246
-Starting Location:  Prison Island off the coast of Gavalkan
-We Are at a Pit in the Jungle
-A large flowering vine emerges from a pit that the group has come up on. 
-         * ROUND ONE:  Poisonous plants are around, poisoning the party. Pagern casts FIREBALL!  The flower grabs Rhody.  Albross hits the flowering vine.  It attacks Rhody, who gets gobbled up. Kibbit attempts to hide then throws his dagger. It attacks Albross but misses. Rhody melts (is damaged by acid) in the creatures.  Rhody casts Conjure Barrage.  The spores get denser, and Albross and Kibbit feel compelled to move closer towards the pit. Caelion casts Sacred Flame, then backs up and casts Healing Word.  Maw casts Hunter’s Mark and fires at it twice. The plant bites at Albross again, restraining him. 
-         * ROUND TWO: Albross casts Armor of Agathys and Eldritch Blast. The plant crits, swallowing him whole. Pagern casts Fireball, dealing massive damage. The plant bites at Kibbit, restraining him. Kibbit steadily aims and stabs the plant. It swallows Kibbit. Rhody attacks from the inside, hitting with Orcreaver.  Caelion casts Sacred Flame again. Maw shoots at it two more times, killing it.  The plant vine explodes.
-Rhody, Albross and Kibbit fall into the pit, catching themselves in various ways. We see a passageway that goes to the left and to the right. We see large scratch marks that could be made by a large cat, and the same weird geode-like rock. Kibbit goes to investigate the paths. Pagern, Caelion and Maw make their way down. Rhody starts cutting at the plant, looking to see if anyone else was swallowed.
-Kibbit sees 3 paths: one has walls that feel rock-like as expected with flora, while the other 2 (the ones going west) are made of a colder material. Kibbit investigates the material but is unsure what it is. Kibbit returns and lets the party know what he’s found. Albross looks and notices ore in the walls. Rhody investigates the plant and just finds skeletal remains of animals, including a large Rongri corpse. Pagern ritually casts Detect Magic. 
-Kibbit explores the northwest passage, finding 2 paths going north and south. He explores the southern path, seeing a giant spider in its web. There is more than 30 ft of webbing on the ceiling. He returns to the party. Pagern finishes his spell, noticing that the air glows with all 8 schools of magic. It intensifies slightly as he continues down the northern path. We prepare for a long rest as Pagern casts Alarm at the different entrances to the room. Kibbit and Caelion take the first watch, Kibbit asks what Caelion’s story is, and he explains the situation. Kibbit explains his backstory- he was going to take something back from a person who stole from his family, breaking into their house. Guards went into the house where he was hiding looking for him, and the guards mistook a child for Kibbit and killed him. He was sent here to serve for the death of the child. He stole a knife from the captain and has been stuck here ever since. 
-Maw and Rhody take the second watch. Maw spills the tea on the Sacred Crows: Kotio flirts with the women in the party all the time, Heffick keeps blabbering about the “better world” he wants to make, & the rogue has a smoking addiction. Maw says that she’s mostly in it for the money to fund her sister's tuition to a bard college. The sacred crows apparently always sleep in a magic hut conjured by Amaros.
-It’s the 30th of Paramor
-After the long rest, we notice that Maw is the only one that wasn’t able to get a rest.  Albross says that he doesn’t see any spiders and doesn’t know if they are there. Kibbit gets mad that Albross doesn’t believe him and tries to prove he’s correct. Rhody breaks up the argument and Kibbit goes to investigate the other path that is unnaturally warm.
-He walks into a large cavern and hears moving water to the north east down a branch in the cave, but it is too far for him to see. The cavern extends to the west beyond his cone of vision. After walking along the south of the cave, Kibbit sees another path extending to the south. There is a large “stoney mound” in the north west corner along the edge of an underground pond. The “stoney mound” is actually a large pile of coins and valuable gems. It is the most amount of money anyone in the party has ever seen. At that point, the gems in the pile start moving and form into a large dragon shape. It proclaims itself as Zeldrigos, the Indomitable Serpent. 
-Zeldrigos says that the island is its domain and no one is allowed to leave the island. It has made a deal with the people who run the prison to allow them to come and go. Albross is able to deduce that this is a dragon made of Jacinth, which is a reddish brown gem. Esadi the Herrying is someone that Zeldrigos made a deal with and he’s not happy about that. She’s been using the storm to cause shipwrecks, and he doesn’t want to talk to her in fear of losing his gem. We agree to go talk to her, and he gives us a bag of wind in order to get to her tower in the clouds.  He takes us out of his lair, keeping Maw as collateral. 
-To the Tower of Esadi the Herring
-We open the bag of wind and shoot into the air.  As we ascend, we notice a marble tower that we are heading to.  We float to the marble tower, landing on the platform top of the tower with a roof.  The platform is decorated with a chessboard floor, vines with grapes, incense, chairs, etc.  We land and the incense is too strong (giving us Disadvantage on Perception checks).  Kibbit grabs a bunch of grapes and pours some wine. Pagern ritually casts Detect Magic, Kibbit explores the outside of the tower but is having a tough time. The wine is enchanted, the censer has transmutation, enchantment and illusion, and there is illusion magic all around. We close the censer, and suddenly we’re magically transported to another plane of existence. 
-We feel like we step out of a painting of moving clouds, into a 30 x 40 room, where there is an iron statue of a man with a sword and shield. We see a painting on each of the four walls:  the one of moving clouds, one of a large pile of gold, one of a desert oasis, and a painting of a luxurious bed room.  Caelion touches the painting with the treasure and the statue man attacks … It's an Iron Golem.
-         * ROUND ONE:  Caelion casts a Dust of Suleiman, damaging the golem. Pagern casts Wall of Fire, which appears to heal the golem. It approaches Caelion and hits him twice, dealing massive damage. Kibbit hits it with his knife. Albross casts Chill Touch, keeping it from healing. The golem looks at each person that damaged it.
-         * ROUND TWO:  Caelion casts Cure Wounds on himself.  Pagern casts Cone of Cold on the Golem. The golem disappears and reappears behind us … the Treasure Room painting is now moving.
-Caelion touches the moving Treasure Room painting and disappears.  Everyone follows.  The party appears in a 30 x 30 room full of gold and magic items.  The gold is moving as if it’s a fountain of gold.  Pagern’s detect magic is still present and he notices that the weapons are magic and there is something of more powerful magic deep in the pile of gold.  He then begins to pick up the gold, scooping it into Caelion’s Bag of Holding.  Pagern then reaches for the magical weapons, which animates and attacks.
-         * ROUND ONE: Kibbit attempts to dig through the gold looking for the powerful magic Pagern sensed, diving into the fountain of gold (Scrooge McDuck), swimming in to grab at the magical item. It’s a small rectangular pouch. The weapons attack, hitting Caelion, Pagern and Albross.  Caelion casts Spirit Guardians, damaging the animated weapons.  Rhody moves and gets hit by one of the weapons that hits him, knocking him prone.  Rhody gets up and moves to an advantageous position, casting Conjure Barrage, killing all but 3 weapons.  Pagern shoots one with a Firebolt and kills it.  Albross kills another with Eldritch Blast.
-         * ROUND TWO:  Kibbit hands Pagern the pouch of and moves up to the last animated item and kills it.
-Pagern sees a deck of cards in the pouch and returns it to Kibbit.  Caelion touches the fountain spewing gold and is teleported back into the room with the Iron Golem.  With his Spirit Guardian up, the Iron Golem is hit and they fight!
-         * ROUND ONE:  The golem moves towards Caelion, hitting him once. Caelion recasts Spirit Guardians, damaging it. 
-         * ROUND TWO: The fog reappears and the golem teleports and becomes inert again.
-The fountain stops flowing, as the magic connecting us to the room of paintings is severed. Everyone appears to be blocked off from Caelion.  Pagern goes to grab the weapons again and they animate once more. 
-         * ROUND ONE:  Pagern casts Fireball, defeating all of the magical weapons.
-Caelion attacks the Iron Golem and a small fight starts for a round and then stops.  The paintings are frozen in place and so Caleion attacks again, hoping to reanimate the paintings, but the combat doesn’t work.
-We stop at this point, trying to figure out how to reunite the party.
-– The Session Ends Here – 
-9
-	Character level at end of the session
-	6
-	Sessions played at that level
-	
-
 
 
 🧑‍🤝‍🧑 Notable NPCs
@@ -2513,7 +2303,8 @@ Met his end being thrown from the bridge
 	Male
 	Met on way to Witguard
 	Saildreith (Blair)
-	Dragon
+	
+
 	Adult copper dragon
 	
 
@@ -3210,35 +3001,39 @@ Killing in the Name of…
 
 
 Tab 9
-42 - I Believe I Can Fly
-Session Date:  August 17th, 2026
-In-game Date:  29th of Paramor, 1246
-Starting Location:  Prison Island off the coast of Gavalkan
-We Are at a Pit in the Jungle
-A large flowering vine emerges from a pit that the group has come up on. 
-               * ROUND ONE:  Poisonous plants are around, poisoning the party. Pagern casts FIREBALL!  The flower grabs Rhody.  Albross hits the flowering vine.  It attacks Rhody, who gets gobbled up. Kibbit attempts to hide then throws his dagger. It attacks Albross but misses. Rhody melts (is damaged by acid) in the creatures.  Rhody casts Conjure Barrage.  The spores get denser, and Albross and Kibbit feel compelled to move closer towards the pit. Caelion casts Sacred Flame, then backs up and casts Healing Word.  Maw casts Hunter’s Mark and fires at it twice. The plant bites at Albross again, restraining him. 
-               * ROUND TWO: Albross casts Armor of Agathys and Eldritch Blast. The plant crits, swallowing him whole. Pagern casts Fireball, dealing massive damage. The plant bites at Kibbit, restraining him. Kibbit steadily aims and stabs the plant. It swallows Kibbit. Rhody attacks from the inside, hitting with Orcreaver.  Caelion casts Sacred Flame again. Maw shoots at it two more times, killing it.  The plant vine explodes.
-Rhody, Albross and Kibbit fall into the pit, catching themselves in various ways. We see a passageway that goes to the left and to the right. We see large scratch marks that could be made by a large cat, and the same weird geode-like rock. Kibbit goes to investigate the paths. Pagern, Caelion and Maw make their way down. Rhody starts cutting at the plant, looking to see if anyone else was swallowed.
-Kibbit sees 3 paths: one has walls that feel rock-like as expected with flora, while the other 2 (the ones going west) are made of a colder material. Kibbit investigates the material but is unsure what it is. Kibbit returns and lets the party know what he’s found. Albross looks and notices ore in the walls. Rhody investigates the plant and just finds skeletal remains of animals, including a large Rongri corpse. Pagern ritually casts Detect Magic. 
-Kibbit explores the northwest passage, finding 2 paths going north and south. He explores the southern path, seeing a giant spider in its web. There is more than 30 ft of webbing on the ceiling. He returns to the party. Pagern finishes his spell, noticing that the air glows with all 8 schools of magic. It intensifies slightly as he continues down the northern path. We prepare for a long rest as Pagern casts Alarm at the different entrances to the room. Kibbit and Caelion take the first watch, Kibbit asks what Caelion’s story is, and he explains the situation. Kibbit explains his backstory- he was going to take something back from a person who stole from his family, breaking into their house. Guards went into the house where he was hiding looking for him, and the guards mistook a child for Kibbit and killed him. He was sent here to serve for the death of the child. He stole a knife from the captain and has been stuck here ever since. 
-Maw and Rhody take the second watch. Maw spills the tea on the Sacred Crows: Kotio flirts with the women in the party all the time, Heffick keeps blabbering about the “better world” he wants to make, & the rogue has a smoking addiction. Maw says that she’s mostly in it for the money to fund her sister's tuition to a bard college. The sacred crows apparently always sleep in a magic hut conjured by Amaros.
-It’s the 30th of Paramor
-After the long rest, we notice that Maw is the only one that wasn’t able to get a rest.  Albross says that he doesn’t see any spiders and doesn’t know if they are there. Kibbit gets mad that Albross doesn’t believe him and tries to prove he’s correct. Rhody breaks up the argument and Kibbit goes to investigate the other path that is unnaturally warm.
-He walks into a large cavern and hears moving water to the north east down a branch in the cave, but it is too far for him to see. The cavern extends to the west beyond his cone of vision. After walking along the south of the cave, Kibbit sees another path extending to the south. There is a large “stoney mound” in the north west corner along the edge of an underground pond. The “stoney mound” is actually a large pile of coins and valuable gems. It is the most amount of money anyone in the party has ever seen. At that point, the gems in the pile start moving and form into a large dragon shape. It proclaims itself as Zeldrigos, the Indomitable Serpent. 
-Zeldrigos says that the island is its domain and no one is allowed to leave the island. It has made a deal with the people who run the prison to allow them to come and go. Albross is able to deduce that this is a dragon made of Jacinth, which is a reddish brown gem. Esadi the Herrying is someone that Zeldrigos made a deal with and he’s not happy about that. She’s been using the storm to cause shipwrecks, and he doesn’t want to talk to her in fear of losing his gem. We agree to go talk to her, and he gives us a bag of wind in order to get to her tower in the clouds.  He takes us out of his lair, keeping Maw as collateral. 
-To the Tower of Esadi the Herring
-We open the bag of wind and shoot into the air.  As we ascend, we notice a marble tower that we are heading to.  We float to the marble tower, landing on the platform top of the tower with a roof.  The platform is decorated with a chessboard floor, vines with grapes, incense, chairs, etc.  We land and the incense is too strong (giving us Disadvantage on Perception checks).  Kibbit grabs a bunch of grapes and pours some wine. Pagern ritually casts Detect Magic, Kibbit explores the outside of the tower but is having a tough time. The wine is enchanted, the censer has transmutation, enchantment and illusion, and there is illusion magic all around. We close the censer, and suddenly we’re magically transported to another plane of existence. 
-We feel like we step out of a painting of moving clouds, into a 30 x 40 room, where there is an iron statue of a man with a sword and shield. We see a painting on each of the four walls:  the one of moving clouds, one of a large pile of gold, one of a desert oasis, and a painting of a luxurious bed room.  Caelion touches the painting with the treasure and the statue man attacks … It's an Iron Golem.
-               * ROUND ONE:  Caelion casts a Dust of Suleiman, damaging the golem. Pagern casts Wall of Fire, which appears to heal the golem. It approaches Caelion and hits him twice, dealing massive damage. Kibbit hits it with his knife. Albross casts Chill Touch, keeping it from healing. The golem looks at each person that damaged it.
-               * ROUND TWO:  Caelion casts Cure Wounds on himself.  Pagern casts Cone of Cold on the Golem. The golem disappears and reappears behind us … the Treasure Room painting is now moving.
-Caelion touches the moving Treasure Room painting and disappears.  Everyone follows.  The party appears in a 30 x 30 room full of gold and magic items.  The gold is moving as if it’s a fountain of gold.  Pagern’s detect magic is still present and he notices that the weapons are magic and there is something of more powerful magic deep in the pile of gold.  He then begins to pick up the gold, scooping it into Caelion’s Bag of Holding.  Pagern then reaches for the magical weapons, which animates and attacks.
-               * ROUND ONE: Kibbit attempts to dig through the gold looking for the powerful magic Pagern sensed, diving into the fountain of gold (Scrooge McDuck), swimming in to grab at the magical item. It’s a small rectangular pouch. The weapons attack, hitting Caelion, Pagern and Albross.  Caelion casts Spirit Guardians, damaging the animated weapons.  Rhody moves and gets hit by one of the weapons that hits him, knocking him prone.  Rhody gets up and moves to an advantageous position, casting Conjure Barrage, killing all but 3 weapons.  Pagern shoots one with a Firebolt and kills it.  Albross kills another with Eldritch Blast.
-               * ROUND TWO:  Kibbit hands Pagern the pouch of and moves up to the last animated item and kills it.
-Pagern sees a deck of cards in the pouch and returns it to Kibbit.  Caelion touches the fountain spewing gold and is teleported back into the room with the Iron Golem.  With his Spirit Guardian up, the Iron Golem is hit and they fight!
-               * ROUND ONE:  The golem moves towards Caelion, hitting him once. Caelion recasts Spirit Guardians, damaging it. 
-               * ROUND TWO: The fog reappears and the golem teleports and becomes inert again.
-The fountain stops flowing, as the magic connecting us to the room of paintings is severed. Everyone appears to be blocked off from Caelion.  Pagern goes to grab the weapons again and they animate once more. 
-               * ROUND ONE:  Pagern casts Fireball, defeating all of the magical weapons.
-Caelion attacks the Iron Golem and a small fight starts for a round and then stops.  The paintings are frozen in place and so Caleion attacks again, hoping to reanimate the paintings, but the combat doesn’t work.
-We stop at this point, trying to figure out how to reunite the party.
+37 - Taking the Fight to Iohir
+Session Date:  June 15th, 2026
+In-game Date:  22nd of Paramor, 1246
+Starting Location:  Khagdaruhl
+Rimestone Pedestal Room
+We start in the Rimestone room, a large semi-circular room, where we finished the combat in the last session.  Pagern recognizes it as a temple dedicated to noone, the Rimestone Temple.  The walls have black frozen branch-like tendrils that are frozen.  There are two dead dwarven guards that accompanied Master Huldi (Cold Breath).
+We make it the Dalgurn, watcher of the stone.  He opens the passage to the throne rooms.  The Lord Emperor and his ambassadors are in the room.  We tell him that Master Huldi took the last pieces and left using his magical “cold breath” ability to travel through the mists.  The Lord Emperor says he needs to consult with his ambassadors about the situation.  He says that there is an Arcane Waypoint that goes between Khagdaruhl and Iohir Monastery.
+We are escorted out of the Great Hall and we go to our quarters.
+We see a monk of Iohir that is a disciple of Master Polar Snake.  The other Master is Icy Sow.  Lucerion told the monk that Grandmaster Huldi got the Rimestone from Khagdaruhl. With that knowledge, heads to the Arcane Waypoint, which we learn is in the Great Hall.  We head back to our quarters and rest.
+After a long rest, we go to the Great Hall to meet with the Lord Emperor. As we step in, we see a court jester, but more like a punching bag for the Lord Emperor. He says that some of the monks are innocent, and brings out the disciple that we recently saw that he had interrogated as evidence.  He calls forth 2 duergar guards, one robed and one in full plate.  He asks the guards to escort us to the arcane waypoint.  Rhody recommends that the dwarves also get the Sacred Crows.  
+(We hear the jester being beaten by the Lord Emperor)
+We go get supplies for Revify and Greater Restoration.  When we return, we see the Sacred Crows being informed.  We get to the Arcane Waypoint and find that Cold Breath has killed the previous guards there.  We use the teleportation circle and appear in Iohir. It’s blizzarding, we can only see about 30 feet ahead of us. 
+We arrive at Iohir Monastery 
+We’re on a center island inside a crevice in the mountains, with bridges connecting to 6 other islands that go into the mountainside. Underneath the islands are moving chunks of ice. The Sacred Crows go through the teleportation circle as well.  
+Rhody casts Locate Object and focuses on the Rimestone.  He says we are basically standing over the rimestone.  We notice a snowflake indentation on the bell.
+We decide to go to one of the huts that the arcane waypoint guide said is likely a master.  We tell the Sacred Crows to head to the other hut to the left of that one.
+Albross goes invisible and scouts around.  Caelion moves over to an island off to the left of the area we were at.  Caelion sees a small statute on this island.  There was wording beneath the shrine that says “May luck be with you.”  There is a levitating man in a shrine type of setup.  As he studies it, he sees a small pool, with gold coins in it.  Caelion tosses a gold coin.  We believe there are people in the hut, but most of the party goes to the island and tosses coins for luck.
+We decide to go into the room.  Master Polar Snake invites Rhody in and tells us we are just in time for a lesson.  After a bit of observing, we notice he has an amulet that looks like a piece of the snowflake.  We try and leave, and they attack.
+INITIATIVE – Combat vs. Polar Snake & His Monks
+               * ROUND ONE:  The Polar Snake casts a Wall of Ice, hitting Caelion.  He then attacks Pagern with a Critical Hit.  Rhody hits him.  Albros hits with Guiding Bolt.  Lucerion swings four times and misses.  Pagern casts Fireball, hitting him.  Caelion heals himself and casts Inflict Wounds on one of the monks.
+               * ROUND TWO:  The Polar Snake points his staff for a Cone of Cold against Rhody.  He then heals himself and then swings at Rhody.  Rhody hit the Polar Snake.  Albross hits one of the monks with an Eldritch Blast, killing it.  Lucerion slashes at the Polar Snake, hitting 3 times.  Pagern kills the Polar Snake.  Caelion heals Pagern.  
+               * The monk misses.  Rhody kills it.
+We take the snowflake amulet pieces (2, 3, 4, 7).
+We decide to head towards the hut that the Sacred Crows were at to tell them what we found out.  We get pieces 8 and 6.  We still need 1 and 5.
+We head back to the building that was to the right of the building that had the Polar Snake.  We investigate the outside and find nothing, so we bust in the front door.
+INITIATIVE – Combat vs. Polar Snake Monks
+               * ROUND ONE:  One of the trainers leaps over us and dies as Rhody and Lucerion use Reaction Attacks to slice him down.  Two other trainers come up and attack, hitting Lucerion.  Lucerion swings, but only lands one attack.  Pagern casts a Fireball in the hut and kills most of the monks.  Albross misses with Eldritch Blast.  Rhody attacks and misses.
+               * ROUND TWO:  The monk trainers attack and hits Rhody.  Lucerion takes down the bloody one and hits the other.  Caelion heals Rhody and casts Vicious Mockery on the monk, who saves.  Pagern casts Firebolt and the monk uses Shield to block it.  Albross kills the last monk.
+We search around and find nothing.  So, we head back to the building and work our way back to the middle, and across the bridge to the other island.  There we find a large monk with a bell that knows we killed one of his monk brothers.
+INITIATIVE – Combat vs Hand of the Cold Breath and a summoned Translucent Brother.
+               * ROUND ONE:  He jumps towards Rhody and hits.  He moves around as Caelion attacks with Spirit Guardians.  Albross misses.  The translucent brother comes up and attacks Albross.  Lucerion attacks the translucent brother, which is resistant to piercing and slashing.  Pagern casts Fireball.  Rhody moves up and attacks the translucent brother.
+               * ROUND TWO:  He runs up and punches Caelion, hitting on the second attack.  He moves over to Rhody and misses.  Caelion casts Spirit Guardians again, with the Hand using his reaction to get away.  Albross casts Chill Touch to kill the Translucent brother.  Lucerion runs towards him and swings, hitting several times.  Pagern shoots a Firebolt and hits.  Rhody runs up and hits with Orcreaver.  
+               * ROUND THREE:  He advances towards Albross, and unloads, hitting, incapacitating and kicking him off the island into the water.  Caelion chases him around with his Spirit Guardians.  Lucerion kills the Hand.  Pagern comes over and levitates, grabbing my Albross’ and reaching up for Lucerion to grab him.  Rhody comes over to assist
+               * ROUND FOUR:  We move over, Lucerion uses Channel Divinity to increase his Athletics and pull Albross up.
+We take piece 1 of the snowflake amulet and attach it.  The Hand had a tome.  We went to the last building that the Icy Sow is in and we found the Sacred Crows had gotten there.
 – The Session Ends Here –

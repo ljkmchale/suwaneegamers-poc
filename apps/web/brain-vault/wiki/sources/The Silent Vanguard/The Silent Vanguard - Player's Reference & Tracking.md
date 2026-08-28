@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/the-silent-vanguard-player-reference.md"
 source_url: "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit"
-source_hash: "5e9bfd1fbb5b22fd22e65c7b597abed23b7a433b398f8fd222313c6a10c96234"
+source_hash: "3c35cfc2c84de8719ec76114dd4d6dd61fa0f4ddb7596e3b07b26f5bfcf9414b"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-05-20T12:16:31.902Z"
-pulled_at: "2026-05-20T12:16:24.103Z"
+imported_at: "2026-08-27T13:46:52.566Z"
+pulled_at: "2026-08-27T13:46:28.173Z"
 ---
 
 # The Silent Vanguard - Player's Reference & Tracking
@@ -17,15 +17,15 @@ pulled_at: "2026-05-20T12:16:24.103Z"
 Campaign: The Silent Vanguard
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
 Raw source: [[raw/the-silent-vanguard-player-reference.md]]
-Raw hash: `5e9bfd1fbb5b22fd22e65c7b597abed23b7a433b398f8fd222313c6a10c96234`
-Imported: 2026-05-20T12:16:31.902Z
+Raw hash: `3c35cfc2c84de8719ec76114dd4d6dd61fa0f4ddb7596e3b07b26f5bfcf9414b`
+Imported: 2026-08-27T13:46:52.566Z
 
 ## Imported Notes
 
 # The Silent Vanguard - Player's Reference & Tracking
 
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
-Pulled: 2026-05-20T12:16:24.103Z
+Pulled: 2026-08-27T13:46:28.173Z
 
 Players
 
@@ -605,8 +605,92 @@ The party left about 40 zombies behind in Brinecross, with some survivors possib
 - **Brinecross**: zombie outbreak town.
 
 
-03 – ??? (06.19.26)
+03 – Farming is tough work (07.08.206)
 22th of Ezale – Tratta
+
+
+Raw Campaign Session Notes (As Provided)
+1. Party & Characters
+Dog: Elf pirate fighter.
+Kyrian: Dwarf fighter.
+Jasper Flint: (Implied Earth Genasi Barbarian—initially mentioned as Cletus, then corrected to Cletus being the wizard).
+Cletus: Very, very tiny gnome wizard.
+Note: During travels and fights, Cletus travels inside of Jasper Flint's backpack.
+2. The Hook / Introduction
+Arrived on the ship, the Wave Hammer.
+Pulled up on deck by Donga (Master Thorn’s second-in-command).
+Taken to the captain's quarters with a big conference table for an "important mission."
+Donga looked over the group, decided they weren't fit for an important mission, and downgraded them to an unimportant one.
+The Mission: A contact named Nowarb usually brings spell ingredients but is late. He’s never been this late before.
+Pay: Donga gives them a map and just a few gold pieces for expenses. The party complains because it seems cheap, but they have nothing else to do, so they accept.
+Destination: Nowarb’s farm, located about 3 days west.
+3. Marketplace & Apothecary Brawl
+Headed to the marketplace for supplies. Noticed a lot of rats running around the city.
+Went to the apothecary to get healing potions.
+Barkin (the apothecary): Party haggles with him. He offers a deal: 3 healing potions for 45 gp each instead of 50 gp. They pay for them.
+The Shakedown: Kintul, a half-orc thug for the Crimposa gang, storms in to demand shakedown money.
+Barkin is terrified and hands over 40 gold pieces. Kintul slaps Barkin around anyway.
+The Fight: Jasper Flint grabs Kintul and tells him to stop, rolling initiative.
+Kintul beats on Jasper Flint with unarmed strikes, eventually knocking him unconscious.
+Note: When Jasper fell unconscious, he almost squished Cletus, who was inside his backpack.
+Dog and Kyrian jump in.
+Dog eventually knocks Kintul unconscious.
+The apothecary is completely trashed, with potions smashed everywhere.
+Barkin was terrified during the fight, crying, "Oh God, leave him alone. Stop," knowing he would pay for it later.
+The Loot & Escape: * Dog pulls a gold tooth out of Kintul’s mouth with effort.
+They rob Kintul: Dog takes his 40 gold pieces back, plus an extra 20 gold pieces Kintul had on him.
+The group sneaks out of the apothecary. They see other gang members roughing up merchants around town, but nothing too terrible, and they scoot out of town.
+4. The Journey to the Farm
+Takes 3 days and is mostly uneventful.
+Day 1: On the road.
+Night 1: Camped by the side of the road. Kyrian got scared, saw some things, and almost woke someone up, but decided to tough it out. Nothing happened.
+Day 3: Arrived at the farm. They see a crudely drawn sign with a picture of a goblin (initially said gnome, corrected to goblin) with a line crossed through it, and a big "N" for No-warb.
+5. Meeting No-warb & The Mystery
+They meet No-warb's son, Ubbub (U B B U B), who is holding a longbow. He yells at them to stop and calls for his dad ("pa").
+The dad (No-warb) comes out with a wrapped-up bum leg and a crutch.
+The Story: No-warb sent his older son, Yorel, to take the ingredients to the Wave Hammer a while ago, but he never showed up. No-warb thinks Yorel is slacking off in some saloon.
+Because Yorel was gone, Ubbub had to watch the livestock.
+Ubbub found some livestock had been taken by goblins, slaughtered, and had all their blood drained out.
+No-warb is planning an attack on the goblin camp because he hates his goblin neighbors. The party agrees to go with No-warb and Ubbub.
+6. Stream Crossing & Goblin Skirmish
+They follow a path and reach a big stream they have to cross.
+Two goblin scouts are visible across the stream on cleared land, with a thick row of bushes/hedgerow and trees behind them.
+Stealth: The party stealths at the water's edge. Jasper Flint casts Pass Without Trace (very stealthy).
+Opening Attacks: They shoot at the guards. Dog hits one, and Ubbub rolls a Nat 20 to finish him off.
+Crossing the Stream (Attempt 1):
+No-warb goes first, fails his Athletics check, and starts getting washed away (but holds onto his crutch).
+Kyrian throws a rope and pulls him back to the starting shore.
+Jasper Flint and Dog make it across the water (Cletus is still in Jasper's backpack).
+The Pincer Trap:
+Three more goblins emerge from a gap in the middle of the hedgerow.
+Kyrian, Jasper, and Dog (now carrying Cletus on her back instead) cross over and run toward the middle gap to chase them.
+Three goblins come around each side of the hedgerow in a pincer move and shoot arrows at them.
+The Split & The Beatdown:
+The party splits. Some go to the left flank, and Kyrian (carrying Cletus) goes through the middle.
+It goes poorly: Kyrian gets knocked unconscious. Cletus has to save her with a healing potion.
+Dog and Jasper finish off their goblins.
+No-warb tries to cross the stream again, falls again, and Ubbub has to help him out of the water. They finally get across.
+Ubbub is a terrible shot and keeps missing all his bow shots.
+No-warb, Ubbub, Dog, and Jasper finish off the remaining three goblins on the left flank.
+The three goblins from the other flank retreat behind the hedgerow to reinforce.
+7. The Goblin Camp & The Chupacabra Discovery
+The party gets behind the hedgerow and finally sees the goblin camp.
+Only Cletus (with high passive perception/insight) realizes it is just a camp of women, children, and elderly goblins.
+An older goblin steps forward, speaks Common, and surrenders.
+The goblins throw down their bows; only the ones guarding the old chief keep their weapons.
+The party debates whether to wipe them out or spare them, deciding not to wipe them out.
+The Beef: Ubbub and No-warb complain about their cattle. The goblins insist they didn't do it and point to their own cattle.
+Cletus’s Insight: Cletus asks if the goblins have had cattle killed. They say yes.
+They check and find the goblins' cattle were killed the exact same way: drained of blood with triangular marks.
+The Deduction: Cletus first guesses a vampire, then realizes it is actually a Chupacabra.
+8. End of Session / Choices
+The session wraps up with the party having to make a decision:
+Join/help the goblins.
+Finish off the goblins anyway.
+Go look for the Chupacabra themselves.
+Return to the Wave Hammer.
+
+
 
 
 NPCs

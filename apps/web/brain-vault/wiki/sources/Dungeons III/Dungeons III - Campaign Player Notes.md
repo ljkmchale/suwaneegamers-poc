@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/dungeons-iii-campaign-player-notes.md"
 source_url: "https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit"
-source_hash: "79f46e6d6fea86c28ea11ef8041fedf7c3ff2fce0a431bb80cee3ec4f958e472"
+source_hash: "fa170d076f85e240f3bb44e746885f9a21a699c345c7b16fc31ce331d1465973"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-06-16T14:00:21.836Z"
-pulled_at: "2026-06-16T14:00:17.539Z"
+imported_at: "2026-08-27T13:46:52.543Z"
+pulled_at: "2026-08-27T13:46:48.025Z"
 ---
 
 # Dungeons III - Campaign Player Notes
@@ -17,627 +17,18 @@ pulled_at: "2026-06-16T14:00:17.539Z"
 Campaign: Dungeons III
 Source: [Google Doc](https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit)
 Raw source: [[raw/dungeons-iii-campaign-player-notes.md]]
-Raw hash: `79f46e6d6fea86c28ea11ef8041fedf7c3ff2fce0a431bb80cee3ec4f958e472`
-Imported: 2026-06-16T14:00:21.836Z
+Raw hash: `fa170d076f85e240f3bb44e746885f9a21a699c345c7b16fc31ce331d1465973`
+Imported: 2026-08-27T13:46:52.543Z
 
 ## Imported Notes
 
 # Dungeons III - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1115KjT1J7g-jy4kQXBXzp4vHhoOhPyqrNxcTZkEEAHY/edit)
-Pulled: 2026-06-16T14:00:17.539Z
-
-🧑‍🤝‍🧑 Players
-
-
-	
-
-	Brian
-	Chip
-	Chuck
-	Suzanne
-	Tiff
-	Tom
-	Character Name
-	
-
-	Meles
-	Draelith
-	Nixie
-	Seraphine
-	Nova
-	Æon (AY-on)
-(No, Ay-ON)
-	Class
-	
-
-	Rogue
-	Wizard
-	Druid
-	Cleric
-	Bard
-	FIghter
-	Species
-	
-
-	Wood Elf
-	Human
-	Gnome (deep)
-	Aasimar
-	Aasimar
-	Half Elf
-	Armor Class
-	
-
-	13
-	12
-	15
-	16
-	12
-	15
-	Passive Perception
-	
-
-	16
-	13
-	15
-	13
-	12
-	12
-	Passive Investig.
-	
-
-	10
-	15
-	14
-	11
-	14
-	12
-	Passive Insight
-	
-
-	12
-	13
-	15
-	15
-	12
-	10
-	Senses
-	
-
-	Darkvision 60
-	-
-	Darkvision 60 ft.
-	Darkvision 60 ft.
-	60 ft
-	Darkvision 60 ft.
-	Defenses
-	
-
-	Immunity Sleep
-
-
-	-
-	
-
-	Resistance: Necrotic, Radiant
-	Resistance: Necrotic, Radiant
-	Magical Sleep
-	Languages
-	
-
-	Common, Common Sign Language, Draconic, Dwarvish, Elvish, Thieves’ Cant, Undercommon
-	Common, Elvish, Gnome
-	Common, Gnomish, Dwarvish
-	Common, Elvish, Dwarvish
-	Common, Goblin, Halfling
-	Common, Elvish, Orc
-	Deity
-	
-
-	Phoe
-	Celestine
-	Cembus
-	Natafae
-	None
-	Various
-	
-
-________________
-
-
-Sessions
-Session
-	Brian
-	Chip
-	Chuck
-	Suzanne
-	Tiff
-	Tom
-	End Date
-	XP Gain
-	XP Total
-	LVL
-	1
-	10/06
-	✓
-	✓
-	✓
-	✓
-	✓
-	✓
-	n/a
-	0
-	0
-	1
-	2
-	10/20
-	✓
-	✓
-	✓
-	✓
-	x
-	✓
-	8th of Evalee
-	
-
-	
-
-	
-
-	3
-	11/3
-	✓
-	✓
-	✓
-	✓
-	✓
-	✓
-	8th of Evalee
-	
-
-	
-
-	
-
-	4
-	11/17
-	✓
-	✓
-	✓
-	✓
-	✓
-	✓
-	
-
-	
-
-	
-
-	
-
-	5
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	6
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	7
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	8
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	9
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	10
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	11
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	12
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	13
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	14
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	15
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	16
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	17
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	18
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	19
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	20
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	21
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	22
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-
+Pulled: 2026-08-27T13:46:48.025Z
 
 📝 Session Notes
-01 – It’s Eye’on! (10.20)
+01 – It’s Eye’on!
 Session Date:  October 10, 2026
 In-game Date:  8th of Evalee, 1246
 Starting Location:  Hesfal
@@ -676,7 +67,7 @@ As they discuss plans for the night, they are interrupted by Frath - one of the 
 Note:  Next time, Sera said that she plans to tell the group about the rumors she heard from Wargus and the local girls.  And - Kadella will surely talk about the serendipity of Æon finding his angel, Sera - if the two arrive at Boar’s Best (as she mentioned to Æon several times during their meeting at the Hall of Many Hands).
 
 
-02 – Pocket Prism (11.03)
+02 – Pocket Prism
 Session Date:  November 03, 2026
 In-game Date:  8th of Evalee, 1246
 Starting Location:  Hesfal
@@ -715,7 +106,7 @@ As they enter the Town Ward, they look around and decide to go downstairs - look
 – THE SESSION ENDS HERE – 
 
 
-03 - Chase the Runners (11.17)
+03 - Chase the Runners
 Session Date: November 17, 2025
 In-game Date:  8th of Evalee, 1246
 Starting Location:  Hesfal
@@ -739,7 +130,7 @@ We borrow horses to chase the bandits.
 – THE SESSION ENDS HERE – 
 
 
-04 - I Can't Even Take A Shit, Man! (12.15)
+04 - I Can't Even Take A Shit, Man!
 Session Date:  December 15, 2026
 In-game Date:  9th of Evalee, 1246
 Starting Location:  Hesfal
@@ -788,7 +179,7 @@ After a few hours of waiting, Nixie hears whistling.
 – THE SESSION ENDS HERE – 
 
 
-05 - The Hots for Nova (01.05)
+05 - The Hots for Nova
 Session Date:  January 5, 2026
 In-game Date:  9th of Evalee, 1246
 Starting Location:  Lean-to in the Woods
@@ -830,7 +221,7 @@ A large hum occurs in the room and then a voice is heard, “Why did I pay you?�
 – THE SESSION ENDS HERE – 
 
 
-06 - Rope-A-Dope (02.02)
+06 - Rope-A-Dope
 Session Date:  February 2, 2026
 In-game Date:  10th of Evalee, 1246
 Starting Location:  Bandit Hideout
@@ -867,7 +258,7 @@ We awake with a large figure going through Nova’s belongings.
 – THE SESSION ENDS HERE – 
 
 
-07 - Brooch the Subject (02.24)
+07 - Brooch the Subject
 Session Date:  February 24, 2026
 In-game Date:  10th of Evalee, 1246
 Starting Location:  Hesfal
@@ -914,7 +305,7 @@ Meles heads to the barn.  Arriving he greets Lyerith and the two are about to vi
 – THE SESSION ENDS HERE – 
 
 
-08 - The Stone (finally) Speaks (03.16)
+08 - The Stone (finally) Speaks
 Session Date:  March 16, 2026
 In-game Date:  13th of Evalee, 1246
 Starting Location:  Scarwatch Hold
@@ -945,7 +336,7 @@ Nixie heads back to the inn to rest.  Meles goes to Thiddle’s home.  Meles tel
 The next day, the Cap’n and Koren are led to the square.  The Warden reads the charges to the two.  Draelith starts rubbing the blue sending stone.  Meles asks “who asks you to do it?”  The Cap’n confesses to what was done and about the interaction with the Scorpion.  Nixie, Aeon and Draelith speaks to their activities.  The Warden speaks about their charges, marking Koren and issuing hard labor, and the Cap’t will be sentenced to conscripted to Scarwatch Hold.
 Draelith hears through the sending stone, “your interference has complicated matters, but perhaps you are more useful than they were.”
 – THE SESSION ENDS HERE – 
-09 - A Cart-time Job (04.06)
+09 - A Cart-time Job
 Session Date:  April 6, 2026
 In-game Date:  14th of Evalee, 1246
 Starting Location:  Scarwatch Hold
@@ -982,12 +373,12 @@ Warrall sees Meles heading back to the Inn from Chasta’s house and walks with 
 Meles mentions that Gurimond, a known “no-good” type, had been spotted in the Hold recently.  Nambra tells Nova that she wants our group to investigate the cult.  Nambra prioritizes the cultist group over Isgo, in light of this graffiti and breach of the wall.
 Meanwhile, Seraphine had returned the previous day from the Sanctuary with bandages around her wrists and forearms.  Draelith now confronts Warrall about the bandaged Seraphine. Warrell declines to give any information - he allows parishioners to worship in private - and tells Draelith he should ask his friend about her wounds.  Nova asks Seraphine about the bandages as well.  She says that she likes to study pain.
 Seraphine visits Arlette, the mercantile merchant, and is told she may have a tough time finding poisons in the Hold.  Meles and Nixie visit Blackshield to sell some extra equipment.  Nova and Aeon visit the guards to learn how the Radiant Eye may have gotten in.  They think it was two humanoid beings of medium build.  Two horses were used to get to the keep from parts unknown.  It probably happened in the shift between two and three in the morning (one of the guards was briefly taken ill in the outhouse).  
-Draelith visits Embryl for clues about the map or cultist group.  He thinks there could be a link in why the group might be in caves to the east.  He found a damaged record in the Hold’s library referencing the “Last Watchtower of the Osmanae.”  The Osmanae are an ancient group that watched the stars and heavens.  The record mentioned an essential instrument for calibrating celestial records disrupted since the Shattering.  The instrument was used to chart the skies.  Embryl thinks the instrument needs to be retrieved, restored, and taken to the Advents of Harmony.  He asks the group to look for this instrument since you are heading that way already.   If we get it to Embryl, he’ll take it.  Embryl thinks there is an ancient observatory near where there are caves.  Someone scouted and it was too dangerous.  It’s possible, the cult is looking for the same instrument.  The observatory is in ancient ruins.  Kill the cultists first or get the instrument before the cultists do.  Embryl believes the cult is dangerous.
+Draelith visits Embryl for clues about the map or cultist group.  He thinks there could be a link in why the group might be in caves to the east.  He found a damaged record in the Hold’s library referencing the “Last Watchtower of the Osmanae.”  The Osmanae are an ancient group that watched the stars and heavens.  The record mentioned an essential instrument for calibrating celestial records disrupted since the Shattering.  The instrument was used to chart the skies.  Embryl thinks the instrument needs to be retrieved, restored, and taken to the Advents of Harmony.  He asks the group to look for this instrument since you are heading that way already.   If we get it to Embryl, he’ll take it.  Embryl thinks there is an ancient observatory near where there are caves.  Someone scouted and it was too dangerous.  It’s possible the cult is looking for the same instrument.  The observatory is in ancient ruins.  Kill the cultists first or get the instrument before the cultists do.  Embryl believes the cult is dangerous.
 The group finally gathers at the Stables and heads out toward the crags mid-morning on horseback.  As they cross the drawbridge and start heading on the path, they see a black horse with a white blaze on its head in the far distance.  There is no rider. 
 – THE SESSION ENDS HERE – 
 
 
-10 - It’s a Long Ass Way (05.04)
+10 - It’s a Long Ass Way
 Session Date:  May 4, 2026
 In-game Date:  15th of Evalee, 1246
 Starting Location:  On the road outside of Scarwatch Hold
@@ -1023,7 +414,7 @@ The horses have a tough time with the trail, making the travel difficult.  Meles
 It’s the 21st of Evalee
 We break camp the next day and move on.  Meles hears the movement in the distance.  He goes into Stealth and scouts ahead.  Moving further ahead, he sees two figures in tan robes with kahlbits.  As we approach them, they attack! 
 – THE SESSION ENDS HERE – 
-11 - Sand(people) Gets In All The Crevisses (05.18)
+11 - Sand(people) Gets In All The Crevisses
 Session Date:  May 18, 2026
 In-game Date:  21st of Evalee, 1246
 Starting Location:  Jagged Waste Crags
@@ -1064,7 +455,7 @@ INITIATIVE – Combat vs Dire Wolves
 * ROUND TWO:  The last wolf advances.  Draelith hits.  Nixie shoots and misses, but backs up.  Aeon critically hits, killing the Dire Wolf.
 We advance to the cave the wolves came from.  Draelith steps just inside the entrance to the cave and lights up his cane.  There is a large tapestry on the floor covering the 10’x10’ entrance, almost like a rug, covered in blood.  Meles decides to sneak in, hugging the wall on one side, and purposefully places his foot on the edge of the tapestry, which gives way and falls into a pit.  The trap is avoided!
 – THE SESSION ENDS HERE – 
-12 - Meles is Awesome (06.01)
+12 - Meles is Awesome
 Session Date:  June 1, 2026
 In-game Date:  21st of Evalee, 1246
 Starting Location:  Jagged Waste Crags, Cave Terrace
@@ -1087,9 +478,171 @@ We move into one of the rooms we discovered.  There are dead humanoids and hobgo
 Meles comes back and searches beyond the barricade.  He finds a path that branches to the left where there is a smaller room.  He finds a lockbox that he picks the lock on.  There is a wolf-fur blanket, a pouch (17gp, 8sp), a shortbow and a quiver with arrows.  Meles returns.   We work our way back to the blocked off area and reach a door.  There is goblin speak.  After a moment, we get them to open the door.  There are four hobgoblins, including Kelkaruud.  We convince him to go to the other hobgoblins in the other cave.  They take Isgo to keep him until we return.
 We go back to the natural tunnel that is marked with many boulders, other natural cave features.  We notice claw marks along the way.  In time, we notice a stone creature that seems to be hiding.  We then figure out this isn’t a creature, nor a statue, but appears to be someone who has been turned to stone. Upon further investigation, we find other “statues” as we go deeper into the cave.  Draelith goes invisible and moves ahead to join Meles.  As the rest of the party enters a large chamber, Draelith creates a noise in one of the cave alcoves to see if it triggers anything.  It does - there seems to be a large reptilian creature lurking near Draelith - who’d been hiding.  
 – THE SESSION ENDS HERE – 
+13 - No Stone Was Left Unturned
+Session Date:  June 29, 2026
+In-game Date:  21st of Evalee, 1246
+Starting Location:  Jagged Waste Crags, Cave Terrace
+Inside a Cavern with Petrified Folk
+The reptilian creature emerges from the path ahead.
+ITS INITIATIVE – Combat vs. the Reptile
+* ROUND ONE:  Most all hold our action, as the creature moves forward.  Nova uses the spell Dissonant Whispers, but the creature makes its Saving Throw, only doing half damage.  Nixie uses Starry Wisp and hits the creature.
+* ROUND TWO:  Draelith uses Mind Sliver and the reptile fails its Saving Throw.  Draelith moves to a rock next to Meles.  The reptile moves towards Draelith and Meles and uses its gaze.  As it does, Aeon releases a firebolt.  The gaze affected Draelith, causing Draeith to become restrained.  Seraphine moves forward and casts Bless on Nova, Aeon and Nixie.  Meles moves around to get into a strategic position.  Aeon uses his potion of Dragon Breath and breathes at the reptile.  Nova uses True Strike to hit with her crossbow.  Nixie uses Starry Wisp again, hitting it.  Nixie activates Luminous form (taking a shapeshift slot).
+* ROUND THEE:  Draelith uses Phantasmal Force, but the creature saves.  Draelith then uses Minor Illusion to create a noise behind it.  Draelith makes his Saving Throw.  The reptile moves forward and uses its gaze; Aeon, Nova and Nixie all make their saving throw.  Seraphine moves back a bit.  Meles uses Steady Shot, critically striking the beast and killing it.  Nova looks around.  Aeon checks on Draelith.  Nixie moves around looking.
+* ROUND FOUR:  Draelith moves to the dead beast, pulls out a dagger and starts trying to cut out its eyes.  Another reptile emerges from the same path.  Seraphine stays put.  Meles uses the Hide action.  Nova uses True Strike and hits the new creature.  Aeon uses the Dragon Breath weapon and then closes in and Attacks, Action Surges and Attacks again.  Nixie attacks with Starry Wisp and misses.  He then uses the Luminous Arrow to hit the reptile.
+* ROUND FIVE:  Draelith uses Silent Image to try and protect Aeon.  The reptile uses its gaze to restrain Aeon and Nixie.  It then bites Aeon and moves next to Draelith.  Nova, Seraphine and Meles all attack.  Aeon and Nixie become unrestrained and avoid petrification.
+Draelith and Seraphine collect the bassilisk eyes.
+Nixie investigates one of the skeletons in an alcove and finds… male human with longish hair pulled back.  Scimitar in his hand (stone), pouch (stone). There's a pack next to him (not stone). Inside he finds:
+* 50gp in a pouch - 8 each, but 9 for Draelith and Melles
+* long bow (BoH)
+* quiver with 12 arrows (Melles)
+* 2 daggers (Aeon)
+* a reddish color potion (looks like healing potion) (Nixie)
+* a bedroll (Draelith)
+* 50ft rope (BoH)
+* crude map mentions city Ahnassa and has directions from there to here and a note to Bauthek (this guy)
+* another bag – nothing in it, but I think it's a Bag of Holding (Nixie)
+Bauthek,
+         Here is your advance of 50gp, as well as other supplies discussed.  Please use the map to find the watchtower.  It was destroyed, but hopefully you can find relics, artifacts, tomes or tools that might have been left behind or overlooked. My understanding from other information is that this will be a setting with many caves and I would not leave any undisturbed.  They probably utilized the area fully.
+         I am looking for a few specific things, but at this point will take anything.  Please use the bag for most things and be sure to note what you store inside.  This will protect the items and also keep them safe from prying eyes.
+         Others are likely on the trail, too.  Word got out faster than I expected.  Don’t trust anyone unless they say they are working with me, but even then, I would require proof of some kind.  Good luck and keep me updated.
+                 Your ser (document is torn)
+Aeon finds:  A shield +1 and then some,  a flint, torch 9 gp, some silver, 40gp worth of incense, smoked jerky, hand drawn map, dried herbs and a few other things.
+We make note of the petrified people so we can inform others.  Based on what we know about basilisks, we can extract the glands.  Seraphine uses her tools to work through this process.  She is successful in extracting enough for two doses.  The herbs are Calendula, which Seraphine knows can be mixed with holy water and used to heal wounds or perform lesser restoration.
+The Path Beyond
+Nixie is looking around and finds a secret opening that leads beyond the basilisk lair.  Meles scouts ahead.  He finds where people have camped and sees an exit to the outside, but decides not to investigate further. 
+We decide to head back out to go to where the hobgoblins are.  As we backtrack and exit the cave, we see three (3) wolves patrolling about.  
+INITIATIVE – Combat vs. Wolves
+* ROUND ONE:  Seraphine uses Toll the Dead and hurts a wolf. The wolves advance.  One wolf bites Meles and knocks him prone.  Meles stands, Disengages, steps back and shoots with Sneak Attack.  Nixie attacks with Guiding Bolt and kills the one wolf.  Aeon misses.  Nova makes one blind.  Draelith creates a Minor Illusion of a wounded gertot on the tier below to try and draw the wolves away.
+* ROUND TWO:  Seraphine moves up and takes a defensive stance.  One wolf moves towards the gertot.  The other one moves up towards the party.  Draelith hits the wolf with his Starbolt.  Meles shoots the wolf and kills it.  Nixie attacks Guiding Bolt and hits the remaining wolf.  Aeon hits.  Seraphine hits.  Nova critically hits, killing the last wolf.
+We make it down to the hobgoblin cavern and after some convincing, including bringing them one of the newly deceased wolves, they let us take shelter with them inside the locked room.  All are able to take a long rest.
+It’s the 22nd of Evalee, 1246
+In the morning, we converse briefly with the hobgoblins, asking about what they know of the cave system.  They say that everyone generally kept to themselves, but that recently there has been an influx of travelers - some individual, some in groups - and that nothing has been right since.  In addition to being displaced by humanoids, the wolves have been more aggressive, too.  They are considering moving somewhere else in the crags.  Expressed concern about the goblins they “managed” in an adjacent cave, but not enough concern to check on them.  We agree to take a look.  Aeon pays them 4gp to continue to watch/hold Isgo while we explore for another day or two.
+We make our way cautiously outside of the cave we sheltered in, but see nothing of interest.  Meles scouts ahead to the closet cave and finds it is a small, 20’x20’ cave with discarded bones, mostly of the animal variety.  No sign of any recent activity.  We then proceed to the next cave over and Meles scouts ahead, followed by Aeon.  This cave has a similar construction to the hobgoblin cave - a mix of stones and natural cave.  This is probably the cave the hobgoblins were referring to.  After entering and looking to the right, Meles sees some pens constructed like the “doors” we found in the hobgoblin lair - constructed of sticks and rope.  But they are empty.  He then goes back and takes the left and sees the cave extends some distance, with a pool of liquid (water?) 30’ ahead.  He gets closer and hears a frog croak - then looks and sees it is being chased by a creature made of steam.
+– THE SESSION ENDS HERE – 
+4
+	Character level at end of the session
+	0
+	Sessions played at that level
+	
+
+14 - Boils and Blood, Meles is Gross
+Session Date:  July 27, 2026
+In-game Date:  22nd of Evalee, 1246
+Starting Location:  Jagged Waste Crags, Cave Terrace
+The Mephit & Gnoll Cave
+We pick up in the cave on the lower terrace where Meles and Aeon went in a cave and went left.  They notice a steam-like creature chasing a small frog.  Meles is very still, having snuck up to about 10 feet away from the creature.  The creature swipes at the frog, killing it and throwing it into the water.  This bothered Meles.  Meles draws his bow and shoots it, causing it to explode.  Two more descend and combat begins…
+* ROUND ONE:  One of the creatures advanced to Meles, 10 feet away and breathes a cone of steam on Meles.  The second creature does the same.  Meles is unable to dodge.  Meles shoots an arrow at one of them, hits and runs past Aeon.  Aeon produces a firebolt and shoots at the one Meles hit, missing the creature.  Draelith shoots his Firebolt, connecting but the creature absorbs it.  Draelith then causes an illusionary rock to appear that he hides behind.  Nixie, rushes forward, and hits the creature that had been hit with a Guiding Bolt, killing the creature.  Nova dashes into action.  Seraphine feels her shield form magical piercing barbs that damage her, though giving her Heroic Inspiration.  She advances to the party.
+* ROUND TWO:  It moves forward and claws at Nixie, who uses the Shield spell to make it miss.  Meles advances past, shoots it and it kills it, exploding it, causing steam damage to most of the party.
+Draelith recognizes the creatures as Steam Mephits.
+Meles scouts ahead, noticing more corpses.  He informs the party and then stealths to scout again.  Nixie looks for secret doors in the room with the dead animals. He sees a "slit" in the wall along the room we were just in and can see the party. Would be a good spot to put a scout and surprise people with a shot.  Meles scouts to the next room and sees more corpses, and returns to inform the party.  Draelith moves the debris around in the pool and a bloated arm floats up.  Nova thinks someone may have scoured the area, taking anything of value.  Further up past the pool, there is a stream that feeds it that we follow.  
+We move up stream and see a door.  The door is locked. Meles is unable to pick the lock, but Nova is successful.   Nova opens the door, and an arrow flies her way from a Gnoll that was across the room, initiating combat.
+* ROUND ONE:  Seraphine feels the bite of the shield, but passes the Heroic Inspiration to Nixie.  Aeon advances into the room and shoots a firebolt, critically hitting the gnoll and making it drop its bow.  Draelith moves in and casts Mind Sliver, causing psychic damage to the gnoll.  Nixie moves in, casts Guiding Bolt using his Heroic Inspiration and critically hits the gnoll, causing him to fall prone.  Seraphine misses with a Guiding Bolt.  Meles advances and critically hits with his short sword.  
+The gnoll has some weapons.  Searching the room, Aeon notices a hidden door safeguarding a chest.  Aeon removes the chest and places it on the ground in the room.  Meles and Nova search the chest for traps, not finding any.  The two work to unlock the chest, but are unsuccessful.  Unable to open the chest, Seraphine crushes the lid with her mace.  There is a strange amulet with interlocking gears.  Nixie investigates the item, determining it as magical and recognizes it as a Clockwork Amulet and places it around his neck.  
+Last Cave on Lower Terrace
+The cave opens into a large cavern, which leads up to where we fought the basilisks.  Meles and Nova search the room.  Meles finds a silvered dagger.  We take some time for Aeon to cast Detect Magic and Seraphine casts Detect Poison and Disease.  We take the path through the basilisk cave and back out on the terrace above.  We exit the cave and move on to a cave that we have not explored yet.  On the way, we notice the remains of dead animals.  About 40 feet from the cave entrance, Meles notices a human head.  Draelith casts Prestidigitation.  Hidden under the head pouch with 4 gold pieces and a Greater Healing potion.  As we approach the cave, we smell sour and rot.  We pick up that the smell reminds us of the cave room with the gnoll.
+The Cave of Rot
+We enter the cave that comes to a cross road.  Ahead is a niche full of empty boxes.  We see claw marks on the walls.  Meles moves left.  A bit down, the tunnel forks.  The left passage dead ends and there appears to be a dead gnoll.  The right passage has walls and ceiling decorated with skulls and bones.  Meles back tracks to make sure the path behind us is nothing following.  Draelith investigates the dead gnoll.  The passage at the right fork leads to a room that smells horrible.  There is a pit in the middle of the room, full of dead bodies.   Around the pit are sitting areas, with furs.  There are stairs on the opposite side of the room.  Meles follows the stairs.  At the top of the stairs, there is a tunnel that heads off to the right.  The hall leads to an elongated room with dead gnolls and a dead Radiant Eye cultist.  Draelith asks Seraphine how long ago the cultist was killed, and it appears it was only a few days ago.  We strip off the cultists tabard, clean it up with Prestidigitation and repair it with Mending.  We find stairs leading back down to the area.  The stairs lead to a passage that leads back to the cave entrance, but with a door across on the opposite wall.  There is some gnoll writing that appears to be some type of warning.  We open the door, revealing a room full of webs.  Nixie tosses a torch into the room, drawing out whatever creature is in the room into combat.
+* ROUND ONE:  Serephine feels the bite of the shield as she gives Heroic Inspiration to Aeon.  Meles shoots at the Giant Spider, critically hitting.  The Giant Spider rushes forward and shoots a web on the torch, causing the torch to go out.  It then retreats up the webs.  Nova casts Blade Ward.  Nixie hits it with Guiding Bolt and the Giant Spider appears to die, caught up in the web.  Seraphine enters the room and notices movement in the web.  Seraphine shoots Guiding Bolt towards the movement, hitting another Giant Spider a ways off.  The Giant Spider advances and casts a web at Nixie, who is able to dodge it.  Draelith moves in, lighting up the torch, picking it up and moving to the corner, trying to burn the webs.  Aeon shoots the Giant Spider with a Firebolt. 
+* ROUND TWO:  Meles moves in and shoots the Giant Spider killing it.
+Nixie, Draelith and Meles do a controlled burn to see what was caught up in the webs. We see skeletal remains.  We find a pack, an old man with a gold ring (with an amethyst).  In the pack we find 37 Silver Pieces, a pearl, a spellbook and some slippers.  The Spellbook is an Enduring Spellbook that has:  Identify, Detect Thoughts, Locate Object and Sending.  Draelith casts Identify to learn that the ring is a Ring of Poison Resistance, and the slippers are slippers of Spider Climbing.
+Looking around the room, we find a secret passage behind a rock that has well preserved man-made stairs that rise.  The workmanship on the stairs and hall rising up represent something that was more civilized and institutionalized before whatever collapsed around them.  We move up the stairs and begin to smell smoke.
+– THE SESSION ENDS HERE – 
+4
+	Character level at end of the session
+	1
+	Sessions played at that level
+	
+
+15 - Wax On, Wax Off
+Session Date:  August 3, 2026
+In-game Date:  22nd of Evalee, 1246
+Starting Location:  Jagged Waste Crags, Cave Terrace
+Up the Stairs
+As we go up the stairs, Seraphine starts wondering about her shield out loud.  Nixie and Aeon notice runes on the straps used to secure the shield to her harm.  Upon studying further, Seraphine notices the runes make some reference to the goddess Natafae.  Nixie wonders about our path up these stairs.  It appears to be not used - perhaps it is a secret passage or a back entrance that no one else knows about.  Aeon complained about the steam mephits, noticing that no other corpses were burned by their steam.  Draelith ponders combining the spell books, thinking it will be expensive.   Nova is sick and tired of the blood, corpses, death and monsters.  Nova puts on the tabard of the Radiant Eye in case we need to act like we are part of the cult.
+As the party nears the top of the stairs, Draelith notices the stone in his pocket getting warm.  He checks it, and calls out trying to send “What do you want?”  There is no answer.  Perhaps it is because of where we are?  We’ve gone up two flights of stairs.  At the top of the stairs, there is one door.  Meles quietly opens the door and sees a passage that goes left and right.  The stone that Draelith is carrying begins to pulse at the same rate as his heartbeat.
+Nixie notices a symbol on the wall at the top of the stairs. Seraphine recognizes it as a symbol for the Osmanae, signalling that we may be in the right location… the “Last Watchtower of the Osmanae” was the reference that Embryl told Draelith back at Scarwatch Hold.  We appear to be in a large underground passageway.  The door from which we entered appears well hidden and secretive from the other side.  We find a way to mark the door and determine how we can mark the location, leaving a rock across the hall to help us.  There is evidence on the road that carts were/are used to haul things in this corridor.
+Meles goes into stealth to check the passage to the right.  Every so often there appears to be timbers.  30 feet down, there is an area that is being excavated, 6 feet wide to 6 feet tall.  This appears to have happened very recently.  Aeon notices another opening about 20 feet down on the left the way we’re heading.  Aeon walks up to check out this opening and sees that it opens into a passage that looks to be about 60 feet long and ends in a chamber, but he doesn’t investigate this further.
+Meles proceeds down the recently excavated tunnel.  Seraphine hears a noise in the larger corridor and we all briefly hide in the excavated tunnel.  Nova stealths back to investigate the sound.  She walks a long way back down the passage, past the hidden door, and finds that the corridor ends in what looks to be a cave-in with boulders and rubble, and notices a small hole in this pile of stones.  She believes the noise appeared to be associated with some four legged burrowing creature.
+Meanwhile, Meles determines that the excavated tunnel leads to the outside, based on turning a corner and seeing daylight far in the distance.  But he doesn’t proceed further - instead he turns around and heads back to the group waiting to re-renter the corridor.
+We decide to go back to where Nova heard the noise.  Meles stealths and heads back first.  He finds a satchel tucked in a side alcove next to the rubble that he quickly grabs.  The party comes up and giant rats jump out and attack.
+* ROUND ONE:  Draelith misses with a Starbolt and puts a rock in front of Nixie for cover using Minor Illusion.  Meles moves up and attacks, killing one. He moves to the other one and hits it.  Seraphine casts Sacred Flame, but the Giant Rat makes his saving throw.  Aeon uses Firebolt against the one that Meles attacked, but he misses.  One giant rat runs up and bites Aeon.  The second giant rat runs up and misses.  Nixie uses Starry Wisp to attack one, and misses.  Nova uses True Strike to hit one of the giant rats.
+* ROUND TWO:  Draelith hits with a Starbolt.  Meles sheaths his weapons so that he can use his crossbow next round.  Seraphine uses Sacred Flame, but the giant rat saves.  Aeon critically hits one of the giant rats and kills it.  Aeon swings at the other giant rat and misses.  Nixie uses Starry Wisp and critically hits, killing the giant rat.
+Studying the area, the group thinks this could have been the main entrance to this area (there is some evidence of daylight in the distance, peering into the rubble pile through the rat tunnel).  Meles looks in the bag and finds various items associated with the excavation.  Meles finds a note that has something that occurred on the 9th day of Evalee, 1246.  This seems to be someone’s pack that was stolen and dragged here by the rat (evidence of bite marks in the leather, combined with slide marks in the dust).  Whoever the satchel belonged to was a meticulous note taker.  The map inside the satchel was crudely drawn, likely on the first day that someone first entered this area.
+Before following the map to the circular room that Aeon discovered earlier, Meles proceeds to the far end of this corridor to find another cave-in which makes this corridor “dead-ended” on both sides.
+The party now moves up the hall to the circular room we noticed on the map.  As they travel through the 60 foot hallway, there are some images that appear on the ceiling, thanks to magic from Draelith, Meles, and Nixie - having a bit of fun.  They enter the chamber coming through a broken portcullis and find a circular room with various symbols of the sky depicted on the tops of 4 hallways that lead from here.  The path that the group came from seemed to have a “shooting star” symbol, while the other halls are marked by a sun symbol, a group of stars, and a crescent moon.  There is a large round pedestal in the center of of this room that has those same symbols on it, as well as two “arms” (similar to a clock).  Nixie checks out this device.  Aeon begins casting Detect Magic.  Draelith moves up next to the pedestal and the Sending Stone pulses.  Draelith pulls up the stone and sees a vision in his head:
+Bronze rings turning beneath countless stars
+Patient hands recording observations
+Moonlight reflecting through a polished crystal
+He thinks this is likely a vision of the past, but isn’t sure.  Nixie determines that this device is mechanical, which Aeon supports since the only magic he senses are traces from the previous hallway and his companions' attempt at humor.  Nixie spends some time studying the pedestal, looks around for a tool to serve as a temporary crank since the pedestal mechanism is broken, and starts to move things and feels gears clicking.  This doesn’t work well so then Nixie removes the clockwork amulet that he found and was wearing and finds that it fits the center of the large device.  He, Draelith and Nova then try to move the pieces - and we find they only move clockwise (at least with the configuration we have been able to create).  The arms on the device move to the long arm to the sun and the short arm to the moon.  The portcullis under the moon opens to a passage.
+We move down a passage towards the sound of dripping water.  We move a ways down the passage and send Meles to scout ahead.  Meles comes to an archway on the left side, where there is a room that opens up into a chamber filled with names etched into the walls all over.  It appears very old.  Draelith is able to determine that the names seemed to have been carved into the walls over time starting on the left side and working around to the right.  Nova checks to see that the last name etched is Eustatus Glenleah, likely from the Glenleah vec in Inverland.  It’s clear from all of the names that the Osmanae brought forth people from all over Myrdae.  Draelith records names while Meles moves further down to search.
+Meles moves down the hall slightly to see another archway with a small chamber with water in a 6’ pale stone basin that is on the floor.  The ceiling in this room rises into a smooth dome that looks like at one time it opened to the skies (but is now collapsed).  The movement of all players seems to keep a ripple in the basin.  There is also a constant drip from one of the sides of the room - that might be contributing to the ripple.  Nixie plugs the water that is dripping using candle wax, everyone gets quiet and still, and then the water in the basin gets very still.  At that point, we notice objects carved into the bottom of the basin.  Nixie begins to draw the symbols (a sun, cluster of stars, a sun, with a crescent moon underneath) and notices a stone in a “voided” space that we move.
+Hidden in this hole under the basin are preserved bronze observation templates (constellations), a ancient stone template of the phases of the moons, and a sealed water proof scroll case.  Included on the bronze observation templates is a phrase: “Reflection reveals what direct sight conceals.”  We get the impression that the basin in this chamber was likely used to reflect stars, constellations, and moons when it was active and open.  The scroll case holds several documents that were preserved on wax-treated vellum.  Some have very worn script, but some passages are readable:
+Observation cycle 228
+Eastern assemblies continue to perform within acceptable tolerances.
+Prism Three required minor polishing following particulate accumulation.
+Western confirmation received without discrepancy.
+No further adjustment necessary.
+Then another:
+Observation Cycle 233
+Sky-Touched Observer accepted into service.
+Mark confirmed.
+Additional notation unnecessary. 
+As Nova reads, that passage, Draelith feels the stone warm again.
+Then another:
+Observation Cycle 237
+Assembly recommends postponement of Radiant Trial Three pending additional calculations.
+The Director disagrees.
+Request submitted to Central Assembly.
+Then finally there is one other page, but it has been cut.  What is left are a few cut passages:
+"...the Director insists the calculations are correct."
+"...risk remains acceptable."
+"...if successful, retrieval may begin before winter."
+There is some discussion about these pages.  While no one is sure what they mean, it shows a few things:  that the Osmanae recorded everything, that there seem to be multiple watchtowers or locations that all worked together, and that there was some disagreement about something that was risky with a pending “retrieval.”  
+We take the stuff from under the rock and make it appear the way it was before we showed up, making the water drip again.  If the cultists or anyone else comes, they won’t know what they missed.
+We proceed down the hall and find a scholars chamber or teaching room that has nothing of consequence.
+We go back to the celestial gear room and work the device to make the portcullis with the sun open up.  We follow that path, that shows more tinkering and engineering.  The corridor opens into a chamber 60 feet vertical deep.  We situate ourselves to raise the pedestal and create a bridge across a 40’ gap.  This involves Meles and Aeon having to scale down chains and then Aeon climbing up other chains.  These chains appear old and in disrepair.  In fact, some of the chains at the great bridge were completely destroyed.  Draelith finds evidence that someone had been her trying to fix the bridge mechanism, but seemed unable to do so.  After everyone is in place, Nixie and Nova direct everyone to operate the gears, cranks, dials, and mechanisms in a coordinated way and we are able to move the center of the bridge up to create a fixed platform to cross. 
+Beyond the bridge is a workshop, filled with every type of tool and mechanism to keep this place running.  Of note is a big polished bronze mirror with fine adjustment controls on the wall.  We also see a matching bronze lantern that stands out because of the material and condition of it.  Nova lights it up using magic and nothing happens out of the ordinary.  The group studies the room and notices a small bronze mirror almost hidden on the wall opposite the big mirror.  Nova shines the lantern in that direction and it refracts light to the large mirror - but at this point, nothing out of the ordinary happens.  Draelith asks Nixie to try to adjust the settings of the big mirror.  In doing so, Nixie positions it so that it lights up a section of the wall which activates a “click,” opening a hidden shelf.  Inside, there are additional tools, adjustment keys, polishing cloths,and a small notebook.  We find a reference inside that almost calls back to what we found in the water room:  
+Eastern assemblies calibrated.
+Primary reflector restored to specification.
+Awaiting western confirmation before Observation Cycle 233.
+This again confirms that there were western and eastern arms of the Osmanae and that these people were meticulous in their operations.  Further, they were very intelligent and were able to use engineering to create things vs. magic - at least for now.  Observation seems to be a key point for these people.
+Nixie pockets some gears that look like they may do a better job in the "clock" room on the pedestal than his amulet. We then head back to the pedestal room.
+We then align the device using the new tool and it opens the seven stars portcullis.  This leads to a hallway where we see more signs of traffic - wheelbarrows, footsteps, tools, timber, etc.  We round a corner and come to a recently excavated area that is a lintel over an open doorway that has been newly reinforced by timbers. Under a carved Osmanae emblem, the sign reads:  “Khelar Watch Eastern Observation Point II.  May the heavens reveal what the world has yet to see.”
+This looks like an official entrance into a large foyer with a grand staircase.  Pillars and walls are etched with stars and constellations.  The way is lit by a few lanterns here and there, and again, there are footprints and evidence of excavation work everywhere.  Despite the grandeur of the room, it seems very fragile as there is rubble everywhere and it looks like someone has tried to brace and reinforce much of the place. 
+As the party starts to enter the foyer and look up the staircase, the group hears something.  Everyone goes still and listens.  We hear voices - there are people talking somewhere up ahead.
+– THE SESSION ENDS HERE – 
+4
+	Character level at end of the session
+	2
+	Sessions played at that level
+	
+
+16 - <Cool Name Here>
+Session Date:  August 24, 2026
+In-game Date:  22nd of Evalee, 1246
+Starting Location:  Jagged Waste Crags, Cave Terrace
+Watch Eastern Observation Point II 
+As we advance up the stairs, Aeon and Meles move into stealth.  Meles (rolling high on his ability check) disappears from everyone into the shadows.  Atop the stairs, the tunnel turns to the right.  There has been a lot of activity, recent excavation.  Meles eases up to a doorway and finds two (2) people at a table doing having a discussion about aesthetics things. They seem to be wearing cultist tabards. But they don't seem to be acting like you might think cultists would act. They don't appear to know they're under observation.
+Meles came back to tell the group what was going on. He went back into stealth and Aeon is going to go talk to them. The rest of the group is wanting to stay near, but hidden to support Aeon if things go pear-shaped.  Aeon enters the room, “Hey friends”.  They look confused, but talk for a bit and Nova comes in wearing the Radian Eye tabard.  Their names appear to be Gault and Bolan, as they chat to get to know each other.  Two other guys come into the room, a guy and a lady.  The lady speaks up with words of command.  Aeon and Nova act as if they are judging the work done here.  Nixie, Seraphine and Draelith are just around the corner, listening to the discussion.  “I am Selris.  This is Garamond”, she says.  They claim to have excavated to get to this area.  Draelith casts Minor Illusion on her Seraphine to give the illusion that she’s wearing a tabard of the Radiant Eye.  Nixie casts the same spell, giving himself a tabard too, picking up a pick axe and following Seraphine into the room.  Seraphine asks Garamond where he got the scar.  Nova is reading thoughts and can tell that Garamond is thinking about how he got the scar; something about two kids and a squirrel.  Selris tries to calm the situation by asking everyone to take a seat and discuss why there are stranger here.  Conversations continue about why Aeon, Seraphine, Nova and Nixie are there.  After some time, Selris drops pieces she’s found on the table, saying it’s part of a puzzle. The ending says …
 
 
-
+Galt pulls out a map; recognizing it as the same writing that was used in the map in the satchel that Meles found.  He tells Selris we are ready to proceed … she folds up the map and says we will wait till tomorrow.  Aeon and Nova follow Selris and Garamond further beyond the room.  Aeon and Nova are led to a large doorway, which they claim that they will open tomorrow; they had spent several stretches preparing the area to open the doors.  Nova investigates the doors, noticing stone that has shifted, but the frame is under tremendous pressure.  They return and decide to show where people can rest.  They start relaxing and eating.
+Meles starts looking at the door for traps or to see if it would collapse.  He determines there are pressure points that make it possible for the door to collapse.  He fingers the door, looking for other pieces that would open the door, but he is unable to determine.  After more thought, he believes that tinkering skills would make it possible to open the door.
+Nixie starts messaging people that he feels that Garamond sent someone to check our story and that we may be in trouble.  We attack the group.
+* ROUND ONE:  Nixie casts Heat Metal on Garamond’s sword, causing him to drop it. Gault steps forward and throws a dagger at Nixie.  Bolan also throws a dagger and misses Nixie.  Meles runs up to attack Garamond, Aeon runs up to Garamond and attacks.  Draelith uses Phantasmal Force to create an illusion of a starry creature emerging from Nova’s tabard and stepping up to smother her.  Garamond attacks Meles, hitting twice.  Seraphine advances to Gault and casts Inflict Wounds,   Nova casts Vicious Mockery on Garamond, killing him.  The other Radiant Eyes members attack.  Selris breaks Draelith’s Phantasmal Force and stands, yelling for the others to defend.  Nixie casts Thunder Wave, hurting many of the cultists.  
+* ROUND TWO:  Gault attacks Seraphine, missing.  Bolan attacks Nova,   Meles steps up and uses Sneak Attack on Bolan.  Aeon moves up to attack Selris and misses.  Draelith casts Starbolt (Firebolt) and hits.  Seraphine fumbles, losing her reaction.  Nova casts Dissonant Whispers on Selris.  The other cultists step forward and attack hitting Meles and Nixie.  Selris attacks Aeon and Nova and then runs.Nixie uses Thunderwave again, blowing the guys away from him.  
+* ROUND THREE:  Gault attacks Seraphine, fumbling.  Bolan attacks Nova and hits.  Meles disengages from the guy he was fighting and attacks the one attacking Nova, killing the cultist.  Aeon steps up and attacks Selris.  Draelith casts Phantasmal Force, but Selris saves.  Seraphine steps up  to heal Meles.  Nova uses Dissonant Whispers, but Selris saves.  The other cultists run up to Nixie and attack, missing him.  One cultist hits Nova.  Selris casts Spirit Guardians, with Aeon, Seraphine, Meles and Nova being in range.  Nixie turns to hit Selris with a Guiding Bolt and misses, but hits with a Luminous Arrow.
+* ROUND FOUR:  Gault attacks Nova, but misses.  Aeon attacks her with his shortsword and shortsword, hitting twice.  Draelith misses Selris with a Starbolt (Firebolt).  Seraphine uses Channel Divinity and raises Meles and healing Nova.  Two cultists step up and hit Nixie.  Another cultist attacks Seraphine and hits once.  Nixie casts Healing Word on himself.and hits with Starry Wisp. 
+* ROUND FIVE:  Gault misses Nova.  Meles stands up and picks up his Scimitar.  Aeon advance to Gault and hits.  Draelith hits the cultist next to Seraphine.  Seraphine hits a cultist with her mace.  Nova casts Vicious Mockery on Gault.  A cultist attacks Nixie, hitting.  Another cultist attacks Seraphine and hits.  Nixie kills one cultist. 
+* ROUND SIX:  Gault misses Nova.  Meles attacks a cultist and Critically hits.  Aeon hits Gault twice.  Draelith kills Gault.  Seraphine kills the other cultist.  Nova casts Vicious Mockery on the last cultist, but he saves.  The other cultist hits Nixie.  Nixie cast Starry Wisp and misses.
+* ROUND SEVEN:  Mele kills the remaining cultist with his scimitar.
+As the last guy falls, there are reinforcements coming from the area where the muscular woman ran off too.  The muscular woman yells, “what the f…’.
+– THE SESSION ENDS HERE – 
+4
+	Character level at end of the session
+	3
+	Sessions played at that level
+	
 
 Goals
 Goals
@@ -1143,73 +696,6 @@ What are the goals of the players that the party is aware of…
 	
 
 	
-
-
-
-NPCs
-Important NPCs
-
-
-Hostile
-	Unfriendly
-	Neutral
-	Friendly
-	Helpful
-	
-
-Name
-	Reputation
-	Description
-	Notes 
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	* 	
-
-	
-
-	
-
-	
-
-	
-
-
 
 
 
@@ -1652,40 +1138,3 @@ Sorcerer or Wizard
 	Defender
 	I haven’t seen you play mean and beefy.
 	Tiffany
-	
-
-	
-
-	
-
-
-
-
-
-
-
-
-
-Tab 6
-12 - Meles is Awesome (06.01)
-Session Date:  June 1, 2026
-In-game Date:  21st of Evalee, 1246
-Starting Location:  Jagged Waste Crags, Cave Terrace
-Inside a Cave
-It is the evening and the sun is setting.  After clearly noting the pit that Meles uncovered, the party looks around.  The cave tunnel goes 15 feet and then dead ends into a passage that goes left and right.  We check the pit and notice only bones.  There are bloody prints from wolves and their victims.  Meles scouts ahead.  Left it goes 40 feet and appears to open into a room that curves north.  To the right, it goes a bit and angles back, but there is a passage that goes to the left.  Meles scouts to the left and sees bones in the room ahead.  Nova compliments Meles for his scouting prowess … “That’s amazing”.  
-We move into the room.  The bones are those of dead kobolds.  Aeon throws one of the bones into the corner and draws out two giant centipedes.  
-ITS INITIATIVE - Combat vs Giant Centipedes
-      * ROUND ONE:  Nova yells, “we have to make sure they don’t get to Meles”. She shoots at one of the centipedes and misses.  Draelith shoots a Starbolt at one and misses, then retreats as he creates an illusion of a rock to hide behind.  Meles holds his action to shoot one.  Nixie shoots Starry Wisp and misses.  Seraphine moves behind Draelith.  Aeon moves to one of the centipedes and Meles shoots and kills it. So, Aeon advances to the other centipede and swings with his short swords and drops the other centipede.
-We move in and investigate the room.  This was clearly an area where many fights went down, bones of kobolds and dead centipedes.  
-Meles scouts the other path.  We stop and search the alcove.  Nixie finds 5 copper pieces, which he leaves behind.  Meles had scouted ahead to a large room.  Nova whispers to Nixie, “stay in touch; I don’t want anything to happen to him.”  Meles scouts the room and sees two humanoids lying down; perhaps they are hobgoblins.  Aeon and Draelith run back to get a wolf head to show the goblinoids that we have helped them.  Nova speaks in goblin, trying to get information out of them.  They say, if you’re here to kill us, then just finish us off.  They were trying to hide.  The one speaking, Gorg, says that Tuudu is hurt.  There is another hobgoblin, Razuu, one of Kelkaruud’s wenches, that is hidden behind a door.  We push our way past the door. Razuu is waiting in the room trying to protect herself.  We help the other hobgoblins into the room to hide.  Razuu follows to get wolf meat to eat.
-We go outside and climb up to the second terrace.  We start climbing up.  It’s a bit tricky, but we all make it up.  We move up to the nearest cave entrance, Meles hiding as he scouts ahead.
-The Next Cave
-This cave is more refined - stone bricks and less earthen - very clean.  There is a path that leads in with many other passages and a barricade off to one side.  Meles examines the first barricade.  The barricade seems to be blocked from the other side, but could be opened.  Meles scouts one of the other paths, one that was off to the left.  He slowly works his way around the passages, looking for clues to where things may be.  He gets to one area as he’s moving along, he bumps into something gooey … A Gelatinous Cube!
-INITIATIVE — Combat vs. Gelatinous Cube
-      * ROUND ONE: The party moves into defensive positions, looking for it.
-      * ROUND TWO:  Nixie hits with Starry Wisp.  Nova uses Dissonant Whispers.  Aeon hits with a Firebolt.  Meles throws a flask of acid at it, hitting it.  Seraphine looks at it.  Draelith comes up around it and hits with his Starbolt.
-      * ROUND THREE:  Nixie hits again with Starry Wisp.  Nova uses Dissonant Whispers again.  Aeon hits with another Firebolt.  Meles shoots an arrow and hits it.  Seraphine uses her vial of acid to hit it.  Draelith hits with a Starbolt.
-      * ROUND FOUR:  Nixie hits with Starry Wisp.  Nova uses Dissonant Whisper again.  Aeon hits with another Firebolt.  Meles shoots another arrow to hit.  Nova whispers, “Meles moves like a majestic panther.”  Draelith slays it with a Starbolt.
-We move into one of the rooms we discovered.  There are dead humanoids and hobgoblins.  Draelith finds a dead humanoid with a tabard of the Radiant Eye.  Seraphine finds Isgo, unconscious, but still alive. She stabilizes him and the group takes a short rest and questions Isgo.  Melese scouts the area further down a natural tunnel.  We intimidate Isgo.  He said the cult took him to make him fight - he was knocked out and brought here, but doesn’t remember much else.
-Meles comes back and searches beyond the barricade.  He finds a path that branches to the left where there is a smaller room.  He finds a lockbox that he picks the lock on.  There is a wolf-fur blanket, a pouch (17gp, 8sp), a shortbow and a quiver with arrows.  Meles returns.   We work our way back to the blocked off area and reach a door.  There is goblin speak.  After a moment, we get them to open the door.  There are four hobgoblins, including Kelkaruud.  We convince him to go to the other hobgoblins in the other cave.  They take Isgo to keep him until we return.
-We go back to the natural tunnel that is marked with many boulders, other natural cave features.  We notice claw marks along the way.  In time, we notice a stone creature that seems to be hiding.  We then figure out this isn’t a creature, nor a statue, but appears to be someone who has been turned to stone. Upon further investigation, we find other “statues” as we go deeper into the cave.  Draelith goes invisible and moves ahead to join Meles.  As the rest of the party enters a large chamber, Draelith creates a noise in one of the cave alcoves to see if it triggers anything.  It does - there seems to be a large reptilian creature lurking near Draelith - who’d been hiding.
