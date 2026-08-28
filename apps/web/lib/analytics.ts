@@ -292,6 +292,17 @@ function safeReferrerHost(value: unknown): string | null {
   }
 }
 
+// The only site pages a signed-out visitor can actually render (mirrors the
+// page entries of PUBLIC_PATHS in proxy.ts). Every other page is members-only:
+// the proxy redirects an unauthenticated browser to /signin before the page
+// loads, so a beacon reporting a *view* of one of those paths could only have
+// come from a signed-in browser.
+const PUBLIC_PAGE_PATHS = new Set(["/signin", "/terms-of-use", "/privacy-policy"]);
+
+function isGatedPagePath(path: string | undefined): boolean {
+  return Boolean(path) && !path!.startsWith("/api/") && !PUBLIC_PAGE_PATHS.has(path!);
+}
+
 export function recordUsageEvents(input: {
   rawSessionId: string;
   rawVisitorId?: string;
@@ -316,6 +327,18 @@ export function recordUsageEvents(input: {
       `).get(visitorId) as { visitor_email: string; visitor_name: string | null } | undefined;
   const visitorEmail = cleanText(input.identity?.email ?? internalIdentity?.email ?? knownIdentity?.visitor_email, 200) ?? null;
   const visitorName = cleanText(input.identity?.name ?? internalIdentity?.name ?? knownIdentity?.visitor_name, 120) ?? null;
+
+  // A beacon that resolved no identity yet reports views of members-only pages
+  // is a contradiction: the proxy would have bounced an unauthenticated browser
+  // to /signin before those pages rendered. The identity was lost in transit
+  // (e.g. a session cookie that momentarily failed to decrypt during a deploy),
+  // not genuinely absent. Recording it anyway would mint a phantom
+  // "Unidentified visitor" that no later beacon can backfill if this session id
+  // never returns. Drop it instead of polluting the analytics with a ghost.
+  if (!visitorEmail && input.events.every((event) => isGatedPagePath(event.path))) {
+    return;
+  }
+
   const ua = input.userAgent ?? "";
   const deviceType = /ipad|tablet/i.test(ua)
     ? "tablet"
@@ -333,7 +356,9 @@ export function recordUsageEvents(input: {
   `);
   const updateIdentity = db.prepare(`
     UPDATE analytics_sessions
-    SET visitor_id = ?, visitor_email = ?, visitor_name = ?
+    SET visitor_id = ?,
+        visitor_email = COALESCE(?, visitor_email),
+        visitor_name = COALESCE(?, visitor_name)
     WHERE session_id = ?
   `);
   const backfillVisitorIdentity = db.prepare(`

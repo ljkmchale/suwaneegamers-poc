@@ -10,6 +10,44 @@ const { createBuildMetadata } = require("./build-version");
 const contentDir = path.resolve(__dirname, "../../../content");
 const repoRoot = path.resolve(__dirname, "../../..");
 const webDir = path.resolve(__dirname, "..");
+
+// Refuse to mint a production bundle without a real session secret. Both A/B
+// slots read the same apps/web/.env.local at runtime, so if it lacks a strong
+// ADMIN_SESSION_SECRET the server falls back to the shared dev secret in
+// lib/userSession.ts — and a cookie sealed by one process can then fail to
+// decrypt in another, silently dropping a signed-in visitor's identity (that is
+// the "Unidentified visitor" analytics ghost we chased down). Load env exactly
+// the way `next build` will, then fail loudly before building.
+const DEV_FALLBACK_SESSION_SECRET = "fallback-dev-secret-change-in-production-32chars";
+// Read one key from the same .env files `next build`/the runtime server load,
+// with the shell's own environment taking precedence. Minimal on purpose: a
+// single unquoted-or-quoted KEY=VALUE lookup, no interpolation.
+function readEnvValue(key) {
+  if (process.env[key]) return process.env[key];
+  for (const file of [".env.local", ".env"]) {
+    const full = path.join(webDir, file);
+    if (!fs.existsSync(full)) continue;
+    for (const line of fs.readFileSync(full, "utf8").split(/\r?\n/)) {
+      const match = /^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/i.exec(line);
+      if (match && match[1] === key) {
+        return match[2].replace(/^["']|["']$/g, "").trim();
+      }
+    }
+  }
+  return undefined;
+}
+function assertSessionSecret() {
+  const secret = readEnvValue("ADMIN_SESSION_SECRET");
+  if (!secret || secret.length < 32 || secret === DEV_FALLBACK_SESSION_SECRET) {
+    throw new Error(
+      "ADMIN_SESSION_SECRET is missing, too short (<32 chars), or the dev fallback. " +
+        "Set a strong 32+ char value in apps/web/.env.local before building for production. " +
+        "Without it the running service silently falls back to the shared dev secret.",
+    );
+  }
+}
+
+assertSessionSecret();
 const allowedSlots = new Set([".next-prod-a", ".next-prod-b"]);
 const activePointer = path.join(webDir, ".next-prod-active.json");
 const readyPointer = path.join(webDir, ".next-prod-ready.json");
