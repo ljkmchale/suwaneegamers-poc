@@ -39,7 +39,7 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               className={styles.portrait}
-              src="/media/images/poc/myra-avatar-poc-v1.png"
+              src="/media/images/poc/myra-avatar-poc-v2.png"
               alt="Myra, an ethereal violet and gold guide"
             />
           )}
@@ -165,7 +165,7 @@ export function MyraAvatarPoc() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className={styles.portrait}
-                  src="/media/images/poc/myra-avatar-poc-v1.png"
+                  src="/media/images/poc/myra-avatar-poc-v2.png"
                   alt="Myra, an ethereal violet and gold guide"
                 />
               </div>
