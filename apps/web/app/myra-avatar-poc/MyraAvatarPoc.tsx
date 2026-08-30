@@ -31,7 +31,6 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
   return (
     <>
       <div className={styles.stage} data-state={state}>
-        <div className={styles.ring} aria-hidden="true" />
         <div className={styles.portraitWrap}>
           {videoTrack ? (
             <VideoTrack trackRef={videoTrack} className={styles.avatarVideo} />
@@ -39,8 +38,8 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               className={styles.portrait}
-              src="/media/images/poc/myra-avatar-poc-v2.png"
-              alt="Myra, an ethereal violet and gold guide"
+              src="/media/images/poc/myra-avatar-poc-v5.png"
+              alt="Myra, a violet and gold fantasy guide"
             />
           )}
         </div>
@@ -160,13 +159,12 @@ export function MyraAvatarPoc() {
         ) : (
           <>
             <div className={styles.stage} data-state="idle">
-              <div className={styles.ring} aria-hidden="true" />
               <div className={styles.portraitWrap}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className={styles.portrait}
-                  src="/media/images/poc/myra-avatar-poc-v2.png"
-                  alt="Myra, an ethereal violet and gold guide"
+                  src="/media/images/poc/myra-avatar-poc-v5.png"
+                  alt="Myra, a violet and gold fantasy guide"
                 />
               </div>
               <div className={styles.status}>

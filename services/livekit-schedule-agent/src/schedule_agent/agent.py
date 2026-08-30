@@ -4381,7 +4381,7 @@ async def schedule_agent(ctx: JobContext):
                     / "media"
                     / "images"
                     / "poc"
-                    / "myra-avatar-poc-v2.png"
+                    / "myra-avatar-poc-v5.png"
                 ),
             )
         )
@@ -4391,9 +4391,10 @@ async def schedule_agent(ctx: JobContext):
         avatar_session = lemonslice.AvatarSession(
             agent_image=avatar_image,
             agent_prompt=(
-                "Preserve the reference character's exact face, violet eyes, hood, "
-                "hair, gold forehead jewel, violet-and-gold armor, lighting, and color "
-                "palette. Myra listens attentively with gentle eye contact and speaks "
+                "Preserve the reference character's exact face, violet eyes, long "
+                "violet hair, gold forehead jewel, violet-and-gold armor, lighting, "
+                "and color palette. Myra listens attentively with gentle eye contact "
+                "and speaks "
                 "with subtle natural head and shoulder movement. Keep her centered and "
                 "camera-facing. Use restrained expressions; do not transform her face, "
                 "clothing, body, background, materials, or art style."
