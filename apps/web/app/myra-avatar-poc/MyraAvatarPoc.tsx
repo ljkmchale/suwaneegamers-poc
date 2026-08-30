@@ -16,6 +16,23 @@ interface ConnectionDetails {
   voiceSessionId: string;
 }
 
+function IdlePortrait() {
+  return (
+    <video
+      className={styles.idleVideo}
+      src="/media/images/poc/myra-avatar-idle-varied-v5.mp4"
+      poster="/media/images/poc/myra-avatar-poc-v6.png"
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      disablePictureInPicture
+      aria-label="Myra waiting quietly to begin a conversation"
+    />
+  );
+}
+
 function AvatarRoom({ onEnd }: { onEnd: () => void }) {
   const { state, videoTrack } = useVoiceAssistant();
   const audioPlayback = useStartAudio({ props: {} });
@@ -42,12 +59,7 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
           {videoTrack ? (
             <VideoTrack trackRef={videoTrack} className={styles.avatarVideo} />
           ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              className={styles.portrait}
-              src="/media/images/poc/myra-avatar-poc-v6.png"
-              alt="Myra, a violet and gold fantasy guide"
-            />
+            <IdlePortrait />
           )}
         </div>
         <div className={styles.status} aria-live="polite">
@@ -138,11 +150,11 @@ export function MyraAvatarPoc() {
       <div className={styles.ambient} aria-hidden="true" />
       <section className={styles.shell} aria-labelledby="poc-title">
         <header className={styles.header}>
-          <p className={styles.eyebrow}>Isolated LemonSlice prototype</p>
+          <p className={styles.eyebrow}>Isolated living-avatar prototype</p>
           <h1 id="poc-title">Myra, the Living Guide</h1>
           <p>
-            A private proof of concept using Myra&apos;s existing voice and intelligence
-            with a real-time LemonSlice avatar.
+            Myra waits naturally without consuming live-avatar credits, then connects
+            her existing voice and intelligence when you tap to talk.
           </p>
         </header>
 
@@ -174,12 +186,7 @@ export function MyraAvatarPoc() {
               aria-label={loading ? "Preparing Myra" : "Tap to talk with Myra"}
             >
               <div className={styles.portraitWrap}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={styles.portrait}
-                  src="/media/images/poc/myra-avatar-poc-v6.png"
-                  alt="Myra, a violet and gold fantasy guide"
-                />
+                <IdlePortrait />
               </div>
               <div className={styles.status}>
                 <span className={styles.statusDot} aria-hidden="true" />

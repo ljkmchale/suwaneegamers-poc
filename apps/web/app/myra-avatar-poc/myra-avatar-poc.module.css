@@ -84,11 +84,6 @@
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-.stageButton .portrait {
-  transform-origin: 50% 38%;
-  animation: idlePresence 7.5s ease-in-out infinite;
-}
-
 .stageButton .portraitWrap::after {
   content: "";
   position: absolute;
@@ -139,12 +134,18 @@
     0 0 2rem rgba(118, 72, 194, 0.18);
 }
 
-.portrait {
+.portrait,
+.idleVideo {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   filter: none;
+}
+
+.idleVideo {
+  background: #05030a;
 }
 
 .avatarVideo {
@@ -251,10 +252,6 @@
 }
 
 @keyframes dotPulse { 50% { opacity: 0.45; transform: scale(0.72); } }
-@keyframes idlePresence {
-  0%, 100% { transform: scale(1.002) translateY(0); }
-  50% { transform: scale(1.012) translateY(-0.18%); }
-}
 @keyframes livingLight {
   0%, 18% { background-position: 105% 0; opacity: 0.35; }
   50% { opacity: 0.8; }
@@ -279,7 +276,6 @@
   .stageButton .portraitWrap {
     transition: none;
   }
-  .stageButton .portrait,
   .stageButton .portraitWrap::after {
     animation: none;
   }
