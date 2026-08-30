@@ -16,30 +16,9 @@ interface ConnectionDetails {
   voiceSessionId: string;
 }
 
-function IdleAvatar({ hidden = false }: { hidden?: boolean }) {
-  return (
-    <video
-      className={`${styles.idleVideo} ${hidden ? styles.idleVideoHidden : ""}`}
-      src="/media/images/poc/myra-avatar-idle-v2.mp4"
-      poster="/media/images/poc/myra-avatar-poc-v6.png"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      aria-label="Myra waiting to begin a conversation"
-    />
-  );
-}
-
 function AvatarRoom({ onEnd }: { onEnd: () => void }) {
   const { state, videoTrack } = useVoiceAssistant();
   const audioPlayback = useStartAudio({ props: {} });
-  const [liveVideoReady, setLiveVideoReady] = useState(false);
-
-  useEffect(() => {
-    setLiveVideoReady(false);
-  }, [videoTrack]);
 
   useEffect(() => {
     if (state !== "listening") return;
@@ -60,12 +39,14 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
     <>
       <div className={styles.stage} data-state={state}>
         <div className={styles.portraitWrap}>
-          <IdleAvatar hidden={liveVideoReady} />
-          {videoTrack && (
-            <VideoTrack
-              trackRef={videoTrack}
-              className={`${styles.avatarVideo} ${liveVideoReady ? styles.avatarVideoReady : ""}`}
-              onCanPlay={() => setLiveVideoReady(true)}
+          {videoTrack ? (
+            <VideoTrack trackRef={videoTrack} className={styles.avatarVideo} />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              className={styles.portrait}
+              src="/media/images/poc/myra-avatar-poc-v6.png"
+              alt="Myra, a violet and gold fantasy guide"
             />
           )}
         </div>
@@ -193,7 +174,12 @@ export function MyraAvatarPoc() {
               aria-label={loading ? "Preparing Myra" : "Tap to talk with Myra"}
             >
               <div className={styles.portraitWrap}>
-                <IdleAvatar />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className={styles.portrait}
+                  src="/media/images/poc/myra-avatar-poc-v6.png"
+                  alt="Myra, a violet and gold fantasy guide"
+                />
               </div>
               <div className={styles.status}>
                 <span className={styles.statusDot} aria-hidden="true" />
