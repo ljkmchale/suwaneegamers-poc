@@ -137,7 +137,6 @@ function buildGlobalRatingsPage(byLocation) {
     'campaign: "World"',
     "visibility: players",
     "tags: [gazetteer, ratings, advents-guide, auto-curated]",
-    `curated_at: "${new Date().toISOString()}"`,
     "---",
     "",
     "# Advents Guide Ratings — All Settlements",
@@ -170,10 +169,19 @@ function frontmatter(title) {
     'campaign: "World"',
     "visibility: players",
     "tags: [gazetteer, settlement, auto-curated]",
-    `curated_at: "${new Date().toISOString()}"`,
     "---",
     "",
   ].join("\n");
+}
+
+// Write only when content actually changed, so unchanged settlements don't bump
+// file mtimes (which would force a needless index rebuild every day).
+function writeIfChanged(filePath, content) {
+  try {
+    if (fs.readFileSync(filePath, "utf8") === content) return false;
+  } catch { /* new file */ }
+  fs.writeFileSync(filePath, content, "utf8");
+  return true;
 }
 
 function loadEntries(db) {
@@ -208,6 +216,7 @@ async function main() {
 
   const byDoc = new Map();
   let written = 0;
+  let changedVault = 0;
   let skipped = 0;
   const failures = [];
 
@@ -226,30 +235,32 @@ async function main() {
       const composed = rating ? `${body}\n${rating}` : body;
 
       // Detail page copy.
-      fs.writeFileSync(path.join(contentOutDir, `${path.basename(entry.slug)}.md`), composed, "utf8");
+      const c1 = writeIfChanged(path.join(contentOutDir, `${path.basename(entry.slug)}.md`), composed);
       // Myra / brain-index copy (frontmatter so it is scoped + player-visible).
       const safeTitle = entry.title.replace(/[<>:"/\\|?* -]/g, "-").trim() || entry.slug;
-      fs.writeFileSync(
+      const c2 = writeIfChanged(
         path.join(vaultGazDir, `${safeTitle}.md`),
         `${frontmatter(entry.title)}# ${entry.title}\n\n${composed}\n`,
-        "utf8",
       );
       written += 1;
-      console.log(`[gazetteer-bodies] ${entry.slug} <- doc ${docId.slice(0, 8)} (${composed.length} chars${rating ? ", +ratings" : ""})`);
+      if (c1 || c2) changedVault += 1;
+      console.log(`[gazetteer-bodies] ${entry.slug} <- doc ${docId.slice(0, 8)} (${composed.length} chars${rating ? ", +ratings" : ""})${c1 || c2 ? "" : " [unchanged]"}`);
     } catch (error) {
       failures.push(`${entry.slug}: ${error.message}`);
     }
   }
 
   // Global ratings page (covers every rated settlement, including map-only ones).
-  fs.writeFileSync(path.join(vaultGazDir, "Advents Guide Ratings.md"), buildGlobalRatingsPage(ratings), "utf8");
+  if (writeIfChanged(path.join(vaultGazDir, "Advents Guide Ratings.md"), buildGlobalRatingsPage(ratings))) changedVault += 1;
 
-  console.log(`[gazetteer-bodies] Wrote ${written} settlements, skipped ${skipped}, failed ${failures.length}.`);
+  console.log(`[gazetteer-bodies] Wrote ${written} settlements (${changedVault} changed), skipped ${skipped}, failed ${failures.length}.`);
   if (failures.length) console.log(`[gazetteer-bodies] Failures:\n- ${failures.join("\n- ")}`);
 
-  if (written > 0 && !noIndex) {
-    console.log("[gazetteer-bodies] Rebuilding brain index...");
+  if (changedVault > 0 && !noIndex) {
+    console.log(`[gazetteer-bodies] Rebuilding brain index (${changedVault} page(s) changed)...`);
     await runIndexer();
+  } else if (!noIndex) {
+    console.log("[gazetteer-bodies] No settlement pages changed; skipping reindex.");
   }
 
   if (written === 0 && failures.length > 0) process.exit(1);

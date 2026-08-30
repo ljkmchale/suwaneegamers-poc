@@ -76,6 +76,17 @@ const jobs = [
     revalidatePaths: ["/gazetteer"],
   },
   {
+    // Fetch each settlement doc's body into content/gazetteer-bodies (detail
+    // pages) and brain-vault/wiki/gazetteer (Myra's index) with Advents Guide
+    // ratings, then reindex. Runs after the gazetteer entries are refreshed.
+    id: "gazetteer-bodies",
+    label: "Gazetteer bodies + ratings (Myra)",
+    schedule: { kind: "daily", time: "10:33" },
+    command: [node, ["scripts/sync-gazetteer-bodies.mjs"]],
+    timeoutMs: 20 * 60_000,
+    revalidatePaths: ["/gazetteer"],
+  },
+  {
     id: "dm-reference",
     label: "DM reference assets",
     schedule: { kind: "daily", time: "10:20" },
