@@ -4381,7 +4381,7 @@ async def schedule_agent(ctx: JobContext):
                     / "media"
                     / "images"
                     / "poc"
-                    / "myra-avatar-poc-v5.png"
+                    / "myra-avatar-poc-v6.png"
                 ),
             )
         )
