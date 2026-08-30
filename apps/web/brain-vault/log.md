@@ -799,3 +799,16 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 - Ran the wiki audit, processed-source status check, and post-ingest dry run against the `brain-vault` root; no broken links, orphan pages, stale raw receipts, missing index entries, or session/timeline/thread drift were found.
 - Disambiguated maintained wiki references to campaign player-note summaries so `HoE`, `SoD`, `Bloody Endeavor`, `Dungeons III`, and `The Crystal Bottle` source-reference links resolve through `wiki/summaries/` instead of competing with `wiki/sources/` copies.
 - Left remaining ambiguity for campaign-scoped versus world-scoped pages, such as `Everlight`, `Scarbrook`, and `A'urea'Pura Cult`, because those are intentional paired pages and need contextual resolution rather than blanket rewriting.
+
+## [2026-08-30] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/The Silent Vanguard Quick Reference]] from current The Silent Vanguard notes (claude-sonnet-5).
+
+## [2026-08-30] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+- Refreshed [[quick/The Silent Vanguard Quick Reference]] from current The Silent Vanguard notes (claude-sonnet-5).
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
+- Refreshed [[quick/Dungeons III Quick Reference]] from current Dungeons III notes (claude-sonnet-5).
+- Refreshed [[quick/The Crystal Bottle Quick Reference]] from current The Crystal Bottle notes (claude-sonnet-5).

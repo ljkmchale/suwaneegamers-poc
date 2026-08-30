@@ -148,6 +148,18 @@ const jobs = [
     revalidatePaths: ["/advents_of_harmony", "/admin/chronicles"],
   },
   {
+    // Regenerate each campaign's Quick Reference synthesis page from the current
+    // player notes (Claude, campaign-isolated, incremental via source-hash), then
+    // reindex. Runs after chronicles-sources so it curates the notes pulled this
+    // morning; a no-op on days no campaign's source changed.
+    id: "chronicles-curation",
+    label: "Chronicles curation (Quick References)",
+    schedule: { kind: "daily", time: "10:47" },
+    command: [node, [path.join("apps", "web", "brain-tools", "src", "curate-sources.mjs")]],
+    timeoutMs: 20 * 60_000,
+    revalidatePaths: ["/advents_of_harmony"],
+  },
+  {
     id: "campaign-journeys",
     label: "Campaign journeys",
     schedule: { kind: "daily", time: "10:50" },
