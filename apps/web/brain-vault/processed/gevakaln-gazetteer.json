@@ -1,9 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/gevakaln-gazetteer.md",
-  "rawContentHash": "575aeb8563df094dfb6b49b22d53a154bf1430ed3813bbd1ac0e98bb2995a3d6",
+  "rawContentHash": "168ce117a29775063cf2d3f3ad5cde06e5abb36b216ce715af1b39af5eb2e68b",
   "status": "processed",
-  "processedAt": "2026-05-14T16:44:42.164Z",
-  "pagesUpdated": [],
-  "notes": ""
+  "processedAt": "2026-08-30T18:41:04.118Z",
+  "pagesUpdated": [
+    "wiki/sources/World/Gevakaln Gazetteer.md"
+  ],
+  "notes": "Automatically staged raw source into wiki/sources/World/Gevakaln Gazetteer.md."
 }

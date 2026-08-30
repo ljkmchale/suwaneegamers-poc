@@ -1,3 +1,27 @@
+---
+title: "Climbor Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/climbor-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit"
+source_hash: "e0b472d6b634323f9c04b1793d1fced0735945a54821b745b9defe31ad19f3a0"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.089Z"
+pulled_at: "2026-08-30T18:40:58.071Z"
+---
+
+# Climbor Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit)
+Raw source: [[raw/climbor-gazetteer.md]]
+Raw hash: `e0b472d6b634323f9c04b1793d1fced0735945a54821b745b9defe31ad19f3a0`
+Imported: 2026-08-30T18:41:04.089Z
+
+## Imported Notes
+
 # Climbor Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit)

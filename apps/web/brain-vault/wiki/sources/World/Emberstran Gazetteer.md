@@ -1,3 +1,27 @@
+---
+title: "Emberstran Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/emberstran-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit"
+source_hash: "4b10da1109efd7a86e66129d65de79cfe8dd57b41fe42d758403697ea784dd10"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.106Z"
+pulled_at: "2026-08-30T18:40:47.131Z"
+---
+
+# Emberstran Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit)
+Raw source: [[raw/emberstran-gazetteer.md]]
+Raw hash: `4b10da1109efd7a86e66129d65de79cfe8dd57b41fe42d758403697ea784dd10`
+Imported: 2026-08-30T18:41:04.106Z
+
+## Imported Notes
+
 # Emberstran Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1oECFiNos1Qqa1CfGo-2DJWbyet9SOF_gMKd3ZR2kY6c/edit)

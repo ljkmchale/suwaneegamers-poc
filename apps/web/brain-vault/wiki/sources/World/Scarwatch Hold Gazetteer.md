@@ -1,3 +1,27 @@
+---
+title: "Scarwatch Hold Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/scarwatch-hold-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1U1YgTimFZtG1VsC4fjWoh1wVCxGGdokU4peu8hh6jx8/edit"
+source_hash: "a458d7a3608804b6baeb7846acdc6700b438a39e7d1615a6b27f293f4206830f"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.137Z"
+pulled_at: "2026-08-30T18:40:48.147Z"
+---
+
+# Scarwatch Hold Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1U1YgTimFZtG1VsC4fjWoh1wVCxGGdokU4peu8hh6jx8/edit)
+Raw source: [[raw/scarwatch-hold-gazetteer.md]]
+Raw hash: `a458d7a3608804b6baeb7846acdc6700b438a39e7d1615a6b27f293f4206830f`
+Imported: 2026-08-30T18:41:04.137Z
+
+## Imported Notes
+
 # Scarwatch Hold Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1U1YgTimFZtG1VsC4fjWoh1wVCxGGdokU4peu8hh6jx8/edit)

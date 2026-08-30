@@ -1,9 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/climbor-gazetteer.md",
-  "rawContentHash": "2b892de88d26a1a437ba6a5a798b351a42eab066ce250768b44f87cba2442152",
+  "rawContentHash": "e0b472d6b634323f9c04b1793d1fced0735945a54821b745b9defe31ad19f3a0",
   "status": "processed",
-  "processedAt": "2026-05-14T16:44:40.201Z",
-  "pagesUpdated": [],
-  "notes": ""
+  "processedAt": "2026-08-30T18:41:04.092Z",
+  "pagesUpdated": [
+    "wiki/sources/World/Climbor Gazetteer.md"
+  ],
+  "notes": "Automatically staged raw source into wiki/sources/World/Climbor Gazetteer.md."
 }

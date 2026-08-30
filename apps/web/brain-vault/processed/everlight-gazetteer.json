@@ -1,9 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/everlight-gazetteer.md",
-  "rawContentHash": "ec7441c340ddd01d826bcb3b7329fb4e1748ebc88c4f6d1edffbd78f71a31dbe",
+  "rawContentHash": "77a1c9d87b618f7b903e14ba5370404638525cab866c99e47a355d7ba745b787",
   "status": "processed",
-  "processedAt": "2026-05-14T16:44:41.498Z",
-  "pagesUpdated": [],
-  "notes": ""
+  "processedAt": "2026-08-30T18:41:04.114Z",
+  "pagesUpdated": [
+    "wiki/sources/World/Everlight Gazetteer.md"
+  ],
+  "notes": "Automatically staged raw source into wiki/sources/World/Everlight Gazetteer.md."
 }

@@ -1,3 +1,27 @@
+---
+title: "Basctdelm Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/basctdelm-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit"
+source_hash: "5a2f5b2d1f503ded422e547aea9c3fd301513815d418713c27491e080560477c"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.085Z"
+pulled_at: "2026-08-30T18:40:56.605Z"
+---
+
+# Basctdelm Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit)
+Raw source: [[raw/basctdelm-gazetteer.md]]
+Raw hash: `5a2f5b2d1f503ded422e547aea9c3fd301513815d418713c27491e080560477c`
+Imported: 2026-08-30T18:41:04.085Z
+
+## Imported Notes
+
 # Basctdelm Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit)

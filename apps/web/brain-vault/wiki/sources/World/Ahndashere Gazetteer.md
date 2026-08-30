@@ -1,3 +1,27 @@
+---
+title: "Ahndashere Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/ahndashere-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1tfgzGJK9ZZcaoiva1lfVAgR0xmbe_2Mn0uFoVj9bFLQ/edit"
+source_hash: "35ad28a95bbf1d5b2a6bdbefd693053e54794f84c72ef7219e0f3b3f59746c91"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.081Z"
+pulled_at: "2026-08-30T18:40:52.934Z"
+---
+
+# Ahndashere Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1tfgzGJK9ZZcaoiva1lfVAgR0xmbe_2Mn0uFoVj9bFLQ/edit)
+Raw source: [[raw/ahndashere-gazetteer.md]]
+Raw hash: `35ad28a95bbf1d5b2a6bdbefd693053e54794f84c72ef7219e0f3b3f59746c91`
+Imported: 2026-08-30T18:41:04.081Z
+
+## Imported Notes
+
 # Ahndashere Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1tfgzGJK9ZZcaoiva1lfVAgR0xmbe_2Mn0uFoVj9bFLQ/edit)

@@ -1,3 +1,27 @@
+---
+title: "Abbey of Light"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/abbey-of-light.md"
+source_url: "https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit"
+source_hash: "73b03c6a004195700665d0a5ba345bcd0e9e0ee270f288c3d87b4174367aeb82"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.077Z"
+pulled_at: "2026-08-30T18:40:43.710Z"
+---
+
+# Abbey of Light
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit)
+Raw source: [[raw/abbey-of-light.md]]
+Raw hash: `73b03c6a004195700665d0a5ba345bcd0e9e0ee270f288c3d87b4174367aeb82`
+Imported: 2026-08-30T18:41:04.077Z
+
+## Imported Notes
+
 # Abbey of Light
 
 Source: [Google Doc](https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit)

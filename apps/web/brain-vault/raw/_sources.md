@@ -48,10 +48,10 @@ After raw material has been extracted into `wiki/`, write a processed receipt fr
 | O'naren Gazetteer | Google Doc | https://docs.google.com/document/d/1ot7DXOzqFjYKucVqVu-tqmTRflrfBKSAwRZjNZtGLXU/edit | raw/onaren-gazetteer.md |
 | Ahndashere Gazetteer | Google Doc | https://docs.google.com/document/d/1tfgzGJK9ZZcaoiva1lfVAgR0xmbe_2Mn0uFoVj9bFLQ/edit | raw/ahndashere-gazetteer.md |
 | Basctdelm Gazetteer | Google Doc | https://docs.google.com/document/d/1kaDz6BPYRFUbRPyZefm41tVdlCHEUBqiZkgKtnDw1qk/edit | raw/basctdelm-gazetteer.md |
-| Climbor Gazetteer | Google Doc | https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit?tab=t.0 | raw/climbor-gazetteer.md |
-| Dhá Chaomhnóir Gazetteer | Google Doc | https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit?tab=t.0 | raw/dha-chaomhnoir-gazetteer.md |
-| Everlight Gazetteer | Google Doc | https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M/edit?tab=t.0 | raw/everlight-gazetteer.md |
-| Gevakaln Gazetteer | Google Doc | https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit?tab=t.0 | raw/gevakaln-gazetteer.md |
+| Climbor Gazetteer | Google Doc | https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit | raw/climbor-gazetteer.md |
+| Dha Chaomhnoir Gazetteer | Google Doc | https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit | raw/dha-chaomhnoir-gazetteer.md |
+| Everlight Gazetteer | Google Doc | https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M/edit | raw/everlight-gazetteer.md |
+| Gevakaln Gazetteer | Google Doc | https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit | raw/gevakaln-gazetteer.md |
 | Gibuldon Gazetteer | Google Doc | https://docs.google.com/document/d/1KNei0mo4Zq-_AsEOWJo9N7Zb6AKMS-bfZORK-UxixZ4/edit?tab=t.0 | raw/gibuldon-gazetteer.md |
 | The Crystal Bottle - Campaign Player Notes | Google Doc | https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit | raw/the-crystal-bottle-campaign-player-notes.md |
 | Myrdae Reference for DMs | Google Doc | https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit | (ingested directly; no raw file) |

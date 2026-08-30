@@ -1,15 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/basctdelm-gazetteer.md",
-  "rawContentHash": "4e1c09be471f7f0a837c782fa3087f73eb917b550464792c85cda57c13fa8cb8",
+  "rawContentHash": "5a2f5b2d1f503ded422e547aea9c3fd301513815d418713c27491e080560477c",
   "status": "processed",
-  "processedAt": "2026-05-14T15:02:30.129Z",
+  "processedAt": "2026-08-30T18:41:04.088Z",
   "pagesUpdated": [
-    "wiki/summaries/Basctdelm Gazetteer.md",
-    "wiki/world/locations/Basctdelm.md",
-    "wiki/world/Myrdae.md",
-    "wiki/world/Territories of Myrdae.md",
-    "index.md"
+    "wiki/sources/World/Basctdelm Gazetteer.md"
   ],
-  "notes": ""
+  "notes": "Automatically staged raw source into wiki/sources/World/Basctdelm Gazetteer.md."
 }

@@ -1,3 +1,27 @@
+---
+title: "O'naren Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/onaren-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1ot7DXOzqFjYKucVqVu-tqmTRflrfBKSAwRZjNZtGLXU/edit"
+source_hash: "fb02fa9f92a74eb0732c8efb861b556df40706283b5cb3d7c9b30d38166a1057"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.132Z"
+pulled_at: "2026-08-30T18:40:51.519Z"
+---
+
+# O'naren Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1ot7DXOzqFjYKucVqVu-tqmTRflrfBKSAwRZjNZtGLXU/edit)
+Raw source: [[raw/onaren-gazetteer.md]]
+Raw hash: `fb02fa9f92a74eb0732c8efb861b556df40706283b5cb3d7c9b30d38166a1057`
+Imported: 2026-08-30T18:41:04.132Z
+
+## Imported Notes
+
 # O'naren Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1ot7DXOzqFjYKucVqVu-tqmTRflrfBKSAwRZjNZtGLXU/edit)

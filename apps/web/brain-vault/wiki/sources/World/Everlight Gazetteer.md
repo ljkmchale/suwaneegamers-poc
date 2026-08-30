@@ -1,3 +1,27 @@
+---
+title: "Everlight Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/everlight-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M/edit"
+source_hash: "77a1c9d87b618f7b903e14ba5370404638525cab866c99e47a355d7ba745b787"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.111Z"
+pulled_at: "2026-08-30T18:41:01.376Z"
+---
+
+# Everlight Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M/edit)
+Raw source: [[raw/everlight-gazetteer.md]]
+Raw hash: `77a1c9d87b618f7b903e14ba5370404638525cab866c99e47a355d7ba745b787`
+Imported: 2026-08-30T18:41:04.111Z
+
+## Imported Notes
+
 # Everlight Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1h-nnyV84AUZnSn1DgnK2msedBhNuf7rPuvPNDb9Xo1M/edit)

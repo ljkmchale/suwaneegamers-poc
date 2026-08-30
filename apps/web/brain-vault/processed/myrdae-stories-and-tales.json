@@ -1,28 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/myrdae-stories-and-tales.md",
-  "rawContentHash": "ba7ca81de5b31bdea363e229e000aff6a859043ee01de3bfb426474672e4e663",
+  "rawContentHash": "b0cd5a4dbd653ec3a7af730608ca4886e448cdb5b3e8d16395aa8e3819cab77e",
   "status": "processed",
-  "processedAt": "2026-05-13T18:44:57.612Z",
+  "processedAt": "2026-08-30T18:41:04.122Z",
   "pagesUpdated": [
-    "wiki/summaries/Myrdae Stories and Tales.md",
-    "wiki/world/Myths and Tales of Myrdae.md",
-    "wiki/world/History of Myrdae.md",
-    "wiki/concepts/Pantheon of Myrdae.md",
-    "wiki/world/Species of Myrdae.md",
-    "wiki/world/Factions of Myrdae.md",
-    "wiki/world/Myrdae.md",
-    "wiki/world/artifacts/Crown of Lyess.md",
-    "wiki/world/artifacts/Affirmation of Strife.md",
-    "wiki/world/artifacts/Laztyr.md",
-    "wiki/world/locations/Dunduar.md",
-    "wiki/world/locations/Oldport.md",
-    "wiki/world/locations/Bistron.md",
-    "wiki/world/locations/Ulgreer.md",
-    "index.md",
-    "log.md",
-    "AGENTS.md",
-    "brain-query/src/query.mjs"
+    "wiki/sources/World/Myrdae Stories and Tales.md"
   ],
-  "notes": ""
+  "notes": "Automatically staged raw source into wiki/sources/World/Myrdae Stories and Tales.md."
 }

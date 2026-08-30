@@ -1,22 +1,45 @@
-# Climbor Gazetteer
+---
+title: "Gevakaln Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/gevakaln-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit"
+source_hash: "168ce117a29775063cf2d3f3ad5cde06e5abb36b216ce715af1b39af5eb2e68b"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.116Z"
+pulled_at: "2026-08-30T18:41:03.721Z"
+---
 
-Source: [Google Doc](https://docs.google.com/document/d/1BE2wwvBrfkFCBD60EWwL-freUByHv7EgwW3djne7DS4/edit)
-Pulled: 2026-08-30T18:40:58.071Z
+# Gevakaln Gazetteer
 
-Contents
-i
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit)
+Raw source: [[raw/gevakaln-gazetteer.md]]
+Raw hash: `168ce117a29775063cf2d3f3ad5cde06e5abb36b216ce715af1b39af5eb2e68b`
+Imported: 2026-08-30T18:41:04.116Z
+
+## Imported Notes
+
+# Gevakaln Gazetteer
+
+Source: [Google Doc](https://docs.google.com/document/d/1PZceMNA0XQoT_dOqVyN-f82iLiibxulwijxuxq_j0cs/edit)
+Pulled: 2026-08-30T18:41:03.721Z
+
+Sections
+
+
 
 
 Gazetteer
-
-
 
 
   
 
 
 
-Climbor  
+Gevakaln  
 ________________
 Overview
 <Notes about the location that are important to the DM>
@@ -27,30 +50,20 @@ History
 <Cover important historical events relative to the location>
 20 Years ago the hole happened
 Citizenry
-There are around 22,000 people living in Climbor, most are living within the city walls, and only a couple thousand are outside the walls. Also of note, of the 22,000, around 3,000 live within the “Hole” 
+There are around 23000 people living in Gevakaln, most of the population is within the city border, some are outside the walls in nearby farms. On the island that the city watches over, Sciogost, hosts Rostiena’s most dangerous prisoners, and there are currently around 360 humanoids. 
 Races 
-Climbor is a diverse city, comprising of: humans (30%), elves (20%), half-races (20%), Gabuuk (15%), other (25%)
+Gevakaln is a diverse city, comprising of: Humans (25%), Half-orcs (25%), Elfs (10%), Dwarfs (20%), Weefolk (10%), other (10%)
 When interacting with the citizenry (NPCs), it may be helpful to use the interaction chart in the Myrdae Reference for DMs
 Holidays and Traditions
 <Outline any popular holidays or traditions of the location>
 Government
-Climbor is ruled by a council of leaders, who dictate the rules and laws that the city must follow. They are known as The Viers Ealdormen, 4 members that are chosen as successors to previous Ealdormen. They have complete immunity in the eyes of the law for the city.
+The ruler is Alred Brydove, (Male High-elf Noble), he seldom leaves his keep and has his representatives take note of things happening in the city.
 Arryn Daetoris
 
 
 <Need a description>
-Mollanis Vensalor
 
 
-<Need a description>
-Katar Raloro
-
-
-<Need a description>
-Heilcaena Caifir (Hail-say-e-nah K-eye-f-ere) 
-
-
-<Need a description>
 Town Guard
 
 
@@ -58,7 +71,7 @@ Town Guard
 
 
 Laws
-Climbor is a city with strict laws and quick to bring justice.  Characters engaging in criminal activity are arrested by the Climbor guards and charged per the City Ordinances.  Once charged, one is brought before the Viers Ealdormen for judgment.
+Gevakaln does not have any more rules beyond what is normal in the StoneShore Territory, however it does try and seem like it is high and tidy to outsiders, while its underbelly couldn’t be more corrupt. The city is also divided into three districts: Fogwalk Underbelly, Mittler Ward, Brydove Heights. As you move up in the district the people, lifestyles, and locations improve in quality, where Fogwalk is the slims where crime is high but the amount of guards is just as high. And Brydove is where the rich live and prosper. 
 Economy and Trade
 
 
@@ -69,13 +82,13 @@ Religion
 Citizens mostly worship non-evil aligned gods openly in the city. 
 Utheri
 there is favoritism towards Utheri, as it is what the majority of the town worships
-Ossana
-there is a little favoritism towards Ossana
-Muerg
-there is a bit of frowning upon Muerg from the Gabuuks who live in the “Hole”
+Addan
+Zealous mindset of following
+Hooded Lady
+Zealous mindset of following
 ________________
 Map
-  
+
 
 
 
@@ -203,7 +216,7 @@ Map
 	Notable Locations
 
 
- Cathedral of Utheri 
+Church of the Hooded Lady
 
 
 <Description for Players>
@@ -786,106 +799,11 @@ Item
 
 	
 
- Stable Example
 
 
-<Need a description>
-It's just a stable near the Tamed Moons
-Non-Player Characters
-NPC
-	Role
-	Description
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	Items for Horses
-Barding, chain
-	200 gp
-	
-
-	Saddle, exotic
-	60 gp
-	Barding, leather
-	40 gp
-	
-
-	Saddle, military
-	20 gp
-	Barding, plate
-	6,000 gp
-	
-
-	Saddle, pack
-	5 gp
-	Bit and bridle
-	2 gp
-	
-
-	Saddle, riding
-	10 gp
-	Feed
-	5 cp
-	
-
-	Saddlebags
-	4 gp
-	Services
-Board, Full
-	1 gp / night
-	
-
-	Stable for the night, plus farrier services, feed and wash
-	Board, Hold
-	3 sp
-	
-
-	Stable for the day; not overnight
-	Board, Standard
-	5 sp / night
-	
-
-	Stable for the night
-	Farrier Services
-	1 sp
-	
-
-	Trim, shape and shoe horses’ hooves
-	Feed
-	7 cp
-	
-
-	Feed the horse
-	Wash
-	2 sp
-	
-
-	Wash the horse
-	
-
-________________
-Shops, Services and Offerings
-Here are many of the standard shops, services and offerings that are can be referenced for availability to visitors of Climbor:
+Location Reference
+Location Types (Shops, Services and Offerings)
+Here are many of the standard shops, services and offerings that are can be referenced for availability:
 Service / Offering
 	Type
 	Available
@@ -1144,250 +1062,3 @@ rushes, etc.
 	
 
 	Weaves raw fabric and baskets.
-	________________
-
-
-Item Stock
-Potions
-
-
-
-
-	Common
-	Uncommon
-	Rare
-	Very Rare
-	Chance of being in stock
-	90%
-	60%
-	30%
-	10%
-	Number of different potions
-	1d3 + 2
-	1d6 + 2
-	1d4
-	1d2
-	Quantity
-	1d6 each
-	1d2 each
-	only 1 each
-	only 1 each
-	
-
-
-
-Stock
-	Quantity
-	Potion
-	Rarity
-	Cost
-	* 	
-
-	Potion of Healing
-	Common
-	50 gp
-	* 	
-
-	Perfume of Bewitching
-	Common
-	75 gp
-	* 	
-
-	Potion of Climbing
-	Common
-	75 gp
-	* 	
-
-	Potion of Comprehension
-	Common
-	75 gp
-	* 	
-
-	Potion of Watchful Rest
-	Common
-	50 gp
-	* 	
-
-	Philter of Love
-	Uncommon
-	100 gp
-	* 	
-
-	Potion of Poison
-	Uncommon
-	100 gp
-	* 	
-
-	Potion of Giant Strength (Hill)
-	Uncommon
-	125 gp
-	* 	
-
-	Potion of Healing (Greater)
-	Uncommon
-	150 gp
-	* 	
-
-	Potion of Waterbreathing
-	Uncommon
-	150 gp
-	* 	
-
-	Potion of Animal Friendship
-	Uncommon
-	200 gp
-	* 	
-
-	Potion of Fire Breath
-	Uncommon
-	250 gp
-	* 	
-
-	Potion of Growth
-	Uncommon
-	300 gp
-	* 	
-
-	Potion of Resistance
-	Uncommon
-	300 gp
-	* 	
-
-	Bottled Breath
-	Uncommon
-	350 gp
-	* 	
-
-	Oil of Slipperiness
-	Uncommon
-	350 gp
-	* 	
-
-	Elixir of Health
-	Rare
-	250 gp
-	* 	
-
-	Potion of Diminution
-	Rare
-	350 gp
-	* 	
-
-	Potion of Healing (Superior)
-	Rare
-	450 gp
-	* 	
-
-	Potion of Gaseous Form
-	Rare
-	500 gp
-	* 	
-
-	Potion of Giant Strength (Frost)
-	Rare
-	500 gp
-	* 	
-
-	Potion of Giant Strength (Stone)
-	Rare
-	500 gp
-	* 	
-
-	Potion of Heroism
-	Rare
-	800 gp
-	* 	
-
-	Potion of Clairvoyance
-	Rare
-	900 gp
-	* 	
-
-	Potion of Aqueous Form
-	Rare
-	1,000 gp
-	* 	
-
-	Potion of Mind Reading
-	Rare
-	1,100 gp
-	* 	
-
-	Potion of Giant Strength (Fire)
-	Rare
-	1,200 gp
-	* 	
-
-	Potion of Invulnerability
-	Rare
-	1,500 gp
-	* 	
-
-	Potion of Mind Control (beast)
-	Rare
-	1,600 gp
-	* 	
-
-	Oil of Etherealness
-	Rare
-	2,000 gp
-	* 	
-
-	Potion of Maximum Power
-	Rare
-	2,000 gp
-	* 	
-
-	Potion of Mind Control (humanoid)
-	Rare
-	2,500 gp
-	* 	
-
-	Potion of Healing (Supreme)
-	Very Rare
-	1,350 gp
-	* 	
-
-	Potion of Flying
-	Very Rare
-	1,500 gp
-	* 	
-
-	Potion of Invisibility
-	Very Rare
-	1,500 gp
-	* 	
-
-	Potion of Giant Strength (Cloud)
-	Very Rare
-	1,800 gp
-	* 	
-
-	Potion of Vitality
-	Very Rare
-	1,800 gp
-	* 	
-
-	Potion of Possibility
-	Very Rare
-	1,900 gp
-	* 	
-
-	Potion of Speed
-	Very Rare
-	2,000 gp
-	* 	
-
-	Oil of Sharpness
-	Very Rare
-	2,500 gp
-	* 	
-
-	Potion of Longevity
-	Very Rare
-	3,000 gp
-	* 	
-
-	Potion of Mind Control (monster)
-	Very Rare
-	6,000 gp

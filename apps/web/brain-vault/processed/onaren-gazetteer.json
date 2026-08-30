@@ -1,18 +1,11 @@
 {
   "version": 1,
   "rawFile": "raw/onaren-gazetteer.md",
-  "rawContentHash": "e98f2bb4fa8fe956e3c45ed4a3ba3e052e4a4ec5d036e59ced3c06498cb8c7c1",
+  "rawContentHash": "fb02fa9f92a74eb0732c8efb861b556df40706283b5cb3d7c9b30d38166a1057",
   "status": "processed",
-  "processedAt": "2026-05-13T20:17:53.831Z",
+  "processedAt": "2026-08-30T18:41:04.135Z",
   "pagesUpdated": [
-    "wiki/summaries/O'naren Gazetteer.md",
-    "wiki/world/locations/O'naren.md",
-    "wiki/world/locations/Abbey of Light.md",
-    "wiki/world/Myrdae.md",
-    "wiki/world/Territories of Myrdae.md",
-    "index.md",
-    "log.md",
-    "brain-query/src/query.mjs"
+    "wiki/sources/World/O'naren Gazetteer.md"
   ],
-  "notes": ""
+  "notes": "Automatically staged raw source into wiki/sources/World/O'naren Gazetteer.md."
 }

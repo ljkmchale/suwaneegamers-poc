@@ -1,3 +1,27 @@
+---
+title: "Myrdae Stories and Tales"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/myrdae-stories-and-tales.md"
+source_url: "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0/edit"
+source_hash: "b0cd5a4dbd653ec3a7af730608ca4886e448cdb5b3e8d16395aa8e3819cab77e"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.119Z"
+pulled_at: "2026-08-30T18:40:42.364Z"
+---
+
+# Myrdae Stories and Tales
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0/edit)
+Raw source: [[raw/myrdae-stories-and-tales.md]]
+Raw hash: `b0cd5a4dbd653ec3a7af730608ca4886e448cdb5b3e8d16395aa8e3819cab77e`
+Imported: 2026-08-30T18:41:04.119Z
+
+## Imported Notes
+
 # Myrdae Stories and Tales
 
 Source: [Google Doc](https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0/edit)

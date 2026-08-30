@@ -1,3 +1,27 @@
+---
+title: "Dha Chaomhnoir Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/dha-chaomhnoir-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit"
+source_hash: "3505b7bf73cc7592d0e26f982a47cf2e07af3d6a96d2a798cf575935fe30ae1a"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.094Z"
+pulled_at: "2026-08-30T18:40:59.419Z"
+---
+
+# Dha Chaomhnoir Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit)
+Raw source: [[raw/dha-chaomhnoir-gazetteer.md]]
+Raw hash: `3505b7bf73cc7592d0e26f982a47cf2e07af3d6a96d2a798cf575935fe30ae1a`
+Imported: 2026-08-30T18:41:04.094Z
+
+## Imported Notes
+
 # Dha Chaomhnoir Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1I1bIs4KJFUtpgOciBY24xrDtWG-U-HF-Zi1fkewx7tY/edit)

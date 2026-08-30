@@ -1,3 +1,27 @@
+---
+title: "Myrdae World Guide"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/myrdae-world-guide.md"
+source_url: "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit"
+source_hash: "7284e8cb1b56aeb0ed1925c5fd907612553c0ae90c5e2f267ea36779d49c75cd"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.124Z"
+pulled_at: "2026-08-30T18:40:41.530Z"
+---
+
+# Myrdae World Guide
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
+Raw source: [[raw/myrdae-world-guide.md]]
+Raw hash: `7284e8cb1b56aeb0ed1925c5fd907612553c0ae90c5e2f267ea36779d49c75cd`
+Imported: 2026-08-30T18:41:04.124Z
+
+## Imported Notes
+
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)

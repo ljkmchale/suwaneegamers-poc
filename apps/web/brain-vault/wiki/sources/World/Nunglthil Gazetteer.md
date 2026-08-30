@@ -1,3 +1,27 @@
+---
+title: "Nunglthil Gazetteer"
+campaign: "World"
+visibility: players
+tags: [source, google-doc, player-notes]
+source_raw: "raw/nunglthil-gazetteer.md"
+source_url: "https://docs.google.com/document/d/1Uow9Y0-_llBAp4meZsA-QEFTmMslbMV_IlgYV3UjNxg/edit"
+source_hash: "464709d82f146e8e13850d47ac60ede1a9c675f2a50e0bd07b14d93512867aac"
+source_status: processed
+raw_status_before_import: "stale"
+imported_at: "2026-08-30T18:41:04.128Z"
+pulled_at: "2026-08-30T18:40:49.935Z"
+---
+
+# Nunglthil Gazetteer
+
+Campaign: World
+Source: [Google Doc](https://docs.google.com/document/d/1Uow9Y0-_llBAp4meZsA-QEFTmMslbMV_IlgYV3UjNxg/edit)
+Raw source: [[raw/nunglthil-gazetteer.md]]
+Raw hash: `464709d82f146e8e13850d47ac60ede1a9c675f2a50e0bd07b14d93512867aac`
+Imported: 2026-08-30T18:41:04.128Z
+
+## Imported Notes
+
 # Nunglthil Gazetteer
 
 Source: [Google Doc](https://docs.google.com/document/d/1Uow9Y0-_llBAp4meZsA-QEFTmMslbMV_IlgYV3UjNxg/edit)
