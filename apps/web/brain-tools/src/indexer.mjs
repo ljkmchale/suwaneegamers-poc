@@ -7,8 +7,18 @@ import { embedTexts } from "./ai-client.mjs";
 import { chunkDocuments, loadVaultDocuments } from "./vault.mjs";
 import { hasIndex, loadIndex, saveIndex } from "./vector-store.mjs";
 
-const batchSize = 16;
-const batchDelayMs = 6000;
+// Jina's throughput cap on this account is the real bottleneck: ~100k tokens/min
+// and only 2 concurrent requests. The old code (16 chunks, fixed 6s delay,
+// sequential ≈ 80k TPM) left throughput on the table AND stalled on a fixed timer
+// even for tiny rebuilds; going wider trips 429 storms that waste time retrying.
+// Instead we pace to a token budget: up to EMBED_CONCURRENCY requests in flight,
+// each batch capped by token estimate, and a token bucket held just under the
+// per-minute cap. This saturates the tier without 429s. Tunable via env; raising
+// EMBED_TPM/CONCURRENCY only helps if the Jina plan's limits are raised too.
+const maxBatchSize = Number(process.env.BRAIN_EMBED_BATCH_SIZE ?? 64);
+const maxBatchTokens = Number(process.env.BRAIN_EMBED_BATCH_TOKENS ?? 14000);
+const embedConcurrency = Number(process.env.BRAIN_EMBED_CONCURRENCY ?? 2);
+const tokensPerMinute = Number(process.env.BRAIN_EMBED_TPM ?? 90000);
 
 async function main() {
   console.log(`Vault: ${config.vaultRoot}`);
@@ -66,18 +76,56 @@ async function main() {
   console.log(`Reusing ${reuseCount} embeddings, embedding ${toEmbedIndices.length} new/changed chunks.`);
 
   if (toEmbedIndices.length > 0) {
-    console.log(`Embedding with ${config.embedModel} via Jina AI...`);
-    const chunksToEmbed = toEmbedIndices.map((i) => chunks[i]);
+    const renders = toEmbedIndices.map((i) => renderChunkForEmbedding(chunks[i]));
+    const estTokens = (text) => Math.ceil(text.length / 4); // ~4 chars/token
 
-    for (let batchStart = 0; batchStart < chunksToEmbed.length; batchStart += batchSize) {
-      if (batchStart > 0) await new Promise((resolve) => setTimeout(resolve, batchDelayMs));
-      const batch = chunksToEmbed.slice(batchStart, batchStart + batchSize);
-      const embedded = await embedTexts(batch.map(renderChunkForEmbedding));
-      for (let j = 0; j < batch.length; j++) {
-        embeddings[toEmbedIndices[batchStart + j]] = embedded[j];
+    // Pack chunks into batches capped by BOTH count and estimated tokens so no
+    // single request trips the per-request token ceiling.
+    const batches = [];
+    let batch = { idx: [], texts: [], tokens: 0 };
+    for (let k = 0; k < renders.length; k += 1) {
+      const t = estTokens(renders[k]);
+      if (batch.texts.length > 0 && (batch.texts.length >= maxBatchSize || batch.tokens + t > maxBatchTokens)) {
+        batches.push(batch);
+        batch = { idx: [], texts: [], tokens: 0 };
       }
-      console.log(`Embedded ${Math.min(batchStart + batch.length, chunksToEmbed.length)} / ${chunksToEmbed.length}`);
+      batch.idx.push(toEmbedIndices[k]);
+      batch.texts.push(renders[k]);
+      batch.tokens += t;
     }
+    if (batch.texts.length) batches.push(batch);
+
+    console.log(`Embedding ${toEmbedIndices.length} chunks in ${batches.length} batches (<=${maxBatchTokens} tok each, ${embedConcurrency} concurrent, ~${tokensPerMinute} TPM)...`);
+
+    // Token bucket: refills continuously toward the per-minute budget; a request
+    // waits until enough tokens are available before it goes out.
+    let available = 0; // start empty so we ramp into the cap instead of bursting
+    let lastRefill = Date.now();
+    const takeTokens = async (need) => {
+      for (;;) {
+        const now = Date.now();
+        available = Math.min(tokensPerMinute, available + ((now - lastRefill) / 60000) * tokensPerMinute);
+        lastRefill = now;
+        if (available >= Math.min(need, tokensPerMinute)) { available -= need; return; }
+        await new Promise((r) => setTimeout(r, Math.ceil(((need - available) / tokensPerMinute) * 60000)));
+      }
+    };
+
+    let cursor = 0;
+    let done = 0;
+    const worker = async () => {
+      for (;;) {
+        const which = cursor++;
+        if (which >= batches.length) return;
+        const b = batches[which];
+        await takeTokens(b.tokens);
+        const embedded = await embedTexts(b.texts);
+        for (let j = 0; j < b.idx.length; j += 1) embeddings[b.idx[j]] = embedded[j];
+        done += b.idx.length;
+        console.log(`Embedded ${done} / ${toEmbedIndices.length}`);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(embedConcurrency, batches.length) }, () => worker()));
   }
 
   const saved = await saveIndex(chunks, embeddings, browseOnlyDocuments, currentFileHashes);
