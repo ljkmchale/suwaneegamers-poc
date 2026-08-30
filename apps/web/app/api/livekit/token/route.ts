@@ -129,9 +129,11 @@ export async function POST(request: NextRequest) {
     // path is accepted — the agent renders this into its prompt, so it is
     // untrusted browser input and is bounded and validated here as well.
     const page = sanitizePageContext(requestBody.page);
-    // The alternate agent is reachable only from the deliberately unlinked POC
-    // route. Arbitrary callers cannot select a dispatch target by name.
-    const avatarPoc = requestBody.avatarPoc === true && page?.path === "/myra-avatar-poc";
+    // The alternate agent is reachable only from the standalone POC and the
+    // temporary Myra replacement for the library. Arbitrary callers cannot
+    // select a dispatch target by name.
+    const avatarPocRoutes = new Set(["/myra-avatar-poc", "/advents_of_harmony"]);
+    const avatarPoc = requestBody.avatarPoc === true && Boolean(page?.path && avatarPocRoutes.has(page.path));
     const agentName = avatarPoc
       ? process.env.LIVEKIT_AVATAR_POC_AGENT_NAME ?? "myra-avatar-poc"
       : normalAgentName;

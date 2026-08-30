@@ -81,7 +81,8 @@ function AvatarRoom({ onEnd }: { onEnd: () => void }) {
   );
 }
 
-export function MyraAvatarPoc() {
+export function MyraAvatarPoc({ pagePath = "/myra-avatar-poc" }: { pagePath?: string }) {
+  const isLibraryReplacement = pagePath === "/advents_of_harmony";
   const [connection, setConnection] = useState<ConnectionDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -128,7 +129,7 @@ export function MyraAvatarPoc() {
         body: JSON.stringify({
           avatarPoc: true,
           welcomeKind: "none",
-          page: { path: "/myra-avatar-poc", title: document.title },
+          page: { path: pagePath, title: document.title },
         }),
       });
       const payload = (await response.json()) as ConnectionDetails & { error?: string };
@@ -150,7 +151,9 @@ export function MyraAvatarPoc() {
       <div className={styles.ambient} aria-hidden="true" />
       <section className={styles.shell} aria-labelledby="poc-title">
         <header className={styles.header}>
-          <p className={styles.eyebrow}>Isolated living-avatar prototype</p>
+          <p className={styles.eyebrow}>
+            {isLibraryReplacement ? "Myrdae's living guide" : "Isolated living-avatar prototype"}
+          </p>
           <h1 id="poc-title">Myra, the Living Guide</h1>
           <p>
             Myra waits naturally without consuming live-avatar credits, then connects
@@ -198,10 +201,12 @@ export function MyraAvatarPoc() {
 
         {error && <p className={styles.error} role="alert">{error}</p>}
 
-        <aside className={styles.safetyNote}>
-          <strong>POC boundary:</strong> unlinked route and separately named worker;
-          the production Myra widget is not changed or restarted.
-        </aside>
+        {!isLibraryReplacement && (
+          <aside className={styles.safetyNote}>
+            <strong>POC boundary:</strong> unlinked route and separately named worker;
+            the production Myra widget is not changed or restarted.
+          </aside>
+        )}
       </section>
     </main>
   );

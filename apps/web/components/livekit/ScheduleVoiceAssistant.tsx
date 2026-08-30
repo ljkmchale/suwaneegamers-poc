@@ -363,6 +363,7 @@ export function ScheduleVoiceAssistant({
 }) {
   const pathname = usePathname();
   const hiddenOnCurrentPage =
+    pathname === "/advents_of_harmony" ||
     pathname === "/maps-of-myrdae" ||
     pathname === "/store" ||
     pathname.startsWith("/store/");
