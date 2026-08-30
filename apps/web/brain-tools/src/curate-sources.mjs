@@ -219,7 +219,10 @@ async function loadSources() {
   const raw = await fs.readFile(config.googleDocSourcesPath, "utf8");
   const parsed = JSON.parse(raw);
   const list = Array.isArray(parsed) ? parsed : parsed.sources;
-  return list.filter((s) => s && s.enabled !== false && s.filename && s.campaign);
+  // Skip non-campaign sources (curate:false) - e.g. the World gazetteer docs,
+  // which are staged verbatim by refresh-sources but have no per-campaign
+  // Quick Reference (and would all collide on one "World Quick Reference" path).
+  return list.filter((s) => s && s.enabled !== false && s.curate !== false && s.filename && s.campaign);
 }
 
 async function runIndexer() {
