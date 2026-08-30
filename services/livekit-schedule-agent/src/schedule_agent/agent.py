@@ -4403,7 +4403,7 @@ async def schedule_agent(ctx: JobContext):
                 "Wait attentively with subtle breathing, occasional natural blinking, "
                 "and a calm welcoming expression."
             ),
-            idle_timeout=300,
+            idle_timeout=60,
         )
         await avatar_session.start(session, room=ctx.room)
         await avatar_session.wait_for_join()

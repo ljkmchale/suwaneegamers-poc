@@ -19,6 +19,13 @@ interface ConnectionDetails {
 function AvatarRoom({ onEnd }: { onEnd: () => void }) {
   const { state, videoTrack } = useVoiceAssistant();
   const audioPlayback = useStartAudio({ props: {} });
+
+  useEffect(() => {
+    if (state !== "listening") return;
+    const idleTimer = window.setTimeout(onEnd, 60_000);
+    return () => window.clearTimeout(idleTimer);
+  }, [onEnd, state]);
+
   const stateLabel =
     state === "listening"
       ? "Myra is listening"
@@ -158,7 +165,14 @@ export function MyraAvatarPoc() {
           </LiveKitRoom>
         ) : (
           <>
-            <div className={styles.stage} data-state="idle">
+            <button
+              type="button"
+              className={`${styles.stage} ${styles.stageButton}`}
+              data-state={loading ? "connecting" : "idle"}
+              onClick={() => void startConversation()}
+              disabled={loading}
+              aria-label={loading ? "Preparing Myra" : "Tap to talk with Myra"}
+            >
               <div className={styles.portraitWrap}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -169,14 +183,9 @@ export function MyraAvatarPoc() {
               </div>
               <div className={styles.status}>
                 <span className={styles.statusDot} aria-hidden="true" />
-                <span>Ready for the avatar test</span>
+                <span>{loading ? "Preparing Myra…" : "Tap to talk with Myra"}</span>
               </div>
-            </div>
-            <div className={styles.controls}>
-              <button type="button" onClick={() => void startConversation()} disabled={loading}>
-                {loading ? "Calling Myra…" : "Start avatar conversation"}
-              </button>
-            </div>
+            </button>
           </>
         )}
 

@@ -69,6 +69,63 @@
   margin: 0 auto;
 }
 
+.stageButton {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.stageButton .portraitWrap {
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.stageButton .portrait {
+  transform-origin: 50% 38%;
+  animation: idlePresence 7.5s ease-in-out infinite;
+}
+
+.stageButton .portraitWrap::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(201, 174, 255, 0.035) 43%,
+    rgba(255, 225, 151, 0.07) 50%,
+    transparent 61%
+  );
+  background-size: 220% 100%;
+  mix-blend-mode: screen;
+  animation: livingLight 9s ease-in-out infinite;
+}
+
+.stageButton:hover .portraitWrap,
+.stageButton:focus-visible .portraitWrap {
+  border-color: rgba(246, 215, 122, 0.72);
+  box-shadow:
+    0 1.5rem 4rem rgba(0, 0, 0, 0.55),
+    0 0 2.5rem rgba(167, 139, 250, 0.34);
+  transform: translateY(-2px);
+}
+
+.stageButton:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 0.4rem;
+  border-radius: 1.25rem;
+}
+
+.stageButton:disabled {
+  cursor: wait;
+}
+
 .portraitWrap {
   position: relative;
   z-index: 2;
@@ -129,6 +186,7 @@
 .stage[data-state="listening"] .statusDot { background: #4ade80; }
 .stage[data-state="thinking"] .statusDot { background: #f59e0b; animation: dotPulse 0.9s ease-in-out infinite; }
 .stage[data-state="speaking"] .statusDot { background: var(--violet); animation: dotPulse 0.45s ease-in-out infinite; }
+.stage[data-state="connecting"] .statusDot { background: var(--violet); animation: dotPulse 0.7s ease-in-out infinite; }
 
 .controls {
   display: flex;
@@ -193,6 +251,15 @@
 }
 
 @keyframes dotPulse { 50% { opacity: 0.45; transform: scale(0.72); } }
+@keyframes idlePresence {
+  0%, 100% { transform: scale(1.002) translateY(0); }
+  50% { transform: scale(1.012) translateY(-0.18%); }
+}
+@keyframes livingLight {
+  0%, 18% { background-position: 105% 0; opacity: 0.35; }
+  50% { opacity: 0.8; }
+  82%, 100% { background-position: -105% 0; opacity: 0.35; }
+}
 
 @media (max-width: 540px) {
   .shell { padding-top: 1.6rem; }
@@ -208,5 +275,12 @@
   }
   .controls button {
     transition: none;
+  }
+  .stageButton .portraitWrap {
+    transition: none;
+  }
+  .stageButton .portrait,
+  .stageButton .portraitWrap::after {
+    animation: none;
   }
 }
