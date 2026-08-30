@@ -812,3 +812,8 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 - Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
 - Refreshed [[quick/Dungeons III Quick Reference]] from current Dungeons III notes (claude-sonnet-5).
 - Refreshed [[quick/The Crystal Bottle Quick Reference]] from current The Crystal Bottle notes (claude-sonnet-5).
+
+## [2026-08-30] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
