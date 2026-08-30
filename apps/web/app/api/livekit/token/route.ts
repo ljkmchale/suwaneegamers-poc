@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
     process.env.LIVEKIT_API_KEY ?? (localDevelopment ? "devkey" : undefined);
   const apiSecret =
     process.env.LIVEKIT_API_SECRET ?? (localDevelopment ? "secret" : undefined);
-  const agentName =
+  const normalAgentName =
     process.env.LIVEKIT_SCHEDULE_AGENT_NAME ?? "myra";
 
   if (!serverUrl || !apiKey || !apiSecret) {
@@ -118,6 +118,7 @@ export async function POST(request: NextRequest) {
     const requestBody = (await request.json().catch(() => ({}))) as {
       welcomeKind?: unknown;
       page?: unknown;
+      avatarPoc?: unknown;
     };
     const welcomeKind =
       requestBody.welcomeKind === "new" || requestBody.welcomeKind === "returning"
@@ -128,6 +129,12 @@ export async function POST(request: NextRequest) {
     // path is accepted — the agent renders this into its prompt, so it is
     // untrusted browser input and is bounded and validated here as well.
     const page = sanitizePageContext(requestBody.page);
+    // The alternate agent is reachable only from the deliberately unlinked POC
+    // route. Arbitrary callers cannot select a dispatch target by name.
+    const avatarPoc = requestBody.avatarPoc === true && page?.path === "/myra-avatar-poc";
+    const agentName = avatarPoc
+      ? process.env.LIVEKIT_AVATAR_POC_AGENT_NAME ?? "myra-avatar-poc"
+      : normalAgentName;
     const userProfile = getUserProfileContext(userSession);
     // How Myra sounds and behaves for this member: their chosen persona, or the
     // one that names them, or the house default.
@@ -291,7 +298,9 @@ export async function POST(request: NextRequest) {
     const metadataForDispatch = `gz:${gzipSync(Buffer.from(metadata, "utf8")).toString("base64")}`;
     token.roomConfig = new RoomConfiguration({
       name: roomName,
-      maxParticipants: 2,
+      // LemonSlice joins as a separate video participant in the isolated POC.
+      // Normal voice rooms retain their existing two-participant ceiling.
+      maxParticipants: avatarPoc ? 3 : 2,
       agents: [
         new RoomAgentDispatch({
           agentName,

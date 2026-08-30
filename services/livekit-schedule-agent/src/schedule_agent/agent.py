@@ -1,7 +1,7 @@
 import asyncio
+import base64
 import contextlib
 import functools
-import base64
 import gzip
 import json
 import logging
@@ -53,6 +53,15 @@ try:
 except Exception:  # plugin absent -> build_tts degrades to Kokoro
     elevenlabs = None
 
+# LemonSlice is opt-in and used only by the separately named avatar POC worker.
+# The normal Myra worker never creates an avatar session or calls LemonSlice.
+try:
+    from livekit.plugins import lemonslice
+    from PIL import Image
+except Exception:  # plugin absent -> fail clearly only if the POC is started
+    lemonslice = None
+    Image = None
+
 logger = logging.getLogger("suwanee-schedule-agent")
 
 # Resolve .env.local by absolute path rather than relative to the working
@@ -66,7 +75,11 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 for env_file in (SERVICE_ROOT / ".env.local", REPO_ROOT / ".env.local"):
     load_dotenv(env_file)
 
-AGENT_NAME = "myra"
+AGENT_NAME = os.getenv("LIVEKIT_AGENT_NAME", "myra").strip() or "myra"
+AVATAR_POC_ENABLED = (
+    AGENT_NAME == "myra-avatar-poc"
+    and os.getenv("MYRA_AVATAR_PROVIDER", "").strip().lower() == "lemonslice"
+)
 DEFAULT_PANTHEON_PATH = (
     Path(__file__).resolve().parents[4]
     / "apps"
@@ -4195,7 +4208,10 @@ def prewarm(proc: Any) -> None:
     threading.Thread(target=_warm_all, name="myra-warmup", daemon=True).start()
 
 
-server = AgentServer()
+# The separately launched avatar POC shares this machine with the production
+# Myra worker. Let Windows choose a free health-check port for the POC so it
+# never competes with Myra's fixed production port (8081).
+server = AgentServer(port=0) if AVATAR_POC_ENABLED else AgentServer()
 server.setup_fnc = prewarm
 
 
@@ -4344,6 +4360,50 @@ async def schedule_agent(ctx: JobContext):
         })
 
     agent = Myra(metadata, ctx.room)
+
+    # The isolated proof-of-concept worker adds LemonSlice as a third LiveKit
+    # participant. It receives Myra's existing TTS audio and publishes a
+    # synchronized video+audio track. Normal `myra` workers never enter this
+    # branch, even though they share this source file.
+    avatar_session = None
+    if AVATAR_POC_ENABLED:
+        if lemonslice is None or Image is None:
+            raise RuntimeError("The LemonSlice LiveKit plugin is not installed")
+        if not os.getenv("LEMONSLICE_API_KEY", "").strip():
+            raise RuntimeError("LEMONSLICE_API_KEY is required for the avatar POC")
+        avatar_image_path = Path(
+            os.getenv(
+                "MYRA_AVATAR_IMAGE",
+                str(
+                    REPO_ROOT
+                    / "apps"
+                    / "web"
+                    / "media"
+                    / "images"
+                    / "poc"
+                    / "myra-avatar-poc-v1.png"
+                ),
+            )
+        )
+        if not avatar_image_path.is_file():
+            raise RuntimeError(f"Myra avatar image is missing: {avatar_image_path}")
+        avatar_image = Image.open(avatar_image_path).convert("RGB")
+        avatar_session = lemonslice.AvatarSession(
+            agent_image=avatar_image,
+            agent_prompt=(
+                "You are Myra, a warm and mysterious fantasy guide made of violet "
+                "arcane light and gold filigree. Listen attentively, maintain gentle "
+                "eye contact, speak with restrained natural hand gestures, and move "
+                "with calm confidence rather than exaggerated performance."
+            ),
+            agent_idle_prompt=(
+                "Wait attentively with subtle breathing, occasional natural blinking, "
+                "and a calm welcoming expression."
+            ),
+            idle_timeout=300,
+        )
+        await avatar_session.start(session, room=ctx.room)
+        await avatar_session.wait_for_join()
 
     # The visitor's browser tells us which page they are on, at connect time via
     # dispatch metadata and on every navigation over this topic. Tasks are held
