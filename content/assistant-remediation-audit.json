@@ -1,6 +1,45 @@
 {
   "entries": [
     {
+      "id": "audit-rem-a00b5f190a68f2c8-1788189961898",
+      "remediationId": "rem-a00b5f190a68f2c8",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Hey, um Collective of Myrdae",
+        "value": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization bearing that name.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:26:01.896Z"
+      },
+      "createdAt": "2026-08-31T15:26:01.896Z"
+    },
+    {
+      "id": "audit-rem-e02766a441a969af-1788189959516",
+      "remediationId": "rem-e02766a441a969af",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "I don't I don't know. Heroes of Emberstranc.",
+        "value": "I need a name or identifier to introduce a character. The excerpts don't specify which person you'd like me to describe. Could you clarify who you're asking about? For example, are you asking about Ainslie, one of the party members, or a named NPC like Selvara Nendris (the Black Quill), Thalex, Lady Rook, Jerik, or someone else from Emberstran?",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:25:59.514Z"
+      },
+      "createdAt": "2026-08-31T15:25:59.514Z"
+    },
+    {
+      "id": "audit-rem-f9794cf9b5024dc6-1788189959512",
+      "remediationId": "rem-f9794cf9b5024dc6",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Do you see the new guild structure in the Bloody Endeavor I",
+        "value": "Faction index for Bloody Endeavor: Wyrm Bane — the party itself; named in Session 15 after freeing the copper dragon Saildreith. Active members: Albross, Caelion, Lucerion, Pagern, Rhody Falco. Monks of Iohir (The Cold Breath Cult) — fanatical monks led by Master Huldi (The Cold Breath); seek to assemble the Rimestone and cause a new ice age, ostensibly to re-seal an eldritch aberration.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:25:59.510Z"
+      },
+      "createdAt": "2026-08-31T15:25:59.510Z"
+    },
+    {
       "id": "audit-rem-533900afc79b79af-1788184490829",
       "remediationId": "rem-533900afc79b79af",
       "action": "applied",

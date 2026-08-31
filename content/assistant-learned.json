@@ -1,6 +1,40 @@
 {
   "answers": [
     {
+      "question": "Hey, um Collective of Myrdae",
+      "normalized": "hey um collective of myrdae",
+      "answer": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization bearing that name.",
+      "sources": [
+        "Myrdae"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-31T15:26:01.896Z"
+    },
+    {
+      "question": "I don't I don't know. Heroes of Emberstranc.",
+      "normalized": "i don t i don t know heroes of emberstranc",
+      "answer": "I need a name or identifier to introduce a character. The excerpts don't specify which person you'd like me to describe. Could you clarify who you're asking about? For example, are you asking about Ainslie, one of the party members, or a named NPC like Selvara Nendris (the Black Quill), Thalex, Lady Rook, Jerik, or someone else from Emberstran?",
+      "sources": [
+        "Emberstran",
+        "Our Exquisites / Etterset",
+        "Emberstran EGD And Civic Authority",
+        "Ainslie",
+        "Cloak of Defiance"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-31T15:25:59.514Z"
+    },
+    {
+      "question": "Do you see the new guild structure in the Bloody Endeavor I",
+      "normalized": "do you see the new guild structure in the bloody endeavor i",
+      "answer": "Faction index for Bloody Endeavor: Wyrm Bane — the party itself; named in Session 15 after freeing the copper dragon Saildreith. Active members: Albross, Caelion, Lucerion, Pagern, Rhody Falco. Monks of Iohir (The Cold Breath Cult) — fanatical monks led by Master Huldi (The Cold Breath); seek to assemble the Rimestone and cause a new ice age, ostensibly to re-seal an eldritch aberration.",
+      "sources": [
+        "Factions And Groups Index"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-31T15:25:59.510Z"
+    },
+    {
       "question": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?",
       "normalized": "can you give me a brief rundown of what heroes of emberstran has been doing",
       "answer": "The Heroes of Emberstran are official investigators operating under the Emberstran Guard Detail—though their authority rests on a precarious foundation. Ainslie and Og began with self-made observer badges; after they cleared the Vintner's Guild cellar blight and the Baltwood blight, Emlee and Haggis delivered an official scroll at the Warm Bear Inn.",
@@ -78,5 +112,5 @@
   "blocked": [
     "is there any other questions you can ask be asked"
   ],
-  "updatedAt": "2026-08-30T15:26:07.625Z"
+  "updatedAt": "2026-08-31T15:26:01.896Z"
 }

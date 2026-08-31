@@ -1,6 +1,107 @@
 {
   "entries": [
     {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-08-31T15:25:59.506Z"
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-08-31T15:25:59.505Z"
+    },
+    {
+      "question": "Do you see the new guild structure in the Bloody Endeavor I",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "Faction index for Bloody Endeavor: Wyrm Bane — the party itself; named in Session 15 after freeing the copper dragon Saildreith. Active members: Albross, Caelion, Lucerion, Pagern, Rhody Falco. Monks of Iohir (The Cold Breath Cult) — fanatical monks led by Master Huldi (The Cold Breath); seek to assemble the Rimestone and cause a new ice age, ostensibly to re-seal an eldritch aberration.",
+      "evidence": [
+        "Factions And Groups Index"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-f9794cf9b5024dc6",
+      "normalized": "do you see the new guild structure in the bloody endeavor i",
+      "status": "approved",
+      "createdAt": "2026-08-31T15:25:59.490Z",
+      "reviewedAt": "2026-08-31T15:25:59.510Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Do you see the new guild structure in the Bloody Endeavor I",
+        "value": "Faction index for Bloody Endeavor: Wyrm Bane — the party itself; named in Session 15 after freeing the copper dragon Saildreith. Active members: Albross, Caelion, Lucerion, Pagern, Rhody Falco. Monks of Iohir (The Cold Breath Cult) — fanatical monks led by Master Huldi (The Cold Breath); seek to assemble the Rimestone and cause a new ice age, ostensibly to re-seal an eldritch aberration.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:25:59.510Z"
+      }
+    },
+    {
+      "question": "I don't I don't know. Heroes of Emberstranc.",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "I need a name or identifier to introduce a character. The excerpts don't specify which person you'd like me to describe. Could you clarify who you're asking about? For example, are you asking about Ainslie, one of the party members, or a named NPC like Selvara Nendris (the Black Quill), Thalex, Lady Rook, Jerik, or someone else from Emberstran?",
+      "evidence": [
+        "Emberstran",
+        "Our Exquisites / Etterset",
+        "Emberstran EGD And Civic Authority",
+        "Ainslie",
+        "Cloak of Defiance"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-e02766a441a969af",
+      "normalized": "i don t i don t know heroes of emberstranc",
+      "status": "approved",
+      "createdAt": "2026-08-31T15:25:59.486Z",
+      "reviewedAt": "2026-08-31T15:25:59.514Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "I don't I don't know. Heroes of Emberstranc.",
+        "value": "I need a name or identifier to introduce a character. The excerpts don't specify which person you'd like me to describe. Could you clarify who you're asking about? For example, are you asking about Ainslie, one of the party members, or a named NPC like Selvara Nendris (the Black Quill), Thalex, Lady Rook, Jerik, or someone else from Emberstran?",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:25:59.514Z"
+      }
+    },
+    {
+      "question": "Hey, um Collective of Myrdae",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization by that name.",
+      "evidence": [
+        "Myrdae"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-a00b5f190a68f2c8",
+      "normalized": "hey um collective of myrdae",
+      "status": "approved",
+      "createdAt": "2026-08-31T15:25:54.467Z",
+      "reviewedAt": "2026-08-31T15:26:01.896Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Hey, um Collective of Myrdae",
+        "value": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization bearing that name.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-31T15:26:01.896Z"
+      }
+    },
+    {
       "question": "Hey Mara, what do you know about the Abbey of Light?",
       "category": "pronunciation-fix",
       "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
@@ -894,5 +995,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-31T13:54:50.827Z"
+  "updatedAt": "2026-08-31T15:26:01.896Z"
 }

@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "healedAt": "2026-08-31T15:25:50.851Z",
+      "kind": "learned-answer",
+      "question": "Do you see the new guild structure in the Bloody Endeavor I"
+    },
+    {
+      "healedAt": "2026-08-31T15:25:50.851Z",
+      "kind": "learned-answer",
+      "question": "I don't I don't know. Heroes of Emberstranc."
+    },
+    {
+      "healedAt": "2026-08-31T15:25:50.851Z",
+      "kind": "learned-answer",
+      "question": "Hey, um Collective of Myrdae"
+    },
+    {
       "healedAt": "2026-08-30T15:25:48.182Z",
       "kind": "mishearing",
       "question": "Hey Mara, what do you know about the Abbey of Light?"
@@ -66,5 +81,5 @@
       "question": "Hey Mara, what do you know about the Abbey of Light?"
     }
   ],
-  "updatedAt": "2026-08-30T15:25:48.182Z"
+  "updatedAt": "2026-08-31T15:25:50.851Z"
 }
