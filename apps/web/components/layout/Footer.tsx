@@ -108,6 +108,13 @@ export function Footer() {
             >
               Privacy Policy
             </Link>
+            <a
+              href="mailto:webmaster@suwaneegamers.net"
+              className="text-xs underline-offset-4 transition-opacity hover:underline hover:opacity-80"
+              style={{ color: "var(--color-accent-arcane)" }}
+            >
+              Contact the Webmaster
+            </a>
           </div>
         </div>
       </div>
