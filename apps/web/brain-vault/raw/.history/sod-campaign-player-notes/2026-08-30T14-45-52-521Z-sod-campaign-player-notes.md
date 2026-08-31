@@ -1,31 +1,7 @@
----
-title: "SoD - Campaign Player Notes"
-campaign: "SoD"
-visibility: players
-tags: [source, google-doc, player-notes]
-source_raw: "raw/sod-campaign-player-notes.md"
-source_url: "https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit"
-source_hash: "4771d29df12e520bb4c56630278feb1991f9a848a237675888465e0c96ca5e07"
-source_status: processed
-raw_status_before_import: "stale"
-imported_at: "2026-08-30T18:41:04.142Z"
-pulled_at: "2026-08-30T14:45:52.520Z"
----
-
-# SoD - Campaign Player Notes
-
-Campaign: SoD
-Source: [Google Doc](https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit)
-Raw source: [[raw/sod-campaign-player-notes.md]]
-Raw hash: `4771d29df12e520bb4c56630278feb1991f9a848a237675888465e0c96ca5e07`
-Imported: 2026-08-30T18:41:04.142Z
-
-## Imported Notes
-
 # SoD - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1pKpiVcOl-mjtJMUD4tuTS6A4UZP3w6ISnehpX8LORH8/edit)
-Pulled: 2026-08-30T14:45:52.520Z
+Pulled: 2026-08-29T14:45:30.159Z
 
 Players
 Players
@@ -898,76 +874,12 @@ The objectives being considered:
 * Go to Gibuldon to seek the Crimson Court and the family who owns the Keep.  
 * Go south to Caldwynn for Zephyra
 * Investigate the Necromancer crypt in Eustera Ridge
+
+
  – The End of the Session – 
 5
 	Character level at end of the session
 	2
-	Sessions played at that level
-	
-
-14 – Everybody Duck!  She’s Got the Wand Out
-Session Date:  August 29, 2026
-In-game Date:  1st of Baegrum, 1246
-Starting Location:  Steoleah Keep 
-In Steoleah Keep Gathering Ourselves
-Escanor takes some time trying to heal Kenton, but it doesn’t seem to help.  Escanor thinks that he likely has a curse on him since a healing potion and magical healing isn’t working.  Kenton then admits that he fought someone who was in the crypt - he described it as “the crypt opened up,” but Escanor knows that he is not telling the full truth.  
-We decide to go to the chapel while Therric stealths to check out the second floor of the Keep.   As he goes around, the rest of the group considers the type of curse Kenton has and decides that it is not magical.  Therric finds a hallway with three doors. In the first room he finds a bed, rotted wood, and old guard equipment.  He then goes to the next door and it is another barracks room.  He notices rats asleep under the bed. He thinks there are a least a dozen. He also sees rubble in the room - looks like it has been chewed and clawed down.  He sees a third room that has skeletal remains - that look to have been chewed by rats. He picks up rocks and throws one at a skeleton and also throws one under the bed as he runs out of the room.  He is trying to determine if the skeleton is undead.  He hears a loud crash from bones falling to the ground in the first room, and then hears rats swarming and attacking the door he ran out of.   He goes to the third door and hears rats at that door as well.  
-He then leaves and goes to another area and there is a spiral staircase that heads upstairs and a hallway that leads to the dining room (feasting hall).  He makes his way back to the Chapel and tells the group what he found.
-We discuss where and how to rest.  Therric lobbies for outside, while Zephyra and Escanor lobby for rest in the Chapel. Esylla and Therric leave the others to check out the second floor.  Using awakened mind, they communicate and travel in stealth to the nearest staircase and go to the second floor.  There they find a hallway with four doors.  Therric first observes that the hallway is black - evidence of soot here.  Everything seems to be charred.  This is similar to what was observed on the top floor.  The doors at the end of the hall have been blown open and burned to a crisp. Therric steps through a door to the outside on the battlements.  He notices shattered glass.  He looks into rooms to see what they contain.  He sees that the battlement is rickety and old. He stays close to the wall and travels down the side to peer into windows.  He thinks the first room is a bedroom. He thinks another is a study and two additional rooms are bedrooms. He goes back to Esylla and tells her in her mind.  They decide to check out all of the rooms.  He hears nothing at the first room and opens the door.  This looks like servant’s quarters - simple bed, wardrobe, etc.  This room has evidence of being burned and of immense force.  There is a silhouette of a body on the wall.  Esylla finds signet ring in a drawer (“S).  Therric hears noise of wind and looks back against the wall and there is no longer a silhouette.  He says “who’s there?”  We see a shadowy figure. IT IS INITIATIVE.
-* ROUND ONE:  Therric fumbles as he pulls out his staff. He then hits with his bonus action.  It then attacks Therric and misses.  Esylla hits with a blast and hits, then fumbles. 
-* ROUND TWO:  Therric hits with his staff, killing it.
-Esylla wants to message the group, but thinks it would be difficult from here.  They decide to go back to the chapel.  Therric briefs the group. We decide to stay in the Chapel and try to take a rest.  We move pews to secure the doors and take shelter under the balcony so that if anyone comes into the balcony, they wouldn’t immediately see us. 
-The group discusses future plans.  Esylla knows that this Keep was owned by a ruthless family.  It was kept as a safe house for bad folks. She also knows that the Scyldgar family (circle of antlers) was associated with the Rayvenra (antlered raven) family.  Escanor feels that this is what Amriel wanted.  Therric brings up the ring Esylla found.  Esylla knows it is not magical.  Kenton realizes this is a ring of a servant.  It is copper, worth probably no more than a gold.  We decide to keep the ring as proof of being here and/or if Kenton needs to pose as a servant.
-Group decides to take a watch.  Kenton and Lila, Esylla and Therric, and then Zephrya and Escanor.
-First watch - nothing much happens.  Next watch - Therric feels uneasy - like it is haunted.  But otherwise it is uneventful. They discuss future plans, then go to sleep. Last watch - Passes uneventfully.   The group gets a long rest.
-It’s the 2nd of Baegrum, 1246
-The group discusses plans, as we all notice that Kenton has a sunken look this morning.   Escanor is able to remove the curse on Kenton, but he his maximum hit points are still lowered.  He was able to ask Amriel for help to make Kenton better.  Kenton tells the group that he has learned a valuable lesson:  if you take something you need to give something back.  There is some discussion about this. Esylla asks if this is like a bribe…or a quid pro quo.  Some discussion about cleaning this place out now or not. We discuss marking the keep as dangerous, heading to Adsuren, then traveling back to the keep with hirelings.  At a minimum, we need to let Adsuren know that we have brought Mollywop’s killer to justice.
-We decide to take out the rats, look at the rooms once the rats are cleaned out, and finish investigating the rooms on the second floor.
-We head to the first floor and to the hallway where the rat room is. Lila steps in front and uses the wand to cast it behind the door where the rats are. It is random spell.  The door disappears and a swarm of rats runs outside of the door.  IT IS INITIATIVE – Combat vs. Swarm of Rats
-* ROUND ONE:  Kenton runs forward and runs next to Lila, opening his ring to shed light 20’.  Then he closes his ring and hides. Escanor pulls his mace out, lights it up, and dashes forward, stepping in front of Lila. Zephyra runs next to Lila and makes the floor tremor, trying to scare the rats. Therric dashes forward and sets a reaction if anything comes close.  The rats run forward, covering Therric.  He misses with his reaction. Esylla pulls out her fan and casts gust of wind, causing everything else to make a strength saving throw.  Escanor and Lila blow forward 15’, as do the rats, clearing Therric of them.  Lila steps forward and uses her wand on the rats. A stream of gems shoots out of the wand, damaging Escanor (who takes 40 points of damage) and embedding in his back.  
-* ROUND TWO:  Kenton moves up to Escanor and looks at him. He casts his shadow mote next to him and he hides.  Escanor has to make a death save.  Zaphyra runs forward and throws the javelin at the rats and hits, but it didn’t do as much damage as she would have hoped.  Therric runs back to Escanor and gives Escanor hit points using his healer’s kit.  Then he runs back next to Zephyra.  The rats run forward and critically hit Zephyra, biting and gnawing her stomach.  Esylla runs up and heals Escanor.  Lila uses luck and hits the rats with a sorcerer’s burst, killing them in a flame of fire. 
-Lila starts to pluck the gems out of Escanor’s back.  There are 40 of them, worth 1gp/each.  Escanor runs forward to heal Zephyra - she will have a scar on her stomach.  
-We go into the first room.  Therric looks around and finds nothing.  We step in the next room and Escanor looks around.  He doesn’t find anything of interest - thinks these were servant bodies.  We go upstairs. We see the large open room that we have not investigated. The room is very familiar to Therric (from his vision).  This was a study.  He sees bookshelves, books on the floor, etc.  The entire area is blackened and fire damaged.  He finds an area near the fireplace where there is 5’ circular area on the floor that is not covered in soot. Escanor thinks that this is the exact spot where something exploded that damaged the keep. 
-Kenton investigates.  This was a lounge for the owners, he thinks.  It was a nice library/study.  There are skeletal bodies that are mounds of ash.  He sees a strange shaped mound by one of the doors - it has a pillar of ash protruding from it.  He points it out to Therric. He uses elementalism to blow the ash away.  There is a large bolt there.  There was a skeleton of a large cat, killed by the bolt.  There is something in the mouth of the cat.  Therric walks over to pull out the item from the mouth.  He feels it is mud/dirt and it disappears, but he now knows a rune that he could carve on something.  
-Therric tells the party about his vision.  That he was a cat and died here. Esylla asks about the vision since no one knows of it, but he declines to answer for now.  Instead he looks at the nearby door and hears crying.  He busts the door open and sees a pale blue figure of a lordly male on the bed, wearing a crown and translucent robe.  Therric asks Esylla to come and talk to this lord.  As he speaks, the man turns his head.  His face is melted off and he says to Therric “you were the cat.”  IT IS INITIATIVE – Combat vs. Ghost.
-* ROUND ONE:  Lila walks up to the door and pulls out her wand and points it just behind the man.  Lila feels sad and takes damage. Therric activates his elemental attunement and imposes thunder damage from range.  He fumbles both attacks (at the same time) and it is awkward and nothing happens.  He then moves to the other side of the room.  Kenton casts a shadow mote and then moves back and moves the mote into the room.  The ghostly figure flies through the wall and targets Zephrya, who fails a wisdom saving throw and takes psychic damage.   She recalls a memory of being at a dance as a teen and being made fun of.  Those outside take psychic damage, too - seeing this image of a younger Zephyra sitting with mud on her dress.  Esylla blasts the ghost and does max damage.  Zephrya rages and hits the ghost twice.  
-* ROUND TWO:  Lila heals Escanor and then moves back against the far wall. Therric moves outside of the room and into the charred study.  He tries to impose thunder damage again and hits twice this time, and converts this into a flurry of blows, hitting a third time, killing the ghost. 
-Esylla comments how bad the image was of Zephrya as a teen.  The group walks back in the room to investigate it.  Esylla thinks this man and most of the people died from the blast.  Escanor says a prayer for everyone from Amriel as he encounters them.  Kenton investigates and gets dirty and finds nothing. Therric checks out the next room and hears nothing at the door.  This seems to be a small study.  Kenton steps forward to investigate again.  He finds a paper that is not ruined - it is a scroll. He shows it to Lila.  But then Esylla looks at it and determines it is a scroll of Speak with Dead.  She gives it to Escanor.
-As we walk back down the hallway, Escanor checks the last three servant quarters doors and sees that each window is blasted out.  He sees a silhouette on each wall.  We close the doors and continue. 
-We go back to the chapel and Escanor uses the scroll to cast Speak with the Dead on the priest. Golden light tendrils raise the creature, puppet-like.   
-1. How can I go about sanctifying this keep? I’m unsure.  
-I offered salvation to vagabonds.
-2. Can you tell me what is going on with the tree in the courtyard with the bodies? 
-The Mystic animated and picked off the lord’s men.
-3. Who is the lady in the sarcophagus in the basement?  
-She is Lady Scyldgar, the last lord of the keep.  She died long ago. 
-4. Who and where is the Mystic?  
-She came at night with the fury of nature.  Her skin was as pale as snow, as was her outfit.  
-{Therric knows this is the woman in his vision}
-5. Would it be in the tenants of Amriel to put the lady in the basement to rest?  
-If left undisturbed, she can cause no harm.  She is at peace in the afterlife. 
-The bones then fall back down.  Escanor says a silent prayer to Amriel thanking them for his ability to talk to the priest.
-We go up and put the 3 shadows to rest that are in the servant’s quarters (fast-tracked).
-Esylla asks Escanor if he is at peace.  He is.  He just says that he wants to put a sign on the keep marking it as dangerous. He casts the spell gentle repose on the body of Ifryn and throws him on a horse to return to Adsuren.
-The group leaves the Keep and heads back, knowing we will have to take a long rest at night.  Therric looks around for signs of Ifryn’s horse…and finds tracks that lead north.  Kenton and Lila share a horse.  Therric and Esylla share a horse.  Escanor and Zephrya (with the dead body) each ride their own horse.  The group travels during the day.  Night falls.  We take watch:  Zephrya and Esylla first, Escanor and Therric second, and Lila and Kenton last.
-First watch:  uneventful. Esylla starts to read the scroll she got from her uncle and explains the effect (somewhat) to Escanor and Therric (as they wake them up) and Zephrya.  Second watch:  uneventful.  They brush their horses.  Therric carves the rune into his staff (earth carving of a panther) during this time. Escanor sees Therric in a trance, eyes closed, carving with an arrowhead.  He sees what Therric carves. Therric comments “this is interesting.”  And spends the last bit of his watch practicing with his staff. Last watch: uneventful.  Lila looks around and feels a warmth on her chest from her pendant.  She sees it is glowing with a darker, richer red color.  She looks into it and gets a greatest hits vision - previous images she has seen:  Graveyard, place under Adsuren center with Z’s mom, strange overgrown, ruined keep, bustling marketplace with a well, Kenton surrounded in an alley by thugs, large shadow in the night sky - the gold dragon with blighted belly.  She’s had all of these before, but they are all clearer.  She continues to look - and suddenly she hears, “Hello.”
- – The End of the Session – 
-5
-	Character level at end of the session
-	3
-	Sessions played at that level
-	
-
-15 – <name>
-Session Date:  September 26, 2026
-In-game Date:  3rd of Baegrum, 1246
-Starting Location:  forest on the way to Adsuren
-
-
- – The End of the Session – 
-5
-	Character level at end of the session
-	4
 	Sessions played at that level
 	
 
@@ -977,18 +889,18 @@ Pre-Campaign Homework
 Campaign Prep Homework
 Character Creation
 Here are some things that players should consider when making their characters:
-   1. vision – have a vision for your character to be renown throughout Myrdae when the campaign is over
-   2. cooperation – play a character that wants to work with other players in the party
+1. vision – have a vision for your character to be renown throughout Myrdae when the campaign is over
+2. cooperation – play a character that wants to work with other players in the party
 don’t get hung up in “but that’s what my character would do” if it goes against the party
-   3. role – consider one of the roles below that you want your character to play;  take initiative during gameplay to fill that role
-      * defender (tank) - quick to stand between the biggest monsters and the party members that die easily
-      * face - someone that helps in npc interaction that relies on skills like deception, persuasion and intimidation
-      * healer - able to help restore hit points and maybe assist with debuffs (curses, poisons, etc.)
-      * scholar - can handle the knowledge skills, like arcana, nature and religion
-      * scout - interesting in moving forward to check the path is clear (stealth, perception, investigation, survival)
-      * support / utility - controls the battlefield, debuffs enemies and helps get through obstacles
+3. role – consider one of the roles below that you want your character to play;  take initiative during gameplay to fill that role
+   * defender (tank) - quick to stand between the biggest monsters and the party members that die easily
+   * face - someone that helps in npc interaction that relies on skills like deception, persuasion and intimidation
+   * healer - able to help restore hit points and maybe assist with debuffs (curses, poisons, etc.)
+   * scholar - can handle the knowledge skills, like arcana, nature and religion
+   * scout - interesting in moving forward to check the path is clear (stealth, perception, investigation, survival)
+   * support / utility - controls the battlefield, debuffs enemies and helps get through obstacles
 think of your character as playing a primary role, but also having a secondary role if possible
-      4. progression – when your character accomplishes something, think about what else would be good to work towards
+   4. progression – when your character accomplishes something, think about what else would be good to work towards
 make sure the dungeon master knows this and it goes with the flow of the campaign
 Type of Character for Next Session 
 Player 
@@ -997,12 +909,12 @@ Player
 	Brian
 	I don’t want to play ...
 	Reason
-	         1. 	
+	      1. 	
 
-	         2.         
+	      2.         
 	
 
-	         3.         
+	      3.         
 	
 
 	Thinking about playing … 
@@ -1013,11 +925,11 @@ Player
 	Chip
 	I don’t want to play ...
 	Reason
-	         1. Tank / Defender
+	      1. Tank / Defender
 	Have too many of those going on …
-	         2. 	
+	      2. 	
 
-	         3. 	
+	      3. 	
 
 	Thinking about playing … 
 	
@@ -1027,11 +939,11 @@ Player
 	Jenny
 	I don’t want to play ...
 	Reason
-	         1. Ranger
+	      1. Ranger
 	Elora is a Hero / Already played one.
-	         2. Wizard
+	      2. Wizard
 	Already played one and obvious complications with spells and spell management
-	         3. 	
+	      3. 	
 
 	Thinking about playing … 
 	fighter/Barbarian
@@ -1039,11 +951,11 @@ Player
 	Larry
 	I don’t want to play ...
 	Reason
-	         1. Barbarian
+	      1. Barbarian
 	Class does not interest me
-	         2. Paladin
+	      2. Paladin
 	Already have the best Paladin in Myrdae
-	         3. Sorcerer
+	      3. Sorcerer
 	
 
 	Thinking about playing … 
@@ -1052,11 +964,11 @@ Player
 	Lesley
 	I don’t want to play ...
 	Reason
-	         1. Paladin
+	      1. Paladin
 	crystal bottle character 
-	         2. Wizard
+	      2. Wizard
 	treasure hunters character 
-	         3. Fighter or Rogue
+	      3. Fighter or Rogue
 	playing both of these in current campaigns
 	Thinking about playing … 
 	Open to Ideas
@@ -1064,11 +976,11 @@ Player
 	Tiff
 	I don’t want to play ...
 	Reason
-	         1. Bard
+	      1. Bard
 	Playing one now Dungeons III (Nova)
-	         2. Ranger
+	      2. Ranger
 	Crystal bottle character (Ren)
-	         3. Barbarian/Fighter
+	      3. Barbarian/Fighter
 	Mead Society (Lizbeth) & Charlemagne’s Angels (Trinity)
 	Thinking about playing … 
 	Druid but open to any ideas
@@ -1224,8 +1136,8 @@ Take a minute to consider what you would like to see the other players choose as
 You could come up with a class, a role, a species … anything that you think would be neat to see the other player play.  
 Each player has a section, where you can say what you would like to see them play and why.
 When coming up with the type of character you want to see the other player play …
-         * do NOT prank them - come up with something you would really like to see
-         * try not to pick something that they do not want to play as outlined above
+      * do NOT prank them - come up with something you would really like to see
+      * try not to pick something that they do not want to play as outlined above
 
 
 Brian should play a …

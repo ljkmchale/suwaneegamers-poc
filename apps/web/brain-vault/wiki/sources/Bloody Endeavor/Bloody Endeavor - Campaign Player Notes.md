@@ -5,10 +5,10 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/bloody-endeavor-campaign-player-notes.md"
 source_url: "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit"
-source_hash: "88c2b60dab68015a11a21107caaf835cd267f0c25e038367e84bdc9596437b51"
+source_hash: "30093e61e74457bffa6c8782b8d20346ebf182343f31fc6f164dc8c0c04365ce"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-08-27T13:46:52.535Z"
+imported_at: "2026-08-29T14:45:43.936Z"
 pulled_at: "2026-08-27T13:46:45.061Z"
 ---
 
@@ -17,8 +17,8 @@ pulled_at: "2026-08-27T13:46:45.061Z"
 Campaign: Bloody Endeavor
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
 Raw source: [[raw/bloody-endeavor-campaign-player-notes.md]]
-Raw hash: `88c2b60dab68015a11a21107caaf835cd267f0c25e038367e84bdc9596437b51`
-Imported: 2026-08-27T13:46:52.535Z
+Raw hash: `30093e61e74457bffa6c8782b8d20346ebf182343f31fc6f164dc8c0c04365ce`
+Imported: 2026-08-29T14:45:43.936Z
 
 ## Imported Notes
 

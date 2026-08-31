@@ -3,7 +3,6 @@ title: "Basctdelm (Gazetteer)"
 campaign: "World"
 visibility: players
 tags: [gazetteer, settlement, auto-curated]
-curated_at: "2026-08-30T19:30:42.933Z"
 ---
 # Basctdelm
 
@@ -344,29 +343,29 @@ Guilds typically have the following organizational structure.
 
 | Guild | Guildmaster & Head Office | Notes |
 | :---- | :---- | :---- |
-| **Alchemy, medicine, healing services** *Apothecaries’ & Physicians’ Guild* | Master Haleth Vorr, female human*The Green Mortar, Central District* | Mildly Influential.  *Regulated carefully for public health* |
-| **Ale, wine, spirits** *Brewers’, Vintners’ & Distillers’ Guild* | Master Grann Ironbelly, male dwarf *The Tun Hall, South District* | Mildly Influential.  *Strong internal market; some exports.* |
-| **Candles, lamps, street lighting** *Chandlers’ & Lamplighters’ Guild* | Master Sera Kwynn, female half-elf *Wickhall, Central District* | Lacks Influence.  *Holds the city lighting contract.* |
-| **Ceramics, roof tiles, household ware** *Potters’ & Tile-makers’ Guild* | Master Edda Stonebust, female dwarf*The Claywalk, South District* | Lacks Influence.  *Supports construction and daily life.* |
-| **Cleaning of garments and linens** *Launderers’ Guild* |  | Lacks Influence.  High volume, low prestige. |
-| **Clothing, dyed cloth, textiles** *Tailors’, Dyers’ & Mercers’ Guild* |  | Mildly Influential.  Overlaps the League of Fine Artisans. |
-| **Construction, masonry, major repairs** *Builders’ & Stonecutters’ Guild* | Master Torven Calder, male human*The Keystone Yard, North District* | Highly Influential.  *Handles imperial projects and private building.* |
-| **Documentation, contracts, records** *Scriveners’, Scribes’ & Clerks’ Guild* |  | Mildly Influential.  Essential for imperial and trade paperwork. |
-| **Food supply, markets, preservation** *Provisioners’ & Farmers’ Consortium* |  | Highly Influential.  Feeds the capital; watched by customs. |
-| **Footwear, harness, leather goods** *Cobblers’ & Leatherworkers’ Guild* |  | Lacks Influence.  Steady everyday demand. |
-| **Glassware, windows, lenses** *Glassblowers’ & Glaziers’ Guild* |  | Lacks Influence.  Specialty and luxury focus. |
-| **Horses, mounts, stabling, shoeing** *Stablemasters’ & Farriers’ Guild* |  | Mildly Influential.  Important for Watch, nobles, & messengers. |
-| **Import/export, contracts, warehousing** *Imperial Merchants’ Consortium* |  | Most Influential. Closest to the crown; handles major imperial and foreign deals. |
-| **Jewelry, gem cutting, fine metal works** *Jewelers’ & Gemcutters’ Guild* |  | Mildly Influential.  Wealthy clientele; tightly secured. |
-| **Land transport within the city**  *Carters’ & Coachmen’s Guild* | Master Pell Rusk, male half-orc *The Trace House, Trade District* | Mildly Influential.  *Moves goods from the docks inland.* |
-| **Loading/unloading ships, harbor logistics** *Harbor & Dockworkers’ League* |  | Highly Influential.  Controls daily port operations. |
-| **Luxury goods, clothing, specialty crafts** *League of Fine Artisans* |  | Mildly Influential.  Serves nobility and wealthy merchants. |
-| **Performance, instruments, entertainment** *Instrument-Makers’ & Choristers’ Guild* |  | Lacks Influence.  Popular with nobles and inns. |
-| **Rope, sails, cordage** *Rope, Sail & Cordwainers’ Guild* |  | Lacks Influence.  Supports shipwrights and harbor work. |
-| **Shipbuilding, repair, drydocks** *Order of Master Shipwrights* |  | Highly Influential.  Critical for commercial and military vessels. |
-| **Small boats, harbor ferries, river traffic** *Watermen’s & Ferrymen’s Guild* |  | Mildly Influential.  Complements the Harbor & Dockworkers’ League. |
-| **Wagons, carts, wheels** *Wagonmakers’ & Wheelwrights’ Guild* |  | Lacks Influence.  Supports carters and overland trade. |
-| **Weapons, armor, tools, metal goods** *Order of Smiths & Metalworkers* |  | Highly Influential.  Supplies military contracts and civilian needs. |
+| **Alchemy, medicine, healing services** *Apothecaries’ & Physicians’ Guild* | Haleth Vorr, female human*The Green Mortar, Central District* | Mildly Influential.  *Regulated carefully for public health* |
+| **Ale, wine, spirits** *Brewers’, Vintners’ & Distillers’ Guild* | Grann Ironbelly, male dwarf *The Tun Hall, South District* | Mildly Influential.  *Strong internal market; some exports.* |
+| **Candles, lamps, street lighting** *Chandlers’ & Lamplighters’ Guild* | Sera Kwynn, female half-elf *Wickhall, Central District* | Lacks Influence.  *Holds the city lighting contract.* |
+| **Ceramics, roof tiles, household ware** *Potters’ & Tile-makers’ Guild* | Edda Stonebust, female dwarf*The Claywalk, South District* | Lacks Influence.  *Supports construction and daily life.* |
+| **Cleaning of garments and linens** *Launderers’ Guild* | Megra Bonsella, female human*The Steam Yards, South District* | Lacks Influence.  *High volume, low prestige.* |
+| **Clothing, dyed cloth, textiles** *Tailors’, Dyers’ & Mercers’ Guild* | Vexa Rihn, female tiefling The Measure, Central District | Mildly Influential.  *Overlaps the League of Fine Artisans.* |
+| **Construction, masonry, major repairs** *Builders’ & Stonecutters’ Guild* | Torven Calder, male human*The Keystone Yard, North District* | Highly Influential.  *Handles imperial projects and private building.* |
+| **Documentation, contracts, records** *Scriveners’, Scribes’ & Clerks’ Guild* | Elira Val’serynn, female elf*The Seal House, Central District* | Mildly Influential.  *Essential for imperial and trade paperwork.* |
+| **Food supply, markets, preservation** *Provisioners’ & Farmers’ Consortium* | Halsy Durvel, male human *The Granary Exchange, Trade District* | Highly Influential.  *Feeds the capital; watched by customs.* |
+| **Footwear, harness, leather goods** *Cobblers’ & Leatherworkers’ Guild* | Joss Bindlesott, male halfling*The Lasting Sole, Central District* | Lacks Influence.  *Steady everyday demand.* |
+| **Glassware, windows, lenses** *Glassblowers’ & Glaziers’ Guild* | Ilen Saergell, female elf*Clearfire Works, North District* | Lacks Influence.  *Specialty and luxury focus.* |
+| **Horses, mounts, stabling, shoeing** *Stablemasters’ & Farriers’ Guild* | Corrin Hale, male human *Crown Stables, Central District* | Mildly Influential.  *Important for Watch, nobles, & messengers.* |
+| **Import/export, contracts, warehousing** *Imperial Merchants’ Consortium* | Varrin Goldmere, male human*The Consortium House, Trade District* | Most Influential. (Closest to the crown) *Handles major imperial and foreign deals.* |
+| **Jewelry, gem cutting, fine metal works** *Jewelers’ & Gemcutters’ Guild* | Cael Damaris, male human*The House Adorned, North District* | Mildly Influential.  *Wealthy clientele; tightly secured.* |
+| **Land transport within the city**  *Carters’ & Coachmen’s Guild* | Pell Rusk, male half-orc *The Trace House, Trade District* | Mildly Influential.  *Moves goods from the docks inland.* |
+| **Loading/unloading ships, harbor logistics** *Harbor & Dockworkers’ League* | Borik Thenn, male human *The Capstan Hall, Trade District* | Highly Influential.  *Controls daily port operations.* |
+| **Luxury goods, clothing, specialty crafts** *League of Fine Artisans* | Selene Marris, female human*The Gilded Loft, North District* | Mildly Influential.  *Serves nobility and wealthy merchants.* |
+| **Performance, instruments, entertainment** *Instrument-Makers’ & Choristers’ Guild* | Lira Fonbell, female halfling *The Sounding Room, Central District* | Lacks Influence.  *Popular with nobles and inns.* |
+| **Rope, sails, cordage** *Rope, Sail & Cordwainers’ Guild* | Nessa Brine, female human *The Coil House, Trade District* | Lacks Influence.  *Supports shipwrights and harbor work.* |
+| **Shipbuilding, repair, drydocks** *Order of Master Shipwrights* | Arnvel Doss, male human *The Drydock Hall, Trade District* | Highly Influential.  *Critical for commercial and military vessels.* |
+| **Small boats, harbor ferries, river traffic** *Watermen’s & Ferrymen’s Guild* | Torma Brinn, female human*The Oarhouse, Trade District* | Mildly Influential.  *Complements the Harbor & Dockworkers’ League.* |
+| **Wagons, carts, wheels** *Wagonmakers’ & Wheelwrights’ Guild* | Guness Stogg, male half-orc *The Spoke Yard, South District* | Lacks Influence.  *Supports carters and overland trade.* |
+| **Weapons, armor, tools, metal goods** *Order of Smiths & Metalworkers* | Ruskel Neb, male human *The Anvil Court, Central District* | Highly Influential.  *Supplies military contracts and civilian needs.* |
 
 ## Religion
 

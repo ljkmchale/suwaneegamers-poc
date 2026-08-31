@@ -5,10 +5,10 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/the-silent-vanguard-player-reference.md"
 source_url: "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit"
-source_hash: "3c35cfc2c84de8719ec76114dd4d6dd61fa0f4ddb7596e3b07b26f5bfcf9414b"
+source_hash: "27ece8b1a6fe6995cbf1b6d8ae32ecf78f122ef39147d9a5fdf54a3f8f5ee2eb"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-08-27T13:46:52.566Z"
+imported_at: "2026-08-29T14:45:43.965Z"
 pulled_at: "2026-08-27T13:46:28.173Z"
 ---
 
@@ -17,8 +17,8 @@ pulled_at: "2026-08-27T13:46:28.173Z"
 Campaign: The Silent Vanguard
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
 Raw source: [[raw/the-silent-vanguard-player-reference.md]]
-Raw hash: `3c35cfc2c84de8719ec76114dd4d6dd61fa0f4ddb7596e3b07b26f5bfcf9414b`
-Imported: 2026-08-27T13:46:52.566Z
+Raw hash: `27ece8b1a6fe6995cbf1b6d8ae32ecf78f122ef39147d9a5fdf54a3f8f5ee2eb`
+Imported: 2026-08-29T14:45:43.965Z
 
 ## Imported Notes
 

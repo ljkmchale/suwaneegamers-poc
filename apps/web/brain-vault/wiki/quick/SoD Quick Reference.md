@@ -4,93 +4,87 @@ campaign: "SoD"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "SoD - Campaign Player Notes"
-source_hash: "1794c95f25b5ae13539074e5006cb6ea2c1e1147404b611ebec715fcaeea3f14"
-curated_at: "2026-08-30T13:35:06.047Z"
+source_hash: "4771d29df12e520bb4c56630278feb1991f9a848a237675888465e0c96ca5e07"
+curated_at: "2026-08-31T14:48:39.917Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
 # SoD Quick Reference
 
 Campaign: SoD
 
-*This is a living quick-reference page, kept current with the latest events from the campaign notes.*
+*This is a living quick-reference page, kept current with the SoD campaign notes.*
 
 ## Current Status
-
-As of Session 13 (August 16, 2026 real-time / 1st of Baegrum, 1246 in-game), the party has finished clearing **Scyldgar Keep**, an abandoned ancestral keep north of Adsuren belonging to the once-powerful Scyldgar family. They tracked and confronted the assassin **Ifryn Ciaradain** (Esylla's disgraced uncle) who had fatally poisoned and stabbed the archmage **Mollywop** during the Adsuren Market Day finale. After a difficult fight, the party killed Ifryn, learning he was hired by a group called **the Crimson Court** for 35,000gp, and that he obtained his cursed greatsword (now wielded by Zephyra, identified as the **Arcane Executioner**) from the crypt of an ancient necromancer, **Jenku the Black**, in Eustera Ridge. Ifryn's dying words to Esylla were "ask my sister about Kasi Um'cata." The party is now deciding next steps: finish exploring the Keep, travel to Gibuldon to investigate the Crimson Court and the noble family that owns the Keep, head south to Caldwynn (tied to both Zephyra's demonic mother and Ifryn's poison source), or investigate the necromancer's crypt in Eustera Ridge.
+As of Session 14 (in-game date: 2nd–3rd of Baegrum, 1246), the party has just left the ruined Scyldgar Keep, having defeated Esylla's uncle (the assassin Ifryn Ciaradain) who killed Mollywop the Magnificent during the Adsuren Market Day finale. The party is escorting Ifryn's preserved body back to Adsuren on horseback. During the final night's watch, Lila's crystal pendant showed her a montage of past visions and then she heard a voice say "Hello." Session 15 begins in a forest on the way back to Adsuren, 3rd of Baegrum, 1246.
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
-| Escanor | Brian | Human | Cleric | Amriel |
-| Therric | Chip | Half-orc | Ranger / Monk | Villari, Muerg, Cembus, Sylunarra |
-| Zephyra | Jenny | Tiefling | Barbarian | Brault; interested in Amriel; revealed to be daughter of the fiend Aeolenne |
-| Kenton | Larry | Human | Rogue | Tyvarion |
-| Esylla | Les | High Elf | Warlock | Tornia; secretly of noble birth (Ciaradain family) |
-| Lila | Tiff | Halfling | Sorcerer | Bearer of a mysterious visionary crystal necklace |
+| Escanor | Brian | Human | Cleric | Worships Amriel; wields Mace of Disruption |
+| Therric | Chip | Half-orc | Ranger/Monk | Worships Villari, Muerg, Cembus, Sylunarra; carving runes into his staff (+1 staff) |
+| Zephyra | Jenny | Tiefling | Barbarian | Worships Brault; interested in Amriel; recently discovered her mother is the succubus/fiend Aeolenne; wields the Arcane Executioner sword |
+| Kenton | Larry | Human | Rogue | Worships Tyvarion; wanted by noble House Reyvennra of Gibuldon over a warehouse fire/stolen silks; recovering from a curse |
+| Esylla | Lesley | High Elf | Warlock | Worships Tornia; secretly of a noble shipping family; niece of the assassin Ifryn Ciaradain |
+| Lila | Tiff | Halfling | Sorcerer | "Spellfire Spark" background; wears a mysterious visionary crystal necklace and a Circlet of Blasting |
+
+## Former Party Members (Deceased / Departed)
+- None recorded as deceased or departed from the active party.
 
 ## Key NPCs
-
-- **Mollywop the Magnificent** - powerful archmage residing in a tower near Adsuren; mentor/ally to the party; gravely poisoned and stabbed by an assassin at Market Day (Session 11); poison is magically unhealable and severed her divine/arcane connection temporarily.
-- **Ifryn Ciaradain** ("the Cockroach," "the Disgraced") - Esylla's uncle, a magic-rejecting assassin hired by the Crimson Court to kill Mollywop; killed by the party at Scyldgar Keep (Session 12).
-- **Aeolenne** - a fiend (implied succubus) who is Zephyra's true mother; freed from imprisonment beneath Adsuren Center when the Cult of the Immured's ritual circle was broken (Session 8); departed south toward Caldwynn.
-- **Intendant Eyovar Dunajor** - former Intendant of Adsuren, secretly "Summoner Karranok," leader of the Cult of the Immured; arrested (Session 8).
-- **Captain Alinia Sarralei** - Captain of the Adsuren Guard; scarred, no-nonsense, has a rivalry with Mollywop.
-- **Priest Tanluar Rotvori** - head priest of the Nature's Oratory in Adsuren; ally to the party.
-- **Areana Duskwhisper** - a mystic Therric knew before the campaign started; appears in his recurring visions/dreams; connected to a book he carries.
-- **Lady Ellspeth** - wealthy noblewoman encountered at Market Day; friendly to the party.
-- **Sir Rodolf Norran** - minor noble from Gibuldon who ambushed Kenton (Session 4-5) over a warehouse fire and stolen silks; connected to the Reyvennra (Vesci) noble house.
-- **Cabristrasz** - a young gold dragon corrupted by fungal blight, encountered and slain (against the party's wishes) near Adsuren's swamp (Session 10); Mollywop sought outside aid to save it beforehand.
+- **Mollywop the Magnificent** – Powerful mage of Adsuren, ally and patron of the party; assassinated at the Market Day finale (Session 11) via poisoned blade by Ifryn Ciaradain; poison used is incurable by magic and severs divine/arcane connection.
+- **Ifryn Ciaradain ("the Cockroach")** – Esylla's disgraced uncle, an assassin hired by the "Crimson Court" for 35,000gp to kill Mollywop; defeated and killed by the party at Scyldgar Keep (Session 13).
+- **Aeolenne** – A succubus/fiend and Zephyra's true mother, freed from imprisonment beneath Adsuren Center when the cult's ritual was disrupted; fled south, possibly toward Caldwynn.
+- **Eyovar Dunajor** – Former Intendant of Adsuren, secretly "Summoner Karranok," leader of the Cult of the Immured; arrested by the guard.
+- **Captain Alinia Sarralei** – Head of the Adsuren town guard; resents Mollywop's influence.
+- **Tanluar Rotvori** – Priest of the Nature's Oratory in Adsuren.
+- **Sir Rodolf Norran** – Minor noble from Gibuldon who ambushed Kenton over stolen silks and a warehouse fire; connected to House Reyvennra.
+- **Lady Reyvennra / House Reyvennra** – Powerful noble house (Vesci) in Gibuldon pursuing Kenton.
+- **Almadia** – The Tanner in Adsuren; her apprentice Ganon was a cultist (killed).
+- **Panwin, Peadar MacCaanain** – Adsuren dockworkers/informants who helped uncover cult activity.
+- **Lix** – Mollywop's senior elven apprentice, now elevated to take over her position.
+- **Areana Duskwhisper** – A mystic Therric knew in the past; appears in his recurring visions; Mollywop is trying to help him contact her.
+- **Doderi Galton / Thunderfall** – Mollywop's halfling and dwarf apprentices.
 
 ## Factions & Organizations
-
-- **Cult of the Immured** - secretive Adsuren-based cult performing heart-based sacrificial rituals to empower/free the fiend Aeolenne; led by the Intendant; dismantled by the party (Sessions 5-8).
-- **The Crimson Court** - shadowy group that paid Ifryn Ciaradain 35,000gp to assassinate Mollywop; identity and motives still unknown.
-- **The Reyvennra (Vesci) family** - powerful noble house of Gibuldon; connected to Kenton's past (stolen silks, overheard plot to "overthrow" someone, a tortured dwarf).
-- **The Scyldgar family** - once-powerful noble family of the Steoleahs (Glenleah Vec lineage), former owners of the ruined keep the party just cleared; fate/current status unknown.
-- **Camburne and Sutherford families** - rival leading families of adjacent Vecs near Adsuren; rising political tension noted (Session 2).
-- **Tegenwald Phet** - a group Mollywop traveled with decades ago, tied to a figure named Dionara; helped improve the Phet's reputation in Myrdae.
-- **Red Jackals** - a gang from Tirncall led by Brownwin Redmouth; attacked Market Day alongside the assassin (Session 11).
+- **Cult of the Immured** – A secretive cult in Adsuren performing heart-sacrifice rituals to a fiendish power (Aeolenne); dismantled by the party (Sessions 5–8).
+- **The Crimson Court** – Mysterious group that hired Ifryn to assassinate Mollywop; motive and members unknown.
+- **Red Jackals** – A gang from Tirncall led by Brownwin Redmouth, involved in the Market Day massacre attempt on Mollywop.
+- **House Reyvennra** – Noble family (Vesci) of Gibuldon pursuing Kenton over stolen goods/information.
+- **House Scyldgar** – Now-ruined noble family who once owned Scyldgar Keep; associated historically with House Reyvennra.
+- **Camburne & Sutherford families** – Rival leading noble families of adjacent Vecs, with rising political tension (rumor).
 
 ## Key Locations
-
-- **Adsuren** - central town of operations, in Camburne Vec territory, Inverland; site of the well poisoning, the cult uprising, and Market Day.
-- **Nature's Oratory** - Adsuren's temple/graveyard complex; Escanor's home base.
-- **Mollywop's Tower** - three-story misshapen tower near Adsuren; home of Mollywop and her apprentices (Lix the elf, Doderi/Daudery the halfling, Thunderfall the dwarf).
-- **Hath'lao Swamp** - swampy region across the river from Adsuren; home to the Sapcutt family plantation (site of the FUKWAD fungal outbreak) and later the corrupted gold dragon Cabristrasz.
-- **The Mines / hillside north of Adsuren** - site of the "White Horns" bulas hunt and the origin of Durgruck Bristleforge's fatal "mine sickness."
-- **Scyldgar Keep** - ruined ancestral keep north of Adsuren, recently cleared of undead guardians, gargoyles, and Ifryn Ciaradain; contains a consecrated chapel to Amriel, a family crypt, and unresolved threats (an animate mummified "Lady" in a sarcophagus).
-- **Caldwynn** - city 5 days south of Adsuren; tied to Aeolenne's ally, Ifryn's poison source, and rumors of a "dark presence" in a local church (per the Oratory priest).
-- **Gibuldon** - city with noble houses (Reyvennra/Vesci); site of Kenton's mysterious past incident.
-- **Eustera Ridge** - location of Jenku the Black's crypt, source of the Arcane Executioner sword.
+- **Adsuren** – Home base town in Camburne Vec, Inverland; site of Market Day and the cult's underground lair beneath Adsuren Center.
+- **Nature's Oratory** – Temple/graveyard complex in Adsuren where Escanor is based.
+- **Mollywop's Tower** – Three-story tower outside Adsuren; now overseen by apprentice Lix following Mollywop's death.
+- **Hath'lao Swamp** – Swampland across the river from Adsuren; home to the Sapcutt family and a golden dragon corrupted by fungal blight.
+- **Scyldgar Keep** – Ruined keep north of Adsuren, former stronghold of House Scyldgar; site of Therric's recurring visions, several undead encounters, and Ifryn's death.
+- **Caldwynn** – City to the south, hub for shipping; suspected destination of Aeolenne; site of a rumored "religious void"/dark presence in a church (per the Oratory priest).
+- **Gibuldon** – City where Kenton has enemies (House Reyvennra) and where a mystical order ("Lords of Magic") is based.
 
 ## Active Quests & Objectives
-
-- Investigate the Crimson Court and who ordered Mollywop's assassination.
-- Decide whether to travel to Gibuldon (Crimson Court/Reyvennra leads), Caldwynn (Aeolenne/poison leads), or Eustera Ridge (Jenku the Black's crypt).
-- Finish thoroughly exploring Scyldgar Keep (an animate "Lady" remains sealed in the crypt).
-- Help Mollywop recover from her poisoning/lost connection to magic.
-- Determine the fate/whereabouts of Aeolenne (Zephyra's fiendish mother), who headed south.
-- Resolve the still-unexplained monstrous roar and shadowy flying creature seen near the swamp early in the campaign (possibly linked to the now-dead dragon Cabristrasz).
-- Follow up on the still-uncaptured bulas/mining disturbances (mostly resolved but loosely threaded).
-- Esylla's uncle's last words: investigate "Kasi Um'cata" with Esylla's sister.
+- Decide how to fully cleanse/secure Scyldgar Keep (undead threats, unexplored areas) or mark it as dangerous and move on.
+- Travel to Gibuldon to investigate the Crimson Court and House Reyvennra's grievance against Kenton.
+- Travel south to Caldwynn to pursue leads on Zephyra's mother, Aeolenne, and the "ally" mentioned in cult letters.
+- Investigate the necromancer Jenku the Black's crypt in Eustera Ridge (source of the Arcane Executioner sword).
+- Return to Adsuren to report Ifryn's death and deliver his body; help stabilize the town after Mollywop's death.
+- Follow up on the corrupted golden dragon in the swamp — Mollywop had contacted a "priest friend" and possibly another gold dragon in Inverland to help heal/save it.
 
 ## Open Threads
-
-- Who exactly are the Crimson Court, and why did they want Mollywop dead?
-- What is "Kasi Um'cata," and why did Ifryn mention it with his dying breath?
-- What was the true nature/origin of the petrified demonic heart from Session 1, and is "Zuz," the demon studied by Mollywop, connected to any of this?
-- Therric's recurring dreams of a white female elf (possibly Areana Duskwhisper) fighting alongside him in beast form at Scyldgar Keep — unresolved significance.
-- Lila's crystal necklace visions (the grave, the red-floored room, the ruined keep, Kenton in the alley, the dragon, and the shadowy roar) — some fulfilled, some (the "dark room with red floor," the "fort/keep... partially destroyed") possibly still pending.
-- What is Esylla actually fleeing from regarding her noble family, and who is her Aunt Ree/Uncle Trey?
-- Kenton's true role/culpability in the Gibuldon warehouse fire and the overheard "overthrow" plot involving a tortured dwarf.
-- The identity and current activity of Zephyra's fiendish mother, Aeolenne, now free in the world.
-- The still-unidentified "Lady" undead animated in the Scyldgar crypt sarcophagus.
+- Who exactly are the "Crimson Court" and why did they want Mollywop dead?
+- What is Kenton's connection to the political conspiracy he overheard in Gibuldon (torture of a dwarf, talk of "overthrow," a "rightful heir")?
+- What is "Kasi Um'cata," the name Ifryn told Esylla to ask his sister about?
+- Where is Aeolenne now, and what is she planning in her "year" of freedom?
+- What will become of Zephyra's fiendish heritage, and can an item/ritual be found to control it (Mollywop mentioned high-level magic could help, but no one currently has access)?
+- What is the significance of Therric's recurring visions of a female elf (resembling Areana Duskwhisper) and his past life/death as a beast-warrior at Scyldgar Keep?
+- What did Lila's crystal necklace's newest vision (hearing "Hello") mean?
+- Who is the mysterious swordsman in Lila's dream/vision (the "serpent" dragon storyline)?
+- Is there a link between the Camburne/Sutherford political tension and other campaign events?
 
 ## Recent Developments
-
-- **Session 9:** Party fought and defeated a corrupted "White Horns" bulas near the mines; obtained Boots of Elvenkind, an Adventurer's Ring, and other Market Day trades; Escanor and Therric each experienced disturbing visions/tests in the woods.
-- **Session 10:** Discovered the swamp's monstrous roar was a corrupted young gold dragon, Cabristrasz; party was forced to kill it despite Lila's attempts to save it; Mollywop vowed to seek outside help for such corruption in the future.
-- **Session 11 (Market Day):** Successful Market Day festivities were violently interrupted when an assassin (Ifryn) stabbed and poisoned Mollywop on stage, backed by a Tirncall gang (the Red Jackals); party fought off the attackers; Mollywop was gravely wounded and evacuated; the party set out in pursuit of the fleeing assassin.
-- **Session 12:** Party tracked Ifryn's blood trail to the ruined Scyldgar Keep; fought through undead guardians and animated gargoyles; discovered Therric's dream-visions match the Keep's history; found a magic wand given to Lila.
-- **Session 13:** Cleared more of the Keep (ghostly warhorse, ghoulish undead, a mummy-like "Lady" that ambushed Kenton); Escanor recovered a Mace of Disruption and consecrated the keep's ruined chapel to Amriel; confronted and killed Ifryn Ciaradain, learning of the Crimson Court's bounty and his cursed sword's origin; party leveled up to character level 2/5 (per session tracking) and must decide their next destination.
+- **Session 11 (Market Day):** Mollywop's Market Day finale is interrupted by an assassination attempt; she is fatally poisoned by Ifryn Ciaradain, revealed as Esylla's uncle; the party fights off the Red Jackals gang and thugs; Mollywop dies from an incurable poison.
+- **Session 12:** The party tracks Ifryn's blood trail to the ruined Scyldgar Keep, discovering its connection to Therric's recurring visions; they battle undead skeleton guards and gargoyles.
+- **Session 13:** The party clears more of Scyldgar Keep (ghoul-undead, a cursed sarcophagus that curses Kenton, a priest's spirit contacted via Speak with Dead), then confronts and kills Ifryn after he reveals he was hired by the Crimson Court for 35,000gp.
+- **Session 14:** The party rests in the Keep's chapel, clears rat swarms and a vengeful ghost, lays remaining spirits to rest, and heads back toward Adsuren with Ifryn's body; Lila's crystal shows a clearer replay of past visions and a new voice says "Hello."
+- **Session 15:** Just beginning, set in the forest en route back to Adsuren on the 3rd of Baegrum, 1246 (no further details recorded yet).
