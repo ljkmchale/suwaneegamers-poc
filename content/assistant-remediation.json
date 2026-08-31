@@ -12,6 +12,142 @@
       "id": "rem-f65388ab26a8e5da",
       "normalized": "hey mara what do you know about the abbey of light",
       "status": "approved",
+      "createdAt": "2026-08-30T15:26:02.812Z",
+      "reviewedAt": "2026-08-30T15:26:07.618Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-30T15:26:07.618Z"
+      }
+    },
+    {
+      "question": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "The Heroes of Emberstran are official investigators operating under the Emberstran Guard Detail—though their authority rests on a precarious foundation. Ainslie and Og began with self-made observer badges; after they cleared the Vintner's Guild cellar blight and the Baltwood blight, Emlee and Haggis delivered an official scroll at the Warm Bear Inn.",
+      "evidence": [
+        "Emberstran",
+        "Emberstran Gazetteer",
+        "Emberstran EGD And Civic Authority",
+        "Emberstran / E.G.D."
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-d2a1294e184ffb5b",
+      "normalized": "can you give me a brief rundown of what heroes of emberstran has been doing",
+      "status": "approved",
+      "createdAt": "2026-08-30T15:26:02.805Z",
+      "reviewedAt": "2026-08-30T15:26:07.625Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?",
+        "value": "The Heroes of Emberstran are official investigators operating under the Emberstran Guard Detail—though their authority rests on a precarious foundation. Ainslie and Og began with self-made observer badges; after they cleared the Vintner's Guild cellar blight and the Baltwood blight, Emlee and Haggis delivered an official scroll at the Warm Bear Inn.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-30T15:26:07.625Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-29T15:25:25.681Z",
+      "reviewedAt": "2026-08-29T15:25:29.819Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-29T15:25:29.819Z"
+      }
+    },
+    {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
+      "status": "approved",
+      "createdAt": "2026-08-28T15:25:14.390Z",
+      "reviewedAt": "2026-08-31T13:54:49.904Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-31T13:54:49.904Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "approved",
+      "createdAt": "2026-08-28T15:25:14.388Z",
+      "reviewedAt": "2026-08-31T13:54:50.827Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-31T13:54:50.827Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
+      "createdAt": "2026-08-28T15:25:08.687Z",
+      "reviewedAt": "2026-08-28T15:25:14.393Z",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-28T15:25:14.393Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what do you know about the Abbey of Light?",
+      "category": "pronunciation-fix",
+      "proposedCorrection": "Review this transcript and add the intended name or phrase to Myra's speech alias and pronunciation map.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-f65388ab26a8e5da",
+      "normalized": "hey mara what do you know about the abbey of light",
+      "status": "approved",
       "createdAt": "2026-08-27T15:25:45.812Z",
       "reviewedAt": "2026-08-27T15:25:50.075Z",
       "application": {
@@ -143,8 +279,16 @@
       "timesSeen": 1,
       "id": "rem-406c5652311982fc",
       "normalized": "what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-08-21T15:25:44.565Z"
+      "status": "approved",
+      "createdAt": "2026-08-21T15:25:44.565Z",
+      "reviewedAt": "2026-08-28T12:48:31.461Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-28T12:48:31.461Z"
+      }
     },
     {
       "question": "Hey Mara, what have you learned today?",
@@ -157,8 +301,16 @@
       "timesSeen": 1,
       "id": "rem-533900afc79b79af",
       "normalized": "hey mara what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-08-21T15:25:44.563Z"
+      "status": "approved",
+      "createdAt": "2026-08-21T15:25:44.563Z",
+      "reviewedAt": "2026-08-28T12:48:32.719Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-28T12:48:32.719Z"
+      }
     },
     {
       "question": "Hey Mara, what do you know about the Abbey of Light?",
@@ -742,5 +894,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-08-27T15:25:50.075Z"
+  "updatedAt": "2026-08-31T13:54:50.827Z"
 }

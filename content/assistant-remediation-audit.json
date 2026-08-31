@@ -1,6 +1,115 @@
 {
   "entries": [
     {
+      "id": "audit-rem-533900afc79b79af-1788184490829",
+      "remediationId": "rem-533900afc79b79af",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-31T13:54:50.827Z"
+      },
+      "previousValue": "{\"id\":\"task-rem-533900afc79b79af\",\"remediationId\":\"rem-533900afc79b79af\",\"kind\":\"routing-task\",\"question\":\"Hey Mara, what have you learned today?\",\"proposedCorrection\":\"Myra answered this from the \\\"general_schedule\\\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.\",\"evidence\":[\"Answered as general_schedule\"],\"status\":\"open\",\"createdAt\":\"2026-08-28T12:48:32.719Z\"}",
+      "createdAt": "2026-08-31T13:54:50.827Z"
+    },
+    {
+      "id": "audit-rem-406c5652311982fc-1788184489907",
+      "remediationId": "rem-406c5652311982fc",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-31T13:54:49.904Z"
+      },
+      "previousValue": "{\"id\":\"task-rem-406c5652311982fc\",\"remediationId\":\"rem-406c5652311982fc\",\"kind\":\"routing-task\",\"question\":\"What have you learned today?\",\"proposedCorrection\":\"Myra answered this from the \\\"general_schedule\\\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.\",\"evidence\":[\"Answered as general_schedule\"],\"status\":\"open\",\"createdAt\":\"2026-08-28T12:48:31.461Z\"}",
+      "createdAt": "2026-08-31T13:54:49.904Z"
+    },
+    {
+      "id": "audit-rem-d2a1294e184ffb5b-1788103567627",
+      "remediationId": "rem-d2a1294e184ffb5b",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?",
+        "value": "The Heroes of Emberstran are official investigators operating under the Emberstran Guard Detail—though their authority rests on a precarious foundation. Ainslie and Og began with self-made observer badges; after they cleared the Vintner's Guild cellar blight and the Baltwood blight, Emlee and Haggis delivered an official scroll at the Warm Bear Inn.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-08-30T15:26:07.625Z"
+      },
+      "createdAt": "2026-08-30T15:26:07.625Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1788103567621",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-30T15:26:07.618Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-30T15:26:07.618Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1788017129822",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-29T15:25:29.819Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-29T15:25:29.819Z"
+    },
+    {
+      "id": "audit-rem-f65388ab26a8e5da-1787930714396",
+      "remediationId": "rem-f65388ab26a8e5da",
+      "action": "applied",
+      "application": {
+        "kind": "mishearing",
+        "key": "Mara",
+        "value": "Myra",
+        "target": "assistant-mishearings.json",
+        "appliedAt": "2026-08-28T15:25:14.393Z"
+      },
+      "previousValue": "Myra",
+      "createdAt": "2026-08-28T15:25:14.393Z"
+    },
+    {
+      "id": "audit-rem-533900afc79b79af-1787921312721",
+      "remediationId": "rem-533900afc79b79af",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-28T12:48:32.719Z"
+      },
+      "createdAt": "2026-08-28T12:48:32.719Z"
+    },
+    {
+      "id": "audit-rem-406c5652311982fc-1787921311463",
+      "remediationId": "rem-406c5652311982fc",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-08-28T12:48:31.461Z"
+      },
+      "createdAt": "2026-08-28T12:48:31.461Z"
+    },
+    {
       "id": "audit-rem-f65388ab26a8e5da-1787844350077",
       "remediationId": "rem-f65388ab26a8e5da",
       "action": "applied",

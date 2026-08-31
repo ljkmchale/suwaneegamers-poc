@@ -1,6 +1,26 @@
 {
   "entries": [
     {
+      "healedAt": "2026-08-30T15:25:48.182Z",
+      "kind": "mishearing",
+      "question": "Hey Mara, what do you know about the Abbey of Light?"
+    },
+    {
+      "healedAt": "2026-08-30T15:25:48.182Z",
+      "kind": "learned-answer",
+      "question": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?"
+    },
+    {
+      "healedAt": "2026-08-29T15:25:25.647Z",
+      "kind": "mishearing",
+      "question": "Hey Mara, what do you know about the Abbey of Light?"
+    },
+    {
+      "healedAt": "2026-08-28T15:25:08.655Z",
+      "kind": "mishearing",
+      "question": "Hey Mara, what do you know about the Abbey of Light?"
+    },
+    {
       "healedAt": "2026-08-27T15:25:45.780Z",
       "kind": "mishearing",
       "question": "Hey Mara, what do you know about the Abbey of Light?"
@@ -46,5 +66,5 @@
       "question": "Hey Mara, what do you know about the Abbey of Light?"
     }
   ],
-  "updatedAt": "2026-08-27T15:25:45.780Z"
+  "updatedAt": "2026-08-30T15:25:48.182Z"
 }

@@ -1,6 +1,19 @@
 {
   "answers": [
     {
+      "question": "Can you give me a brief rundown of what Heroes of Emberstran has been doing?",
+      "normalized": "can you give me a brief rundown of what heroes of emberstran has been doing",
+      "answer": "The Heroes of Emberstran are official investigators operating under the Emberstran Guard Detail—though their authority rests on a precarious foundation. Ainslie and Og began with self-made observer badges; after they cleared the Vintner's Guild cellar blight and the Baltwood blight, Emlee and Haggis delivered an official scroll at the Warm Bear Inn.",
+      "sources": [
+        "Emberstran",
+        "Emberstran Gazetteer",
+        "Emberstran EGD And Civic Authority",
+        "Emberstran / E.G.D."
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-08-30T15:26:07.625Z"
+    },
+    {
       "question": "I mean, the campaign was the Crystal Bottle.",
       "normalized": "i mean the campaign was the crystal bottle",
       "answer": "The Crystal Bottle is the campaign documented in these excerpts. The party followed a map across a windswept desert, where visibility dropped to 30 feet due to powerful winds and stinging sand. They tracked petrified tree stumps from when the map was first made. The earth then split open, and Scarlytt, Sigil, and Yvaine fell into a chasm.",
@@ -65,5 +78,5 @@
   "blocked": [
     "is there any other questions you can ask be asked"
   ],
-  "updatedAt": "2026-08-27T15:25:45.780Z"
+  "updatedAt": "2026-08-30T15:26:07.625Z"
 }

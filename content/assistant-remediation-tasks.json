@@ -1,3 +1,28 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "id": "task-rem-533900afc79b79af",
+      "remediationId": "rem-533900afc79b79af",
+      "kind": "routing-task",
+      "question": "Hey Mara, what have you learned today?",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "status": "open",
+      "createdAt": "2026-08-31T13:54:50.827Z"
+    },
+    {
+      "id": "task-rem-406c5652311982fc",
+      "remediationId": "rem-406c5652311982fc",
+      "kind": "routing-task",
+      "question": "What have you learned today?",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "status": "open",
+      "createdAt": "2026-08-31T13:54:49.904Z"
+    }
+  ]
 }
