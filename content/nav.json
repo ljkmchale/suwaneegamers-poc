@@ -10,11 +10,6 @@
           "label": "Campaigns"
         },
         {
-          "id": "advents-of-harmony",
-          "label": "Library",
-          "href": "/advents_of_harmony"
-        },
-        {
           "id": "maps-of-myrdae",
           "href": "/maps-of-myrdae",
           "label": "Map"

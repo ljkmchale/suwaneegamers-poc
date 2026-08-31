@@ -3,7 +3,6 @@ title: "Thel Kholdur (Gazetteer)"
 campaign: "World"
 visibility: players
 tags: [gazetteer, settlement, auto-curated]
-curated_at: "2026-08-30T19:32:43.295Z"
 ---
 # Thel Kholdur
 

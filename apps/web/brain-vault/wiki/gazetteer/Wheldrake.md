@@ -3,7 +3,6 @@ title: "Wheldrake (Gazetteer)"
 campaign: "World"
 visibility: players
 tags: [gazetteer, settlement, auto-curated]
-curated_at: "2026-08-30T19:33:09.509Z"
 ---
 # Wheldrake
 

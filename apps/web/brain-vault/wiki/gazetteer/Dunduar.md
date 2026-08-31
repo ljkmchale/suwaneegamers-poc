@@ -3,7 +3,6 @@ title: "Dunduar (Gazetteer)"
 campaign: "World"
 visibility: players
 tags: [gazetteer, settlement, auto-curated]
-curated_at: "2026-08-30T19:31:06.326Z"
 ---
 # Dunduar
 

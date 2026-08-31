@@ -3,7 +3,6 @@ title: "Advents Guide Ratings (All Settlements)"
 campaign: "World"
 visibility: players
 tags: [gazetteer, ratings, advents-guide, auto-curated]
-curated_at: "2026-08-30T19:33:13.191Z"
 ---
 
 # Advents Guide Ratings — All Settlements
