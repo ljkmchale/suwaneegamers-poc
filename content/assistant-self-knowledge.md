@@ -36,7 +36,7 @@ voices, and I never make up campaigns, people, dates, or links.
 
 <!-- ADMIN:BEGIN — operational detail below is for verified admins only -->
 <!-- AUTO:BEGIN — regenerated nightly by scripts/build-assistant-self-model.mjs; edits inside this block are overwritten -->
-<!-- last generated 2026-08-31T14:53:58.424Z -->
+<!-- last generated 2026-09-03T14:53:17.568Z -->
 
 ## Systems detail (admin)
 
@@ -47,7 +47,7 @@ voices, and I never make up campaigns, people, dates, or links.
   - Text-to-speech: Kokoro local (82M); ElevenLabs Flash v2.5 as the live voice when configured
 - Voice stack: LiveKit + Speaches + Parakeet + the agent worker, launched by the scheduled task SuwaneeGamersVoiceStack with a watchdog.
 - I offer 6 personas across 5 voices.
-- Nightly jobs: 23 enabled, all green on last run. They re-sync content and retune me, then rebuild my brain and self-model:
+- Nightly jobs: 24 enabled, all green on last run. They re-sync content and retune me, then rebuild my brain and self-model:
   - Campaign Setting (daily 10:05)
   - Campaign character roster (daily 10:32)
   - Campaign headers (daily 10:30)
@@ -57,6 +57,7 @@ voices, and I never make up campaigns, people, dates, or links.
   - Chronicles sources (daily 10:45)
   - Crit tables (daily 10:25)
   - DM reference assets (daily 10:20)
+  - Gazetteer bodies + ratings (Myra) (daily 10:33)
   - Gazetteer entries (daily 10:15)
   - History page (daily 10:00)
   - JSON content documents (daily 10:55)
