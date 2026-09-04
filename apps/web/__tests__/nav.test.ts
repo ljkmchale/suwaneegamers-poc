@@ -112,13 +112,12 @@ describe("nav item ID uniqueness", () => {
 });
 
 describe("Chronicles navigation", () => {
-  it("uses one embedded Chronicles doorway with no Knowledge Base duplicate", () => {
+  it("intentionally omits the former Library and Knowledge Base doorways", () => {
     const items = getNavConfig().sections.flatMap((section) => section.items);
     const chronicles = items.filter((item) => item.label === "Library");
 
-    expect(chronicles).toEqual([
-      expect.objectContaining({ href: "/advents_of_harmony" }),
-    ]);
+    expect(chronicles).toEqual([]);
+    expect(items.some((item) => item.href === "/advents_of_harmony")).toBe(false);
     expect(items.some((item) => item.label === "Knowledge Base")).toBe(false);
   });
 });

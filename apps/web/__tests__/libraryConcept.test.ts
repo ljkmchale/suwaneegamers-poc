@@ -12,10 +12,11 @@ describe("Advents of Harmony library", () => {
     expect(experience).toContain("<RunicBackground />");
   });
 
-  it("exists as the public replacement for Chronicles", () => {
+  it("keeps the former library implementation available but routes the doorway to Myra", () => {
     expect(fs.existsSync(path.join(routeDir, "page.tsx"))).toBe(true);
-    const nav = fs.readFileSync(path.join(process.cwd(), "lib", "nav.ts"), "utf8");
-    expect(nav).toContain("/advents_of_harmony");
+    const page = fs.readFileSync(path.join(routeDir, "page.tsx"), "utf8");
+    expect(page).toContain('import { MyraAvatarPoc } from "@/app/myra-avatar-poc/MyraAvatarPoc"');
+    expect(page).toContain('<MyraAvatarPoc pagePath="/advents_of_harmony" />');
   });
 
   it("includes interactive reading and bookmark affordances", () => {
@@ -67,8 +68,8 @@ describe("Advents of Harmony library", () => {
     expect(scene).not.toContain("Return through the doors");
   });
 
-  it("does not truncate campaign histories in their library volumes", () => {
-    const page = fs.readFileSync(path.join(routeDir, "page.tsx"), "utf8");
+  it("does not truncate campaign histories in the retained library implementation", () => {
+    const page = fs.readFileSync(path.join(routeDir, "FullLibraryPage.tsx"), "utf8");
     const css = fs.readFileSync(path.join(routeDir, "library.module.css"), "utf8");
     expect(page).not.toContain("sessionSummaries?.slice(0, 2)");
     expect(page).not.toContain("journey.stops.slice(0, 4)");
