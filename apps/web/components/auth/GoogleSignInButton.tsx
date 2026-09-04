@@ -7,19 +7,25 @@ const TERMS_ACCEPTANCE_KEY = "sg-terms-of-service-accepted-v1";
 
 export function GoogleSignInButton({ returnTo }: { returnTo?: string } = {}) {
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const href =
-    returnTo && returnTo !== "/"
-      ? `/api/auth/google/login?from=${encodeURIComponent(returnTo)}`
-      : "/api/auth/google/login";
+  const [href, setHref] = useState("/api/auth/google/login");
   const buttonClasses =
     "inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-lg px-5 py-3 font-semibold shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#16121d]";
 
   useEffect(() => {
     const restoreAcceptance = window.setTimeout(() => {
       setTermsAccepted(window.localStorage.getItem(TERMS_ACCEPTANCE_KEY) === "true");
+      const params = new URLSearchParams();
+      if (returnTo && returnTo !== "/") params.set("from", returnTo);
+      if (document.referrer) params.set("referrer", document.referrer);
+      params.set("landing", returnTo || "/signin");
+      for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
+        const value = new URLSearchParams(window.location.search).get(key);
+        if (value) params.set(key, value);
+      }
+      setHref(`/api/auth/google/login?${params.toString()}`);
     }, 0);
     return () => window.clearTimeout(restoreAcceptance);
-  }, []);
+  }, [returnTo]);
 
   function updateTermsAcceptance(accepted: boolean) {
     setTermsAccepted(accepted);

@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { randomBytes } from "crypto";
 import { buildAuthUrl, getRedirectUri, isGoogleAuthConfigured } from "@/lib/googleOAuth";
-import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
+import { ACQUISITION_COOKIE, RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +36,24 @@ export async function GET(request: NextRequest) {
       sameSite: "lax",
       path: "/",
       maxAge: 600,
+    });
+  }
+  const suppliedReferrer = request.nextUrl.searchParams.get("referrer") ?? "";
+  const suppliedLanding = request.nextUrl.searchParams.get("landing") ?? "";
+  if ((suppliedReferrer || suppliedLanding) && !request.cookies.has(ACQUISITION_COOKIE)) {
+    const acquisition = {
+      landingPath: safeReturnPath(suppliedLanding, "/signin").slice(0, 500),
+      referrer: suppliedReferrer.slice(0, 1000),
+      utmSource: (request.nextUrl.searchParams.get("utm_source") ?? "").slice(0, 100),
+      utmMedium: (request.nextUrl.searchParams.get("utm_medium") ?? "").slice(0, 100),
+      utmCampaign: (request.nextUrl.searchParams.get("utm_campaign") ?? "").slice(0, 160),
+    };
+    response.cookies.set(ACQUISITION_COOKIE, encodeURIComponent(JSON.stringify(acquisition)), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 900,
     });
   }
   return response;

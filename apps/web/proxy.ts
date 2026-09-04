@@ -4,6 +4,7 @@ import { SESSION_OPTIONS, type AdminSessionData } from "@/lib/adminSession";
 import { USER_SESSION_OPTIONS, isSignedIn, type UserSessionData } from "@/lib/userSession";
 import { automaticallyBlockThreat, clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/lib/securityLog";
 import { isVerifiedCloudflareRequest } from "@/lib/cloudflareSecurity";
+import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
 
 // Reachable without a signed-in visitor. Everything else — pages and APIs alike
 // — requires Google sign-in.
@@ -110,7 +111,27 @@ export async function proxy(request: NextRequest) {
     }
     const signInUrl = new URL("/signin", request.url);
     if (pathname !== "/") signInUrl.searchParams.set("from", pathname);
-    return NextResponse.redirect(signInUrl);
+    const redirectResponse = NextResponse.redirect(signInUrl);
+    const landingUrl = new URL(request.url);
+    const acquisition = {
+      landingPath: `${landingUrl.pathname}${landingUrl.search}`.slice(0, 500),
+      referrer: (request.headers.get("referer") ?? "").slice(0, 1000),
+      utmSource: landingUrl.searchParams.get("utm_source")?.slice(0, 100) ?? "",
+      utmMedium: landingUrl.searchParams.get("utm_medium")?.slice(0, 100) ?? "",
+      utmCampaign: landingUrl.searchParams.get("utm_campaign")?.slice(0, 160) ?? "",
+    };
+    redirectResponse.cookies.set(
+      ACQUISITION_COOKIE,
+      encodeURIComponent(JSON.stringify(acquisition)),
+      {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 900,
+      },
+    );
+    return redirectResponse;
   }
 
   const requestHeaders = new Headers(request.headers);

@@ -183,6 +183,8 @@ export interface AnalyticsDashboardData {
     visitorName: string | null;
     visitorEmail: string | null;
     firstTimeVisitor: boolean;
+    acquisitionSource: string;
+    acquisitionCampaign: string | null;
   }>;
   people: Array<{
     visitorKey: string;
@@ -308,6 +310,12 @@ export function recordUsageEvents(input: {
   rawVisitorId?: string;
   events: UsageEventInput[];
   referrer?: string;
+  acquisition?: {
+    landingPath?: string;
+    utmSource?: string;
+    utmMedium?: string;
+    utmCampaign?: string;
+  };
   userAgent?: string;
   identity?: { email?: string; name?: string };
 }): void {
@@ -347,11 +355,15 @@ export function recordUsageEvents(input: {
       : "desktop";
   const referrerHost = safeReferrerHost(input.referrer);
   const entryPath = input.events[0]?.path ?? "/";
+  const acquisitionPath = cleanText(input.acquisition?.landingPath, 500);
+  const utmSource = cleanText(input.acquisition?.utmSource, 100);
+  const utmMedium = cleanText(input.acquisition?.utmMedium, 100);
+  const utmCampaign = cleanText(input.acquisition?.utmCampaign, 160);
 
   const insertSession = db.prepare(`
     INSERT INTO analytics_sessions
-      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_id, visitor_email, visitor_name)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_id, visitor_email, visitor_name, acquisition_path, utm_source, utm_medium, utm_campaign)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(session_id) DO NOTHING
   `);
   const updateIdentity = db.prepare(`
@@ -386,7 +398,7 @@ export function recordUsageEvents(input: {
   `);
 
   db.transaction(() => {
-    insertSession.run(sessionId, now, now, entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName);
+    insertSession.run(sessionId, now, now, acquisitionPath ?? entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName, acquisitionPath, utmSource, utmMedium, utmCampaign);
     // Backfill identity on sessions that started before sign-in resolved.
     updateIdentity.run(visitorId, visitorEmail, visitorName, sessionId);
     if (visitorEmail) {
@@ -1078,6 +1090,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       s.engaged_seconds,
       s.visitor_email,
       s.visitor_name,
+      s.referrer_host,
+      s.utm_source,
+      s.utm_medium,
+      s.utm_campaign,
       CASE WHEN (
         SELECT COUNT(*) FROM analytics_sessions AS lifetime
         WHERE COALESCE(lifetime.visitor_email, lifetime.visitor_id, lifetime.session_id)
@@ -1101,6 +1117,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     engaged_seconds: number;
     visitor_email: string | null;
     visitor_name: string | null;
+    referrer_host: string | null;
+    utm_source: string | null;
+    utm_medium: string | null;
+    utm_campaign: string | null;
     visitor_label: string;
     first_time_visitor: number;
   }>).map((row) => ({
@@ -1114,6 +1134,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     visitorName: row.visitor_name,
     visitorEmail: row.visitor_email,
     firstTimeVisitor: row.first_time_visitor === 1,
+    acquisitionSource: row.utm_source
+      ? [row.utm_source, row.utm_medium].filter(Boolean).join(" / ")
+      : row.referrer_host
+        ? row.referrer_host === "accounts.google.com" ? "Google sign-in (legacy)" : row.referrer_host
+        : "Direct or shared link",
+    acquisitionCampaign: row.utm_campaign,
   }));
 
   const people = (db.prepare(`

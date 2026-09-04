@@ -202,6 +202,15 @@ function migrateSchema(db: Database.Database): void {
   if (!analyticsSessionColumns.has("visitor_id")) {
     db.exec(`ALTER TABLE analytics_sessions ADD COLUMN visitor_id TEXT`);
   }
+  const addAnalyticsSessionColumn = (name: string) => {
+    if (!analyticsSessionColumns.has(name)) {
+      db.exec(`ALTER TABLE analytics_sessions ADD COLUMN ${name} TEXT`);
+    }
+  };
+  addAnalyticsSessionColumn("acquisition_path");
+  addAnalyticsSessionColumn("utm_source");
+  addAnalyticsSessionColumn("utm_medium");
+  addAnalyticsSessionColumn("utm_campaign");
 
   // Records which model answered each voice question. Historically this
   // distinguished Claude from the retired local fallback; today it is "claude"
@@ -612,7 +621,11 @@ function initializeSchema(db: Database.Database): void {
       engaged_seconds INTEGER NOT NULL DEFAULT 0,
       visitor_id    TEXT,
       visitor_email TEXT,
-      visitor_name  TEXT
+      visitor_name  TEXT,
+      acquisition_path TEXT,
+      utm_source TEXT,
+      utm_medium TEXT,
+      utm_campaign TEXT
     );
 
     CREATE TABLE IF NOT EXISTS analytics_events (

@@ -139,6 +139,18 @@ describe("Campaign party → players.json", () => {
 });
 
 describe("Living Chronicle campaign links", () => {
+  it("keeps Bloody Endeavor raw Notes and Living Chronicle as separate adjacent resources", () => {
+    const campaign = campaigns.find((item) => item.id === "bloody-endeavor");
+    const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;
+    const chroniclesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Chronicles") ?? -1;
+
+    expect(campaign?.resources?.[notesIndex]?.url).toBe(
+      "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit?usp=sharing",
+    );
+    expect(campaign?.resources?.[chroniclesIndex]?.url).toBe("/campaigns/bloody-endeavor/chronicle");
+    expect(chroniclesIndex).toBe(notesIndex + 1);
+  });
+
   it("keeps A New Adventure raw Notes and Living Chronicle as separate adjacent resources", () => {
     const campaign = campaigns.find((item) => item.id === "a-new-adventure");
     const notesIndex = campaign?.resources?.findIndex((resource) => resource.label === "Notes") ?? -1;

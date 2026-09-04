@@ -5,8 +5,38 @@ import {
   type UsageEventInput,
 } from "@/lib/analytics";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
+import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
 
 export const dynamic = "force-dynamic";
+
+function cleanAcquisition(value: unknown) {
+  try {
+    const parsed = value as Record<string, unknown>;
+    if (!parsed || typeof parsed !== "object") return undefined;
+    const text = (key: string, max: number) => typeof parsed[key] === "string"
+      ? parsed[key].slice(0, max)
+      : undefined;
+    return {
+      landingPath: text("landingPath", 500),
+      referrer: text("referrer", 1000),
+      utmSource: text("utmSource", 100),
+      utmMedium: text("utmMedium", 100),
+      utmCampaign: text("utmCampaign", 160),
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+function readAcquisition(request: NextRequest) {
+  const raw = request.cookies.get(ACQUISITION_COOKIE)?.value;
+  if (!raw) return undefined;
+  try {
+    return cleanAcquisition(JSON.parse(decodeURIComponent(raw)));
+  } catch {
+    return undefined;
+  }
+}
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get("origin");
@@ -57,13 +87,18 @@ export async function POST(request: NextRequest) {
     ? { email: userSession.email, name: userSession.name }
     : undefined;
 
+  const cookieAcquisition = readAcquisition(request);
+  const acquisition = cookieAcquisition ?? cleanAcquisition(payload.acquisition);
   recordUsageEvents({
     rawSessionId,
     rawVisitorId: rawVisitorId.length >= 16 ? rawVisitorId : undefined,
     events,
-    referrer: typeof payload.referrer === "string" ? payload.referrer : undefined,
+    referrer: acquisition?.referrer || (typeof payload.referrer === "string" ? payload.referrer : undefined),
+    acquisition,
     userAgent: request.headers.get("user-agent") ?? undefined,
     identity,
   });
-  return new NextResponse(null, { status: 204 });
+  const response = new NextResponse(null, { status: 204 });
+  if (cookieAcquisition) response.cookies.delete(ACQUISITION_COOKIE);
+  return response;
 }

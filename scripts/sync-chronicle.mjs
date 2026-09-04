@@ -39,6 +39,22 @@ const chronicles = [
     minimumChapters: 10,
   },
   {
+    id: "bloody-endeavor",
+    name: "Bloody Endeavor II",
+    dir: path.join(root, "bloody-endeavor-chronicle-poc"),
+    source: "bloody-endeavor-chronicle.md",
+    output: "bloody-endeavor-chronicle.html",
+    served: "bloody-endeavor.html",
+    exportUrl: "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/export?format=txt",
+    isSessionHead: (line) => /^\d{1,2}\s*[–-]\s*\S/.test(line.trim().replace(/^\*\s+/, "")),
+    countChapters: (lines) => new Set(
+      lines.filter((line) => /^\d{1,2}\s*[–-]\s*\S/.test(line.trim().replace(/^\*\s+/, "")))
+        .map((line) => line.trim().replace(/^\*\s+/, "").match(/^(\d{1,2})/)?.[1]),
+    ).size,
+    normalizeSource: (source) => source.split(/\r?\n/).map((line) => line.trimEnd()).join("\n"),
+    minimumChapters: 35,
+  },
+  {
     id: "a-new-adventure",
     name: "A New Adventure",
     dir: path.join(root, "ana-chronicle-poc"),

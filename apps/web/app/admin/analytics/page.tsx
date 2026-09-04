@@ -593,6 +593,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                   <th className="px-5 py-3 font-normal">Visitor</th>
                   <th className="px-5 py-3 font-normal">Last seen</th>
                   <th className="px-5 py-3 font-normal">Entry</th>
+                  <th className="px-5 py-3 font-normal">Source</th>
+                  <th className="px-5 py-3 font-normal">Campaign</th>
                   <th className="px-5 py-3 font-normal">Last page</th>
                   <th className="px-5 py-3 font-normal">Device</th>
                   <th className="px-5 py-3 text-right font-normal">Views</th>
@@ -612,6 +614,8 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                     </td>
                     <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(visitor.lastSeenAt)}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#a89880]">{visitor.entryPath}</td>
+                    <td className="max-w-40 truncate px-5 py-3 text-[#a89880]" title={visitor.acquisitionSource}>{visitor.acquisitionSource}</td>
+                    <td className="max-w-36 truncate px-5 py-3 text-[#a89880]">{visitor.acquisitionCampaign ?? "—"}</td>
                     <td className="max-w-36 truncate px-5 py-3 text-[#e8dfc8]">{visitor.lastPath}</td>
                     <td className="px-5 py-3 capitalize text-[#9080a0]">{visitor.deviceType}</td>
                     <td className="px-5 py-3 text-right">{visitor.pageViews}</td>

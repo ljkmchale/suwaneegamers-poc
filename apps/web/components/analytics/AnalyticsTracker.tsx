@@ -80,10 +80,18 @@ function pageLabel() {
 
 function send(events: ClientUsageEvent[], beacon = false) {
   if (!analyticsEnabled() || events.length === 0) return;
+  const search = new URLSearchParams(window.location.search);
   const payload = JSON.stringify({
     sessionId: visitId(),
     visitorId: visitorId(),
     referrer: firstPayload ? document.referrer : undefined,
+    acquisition: firstPayload ? {
+      landingPath: `${window.location.pathname}${window.location.search}`,
+      referrer: document.referrer,
+      utmSource: search.get("utm_source") ?? "",
+      utmMedium: search.get("utm_medium") ?? "",
+      utmCampaign: search.get("utm_campaign") ?? "",
+    } : undefined,
     events: events.map((event) => ({
       ...event,
       path: event.path ?? window.location.pathname,

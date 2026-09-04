@@ -3,6 +3,8 @@
 
 /** Cookie carrying the pre-sign-in destination across the Google round trip. */
 export const RETURN_TO_COOKIE = "sg-oauth-from";
+/** Short-lived pre-auth attribution, consumed by the first analytics beacon. */
+export const ACQUISITION_COOKIE = "sg-acquisition";
 
 /**
  * Reduce an arbitrary return path to one that is safe to redirect to.
