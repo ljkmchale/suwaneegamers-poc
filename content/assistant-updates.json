@@ -1,6 +1,18 @@
 {
   "updates": [
     {
+      "date": "2026-08-27",
+      "area": "myra",
+      "title": "Lore Q&A moved into Myra and the Library",
+      "detail": "The old text-based Chronicles Q&A page is gone. Ask Myra about lore out loud, or browse the full write-ups in the Advents of Harmony Library."
+    },
+    {
+      "date": "2026-08-21",
+      "area": "site",
+      "title": "Session notes now open as illustrated Chronicles",
+      "detail": "Clicking Notes on a campaign session now opens a full illustrated Chronicle page instead of a plain Google Doc."
+    },
+    {
       "date": "2026-08-18",
       "area": "site",
       "title": "Location & business ratings on the Map of Myrdae",

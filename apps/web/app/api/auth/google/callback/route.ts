@@ -3,6 +3,8 @@ import { sealData } from "iron-session";
 import { USER_SESSION_OPTIONS, USER_SESSION_TTL_SECONDS, type UserSessionData } from "@/lib/userSession";
 import { exchangeCodeForIdentity, getBaseUrl, getRedirectUri, isGoogleAuthConfigured } from "@/lib/googleOAuth";
 import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
+import { clientIpFromHeaders } from "@/lib/securityLog";
+import { recordMemberSignin } from "@/lib/memberSignins";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +48,14 @@ export async function GET(request: NextRequest) {
   } catch {
     return failure(request, "exchange");
   }
+
+  recordMemberSignin({
+    googleSub: identity.sub,
+    email: identity.email,
+    displayName: identity.name,
+    ip: clientIpFromHeaders(request.headers),
+    userAgent: request.headers.get("user-agent"),
+  });
 
   // Seal the session and set it directly on the response. iron-session's
   // (request, response) writer did not survive the proxy here, so we write the

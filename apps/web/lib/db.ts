@@ -808,6 +808,23 @@ function initializeSchema(db: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_security_events_kind_created
       ON security_events(kind, created_at DESC);
 
+    -- Every completed member Google sign-in (not just failures/scanners), so
+    -- "who is X and where did they come from" can be answered after the fact.
+    CREATE TABLE IF NOT EXISTS member_signins (
+      id           INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at   TEXT NOT NULL,
+      google_sub   TEXT NOT NULL,
+      email        TEXT NOT NULL,
+      display_name TEXT,
+      ip           TEXT,
+      user_agent   TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_member_signins_created
+      ON member_signins(created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_member_signins_email_created
+      ON member_signins(email, created_at DESC);
+
     -- Cloudflare edge blocks created by automatic detection or an admin.
     -- Keeping the provider rule id makes every block reversible from the UI.
     CREATE TABLE IF NOT EXISTS security_blocks (

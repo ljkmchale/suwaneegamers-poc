@@ -17,6 +17,7 @@ import {
 } from "@/lib/securityLog";
 import type { ThreatLevel } from "@/lib/securityClassifier";
 import { cloudflareSecurityConfigured, getSecurityBlocks } from "@/lib/cloudflareSecurity";
+import { getRecentMemberSignins } from "@/lib/memberSignins";
 import { blockIpAction, unblockIpAction } from "./actions";
 import { ConfirmSecurityAction } from "./ConfirmSecurityAction";
 
@@ -93,6 +94,7 @@ export default function SecurityPage() {
   const summary = getSecuritySummary(DAYS);
   const situation = getSecuritySituation();
   const events = getRecentSecurityEvents({ days: DAYS, limit: 200 });
+  const memberSignins = getRecentMemberSignins({ days: DAYS, limit: 100 });
   const blocks = getSecurityBlocks();
   const activeBlocks = blocks.filter((block) => block.status === "active");
   const inactiveBlockHistory = blocks.filter((block) => block.status !== "active");
@@ -392,6 +394,56 @@ export default function SecurityPage() {
           </div>
         </section>
       )}
+
+      <section className="mt-8">
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="text-sm uppercase tracking-wider text-[#9080a0]">Recent member sign-ins</h2>
+            <p className="mt-2 text-xs text-[#6a5a78]">
+              Every completed Google sign-in during the last {DAYS} days, so a new member and where they
+              connected from can be traced later.
+            </p>
+          </div>
+        </div>
+        {memberSignins.length === 0 ? (
+          <p className="mt-3 rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-5 py-6 text-sm text-[#9080a0]">
+            No sign-ins recorded in the last {DAYS} days.
+          </p>
+        ) : (
+          <div className="mt-3 overflow-x-auto rounded-lg border border-[#2a2a35] bg-[#0f0a1a]">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-[#2a2a35] text-xs uppercase tracking-wider text-[#9080a0]">
+                  <th className="px-4 py-3">When</th>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">IP</th>
+                  <th className="px-4 py-3">User agent</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#2a2a35]">
+                {memberSignins.map((signin) => (
+                  <tr key={signin.id}>
+                    <td className="whitespace-nowrap px-4 py-2.5 text-[#9080a0]">
+                      {dateTime(signin.createdAt)}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2.5 text-xs text-[#e8dfc8]">
+                      {signin.displayName ?? "—"}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2.5 text-xs text-[#c8bda8]">{signin.email}</td>
+                    <td className="whitespace-nowrap px-4 py-2.5 font-mono text-xs text-[#e8dfc8]">
+                      {signin.ip ?? "—"}
+                    </td>
+                    <td className="max-w-72 truncate px-4 py-2.5 text-xs text-[#9080a0]">
+                      {signin.userAgent ?? "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
 
       <section className="mt-8">
         <h2 className="text-sm uppercase tracking-wider text-[#9080a0]">Recent events</h2>
