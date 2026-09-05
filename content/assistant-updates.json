@@ -1,6 +1,12 @@
 {
   "updates": [
     {
+      "date": "2026-09-04",
+      "area": "site",
+      "title": "Illustrated artwork added to Bloody Endeavor Chronicles",
+      "detail": "Session and character artwork now appears in the illustrated Chronicle pages for the Bloody Endeavor campaign."
+    },
+    {
       "date": "2026-08-27",
       "area": "myra",
       "title": "Lore Q&A moved into Myra and the Library",
