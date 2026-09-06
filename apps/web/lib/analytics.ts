@@ -546,6 +546,106 @@ export function getSignedInMemberActivity(days: number, limit = 12): SignedInMem
   };
 }
 
+function acquisitionLabel(row: { utm_source: string | null; utm_medium: string | null; referrer_host: string | null }): string {
+  if (row.utm_source) return [row.utm_source, row.utm_medium].filter(Boolean).join(" / ");
+  if (!row.referrer_host) return "Direct or shared link";
+  if (row.referrer_host === "accounts.google.com") return "Google sign-in (legacy)";
+  return row.referrer_host;
+}
+
+export interface VisitorGrowthSummary {
+  days: number;
+  newVisitorCount: number;
+  newVisitorNames: string[];
+  extraNewVisitorCount: number;
+  acquisitionBreakdown: Array<{ source: string; count: number }>;
+  topPageAmongNewVisitors: string | null;
+}
+
+/**
+ * Plain-English "who's new and how did they get here" digest, distilled from
+ * the same session/event tables the full dashboard reads. Distinct from
+ * `getAnalyticsDashboardData`'s `recentVisitors`/`people` lists, which are
+ * capped for table display and not scoped to "joined in this window."
+ */
+export function getVisitorGrowthSummary(days: number): VisitorGrowthSummary {
+  const db = getDb();
+  const safeDays = [7, 30, 90].includes(days) ? days : 30;
+  const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
+  since.setHours(0, 0, 0, 0);
+  const sinceIso = since.toISOString();
+
+  const newVisitorRows = db.prepare(`
+    WITH first_sessions AS (
+      SELECT
+        COALESCE(visitor_email, visitor_id, session_id) AS visitor_key,
+        MIN(first_seen_at) AS joined_at
+      FROM analytics_sessions
+      GROUP BY visitor_key
+    )
+    SELECT
+      f.visitor_key AS visitor_key,
+      f.joined_at AS joined_at,
+      COALESCE(s.visitor_name, s.visitor_email) AS name,
+      s.utm_source,
+      s.utm_medium,
+      s.referrer_host
+    FROM first_sessions f
+    JOIN analytics_sessions s
+      ON COALESCE(s.visitor_email, s.visitor_id, s.session_id) = f.visitor_key
+      AND s.first_seen_at = f.joined_at
+    WHERE f.joined_at >= ? AND f.joined_at = (SELECT MIN(joined_at) FROM first_sessions WHERE visitor_key = f.visitor_key)
+    GROUP BY f.visitor_key
+    ORDER BY f.joined_at
+  `).all(sinceIso) as Array<{
+    visitor_key: string;
+    joined_at: string;
+    name: string | null;
+    utm_source: string | null;
+    utm_medium: string | null;
+    referrer_host: string | null;
+  }>;
+
+  const newVisitorKeys = newVisitorRows.map((row) => row.visitor_key);
+  const names = newVisitorRows
+    .map((row) => row.name)
+    .filter((name): name is string => Boolean(name));
+
+  const acquisitionCounts = new Map<string, number>();
+  for (const row of newVisitorRows) {
+    const label = acquisitionLabel(row);
+    acquisitionCounts.set(label, (acquisitionCounts.get(label) ?? 0) + 1);
+  }
+  const acquisitionBreakdown = Array.from(acquisitionCounts, ([source, count]) => ({ source, count }))
+    .sort((a, b) => b.count - a.count);
+
+  let topPageAmongNewVisitors: string | null = null;
+  if (newVisitorKeys.length > 0) {
+    const placeholders = newVisitorKeys.map(() => "?").join(", ");
+    const topPageRow = db.prepare(`
+      SELECT e.path AS path, COUNT(*) AS views
+      FROM analytics_events AS e
+      JOIN analytics_sessions AS s ON s.session_id = e.session_id
+      WHERE e.event_type = 'page_view'
+        AND e.created_at >= ?
+        AND COALESCE(s.visitor_email, s.visitor_id, s.session_id) IN (${placeholders})
+      GROUP BY e.path
+      ORDER BY views DESC
+      LIMIT 1
+    `).get(sinceIso, ...newVisitorKeys) as { path: string; views: number } | undefined;
+    topPageAmongNewVisitors = topPageRow?.path ?? null;
+  }
+
+  return {
+    days: safeDays,
+    newVisitorCount: newVisitorRows.length,
+    newVisitorNames: names.slice(0, 5),
+    extraNewVisitorCount: Math.max(0, names.length - 5),
+    acquisitionBreakdown,
+    topPageAmongNewVisitors,
+  };
+}
+
 export function getUsagePurposeMetrics(days: number): Array<{
   purpose: UsagePurpose;
   signals: number;

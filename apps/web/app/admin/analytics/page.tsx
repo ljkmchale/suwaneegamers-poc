@@ -12,9 +12,10 @@ import {
   Radio,
   Route,
   Search,
+  Sparkles,
   Users,
 } from "lucide-react";
-import { getAnalyticsDashboardData } from "@/lib/analytics";
+import { getAnalyticsDashboardData, getVisitorGrowthSummary } from "@/lib/analytics";
 import { AnalyticsAutoRefresh } from "./AnalyticsAutoRefresh";
 
 export const dynamic = "force-dynamic";
@@ -149,6 +150,11 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
   const params = await searchParams;
   const requestedDays = Number(params?.days ?? 30);
   const data = getAnalyticsDashboardData(requestedDays);
+  const growth = getVisitorGrowthSummary(requestedDays);
+  const pageLabelByPath = new Map(data.pageAudiences.map((page) => [page.path, page.pageLabel]));
+  const topNewVisitorPageLabel = growth.topPageAmongNewVisitors
+    ? pageLabelByPath.get(growth.topPageAmongNewVisitors) ?? growth.topPageAmongNewVisitors
+    : null;
   const cards = [
     { label: "Page views", value: number(data.summary.pageViews), icon: Eye, color: "#a78bfa" },
     { label: "Visitors", value: number(data.summary.uniqueVisitors), icon: Users, color: "#60a5fa" },
@@ -201,6 +207,52 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           <AnalyticsAutoRefresh />
         </div>
       </div>
+
+      <section className="mb-6 rounded-xl border border-[#3d2e5c] bg-gradient-to-br from-[#1a1029] to-[#0f0a1a] p-5">
+        <div className="mb-3 flex items-center gap-2">
+          <Sparkles size={18} className="text-[#c4b5fd]" aria-hidden="true" />
+          <h2 className="font-cinzel text-sm uppercase tracking-widest text-[#e8dfc8]">At a glance</h2>
+        </div>
+        {growth.newVisitorCount === 0 ? (
+          <p className="text-sm leading-relaxed text-[#c8bda8]">
+            No new visitors joined in the last {growth.days} days.
+          </p>
+        ) : (
+          <div className="space-y-2 text-sm leading-relaxed text-[#c8bda8]">
+            <p>
+              <span className="font-medium text-[#e8dfc8]">
+                {growth.newVisitorCount} new {growth.newVisitorCount === 1 ? "person" : "people"}
+              </span>{" "}
+              joined in the last {growth.days} days
+              {growth.newVisitorNames.length > 0 && (
+                <>
+                  {": "}
+                  <span className="text-[#e8dfc8]">{growth.newVisitorNames.join(", ")}</span>
+                  {growth.extraNewVisitorCount > 0 ? ` and ${growth.extraNewVisitorCount} more` : ""}
+                </>
+              )}
+              .
+            </p>
+            {growth.acquisitionBreakdown.length > 0 && (
+              <p>
+                Most of them arrived via{" "}
+                <span className="text-[#e8dfc8]">{growth.acquisitionBreakdown[0].source}</span>
+                {growth.acquisitionBreakdown.length > 1 && (
+                  <>
+                    {" "}(also seen: {growth.acquisitionBreakdown.slice(1).map((entry) => `${entry.source} (${entry.count})`).join(", ")})
+                  </>
+                )}
+                .
+              </p>
+            )}
+            {topNewVisitorPageLabel && (
+              <p>
+                Once in, new visitors gravitated toward <span className="text-[#e8dfc8]">{topNewVisitorPageLabel}</span> more than anything else.
+              </p>
+            )}
+          </div>
+        )}
+      </section>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {cards.map((card) => {
