@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   type CalendarEvent,
   fetchRecentCalendarEvents,
@@ -283,32 +284,39 @@ export default async function CalendarPage() {
                 href="https://www.garenfest.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-w-0 flex-1 items-center gap-3 self-end rounded-lg border-l-4 px-4 py-2.5 transition-colors hover:opacity-90"
+                className="flex min-w-0 flex-1 items-stretch self-end overflow-hidden rounded-lg border transition-colors hover:opacity-90"
                 style={{
-                  borderColor: "var(--color-accent-gold)",
+                  borderColor: "var(--color-bg-border)",
                   background: "var(--color-bg-card)",
                 }}
               >
-                <span
-                  className="shrink-0 text-lg leading-none"
-                  aria-hidden="true"
-                  style={{ color: "var(--color-accent-gold)" }}
+                <div className="relative w-16 shrink-0 sm:w-20">
+                  <Image
+                    src="/media/images/campaigns/georgia-renaissance-festival-fall-fling.webp"
+                    alt="Georgia Renaissance Festival"
+                    fill
+                    sizes="80px"
+                    className="object-cover"
+                  />
+                </div>
+                <div
+                  className="flex min-w-0 items-center gap-3 border-l-4 px-4 py-2.5"
+                  style={{ borderColor: "var(--color-accent-gold)" }}
                 >
-                  ✦
-                </span>
-                <div className="min-w-0">
-                  <p
-                    className="font-cinzel text-[0.65rem] uppercase tracking-[0.3em]"
-                    style={{ color: "var(--color-accent-gold)" }}
-                  >
-                    Special Event
-                  </p>
-                  <p
-                    className="mt-0.5 truncate text-sm leading-snug underline decoration-transparent hover:decoration-inherit"
-                    style={{ color: "var(--color-text-secondary)" }}
-                  >
-                    Suwanee Gamers outing to the Ren Fest &ndash; Nov 21st
-                  </p>
+                  <div className="min-w-0">
+                    <p
+                      className="font-cinzel text-[0.65rem] uppercase tracking-[0.3em]"
+                      style={{ color: "var(--color-accent-gold)" }}
+                    >
+                      Special Event
+                    </p>
+                    <p
+                      className="mt-0.5 truncate text-sm leading-snug underline decoration-transparent hover:decoration-inherit"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
+                      Suwanee Gamers outing to the Georgia Renaissance Festival &ndash; Nov 21st
+                    </p>
+                  </div>
                 </div>
               </a>
 
