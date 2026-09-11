@@ -279,8 +279,11 @@ export default async function CalendarPage() {
                 </h2>
               </div>
 
-              <div
-                className="flex min-w-0 flex-1 items-center gap-3 self-end rounded-lg border-l-4 px-4 py-2.5"
+              <a
+                href="https://www.garenfest.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-w-0 flex-1 items-center gap-3 self-end rounded-lg border-l-4 px-4 py-2.5 transition-colors hover:opacity-90"
                 style={{
                   borderColor: "var(--color-accent-gold)",
                   background: "var(--color-bg-card)",
@@ -301,13 +304,13 @@ export default async function CalendarPage() {
                     Special Event
                   </p>
                   <p
-                    className="mt-0.5 truncate text-sm leading-snug"
+                    className="mt-0.5 truncate text-sm leading-snug underline decoration-transparent hover:decoration-inherit"
                     style={{ color: "var(--color-text-secondary)" }}
                   >
                     Suwanee Gamers outing to the Ren Fest &ndash; Nov 21st
                   </p>
                 </div>
-              </div>
+              </a>
 
               <a
                 href={googleCalendarEmbedUrl()}
