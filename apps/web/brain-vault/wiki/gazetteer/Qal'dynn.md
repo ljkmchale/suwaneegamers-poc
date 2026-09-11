@@ -497,7 +497,7 @@ Here are many of the standard shops, services and offerings that are can be refe
 
 # Item Stock
 
-## Potions
+## Potions {#potions}
 
 |  | Common | Uncommon | Rare | Very Rare |
 | ----- | :---: | :---: | :---: | :---: |
@@ -549,3 +549,13 @@ Here are many of the standard shops, services and offerings that are can be refe
 |  |  | Oil of Sharpness | Very Rare | 2,500 gp |
 |  |  | Potion of Longevity | Very Rare | 3,000 gp |
 |  |  | Potion of Mind Control (monster) | Very Rare | 6,000 gp |
+
+## Advents Guide Ratings
+
+Player ratings from the Advents Guide to Myrdae (in-character reviews, 1 to 5 stars).
+
+- **The Pale Lantern** (business): 5.0 out of 5 from 1 review.
+
+Recent reviews:
+- The Pale Lantern: "Beautiful and tasteful. The bartender was very kind; he gave me a drink on the house made with something called "chocolate." It was amazing. I definitely need more." — Relys (5 stars)
+

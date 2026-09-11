@@ -84,7 +84,7 @@ tags: [gazetteer, settlement, auto-curated]
 
 ![][image1]
 
-# **Overview**
+# **Overview** {#overview}
 
 Nunglthil is an Underdark trading enclave on the black shores of Rothenloch that has endured for more than a century by maintaining a strictly enforced neutrality. It is the single most reliable crossing point between surface merchants and Underdark cultures, a place where trade, information, and influence flow as freely as coin — but only because its five enclaves uphold an unspoken pact: violence threatens everyone’s livelihood. Beneath this uneasy peace lies a constant hum of politics, secrets, and mutual suspicion. Each enclave manipulates trade, territory, and reputation to secure subtle advantages while never quite risking open conflict.
 
@@ -96,13 +96,13 @@ Nunglthil is a balanced ecosystem, not a lawful sanctuary.  Every faction here h
 
 ## While the settlement can be safe enough for travelers, Nunglthil is far from simple. Every enclave keeps to its traditions — the Selraeth drow maintain elegant but watchful halls, the duergar run industrious forges, the svirfneblin trade delicate wonders, and the ulbin and dwarves of Gral’thune tend the sturdy structures that keep the whole place from collapsing. Visitors are welcomed so long as they show respect, mind local customs, and honor the no-violence pact. For those willing to navigate its blend of shadows and diplomacy, Nunglthil offers rare goods, unexpected allies, and secrets whispered from both the deepest tunnels and the world above.
 
-## **History**
+## **History** {#history}
 
 Nunglthil began not as a market, but as a refuge. During the height of the Demon Wars, when incursions from the deep places of the Underdark shattered settlements and turned long-held tunnels into killing grounds, disparate peoples fled toward the shores of Rothenloch. Ulbin, duergar, svirfneblin, and drow found themselves pressed into the same cavern with no safe route forward or back. From necessity rather than trust, they forged what became known as the Refuge Pact—an agreement to suspend rivalries, share defenses, and hold the cavern together against the demonic threat.
 
 As the wars deepened, the cavern at Rothenloch proved uniquely defensible. Its sheer cliffs, controllable dock access, and the river that carried supplies deeper into the Underdark allowed Nunglthil to evolve into a joint stronghold. Fortifications were carved into the stone, watch posts established along the lake and tunnels, and mixed patrols coordinated resistance against demon incursions. When the demonic advance was finally broken, the fort was no longer needed—but the bonds forged in survival endured. In the years that followed, Nunglthil shed its martial purpose and transformed into a neutral trading hub, with surface traders joining.  They preserved the spirit of the Refuge Pact as a vow of peace.
 
-## **Citizenry**
+## **Citizenry** {#citizenry}
 
 Nunglthil is home to a rare and uneasy mix of peoples drawn from both the Underdark and the surface world. Its population is divided among five pact-bound enclaves—Gral’thune, Selraeth, Kar’Solar, Durrak, and Glimmerdel—each maintaining its own customs, internal authority, and traditions. Ulbin, dwarves, drow, duergar, svirfneblin, and surface folk live in close proximity, bound not by shared culture but by mutual reliance. Though tensions and old prejudices persist, open violence is rare, as the survival of the settlement depends on restraint and cooperation.
 
@@ -132,7 +132,7 @@ Duergar established Durrak to ensure they would have controlled access to surfac
 
 Glimmerdel is probably the most approachable enclave, made up of svirfneblin that bring an uncommon sense of cheer and optimism to Nungylthil.  Though often underestimated, Glimmerdel has a tight communal network and fiercely guards Nungylthil’s neutrality. They are the first to sense danger and the fastest to coordinate warnings.
 
-## **Traditions**
+## **Traditions** {#traditions}
 
 ### **Tokens of Safe Return**
 
@@ -142,7 +142,7 @@ Before undertaking dangerous journeys, residents and travelers of Nunglthil ofte
 
 On the first day of every harmon, the docks and harbor platforms of Nunglthil are given over to the Open Feast, a communal gathering where food and drink are shared openly. Long tables are set along the water’s edge, braziers are lit, and the people exchange meals, stories, and tales. Old rivalries are expected to rest for the evening. The people believe that survival is easier when stories, warnings, and successes are shared.
 
-## **Government**
+## **Government** {#government}
 
 Nunglthil is governed by the Pact Council, a cooperative body formed from the five enclaves that comprise the settlement. Each enclave appoints a single representative—known informally as a **Pact Voice**—to speak and act on its behalf. The Council exists solely to oversee matters that affect the settlement as a whole, including the enforcement of neutrality, regulation of shared trade spaces, control of harbor access, and the defense of Nunglthil against external threats. Internal laws, customs, and discipline remain the exclusive domain of each enclave, preserving their autonomy while binding them to the common pact.
 
@@ -166,7 +166,7 @@ Alongside formal governance, Favor functions as a powerful informal authority; r
 | Kar’Solar | Vansia Kelmoor  | male, human |
 | Selraeth | Zeyona Jandori | female, drow |
 
-## **Laws**
+## **Laws** {#laws}
 
 Law in Nunglthil is founded on the Pact of Neutrality, a simple but absolute principle: violence and actions that threaten trade or stability are forbidden in shared spaces. Each enclave enforces its own internal laws, but crimes committed in neutral zones—docks, markets, the Dais of Devotion, and major thoroughfares—fall under the authority of the Pact Council. There is no unified legal code; instead, judgments are guided by precedent, enclave customs, and the practical need to preserve order and commerce.
 
@@ -255,7 +255,7 @@ Typical Punishments:  Restitution, trade bans, forced labor, stripping of Favor,
 
 Typical Punishments:  Fines, restitution, edicts, temporary loss of access or Favor.
 
-## **Economy and Trade**
+## **Economy and Trade** {#economy-and-trade}
 
 Nunglthil exists for one purpose above all others: trade without bloodshed. Its position along the brackish waters of Rothenloch and the river that flows deeper into the Underdark makes it a rare and indispensable waypoint between subterranean realms and the surface world. Goods, information, and influence pass through its docks as readily as coin, and its continued survival depends on the strict maintenance of neutrality. Trade here is governed as much by reputation—known locally as Favor—as by currency, with long-standing relationships often outweighing raw wealth.
 
@@ -269,7 +269,7 @@ Rather than operating as a unified market, Nunglthil’s economy is shaped by it
 
 Together, these enclaves form a tightly interdependent economic system where no single group can dominate without endangering the whole. Occasional feuds and rivalries flare, but open disruption of trade is swiftly punished, for all who dwell in Nunglthil understand the same truth: *if commerce fails here, survival soon follows*.
 
-## **Religion**
+## **Religion** {#religion}
 
 Religion in Nunglthil is practiced quietly, personally, and without dominance. As a settlement founded on survival, neutrality, and cooperation among disparate peoples, Nunglthil does not elevate any single deity, pantheon, or creed above another. Instead, it recognizes the importance of faith as a stabilizing force and permits worship so long as it does not threaten the Pact of Neutrality or the safety of the settlement. Open proselytizing, coercive rites, or divine mandates that call for violence are not tolerated.
 
@@ -277,7 +277,7 @@ At the heart of religious life stands the Dais of Devotion, a large communal cha
 
 Faith in Nunglthil tends toward practical devotion rather than elaborate ritual. Many residents honor deities of protection, endurance, trade, craftsmanship, guidance, or fate—gods whose domains align with the realities of Underdark life. Some offer prayers before journeys or negotiations; others seek solace after loss or failure. It is also common for travelers to light a candle at the Dais upon arrival, acknowledging both the dangers they have survived and those yet to come. In Nunglthil, belief is respected, but it is action—keeping the Pact, honoring Favor, and protecting the fragile peace—that is considered the truest expression of devotion.
 
-# **Map**
+# **Map** {#map}
 
 ![][image7]
 
@@ -292,7 +292,7 @@ Faith in Nunglthil tends toward practical devotion rather than elaborate ritual.
 | 8 | Trading Stalls |  | 17 | Seat of Selraeth |  | 26 | The Holding |
 | 9 | Storeroom |  | 18 | Silken Secrets |  |  |  |
 
-# **Layout**
+# **Layout** {#layout}
 
 Nunglthil is carved directly into the cliffside bordering Rothenloch and arranged in four distinct layers. Stone stairwells, and switchback ramps connect the layers, allowing movement without exposing the settlement to uncontrolled access.
 
@@ -306,9 +306,9 @@ Above all rests the **Fourth Layer**, consisting of a single fortified lookout c
 
 ![][image8]
 
-# **Notable Locations**
+# **Notable Locations** {#notable-locations}
 
-## **Armstack**
+## **Armstack** {#armstack}
 
 Armstack is a well-lit arms and armor shop in Nunglthil, notable for its brightness and for the sheer density of weaponry on display. The shop is operated by **Reddig Oddbrow**, a talkative duergar from the city of Dhaltarune who thrives on conversation as much as commerce. Reddig maintains a close working relationship with the Doomhorn smiths of Firmforge, and the majority of his stock consists of their weapons and armor. Supplementing this are pieces acquired through trade—items sold by travelers, guards, and adventurers passing through Nunglthil.
 
@@ -328,7 +328,7 @@ To showcase his wares, Reddig has lined the shop’s walls with polished ivory m
 
 Most standard [arms](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Weapons) and [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor) are available for purchase. 
 
-## **Coppereyes Gemcraft**
+## **Coppereyes Gemcraft** {#coppereyes-gemcraft}
 
 Coppereyes Gemcraft is the premier gemcutting and jewel-trading establishment in Nunglthil, operated by **Scalimank Coppereyes** under the watchful authority of his aunt, **Antadda Coppereyes** — the leader of Glimmerdel. The shop occupies a prominent position just a few doors to the right of the trading post area in Nunglthil’s main cavern, marked by soft blue fungus-lanterns that illuminate intricately carved stone signage. Inside, the store is a blend of meticulous svirfneblin design and cautious Underdark security: reinforced stone counters, illusion-warded display cases, and glow-crystal sconces that highlight each gemstone with magical clarity.
 
@@ -356,7 +356,7 @@ Scalimank runs the day-to-day operations with precision bordering on obsession. 
 
 You can find most [gemstones](https://www.dndbeyond.com/sources/dnd/dmg-2024/treasure#Gemstones) up to 100gp in value; those more valuable are uncommon and may not be in stock.
 
-## **Dais of Devotion (alter house)**
+## **Dais of Devotion (alter house)** {#dais-of-devotion-(alter-house)}
 
 The Dais of Devotion is Nunglthil’s central place of worship—an enclave-neutral chamber where all faiths, surface or Underdark, may honor their gods without judgment or interference. The room is large, and carved entirely from natural stone, softened by cushions, woven mats, and clusters of braziers placed against the walls. Its centerpiece is a wide, elevated dais supporting a massive circular altar of white marble streaked with gold veining. The altar itself is divided into four equal quarters, leaving cross-shaped passages so worshipers can walk freely into the open middle. Both the inner and outer walls of the altar are intricately carved with symbols representing dozens of deities from Myrdae—some ancient and nearly forgotten, others commonly worshiped today.
 
@@ -382,7 +382,7 @@ Someone can get the following services at the Dais:
 | :---- | ----: | :---- | :---- | ----: | :---- | :---- | ----: |
 | Lesser Restoration | 40 gp |  |  |  |  |  |  |
 
-## **Darkbottom Draught**
+## **Darkbottom Draught** {#darkbottom-draught}
 
 Darkbottom Draught is the only inn and tavern in Nunglthil, located on the bottom layer near the cavern’s dockside platforms. It serves as both a gathering place and a neutral refuge used by traders, mercenaries, enclave delegates, and travelers making the long descent into the Underdark. **Faffi**, a heavyset and sharp-tongued female ulbin, owns and runs the establishment with a tight hand and a warm laugh. She manages the rooms, keeps the books, and maintains order alongside her adopted quaggoth bodyguards, **Thak** and **Drogan**.
 
@@ -451,7 +451,7 @@ Additionally, you can get the following:
 | :---- | :---- | :---: |
 | Private Meeting Room | Stone-walled side chambers with tables for up to twelve. | 2 gp / hour |
 
-## **Deep Desires (escort)**
+## **Deep Desires (escort)** {#deep-desires-(escort)}
 
 Deep Desires is a discreet but unmistakable escort house operating from a garishly decorated storefront on the main layer of Nunglthil, with private rooms occupying the second level above.  The establishment fulfills a demand common to long-term travelers, traders, and residents of the Underdark.
 
@@ -478,7 +478,7 @@ You can find the following services available here:
 | Companion Escort | Time-based escort arrangements to keep company (no fornication) while about Nunglthil. | 1 gp / hr |
 | Private Room Service | Modestly furnished chambers with a companion for discrete pleasure, lasting no more than 1 hour. | 5 gp |
 
-## **Durrak Den**
+## **Durrak Den** {#durrak-den}
 
 The Durrak Den serves as the administrative and commercial nerve center of the Durrak enclave, positioned deliberately between Armstack and Firmforge along the docks overlooking Rothenloch.  The Den is austere and uncompromising, projecting authority through order rather than decoration.
 
@@ -492,7 +492,7 @@ Inside, the space is carved with exacting lines and reinforced stonework. Heavy 
 
 The Durrak administrator (varies), a duergar official responsible for overseeing contracts, and enclave correspondence.
 
-## **Firmforge (smithy)**
+## **Firmforge (smithy)** {#firmforge-(smithy)}
 
 Firmforge occupies the far right edge of Nunglthil’s dock line, positioned so its smoke vent opens directly out over Rothenloch. The shop is built for function rather than comfort: natural stone walls, soot-darkened ceilings, and a square forge set firmly in the center of the space. A broad iron vent rises straight upward from the forge, carrying heat and smoke out toward the lake. 
 
@@ -513,7 +513,7 @@ The forge is operated by two duergar smiths of the **Doomhorn** clan from the du
 
 The smiths can fashion, adjust and repair most standard [arms](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Weapons) and [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor), but newly crafted items are sent to Armstack for purchase. 
 
-## **Fishery & Smokehouse**
+## **Fishery & Smokehouse** {#fishery-&-smokehouse}
 
 The Fishery & Smokehouse is a two-level operation perched along the left side of Nunglthil’s docks, overlooking the dark waters of Rothenloch. It serves as the primary hub for the handling, preparation, and preservation of the lake’s catch, supplying both daily meals and long-lasting provisions for residents, traders, and expeditions traveling deeper into the Underdark. The lower level opens directly onto the docks, allowing fishing crews to unload fresh catch quickly before spoilage can set in.
 
@@ -544,7 +544,7 @@ You can find standard rations here, as well as trade fish caught from Rothenloch
 
 ## 
 
-## **Glimmerdel Center**
+## **Glimmerdel Center** {#glimmerdel-center}
 
 The Glimmerdel Center functions as the operational heart of the Glimmerdel enclave, coordinating trade, security alerts, and community affairs for the svirfneblin of Nunglthil. Unlike more austere enclave offices, the Center blends practicality with warmth, reflecting Glimmerdel’s emphasis on cooperation and foresight. From this office, routes are tracked, gem and alchemical exchanges are scheduled, and early warnings are disseminated when danger threatens.
 
@@ -558,7 +558,7 @@ The interior is organized but welcoming. Low desks and worktables are arranged f
 
 The Glimmerdel administrator (varies), a svirfneblin official responsible for overseeing contracts, and enclave correspondence.
 
-## **Guardhouse**
+## **Guardhouse** {#guardhouse}
 
 The Guardhouse is a functional Gral’Thune outpost positioned along the edge of the docks on Rothenloch, carved directly into the cavern wall near the entrance to Nunglthil’s inner harbor area. Its placement allows Gral’thune patrols to monitor traffic moving between the open docks and the interior of the settlement. 
 
@@ -572,7 +572,7 @@ The interior is sparse and practical. A few heavy tables and chairs provide spac
 
 Various members of Gral’Thune can be found here as patrols rotate shifts.
 
-## **Holding, The**
+## **Holding, The** {#holding,-the}
 
 The Holding is one of Nunglthil’s most functional and tightly controlled spaces, designed to serve multiple necessary but unsentimental purposes. It functions primarily as a stable and holding ground for Underdark mounts—most notably Leatherback giant lizards—while also containing a small number of secure holding cells for prisoners, dangerous individuals, or those awaiting judgment under the Pact. The space is maintained and guarded by members of Gral’Thune, reinforcing its role as neutral, orderly, and firmly enforced.
 
@@ -592,7 +592,7 @@ The area is overseen by **Tholumn Blaregut**, a seasoned dwarf. The chamber is l
 
 Boarding a mount is a standard 5 silver pieces per night and involves feeding and standard care.
 
-## **Miss Placed Tomes**
+## **Miss Placed Tomes** {#miss-placed-tomes}
 
 Miss Placed Tomes is a tall, quiet bookshop situated just to the left of the Darkbottom Draught, its calm deliberately contrasting the tavern’s noise. The shop is run by **Dririel Auveqerynn**, an elderly drow scholar and author whose reputation extends well beyond Nunglthil. Dririel is deeply well read and has penned several works of fiction that many claim verge on prophecy—political intrigues of drow houses laced with subtle horror and unsettling foresight. Rumors persist that his writings are influenced, directly or indirectly, by Eredra, though Dririel neither confirms nor denies such claims.
 
@@ -620,7 +620,7 @@ You can find the following items and services here:
 | Research Assistance | Assistance in searching books for information. | 10 gp / hours |
 | One of Dririel’s Books | He will sell one of his own pieces of fiction: Misplaced A Last Time – A fictional autobiography? Silkin Blood – A horror romance Cut Spider Threads – Rise of a drow house in Vel’Drezadon The Silent Crown – Poisoned matriarch that went mad | 10 gp / each |
 
-## **Nassy’s Necessities (general goods)**
+## **Nassy’s Necessities (general goods)** {#nassy’s-necessities-(general-goods)}
 
 Nassy’s Necessities is one of the largest and most frequented stores in Nunglthil, occupying a strategic position between the docks of Rothenloch and the interior passages of the settlement. Its front entrance opens directly onto the harbor platforms, making it an easy stop for sailors and dockworkers, while a long tunnel-like hallway at the rear connects the store to inner Nunglthil, ensuring constant foot traffic from residents and traders alike.
 
@@ -640,7 +640,7 @@ The shop is owned and operated by **Nassy Sternbelcher**, a duergar whose approa
 
 You can find [basic supplies](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#AdventuringGear) here.
 
-## **Needle on Rothenloch**
+## **Needle on Rothenloch** {#needle-on-rothenloch}
 
 Needle on Rothenloch is a tattoo and piercing establishment operating under a multi-enclave accord, jointly represented by Gral’Thune, Selraeth, Kar’Solar, and Glimmerdel.  The interior is clean, controlled, and quiet. Stone walls are broken by hanging panels of treated hide and cloth displaying design motifs drawn from all four enclaves—tribal geometry, elegant sigils, coded symbols, and crystalline patterns. A shallow basin of dark water taken from Rothenloch sits near the entrance, used ceremonially to cleanse tools before and after each marking. Each operator works within their own discipline and cultural tradition, but all adhere to strict shared rules: no coercion, no false Favor marks, and no work performed on the unwilling or unstable. Violations are reported directly to the Pact Council.
 
@@ -669,7 +669,7 @@ You can find the following goods and services here:
 | Piercing | Per piercing; does not include jewelry | 5 sp |
 | Tattoo | Permanent markings based on a per hour basis. | \~ 2 gp / half-hour |
 
-## **Paths by Stonesniff (guide & mapmaker)**
+## **Paths by Stonesniff (guide & mapmaker)** {#paths-by-stonesniff-(guide-&-mapmaker)}
 
 Paths by Stonesniff is a small, cluttered shop in Nunglthil devoted almost entirely to the mapping, recording, and interpretation of Underdark routes. Surface maps are rare here; **Bolshack Stonesniff**’s expertise lies below the world, charting tunnels, forgotten caverns, submerged passages, and unstable regions shaped by time, magic, or collapse. The shop itself resembles a curated hoard more than a storefront, filled with oddities gathered from across the Underdark—stuffed bats suspended from rafters, paintings of distant settlements, mineral samples, and a reinforced display case crafted from umberhulk shell.
 
@@ -695,7 +695,7 @@ Bolshack will pay handsomely for any odd or eclectic item from the Underdark to 
 | Route Consultation | Bolshack advises on safe paths, hazards, collapses, and political boundaries. | 10 gp |
 | Custom Cartography | Commissioned maps based on client needs, updated through rumor and exploration. | 5 gp / hour |
 
-## **Post of Kar’Solar**
+## **Post of Kar’Solar** {#post-of-kar’solar}
 
 The Post of Kar’Solar serves as the administrative hub and coordination office for the Kar’Solar enclave, representing surface folk interests within Nunglthil. Though widely rumored to be a den of thieves and smugglers, the Post itself is orderly, controlled, and deliberately understated. From this office, Kar’Solar manages trade contacts, surface routes, internal codes of conduct, and the quiet arbitration of disputes that could otherwise destabilize Nunglthil’s neutrality.
 
@@ -709,7 +709,7 @@ The interior balances practicality with discretion. Ledgers are kept under lock 
 
 The Kar’Solar administrator (varies), officials responsible for overseeing contracts, and enclave correspondence.
 
-## **Scales to Skin**
+## **Scales to Skin** {#scales-to-skin}
 
 Scales to Skin is a modest but respected leatherworking shop in Nunglthil, known for its quality craftsmanship and distinctive materials. The interior is tall and open, with a ceiling rising nearly fifteen feet overhead. Anchored along the upper walls are petrified wood limbs, arranged in a branching pattern that gives the impression of standing beneath a leafless tree—an intentional design choice reflecting the owner’s surface origins. The far wall is lined with carefully displayed leather samples in a wide range of colors and textures, while the left side of the shop holds neatly stacked hides and prepared leathers awaiting use. The right side features shelves and hooks displaying finished goods ready for sale.
 
@@ -734,7 +734,7 @@ You can find all types of standard leather goods (armor, boots, backpacks, etc),
 | :---- | :---- | :---: |
 | Slumber Newt Leather | Items created with Slumber Newt leather repel water and do not need to be dried out. | standard \+10% |
 
-## **Seafarer’s Supplies**
+## **Seafarer’s Supplies** {#seafarer’s-supplies}
 
 Seafarer’s Supplies is a practical, well-stocked outfitter located at the far end of the docks on the left side of Nunglthil’s main harbor, overlooking the dark waters of Rothenloch. The shop caters to anyone who makes their living on the lake or the river beyond it, providing gear for navigation, fishing, maintenance, and survival on brackish Underdark waters. 
 
@@ -757,7 +757,7 @@ The shop is owned and operated by **Ronsen “Rigger” Drace**, a surface-born 
 
 You can find many standard supplies for boating and fishing.
 
-## **Seat of Salraeth**
+## **Seat of Salraeth** {#seat-of-salraeth}
 
 The Seat of Salraeth serves as the administrative and diplomatic office of the Selraeth enclave within Nunglthil. Unlike the enclave’s more public-facing establishments, this location is deliberately understated—designed to blend into the surrounding stone and avoid drawing attention. From here, Selraeth manages trade agreements, negotiates discreet arrangements, and monitors political currents both within Nunglthil and beyond.
 
@@ -771,7 +771,7 @@ The interior is orderly and precise. Records of trade, contracts, and favors are
 
 The Selraeth administrator (varies), a drow official responsible for overseeing contracts, and enclave correspondence.
 
-## **Silken Secrets**
+## **Silken Secrets** {#silken-secrets}
 
 Silken Secrets is one of the most alluring and quietly dangerous establishments in Nunglthil, operated by the Selraeth enclave. The shop is known for its exquisite drow craftsmanship—fabrics that shimmer like moonlit silk, exotic clothing from the deep Underdark, and tailored pieces designed for nobles, performers, diplomats, and those who simply crave luxury. The storefront is tastefully understated, but inside the atmosphere transforms into one of dim violet light, warm shadows, and sensuous elegance. Violet and silver drapery hangs from carved niches, and the entire floor is covered in a plush, tightly woven cloth that muffles footsteps and exudes warmth beneath the feet.
 
@@ -802,7 +802,7 @@ You can find the following items here.
 | [Truth Serum](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#TruthSerum150GP) | An ingested poison that gives the Poisoned condition and prohibits the person from lying | 150 gp |
 | Piwafwi ([cloak of elvenkind](https://www.dndbeyond.com/magic-items/9228408-cloak-of-elvenkind)) | A spider-silk cloak with magical properties | 250 gp |
 
-## **Soothing Spores**
+## **Soothing Spores** {#soothing-spores}
 
 Soothing Spores is a small but well-regarded specialty shop situated beside the market stalls in Nunglthil’s central harbor area. The space is intimate and densely arranged, with wall-mounted shelves and low display tables filled with jars, bundles, sachets, and carefully labeled containers of fungi-based remedies. 
 
@@ -837,7 +837,7 @@ You can find the following goods here:
 | Veilcap Extract | Used carefully to treat deep melancholy or emotional numbness. | 12 gp |
 | Dreammirror | Taken in ritual settings to explore memories or blocked thoughts. | 15 gp |
 
-## **Storeroom**
+## **Storeroom** {#storeroom}
 
 The Storeroom is a large, secure storage chamber attached directly to the Trading Stalls of Nunglthil, used by vendors who remain in the market for multiple days. It exists to reduce congestion in the harbor area and to provide a trusted place where goods can be kept between market sessions without the risk of theft or sabotage. Access to the Storeroom is strictly controlled by the **Fungadyn** family.
 
@@ -851,7 +851,7 @@ The chamber is sealed by a massive iron door that can only be opened by **Droann
 
 Storage is leased for 1 sp per night.
 
-## **Sweetspring (bathhouse)**
+## **Sweetspring (bathhouse)** {#sweetspring-(bathhouse)}
 
 Sweetspring Bathhouse is just to the right of Deep Desires along the main layer.  Sweetspring preserves a natural Underdark aesthetic with a gently sloping, unworked tunnel leading inward to a single, broad, naturally rounded chamber dominated by a large spring-fed pool. Clear, warm freshwater flows steadily through the basin, entering from one side and exiting the other, ensuring constant renewal. Though the water is pristine, small, slow-moving cyclones circle the surface, keeping it perpetually rippled and obscuring the depths below.
 
@@ -875,7 +875,7 @@ The following services can be provided:
 | :---- | :---- | :---: |
 | Bath | Warm, continuously refreshed freshwater suitable for bathing, with soft, sponge-like Underdark growths used as natural cleaning agents; effective and scentless.  | 4 sp |
 
-## **Trader’s Tankard (pub)**
+## **Trader’s Tankard (pub)** {#trader’s-tankard-(pub)}
 
 The Trader’s Tankard is a dockside pub overlooking Rothenloch, known for being quieter, dimmer, and more discreet than the Darkbottom Draught. While not overtly criminal, it attracts those who prefer private conversation, subtle deals, and minimal attention. The establishment has earned a reputation as a place where information changes hands as often as coin, making it a favored haunt of smugglers, middlemen, and traders who value discretion over revelry.
 
@@ -906,7 +906,7 @@ The tavern provides the following standard food items:
 | Ale, mug | 4 cp |  | Meat, chunk | 3 sp |  | Wine, fine | 10 gp |
 | Bread, loaf | 2 cp |  |  |  |  |  |  |
 
-## **Trading Stalls**
+## **Trading Stalls** {#trading-stalls}
 
 The Trading Stalls is an open market area situated along the inner harbor docks of Nunglthil.  The area consists of an expansive, cavernous platform with a smooth stone floor worn flat by constant foot traffic. Vendors arrive by boat or tunnel, erecting temporary stalls to buy, sell, and barter goods ranging from raw materials and foodstuffs to curiosities and salvaged finds. The market shifts daily in both layout and offerings.
 

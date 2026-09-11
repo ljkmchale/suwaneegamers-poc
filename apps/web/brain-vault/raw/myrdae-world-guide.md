@@ -1,7 +1,7 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-08-30T18:40:41.530Z
+Pulled: 2026-09-11T14:46:20.610Z
 
 Sections
   
@@ -78,208 +78,9 @@ chapter 1
 Characters  
 Myrdae is home to many peoples who shape its lands, weave its magic, and carry its stories. Some arrived as wanderers from distant planes or forgotten realms. Others have walked Myrdae’s soil since the elder days, their blood and traditions tied to its rivers, forests, and skies.
 Classes
-All classes from the Player’s Handbook (along with the Artificer) are available when creating your character to adventure in Myrdae.  Your choice of class and subclass equips you with powerful skills to explore forgotten ruins, battle dark forces, advance personal causes, and leave your mark on this living land.  Some subclasses are restricted. See the table of approved subclasses below. If the subclass you want to play isn’t listed, consult your Dungeon Master before selecting it for your character.
+<Need a blurb about classes that are available, and point to the ones that are not in the Appendix>
+Artificer
 
-
-CLASS
-	SUBCLASS
-	Artificer
-	Alchemist
-	Artificer
-	Cartographer
-	
-
-	
-
-	Barbarian
-	Path of the Berserker
-	Barbarian
-	Path of the Wild Heart
-	Barbarian
-	Path of the World Tree
-	Barbarian
-	Path of the Zeolot
-	
-
-	
-
-	Bard
-	College of Dance
-	Bard
-	College of Glamour
-	Bard
-	College of Lore
-	Bard
-	College of Valor
-	
-
-	
-
-	Cleric
-	Life Domain
-	Cleric
-	Light Domain
-	Cleric
-	Trickery Domain
-	Cleric
-	War Domain
-	
-
-	
-
-	Druid
-	Circle of the Land
-	Druid
-	Circle of the Moon
-	Druid
-	Circle of the Sea
-	Druid
-	Circle of the Stars
-	
-
-	
-
-	
-
-________________
-
-
-
-
-CLASS
-	SUBCLASS
-	Fighter
-	Battle Master
-	Fighter
-	Champion
-	Fighter
-	Eldritch Knight
-	Fighter
-	Psi Warrior
-	
-
-	
-
-	Monk
-	Warrior of Mercy
-	Monk
-	Warrior of Shadow
-	Monk
-	Warrior of the Elements
-	Monk
-	Warrior of the Open Hand
-	
-
-	
-
-	Paladin
-	Oath of Devotion
-	Paladin
-	Oath of Glory
-	Paladin
-	Oath of the Ancients
-	Paladin
-	Oath of Vengeance
-	
-
-	
-
-	Ranger
-	Beast Master
-	Ranger
-	Fey Wanderer
-	Ranger
-	Gloom Stalker
-	Ranger
-	Hunter
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-________________
-
-
-
-
-CLASS
-	SUBCLASS
-	Rogue
-	Arcane Trickster
-	Rogue
-	Assassin
-	Rogue
-	Soulknife
-	Rogue
-	Thief
-	
-
-	
-
-	Sorcerer
-	Aberrant Sorcery
-	Sorcerer
-	Clockwork Sorcery
-	Sorcerer
-	Draconic Sorcery
-	Sorcerer
-	Wild Magic Sorcery
-	
-
-	
-
-	Warlock
-	Archfey Patron
-	Warlock
-	Celestial Patron
-	Warlock
-	Fiend Patron
-	Warlock
-	Great Old One Patron
-	
-
-	
-
-	Wizard
-	Abjurer
-	Wizard
-	Diviner
-	Wizard
-	Evoker
-	Wizard
-	Illusionist
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 
 Barbarians
 
@@ -2464,257 +2265,532 @@ ________________
  
 Appendicies
 Content Review
-This section contains an assessment of how well various Dungeons & Dragons sourcebooks fit into this setting.
-Astarion’s Book of Hunger
-Accepted
-All of the content from this sourcebook is acceptable.
-
-
-Cthulhu by Torchlight (by Chaosium)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Dungeons of Drakkenheim (by Ghostfire Gaming)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Eberron:  Forge of the Artificer
-Under Review – Accepted with Exceptions
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Subclass
-	Armorer
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	Subclass
-	Artillerist
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	Subclass
-	Battle Smith
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	
-
-Forgotten Realms: Heroes of Faerûn
-Accepted with Exceptions
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Lorwyn: First Light
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Northlands Worldbook (by Kobold Press)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Ravenloft
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Subclass
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
+This section contains an assessment of how well various Dungeons & Dragons sourcebooks and expansions fit into a Myrdae Campaign.  Options captured here are either:
+   1. prohibited – designated by the red font, or 
+   2. not recommended – designated by orange font; see explanation.
+Background Options
+Background
+	Source
+	Assessment / Explanation
+	Aberrant Heir
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Agent of the Ninth Quill
+	Arcana Unleashed
+	Still under review; ask your DM
+	Bejeweled Conclave Spy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Chondathan Freebooter
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cosmic Dawn Experiment
+	Arcana Unleashed
+	Still under review; ask your DM
+	Covenant of the Grave Rec
+	Arcana Unleashed
+	Still under review; ask your DM
+	Crucible Storm Chaser
+	Arcana Unleashed
+	Still under review; ask your DM
+	Dead Magic Dweller
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Dragon Cultist
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Emerald Enclave Caretaker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Familiar Trainer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Flaming Fist Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Genie Touched
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Harper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Horizon Weaver Initiate
+	Arcana Unleashed
+	Still under review; ask your DM
+	House Agent
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	House Backgrounds
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Ice Fisher
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Knight of the Gauntlet
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lord’s Alliance Vassal
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lorwyn Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Mist Wanderer
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting
+	Moonwell Pilgrim
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mulhorandi Tomb Raider
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mythalkeeper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Pact Seeker
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Phantasmic Circus Trouper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Purple Dragon Squire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rashemi Wanderer
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Seer Apprentice
+	Arcana Unleashed
+	Still under review; ask your DM
+	Shadowmasters Exile
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Shadowmoor Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Spellfire Initiate
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Ward of Sheltering Hands
+	Arcana Unleashed
+	Still under review; ask your DM
+	Zhentarim Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	
+
+Class / Subclass Options
+Class / Subclass
+	Source
+	Assessment / Explanation
+	Artificer: Armorer
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Artillerist
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Battle Smith
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Reanimator
+	Ravenloft: The Horrors Within
+	Provides combat companion; will slow game play 
+	Barbarian: Glacier
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Barbarian: Spell Scorned
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Barbarian: Titan
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Choreography
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Bard: Drama
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Bard: Skald
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Spirits
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Bard: the Moon
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Apocalypse
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Cleric: Arcana
+	Arcana Unleashed
+	Still under review; ask your DM
+	Cleric: Astral
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Cleric: Grave
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Cleric: Knowledge
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Nornbound
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: Fenris
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: the Symbiote
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Druid: Unbroken Circle
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Arcane Archer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fighter: Banneret
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Fighter: Couatl Herald
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Hero
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Fighter: Viking
+	Northlands Worldbook
+	Still under review; ask your DM
+	Monk: Celestial
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Monk: Cosmic Balance
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Monk: Mystic Arts
+	Arcana Unleashed
+	Still under review; ask your DM
+	Paladin: Guardian
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Paladin: Noble Genies
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Paladin: Hearth
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Paladin: Valhalla
+	Northlands Worldbook
+	Still under review; ask your DM
+	Ranger: Beast Master
+	Player’s Handbook
+	Provides combat companion; will slow game play 
+	Ranger: Hollow Warden
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Ranger: Trail Warden
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Ranger: Winter Trapper
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Ranger:  Winter Walker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rogue: Phantom
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Rogue: Runetagger
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Rogue: Scion of the Three
+	Forgotten Realms: Heroes of Faerûn
+	Does not fit Myrdae setting
+	Rogue: Shadow Stalker
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Clockwork
+	Player’s Handbook
+	Does not fit Myrdae setting
+	Sorcerer: Frost
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Sorcerer: Hungering Dark
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Shadow
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Sorcerer: Spellfire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Sorcerer: Spirit Caller
+	Northlands Worldbook
+	Still under review; ask your DM
+	Warlock: Astral Griffon
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Warlock: Exalted Assembly
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Warlock: Undead
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Warlock: Vestige
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Bibliomancy
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Wizard: Bladesinger
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Wizard: Conjuerer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Enchanter
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Materilizer
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Wizard: Necromancer
+	Arcana Unleashed
+	Provides combat companion; will slow game play 
+	Wizard: Transmuter
+	Arcana Unleashed
+	Still under review; ask your DM
+	
+
+Feat Options
+Feat
+	Source
+	Assessment / Explanation
+	Abjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Aberrant Anatomy
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Arcane Artist
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Eloquence
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Infiltrator
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Omens
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Overload
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Safeguard
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Undertaker
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Warrior
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Erupting Spellpower
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Magic School Master.
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of the Iron Mind
+	Arcana Unleashed
+	Still under review; ask your DM
+	Conjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Divination Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Echoing Soul
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Elemental Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Enchantment Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Evocation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Familiar Friend
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fey Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Sentinel
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Tormentor
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Gathered Whispers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Illusion Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Infernal Bulwark
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Dragoon
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Living Shadow
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Magic Connoisseur
+	Arcana Unleashed
+	Still under review; ask your DM
+	Mist Walker
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Necromancy Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Otherworldly Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Pack Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Portal Jumper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Prone Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Second Skin
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Soothing Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Resistant
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Subterfuge
+	Arcana Unleashed
+	Still under review; ask your DM
+	Symbiotic Being
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Shifting Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Tactical Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Transmutation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Transmuted Anatomy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Touch of Death
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Warlike Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Watchers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	
+
+Species Options
+Species
+	Source
+	Assessment / Explanation
+	Boggart
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Changeling
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Faeries
+	Lorwyn: First Light
+	Does not fit Myrdae setting;considered a monster in civilized areas
+	Flamekin
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Kitkin
+	Lorwyn: First Light
+	Does not fit Myrdae setting; a reskin of halflings
 	Lupin
-	Would be considered a monster
-	Species
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
 	Reborn
-	Doesn’t fit the Myrdae campaign setting theme
-	Spells
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Rimekin
+	Lorwyn: First Light
+	Still under review; ask your DM
 	
 
 	
 
-	Monsters
 	
 
 	
 
-	________________
+Spell Options
+Spell
+	Source
+	Assessment / Explanation
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+________________
 
 
 Geography Reference

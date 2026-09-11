@@ -59,7 +59,7 @@ Though Sapphira is warm and welcoming to those who visit her, she maintains an a
 
 Sapphira is protective of Shademoor’s reputation and prosperity, actively working to maintain its stability while discouraging outside interference in the town’s affairs. She is wary of those who dig too deeply into the mysteries of the Shademoor Forest and The Garden, deflecting questions with grace but rarely providing clear answers.
 
-### **Countess Sapphira Legore**
+### **Countess Sapphira Legore** {#countess-sapphira-legore}
 
 ## 
 

@@ -100,7 +100,7 @@ Characters engaging in criminal activity are arrested by the city guard and char
 
 # Landmarks
 
-## Badger & Harp
+## Badger & Harp {#badger-&-harp}
 
 ## 
 
@@ -150,15 +150,15 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Bird in the Hand
+## Bird in the Hand {#bird-in-the-hand}
 
 This is a brothel, but features nothing but women in various states of undress.  Some perform striptease, while others take guests to private areas (heavy drapes create small chambers).  This place has no ties to crime – Altra Noh, a beautiful elven woman, owns and runs the place.
 
-## Bond Plaza
+## Bond Plaza {#bond-plaza}
 
 This is a high end row of shops, targeting the wealthy and elite who visit Dha.  You’ll find well made linens and clothing, shoes, leather goods, and other accessories, as well as stores who sell items for house decorating and gift giving.
 
-## Brew & Stew
+## Brew & Stew {#brew-&-stew}
 
 ## 
 
@@ -208,19 +208,19 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Brym’s Blades
+## Brym’s Blades {#brym’s-blades}
 
 This is the blacksmith and armorsmith, occupying two adjacent buildings.  Brym Moore is the head blacksmith, while Lawson Kile runs the armor shop.  Both are well run.
 
-## Bud in Bloom, A
+## Bud in Bloom, A {#bud-in-bloom,-a}
 
 This is essentially and bathhouse and spa, but also has a more devious element in that it features services for women (men on demand).  Tied to the Cur family for money laundering purposes.  Adult Cur daughter, Lornan Cur, runs the establishment.
 
-## Cur Manor
+## Cur Manor {#cur-manor}
 
 This is the richest family in Dha.  The ***Cur*** family (Crest is a lion with a heart) is also one of the most powerful. They control many of the brothels and gambling houses in Dunmoore. Their gold-laden wagons transport payments from their “businesses” in the towns and cities throughout Dunmoore to the Vaults. The leader of the Cur family is referred to as Don Cur.
 
-## Dun’s B\&B
+## Dun’s B\&B {#dun’s-b&b}
 
 ## 
 
@@ -270,15 +270,15 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## East Gate Village
+## East Gate Village {#east-gate-village}
 
 Village that has built up and is growing outside the gates.  Reasonable prices for general goods and services.
 
-## Guardian Atrium
+## Guardian Atrium {#guardian-atrium}
 
 Place where people go to perform and/or see performances.
 
-## Guardian Inn
+## Guardian Inn {#guardian-inn}
 
 ## 
 
@@ -328,7 +328,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Guardian Inn (aka the “other” Guardian Inn)
+## Guardian Inn (aka the “other” Guardian Inn) {#guardian-inn-(aka-the-“other”-guardian-inn)}
 
 ## 
 
@@ -378,7 +378,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Guardshack Tavern
+## Guardshack Tavern {#guardshack-tavern}
 
 ## 
 
@@ -419,7 +419,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## House of Eight
+## House of Eight {#house-of-eight}
 
 ## 
 
@@ -443,17 +443,17 @@ At the DM’s discretion, there may be spell services available as outlined in t
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## House of Krem
+## House of Krem {#house-of-krem}
 
 The House of Krem was a powerful family. The head of the house was a warlock of significant power who staffed the home with undead. It is rumored that the House of Krem made a move to usurp the power of the Cur family by raiding its brothel payments along the road to Blackfield. Some say they even dared to rob the Vault of the Cur family under the noses of the very Guardians themselves. The Vault Keepers and the Cur family deny that particular rumor. However, the Warlock Krem and his concubine were found murdered in their bed and the home was nearly burned to the ground. The Cur family insisted on leading the cleanup and subsequent investigation. Daughter Stacia (nee Lillitu) was the heir; step brother Lionel hoped to inherit as well.  Stacia was wed to “Kivuss” who was Lionel’s brother.  They took the money and left Dha forever.  Lionel still uses the house, though it has fallen into disrepair.
 
 \*Adventure note \- Stacia Krem 
 
-## Library
+## Library {#library}
 
 A well-stocked library with information about most anything.
 
-## Lodge Moore
+## Lodge Moore {#lodge-moore}
 
 ## 
 
@@ -503,15 +503,15 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Lower Ward
+## Lower Ward {#lower-ward}
 
 Poor community; some places rent by the hour.  Wardens of the city don’t go here believing that they can police themselves as long as they stay here.
 
-## Lushi’s Root Cellar
+## Lushi’s Root Cellar {#lushi’s-root-cellar}
 
 This is the alchemist in town, who is known for mixing concoctions to help with all types of maladies.  You name it, he may have it – or he will try to make or find you something.  Has several potions, creams, powders, and herbs on hand.  Gemy is the proprietor; he’s honest, but  can be unscrupulous at times.
 
-## Lynrik’s Emporium
+## Lynrik’s Emporium {#lynrik’s-emporium}
 
 ## 
 
@@ -536,7 +536,7 @@ Here are some of the unique items that Lynriksells
 
 ### 
 
-## Mother’s Shrine
+## Mother’s Shrine {#mother’s-shrine}
 
 ## 
 
@@ -560,25 +560,25 @@ At the DM’s discretion, there may be spell services available as outlined in t
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Old Dicon House
+## Old Dicon House {#old-dicon-house}
 
 This was the old capital of Inverland, but the Dicon decided a hundred years ago or so to move the capital of Gibuldon because Dha became the financial seat of Inverland and the leaders didn’t think that money and power should be in the same city (The Lords of Magic was originally in the top of the Vault pyramid, which is why it houses a teleportation circle).  This area was left public property, with the library, an orangery, a reflecting pool, sports field, etc. on the property.  Dean Bozous Dunmoore’s youngest brother, Tomberlin – is the caretaker of the manor house on the property and resident historian.
 
  (The Lords of Magic was originally in the top of the Vault pyramid, which is why it houses a teleportation circle).
 
-## Open Air Market
+## Open Air Market {#open-air-market}
 
 Located near the shipping docks, this is a market with stalls where the sellers sell everything from herbs and honey, to fish and other meats, to fruits and vegetables, as well as hand crafted goods.
 
-## Pointy End, The
+## Pointy End, The {#pointy-end,-the}
 
 This is a magic shop run by Ozella and Oveline Palmer.  They have a limited number of items, but are happy to try to find anything for a price. Ozella is a member of the Tegenwald Phet.
 
-## Puss & Boots
+## Puss & Boots {#puss-&-boots}
 
 This is a brothel, with an “all comers” mix of clientele.  You name it, it happens here.  Ask for the “Redford” and a large man will provide favors for a fixed price.  The place is used for money laundering by the Cur family.  A Cur cousin who goes by the name Steiner, runs the place.
 
-## Southhoof Stables
+## Southhoof Stables {#southhoof-stables}
 
 ## 
 
@@ -614,7 +614,7 @@ Run by Dutton Dunmoore, cousin of Bozous, this is a typical stable that is hones
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
 
-## Temple of Light
+## Temple of Light {#temple-of-light}
 
 ## 
 
@@ -638,7 +638,7 @@ At the DM’s discretion, there may be spell services available as outlined in t
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Vaults, The
+## Vaults, The {#vaults,-the}
 
 ## 
 

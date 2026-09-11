@@ -89,7 +89,7 @@ The Eternal Guardian, the Dawn Princess, the Truthbringer, and the Crowned Glory
 
 There is a list of [Shops, Services and Offerings](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.dn5odfn8hd7y) in the Myrdae Reference for Dungeon Masters.
 
-## Church to Addan
+## Church to Addan {#church-to-addan}
 
 ## 
 
@@ -103,7 +103,7 @@ People come to this church to pray for protection.
 | :---- | :---- | :---- |
 | Turgum Cur  | [Priest](https://www.dndbeyond.com/monsters/16985-priest) | NG male half-orc |
 
-## Church to Vallari
+## Church to Vallari {#church-to-vallari}
 
 ## 
 
@@ -117,7 +117,7 @@ People come to this church to pray for nature.
 | :---- | :---- | :---- |
 | Seralena Petwenys  | [Priest](https://www.dndbeyond.com/monsters/16985-priest) | N female elf |
 
-## Church to Olfarium
+## Church to Olfarium {#church-to-olfarium}
 
 ## 
 
@@ -131,7 +131,7 @@ People come to this church to pray for guidance
 | :---- | :---- | :---- |
 | Iathre Mugri  | [Priest](https://www.dndbeyond.com/monsters/16985-priest) | LG female Gold dragonborn |
 
-## Church to Utheri
+## Church to Utheri {#church-to-utheri}
 
 ## 
 
@@ -145,7 +145,7 @@ People come to this church to pray for justice and repent if sentenced for a cri
 | :---- | :---- | :---- |
 | Wilkin Dafydd  | [Priest](https://www.dndbeyond.com/monsters/16985-priest) | LN male human Priest |
 
-## Laya’s Bend
+## Laya’s Bend {#laya’s-bend}
 
 ## 
 
@@ -159,7 +159,7 @@ This is Tyrynder’s local woodworker and leatherworker run by Athlaya Nericeran
 | :---- | :---- | :---- |
 | Athlaya Nericeran | smith | CN female half-elf ([commoner](https://www.dndbeyond.com/monsters/16829-commoner)) |
 
-## Pawlin’s Smithy
+## Pawlin’s Smithy {#pawlin’s-smithy}
 
 ## 
 
@@ -173,7 +173,7 @@ This is Tyrynder’s local blacksmith, run by Jerry Pawlin. It has all the basic
 | :---- | :---- | :---- |
 | Jerry Pawlin | smith | NG male human ([commoner](https://www.dndbeyond.com/monsters/16829-commoner)) |
 
-## Red Dove Inn
+## Red Dove Inn {#red-dove-inn}
 
 ## 
 
@@ -211,7 +211,7 @@ Inside the inn, there are plentiful rooms in which you can rent for trade, the r
 
 ## 
 
-## Sword’s Edge Post, The
+## Sword’s Edge Post, The {#sword’s-edge-post,-the}
 
 ## 
 
@@ -235,7 +235,7 @@ There are also smaller watch posts on each of the crossroads with shifting guard
 * 5 x dwarf guards  
 * 4 x elf guards
 
-## Tyryn Hall
+## Tyryn Hall {#tyryn-hall}
 
 ## 
 
@@ -251,7 +251,7 @@ A thing of note, in the center of the building, in a glass box, the cracked swor
 | :---- | :---- | :---- |
 | Vuduin Tyryn | Burgomaster | LN male half-elf (wood) ([veteran](https://www.dndbeyond.com/monsters/17045-veteran)) |
 
-## Vital Goods
+## Vital Goods {#vital-goods}
 
 ## 
 
@@ -265,7 +265,7 @@ A general store, run by Serlo Richter, sells [basic supplies](https://www.dndbey
 | :---- | :---- | :---- |
 | Serlo Richter | owner | NG male human ([commoner](https://www.dndbeyond.com/monsters/16829-commoner)) |
 
-## Witch’s Hut, The
+## Witch’s Hut, The {#witch’s-hut,-the}
 
 ## 
 
