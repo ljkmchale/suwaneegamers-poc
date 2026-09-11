@@ -45,6 +45,31 @@ export function AdventsGuideMap({ src, initialRatings }: {
   const [notice, setNotice] = useState("");
   const [ratings, setRatings] = useState(initialRatings);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const reviewFormRef = useRef<HTMLFormElement>(null);
+
+  // Pre-fills the review form from the viewer's own existing review on a
+  // subject (if any), so re-submitting edits it instead of starting blank.
+  function applyReviewToForm(subject: GuideSubject | undefined, characters: string[], canReviewAsAnyone: boolean) {
+    const mine = subject?.reviews.find((review) => review.isMine);
+    if (mine) {
+      setRating(mine.rating);
+      setComment(mine.comment);
+      setCharacterName(mine.characterName);
+      setUseCustomReviewer(canReviewAsAnyone && !characters.includes(mine.characterName));
+    } else {
+      setRating(0);
+      setComment("");
+      setUseCustomReviewer(false);
+      setCharacterName((current) => current && characters.includes(current) ? current : (characters[0] ?? ""));
+    }
+  }
+
+  function selectSubject(id: string) {
+    setActiveSubjectId(id);
+    if (!payload) return;
+    const subject = [payload.location, ...payload.businesses].find((candidate) => candidate.id === id);
+    applyReviewToForm(subject, payload.characters, payload.canReviewAsAnyone);
+  }
 
   const sendRatings = useCallback(() => {
     iframeRef.current?.contentWindow?.postMessage({ type: "advents-guide:ratings", ratings }, mapOrigin);
@@ -72,7 +97,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
         },
       } : current);
       setActiveSubjectId(data.location.id);
-      setCharacterName((current) => current && data.characters.includes(current) ? current : (data.characters[0] ?? ""));
+      applyReviewToForm(data.location, data.characters, data.canReviewAsAnyone);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to load the guide.");
     } finally {
@@ -97,6 +122,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
   const activeSubject = payload
     ? [payload.location, ...payload.businesses].find((subject) => subject.id === activeSubjectId) ?? payload.location
     : null;
+  const myReview = activeSubject?.reviews.find((review) => review.isMine);
 
   // On a location overview, roll up reviews from the location and every place
   // within it (tagged with the place name); on a place, show just its reviews.
@@ -129,12 +155,14 @@ export function AdventsGuideMap({ src, initialRatings }: {
           reviewCount: data.locationSummary.reviewCount,
         },
       } : current);
-      setComment("");
-      setRating(0);
-      setBusinessName("");
       if (body.action === "review") {
-        setNotice("Your review was published.");
+        const subject = [data.location, ...data.businesses].find((candidate) => candidate.id === body.subjectId);
+        applyReviewToForm(subject, data.characters, data.canReviewAsAnyone);
+        const saved = subject?.reviews.find((review) => review.isMine);
+        setNotice(saved && saved.createdAt !== saved.updatedAt ? "Your review was updated." : "Your review was published.");
         scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (body.action === "add-business") {
+        setBusinessName("");
       }
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to update the guide.");
@@ -167,7 +195,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
               {activeSubject?.kind === "location" && <img key={selectedLocation.id} src={`${mapOrigin}/images/cities/${encodeURIComponent(selectedLocation.id)}/crest.png`} alt="" className="h-11 w-11 shrink-0 object-contain" onError={(event) => { event.currentTarget.style.display = "none"; }} />}
               <span>{activeSubject?.name ?? selectedLocation.name}</span>
             </h1>
-            {activeSubject?.kind === "business" && <button className="mt-1 text-xs text-amber-300 hover:text-amber-200" onClick={() => setActiveSubjectId(payload?.location.id ?? null)}>← Back to {selectedLocation.name}</button>}
+            {activeSubject?.kind === "business" && <button className="mt-1 text-xs text-amber-300 hover:text-amber-200" onClick={() => payload && selectSubject(payload.location.id)}>← Back to {selectedLocation.name}</button>}
           </div>
           <button aria-label="Close Advents Guide" className="rounded-full border border-white/15 px-3 py-1 text-lg text-[#a89880] hover:border-amber-400 hover:text-amber-300" onClick={() => setSelectedLocation(null)}>×</button>
         </div>
@@ -188,7 +216,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
           <h2 className="font-cinzel text-sm uppercase tracking-wider text-amber-300">Places</h2>
           {payload.businesses.length === 0
             ? <p className="mt-3 text-sm italic text-[#7f748a]">No places on the map here yet.</p>
-            : <select value="" onChange={(event) => { if (event.target.value) setActiveSubjectId(event.target.value); }} className="mt-3 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm text-[#e8dfc8] outline-none focus:border-amber-400">
+            : <select value="" onChange={(event) => { if (event.target.value) selectSubject(event.target.value); }} className="mt-3 w-full rounded border border-white/15 bg-[#130e1e] px-3 py-2 text-sm text-[#e8dfc8] outline-none focus:border-amber-400">
                 <option value="">Select a place…</option>
                 {payload.businesses.map((business) => <option key={business.id} value={business.id}>
                   {business.name}{business.averageRating ? ` — ★ ${business.averageRating}` : " — Not rated"}
@@ -204,12 +232,21 @@ export function AdventsGuideMap({ src, initialRatings }: {
           <h2 className="font-cinzel text-sm uppercase tracking-wider text-amber-300">Adventurers’ Reports</h2>
           <div className="mt-3 max-h-[40vh] space-y-3 overflow-y-auto pr-1">
             {reports.length === 0 && <p className="text-sm italic text-[#7f748a]">No adventurer has filed a report here yet.</p>}
-            {reports.map(({ review, place }) => <article key={review.id} className="rounded-lg border border-white/10 bg-white/[.03] p-4">
-              {place && <button onClick={() => setActiveSubjectId(review.subjectId)} className="mb-1 block font-cinzel text-xs uppercase tracking-wider text-amber-300 hover:text-amber-200">{place}</button>}
-              <div className="flex items-center justify-between gap-3"><strong className="font-cinzel text-sm text-[#e8dfc8]">{review.characterName}</strong><Stars value={review.rating} /></div>
+            {reports.map(({ review, place }) => <article key={review.id} className={`rounded-lg border p-4 ${review.isMine ? "border-amber-500/30 bg-amber-500/[.06]" : "border-white/10 bg-white/[.03]"}`}>
+              {place && <button onClick={() => selectSubject(review.subjectId)} className="mb-1 block font-cinzel text-xs uppercase tracking-wider text-amber-300 hover:text-amber-200">{place}</button>}
+              <div className="flex items-center justify-between gap-3">
+                <strong className="flex items-center gap-2 font-cinzel text-sm text-[#e8dfc8]">
+                  {review.characterName}
+                  {review.isMine && <span className="rounded-full border border-amber-400/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-amber-300">You</span>}
+                </strong>
+                <Stars value={review.rating} />
+              </div>
               {review.censored
                 ? <p className="mt-2 text-sm italic text-[#7f748a]">⟨Comment removed by a moderator⟩</p>
                 : review.comment && <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-[#b9ac98]">“{review.comment}”</p>}
+              {review.isMine && <div className="mt-3 border-t border-white/5 pt-2 text-xs">
+                <button type="button" onClick={() => { selectSubject(review.subjectId); reviewFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }} className="text-amber-300 hover:text-amber-200">Edit your review</button>
+              </div>}
               {payload?.canModerate && <div className="mt-3 flex gap-4 border-t border-white/5 pt-2 text-xs">
                 <button type="button" onClick={() => void post({ action: "censor-review", reviewId: review.id, censored: !review.censored })} className="text-amber-300 hover:text-amber-200">{review.censored ? "Restore" : "Censor"}</button>
                 <button type="button" onClick={() => { if (window.confirm("Delete this review permanently?")) void post({ action: "delete-review", reviewId: review.id }); }} className="text-red-300 hover:text-red-200">Delete</button>
@@ -218,8 +255,9 @@ export function AdventsGuideMap({ src, initialRatings }: {
           </div>
         </section>}
 
-        {activeSubject && <form className="space-y-3 border-t border-amber-500/20 pt-5" onSubmit={submitReview}>
-          <h2 className="font-cinzel text-sm uppercase tracking-wider text-amber-300">Rate &amp; Review</h2>
+        {activeSubject && <form ref={reviewFormRef} className="space-y-3 border-t border-amber-500/20 pt-5" onSubmit={submitReview}>
+          <h2 className="font-cinzel text-sm uppercase tracking-wider text-amber-300">{myReview ? "Edit Your Review" : "Rate & Review"}</h2>
+          {myReview && <p className="text-xs italic text-[#7f748a]">You already reviewed this — changes here will replace your existing review.</p>}
           {payload && (payload.characters.length > 0 || payload.canReviewAsAnyone) ? <>
             <label className="block text-xs uppercase tracking-wider text-[#a89880]">Reviewing as
               {payload.canReviewAsAnyone && payload.characters.length === 0
@@ -238,7 +276,7 @@ export function AdventsGuideMap({ src, initialRatings }: {
               {[1,2,3,4,5].map((star) => <button type="button" key={star} aria-label={`${star} stars`} onClick={() => setRating(star)} className={`text-3xl ${star <= rating ? "text-amber-400" : "text-[#51485b]"}`}>★</button>)}
             </div></fieldset>
             <textarea maxLength={1200} value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Share what your character experienced…" className="min-h-28 w-full rounded border border-white/15 bg-black/30 p-3 text-sm text-[#e8dfc8] outline-none focus:border-amber-400" />
-            <button disabled={loading || rating === 0 || !characterName.trim()} className="w-full rounded border border-amber-500/60 bg-amber-500/10 px-4 py-2 font-cinzel text-sm text-amber-300 disabled:opacity-40">Publish Review</button>
+            <button disabled={loading || rating === 0 || !characterName.trim()} className="w-full rounded border border-amber-500/60 bg-amber-500/10 px-4 py-2 font-cinzel text-sm text-amber-300 disabled:opacity-40">{myReview ? "Update Review" : "Publish Review"}</button>
           </> : <p className="text-sm text-[#a89880]">A character must be assigned to your player profile before you can publish a review.</p>}
         </form>}
       </div>
