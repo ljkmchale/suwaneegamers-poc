@@ -263,7 +263,7 @@ export default async function CalendarPage() {
 
         <div>
           <section>
-            <div className="mb-5 flex items-end justify-between gap-3">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3 sm:grid sm:grid-cols-[13rem_1fr_auto] sm:items-end sm:gap-3">
               <div>
                 <p
                   className="font-cinzel text-xs uppercase tracking-[0.35em]"
@@ -278,13 +278,44 @@ export default async function CalendarPage() {
                   Adventures
                 </h2>
               </div>
+
+              <div
+                className="flex min-w-0 flex-1 items-center gap-3 self-end rounded-lg border-l-4 px-4 py-2.5"
+                style={{
+                  borderColor: "var(--color-accent-gold)",
+                  background: "var(--color-bg-card)",
+                }}
+              >
+                <span
+                  className="shrink-0 text-lg leading-none"
+                  aria-hidden="true"
+                  style={{ color: "var(--color-accent-gold)" }}
+                >
+                  ✦
+                </span>
+                <div className="min-w-0">
+                  <p
+                    className="font-cinzel text-[0.65rem] uppercase tracking-[0.3em]"
+                    style={{ color: "var(--color-accent-gold)" }}
+                  >
+                    Special Event
+                  </p>
+                  <p
+                    className="mt-0.5 truncate text-sm leading-snug"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    Suwanee Gamers outing to the Ren Fest &ndash; Nov 21st
+                  </p>
+                </div>
+              </div>
+
               <a
                 href={googleCalendarEmbedUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Open the full Google Calendar"
                 aria-label="Open the full Google Calendar"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-colors hover:opacity-80"
+                className="flex h-10 w-10 shrink-0 items-center justify-center self-start rounded-md border transition-colors hover:opacity-80"
                 style={{
                   borderColor: "rgba(245,158,11,.34)",
                   background: "rgba(245,158,11,.08)",
