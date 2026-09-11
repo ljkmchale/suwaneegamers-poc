@@ -749,7 +749,7 @@ Upon Entering …
 
 At the DM’s discretion, there may be [spell services](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.bhk15oln1srj) available as outlined in the Myrdae Reference for DMs.
 
-## **Lord’s Keep**
+## **Lord’s Keep** {#lord’s-keep}
 
 Lord Dusklight’s residence, known as the Lord’s Keep, is the political and symbolic heart of Emberstran’s power. Perched on the highest elevation of the northern district, this four-story estate is built from solid grey stone and features four square towers—one at each corner—accented with black ironwork railings, window casings, and archways that give the structure a subtly gothic presence. The rear of the keep commands a panoramic view of the piers and docks far below, thanks to the sheer cliff it sits atop, allowing the lord a literal and figurative vantage point over his city. Within the estate, council meetings are held in a grand chamber on the third floor, while the uppermost floor serves as Lord Dusklight’s private quarters. The estate also includes servants' quarters, a well-stocked larder, and rooms for honored guests. Guards are always stationed at the front and rear entrances, and only those with formal invitations or business of significance are granted entry beyond the courtyard gates.
 

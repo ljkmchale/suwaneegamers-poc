@@ -12,7 +12,7 @@
       "id": "rem-406c5652311982fc",
       "normalized": "what have you learned today",
       "status": "pending",
-      "createdAt": "2026-08-31T15:25:59.506Z"
+      "createdAt": "2026-09-10T15:25:33.065Z"
     },
     {
       "question": "Hey Mara, what have you learned today?",
@@ -26,7 +26,51 @@
       "id": "rem-533900afc79b79af",
       "normalized": "hey mara what have you learned today",
       "status": "pending",
-      "createdAt": "2026-08-31T15:25:59.505Z"
+      "createdAt": "2026-09-10T15:25:33.063Z"
+    },
+    {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
+      "status": "approved",
+      "createdAt": "2026-08-31T15:25:59.506Z",
+      "reviewedAt": "2026-09-10T01:48:47.965Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-09-10T01:48:47.965Z"
+      }
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "approved",
+      "createdAt": "2026-08-31T15:25:59.505Z",
+      "reviewedAt": "2026-09-10T01:48:48.812Z",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-09-10T01:48:48.812Z"
+      }
     },
     {
       "question": "Do you see the new guild structure in the Bloody Endeavor I",
@@ -995,5 +1039,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-09-06T15:25:19.647Z"
+  "updatedAt": "2026-09-10T15:25:33.065Z"
 }

@@ -486,6 +486,31 @@ There is rarely any need for anyone to enter the Undercroft, but there is typica
 | **Bigg Pharodiash** Historian / Interpreter *male firbolg* | 	*Responsibility:*	Knowledge on ancient and difficult to understand texts 	*Appearance:*	Tall, wide (big boned), gray hair, large pocket long-coat 	*Personality*:	Kind and warm; smiles often and takes interests in others questions 	*Background*:	Retired explorer & traveller, “Seeker” in the Advents of Harmony |
 | **Thrain Ironbrow** Security *male dwarf* | 	*Responsibility:*	Ensures archives are protected 	*Appearance:*	White hair that stands out to the sides, long white beard 	*Personality*:	Gruff, anal, opinionated 	*Background*:	Former watchman |
 
+## Cut and Craft
+
+*Central District*  
+Busy street jeweler on a market block. Rings, pins, small gems, repair work, and the occasional larger stone bought off merchants or the docks. Bram turns stock over fast.
+
+Approaching from the street…
+
+## 
+
+## A painted board over a wide Central District shopfront: a fishhook catching a cut gem. Two windows full of trays. People in and out all day. A bell on the door that never stops.
+
+Upon entering… 
+
+## 
+
+## Crowded cases, a scuffed counter, a workbench in view. Trays of cheap sparkle in front, better stones under glass closer to Bram. The back room is a mess of tools, ledgers, and a locked iron box bolted to the floor. Smells like metal dust, lamp smoke, and the street.
+
+| Non-Player Characters |  |
+| :---- | :---- |
+| **Bram Hollen** Proprietor *male human* | 	*Appearance:*	Forty, receding hair, quick hands, a magnifier on a cord. 	*Personality*:	Talks while he works. Friendly until he thinks you are wasting the queue. 	*Background*:	 |
+| **Nilli Hollen** Assistant *female human* | 	*Appearance:*	late teens 	*Personality*:	 	*Background*:	Bram’s niece |
+| **Kett Nettlebon** Assistant *male halfing* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+
+### 
+
 ## Double Mice Inn
 
 The Double Mice Inn is the largest and most popular inn in Basctdelm’s Lower District. It caters primarily to travelers, merchants, laborers, and adventurers who want affordable lodging and a lively atmosphere. The inn makes most of its coin from its busy tavern and gambling, with room rentals as a secondary source of income. Because of its size and constant flow of people, it is an excellent location for players to gather information, meet contacts, or get into (or break up) trouble. Rowdiness is common, but the inn maintains just enough order through its bouncers to avoid constant Watch intervention.
@@ -587,16 +612,26 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 ## Flawless Crafts
 
-## 
+*North District*  
+High-end jeweler and gem house serving nobles, temples, and anyone who can pay without blinking. Stones are displayed by appointment as often as from the case. Ritual-grade diamonds are kept in a rear vault, not in the window. Sennava sells quality, not haste. 
+
+Approaching from the street…
 
 ## 
+
+## A narrow front of pale stone and dark wood on a quiet North District lane. One window. A single uncut crystal on a black cloth. No hanging sign beyond a small silver plate: Flawless Crafts. A liveried doorman or a locked door with a pull-bell, depending on the hour.
+
+Upon entering… 
+
+## 
+
+## Cool, quiet, and spare. Grey velvet, low lamps, three glass cases. Nothing is crowded. A side door leads to a fitting room; a steel door behind the counter leads to the vault. The air smells of polish and cold metal. You are expected to speak softly.
 
 | Non-Player Characters |  |
 | :---- | :---- |
-| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
-| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
-| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
-| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Sennava Du’cerie** Proprietor *female high elf* | 	*Appearance:*	Tall, silver-blonde hair worn tight, grey eyes, simple dark clothes and one thin diamond pin. 	*Personality*:	Calm, exact, slightly bored by anyone who bargains like a market stall. 	*Background*:	 |
+| **Meren Stonebottom** Jeweler *male dwarf* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Rhee Tallen** Clerk *female human* | 	*Appearance:*	Mid thirties 	*Personality*:	Remembers faces 	*Background*:	 |
 
 ### 
 
@@ -707,9 +742,20 @@ All the drinks are served with a half-salt rim to enhance the flavor. Additional
 
 ## House of Myr
 
-## 
+*High District*  
+The House of Myr is the Meridian’s principal house in Basctdelm: a tall, tapering octagonal tower in the High District. It is a working fortress-monastery, not a palace. Couriers, knights, and officers move through it all day.
+
+Approaching from the street…
 
 ## 
+
+## A narrow stone tower rising well above the High District roofs, pointed cap, many small windows stacked up the shaft. A sunburst device marks the upper banners. The base opens into a walled courtyard rather than a public square. From the Vista slits you see packed High District streets, other towers, and the wider city falling away toward the lower wards.
+
+Upon entering… 
+
+## 
+
+## Worn stone, iron fittings, little ornament. Silver Meridian marks on doors that matter. Everything smells of lamp oil, oiled leather, and old paper.
 
 Arcane Waypoint Contacts:
 
@@ -786,6 +832,29 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 
 ## 
 
+## Open Quill
+
+*Central District*  
+A bistro for academy tutors, clerks, and anyone who wants a table without a tavern’s noise. Midday and late afternoon are busy; evenings thin out.
+
+Approaching from the street…
+
+## 
+
+## A corner front a short walk from the Academy gates. Dark green paint, a hanging sign of an open book and a quill. Two wide windows on the street. Students pass it all day. You can see who is inside before you open the door.
+
+Upon entering… 
+
+## 
+
+## One main room, worn wood, small tables, a long counter. Lamps, not chandeliers. The front window table seats four and is the one Phira wants. A short passage leads to the kitchen and a side door onto an alley—useful, not hidden. Smells like bread, citrus, and tea. No stage. No booths deep enough to hide a meeting.
+
+| Non-Player Characters |  |
+| :---- | :---- |
+| **Helene Vossaire** Proprietor *female high elf* | 	*Appearance:*	Early fifties. Grey-brown hair pinned up, ink on her fingers, apron over plain clothes. 	*Personality*:	Dry, watchful, ; she seats you, brings the plate, and does not hover. 	*Background*:	 |
+| **Jemm Potter** Servant *male dwarf* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Pell Brewbelly** Cook *female dwarf* | 	*Appearance:*	Mid thirties 	*Personality*:	Remembers faces 	*Background*:	 |
+
 ## Plethora of Possibilities
 
 ## 
@@ -821,6 +890,29 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 ## 
 
 ## 
+
+## Stormwell
+
+*South District, Basctdelm*  
+Place of worship for Vo’egurn – Not a cathedral. A working shrine to Vo’egurn, demigod of storm and breaking, under Torec’s elemental line. South District dock-hands, roofers, and people who live by bad weather come here. Rites are short, loud, and paid in coin or labor. They do not perform resurrection. They may bless a crossing, hear a vow, or tell you where the old storm-marks still sit in the city. If the party comes asking about Guigzien, sludge, or a drained statue, the keeper will listen. Vo’egurn and Guigzien are not allies; the Stormwell treats the muck-god as a wrong turning of earth and water.
+
+Approaching from the street…
+
+## 
+
+## A low stone hall jammed between workshops on a South District slope. No garden. A black iron rod stands in the yard, scored by old strikes. The door is heavy timber with a storm-wheel burned into it. Rain stains run down the front wall on purpose. You hear the place before you see a sign.
+
+Upon entering… 
+
+## 
+
+## One open room, dark beams, a sunken stone well in the floor that never quite dries. Candles in iron cages. Offerings on a shelf: nails, snapped oars, salt, coins bent by hammers. The altar is a block of dark stone with a shallow basin. When it storms, they open the roof-slats and let the rain hit the well. It smells of wet stone, smoke, and the river.
+
+| Non-Player Characters |  |
+| :---- | :---- |
+| **Harn Voel** Keeper *male human* | 	*Appearance:*	Sixties; shaved head, split eyebrow, voice like gravel. 	*Personality*:	Blunt; suspicious of North District manners, unexpectedly carful 	*Background*:	Former roofer |
+| **Ruuka** Assistant *female half-orc* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Ole Pett Climden** Assistant *male human* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 
 ## Strongbow
 
@@ -901,6 +993,29 @@ This location works well for several types of scenes. It can serve as the starti
 | **\<Name\>** Talward Liason *\<sex\> \<species\>* | 	*Responsibility:*	House Talward noble appointee to oversee the strategic use of the aerial forces 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 
 ### 
+
+## Temple of Roses
+
+*North District*  
+Cathedral of Diverra, the Ardent One – The principal house of Diverra in the capital. Newer than the old-god halls, built to look as if it had always belonged among North District stone. Weddings, healing, public rites, and private counsel all happen here. High rites (raise dead, resurrection) are possible if a ranking priest agrees and the diamond is real. They will not raise a stranger on a walk-in.
+
+Approaching from the street…
+
+## 
+
+## A pale stone cathedral on a North District square. Twin doors under an arch of carved roses. Stained glass in warm rose, gold, and clear white. A small public garden of living roses along the front walk, kept even in poor weather. Beggars are moved on politely. Carriages stop here.
+
+Upon entering… 
+
+## 
+
+## A long nave, white stone, rose-inlay floor, light through the glass. The air is warm and scented. Side chapels for vows and quiet prayer. A sacristy and a closed healing ward behind the sanctuary. The high altar is simple: roses, a basin, Diverra’s mark. Nothing about it looks cheap. Nothing about it looks old.
+
+| Non-Player Characters |  |
+| :---- | :---- |
+| **Priestess Calenne Mabboe** High Priestess *female human* | 	*Appearance:*	Early fifties; dark hair going silver, rose-colored vestments without excess jewelry. 	*Personality*:	Composed, kind, not soft. 	*Background*:	 |
+| **Brother Syle** Acolyte *male half-elf* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Sister Padra** Acolyte *female human* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 
 ## Temple of Tranquility
 
@@ -1010,7 +1125,7 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 |  |  |  |
 |  |  |  |
 
-## Vault of Basctdelm
+## Vault of Basctdelm {#vault-of-basctdelm}
 
 ## 
 
@@ -1255,11 +1370,37 @@ The attached image has landmarks.  Here is additional information on those landm
 
 If you want, I can take what you’ve already given me and turn it into a **district-by-district city design brief for Basctdelm** so we have a clean blueprint before moving into map creation.
 
+### **Redlatch Gems**
+
+*Central District, Basctdelm*
+
+A cutter’s shop first, a store second. Kestra buys rough, cuts it herself, and sells what meets her standard. Fewer pieces on display than Bram, better cutting than his average tray. She often has one serious diamond in the safe. She will name a fair price and stop talking. No credit, no story discount, no interest in why you need it unless you are wasting her light. If she does not have the stone, she says so and points north.
+
+Street: 
+
+## 
+
+## A plain stone front on a side street off the main Central market. Small window. A heavy wooden sign with a simple carved latch and a faceted stone. The door is thick. You can hear a wheel and a grit-saw from the pavement.
+
+Inside: 
+
+## 
+
+## One short display case. Most of the room is the cutting bench: wheel, lamps, leather pads, a pegboard of tools. Stone dust on the floor. A dwarf-made safe against the back wall. A stool for the customer, not a chair. It feels like a workshop that happens to sell.
+
+#### ***People***
+
+* Kestra Redlatch — female dwarf, proprietor. Broad, rust-red braid gone grey at the temples, leather apron, no jewelry of her own except a steel ring. Blunt, dry, impatient with speeches. She looks at the stone, then at your coin, then at you. If she likes your manners she may throw in a cheap setting. If she does not, you still get a fair cut.  
+* Jorik Redlatch — male dwarf, cousin, guard and hauler. Sits near the door with a club and a bored expression. Does not talk unless Kestra is in the back.  
+* Lissa — female gnome, apprentice. Young, ink-stained fingers, learning facets. She fetches stones from the safe when Kestra nods. She stares at interesting customers and then pretends she was not.
+
 ## Advents Guide Ratings
 
 Player ratings from the Advents Guide to Myrdae (in-character reviews, 1 to 5 stars).
 
+- **Flawless Crafts** (business): 1.0 out of 5 from 1 review.
 - **House of Myr** (business): 5.0 out of 5 from 1 review.
 
 Recent reviews:
+- Flawless Crafts: "Snobby, sensitive, and painfully mediocre. Very touchy about their lackluster cuts. I made the dwarf cry." — Zymve (1 stars)
 - House of Myr: "very accommodating and helpful.  Let hap and I stay here so I can raise him back to the living and also allowed us to travel here for free thru the teleportation circle." — Aurelius (5 stars)

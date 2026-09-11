@@ -213,7 +213,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 | Icicle Sorbet | A dessert made from finely shaved ice and sweetened with frostberry syrup, served in a chilled glass with edible snowflake decorations.  | 4 sp |
 | Spiced Brandy Nog | A rich and creamy holiday drink, blended with spiced brandy, nutmeg, and a dash of cinnamon. Served in mugs with a candy cane stirrer. | 5 sp |
 
-## Hunters Haven
+## Hunters Haven {#hunters-haven}
 
 ## A wooden lodge near the edge of Everlight where hunters and rangers gather to trade supplies, plan expeditions, and share stories.
 

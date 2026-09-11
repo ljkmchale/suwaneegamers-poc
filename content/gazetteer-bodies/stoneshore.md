@@ -81,7 +81,7 @@ All gods are worshiped in Stoneshore. There are 5 big churches here dedicated to
 
 # Notable Locations
 
-## Addan’s Sanctuary
+## Addan’s Sanctuary {#addan’s-sanctuary}
 
 ## 
 
@@ -101,7 +101,7 @@ Addan’s Sanctuary is a church in the North Ward dedicated to Addan, the Eterna
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs).
 
-## Burning Dragon, the (inn)
+## Burning Dragon, the (inn) {#burning-dragon,-the-(inn)}
 
 ## 
 
@@ -159,7 +159,7 @@ The Basement is accessible only to members of Dissent Oblation.
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Church of Goldraen
+## Church of Goldraen {#church-of-goldraen}
 
 ## 
 
@@ -179,7 +179,7 @@ This is a church of Goldraen in the East Ward. The church promotes creativity he
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit#heading=h.bhk15oln1srj).
 
-## Cresting Wave (inn)
+## Cresting Wave (inn) {#cresting-wave-(inn)}
 
 ## 
 
@@ -231,7 +231,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Curious Cushions
+## Curious Cushions {#curious-cushions}
 
 ## 
 
@@ -256,7 +256,7 @@ Here are some of the unique items that Ternian sells
 
 ### 
 
-## Dewmist Greens
+## Dewmist Greens {#dewmist-greens}
 
 ## 
 
@@ -264,7 +264,7 @@ Here are some of the unique items that Ternian sells
 
 This is the largest of the parks within StoneShore held within the North Ward.
 
-## Fate’s Mercy (pub)
+## Fate’s Mercy (pub) {#fate’s-mercy-(pub)}
 
 ## 
 
@@ -306,7 +306,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 There are trade rooms for rent here if needed.
 
-## Frozen Duck, The (pub)
+## Frozen Duck, The (pub) {#frozen-duck,-the-(pub)}
 
 ## 
 
@@ -343,7 +343,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 |  |  |  |
 |  |  |  |
 
-## Giantsbane Keep
+## Giantsbane Keep {#giantsbane-keep}
 
 ## 
 
@@ -355,7 +355,7 @@ This is the royal palace for the ruler of StoneShore, it rests upon a large hill
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Gram’s Ore (smith)
+## Gram’s Ore (smith) {#gram’s-ore-(smith)}
 
 ## 
 
@@ -380,7 +380,7 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 |  |  |  |
 |  |  |  |
 
-## Ivory Seadog (tavern)
+## Ivory Seadog (tavern) {#ivory-seadog-(tavern)}
 
 ## 
 
@@ -419,7 +419,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Jundr Stone, The
+## Jundr Stone, The {#jundr-stone,-the}
 
 ## 
 
@@ -427,7 +427,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 This is said to be the final resting place of the leader of the Stone Giants who once resided where Stoneshore is. Slain long ago by the ancestor of Giantsbane, King Jundr died when this “stone” fell from his hand. It is a massive boulder nearly 30 feet in diameter that has an inset pattern of (Colors of StoneShore). It now forever rests within the North District.
 
-## Layeth’s Cathedral
+## Layeth’s Cathedral {#layeth’s-cathedral}
 
 ## 
 
@@ -447,7 +447,7 @@ This place of worship in the South Ward is one of the safer places that many com
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit#heading=h.bhk15oln1srj).
 
-## Lucky Geode, The (jeweler)
+## Lucky Geode, The (jeweler) {#lucky-geode,-the-(jeweler)}
 
 ## 
 
@@ -472,7 +472,7 @@ This jeweler located in the East Ward of StoneShore is run by Krafack Earthtoe. 
 |  |  |  |
 |  |  |  |
 
-## Maeguerth’s Reach
+## Maeguerth’s Reach {#maeguerth’s-reach}
 
 ## 
 
@@ -480,7 +480,7 @@ This jeweler located in the East Ward of StoneShore is run by Krafack Earthtoe. 
 
 This is the wall that blocks normal passage through StoneShore, it is usually open, but with little effort can close down, protecting the city from watery threats. There is another wall that surrounds the city as well called Wall Calliroe.
 
-## None for Noone (alchemist)
+## None for Noone (alchemist) {#none-for-noone-(alchemist)}
 
 ## 
 
@@ -500,7 +500,7 @@ The owner is Noone Giax (pronounced noo͞n), an old alchemist.  He has turned th
 
 If you haven’t predetermined the potions that Noone has on hand, you can use the [Potion Item Stock](#potions) table at the end of this document.
 
-## Owl’s Eye, The (fletcher)
+## Owl’s Eye, The (fletcher) {#owl’s-eye,-the-(fletcher)}
 
 ## 
 
@@ -527,7 +527,7 @@ Many of the standard [bows](https://www.dndbeyond.com/sources/dnd/phb-2024/equip
 |  |  |  |
 |  |  |  |
 
-## Round Rock (inn)
+## Round Rock (inn) {#round-rock-(inn)}
 
 ## 
 
@@ -570,7 +570,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 |  |  |  |
 |  |  |  |
 
-## Royal Manors
+## Royal Manors {#royal-manors}
 
 ## 
 
@@ -578,7 +578,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 This is where many manors reside within the Noble ward. They house many of the noble families, dukes, and other high ranking political figures that look over all of the city’s economic and environmental tidings.
 
-## Shattered Horn, The
+## Shattered Horn, The {#shattered-horn,-the}
 
 ## 
 
@@ -622,7 +622,7 @@ All the drinks are served with a half-salt rim to enhance the flavor. Additional
 |  |  |  |
 |  |  |  |
 
-## Shrine to Coralei
+## Shrine to Coralei {#shrine-to-coralei}
 
 ## 
 
@@ -642,7 +642,7 @@ This is a shrine to the Goddess Coralei to help guide traders and all shipmates 
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit#heading=h.bhk15oln1srj).
 
-## Stone’s Throw Market
+## Stone’s Throw Market {#stone’s-throw-market}
 
 ## 
 
@@ -650,7 +650,7 @@ At the DM’s discretion, there may be spell services available as outlined in t
 
 This is a marketplace that took over a deserted area of the city.  Miscellaneous goods and services can be bought here.
 
-## Stonereach Stronghold
+## Stonereach Stronghold {#stonereach-stronghold}
 
 ## 
 
@@ -669,7 +669,7 @@ There are over 1,000 guards ([archer](https://www.dndbeyond.com/monsters/2560725
 | Major | [warrior](https://www.dndbeyond.com/monsters/368996-warrior) | one per city watch |
 | Commander | [warlord](https://www.dndbeyond.com/monsters/17161-hobgoblin-warlord) | Leader of all the military forces aside from the King's personal guard |
 
-## Tan Stitching, The
+## Tan Stitching, The {#tan-stitching,-the}
 
 ## 
 
@@ -694,7 +694,7 @@ Many of the standard [leather goods](https://www.dndbeyond.com/sources/dnd/phb-2
 |  |  |  |
 |  |  |  |
 
-## Temple of Muerg
+## Temple of Muerg {#temple-of-muerg}
 
 ## 
 
@@ -714,7 +714,7 @@ This is the church of Muerg in the East Ward of StoneShore. It is the largest ch
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs).
 
-## Valroara Annals, The
+## Valroara Annals, The {#valroara-annals,-the}
 
 ## 
 
@@ -722,7 +722,7 @@ At the DM’s discretion, there may be spell services available as outlined in t
 
 The second largest collection of information in the foothills, the Valroara Annals is a library located in the East Ward. It was named after the first high mage Raimkas Valroara, who also set up the high mages and their stations way back when.
 
-## Vault of Stoneshore
+## Vault of Stoneshore {#vault-of-stoneshore}
 
 ## 
 
@@ -776,7 +776,7 @@ The vault of StoneShore is located in North Ward. This vault is part of the “R
 
 # Item Stock
 
-## Potions
+## Potions {#potions}
 
 |  | Common | Uncommon | Rare | Very Rare |
 | ----- | :---: | :---: | :---: | :---: |

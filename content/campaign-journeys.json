@@ -1972,7 +1972,7 @@
       "id": "heroes-of-emberstran",
       "name": "Heroes of Emberstran",
       "color": "#ff9f43",
-      "status": "At Emberstran",
+      "status": "At Basctdelm",
       "campaignHref": "/campaigns/heroes-of-emberstran",
       "stops": [
         {
@@ -2913,6 +2913,64 @@
           },
           "sourceKey": "heroes-of-emberstran:session-33",
           "sourceHash": "5249bce35cf9db43df54f3d2ad260182e34e742182be19a366725d5999c5200d",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-34",
+          "locationId": "emberstran",
+          "location": "Emberstran",
+          "x": 60.75,
+          "y": 58.23,
+          "session": "Session 34",
+          "title": "If We Must Go There",
+          "summary": "The adventurers left Guigzien’s shrine determined to keep Hap from slipping beyond recall, honor Zabeek, and decide whether to seek help in Emberstran or follow Phira’s trail into Basctdelm. Yazzdyrin of the Meridian arrived with word from Thaelex that Phira had been seen free in the city with Vesper Sall, and the party used that opening to reach the House of Myr, buy the diamonds they needed, and discover that the Shadow Sovereign already knew they had arrived. In the courtyard Aury called Hap back from death, after which Ky’tha and Zymve took the Cloak’s invitation to the Dripping Dagger while the others hunted the North district for Phira.…",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Emberstran",
+            "description": "The adventurers left Guigzien’s shrine determined to keep Hap from slipping beyond recall, honor Zabeek, and decide whether to seek help in Emberstran or follow Phira’s trail into Basctdelm."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "heroes-of-emberstran:session-34",
+          "sourceHash": "600e09d816f7d2c10aa08f2088bc709f448982db9dbdf713c2b15d1ffc76fc16",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-35",
+          "locationId": "basctdelm",
+          "location": "Basctdelm",
+          "x": 57.72,
+          "y": 31.66,
+          "session": "Session 35",
+          "title": "Phira and the Bellows",
+          "summary": "The heroes were split across Basctdelm to find Phira and to test the Cloak’s invitation into the Bellows. Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land. That night they slept at the Grey Fiddle after Cutter set their dinner for sunset at the edge of the Void, and on the sixth of Paramor they spent the day at the archives, the Temple of Roses, and the Greenscape before walking into the Bellows together. The session ended as a child waved the ferry in to carry them across.",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
+          },
+          "automatic": true,
+          "confidence": 0.85,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 60.75,
+                "y": 58.23
+              },
+              {
+                "x": 57.72,
+                "y": 31.66
+              }
+            ],
+            "miles": 668.6
+          },
+          "sourceKey": "heroes-of-emberstran:session-35",
+          "sourceHash": "e48437e9e8951f05de9f3f07edb180c6ccad049af024a42b4ca56a6c2142d273",
           "current": true
         }
       ],
@@ -3500,10 +3558,10 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-09-06T14:50:18.034Z",
+    "lastGeneratedAt": "2026-09-11T14:50:42.269Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 113,
+    "generatedStops": 115,
     "routedSegments": 8,
     "impactLocations": 32
   },
@@ -3662,6 +3720,14 @@
           "title": "Conflict reshaped Emberstran",
           "type": "battle",
           "description": "With the immediate threats destroyed the party turned their attention to whether they could still bring Hap back from the brink."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 34",
+          "title": "Danger remains at Emberstran",
+          "type": "warning",
+          "description": "The adventurers left Guigzien’s shrine determined to keep Hap from slipping beyond recall, honor Zabeek, and decide whether to seek help in Emberstran or follow Phira’s trail into Basctdelm."
         }
       ],
       "crossCampaign": false
@@ -4445,6 +4511,36 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-basctdelm",
+      "locationId": "basctdelm",
+      "location": "Basctdelm",
+      "x": 57.72,
+      "y": 31.66,
+      "realm": "surface",
+      "campaignIds": [
+        "heroes-of-emberstran"
+      ],
+      "impacts": [
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 31",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 35",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-brokencitadel",
       "locationId": "brokencitadel",
       "location": "Broken Citadel",
@@ -4588,28 +4684,6 @@
           "title": "Conflict reshaped Varenwood",
           "type": "battle",
           "description": "In the Shadowfell, waves of shadowy assailants and an avatar of Malgri'n assailed them, nearly claiming Fungus before the group rallied before defeated the avatar."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-basctdelm",
-      "locationId": "basctdelm",
-      "location": "Basctdelm",
-      "x": 57.72,
-      "y": 31.66,
-      "realm": "surface",
-      "campaignIds": [
-        "heroes-of-emberstran"
-      ],
-      "impacts": [
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 31",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
         }
       ],
       "crossCampaign": false

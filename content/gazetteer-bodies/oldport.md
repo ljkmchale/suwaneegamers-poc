@@ -75,7 +75,7 @@ Oldport isn’t characterized by its strict laws, but when necessary, characters
 
 # Landmarks
 
-## Apothecary
+## Apothecary {#apothecary}
 
 ## 
 
@@ -100,7 +100,7 @@ If you haven’t predetermined the potions that are on hand, you can use the Pot
 |  |  |  |
 |  |  |  |
 
-## Armory
+## Armory {#armory}
 
 ## 
 
@@ -127,7 +127,7 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 
 ## 
 
-## Blurp’s Pool
+## Blurp’s Pool {#blurp’s-pool}
 
 ## 
 
@@ -137,7 +137,7 @@ Blurp is an awakened octopus that is seen as a mascot and blessing from Osanna. 
 
 ## 
 
-## Blush Blossom Inn
+## Blush Blossom Inn {#blush-blossom-inn}
 
 ## 
 
@@ -187,7 +187,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Books & Study
+## Books & Study {#books-&-study}
 
 ## 
 
@@ -212,7 +212,7 @@ In addition to many standard items available, the following unique items are als
 |  |  |  |
 |  |  |  |
 
-## Church of Goldraen
+## Church of Goldraen {#church-of-goldraen}
 
 ## 
 
@@ -232,7 +232,7 @@ In addition to many standard items available, the following unique items are als
 
 At the DM’s discretion, there may be spell services available as outlined in the [Myrdae Reference for DMs](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit#heading=h.bhk15oln1srj).
 
-## Cobbler & Tailor
+## Cobbler & Tailor {#cobbler-&-tailor}
 
 ## 
 
@@ -257,7 +257,7 @@ In addition to many standard items available, the following unique items are als
 |  |  |  |
 |  |  |  |
 
-## Dockhouse & Fishery
+## Dockhouse & Fishery {#dockhouse-&-fishery}
 
 ## 
 
@@ -282,7 +282,7 @@ In addition to many standard items available, the following unique items are als
 |  |  |  |
 |  |  |  |
 
-## Fletcher & Tannery
+## Fletcher & Tannery {#fletcher-&-tannery}
 
 ## 
 
@@ -308,7 +308,7 @@ Many of the standard [leather goods](https://www.dndbeyond.com/sources/dnd/phb-2
 |  |  |  |
 |  |  |  |
 
-## General Store
+## General Store {#general-store}
 
 ## 
 
@@ -333,7 +333,7 @@ In addition to many [standard items available](https://www.dndbeyond.com/sources
 |  |  |  |
 |  |  |  |
 
-## Grove of Fralee
+## Grove of Fralee {#grove-of-fralee}
 
 ## 
 
@@ -341,7 +341,7 @@ In addition to many [standard items available](https://www.dndbeyond.com/sources
 
 \<Description for DM\>
 
-## Guard Post
+## Guard Post {#guard-post}
 
 ## 
 
@@ -349,7 +349,7 @@ In addition to many [standard items available](https://www.dndbeyond.com/sources
 
 City gate from the road; 2 guards always on duty. Two who work here are Artis and Artane. 
 
-## Guardhouse
+## Guardhouse {#guardhouse}
 
 ## 
 
@@ -366,7 +366,7 @@ City gate from the road; 2 guards always on duty. Two who work here are Artis an
 | Major | [warrior](https://www.dndbeyond.com/monsters/368996-warrior) |  |
 | Commander | [warlord](https://www.dndbeyond.com/monsters/17161-hobgoblin-warlord) |  |
 
-## Idol of Osanna
+## Idol of Osanna {#idol-of-osanna}
 
 ## 
 
@@ -376,7 +376,7 @@ City gate from the road; 2 guards always on duty. Two who work here are Artis an
 
 A statue of Osanna, the Smiling Dutchess, that represents her depiction in the [Pantheon](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit#heading=h.5x1jci76eiia) section of the Player's Guide to Myrdae.
 
-## Intendant’s Residence
+## Intendant’s Residence {#intendant’s-residence}
 
 ## 
 
@@ -388,7 +388,7 @@ He hosts an annual ball every year.
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Jeweler
+## Jeweler {#jeweler}
 
 ## 
 
@@ -415,7 +415,7 @@ Least expensive item in the shop was 50gp.
 |  |  |  |
 |  |  |  |
 
-## Lighthouse
+## Lighthouse {#lighthouse}
 
 ## 
 
@@ -427,7 +427,7 @@ Least expensive item in the shop was 50gp.
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Oddities
+## Oddities {#oddities}
 
 ## 
 
@@ -452,7 +452,7 @@ You can use the [Trinkets](https://www.dndbeyond.com/sources/dnd/phb-2024/creati
 |  |  |  |
 |  |  |  |
 
-## Prison Cells
+## Prison Cells {#prison-cells}
 
 ## 
 
@@ -466,7 +466,7 @@ Guard is Cale, a half orc.  He is corrupt and can be bought for coin to take peo
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Soaked Sail, the (inn)
+## Soaked Sail, the (inn) {#soaked-sail,-the-(inn)}
 
 ## 
 
@@ -516,7 +516,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Smith
+## Smith {#smith}
 
 ## 
 
@@ -541,7 +541,7 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 |  |  |  |
 |  |  |  |
 
-## Stables
+## Stables {#stables}
 
 ## 
 
@@ -575,7 +575,7 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
 
-## Tower of Kragus
+## Tower of Kragus {#tower-of-kragus}
 
 ## 
 
@@ -589,7 +589,7 @@ Old mage that is distantly related to Zibeus Ondue the mad (mage that
 
 \<Make a map or delete section \- [Dungeon Scrawl](https://app.dungeonscrawl.com/)\>
 
-## Trusty Mates Tavern
+## Trusty Mates Tavern {#trusty-mates-tavern}
 
 ## 
 
@@ -626,7 +626,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 |  |  |  |
 |  |  |  |
 
-## Water Mill
+## Water Mill {#water-mill}
 
 ## 
 

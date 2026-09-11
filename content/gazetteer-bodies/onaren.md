@@ -92,7 +92,7 @@ The Temple of Tranquility serves as the town’s primary place of worship, where
 
 # **Notable Locations**
 
-## **Commons Area**
+## **Commons Area** {#commons-area}
 
 The Commons Area is a tranquil clearing on the first terrace in the southeastern part of O’naren, positioned on one side of the river. At its center stands a large stone gazebo, crafted with smooth, carved pillars and an open design that allows for a clear view of the cascading falls that feed the **Driftglow** pond. The area is used for various gatherings, from meditation and celebrations to public announcements and town discussions. The location provides a peaceful atmosphere for residents to connect, through contemplation, community events, or just to enjoy the beauty of O’naren.
 
@@ -100,7 +100,7 @@ The Commons Area is a tranquil clearing on the first terrace in the southeastern
 
 ## As you step into the Commons Area, the sound of rushing water blends with the gentle breeze that rustles through the trees. A grand stone gazebo stands at the center of the clearing, its open pillars framing a wonderful view of the falls that tumble down into the Driftglow pond below. The space feels calm yet welcoming, where townspeople and visitors alike gather for quiet meditation, festive gatherings, or the occasional town speech. The air is fresh, carrying the scent of moss and water, making this a perfect place to pause and take in the beauty of O’naren.
 
-## **Evonstride Stables**
+## **Evonstride Stables** {#evonstride-stables}
 
 The Evonstride Stables serve as the primary care facility for horses and mounts in O’naren. Attached to the Evonstride family home, the stables are well-maintained, with intricately carved wooden walls supported by sturdy stone columns. A fenced-in running area behind the structure allows for training and exercise, ensuring that the horses remain in excellent condition. The business is now run primarily by Maenari and Adryss Evonstride, as their father, Balalean, has mostly retired. Areysa and Erendaar, though still living in the home, have devoted themselves to their roles as acolytes of Fralee and do not participate in the stable’s operations. Maenari and Adryss are both skilled farriers, providing exceptional care, shoeing, and training services for visitors and locals alike. Despite the loss of their mother years ago, the family remains close-knit and deeply respected within the community.
 
@@ -135,7 +135,7 @@ The Evonstride Stables serve as the primary care facility for horses and mounts 
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
 
-## **Fletcher / Tannery**
+## **Fletcher / Tannery** {#fletcher-/-tannery}
 
 On the upper terrace of O’naren, along the south side of town, stand two well-maintained stone buildings dedicated to the needs of hunters and woodsmen. The Fletcher is a workshop where bows and arrows are skillfully crafted using the materials sourced from the surrounding forests. Various arrowheads, bowstrings, and quivers are also sold here.
 
@@ -165,7 +165,7 @@ Adjacent to it, the Tannery serves as both a taxidermy and leatherworking shop, 
 
 At these two shops, you can find [bows](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Weapons) and [ammunition](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#AmmunitionVaries), animal hides, and [leather armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor).
 
-## **Hall of O’naren**
+## **Hall of O’naren** {#hall-of-o’naren}
 
 The Hall of O’naren serves as the center of governance for the town and the seat of Lord Itham Elle’neros. The structure consists of a large circular central chamber flanked by two rectangular wings. The main hall is a spacious, open forum where official town gatherings, judicial proceedings, and diplomatic discussions are held. The left wing houses meeting chambers where the lord and his advisors convene, while the right wing contains a dining hall used for hosting important visitors. Beneath the hall, a secured dungeon holds prisoners in a series of well-maintained cells, primarily used for those awaiting trial or exile. The daily affairs of the hall are managed by Attendant **Cadlas Saj’esuru**, a meticulous and authoritative figure who ensures the smooth operation of governance. While the hall is often a place of diplomacy and order, it is also where security matters are discussed with the Realmwardens, and where disputes among townsfolk are mediated.
 
@@ -180,7 +180,7 @@ The Hall of O’naren serves as the center of governance for the town and the se
 | **Cadlas Saj’esuru** | attendant ([commoner](https://www.dndbeyond.com/monsters/16829-commoner)) | *male high elf* A refined elf with sharp, symmetrical features, pale golden skin, piercing azure eyes, and neatly tied silver-white hair. He is meticulous and efficient, speaking in a measured tone. |
 | **Captain Salaal Windseek** | captain ([guard captain](https://www.dndbeyond.com/monsters/5195064-guard-captain)) | *male high elf* A tall, lean elf with sun-kissed bronze skin, deep green eyes, and long, dark auburn hair tied back in a warrior’s braid. He is calm and disciplined. |
 
-## **Mines**
+## **Mines** {#mines}
 
 The mines of O’naren are located on the southwest side of town, where a cave entrance opens into the rocky foothills. The mines have long provided the town with high-quality stone and ore, contributing to the settlement’s economy and craftsmanship. The entrance is situated on the second terrace, accessible via a well-worn path leading up from the lower terraces. Outside the cave, a circular stone building serves as the director’s office, where mining operations are managed, records are kept, and workers check in at the start and end of their shifts. The mine itself extends deep into the foothills, with carved tunnels leading to various excavation sites. 
 
@@ -196,7 +196,7 @@ The mines of O’naren are located on the southwest side of town, where a cave e
 | :---- | :---- | :---- |
 | **Beatror Rulendor** | director ([tough](https://www.dndbeyond.com/monsters/5195235-tough)) | *male high elf* A broad-shouldered high elf with sharp features, silver-streaked auburn hair, and emerald eyes, in fine mithril chainmail.  He is stern and pragmatic, valuing efficiency and discipline in his miners. |
 
-## **Nestling Soar**
+## **Nestling Soar** {#nestling-soar}
 
 The Nestling Soar is a well-kept elven inn situated on the upper terrace of northeast O’naren, offering travelers a quiet and comfortable place to stay. It consists of two buildings: the main inn, which houses modest rooms on the ground floor and common rooms on the second floor, and a smaller second building with four finely appointed private suites for wealthier guests. The inn is entirely constructed of smooth, carved stone, accented with ornate wooden detailing that blends naturally with the elven architecture of O’naren. The welcoming room at the entrance is warm but unassuming, with a small fireplace and a simple desk where guests are greeted. The Fardawn sisters, **Lathae** and **Andella**, manage the establishment with efficient grace, ensuring a peaceful and well-maintained environment. While the inn does not have a formal tavern, it provides light meals and warm drinks for its guests from the neighboring Truffle Trap
 
@@ -224,7 +224,7 @@ The rooms are spacious and well kept …
 
 ## The rooms at the Nestling Soar are open and inviting, embodying the elegance of elven craftsmanship. Large arched windows allow ample natural light to filter in. The furnishings are made from finely carved medium-toned wood. Each bed is draped with light, breathable linens, accented with embroidered patterns inspired by the flowing streams and foliage of the Borealian Sway. A small writing desk and a comfortable chair sit near the window. The room has warm, natural hues, combined with the delicate fragrance of polished wood and fresh air.
 
-## **Oracle**
+## **Oracle** {#oracle}
 
 The Oracle, Zanasee Tsal’daree, is known as the Weavereader, a magic user with deep ties in the Tegenwald Phet.  The Weavereader’s home is a circular two-story structure on the upper terrace of O’naren, located on the south side of town. The main floor of the sanctuary is spacious, arranged with various sitting areas that serve both for private counsel and small gatherings. Subtle arcane motifs are woven into the tapestries and carvings, a nod to her mystical insight. A large decorative rug at the center of the chamber conceals a secret entrance to a hidden chamber below, where she maintains an Arcane Waypoint—a fully functional teleportation circle known only to those she trusts. The upper floor serves as her private study and sleeping quarters, filled with ancient tomes, scrolls, and relics tied to her divinations.
 
@@ -240,7 +240,7 @@ The Weavereader is a known sage and seer, offering guidance to those who seek he
 | :---- | :---- | :---- |
 | **Zanasee Tsal’daree** | Weavereader ([mage](https://www.dndbeyond.com/monsters/4831023-mage)) | *female high elf* A tall slender elven woman with ashen silver hair woven into intricate long braids, deep violet eyes, smooth, warm brown skin with delicate runic markings.  She wears flowing robes of dark red adorned with woven gold threads that form elegant, swirling patterns.   |
 
-## **Ore Masters**
+## **Ore Masters** {#ore-masters}
 
 The Ore Masters is the collective name for three connected and meticulously kept buildings operated by the Tu'osaar siblings, whose lineage is renowned for producing some of the finest smiths and jewel-crafters in Myrdae. Situated just to the left of the mine entrance, these buildings house an armorsmith, a jeweler, and a weaponsmith, each managed by a Tu'osaar sibling. Despite the nature of their work, the interiors are immaculate.  Grand corridors link the three shops, showcasing some of their finest works on pedestals or within glass cases.
 
@@ -272,7 +272,7 @@ The last shop, furthest from the mines, is the weaponsmithing forge run by Siase
 
 The ore masters provide services for buying, selling and repairing, jewelry, [gemstones](https://www.dndbeyond.com/sources/dnd/dmg-2014/treasure#Gemstones), [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor), and [weapons](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Weapons).
 
-## **Overlook**
+## **Overlook** {#overlook}
 
 The Overlook in O’naren is a tall, round stone tower situated on the northwestern edge of Driftglow Pond, serving as both a vantage point for the Realmwardens and a communal hub for travelers and merchants. The lower level of the structure is an open-air circular plaza where traders and artisans frequently set up small stalls or temporary shops. A wide stone staircase spirals around the tower’s interior, leading up to a balcony where Realmwardens keep watch over the settlement and its surrounding foothills. The tower itself is made of smooth, finely-carved stone, adorned with delicate vine engravings that blend seamlessly with the natural aesthetic of O’naren. Though it primarily functions as a defensive structure, it is also a gathering place where townsfolk can take in the breathtaking view of the Driftglow and the dense woodlands beyond.
 
@@ -284,7 +284,7 @@ The Overlook in O’naren is a tall, round stone tower situated on the northwest
 
 Check the [market stalls](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.5ajzwn4xgw6s) table in the Myrdae Reference for Dungeon Masters to pick merchants available.
 
-## **Pieces of Ra’lorn**
+## **Pieces of Ra’lorn** {#pieces-of-ra’lorn}
 
 The tailor's shop is an elegant establishment catering primarily to elven fashion. The shop is meticulously arranged, with only a few dozen outfits on display at a time, each carefully selected for its craftsmanship and artistry. The tailor, known for their expertise in elven garments, offers both pre-made pieces and custom alterations to accommodate non-elven clientele. The open layout enhances the refined atmosphere, with a large central mirror for fittings and a discrete dressing area behind a decorative divider. 
 
@@ -298,7 +298,7 @@ The tailor's shop is an elegant establishment catering primarily to elven fashio
 | :---- | :---- | :---- |
 | **Taana Dawnspar** | tailor / owner ([performer](https://www.dndbeyond.com/monsters/5195156-performer)) | *female high elf* A slender high elf with light brown hair styled in an elegant braided updo, Taana wears flowing garments in soft earth tones. She is patient and takes great pride in ensuring that each client leaves her shop feeling comfortable in their attire. |
 
-## **Purposeful Poise** 
+## **Purposeful Poise**  {#purposeful-poise}
 
 The stylist’s parlor in O’naren is an elegant establishment catering to those who seek refinement and personal grooming. The space is warm and inviting, with a sense of luxury that complements the town’s natural beauty. Inside, on the right, finely crafted hutches hold an assortment of grooming tools, oils, and accessories, while a single central chair serves as the primary station for cutting, styling, and piercings. The left side of the room features a plush waiting area with cushioned seats where customers are served wine while they wait. Large arched windows allow natural light to flood in, while suspended lanterns provide additional soft illumination, ensuring the finest details of beauty work are performed with precision. The stylist takes great pride in their craft, offering services that range from intricate hair styling and makeup application to piercings for those looking to embrace a more personalized look.
 
@@ -322,7 +322,7 @@ The stylist’s parlor in O’naren is an elegant establishment catering to thos
 | **Facial** | A soft cleaning, with lotions and accent make-up | 5 gp |
 | **Perfume** | Various scented vials | 25 gp |
 
-## **Temple of Tranquility**
+## **Temple of Tranquility** {#temple-of-tranquility}
 
 The Temple of Tranquility is one of the largest and most revered structures in O’naren, standing on a terrace overlooking the northeastern side of town. It is built from smooth stone with intricate floral carvings.
 
@@ -370,7 +370,7 @@ The O’naren Tenement is the largest structure in O’naren, housing most of th
 | **Tailor** | **Euwyn Tyndera**  *male high elf* | Makes and sells [clothing](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#ClothesFine15GP), including hats and cloaks, and carries out repairs and alterations of cloth goods. |
 | **Weaver** | **Aeva Tyndera** *female high elf* | Weaves raw fabric and [baskets](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Basket4SP). |
 
-## **Truffle Trap, The**
+## **Truffle Trap, The** {#truffle-trap,-the}
 
 The Truffle Trap is the main tavern in O’naren, sitting adjacent to the Nestling Soar on the upper terrace. It is constructed of the same smooth carved stone as the inn, with ornate wooden accents that reflect the town’s natural aesthetic. A four-story circular tower extends from its right side, giving the establishment a unique architectural touch. The main hall features several tables, a bar along the left wall, and a small central clearing for performances. The attached tower houses three floors of round tables, seating up to ten people each, while the top floor is an open space with tall standing tables, offering a panoramic view of O’naren.
 
@@ -410,7 +410,7 @@ Additionally, the tavern is known for the following unique food items and dishes
 | :---- | :---- | ----- |
 | Elderbisque | A rich truffle bisque that is a delicacy in O’naren, often served in the Truffle Trap tavern. Made from finely foraged wild truffles found in the Borealian Sway, the bisque has an earthy and slightly nutty aroma with a deep, savory scent that lingers in the air. Its texture is velvety and smooth, infused with delicate herbs and a hint of woodland spices. | 5 sp |
 
-## **Welthas’ Market**
+## **Welthas’ Market** {#welthas’-market}
 
 The general store in O’naren is a two-story structure. The ground floor is a spacious square room, well-stocked with essentials such as rations, travel gear, simple tools, and common goods frequently needed by visitors and locals alike. Shelves are arranged neatly, and natural light filters through large windows, enhancing the store’s welcoming atmosphere. The second floor, which is circular in design, houses more specialized and uncommon items, including rare herbs, finely crafted elven trinkets, and other unique goods that cater to the more discerning buyer. The shopkeeper keeps a close watch over the inventory and offers fair, yet firm, pricing.
 
@@ -433,7 +433,7 @@ Welthas had Sinnas with an adventuring human lady he fell in love with when she 
 
 You can find [basic supplies](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#AdventuringGear), groceries and various goods here.
 
-## **Vocehna’s Gallery**
+## **Vocehna’s Gallery** {#vocehna’s-gallery}
 
 Vocehna Maepholaer’s art gallery is on the upper terrace of O’naren, housed in a square, single-story building with smooth carved stone walls rising to a 20-foot ceiling. The interior is spacious and filled with natural light from high arched windows, showcasing a curated selection of vases, sculptures, paintings, and ornamental elven crafts. Vocehna carefully selects and appraises pieces, often acquiring works from traveling artisans and commissioning local talent. Notable pieces include “The Gilded Veil,” an enchanted painting that shifts between day and night scenes, “The Silent Lyric,” a silver-inlaid bust of an elven bard that hums faintly when touched, and “Whispers of the Canopy,” a woven tapestry that captures the movement of wind through treetops. 
 

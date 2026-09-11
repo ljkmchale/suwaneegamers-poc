@@ -1,6 +1,34 @@
 {
   "entries": [
     {
+      "id": "audit-rem-533900afc79b79af-1789004928814",
+      "remediationId": "rem-533900afc79b79af",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "Hey Mara, what have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-09-10T01:48:48.812Z"
+      },
+      "previousValue": "{\"id\":\"task-rem-533900afc79b79af\",\"remediationId\":\"rem-533900afc79b79af\",\"kind\":\"routing-task\",\"question\":\"Hey Mara, what have you learned today?\",\"proposedCorrection\":\"Myra answered this from the \\\"general_schedule\\\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.\",\"evidence\":[\"Answered as general_schedule\"],\"status\":\"open\",\"createdAt\":\"2026-08-31T13:54:50.827Z\"}",
+      "createdAt": "2026-09-10T01:48:48.812Z"
+    },
+    {
+      "id": "audit-rem-406c5652311982fc-1789004927968",
+      "remediationId": "rem-406c5652311982fc",
+      "action": "applied",
+      "application": {
+        "kind": "routing-task",
+        "key": "What have you learned today?",
+        "value": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+        "target": "assistant-remediation-tasks.json",
+        "appliedAt": "2026-09-10T01:48:47.965Z"
+      },
+      "previousValue": "{\"id\":\"task-rem-406c5652311982fc\",\"remediationId\":\"rem-406c5652311982fc\",\"kind\":\"routing-task\",\"question\":\"What have you learned today?\",\"proposedCorrection\":\"Myra answered this from the \\\"general_schedule\\\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.\",\"evidence\":[\"Answered as general_schedule\"],\"status\":\"open\",\"createdAt\":\"2026-08-31T13:54:49.904Z\"}",
+      "createdAt": "2026-09-10T01:48:47.965Z"
+    },
+    {
       "id": "audit-rem-a00b5f190a68f2c8-1788189961898",
       "remediationId": "rem-a00b5f190a68f2c8",
       "action": "applied",
