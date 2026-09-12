@@ -198,6 +198,8 @@ export interface AnalyticsDashboardData {
     pagesViewed: number;
     topPage: string;
     firstTimeVisitor: boolean;
+    deviceType: string;
+    deviceMix: string[];
   }>;
   memberPageActivity: Array<{
     visitorKey: string;
@@ -1292,6 +1294,8 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     pagesViewed: 0,
     topPage: "",
     firstTimeVisitor: row.lifetime_sessions === 1,
+    deviceType: "",
+    deviceMix: [] as string[],
   }));
 
   const memberPageActivity = (db.prepare(`
@@ -1349,6 +1353,34 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     const rows = activityByVisitor.get(person.visitorKey) ?? [];
     person.pagesViewed = rows.length;
     person.topPage = [...rows].sort((a, b) => b.pageViews - a.pageViews)[0]?.path ?? "";
+  }
+
+  // A visitor can carry the same device across many sessions, so this is not
+  // rolled into the `people` GROUP BY above (it would multiply rows). Pulled
+  // separately, most-recent session first, and reduced in JS: `deviceType` is
+  // what they were last seen on, `deviceMix` is everything seen in the window.
+  const deviceRows = (db.prepare(`
+    SELECT
+      COALESCE(visitor_email, visitor_id, session_id) AS visitor_key,
+      device_type,
+      last_seen_at
+    FROM analytics_sessions
+    WHERE last_seen_at >= ?
+    ORDER BY last_seen_at DESC
+  `).all(sinceIso) as Array<{ visitor_key: string; device_type: string; last_seen_at: string }>);
+  const deviceMixByVisitor = new Map<string, string[]>();
+  for (const row of deviceRows) {
+    const mix = deviceMixByVisitor.get(row.visitor_key) ?? [];
+    if (!mix.includes(row.device_type)) mix.push(row.device_type);
+    deviceMixByVisitor.set(row.visitor_key, mix);
+  }
+  const latestDeviceByVisitor = new Map<string, string>();
+  for (const row of deviceRows) {
+    if (!latestDeviceByVisitor.has(row.visitor_key)) latestDeviceByVisitor.set(row.visitor_key, row.device_type);
+  }
+  for (const person of people) {
+    person.deviceType = latestDeviceByVisitor.get(person.visitorKey) ?? "";
+    person.deviceMix = deviceMixByVisitor.get(person.visitorKey) ?? [];
   }
 
   const pageAudiences = (db.prepare(`

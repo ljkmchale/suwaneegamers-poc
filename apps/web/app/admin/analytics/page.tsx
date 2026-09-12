@@ -8,11 +8,14 @@ import {
   Eye,
   Gauge,
   LogOut,
+  Monitor,
   MousePointerClick,
   Radio,
   Route,
   Search,
+  Smartphone,
   Sparkles,
+  Tablet,
   Users,
 } from "lucide-react";
 import { getAnalyticsDashboardData, getVisitorGrowthSummary } from "@/lib/analytics";
@@ -44,6 +47,21 @@ function dateTime(value: string | null) {
     hour: "numeric",
     minute: "2-digit",
   }).format(new Date(value));
+}
+
+const DEVICE_ICONS = { mobile: Smartphone, tablet: Tablet, desktop: Monitor } as const;
+
+function DeviceTag({ deviceType, deviceMix }: { deviceType: string; deviceMix: string[] }) {
+  if (!deviceType) return <span className="text-[#6a5a78]">—</span>;
+  const Icon = DEVICE_ICONS[deviceType as keyof typeof DEVICE_ICONS] ?? Monitor;
+  const title = deviceMix.length > 1 ? `Also seen on: ${deviceMix.filter((d) => d !== deviceType).join(", ")}` : undefined;
+  return (
+    <span className="inline-flex items-center gap-1.5 capitalize text-[#9080a0]" title={title}>
+      <Icon size={13} aria-hidden="true" />
+      {deviceType}
+      {deviceMix.length > 1 && <span className="text-[#6a5a78]">+{deviceMix.length - 1}</span>}
+    </span>
+  );
 }
 
 function FirstTimeBadge() {
@@ -332,6 +350,7 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
               <tr>
                 <th className="px-5 py-3 font-normal">Visitor</th>
                 <th className="px-5 py-3 font-normal">Email</th>
+                <th className="px-5 py-3 font-normal">Device</th>
                 <th className="px-5 py-3 font-normal">Last seen</th>
                 <th className="px-5 py-3 text-right font-normal">Visits</th>
                 <th className="px-5 py-3 text-right font-normal">Pages</th>
@@ -350,6 +369,9 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
                     </div>
                   </td>
                   <td className="max-w-56 truncate px-5 py-3 text-[#9080a0]">{person.email ?? "Identity not verified"}</td>
+                  <td className="px-5 py-3 text-xs">
+                    <DeviceTag deviceType={person.deviceType} deviceMix={person.deviceMix} />
+                  </td>
                   <td className="whitespace-nowrap px-5 py-3 text-[#9080a0]">{dateTime(person.lastSeenAt)}</td>
                   <td className="px-5 py-3 text-right">{person.sessions}</td>
                   <td className="px-5 py-3 text-right">{person.pagesViewed}</td>

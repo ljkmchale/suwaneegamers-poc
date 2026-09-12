@@ -112,25 +112,32 @@ export async function proxy(request: NextRequest) {
     const signInUrl = new URL("/signin", request.url);
     if (pathname !== "/") signInUrl.searchParams.set("from", pathname);
     const redirectResponse = NextResponse.redirect(signInUrl);
-    const landingUrl = new URL(request.url);
-    const acquisition = {
-      landingPath: `${landingUrl.pathname}${landingUrl.search}`.slice(0, 500),
-      referrer: (request.headers.get("referer") ?? "").slice(0, 1000),
-      utmSource: landingUrl.searchParams.get("utm_source")?.slice(0, 100) ?? "",
-      utmMedium: landingUrl.searchParams.get("utm_medium")?.slice(0, 100) ?? "",
-      utmCampaign: landingUrl.searchParams.get("utm_campaign")?.slice(0, 160) ?? "",
-    };
-    redirectResponse.cookies.set(
-      ACQUISITION_COOKIE,
-      encodeURIComponent(JSON.stringify(acquisition)),
-      {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-        maxAge: 900,
-      },
-    );
+    // Only the FIRST unauthenticated hit carries the real referrer. A browser
+    // often fires a second gated request (a prefetched icon, a manifest fetch)
+    // while still mid-redirect, and that one's Referer is typically blank or
+    // same-origin — letting it overwrite the cookie would clobber genuine
+    // attribution with a false "Direct" read.
+    if (!request.cookies.has(ACQUISITION_COOKIE)) {
+      const landingUrl = new URL(request.url);
+      const acquisition = {
+        landingPath: `${landingUrl.pathname}${landingUrl.search}`.slice(0, 500),
+        referrer: (request.headers.get("referer") ?? "").slice(0, 1000),
+        utmSource: landingUrl.searchParams.get("utm_source")?.slice(0, 100) ?? "",
+        utmMedium: landingUrl.searchParams.get("utm_medium")?.slice(0, 100) ?? "",
+        utmCampaign: landingUrl.searchParams.get("utm_campaign")?.slice(0, 160) ?? "",
+      };
+      redirectResponse.cookies.set(
+        ACQUISITION_COOKIE,
+        encodeURIComponent(JSON.stringify(acquisition)),
+        {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: 900,
+        },
+      );
+    }
     return redirectResponse;
   }
 
