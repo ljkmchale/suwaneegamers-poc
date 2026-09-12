@@ -1,6 +1,6 @@
 # Admin reporting review and proposed organization
 
-Reviewed September 12, 2026. This is an analysis and implementation specification; it does not change application routes, tracking, or production.
+Reviewed and implemented September 12, 2026. Production activation remains separate.
 
 ## Main finding
 
@@ -14,8 +14,8 @@ The existing style is suitable: retain Cinzel headings, dark plum backgrounds (#
 - `apps/web/app/admin/layout.tsx` places Usage & Connections and Members under Security, while most content tools remain individual links. The dashboard largely repeats navigation and adds a source resync action.
 - The visitor directory, recent visits, visitor/page activity, page audiences, and Members repeat identity and activity information, though their aggregation levels differ. These should become connected views, not be deleted or indiscriminately combined.
 - Myra combines usage, estimated provider cost, remediation, tuning, personalities, questions, and capability gaps. Keep it a dedicated domain with internal tabs separating reporting from controls.
-- Browser inspection of `http://localhost:4652/admin/analytics` reached the admin login gate. Authenticated visual layout and the active bundle's parity with the checkout were not verified. Conclusions come from current source and read-only database inspection.
-- Architecture preflight passed. No application code or database writes were made for this review. A concurrent change to `content/campaign-roster.json` appeared during the review and was left untouched.
+- The redesigned overview and map report were visually verified through an authenticated, isolated local preview backed by a database snapshot. The active production bundle was not changed.
+- A concurrent set of campaign and Gazetteer content changes was left untouched.
 
 ## Proposed sidebar
 

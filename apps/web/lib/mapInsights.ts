@@ -43,7 +43,11 @@ export function getMapInsights(days: number, audience: AnalyticsAudience = "all"
     }>;
   const visits = db.prepare(`SELECT s.session_id AS id,
     COALESCE(s.visitor_name, s.visitor_email, 'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))) AS visitor,
-    COALESCE(s.utm_source, CASE WHEN s.referrer_host = 'accounts.google.com' THEN 'Google sign-in (legacy)' ELSE s.referrer_host END, 'Unknown / direct') AS source,
+    COALESCE(
+      CASE WHEN s.utm_source IS NOT NULL THEN s.utm_source || CASE WHEN s.utm_medium IS NOT NULL THEN ' / ' || s.utm_medium ELSE '' END END,
+      CASE WHEN s.referrer_host = 'accounts.google.com' THEN 'Google sign-in (legacy)' ELSE s.referrer_host END,
+      'Unknown / direct'
+    ) AS source,
     s.utm_campaign AS campaign, COALESCE(s.acquisition_path, s.entry_path) AS entry,
     s.device_type AS device, MIN(e.created_at) AS firstSeen, MAX(e.created_at) AS lastSeen,
     SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS views,
