@@ -229,6 +229,12 @@ export interface AnalyticsDashboardData {
     pageViews: number;
     firstTimeVisitor: boolean;
   }>;
+  mapActivity: {
+    pageViews: number;
+    visitors: number;
+    engagedSeconds: number;
+    topLocations: Array<{ label: string; kind: string; clicks: number }>;
+  };
   syncJobs: Array<{
     id: string;
     label: string;
@@ -1473,6 +1479,37 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     firstTimeVisitor: row.lifetime_sessions === 1,
   }));
 
+  const mapPageStats = db.prepare(`
+    SELECT
+      SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+      COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, e.session_id)) AS visitors,
+      SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds
+    FROM analytics_events AS e
+    JOIN analytics_sessions AS s ON s.session_id = e.session_id
+    WHERE e.created_at >= ? AND e.path = '/maps-of-myrdae'
+  `).get(sinceIso) as { page_views: number | null; visitors: number | null; engaged_seconds: number | null };
+
+  const mapTopLocations = (db.prepare(`
+    SELECT
+      COALESCE(NULLIF(content_label, ''), content_id) AS label,
+      content_type AS kind,
+      COUNT(*) AS clicks
+    FROM analytics_events
+    WHERE created_at >= ?
+      AND event_type = 'content_view'
+      AND content_type IN ('map location', 'map region')
+    GROUP BY label, kind
+    ORDER BY clicks DESC, label
+    LIMIT 15
+  `).all(sinceIso) as Array<{ label: string; kind: string; clicks: number }>);
+
+  const mapActivity = {
+    pageViews: mapPageStats.page_views ?? 0,
+    visitors: mapPageStats.visitors ?? 0,
+    engagedSeconds: mapPageStats.engaged_seconds ?? 0,
+    topLocations: mapTopLocations,
+  };
+
   const syncJobs = (db.prepare(`
     SELECT id, label, last_status, last_started_at, last_finished_at, next_run_at, last_duration_ms
     FROM content_sync_jobs
@@ -1558,6 +1595,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     memberPageActivity,
     pageAudiences,
     activeVisitors,
+    mapActivity,
     syncJobs,
     recentSyncRuns,
   };

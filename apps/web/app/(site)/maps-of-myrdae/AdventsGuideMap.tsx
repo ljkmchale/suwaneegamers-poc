@@ -2,6 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { GuideSubject } from "@/lib/adventsGuide";
+import { recordUsageEvent } from "@/components/analytics/AnalyticsTracker";
 
 interface GuidePayload {
   location: GuideSubject;
@@ -113,6 +114,18 @@ export function AdventsGuideMap({ src, initialRatings }: {
         const location = event.data.location as MapLocation;
         setSelectedLocation(location);
         void loadGuide(location);
+      }
+      // A marker/region click on the map itself (distinct from opening the
+      // Advents Guide sidebar) — the signal for which places on the map
+      // people actually go look at.
+      if (event.data?.type === "map:location-click" && event.data.location?.id && event.data.location?.name) {
+        const clicked = event.data.location as MapLocation & { kind?: string };
+        recordUsageEvent({
+          eventType: "content_view",
+          contentType: clicked.kind === "region" ? "map region" : "map location",
+          contentId: clicked.id,
+          contentLabel: clicked.name,
+        });
       }
     };
     window.addEventListener("message", receive);

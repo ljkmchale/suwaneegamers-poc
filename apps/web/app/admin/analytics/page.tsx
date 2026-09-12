@@ -8,6 +8,7 @@ import {
   Eye,
   Gauge,
   LogOut,
+  Map as MapIcon,
   Monitor,
   MousePointerClick,
   Radio,
@@ -286,6 +287,47 @@ export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps
           );
         })}
       </div>
+
+      <section className="mb-6 rounded-xl border border-[#3d2e5c] bg-gradient-to-br from-[#1a1029] to-[#0f0a1a] p-5">
+        <div className="mb-5 flex items-center gap-3">
+          <MapIcon size={20} className="text-[#f59e0b]" aria-hidden="true" />
+          <div>
+            <h2 className="font-cinzel text-sm uppercase tracking-widest text-[#e8dfc8]">Map of Myrdae activity</h2>
+            <p className="mt-1 text-xs text-[#6a5a78]">
+              The interactive map (mapeditor.suwaneegamers.net) is embedded in a page shell here; clicks inside it are
+              bridged back over postMessage and logged as their own events
+            </p>
+          </div>
+        </div>
+        <div className="mb-6 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-lg border border-[#2a2a35] bg-[#08050f] p-4">
+            <p className="text-xs uppercase tracking-widest text-[#9080a0]">Page views</p>
+            <p className="mt-2 font-cinzel text-2xl text-[#f59e0b]">{number(data.mapActivity.pageViews)}</p>
+          </div>
+          <div className="rounded-lg border border-[#2a2a35] bg-[#08050f] p-4">
+            <p className="text-xs uppercase tracking-widest text-[#9080a0]">Visitors</p>
+            <p className="mt-2 font-cinzel text-2xl text-[#f59e0b]">{number(data.mapActivity.visitors)}</p>
+          </div>
+          <div className="rounded-lg border border-[#2a2a35] bg-[#08050f] p-4">
+            <p className="text-xs uppercase tracking-widest text-[#9080a0]">Engaged time</p>
+            <p className="mt-2 font-cinzel text-2xl text-[#f59e0b]">{duration(data.mapActivity.engagedSeconds)}</p>
+          </div>
+        </div>
+        <div>
+          <p className="mb-3 text-[10px] uppercase tracking-widest text-[#6a5a78]">Most-clicked locations & regions</p>
+          {data.mapActivity.topLocations.length > 0 ? (
+            <HorizontalBars rows={data.mapActivity.topLocations.map((location) => ({
+              label: location.label,
+              value: location.clicks,
+              detail: location.kind === "map region" ? "region" : "location",
+            }))} />
+          ) : (
+            <p className="py-10 text-center text-sm text-[#6a5a78]">
+              No map clicks recorded yet — this tracking is new and will fill in as visitors use the map.
+            </p>
+          )}
+        </div>
+      </section>
 
       <section className="mb-6 overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
         <div className="flex flex-wrap items-center justify-between gap-3 p-5">
