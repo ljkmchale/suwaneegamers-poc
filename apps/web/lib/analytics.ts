@@ -335,12 +335,14 @@ export function recordUsageEvents(input: {
   const visitorId = input.rawVisitorId ? anonymizeSessionId(input.rawVisitorId) : sessionId;
   const now = new Date().toISOString();
   const internalIdentity = KNOWN_VISITOR_IDENTITIES.get(visitorId) ?? null;
+  const referrerHost = safeReferrerHost(input.referrer);
 
-  // Known testing browsers/devices (used to QA the site, not by real
-  // visitors) are never written to analytics at all — not recorded then
-  // filtered at query time. Recording and excluding them produced ~6,200
-  // events from four testing identities before this existed.
-  if (internalIdentity?.name === "Internal testing") return;
+  // Our own work on the site — known testing/dev browsers (including
+  // Larry's own device hash) and anything referred from localhost/127.0.0.1
+  // — is never written to analytics at all, not recorded then filtered at
+  // query time. Recording and excluding it produced ~6,200 events from four
+  // testing identities before this existed.
+  if (internalIdentity?.name || referrerHost === "localhost" || referrerHost === "127.0.0.1") return;
 
   const knownIdentity = input.identity || internalIdentity
     ? null
@@ -371,7 +373,6 @@ export function recordUsageEvents(input: {
     : /mobile|iphone|android/i.test(ua)
       ? "mobile"
       : "desktop";
-  const referrerHost = safeReferrerHost(input.referrer);
   const entryPath = input.events[0]?.path ?? "/";
   const acquisitionPath = cleanText(input.acquisition?.landingPath, 500);
   const utmSource = cleanText(input.acquisition?.utmSource, 100);
