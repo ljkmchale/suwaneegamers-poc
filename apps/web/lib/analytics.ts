@@ -335,6 +335,13 @@ export function recordUsageEvents(input: {
   const visitorId = input.rawVisitorId ? anonymizeSessionId(input.rawVisitorId) : sessionId;
   const now = new Date().toISOString();
   const internalIdentity = KNOWN_VISITOR_IDENTITIES.get(visitorId) ?? null;
+
+  // Known testing browsers/devices (used to QA the site, not by real
+  // visitors) are never written to analytics at all — not recorded then
+  // filtered at query time. Recording and excluding them produced ~6,200
+  // events from four testing identities before this existed.
+  if (internalIdentity?.name === "Internal testing") return;
+
   const knownIdentity = input.identity || internalIdentity
     ? null
     : db.prepare(`
