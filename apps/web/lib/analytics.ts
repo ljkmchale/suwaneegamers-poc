@@ -1,5 +1,6 @@
 import "server-only";
 
+import { analyticsVisitorToken, audienceSessions, analyticsPeriod, type AnalyticsAudience } from "@/lib/analyticsFilters";
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
 import { pruneExpired } from "@/lib/retention";
@@ -188,6 +189,7 @@ export interface AnalyticsDashboardData {
   }>;
   people: Array<{
     visitorKey: string;
+    visitorToken: string;
     name: string;
     email: string | null;
     signedIn: boolean;
@@ -203,6 +205,7 @@ export interface AnalyticsDashboardData {
   }>;
   memberPageActivity: Array<{
     visitorKey: string;
+    visitorToken: string;
     name: string;
     email: string | null;
     signedIn: boolean;
@@ -556,7 +559,7 @@ export function getSignedInMemberActivity(days: number, limit = 12): SignedInMem
 
 function acquisitionLabel(row: { utm_source: string | null; utm_medium: string | null; referrer_host: string | null }): string {
   if (row.utm_source) return [row.utm_source, row.utm_medium].filter(Boolean).join(" / ");
-  if (!row.referrer_host) return "Direct or shared link";
+  if (!row.referrer_host) return "Unknown / direct";
   if (row.referrer_host === "accounts.google.com") return "Google sign-in (legacy)";
   return row.referrer_host;
 }
@@ -576,12 +579,9 @@ export interface VisitorGrowthSummary {
  * `getAnalyticsDashboardData`'s `recentVisitors`/`people` lists, which are
  * capped for table display and not scoped to "joined in this window."
  */
-export function getVisitorGrowthSummary(days: number): VisitorGrowthSummary {
+export function getVisitorGrowthSummary(days: number, audience: AnalyticsAudience = "all"): VisitorGrowthSummary {
   const db = getDb();
-  const safeDays = [7, 30, 90].includes(days) ? days : 30;
-  const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
-  since.setHours(0, 0, 0, 0);
-  const sinceIso = since.toISOString();
+  const { days: safeDays, sinceIso } = analyticsPeriod(days);
 
   const newVisitorRows = db.prepare(`
     WITH first_sessions AS (
@@ -602,7 +602,7 @@ export function getVisitorGrowthSummary(days: number): VisitorGrowthSummary {
     JOIN analytics_sessions s
       ON COALESCE(s.visitor_email, s.visitor_id, s.session_id) = f.visitor_key
       AND s.first_seen_at = f.joined_at
-    WHERE f.joined_at >= ? AND f.joined_at = (SELECT MIN(joined_at) FROM first_sessions WHERE visitor_key = f.visitor_key)
+    WHERE s.session_id IN (${audienceSessions(audience)}) AND f.joined_at >= ? AND f.joined_at = (SELECT MIN(joined_at) FROM first_sessions WHERE visitor_key = f.visitor_key)
     GROUP BY f.visitor_key
     ORDER BY f.joined_at
   `).all(sinceIso) as Array<{
@@ -654,7 +654,7 @@ export function getVisitorGrowthSummary(days: number): VisitorGrowthSummary {
   };
 }
 
-export function getUsagePurposeMetrics(days: number): Array<{
+export function getUsagePurposeMetrics(days: number, audience: AnalyticsAudience = "all"): Array<{
   purpose: UsagePurpose;
   signals: number;
   visits: number;
@@ -669,7 +669,7 @@ export function getUsagePurposeMetrics(days: number): Array<{
       COUNT(DISTINCT session_id) AS visits,
       ROUND(AVG(confidence)) AS averageConfidence
     FROM analytics_purpose_signals
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
     GROUP BY purpose
     ORDER BY visits DESC, signals DESC
   `).all(since.toISOString()) as Array<{
@@ -680,7 +680,7 @@ export function getUsagePurposeMetrics(days: number): Array<{
   }>;
 }
 
-export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData {
+export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudience = "all", fullReports = false): AnalyticsDashboardData {
   const db = getDb();
   const applyKnownIdentity = db.prepare(`
     UPDATE analytics_sessions
@@ -692,10 +692,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       applyKnownIdentity.run(visitorId, identity.email, identity.name, visitorId, visitorId);
     }
   })();
-  const safeDays = [7, 30, 90].includes(days) ? days : 30;
-  const since = new Date(Date.now() - (safeDays - 1) * 86_400_000);
-  since.setHours(0, 0, 0, 0);
-  const sinceIso = since.toISOString();
+  const { days: safeDays, since, sinceIso } = analyticsPeriod(days);
 
   const summary = db.prepare(`
     SELECT
@@ -712,7 +709,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN e.event_type = 'client_error' THEN 1 ELSE 0 END) AS client_errors
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
   `).get(sinceIso) as {
     page_views: number | null;
     visits: number | null;
@@ -731,7 +728,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   const activeNow = (db.prepare(`
     SELECT COUNT(DISTINCT COALESCE(visitor_email, visitor_id, session_id)) AS count
     FROM analytics_sessions
-    WHERE last_seen_at >= ?
+    WHERE last_seen_at >= ? AND session_id IN (${audienceSessions(audience)})
   `).get(activeThreshold) as { count: number }).count;
 
   const dailyRows = db.prepare(`
@@ -743,7 +740,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
     GROUP BY date(e.created_at, 'localtime')
     ORDER BY date
   `).all(sinceIso) as Array<{
@@ -780,11 +777,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
     GROUP BY e.path
-    HAVING page_views > 0 OR engaged_seconds > 0
+    HAVING SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) > 0 OR SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) > 0
     ORDER BY page_views DESC, engaged_seconds DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     path: string;
     page_views: number;
@@ -803,11 +800,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(content_type, 'content') AS type,
       COUNT(*) AS views
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('content_view', 'content_open')
     GROUP BY label, type
     ORDER BY views DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{ label: string; type: string; views: number }>);
 
   const topMedia = (db.prepare(`
@@ -820,11 +817,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN event_type = 'media_progress' AND duration_seconds >= 75 THEN 1 ELSE 0 END) AS progress_75,
       SUM(CASE WHEN event_type = 'media_complete' THEN 1 ELSE 0 END) AS completions
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('media_play', 'media_progress', 'media_complete')
     GROUP BY label, media_id
     ORDER BY plays DESC, completions DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     label: string;
     media_id: string;
@@ -850,12 +847,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(NULLIF(content_type, ''), CASE WHEN event_type = 'outbound_click' THEN 'outbound' ELSE 'content' END) AS type,
       COUNT(*) AS clicks
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('internal_click', 'outbound_click', 'search_result_click')
       AND COALESCE(content_type, '') NOT IN ('nav', 'footer', 'utility')
     GROUP BY label, href, type
     ORDER BY clicks DESC, label
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     label: string;
     href: string;
@@ -868,7 +865,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(NULLIF(content_type, ''), CASE WHEN event_type = 'outbound_click' THEN 'outbound' ELSE 'content' END) AS type,
       COUNT(*) AS clicks
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('internal_click', 'outbound_click', 'search_result_click')
     GROUP BY type
     ORDER BY clicks DESC, type
@@ -880,12 +877,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN event_type IN ('search_query', 'search_no_results') THEN 1 ELSE 0 END) AS searches,
       SUM(CASE WHEN event_type = 'search_result_click' THEN 1 ELSE 0 END) AS result_clicks
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('search_query', 'search_no_results', 'search_result_click')
     GROUP BY query
     HAVING searches > 0 OR result_clicks > 0
     ORDER BY searches DESC, result_clicks DESC, query
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     query: string;
     searches: number;
@@ -901,11 +898,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(NULLIF(content_label, ''), content_id, 'Unknown search') AS query,
       COUNT(*) AS searches
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type = 'search_no_results'
     GROUP BY query
     ORDER BY searches DESC, query
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{ query: string; searches: number }>);
 
   const searchGaps = (db.prepare(`
@@ -915,12 +912,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN event_type = 'search_result_click' THEN 1 ELSE 0 END) AS result_clicks,
       SUM(CASE WHEN event_type = 'search_no_results' THEN 1 ELSE 0 END) AS no_results
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type IN ('search_query', 'search_no_results', 'search_result_click')
     GROUP BY query
     HAVING no_results > 0 OR result_clicks = 0
     ORDER BY no_results DESC, searches DESC, query
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     query: string;
     searches: number;
@@ -939,11 +936,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(content_id, '') AS href,
       COUNT(*) AS clicks
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type = 'search_result_click'
     GROUP BY query, href
     ORDER BY clicks DESC, query
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{ query: string; href: string; clicks: number }>);
 
   const pageDepth = (db.prepare(`
@@ -955,12 +952,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN e.event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS depth_events
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
       AND e.event_type IN ('page_view', 'scroll_depth')
     GROUP BY e.path
     HAVING depth_events > 0
     ORDER BY max_depth DESC, visitors DESC, depth_events DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     path: string;
     page_label: string;
@@ -981,11 +978,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COUNT(*) AS exits,
       SUM(e.duration_seconds) AS engaged_seconds
     FROM analytics_events AS e
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
       AND e.event_type = 'page_exit'
     GROUP BY e.path
     ORDER BY exits DESC, engaged_seconds DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     path: string;
     exits: number;
@@ -1004,7 +1001,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
         e.created_at,
         LEAD(e.path) OVER (PARTITION BY e.session_id ORDER BY e.created_at, e.id) AS next_path
       FROM analytics_events AS e
-      WHERE e.created_at >= ?
+      WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
         AND e.event_type = 'page_view'
     )
     SELECT path AS from_path, next_path AS to_path, COUNT(*) AS transitions
@@ -1013,7 +1010,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       AND next_path != path
     GROUP BY path, next_path
     ORDER BY transitions DESC, from_path, to_path
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     from_path: string;
     to_path: string;
@@ -1040,7 +1037,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
         COALESCE(s.visitor_email, s.visitor_id, e.session_id) AS visitor_key
       FROM analytics_events AS e
       JOIN analytics_sessions AS s ON s.session_id = e.session_id
-      WHERE e.created_at >= ?
+      WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
     )
     SELECT
       campaign,
@@ -1053,7 +1050,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     WHERE campaign IS NOT NULL AND campaign != ''
     GROUP BY campaign
     ORDER BY page_views DESC, engaged_seconds DESC, session_opens DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     campaign: string;
     page_views: number;
@@ -1076,12 +1073,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN event_type = 'content_open' THEN 1 ELSE 0 END) AS opens,
       SUM(CASE WHEN event_type = 'media_play' THEN 1 ELSE 0 END) AS media_plays
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND content_type IN ('session summary', 'session recording')
       AND event_type IN ('content_open', 'media_play')
     GROUP BY label
     ORDER BY opens DESC, media_plays DESC, label
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     label: string;
     opens: number;
@@ -1099,12 +1096,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       AVG(duration_seconds) AS average_ms,
       MAX(duration_seconds) AS worst_ms
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type = 'page_load'
       AND duration_seconds >= 3000
     GROUP BY path
     ORDER BY worst_ms DESC, events DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     path: string;
     events: number;
@@ -1123,11 +1120,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       path,
       COUNT(*) AS count
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type = 'client_error'
     GROUP BY label, path
     ORDER BY count DESC, label
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     label: string;
     path: string;
@@ -1147,7 +1144,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
     GROUP BY segment
     ORDER BY page_views DESC, engaged_seconds DESC
   `).all(sinceIso) as Array<{
@@ -1167,26 +1164,24 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
   const devices = (db.prepare(`
     SELECT device_type AS label, COUNT(*) AS value
     FROM analytics_sessions
-    WHERE last_seen_at >= ?
+    WHERE last_seen_at >= ? AND session_id IN (${audienceSessions(audience)})
     GROUP BY device_type
     ORDER BY value DESC
   `).all(sinceIso) as Array<{ label: string; value: number }>);
 
-  const referrers = (db.prepare(`
-    SELECT
-      CASE
-        WHEN referrer_host IS NULL THEN 'Direct'
-        WHEN referrer_host IN ('suwaneegamers.net', 'www.suwaneegamers.net', 'localhost', '127.0.0.1') THEN 'Same site'
-        WHEN referrer_host = 'accounts.google.com' THEN 'Google sign-in'
-        ELSE referrer_host
-      END AS label,
-      COUNT(*) AS value
+  const sourceRows = db.prepare(`
+    SELECT utm_source, utm_medium, referrer_host, COUNT(*) AS value
     FROM analytics_sessions
-    WHERE first_seen_at >= ?
-    GROUP BY label
-    ORDER BY value DESC
-    LIMIT 8
-  `).all(sinceIso) as Array<{ label: string; value: number }>);
+    WHERE last_seen_at >= ? AND session_id IN (${audienceSessions(audience)})
+    GROUP BY utm_source, utm_medium, referrer_host
+  `).all(sinceIso) as Array<{ utm_source: string | null; utm_medium: string | null; referrer_host: string | null; value: number }>;
+  const sourceCounts = new Map<string, number>();
+  for (const row of sourceRows) {
+    const label = acquisitionLabel(row);
+    sourceCounts.set(label, (sourceCounts.get(label) ?? 0) + row.value);
+  }
+  const referrers = Array.from(sourceCounts, ([label, value]) => ({ label, value }))
+    .sort((a, b) => b.value - a.value).slice(0, fullReports ? undefined : 8);
 
   const recentVisitors = (db.prepare(`
     SELECT
@@ -1213,9 +1208,9 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
         'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
       ) AS visitor_label
     FROM analytics_sessions AS s
-    WHERE s.last_seen_at >= ?
+    WHERE s.last_seen_at >= ? AND s.session_id IN (${audienceSessions(audience)})
     ORDER BY s.last_seen_at DESC
-    LIMIT 12
+    LIMIT ${fullReports ? -1 : 12}
   `).all(sinceIso) as Array<{
     last_seen_at: string;
     entry_path: string;
@@ -1242,11 +1237,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     visitorName: row.visitor_name,
     visitorEmail: row.visitor_email,
     firstTimeVisitor: row.first_time_visitor === 1,
-    acquisitionSource: row.utm_source
-      ? [row.utm_source, row.utm_medium].filter(Boolean).join(" / ")
-      : row.referrer_host
-        ? row.referrer_host === "accounts.google.com" ? "Google sign-in (legacy)" : row.referrer_host
-        : "Direct or shared link",
+    acquisitionSource: acquisitionLabel(row),
     acquisitionCampaign: row.utm_campaign,
   }));
 
@@ -1275,10 +1266,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
     JOIN lifetime
       ON lifetime.visitor_key = COALESCE(s.visitor_email, s.visitor_id, s.session_id)
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
     GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id)
     ORDER BY last_seen_at DESC
-    LIMIT 50
+    LIMIT ${fullReports ? -1 : 50}
   `).all(sinceIso) as Array<{
     visitor_key: string;
     email: string | null;
@@ -1290,6 +1281,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     lifetime_sessions: number;
   }>).map((row) => ({
     visitorKey: row.visitor_key,
+    visitorToken: analyticsVisitorToken(row.visitor_key),
     email: row.email,
     name: row.name,
     signedIn: row.email !== null,
@@ -1321,10 +1313,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       MAX(e.created_at) AS last_viewed_at
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
       AND e.event_type IN ('page_view', 'page_engagement')
     GROUP BY COALESCE(s.visitor_email, s.visitor_id, s.session_id), e.path
-    HAVING page_views > 0 OR engaged_seconds > 0
+    HAVING SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) > 0 OR SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) > 0
     ORDER BY last_viewed_at DESC
   `).all(sinceIso) as Array<{
     visitor_key: string;
@@ -1338,6 +1330,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     last_viewed_at: string;
   }>).map((row) => ({
     visitorKey: row.visitor_key,
+    visitorToken: analyticsVisitorToken(row.visitor_key),
     name: row.name,
     email: row.email,
     signedIn: row.email !== null,
@@ -1371,7 +1364,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       device_type,
       last_seen_at
     FROM analytics_sessions
-    WHERE last_seen_at >= ?
+    WHERE last_seen_at >= ? AND session_id IN (${audienceSessions(audience)})
     ORDER BY last_seen_at DESC
   `).all(sinceIso) as Array<{ visitor_key: string; device_type: string; last_seen_at: string }>);
   const deviceMixByVisitor = new Map<string, string[]>();
@@ -1395,7 +1388,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       COALESCE(MAX(CASE WHEN e.event_type = 'page_view' THEN NULLIF(e.content_label, '') END), e.path) AS page_label,
       SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
       COUNT(DISTINCT COALESCE(s.visitor_email, s.visitor_id, s.session_id)) AS people,
-      GROUP_CONCAT(DISTINCT COALESCE(
+      JSON_GROUP_ARRAY(DISTINCT COALESCE(
         s.visitor_name,
         s.visitor_email,
         'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))
@@ -1403,12 +1396,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       MAX(e.created_at) AS last_viewed_at
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ?
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)})
       AND e.event_type IN ('page_view', 'page_engagement')
     GROUP BY e.path
-    HAVING page_views > 0 OR SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) > 0
+    HAVING SUM(CASE WHEN e.event_type = 'page_view' THEN 1 ELSE 0 END) > 0 OR SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) > 0
     ORDER BY people DESC, page_views DESC
-    LIMIT 50
+    LIMIT ${fullReports ? -1 : 50}
   `).all(sinceIso) as Array<{
     path: string;
     page_label: string;
@@ -1421,7 +1414,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     pageLabel: row.page_label,
     pageViews: row.page_views,
     people: row.people,
-    visitorNames: row.visitor_names?.split(",") ?? [],
+    visitorNames: row.visitor_names ? JSON.parse(row.visitor_names) as string[] : [],
     lastViewedAt: row.last_viewed_at,
   }));
 
@@ -1453,11 +1446,11 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       FROM analytics_sessions AS s
       JOIN lifetime
         ON lifetime.visitor_key = COALESCE(s.visitor_email, s.visitor_id, s.session_id)
-      WHERE s.last_seen_at >= ?
+      WHERE s.last_seen_at >= ? AND s.session_id IN (${audienceSessions(audience)})
     )
     WHERE visitor_rank = 1
     ORDER BY last_seen_at DESC
-    LIMIT 20
+    LIMIT ${fullReports ? -1 : 20}
   `).all(activeThreshold) as Array<{
     session_id: string;
     visitor_id: string | null;
@@ -1486,7 +1479,7 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       SUM(CASE WHEN e.event_type = 'page_engagement' THEN e.duration_seconds ELSE 0 END) AS engaged_seconds
     FROM analytics_events AS e
     JOIN analytics_sessions AS s ON s.session_id = e.session_id
-    WHERE e.created_at >= ? AND e.path = '/maps-of-myrdae'
+    WHERE e.created_at >= ? AND e.session_id IN (${audienceSessions(audience)}) AND e.path = '/maps-of-myrdae'
   `).get(sinceIso) as { page_views: number | null; visitors: number | null; engaged_seconds: number | null };
 
   const mapTopLocations = (db.prepare(`
@@ -1495,12 +1488,12 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
       content_type AS kind,
       COUNT(*) AS clicks
     FROM analytics_events
-    WHERE created_at >= ?
+    WHERE created_at >= ? AND session_id IN (${audienceSessions(audience)})
       AND event_type = 'content_view'
       AND content_type IN ('map location', 'map region')
     GROUP BY label, kind
     ORDER BY clicks DESC, label
-    LIMIT 15
+    LIMIT ${fullReports ? -1 : 15}
   `).all(sinceIso) as Array<{ label: string; kind: string; clicks: number }>);
 
   const mapActivity = {
@@ -1536,9 +1529,10 @@ export function getAnalyticsDashboardData(days: number): AnalyticsDashboardData 
     SELECT runs.id, jobs.label, runs.started_at, runs.status, runs.duration_ms, runs.message
     FROM content_sync_runs AS runs
     JOIN content_sync_jobs AS jobs ON jobs.id = runs.job_id
+    WHERE runs.started_at >= ?
     ORDER BY runs.started_at DESC
-    LIMIT 12
-  `).all() as Array<{
+    LIMIT ${fullReports ? -1 : 12}
+  `).all(sinceIso) as Array<{
     id: number;
     label: string;
     started_at: string;

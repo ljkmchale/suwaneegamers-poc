@@ -124,11 +124,12 @@ function TuningCard({ knob }: { knob: TuningKnob }) {
 }
 
 interface VoiceAssistantPageProps {
-  searchParams?: Promise<{ days?: string }>;
+  searchParams?: Promise<{ days?: string; section?: string }>;
 }
 
 export default async function VoiceAssistantPage({ searchParams }: VoiceAssistantPageProps) {
   const params = await searchParams;
+  const section = params?.section === "quality" || params?.section === "settings" ? params.section : "usage";
   const requestedDays = Number(params?.days ?? 30);
   const days = [7, 30, 90].includes(requestedDays) ? requestedDays : 30;
   const voice = getVoiceAnalytics(days);
@@ -243,7 +244,7 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           {[7, 30, 90].map((range) => (
             <Link
               key={range}
-              href={`/admin/voice-assistant?days=${range}`}
+              href={`/admin/voice-assistant?days=${range}&section=${section}`}
               className={`rounded-md px-4 py-2 font-cinzel text-[10px] uppercase tracking-widest ${
                 days === range ? "bg-[#8b5cf6] text-white" : "text-[#9080a0] hover:text-[#e8dfc8]"
               }`}
@@ -254,7 +255,10 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
         </div>
       </div>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+      <nav aria-label="Myra reports" className="mb-6 flex flex-wrap gap-2">
+        {[["usage", "Usage & Cost"], ["quality", "Questions & Quality"], ["settings", "Tuning & Voices"]].map(([key, label]) => <Link key={key} href={`/admin/voice-assistant?days=${days}&section=${key}`} aria-current={section === key ? "page" : undefined} className={`rounded-lg border px-4 py-2 text-sm ${section === key ? "border-violet-500 bg-[#2b1944] text-violet-200" : "border-[#493957] text-[#c8bda8]"}`}>{label}</Link>)}
+      </nav>
+      {section === "usage" && (<div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
         {[
           ["Sessions", voice.summary.sessions],
           ["Members", voice.summary.users],
@@ -269,9 +273,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             <p className="mt-3 font-cinzel text-2xl text-violet-300">{value}</p>
           </div>
         ))}
-      </div>
+      </div>)}
 
-      <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+      {section === "usage" && (<section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
@@ -341,11 +345,11 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           {claude.message} Request counts remain Myra&apos;s local voice-session counts. Cost is
           estimated from published model rates and excludes taxes, credits, and negotiated pricing.
         </p>
-      </section>
+      </section>)}
 
-      <RemediationPanel entries={remediationQueue} audit={remediationAudit} />
+      {section === "quality" && (<RemediationPanel entries={remediationQueue} audit={remediationAudit} />)}
 
-      <section className="hidden">
+      {section === "quality" && (<section className="hidden">
         <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
@@ -420,9 +424,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             ))}
           </div>
         )}
-      </section>
+      </section>)}
 
-      <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+      {section === "settings" && (<section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
             <SlidersHorizontal size={17} className="text-violet-300" aria-hidden="true" />
@@ -452,9 +456,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           shipped to Myra each session. <span className="text-violet-300">Auto</span> knobs
           are nudged nightly within safe bounds; manual knobs change only when edited.
         </p>
-      </section>
+      </section>)}
 
-      <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+      {section === "settings" && (<section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
             <Theater size={17} className="text-violet-300" aria-hidden="true" />
@@ -623,9 +627,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             </tbody>
           </table>
         </div>
-      </section>
+      </section>)}
 
-      <section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
+      {section === "quality" && (<section className="mb-6 rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
             <GraduationCap size={17} className="text-violet-300" aria-hidden="true" />
@@ -723,9 +727,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             {learned.blocked.length > 0 ? `${learned.blocked.length} question(s) forgotten` : ""}
           </p>
         ) : null}
-      </section>
+      </section>)}
 
-      <div className="mb-6 grid gap-6 lg:grid-cols-2">
+      {section === "quality" && (<div className="mb-6 grid gap-6 lg:grid-cols-2">
         <section className="rounded-xl border border-[#2a2a35] bg-[#0f0a1a] p-5">
           <h2 className="mb-4 flex items-center gap-2 font-cinzel text-sm uppercase tracking-widest">
             <MessageCircleQuestion size={17} className="text-violet-300" aria-hidden="true" />
@@ -737,9 +741,9 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
           <h2 className="mb-4 font-cinzel text-sm uppercase tracking-widest">Capability gaps to review</h2>
           <HorizontalBars rows={voice.unsupported} />
         </section>
-      </div>
+      </div>)}
 
-      <section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
+      {section === "quality" && (<section className="overflow-hidden rounded-xl border border-[#2a2a35] bg-[#0f0a1a]">
         <div className="border-b border-[#2a2a35] px-5 py-4">
           <h2 className="font-cinzel text-sm uppercase tracking-widest">Recent recognized questions</h2>
           <p className="mt-1 text-xs text-[#6a5a78]">Question text and answers are available only within the admin area.</p>
@@ -788,7 +792,7 @@ export default async function VoiceAssistantPage({ searchParams }: VoiceAssistan
             </tbody>
           </table>
         </div>
-      </section>
+      </section>)}
     </div>
   );
 }

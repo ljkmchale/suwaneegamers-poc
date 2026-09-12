@@ -5,6 +5,7 @@ node_modules/
 
 # Next.js
 apps/web/.next/
+apps/web/.next-admin-review*/
 apps/web/.next-prod/
 # A/B deployment slots and their local state pointers. These are build output
 # (~500MB each) plus machine-specific "which slot is live" markers, so they are
