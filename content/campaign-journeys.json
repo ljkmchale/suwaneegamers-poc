@@ -201,7 +201,7 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 50.05,
@@ -212,12 +212,7 @@
                 "y": 33.2
               }
             ],
-            "miles": 23.2,
-            "days": 1.2,
-            "roadIds": [
-              "qaldynn-road-west"
-            ],
-            "roadNames": []
+            "miles": 23.2
           },
           "sourceKey": "a-new-adventure:session-8",
           "sourceHash": "0e520a9fe9a215e18c8aba9dd9b31aa7222280b0c83b4112cf8acb6e0e674b7c",
@@ -408,32 +403,18 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 50.94,
                 "y": 33.2
               },
               {
-                "x": 50.05,
-                "y": 33.46
-              },
-              {
-                "x": 49.06,
-                "y": 34.07
-              },
-              {
                 "x": 49.1,
                 "y": 36.3
               }
             ],
-            "miles": 108,
-            "days": 5.4,
-            "roadIds": [
-              "qaldynn-road-west",
-              "onaren-road-south"
-            ],
-            "roadNames": []
+            "miles": 90.1
           },
           "sourceKey": "a-new-adventure:session-16",
           "sourceHash": "fcf2d9b468e0748e61cc56938fa8b5a00146c59d13b29f5022128719ff1bbd01",
@@ -724,33 +705,18 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 50.94,
                 "y": 33.2
               },
               {
-                "x": 51.26,
-                "y": 34.92
-              },
-              {
-                "x": 52.19,
-                "y": 34.5
-              },
-              {
                 "x": 52.65,
                 "y": 34.5
               }
             ],
-            "miles": 80.7,
-            "days": 4,
-            "roadIds": [
-              "darafee-road-west"
-            ],
-            "roadNames": [
-              "Borealian Loop"
-            ]
+            "miles": 53.7
           },
           "sourceKey": "a-new-adventure:session-27",
           "sourceHash": "f1ac3414f6c8522b059f1b63e89102ed7e3291a00d68a191d7b0684a80fd7854",
@@ -773,27 +739,18 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 52.65,
                 "y": 34.5
               },
               {
-                "x": 53.09,
-                "y": 34.42
-              },
-              {
                 "x": 53.13,
                 "y": 36.23
               }
             ],
-            "miles": 56.4,
-            "days": 2.8,
-            "roadIds": [
-              "caelora-road-north"
-            ],
-            "roadNames": []
+            "miles": 44.9
           },
           "sourceKey": "a-new-adventure:session-28",
           "sourceHash": "01858a052cc1261a987e7f133e7eb07881a8300a43b1a959abbb94974a731034",
@@ -930,31 +887,18 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 53.13,
                 "y": 36.23
               },
               {
-                "x": 53.58,
-                "y": 35.81
-              },
-              {
-                "x": 54.35,
-                "y": 35.73
-              },
-              {
                 "x": 54.9,
                 "y": 36.01
               }
             ],
-            "miles": 50.2,
-            "days": 2.5,
-            "roadIds": [
-              "southernarch-road-west"
-            ],
-            "roadNames": []
+            "miles": 44.6
           },
           "sourceKey": "a-new-adventure:session-33",
           "sourceHash": "59f55a6bd860d107035219589187e6ce9de88a49658fd03b300059d5ec603041",
@@ -1016,7 +960,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "At Sciogost",
+      "status": "At Gevakaln",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1285,10 +1229,10 @@
         },
         {
           "id": "auto-bloody-endeavor-session-39",
-          "locationId": "kahgdaruhl",
           "location": "Khagdaruhl",
-          "x": 53.5,
-          "y": 74,
+          "x": 57.2,
+          "y": 69.8,
+          "precision": "approximate",
           "session": "Session 39",
           "title": "Why’d You Wanna Hit Me Man?",
           "summary": "The party had to restore Rhody to life before returning to Khagdaruhl with the Rimestone to reseal the eldritch threat before its roots claimed more minds. In the dwarven kingdom, the group had time to rest and shop, learning of the legendary sword Kretopulus, which with the party had two shards from and which they handed to forgemaster Hultgrum for restoration. Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room.…",
@@ -1307,8 +1251,8 @@
                 "y": 69.8
               },
               {
-                "x": 53.5,
-                "y": 74
+                "x": 57.2,
+                "y": 69.8
               }
             ]
           },
@@ -1336,15 +1280,15 @@
             "mode": "direct",
             "points": [
               {
-                "x": 53.5,
-                "y": 74
+                "x": 57.2,
+                "y": 69.8
               },
               {
                 "x": 55.21,
                 "y": 67.71
               }
             ],
-            "miles": 163
+            "miles": 72.1
           },
           "sourceKey": "bloody-endeavor:session-40",
           "sourceHash": "2936427ffe15152f50bce1739b5e07531d07b9ec9fb002b7dbd8b7d62589fdaa",
@@ -1367,100 +1311,18 @@
           "automatic": true,
           "confidence": 0.99,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 55.21,
                 "y": 67.71
               },
               {
-                "x": 54.48,
-                "y": 67.48
-              },
-              {
-                "x": 54.36,
-                "y": 69.42
-              },
-              {
-                "x": 54.06,
-                "y": 69.9
-              },
-              {
-                "x": 53.02,
-                "y": 69.69
-              },
-              {
-                "x": 52.09,
-                "y": 70.3
-              },
-              {
-                "x": 51.6,
-                "y": 69.97
-              },
-              {
-                "x": 50.82,
-                "y": 70
-              },
-              {
-                "x": 50.21,
-                "y": 70.85
-              },
-              {
-                "x": 49.9,
-                "y": 70.9
-              },
-              {
-                "x": 49.31,
-                "y": 70.8
-              },
-              {
-                "x": 48.43,
-                "y": 71.13
-              },
-              {
-                "x": 48.18,
-                "y": 70.67
-              },
-              {
-                "x": 47.73,
-                "y": 70.8
-              },
-              {
-                "x": 48.19,
-                "y": 68.87
-              },
-              {
-                "x": 47.93,
-                "y": 68.2
-              },
-              {
-                "x": 47.39,
-                "y": 67.36
-              },
-              {
-                "x": 47.3,
-                "y": 65.53
-              },
-              {
-                "x": 46.63,
-                "y": 65.14
-              },
-              {
                 "x": 46.88,
                 "y": 64.68
               }
             ],
-            "miles": 438.6,
-            "days": 21.9,
-            "roadIds": [
-              "nurador-road-west",
-              "unknown-road-10",
-              "climbor-road-northwest",
-              "witguard-road-west",
-              "tyrynder-road-north",
-              "valenlun-road-northwest"
-            ],
-            "roadNames": []
+            "miles": 221.6
           },
           "sourceKey": "bloody-endeavor:session-41",
           "sourceHash": "49d98e59ee7306e86ef6e9ee0727712f16e3019769964897668abe57c3d0f37d",
@@ -1468,33 +1330,23 @@
         },
         {
           "id": "auto-bloody-endeavor-session-42",
-          "locationId": "sciogost",
-          "location": "Sciogost",
-          "x": 46.6,
-          "y": 63.8,
+          "locationId": "gevakaln",
+          "location": "Gevakaln",
+          "x": 46.88,
+          "y": 64.68,
           "session": "Session 42",
           "title": "I Believe I Can Fly",
           "summary": "In Session 42, titled I Believe I Can Fly, the party stood at the edge of a jungle pit on Sciogost, seeking a path off the prisoner island that avoided the heavily guarded prison. A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past. Deeper in they met Zeldrigos the Indomitable Serpent, a dragon of living jacinth who claimed the island, kept Maw as collateral, and gave them a bag of wind to confront the storm witch Esadi the Herrying in her cloud tower.…",
           "impact": {
             "type": "battle",
-            "title": "Conflict reshaped Sciogost",
+            "title": "Conflict reshaped Gevakaln",
             "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
           },
           "automatic": true,
-          "confidence": 1,
+          "confidence": 0.68,
           "route": {
-            "mode": "direct",
-            "points": [
-              {
-                "x": 46.88,
-                "y": 64.68
-              },
-              {
-                "x": 46.6,
-                "y": 63.8
-              }
-            ],
-            "miles": 23.1
+            "mode": "local",
+            "points": []
           },
           "sourceKey": "bloody-endeavor:session-42",
           "sourceHash": "85cb8a03016ab2ac1f6168196463b5cd09382409700c289eeb1dc65693edb22b",
@@ -1707,27 +1559,18 @@
           "automatic": true,
           "confidence": 1,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
                 "x": 71.8,
                 "y": 40.5
               },
               {
-                "x": 71.4,
-                "y": 41.7
-              },
-              {
                 "x": 71.6,
                 "y": 42.4
               }
             ],
-            "miles": 49.8,
-            "days": 2.5,
-            "roadIds": [
-              "hesfal-road-south"
-            ],
-            "roadNames": []
+            "miles": 47.8
           },
           "sourceKey": "dungeons-iii:session-7",
           "sourceHash": "bfe111e884c0f5d3e6839e3e58adba5fe4ae9228a50d990b3bfe6a9e65f42399",
@@ -2628,8 +2471,8 @@
           "id": "auto-heroes-of-emberstran-session-25",
           "locationId": "ulgrey",
           "location": "Ulgrey",
-          "x": 62.83,
-          "y": 60.92,
+          "x": 62.87,
+          "y": 60.8,
           "session": "Session 25",
           "title": "Grief Stricken",
           "summary": "The party stepped into the Emberheart Vault. They bested trials of roaring fear and a spectral guardian before Irragosa herself appeared, naming their ancestral ties, revealing the relic’s power to shatter a cycle of rebirth, and entrusting the pulsing crystal to Ainslie. With the dragon’s protection they emerged safely, gained the eager rock gnome Zabeek as a new traveling companion, and returned to Emberstran where Lady Rook openly offered alliance at the newly expanded Temple of Diverra while Ainslie was laid upon the rose-draped altar beneath Diverra’s guiding light. The session ended with grim tidings from Ulgrey where Hap's sister was last seen.",
@@ -2648,11 +2491,11 @@
                 "y": 55.5
               },
               {
-                "x": 62.83,
-                "y": 60.92
+                "x": 62.87,
+                "y": 60.8
               }
             ],
-            "miles": 135.7
+            "miles": 132.6
           },
           "sourceKey": "heroes-of-emberstran:session-25",
           "sourceHash": "d7a3e3218de9175062d36edc8b484bd60f3002124753bf80bef04113201ac747",
@@ -2675,35 +2518,18 @@
           "automatic": true,
           "confidence": 0.86,
           "route": {
-            "mode": "road",
+            "mode": "direct",
             "points": [
               {
-                "x": 62.83,
-                "y": 60.92
-              },
-              {
-                "x": 62.54,
-                "y": 59.94
-              },
-              {
-                "x": 61.85,
-                "y": 59.9
-              },
-              {
-                "x": 61.46,
-                "y": 58.09
+                "x": 62.87,
+                "y": 60.8
               },
               {
                 "x": 60.75,
                 "y": 58.23
               }
             ],
-            "miles": 107.2,
-            "days": 5.4,
-            "roadIds": [
-              "ulgrey-road-northwest"
-            ],
-            "roadNames": []
+            "miles": 83.3
           },
           "sourceKey": "heroes-of-emberstran:session-26",
           "sourceHash": "36681985f9d00fdf165ba6f3159937d4963c6e2f93b8e3633fb79f5068e28ead",
@@ -2770,8 +2596,8 @@
           "id": "auto-heroes-of-emberstran-session-29",
           "locationId": "ulgrey",
           "location": "Ulgrey",
-          "x": 62.83,
-          "y": 60.92,
+          "x": 62.87,
+          "y": 60.8,
           "session": "Session 29",
           "title": "Made it to Ulgrey",
           "summary": "The Heroes of Emberstran lingered at the Featherfall campsite to aid the grieving Weftirin gypsies after Finn’s death. Aury received mysterious signs from his goddess and the party recovered a depleted Idol of Vo’egurn from a hidden sea cave. They pressed on toward Ulgrey, stopping at the River Ring Rest where they discovered a shattered heart tapestry fragment and dramatically returned a long-lost wedding ring to the widow Maren to give her the closure she had sought for twenty years.…",
@@ -2790,8 +2616,8 @@
                 "y": 58.23
               },
               {
-                "x": 62.83,
-                "y": 60.92
+                "x": 62.87,
+                "y": 60.8
               }
             ]
           },
@@ -2803,8 +2629,8 @@
           "id": "auto-heroes-of-emberstran-session-30",
           "locationId": "ulgrey",
           "location": "Ulgrey",
-          "x": 62.83,
-          "y": 60.92,
+          "x": 62.87,
+          "y": 60.8,
           "session": "Session 30",
           "title": "We Don’t Like Wizards",
           "summary": "At the Riverdog Inn in Ulgrey, the party encountered a Meridian soldier and the wizard Thaelex who they spent a little time getting to know before offering aid to Basctdelm. Shanna provided Phira’s abandoned pack and Og recognized the Gilded Vultures from his mercenary past while Ainslie infiltrated Paeris’s tower only to be knocked out by cake after Zabeek had revealed some of their secrets. Some members experienced vivid dreams before the morning of the third of Paramor and the magical cat Tatters provided his collar as a gift. They went to Solly’s Supplies, rummaged through the organized hoard of goods and found a nice pipe, a Spitespirit Cache key, a magical arcane focus and Dunduar ore.…",
@@ -2843,15 +2669,15 @@
             "mode": "direct",
             "points": [
               {
-                "x": 62.83,
-                "y": 60.92
+                "x": 62.87,
+                "y": 60.8
               },
               {
                 "x": 57.72,
                 "y": 31.66
               }
             ],
-            "miles": 742.6
+            "miles": 739.8
           },
           "sourceKey": "heroes-of-emberstran:session-31",
           "sourceHash": "012b306217c130b1865718034a0021d22043779dd465b10e277ca864e6288159",
@@ -3558,12 +3384,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-09-11T14:50:42.269Z",
+    "lastGeneratedAt": "2026-09-12T14:50:17.028Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
     "generatedStops": 115,
-    "routedSegments": 8,
-    "impactLocations": 32
+    "routedSegments": 0,
+    "impactLocations": 30
   },
   "locationImpacts": [
     {
@@ -4269,6 +4095,51 @@
       "crossCampaign": false
     },
     {
+      "id": "name-khagdaruhl",
+      "location": "Khagdaruhl",
+      "x": 57.2,
+      "y": 69.8,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 34",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 35",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 36",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 39",
+          "title": "Khagdaruhl's balance shifted",
+          "type": "political",
+          "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -4361,43 +4232,6 @@
       "crossCampaign": false
     },
     {
-      "id": "name-khagdaruhl",
-      "location": "Khagdaruhl",
-      "x": 57.2,
-      "y": 69.8,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 34",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "Ambassador Greythane revealed the Rimestone’s broken prison and monk Huldi Coldbreath’s ambitions before sending the party into the Ring of Respect."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 35",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "They stepped into the Ring of Respect to face the Sacred Crows and earn an audience with Lord Emperor Thundermaul the Sixth."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 36",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "The Lord Emperor confirmed the monks' strained ties, revealed the Rimestone's ancient purpose of freezing an undead aberration awakened by dark magic in the once-verdant Yagvur Sierra, and allowed them to descend as Runegrip representatives."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "name-nunglthil",
       "location": "Nunglthil",
       "x": 60.75,
@@ -4476,8 +4310,8 @@
       "id": "surface-ulgrey",
       "locationId": "ulgrey",
       "location": "Ulgrey",
-      "x": 62.83,
-      "y": 60.92,
+      "x": 62.87,
+      "y": 60.8,
       "realm": "surface",
       "campaignIds": [
         "heroes-of-emberstran"
@@ -4566,6 +4400,36 @@
           "title": "Lives changed at Broken Citadel",
           "type": "rescue",
           "description": "After splitting briefly to ensure the rescued wolf pup and the strange powder were returned safely to Mossholde, the remaining adventurers descended into the ruins below and found evidence of layered, ancient uses, including alchemical work, undead guardians, and infernal summoning."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-gevakaln",
+      "locationId": "gevakaln",
+      "location": "Gevakaln",
+      "x": 46.88,
+      "y": 64.68,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 41",
+          "title": "Gevakaln's balance shifted",
+          "type": "political",
+          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 42",
+          "title": "Conflict reshaped Gevakaln",
+          "type": "battle",
+          "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
         }
       ],
       "crossCampaign": false
@@ -4774,50 +4638,6 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-gevakaln",
-      "locationId": "gevakaln",
-      "location": "Gevakaln",
-      "x": 46.88,
-      "y": 64.68,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 41",
-          "title": "Gevakaln's balance shifted",
-          "type": "political",
-          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-kahgdaruhl",
-      "locationId": "kahgdaruhl",
-      "location": "Khagdaruhl",
-      "x": 53.5,
-      "y": 74,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 39",
-          "title": "Khagdaruhl's balance shifted",
-          "type": "political",
-          "description": "Lucerion attuned to the Rimestone hoping to drive back a blizzard that had already started across the land, and then the group went to seal back the threat under the throne room."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "surface-nurador",
       "locationId": "nurador",
       "location": "Nurador",
@@ -4835,28 +4655,6 @@
           "title": "Nurador's balance shifted",
           "type": "political",
           "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-sciogost",
-      "locationId": "sciogost",
-      "location": "Sciogost",
-      "x": 46.6,
-      "y": 63.8,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 42",
-          "title": "Conflict reshaped Sciogost",
-          "type": "battle",
-          "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
         }
       ],
       "crossCampaign": false

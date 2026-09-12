@@ -338,7 +338,7 @@ Guilds typically have the following organizational structure.
 | **Alchemy, medicine, healing services** *Apothecaries’ & Physicians’ Guild* | Haleth Vorr, female human*The Green Mortar, Central District* | Mildly Influential.  *Regulated carefully for public health* |
 | **Ale, wine, spirits** *Brewers’, Vintners’ & Distillers’ Guild* | Grann Ironbelly, male dwarf *The Tun Hall, South District* | Mildly Influential.  *Strong internal market; some exports.* |
 | **Candles, lamps, street lighting** *Chandlers’ & Lamplighters’ Guild* | Sera Kwynn, female half-elf *Wickhall, Central District* | Lacks Influence.  *Holds the city lighting contract.* |
-| **Ceramics, roof tiles, household ware** *Potters’ & Tile-makers’ Guild* | Edda Stonebust, female dwarf*The Claywalk, South District* | Lacks Influence.  *Supports construction and daily life.* |
+| **Ceramics, roof tiles, household ware** *Potters’ & Tile-makers’ Guild* | Edda Stonebottom, female dwarf*The Claywalk, South District* | Lacks Influence.  *Supports construction and daily life.* |
 | **Cleaning of garments and linens** *Launderers’ Guild* | Megra Bonsella, female human*The Steam Yards, South District* | Lacks Influence.  *High volume, low prestige.* |
 | **Clothing, dyed cloth, textiles** *Tailors’, Dyers’ & Mercers’ Guild* | Vexa Rihn, female tiefling The Measure, Central District | Mildly Influential.  *Overlaps the League of Fine Artisans.* |
 | **Construction, masonry, major repairs** *Builders’ & Stonecutters’ Guild* | Torven Calder, male human*The Keystone Yard, North District* | Highly Influential.  *Handles imperial projects and private building.* |
@@ -579,7 +579,7 @@ Whispers of a secret passage leading to the Bellows swirl among the patrons, tho
 | Non-Player Characters |  |
 | :---- | :---- |
 | **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
-| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Ogbi Darklatch** barkeep *male svirfneblin* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 | **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 | **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 
@@ -852,7 +852,7 @@ Upon entering…
 | Non-Player Characters |  |
 | :---- | :---- |
 | **Helene Vossaire** Proprietor *female high elf* | 	*Appearance:*	Early fifties. Grey-brown hair pinned up, ink on her fingers, apron over plain clothes. 	*Personality*:	Dry, watchful, ; she seats you, brings the plate, and does not hover. 	*Background*:	 |
-| **Jemm Potter** Servant *male dwarf* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
+| **Jemm Potter** Servant *male human* | 	*Appearance:*	 	*Personality*:	 	*Background*:	 |
 | **Pell Brewbelly** Cook *female dwarf* | 	*Appearance:*	Mid thirties 	*Personality*:	Remembers faces 	*Background*:	 |
 
 ## Plethora of Possibilities
@@ -1284,7 +1284,7 @@ Stolen goods market
 
 \<brothel & bath-house\>
 
-## Slate Swallow, the
+## Slate, the
 
 Place to hire an assassin from the Bloodhand organization
 
