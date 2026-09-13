@@ -78,7 +78,7 @@ describe("analytics reporting queries", () => {
     expect(report.totals).toMatchObject({visits:2,interactingVisits:1,clicks:3});
     expect(report.locations).toHaveLength(2);
     expect(report.locations.find(r=>r.id==="one")).toMatchObject({visitors:1,visits:1,clicks:2});
-    expect(report.journeys.some(r=>r.next==="/gazetteer")).toBe(true);
+    expect(report.journeys.some(r=>r.visitor==="Name, with comma" && r.next==="/gazetteer" && r.visitId==="member")).toBe(true);
     expect(report.timeline).toHaveLength(5);
     expect(getMapInsights(30,"external","owner").timeline).toEqual([]);
   });
@@ -94,7 +94,13 @@ describe("analytics reporting queries", () => {
       expect(html).toContain(INSIGHT_VIEWS[view].replaceAll("&","&amp;"));
       expect(html).toContain("Exclude internal");
       expect(html).not.toContain("NaN");
-      if(view==="maps") expect(html).toContain("No location or region signals have reached");
+      if(view==="maps") {
+        expect(html).toContain("No location or region signals have reached");
+        expect(html).toContain("Map arrivals and next pages");
+        expect(html).toContain("Name, with comma");
+        expect(html).toContain("visit=member");
+        expect(html).toContain("#map-visit-timeline");
+      }
     }
   });
 });

@@ -35,11 +35,15 @@ export function getMapInsights(days: number, audience: AnalyticsAudience = "all"
       LAG(e.path) OVER (PARTITION BY e.session_id ORDER BY e.created_at, e.id) AS previous,
       LEAD(e.path) OVER (PARTITION BY e.session_id ORDER BY e.created_at, e.id) AS next
     FROM analytics_events e WHERE ${eligible} AND e.event_type = 'page_view'
-  ) SELECT COALESCE(previous, 'First recorded page in period') AS previous,
-    COALESCE(next, 'No later page recorded') AS next, COUNT(*) AS opens,
-    COUNT(DISTINCT session_id) AS visits
-    FROM pages WHERE path = '/maps-of-myrdae' GROUP BY previous, next ORDER BY visits DESC`).all(sinceIso) as Array<{
-      previous: string; next: string; opens: number; visits: number;
+  ) SELECT p.session_id AS visitId,
+    COALESCE(s.visitor_name, s.visitor_email,
+      'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))) AS visitor,
+    p.created_at AS openedAt,
+    COALESCE(p.previous, 'First recorded page in period') AS previous,
+    COALESCE(p.next, 'No later page recorded') AS next
+    FROM pages p JOIN analytics_sessions s ON s.session_id = p.session_id
+    WHERE p.path = '/maps-of-myrdae' ORDER BY p.created_at DESC`).all(sinceIso) as Array<{
+      visitId: string; visitor: string; openedAt: string; previous: string; next: string;
     }>;
   const visits = db.prepare(`SELECT s.session_id AS id,
     COALESCE(s.visitor_name, s.visitor_email, 'Unidentified visitor ' || UPPER(SUBSTR(COALESCE(s.visitor_id, s.session_id), 1, 6))) AS visitor,
