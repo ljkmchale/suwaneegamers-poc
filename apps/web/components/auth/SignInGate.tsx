@@ -112,6 +112,26 @@ export function SignInGate({ error, returnTo }: { error?: string; returnTo?: str
             </div>
           </div>
 
+          <Link
+            href="/platform"
+            className="group mt-5 flex w-full max-w-2xl items-center justify-between gap-5 rounded-xl border border-violet-300/25 bg-[linear-gradient(135deg,rgba(139,92,246,0.14),rgba(245,158,11,0.06))] px-5 py-4 text-left shadow-lg transition hover:border-amber-300/45 hover:bg-violet-400/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300"
+          >
+            <span>
+              <span className="block font-cinzel text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
+                New to Suwanee Gamers?
+              </span>
+              <span className="mt-1 block text-sm leading-6 text-[#cfc2aa]">
+                Tour the living campaign platform and explore the real Map of Myrdae.
+              </span>
+            </span>
+            <span
+              aria-hidden="true"
+              className="shrink-0 text-xl text-violet-300 transition-transform group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+
           <div className="divider-rune my-6 w-full max-w-md" aria-hidden="true">
             <span className="font-cinzel text-amber-400">◆</span>
           </div>

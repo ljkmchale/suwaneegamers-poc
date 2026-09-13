@@ -10,6 +10,7 @@ import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
 // — requires Google sign-in.
 const PUBLIC_PATHS = [
   "/signin", // the gate itself
+  "/platform", // public, shareable tour linked from the sign-in gate
   "/terms-of-use", // must be readable before a visitor can consent at the gate
   "/privacy-policy", // privacy practices must be readable before Google sign-in
   "/api/auth/", // the sign-in round trip
