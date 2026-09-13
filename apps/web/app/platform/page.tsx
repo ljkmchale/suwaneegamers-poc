@@ -230,12 +230,13 @@ export default function PlatformPage() {
                 that goes stale.
               </h1>
               <p className={styles.lede}>
-                Suwanee Gamers is what happens when a real six-campaign table
-                stops fighting its own tools. Session notes write themselves
-                into Chronicles. A voice guide answers lore questions grounded
-                in your own world. The map is live, detailed, and always
-                evolving. And for the first time, a Dungeon Master can see what
-                the table is actually paying attention to.
+                Suwanee Gamers is what happens when a real DM&apos;s and Players
+                work together to create tools that give them an advantage.
+                Session notes write themselves into Chronicles. A voice guide
+                answers lore questions grounded in your own world. The map is
+                live, detailed, and always evolving. And for the first time, a
+                Dungeon Master can see what the table is actually paying
+                attention to.
               </p>
               <div className={styles.actions}>
                 <a className={`${styles.button} ${styles.solid}`} href="#dms">
