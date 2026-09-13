@@ -201,13 +201,7 @@ function DetailCard({
 export default function PlatformPage() {
   return (
     <div className={styles.page}>
-      <RunicBackground prominentLightning />
-      <div className={styles.lightningField} aria-hidden="true">
-        <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
-          <path d="M1540 -40 1380 142 1441 136 1278 338 1350 326 1115 625" />
-          <path d="M48 -35 205 136 154 132 326 315 264 304 472 548" />
-        </svg>
-      </div>
+      <RunicBackground />
       <div className={styles.veil} aria-hidden="true" />
 
       <header className={styles.bar}>
