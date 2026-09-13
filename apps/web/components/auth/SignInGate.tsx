@@ -87,6 +87,39 @@ export function SignInGate({ error, returnTo }: { error?: string; returnTo?: str
               More than a campaign website
             </p>
             <div className="grid gap-3 text-left sm:grid-cols-2">
+              <Link
+                href="/platform"
+                className="group relative aspect-[3/2] overflow-hidden rounded-xl border border-violet-300/25 bg-black/40 shadow-lg transition hover:border-amber-300/50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300 sm:col-span-2 sm:aspect-[3/1]"
+              >
+                <Image
+                  src="/media/images/signin/platform-promise-v1.png"
+                  alt="Friends gathered around a living campaign world as Myra guides their shared stories"
+                  fill
+                  sizes="(min-width: 1024px) 640px, (min-width: 640px) 90vw, 90vw"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,5,15,0.78)_0%,rgba(8,5,15,0.34)_48%,rgba(8,5,15,0.08)_100%),linear-gradient(180deg,transparent_30%,rgba(8,5,15,0.88)_100%)]"
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-5 sm:p-6">
+                  <span>
+                    <span className="block font-cinzel text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
+                      New to Suwanee Gamers?
+                    </span>
+                    <span className="mt-1 block max-w-lg text-sm leading-6 text-[#e0d5c0]">
+                      Tour the living campaign platform and explore the real Map of Myrdae.
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 text-xl text-violet-200 transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </div>
+              </Link>
+
               {PORTAL_HIGHLIGHTS.map(({ title, description, image, alt }) => (
                 <div
                   key={title}
@@ -111,26 +144,6 @@ export function SignInGate({ error, returnTo }: { error?: string; returnTo?: str
               ))}
             </div>
           </div>
-
-          <Link
-            href="/platform"
-            className="group mt-5 flex w-full max-w-2xl items-center justify-between gap-5 rounded-xl border border-violet-300/25 bg-[linear-gradient(135deg,rgba(139,92,246,0.14),rgba(245,158,11,0.06))] px-5 py-4 text-left shadow-lg transition hover:border-amber-300/45 hover:bg-violet-400/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300"
-          >
-            <span>
-              <span className="block font-cinzel text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
-                New to Suwanee Gamers?
-              </span>
-              <span className="mt-1 block text-sm leading-6 text-[#cfc2aa]">
-                Tour the living campaign platform and explore the real Map of Myrdae.
-              </span>
-            </span>
-            <span
-              aria-hidden="true"
-              className="shrink-0 text-xl text-violet-300 transition-transform group-hover:translate-x-1"
-            >
-              →
-            </span>
-          </Link>
 
           <div className="divider-rune my-6 w-full max-w-md" aria-hidden="true">
             <span className="font-cinzel text-amber-400">◆</span>

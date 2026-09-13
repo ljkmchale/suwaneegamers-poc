@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { RunicBackground } from "@/app/(site)/calendar/RunicBackground";
 import styles from "./platform.module.css";
 
 export const metadata: Metadata = {
@@ -200,6 +201,7 @@ function DetailCard({
 export default function PlatformPage() {
   return (
     <div className={styles.page}>
+      <RunicBackground />
       <div className={styles.veil} aria-hidden="true" />
 
       <header className={styles.bar}>
