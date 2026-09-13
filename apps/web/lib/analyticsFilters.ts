@@ -8,11 +8,11 @@ export function analyticsVisitorToken(visitorKey: string) {
 
 export function analyticsAudience(value?: string): AnalyticsAudience {
   return ["external", "members", "unidentified", "internal"].includes(value ?? "")
-    ? value as AnalyticsAudience : "all";
+    ? value as AnalyticsAudience : "external";
 }
 
 export const AUDIENCE_LABELS: Record<AnalyticsAudience, string> = {
-  all: "Everyone", external: "Exclude internal", members: "Members (excluding internal)",
+  all: "Everyone including internal", external: "Visitors (webmaster excluded)", members: "Members (excluding internal)",
   unidentified: "Unidentified visitors", internal: "Internal activity",
 };
 

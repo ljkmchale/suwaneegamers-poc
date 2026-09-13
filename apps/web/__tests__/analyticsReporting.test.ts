@@ -8,7 +8,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 const state = vi.hoisted(() => ({ db: null as unknown as Database.Database }));
 vi.mock("@/lib/db", () => ({ getDb: () => state.db }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
-import { getAnalyticsDashboardData, getVisitorGrowthSummary } from "@/lib/analytics";
+import {
+  getAnalyticsDashboardData,
+  getVisitorGrowthSummary,
+  isSuppressedAnalyticsIdentity,
+  recordUsageEvents,
+} from "@/lib/analytics";
 import { getMapInsights } from "@/lib/mapInsights";
 import { InsightsPage, INSIGHT_VIEWS, type InsightView } from "@/app/admin/analytics/InsightsPage";
 import { analyticsAudience } from "@/lib/analyticsFilters";
@@ -37,7 +42,7 @@ afterEach(() => { state.db.close(); vi.useRealTimers(); });
 
 describe("analytics reporting queries", () => {
   it("scopes every summary to the selected audience and normalizes unknown input", () => {
-    expect(analyticsAudience("'; DROP TABLE analytics_events;")).toBe("all");
+    expect(analyticsAudience("'; DROP TABLE analytics_events;")).toBe("external");
     for (const [audience,count] of [["all",4],["external",2],["members",1],["unidentified",1],["internal",2]] as const) {
       const data = getAnalyticsDashboardData(30,audience,true);
       expect(data.summary.uniqueVisitors).toBe(count);
@@ -50,6 +55,29 @@ describe("analytics reporting queries", () => {
       expect(data.mapActivity.visitors).toBe(count);
       expect(getVisitorGrowthSummary(30,audience).newVisitorCount).toBe(count);
     }
+  });
+  it("suppresses the webmaster identity case-insensitively", () => {
+    expect(isSuppressedAnalyticsIdentity({ email: " LARRY.M.MCHALE@GMAIL.COM " })).toBe(true);
+    expect(isSuppressedAnalyticsIdentity({ email: "member@example.test" })).toBe(false);
+    expect(isSuppressedAnalyticsIdentity()).toBe(false);
+  });
+  it("accepts anonymous platform traffic while dropping webmaster traffic at intake", () => {
+    const platformView = [{ eventType: "page_view" as const, path: "/platform" }];
+    recordUsageEvents({
+      rawSessionId: "anonymous-platform-session",
+      rawVisitorId: "anonymous-platform-visitor",
+      events: platformView,
+      userAgent: "Mozilla/5.0",
+    });
+    recordUsageEvents({
+      rawSessionId: "webmaster-platform-session",
+      rawVisitorId: "webmaster-platform-visitor",
+      events: platformView,
+      identity: { email: "larry.m.mchale@gmail.com", name: "Larry McHale" },
+      userAgent: "Mozilla/5.0",
+    });
+    expect(state.db.prepare("SELECT COUNT(*) AS count FROM analytics_events WHERE path = '/platform'").get())
+      .toEqual({ count: 1 });
   });
   it("uses campaign acquisition consistently and preserves names containing commas", () => {
     const data = getAnalyticsDashboardData(30,"members",true);
@@ -92,7 +120,8 @@ describe("analytics reporting queries", () => {
     for(const view of Object.keys(INSIGHT_VIEWS) as InsightView[]){
       const html=renderToStaticMarkup(await InsightsPage({view,searchParams:Promise.resolve({days:"7",audience:"external"})}));
       expect(html).toContain(INSIGHT_VIEWS[view].replaceAll("&","&amp;"));
-      expect(html).toContain("Exclude internal");
+      expect(html).toContain("Visitors (webmaster excluded)");
+      expect(html).not.toContain("Everyone including internal");
       expect(html).not.toContain("NaN");
       if(view==="maps") {
         expect(html).toContain("No location or region signals have reached");

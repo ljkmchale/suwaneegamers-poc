@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
+  isSuppressedAnalyticsIdentity,
   normalizeUsageEvent,
   recordUsageEvents,
   type UsageEventInput,
@@ -8,6 +9,7 @@ import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
 
 export const dynamic = "force-dynamic";
+const ANALYTICS_SUPPRESSION_COOKIE = "sg-analytics-suppressed";
 
 function cleanAcquisition(value: unknown) {
   try {
@@ -88,6 +90,21 @@ export async function POST(request: NextRequest) {
     : undefined;
 
   const cookieAcquisition = readAcquisition(request);
+  const suppressForWebmaster = isSuppressedAnalyticsIdentity(identity);
+  if (suppressForWebmaster || request.cookies.get(ANALYTICS_SUPPRESSION_COOKIE)?.value === "1") {
+    const response = new NextResponse(null, { status: 204 });
+    if (suppressForWebmaster) {
+      response.cookies.set(ANALYTICS_SUPPRESSION_COOKIE, "1", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 365 * 24 * 60 * 60,
+      });
+    }
+    if (cookieAcquisition) response.cookies.delete(ACQUISITION_COOKIE);
+    return response;
+  }
   const acquisition = cookieAcquisition ?? cleanAcquisition(payload.acquisition);
   recordUsageEvents({
     rawSessionId,

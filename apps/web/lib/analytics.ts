@@ -310,10 +310,14 @@ function safeReferrerHost(value: unknown): string | null {
 // the proxy redirects an unauthenticated browser to /signin before the page
 // loads, so a beacon reporting a *view* of one of those paths could only have
 // come from a signed-in browser.
-const PUBLIC_PAGE_PATHS = new Set(["/signin", "/terms-of-use", "/privacy-policy"]);
+const PUBLIC_PAGE_PATHS = new Set(["/signin", "/platform", "/terms-of-use", "/privacy-policy"]);
 
 function isGatedPagePath(path: string | undefined): boolean {
   return Boolean(path) && !path!.startsWith("/api/") && !PUBLIC_PAGE_PATHS.has(path!);
+}
+
+export function isSuppressedAnalyticsIdentity(identity?: { email?: string }): boolean {
+  return identity?.email?.trim().toLowerCase() === SELF_EMAIL;
 }
 
 export function recordUsageEvents(input: {
@@ -342,7 +346,12 @@ export function recordUsageEvents(input: {
   // — is never written to analytics at all, not recorded then filtered at
   // query time. Recording and excluding it produced ~6,200 events from four
   // testing identities before this existed.
-  if (internalIdentity?.name || referrerHost === "localhost" || referrerHost === "127.0.0.1") return;
+  if (
+    isSuppressedAnalyticsIdentity(input.identity)
+    || internalIdentity?.name
+    || referrerHost === "localhost"
+    || referrerHost === "127.0.0.1"
+  ) return;
 
   const knownIdentity = input.identity || internalIdentity
     ? null
