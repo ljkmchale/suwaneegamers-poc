@@ -1252,7 +1252,7 @@ This level handles much of the guild’s day-to-day criminal operations. It cont
 
 ## The hallway here feels more secure than the levels below. Iron-reinforced doors line the walls, and the lighting is even lower. One reinforced door bears heavy locks and what appear to be magical markings. Further down the passage, a large room contains weapon racks, climbing gear, and various tools of the trade neatly organized along the walls. Another chamber holds several tables covered in maps and documents.
 
-### **Leadership Level (Top Floor)**
+### **Top Floor**
 
 This is the most secure and private level of the Crimson Seat. It contains the Shadow Sovereign’s personal sitting room (featuring the large crimson throne-like seat), her private quarters, a small war room for high-level planning, and the records vault’s most sensitive materials. Only the Shadow Sovereign’s most trusted inner circle has regular access. The large windows and balcony area offer a commanding view over The Void.
 
@@ -1284,6 +1284,10 @@ Well known Duergar smith
 
 Stolen goods market
 
+## Needles & Notch
+
+tailor. No window. Coats with extra seams, Cloak-cut hoods, pockets that eat a blade. Mavri (f, half-elf) talks only while pinning. She can hide the signet. She will remember who asked.
+
 ## One for Everyone 
 
 ## 
@@ -1297,6 +1301,8 @@ Stolen goods market
 Place to hire an assassin from the Bloodhand organization
 
 ## Slip, the (Poison dealer)
+
+chemist behind a curtain of drying herbs. Rat-kill, sleep, and things that stop a heart if the dose is not a kindness. Keeper: Pellam (nb, gnome, soft voice). Sells to Cloak accounts on slate. Cash buyers get the legal shelf only.
 
 ## Turnby Wainwright 
 
