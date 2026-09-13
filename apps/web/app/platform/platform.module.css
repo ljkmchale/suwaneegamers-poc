@@ -35,6 +35,38 @@
     radial-gradient(ellipse 1100px 800px at 50% 105%, rgba(139, 92, 246, .09), transparent 70%);
 }
 
+.lightningField {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.lightningField svg { width: 100%; height: 100%; }
+.lightningField path {
+  fill: none;
+  stroke: #a78bfa;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: bevel;
+  opacity: .48;
+  filter: drop-shadow(0 0 5px #8b5cf6) drop-shadow(0 0 16px rgba(96, 165, 250, .8));
+  animation: platformLightningPulse 5.2s steps(1, end) infinite;
+}
+.lightningField path:last-child {
+  stroke: #60a5fa;
+  opacity: .22;
+  animation-delay: -2.8s;
+}
+
+@keyframes platformLightningPulse {
+  0%, 8%, 12%, 100% { opacity: .28; }
+  9%, 11% { opacity: .92; }
+  10% { opacity: .48; }
+}
+
 .bar {
   position: sticky;
   z-index: 30;
@@ -222,4 +254,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .page { scroll-behavior: auto; }
+  .lightningField path { animation: none; opacity: .36; }
+  .lightningField path:last-child { opacity: .24; }
 }

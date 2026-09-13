@@ -472,11 +472,17 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
+function RuneScene({
+  reducedMotion,
+  prominentLightning,
+}: {
+  reducedMotion: boolean;
+  prominentLightning: boolean;
+}) {
   const group = useRef<Group>(null);
   const runeRefs = useRef<Array<Sprite | null>>([]);
   const bolts = useRef<BoltState[]>([]);
-  const nextStrike = useRef(2.4);
+  const nextStrike = useRef(prominentLightning ? 0.8 : 2.4);
   const pointer = useRef({ x: 0, y: 0 });
   const smoothPointer = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
@@ -616,7 +622,7 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
         const midpointX = (first.sprite.position.x + item.sprite.position.x) / 2;
         const midpointY = (first.sprite.position.y + item.sprite.position.y) / 2;
         const crossesQuietCenter = Math.abs(midpointX) < 3.8 && Math.abs(midpointY) < 2.35;
-        return d > 4.2 && d < 19 && !crossesQuietCenter;
+        return d > 4.2 && d < 19 && (prominentLightning || !crossesQuietCenter);
       });
       if (first && candidates.length === 0) {
         candidates = visible.filter((item) => item.index !== first.index);
@@ -654,13 +660,13 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
         bolts.current[boltIndex] = {
           boltIndex,
           born: elapsed,
-          duration: rand(0.65, 1.15),
+          duration: prominentLightning ? rand(0.95, 1.5) : rand(0.65, 1.15),
           color: pick(LIGHTNING_COLORS),
           endpointA,
           endpointB,
         };
       }
-      nextStrike.current = elapsed + rand(3.2, 6.4);
+      nextStrike.current = elapsed + (prominentLightning ? rand(1.4, 3) : rand(3.2, 6.4));
     }
 
     for (const bolt of bolts.current) {
@@ -685,11 +691,11 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
       const opacity = Math.pow(1 - age, 1.8) * crackle;
       glowMaterial.color.set(bolt.color);
       coreMaterial.color.set("#ffffff");
-      glowMaterial.opacity = opacity * 0.9;
-      coreMaterial.opacity = Math.min(0.92, opacity * 1.35);
+      glowMaterial.opacity = Math.min(1, opacity * (prominentLightning ? 1.2 : 0.9));
+      coreMaterial.opacity = Math.min(1, opacity * (prominentLightning ? 1.65 : 1.35));
       // Brief wash of light over nearby mist and runes while the bolt lives.
       pair.flash.material.color.set(bolt.color);
-      pair.flash.material.opacity = Math.pow(1 - age, 2.6) * 0.4;
+      pair.flash.material.opacity = Math.pow(1 - age, 2.6) * (prominentLightning ? 0.68 : 0.4);
       pair.branches.forEach((branch, branchIndex) => {
         const branchFalloff = branchIndex % 2 === 0 ? 0.58 : 0.42;
         branch.glow.material.color.set(bolt.color);
@@ -762,7 +768,7 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
   );
 }
 
-export function RunicBackground() {
+export function RunicBackground({ prominentLightning = false }: { prominentLightning?: boolean }) {
   const reducedMotion = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
 
@@ -787,7 +793,7 @@ export function RunicBackground() {
           style={{ height: "100%", width: "100%" }}
         >
           <Suspense fallback={null}>
-            <RuneScene reducedMotion={reducedMotion} />
+            <RuneScene reducedMotion={reducedMotion} prominentLightning={prominentLightning} />
           </Suspense>
         </Canvas>
       )}
