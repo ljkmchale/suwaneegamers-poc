@@ -7,6 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contractPath = path.join(root, "docs", "architecture-contract.json");
 const contract = JSON.parse(fs.readFileSync(contractPath, "utf8"));
 const failures = [];
+const notices = [];
+const sourceOnly = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
 
 function requirePath(relativePath, label) {
   if (!fs.existsSync(path.join(root, relativePath))) failures.push(`${label}: missing ${relativePath}`);
@@ -15,10 +17,8 @@ function requirePath(relativePath, label) {
 requirePath(contract.canonicalGuide, "canonical guide");
 requirePath(contract.content.runtimeReader, "content reader");
 requirePath(contract.content.fileMirror, "content mirror");
-requirePath(contract.content.database, "content database");
 requirePath(contract.media.imageDiskRoot, "image disk root");
 requirePath(contract.media.imageRoute, "image route");
-requirePath(contract.media.audioDiskRoot, "audio disk root");
 requirePath(contract.media.audioRoute, "audio route");
 requirePath(contract.voice.client, "voice client");
 requirePath(contract.voice.tokenRoute, "voice token route");
@@ -29,6 +29,15 @@ requirePath(contract.voice.healthDashboard, "Myra health dashboard");
 requirePath(contract.automation.scheduler, "content scheduler");
 requirePath(contract.automation.myraHealthMonitor, "Myra health monitor");
 requirePath(contract.automation.productionLauncher, "production launcher");
+
+if (sourceOnly) {
+  notices.push(
+    `Source-only CI mode: skipped machine-local ${contract.content.database}, ${contract.media.audioDiskRoot}, and their runtime media audits.`,
+  );
+} else {
+  requirePath(contract.content.database, "content database");
+  requirePath(contract.media.audioDiskRoot, "audio disk root");
+}
 
 for (const instructionFile of ["AGENTS.md", "CLAUDE.md", ".github/copilot-instructions.md"]) {
   requirePath(instructionFile, "AI instruction file");
@@ -52,16 +61,18 @@ for (const filename of scriptFiles) {
   }
 }
 
-for (const [label, filename] of [
-  ["image", "audit-local-images.mjs"],
-  ["session-audio", "audit-local-audio.mjs"],
-]) {
-  const audit = spawnSync(process.execPath, [path.join(root, "scripts", filename)], {
-    cwd: root,
-    encoding: "utf8",
-  });
-  if (audit.status !== 0) {
-    failures.push(`${label} audit failed:\n${(audit.stderr || audit.stdout).trim()}`);
+if (!sourceOnly) {
+  for (const [label, filename] of [
+    ["image", "audit-local-images.mjs"],
+    ["session-audio", "audit-local-audio.mjs"],
+  ]) {
+    const audit = spawnSync(process.execPath, [path.join(root, "scripts", filename)], {
+      cwd: root,
+      encoding: "utf8",
+    });
+    if (audit.status !== 0) {
+      failures.push(`${label} audit failed:\n${(audit.stderr || audit.stdout).trim()}`);
+    }
   }
 }
 
@@ -72,6 +83,7 @@ console.log(`  Images: ${contract.media.imageUrlPrefix} -> ${contract.media.imag
 console.log(`  Audio: ${contract.media.audioUrlPrefix} -> ${contract.media.audioDiskRoot}`);
 console.log(`  Voice: LiveKit ${contract.voice.livekitPort}, Speaches ${contract.voice.speachesPort}, Parakeet ${contract.voice.parakeetPort}`);
 console.log(`  Production: ${contract.runtime.productionService} on ${contract.runtime.productionUrl}, active slot via ${contract.runtime.productionSlotPointer}`);
+notices.forEach((notice) => console.log(`  Note: ${notice}`));
 
 if (failures.length) {
   console.error("\nArchitecture preflight failed:");

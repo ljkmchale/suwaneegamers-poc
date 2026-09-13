@@ -1,18 +1,37 @@
 name: Deploy to Windows
 
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  workflow_dispatch:
 
-# Only run after CI passes
 jobs:
   deploy:
-    name: SSH Deploy to Windows Machine
+    name: Deploy to Windows if configured
     runs-on: ubuntu-latest
-    needs: []  # Remove this when ci.yml is wired as a workflow dependency
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
 
     steps:
+      - name: Check deployment configuration
+        id: config
+        shell: bash
+        env:
+          WINDOWS_HOST: ${{ secrets.WINDOWS_HOST }}
+          WINDOWS_USER: ${{ secrets.WINDOWS_USER }}
+          WINDOWS_SSH_KEY: ${{ secrets.WINDOWS_SSH_KEY }}
+        run: |
+          if [[ -n "$WINDOWS_HOST" && -n "$WINDOWS_USER" && -n "$WINDOWS_SSH_KEY" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Windows deployment is not configured; add WINDOWS_HOST, WINDOWS_USER, and WINDOWS_SSH_KEY repository secrets to enable it."
+          fi
+
       - name: Deploy via SSH
+        if: steps.config.outputs.configured == 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.WINDOWS_HOST }}

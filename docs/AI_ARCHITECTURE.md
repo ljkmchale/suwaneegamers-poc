@@ -2,6 +2,8 @@
 
 This is the canonical orientation contract for any AI model or developer changing this repository. Read it and run `pnpm arch:preflight` before editing paths, content, images, audio, video, synchronization, voice, builds, or deployment.
 
+On a CI runner, the preflight validates tracked source and architecture paths but skips the production database, cached session audio, and their runtime media audits because those machine-local artifacts are intentionally excluded from Git. A preflight run on the production machine remains the authoritative check for those runtime assets.
+
 The machine-readable companion is `docs/architecture-contract.json`. If this guide, the contract, and runtime code disagree, stop and trace the runtime code before changing anything; then update the guide and contract in the same change.
 
 ## The five paths every change must trace
