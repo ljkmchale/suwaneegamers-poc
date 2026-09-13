@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { RunicBackground } from "@/app/(site)/calendar/RunicBackground";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import styles from "./platform.module.css";
 
 export const metadata: Metadata = {
@@ -201,6 +202,7 @@ function DetailCard({
 export default function PlatformPage() {
   return (
     <div className={styles.page}>
+      <AnalyticsTracker />
       <RunicBackground forceLightning />
 
       <header className={styles.bar}>
