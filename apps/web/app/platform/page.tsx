@@ -202,7 +202,6 @@ export default function PlatformPage() {
   return (
     <div className={styles.page}>
       <RunicBackground />
-      <div className={styles.veil} aria-hidden="true" />
 
       <header className={styles.bar}>
         <Link className={styles.wordmark} href="/signin">

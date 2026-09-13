@@ -24,17 +24,6 @@
 .page a:hover { color: var(--gold); }
 .page a:focus-visible { border-radius: 3px; outline: 2px solid var(--arcane); outline-offset: 3px; }
 
-.veil {
-  position: fixed;
-  z-index: 0;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 1000px 560px at 15% -10%, rgba(139, 92, 246, .2), transparent 60%),
-    radial-gradient(ellipse 800px 520px at 92% 0%, rgba(242, 178, 61, .1), transparent 65%),
-    radial-gradient(ellipse 1100px 800px at 50% 105%, rgba(139, 92, 246, .09), transparent 70%);
-}
-
 .bar {
   position: sticky;
   z-index: 30;
