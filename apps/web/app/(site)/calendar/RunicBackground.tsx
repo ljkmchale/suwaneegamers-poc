@@ -472,7 +472,13 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
+function RuneScene({
+  reducedMotion,
+  forceLightning,
+}: {
+  reducedMotion: boolean;
+  forceLightning: boolean;
+}) {
   const group = useRef<Group>(null);
   const runeRefs = useRef<Array<Sprite | null>>([]);
   const bolts = useRef<BoltState[]>([]);
@@ -605,7 +611,7 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
       sprite.material.rotation = rune.phase + elapsed * rune.spin * (reducedMotion ? 0.1 : 1);
     });
 
-    if (!reducedMotion && elapsed > nextStrike.current) {
+    if ((!reducedMotion || forceLightning) && elapsed > nextStrike.current) {
       const visible = runeModels
         .map((rune, index) => ({ rune, sprite: runeRefs.current[index], index }))
         .filter((item) => item.sprite && item.rune.position[2] < -4.5 && item.rune.position[2] > -18);
@@ -762,7 +768,7 @@ function RuneScene({ reducedMotion }: { reducedMotion: boolean }) {
   );
 }
 
-export function RunicBackground() {
+export function RunicBackground({ forceLightning = false }: { forceLightning?: boolean }) {
   const reducedMotion = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
 
@@ -787,7 +793,7 @@ export function RunicBackground() {
           style={{ height: "100%", width: "100%" }}
         >
           <Suspense fallback={null}>
-            <RuneScene reducedMotion={reducedMotion} />
+            <RuneScene reducedMotion={reducedMotion} forceLightning={forceLightning} />
           </Suspense>
         </Canvas>
       )}

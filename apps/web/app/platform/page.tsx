@@ -201,7 +201,7 @@ function DetailCard({
 export default function PlatformPage() {
   return (
     <div className={styles.page}>
-      <RunicBackground />
+      <RunicBackground forceLightning />
 
       <header className={styles.bar}>
         <Link className={styles.wordmark} href="/signin">
