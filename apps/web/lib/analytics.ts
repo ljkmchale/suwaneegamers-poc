@@ -1042,6 +1042,11 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
     WITH campaign_events AS (
       SELECT
         CASE
+          WHEN e.path LIKE '/campaigns/%/chronicle' THEN substr(
+            e.path,
+            length('/campaigns/') + 1,
+            length(e.path) - length('/campaigns/') - length('/chronicle')
+          )
           WHEN e.path LIKE '/campaigns/%' THEN substr(e.path, length('/campaigns/') + 1)
           WHEN e.content_type = 'session summary' AND instr(COALESCE(e.content_id, ''), ':') > 0
             THEN substr(e.content_id, 1, instr(e.content_id, ':') - 1)

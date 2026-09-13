@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { contentDir } from "@/lib/contentFiles";
 import { findCampaign } from "@/lib/campaigns";
+import { injectChronicleAnalytics } from "@/lib/chronicleAnalytics";
 
 // Serves a campaign's Living Chronicle: a self-contained, full-screen HTML page
 // built from the campaign's session-notes Google Doc (see chronicle-poc/ and
@@ -35,7 +36,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     });
   }
 
-  const html = fs.readFileSync(file, "utf-8");
+  const html = injectChronicleAnalytics(fs.readFileSync(file, "utf-8"));
   return new Response(html, {
     headers: {
       "content-type": "text/html; charset=utf-8",

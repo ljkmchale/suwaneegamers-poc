@@ -85,6 +85,22 @@ describe("analytics reporting queries", () => {
     expect(data.recentVisitors[0].acquisitionSource).toBe("discord");
     expect(data.pageAudiences[0].visitorNames).toEqual(["Name, with comma"]);
   });
+  it("attributes Chronicle activity to its campaign and reports chapter readership", () => {
+    event("member", "/campaigns/heroes-of-emberstran", "page_view", "Heroes of Emberstran");
+    event("member", "/campaigns/heroes-of-emberstran/chronicle", "page_view", "The Emberstran Chronicle");
+    event("member", "/campaigns/heroes-of-emberstran/chronicle", "page_engagement", null, null, null);
+    event("member", "/campaigns/heroes-of-emberstran/chronicle", "content_view", "The Chronicle of Emberstran · Chapter 35 — Phira and the Bellows", "s35", "chronicle chapter");
+
+    const data = getAnalyticsDashboardData(30, "members", true);
+    expect(data.campaignEngagement.find((row) => row.campaign === "heroes-of-emberstran"))
+      .toMatchObject({ pageViews: 2, visitors: 1 });
+    expect(data.campaignEngagement.some((row) => row.campaign.includes("/chronicle"))).toBe(false);
+    expect(data.topContent).toContainEqual({
+      label: "The Chronicle of Emberstran · Chapter 35 — Phira and the Bellows",
+      type: "chronicle chapter",
+      views: 1,
+    });
+  });
   it("keeps complete report rows beyond the old caps and includes only in-period job history", () => {
     for(let i=0;i<55;i++){ session(`extra-${i}`,null); event(`extra-${i}`,`/page-${i}`); }
     state.db.exec(`INSERT INTO content_sync_jobs(id,label,schedule,command) VALUES ('job','Example','daily','example');`);
