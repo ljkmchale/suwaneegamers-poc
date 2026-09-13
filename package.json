@@ -19,6 +19,7 @@
     "content:scheduler:once": "node scripts/content-scheduler.mjs --once",
     "content:sync-all": "node scripts/content-scheduler.mjs --once --run-all",
     "content:sync-documents": "node scripts/sync-content-documents.mjs",
+    "content:export-campaigns": "node scripts/sync-campaign-json.mjs",
     "content:build-assistant-brain": "node scripts/build-assistant-brain.mjs",
     "content:build-assistant-self-model": "node scripts/build-assistant-self-model.mjs",
     "content:autotune-assistant": "cd apps/web && npx tsx scripts/autotune-assistant.ts",

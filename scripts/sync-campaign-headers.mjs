@@ -7,6 +7,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { syncCampaignJsonFromDb } from "./sync-campaign-json.mjs";
 import { readContent, writeContent, contentPath } from "./content-documents.mjs";
 import { listDriveItems, downloadDriveFile, driveDownloadDelay } from "./drive-api.mjs";
 import { saveOptimizedImage } from "./lib-image-cache.mjs";
@@ -259,6 +260,7 @@ db.transaction(() => {
     );
   }
 })();
+syncCampaignJsonFromDb(db);
 
 // --- Archived campaign cards in previous-campaigns.json ---
 const previousLayouts = readContent("page-layouts/previous-campaigns.json");

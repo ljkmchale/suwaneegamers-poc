@@ -11,6 +11,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { getDb } from "./sync-db.mjs";
+import { syncCampaignJsonFromDb } from "./sync-campaign-json.mjs";
 import { readContent } from "./content-documents.mjs";
 import { listDriveItems, downloadPublicDriveFileToPath, driveDownloadDelay } from "./drive-api.mjs";
 
@@ -260,6 +261,8 @@ if (updates.size > 0) {
     }
   })();
 }
+
+syncCampaignJsonFromDb(db);
 
 const stamp = new Date().toISOString();
 console.log(`[${stamp}] Session audio sync complete`);

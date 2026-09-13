@@ -5,6 +5,7 @@
  *   npx tsx apps/web/scripts/sync-session-notes.ts
  */
 import { getDb } from "@/lib/db";
+import { syncCampaignJsonFromDb } from "../../../scripts/sync-campaign-json.mjs";
 import { readContent } from "@/lib/contentFiles";
 import type { AutoManagedPage } from "@/lib/autoManagedPages";
 
@@ -225,6 +226,7 @@ async function main() {
 
   console.log(`Found ${parsed.length} campaign section(s) in doc.`);
   const updated = syncToDb(parsed);
+  syncCampaignJsonFromDb(getDb());
   console.log(`Done — updated ${updated} campaign(s).`);
 }
 
