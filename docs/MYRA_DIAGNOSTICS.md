@@ -61,11 +61,34 @@ database, Cloudflare route, or local AI) or resolves one, `getMyraHealth` fires 
 fire-and-forget email. Because the alert triggers on the DB state *transition*, it
 sends exactly once per outage and once per recovery, no matter which check (the
 24/7 monitor or a live "how do you feel") detected it. A send failure is logged and
-never fails the health check. Configure Gmail SMTP with `MYRA_ALERT_SMTP_USER`,
-`MYRA_ALERT_SMTP_PASS` (a Google App Password), and `MYRA_ALERT_TO` in the web
-process env; unset any of them and alerts stay on the dashboard only
-(`myra_health_alert_skipped` is logged). Only critical transitions email; warnings
-stay on the dashboard. Discord, Slack, and SMS remain future notifiers.
+never fails the health check. Configure any SMTP relay with `MYRA_ALERT_SMTP_HOST`
+(defaults to `smtp.gmail.com` if unset), `MYRA_ALERT_SMTP_PORT`, `MYRA_ALERT_SMTP_USER`,
+`MYRA_ALERT_SMTP_PASS`, `MYRA_ALERT_FROM` (defaults to the SMTP user), and
+`MYRA_ALERT_TO` in the web process env; unset user/pass/to and alerts stay on the
+dashboard only (`myra_health_alert_skipped` is logged). Only critical transitions
+email; warnings stay on the dashboard. Discord, Slack, and SMS remain future
+notifiers.
+
+As of 2026-09-13 the relay is **Mailgun** (`smtp.mailgun.org:587`, domain
+`suwaneegamers.net`, SMTP login `myra@suwaneegamers.net`), sending to
+`MYRA_ALERT_TO=webmaster@suwaneegamers.net`, which Cloudflare Email Routing
+forwards to Larry's Gmail. Mailgun's HTTP API is account-blocked from sending on
+this account for reasons that stayed invisible in their dashboard (domain fully
+DNS-verified, billing shows no required payment method, account-confirmation
+checkbox green) — SMTP relay sending works fine regardless, and that's the only
+path this app uses, so it's a non-issue in practice.
+
+**Gmail dedup gotcha**: never point `MYRA_ALERT_SMTP_USER`'s sending account (or
+whatever the alert's "From" resolves to) at the same Gmail account `MYRA_ALERT_TO`
+ultimately forwards to. Gmail silently deduplicates a message from itself to
+itself — even routed through a third-party forwarder like Cloudflare Email
+Routing — and it never reaches Inbox *or* Spam; the only trace is a Cloudflare
+"Missing email from X to Y?" notice landing in Spam. This is exactly what broke
+when `MYRA_ALERT_TO` was briefly set to `webmaster@suwaneegamers.net` while still
+sending via `larry.m.mchale@gmail.com`'s own SMTP (both the sender and the
+forward's ultimate destination were the same Gmail account). Switching the sender
+to Mailgun (a distinct account) fixed it — confirmed landing in Inbox via a live
+test.
 
 ## API and security
 
