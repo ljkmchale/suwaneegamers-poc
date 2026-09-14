@@ -10,7 +10,7 @@ import {
 } from "@/lib/securityClassifier";
 import { blockIp, cloudflareSecurityConfigured, isBlockableSourceIp } from "@/lib/cloudflareSecurity";
 
-export const SECURITY_EVENT_KINDS = ["failed_login", "admin_request", "suspicious_request"] as const;
+export const SECURITY_EVENT_KINDS = ["failed_login", "admin_request", "suspicious_request", "geo_blocked"] as const;
 
 export type SecurityEventKind = (typeof SECURITY_EVENT_KINDS)[number];
 

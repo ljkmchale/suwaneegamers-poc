@@ -172,6 +172,9 @@ export interface AnalyticsDashboardData {
     transitions: number;
   }>;
   devices: Array<{ label: string; value: number }>;
+  /** Cloudflare's cf-ipcountry per session, never the raw IP. "Unknown" covers
+   *  sessions recorded before this existed or that didn't arrive via Cloudflare. */
+  countries: Array<{ label: string; value: number }>;
   referrers: Array<{ label: string; value: number }>;
   recentVisitors: Array<{
     lastSeenAt: string;
@@ -186,6 +189,7 @@ export interface AnalyticsDashboardData {
     firstTimeVisitor: boolean;
     acquisitionSource: string;
     acquisitionCampaign: string | null;
+    country: string;
   }>;
   people: Array<{
     visitorKey: string;
@@ -333,6 +337,8 @@ export function recordUsageEvents(input: {
   };
   userAgent?: string;
   identity?: { email?: string; name?: string };
+  /** Cloudflare's cf-ipcountry header (ISO 3166-1 alpha-2), never the raw IP. */
+  country?: string;
 }): void {
   const db = getDb();
   const sessionId = anonymizeSessionId(input.rawSessionId);
@@ -387,11 +393,14 @@ export function recordUsageEvents(input: {
   const utmSource = cleanText(input.acquisition?.utmSource, 100);
   const utmMedium = cleanText(input.acquisition?.utmMedium, 100);
   const utmCampaign = cleanText(input.acquisition?.utmCampaign, 160);
+  // A two-letter ISO country code or nothing — never trust this header beyond
+  // that shape, since it rides in on a request we don't otherwise validate.
+  const country = /^[A-Z]{2}$/.test(input.country ?? "") ? input.country : null;
 
   const insertSession = db.prepare(`
     INSERT INTO analytics_sessions
-      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_id, visitor_email, visitor_name, acquisition_path, utm_source, utm_medium, utm_campaign)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (session_id, first_seen_at, last_seen_at, entry_path, last_path, referrer_host, device_type, visitor_id, visitor_email, visitor_name, acquisition_path, utm_source, utm_medium, utm_campaign, country)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(session_id) DO NOTHING
   `);
   const updateIdentity = db.prepare(`
@@ -426,7 +435,7 @@ export function recordUsageEvents(input: {
   `);
 
   db.transaction(() => {
-    insertSession.run(sessionId, now, now, acquisitionPath ?? entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName, acquisitionPath, utmSource, utmMedium, utmCampaign);
+    insertSession.run(sessionId, now, now, acquisitionPath ?? entryPath, entryPath, referrerHost, deviceType, visitorId, visitorEmail, visitorName, acquisitionPath, utmSource, utmMedium, utmCampaign, country);
     // Backfill identity on sessions that started before sign-in resolved.
     updateIdentity.run(visitorId, visitorEmail, visitorName, sessionId);
     if (visitorEmail) {
@@ -1191,6 +1200,16 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
     ORDER BY value DESC
   `).all(sinceIso) as Array<{ label: string; value: number }>);
 
+  // Only recorded for sessions since country capture was added; older rows
+  // (and any request that didn't arrive through Cloudflare) show "Unknown".
+  const countries = (db.prepare(`
+    SELECT COALESCE(country, 'Unknown') AS label, COUNT(*) AS value
+    FROM analytics_sessions
+    WHERE last_seen_at >= ? AND session_id IN (${audienceSessions(audience)})
+    GROUP BY label
+    ORDER BY value DESC
+  `).all(sinceIso) as Array<{ label: string; value: number }>);
+
   const sourceRows = db.prepare(`
     SELECT utm_source, utm_medium, referrer_host, COUNT(*) AS value
     FROM analytics_sessions
@@ -1219,6 +1238,7 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
       s.utm_source,
       s.utm_medium,
       s.utm_campaign,
+      s.country,
       CASE WHEN (
         SELECT COUNT(*) FROM analytics_sessions AS lifetime
         WHERE COALESCE(lifetime.visitor_email, lifetime.visitor_id, lifetime.session_id)
@@ -1246,6 +1266,7 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
     utm_source: string | null;
     utm_medium: string | null;
     utm_campaign: string | null;
+    country: string | null;
     visitor_label: string;
     first_time_visitor: number;
   }>).map((row) => ({
@@ -1261,6 +1282,7 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
     firstTimeVisitor: row.first_time_visitor === 1,
     acquisitionSource: acquisitionLabel(row),
     acquisitionCampaign: row.utm_campaign,
+    country: row.country ?? "Unknown",
   }));
 
   const people = (db.prepare(`
@@ -1605,6 +1627,7 @@ export function getAnalyticsDashboardData(days: number, audience: AnalyticsAudie
     exitPages,
     journeyPaths,
     devices,
+    countries,
     referrers,
     recentVisitors,
     people,

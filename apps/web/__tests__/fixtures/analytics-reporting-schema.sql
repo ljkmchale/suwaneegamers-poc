@@ -8,7 +8,7 @@ CREATE TABLE analytics_sessions (
       device_type   TEXT NOT NULL DEFAULT 'desktop',
       page_views    INTEGER NOT NULL DEFAULT 0,
       engaged_seconds INTEGER NOT NULL DEFAULT 0
-    , visitor_email TEXT, visitor_name TEXT, visitor_id TEXT, acquisition_path TEXT, utm_source TEXT, utm_medium TEXT, utm_campaign TEXT);
+    , visitor_email TEXT, visitor_name TEXT, visitor_id TEXT, acquisition_path TEXT, utm_source TEXT, utm_medium TEXT, utm_campaign TEXT, country TEXT);
 CREATE TABLE analytics_events (
       id               INTEGER PRIMARY KEY AUTOINCREMENT,
       session_id       TEXT NOT NULL REFERENCES analytics_sessions(session_id) ON DELETE CASCADE,

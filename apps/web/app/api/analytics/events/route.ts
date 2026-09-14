@@ -114,6 +114,7 @@ export async function POST(request: NextRequest) {
     acquisition,
     userAgent: request.headers.get("user-agent") ?? undefined,
     identity,
+    country: request.headers.get("cf-ipcountry") ?? undefined,
   });
   const response = new NextResponse(null, { status: 204 });
   if (cookieAcquisition) response.cookies.delete(ACQUISITION_COOKIE);

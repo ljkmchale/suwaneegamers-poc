@@ -29,11 +29,13 @@ const KIND_LABELS: Record<string, string> = {
   failed_login: "Failed login",
   admin_request: "Admin probe",
   suspicious_request: "Scanner probe",
+  geo_blocked: "Blocked (foreign)",
 };
 
 function kindClass(kind: string) {
   if (kind === "failed_login") return "border-red-900 text-red-300 bg-red-950/30";
   if (kind === "suspicious_request") return "border-amber-800 text-amber-300 bg-amber-950/30";
+  if (kind === "geo_blocked") return "border-sky-800 text-sky-300 bg-sky-950/30";
   return "border-[#2a2a35] text-[#9080a0]";
 }
 

@@ -221,6 +221,8 @@ function migrateSchema(db: Database.Database): void {
   addAnalyticsSessionColumn("utm_source");
   addAnalyticsSessionColumn("utm_medium");
   addAnalyticsSessionColumn("utm_campaign");
+  // Rough geolocation only: Cloudflare's cf-ipcountry header, never the raw IP.
+  addAnalyticsSessionColumn("country");
 
   // Records which model answered each voice question. Historically this
   // distinguished Claude from the retired local fallback; today it is "claude"
@@ -635,7 +637,8 @@ function initializeSchema(db: Database.Database): void {
       acquisition_path TEXT,
       utm_source TEXT,
       utm_medium TEXT,
-      utm_campaign TEXT
+      utm_campaign TEXT,
+      country TEXT
     );
 
     CREATE TABLE IF NOT EXISTS analytics_events (

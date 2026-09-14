@@ -52,6 +52,54 @@ function anyAuthProviderConfigured(): boolean {
   );
 }
 
+// This is a small, US-based tabletop group. Fresh/anonymous traffic from
+// outside the US is almost never a real prospective member — it's scanners,
+// bots, and link-preview crawlers. A member who is ALREADY signed in (any
+// provider) or logged in as admin is never affected by this, from anywhere —
+// it only stops new, unauthenticated visitors from outside the US at the door.
+const GEO_BLOCK_ALLOWED_COUNTRY = "US";
+
+// Reachable regardless of country: legal pages (kept globally readable for
+// compliance), the version endpoint, Myra's own health check, and every
+// server-to-server MACHINE_PATHS caller (its own bearer secret already
+// authorizes it, and it may not even arrive via Cloudflare with a country
+// header at all — blocking it by country would just break internal automation).
+const GEO_BLOCK_EXEMPT_PATHS = [
+  "/terms-of-use",
+  "/privacy-policy",
+  "/api/version",
+  "/api/myra/health/summary",
+  ...MACHINE_PATHS,
+];
+
+function isGeoBlockExempt(pathname: string): boolean {
+  return GEO_BLOCK_EXEMPT_PATHS.some((entry) =>
+    entry.endsWith("/") ? pathname.startsWith(entry) : pathname === entry,
+  );
+}
+
+/**
+ * True when this request should be stopped for being fresh, unauthenticated,
+ * non-US traffic. Only trusts cf-ipcountry when the request is verifiably
+ * proxied through Cloudflare (cf-ray + cf-connecting-ip both present) — a
+ * direct hit on the origin (or local dev) carries neither, so this fails
+ * open rather than trusting a header anyone could forge by going around
+ * Cloudflare.
+ */
+async function shouldGeoBlock(request: NextRequest): Promise<boolean> {
+  if (isGeoBlockExempt(request.nextUrl.pathname)) return false;
+  const country = request.headers.get("cf-ipcountry");
+  if (!country || country === GEO_BLOCK_ALLOWED_COUNTRY) return false;
+  if (!isVerifiedCloudflareRequest(request.headers)) return false;
+
+  const probe = NextResponse.next();
+  const [userSession, adminSession] = await Promise.all([
+    getIronSession<UserSessionData>(request, probe, USER_SESSION_OPTIONS),
+    getIronSession<AdminSessionData>(request, probe, SESSION_OPTIONS),
+  ]);
+  return !isSignedIn(userSession) && adminSession.isAdmin !== true;
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -71,6 +119,20 @@ export async function proxy(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     return response;
+  }
+
+  if (await shouldGeoBlock(request)) {
+    recordSecurityEvent({
+      kind: "geo_blocked",
+      path: pathname,
+      method: request.method,
+      ip: clientIpFromHeaders(request.headers),
+      userAgent: request.headers.get("user-agent"),
+    });
+    return new NextResponse(
+      "Suwanee Gamers is a private site currently limited to visitors in the United States.",
+      { status: 403, headers: { "content-type": "text/plain; charset=utf-8" } },
+    );
   }
 
   if (!pathname.startsWith("/admin")) {
