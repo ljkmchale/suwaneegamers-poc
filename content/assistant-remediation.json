@@ -11,6 +11,34 @@
       "timesSeen": 1,
       "id": "rem-406c5652311982fc",
       "normalized": "what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-09-14T15:25:51.041Z"
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "pending",
+      "createdAt": "2026-09-14T15:25:51.039Z"
+    },
+    {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
       "status": "dismissed",
       "createdAt": "2026-09-10T15:25:33.065Z",
       "reviewedAt": "2026-09-14T12:39:43.233Z"
@@ -1041,5 +1069,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-09-14T12:39:43.233Z"
+  "updatedAt": "2026-09-14T15:25:51.041Z"
 }
