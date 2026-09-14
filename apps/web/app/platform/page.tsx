@@ -23,7 +23,7 @@ const WORLD_ROUTES = [
   ],
   [
     "The Library",
-    "A full immersive Chronicle reader, built from the same living lore vault Myra draws from.",
+    "An immersive Chronicle reader under construction, built from the same living lore vault Myra draws from.",
   ],
   [
     "Bestiary, Pantheon & History",
@@ -35,7 +35,7 @@ const WORLD_ROUTES = [
   ],
   [
     "Calendar & Store",
-    "The shared session calendar and the group’s own merch shelf, live inventory included.",
+    "The shared session calendar and the group’s own merch shelf, with the Store currently under construction.",
   ],
 ] as const;
 
@@ -134,7 +134,7 @@ const AUTOMATION = [
   ],
   [
     "A living Chronicle, self-assembled",
-    "A session Doc becomes a complete, image-rich Chronicle page — no formatting and no copy-paste.",
+    "A session Doc becomes a complete Chronicle page—automatically formatted and paired with curated artwork, with no copying and pasting.",
   ],
   [
     "The journey map draws itself",
@@ -171,7 +171,7 @@ const OLD_WAY = [
 
 const SUWANEE_WAY = [
   "Campaign pages that rebuild themselves from the notes you already take",
-  "One living Chronicle per campaign, always current and in one place",
+  "Living Chronicles for every campaign with published session notes, always current and gathered in one place",
   "A live map with two realms, travel tools, location detail, and in-world reviews",
   "Honest, labeled analytics on exactly what the table engages with",
   "A voice guide that looks lore up in your world instead of guessing",
@@ -232,8 +232,8 @@ export default function PlatformPage() {
                 that goes stale.
               </h1>
               <p className={styles.lede}>
-                Suwanee Gamers is what happens when a real DM&apos;s and Players
-                work together to create tools that give them an advantage.
+                Suwanee Gamers is what happens when real DMs and players work
+                together to create tools that give their tables an advantage.
                 Session notes write themselves into Chronicles. A voice guide
                 answers lore questions grounded in your own world. The map is
                 live, detailed, and always evolving. And for the first time, a
@@ -274,9 +274,10 @@ export default function PlatformPage() {
             <Eyebrow>Chapter I</Eyebrow>
             <h2>One doorway. A whole living setting.</h2>
             <p>
-              Suwanee Gamers isn’t a place lore gets typed once and forgotten.
-              It is the front door to a setting that keeps growing. Every page
-              below is real, live, and current.
+              Suwanee Gamers isn’t a place where lore gets typed once and
+              forgotten. It is the front door to a setting that keeps growing.
+              Everything shown here is real, running, or clearly marked as
+              under construction.
             </p>
           </div>
           <ul className={styles.routeList}>
@@ -452,7 +453,7 @@ export default function PlatformPage() {
               <span aria-hidden="true">◆</span>
               <Eyebrow>The part built for you</Eyebrow>
             </div>
-            <h2 className={styles.dmHeading}>This is the part every other platform is missing.</h2>
+            <h2 className={styles.dmHeading}>This is the part most campaign platforms are missing.</h2>
             <p className={styles.dmLede}>
               A wiki tells you what happened last session. Suwanee Gamers tells
               you what your players are actually doing with it — which pages
@@ -490,7 +491,7 @@ export default function PlatformPage() {
                 it means exactly what it says.
               </p>
               <ul>
-                <li>Internal testing and DM development traffic are never recorded.</li>
+                <li>Known webmaster, testing, and development traffic is suppressed from analytics.</li>
                 <li>A missing interaction signal is labeled as missing coverage, not “no interest.”</li>
                 <li>Page opens, searches, clicks, and media plays remain separate measures.</li>
                 <li>Every figure states its definition in plain language beside the chart.</li>
@@ -520,7 +521,7 @@ export default function PlatformPage() {
           <Eyebrow>The takeaway</Eyebrow>
           <h2>This is what a campaign hub looks like when it is built by DMs who were tired of duct tape.</h2>
           <p>
-            Suwanee Gamers started as one group’s six campaigns. What it became
+            Suwanee Gamers started as one group’s campaign hub. What it became
             is a working answer to the question every DM eventually asks:
             <em> where does all of this actually live?</em>
           </p>
@@ -534,7 +535,7 @@ export default function PlatformPage() {
       <footer className={styles.footer}>
         <div className={styles.wrap}>
           <span>◆ Suwanee Gamers</span>
-          <p>Built for one table’s six campaigns — and everything here is a real, running feature.</p>
+          <p>Built for one table’s living world—and everything shown here is real or clearly marked as under construction.</p>
         </div>
       </footer>
     </div>
