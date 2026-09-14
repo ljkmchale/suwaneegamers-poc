@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
+import { AuthProviderButtons } from "@/components/auth/AuthProviderButtons";
 
 const ERROR_MESSAGES: Record<string, string> = {
   denied: "Sign-in was cancelled. Give it another try.",
   state: "Your sign-in session expired. Please try again.",
-  exchange: "We couldn't complete sign-in with Google. Please try again.",
+  exchange: "We couldn't complete sign-in. Please try again.",
   not_configured: "Sign-in is not available right now.",
 };
 
@@ -36,7 +36,15 @@ const PORTAL_HIGHLIGHTS = [
   },
 ];
 
-export function SignInGate({ error, returnTo }: { error?: string; returnTo?: string }) {
+export function SignInGate({
+  error,
+  returnTo,
+  discordEnabled,
+}: {
+  error?: string;
+  returnTo?: string;
+  discordEnabled?: boolean;
+}) {
   const message = error ? ERROR_MESSAGES[error] : undefined;
 
   return (
@@ -180,15 +188,15 @@ export function SignInGate({ error, returnTo }: { error?: string; returnTo?: str
             </p>
           )}
 
-          <GoogleSignInButton returnTo={returnTo} />
+          <AuthProviderButtons returnTo={returnTo} discordEnabled={discordEnabled} />
 
           <div className="mt-7 border-t border-[#35303c] pt-6 text-center">
             <p className="text-xs leading-6 text-[#8f8298]">
-              Anyone may sign in with Google; access to member content remains by
-              invitation. We use your Google name and email only to identify you and
-              display your active, inactive, or visitor status. We do not sell or share
-              your information, and we will not contact you unless you ask us to. Read
-              our{" "}
+              Anyone may sign in with Google{discordEnabled ? " or Discord" : ""}; access
+              to member content remains by invitation. We use your name and email only to
+              identify you and display your active, inactive, or visitor status. We do
+              not sell or share your information, and we will not contact you unless you
+              ask us to. Read our{" "}
               <Link
                 href="/privacy-policy"
                 target="_blank"

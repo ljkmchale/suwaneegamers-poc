@@ -2,8 +2,11 @@ import { getIronSession, type SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 
 export interface UserSessionData {
-  /** Google account subject id (stable per user) */
+  /** Stable account subject id from whichever provider signed this visitor in. */
   sub?: string;
+  /** Which provider issued this session. Absent on sessions sealed before this
+   *  field existed — those are all Google, since it was the only provider. */
+  provider?: "google" | "discord";
   email?: string;
   name?: string;
   picture?: string;

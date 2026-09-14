@@ -64,7 +64,13 @@ interface UserProfileRow {
 }
 
 function profileId(session: UserSessionData): string {
-  const identity = session.sub ?? session.email?.toLowerCase() ?? "unknown";
+  // Namespace non-Google subjects by provider so a Discord snowflake can never
+  // collide with a Google sub (both are opaque numeric-looking strings).
+  // Google stays unprefixed — undefined `provider` predates multi-provider
+  // sign-in and was always Google — so existing member profiles keep their id.
+  const rawSub = session.sub ?? session.email?.toLowerCase() ?? "unknown";
+  const identity =
+    session.provider && session.provider !== "google" ? `${session.provider}:${rawSub}` : rawSub;
   return createHash("sha256").update(identity).digest("hex").slice(0, 24);
 }
 

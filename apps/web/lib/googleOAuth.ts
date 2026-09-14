@@ -1,4 +1,5 @@
 import "server-only";
+import { getOAuthBaseUrl } from "@/lib/oauthShared";
 
 const GOOGLE_AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 const GOOGLE_TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
@@ -21,25 +22,9 @@ export function isGoogleAuthConfigured(): boolean {
   return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 }
 
-/**
- * Resolve the externally-visible base URL for building redirect URIs. The
- * redirect URI must match exactly between the login redirect, the token
- * exchange, and what is registered in the Google Cloud console — so prefer an
- * explicit override, then proxy headers (production sits behind Cloudflare),
- * then the request origin.
- */
+/** Resolve the externally-visible base URL. See lib/oauthShared.ts. */
 export function getBaseUrl(request: Request): string {
-  const override = process.env.OAUTH_BASE_URL;
-  if (override) return override.replace(/\/$/, "");
-
-  const headers = request.headers;
-  const forwardedHost = headers.get("x-forwarded-host") ?? headers.get("host");
-  if (forwardedHost) {
-    const proto = headers.get("x-forwarded-proto")
-      ?? (forwardedHost.startsWith("localhost") || forwardedHost.startsWith("127.0.0.1") ? "http" : "https");
-    return `${proto}://${forwardedHost}`;
-  }
-  return new URL(request.url).origin;
+  return getOAuthBaseUrl(request);
 }
 
 export function getRedirectUri(request: Request): string {

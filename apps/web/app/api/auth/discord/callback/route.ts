@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { sealData } from "iron-session";
 import { USER_SESSION_OPTIONS, USER_SESSION_TTL_SECONDS, type UserSessionData } from "@/lib/userSession";
-import { exchangeCodeForIdentity, getBaseUrl, getRedirectUri, isGoogleAuthConfigured } from "@/lib/googleOAuth";
+import { exchangeCodeForIdentity, getRedirectUri, isDiscordAuthConfigured } from "@/lib/discordOAuth";
+import { getOAuthBaseUrl } from "@/lib/oauthShared";
 import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 import { clientIpFromHeaders } from "@/lib/securityLog";
 import { recordMemberSignin } from "@/lib/memberSignins";
@@ -10,13 +11,13 @@ export const dynamic = "force-dynamic";
 
 function homeUrl(request: NextRequest) {
   // Public host from proxy headers, never the internal origin (localhost:4652).
-  return new URL("/", getBaseUrl(request));
+  return new URL("/", getOAuthBaseUrl(request));
 }
 
 /** Where to land after a successful sign-in: the page they originally asked for. */
 function returnUrl(request: NextRequest) {
   const from = safeReturnPath(request.cookies.get(RETURN_TO_COOKIE)?.value);
-  return new URL(from, getBaseUrl(request));
+  return new URL(from, getOAuthBaseUrl(request));
 }
 
 function failure(request: NextRequest, reason: string) {
@@ -32,7 +33,7 @@ function failure(request: NextRequest, reason: string) {
 }
 
 export async function GET(request: NextRequest) {
-  if (!isGoogleAuthConfigured()) return failure(request, "not_configured");
+  if (!isDiscordAuthConfigured()) return failure(request, "not_configured");
 
   const { searchParams } = request.nextUrl;
   if (searchParams.get("error")) return failure(request, "denied");
@@ -50,8 +51,8 @@ export async function GET(request: NextRequest) {
   }
 
   recordMemberSignin({
-    provider: "google",
-    providerSub: identity.sub,
+    provider: "discord",
+    providerSub: identity.id,
     email: identity.email,
     displayName: identity.name,
     ip: clientIpFromHeaders(request.headers),
@@ -63,11 +64,11 @@ export async function GET(request: NextRequest) {
   // cookie the same way the (working) state cookie is written.
   const sealed = await sealData(
     {
-      sub: identity.sub,
-      provider: "google",
+      sub: identity.id,
+      provider: "discord",
       email: identity.email,
       name: identity.name,
-      picture: identity.picture,
+      picture: identity.avatar,
     } satisfies UserSessionData,
     { password: USER_SESSION_OPTIONS.password as string, ttl: USER_SESSION_TTL_SECONDS },
   );

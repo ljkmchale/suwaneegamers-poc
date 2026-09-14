@@ -400,7 +400,7 @@ export default function SecurityPage() {
           <div>
             <h2 className="text-sm uppercase tracking-wider text-[#9080a0]">Recent member sign-ins</h2>
             <p className="mt-2 text-xs text-[#6a5a78]">
-              Every completed Google sign-in during the last {DAYS} days, so a new member and where they
+              Every completed sign-in during the last {DAYS} days, so a new member and where they
               connected from can be traced later.
             </p>
           </div>
@@ -415,6 +415,7 @@ export default function SecurityPage() {
               <thead>
                 <tr className="border-b border-[#2a2a35] text-xs uppercase tracking-wider text-[#9080a0]">
                   <th className="px-4 py-3">When</th>
+                  <th className="px-4 py-3">Provider</th>
                   <th className="px-4 py-3">Name</th>
                   <th className="px-4 py-3">Email</th>
                   <th className="px-4 py-3">IP</th>
@@ -426,6 +427,9 @@ export default function SecurityPage() {
                   <tr key={signin.id}>
                     <td className="whitespace-nowrap px-4 py-2.5 text-[#9080a0]">
                       {dateTime(signin.createdAt)}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2.5 text-xs capitalize text-[#9080a0]">
+                      {signin.provider}
                     </td>
                     <td className="whitespace-nowrap px-4 py-2.5 text-xs text-[#e8dfc8]">
                       {signin.displayName ?? "—"}

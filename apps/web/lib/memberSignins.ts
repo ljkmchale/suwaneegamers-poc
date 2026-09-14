@@ -8,7 +8,8 @@ const RETENTION_DAYS = 180;
 export interface MemberSignin {
   id: number;
   createdAt: string;
-  googleSub: string;
+  provider: string;
+  providerSub: string;
   email: string;
   displayName: string | null;
   ip: string | null;
@@ -16,7 +17,9 @@ export interface MemberSignin {
 }
 
 export function recordMemberSignin(input: {
-  googleSub: string;
+  /** Which OAuth provider this sign-in came through, e.g. "google" or "discord". */
+  provider: string;
+  providerSub: string;
   email: string;
   displayName?: string | null;
   ip?: string | null;
@@ -25,11 +28,12 @@ export function recordMemberSignin(input: {
   try {
     const db = getDb();
     db.prepare(
-      `INSERT INTO member_signins (created_at, google_sub, email, display_name, ip, user_agent)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO member_signins (created_at, provider, google_sub, email, display_name, ip, user_agent)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
     ).run(
       new Date().toISOString(),
-      input.googleSub,
+      input.provider,
+      input.providerSub,
       input.email,
       input.displayName ?? null,
       input.ip ?? null,
@@ -45,6 +49,7 @@ export function recordMemberSignin(input: {
 interface MemberSigninRow {
   id: number;
   created_at: string;
+  provider: string;
   google_sub: string;
   email: string;
   display_name: string | null;
@@ -66,7 +71,8 @@ export function getRecentMemberSignins(options?: { days?: number; limit?: number
   return rows.map((row) => ({
     id: row.id,
     createdAt: row.created_at,
-    googleSub: row.google_sub,
+    provider: row.provider,
+    providerSub: row.google_sub,
     email: row.email,
     displayName: row.display_name,
     ip: row.ip,

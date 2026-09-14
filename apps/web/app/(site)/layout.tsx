@@ -16,6 +16,7 @@ import { getAutoManagedPages } from "@/lib/autoManagedPagesData";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { isGoogleAuthConfigured } from "@/lib/googleOAuth";
+import { isDiscordAuthConfigured } from "@/lib/discordOAuth";
 import { SignInGate } from "@/components/auth/SignInGate";
 import { ScheduleVoiceAssistant } from "@/components/livekit/ScheduleVoiceAssistant";
 import { getOrCreateUserProfile } from "@/lib/userProfiles";
@@ -36,14 +37,16 @@ export default async function SiteLayout({
   const editMode = isAdmin && session.editMode === true;
   const publicLegalPage = (await headers()).get("x-sg-public-legal-page") === "1";
 
-  // Require Google sign-in for the public site once OAuth is configured.
-  // Admins are always allowed through so they can never lock themselves out.
+  // Require sign-in for the public site once at least one OAuth provider is
+  // configured. Admins are always allowed through so they can never lock
+  // themselves out.
   const userSession = await getUserSession();
   const signedIn = isSignedIn(userSession) || isAdmin;
-  if (isGoogleAuthConfigured() && !signedIn && !publicLegalPage) {
+  const discordEnabled = isDiscordAuthConfigured();
+  if ((isGoogleAuthConfigured() || discordEnabled) && !signedIn && !publicLegalPage) {
     const cookieStore = await cookies();
     const authError = cookieStore.get("sg-auth-error")?.value;
-    return <SignInGate error={authError} />;
+    return <SignInGate error={authError} discordEnabled={discordEnabled} />;
   }
 
   if (publicLegalPage && !signedIn) {

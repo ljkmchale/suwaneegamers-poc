@@ -53,6 +53,16 @@ function migrateSchema(db: Database.Database): void {
     })();
   }
 
+  // Records which OAuth provider each member sign-in came through. Existing
+  // rows predate multi-provider sign-in and were all Google, so the column
+  // default covers them without a backfill.
+  const memberSigninColumns = new Set(
+    (db.prepare(`PRAGMA table_info(member_signins)`).all() as { name: string }[]).map((c) => c.name),
+  );
+  if (!memberSigninColumns.has("provider")) {
+    db.exec(`ALTER TABLE member_signins ADD COLUMN provider TEXT NOT NULL DEFAULT 'google'`);
+  }
+
   const campaignColumns = new Set(
     (db.prepare(`PRAGMA table_info(campaigns)`).all() as { name: string }[]).map((c) => c.name),
   );
@@ -808,11 +818,14 @@ function initializeSchema(db: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_security_events_kind_created
       ON security_events(kind, created_at DESC);
 
-    -- Every completed member Google sign-in (not just failures/scanners), so
+    -- Every completed member sign-in (not just failures/scanners), so
     -- "who is X and where did they come from" can be answered after the fact.
+    -- google_sub holds the stable subject id from whichever provider signed
+    -- them in (Google's "sub" or Discord's user id) — see the provider column.
     CREATE TABLE IF NOT EXISTS member_signins (
       id           INTEGER PRIMARY KEY AUTOINCREMENT,
       created_at   TEXT NOT NULL,
+      provider     TEXT NOT NULL DEFAULT 'google',
       google_sub   TEXT NOT NULL,
       email        TEXT NOT NULL,
       display_name TEXT,

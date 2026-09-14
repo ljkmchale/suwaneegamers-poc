@@ -42,10 +42,14 @@ function isPublicPath(pathname: string): boolean {
   );
 }
 
-// Mirrors lib/googleOAuth.ts: sign-in is only *enforced* once real credentials
-// exist, so a server without OAuth configured is never locked out of itself.
-function googleAuthConfigured(): boolean {
-  return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+// Mirrors lib/googleOAuth.ts and lib/discordOAuth.ts: sign-in is only
+// *enforced* once at least one provider has real credentials, so a server
+// with no OAuth configured is never locked out of itself.
+function anyAuthProviderConfigured(): boolean {
+  return (
+    Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) ||
+    Boolean(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET)
+  );
 }
 
 export async function proxy(request: NextRequest) {
@@ -84,7 +88,7 @@ export async function proxy(request: NextRequest) {
       if (isVerifiedCloudflareRequest(request.headers)) await automaticallyBlockThreat(ip);
     }
 
-    if (!googleAuthConfigured() || isPublicPath(pathname)) {
+    if (!anyAuthProviderConfigured() || isPublicPath(pathname)) {
       const requestHeaders = new Headers(request.headers);
       if (pathname === "/terms-of-use" || pathname === "/privacy-policy") {
         requestHeaders.set("x-sg-public-legal-page", "1");

@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 import { SignInGate } from "@/components/auth/SignInGate";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { safeReturnPath } from "@/lib/authRedirect";
+import { isDiscordAuthConfigured } from "@/lib/discordOAuth";
 
 export const metadata: Metadata = {
   title: "Sign In",
-  description: "Sign in with Google to enter Suwanee Gamers.",
+  description: "Sign in with Google or Discord to enter Suwanee Gamers.",
   robots: { index: false, follow: false },
 };
 
@@ -28,5 +29,5 @@ export default async function SignInPage({
   if (isSignedIn(await getUserSession())) redirect(target);
 
   const authError = (await cookies()).get("sg-auth-error")?.value;
-  return <SignInGate error={authError} returnTo={target} />;
+  return <SignInGate error={authError} returnTo={target} discordEnabled={isDiscordAuthConfigured()} />;
 }
