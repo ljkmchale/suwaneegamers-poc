@@ -250,22 +250,6 @@ export default function PlatformPage() {
               </div>
             </div>
 
-            <aside className={styles.myraDemo} aria-label="Example Myra conversation">
-              <div className={styles.demoHead}>
-                <span className={styles.dots} aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                </span>
-                <span>Ask Myra — example</span>
-              </div>
-              <div className={styles.demoBody}>
-                <p><b>You</b><span>Who is Draelith, and why does Therric hate him?</span></p>
-                <p><b>Myra</b><span>Looked up in the world’s own Chronicle, not guessed — Draelith led the betrayal at…</span></p>
-                <p><b>You</b><span>When’s our next session?</span></p>
-                <p><b>Myra</b><span>Straight from the real schedule. Thursday, 7:00 PM.</span></p>
-              </div>
-            </aside>
           </div>
         </section>
 
