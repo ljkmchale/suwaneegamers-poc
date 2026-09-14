@@ -304,7 +304,7 @@ export default function PlatformPage() {
           <blockquote className={styles.myraManifesto}>
             <span aria-hidden="true">“</span>
             <p>
-              Most sites have a chatbot. Myra is a voice to a portal where
+              Most sites have a chatbot. Myra is the voice of a portal where
               fantasy becomes reality.
             </p>
           </blockquote>
