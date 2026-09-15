@@ -136,7 +136,13 @@ starts.forEach((st,k)=>{
   const next=starts[k+1]??lines.length;
   const slice=lines.slice(st,next);
   const end=slice.findIndex((line,index)=>index>0 && /[–-]\s*The (?:Session Ends Here|End of the Session)\s*[–-]?/i.test(line.trim()));
-  const bounded=end>-1?slice.slice(0,end+1):slice;
+  // The still-in-progress session has no explicit end marker yet, so its slice
+  // otherwise runs to the end of the document — sweeping in the campaign-wide
+  // "Notable NPCs" reference appendix (a table whose cells don't start with "|",
+  // so parseSession's short-line heuristic turns every cell into its own heading).
+  // Stop at whichever boundary comes first.
+  const appendix=slice.findIndex((line,index)=>index>0 && /Notable NPCs/i.test(line.trim()));
+  const bounded=end>-1?slice.slice(0,end+1):appendix>-1?slice.slice(0,appendix):slice;
   const parsed=parseSession(bounded);
   sessionsByNumber.set(parsed.num,parsed);
 });
@@ -233,6 +239,33 @@ ${artSeed}
   }
   function upd(){var h=scroller.scrollHeight-scroller.clientHeight;bar.style.transform='scaleX('+(h>0?scroller.scrollTop/h:0)+')';}
   scroller.addEventListener('scroll',upd,{passive:true});upd();
+
+  // Deep links (e.g. #s43) target a <section> inside the custom .scroll container
+  // rather than the document body. The browser's built-in "scroll to fragment on
+  // load" step is unreliable for a non-document scrolling box once web fonts and
+  // hero art finish loading and shift layout height beneath it — on a cold load it
+  // can leave the page sitting at scrollTop 0 (or drift mid-chapter) instead of the
+  // requested chapter. Drive the scroll ourselves and re-assert it as the async
+  // layout-affecting work (fonts, art) settles, but stop the moment a visitor
+  // takes the wheel/keyboard/touch themselves.
+  if(location.hash){
+    var hashTarget=document.getElementById(location.hash.slice(1));
+    if(hashTarget){
+      var userTookControl=false;
+      ['wheel','touchstart','keydown'].forEach(function(evt){
+        scroller.addEventListener(evt,function(){userTookControl=true;},{passive:true,once:true});
+      });
+      var jumpToHash=function(){
+        if(userTookControl) return;
+        hashTarget.scrollIntoView({block:'start',behavior:'auto'});
+      };
+      jumpToHash();
+      window.addEventListener('load',jumpToHash);
+      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(jumpToHash);
+      setTimeout(jumpToHash,400);
+    }
+  }
+
   var links=[].slice.call(document.querySelectorAll('.rail-list a'));
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);if(i>-1){links.forEach(function(a){a.parentElement.classList.remove('active');});links[i].parentElement.classList.add('active');links[i].scrollIntoView({block:'nearest'});}}});},{root:scroller,threshold:0,rootMargin:'-45% 0px -50% 0px'});
