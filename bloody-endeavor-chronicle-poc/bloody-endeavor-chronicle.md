@@ -2325,8 +2325,47 @@ We stop at this point, trying to figure out how to reunite the party.
 	Character level at end of the session
 	6
 	Sessions played at that level
+	43 - Kibbit Needs A Bath
+Session Date:  September 14th, 2026
+In-game Date:  30th of Paramor, 1246
+Starting Location:  Prison Island off the coast of Gavalkan
+In the Cloud Space
+Caelion casts Sending to Pagern …
 
 
+When fountain starts, all touch at same time. Don’t. Pick. up. Weapons. I’m working on it.
+Pagern receives the message and replies…
+
+
+Got it. When the fountain starts we will all touch it together.
+Caelion casts toll the dead on the golem, starting initiative:
+         * ROUND ONE:  The golem turns toward Caelion and spews poisonous gas from his mask, nearly knocking out Caelion. His Death Ward saves him. Caelion just stands there waiting for the golem to reform in the middle. Combat ends with the golem looking towards Caelion.
+The fountain reactivates and the rest of the party touches it, returning them back to the painting room with Caelion. We discuss the nature of the room. Rhody will stand by the bedroom painting and plans to attack it, drawing its attention.  Rhody throws his pitchfork, (rolling like shit) and it takes him 5 times to hit the golem…
+         * ROUND ONE:  The Iron Golem strikes towards Rhody but misses twice (also rolls like shit), and the rest of the party waits for the golem to freeze. Eventually it does and combat ends.
+The painting of the bedroom comes alive. On the left side of the painting is a massive bed with a canopy. On the right side is a bubbling bathtub. It’s looking lively. The party walks through the painting. It’s like opening a door, and we notice a door where the painting was when we enter the 40 x 40 room. The walls all have a scattering of paintings. Kibbit begins disrobing and heads toward the bubble bath when a bubble amalgamation. We ask if the amalgamation is Esadi, and the bubbles fall away to reveal the woman. She’s not wearing anything besides the jewelry. She magically commands wind to bring her a towel. Kibbit keeps asking if he can use the bath and she eventually says yes. Albross asks her about the storm around the island, asking her if she can stop the storm from bringing ships to the island. She tells us she really wants Zeldrigos’s gem. It's very powerful and she wants to study it. We tell her we want to make a deal to figure out a way to get off of the island. She summons a cloud of fog to give us a moment of privacy while we discuss our plan.
+We agree we shouldn’t give her the rimestone. We discuss our options: killing the dragon, convincing her to let one ship pass by, etc. The winds dissipate and Kibbit talks to her about spreading her name where we go and convincing others to worship her as the Goddess of the Sky Esadi. She seems to like this idea. Caelion brings up Maw and asks to ensure we make sure she gets off the island as well. She says she can also grant all of our wishes if we bring her the gem.
+We have 3 options:
+         * Option 1 is to go get her the gem now and she gives us a tower and keeps the prisoners locked up.
+         * Option 2 is she lets us out of the island in exchange for worshiping her and spreading her name as the goddess of the sky to every town.
+         * Option 3 is entering a contract to be released from the prison now and returning within the year to kill the dragon and get her the gem. We’re leaning towards Option 2 or 3.
+Meanwhile, Albross steps out of the bedroom and casts Contact Other Plane to his patron.  A six winged bird appears ...
+         1. He asks if the storm has stopped more people than the gem has.
+Answer: Unclear.
+         2. He asks if Esadi is someone with a strong moral compass.
+Answer: She is like a storm.
+         3. Has Esadi brought harm to this world unjustly?
+Answer: Partially Responsible.
+         4. If she had the gem, would she do more than just study it, like she claims?
+Answer: Yes.
+         5. Is Esadi a threat to the stability of the Rostiena Foothills?
+Answer:  No.
+The patron avatar disappears and Albross is standing with the golem.
+We all meet at the terrace discussing our options. We all decide on option 2 except for Albross, who is vehemently against worshipping Esadi. We decide we’ll each decide for ourselves and head back to Esadi, except for Albross who’s investigating the paintings in the golem room.
+Pagern, Caelion and Kibbit take a bath.
+Everyone but Albross takes Option 2 … promoting Esadi as becoming a goddess.  We become, Wyrmbane, worshippers of Esadi.
+Rhody asks his monocle, speaking to Madam Mabel, asking if this will anger her. He casts See Invisibility, and sees her as he looks through the monocle. She’s there in the reflection, chuckling. Rhody also sees an invisible air elemental. We discuss the terms of the deal. All but Albross make the deal, and are all now worshippers of Esadi. She summons Albross with a tornado and asks him to make his choice. He casts banishment, and she disappears. We roll initiative.
+            * ROUND ONE:  The Air Elemental hidden in the room attacks Albross, losing concentration on Banishment. Esadi returns in her truer form as a Djinn. Kibbit hides behind Pagern and takes the dodge action. Pagern casts Polymorph on Albross, but Albross resists the spell. Albross casts Guardian of Faith, targeting Esadi and anyone who damages him. Caelion . Rhody attempts to grapple Albross but fails. Esadi knocks down Albross, and the Air elemental sucks all the wind out of his lungs, killing him. Combat ends.
+Esadi gives us a bag of wind to leave and return to her domain. She shunts us back to the terrace and we put Albross’s body into the bag of holding. We ask Esadi how Maw will get out safely, and the wind tells us we can tell the dragon that the strait is fixed. We are shunted off the terrace and are sent down towards the ground, saved by the bag. The dragon arrives with Maw to greet us. We tell him the strait is fixed. He tells us we are ok to leave the island. If we ever return, he’ll make a point to visit us. Kibbit asks for some gold or gems in recompense. Zeldrigos says no. We say our goodbyes and take Maw with us. We use the bag again and return to the terrace, Maw in tow. Esadi is at the top again, and she sends us away to Gevakaln. She casts Wind Walk on us and we head to Gevakaln. We land on the outside of the city, returning to our physical forms. We revive Albross with Revivfy. We decide we’ll head towards Gevakaln to help save Albross’s brother.
 
 
 🧑‍🤝‍🧑 Notable NPCs
@@ -2698,56 +2737,56 @@ Primary Quests
 
 	Quest
 	Notes
-	         * 	Rescue Princess
+	            * 	Rescue Princess
 	Obtained 100gp each
-	         * 	Checking in on Establishment
+	            * 	Checking in on Establishment
 	Warehouse in the hole
 Profits
 Cud Thongen
 Bring his headband
 Obtained 100gp each
-	         * 	Kill a monster that killed a bear
+	            * 	Kill a monster that killed a bear
 	Scipio would like to find and take care of a monster that had killed a bear.
-	         * 	Investigate the tablet
+	            * 	Investigate the tablet
 	Tablet from Kana to Ravi, in a druidic slang …
 The funds from Colbath have been drying up.
 I will send Ravi to gather more shortly.
 May the cold breath freeze all
-	         * 	Find a bone marigold flower
+	            * 	Find a bone marigold flower
 	The flower is to cure Eva
 A champion searched in the nearby woods to the SW
-	         * 	Get Bakah some armor
+	            * 	Get Bakah some armor
 
 
-	         * 	Stop the Cold Breath
+	            * 	Stop the Cold Breath
 	Cold Breath wants to freeze the earth to save the people somehow. But many people and much nature will perish. This plan is unacceptable. While some say there are too many people, there is not too many nature.
-	         * 	Help the Cold Breath
+	            * 	Help the Cold Breath
 	Counterpoint: There are too many people
-	         * 	Vengeance on the Slavers
+	            * 	Vengeance on the Slavers
 
 
-	         * 	Job for Caifirs
+	            * 	Job for Caifirs
 	Caifir wants this
 Find out what the House of Daeloris is up to.
 They are hiring mercenaries
 50 gp for info / 200 gp for each person
 Paragain Crawbert is cousin to the family, seen hiring … scrawny,
-	         * 	Kill Paragain Crawbert
+	            * 	Kill Paragain Crawbert
 	He shall be punished for his treachery
-	         * 	Save Spiked Throats
+	            * 	Save Spiked Throats
 Failed (Most likely)
 	Safe House 4
 Arm Shyeris
-	         * 	Hunt Jasper 5 fingers
+	            * 	Hunt Jasper 5 fingers
 	He stole our manacles
-	         * 	Find new friend
+	            * 	Find new friend
 	We need to “hatch a new egg”
-	         * 	Find another friend
+	            * 	Find another friend
 	We need another Goblin
-	         * 	Stop the war between the Rostina Foothills and the Dalasor Coast
+	            * 	Stop the war between the Rostina Foothills and the Dalasor Coast
 
 
-	         * 	Go to Yag’vur Sierra to recruit the nomads and the dwarves on the Magistrate of Witguard’s behalf
+	            * 	Go to Yag’vur Sierra to recruit the nomads and the dwarves on the Magistrate of Witguard’s behalf
 	We need to figure out where the dwarves live
 
 
@@ -2758,15 +2797,15 @@ Side Quests
 
 	Quest
 	Notes
-	         * 	Meet up with the Sacred Crows
+	            * 	Meet up with the Sacred Crows
 	They are working towards the same goal with the Magistrate
-	         * 	Give Widow Tabard from dead knight
+	            * 	Give Widow Tabard from dead knight
 
 
-	         * 	Help Lady Roysia Coarsepetal find her sword
+	            * 	Help Lady Roysia Coarsepetal find her sword
 
 
-	         * 	Stranger Danger - Who was the cabin murderer
+	            * 	Stranger Danger - Who was the cabin murderer
 	Figure out what that guy standing in the woods by the murder house was doing
 Lucerion saw the guy, but we don’t know much about it.
 
@@ -2781,21 +2820,21 @@ Dumb Quests
 
 	Quest
 	Notes
-	         * 	Pretty Elf
+	            * 	Pretty Elf
 	Alavara - elven maid at the Caifir Estate. Not too fond of Lucerion.
 
 
 *but you are saying there is a chance?
-	         * 	Take over the Grain Operation
+	            * 	Take over the Grain Operation
 	Stake out the re-established grain operation
 After a couple stretches, stake out the warehouse to see if the smuggling operation has restarted. Decide to shut it down again or maybe start taking some “protection money.”
-	         * 	Free the Gabüks!
+	            * 	Free the Gabüks!
 	They seem to be treated very poorly
-	         * 	Kill Neha
+	            * 	Kill Neha
 	Could be fun * was not fun, Lucy did…. “things”
-	         * 	Kill Aishka the Braizen
+	            * 	Kill Aishka the Braizen
 	Found him in Witguard wrestling knights. He got away but we retrieved the pilfered Tabard
-	         * 	Avenge the Spider Monkey’s Troop
+	            * 	Avenge the Spider Monkey’s Troop
 	The Orcs must pay
 
 
@@ -2879,38 +2918,38 @@ Character
 	0
 
 
-	         * Alive
-	         * Alive
-	         * Alive
-	         * Alive
-	         * Alive
-	         * Alive
+	            * Alive
+	            * Alive
+	            * Alive
+	            * Alive
+	            * Alive
+	            * Alive
 
 
 
 
 📑 Old Name Table
 Important Names
-         * Caifir Family
+            * Caifir Family
 Trustworthy family in the city of Climbor
-         * Inriel the Butler
+            * Inriel the Butler
 Trusted alley of the Caifir Family
-         * Cold Breath Cult
+            * Cold Breath Cult
 Cult that was aiding the Colbath family
 Fled east after we returned to help the Colbath family
-         * Colbath Family
+            * Colbath Family
 Noble family that has a keep outside of Climbor
-         * Cult of Verander
+            * Cult of Verander
 Cult that tends to be underneath cities, worshipping an elf named Verander
-         * Aiska the Half Dragon
+            * Aiska the Half Dragon
 Met in the cavern, almost killed us before getting away
-         * Lilian
+            * Lilian
 Woman hunting the Cult of Vernader
-         * Saildreith, the Copper
+            * Saildreith, the Copper
 Bronze dragon that we saved in the orc fort
-         * Ana Belen Sandoval
+            * Ana Belen Sandoval
 Agent or spy from Pelveron, in the Dalasor Coast territory
-         * Chief Sharpmire
+            * Chief Sharpmire
 Leader of the Orcs
 
 
@@ -3156,60 +3195,25 @@ Lesson 3: Don’t make deals with fey or hags
 Lesson 4: How oil lanterns work:
 
 
-            * If you see a statue behind a sarcophagus, assume you have to deal with the statue.
+               * If you see a statue behind a sarcophagus, assume you have to deal with the statue.
 
 
 Look Up!
 Group Name
 Party Name Suggestions:
-            * High Society (Hi!)
-            * Wyrm Bane ™
-            * Wyrm Friends
-            * Rage Against The Dragine
+               * High Society (Hi!)
+               * Wyrm Bane ™
+               * Wyrm Friends
+               * Rage Against The Dragine
 Killing in the Name of…
-            * Mountain Smashers
-            * Pagern and the heartbreakers
-            * Summer Breeze
-            * Spring Cleaning
-            * The Goat Herders!
-            * Winds of Summer
-            * 6 – no, 5 – Guys
-            * Wait, Wait, don’t kill me
-            * Goat Toaster 2026
-            * “The Hard Way”
-            * Dragon Slaves
-
-
-Tab 9
-42 - I Believe I Can Fly
-Session Date:  August 17th, 2026
-In-game Date:  29th of Paramor, 1246
-Starting Location:  Prison Island off the coast of Gavalkan
-We Are at a Pit in the Jungle
-A large flowering vine emerges from a pit that the group has come up on.
-               * ROUND ONE:  Poisonous plants are around, poisoning the party. Pagern casts FIREBALL!  The flower grabs Rhody.  Albross hits the flowering vine.  It attacks Rhody, who gets gobbled up. Kibbit attempts to hide then throws his dagger. It attacks Albross but misses. Rhody melts (is damaged by acid) in the creatures.  Rhody casts Conjure Barrage.  The spores get denser, and Albross and Kibbit feel compelled to move closer towards the pit. Caelion casts Sacred Flame, then backs up and casts Healing Word.  Maw casts Hunter’s Mark and fires at it twice. The plant bites at Albross again, restraining him.
-               * ROUND TWO: Albross casts Armor of Agathys and Eldritch Blast. The plant crits, swallowing him whole. Pagern casts Fireball, dealing massive damage. The plant bites at Kibbit, restraining him. Kibbit steadily aims and stabs the plant. It swallows Kibbit. Rhody attacks from the inside, hitting with Orcreaver.  Caelion casts Sacred Flame again. Maw shoots at it two more times, killing it.  The plant vine explodes.
-Rhody, Albross and Kibbit fall into the pit, catching themselves in various ways. We see a passageway that goes to the left and to the right. We see large scratch marks that could be made by a large cat, and the same weird geode-like rock. Kibbit goes to investigate the paths. Pagern, Caelion and Maw make their way down. Rhody starts cutting at the plant, looking to see if anyone else was swallowed.
-Kibbit sees 3 paths: one has walls that feel rock-like as expected with flora, while the other 2 (the ones going west) are made of a colder material. Kibbit investigates the material but is unsure what it is. Kibbit returns and lets the party know what he’s found. Albross looks and notices ore in the walls. Rhody investigates the plant and just finds skeletal remains of animals, including a large Rongri corpse. Pagern ritually casts Detect Magic.
-Kibbit explores the northwest passage, finding 2 paths going north and south. He explores the southern path, seeing a giant spider in its web. There is more than 30 ft of webbing on the ceiling. He returns to the party. Pagern finishes his spell, noticing that the air glows with all 8 schools of magic. It intensifies slightly as he continues down the northern path. We prepare for a long rest as Pagern casts Alarm at the different entrances to the room. Kibbit and Caelion take the first watch, Kibbit asks what Caelion’s story is, and he explains the situation. Kibbit explains his backstory- he was going to take something back from a person who stole from his family, breaking into their house. Guards went into the house where he was hiding looking for him, and the guards mistook a child for Kibbit and killed him. He was sent here to serve for the death of the child. He stole a knife from the captain and has been stuck here ever since.
-Maw and Rhody take the second watch. Maw spills the tea on the Sacred Crows: Kotio flirts with the women in the party all the time, Heffick keeps blabbering about the “better world” he wants to make, & the rogue has a smoking addiction. Maw says that she’s mostly in it for the money to fund her sister's tuition to a bard college. The sacred crows apparently always sleep in a magic hut conjured by Amaros.
-It’s the 30th of Paramor
-After the long rest, we notice that Maw is the only one that wasn’t able to get a rest.  Albross says that he doesn’t see any spiders and doesn’t know if they are there. Kibbit gets mad that Albross doesn’t believe him and tries to prove he’s correct. Rhody breaks up the argument and Kibbit goes to investigate the other path that is unnaturally warm.
-He walks into a large cavern and hears moving water to the north east down a branch in the cave, but it is too far for him to see. The cavern extends to the west beyond his cone of vision. After walking along the south of the cave, Kibbit sees another path extending to the south. There is a large “stoney mound” in the north west corner along the edge of an underground pond. The “stoney mound” is actually a large pile of coins and valuable gems. It is the most amount of money anyone in the party has ever seen. At that point, the gems in the pile start moving and form into a large dragon shape. It proclaims itself as Zeldrigos, the Indomitable Serpent.
-Zeldrigos says that the island is its domain and no one is allowed to leave the island. It has made a deal with the people who run the prison to allow them to come and go. Albross is able to deduce that this is a dragon made of Jacinth, which is a reddish brown gem. Esadi the Herrying is someone that Zeldrigos made a deal with and he’s not happy about that. She’s been using the storm to cause shipwrecks, and he doesn’t want to talk to her in fear of losing his gem. We agree to go talk to her, and he gives us a bag of wind in order to get to her tower in the clouds.  He takes us out of his lair, keeping Maw as collateral.
-To the Tower of Esadi the Herring
-We open the bag of wind and shoot into the air.  As we ascend, we notice a marble tower that we are heading to.  We float to the marble tower, landing on the platform top of the tower with a roof.  The platform is decorated with a chessboard floor, vines with grapes, incense, chairs, etc.  We land and the incense is too strong (giving us Disadvantage on Perception checks).  Kibbit grabs a bunch of grapes and pours some wine. Pagern ritually casts Detect Magic, Kibbit explores the outside of the tower but is having a tough time. The wine is enchanted, the censer has transmutation, enchantment and illusion, and there is illusion magic all around. We close the censer, and suddenly we’re magically transported to another plane of existence.
-We feel like we step out of a painting of moving clouds, into a 30 x 40 room, where there is an iron statue of a man with a sword and shield. We see a painting on each of the four walls:  the one of moving clouds, one of a large pile of gold, one of a desert oasis, and a painting of a luxurious bed room.  Caelion touches the painting with the treasure and the statue man attacks … It's an Iron Golem.
-               * ROUND ONE:  Caelion casts a Dust of Suleiman, damaging the golem. Pagern casts Wall of Fire, which appears to heal the golem. It approaches Caelion and hits him twice, dealing massive damage. Kibbit hits it with his knife. Albross casts Chill Touch, keeping it from healing. The golem looks at each person that damaged it.
-               * ROUND TWO:  Caelion casts Cure Wounds on himself.  Pagern casts Cone of Cold on the Golem. The golem disappears and reappears behind us … the Treasure Room painting is now moving.
-Caelion touches the moving Treasure Room painting and disappears.  Everyone follows.  The party appears in a 30 x 30 room full of gold and magic items.  The gold is moving as if it’s a fountain of gold.  Pagern’s detect magic is still present and he notices that the weapons are magic and there is something of more powerful magic deep in the pile of gold.  He then begins to pick up the gold, scooping it into Caelion’s Bag of Holding.  Pagern then reaches for the magical weapons, which animates and attacks.
-               * ROUND ONE: Kibbit attempts to dig through the gold looking for the powerful magic Pagern sensed, diving into the fountain of gold (Scrooge McDuck), swimming in to grab at the magical item. It’s a small rectangular pouch. The weapons attack, hitting Caelion, Pagern and Albross.  Caelion casts Spirit Guardians, damaging the animated weapons.  Rhody moves and gets hit by one of the weapons that hits him, knocking him prone.  Rhody gets up and moves to an advantageous position, casting Conjure Barrage, killing all but 3 weapons.  Pagern shoots one with a Firebolt and kills it.  Albross kills another with Eldritch Blast.
-               * ROUND TWO:  Kibbit hands Pagern the pouch of and moves up to the last animated item and kills it.
-Pagern sees a deck of cards in the pouch and returns it to Kibbit.  Caelion touches the fountain spewing gold and is teleported back into the room with the Iron Golem.  With his Spirit Guardian up, the Iron Golem is hit and they fight!
-               * ROUND ONE:  The golem moves towards Caelion, hitting him once. Caelion recasts Spirit Guardians, damaging it.
-               * ROUND TWO: The fog reappears and the golem teleports and becomes inert again.
-The fountain stops flowing, as the magic connecting us to the room of paintings is severed. Everyone appears to be blocked off from Caelion.  Pagern goes to grab the weapons again and they animate once more.
-               * ROUND ONE:  Pagern casts Fireball, defeating all of the magical weapons.
-Caelion attacks the Iron Golem and a small fight starts for a round and then stops.  The paintings are frozen in place and so Caleion attacks again, hoping to reanimate the paintings, but the combat doesn’t work.
-We stop at this point, trying to figure out how to reunite the party.
-– The Session Ends Here –
+               * Mountain Smashers
+               * Pagern and the heartbreakers
+               * Summer Breeze
+               * Spring Cleaning
+               * The Goat Herders!
+               * Winds of Summer
+               * 6 – no, 5 – Guys
+               * Wait, Wait, don’t kill me
+               * Goat Toaster 2026
+               * “The Hard Way”
+               * Dragon Slaves

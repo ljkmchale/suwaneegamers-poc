@@ -871,6 +871,21 @@ function initializeSchema(db: Database.Database): void {
       created_by   TEXT
     );
 
+    -- A blocked member can ask an administrator to review the restriction.
+    -- This is intentionally separate from member_blocks so the request and
+    -- its resolution remain visible after access is restored.
+    CREATE TABLE IF NOT EXISTS member_unblock_requests (
+      email        TEXT PRIMARY KEY,
+      message      TEXT,
+      status       TEXT NOT NULL CHECK (status IN ('pending', 'approved', 'declined')),
+      requested_at TEXT NOT NULL,
+      reviewed_at  TEXT,
+      reviewed_by  TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_member_unblock_requests_status_requested
+      ON member_unblock_requests(status, requested_at DESC);
+
     -- ----------------------------------------------------------------
     -- JSON content documents
     -- ----------------------------------------------------------------

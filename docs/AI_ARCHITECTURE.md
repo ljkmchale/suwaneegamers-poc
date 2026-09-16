@@ -65,6 +65,13 @@ Credential/secret-file probes, installer or web-shell paths, and non-read
 requests to suspicious paths block immediately. Never block Cloudflare's shared
 cross-zone Worker source `2a06:98c0:3600::103`; it is not a visitor identity.
 
+Member access restrictions are separate from Cloudflare IP blocks. The
+`member_blocks` table is enforced by `proxy.ts` on every authenticated request
+and by both OAuth callbacks. A rejected identity receives a short-lived sealed
+review token; `/signin` uses it to submit a verified request into
+`member_unblock_requests`. Pending requests and the Unblock/Keep blocked
+decisions live at `/admin/members`. Internal block reasons are admin-only.
+
 `/images/...` is obsolete. Files under `apps/web/media/images/` must be referenced as `/media/images/...`. Do not put site media back under `public/` unless the architecture contract is deliberately migrated everywhere.
 
 ## Change-impact checklist

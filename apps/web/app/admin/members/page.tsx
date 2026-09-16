@@ -2,7 +2,12 @@ import Link from "next/link";
 import { ArrowLeft, ShieldCheck, UserPlus, Ban } from "lucide-react";
 import { listSiteMembers, NEW_MEMBER_DAYS } from "@/lib/userProfiles";
 import { listMemberBlocks } from "@/lib/memberBlocks";
-import { blockMemberAction, unblockMemberAction } from "./actions";
+import { listPendingMemberUnblockRequests } from "@/lib/memberUnblockRequests";
+import {
+  blockMemberAction,
+  declineMemberUnblockRequestAction,
+  unblockMemberAction,
+} from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +50,7 @@ function RosterBadge() {
 export default function AdminMembersPage() {
   const members = listSiteMembers();
   const blocks = listMemberBlocks();
+  const reviewRequests = listPendingMemberUnblockRequests();
   const blockedEmails = new Set(blocks.map((block) => block.email));
   const newCount = members.filter((member) => member.isNew).length;
   const offRoster = members.filter((member) => !member.onRoster).length;
@@ -66,7 +72,7 @@ export default function AdminMembersPage() {
         the join date, so it stays until the person is no longer new.
       </p>
 
-      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <div className="mb-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <div className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] p-5">
           <div className="text-3xl font-cinzel text-[#f59e0b]">{members.length}</div>
           <div className="mt-1 text-xs uppercase tracking-widest text-[#a89880]">Total members</div>
@@ -81,7 +87,72 @@ export default function AdminMembersPage() {
           <div className="text-3xl font-cinzel text-[#c9b8a8]">{offRoster}</div>
           <div className="mt-1 text-xs uppercase tracking-widest text-[#a89880]">Not on roster</div>
         </div>
+        <div className="rounded-lg border border-amber-800/60 bg-amber-950/10 p-5">
+          <div className="text-3xl font-cinzel text-amber-300">{reviewRequests.length}</div>
+          <div className="mt-1 text-xs uppercase tracking-widest text-[#a89880]">
+            Access reviews
+          </div>
+        </div>
       </div>
+
+      {reviewRequests.length > 0 && (
+        <section className="mb-10">
+          <h2 className="mb-2 font-cinzel text-xl uppercase tracking-widest text-amber-200">
+            Access review requests
+          </h2>
+          <p className="mb-4 max-w-2xl text-sm text-[#a89880]">
+            These blocked members asked for their access to be reviewed. Unblocking restores their
+            ability to sign in; keeping the restriction closes the current request.
+          </p>
+          <div className="overflow-x-auto rounded-lg border border-amber-800/50 bg-amber-950/5">
+            <table className="w-full min-w-[700px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-amber-900/40 text-[10px] uppercase tracking-widest text-[#8f7b62]">
+                  <th className="px-4 py-3 font-sans font-normal">Account</th>
+                  <th className="px-4 py-3 font-sans font-normal">Message</th>
+                  <th className="px-4 py-3 font-sans font-normal">Requested</th>
+                  <th className="px-4 py-3 font-sans font-normal">Decision</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reviewRequests.map((request) => (
+                  <tr key={request.email} className="border-b border-[#2a211c] last:border-0">
+                    <td className="px-4 py-3 text-[#e8dcc8]">{request.email}</td>
+                    <td className="max-w-md whitespace-pre-wrap px-4 py-3 text-[#c9b8a8]">
+                      {request.message ?? "No message included."}
+                    </td>
+                    <td className="px-4 py-3 align-top text-[#c9b8a8]">
+                      {dateTime(request.requestedAt)}
+                    </td>
+                    <td className="px-4 py-3 align-top">
+                      <div className="flex flex-wrap gap-2">
+                        <form action={unblockMemberAction}>
+                          <input type="hidden" name="email" value={request.email} />
+                          <button
+                            type="submit"
+                            className="rounded border border-emerald-700 bg-emerald-950/30 px-2 py-1 font-sans text-[10px] uppercase tracking-wider text-emerald-300 hover:bg-emerald-950/60"
+                          >
+                            Unblock
+                          </button>
+                        </form>
+                        <form action={declineMemberUnblockRequestAction}>
+                          <input type="hidden" name="email" value={request.email} />
+                          <button
+                            type="submit"
+                            className="rounded border border-[#3a3340] px-2 py-1 font-sans text-[10px] uppercase tracking-wider text-[#a89880] hover:border-red-800 hover:text-red-300"
+                          >
+                            Keep blocked
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       <div className="overflow-x-auto rounded-lg border border-[#2a2a35]">
         <table className="w-full min-w-[640px] text-left text-sm">

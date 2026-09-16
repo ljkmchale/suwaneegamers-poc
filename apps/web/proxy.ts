@@ -5,6 +5,11 @@ import { USER_SESSION_OPTIONS, isSignedIn, type UserSessionData } from "@/lib/us
 import { automaticallyBlockThreat, clientIpFromHeaders, isSuspiciousPath, recordSecurityEvent } from "@/lib/securityLog";
 import { isVerifiedCloudflareRequest } from "@/lib/cloudflareSecurity";
 import { isMemberBlocked } from "@/lib/memberBlocks";
+import {
+  createMemberBlockReviewToken,
+  MEMBER_BLOCK_REVIEW_COOKIE,
+  MEMBER_BLOCK_REVIEW_TTL_SECONDS,
+} from "@/lib/memberBlockReviewIdentity";
 import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
 
 // Reachable without a signed-in visitor. Everything else — pages and APIs alike
@@ -175,6 +180,7 @@ export async function proxy(request: NextRequest) {
       // checked on every request, not just at sign-in, or an existing 30-day
       // session would keep working after being blocked.
       if (userSession.email && isMemberBlocked(userSession.email)) {
+        const reviewToken = await createMemberBlockReviewToken(userSession.email);
         recordSecurityEvent({
           kind: "member_blocked",
           path: pathname,
@@ -185,6 +191,13 @@ export async function proxy(request: NextRequest) {
         if (pathname.startsWith("/api/")) {
           const blockedApiResponse = NextResponse.json({ error: "Access revoked." }, { status: 403 });
           blockedApiResponse.cookies.delete("sg-user");
+          blockedApiResponse.cookies.set(MEMBER_BLOCK_REVIEW_COOKIE, reviewToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            maxAge: MEMBER_BLOCK_REVIEW_TTL_SECONDS,
+          });
           return blockedApiResponse;
         }
         const blockedResponse = NextResponse.redirect(new URL("/signin", request.url));
@@ -195,6 +208,13 @@ export async function proxy(request: NextRequest) {
           sameSite: "lax",
           path: "/",
           maxAge: 30,
+        });
+        blockedResponse.cookies.set(MEMBER_BLOCK_REVIEW_COOKIE, reviewToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: MEMBER_BLOCK_REVIEW_TTL_SECONDS,
         });
         return blockedResponse;
       }

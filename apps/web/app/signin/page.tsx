@@ -5,6 +5,12 @@ import { SignInGate } from "@/components/auth/SignInGate";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { safeReturnPath } from "@/lib/authRedirect";
 import { isDiscordAuthConfigured } from "@/lib/discordOAuth";
+import { isMemberBlocked } from "@/lib/memberBlocks";
+import {
+  MEMBER_BLOCK_REVIEW_COOKIE,
+  readMemberBlockReviewToken,
+} from "@/lib/memberBlockReviewIdentity";
+import { getMemberUnblockRequest } from "@/lib/memberUnblockRequests";
 
 export const metadata: Metadata = {
   title: "Sign In",
@@ -20,14 +26,31 @@ export const dynamic = "force-dynamic";
 export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ from?: string }>;
+  searchParams: Promise<{ from?: string; review?: string }>;
 }) {
-  const { from } = await searchParams;
+  const { from, review } = await searchParams;
   const target = safeReturnPath(from);
 
   // Already signed in (a stale bookmark, or a second tab): go straight through.
   if (isSignedIn(await getUserSession())) redirect(target);
 
-  const authError = (await cookies()).get("sg-auth-error")?.value;
-  return <SignInGate error={authError} returnTo={target} discordEnabled={isDiscordAuthConfigured()} />;
+  const cookieStore = await cookies();
+  const authError = cookieStore.get("sg-auth-error")?.value;
+  const reviewEmail = await readMemberBlockReviewToken(
+    cookieStore.get(MEMBER_BLOCK_REVIEW_COOKIE)?.value,
+  );
+  const blockedReviewAvailable = Boolean(reviewEmail && isMemberBlocked(reviewEmail));
+  const reviewStatus = reviewEmail ? getMemberUnblockRequest(reviewEmail)?.status : undefined;
+
+  return (
+    <SignInGate
+      error={blockedReviewAvailable ? "blocked" : authError}
+      returnTo={target}
+      discordEnabled={isDiscordAuthConfigured()}
+      blockedReviewAvailable={blockedReviewAvailable}
+      reviewPending={reviewStatus === "pending" || review === "requested"}
+      reviewDeclined={reviewStatus === "declined"}
+      reviewUnavailable={review === "unavailable"}
+    />
+  );
 }

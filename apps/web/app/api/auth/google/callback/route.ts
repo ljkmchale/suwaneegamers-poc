@@ -6,6 +6,11 @@ import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 import { clientIpFromHeaders } from "@/lib/securityLog";
 import { recordMemberSignin } from "@/lib/memberSignins";
 import { isMemberBlocked } from "@/lib/memberBlocks";
+import {
+  createMemberBlockReviewToken,
+  MEMBER_BLOCK_REVIEW_COOKIE,
+  MEMBER_BLOCK_REVIEW_TTL_SECONDS,
+} from "@/lib/memberBlockReviewIdentity";
 
 export const dynamic = "force-dynamic";
 
@@ -21,13 +26,27 @@ function returnUrl(request: NextRequest) {
 }
 
 function failure(request: NextRequest, reason: string) {
-  const response = NextResponse.redirect(homeUrl(request));
+  const response = NextResponse.redirect(
+    reason === "blocked" ? new URL("/signin", getBaseUrl(request)) : homeUrl(request),
+  );
   response.cookies.set("sg-auth-error", reason, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
     maxAge: 30,
+  });
+  return response;
+}
+
+async function blockedFailure(request: NextRequest, email: string) {
+  const response = failure(request, "blocked");
+  response.cookies.set(MEMBER_BLOCK_REVIEW_COOKIE, await createMemberBlockReviewToken(email), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: MEMBER_BLOCK_REVIEW_TTL_SECONDS,
   });
   return response;
 }
@@ -50,7 +69,7 @@ export async function GET(request: NextRequest) {
     return failure(request, "exchange");
   }
 
-  if (isMemberBlocked(identity.email)) return failure(request, "blocked");
+  if (isMemberBlocked(identity.email)) return blockedFailure(request, identity.email);
 
   recordMemberSignin({
     provider: "google",

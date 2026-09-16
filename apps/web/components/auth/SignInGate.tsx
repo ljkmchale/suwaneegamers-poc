@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AuthProviderButtons } from "@/components/auth/AuthProviderButtons";
+import { requestUnblockAction } from "@/app/signin/actions";
 
 const ERROR_MESSAGES: Record<string, string> = {
   denied: "Sign-in was cancelled. Give it another try.",
   state: "Your sign-in session expired. Please try again.",
   exchange: "We couldn't complete sign-in. Please try again.",
   not_configured: "Sign-in is not available right now.",
-  blocked: "This account has been blocked from Suwanee Gamers.",
+  blocked:
+    "Access for this account has been restricted. This may be related to an account or security concern.",
 };
 
 const PORTAL_HIGHLIGHTS = [
@@ -41,12 +43,21 @@ export function SignInGate({
   error,
   returnTo,
   discordEnabled,
+  blockedReviewAvailable = false,
+  reviewPending = false,
+  reviewDeclined = false,
+  reviewUnavailable = false,
 }: {
   error?: string;
   returnTo?: string;
   discordEnabled?: boolean;
+  blockedReviewAvailable?: boolean;
+  reviewPending?: boolean;
+  reviewDeclined?: boolean;
+  reviewUnavailable?: boolean;
 }) {
   const message = error ? ERROR_MESSAGES[error] : undefined;
+  const isBlocked = error === "blocked";
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#08050f]">
@@ -181,11 +192,75 @@ export function SignInGate({
           </p>
 
           {message && (
-            <p
+            <div
               role="alert"
               className="mb-6 rounded-lg border border-red-400/50 bg-red-950/30 px-4 py-3 text-sm text-red-200"
             >
-              {message}
+              <p>{message}</p>
+              {isBlocked && (
+                <p className="mt-2 text-xs leading-5 text-red-100/80">
+                  If you believe access should be restored, you may ask an administrator to
+                  review the restriction.
+                </p>
+              )}
+            </div>
+          )}
+
+          {isBlocked && blockedReviewAvailable && (
+            <div className="mb-6 rounded-xl border border-amber-400/30 bg-amber-950/15 p-4">
+              {reviewPending ? (
+                <div role="status">
+                  <p className="font-cinzel text-sm font-semibold text-amber-200">
+                    Review requested
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-[#cdbfa8]">
+                    Your request has been sent to the site administrators. You can try signing in
+                    again after they have reviewed it.
+                  </p>
+                </div>
+              ) : reviewDeclined ? (
+                <div role="status">
+                  <p className="font-cinzel text-sm font-semibold text-amber-200">
+                    Review completed
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-[#cdbfa8]">
+                    Access for this account remains restricted at this time.
+                  </p>
+                </div>
+              ) : (
+                <form action={requestUnblockAction}>
+                  <label
+                    htmlFor="unblock-message"
+                    className="font-cinzel text-sm font-semibold text-amber-200"
+                  >
+                    Request an access review
+                  </label>
+                  <p className="mt-2 text-xs leading-5 text-[#cdbfa8]">
+                    You may include a short note for the administrators. A note is optional.
+                  </p>
+                  <textarea
+                    id="unblock-message"
+                    name="message"
+                    maxLength={1000}
+                    rows={3}
+                    placeholder="Optional message"
+                    className="mt-3 w-full resize-y rounded-lg border border-[#4a3b2b] bg-[#0d0914] px-3 py-2 text-sm text-[#f4ecd8] placeholder:text-[#74677d] focus:border-amber-400 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="mt-3 min-h-11 w-full rounded-lg border border-amber-400/60 bg-amber-500/10 px-4 py-2 font-cinzel text-xs font-semibold uppercase tracking-wider text-amber-200 transition hover:bg-amber-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  >
+                    Request review
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+
+          {reviewUnavailable && (
+            <p role="alert" className="mb-6 text-xs leading-5 text-amber-200">
+              We could not verify the restricted account. Please sign in again before requesting
+              a review.
             </p>
           )}
 

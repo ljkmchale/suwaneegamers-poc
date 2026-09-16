@@ -53,23 +53,27 @@ export function blockMember(input: {
 }): void {
   const email = input.email.trim().toLowerCase();
   if (!email) throw new Error("An email address is required to block a member.");
-  getDb()
-    .prepare(
-      `INSERT INTO member_blocks (email, display_name, reason, created_at, created_by)
-       VALUES (@email, @displayName, @reason, @createdAt, @createdBy)
-       ON CONFLICT(email) DO UPDATE SET
-         display_name = excluded.display_name,
-         reason = excluded.reason,
-         created_at = excluded.created_at,
-         created_by = excluded.created_by`,
-    )
-    .run({
+  const db = getDb();
+  const saveBlock = db.prepare(
+    `INSERT INTO member_blocks (email, display_name, reason, created_at, created_by)
+     VALUES (@email, @displayName, @reason, @createdAt, @createdBy)
+     ON CONFLICT(email) DO UPDATE SET
+       display_name = excluded.display_name,
+       reason = excluded.reason,
+       created_at = excluded.created_at,
+       created_by = excluded.created_by`,
+  );
+  const clearPriorReview = db.prepare(`DELETE FROM member_unblock_requests WHERE email = ?`);
+  db.transaction(() => {
+    saveBlock.run({
       email,
       displayName: input.displayName ?? null,
       reason: input.reason ?? null,
       createdAt: new Date().toISOString(),
       createdBy: input.createdBy ?? null,
     });
+    clearPriorReview.run(email);
+  })();
 }
 
 /** Lift a block. No-op if the email was not blocked. */

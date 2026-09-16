@@ -34,6 +34,28 @@ export function audienceSessions(audience: AnalyticsAudience = "all") {
   return `SELECT session_id FROM analytics_sessions WHERE ${predicate}`;
 }
 
+export type AnalyticsEngagement = "all" | "engaged" | "bounced";
+
+export function analyticsEngagement(value?: string): AnalyticsEngagement {
+  return ["engaged", "bounced"].includes(value ?? "") ? value as AnalyticsEngagement : "all";
+}
+
+export const ENGAGEMENT_LABELS: Record<AnalyticsEngagement, string> = {
+  all: "All sessions", engaged: "Engaged sessions", bounced: "Bounced (no engagement)",
+};
+
+// A session is a "bounce" when it never logged a page_engagement duration and
+// touched at most one page — e.g. a bookmarked page reopened and closed
+// before the exit/visibility handlers fired. Mixing these into average
+// time-on-page or pages-per-visit metrics understates real engagement.
+const bounce = `(page_views <= 1 AND engaged_seconds = 0)`;
+
+export function engagementSessions(engagement: AnalyticsEngagement = "all") {
+  const predicate = engagement === "bounced" ? bounce
+    : engagement === "engaged" ? `NOT ${bounce}` : "1 = 1";
+  return `SELECT session_id FROM analytics_sessions WHERE ${predicate}`;
+}
+
 export function analyticsPeriod(days: number, now = new Date()) {
   const safeDays = [7, 30, 90].includes(days) ? days : 30;
   const since = new Date(now);

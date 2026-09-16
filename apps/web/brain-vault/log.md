@@ -839,3 +839,8 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 ## [2026-09-11] synthesis | Quick Reference auto-curation
 
 - Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+
+## [2026-09-15] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
