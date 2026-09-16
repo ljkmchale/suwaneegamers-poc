@@ -2,9 +2,10 @@ export type ThreatLevel = "normal" | "system" | "scanner" | "suspicious" | "atta
 
 export interface ClassifiableSecurityEvent {
   createdAt: string;
-  // "geo_blocked" is expected policy enforcement, not an attack signal, so the
-  // classifier below never scores it — it just needs to type-check in the mix.
-  kind: "failed_login" | "admin_request" | "suspicious_request" | "geo_blocked";
+  // "geo_blocked" and "member_blocked" are expected policy enforcement, not an
+  // attack signal, so the classifier below never scores them — they just need
+  // to type-check in the mix.
+  kind: "failed_login" | "admin_request" | "suspicious_request" | "geo_blocked" | "member_blocked";
   ip: string | null;
   path: string;
   userAgent: string | null;

@@ -7,6 +7,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   state: "Your sign-in session expired. Please try again.",
   exchange: "We couldn't complete sign-in. Please try again.",
   not_configured: "Sign-in is not available right now.",
+  blocked: "This account has been blocked from Suwanee Gamers.",
 };
 
 const PORTAL_HIGHLIGHTS = [

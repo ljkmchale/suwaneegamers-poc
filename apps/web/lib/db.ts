@@ -858,6 +858,19 @@ function initializeSchema(db: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_security_blocks_status_updated
       ON security_blocks(status, updated_at DESC);
 
+    -- Members an admin has explicitly barred from the site, keyed by the
+    -- lowercased sign-in email (stable across Google/Discord re-auth, unlike
+    -- the provider subject id). Enforced in proxy.ts on every signed-in
+    -- request; presence of a row is itself the block, so unblocking is a
+    -- plain delete rather than a status flip.
+    CREATE TABLE IF NOT EXISTS member_blocks (
+      email        TEXT PRIMARY KEY,
+      display_name TEXT,
+      reason       TEXT,
+      created_at   TEXT NOT NULL,
+      created_by   TEXT
+    );
+
     -- ----------------------------------------------------------------
     -- JSON content documents
     -- ----------------------------------------------------------------

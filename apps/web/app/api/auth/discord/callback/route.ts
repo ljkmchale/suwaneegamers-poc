@@ -6,6 +6,7 @@ import { getOAuthBaseUrl } from "@/lib/oauthShared";
 import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 import { clientIpFromHeaders } from "@/lib/securityLog";
 import { recordMemberSignin } from "@/lib/memberSignins";
+import { isMemberBlocked } from "@/lib/memberBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +50,8 @@ export async function GET(request: NextRequest) {
   } catch {
     return failure(request, "exchange");
   }
+
+  if (isMemberBlocked(identity.email)) return failure(request, "blocked");
 
   recordMemberSignin({
     provider: "discord",
