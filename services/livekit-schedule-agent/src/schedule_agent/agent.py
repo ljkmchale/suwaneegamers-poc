@@ -2426,6 +2426,58 @@ def tuning_float(tuning: dict[str, Any], key: str, env_name: str, default: float
 
 DEFAULT_CLAUDE_MODEL = "claude-haiku-4-5"
 
+# LiveKit 1.6.x preserves Anthropic cache reads on LLMMetrics but drops cache
+# creation tokens while translating the provider's final CompletionUsage. Keep
+# the provider value keyed by Anthropic request id until the matching metric is
+# forwarded to the website. This can be removed once LLMMetrics exposes the
+# cache-creation field directly.
+_cache_creation_tokens_by_request_id: dict[str, int] = {}
+_cache_creation_tokens_lock = threading.Lock()
+
+
+def _remember_anthropic_cache_creation(request_id: str, tokens: int) -> None:
+    if not request_id:
+        return
+    with _cache_creation_tokens_lock:
+        _cache_creation_tokens_by_request_id[request_id] = max(0, int(tokens))
+        # A cancelled stream may never emit LLMMetrics. Bound the side channel
+        # so those orphaned request ids cannot accumulate for a long-lived worker.
+        while len(_cache_creation_tokens_by_request_id) > 256:
+            _cache_creation_tokens_by_request_id.pop(next(iter(_cache_creation_tokens_by_request_id)))
+
+
+def _take_anthropic_cache_creation(request_id: str) -> int:
+    if not request_id:
+        return 0
+    with _cache_creation_tokens_lock:
+        return _cache_creation_tokens_by_request_id.pop(request_id, 0)
+
+
+def _capture_anthropic_cache_creation(event: Any) -> None:
+    if getattr(event, "type", None) != "message_start":
+        return
+    message = getattr(event, "message", None)
+    usage = getattr(message, "usage", None)
+    _remember_anthropic_cache_creation(
+        getattr(message, "id", ""),
+        getattr(usage, "cache_creation_input_tokens", 0) or 0,
+    )
+
+
+class CacheAwareAnthropicLLM(anthropic.LLM):
+    """Retain Anthropic cache-write usage until LiveKit exposes it on LLMMetrics."""
+
+    def chat(self, *args: Any, **kwargs: Any) -> Any:
+        stream = super().chat(*args, **kwargs)
+        parse_event = stream._parse_event
+
+        def parse_event_with_cache_creation(event: Any) -> Any:
+            _capture_anthropic_cache_creation(event)
+            return parse_event(event)
+
+        stream._parse_event = parse_event_with_cache_creation
+        return stream
+
 
 def _stt_falsey(value: str) -> bool:
     return value.strip().casefold() in {"", "off", "none", "0", "false"}
@@ -2565,7 +2617,7 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
     }:
         remote_kwargs["caching"] = "ephemeral"
 
-    remote = anthropic.LLM(
+    remote = CacheAwareAnthropicLLM(
         # The plugin defaults to Sonnet. Haiku is the right tier for a voice
         # turn, and it is the one current Claude model that still accepts
         # `temperature` — Sonnet 5 and Opus 5 reject it with a 400, which would
@@ -2750,6 +2802,13 @@ def metric_forward_payload(metric: Any, session_id: str | None) -> list[dict[str
         model = getattr(metadata, "model_name", None)
         prompt_tokens = getattr(metric, "prompt_tokens", 0) or 0
         cache_read_tokens = getattr(metric, "prompt_cached_tokens", 0) or 0
+        captured_cache_creation_tokens = _take_anthropic_cache_creation(
+            getattr(metric, "request_id", "") or ""
+        )
+        cache_creation_tokens = max(
+            getattr(metric, "cache_creation_tokens", 0) or 0,
+            captured_cache_creation_tokens,
+        )
         return [{
             "sessionId": session_id,
             "kind": "llm_ttft",
@@ -2760,10 +2819,7 @@ def metric_forward_payload(metric: Any, session_id: str | None) -> list[dict[str
             "inputTokens": prompt_tokens,
             "outputTokens": getattr(metric, "completion_tokens", 0) or 0,
             "cacheReadTokens": cache_read_tokens,
-            # LiveKit's LLMMetrics currently exposes cache reads but not cache
-            # creation. Myra does not enable Anthropic prompt caching today, so
-            # this is correctly zero and the field is ready if that changes.
-            "cacheCreationTokens": 0,
+            "cacheCreationTokens": cache_creation_tokens,
         }]
     if name == "STTMetrics":
         # `duration` is 0.0 for streaming engines; Parakeet and Whisper are both
@@ -4074,7 +4130,7 @@ class Myra(Agent):
                 )
             await self._publish_external(sheet_url, f"{facts['character']} character sheet")
             logger.info("open_character_sheet(%r) -> authorized D&D Beyond sheet", name)
-            return f"Opening {facts['character']}’s character sheet in D&D Beyond."
+            return f"Opening {facts['character']}'s character sheet in D&D Beyond."
         slug = data["campaign_ids"].get(campaign.casefold())
         if not slug:
             return f"I couldn't find a site page for {campaign}."

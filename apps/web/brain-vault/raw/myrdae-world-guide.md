@@ -1,7 +1,7 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-09-11T14:46:20.610Z
+Pulled: 2026-09-16T14:45:44.090Z
 
 Sections
   
@@ -2095,7 +2095,7 @@ Beliefs and Values
    * Order – you are responsible for honor and order
    * Never Fear – meet threats head on, don’t wait for them to have an advantage
 Structure & Membership
-The Meridian organization is led by an Ambassador who is aligned with each major region in Myrdae.  There is also one Templar who has the responsibility of mediating decisions.  There are embassies in each region in Myrdae, with an Ambassador heading up each location (Adamont, Basctdelm, Gibuldon, and Thrargael). Leaders of the Meridian gather every harmon to review threats on the land.
+The Meridian organization is led by Templars, one appointed to each region (Bathaes, Inverland, Jehsle, Orbansia and Var’Shala).  Next in line are Ambassadors (Rank 4) who represent a specific territory and Champions (Rank 4) who are given responsibilities not tied to a territory.  Templars are elected into position by the Ambassadors covering territories within the region the Templar is responsible for.  The Meridian hasn’t grown to cover every territory, but many of the most prominent territories are likely to have Meridian representation.  Although Templars aren’t always stationary, they do hold authority over an embassy within their region, which are located at the following:  Adamont for Orbansia, Basctdelm for Batheas, Gibuldon for Inverland Qaethyra for Jehsle and Ulkef for Var’Shala.
 Members of the Meridian grasp their silver amulet insignia in their right hand and place it over their heart with a nod of their head. 
 Rank
 	Renown
@@ -2111,6 +2111,9 @@ Rank
 	Gallant
 	4
 	25+
+	Ambassador / Champion
+	5
+	-
 	Templar
 	Benefits
 The following assets are available to members:

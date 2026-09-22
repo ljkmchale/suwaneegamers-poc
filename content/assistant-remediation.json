@@ -11,8 +11,9 @@
       "timesSeen": 1,
       "id": "rem-406c5652311982fc",
       "normalized": "what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-09-14T15:25:51.041Z"
+      "status": "dismissed",
+      "createdAt": "2026-09-16T15:25:11.422Z",
+      "reviewedAt": "2026-09-22T13:06:09.275Z"
     },
     {
       "question": "Hey Mara, what have you learned today?",
@@ -25,8 +26,39 @@
       "timesSeen": 1,
       "id": "rem-533900afc79b79af",
       "normalized": "hey mara what have you learned today",
-      "status": "pending",
-      "createdAt": "2026-09-14T15:25:51.039Z"
+      "status": "dismissed",
+      "createdAt": "2026-09-16T15:25:11.420Z",
+      "reviewedAt": "2026-09-22T13:06:06.810Z"
+    },
+    {
+      "question": "What have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-406c5652311982fc",
+      "normalized": "what have you learned today",
+      "status": "dismissed",
+      "createdAt": "2026-09-14T15:25:51.041Z",
+      "reviewedAt": "2026-09-16T14:39:04.783Z"
+    },
+    {
+      "question": "Hey Mara, what have you learned today?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
+      "evidence": [
+        "Answered as general_schedule"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-533900afc79b79af",
+      "normalized": "hey mara what have you learned today",
+      "status": "dismissed",
+      "createdAt": "2026-09-14T15:25:51.039Z",
+      "reviewedAt": "2026-09-16T14:39:05.812Z"
     },
     {
       "question": "What have you learned today?",
@@ -1069,5 +1101,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-09-15T15:25:14.836Z"
+  "updatedAt": "2026-09-22T13:06:09.275Z"
 }

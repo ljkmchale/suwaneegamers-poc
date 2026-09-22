@@ -17,17 +17,17 @@ from schedule_agent.agent import (
     describe_weather,
     detect_site_feedback,
     diagnostic_request,
-    extract_weather_place,
-    is_weather_question,
     event_loop_lag,
+    extract_weather_place,
     general_schedule_answer,
     is_about_suwanee_gamers_question,
     is_personal_schedule_question,
     is_recap_question,
     is_schedule_question,
+    is_self_diagnosis_question,
     is_self_report_question,
     is_time_or_date_question,
-    is_self_diagnosis_question,
+    is_weather_question,
     load_full_pantheon_knowledge,
     load_pantheon_knowledge,
     load_voice_entity_catalog,
@@ -958,6 +958,9 @@ def test_event_loop_lag_never_reports_early_wakeup_as_blocking():
 
 
 def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
+    from schedule_agent.agent import _remember_anthropic_cache_creation
+
+    _remember_anthropic_cache_creation("msg-cache-write", 3_000)
     metric = type(
         "LLMMetrics",
         (),
@@ -967,6 +970,7 @@ def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
             "prompt_tokens": 12_000,
             "completion_tokens": 800,
             "prompt_cached_tokens": 2_000,
+            "request_id": "msg-cache-write",
             "metadata": SimpleNamespace(
                 model_provider="anthropic",
                 model_name="claude-haiku-4-5",
@@ -984,8 +988,48 @@ def test_llm_metric_forwards_claude_tokens_and_model_for_cost_accounting():
         "inputTokens": 12_000,
         "outputTokens": 800,
         "cacheReadTokens": 2_000,
-        "cacheCreationTokens": 0,
+        "cacheCreationTokens": 3_000,
     }]
+
+
+def test_anthropic_message_start_captures_cache_creation_usage():
+    from schedule_agent.agent import (
+        _capture_anthropic_cache_creation,
+        _take_anthropic_cache_creation,
+    )
+
+    event = SimpleNamespace(
+        type="message_start",
+        message=SimpleNamespace(
+            id="msg-anthropic-usage",
+            usage=SimpleNamespace(cache_creation_input_tokens=4_096),
+        ),
+    )
+
+    _capture_anthropic_cache_creation(event)
+
+    assert _take_anthropic_cache_creation("msg-anthropic-usage") == 4_096
+    assert _take_anthropic_cache_creation("msg-anthropic-usage") == 0
+
+
+def test_cache_aware_anthropic_llm_wraps_the_provider_stream(monkeypatch):
+    from livekit.plugins import anthropic
+
+    from schedule_agent.agent import CacheAwareAnthropicLLM, _take_anthropic_cache_creation
+
+    stream = SimpleNamespace(_parse_event=lambda event: event.type)
+    monkeypatch.setattr(anthropic.LLM, "chat", lambda self, *args, **kwargs: stream)
+    claude = CacheAwareAnthropicLLM(api_key="sk-ant-test")
+    event = SimpleNamespace(
+        type="message_start",
+        message=SimpleNamespace(
+            id="msg-wrapped-stream",
+            usage=SimpleNamespace(cache_creation_input_tokens=5_120),
+        ),
+    )
+
+    assert claude.chat()._parse_event(event) == "message_start"
+    assert _take_anthropic_cache_creation("msg-wrapped-stream") == 5_120
 
 
 def test_stt_metric_captures_recognition_time_and_engine():

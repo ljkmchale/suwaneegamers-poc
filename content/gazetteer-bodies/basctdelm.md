@@ -759,6 +759,13 @@ Upon entering…
 
 Arcane Waypoint Contacts:
 
+| Non-Player Characters |  |
+| :---- | :---- |
+| **Igdan O’bald** Waypoint Sentry *\<sex\> \<species\>* | 	*Responsibility*:	Primary waypoint officer; logs arrivals. 	*Appearance:*	Mid-forties, salt-and-pepper hair, trimmed beard 	*Personality*:	 |
+| **Gelora Fornak** Waypoint Sentry *\<sex\> \<species\>* | 	*Responsibility*:	Secondary waypoint officer; logs arrivals. 	*Appearance:*	Auburn hair, emerald eyes 	*Personality*:	 |
+| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Responsibility*:	 	*Appearance:*	 	*Personality*:	 |
+| **\<Name\>** \<role\> *\<sex\> \<species\>* | 	*Responsibility*:	 	*Appearance:*	 	*Personality*:	 |
+
 ## Last Prince Inn
 
 ## 
