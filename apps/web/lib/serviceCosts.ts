@@ -219,3 +219,48 @@ export function regularChargesDue(
     return entry.billingCycle === "yearly" && entry.renewalDate.slice(0, 7) === month;
   });
 }
+
+/**
+ * Next charge date for a monthly plan: the last logged payment's day of month,
+ * rolled forward to the first date after `today` (clamped to short months).
+ */
+export function nextMonthlyCharge(lastPaidOn: string, today: Date): string | null {
+  if (!isIsoDate(lastPaidOn)) return null;
+  const [year, month, day] = lastPaidOn.split("-").map(Number);
+  const todayKey = `${monthKey(today)}-${String(today.getDate()).padStart(2, "0")}`;
+  for (let offset = 1; offset <= 36; offset += 1) {
+    const first = new Date(year, month - 1 + offset, 1);
+    const lastDay = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+    const candidate = `${monthKey(first)}-${String(Math.min(day, lastDay)).padStart(2, "0")}`;
+    if (candidate > todayKey) return candidate;
+  }
+  return null;
+}
+
+export interface UpcomingCharge {
+  entry: ServiceEntry;
+  date: string;
+}
+
+/**
+ * Upcoming charges for counted services, soonest first: monthly plans from
+ * their last logged payment, yearly plans from their renewal date.
+ */
+export function upcomingCharges(
+  services: ServiceEntry[],
+  lastPaidOn: Map<string, string>,
+  today: Date,
+): UpcomingCharge[] {
+  const charges: UpcomingCharge[] = [];
+  for (const entry of services) {
+    if (entry.category === "free" || entry.category === "dormant" || entry.category === "excluded") continue;
+    if (entry.billingCycle === "monthly") {
+      const last = lastPaidOn.get(entry.id);
+      const date = last ? nextMonthlyCharge(last, today) : null;
+      if (date) charges.push({ entry, date });
+    } else if (entry.renewalDate && (daysUntil(entry.renewalDate, today) ?? -1) >= 0) {
+      charges.push({ entry, date: entry.renewalDate });
+    }
+  }
+  return charges.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+}

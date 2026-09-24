@@ -4,6 +4,7 @@ import {
   clampService,
   daysUntil,
   monthlyEquivalent,
+  nextMonthlyCharge,
   parseCents,
   parseCost,
   recentMonths,
@@ -11,6 +12,7 @@ import {
   safeUrl,
   summarizeCosts,
   totalsByMonth,
+  upcomingCharges,
   type ServiceEntry,
 } from "@/lib/serviceCosts";
 
@@ -121,5 +123,33 @@ describe("payment log helpers", () => {
     ];
     const due = regularChargesDue(services, "2026-09", new Set(["claude"]));
     expect(due.map((s) => s.id)).toEqual(["eleven", "domain"]);
+  });
+});
+
+describe("upcoming charges", () => {
+  const today = new Date(2026, 8, 24);
+
+  it("rolls a monthly billing day forward past today", () => {
+    expect(nextMonthlyCharge("2026-09-04", today)).toBe("2026-10-04");
+    expect(nextMonthlyCharge("2026-07-08", today)).toBe("2026-10-08");
+    expect(nextMonthlyCharge("2026-08-30", today)).toBe("2026-09-30");
+    expect(nextMonthlyCharge("2026-01-31", new Date(2026, 1, 10))).toBe("2026-02-28");
+    expect(nextMonthlyCharge("bad", today)).toBeNull();
+  });
+
+  it("orders monthly and yearly charges, skipping uncounted services", () => {
+    const services = [
+      entry({ name: "Domain", category: "subscription", cost: 20, billingCycle: "yearly", renewalDate: "2027-03-09" }),
+      entry({ name: "Claude", category: "dev", cost: 20, billingCycle: "monthly" }),
+      entry({ name: "Eleven", category: "subscription", cost: 22, billingCycle: "monthly" }),
+      entry({ name: "Suno", category: "excluded", cost: 8, billingCycle: "monthly" }),
+      entry({ name: "Never paid", category: "subscription", cost: 5, billingCycle: "monthly" }),
+    ];
+    const last = new Map([["claude", "2026-09-04"], ["eleven", "2026-09-08"], ["suno", "2026-09-01"]]);
+    expect(upcomingCharges(services, last, today).map((c) => `${c.entry.id} ${c.date}`)).toEqual([
+      "claude 2026-10-04",
+      "eleven 2026-10-08",
+      "domain 2027-03-09",
+    ]);
   });
 });

@@ -8,10 +8,12 @@ import {
   daysUntil,
   monthlyEquivalent,
   summarizeCosts,
+  upcomingCharges,
   type ServiceCategory,
   type ServiceEntry,
 } from "@/lib/serviceCosts";
 import { configuredKeyMap, getServiceCatalog } from "@/lib/serviceCostStore";
+import { listServicePayments } from "@/lib/servicePayments";
 import { addServiceAction, deleteServiceAction, saveServiceAction } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -230,18 +232,22 @@ export default async function AdminServicesPage() {
   const keyStatus = configuredKeyMap(services);
   const summary = summarizeCosts(services);
   const today = new Date();
-  const nextRenewal = services
-    .map((entry) => ({ entry, days: daysUntil(entry.renewalDate, today) }))
-    .filter((item): item is { entry: ServiceEntry; days: number } => item.days !== null && item.days >= 0)
-    .sort((a, b) => a.days - b.days)[0];
+  // Monthly plans project their next charge from the last logged payment.
+  const lastPaidOn = new Map<string, string>();
+  for (const payment of listServicePayments("0000-01-01")) {
+    if (!lastPaidOn.has(payment.serviceId)) lastPaidOn.set(payment.serviceId, payment.paidOn);
+  }
+  const upcoming = upcomingCharges(services, lastPaidOn, today).slice(0, 3);
 
   const stats = [
     { label: "Monthly (known)", value: usd.format(summary.monthlyTotal) },
     { label: "Yearly (known)", value: usd.format(summary.yearlyTotal) },
     { label: "Paid, cost not entered", value: String(summary.unpricedCount) },
     {
-      label: "Next renewal",
-      value: nextRenewal ? `${nextRenewal.entry.name} · ${nextRenewal.entry.renewalDate}` : "None set",
+      label: "Next charges",
+      value: upcoming.length
+        ? upcoming.map((charge) => `${charge.date.slice(5)} ${charge.entry.name} ${charge.entry.cost === null ? "" : usd.format(charge.entry.cost)}`.trim()).join("\n")
+        : "None set",
     },
   ];
 
@@ -264,7 +270,7 @@ export default async function AdminServicesPage() {
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-4 py-3">
               <dt className={labelClass}>{stat.label}</dt>
-              <dd className="mt-1 text-lg text-[#e8dfc8]">{stat.value}</dd>
+              <dd className={`mt-1 whitespace-pre-line text-[#e8dfc8] ${stat.value.includes("\n") ? "text-sm leading-relaxed" : "text-lg"}`}>{stat.value}</dd>
             </div>
           ))}
         </dl>
