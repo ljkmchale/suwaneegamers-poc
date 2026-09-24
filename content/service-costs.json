@@ -75,31 +75,31 @@
       "id": "domain-net",
       "name": "Domain: suwaneegamers.net",
       "category": "subscription",
-      "purpose": "Main site domain. DNS on Cloudflare.",
+      "purpose": "Main site domain. Registered at GoDaddy; DNS on Cloudflare.",
       "envKeys": [],
       "plan": "$20/yr",
       "cost": 20,
       "billingCycle": "yearly",
-      "renewalDate": "",
+      "renewalDate": "2027-05-12",
       "billingEmail": "",
-      "dashboardUrl": "https://dash.cloudflare.com/",
+      "dashboardUrl": "https://dcc.godaddy.com/control/portfolio",
       "usageUrl": "",
-      "notes": "Confirm the registrar."
+      "notes": "Registrar: GoDaddy (found via public RDAP 2026-09-24). Registered 2026-05-12, expires 2027-05-12. Registry shows renew/transfer/update locks — normal GoDaddy protection, but confirm auto-renew is on in the GoDaddy account."
     },
     {
       "id": "domain-com",
       "name": "Domain: suwaneegamers.com",
       "category": "subscription",
-      "purpose": "Secondary domain, registered at Squarespace.",
+      "purpose": "Secondary domain. Registered at Squarespace; DNS on Google Cloud DNS.",
       "envKeys": [],
       "plan": "$20/yr",
       "cost": 20,
       "billingCycle": "yearly",
-      "renewalDate": "",
+      "renewalDate": "2027-03-09",
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": ""
+      "notes": "Registrar: Squarespace Domains (found via public RDAP 2026-09-24). Registered 2026-03-09, expires 2027-03-09. Nameservers are ns-cloud-b*.googledomains.com (carried over from Google Domains)."
     },
     {
       "id": "claude-subscription",
