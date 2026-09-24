@@ -16,8 +16,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://platform.claude.com/settings/billing",
-      "notes": "Prepaid credits, no subscription. Console on 2026-09-24: balance $31.56, $3.27 spent Sep 1–24 (≈ $4/mo pace), 463.8K tokens in the last 7 days. Auto-reload is OFF; the only cap is the $500 tier limit. Myra's local metrics account for only a few cents of this, so most spend is Chronicles/Library answers. If credits hit $0, Myra drops to schedule/navigation-only answers and Chronicles falls back to Groq.",
-      "usageUrl": "https://platform.claude.com/usage"
+      "usageUrl": "https://platform.claude.com/usage",
+      "notes": "Prepaid credits, no subscription. Console on 2026-09-24: balance $31.56, $3.27 spent Sep 1–24 (≈ $4/mo pace), 463.8K tokens in the last 7 days. Auto-reload is OFF; the only cap is the $500 tier limit. Myra's local metrics account for only a few cents of this, so most spend is Chronicles/Library answers. If credits hit $0, Myra drops to schedule/navigation-only answers and Chronicles falls back to Groq."
     },
     {
       "id": "lemonslice",
@@ -33,8 +33,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://lemonslice.com/",
-      "notes": "Cancelled. Subscription ends September 29, 2026; no further charges. Was $8/mo. The Myra avatar POC stops working after that.",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": "Cancelled. Subscription ends September 29, 2026; no further charges. Was $8/mo. The Myra avatar POC stops working after that."
     },
     {
       "id": "elevenlabs",
@@ -50,8 +50,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://elevenlabs.io/app/subscription",
-      "notes": "Fixed monthly plan with a character quota. If usage-based overage is enabled in the account, heavy Myra use can cost more than $22 — check the Usage page.",
-      "usageUrl": "https://elevenlabs.io/app/usage"
+      "usageUrl": "https://elevenlabs.io/app/usage",
+      "notes": "Fixed monthly plan with a character quota. If usage-based overage is enabled in the account, heavy Myra use can cost more than $22 — check the Usage page."
     },
     {
       "id": "migadu",
@@ -68,8 +68,8 @@
       "renewalDate": "2027-09-15",
       "billingEmail": "",
       "dashboardUrl": "https://admin.migadu.com/",
-      "notes": "Renewal date assumed from the 2026-09-15 signup — verify.",
-      "usageUrl": "https://admin.migadu.com/"
+      "usageUrl": "https://admin.migadu.com/",
+      "notes": "Renewal date assumed from the 2026-09-15 signup — verify."
     },
     {
       "id": "domain-net",
@@ -83,8 +83,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://dash.cloudflare.com/",
-      "notes": "Confirm the registrar.",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": "Confirm the registrar."
     },
     {
       "id": "domain-com",
@@ -98,8 +98,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
-      "notes": "",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": ""
     },
     {
       "id": "claude-subscription",
@@ -158,8 +158,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "",
-      "notes": "Counted as free — existing home PC and internet, no added cost tracked.",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": "Counted as free — existing home PC and internet, no added cost tracked."
     },
     {
       "id": "cloudflare",
@@ -176,8 +176,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://dash.cloudflare.com/",
-      "notes": "Free plan confirmed 2026-09-24.",
-      "usageUrl": "https://dash.cloudflare.com/"
+      "usageUrl": "https://dash.cloudflare.com/",
+      "notes": "Free plan confirmed 2026-09-24."
     },
     {
       "id": "groq",
@@ -193,8 +193,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://console.groq.com/settings/billing",
-      "notes": "Backup only — used when Claude fails. Free-tier rate limits apply, so if Anthropic credits run out, Library answers may be slower or throttled.",
-      "usageUrl": "https://console.groq.com/dashboard/usage"
+      "usageUrl": "https://console.groq.com/dashboard/usage",
+      "notes": "Backup only — used when Claude fails. Free-tier rate limits apply, so if Anthropic credits run out, Library answers may be slower or throttled."
     },
     {
       "id": "jina",
@@ -210,8 +210,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://jina.ai/api-dashboard/",
-      "notes": "Free tier has a token allowance. If it runs out, the nightly Chronicles reindex and every Library/Myra lore lookup (query embedding) fail — watch the balance on the dashboard.",
-      "usageUrl": "https://jina.ai/api-dashboard/"
+      "usageUrl": "https://jina.ai/api-dashboard/",
+      "notes": "Free tier has a token allowance. If it runs out, the nightly Chronicles reindex and every Library/Myra lore lookup (query embedding) fail — watch the balance on the dashboard."
     },
     {
       "id": "google-cloud",
@@ -229,8 +229,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://console.cloud.google.com/billing",
-      "notes": "Project \"Local n8n\". Worth a budget alert.",
-      "usageUrl": "https://console.cloud.google.com/apis/dashboard"
+      "usageUrl": "https://console.cloud.google.com/apis/dashboard",
+      "notes": "Project \"Local n8n\". Worth a budget alert."
     },
     {
       "id": "discord",
@@ -247,8 +247,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://discord.com/developers/applications",
-      "notes": "",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": ""
     },
     {
       "id": "github",
@@ -262,8 +262,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://github.com/settings/billing",
-      "notes": "",
-      "usageUrl": "https://github.com/settings/billing/usage"
+      "usageUrl": "https://github.com/settings/billing/usage",
+      "notes": ""
     },
     {
       "id": "open-meteo",
@@ -277,8 +277,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://open-meteo.com/",
-      "notes": "",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": ""
     },
     {
       "id": "ipify",
@@ -292,8 +292,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://www.ipify.org/",
-      "notes": "",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": ""
     },
     {
       "id": "lets-encrypt",
@@ -307,8 +307,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://letsencrypt.org/",
-      "notes": "",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": ""
     },
     {
       "id": "paypal",
@@ -325,8 +325,8 @@
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://www.paypal.com/businessmanage/",
-      "notes": "Per-transaction fees once enabled.",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": "Per-transaction fees once enabled."
     },
     {
       "id": "mailgun",
@@ -335,13 +335,13 @@
       "purpose": "Retired 2026-09-15 in favor of Migadu.",
       "envKeys": [],
       "plan": "",
-      "cost": null,
-      "billingCycle": "monthly",
+      "cost": 0,
+      "billingCycle": "free",
       "renewalDate": "",
-      "billingEmail": "",
+      "billingEmail": "larry.m.mchale@gmail.com",
       "dashboardUrl": "https://app.mailgun.com/",
-      "notes": "Close the account if it still exists.",
-      "usageUrl": ""
+      "usageUrl": "",
+      "notes": "Close the account if it still exists."
     }
   ]
 }
