@@ -99,7 +99,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry, not let it lapse. Transfer = unlock + auth code at Squarespace, start transfer at GoDaddy (adds a year). Recreate the Migadu MX/SPF/DKIM records wherever its DNS ends up, or webmaster@suwaneegamers.com stops receiving mail."
+      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry. DNS: Cloudflare zone created 2026-09-24 with all 13 records copied (Migadu MX/SPF/DKIM/DMARC + Squarespace parking A/www); PENDING until the nameservers at Squarespace are changed to hayes.ns.cloudflare.com + josephine.ns.cloudflare.com."
     },
     {
       "id": "claude-subscription",
