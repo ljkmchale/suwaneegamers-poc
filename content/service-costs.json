@@ -90,7 +90,7 @@
       "id": "domain-com",
       "name": "Domain: suwaneegamers.com",
       "category": "subscription",
-      "purpose": "Secondary domain. Registered at Squarespace; DNS on Google Cloud DNS.",
+      "purpose": "Secondary domain. Registered at Squarespace; DNS on Cloudflare; web traffic 301-redirects to www.suwaneegamers.net.",
       "envKeys": [],
       "plan": "$20/yr — auto-renew OFF on purpose",
       "cost": 20,
@@ -99,7 +99,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry. DNS: Cloudflare zone created 2026-09-24 with all 13 records copied (Migadu MX/SPF/DKIM/DMARC + Squarespace parking A/www); PENDING until the nameservers at Squarespace are changed to hayes.ns.cloudflare.com + josephine.ns.cloudflare.com."
+      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry. DNS moved to Cloudflare 2026-09-24 (nameservers hayes/josephine, zone active): Migadu MX/SPF/DKIM/DMARC kept; Squarespace parking replaced by a Cloudflare Redirect Rule (suwaneegamers.com and www → https://www.suwaneegamers.net + same path/query). Keep the Cloudflare nameservers when transferring."
     },
     {
       "id": "claude-subscription",
