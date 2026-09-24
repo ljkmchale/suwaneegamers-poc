@@ -99,7 +99,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry. DNS moved to Cloudflare 2026-09-24 (nameservers hayes/josephine, zone active): Migadu MX/SPF/DKIM/DMARC kept; Squarespace parking replaced by a Cloudflare Redirect Rule (suwaneegamers.com and www → https://www.suwaneegamers.net + same path/query). Keep the Cloudflare nameservers when transferring."
+      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy about a month before expiry (early Feb 2027; the amber 30-day warning here starts 2027-02-07). Transfer takes ~5–7 days: Squarespace → Request transfer code (needs Google re-verify), then start the transfer at GoDaddy. DNS moved to Cloudflare 2026-09-24 (nameservers hayes/josephine, zone active): Migadu MX/SPF/DKIM/DMARC kept; Squarespace parking replaced by a Cloudflare Redirect Rule (suwaneegamers.com and www → https://www.suwaneegamers.net + same path/query). Keep the Cloudflare nameservers when transferring."
     },
     {
       "id": "claude-subscription",
