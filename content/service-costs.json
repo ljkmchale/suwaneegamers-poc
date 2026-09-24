@@ -17,7 +17,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://platform.claude.com/settings/billing",
       "usageUrl": "https://platform.claude.com/usage",
-      "notes": "Prepaid credits, no subscription. Console on 2026-09-24: balance $31.56, $3.27 spent Sep 1–24 (≈ $4/mo pace), 463.8K tokens in the last 7 days. Auto-reload is OFF; the only cap is the $500 tier limit. Myra's local metrics account for only a few cents of this, so most spend is Chronicles/Library answers. If credits hit $0, Myra drops to schedule/navigation-only answers and Chronicles falls back to Groq."
+      "notes": "Prepaid credits, no subscription, auto-reload OFF. Purchases (per receipts): $20 on 2026-07-29 (first API invoice) and $20 on 2026-09-22. Console on 2026-09-24: balance $31.56, $3.27 spent Sep 1–24 (≈ $4/mo pace). Most spend is Chronicles/Library answers; Myra's own Haiku use is cents. If credits hit $0, Myra drops to schedule/navigation-only answers and Chronicles falls back to Groq."
     },
     {
       "id": "lemonslice",
@@ -34,7 +34,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://lemonslice.com/",
       "usageUrl": "",
-      "notes": "Experiment (Myra video avatar). Cancelled — subscription ends September 29, 2026; no further charges. Was $8/mo."
+      "notes": "Experiment (Myra video avatar). Starter $8/mo, one charge on 2026-08-29 (receipt 2273-1742). Cancelled — ends September 29, 2026; no further charges."
     },
     {
       "id": "elevenlabs",
@@ -44,14 +44,14 @@
       "envKeys": [
         "ELEVEN_API_KEY"
       ],
-      "plan": "$22/mo",
+      "plan": "Creator — $22/mo, bills on the 8th",
       "cost": 22,
       "billingCycle": "monthly",
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://elevenlabs.io/app/subscription",
       "usageUrl": "https://elevenlabs.io/app/usage",
-      "notes": "Fixed monthly plan with a character quota. If usage-based overage is enabled in the account, heavy Myra use can cost more than $22 — check the Usage page."
+      "notes": "Started 2026-08-08 (receipts Aug 8, Sep 8). Creator plan includes a monthly character quota (Aug 8–Sep 8 used ~52.9K subscription credits + 3.7K rollover, $0 overage). If usage-based overage is enabled, heavy Myra use can cost more than $22."
     },
     {
       "id": "migadu",
@@ -69,7 +69,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://admin.migadu.com/",
       "usageUrl": "https://admin.migadu.com/",
-      "notes": "Renewal date assumed from the 2026-09-15 signup — verify."
+      "notes": "Plan changed to Micro / yearly on 2026-09-15 (Migadu confirmation email); renews 2027-09-15. Receipts at admin.migadu.com/billing/receipts."
     },
     {
       "id": "domain-net",
@@ -107,14 +107,14 @@
       "category": "dev",
       "purpose": "Claude Code and Claude chat for building and maintaining the site.",
       "envKeys": [],
-      "plan": "$20/mo",
+      "plan": "$20/mo, bills on the 4th",
       "cost": 20,
       "billingCycle": "monthly",
       "renewalDate": "",
       "billingEmail": "",
       "dashboardUrl": "https://claude.ai/settings/billing",
       "usageUrl": "https://claude.ai/settings/usage",
-      "notes": "Separate from the Anthropic API credits the site itself spends."
+      "notes": "Claude Pro via Anthropic (receipts on the 4th each month; Sep 2026 was invoice #12, so it started around Oct 2025). Separate from the Anthropic API credits the site itself spends."
     },
     {
       "id": "chatgpt",
@@ -129,7 +129,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://chatgpt.com/#settings/Account",
       "usageUrl": "",
-      "notes": ""
+      "notes": "No receipts found in Gmail (likely billed via an app store or email receipts off), so logged payment dates are placeholders on the 24th — check the billing day in ChatGPT settings."
     },
     {
       "id": "flova",
@@ -144,7 +144,7 @@
       "billingEmail": "",
       "dashboardUrl": "https://www.flova.ai/",
       "usageUrl": "",
-      "notes": "Experiment (made the Library entrance video). Cancelled — access ends October 18, 2026; no further charges. Was $20/mo."
+      "notes": "Experiment (made the Library entrance video). Starter $20/mo, charged 2026-08-18 and 2026-09-18 ($40 total). Cancelled — access ends October 18, 2026; no further charges."
     },
     {
       "id": "home-server",
@@ -165,7 +165,7 @@
       "id": "cloudflare",
       "name": "Cloudflare",
       "category": "free",
-      "purpose": "DNS, the Tunnel that publishes the site, TURN DNS updates, and edge blocking of scanners/failed logins.",
+      "purpose": "DNS for both domains, the Tunnel that publishes the site, TURN DNS updates, edge blocking of scanners/failed logins, and the suwaneegamers.com → .net redirect.",
       "envKeys": [
         "CLOUDFLARE_API_TOKEN",
         "CLOUDFLARE_SECURITY_API_TOKEN"
