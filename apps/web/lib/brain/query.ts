@@ -295,22 +295,25 @@ export async function answerQuestion(question: string, options: QueryOptions = {
   const matches = curateMatchesForAnswer(retrievedMatches, question, { relationshipQuestion, identityQuestion, threadQuestion, storyRecapQuestion });
   const context = renderContext(matches);
 
+  // The system prompt + excerpts block is the prompt-cache prefix that
+  // reviewAnswer resends byte-for-byte, so the second call reads it from cache.
   const draft = await chat([
     { role: "system", content: systemPrompt(intent, scope).join(" ") },
     {
       role: "user",
       content: [
-        `Vault excerpts:\n${context}`,
-        "",
-        `Selected campaign: ${scope.promptCampaign}`,
-        `Question: ${question}`,
-        relationshipQuestion ? "Cover the relationship between these people — what they mean to each other, what they know or suspect, any tensions or bonds, and how each one sees the other." : "",
-        identityQuestion ? "Introduce this person fully — their presence in the world, their role, what drives them, their key relationships, and anything that currently hangs over them." : "",
-        threadQuestion ? "Recount this thread — what has been established, where it stands right now, what leads exist, what remains unresolved, and why it matters." : "",
-        comparativeQuestion ? "List candidates from the excerpts. For each, label them with their actual campaign name (e.g., Heroes of Emberstran) or 'World lore' — never use 'All' as a label. Do not connect or compare characters across campaigns — they are in separate stories." : "",
-        storyRecapQuestion ? "Story / Recap Mode is active. Start with 'Short version:' and the direct answer in one sentence. Then write 'Story recap:' and give the table-ready recap in compact narrative prose." : "",
-        storyRecapQuestion ? "Use exactly those two labels and no other headers. Do not use lists or tables; fold unresolved threads into the recap prose." : "Answer first. Keep specific lookup questions concise. Use bullets only if they make the answer easier to scan. No tables.",
-      ].filter((part) => part !== "").join("\n"),
+        { text: excerptsBlock(context), cache: true },
+        { text: [
+          `Selected campaign: ${scope.promptCampaign}`,
+          `Question: ${question}`,
+          relationshipQuestion ? "Cover the relationship between these people — what they mean to each other, what they know or suspect, any tensions or bonds, and how each one sees the other." : "",
+          identityQuestion ? "Introduce this person fully — their presence in the world, their role, what drives them, their key relationships, and anything that currently hangs over them." : "",
+          threadQuestion ? "Recount this thread — what has been established, where it stands right now, what leads exist, what remains unresolved, and why it matters." : "",
+          comparativeQuestion ? "List candidates from the excerpts. For each, label them with their actual campaign name (e.g., Heroes of Emberstran) or 'World lore' — never use 'All' as a label. Do not connect or compare characters across campaigns — they are in separate stories." : "",
+          storyRecapQuestion ? "Story / Recap Mode is active. Start with 'Short version:' and the direct answer in one sentence. Then write 'Story recap:' and give the table-ready recap in compact narrative prose." : "",
+          storyRecapQuestion ? "Use exactly those two labels and no other headers. Do not use lists or tables; fold unresolved threads into the recap prose." : "Answer first. Keep specific lookup questions concise. Use bullets only if they make the answer easier to scan. No tables.",
+        ].filter((part) => part !== "").join("\n") },
+      ],
     },
   ]);
 
@@ -458,6 +461,10 @@ function renderContext(matches: IndexItem[]): string {
     .join("\n\n---\n\n");
 }
 
+function excerptsBlock(context: string): string {
+  return `Vault excerpts:\n${context}`;
+}
+
 async function reviewAnswer(
   question: string,
   draft: string,
@@ -465,34 +472,35 @@ async function reviewAnswer(
   intent: QueryIntent,
   scope: QueryScope,
 ): Promise<string> {
+  // The system prompt and excerpts block must stay byte-identical to the draft
+  // call in answerQuestion — that shared prefix is what the prompt cache reuses.
+  // The final-pass instructions therefore ride after it in the user turn rather
+  // than in the system prompt.
   return chat(
     [
-      {
-        role: "system",
-        content: [
-          ...systemPrompt(intent, scope),
-          "You are doing a final pass on a draft answer. Your job is two things: facts and voice.",
-          "Facts: add anything important the draft missed that is in the excerpts, especially active complications and unresolved threads. Remove any claim not supported by the excerpts — this includes invented emotional states, motivations, fears, personality traits, and atmospheric details that aren't documented. Fix any reversed relationships or directionality errors.",
-          "Voice: read every sentence and ask — does this sound like a great DM said it, and is it grounded in what actually happened? Cut invented drama. Cut generic filler. Sharpen anything vague. If the excerpts only support a short answer, make it a short answer — honest and vivid beats long and fabricated. Specific questions should answer first and stay concise. Story / Recap Mode may be narrative, but it must start with the short answer.",
-          "Return only the revised answer. No critique, no preamble.",
-        ].join(" "),
-      },
+      { role: "system", content: systemPrompt(intent, scope).join(" ") },
       {
         role: "user",
         content: [
-          `Question: ${question}`,
-          `Selected campaign: ${scope.promptCampaign}`,
-          intent.relationshipQuestion ? "Speak as a DM in flowing prose. Describe only the documented relationship between these characters. If the excerpts show a loose party bond rather than a deep relationship, keep the answer short and say that. No bullet points or headers." : "",
-          intent.identityQuestion ? "Speak as a DM introducing this character to the players. Use flowing prose — no bullet points, no labeled fields, no headers. Paint a picture of who they are, their role in the party, their personality, goals, and any active complications hanging over them." : "",
-          intent.threadQuestion ? "Speak as a DM recapping this plot thread at the table. Describe what is known, what leads exist, what remains unresolved, and why it matters — in flowing prose, not a list." : "",
-          intent.storyRecapQuestion ? "Keep Story / Recap Mode. Start with 'Short version:' and the answer in one sentence. Then use 'Story recap:' for the narrative. Use exactly those two labels and no other headers. Do not use lists; fold complications and unresolved threads into the prose." : "",
-          "",
-          `Draft answer:\n${draft}`,
-          "",
-          `Vault excerpts:\n${context}`,
-        ]
-          .filter((part) => part !== "")
-          .join("\n"),
+          { text: excerptsBlock(context), cache: true },
+          { text: [
+            "You are doing a final pass on a draft answer. Your job is two things: facts and voice.",
+            "Facts: add anything important the draft missed that is in the excerpts, especially active complications and unresolved threads. Remove any claim not supported by the excerpts — this includes invented emotional states, motivations, fears, personality traits, and atmospheric details that aren't documented. Fix any reversed relationships or directionality errors.",
+            "Voice: read every sentence and ask — does this sound like a great DM said it, and is it grounded in what actually happened? Cut invented drama. Cut generic filler. Sharpen anything vague. If the excerpts only support a short answer, make it a short answer — honest and vivid beats long and fabricated. Specific questions should answer first and stay concise. Story / Recap Mode may be narrative, but it must start with the short answer.",
+            "Return only the revised answer. No critique, no preamble.",
+            "",
+            `Question: ${question}`,
+            `Selected campaign: ${scope.promptCampaign}`,
+            intent.relationshipQuestion ? "Speak as a DM in flowing prose. Describe only the documented relationship between these characters. If the excerpts show a loose party bond rather than a deep relationship, keep the answer short and say that. No bullet points or headers." : null,
+            intent.identityQuestion ? "Speak as a DM introducing this character to the players. Use flowing prose — no bullet points, no labeled fields, no headers. Paint a picture of who they are, their role in the party, their personality, goals, and any active complications hanging over them." : null,
+            intent.threadQuestion ? "Speak as a DM recapping this plot thread at the table. Describe what is known, what leads exist, what remains unresolved, and why it matters — in flowing prose, not a list." : null,
+            intent.storyRecapQuestion ? "Keep Story / Recap Mode. Start with 'Short version:' and the answer in one sentence. Then use 'Story recap:' for the narrative. Use exactly those two labels and no other headers. Do not use lists; fold complications and unresolved threads into the prose." : null,
+            "",
+            `Draft answer:\n${draft}`,
+          ]
+            .filter((part) => part !== null)
+            .join("\n") },
+        ],
       },
     ],
     { temperature: 0.1 },

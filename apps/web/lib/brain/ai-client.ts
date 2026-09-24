@@ -2,7 +2,11 @@ import Anthropic from "@anthropic-ai/sdk";
 
 import { brainConfig } from "./config";
 
-export type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
+// A message's content is plain text, or ordered parts when the caller wants a
+// prompt-cache breakpoint: `cache: true` marks the end of a prefix that a
+// follow-up call will resend byte-for-byte (see answerQuestion → reviewAnswer).
+export type ChatPart = { text: string; cache?: boolean };
+export type ChatMessage = { role: "system" | "user" | "assistant"; content: string | ChatPart[] };
 export type ChatOptions = { temperature?: number };
 
 function withTimeout(ms: number): { signal: AbortSignal; clear: () => void } {
@@ -45,17 +49,36 @@ function describeError(error: unknown): string {
 // Anthropic takes the system prompt as a separate top-level field and only
 // user/assistant turns in `messages`. Callers here send one system + one user
 // turn, so fold every system message into the system field and keep the rest.
+function flattenContent(content: ChatMessage["content"]): string {
+  return typeof content === "string" ? content : content.map((part) => part.text).join("\n");
+}
+
+function toAnthropicContent(content: ChatMessage["content"]): string | Anthropic.TextBlockParam[] {
+  if (typeof content === "string") return content;
+  return content.map((part) => ({
+    type: "text" as const,
+    text: part.text,
+    ...(part.cache ? { cache_control: { type: "ephemeral" as const } } : {}),
+  }));
+}
+
 function toAnthropicMessages(messages: ChatMessage[]): {
   system: string;
-  turns: { role: "user" | "assistant"; content: string }[];
+  turns: Anthropic.MessageParam[];
 } {
   const systemParts: string[] = [];
-  const turns: { role: "user" | "assistant"; content: string }[] = [];
+  const turns: Anthropic.MessageParam[] = [];
   for (const message of messages) {
-    if (message.role === "system") systemParts.push(message.content);
-    else turns.push({ role: message.role, content: message.content });
+    if (message.role === "system") systemParts.push(flattenContent(message.content));
+    else turns.push({ role: message.role, content: toAnthropicContent(message.content) });
   }
   return { system: systemParts.join("\n\n"), turns };
+}
+
+// Groq's OpenAI-style API takes plain string content; cache parts are an
+// Anthropic-only concept, so they collapse back to the same text.
+function toGroqMessages(messages: ChatMessage[]): { role: string; content: string }[] {
+  return messages.map((message) => ({ role: message.role, content: flattenContent(message.content) }));
 }
 
 async function chatClaude(messages: ChatMessage[], options: ChatOptions): Promise<string> {
@@ -148,7 +171,7 @@ async function chatGroq(messages: ChatMessage[], options: ChatOptions = {}): Pro
       },
       body: JSON.stringify({
         model: brainConfig.chatModel,
-        messages,
+        messages: toGroqMessages(messages),
         temperature: options.temperature ?? 0.2,
         stream: false,
       }),
@@ -208,7 +231,7 @@ async function* chatStreamGroq(
       },
       body: JSON.stringify({
         model: brainConfig.chatModel,
-        messages,
+        messages: toGroqMessages(messages),
         temperature: options.temperature ?? 0.2,
         stream: true,
       }),
