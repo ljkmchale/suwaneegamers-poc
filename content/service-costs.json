@@ -92,14 +92,14 @@
       "category": "subscription",
       "purpose": "Secondary domain. Registered at Squarespace; DNS on Google Cloud DNS.",
       "envKeys": [],
-      "plan": "$20/yr — auto-renew OFF",
+      "plan": "$20/yr — auto-renew OFF on purpose",
       "cost": 20,
       "billingCycle": "yearly",
       "renewalDate": "2027-03-09",
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": "Squarespace, registered 2026-03-09; renewal price $20.00. Auto-renew was turned OFF on 2026-07-28, so it EXPIRES 2027-03-09 unless renewed. webmaster@suwaneegamers.com (Migadu) stops receiving mail if this lapses."
+      "notes": "Squarespace, registered 2026-03-09, expires 2027-03-09. Auto-renew turned off on purpose (2026-07-28): plan is to TRANSFER to GoDaddy before expiry, not let it lapse. Transfer = unlock + auth code at Squarespace, start transfer at GoDaddy (adds a year). Recreate the Migadu MX/SPF/DKIM records wherever its DNS ends up, or webmaster@suwaneegamers.com stops receiving mail."
     },
     {
       "id": "claude-subscription",
