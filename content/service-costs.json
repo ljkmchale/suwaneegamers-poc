@@ -77,14 +77,14 @@
       "category": "subscription",
       "purpose": "Main site domain. Registered at GoDaddy; DNS on Cloudflare.",
       "envKeys": [],
-      "plan": "$20/yr",
-      "cost": 20,
+      "plan": "$24.99/yr renewal (first year was $15.19)",
+      "cost": 24.99,
       "billingCycle": "yearly",
       "renewalDate": "2027-05-12",
       "billingEmail": "",
       "dashboardUrl": "https://dcc.godaddy.com/control/portfolio",
       "usageUrl": "",
-      "notes": "Registrar: GoDaddy (found via public RDAP 2026-09-24). Registered 2026-05-12, expires 2027-05-12. Registry shows renew/transfer/update locks — normal GoDaddy protection, but confirm auto-renew is on in the GoDaddy account."
+      "notes": "GoDaddy order 4086630791, paid $15.19 on 2026-05-12 (first-year price). Auto-renew is ON: renews 2027-05-12 for $24.99 + tax. This is the live site's domain — keep the card on file current."
     },
     {
       "id": "domain-com",
@@ -92,14 +92,14 @@
       "category": "subscription",
       "purpose": "Secondary domain. Registered at Squarespace; DNS on Google Cloud DNS.",
       "envKeys": [],
-      "plan": "$20/yr",
+      "plan": "$20/yr — auto-renew OFF",
       "cost": 20,
       "billingCycle": "yearly",
       "renewalDate": "2027-03-09",
       "billingEmail": "",
       "dashboardUrl": "https://account.squarespace.com/domains",
       "usageUrl": "",
-      "notes": "Registrar: Squarespace Domains (found via public RDAP 2026-09-24). Registered 2026-03-09, expires 2027-03-09. Nameservers are ns-cloud-b*.googledomains.com (carried over from Google Domains)."
+      "notes": "Squarespace, registered 2026-03-09; renewal price $20.00. Auto-renew was turned OFF on 2026-07-28, so it EXPIRES 2027-03-09 unless renewed. webmaster@suwaneegamers.com (Migadu) stops receiving mail if this lapses."
     },
     {
       "id": "claude-subscription",
