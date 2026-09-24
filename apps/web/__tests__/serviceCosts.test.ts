@@ -4,9 +4,13 @@ import {
   clampService,
   daysUntil,
   monthlyEquivalent,
+  parseCents,
   parseCost,
+  recentMonths,
+  regularChargesDue,
   safeUrl,
   summarizeCosts,
+  totalsByMonth,
   type ServiceEntry,
 } from "@/lib/serviceCosts";
 
@@ -74,5 +78,48 @@ describe("serviceCosts", () => {
     expect(daysUntil("2026-09-30", today)).toBe(6);
     expect(daysUntil("2026-09-20", today)).toBe(-4);
     expect(daysUntil("", today)).toBeNull();
+  });
+});
+
+describe("payment log helpers", () => {
+  it("converts amounts to cents", () => {
+    expect(parseCents("$22")).toBe(2200);
+    expect(parseCents("19.99")).toBe(1999);
+    expect(parseCents("")).toBeNull();
+  });
+
+  it("lists recent months newest first across a year boundary", () => {
+    expect(recentMonths(new Date(2026, 0, 15), 3)).toEqual(["2026-01", "2025-12", "2025-11"]);
+  });
+
+  it("totals payments by month", () => {
+    const totals = totalsByMonth(
+      [
+        { paidOn: "2026-09-03", amountCents: 2200 },
+        { paidOn: "2026-09-10", amountCents: 2000 },
+        { paidOn: "2026-08-03", amountCents: 2200 },
+        { paidOn: "2025-01-01", amountCents: 999 },
+      ],
+      ["2026-09", "2026-08", "2026-07"],
+    );
+    expect(totals).toEqual([
+      { month: "2026-09", totalCents: 4200, count: 2 },
+      { month: "2026-08", totalCents: 2200, count: 1 },
+      { month: "2026-07", totalCents: 0, count: 0 },
+    ]);
+  });
+
+  it("finds regular charges not yet logged this month", () => {
+    const services = [
+      entry({ name: "Eleven", category: "subscription", cost: 22, billingCycle: "monthly" }),
+      entry({ name: "Claude", category: "dev", cost: 20, billingCycle: "monthly" }),
+      entry({ name: "Domain", category: "subscription", cost: 20, billingCycle: "yearly", renewalDate: "2026-09-30" }),
+      entry({ name: "Other domain", category: "subscription", cost: 20, billingCycle: "yearly", renewalDate: "2027-02-01" }),
+      entry({ name: "Credits", category: "usage", cost: 4, billingCycle: "usage" }),
+      entry({ name: "Suno", category: "excluded", cost: 10, billingCycle: "monthly" }),
+      entry({ name: "Unpriced", category: "subscription", cost: null, billingCycle: "monthly" }),
+    ];
+    const due = regularChargesDue(services, "2026-09", new Set(["claude"]));
+    expect(due.map((s) => s.id)).toEqual(["eleven", "domain"]);
   });
 });

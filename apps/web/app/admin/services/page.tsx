@@ -1,4 +1,5 @@
-import { ExternalLink, KeyRound, Plus } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, KeyRound, Plus, Receipt } from "lucide-react";
 import { requireAdmin } from "@/lib/adminAuth";
 import {
   BILLING_CYCLES,
@@ -252,6 +253,13 @@ export default async function AdminServicesPage() {
           Every outside service the site connects to and what it costs. Click a service to fill in its plan,
           price, and renewal date. Yearly plans count toward the monthly total at one-twelfth.
         </p>
+        <Link
+          href="/admin/services/payments"
+          className="mt-3 inline-flex items-center gap-1.5 text-xs text-[#a89880] hover:text-[#f59e0b]"
+        >
+          <Receipt size={12} aria-hidden="true" />
+          Payment Log: what was actually charged each month
+        </Link>
         <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-lg border border-[#2a2a35] bg-[#0f0a1a] px-4 py-3">

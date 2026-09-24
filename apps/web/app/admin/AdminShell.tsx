@@ -29,6 +29,7 @@ const NAV_GROUPS = [
     { href: "/admin/analytics/operations", label: "Performance & Jobs" },
     { href: "/admin/source-managed", label: "Source Managed" },
     { href: "/admin/services", label: "Services & Costs" },
+    { href: "/admin/services/payments", label: "Payment Log" },
   ] },
   { label: "Security", links: [{ href: "/admin/security", label: "Threats & Sign-ins" }] },
   { label: "Content & Design", links: [

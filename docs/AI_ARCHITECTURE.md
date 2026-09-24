@@ -72,6 +72,14 @@ review token; `/signin` uses it to submit a verified request into
 `member_unblock_requests`. Pending requests and the Unblock/Keep blocked
 decisions live at `/admin/members`. Internal block reasons are admin-only.
 
+Operating costs live in two places. `content/service-costs.json` (DB-first via
+`contentFiles.ts`, edited at `/admin/services`) is the catalog of outside
+services with plan prices, renewal dates, and billing/usage links. Actual
+charges are rows in the `service_payments` table (`apps/web/lib/servicePayments.ts`,
+`/admin/services/payments`), keyed to the catalog by `service_id` with a
+`service_name` snapshot so history survives renames. No scheduled job writes
+either one.
+
 `/images/...` is obsolete. Files under `apps/web/media/images/` must be referenced as `/media/images/...`. Do not put site media back under `public/` unless the architecture contract is deliberately migrated everywhere.
 
 ## Change-impact checklist

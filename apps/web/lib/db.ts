@@ -887,6 +887,26 @@ function initializeSchema(db: Database.Database): void {
       ON member_unblock_requests(status, requested_at DESC);
 
     -- ----------------------------------------------------------------
+    -- Service payment log (/admin/services/payments)
+    -- ----------------------------------------------------------------
+    -- Actual charges paid for the outside services listed in
+    -- content/service-costs.json. service_id links to that catalog;
+    -- service_name is a snapshot so history survives a rename or removal.
+    CREATE TABLE IF NOT EXISTS service_payments (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      service_id    TEXT NOT NULL,
+      service_name  TEXT NOT NULL,
+      -- Calendar date the charge landed, YYYY-MM-DD.
+      paid_on       TEXT NOT NULL,
+      amount_cents  INTEGER NOT NULL CHECK (amount_cents >= 0),
+      note          TEXT,
+      created_at    TEXT NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_service_payments_paid_on
+      ON service_payments(paid_on DESC);
+
+    -- ----------------------------------------------------------------
     -- JSON content documents
     -- ----------------------------------------------------------------
     CREATE TABLE IF NOT EXISTS content_documents (

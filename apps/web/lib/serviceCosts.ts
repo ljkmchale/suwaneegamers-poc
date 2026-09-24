@@ -160,3 +160,62 @@ export function daysUntil(renewalDate: string, today: Date): number | null {
   const start = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
   return Math.round((Date.parse(`${renewalDate}T00:00:00Z`) - start) / 86_400_000);
 }
+
+// --- Payment log helpers (the service_payments table) -----------------------
+
+/** Parse a user-entered amount to whole cents, or null. */
+export function parseCents(value: unknown): number | null {
+  const dollars = parseCost(value);
+  return dollars === null ? null : Math.round(dollars * 100);
+}
+
+/** "YYYY-MM" for a local date. */
+export function monthKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+}
+
+/** The last `count` month keys ending with the month of `today`, newest first. */
+export function recentMonths(today: Date, count: number): string[] {
+  return Array.from({ length: count }, (_, index) =>
+    monthKey(new Date(today.getFullYear(), today.getMonth() - index, 1)),
+  );
+}
+
+export interface MonthTotal {
+  month: string;
+  totalCents: number;
+  count: number;
+}
+
+/** Sum payments into the given months (payments outside them are ignored). */
+export function totalsByMonth(
+  payments: { paidOn: string; amountCents: number }[],
+  months: string[],
+): MonthTotal[] {
+  const totals = new Map(months.map((month) => [month, { month, totalCents: 0, count: 0 }]));
+  for (const payment of payments) {
+    const bucket = totals.get(payment.paidOn.slice(0, 7));
+    if (!bucket) continue;
+    bucket.totalCents += payment.amountCents;
+    bucket.count += 1;
+  }
+  return months.map((month) => totals.get(month)!);
+}
+
+/**
+ * Fixed charges expected in `month` ("YYYY-MM") that have not been logged yet:
+ * counted monthly plans with a price, plus yearly plans renewing that month.
+ * Usage-billed services (prepaid credit, top-ups) are logged by hand.
+ */
+export function regularChargesDue(
+  services: ServiceEntry[],
+  month: string,
+  loggedServiceIds: Set<string>,
+): ServiceEntry[] {
+  return services.filter((entry) => {
+    if (entry.category === "free" || entry.category === "dormant" || entry.category === "excluded") return false;
+    if (!entry.cost || loggedServiceIds.has(entry.id)) return false;
+    if (entry.billingCycle === "monthly") return true;
+    return entry.billingCycle === "yearly" && entry.renewalDate.slice(0, 7) === month;
+  });
+}
