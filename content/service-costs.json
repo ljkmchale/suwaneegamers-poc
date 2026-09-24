@@ -342,6 +342,21 @@
       "dashboardUrl": "https://app.mailgun.com/",
       "usageUrl": "",
       "notes": "Close the account if it still exists."
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "category": "excluded",
+      "purpose": "AI music generation — personal use, not used by the site.",
+      "envKeys": [],
+      "plan": "",
+      "cost": null,
+      "billingCycle": "monthly",
+      "renewalDate": "",
+      "billingEmail": "",
+      "dashboardUrl": "https://suno.com/account",
+      "usageUrl": "",
+      "notes": "Listed for reference; not counted in the totals."
     }
   ]
 }

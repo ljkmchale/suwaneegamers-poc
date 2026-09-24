@@ -62,6 +62,8 @@ describe("serviceCosts", () => {
       entry({ name: "Jina", category: "usage", cost: null, billingCycle: "usage" }),
       entry({ name: "Free", category: "free", cost: 0, billingCycle: "free" }),
       entry({ name: "Off", category: "dormant", cost: 50, billingCycle: "monthly" }),
+      entry({ name: "Suno", category: "excluded", cost: 10, billingCycle: "monthly" }),
+      entry({ name: "Unpriced ref", category: "excluded", cost: null, billingCycle: "monthly" }),
     ];
     expect(monthlyEquivalent(services[0])).toBe(2);
     expect(summarizeCosts(services)).toEqual({ monthlyTotal: 7, yearlyTotal: 84, unpricedCount: 1 });

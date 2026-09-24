@@ -30,6 +30,7 @@ const CATEGORY_HINTS: Record<ServiceCategory, string> = {
   dev: "What it costs to build and maintain the site, not to run it.",
   free: "No bill today, but tracked so nothing surprises you.",
   dormant: "Wired up but switched off or retired.",
+  excluded: "Tracked for reference only — not part of the site, so left out of the totals.",
 };
 
 const inputClass =

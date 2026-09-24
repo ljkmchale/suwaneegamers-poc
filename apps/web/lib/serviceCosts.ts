@@ -2,7 +2,7 @@
 // external service the site connects to, with what it costs and when it
 // renews. No fs here (unit-tested); reads/writes live in serviceCostStore.ts.
 
-export type ServiceCategory = "usage" | "subscription" | "dev" | "free" | "dormant";
+export type ServiceCategory = "usage" | "subscription" | "dev" | "free" | "dormant" | "excluded";
 export type BillingCycle = "usage" | "monthly" | "yearly" | "free";
 
 export interface ServiceEntry {
@@ -37,9 +37,10 @@ export const CATEGORY_LABELS: Record<ServiceCategory, string> = {
   dev: "Development tools",
   free: "Free / keyless",
   dormant: "Configured but off",
+  excluded: "Not counted",
 };
 
-export const CATEGORY_ORDER: ServiceCategory[] = ["usage", "subscription", "dev", "free", "dormant"];
+export const CATEGORY_ORDER: ServiceCategory[] = ["usage", "subscription", "dev", "free", "dormant", "excluded"];
 export const BILLING_CYCLES: BillingCycle[] = ["usage", "monthly", "yearly", "free"];
 
 const MAX_TEXT = 500;
@@ -125,6 +126,9 @@ export function clampCatalog(raw: unknown): ServiceCatalog {
   return { services };
 }
 
+/** Categories left out of the totals: no bill, no longer billing, or listed for reference only. */
+const UNCOUNTED: ServiceCategory[] = ["free", "dormant", "excluded"];
+
 /** Normalize a cost to a per-month figure; free/unknown costs count as 0. */
 export function monthlyEquivalent(entry: Pick<ServiceEntry, "cost" | "billingCycle">): number {
   if (entry.cost === null || entry.billingCycle === "free") return 0;
@@ -134,7 +138,7 @@ export function monthlyEquivalent(entry: Pick<ServiceEntry, "cost" | "billingCyc
 export interface CostSummary {
   monthlyTotal: number;
   yearlyTotal: number;
-  /** Paid (non-free, non-dormant) services with no cost entered yet. */
+  /** Paid (counted) services with no cost entered yet. */
   unpricedCount: number;
 }
 
@@ -142,7 +146,7 @@ export function summarizeCosts(services: ServiceEntry[]): CostSummary {
   let monthlyTotal = 0;
   let unpricedCount = 0;
   for (const entry of services) {
-    if (entry.category === "free" || entry.category === "dormant") continue;
+    if (UNCOUNTED.includes(entry.category)) continue;
     if (entry.cost === null && entry.billingCycle !== "free") unpricedCount += 1;
     monthlyTotal += monthlyEquivalent(entry);
   }
