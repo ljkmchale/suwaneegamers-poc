@@ -194,11 +194,15 @@ function syncToDb(parsed: ParsedCampaign[]): number {
       deleteSummaries.run(campaignId);
       for (const [index, session] of parsedCampaign.sessions.entries()) {
         const docAudio = session.audioLinks.length ? JSON.stringify(session.audioLinks) : null;
+        // Links already localized by sync-session-audio (/media/session-audio/…)
+        // win over the doc's raw Drive links, or a re-run would undo that job.
+        const storedAudio = audioByNumber.get(session.number);
+        const localized = storedAudio?.includes("/media/session-audio/") ? storedAudio : undefined;
         insertSummary.run({
           campaign_id: campaignId,
           title: `Session ${session.number} - ${session.title}`,
           summary: session.summary,
-          audio_links: docAudio ?? audioByNumber.get(session.number) ?? "[]",
+          audio_links: localized ?? docAudio ?? storedAudio ?? "[]",
           session_date: dateByNumber.get(session.number) ?? null,
           sort_order: index,
         });
