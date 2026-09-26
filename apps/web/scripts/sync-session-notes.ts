@@ -63,6 +63,11 @@ interface ParsedCampaign {
   sessions: ParsedSession[];
 }
 
+// Google Docs' markdown export backslash-escapes punctuation ("Caw\!").
+function unescapeMarkdown(text: string): string {
+  return text.replace(/\\([\\`*_{}\[\]()#+\-.!|~<>])/g, "$1");
+}
+
 function parseSessionSummariesDoc(markdown: string): ParsedCampaign[] {
   const campaigns: ParsedCampaign[] = [];
 
@@ -88,7 +93,7 @@ function parseSessionSummariesDoc(markdown: string): ParsedCampaign[] {
       if (!m) continue;
 
       const sessionNumber = parseInt(m[1], 10);
-      const sessionTitle = m[2].replace(/\*+/g, "").trim();
+      const sessionTitle = unescapeMarkdown(m[2].replace(/\*+/g, "").trim());
 
       const audioLinks: AudioLink[] = [];
       const summaryParts: string[] = [];
@@ -104,7 +109,7 @@ function parseSessionSummariesDoc(markdown: string): ParsedCampaign[] {
         }
       }
 
-      const summary = summaryParts.join(" ").trim();
+      const summary = unescapeMarkdown(summaryParts.join(" ").trim());
       if (!summary) continue;
 
       sessions.push({ number: sessionNumber, title: sessionTitle, summary, audioLinks });
