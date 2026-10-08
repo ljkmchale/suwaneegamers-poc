@@ -1,5 +1,3 @@
-# Sections
-
 # 
 
 # Player’s Guide to \<Name\>
@@ -42,7 +40,8 @@ Adsuren was originally settled as a few small houses of people who were attracte
 
 ## Citizenry
 
-Humans (40%), Half-Elves (25%), Elves (20%),  other (15%)  
+Humans (40%), Half-Elves (25%), Elves (20%),  other (15%)
+
 *When interacting with NPCs, it may be helpful to use the [interaction chart](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.bkfxerpcdyol) in the Myrdae Reference for DMs.*
 
 ### **Style and Aesthetic**
@@ -202,8 +201,6 @@ Additionally, the tavern is known for the following unique food items and dishes
 | Farrier Services | 1 sp |  | Trim, shape and shoe horses’ hooves |
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

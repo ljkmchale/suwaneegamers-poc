@@ -1,6 +1,17 @@
 {
   "answers": [
     {
+      "question": "No, I'm looking for information on the goddess Teldo, Tiash.",
+      "normalized": "no i m looking for information on the goddess teldo tiash",
+      "answer": "The excerpts do not contain information about a goddess named Teldo. However, they extensively document Tiash, the goddess of balance, one of the eight greater deities of the Assembly of Essence who oversaw Myrdae before the Awakening. Tiash's story is one of betrayal and impossible choice.",
+      "sources": [
+        "Myrdae Stories and Tales",
+        "Myrdae World Guide"
+      ],
+      "timesAsked": 1,
+      "learnedAt": "2026-09-29T15:25:20.945Z"
+    },
+    {
       "question": "Hey, um Collective of Myrdae",
       "normalized": "hey um collective of myrdae",
       "answer": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization bearing that name.",
@@ -112,5 +123,5 @@
   "blocked": [
     "is there any other questions you can ask be asked"
   ],
-  "updatedAt": "2026-09-24T15:25:45.509Z"
+  "updatedAt": "2026-10-08T15:25:38.143Z"
 }

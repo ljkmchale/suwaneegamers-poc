@@ -1,5 +1,3 @@
-# Sections
-
 # **Overview**
 
 The Abbey of Mont Rest, now commonly referred to as the Abbey of Light, is a sanctuary located south of O’naren, sitting at the summit of a tall foothill descending from the Distancion Mountains into the Borealian Sway. Originally dedicated to the old god Neera, the abbey has since expanded its purpose, becoming a place of study and reverence for all the gods of Myrdae. Built from the region’s natural stone, the abbey has stood for approximately 150 years, housing both devoted scholars of divine lore and an orphanage that provides care for abandoned or displaced children.
@@ -29,7 +27,8 @@ Predominately high elves, humans, and half-elves form its heart, with other spec
 Almost everyone in the Abbey of Light is tied into its work, prayer and study. The majority are initiated into one of the Four Orders:
 
 * **The Nurturing Light –** The Nurturing Light are caretakers of the orphanage and healers of the body and spirit.  This order oversees the orphanage, infirmary, gardens, and communal kitchens.  
-* **The Protective Light –** The Order of Protective Light are defenders of the Abbey, guardians of sacred relics, and enforcers of spiritual boundaries.  This order oversees guarding the people, the sanctum vaults and the outer walls.  
+* **The Protective Light –** The Order of Protective Light are defenders of the Abbey, guardians of sacred relics, and enforcers of spiritual boundaries.  This order oversees guarding the people, the sanctum vaults and the outer walls.
+
 * **The Reflective Light –** The Order of Reflective Light  are scholars, diplomats, and mediators — quietly influential thinkers who support causes like the Tegenwald Phet.  This order oversees the archives, lecture halls, civic correspondence, and public doctrine.  
 * **The Rising Light –** The Order of Rising Light are leaders of ritual, memory, and faith — shepherds of transitions and sacred oaths.  This order oversees the ceremonial halls and leading services.
 

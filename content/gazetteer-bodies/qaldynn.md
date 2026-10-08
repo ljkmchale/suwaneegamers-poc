@@ -1,5 +1,3 @@
-# Sections
-
 Gazetteer
 
 Qal’dynn
@@ -130,39 +128,44 @@ Characters engaging in criminal activity are arrested by the guard and charged p
 
 #### 
 
-#### **The Arcanum (Magic Studies)**
+#### The Arcanum (Magic Studies)
 
 Focus: Arcane theory, spellcasting, enchantment, transmutation, planar studies, and magical history.  
  Notable Branches:
 
-* *The Scriptorium of Runes* – focuses on glyphwork and magical language.  
-* *The Veiled Chamber* – studies planar phenomena and the multiverse.  
+* *The Scriptorium of Runes* – focuses on glyphwork and magical language.
+
+* *The Veiled Chamber* – studies planar phenomena and the multiverse.
+
 * *The Wandwright’s Atelier* – for practical spellcasting and magical dueling.
 
-#### **The Chasari (Science & Natural Philosophy)**
+#### The Chasari (Science & Natural Philosophy)
 
 Focus: Astronomy, alchemy, engineering, anatomy, natural philosophy, and ecological studies.  
  Notable Branches:
 
-* *The Alchemical Crucible* – home to advanced studies in alchemy and material reactions.  
+* *The Alchemical Crucible* – home to advanced studies in alchemy and material reactions.
+
 * *The Celestarium* – focused on celestial bodies, divination through stars, and arcane astronomy.  
 * *The Menagerie of Forms* – study of flora, fauna, and anatomical biology.
 
-#### **The Lyrisen (Arts & Expression)**
+#### The Lyrisen (Arts & Expression)
 
 Focus: Music, literature, visual arts, performance, philosophy, and cultural history.  
  Notable Branches:
 
-* *The Hall of Echoes* – for bardic music and vocal artistry.  
+* *The Hall of Echoes* – for bardic music and vocal artistry.
+
 * *The Quill and Ink Society* – dedicated to poetry, storytelling, and historical epics.  
 * *The Atelier of Color* – painting, sculpture, and visual enchantment arts.
 
-#### **The Civisabul (Interdisciplinary Lore & Debate)**
+#### The Civisabul (Interdisciplinary Lore & Debate)
 
 Focus: Ethics, elven law, diplomacy, history of the Sway, and integrated studies.  
  Notable Branches:
 
-* *The Council of Quills* – handles research and scholarly debate.  
+* *The Council of Quills* – handles research and scholarly debate.
+
 * *The Harmonium Table* – a circle of sages, philosophers, and diplomats.
 
 ## Leaf Light

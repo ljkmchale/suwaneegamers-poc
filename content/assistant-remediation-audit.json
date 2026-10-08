@@ -1,6 +1,19 @@
 {
   "entries": [
     {
+      "id": "audit-rem-ffbb64b9eaff16e9-1790695520947",
+      "remediationId": "rem-ffbb64b9eaff16e9",
+      "action": "applied",
+      "application": {
+        "kind": "learned-answer",
+        "key": "No, I'm looking for information on the goddess Teldo, Tiash.",
+        "value": "The excerpts do not contain information about a goddess named Teldo. However, they extensively document Tiash, the goddess of balance, one of the eight greater deities of the Assembly of Essence who oversaw Myrdae before the Awakening. Tiash's story is one of betrayal and impossible choice.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-09-29T15:25:20.945Z"
+      },
+      "createdAt": "2026-09-29T15:25:20.945Z"
+    },
+    {
       "id": "audit-undo-audit-rem-f65388ab26a8e5da-1788103567621-1789389642512",
       "remediationId": "rem-f65388ab26a8e5da",
       "action": "undone",

@@ -1,8 +1,6 @@
-# Sections
-
 ![][image1]
 
-# **Overview**
+# Overview
 
 Scarwatch Hold rises from the spine of the **Jagged Waste Crags** with pale stone walls and rising towers.  The architecture bears the marks of age and repair. Sections of the outer wall show darker stone where collapse and fire once bit deep during the Awakening, while newer masonry reinforces towers and parapets. Conical-roofed towers rise above the curtain wall, their narrow slits facing outward. Within the walls, the keep is functional rather than grand: drill yards worn smooth by boots, banners stiffened by constant wind, and lookout platforms where sentries linger longer than strictly necessary.
 

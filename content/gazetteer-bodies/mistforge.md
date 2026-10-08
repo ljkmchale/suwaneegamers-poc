@@ -1,5 +1,3 @@
-# Sections
-
 Gazetteer
 
 ![][image1]

@@ -1,5 +1,3 @@
-# Sections
-
 Gazetteer
 
 ![][image1]
@@ -171,8 +169,6 @@ description for dungeon master
 | Farrier Services | 1 sp |  | Trim, shape and shoe horses’ hooves |
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

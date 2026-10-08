@@ -1,6 +1,11 @@
 {
   "entries": [
     {
+      "healedAt": "2026-09-29T15:25:09.142Z",
+      "kind": "learned-answer",
+      "question": "No, I'm looking for information on the goddess Teldo, Tiash."
+    },
+    {
       "healedAt": "2026-08-31T15:25:50.851Z",
       "kind": "learned-answer",
       "question": "Do you see the new guild structure in the Bloody Endeavor I"
@@ -81,5 +86,5 @@
       "question": "Hey Mara, what do you know about the Abbey of Light?"
     }
   ],
-  "updatedAt": "2026-08-31T15:25:50.851Z"
+  "updatedAt": "2026-09-29T15:25:09.142Z"
 }

@@ -1,5 +1,3 @@
-# Sections
-
 **Table of Contents**
 
 [**Overview	2**](#overview)

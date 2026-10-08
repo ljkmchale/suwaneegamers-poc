@@ -958,6 +958,30 @@
           },
           "sourceKey": "a-new-adventure:session-33",
           "sourceHash": "59f55a6bd860d107035219589187e6ce9de88a49658fd03b300059d5ec603041",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-34",
+          "locationId": "southern-arch",
+          "location": "Southern Arch",
+          "x": 54.9,
+          "y": 36.01,
+          "session": "Session 34",
+          "title": "Signs of Vhaulmast",
+          "summary": "The party reached the Southern Arch determined to reunite with Pa, finish the escort they had already been paid to complete, and learn why the south road had gone silent. They found Pa and his family safe at the Dockhouse Inn, heard that Ustina had vanished after riding toward the trouble, and chose to push ahead alone so the caravan would not walk into whatever had emptied Bloodbeak and Windbreak. On the road they found Ustina torn apart, fled two shadow-touched black bears, and opened her speaking locket, which named Vhaulmast as the curse sweeping the land, a name Relys and Cerul tied to the ruin of Iparos.…",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Southern Arch",
+            "description": "On the road they found Ustina torn apart, fled two shadow-touched black bears, and opened her speaking locket, which named Vhaulmast as the curse sweeping the land, a name Relys and Cerul tied to the ruin of Iparos."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "a-new-adventure:session-34",
+          "sourceHash": "1ef4f5e03bc980899f434525b24cebee371bcc59f0634d18873033869e53022f",
           "current": true
         }
       ],
@@ -1062,7 +1086,7 @@
             "points": []
           },
           "sourceKey": "bloody-endeavor:session-30",
-          "sourceHash": "83639bbc00b68fb20e221b40577a061da7642194f4da6fc54c5b4c06edd39fb6",
+          "sourceHash": "8c40ac4ebb8e40d29859d3bc75ffaa0943ab25f89a77e64daea3c3e49000ab4c",
           "current": false
         },
         {
@@ -1137,7 +1161,7 @@
             "points": []
           },
           "sourceKey": "bloody-endeavor:session-33",
-          "sourceHash": "10314e215c86228410d7f60f510b6363eb4fdfb98d6c3d118bc919d78508b882",
+          "sourceHash": "9a0d89cba8b77d57d9454d4c5b3a3f7a5025c295549e512f84ea5a5b398f928c",
           "current": false
         },
         {
@@ -1267,11 +1291,11 @@
           "precision": "off-map",
           "session": "Session 38",
           "title": "Just the Tip",
-          "summary": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a \\+2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-sealed halls below. In the Room of Detachment they bought rest through sacrifice, solved the deadly elemental bell puzzle in the Room of Bells, felled Dearth the black fox mount of the Cold Breath, and faced Huldi himself in a vast chamber of plummeting platforms where ice blades, a wall-bursting eldritch horror, and a shattered blade led to Pagern’s killing blow, Rhody’s death and Caelion’s Revivify, the Sacred Crow…",
+          "summary": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a +2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-sealed halls below. In the Room of Detachment they bought rest through sacrifice, solved the deadly elemental bell puzzle in the Room of Bells, felled Dearth the black fox mount of the Cold Breath, and faced Huldi himself in a vast chamber of plummeting platforms where ice blades, a wall-bursting eldritch horror, and a shattered blade led to Pagern’s killing blow, Rhody’s death and Caelion’s Revivify, the Sacred Crows…",
           "impact": {
             "type": "battle",
             "title": "Conflict reshaped Master Icy Sow’s building",
-            "description": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a \\+2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-…"
+            "description": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a +2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-s…"
           },
           "automatic": true,
           "confidence": 0.79,
@@ -1280,7 +1304,7 @@
             "points": []
           },
           "sourceKey": "bloody-endeavor:session-38",
-          "sourceHash": "b630f98f5517ce2706827956d6c16c3d43ff8543c9d07b0142765f5eb5593571",
+          "sourceHash": "165cb373f1f281ffa422741f71cf3335c50b0007cabf81b7395fb877ddd27c73",
           "current": false
         },
         {
@@ -1540,7 +1564,7 @@
       "id": "dungeons-iii",
       "name": "Dungeons III – kNight Watch",
       "color": "#76d7c4",
-      "status": "At Jagged Waste Crags",
+      "status": "At Ahnassa",
       "campaignHref": "/campaigns/dungeons-iii",
       "stops": [
         {
@@ -1815,7 +1839,7 @@
             "miles": 180.5
           },
           "sourceKey": "dungeons-iii:session-10",
-          "sourceHash": "d4e11d07d648422504054946098b28caba18a0b52ffb543a8e6ca9b991c4ce2b",
+          "sourceHash": "bf9fb0f7ee38ffac068214accd0392999ad6121366bac39869147a9b49f42ed7",
           "current": false
         },
         {
@@ -1938,6 +1962,64 @@
           },
           "sourceKey": "dungeons-iii:session-15",
           "sourceHash": "ec063d1bde2f33239e1de63e96c51ba3305aa002f1020d037831add3223a5b70",
+          "current": false
+        },
+        {
+          "id": "auto-dungeons-iii-session-16",
+          "locationId": "jagged-waste-crags",
+          "location": "Jagged Waste Crags",
+          "x": 73.37,
+          "y": 49.4,
+          "session": "Session 16",
+          "title": "Act First, Ask Later?",
+          "summary": "The kNight Watch climbed into Khelar Watch, Eastern Observation Point II, to learn what the Radiant Eye wanted in the last Osmanae watchtower and to take the celestial instrument before the cult could. Posing as inspectors, they spoke with Gault, Bolin, Selris, and Garamond, fitted the broken line that the eastern eye watches and the western answers, and kept silent about the bridge and the reflecting basin. Selris meant to open the great observation doors the next day and offered rest in the indoor camp.…",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Jagged Waste Crags",
+            "description": "The kNight Watch climbed into Khelar Watch, Eastern Observation Point II, to learn what the Radiant Eye wanted in the last Osmanae watchtower and to take the celestial instrument before the cult could."
+          },
+          "automatic": true,
+          "confidence": 0.68,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "dungeons-iii:session-16",
+          "sourceHash": "cf250f2f0bed67a00a5cffddda5fff1b8924b0ff4ab7826295584ed4437d92ca",
+          "current": false
+        },
+        {
+          "id": "auto-dungeons-iii-session-17",
+          "locationId": "ahnassa",
+          "location": "Ahnassa",
+          "x": 72.9,
+          "y": 38.2,
+          "session": "Session 17",
+          "title": "We’ll Get His Foreskin",
+          "summary": "The kNight Watch held the indoor camp at Khelar Watch to deal with the remaining Radiant Eye, open the sealed observation doors, and reach the celestial instrument. Mira and an elf walked in on the dead; Draelith charmed Mira, the elf fled with most of the outdoor company, and Dorin stayed, then stood down after talk, a dropped charm, and Meles’s moonweed. Before leaving for Ahnassa’s Raise Reef Harbor, Mira and Dorin said the Eye was studying Osmanae research; the party identified a Ring of Protection and a finer longsword, and the hall carvings showed Draelith’s harp mark and three intact moons.…",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "They opened the doors, found a bronze pedestal and a glowing crystal marked Place, Sky, Witness, and the session ended when radiant light struck Nova with the balance of Endelo’ar and Tudar while the pedestal turned."
+          },
+          "automatic": true,
+          "confidence": 0.97,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 73.37,
+                "y": 49.4
+              },
+              {
+                "x": 72.9,
+                "y": 38.2
+              }
+            ],
+            "miles": 280.2
+          },
+          "sourceKey": "dungeons-iii:session-17",
+          "sourceHash": "8cc984793fc28c941c0e2e053597efa5f0348384914db44880aa4f95eb67dc29",
           "current": true
         }
       ],
@@ -2548,7 +2630,7 @@
             "miles": 89.9
           },
           "sourceKey": "heroes-of-emberstran:session-21",
-          "sourceHash": "b4875ec6a8586e683d8317c156788ed5f6c7ce3dce0476f11000af273748a702",
+          "sourceHash": "e9598313bd01c9a73a8f783ac94d80ae68fb4c529cf3efa211b1e1f645056143",
           "current": false
         },
         {
@@ -2971,6 +3053,30 @@
           },
           "sourceKey": "heroes-of-emberstran:session-35",
           "sourceHash": "e48437e9e8951f05de9f3f07edb180c6ccad049af024a42b4ca56a6c2142d273",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-36",
+          "locationId": "basctdelm",
+          "location": "Basctdelm",
+          "x": 57.72,
+          "y": 31.66,
+          "session": "Session 36",
+          "title": "Crimson Seat & Iron Ledger",
+          "summary": "The group continued to the Crimson Seat to keep Landra’s summons and find out what she wanted of them, and whether Hap’s sister could be left alone. At dinner she named the price: the Iron Ledger, opened only by Benoit’s signet, and Ky’tha’s service. Ky’tha took Rank Three and the halved locket in exchange for eyes, ears, and Phira’s protection; Hap would be paid when the book was found. Back at the Grey Fiddle, Paeris warned that Vilmuss—and a dark-horned woman Ogmund knew as D’Arcy Fol—was asking after Ainslie and Aurelius, Sahphi Mariesh claimed Ainslie for the Advents, and morning brought Meren Bahndoso’s invitation for Hap to lunch.",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "Ky’tha took Rank Three and the halved locket in exchange for eyes, ears, and Phira’s protection; Hap would be paid when the book was found."
+          },
+          "automatic": true,
+          "confidence": 0.68,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "heroes-of-emberstran:session-36",
+          "sourceHash": "d1c6c0d39e5f239a1c04bcef0a835bf98a3f3265c2fa9bba99841c0e94ec7c5b",
           "current": true
         }
       ],
@@ -3343,6 +3449,30 @@
           },
           "sourceKey": "souls-of-destiny:session-13",
           "sourceHash": "72a58280cb382674f01d25fdc17add51249c7625c9003a3fbb4bfacb0dd2e49c",
+          "current": false
+        },
+        {
+          "id": "auto-souls-of-destiny-session-14",
+          "locationId": "adsuren",
+          "location": "Adsuren",
+          "x": 24.1,
+          "y": 28.6,
+          "session": "Session 14",
+          "title": "Everybody Duck!",
+          "summary": "After bringing Ifryn down, the Souls of Destiny stayed in ruined Scyldgar Keep to finish searching its halls, lift the curse that clung to Kenton, and carry the assassin’s body back to Adsuren so the town would know Mollywop’s killer had been brought to justice. Escanor broke the curse, though Kenton’s strength stayed diminished, while the party cleared rats, put lingering shadows to rest, and learned from a slain priest that a pale Mystic had once animated the courtyard tree against the lord’s men.…",
+          "impact": {
+            "type": "political",
+            "title": "Adsuren's balance shifted",
+            "description": "Escanor broke the curse, though Kenton’s strength stayed diminished, while the party cleared rats, put lingering shadows to rest, and learned from a slain priest that a pale Mystic had once animated the courtyard tree against the lord’s men."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "souls-of-destiny:session-14",
+          "sourceHash": "e2077a659ad075efa803f0b94d90dadbf3b52f232bad224f5f776820af901cd9",
           "current": true
         }
       ],
@@ -3558,12 +3688,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-09-24T14:50:28.390Z",
+    "lastGeneratedAt": "2026-10-08T14:50:36.438Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 115,
+    "generatedStops": 120,
     "routedSegments": 8,
-    "impactLocations": 32
+    "impactLocations": 33
   },
   "locationImpacts": [
     {
@@ -3830,6 +3960,14 @@
           "title": "Arcane consequences at Adsuren",
           "type": "arcane",
           "description": "The session closed as Zephyra discovered a red, smoky horse figure still waiting in the stables and Kenton and Lila found a golden stick gleaming inside an untouched chest, the keep holding both old secrets and the continuing trail of their quarry."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 14",
+          "title": "Adsuren's balance shifted",
+          "type": "political",
+          "description": "Escanor broke the curse, though Kenton’s strength stayed diminished, while the party cleared rats, put lingering shadows to rest, and learned from a slain priest that a pale Mystic had once animated the courtyard tree against the lord’s men."
         }
       ],
       "crossCampaign": false
@@ -3924,6 +4062,76 @@
           "title": "A new truth surfaced",
           "type": "discovery",
           "description": "Affy uncovered that one of the shackled prisoners was none other than Ridley’s long-sought assassination target."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-jagged-waste-crags",
+      "locationId": "jagged-waste-crags",
+      "location": "Jagged Waste Crags",
+      "x": 73.37,
+      "y": 49.4,
+      "realm": "surface",
+      "campaignIds": [
+        "dungeons-iii"
+      ],
+      "impacts": [
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 10",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "Along the way they found a hidden cache of gold and potions, discovered a decomposed corpse, and defeated a Xorn that erupted from the earth."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 11",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 12",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "The party defeated a Gelatinous Cube, discovered Isgo unconscious among the dead, stabilized and questioned him about the cult's arena fights, and found useful loot in a hidden lockbox."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 13",
+          "title": "Conflict reshaped Jagged Waste Crags",
+          "type": "battle",
+          "description": "They defeated two basilisks in fierce combat, while uncovering a telling note on a petrified person offering gold to loot a destroyed watchtower near Ahnassa."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 14",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 15",
+          "title": "Lives changed at Jagged Waste Crags",
+          "type": "rescue",
+          "description": "By fitting Nixie’s Clockwork Amulet into the broken mechanism they opened successive passages, recovered bronze star templates and sealed observation scrolls that spoke of a risky “retrieval,” and restored a chain bridge to reach an engineering workshop."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 16",
+          "title": "Danger remains at Jagged Waste Crags",
+          "type": "warning",
+          "description": "The kNight Watch climbed into Khelar Watch, Eastern Observation Point II, to learn what the Radiant Eye wanted in the last Osmanae watchtower and to take the celestial instrument before the cult could."
         }
       ],
       "crossCampaign": false
@@ -4048,68 +4256,6 @@
           "title": "Conflict reshaped Hesfal",
           "type": "battle",
           "description": "While investigating the depths of the hideout, the party fought and defeated dangerous creatures drawn to the cavern’s magic, revealing a potential path toward the Underdark below."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-jagged-waste-crags",
-      "locationId": "jagged-waste-crags",
-      "location": "Jagged Waste Crags",
-      "x": 73.37,
-      "y": 49.4,
-      "realm": "surface",
-      "campaignIds": [
-        "dungeons-iii"
-      ],
-      "impacts": [
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 10",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "Along the way they found a hidden cache of gold and potions, discovered a decomposed corpse, and defeated a Xorn that erupted from the earth."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 11",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "They defeated a band of Mahruudian Raiders in a fierce running battle across the cliffs, claiming two kahlbits as new mounts along with supplies and a potion of fire breath."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 12",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "The party defeated a Gelatinous Cube, discovered Isgo unconscious among the dead, stabilized and questioned him about the cult's arena fights, and found useful loot in a hidden lockbox."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 13",
-          "title": "Conflict reshaped Jagged Waste Crags",
-          "type": "battle",
-          "description": "They defeated two basilisks in fierce combat, while uncovering a telling note on a petrified person offering gold to loot a destroyed watchtower near Ahnassa."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 14",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "Several valuables were discovered, including a clockwork amulet, an enduring spellbook, a ring of poison resistance, and slippers of spider climbing."
-        },
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 15",
-          "title": "Lives changed at Jagged Waste Crags",
-          "type": "rescue",
-          "description": "By fitting Nixie’s Clockwork Amulet into the broken mechanism they opened successive passages, recovered bronze star templates and sealed observation scrolls that spoke of a risky “retrieval,” and restored a chain bridge to reach an engineering workshop."
         }
       ],
       "crossCampaign": false
@@ -4361,6 +4507,44 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-basctdelm",
+      "locationId": "basctdelm",
+      "location": "Basctdelm",
+      "x": 57.72,
+      "y": 31.66,
+      "realm": "surface",
+      "campaignIds": [
+        "heroes-of-emberstran"
+      ],
+      "impacts": [
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 31",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 35",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 36",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Ky’tha took Rank Three and the halved locket in exchange for eyes, ears, and Phira’s protection; Hap would be paid when the book was found."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "name-khagdaruhl",
       "location": "Khagdaruhl",
       "x": 57.2,
@@ -4511,36 +4695,6 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-basctdelm",
-      "locationId": "basctdelm",
-      "location": "Basctdelm",
-      "x": 57.72,
-      "y": 31.66,
-      "realm": "surface",
-      "campaignIds": [
-        "heroes-of-emberstran"
-      ],
-      "impacts": [
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 31",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
-        },
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 35",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "surface-brokencitadel",
       "locationId": "brokencitadel",
       "location": "Broken Citadel",
@@ -4624,7 +4778,37 @@
           "session": "Session 38",
           "title": "Conflict reshaped Master Icy Sow’s building",
           "type": "battle",
-          "description": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a \\+2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-…"
+          "description": "The party arrived at Master Icy Sow’s building to find the Sacred Crows victorious over the monks, claimed the last amulet fragment along with a +2 scimitar and the revelation that Pagern’s staff was a Staff of Frost, then struck the assembled necklace to open a spiraling pit and navigated the ice-s…"
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-southern-arch",
+      "locationId": "southern-arch",
+      "location": "Southern Arch",
+      "x": 54.9,
+      "y": 36.01,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 33",
+          "title": "Conflict reshaped Southern Arch",
+          "type": "battle",
+          "description": "The party stood in the smoky ruins of Adore determined to learn what had destroyed the monastery, to settle matters with the unexpected arrival of the wizard Rueh’unar Heildove, and to continue toward the Southern Arch where Pa waited."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 34",
+          "title": "Arcane consequences at Southern Arch",
+          "type": "arcane",
+          "description": "On the road they found Ustina torn apart, fled two shadow-touched black bears, and opened her speaking locket, which named Vhaulmast as the curse sweeping the land, a name Relys and Cerul tied to the ruin of Iparos."
         }
       ],
       "crossCampaign": false
@@ -4684,6 +4868,28 @@
           "title": "Conflict reshaped Varenwood",
           "type": "battle",
           "description": "In the Shadowfell, waves of shadowy assailants and an avatar of Malgri'n assailed them, nearly claiming Fungus before the group rallied before defeated the avatar."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-ahnassa",
+      "locationId": "ahnassa",
+      "location": "Ahnassa",
+      "x": 72.9,
+      "y": 38.2,
+      "realm": "surface",
+      "campaignIds": [
+        "dungeons-iii"
+      ],
+      "impacts": [
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 17",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They opened the doors, found a bronze pedestal and a glowing crystal marked Place, Sky, Witness, and the session ended when radiant light struck Nova with the balance of Endelo’ar and Tudar while the pedestal turned."
         }
       ],
       "crossCampaign": false
@@ -4857,28 +5063,6 @@
           "title": "Conflict reshaped Sciogost",
           "type": "battle",
           "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-southern-arch",
-      "locationId": "southern-arch",
-      "location": "Southern Arch",
-      "x": 54.9,
-      "y": 36.01,
-      "realm": "surface",
-      "campaignIds": [
-        "a-new-adventure"
-      ],
-      "impacts": [
-        {
-          "campaignId": "a-new-adventure",
-          "campaignName": "A New Adventure",
-          "session": "Session 33",
-          "title": "Conflict reshaped Southern Arch",
-          "type": "battle",
-          "description": "The party stood in the smoky ruins of Adore determined to learn what had destroyed the monastery, to settle matters with the unexpected arrival of the wizard Rueh’unar Heildove, and to continue toward the Southern Arch where Pa waited."
         }
       ],
       "crossCampaign": false

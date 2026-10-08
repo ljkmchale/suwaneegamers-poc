@@ -1,5 +1,3 @@
-# Sections
-
 Gazetteer
 
 ![][image1]
@@ -306,8 +304,6 @@ description for dungeon master
 | name | role ([stat block](https://www.dndbeyond.com/monsters/16829-commoner)) | sex \- species description and personality |
 |  |  |  |
 |  |  |  |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

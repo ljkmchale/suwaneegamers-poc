@@ -1,5 +1,3 @@
-# Sections
-
 # Player’s Guide to Ulgrey
 
 ![][image1]
@@ -308,7 +306,8 @@ Paeris tends to keep to herself, but she is a respected figure in Ulgrey. Her to
 
 ## Riverdog Inn
 
-The Riverdog Inn is the true heart and oldest structure of Ulgrey. Originally a small dock house and tavern, it has been expanded many times as the village grew. The patchwork of different wood types and architectural styles tells the story of the village’s development.  
+The Riverdog Inn is the true heart and oldest structure of Ulgrey. Originally a small dock house and tavern, it has been expanded many times as the village grew. The patchwork of different wood types and architectural styles tells the story of the village’s development.
+
 For as long as anyone can remember, the owners of the inn have always kept a dog that freely roams the premises and greets guests arriving from the river or the road. The current owners, Harrek and Shanna Vellor, continue this tradition.
 
 ## 
@@ -390,7 +389,8 @@ The store serves as the main place to buy supplies when the market is not runnin
 
 ## Stables
 
-Built years ago by a half-elf named Jeeder Aevendor, the Stables are now managed by his twin children Avidele and Zanlas. The building is unusually large for a village this size, functioning more like a substantial livestock barn than a simple stable. It provides ample covered space for horses, mules, oxen, and other beasts of burden belonging to both villagers and traveling merchants.  
+Built years ago by a half-elf named Jeeder Aevendor, the Stables are now managed by his twin children Avidele and Zanlas. The building is unusually large for a village this size, functioning more like a substantial livestock barn than a simple stable. It provides ample covered space for horses, mules, oxen, and other beasts of burden belonging to both villagers and traveling merchants.
+
 Jeeder’s children are well known for being strong, quiet, and exceptionally good with animals.
 
 ## 

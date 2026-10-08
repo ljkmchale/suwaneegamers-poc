@@ -1,5 +1,3 @@
-# Contents
-
 i
 
 Gazetteer

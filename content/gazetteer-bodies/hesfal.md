@@ -1,5 +1,3 @@
-# Sections
-
 # **Overview**
 
 Hesfal is a quaint hamlet located on the western edge of the Yearning Vale territory on the trade route called the Tor March.  With roughly 250 residents who call it home, it is a peaceful and prosperous colony full of artists and artisans, diverse residents of all ages, and a welcome stop for caravans and travelers.

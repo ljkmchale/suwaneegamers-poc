@@ -1,6 +1,30 @@
 {
   "entries": [
     {
+      "question": "No, I'm looking for information on the goddess Teldo, Tiash.",
+      "category": "learned-answer",
+      "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
+      "answerCandidate": "The excerpts do not contain information about a goddess named Teldo. However, they extensively document Tiash, the goddess of balance, one of the eight greater deities of the Assembly of Essence who oversaw Myrdae before the Awakening. Tiash's story is one of betrayal and impossible choice.",
+      "evidence": [
+        "Myrdae Stories and Tales",
+        "Myrdae World Guide"
+      ],
+      "source": "nightly-learning",
+      "timesSeen": 1,
+      "id": "rem-ffbb64b9eaff16e9",
+      "normalized": "no i m looking for information on the goddess teldo tiash",
+      "status": "approved",
+      "createdAt": "2026-09-29T15:25:20.921Z",
+      "reviewedAt": "2026-09-29T15:25:20.945Z",
+      "application": {
+        "kind": "learned-answer",
+        "key": "No, I'm looking for information on the goddess Teldo, Tiash.",
+        "value": "The excerpts do not contain information about a goddess named Teldo. However, they extensively document Tiash, the goddess of balance, one of the eight greater deities of the Assembly of Essence who oversaw Myrdae before the Awakening. Tiash's story is one of betrayal and impossible choice.",
+        "target": "assistant-learned.json",
+        "appliedAt": "2026-09-29T15:25:20.945Z"
+      }
+    },
+    {
       "question": "What have you learned today?",
       "category": "routing-correction",
       "proposedCorrection": "Myra answered this from the \"general_schedule\" shortcut, but it reads as a question about herself. It should fall through to the grounded model — check the deterministic router's guards.",
@@ -1101,5 +1125,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-09-22T13:06:09.275Z"
+  "updatedAt": "2026-09-29T15:25:20.945Z"
 }

@@ -1,5 +1,3 @@
-# Sections
-
 # Player’s Guide to \<Name\>
 
 ![][image1]
@@ -195,8 +193,6 @@ Additionally, the tavern is known for the following unique food items and dishes
 | Farrier Services | 1 sp |  | Trim, shape and shoe horses’ hooves |
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 
