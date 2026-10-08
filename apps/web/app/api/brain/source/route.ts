@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { grantedVisibility } from "@/lib/brain/requestVisibility";
 import { hasIndex, loadIndex } from "@/lib/brain/vector-store";
 import { brainConfig } from "@/lib/brain/config";
 import path from "node:path";
@@ -17,7 +18,8 @@ export async function GET(request: NextRequest) {
     if (!sourcePath) return NextResponse.json({ error: "Missing path query parameter." }, { status: 400 });
     if (!(await hasIndex())) return NextResponse.json({ error: "Index not found. Run npm run index first." }, { status: 409 });
 
-    const visibility = request.nextUrl.searchParams.get("visibility") ?? "players";
+    // Asking for "dm" in the address is not enough; see grantedVisibility.
+    const visibility = await grantedVisibility(request.nextUrl.searchParams.get("visibility"));
     const index = await loadIndex();
     const page = index.pages?.[sourcePath];
     if (!page) return NextResponse.json({ error: "Source is not in the current index." }, { status: 404 });

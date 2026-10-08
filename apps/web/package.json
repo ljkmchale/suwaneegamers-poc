@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "sync-notes": "tsx scripts/sync-session-notes.ts",
+    "check-wiki": "tsx scripts/check-wiki.ts",
     "test:watch": "vitest"
   },
   "dependencies": {
