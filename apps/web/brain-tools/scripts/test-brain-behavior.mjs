@@ -303,6 +303,36 @@ const tests = [
     includes: ["Adamont", "Ahndashere", "Glimmerstone", "Paendley", "Stonetrace", "Ulgrey"],
     excludes: ["Choose a specific campaign"],
     sourcePaths: ["wiki/world/locations/Emberstran.md"]
+  },
+  // Spoken questions are compound and possessive. These were refused as
+  // "not documented" before 2026-10-09 because the name was read wrongly.
+  {
+    name: "a follow-on clause is not part of the name",
+    question: "What is the Bone Marigold and why did the party need it?",
+    campaign: "WB",
+    includes: ["Eva"],
+    excludes: ["not documented"]
+  },
+  {
+    name: "a possessive name is still the name",
+    question: "What is Zephyra's connection to Aeolenne?",
+    campaign: "SoD",
+    includes: ["Aeolenne"],
+    excludes: ["not documented"]
+  },
+  {
+    name: "who plays him refers back to the named character",
+    question: "Who is Aurelius and who plays him?",
+    campaign: "HoE",
+    includes: ["Larry", "Aurelius"],
+    excludes: ["him is not documented"]
+  },
+  {
+    name: "any world page is world lore without a campaign",
+    question: "Tell me about Adsuren.",
+    includes: ["Adsuren"],
+    excludes: ["Choose a specific campaign"],
+    sourcePaths: ["wiki/world/locations/Adsuren.md"]
   }
 ];
 

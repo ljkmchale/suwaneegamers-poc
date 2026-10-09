@@ -229,6 +229,7 @@ export async function retrieve(question: string, options: QueryOptions = {}): Pr
 }
 
 export async function answerQuestion(question: string, options: QueryOptions = {}): Promise<QueryResult> {
+  await refreshWorldPageTitles();
   const conversationalAnswer = answerConversationalPrompt(question, options);
   if (conversationalAnswer) return finalizeResult(conversationalAnswer);
 
@@ -338,6 +339,7 @@ export async function streamAnswer(
     callbacks.onDone?.(finalized.sources, null, finalized.answer);
   }
 
+  await refreshWorldPageTitles();
   const conversationalAnswer = answerConversationalPrompt(question, options);
   if (conversationalAnswer) { emitImmediate(conversationalAnswer); return; }
 
@@ -1625,8 +1627,41 @@ function isNarrowQuestion(question: string): boolean {
   return /\b(stand for|mean|when|where|which|how many|what is the name|what was the name|who is the|who was the|who plays|player of|class|species)\b/i.test(question);
 }
 
+/**
+ * Titles of the vault's world pages (places, gods, regions), taken from the
+ * index so every world page counts, not only the names written into the
+ * pattern below. "Tell me about Adsuren" is world lore even with no campaign
+ * selected. Rebuilt whenever the index object changes (it is reloaded when
+ * brain-index.json is rewritten).
+ */
+let worldPageTitles: string[] = [];
+let worldPageTitlesFrom: BrainIndex | null = null;
+
+async function refreshWorldPageTitles(): Promise<void> {
+  const index = await loadIndex().catch(() => null);
+  if (!index || index === worldPageTitlesFrom) return;
+  worldPageTitlesFrom = index;
+  worldPageTitles = [
+    ...new Set(
+      Object.values(index.pages ?? {})
+        .filter((page) => page.campaign === "World" && page.visibility !== "dm")
+        // Real names only: map placeholder ids ("unknown-12") and very short titles would match ordinary words.
+        .filter((page) => !/^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(page.title))
+        .map((page) => normalize(page.title))
+        .filter((title) => title.length >= 4),
+    ),
+  ];
+}
+
+function namesWorldPage(question: string): boolean {
+  const text = ` ${normalize(question)} `;
+  return worldPageTitles.some((title) => text.includes(` ${title} `));
+}
+
 function isWorldOnlyQuestion(question: string): boolean {
   if (isSuperlativeWorldQuestion(question)) return false;
+  const campaignNamed = /\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|The Crystal Bottle|Crystal Bottle|TCB)\b/i.test(question);
+  if (namesWorldPage(question) && !campaignNamed) return true;
   const worldSubject = /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question);
   const pantheonSubject = /\b(god|gods|goddess|goddesses|deity|deities|pantheon|Addan|Amriel|Asmodeus|Brault|Celestine|Cembus|Coralei|Crael|Diverra|Diveria|Eredra|Fralee|Goldraen|Iuz'?Obal|Layeth|Muerg|Myrdris|Natafae|Nigrum|Ol'?Farium|Osanna|Phoe|Sylunara|Tornia|Tyvarion|Urlich|Utheri|Villari|Vo'?egurn|Athuel|Bellum|Disgar|Lyess|Neera|Smott|Tiash|Torec)\b/i.test(question);
   return (worldSubject || pantheonSubject) && !/\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane)\b/i.test(question);
@@ -1675,10 +1710,18 @@ function cleanEntityName(value: string): string {
   const cleaned = value
     .replace(/[?.!,;:]+$/g, "")
     .replace(/\b(in|from|for|about)\b.*$/i, "")
+    // A second clause is not part of the name: "the Bone Marigold and why did
+    // the party need it". Names that contain "and" ("Arbescar Light and
+    // Magic") are kept, because what follows is not a question word.
+    .replace(/\s+(?:and|or|but)\s+(?:why|how|what|who|whom|whose|where|when|which|did|does|do|is|are|was|were|can|could|should|would|has|have|had|tell)\b.*$/i, "")
+    .replace(/\s+(?:why|because)\b.*$/i, "")
+    .replace(/\s+(?:and|or|but)\s*$/i, "")
     .replace(/['’]s\s+(commandments?|rites?|symbols?|myths?|domains?|titles?|faith|teachings?)$/i, "")
     .replace(/\b(thread|plot|quest|lead|mystery|storyline|story line|arc)\b$/i, "")
     .replace(/^the\s+/i, "")
-    .trim();
+    .trim()
+    // "Zephyra's connection" names Zephyra.
+    .replace(/['’]s$/i, "");
   return canonicalEntityName(cleaned);
 }
 
@@ -1709,7 +1752,14 @@ function resolveCampaignSelection(value: string): CampaignDef | null {
 function extractRosterTargetName(question: string): string {
   const match = String(question).match(/\b(?:who\s+plays|who\s+is\s+playing|which\s+player\s+plays)\s+([A-Z][A-Za-z' -]{1,60}?)(?:\s+(?:in|for|from)\s+(?:HoE|SoD|D3|TSV|WB|Dungeons III|Dungeons 3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|Heroes of Emberstran|Souls of Destiny))?\??$/i);
   if (!match) return "";
-  return cleanEntityName(match[1]);
+  const target = cleanEntityName(match[1]);
+  if (!isPronoun(target)) return target;
+  // "Who is Aurelius and who plays him?": the pronoun means the name asked about first.
+  return extractEntityNames(question.slice(0, match.index)).find((name) => !isPronoun(name)) ?? "";
+}
+
+function isPronoun(value: string): boolean {
+  return /^(?:him|her|them|they|it|he|she|his|hers|their)$/i.test(value.trim());
 }
 
 function findEntityPages(index: BrainIndex, entityName: string): PageEntry[] {
