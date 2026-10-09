@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { config } from "../src/config.mjs";
 import { extractWikiLinks, parseFrontmatter, titleFromMarkdown } from "../src/markdown.mjs";
+// The index's own rule, so this audit and the site agree on every page's campaign.
+import { inferCampaign } from "../src/vault.mjs";
 
 const wikiRoot = path.join(config.vaultRoot, "wiki");
 const indexPath = path.join(config.vaultRoot, "index.md");
@@ -208,31 +210,6 @@ function sessionAliasKey(value) {
   const prefix = match[1].toLowerCase() === "silent vanguard" ? "Silent Vanguard" : match[1];
   const sessionNumber = match[2].padStart(2, "0");
   return normalizeLinkKey(`${prefix} Session ${sessionNumber}`);
-}
-
-function inferCampaign(relativePath, body) {
-  const normalizedPath = relativePath.replaceAll("\\", "/");
-  const basename = path.basename(relativePath, ".md");
-  if (["index.md", "wiki/overview.md", "wiki/synthesis.md"].includes(normalizedPath)) return "All";
-  if (normalizedPath.startsWith("wiki/world/") || normalizedPath === "wiki/concepts/Pantheon of Myrdae.md") return "World";
-  if (normalizedPath.includes("/The Silent Vanguard/") || basename.includes("(TSV)") || /\bTSV\b/.test(basename) || basename.includes("Silent Vanguard")) return "The Silent Vanguard";
-  if (normalizedPath.includes("/Dungeons III/") || /\bDungeons III\b/i.test(basename) || /\bDungeons 3\b/i.test(basename) || /\bD3\b/.test(basename)) return "Dungeons III";
-  if (normalizedPath.includes("/Bloody Endeavor/") || normalizedPath.includes("/Wyrm Bane/") || /^WB Session\b/.test(basename)) return "Bloody Endeavor";
-  if (normalizedPath.includes("/SoD/") || /\bSoD\b/.test(basename)) return "SoD";
-  if (normalizedPath.includes("/HoE/") || /\bHoE\b/.test(basename)) return "HoE";
-
-  const explicitCampaign = body.match(/(?:^|\n)\s*(?:[-*]\s*)?(?:Campaign|Campaign Scope):\s*(HoE|SoD|The Silent Vanguard|Bloody Endeavor|Wyrm Bane|Dungeons III|Dungeons 3|D3)\b/i);
-  if (explicitCampaign) return normalizeCampaignName(explicitCampaign[1]);
-  return "All";
-}
-
-function normalizeCampaignName(value) {
-  const normalized = String(value).toLowerCase().trim();
-  if (normalized === "hoe") return "HoE";
-  if (normalized === "sod") return "SoD";
-  if (normalized === "bloody endeavor" || normalized === "wyrm bane" || normalized === "wb") return "Bloody Endeavor";
-  if (normalized === "dungeons iii" || normalized === "dungeons 3" || normalized === "d3") return "Dungeons III";
-  return "The Silent Vanguard";
 }
 
 function isBrowseOnly(relativePath) {

@@ -208,31 +208,55 @@ function normalizeLinkKey(value) {
   return String(value).toLowerCase().replaceAll(path.sep, "/").replace(/\.md$/i, "").replace(/\/+$/g, "").trim();
 }
 
-function inferCampaign(relativePath, body, frontmatter) {
+// Campaign folders as the vault files them (wiki/npcs/<folder>/…), and the
+// names a file name or "<name> only" scope line may use. The Crystal Bottle
+// was missing here, so its pages without front matter fell through to "All".
+const campaignNames = [
+  { name: "The Silent Vanguard", folders: ["The Silent Vanguard"], basename: /\(TSV\)|\bTSV\b|Silent Vanguard/ },
+  { name: "Dungeons III", folders: ["Dungeons III"], basename: /\bDungeons III\b|\bDungeons 3\b|\bD3\b/i },
+  { name: "Bloody Endeavor", folders: ["Bloody Endeavor", "Wyrm Bane"], basename: /^WB Session\b|\bBloody Endeavor\b|\bWyrm Bane\b/i },
+  { name: "The Crystal Bottle", folders: ["The Crystal Bottle"], basename: /\bCrystal Bottle\b|\(TCB\)|\bTCB\b/ },
+  { name: "SoD", folders: ["SoD"], basename: /\bSoD\b/ },
+  { name: "HoE", folders: ["HoE"], basename: /\bHoE\b/ }
+];
+const campaignNamePattern = "HoE|SoD|The Silent Vanguard|Bloody Endeavor|Wyrm Bane|Dungeons III|Dungeons 3|D3|The Crystal Bottle|Crystal Bottle|TCB";
+
+/**
+ * Which campaign a page belongs to, in order of how sure we can be: its front
+ * matter, the campaign folder it is filed under, a campaign named in its file
+ * name, an explicit "Campaign:" or "<campaign> only" line, and only then the
+ * first campaign its text mentions. Exported so audit-wiki and the wiki
+ * checker classify pages exactly as the index does.
+ */
+export function inferCampaign(relativePath, body = "", frontmatter = {}) {
   if (frontmatter.campaign) return String(frontmatter.campaign);
   const normalizedPath = relativePath.replaceAll(path.sep, "/");
   if (["index.md", "wiki/overview.md", "wiki/synthesis.md"].includes(normalizedPath)) return "All";
   if (normalizedPath.startsWith("wiki/world/") || normalizedPath === "wiki/concepts/Pantheon of Myrdae.md") return "World";
 
-  const basename = path.basename(relativePath, ".md");
+  const basename = path.basename(normalizedPath, ".md");
   if (/\bby campaign\b/i.test(basename)) return "All";
-  if (normalizedPath.includes("/The Silent Vanguard/") || basename.includes("(TSV)") || /\bTSV\b/.test(basename) || basename.includes("Silent Vanguard") || basename === "The Silent Vanguard") {
-    return "The Silent Vanguard";
-  }
-  if (normalizedPath.includes("/Dungeons III/") || /\bDungeons III\b/i.test(basename) || /\bDungeons 3\b/i.test(basename) || /\bD3\b/.test(basename)) return "Dungeons III";
-  if (normalizedPath.includes("/Bloody Endeavor/") || normalizedPath.includes("/Wyrm Bane/") || /^WB Session\b/.test(basename)) return "Bloody Endeavor";
-  if (normalizedPath.includes("/SoD/") || /\bSoD\b/.test(basename)) return "SoD";
-  if (normalizedPath.includes("/HoE/") || /\bHoE\b/.test(basename)) return "HoE";
 
-  const explicitCampaign = body.match(/(?:^|\n)\s*(?:[-*]\s*)?(?:Campaign|Campaign Scope):\s*(HoE|SoD|The Silent Vanguard|Bloody Endeavor|Wyrm Bane|Dungeons III|Dungeons 3|D3)\b/i);
+  const folders = normalizedPath.split("/").slice(0, -1);
+  const filedUnder = campaignNames.find((campaign) => campaign.folders.some((folder) => folders.includes(folder)));
+  if (filedUnder) return filedUnder.name;
+
+  const named = campaignNames.find((campaign) => campaign.basename.test(basename));
+  if (named) return named.name;
+
+  const explicitCampaign = body.match(new RegExp(`(?:^|\\n)\\s*(?:[-*]\\s*)?(?:Campaign|Campaign Scope):\\s*(${campaignNamePattern})\\b`, "i"));
   if (explicitCampaign) return normalizeCampaignName(explicitCampaign[1]);
 
-  const scopedOnly = body.match(/\b(HoE|SoD|The Silent Vanguard|Bloody Endeavor|Wyrm Bane|Dungeons III|Dungeons 3|D3)(?:-|\s+)only\b/i);
+  // The same thing written as a section: "## Campaign Scope" then "SoD. Do not merge with HoE…".
+  const scopeSection = body.match(new RegExp(`(?:^|\\n)#{1,6}\\s*Campaign Scope\\s*\\r?\\n(?:\\s*\\r?\\n)*\\s*(${campaignNamePattern})\\b`, "i"));
+  if (scopeSection) return normalizeCampaignName(scopeSection[1]);
+
+  // "SoD-only", "Wyrm Bane campaign only".
+  const scopedOnly = body.match(new RegExp(`\\b(${campaignNamePattern})(?:-|\\s+)(?:campaign\\s+)?only\\b`, "i"));
   if (scopedOnly) return normalizeCampaignName(scopedOnly[1]);
 
-  const parts = relativePath.split(path.sep);
   for (const campaign of ["HoE", "SoD", "The Silent Vanguard", "Bloody Endeavor", "Dungeons III"]) {
-    if (parts.includes(campaign) || body.includes(campaign)) return campaign;
+    if (body.includes(campaign)) return campaign;
   }
   return "All";
 }
@@ -243,6 +267,7 @@ function normalizeCampaignName(value) {
   if (normalized === "sod") return "SoD";
   if (normalized === "bloody endeavor" || normalized === "wyrm bane" || normalized === "wb") return "Bloody Endeavor";
   if (normalized === "dungeons iii" || normalized === "dungeons 3" || normalized === "d3") return "Dungeons III";
+  if (normalized === "the crystal bottle" || normalized === "crystal bottle" || normalized === "tcb") return "The Crystal Bottle";
   return "The Silent Vanguard";
 }
 
