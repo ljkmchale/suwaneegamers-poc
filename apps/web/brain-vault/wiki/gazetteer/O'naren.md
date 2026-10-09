@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # O'naren
 
-# Sections
-
 # **Overview**
 
 O’naren is a small elven settlement in the wooded foothills west of Qal’dynn, serving as both a waypoint for travelers and a place of quiet contemplation. Its finely carved stone buildings blend seamlessly with the gray-green forest, reflecting the elven reverence for nature. The town is centered around **Driftglow Pond**, a pristine circular body of water that catches the cascading falls from the hills. At its heart lies a small island, crowned by an ancient tree with striking pink foliage—believed to be a relic of the **Qal’daefar**, the original elves of Myrdae.
@@ -30,7 +28,8 @@ O’naren was originally established as a small elven outpost to the west of Qal
 
 ## **Citizenry**
 
-Elves (95%), other (5%)  
+Elves (95%), other (5%)
+
 *When interacting with NPCs, it may be helpful to use the [interaction chart](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.bkfxerpcdyol) in the Myrdae Reference for DMs.*
 
 ### **Style and Aesthetic**

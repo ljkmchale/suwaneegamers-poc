@@ -4,78 +4,85 @@ campaign: "The Silent Vanguard"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "The Silent Vanguard - Player's Reference & Tracking"
-source_hash: "27ece8b1a6fe6995cbf1b6d8ae32ecf78f122ef39147d9a5fdf54a3f8f5ee2eb"
-curated_at: "2026-08-30T13:27:38.572Z"
+source_hash: "8672401b85682b5aaf443a2c52b272e07b480393be426f337b7ca62a757af40e"
+curated_at: "2026-10-08T14:48:27.090Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
 # The Silent Vanguard Quick Reference
 
 Campaign: The Silent Vanguard
 
-*This is a living quick-reference page, kept current with the latest campaign notes.*
+*This is a living quick-reference synthesized from the campaign's player notes, updated to reflect the most recent session.*
 
 ## Current Status
-As of Session 03 (22nd of Ezale, having departed Tratta), the party traveled three days west to Nowarb's farm to investigate a late spell-ingredient delivery. After a brawl with the Crimposa gang at Barkin's apothecary in Tratta, they journeyed to the farm, learned Nowarb's son Yorel never delivered the ingredients as ordered, and joined Nowarb and his son Ubbub on a raid against a nearby goblin camp believed responsible for slaughtered, blood-drained livestock. After a skirmish at a stream crossing, the party discovered the goblin camp was mostly women, children, and the elderly, and that the goblins' own cattle had been killed the same way. The session ends with the party needing to decide whether to help the goblins, finish them off, hunt the true culprit (suspected to be a chupacabra), or return to the Wavehammer.
+
+As of Session 04 ("Shadow of the Sand"), the party's exact location and circumstances are only partially recorded. The notes describe a wagering scene — bets placed on "Shadow of the Sand" and on "Goblins against the Leopard," a mention of "kills behind him," an NPC named Cassian, and the party needing a short rest. The last clear in-game date on record is the 22nd of Ezale (Session 03, Tratta). No further in-game date is confirmed for Session 04.
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
 | Cletus | Brian | Human | Cleric | — |
-| Lensworth | Tom | Human | Barbarian | Villari, Muerg, Cembus, Sylunarra |
-| Zephyra | Susan | Tiefling | Barbarian | Brault; interested in Amriel |
-| Jett | Larry | Human | Rogue | Tyvarion |
+| Lensworth | Tom | Human | Barbarian | Worships Villari, Muerg, Cembus, Sylunarra |
+| Zephyra | Susan | Tiefling | Barbarian | Worships Brault; interested in Amriel |
+| Jett | Larry | Human | Rogue | Worships Tyvarion |
+| Lila | ?? | ?? | ?? | Worships Tornia |
 
-*Note: Session 03's narrative refers to party members by the names Dog (elf pirate fighter), Kyrian (dwarf fighter), Jasper Flint (barbarian), and a very small gnome wizard also called Cletus, who rides in Jasper Flint's backpack. This differs from the roster above as recorded in the notes.*
+*Note: Session 02 and Session 03 recount adventures using a differing set of character names (e.g., Ivy, Lenny, Fossil, Dog, Kyrian, Jasper Flint, and an alternate gnome-wizard "Cletus"). The notes do not clarify how these map onto the roster above, so they are preserved as recorded rather than merged.
 
 ## Key NPCs
-- **Master Thorne** - the party's patron who first gathered them in Tratta and runs operations from the Wavehammer.
-- **Thorin** - contact who came aboard the Wavehammer to review evidence the party gathered from Brinecross (drugs, "The Long Night," the letter); may be tied to the drug operation's background.
-- **Donga** - Master Thorne's second-in-command aboard the Wavehammer; briefs the party on missions.
-- **H'arald ("Harold") Stonesheep** - thief contact met in Brinecross; survived the zombie outbreak after eating tainted fish; provided the phrase "The Long Night."
-- **Gultren, the Canvas Master** - recipient of an intercepted letter about trafficking through Tratta's warehouses, held at the Sticky Pear Inn.
-- **Barkin** - Tratta apothecary shaken down by the Crimposa gang; sold the party healing potions.
-- **Kintul** - half-orc Crimposa gang enforcer who assaulted Barkin and was beaten unconscious and robbed by the party.
-- **Nowarb** - farmer and regular supplier of spell ingredients to the Wavehammer; injured, leads an attack on a nearby goblin camp over slaughtered cattle.
-- **Ubbub** - Nowarb's younger son, armed with a longbow, helped guard livestock after his brother Yorel disappeared.
-- **Yorel** - Nowarb's older son, sent to deliver ingredients to the Wavehammer but never arrived; suspected of slacking off.
-- **Linda / Nora** - Brinecross-area figures connected to herbs/vegetables grown near magical spring water, used to treat fish-borne infection.
+
+- **Master Thorne** - the party's patron who first gathered them in Tratta and arranged their cover aboard the Wavehammer.
+- **Thorin** - receives and studies the clues the party brings back from Brinecross; aware of the drug operation but not its full purpose.
+- **Donga** - Master Thorne's second-in-command aboard the Wavehammer; briefed the party on the Nowarb mission.
+- **H'arald "Harold" Stonesheep** - thief contact in Brinecross; found sick after eating tainted fish; revealed the phrase "The Long Night."
+- **Gultren, the Canvas Master** - recipient of an intercepted letter describing trafficking through Tratta's warehouses, held at the Sticky Pear Inn.
+- **Barkin** - an apothecary in Tratta, shaken down by the Crimposa gang.
+- **Kintul** - a half-orc thug for the Crimposa gang who extorted Barkin and was beaten and robbed by the party.
+- **Nowarb ("No-warb")** - a farmer and spell-ingredient supplier whose livestock were being drained of blood; led the party against a goblin camp.
+- **Ubbub** - Nowarb's younger son, a poor shot with a longbow, who helped guide the party to the goblin camp.
+- **Yorel** - Nowarb's older son, missing after being sent to deliver ingredients to the Wavehammer.
+- **Linda / Nora** - Brinecross residents connected to herbs/vegetables grown with magical spring water, possibly a cure for the fish-borne sickness.
+- **Cassian** - mentioned in Session 04 in connection with the betting/arena scene; context unclear.
+- **Spiky** - a famous triceratops/gladiator figure referenced in old colosseum news coverage.
 
 ## Factions & Organizations
-- **Crimposa gang** - criminal organization running shakedowns in Tratta (e.g., against Barkin).
-- **The Gilded Ledger** - one of Tratta's two major broadsheets; authority-friendly, polished, rarely lies outright but curates truth.
-- **Salt and Cinder Press** - rival broadsheet; bold, anti-corruption, popular with commoners, focused on colosseum/slavery/black-market corruption.
-- **Goblin camp (near Nowarb's farm)** - largely non-combatant goblins (elderly, women, children) wrongly blamed for cattle killings; possibly sharing a common enemy with the party.
+
+- **Crimposa gang** - a criminal gang in Tratta running shakedowns on merchants like Barkin.
+- **The Gilded Ledger** - one of Tratta's two major broadsheets; official-sounding, polished, generally sides with authority.
+- **Salt and Cinder Press** - the rival broadsheet; bold and anti-corruption, focused on exposing colosseum, slavery, and black-market ties.
+- **The colosseum (arena)** - tied to gladiator fights, trafficking, and the drug operation under investigation.
 
 ## Key Locations
-- **Tratta** - sandstone harbor city with a wizard's tower, dockside crime, hidden tunnels, and the party's base of operations.
-- **The Wavehammer** - old naval vessel under repair, used as the party's lodging/cover and Thorne's base.
-- **Brinecross** - coastal hamlet southwest of Tratta, site of a zombie outbreak caused by tainted fish; roughly 40 zombies and possible survivors remain there.
-- **The Long Night** - suspected drug-operation location, described via a sign depicting a sleepy knight in armor.
-- **South warehouse / old stone ramp (Tratta)** - site where a trafficking shipment is expected to arrive after dark.
-- **Sticky Pear Inn** - mail drop location for Gultren, the Canvas Master.
-- **Nowarb's farm** - three days west of Tratta; source of spell ingredients, site of livestock killings.
-- **Goblin camp (near the farm)** - across a stream from Nowarb's farm, behind a hedgerow.
-- **The colosseum (Tratta)** - linked to gladiators, arena trafficking, and figures like Spiky the triceratops.
+
+- **Tratta** - a sandstone harbor city, home base for the party, split between public spectacle and hidden criminal activity; overseen by a wizard's tower.
+- **The Wavehammer** - an old naval vessel "under repair" serving as the party's lodging and cover, and Master Thorne's base of operations.
+- **Brinecross** - a small coastal hamlet southwest of Tratta, site of a zombie outbreak caused by tainted fish; roughly 40 zombies and possible survivors were left behind.
+- **Sticky Pear Inn** - mail drop location named in the intercepted letter addressed to Gultren.
+- **South warehouse / old stone ramp** - site in Tratta where a trafficking shipment was expected to arrive after dark.
+- **Nowarb's farm** - located about 3 days west of Tratta; site of the goblin skirmish and Chupacabra mystery.
+- **The Long Night** - a suspected location (possibly an inn, marked by a sign of a sleepy knight in armor) tied to the drug operation.
 
 ## Active Quests & Objectives
-- Investigate and potentially disrupt the trafficking/drug operation tied to "The Long Night," the colosseum, and the south warehouse shipment (expected roughly 20 nights after the letter was found).
-- Report on and possibly organize aid for the ongoing zombie outbreak in Brinecross.
-- Resolve the goblin camp situation at Nowarb's farm: decide whether to ally with, spare, or eliminate the goblins.
-- Track down the true culprit behind the blood-drained cattle (suspected chupacabra).
-- Locate Nowarb's missing son, Yorel, and the overdue spell ingredient delivery.
+
+- Investigate and potentially disrupt the drug/trafficking operation associated with **The Long Night**, the colosseum, and the south warehouse.
+- Follow up on the intercepted letter to Gultren the Canvas Master regarding a trafficking shipment (originally "20 nights" out as of Session 02).
+- Resolve the unfinished decision from Session 03 regarding the goblin camp (help them, finish them off, hunt the Chupacabra, or return to the Wavehammer).
+- Determine the cause and resolve the aftermath of the Brinecross zombie outbreak, including possible survivors.
 
 ## Open Threads
-- What is "The Long Night," and how exactly does it connect to the drug and trafficking operation?
-- Who is signing the intercepted letter as "a man who's hiding them," and what is Gultren the Canvas Master's role?
-- Is Thorin connected to or aware of the drug operation beyond what he's told the party?
-- What happened to the ivory/statue figurine recovered from the dead dwarf in Brinecross — is it significant?
-- Are the horseshoes taken from the postal horse magical?
-- What is the fate of the remaining Brinecross survivors and the ~40 zombies left behind?
-- What happened to Yorel, Nowarb's older son?
-- Is the chupacabra responsible for both the farm's and the goblins' cattle deaths, and where is it?
+
+- What exactly is "The Long Night," and how does it connect to the colosseum, drugs, and trafficking?
+- Who is responsible for the people-trafficking operation referenced in the intercepted letter?
+- What is the significance of the ivory/carved statue recovered from the dead dwarf in Brinecross?
+- Is Harold fully cured of the fish-borne sickness, and what became of Brinecross's remaining survivors and zombies?
+- What is actually killing cattle near Nowarb's farm — is it truly a Chupacabra, and how does it relate to both the goblins and Nowarb's family?
+- Whatever became of Yorel, Nowarb's missing older son?
+- What is happening in Session 04's "Shadow of the Sand" scene, and who is Cassian?
 
 ## Recent Developments
-- **Session 01**: Party recruited by Master Thorne aboard the Wavehammer for a retrieval mission in Brinecross involving thief H'arald Stonesheep.
-- **Session 02**: Survived a zombie outbreak in Brinecross caused by tainted fish; rescued Harold, recovered a statue/clue and the phrase "The Long Night"; intercepted a letter revealing a trafficking operation through Tratta's warehouses; returned to Tratta, reported the outbreak, leveled up to level 2, and briefed Thorin on all findings.
-- **Session 03**: Given a "lesser" mission by Donga to check on overdue ingredient contact Nowarb; brawled with the Crimposa gang at Barkin's apothecary in Tratta; traveled to Nowarb's farm; joined a raid on a nearby goblin camp over slaughtered livestock; discovered the goblin camp poses little threat and shares the same cattle-killing problem, pointing to a chupacabra; session ends on an unresolved decision about how to proceed.
+
+- **Session 01**: The party was recruited by Master Thorne aboard the Wavehammer in Tratta and dispatched to Brinecross to meet the thief H'arald Stonesheep for an object and a location name.
+- **Session 02**: The party survived a zombie outbreak in Brinecross, recovered an ivory statue, found Harold alive but sick, learned the phrase "The Long Night," intercepted a letter revealing a trafficking operation through Tratta's warehouses, escaped on horseback, reported the outbreak, reached level 2, and delivered their findings to Thorin aboard the Wavehammer.
+- **Session 03**: A differently-composed party (Dog, Kyrian, Jasper Flint, and a gnome-wizard Cletus) was sent by Donga to Nowarb's farm after a contact failed to deliver spell ingredients; along the way they brawled with the Crimposa gang's Kintul in Tratta, then fought goblins at Nowarb's farm, discovered the goblin camp was mostly noncombatants, and uncovered evidence pointing to a Chupacabra killing cattle on both sides — ending on an unresolved decision about how to proceed.
+- **Session 04**: Fragmentary notes describe a scene titled "Shadow of the Sand" involving bets placed on an arena-style matchup ("Goblins against the Leopard"), combat ("kills behind him"), the NPC Cassian, and the party needing a short rest.

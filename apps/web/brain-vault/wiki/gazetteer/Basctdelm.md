@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Basctdelm
 
-# Gazetteer
-
 # Player’s Guide to Basctdelm
 
 ![][image1]
@@ -496,7 +494,8 @@ There is rarely any need for anyone to enter the Undercroft, but there is typica
 
 ## Cut and Craft
 
-*Central District*  
+*Central District*
+
 Busy street jeweler on a market block. Rings, pins, small gems, repair work, and the occasional larger stone bought off merchants or the docks. Bram turns stock over fast.
 
 Approaching from the street…
@@ -620,7 +619,8 @@ Additionally, the tavern is known for the following unique food items and dishes
 
 ## Flawless Crafts
 
-*North District*  
+*North District*
+
 High-end jeweler and gem house serving nobles, temples, and anyone who can pay without blinking. Stones are displayed by appointment as often as from the case. Ritual-grade diamonds are kept in a rear vault, not in the window. Sennava sells quality, not haste. 
 
 Approaching from the street…
@@ -750,7 +750,8 @@ All the drinks are served with a half-salt rim to enhance the flavor. Additional
 
 ## House of Myr
 
-*High District*  
+*High District*
+
 The House of Myr is the Meridian’s principal house in Basctdelm: a tall, tapering octagonal tower in the High District. It is a working fortress-monastery, not a palace. Couriers, knights, and officers move through it all day.
 
 Approaching from the street…
@@ -849,7 +850,8 @@ Many of the standard [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equi
 
 ## Open Quill
 
-*Central District*  
+*Central District*
+
 A bistro for academy tutors, clerks, and anyone who wants a table without a tavern’s noise. Midday and late afternoon are busy; evenings thin out.
 
 Approaching from the street…
@@ -908,7 +910,8 @@ Upon entering…
 
 ## Stormwell
 
-*South District, Basctdelm*  
+*South District, Basctdelm*
+
 Place of worship for Vo’egurn – Not a cathedral. A working shrine to Vo’egurn, demigod of storm and breaking, under Torec’s elemental line. South District dock-hands, roofers, and people who live by bad weather come here. Rites are short, loud, and paid in coin or labor. They do not perform resurrection. They may bless a crossing, hear a vow, or tell you where the old storm-marks still sit in the city. If the party comes asking about Guigzien, sludge, or a drained statue, the keeper will listen. Vo’egurn and Guigzien are not allies; the Stormwell treats the muck-god as a wrong turning of earth and water.
 
 Approaching from the street…
@@ -1011,7 +1014,8 @@ This location works well for several types of scenes. It can serve as the starti
 
 ## Temple of Roses
 
-*North District*  
+*North District*
+
 Cathedral of Diverra, the Ardent One – The principal house of Diverra in the capital. Newer than the old-god halls, built to look as if it had always belonged among North District stone. Weddings, healing, public rites, and private counsel all happen here. High rites (raise dead, resurrection) are possible if a ranking priest agrees and the diamond is real. They will not raise a stranger on a walk-in.
 
 Approaching from the street…
@@ -1369,8 +1373,6 @@ Smuggler operating as a cart and wagon builder
 |  |  | Oil of Sharpness | Very Rare | 2,500 gp |
 |  |  | Potion of Longevity | Very Rare | 3,000 gp |
 |  |  | Potion of Mind Control (monster) | Very Rare | 6,000 gp |
-
-# Tab 2
 
 This should describe the areas best:
 

@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Tyrynder
 
-# Sections
-
 Gazetteer
 
 ![][image1]

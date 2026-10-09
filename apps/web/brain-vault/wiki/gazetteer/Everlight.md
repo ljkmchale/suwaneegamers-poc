@@ -8,8 +8,6 @@ tags: [gazetteer, settlement, auto-curated]
 
 # Everlight
 
-# Everlight
-
 ![][image1]
 
 | 1 | The Twinkling Fir Tavern |  | 5 | Shrine of Everlight |  |  |  |

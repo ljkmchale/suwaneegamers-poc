@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Kelaad
 
-# Sections
-
 # Player’s Guide to Kelaad
 
 ![][image1]
@@ -73,7 +71,8 @@ Kelaad has no lord. The town answers to Harbormaster Fanson “Feisty Fan” Edg
 
 ### **Harbormaster “Feisty Fan” Fanson Edgelow**
 
-*Male human, about 50\. De facto burgomaster. Seat: the keep. Second office: the docks.*  
+*Male human, about 50\. De facto burgomaster. Seat: the keep. Second office: the docks.*
+
 He is wiry, salt-and-pepper cropped hair, green eyes, sailor’s garb and a captain’s whistle even in the keep hall. Quick tongue, stiff drink, no patience for a title that would make him sound like a mainland governor. He earned the post by keeping the cove working after 1228 and has held it by acclaim since. If he falls, the town will have to name another Harbormaster; there is no heir.
 
 ## 
@@ -82,7 +81,8 @@ He is wiry, salt-and-pepper cropped hair, green eyes, sailor’s garb and a capt
 
 ### **Elder Alara**
 
-*Female half-elf, elder. Town Wisdom and keep healer.*  
+*Female half-elf, elder. Town Wisdom and keep healer.*
+
 She keeps the infirmary in the keep and the old Featherwell memory in her head: herbs from the coastal wood, births, burials, and which moon to wait on. Fanson does not move on land, sick, or sacred matters without her. She does not command the Watch. 
 
 ## 
@@ -91,7 +91,8 @@ She keeps the infirmary in the keep and the old Featherwell memory in her head: 
 
 ### **Sergeant Raug Morley**
 
-*Male human. Sergeant of the Harbor Watch. Reports to Fanson.*  
+*Male human. Sergeant of the Harbor Watch. Reports to Fanson.*
+
 He holds the yard, the gates, and the street when the Harbormaster is on the water. Spears, round shields, nets; beige studded leather and brown tunics. Small force, used to dock brawls and smugglers, not a standing army.
 
 ## 

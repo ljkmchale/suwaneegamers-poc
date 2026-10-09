@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Adsuren
 
-# Sections
-
 # **Overview**
 
 Adsuren is a small town in a wooded valley underneath **Mount Ethea** and borders on the **Wehgyn River**. It functions as a humble spot for those who call it home and a traveling spot for those who wish to get to the Eustera Ridge and don’t wish to go by the coast or up through Gibuldon. The village is littered with small buildings that branch off the river and form around a large open space where the town houses a market. 
@@ -28,7 +26,8 @@ The village's true legacy, however, began to unfold in the 1210s with the rise o
 
 ## **Citizenry**
 
-Humans (45%), Half-Elves (25%), Elves (20%),  other (10%)  
+Humans (45%), Half-Elves (25%), Elves (20%),  other (10%)
+
 *When interacting with NPCs, it may be helpful to use the [interaction chart](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.bkfxerpcdyol) in the Myrdae Reference for DMs.*
 
 ### **Style and Aesthetic**
@@ -264,7 +263,7 @@ The Spider’s Silk is an elegant dark stone and dark roofed building built bene
 
 | NPC | Role | Description |
 | :---- | :---- | :---- |
-| Anabu Mievriat | tailor ([drow](https://www.dndbeyond.com/monsters/5900660-drow-of-lolth)) | *male drow* A slender drow with white hair that is slicked back and flows long down his back. His purplish gray skin is always covered by a deep violet robe that is cinched at the waist with a large white sash that is bedazzled like a spider's web with dewdrops using small red gemstones. |
+| Anabu Mievriat (Dead)  | tailor ([drow](https://www.dndbeyond.com/monsters/5900660-drow-of-lolth)) | *male drow* A slender drow with white hair that is slicked back and flows long down his back. His purplish gray skin is always covered by a deep violet robe that is cinched at the waist with a large white sash that is bedazzled like a spider's web with dewdrops using small red gemstones. |
 
 ## **Tanner**
 
@@ -284,8 +283,10 @@ At this shop, you can find animal hides (for practical or ornamental purposes), 
 
 Player ratings from the Advents Guide to Myrdae (in-character reviews, 1 to 5 stars).
 
+- **Guard Post** (business): 1.0 out of 5 from 1 review.
 - **The Graying Grotto** (business): 5.0 out of 5 from 1 review.
 
 Recent reviews:
+- Guard Post: "Needs more Guards that are loyal to the town even if the town does not have money" — Kenton (1 stars)
 - The Graying Grotto: "Lovely place to stay in this bustling, but small town.  The McLuinge family is attentive, providing great food and service, and they will accommodate additional requests for coin.  Traveler's tip:  try to visit during a Market Day and be sure to try the unique Precura fruit, a specialty of the area." — Esylla (5 stars)
 

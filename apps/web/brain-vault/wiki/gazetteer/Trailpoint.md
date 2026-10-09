@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Trailpoint
 
-# Sections
-
 Gazetteer
 
 ![][image1]

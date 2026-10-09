@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Gevakaln
 
-# Sections
-
 Gazetteer
 
 ![][image1]
@@ -417,8 +415,6 @@ Many of the standard [leather goods](https://www.dndbeyond.com/sources/dnd/phb-2
 |  |  |  |
 |  |  |  |
 |  |  |  |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

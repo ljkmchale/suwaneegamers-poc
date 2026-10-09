@@ -1,4 +1,3 @@
-🫅 Players
 Players
 
 
@@ -125,7 +124,6 @@ Mabel’s Monocle
 	Alive
 	* 	* 	* 	* 	* 	Party Inventory Magic Items:
 Bag of Holding, Thornfeeder, Clawed Glove
-📜 Sessions
 01 - Prisoners
 Session Date:  September 9, 2024
 In-game Date:  Uncertain - Year 1246
@@ -2368,7 +2366,6 @@ Rhody asks his monocle, speaking to Madam Mabel, asking if this will anger her. 
 Esadi gives us a bag of wind to leave and return to her domain. She shunts us back to the terrace and we put Albross’s body into the bag of holding. We ask Esadi how Maw will get out safely, and the wind tells us we can tell the dragon that the strait is fixed. We are shunted off the terrace and are sent down towards the ground, saved by the bag. The dragon arrives with Maw to greet us. We tell him the strait is fixed. He tells us we are ok to leave the island. If we ever return, he’ll make a point to visit us. Kibbit asks for some gold or gems in recompense. Zeldrigos says no. We say our goodbyes and take Maw with us. We use the bag again and return to the terrace, Maw in tow. Esadi is at the top again, and she sends us away to Gevakaln. She casts Wind Walk on us and we head to Gevakaln. We land on the outside of the city, returning to our physical forms. We revive Albross with Revivfy. We decide we’ll head towards Gevakaln to help save Albross’s brother.
 
 
-🧑‍🤝‍🧑 Notable NPCs
 
 
 Name
@@ -2731,7 +2728,6 @@ Encounter when looking for 7th Co. (Session 21)
 
 
 
-📍 Quests
 Primary Quests
 
 
@@ -2838,7 +2834,6 @@ After a couple stretches, stake out the warehouse to see if the smuggling operat
 	The Orcs must pay
 
 
-💀 Characters - Live or Dead
 
 
 Character
@@ -2928,7 +2923,6 @@ Character
 
 
 
-📑 Old Name Table
 Important Names
             * Caifir Family
 Trustworthy family in the city of Climbor
@@ -3147,7 +3141,6 @@ She was in the company
 
 
 
-🎓 Lessons Learned (2)
 Total Lessons Learned: 4
 
 
@@ -3199,7 +3192,6 @@ Lesson 4: How oil lanterns work:
 
 
 Look Up!
-Group Name
 Party Name Suggestions:
                * High Society (Hi!)
                * Wyrm Bane ™

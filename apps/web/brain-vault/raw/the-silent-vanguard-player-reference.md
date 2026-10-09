@@ -1,7 +1,7 @@
 # The Silent Vanguard - Player's Reference & Tracking
 
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
-Pulled: 2026-08-27T13:46:28.173Z
+Pulled: 2026-10-08T14:45:46.031Z
 
 Players
 
@@ -667,8 +667,25 @@ Go look for the Chupacabra themselves.
 Return to the Wave Hammer.
 
 
+04 - (10.07.26)
 
 
+Shadow of the Sand
+
+  
+
+
+Lenny bets 10:12  on Shadow of the Sand
+Kills behind him 10:15
+
+
+(Cassian 10:12)
+
+
+Lenny bets 10:80 on the Goblins against the Leopard
+
+
+We need a short rest
 NPCs
 
 

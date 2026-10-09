@@ -848,3 +848,27 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 ## [2026-09-18] synthesis | Quick Reference auto-curation
 
 - Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+
+## [2026-09-26] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+
+## [2026-09-27] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+
+## [2026-09-28] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Dungeons III Quick Reference]] from current Dungeons III notes (claude-sonnet-5).
+
+## [2026-09-29] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Dungeons III Quick Reference]] from current Dungeons III notes (claude-sonnet-5).
+
+## [2026-09-30] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+
+## [2026-10-08] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/The Silent Vanguard Quick Reference]] from current The Silent Vanguard notes (claude-sonnet-5).

@@ -21,6 +21,11 @@ boosting on the *greedy* decoder (so the ~85ms speed is kept). The boosting tree
 is rebuilt only when the phrase set changes — i.e. roughly once per session, not
 per turn.
 
+Two assistants share this service: Myra (boosted with her campaign names) and
+Chef Bruno in Jenny's Kitchen (no boosting). Each phrase set's decoder is kept
+ready in a small cache, so switching between them swaps a warmed decoder in
+instead of rebuilding and recompiling one (which cost 0.7-3.3s per switch).
+
 GPU: the box masks the GPU globally with CUDA_VISIBLE_DEVICES=-1 to keep
 CTranslate2 (Speaches) off it. This service must be launched with an explicit
 per-process CUDA_VISIBLE_DEVICES=0. See scripts/start-local-voice-stack.ps1.
@@ -59,6 +64,9 @@ TARGET_SR = 16000
 # available on Windows, so it must be disabled (falls back to a non-CUDA-graph
 # path — slower, but still an order of magnitude under CPU Whisper).
 USE_TRITON = False
+# Decoders kept ready, one per phrase set: no boosting (Chef Bruno), plus a few
+# recent Myra vocabularies (hers varies by visitor). Each is small.
+DECODER_CACHE_SIZE = int(os.getenv("PARAKEET_DECODER_CACHE", "4"))
 
 
 class Transcriber:
@@ -74,6 +82,10 @@ class Transcriber:
         self._applied_phrases: Optional[tuple[str, ...]] = None
         self._boost_cfg_cls = None
         self._base_decoding_cfg = None
+        # phrase tuple -> the decoding state change_decoding_strategy built for
+        # it, most recently used last. Swapping a cached entry back in keeps its
+        # warmed kernels; rebuilding would start cold.
+        self._decoders: dict[tuple[str, ...], dict] = {}
 
     def load(self) -> float:
         import nemo.collections.asr as nemo_asr
@@ -87,6 +99,9 @@ class Transcriber:
         # Snapshot the pristine greedy decoding config so boosting can be turned
         # off again by restoring it.
         self._base_decoding_cfg = OmegaConf.to_container(model.cfg.decoding, resolve=True)
+        # The model's own decoder is the no-boosting one; keep it (warmed below).
+        self._decoders[()] = self._capture()
+        self._applied_phrases = ()
         # Warm up the CUDA kernels so the first real request is not slow. The
         # boosting/fusion path (triton off, no CUDA graphs) compiles lazily, and
         # that compile is bucketed by tree size: a 1-phrase warmup left a ~2s
@@ -101,17 +116,62 @@ class Transcriber:
         # active, so the compile happens here at startup instead. ~2s of noise.
         rng = np.random.default_rng(0)
         noise = (rng.standard_normal(TARGET_SR * 2) * 0.1).astype(np.float32)
+        # Clients send 24-48 kHz audio, so every real request resamples, and
+        # librosa's resampler loads lazily: its first call cost ~2.5s, which
+        # landed on whoever spoke first after a restart. Pay it here instead.
+        librosa.resample(noise, orig_sr=TARGET_SR * 3, target_sr=TARGET_SR)
         model.transcribe([noise], batch_size=1, verbose=False)
         with self._lock:
             self._apply_phrases(("Myrdae", "Aurelius Valeheart", "Heroes of Emberstran"))
             model.transcribe([noise], batch_size=1, verbose=False)
+            # Back to the original, already-warmed no-boosting decoder (cached),
+            # not a freshly built cold one, and warm it once more to be sure.
             self._apply_phrases(())
+            model.transcribe([noise], batch_size=1, verbose=False)
         torch.cuda.synchronize()
         return time.perf_counter() - t0
 
+    def _capture(self) -> dict:
+        """The model state change_decoding_strategy sets (NeMo RNNT/TDT BPE)."""
+        m = self._model
+        return {
+            "decoding": m.decoding,
+            "wer": m.wer,
+            "cfg": m.cfg.decoding,
+            "temperature": m.joint.temperature,
+        }
+
+    def _restore(self, state: dict) -> None:
+        from omegaconf import open_dict
+
+        m = self._model
+        m.decoding = state["decoding"]
+        m.wer = state["wer"]
+        if m.joint.fuse_loss_wer or (
+            m.decoding.joint_fused_batch_size is not None and m.decoding.joint_fused_batch_size > 0
+        ):
+            m.joint.set_loss(m.loss)
+            m.joint.set_wer(m.wer)
+        m.joint.temperature = state["temperature"]
+        with open_dict(m.cfg):
+            m.cfg.decoding = state["cfg"]
+
     def _apply_phrases(self, phrases: tuple[str, ...]) -> None:
-        """Compile (or clear) the boosting tree. Caller holds the lock."""
+        """Switch to (building if needed) the decoder for this phrase set.
+        Caller holds the lock."""
         if phrases == self._applied_phrases:
+            return
+        cached = self._decoders.pop(phrases, None)
+        if cached is not None:
+            t0 = time.perf_counter()
+            self._restore(cached)
+            self._decoders[phrases] = cached  # most recently used
+            self._applied_phrases = phrases
+            logger.info(
+                "boosting set to %d phrase(s) from cache in %.1fms",
+                len(phrases),
+                (time.perf_counter() - t0) * 1000,
+            )
             return
         from omegaconf import OmegaConf, open_dict
 
@@ -128,8 +188,13 @@ class Transcriber:
                 )
                 dcfg.greedy.boosting_tree_alpha = BOOST_ALPHA
         t0 = time.perf_counter()
-        self._model.change_decoding_strategy(dcfg)
+        self._model.change_decoding_strategy(dcfg, verbose=False)
         self._applied_phrases = phrases
+        self._decoders[phrases] = self._capture()
+        # Evict the least recently used set, but never the no-boosting one.
+        while len(self._decoders) > max(DECODER_CACHE_SIZE, 2):
+            oldest = next(k for k in self._decoders if k)
+            del self._decoders[oldest]
         logger.info(
             "boosting set to %d phrase(s) in %.0fms", len(phrases), (time.perf_counter() - t0) * 1000
         )

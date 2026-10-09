@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Khagdaruhl
 
-# Sections
-
 # Player’s Guide to Khagdaruhl
 
 ![][image1]
@@ -400,7 +398,8 @@ You can find **reagents** and other items normally needed for spellcasting.
 
 ## Church to Goldraen
 
-\<Description for Dungeon Master\>  
+\<Description for Dungeon Master\>
+
 Located in the refined northern district of Emberstran, the Temple of Diverra is a mid-sized sanctuary devoted to the goddess of love and passion. The temple is constructed of smooth, pale stone with rich, dark red wood trimming and accents of gilded metal.
 
 ## 
@@ -416,7 +415,8 @@ Located in the refined northern district of Emberstran, the Temple of Diverra is
 
 ## Temple of Brault
 
-\<Description for Dungeon Master\>  
+\<Description for Dungeon Master\>
+
 Located in the refined northern district of Emberstran, the Temple of Diverra is a mid-sized sanctuary devoted to the goddess of love and passion. The temple is constructed of smooth, pale stone with rich, dark red wood trimming and accents of gilded metal.
 
 ## 
@@ -443,8 +443,6 @@ Located in the refined northern district of Emberstran, the Temple of Diverra is
 | Role | Name | Description |
 | :---- | :---- | :---- |
 | Forgemaster Holtgrun | Forgemaster [(commoner](https://www.dndbeyond.com/sources/dnd/mm-2024/monsters-c#Commoner)) | *Male Duergar* \<description & personality\> |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

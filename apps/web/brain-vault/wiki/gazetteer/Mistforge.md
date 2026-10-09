@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Mistforge
 
-# Sections
-
 Gazetteer
 
 ![][image1]

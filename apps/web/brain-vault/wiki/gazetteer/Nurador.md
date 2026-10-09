@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Nurador
 
-# Sections
-
 # Player’s Guide to Nurador
 
 ![][image1]
@@ -249,8 +247,6 @@ Additionally, the tavern is known for the following unique food items and dishes
 | Farrier Services | 1 sp |  | Trim, shape and shoe horses’ hooves |
 | Feed | 7 cp |  | Feed the horse |
 | Wash | 2 sp |  | Wash the horse |
-
-# NPC Info
 
 # Lady Phéhldra Lightgarde
 

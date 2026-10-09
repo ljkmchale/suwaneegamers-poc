@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Caelora
 
-# Sections
-
 # Player’s Guide to Caelora
 
 ![][image1]
@@ -37,8 +35,10 @@ Nearly 80% of the city are high elves, with elves or half-elves making up 90% of
 
 All gods are worshipped, but three gods align to the lifestyle of Caeloreans:
 
-* **Diverra**, *Goddess of Love and Beauty*—celebrated in lush gardens and the shimmering Daefar pool.  
-* **Tyvarion**, *God of Art and Expression*—patron of the city—honored in every song, carving, and performance.  
+* **Diverra**, *Goddess of Love and Beauty*—celebrated in lush gardens and the shimmering Daefar pool.
+
+* **Tyvarion**, *God of Art and Expression*—patron of the city—honored in every song, carving, and performance.
+
 * **Utheri**, *the Truth Bringe*r—revered for echoing the city’s ancient elven ideals.
 
 Worship flows through art, festival, and devoted temples. Tyvarion’s priests are typically musicians or poets; Diverra’s serve as matchmakers, healers, and garden tenders; Utheri’s act as judges, mediators, and truth-wardens. 
@@ -69,8 +69,10 @@ After many years in service to the king, Teren returned to Caelora to spend his 
 
 During the Time of Growth, Caelora became both a prize and a battleground. Its hills witnessed invasions and sieges, and the city was razed and rebuilt twice over. From these struggles emerged resilience — and the rise of three noble families who helped stabilize Caelora during its cycles of ruin and renewal:
 
-* **House Airithel** — remembered for their wisdom and their role as keepers of Caelora’s archives and histories.  
-* **House Rulendor** — famed as patrons of artisans and protectors of Caelora’s culture of beauty and song.  
+* **House Airithel** — remembered for their wisdom and their role as keepers of Caelora’s archives and histories.
+
+* **House Rulendor** — famed as patrons of artisans and protectors of Caelora’s culture of beauty and song.
+
 * **House Venathrial** — renowned for their martial tradition and long service among the Realmwardens.
 
 Together, these families rallied behind their sovereign, Lady Faevyr Venathrial, ensuring the city not only endured but flourished again. Their descendants remain powerful to this day, serving as counselors to the current ruler, Lady Alandri Venathrial.
@@ -140,7 +142,7 @@ Since the city is not defined by solemn temples or rigid dogma, but by the livin
 
 ### 
 
-## **Academe Lyrael’vin**
+## Academe Lyrael’vin
 
 The premier academy of Caelora, Academe Lyrael'vin trains High Elves (and rare gifted outsiders) in the sensory arts as an act of worship to Tyvarion. It occupies a sprawling complex of living groves, crystal halls, and song-walls built around the original Daefar pool overlook. Masters enforce cross-sensory mastery; students produce works that engage multiple senses simultaneously. The academy supplies finished elven arms and armor to the city’s export trade and serves as a quiet center for subtle Weave research.
 
@@ -476,8 +478,6 @@ Additionally, the tavern is known for the following unique food items and dishes
 |  |  |   |
 |  |  |  |
 |  |  |  |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

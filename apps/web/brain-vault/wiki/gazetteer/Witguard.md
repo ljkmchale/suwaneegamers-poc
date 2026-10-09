@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Witguard
 
-# Sections
-
 Gazetteer
 
 ![][image1]
@@ -20,7 +18,7 @@ Witguard
 
 ## 
 
-## *In the valley, a green hill rises upon the west. An embankment and mighty wooden wall circle it. Within, roofs of multiple houses, and the highest point, set on a terrace, is a great hold. Surrounding the town, stretched for near a mile, dots of white and tan, tents, set up in clusters of men. A fair distance off rests another hill of equal size, but to your eyes, they could be twins. Its ridge bare apart from the spare tree, untouched by man.*
+## In the valley, a green hill rises upon the west. An embankment and mighty wooden wall circle it. Within, roofs of multiple houses, and the highest point, set on a terrace, is a great hold. Surrounding the town, stretched for near a mile, dots of white and tan, tents, set up in clusters of men. A fair distance off rests another hill of equal size, but to your eyes, they could be twins. Its ridge bare apart from the spare tree, untouched by man.
 
 ## 
 

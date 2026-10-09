@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Riverside
 
-# Sections
-
 Gazetteer
 
 ![][image1]

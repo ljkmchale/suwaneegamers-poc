@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/the-silent-vanguard-player-reference.md"
 source_url: "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit"
-source_hash: "27ece8b1a6fe6995cbf1b6d8ae32ecf78f122ef39147d9a5fdf54a3f8f5ee2eb"
+source_hash: "8672401b85682b5aaf443a2c52b272e07b480393be426f337b7ca62a757af40e"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-08-29T14:45:43.965Z"
-pulled_at: "2026-08-27T13:46:28.173Z"
+imported_at: "2026-10-08T14:46:15.570Z"
+pulled_at: "2026-10-08T14:45:46.031Z"
 ---
 
 # The Silent Vanguard - Player's Reference & Tracking
@@ -17,15 +17,15 @@ pulled_at: "2026-08-27T13:46:28.173Z"
 Campaign: The Silent Vanguard
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
 Raw source: [[raw/the-silent-vanguard-player-reference.md]]
-Raw hash: `27ece8b1a6fe6995cbf1b6d8ae32ecf78f122ef39147d9a5fdf54a3f8f5ee2eb`
-Imported: 2026-08-29T14:45:43.965Z
+Raw hash: `8672401b85682b5aaf443a2c52b272e07b480393be426f337b7ca62a757af40e`
+Imported: 2026-10-08T14:46:15.570Z
 
 ## Imported Notes
 
 # The Silent Vanguard - Player's Reference & Tracking
 
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
-Pulled: 2026-08-27T13:46:28.173Z
+Pulled: 2026-10-08T14:45:46.031Z
 
 Players
 
@@ -691,8 +691,25 @@ Go look for the Chupacabra themselves.
 Return to the Wave Hammer.
 
 
+04 - (10.07.26)
 
 
+Shadow of the Sand
+
+  
+
+
+Lenny bets 10:12  on Shadow of the Sand
+Kills behind him 10:15
+
+
+(Cassian 10:12)
+
+
+Lenny bets 10:80 on the Goblins against the Leopard
+
+
+We need a short rest
 NPCs
 
 

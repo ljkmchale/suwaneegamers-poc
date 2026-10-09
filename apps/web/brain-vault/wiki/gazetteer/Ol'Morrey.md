@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Ol'Morrey
 
-# Sections
-
 Gazetteer
 
 ![][image1]

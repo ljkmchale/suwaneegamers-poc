@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Emberstran
 
-# Sections
-
 # **Overview**
 
 Emberstran is a coastal city located in the eastern region of Orbansia, along the shores of the Glimmering Sea and nestled just south of the Severed Crease. The city lies not far from Mount Emberstran, an unrest volcano whose eruption during the Awakening transformed the surrounding landscape. Though once threatened with destruction, Emberstran survived and has since thrived, bolstered by the fertile volcanic soil ideal for grape cultivation. Today, Emberstran is a major producer of wine and a hub for trade, with goods flowing in and out via its bustling port.
@@ -914,7 +912,8 @@ Entering …
 
 ### **Services Provided**
 
-The smith provides services for buying, selling and repairing [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor).  
+The smith provides services for buying, selling and repairing [armor](https://www.dndbeyond.com/sources/dnd/phb-2024/equipment#Armor).
+
 Here are some of Vyaanis’ specialty items …
 
 | NPC | Role | Cost |

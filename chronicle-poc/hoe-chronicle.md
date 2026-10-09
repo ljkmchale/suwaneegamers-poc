@@ -1,13 +1,15 @@
-# 📖 Session Notes
+Ky’tha is also referred to as Ky
 
-Ky’tha is also referred to as Ky  
-Ainslie is also referred to as Ains  
+Ainslie is also referred to as Ains
+
 Aurelius is also referred to as Aury
 
 # **01 \- Dock Troubles**
 
-**Session Date**:  March 3, 2025  
-**In-game Date**:  14th of Talil, 1246  
+**Session Date**:  March 3, 2025
+
+**In-game Date**:  14th of Talil, 1246
+
 **Starting Location**:  The Dyed Cane in Emberstran
 
 ## **The Dyed Cane \- 14th of Talil**
@@ -57,8 +59,10 @@ Og and Ainslie make their way around the town \- trying to get info on where Eml
 
 # **02 \- Bad Wine**
 
-**Session Date**:  April 22, 2025  
-**In-game Date**:  14th of Talil, 1246  
+**Session Date**:  April 22, 2025
+
+**In-game Date**:  14th of Talil, 1246
+
 **Starting Location**:  The Old Oak & Grapes tavern in Emberstran
 
 ## **In the Old Oak & Grapes**
@@ -111,8 +115,10 @@ We are walked up to the house (he locks up the cellar).  We go back into the foy
 
 # **03 \- The EGD**
 
-**Session Date**:  May 6, 2025  
-**In-game Date**:  15th of Talil, 1246  
+**Session Date**:  May 6, 2025
+
+**In-game Date**:  15th of Talil, 1246
+
 **Starting Location**:  The Vintner’s Guildhouse in Emberstran
 
 ## **The Vintner’s Guildhouse**
@@ -185,13 +191,16 @@ As we exit this room, Aury feels something land on his back.
 
 # **04 \- Beneath the City**
 
-**Session Date**:  May 28, 2025  
-**In-game Date**:  15th of Talil, 1246  
+**Session Date**:  May 28, 2025
+
+**In-game Date**:  15th of Talil, 1246
+
 **Starting Location**:  Ruins beneath Emberstran
 
 ## **Beneath Emberstran** 
 
-IT’S INITIATIVE:  Combat vs. Giant Tick  
+IT’S INITIATIVE:  Combat vs. Giant Tick
+
 Og sees a “slimy tick” covering Aury’s back and smashes it off of Aury’s back.  Ky misses twice.  Aury hits it \- a little.  It then jumps back on Aury’s back and attaches to him.  Ainslie thinks damage to the “tick” might also hurt Aury.  Ainslie delivers 3 points of psychic damage to the tick.  Hap tries to grab the tick and pull him off and can’t do it.  Og tries to pull him off, too, but can’t. Ky then pulls him off and Aury heals himself.  The bug then jumps at the fighter and misses.  Ainslie attacks him and does psychic damage again.  Hap stabs the tick and hits twice and bloodies him.  Og  smashes him with his hammer.  Ky then slashes his head off with her shortsword and kills it.  Aury then flames it up after being grossed out.  
 
 As we step out and turn right, there is a V ahead \- lava rock passage that breaks off to the left and a cobblestone path to the right. We discuss which path to take.  Og looks both directions to try to determine which might be the best.  Ky thinks no one has been in this area for a long time.  Group decides to go to the right.  Ky offers to scout.  Hap sends Fleur to go with her.  She goes down a way and tells Fleur to go back to get the others.  She comes to a fork in the path and you can go left (north) or right (east).  To the north Ky hears soft water trickling.  Same to the right.  The group catches up and Ky points out the sound.  Ainslie thinks the sound is muffled in one direction and echoed in the other.  Group decides to go right \- Ky and Fleur go first.  Water sound is louder.  Come to a grate is on the side and waist height and an alcove with a ladder going up.  This ladder is not as well maintained as the one they previously found.  Ky hears talking from the alcove \- she sends Fleur back.  She backtracks 15’ feet to meet the group and tells what she’s found.  They go back to the alcove and Ky goes into see if she can source the talking. She finds a hole behind the stairs and hears “bitch, behind this, backing the Etterset, gathering them” and Ainslie hears a few different voices and hears “**Lady Rook**.”   Voices fade and we hear a door close. 
@@ -232,8 +241,10 @@ We all get a long rest, but in the morning, Aury and Hap gets a knock on the doo
 
 # **05 \- Beneath the City**
 
-**Session Date**:  June 10, 2025  
-**In-game Date**:  16th of Talil, 1246  
+**Session Date**:  June 10, 2025
+
+**In-game Date**:  16th of Talil, 1246
+
 **Starting Location**:  The Temple to Diverra in Emberstran
 
 ## **Temple to Diverra**
@@ -318,8 +329,10 @@ After a few moments, we notice a robed figure coming toward us (“hooded lady�
 
 # **06 \- Diverra’s Grove**
 
-**Session Date**:  June 24, 2025  
-**In-game Date**:  16th of Talil, 1246  
+**Session Date**:  June 24, 2025
+
+**In-game Date**:  16th of Talil, 1246
+
 **Starting Location**:  The Tower of Imonarra in Emberstran
 
 She welcomes us.  Ainslie and Og ask about her cat head.  She says she is a Tabaxi.  She says that she is here to acquire lands \- after dancing around a bit \- she says she has purchased the Cetaen land.  Hap tells her he knows of a rumor that the Cetaen’s do not own that land.  She laughs it off, mentioning other “rumors” in the town, which Ky challenges are all true.  Og then chimes in that it is their business to know the truth of rumors as part of the Emberstran Guard Department (EGD)…which she questions (and Ainslie can’t convince her).
@@ -372,7 +385,8 @@ We head down the central trail and come to another clearing. Mt. Emberstran is i
 
 The egg and key start to shake in his hands and the ritual begins. Og feels warm, radiant energy.  Gusts of winds swirl around all of us.  The words are not familiar to any of us.  The rose outline on the carving starts to glow.  Air darkens and black mist starts to rise and seep on the ground and we are attacked. 
 
-IT’S INITIATIVE  
+IT’S INITIATIVE
+
 Ainslie attacks with a spell and kills one. Hap attacks and misses.  Aury uses channel divinity and hits and kills one.  It then attacks Og, but Aury imposes disadvantage.  Ky then kills one.  Og continues to read.  Ainslie attacks the remaining entity and hits.  Hap swings and misses.  Aury attacks with a spell and hits it.  The entity attacks Ainslie and misses and then attacks Aury and misses.  Ky runs over and attacks it and kills it.   We each reposition ourselves for additional attacks if needed.
 
 The rose glows brighter, but the relief is brief.  We hear a sinister laugh from the cliffs above and figures form in the air \- they smell and the mist forms into bodies that pop up.  Ainslie attacks and hits and it laughs at him (these are darker and more evil).  The trees are starting to flutter.  Hap attacks and misses and his owl will give Ky advantage.  Aury flashes his holy symbol and they take radiant damage.  The creature attacks (with disadvantage) Aury and misses.  The other attacks Ainslie with vomit…and hit and he is poisoned. Ky attacks one and hits twice.  Ainslie attacks and hits and then moves next to Hap.  Hap attacks and hits and knocks him prone. Aury casts a spell on the one next to him and hits and then casts healing word on Ainslie. One attacks Ky and hits, but the damage is minimal.  The other vomits on Hap and hits and he’s poisoned.  Ky attacks and kills one.  Og continues to read.  Ainslie attacks and hits.  Hap attacks and misses and heals himself a little.  Aury shoots a bolt at the last one and hits. He tries to attack Og and Aury imposes disadvantage and he misses.  Ky then kills the last one.  
@@ -385,8 +399,10 @@ Ainslie torments it and makes it run away, as Ky gets an opportunity attack and 
 
 # **07 \- Divine Waypoint**
 
-**Session Date**:  July 9, 2025  
-**In-game Date**:  17th of Talil, 1246  
+**Session Date**:  July 9, 2025
+
+**In-game Date**:  17th of Talil, 1246
+
 **Starting Location**:  The Southern Baltwood Forest
 
 ## **At the Platform**
@@ -451,8 +467,10 @@ Ky confirms that this is a cart from Lady Rook and asks if her friends are going
 
 # **08 \- Cemetery Mystery**
 
-**Session Date**:  July 16, 2025  
-**In-game Date**:  18th of Talil, 1246  
+**Session Date**:  July 16, 2025
+
+**In-game Date**:  18th of Talil, 1246
+
 **Starting Location**:  Various Locations in Emberstran
 
 ### **Meeting with Lady Rook**
@@ -515,8 +533,10 @@ We make our way to the Old Oak & Grapes.  As we walk by the Temple, we see the a
 
 # **09 \- Sides & 3rd Piece**
 
-**Session Date**:  August 11, 2025  
-**In-game Date**:  18th of Talil, 1246  
+**Session Date**:  August 11, 2025
+
+**In-game Date**:  18th of Talil, 1246
+
 **Starting Location**:  The Old Oak & Grapes in Emberstran
 
 ### **Dinner with Lady Rook**
@@ -610,8 +630,10 @@ Ky presses her connections and gets a map of the sewers.  Group decides that we 
 
 # **10 \- The Sewers**
 
-**Session Date**:  August 20, 2025  
-**In-game Date**:  19th of Talil, 1246  
+**Session Date**:  August 20, 2025
+
+**In-game Date**:  19th of Talil, 1246
+
 **Starting Location**:  The Dyed Cane in Emberstran
 
 ### **Inside the Dyed Cane**
@@ -665,8 +687,10 @@ The group heads down, also looks in passage on the right (due west).  We haven�
 
 # **11 \- Confronting Cloak**
 
-**Session Date**:  September 9, 2025  
-**In-game Date**:  20th of Talil, 1246  
+**Session Date**:  September 9, 2025
+
+**In-game Date**:  20th of Talil, 1246
+
 **Starting Location**:  The Sewers of Emberstran
 
 Aury’s “cloak” nickname is Flower.  He is with us.
@@ -736,8 +760,10 @@ Next morning, Emilee and Haggis are sitting there at breakfast.  They jump up an
 
 # **12  \- The Eradic**
 
-**Session Date**:  October 7, 2025  
-**In-game Date**:  21st of Talil, 1246  
+**Session Date**:  October 7, 2025
+
+**In-game Date**:  21st of Talil, 1246
+
 **Starting Location**:  Various Locations of Emberstran
 
 ### **At the Headless Hydra**
@@ -802,8 +828,10 @@ Meanwhile, Ainslie and Og go to the Crimson Swan to meet with the Cloak of Defia
 
 # **13  \- Emberheart Tablet**
 
-**Session Date**:  October 23, 2025  
-**In-game Date**:  22nd of Talil, 1246  
+**Session Date**:  October 23, 2025
+
+**In-game Date**:  22nd of Talil, 1246
+
 **Starting Location**:  Various Locations of Emberstran
 
 We have become known in the town–heroes to some, problems to others.
@@ -875,8 +903,10 @@ Back to Og and Ainslie \- Ainslie tells Og that he will need to go to the Mounta
 
 # **14 \- Drowned Waypoint**
 
-**Session Date**:  November 12, 2025  
-**In-game Date**:  22nd of Talil, 1246  
+**Session Date**:  November 12, 2025
+
+**In-game Date**:  22nd of Talil, 1246
+
 **Starting Location**:  Various Locations of Emberstran
 
 Ky heads to the Lord’s Keep; Og and Ainslie heading to the Gate from the Bear; Aury and Hap at the Temple, about to head to the Gate.
@@ -936,8 +966,10 @@ We think this will be an interesting place to seek answers \- about Diverra, abo
 
 # **15 \- Spitespirit Cache**
 
-**Session Date**:  November 28, 2026  
-**In-game Date**:  23rd of Talil, 1246  
+**Session Date**:  November 28, 2026
+
+**In-game Date**:  23rd of Talil, 1246
+
 **Starting Location**:  Nunglthil
 
 Aury thinks it is late in the afternoon
@@ -990,8 +1022,10 @@ We make our way back to the guard at the portcullis \- a day has passed.  We are
 
 # **16 \- Favor in Nunglthil**
 
-**Session Date**:  January 7, 2026  
-**In-game Date**:  25th of Talil, 1246  
+**Session Date**:  January 7, 2026
+
+**In-game Date**:  25th of Talil, 1246
+
 **Starting Location**:  Nunglthil
 
 ### **25th of Talil in the Darkbottom Draught**
@@ -1062,8 +1096,10 @@ NEXT TIME \- we will start the next day and hear about Ains book study and make 
 
 # **17 \- Giant’s Silver**
 
-**Session Date**:  January 28, 2026  
-**In-game Date**:  26th of Talil, 1246  
+**Session Date**:  January 28, 2026
+
+**In-game Date**:  26th of Talil, 1246
+
 **Starting Location**:  Nunglthil
 
 ### **25th of Talil in the Darkbottom Draught**
@@ -1150,13 +1186,16 @@ We travel further.  Ky’tha notices movement ahead.  She sees a small creature 
 
 The session ends as we are walking to Makra’s genling village. 
 
-(Each character has gained enough XP to make it to level 7\)   
+(Each character has gained enough XP to make it to level 7\) 
+
 – The End of the Session – 
 
 # **18 \- In Bimblefol**
 
-**Session Date**:  February 17, 2026  
-**In-game Date**:  29th of Talil, 1246  
+**Session Date**:  February 17, 2026
+
+**In-game Date**:  29th of Talil, 1246
+
 **Starting Location**:  Thallgrove
 
 ### **Escort to Genling Village**
@@ -1234,8 +1273,10 @@ After another 3-4 hours, we find an opening where we can set up camp for the nig
 
 # **19 \- Lost Sanctuary**
 
-**Session Date**:  March 2, 2026  
-**In-game Date**:  30th of Talil, 1246  
+**Session Date**:  March 2, 2026
+
+**In-game Date**:  30th of Talil, 1246
+
 **Starting Location**:  Underdark
 
 Ky’tha and Aury wake up Og and Ains.  We brief them on the fact that the fungi might cause hallucinations, but otherwise, there was no danger.  Aury and Ky’tha get rest, while the other two are at watch. They talk about the water and what to expect, specifically about octopus/octopi…and do we talk to them or fight them, should we encounter them in the water.  Watch is uneventful and they wake up Zymve and Hap and get rest.  They briefly talk \- Hap says “it is pret’ner feels like home” as they talk about the swamp and gators \- he describes what they are to Zymve.  Night passes uneventfully.
@@ -1271,7 +1312,7 @@ Ky’tha looks around and investigates the area \- checking out the carving.  Sh
 
 Ains follows Og to the tree. Zymve stands just outside the door of the Temple.  Og hears a voice in his head \- as if the thornleaf is speaking to him \- it speaks without words but says “Answer its call,” as clear as day.  He reaches for the tree with his hand.  The bark is cool and rough.  Og’s breathing slows and his eyes grow heavy.  He hears “rest now Ogman Crag, accept your destiny and fall into E’espran.”  He resists the pull.  Ains sees him and asks, “what is going on.”  He explains about resting \- and they talk and Ains tells him to rest.  Og puts his hand back on the tree. His skin starts to change.  His hand looks like it is one with the tree…changing into bark. He looks like he is about to collapse.  Ains helps set him down.  He sees his eyes close heavily \- he doesn’t think he is in danger \- but he’s never seen him this calm.  This might be bad \- he doesn’t know.  He tries to connect to Og’s thoughts.  “Are you good?”  Og says “ok” but is very tired.  He feels connected to him, but he thinks Og is talking to something else. He hears:
 
-## *The great cycle of green and shadow, the living pulse that binds the world's roots and branches–The Alferumn. It is more than a tree, a connection of all that grows and withers in balance. When the balance frays, the Alferumn suffers, and guardians are called. You are E’erspan, thorn-bearer, the one who walks between bloom and rot to restore what has been taken.*
+## The great cycle of green and shadow, the living pulse that binds the world's roots and branches–The Alferumn. It is more than a tree, a connection of all that grows and withers in balance. When the balance frays, the Alferumn suffers, and guardians are called. You are E’erspan, thorn-bearer, the one who walks between bloom and rot to restore what has been taken.
 
 Og feels this thing’s pain.  They share the pain.  He has felt this before \- this is the second time he has felt the blight.  He feels that the tree’s roots are starved…it is poisoned.  This seems to be the single most important tree \- this is the Life Tree.  It says “you feel the pain.  Seek Dandelia of the Veil, for she has been seeking E’erspan’s aid.”  He is being called forth to be the guardian of this tree, of life.   He feels like he needs to find Dandelia (the druid of the Veil).  This would be to the east of the Baltwood. (Kahlbit’s Veil).  Ains thinks Og is going to be out for a long rest. Zymve sees this happening at the tree.  She has never seen trees and she and Ains talk about trees.  He explains that it looks like Og is okay, just resting.
 
@@ -1285,7 +1326,7 @@ Aury \- he starts to read through the new tome.  It is celestial.  It reveals �
 
 ## 
 
-## "*The Shattered Hearts, fragments of lost passion scattered across the world, must be sought and returned. When found, place each at the proper place of worship dedicated to me—shrines, temples, groves where my name is still honored. There, in sacred ground, their pieces may be reunited, their light restored, and the wounds of the heart healed. Only in this way shall the eternal bloom be made whole*."
+## "The Shattered Hearts, fragments of lost passion scattered across the world, must be sought and returned. When found, place each at the proper place of worship dedicated to me—shrines, temples, groves where my name is still honored. There, in sacred ground, their pieces may be reunited, their light restored, and the wounds of the heart healed. Only in this way shall the eternal bloom be made whole."
 
 These are material components of love (which is immaterial).  If someone comes across one they need to find out where it belongs.  Aury would need to put it in its rightful place (praying to Diverra to find out where it goes).  This is a sanctuary in its truest form.  As long as he holds the book and specific petals he can cast a ritual and bring us back to this place.  Anywhere in Myrdae…he can come back here.  But he has to have petals and the book.  This is the only copy of this book.
 
@@ -1301,8 +1342,10 @@ WE END HERE.  When we return, we will have had a long rest.  Options \- go back 
 
 # **20 \- Coming Home**
 
-**Session Date**:  March 2, 2026  
-**In-game Date**:  32nd of Talil, 1246  
+**Session Date**:  March 2, 2026
+
+**In-game Date**:  32nd of Talil, 1246
+
 **Starting Location**:  Bloomrest
 
 ### **In Bloomrest (The Lost Sanctuary of Diverra)**
@@ -1319,7 +1362,8 @@ As we continue, we see three sweat-stained guys hefting logs onto a wagon.  They
 
 The cart takes us to an area with real, unfiltered sunlight as we travel to Emberstran.  This is Zymve’s first view of a bright day.  Ains creates and hands Zymve a pair of “sunglasses” to help shield them from the bright light.  Every six seconds he recasts the spell to keep them up.  These guys are making small talk with us.  They say now that the blight is gone the lumber business is picking up.  Eventually a young rider comes into view riding a horse and singing.  His song has to do with the removal of the blight…
 
-*“No more the blight shall claim our blood, no more the fear shall reign,*  
+*“No more the blight shall claim our blood, no more the fear shall reign,*
+
 *For unseen hands have turned the tide—our thanks shall never wane\!”*
 
 He then pulls next to us.  He is **Brander**, a “*wandering minstrel of no small repute*”.  That was the “**Victors of the Vine**” \- tales of our deeds.  He is shocked and pleased to have sung it to us. Zymve comments that it needs work.  He says, well maybe so.  He also comments how he thought there were 5 of us, but now sees that we are a group of 6\.  Ains tells the same tale…and in his head says “you are going along with this please.”  Aury flips him a gold piece and Ky’tha tells him that more words rhyme with six than five.  He then asks Zymve if she wants to be included in his next version and she tells him ‘to find another profession.’ And he leaves.
@@ -1360,7 +1404,8 @@ Ains, Zymve, and Og head to the drow….after Zymve disguises herself.  Ains int
 
 ### **The Warm Bear Inn**
 
-Og apologizes about the lady of the night comment.  At Warm Bear…the settle in.  They notice the lumbermen…pacing themselves. A few people recognize them:  “you are right, they are here.”  Zymve is introduced as Og’s half-sister.  They look around and Zymve and Ains notice a guy sitting in the corner with his head down, with a broken lute…several empty tankards–its Bander, the bard we met on the road to Emberstran.  Zymve \- disguised \- offers to remedy the situation.  Og gets chummy with some hunters, has a few drinks, and asks about Mount Emberstan \- paths, threats, etc.  A sturdy, strong woman sitting at the corner of the bar perks up and walks over and says “well I’ll be damned \- heroes of Emberstran are going to Mount Emberstran”  My name is **Agnett** and I’ve been traveling these parts for many years.  She tells them it will be 3-5 days to get there. They will have to go through the Mist Springs. They are hot springs that create mists and make the trail hard to see…  
+Og apologizes about the lady of the night comment.  At Warm Bear…the settle in.  They notice the lumbermen…pacing themselves. A few people recognize them:  “you are right, they are here.”  Zymve is introduced as Og’s half-sister.  They look around and Zymve and Ains notice a guy sitting in the corner with his head down, with a broken lute…several empty tankards–its Bander, the bard we met on the road to Emberstran.  Zymve \- disguised \- offers to remedy the situation.  Og gets chummy with some hunters, has a few drinks, and asks about Mount Emberstan \- paths, threats, etc.  A sturdy, strong woman sitting at the corner of the bar perks up and walks over and says “well I’ll be damned \- heroes of Emberstran are going to Mount Emberstran”  My name is **Agnett** and I’ve been traveling these parts for many years.  She tells them it will be 3-5 days to get there. They will have to go through the Mist Springs. They are hot springs that create mists and make the trail hard to see…
+
 “*\[The Mists are\] beautiful, but they’ll hide your footing and sometimes show things that aren’t really there. Stick to the high ridges when the mist rolls in.*” 
 
 Meanwhile, Zymve still disguised as a human mosies up to the bard Bander we met along the path and begins talking to him.  She asks his deal, taking his drink away, he should be really experienced…(he had a bad day)... he says wrote a great song, but he didn’t get respect.  She says he needs to lock in while she uses the Mending spell to mend his lute.  He said he does well at every place he goes to, but those days are gone. She tries to convince him to play again.  She pushes the lute into his chest…showing him some tips (giving him Bardic Inspiration) and he tries again and really plays well, impressing her.  She offers to duet with him.  He mentions that Zymve (who is disguise) is much nicer than the “bitch” he met on the road (referring to Zymve).  They get up to play in the clearing and knock it out of the park (rolling a Natural 20 on Performance). Even Agnett pushes away to listen.  The entire tavern is enthralled with their performance.  They finish up and she asks his name.  It is Brander, he announced himself as a wandering menstrual of no ill repute. She introduces herself as **Lynda**.  
@@ -1377,8 +1422,10 @@ Zymve arrives at the temple…sees Og.  Eventually, Hap and Aury arrive back at 
 
 # **21 \- He Ate a Baby**
 
-**Session Date**:  April 8, 2026  
-**In-game Date**:  33rd of Talil, 1246  
+**Session Date**:  April 8, 2026
+
+**In-game Date**:  33rd of Talil, 1246
+
 **Starting Location**:  Emberstran
 
 The night before, when Ainslie absorbed the necrotic energy, everyone was in the Temple of Diverra.  Ky’tha walked in right when Ainslie pulled the magical energy from the Marrowstone.  Overwhelmed by the day's events and shocked by what occurred between Ainslie and the Marrowstone, the party decides to wait until the next day to discuss it.
@@ -1466,8 +1513,10 @@ WE END HERE.  It is dawn, 36th of Talil, 1246
 
 # **22 \- The Tracker**
 
-**Session Date**:  April 13, 2026  
-**In-game Date**:  36th of Talil, 1246  
+**Session Date**:  April 13, 2026
+
+**In-game Date**:  36th of Talil, 1246
+
 **Starting Location**:  Old Trader’s Trail en route to Mount Emberstran
 
 We all comment about “what was that sound” and “what is that flying ship?” As we look, we see the dragon hit the ship with lightning as it closes on the ship.  Hap heard rumors of a ship that “years ago people crashed in Myrdae in a flying ship” and also that there was a flying cloud castle over **Basctdelm** \- but think these are rumors and tall tales.  We look at the dragon slam into the ship and wrap around it \- trying to collapse it.  We see a person fall from the ship as it tilts.  We see the dragon rip off the front of the ship.  We see both the ship and dragon tumble down ending in a loud crash in the distance.  This crash was to the west \- not in the direction we were heading. 
@@ -1518,8 +1567,10 @@ The group sits at the fork and decides to take the path to the right…
 
 # **23 \- Into the Volcano**
 
-**Session Date**:  April 21, 2026  
-**In-game Date**:  37th of Talil, 1246  
+**Session Date**:  April 21, 2026
+
+**In-game Date**:  37th of Talil, 1246
+
 **Starting Location**:  Base of Mount Emberstran, fork in the path
 
 ### **Moving Foward**
@@ -1586,8 +1637,10 @@ Group follows the giant…we go for 5 minutes and come to a fork to go left or r
 
 # **24 \- Let The Bodies Hit the Floor**
 
-**Session Date**:  April 30, 2026  
-**In-game Date**:  38th of Talil, 1246  
+**Session Date**:  April 30, 2026
+
+**In-game Date**:  38th of Talil, 1246
+
 **Starting Location**:  Mount Emberstran
 
 IT IS INITIATIVE – Combat vs. Firenewts
@@ -1636,8 +1689,10 @@ We decide to go up:  Ky’tha, Hap/OG, Aury/Ains, Zymve at the back.  Ky’tha n
 
 # **25 \- Grief Stricken**
 
-**Session Date**:  May 14, 2026  
-**In-game Date**:  39th of Talil, 1246  
+**Session Date**:  May 14, 2026
+
+**In-game Date**:  39th of Talil, 1246
+
 **Starting Location**:  Mount Emberstran
 
 ### **Inside the Emberheart Vault \- First Test**
@@ -1722,8 +1777,10 @@ Ky’tha finds Tessa at Our Exquisites, the new Etterset HQ.  Tessa runs up to h
 
 # **26 \- Bad News & A Wild Goose Chase**
 
-**Session Date**:  May 25, 2026  
-**In-game Date**:  44th of Talil, 1246  
+**Session Date**:  May 25, 2026
+
+**In-game Date**:  44th of Talil, 1246
+
 **Starting Location**:  City of Emberstran
 
 ### **In Emberstran**
@@ -1762,13 +1819,14 @@ Aury and the Priestess discuss sending Arnol to **Stoneshore**.  The Priestess l
 
 ## “Hap \- unfortunately the brothers Varmond had to be dealt with.  I’ve asked your sister to be sent to me for a discussion.  Maybe in time we can earn the respect of you and your companions.” 
 
-## – signed the ***Shadow Sovereign***.  
+## – signed the **Shadow Sovereign**.  
 
 Ky’tha is able to piece together the following:
 
 * The Shadow Sovereign is the leader of the Cloak of Defiance and is likely in the Bellows in Basctdelm (*successful History check*)  
 * This finger was likely **Jerik**’s finger \- he must have taken the ring from Hap’s father  
-* The elf that delivered the box is likely the new leader of the Cloak of Defiance in Emberstran  
+* The elf that delivered the box is likely the new leader of the Cloak of Defiance in Emberstran
+
 * This new leader likely is the one that took out Jerik Varmond
 
 So Phira is being taken there to talk to the Shadow Sovereign…and we no longer need to go to Ulgrey.  Discussion about finding a quicker way to get there \- maybe through Imonorra?  
@@ -1785,7 +1843,7 @@ Zymve, Zabeek, and Og go to the Silver Spaulder.  They see the owner, **Vyaanis 
 
 ## 
 
-## Vyaanis leans in … “*This guy seems very dangerous, you should be careful.*”
+## Vyaanis leans in … “This guy seems very dangerous, you should be careful.”
 
 She says if you ever run across him again, I’d be obliged if you would tell the Priestess to tell Aury and will pay you for information.  She then pays him another 1gp for his information. 
 
@@ -1831,7 +1889,7 @@ Then the group hears in their heads from Zabeek (except Aury) …
 
 ## 
 
-## *“Hey \- this guy is really cool, he just gave me a ruby ring.”* 
+## “Hey \- this guy is really cool, he just gave me a ruby ring.” 
 
 – The End of the Session –
 
@@ -1841,8 +1899,10 @@ Then the group hears in their heads from Zabeek (except Aury) …
 
 # **27 \- A Bitter Day**
 
-**Session Date**:  June 9, 2026  
-**In-game Date**:  45th of Talil, 1246  
+**Session Date**:  June 9, 2026
+
+**In-game Date**:  45th of Talil, 1246
+
 **Starting Location**:  City of Emberstran, Ghone cultist hideout
 
 ### **In Emberstran**
@@ -1919,11 +1979,11 @@ Myra says the catcher caught something old that carries weight \- she says that 
 
 ## 
 
-## “*You gave it a lot to hold last night,*” Mira says, “*It caught something old. Something that still carries weight.*”
+## “You gave it a lot to hold last night,” Mira says, “It caught something old. Something that still carries weight.”
 
-## “*I saw two groups standing across from one another. One bore the markings of your clan. The other… the Cragfury. There was anger. Fear. Words were spoken that could not be taken back. And then…*” Mira’s brow furrows slightly. “T*here was a tearing. Not of flesh, but of the world itself. **The Cragfury were pulled away — not by choice, but by force**. Thrown through the spaces between places. I felt the land itself resist it.*”
+## “I saw two groups standing across from one another. One bore the markings of your clan. The other… the Cragfury. There was anger. Fear. Words were spoken that could not be taken back. And then…” Mira’s brow furrows slightly. “There was a tearing. Not of flesh, but of the world itself. **The Cragfury were pulled away — not by choice, but by force**. Thrown through the spaces between places. I felt the land itself resist it.”
 
-## “*There was something else at the end of it all. A steady, deep rhythm. Like the beating of a great heart. It was calm, suppressing everything that was torn apart into peace. **A guardian’s heart**, I think.*”
+## “There was something else at the end of it all. A steady, deep rhythm. Like the beating of a great heart. It was calm, suppressing everything that was torn apart into peace. **A guardian’s heart**, I think.”
 
 You may want to keep this with you and hands her back the dreamcatcher.  She shows her how to work with the dreamcatcher.  Says that she should work with one of great wisdom in her “family.”
 
@@ -1943,8 +2003,10 @@ We see in the distance the campfire as high as it can be, we see people trying t
 
 # **28 \- Those Effers Ruined My Boots**
 
-**Session Date**:  June 23, 2026  
-**In-game Date**:  47th of Talil, 1246  
+**Session Date**:  June 23, 2026
+
+**In-game Date**:  47th of Talil, 1246
+
 **Starting Location**:  near Featherfall campsite on the Glimmercoast Way
 
 ### **At the Featherfall campsite**
@@ -1984,8 +2046,10 @@ The harpy is under Og and underwater and restrained.
 
 # **29 \- Made it to Ulgrey**
 
-**Session Date**:  June 23, 2026  
-**In-game Date**:  47th of Talil, 1246  
+**Session Date**:  June 23, 2026
+
+**In-game Date**:  47th of Talil, 1246
+
 **Starting Location**:  near Featherfall campsite on the Glimmercoast Way
 
 ### **At the Featherfall campsite**
@@ -2016,13 +2080,13 @@ Ains then casts Sending to Irragosa, holding the Idol.
 
 ## 
 
-## “*Hey \- its Ains \- do you worship **Vo’egurn**.  Trying to figure out god things.  He is lightning and you are lightning and I shoot lightning.  Coincidence.  Good morning*.”  
+## “Hey \- its Ains \- do you worship **Vo’egurn**.  Trying to figure out god things.  He is lightning and you are lightning and I shoot lightning.  Coincidence.  Good morning.”  
 
 He hears back:  
 
 ## 
 
-## “*Do you make a habit of waking others in the middle of the night?  Yes \- I draw energy from Vo’egurn, but I let Ol’Farium guide me.  Good night.*”  
+## “Do you make a habit of waking others in the middle of the night?  Yes \- I draw energy from Vo’egurn, but I let Ol’Farium guide me.  Good night.”  
 
 He then spends time studying the Idol. He doesn’t think he can attune to it, but thinks it is good he saved this Idol.
 
@@ -2096,8 +2160,10 @@ As we sit here, the door from the dock opens up and two patrons walk in.  The pl
 
 # **30 \- We Don’t Trust Wizards**
 
-**Session Date**:  July 14, 2026  
-**In-game Date**:  2nd of Paramor, 1246  
+**Session Date**:  July 14, 2026
+
+**In-game Date**:  2nd of Paramor, 1246
+
 **Starting Location**:  Ulgrey
 
 ### **At Ulgrey’s Riverdog Inn** 
@@ -2176,8 +2242,10 @@ As the group leaves the store they see the Ulgrey mansion. They see someone knoc
 
 # **31 \- Oh No\!  Zabeek\!**
 
-**Session Date**: July 23, 2026  
-**In-game Date**:  3rd of Paramor, 1246  
+**Session Date**: July 23, 2026
+
+**In-game Date**:  3rd of Paramor, 1246
+
 **Starting Location**:  Ulgrey
 
 ### **In the town of Ulgrey**
@@ -2240,8 +2308,10 @@ Og is cursed (Red) and Ainslie is cursed (Blue).  Ky’tha is in the front by 10
 
 # **32 \- Claim your Slaad\!**
 
-**Session Date**: July 30, 2026  
-**In-game Date**:  4th of Paramor, 1246  
+**Session Date**: July 30, 2026
+
+**In-game Date**:  4th of Paramor, 1246
+
 **Starting Location**:  Lost Shrine to Guigzien
 
 We start by recognizing Zabeek.  Aury prays for him and asks Diverra to take his soul.   Zymve looks at the drums that she gave Zabeek and mends them, as Ains picks up the wand he gave him.   Ky’tha stealths (31) and goes to check out the chamber, heading down stairs. She gets to the edge of the water to see if she sees anything.   She just sees rubble on the other side of the hallway \- this entire hallway is under water.    She thinks this isn’t the highest quality stone, but thinks this happened during the Awakening.  
@@ -2282,8 +2352,10 @@ Who summoned Guigzien?  We have to deal with him, the person who summoned him, a
 
 # **33 \- We Shall Prevail**
 
-**Session Date**: August 13, 2026  
-**In-game Date**:  4th of Paramor, 1246  
+**Session Date**: August 13, 2026
+
+**In-game Date**:  4th of Paramor, 1246
+
 **Starting Location**:  Lost Shrine to Guigzien
 
 We are still in combat against Blackrend and the Slaad.
@@ -2331,8 +2403,10 @@ On the upper level the party plans is to return to Ulgrey to find a way to bring
 
 # **34 \- If We Must Go There**
 
-**Session Date**: August 27, 2026  
-**In-game Date**:  4th of Paramor, 1246  
+**Session Date**: August 27, 2026
+
+**In-game Date**:  4th of Paramor, 1246
+
 **Starting Location**:  Lost Shrine to Guigzien
 
 ### **Resting In the Upper Level of the Lost Shrine**
@@ -2365,9 +2439,9 @@ We ask about a map (an official one or a sketch). We ask for directions to local
 
 We make our way to the **Flawless Crafts** in the high district. We are on the way and notice a carriage that cuts us off \- we have to make animal handling checks and do.  One of the people intentionally bumps into Ky’tha and makes a scene and walks away.  They left her a note.  She opens it:  
 
-## *Welcome.  Would you do me the favor some night having dinner at the Crimson Seat. You can find what you want at the Dripping Dagger.*
+## Welcome.  Would you do me the favor some night having dinner at the Crimson Seat. You can find what you want at the Dripping Dagger.
 
-## *Landra*  
+## Landra  
 
 Ky’tha recognizes the name as the **Shadow Sovereign**. The Cloak knows we have arrived.
 
@@ -2393,8 +2467,10 @@ The guys head to the next tavern (the **Terrible Terrasque**). They order food a
 
 # **35 \- Phira and the Bellows**
 
-**Session Date**: September 9, 2026  
-**In-game Date**:  5th of Paramor, 1246  
+**Session Date**: September 9, 2026
+
+**In-game Date**:  5th of Paramor, 1246
+
 **Starting Location**:  Party split (Dripping Dagger and Terrible Terrasque)
 
 The foursome at the Terrible Terrasque see the two tieflings turn around and they know at once this is Phira and she is slightly older than Hap. The other tiefling with her is a male, deep red skin, dark hair and clean shaven \- he is dressed clean cut, well kept.  They immediately back up and pause, scraping their chairs.  The tavern quiets and all look on.  Phira locks eyes with Hap, and her color drains.  The man stands up and places a hand on her shoulder.   The tavern starts to go back to their business.  The man walks toward the foursome, more questioning than threatening.  He says “she’s with me.  If this is cloak business you picked a loud room for it.”  Hap says “I real need to talk to her.” She stands up “you look just like father” as she pulls her chair and slides it towards the table.  The man “I guess this is family business” and steps aside.  Then Phira lunges for Hap and hugs him as he asks “are you really my sister?”
@@ -2513,10 +2589,12 @@ The group meets up outside the Dripping Dagger to walk into the Bellows together
 | :---: | :---- |
 | **1** | *Sessions played at that level* |
 
-# **36 \- \<TBD\>**
+# **36 \- Crimson Seat & Iron Ledger**
 
-**Session Date**: September 16, 2026  
-**In-game Date**:  6th of Paramor, 1246  
+**Session Date**: September 16, 2026
+
+**In-game Date**:  6th of Paramor, 1246
+
 **Starting Location**:  The Bellows
 
 ### **Heading to the Crimson Seat**
@@ -2527,13 +2605,17 @@ Ky’tha tells the group to be confident.  We walk in and are counted.  The cree
 
 It arrives\! The ferryman pulls up and looks at all of us. Regular man in regular clothes.  Basket of fish and pole there.  Ains asks  \- “ok to board?”  And he says “Get on,” gruffly.  Aury touches his face and he threatens him.  He tells us where/how to fish \- “don’t go there \- you’ll be eaten, don’t go there you’ll see dead bodies.  There is the fishing hole.  That’s where I’ll be going when I drop you off.”  That’s where I caught all of those.”  The ferryman is using a pole to push us off.  “When the stars are out, that means it is good fishing.”  Ky’tha asks him about his fish \- do you eat or sell them?  He replies that they are “sewage fish” and he feeds them to the tentacled creature that is where the dead bodies are dropped.  He pulls up to a cobbled walkway and we see a big door with stone works going up.  A couple of levels up we see a balcony.  There are arrow slits on the side of the door and we notice arrows notched in the slits. 
 
-We see red lighting in the stone structure, but it might be candlelight that is modified by all the crimson within.  In our heads, we discuss that this is the Cloak’s headquarters and the arrows in the slits.  Ains starts to discuss escape plans in our heads.  A small gabuk steps out \- “names please.”  Ky’tha says “you first.”  He says “Podd Nimm.”  Ky’tha then says Ky’tha Fawnborn.  Zymve tells her name and is questioned about Donjo.  Then Hap introduces himself fully, then Ains, then Og (we’ve never heard the full name).  The Aury, including his title.  
+We see red lighting in the stone structure, but it might be candlelight that is modified by all the crimson within.  In our heads, we discuss that this is the Cloak’s headquarters and the arrows in the slits.  Ains starts to discuss escape plans in our heads.  A small gabük steps out \- “names please.”  Ky’tha says “you first.”  He says “**Podd Nimm**.”  Ky’tha then says Ky’tha Fawnborn.  Zymve tells her name and is questioned about Donjo.  Then Hap introduces himself fully, then Ains, then Og (we’ve never heard the full name).  The Aury, including his title.  
 
-He opens the door after checking us in.  We see a nice eating quarters with white linens on the tables, red plates, black candles \- clearly on theme.  There are a lot of people who don’t look like they belong.  Some in red cloaks, but also many others who are not dressed nice.  Everyone is minding their manners.  Door closes softly.  Podd then gestures, “this way,” and leads us to a table.  We see off in a corner a circle bar with a dozen patrons and a barkeep.  He says Serrin will be with you in a moment.  Hap asks (in heads) if we know of Serrin.  We don’t.  Someone then shows up with a tray of food and drinks, carafe of wine, jugs of ale, meats, cheeses, breads.  The person then puts the napkins in our laps.  Ky’tha thanks them, but they are hooded and we can’t see their face, but they nod and then walk away.   Discussion of if the drinks are poisoned and Og takes a sip as the guinea pig.  He thinks it tastes amazing.  Ains brings up the scar that Aury has \- it was given to him after sex.  He was having an affair with someone and got caught and the husband cut him and left a disfiguring scar on his face.  He turned to Diverra then \- to cure him of the temptations of the flesh.  
+He opens the door after checking us in.  We see nice eating quarters with white linens on the tables, red plates, black candles \- clearly on theme.  There are a lot of people who don’t look like they belong.  Some in red cloaks, but also many others who are not dressed nice.  Everyone is minding their manners.  The door closes softly.  Podd then gestures, “this way,” and leads us to a table.  We see off in a corner a circle bar with a dozen patrons and a barkeep.  He says Serrin will be with you in a moment.  Hap asks (in heads) if we know of Serrin.  We don’t.  Someone then shows up with a tray of food and drinks, carafe of wine, jugs of ale, meats, cheeses, breads.  The person then puts the napkins in our laps.  Ky’tha thanks them, but they are hooded and we can’t see their face, but they nod and then walk away.   Discussion of if the drinks are poisoned and Og takes a sip as the guinea pig.  He thinks it tastes amazing.  Ains brings up the scar that Aury has \- it was given to him after sex.  He was having an affair with someone and got caught and the husband cut him and left a disfiguring scar on his face.  He turned to Diverra then \- to cure him of the temptations of the flesh.  
 
 About that time, Serrin pulls up a chair \- what an interesting conversation.  He asks why we are there and we share that we got a note \- that they invited us/told us to come.  He asks by whom and we share Landra (the Shadow Sovereign).  He then asks if we are aware that if we make a scene we will be put in the water and not outside. We understand.  He asks Zymve who is the spokesperson and she says Ky’tha \- “this is her wheelhouse.”  Ky’tha responds that since she was given the note, she will speak here.  He says someone will come get us soon.
 
-The light dims briefly and we feel a presence on the table.  We turn and see a big female half orc \- “I’m here to take you.”  Harda Thorn is her name.  We ask if we need to bring our drinks and are told no \- several chug and we get up and walk around to the stairs.  We see a crimson runner leading upstairs.  We continue up to the third story, bypassing a waiting area on the second floor.  We can see the stars of the roof of the void through the windows and doors on this floor.  We notice in each corner of the room, there is a hooded cloaked figure.  On the balcony are two more cloaked individuals.  We see a table in the room with an attractive half-elven woman clad in black leather.  She offers us seats and starts to pour wine to everyone. She thanks us for accepting her invitation.  Aury \- in the heads \- says to Ains (we can all appreciate that).  Og sits to her left, Ky’tha to the right.  She fills cups and passes them, commenting how she is sitting next to the tallest and shortest in our group.  She starts the conversation \- I’d like to know what brought you here.   Hap tells her we had to come here for “emergency supplies.”  Og then tells her it was because Hap died.  She comments how convenient \- you got what you needed and got to have some questions answered.  Hap then tells about how he met Phira: “we just stumbled upon her.”  He says it was easy to find her “she looks like me, but pert near like me, better looking.”  Hap says it was the first time they had met.  She comments that it was a glorious moment to meet his long lost sister.  Hap continues to press and tells the story of what happened to Phira (on the road, husband killed, she was questioned by the Cloak).  He just doesn’t feel like he got good answers from her about how and why the husband was killed.  Hap notices that she glances at the signet ring on his hand.  She comments “I’m torn by this situation \- it seems that your Phira is caught between a rock and a hard spot.  It was not intentional to take his life.  The person who made the decision is now sleeping well in the void.  They were both supposed to come here.  I wanted them here for a reason.  The former leader in Emberstran and your father had a relationship.”  Hap comments that it was deadly.  She comments that she is okay that he has the ring, but that she is not okay with what Jerrick was able to do or not do.  Hap confirms that he dad was not in the Cloak.  She says that she has been involved for 4 years.  Jerrick was unable to secure something from Hap’s father. And in fact, you and this “fine young dwarf” are the reasons I asked you here tonight.  
+The light dims briefly and we feel a presence on the table.  We turn and see a big female half orc \- “I’m here to take you.”  Harda Thorn is her name.  We ask if we need to bring our drinks and are told no \- several chug and we get up and walk around to the stairs.  We see a crimson runner leading upstairs.  We continue up to the third story, bypassing a waiting area on the second floor.  
+
+### **The meeting with The Shadow Sovereign**
+
+We can see the stars of the roof of the void through the windows and doors on this floor.  We notice in each corner of the room, there is a hooded cloaked figure.  On the balcony are two more cloaked individuals.  We see a table in the room with an attractive half-elven woman clad in black leather.  She offers us seats and starts to pour wine to everyone. She thanks us for accepting her invitation.  Aury \- in the heads \- says to Ains (we can all appreciate that).  Og sits to her left, Ky’tha to the right.  She fills cups and passes them, commenting how she is sitting next to the tallest and shortest in our group.  She starts the conversation \- I’d like to know what brought you here.   Hap tells her we had to come here for “emergency supplies.”  Og then tells her it was because Hap died.  She comments how convenient \- you got what you needed and got to have some questions answered.  Hap then tells about how he met Phira: “we just stumbled upon her.”  He says it was easy to find her “she looks like me, but pert near like me, better looking.”  Hap says it was the first time they had met.  She comments that it was a glorious moment to meet his long lost sister.  Hap continues to press and tells the story of what happened to Phira (on the road, husband killed, she was questioned by the Cloak).  He just doesn’t feel like he got good answers from her about how and why the husband was killed.  Hap notices that she glances at the signet ring on his hand.  She comments “I’m torn by this situation \- it seems that your Phira is caught between a rock and a hard spot.  It was not intentional to take his life.  The person who made the decision is now sleeping well in the void.  They were both supposed to come here.  I wanted them here for a reason.  The former leader in Emberstran and your father had a relationship.”  Hap comments that it was deadly.  She comments that she is okay that he has the ring, but that she is not okay with what Jerrick was able to do or not do.  Hap confirms that he dad was not in the Cloak.  She says that she has been involved for 4 years.  Jerrick was unable to secure something from Hap’s father. And in fact, you and this “fine young dwarf” are the reasons I asked you here tonight.  
 
 Hap tries to reason this out.  Hap got the ring and his land.  She no longer needs Phira.  She wants something from Hap.  Hap asks her to  “put things square out there.”  He wants this sister to have a happy life and she says that she should.  Landra says there is just one unresolved issue.  Hap’s father has the **“iron ledger**” \- this is a tome that is empowered to show the state and well being of the names etched within.  The only way to open it is with that ring.  Hap confirms that the book is from the “Iron Brotherhood.”  This is a missing tome.  Jerrick went to find it, but that encounter didn’t go well \- Benoit died.   Hap confirms that the book is missing.  Hap says he doesn’t know where the book is.  Ky’tha asks what she wants with the book.  Ains asks what names in the book she wants and she comments that it is the names that she doesn’t want people to have.
 
@@ -2541,29 +2623,41 @@ She looks at Ky’tha and wants her to do Cloak business.  I have a thorn in my 
 
 We have a talk about Ky’tha joining the Cloak.  She talks about being a double agent. Ains talks about killing Landra and fleeing. Aury doesn’t want to kill anyone.  Og is on the fence.  Zymve will go with whatever the group wants to do.  Ky’tha stands up and walks out to the balcony. She says “I’ll be with you in a moment.” Then she motions Ky’tha to walk out with her.  They talk.  She says that she wants someone to step into her shoes someday.  She wants Ky’tha to be eyes and ears for her.  Ky’tha asks for the same and for Phira to be protected. Ky’tha also asks her about Endavo \-is he looking for the book.  And she responds that he acts for himself and that he is friends with Rook. Ky’tha accepts the offer and she gives her the locket.  Ky’tha asks how they can communicate.  She says that she expects her people to be resourceful.  Ky’tha tells the group (in their heads) that it is done.  They rejoin the group.  Ky’tha tells Hap \- we will find the book.  And Hap asks for leads.  She has none. Ky’tha asks for compensation for Hap in exchange for the book and she says that she will compensate him.  Hap says he will think of something but “let’s not count our chickens before they hatch.” Zymve asks for more wine and gets some. 
 
-Ky’tha will be at Rank 3 in the Cloak, but will report to the Shadow Sovereign (special status).  
+If she accepts, Ky’tha will enter with high recognition (Rank 3 in the Cloak), and will report to the Shadow Sovereign (special status).  
 
-Ky’tha asks her if there would be a way to get horses should we need them tomorrow.  She says yes \- she could give us all horses.  She says she will send word to Ky’tha at the Gray Fiddle.  Hap then asks if this is a dangerous quest he is on and she says she is not sure.   Og gets a personal bottle of wine, too.  Ains then asks for some wine. We are escorted to the ferry and taken back to the Bellows.  We stand by the water and admire the view while Ains casts the spell again to talk in our heads (all except Aury).  Aury hears a horse approach.  It is white and it stands out.  There is a blanket of roses on its neck and it stops in front of the group.  Og comments “your god is (not) the god of conspicuousness).”  Aury walks up to the horse and asks if she is ready to go.  She neighs and stomps her foot and is waiting for him.  
+Ky’tha asks her if there would be a way to get horses should we need them tomorrow.  She says yes \- she could give us all horses.  She says she will send word to Ky’tha at the **Gray Fiddle**.  Hap then asks if this is a dangerous quest he is on and she says she is not sure.   Og gets a personal bottle of wine, too.  Ains then asks for some wine. We are escorted to the ferry and taken back to the Bellows.  We stand by the water and admire the view while Ains casts the spell again to talk in our heads (all except Aury).  Aury hears a horse approach.  It is white and it stands out.  There is a blanket of roses on its neck and it stops in front of the group.  Og comments “your god is (not) the god of conspicuousness).”  Aury walks up to the horse and asks if she is ready to go.  She neighs and stomps her foot and is waiting for him.  
 
 Group then talks about where to go next.  Back to Kahlbit’s Vale or to Murfield on the lead from the gypsies about the blight?  Does Hap join the Meridian or at least talk to them about his father’s book?  Ains buys some components as we walk out of the Bellows. We start to go  back to the Gray Fiddle.  
 
+### **A Sending from Paeris**
+
 Ky’tha hears a voice in her head. Someone is asking about Ains and Aury \- it is Paeris.  Ky’tha tells her to tell them they are going to Jeshle.  She then tells her that “Vilmuss is asking about them \- and describes her with horns and being dark (which doesn’t fit the description of what Og knew of that person \- this sounds like D’arcy Fol \- who was low ranking back when).”  Ky’tha says “Ask her how they can get in touch with D’arcy and if Vilmuss has a specific message.”  She hears nothing back.
+
+### **Back at the Gray Fiddle Inn**
 
 We stable Aury’s horse.  We walk into the Gray Fiddle…and see a line of folks waiting in front of us.  In front of us are two dark blue tabards with silver lining \- they are Meridian.  A young lady is with them.  They aren’t asking for a room \- they are instead interrogating the person at the hotel.   Ky’tha and Og overhear that they are talking “last night \- very well \- hopefully they will return to the house.”  The woman with blond wavy hair, who is clean but in travelers clothing.  Aury knows she has celestial blood.  She looks past the group and see Ains.  “Ah \- I was hoping to find you.  Mother Velna wrote and said you had agreed to join us.”  Ains tells her yes.  She asks if we have rooms for the evening and looks at the guards and tells them she’s good and dismisses them.  She then goes to get a table and asks Ains to join her \- and offers the rest of us to join them.  We get the 3 rooms.  Ains, Og, and Aury sit with the female…Hap, Ky’tha, and Zymve go to the rooms.  
 
-The lady asks if Ains is having a good time.  She introduces herself as Sahphi Mariesh.  He introduces himself, Og, and Aury.  She tells him that she is sort of a mentor from the Argent Halls.  She arrived from the House of Myr.  She says that she wants to make sure that new recruits have someone to talk to.  She needed to meet him in person \- says that she will be his contact moving forward. He asks if he is the bottom of the order of the Argent Halls (and mentions the Cloak in passing).  She just asks him to document what he does and tells him that she can be of assistance anywhere in Myrdae she and the group can help.  They have expert monks all over that can help.  He tells her that Aury is “THE priest of Diverra.”  And he has the “holy book of holy books.”  Ains asks him to show her the book and he acts like he has no idea what he is talking about.  Ains starts talking about the Tree of Life (the Ascension Tree),  the First Temple of Diverra, etc.  He says that he is “trying to make her trip worthwhile” by giving her information. Og backs up Ains, but Aury doesn’t want to help out.  She realizes this is strange, so she offers to help out with information if she can.  Ains asks about Eustera Ridge in Inverland.  She says she could research arcane waypoints in Inverland and get back to him.  He mentions that he is looking for a dragon in Inverland, but she has not heard of that dragon.  She tells Ains that “she is not going to do his dirty work for him \- if she can help him, she will.”  He then mentions the Emberheart and she has not heard of it.  She is frustrated that she doesn’t know answers to questions.  She really just wants to make contact…this is her first mentee.  But she isn’t sure what to do with Ains and his curiosity. Ains says in her head “we will talk later.”  And she says back in his head “if we have to.”
+The lady asks if Ains is having a good time.  She introduces herself as **Sahphi Mariesh**.  He introduces himself, Og, and Aury.  She tells him that she is sort of a mentor from the **Argent Halls**.  She arrived from the House of Myr.  She says that she wants to make sure that new recruits have someone to talk to.  She needed to meet him in person \- says that she will be his contact moving forward. He asks if he is the bottom of the order of the Argent Halls (and mentions the Cloak in passing).  She just asks him to document what he does and tells him that she can be of assistance anywhere in Myrdae she and the group can help.  They have expert monks all over that can help.  He tells her that Aury is “THE priest of Diverra.”  And he has the “holy book of holy books.”  Ains asks him to show her the book and he acts like he has no idea what he is talking about.  Ains starts talking about the Tree of Life (**the Ascension Tree**),  the **First Temple of Diverra**, etc.  He says that he is “trying to make her trip worthwhile” by giving her information. Og backs up Ains, but Aury doesn’t want to help out.  She realizes this is strange, so she offers to help out with information if she can.  Ains asks about Eustera Ridge in Inverland.  She says she could research arcane waypoints in Inverland and get back to him.  He mentions that he is looking for a dragon in Inverland, but she has not heard of that dragon.  She tells Ains that “she is not going to do his dirty work for him \- if she can help him, she will.”  He then mentions the Emberheart and she has not heard of it.  She is frustrated that she doesn’t know answers to questions.  She really just wants to make contact…this is her first mentee.  But she isn’t sure what to do with Ains and his curiosity. Ains says in her head “we will talk later.”  And she says back in his head “if we have to.”
 
-They go up to bed.  Ains casts spells to let the House and Tower or Myr that we will not need their services and the stablemaster in Ulgrey that we need for them to keep the carriage a bit longer and will compensate them for their time. He hears back from the House of Myr:  apologies are not necessary.  Seriously, people like you.  It is ok.  I’ll let them know.  Tower of Myr:  what are you apologizing for.  Just don’t come \- I don’t care.  Good night.  Stablemaster:  I’m glad you apologized.  I’m not done yet.  It will take longer.  The stain is so deep….etc.”
+They go up to bed.  Ains casts spells to let the House and Tower or Myr that we will not need their services and the stablemaster in Ulgrey that we need for them to keep the carriage a bit longer and will compensate them for their time. He hears back from the House of Myr:  apologies are not necessary.  Seriously, people like you.  It is ok.  I’ll let them know.  Tower of Myr:  what are you apologizing for?  Just don’t come \- I don’t care.  Good night.  Stablemaster:  I’m glad you apologized.  I’m not done yet.  It will take longer.  The stain is so deep….etc.”
 
 Then off to bed.
 
-7th of Paramor, 1246
+### **It’s the next morning, the 7th of Paramor, 1246**
 
-Aury wakes up to pray and kneels and hears a piece of paper slipped under the door.  “Why is it always during prayers?”  On the outside of the note is a Meridian mark addressed to Hap.  Aury wakes up Hap by tickling his toes and hands him the note.  He opens the note.  “My Garamond, I’ve heard you are well.  That is great news.  I have also heard from the Sargent in the Tower of Myr that you are probably the one most equipped to help us.  I hope that you will meet with me at lunch today.”  \-Meren Bahndoso.
+Aury wakes up to pray and kneels and hears a piece of paper slipped under the door.  “Why is it always during prayers?”  On the outside of the note is a **Meridian** mark addressed to Hap.  Aury wakes up Hap by tickling his toes and hands him the note.  He opens the note.  
 
-WE END HERE
+## 
 
-# ❕ Quests
+## “My Garamond, I’ve heard you are well.  That is great news.  I have also heard from the Sargent in the Tower of Myr that you are probably the one most equipped to help us.  I hope that you will meet with me at lunch today.”  
+
+## \- **Meren Bahndoso**.
+
+– The End of the Session –
+
+| 10 | *Character level at end of the session* |
+| :---: | :---- |
+| **2** | *Sessions played at that level* |
 
 # Quests
 
@@ -2579,8 +2673,6 @@ What are the quests of the players that the party is aware of…
 |  | Aury & Hap | High Priestess Maladra’s Grove | The Black Rend has taken the grove and captured the wisp |
 |  | Party | Cellar with tainted vintage | The cellar job is 50 gp (**Emlee Tryndel** signed the posting) |
 |  | Party | Zombie Ship |  |
-
-# 🧑‍🤝‍🧑 NPCs
 
 # Important NPCs
 
@@ -2604,11 +2696,9 @@ What are the quests of the players that the party is aware of…
 
 # Leads
 
-# Leads
-
 ![][image1]
 
-https://app.mural.co/t/dnd0915/m/dnd0915/1749601542322/5ed354d63afd8a1501791f4a572a54d88c32586a
+https\://app.mural.co/t/dnd0915/m/dnd0915/1749601542322/5ed354d63afd8a1501791f4a572a54d88c32586a
 
 The Hooded Lady (Bivra Rook)
 
@@ -2623,11 +2713,9 @@ The Ventner Guild (Lady Terthial Runthor)
 
 THIS IS THE MIND MAP THAT LARRY CREATED:  
 
-[https://notebooklm.google.com/notebook/f73a3176-ea94-475b-89fa-692fe4216c30](https://notebooklm.google.com/notebook/f73a3176-ea94-475b-89fa-692fe4216c30)
+[https\://notebooklm.google.com/notebook/f73a3176-ea94-475b-89fa-692fe4216c30](https://notebooklm.google.com/notebook/f73a3176-ea94-475b-89fa-692fe4216c30)
 
 ![][image2]
-
-# Campaign Prep
 
 # DM Brief
 
@@ -2767,8 +2855,6 @@ When coming up with the type of character you want to see the other player play 
 | Lesley | Barbarian, fighter, or pally | Ty can be the defender of the group.  Not a face character or one to steal the limelight, just a tough guy who is there to help the party any way he can. |
 | Sean | Paladin  | For some reason I like seeing the inversion of what they have already done, he usually likes playing versatile characters, and while that is great, sticking to a role would help solidify a complete understanding of the game… also this is a class with multiattack, which I don't know if you’ve ever played that |
 
-# 🎲 Player Summary
-
 |  | Ainslie | Aurelius | Hap | Ky | Og | Zymve |
 | ----- | :---: | :---: | :---: | :---: | :---: | :---: |
 | Player | Sean | Larry (Flower) | Ty | Lesley | Josh | Emma |
@@ -2783,8 +2869,6 @@ When coming up with the type of character you want to see the other player play 
 | Lang. | Common Giant Sign Language | Common Elvish Goblin | Common Draconic Sign Language | Common Dwarvish Elvish Orc Thieves’ Cant | Common Dwarvish Giant | Common Undercommon Elvish Gnomish Deep |
 | Deity | \- | Diverra | Diverra | Goldraen | Layeth | \- |
 | Magic Items | Wand Magic Det.  | Scepter of AdorationBreastplate \+1 Emberheart Tablet | Shadowtrail Amulet vs. Det. Dagger \+1 | Figurine (Raven) Quiver of Ehlonna Mantle of Spell Resistance  | Eroding Glaive Mask  With. Breath Thornleaf | Studded Leather \+1 |
-
-# Session 0
 
 # Session 00 \- 3/16/25
 

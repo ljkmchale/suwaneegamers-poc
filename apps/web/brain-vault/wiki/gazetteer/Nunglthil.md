@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Nunglthil
 
-# Sections
-
 **Table of Contents**
 
 [**Overview	2**](#overview)

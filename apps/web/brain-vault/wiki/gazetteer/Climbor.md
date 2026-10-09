@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Climbor
 
-# Contents
-
 i
 
 Gazetteer

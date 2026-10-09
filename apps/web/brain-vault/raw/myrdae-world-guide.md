@@ -1,7 +1,7 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-09-16T14:45:44.090Z
+Pulled: 2026-09-29T14:45:50.984Z
 
 Sections
   
@@ -2210,7 +2210,7 @@ Beliefs and Values
    * Prong – Contingency plans improve success
    * Veil – Covert means can be the best promoter of freedom
 Structure & Membership
-The Tegenwald Phet are run by a council known as the Phet’extant who are made up of a head member of highest rank, Master Arcanum, and of ranked members representing these areas of magic: arcane, divine, primal, psychic, ritual, and versatile.  The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
+The Tegenwald Phet are run by a council known as the Phet’extant who are made  up of the head member of highest rank, Master Arcanum, and the eight Grand Magisters. Grand Magisters are the highest ranked members representing the eight schools of magic: Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion, Necromancy, and Transmutation. The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
 Tegenwald Phet members are recruited by other members who have an eye for noticing those in alignment with the faction’s goals and values. Members receive a tattoo of the faction symbol that not only identifies the member can be leveraged by upper-ranking members to locate them. 
 Rank
 	Renown
@@ -2227,6 +2227,9 @@ Rank
 	4
 	25+
 	Magister
+	5
+	*
+	Master Arcanum
 	Benefits
 The following assets are available to members:
    1. Spell components in a city

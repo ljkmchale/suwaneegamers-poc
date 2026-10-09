@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Tratta
 
-# Tratta
-
 # **Overview**
 
 Tratta stands as one of the great maritime cities of Myrdae, a vast port capital of the Yearning Vale and a central artery of trade along the Broken Deep. Purpose-built and carefully planned, the city is renowned as a commercial crossroads, where inland routes from the Vale converge with sea-lanes stretching toward the Bathaen Empire, the Mahruud, and beyond. Merchants, scholars, sailors, and diplomats all pass through Tratta, giving it a reputation as a city where coin, knowledge, and influence move with equal speed.
@@ -1092,8 +1090,6 @@ A refined winery importing grapes and crafting wines for the elite.
 | **Valis Corren** *male human* | vintner / owner ([noble](https://www.dndbeyond.com/monsters/5195145-noble)) | Smooth-talking vintner |
 | **Elira Valserrin**  *female high-elf* | sommelier ([performer](https://www.dndbeyond.com/monsters/5195156-performer)) | Sommelier with impeccable taste |
 | **Darek Pell** *male human* | guard ([guard](https://www.dndbeyond.com/monsters/5195065-guard)) | The guard who samples too much |
-
-# DM Resources
 
 # **DM Resources**
 

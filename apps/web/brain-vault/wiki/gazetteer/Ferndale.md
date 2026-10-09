@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Ferndale
 
-# Sections
-
 Gazetteer
 
 ![][image1]

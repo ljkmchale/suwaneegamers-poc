@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Stoneshore
 
-# Sections
-
 Gazetteer
 
 Stoneshore

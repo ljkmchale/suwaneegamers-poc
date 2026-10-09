@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Valenlun
 
-# Sections
-
 # Player’s Guide to Valenlun
 
 ![][image1]
@@ -265,8 +263,6 @@ Additionally, the tavern is known for the following unique food items and dishes
 |  |  |   |
 |  |  |  |
 |  |  |  |
-
-# Location Reference
 
 ## Location Types (Shops, Services and Offerings)
 

@@ -10,6 +10,7 @@ tags: [gazetteer, ratings, advents-guide, auto-curated]
 Player star ratings (1 to 5) from the Advents Guide to Myrdae, grouped by settlement. Only places with at least one review are listed.
 
 ## Adsuren
+- Guard Post (business): 1.0 out of 5 from 1 review(s).
 - The Graying Grotto (business): 5.0 out of 5 from 1 review(s).
 
 ## Basctdelm

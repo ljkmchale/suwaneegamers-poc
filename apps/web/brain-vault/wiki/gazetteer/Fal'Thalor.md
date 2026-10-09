@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Fal'Thalor
 
-# Sections
-
 Gazetteer
 
 ![][image1]

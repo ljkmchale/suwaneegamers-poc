@@ -6,8 +6,6 @@ tags: [gazetteer, settlement, auto-curated]
 ---
 # Shademoor
 
-# Sections
-
 # **Overview**
 
 Shademoor is a quiet yet resilient town that thrives in the shadow of its tragic past. With a population of around 1,000, the town has managed to rebuild after the horrors of the Fracturing. The town itself is modest, with cobblestone streets lined by weather-worn homes, many of which house multiple generations under one roof. 
@@ -38,7 +36,8 @@ Yet the scars of the past remain. The Garden, a cemetery in the western forest, 
 
 ## **Citizenry**
 
-Humans (35%), halflings (35%), other (30%)  
+Humans (35%), halflings (35%), other (30%)
+
 *When interacting with NPCs, it may be helpful to use the [interaction chart](https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit?tab=t.0#heading=h.bkfxerpcdyol) in the Myrdae Reference for DMs.*
 
 Humans and halflings make up the majority of the population, with a small but notable mix of other races, including elves, gnomes, and dwarves. 
