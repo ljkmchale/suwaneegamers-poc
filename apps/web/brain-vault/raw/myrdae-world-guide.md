@@ -1,7 +1,7 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-09-29T14:45:50.984Z
+Pulled: 2026-10-09T14:46:19.912Z
 
 Sections
   
@@ -1946,6 +1946,19 @@ The network of the Andërs connects members to influential figures across Myrdae
 ________________
 
 
+Ashen Hand
+The Ashen Hand began while the Bathaen Empire had the Tegenwald Phet under fire. Four rogue wizards left that order and went east, as far from the empire as the land allowed, then settled in the Range of Otesurr under a single promise: no queen or king would rule them. The four Spirens who lead the Hand today are not those founders. They rose to the posts later, and the promise still binds the order they inherited.
+The Hand seeks power in order to rule by magic. Members are told that outright. Outsiders hear rumors, and what a city is actually offered is use. The Hand does not plant enclaves across Myrdae. It holds Otestein, and it moves four Skykeeps, so a region invites a finger in when the work is worth the price. The Tegenwald Phet still holds that knowledge is power, and it still acts ethically. The Hand does not. Its allies change from year to year, though the Barrenscars remain the standing large ally and the source of the slaves the Hand takes.
+The Hand has no formal tenets, and it requires no deity. Members follow who they choose. What is recognized inside the order is magical supremacy, personal ambition, hierarchy, and the pursuit of power, held together by the founding promise that the Hand will not be ruled by a queen or king.
+Four Spirens rule together, and no one sits above them. Each Spiren leads one finger, built on a diametrically opposed pair of schools of magic:
+   * Divination and Conjuration
+   * Evocation and Enchantment
+   * Necromancy and Illusion
+   * Transmutation and Abjuration
+Four Hicusps are second in command, aligned to the other school of magic opposed to the Spiren’s school.  There is also a Castellan, aligned to each Skykeep. There is no standard recruitment and no rank ladder. A bound member is brought in by someone already of that school, and is known by the work they do rather than by a title.  
+The seat is Otestein, a large cold city on the eastern foothills of the Otesurr Mountains, between the summit and the eastern coast, built of muted black ebony stone with platinum accents. A steward runs the city and is not a fifth leader. Four natural spires were used to build the Skykeeps, and each spire is the anchor that keep returns to: Darkvist for Necromancy and Illusion, Oathbrand for Evocation and Enchantment, Farcall for Divination and Conjuration, and Turnward for Transmutation and Abjuration. Four cloud giants, cast out of their clan, aligned with the Hand to increase their own power, and that there were four is treated as fate. One giant stands to a finger.  A Skykeep does not sail. A destination is chosen and the keep teleports, then it must remain in place for a stretch, eight days, before it can jump again.
+The mark of the Ashen Hand is a slate-gray diamond with a white handprint burned into the center, the ash forming the border of the print rather than the fill. Members carry no single required token. The mark is struck on a clasp, a gate, or a Skykeep hull.
+________________
 Astereal Accord
 The Astereal Accord was founded years ago, when threats from the skies, unstable planar breaches, and corrupted magic endangered Myrdae. Unlike the Meridian, who focus on law, order, and protection against the Crungess and terrestrial dangers, the Accord looks outward and upward, safeguarding Myrdae from threats beyond its borders and balance. Over the decades, the Accord became recognized as the foremost organization against extraplanar dangers, unstable magical resonance, and abuses of Lodestone technology.
 The Astereal Accord have the following Goals:
