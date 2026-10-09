@@ -50,6 +50,12 @@ function print(report: WikiCheckReport, limit: number) {
     (item) => `"${item.titles[0]}" / "${item.titles[1]}" (${item.why})\n      ${item.paths[0]}\n      ${item.paths[1]}`,
   );
   section("Scope disagreements", report.scopeProblems, limit, (item) => `${item.path} ${item.problem}`);
+  section(
+    "Unnamed map locations (name them in the map editor; the next map import renames the page)",
+    report.unnamedLocations,
+    limit,
+    (item) => item,
+  );
 }
 
 function section<T>(title: string, items: T[], limit: number, render: (item: T) => string) {

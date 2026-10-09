@@ -13,6 +13,9 @@
  *  - Scope disagreements: a page filed under one campaign's folder that the
  *    site treats as another campaign (or none), a declared campaign that is
  *    not a known one, or an unrecognised visibility value.
+ *  - Unnamed map locations: world-map pages still titled with the map
+ *    editor's placeholder id ("next-to-glimmerstone-location-1"), which need
+ *    a real name in the map editor; the next map import renames the page.
  *
  * Pure functions over documents shaped like brain-tools' loadVaultDocuments()
  * output, so the campaign, visibility and resolved links are exactly the ones
@@ -65,6 +68,30 @@ export interface WikiCheckReport {
   campaignBleed: CampaignBleed[];
   spellingVariants: SpellingVariant[];
   scopeProblems: ScopeProblem[];
+  /** Paths of world-map pages whose title is still a placeholder id. */
+  unnamedLocations: string[];
+}
+
+/**
+ * Similar names that a person has checked and confirmed are different
+ * things, so they are not reported as spelling variants again.
+ */
+export const KNOWN_DISTINCT_NAMES: ReadonlyArray<readonly [string, string]> = [
+  // Aelspire is a mountain region in Lyewell Stretch; Elspire is a coastal
+  // town in Aelbon (separate map ids and positions). Confirmed 2026-10-08.
+  ["Aelspire", "Elspire"],
+];
+
+const isKnownDistinct = (a: string, b: string) =>
+  KNOWN_DISTINCT_NAMES.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+
+/** A world-map page still titled with the map editor's id ("unknown-location-10"). */
+export function isUnnamedMapLocation(doc: VaultDoc): boolean {
+  return doc.relativePath.startsWith("wiki/world/locations/") && /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(doc.metadata.title);
+}
+
+export function findUnnamedLocations(docs: VaultDoc[]): string[] {
+  return docs.filter(isUnnamedMapLocation).map((doc) => doc.relativePath);
 }
 
 const isCampaign = (value: string): boolean => (CAMPAIGNS as readonly string[]).includes(value);
@@ -135,13 +162,18 @@ function oneEditApart(a: string, b: string): boolean {
  */
 export function findSpellingVariants(docs: VaultDoc[]): SpellingVariant[] {
   const titles = new Map<string, string>();
-  for (const doc of docs) if (!titles.has(doc.metadata.title)) titles.set(doc.metadata.title, doc.relativePath);
+  for (const doc of docs) {
+    // Placeholder ids are reported as unnamed, not as typos of each other.
+    if (isUnnamedMapLocation(doc)) continue;
+    if (!titles.has(doc.metadata.title)) titles.set(doc.metadata.title, doc.relativePath);
+  }
   const entries = [...titles.entries()].map(([title, path]) => ({ title, path, key: squash(title) }));
   const found: SpellingVariant[] = [];
   for (let a = 0; a < entries.length; a++) {
     for (let b = a + 1; b < entries.length; b++) {
       const left = entries[a]!;
       const right = entries[b]!;
+      if (isKnownDistinct(left.title, right.title)) continue;
       // A source and the summary or gazetteer page written from it share a name by design.
       const isSourceCopy = (path: string) => /^wiki\/(summaries|sources)\//.test(path);
       const folder = (path: string) => path.split("/")[1];
@@ -194,5 +226,6 @@ export function checkWiki(docs: VaultDoc[]): WikiCheckReport {
     campaignBleed: findCampaignBleed(docs),
     spellingVariants: findSpellingVariants(docs),
     scopeProblems: findScopeProblems(docs),
+    unnamedLocations: findUnnamedLocations(docs),
   };
 }

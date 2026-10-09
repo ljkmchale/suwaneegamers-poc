@@ -5,6 +5,7 @@ import {
   findScopeProblems,
   findSpellingVariants,
   findSpoilerLinks,
+  findUnnamedLocations,
   folderCampaign,
   type VaultDoc,
 } from "@/lib/brain/wikiCheck";
@@ -57,12 +58,12 @@ describe("names spelled two ways", () => {
     const variants = findSpellingVariants([
       doc("wiki/npcs/HoE/Iuz'Obal.md", "HoE"),
       doc("wiki/npcs/SoD/Iuz Obal.md", "SoD"),
-      doc("wiki/world/locations/Aelspire.md", "World"),
-      doc("wiki/world/locations/Elspire.md", "World"),
+      doc("wiki/locations/The Crystal Bottle/Kravwynhold.md", "The Crystal Bottle"),
+      doc("wiki/npcs/The Crystal Bottle/Kravwinhold.md", "The Crystal Bottle"),
     ]);
     expect(variants.map((variant) => [variant.titles, variant.why])).toEqual([
       [["Iuz'Obal", "Iuz Obal"], "punctuation or spacing"],
-      [["Aelspire", "Elspire"], "one letter"],
+      [["Kravwynhold", "Kravwinhold"], "one letter"],
     ]);
   });
 
@@ -79,6 +80,28 @@ describe("names spelled two ways", () => {
         doc("wiki/summaries/Ahndashere Gazetteer.md", "World"),
       ]),
     ).toEqual([]);
+  });
+});
+
+describe("confirmed names and unnamed map locations", () => {
+  it("does not report names confirmed to be different places", () => {
+    expect(findSpellingVariants([doc("wiki/world/locations/Aelspire.md", "World"), doc("wiki/world/locations/Elspire.md", "World")])).toEqual([]);
+  });
+
+  it("reports map placeholders as unnamed, not as typos of each other", () => {
+    const docs = [
+      doc("wiki/world/locations/next-to-glimmerstone-location.md", "World"),
+      doc("wiki/world/locations/next-to-glimmerstone-location-1.md", "World"),
+      doc("wiki/world/locations/unknown-location-10.md", "World"),
+      doc("wiki/world/locations/Glimmerstone.md", "World"),
+      doc("wiki/sessions/HoE/hoe-session-notes.md", "HoE"),
+    ];
+    expect(findUnnamedLocations(docs)).toEqual([
+      "wiki/world/locations/next-to-glimmerstone-location.md",
+      "wiki/world/locations/next-to-glimmerstone-location-1.md",
+      "wiki/world/locations/unknown-location-10.md",
+    ]);
+    expect(findSpellingVariants(docs)).toEqual([]);
   });
 });
 
@@ -106,5 +129,5 @@ describe("scope disagreements", () => {
 
 it("puts every check in one report", () => {
   const report = checkWiki([doc("wiki/npcs/HoE/Ana.md", "HoE")]);
-  expect(report).toEqual({ pageCount: 1, spoilerLinks: [], campaignBleed: [], spellingVariants: [], scopeProblems: [] });
+  expect(report).toEqual({ pageCount: 1, spoilerLinks: [], campaignBleed: [], spellingVariants: [], scopeProblems: [], unnamedLocations: [] });
 });
