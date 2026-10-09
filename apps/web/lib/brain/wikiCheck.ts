@@ -4,8 +4,6 @@
  * audit-wiki already reports broken and ambiguous links, orphan pages and
  * pages missing from the index. This adds the vault's own rules on top:
  *
- *  - Links to DM-only pages from player-visible pages. The Library refuses
- *    the page to players, so the link dead-ends and only its title shows.
  *  - Campaign bleed: a page from one campaign linking into another campaign's
  *    pages ("never bleed information across campaigns", brain-vault/CLAUDE.md).
  *  - Names spelled two ways: page titles that differ only by a typo,
@@ -39,11 +37,6 @@ export interface VaultDoc {
   };
 }
 
-export interface SpoilerLink {
-  from: string;
-  to: string;
-}
-
 export interface CampaignBleed {
   from: string;
   fromCampaign: string;
@@ -64,7 +57,6 @@ export interface ScopeProblem {
 
 export interface WikiCheckReport {
   pageCount: number;
-  spoilerLinks: SpoilerLink[];
   campaignBleed: CampaignBleed[];
   spellingVariants: SpellingVariant[];
   scopeProblems: ScopeProblem[];
@@ -99,18 +91,6 @@ const isCampaign = (value: string): boolean => (CAMPAIGNS as readonly string[]).
 /** Pages that list or map several campaigns on purpose; links out of them are not bleed. */
 function isCrossCampaignPage(doc: VaultDoc): boolean {
   return Boolean(doc.metadata.browseOnly) || /^wiki\/(indexes|maps|timelines|threads)\//.test(doc.relativePath) || /\bby campaign\b/i.test(doc.relativePath);
-}
-
-export function findSpoilerLinks(docs: VaultDoc[]): SpoilerLink[] {
-  const byPath = new Map(docs.map((doc) => [doc.relativePath, doc]));
-  const found: SpoilerLink[] = [];
-  for (const doc of docs) {
-    if (doc.metadata.visibility === "dm") continue;
-    for (const target of new Set(doc.metadata.links ?? [])) {
-      if (byPath.get(target)?.metadata.visibility === "dm") found.push({ from: doc.relativePath, to: target });
-    }
-  }
-  return found;
 }
 
 export function findCampaignBleed(docs: VaultDoc[]): CampaignBleed[] {
@@ -222,7 +202,6 @@ export function findScopeProblems(docs: VaultDoc[]): ScopeProblem[] {
 export function checkWiki(docs: VaultDoc[]): WikiCheckReport {
   return {
     pageCount: docs.length,
-    spoilerLinks: findSpoilerLinks(docs),
     campaignBleed: findCampaignBleed(docs),
     spellingVariants: findSpellingVariants(docs),
     scopeProblems: findScopeProblems(docs),

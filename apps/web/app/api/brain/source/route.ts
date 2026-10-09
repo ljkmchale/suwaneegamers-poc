@@ -33,13 +33,16 @@ export async function GET(request: NextRequest) {
     }
 
     const markdown = await fs.readFile(absolutePath, "utf8");
+    const visibleTo = (paths: string[]) =>
+      visibility === "dm" ? paths : paths.filter((linked) => index.pages?.[linked]?.visibility !== "dm");
     return NextResponse.json({
       title: page.title,
       path: page.path,
       campaign: page.campaign,
       visibility: page.visibility,
-      links: page.links ?? [],
-      backlinks: page.backlinks ?? [],
+      // A player's view never names DM-only pages, even as a link or backlink.
+      links: visibleTo(page.links ?? []),
+      backlinks: visibleTo(page.backlinks ?? []),
       markdown,
     });
   } catch (error) {

@@ -7,6 +7,8 @@ import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 const vaultRoot = fs.mkdtempSync(path.join(os.tmpdir(), "brain-dm-access-"));
 fs.mkdirSync(path.join(vaultRoot, "wiki", "threads"), { recursive: true });
 fs.writeFileSync(path.join(vaultRoot, "wiki", "threads", "Secret.md"), "---\nvisibility: dm\n---\n# Secret\n\nThe villain is the innkeeper.");
+fs.mkdirSync(path.join(vaultRoot, "wiki", "entities"), { recursive: true });
+fs.writeFileSync(path.join(vaultRoot, "wiki", "entities", "Hero.md"), "# Hero\n\nSee [[Secret]] and [[Friend]].");
 
 const admin = vi.hoisted(() => ({ isAdmin: false }));
 vi.mock("@/lib/adminSession", () => ({ getAdminSession: async () => ({ isAdmin: admin.isAdmin }) }));
@@ -15,7 +17,12 @@ vi.mock("@/lib/brain/vector-store", () => ({
   hasIndex: async () => true,
   loadIndex: async () => ({
     pages: {
-      "wiki/threads/Secret.md": { path: "wiki/threads/Secret.md", title: "Secret", campaign: "HoE", visibility: "dm" },
+      "wiki/threads/Secret.md": { path: "wiki/threads/Secret.md", title: "Secret", campaign: "HoE", visibility: "dm", links: [], backlinks: ["wiki/entities/Hero.md"] },
+      "wiki/entities/Hero.md": {
+        path: "wiki/entities/Hero.md", title: "Hero", campaign: "HoE", visibility: "players",
+        links: ["wiki/threads/Secret.md", "wiki/entities/Friend.md"], backlinks: ["wiki/threads/Secret.md"],
+      },
+      "wiki/entities/Friend.md": { path: "wiki/entities/Friend.md", title: "Friend", campaign: "HoE", visibility: "players", links: [], backlinks: [] },
     },
   }),
 }));
@@ -50,6 +57,14 @@ describe("DM-only Library pages", () => {
     expect(response.status).toBe(200);
     expect((await response.json()).markdown).toContain("innkeeper");
     expect((await resolveSource(request("/api/brain/resolve-source", { target: "Secret", visibility: "dm" }))).status).toBe(200);
+  });
+
+  it("a player page never lists DM-only pages as links or backlinks", async () => {
+    const asPlayer = await (await getSource(request("/api/brain/source", { path: "wiki/entities/Hero.md", visibility: "dm" }))).json();
+    expect(asPlayer).toMatchObject({ links: ["wiki/entities/Friend.md"], backlinks: [] });
+    admin.isAdmin = true;
+    const asDm = await (await getSource(request("/api/brain/source", { path: "wiki/entities/Hero.md", visibility: "dm" }))).json();
+    expect(asDm).toMatchObject({ links: ["wiki/threads/Secret.md", "wiki/entities/Friend.md"], backlinks: ["wiki/threads/Secret.md"] });
   });
 
   it("only grants dm to an admin who asks for it", async () => {

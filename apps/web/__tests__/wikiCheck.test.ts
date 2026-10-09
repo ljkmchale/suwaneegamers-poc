@@ -4,7 +4,6 @@ import {
   findCampaignBleed,
   findScopeProblems,
   findSpellingVariants,
-  findSpoilerLinks,
   findUnnamedLocations,
   folderCampaign,
   type VaultDoc,
@@ -24,17 +23,6 @@ function doc(relativePath: string, campaign: string, links: string[] = [], optio
     },
   };
 }
-
-describe("links to DM-only pages", () => {
-  it("finds player pages linking to DM pages, and ignores DM pages linking to each other", () => {
-    const docs = [
-      doc("wiki/entities/Kenton.md", "SoD", ["wiki/threads/Kenton - Goals.md"]),
-      doc("wiki/threads/Kenton - Goals.md", "SoD", ["wiki/threads/Other DM.md"], { visibility: "dm" }),
-      doc("wiki/threads/Other DM.md", "SoD", [], { visibility: "dm" }),
-    ];
-    expect(findSpoilerLinks(docs)).toEqual([{ from: "wiki/entities/Kenton.md", to: "wiki/threads/Kenton - Goals.md" }]);
-  });
-});
 
 describe("campaign bleed", () => {
   it("flags a campaign page linking into another campaign", () => {
@@ -129,5 +117,5 @@ describe("scope disagreements", () => {
 
 it("puts every check in one report", () => {
   const report = checkWiki([doc("wiki/npcs/HoE/Ana.md", "HoE")]);
-  expect(report).toEqual({ pageCount: 1, spoilerLinks: [], campaignBleed: [], spellingVariants: [], scopeProblems: [], unnamedLocations: [] });
+  expect(report).toEqual({ pageCount: 1, campaignBleed: [], spellingVariants: [], scopeProblems: [], unnamedLocations: [] });
 });

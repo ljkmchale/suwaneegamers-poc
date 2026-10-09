@@ -28,12 +28,6 @@ async function main() {
 
 function print(report: WikiCheckReport, limit: number) {
   console.log(`Campaign wiki check: ${report.pageCount} pages\n`);
-  section(
-    "Links from player pages to DM-only pages (players hit \"DM-only\"; the title shows)",
-    report.spoilerLinks,
-    limit,
-    (item) => `${item.from}  ->  ${item.to}`,
-  );
   const bleedBySource = new Map<string, typeof report.campaignBleed>();
   for (const item of report.campaignBleed) bleedBySource.set(item.from, [...(bleedBySource.get(item.from) ?? []), item]);
   section(
