@@ -81,6 +81,8 @@ describe("confirmed names and unnamed map locations", () => {
       doc("wiki/world/locations/next-to-glimmerstone-location.md", "World"),
       doc("wiki/world/locations/next-to-glimmerstone-location-1.md", "World"),
       doc("wiki/world/locations/unknown-location-10.md", "World"),
+      doc("wiki/world/locations/beveress-paendley-crossroads.md", "World"),
+      doc("wiki/world/locations/crossroad-boldshire-edgewind-bistron.md", "World"),
       doc("wiki/world/locations/Glimmerstone.md", "World"),
       doc("wiki/sessions/HoE/hoe-session-notes.md", "HoE"),
     ];
