@@ -78,9 +78,12 @@ describe("confirmed names and unnamed map locations", () => {
 
   it("reports map placeholders as unnamed, not as typos of each other", () => {
     const docs = [
+      // New placeholders are still caught.
+      doc("wiki/world/locations/new-town-location.md", "World"),
+      doc("wiki/world/locations/new-town-location-1.md", "World"),
+      // Fine to leave unnamed: crossroads, unknown and coastline markers, the Glimmerstone towns.
       doc("wiki/world/locations/next-to-glimmerstone-location.md", "World"),
-      doc("wiki/world/locations/next-to-glimmerstone-location-1.md", "World"),
-      // Fine to leave unnamed: crossroads, unknown markers, coastline markers.
+      doc("wiki/world/locations/next-to-glimmerstone-location-3.md", "World"),
       doc("wiki/world/locations/unknown-location-10.md", "World"),
       doc("wiki/world/locations/unknown-12.md", "World"),
       doc("wiki/world/locations/coastline-location-siltbay.md", "World"),
@@ -90,8 +93,8 @@ describe("confirmed names and unnamed map locations", () => {
       doc("wiki/sessions/HoE/hoe-session-notes.md", "HoE"),
     ];
     expect(findUnnamedLocations(docs)).toEqual([
-      "wiki/world/locations/next-to-glimmerstone-location.md",
-      "wiki/world/locations/next-to-glimmerstone-location-1.md",
+      "wiki/world/locations/new-town-location.md",
+      "wiki/world/locations/new-town-location-1.md",
     ]);
     expect(findSpellingVariants(docs)).toEqual([]);
   });

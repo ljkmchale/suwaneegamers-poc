@@ -81,18 +81,25 @@ const isKnownDistinct = (a: string, b: string) =>
  * Placeholder ids that are fine to leave unnamed (Larry, 2026-10-09):
  * crossroads, whose ids already name the towns they join
  * ("beveress-paendley-crossroads"); "unknown-…" markers; and coastline
- * markers ("coastline-location-siltbay").
+ * markers ("coastline-location-siltbay"); and the three unnamed towns next
+ * to Glimmerstone ("next-to-glimmerstone-location", "-1", "-3").
+ * New placeholder ids are still reported.
  */
-const UNNAMED_IS_FINE = [/(?:^|-)crossroads?(?:-|$)/, /^unknown(?:-|$)/, /^coastline(?:-|$)/];
+const UNNAMED_IS_FINE = [
+  /(?:^|-)crossroads?(?:-|$)/,
+  /^unknown(?:-|$)/,
+  /^coastline(?:-|$)/,
+  /^next-to-glimmerstone-location(?:-\d+)?$/,
+];
 
 /** A world-map page still titled with the map editor's id ("next-to-glimmerstone-location-1"). */
 export function isUnnamedMapLocation(doc: VaultDoc): boolean {
-  const title = doc.metadata.title;
-  return (
-    doc.relativePath.startsWith("wiki/world/locations/") &&
-    /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(title) &&
-    !UNNAMED_IS_FINE.some((pattern) => pattern.test(title))
-  );
+  return isMapPlaceholder(doc) && !UNNAMED_IS_FINE.some((pattern) => pattern.test(doc.metadata.title));
+}
+
+/** Any world-map page titled with a map id, whether or not it is fine to leave that way. */
+function isMapPlaceholder(doc: VaultDoc): boolean {
+  return doc.relativePath.startsWith("wiki/world/locations/") && /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(doc.metadata.title);
 }
 
 export function findUnnamedLocations(docs: VaultDoc[]): string[] {
@@ -157,7 +164,7 @@ export function findSpellingVariants(docs: VaultDoc[]): SpellingVariant[] {
   const titles = new Map<string, string>();
   for (const doc of docs) {
     // Placeholder ids are reported as unnamed, not as typos of each other.
-    if (isUnnamedMapLocation(doc)) continue;
+    if (isMapPlaceholder(doc)) continue;
     if (!titles.has(doc.metadata.title)) titles.set(doc.metadata.title, doc.relativePath);
   }
   const entries = [...titles.entries()].map(([title, path]) => ({ title, path, key: squash(title) }));
