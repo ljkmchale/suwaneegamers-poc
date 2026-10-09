@@ -78,13 +78,21 @@ const isKnownDistinct = (a: string, b: string) =>
   KNOWN_DISTINCT_NAMES.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
 
 /**
- * A world-map page still titled with the map editor's id ("unknown-location-10").
- * Crossroads are left out: their ids already name the towns they join
- * ("beveress-paendley-crossroads"), which is all a junction needs (Larry, 2026-10-09).
+ * Placeholder ids that are fine to leave unnamed (Larry, 2026-10-09):
+ * crossroads, whose ids already name the towns they join
+ * ("beveress-paendley-crossroads"); "unknown-…" markers; and coastline
+ * markers ("coastline-location-siltbay").
  */
+const UNNAMED_IS_FINE = [/(?:^|-)crossroads?(?:-|$)/, /^unknown(?:-|$)/, /^coastline(?:-|$)/];
+
+/** A world-map page still titled with the map editor's id ("next-to-glimmerstone-location-1"). */
 export function isUnnamedMapLocation(doc: VaultDoc): boolean {
   const title = doc.metadata.title;
-  return doc.relativePath.startsWith("wiki/world/locations/") && /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(title) && !/(?:^|-)crossroads?(?:-|$)/.test(title);
+  return (
+    doc.relativePath.startsWith("wiki/world/locations/") &&
+    /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(title) &&
+    !UNNAMED_IS_FINE.some((pattern) => pattern.test(title))
+  );
 }
 
 export function findUnnamedLocations(docs: VaultDoc[]): string[] {

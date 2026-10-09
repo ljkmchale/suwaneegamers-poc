@@ -80,7 +80,10 @@ describe("confirmed names and unnamed map locations", () => {
     const docs = [
       doc("wiki/world/locations/next-to-glimmerstone-location.md", "World"),
       doc("wiki/world/locations/next-to-glimmerstone-location-1.md", "World"),
+      // Fine to leave unnamed: crossroads, unknown markers, coastline markers.
       doc("wiki/world/locations/unknown-location-10.md", "World"),
+      doc("wiki/world/locations/unknown-12.md", "World"),
+      doc("wiki/world/locations/coastline-location-siltbay.md", "World"),
       doc("wiki/world/locations/beveress-paendley-crossroads.md", "World"),
       doc("wiki/world/locations/crossroad-boldshire-edgewind-bistron.md", "World"),
       doc("wiki/world/locations/Glimmerstone.md", "World"),
@@ -89,7 +92,6 @@ describe("confirmed names and unnamed map locations", () => {
     expect(findUnnamedLocations(docs)).toEqual([
       "wiki/world/locations/next-to-glimmerstone-location.md",
       "wiki/world/locations/next-to-glimmerstone-location-1.md",
-      "wiki/world/locations/unknown-location-10.md",
     ]);
     expect(findSpellingVariants(docs)).toEqual([]);
   });
