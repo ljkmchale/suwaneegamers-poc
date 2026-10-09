@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { addChronicleStories } from '../scripts/lib/chronicle-story.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DIR = process.argv[2] || HERE;
 const OUT = process.argv[3] || path.join(DIR, 'emberstran-chronicle.html');
@@ -252,5 +253,5 @@ ${artSeed}
 })();
 </script>`;
 
-fs.writeFileSync(OUT, html);
+fs.writeFileSync(OUT, addChronicleStories(html, DIR));
 console.log('wrote', OUT, (html.length/1024).toFixed(0)+'KB', '·', sessions.length, 'chapters');

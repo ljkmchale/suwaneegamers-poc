@@ -292,7 +292,7 @@ window.SESSION_ART = {
     "33": "/media/images/chronicles/heroes-of-emberstran/session-33-aury-carries-hap-v1.webp",
     "34": "/media/images/chronicles/heroes-of-emberstran/session-34-the-bellows-v1.jpg",
     "35": "/media/images/chronicles/heroes-of-emberstran/session-35-phira-hap-reunion-v1.webp",
-    "36": "/media/images/chronicles/heroes-of-emberstran/session-36-kytha-joins-cloak-v1.webp"
+    "36": "/media/images/chronicles/heroes-of-emberstran/session-36-ains-aury-diverra-permission-v1.webp"
 };
 </script>
 
@@ -2356,5 +2356,50 @@ window.SESSION_ART = {
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);if(i>-1){links.forEach(function(a){a.parentElement.classList.remove('active');});links[i].parentElement.classList.add('active');links[i].scrollIntoView({block:'nearest'});}}});},{root:scroller,threshold:0,rootMargin:'-45% 0px -50% 0px'});
   secs.forEach(function(s){if(s)io.observe(s);});
+})();
+</script><style>
+.hero-photo.story-incoming{opacity:0;transition:opacity 2.5s ease-in-out}
+.has-photo .hero-photo.story-incoming{opacity:0}
+.has-photo .hero-photo.story-incoming.visible{opacity:1}
+@media(prefers-reduced-motion:reduce){.hero-photo.story-incoming{transition:none}}
+</style>
+<script>
+(function(){
+  var stories={"36":["/media/images/chronicles/heroes-of-emberstran/session-36-ains-aury-diverra-permission-v1.webp","/media/images/chronicles/heroes-of-emberstran/session-36-kytha-joins-cloak-v1.webp","/media/images/chronicles/heroes-of-emberstran/session-36-aury-white-horse-v1.webp"]};
+  Object.keys(stories).forEach(function(chapter){
+    var section=document.getElementById('s'+chapter);if(!section)return;
+    var holder=section.querySelector('.hero-art'),base=holder.querySelector('.hero-photo');
+    var incoming=document.createElement('div');incoming.className='hero-photo story-incoming';
+    holder.appendChild(incoming);
+    var scenes=[],index=0,visible=false,started=false,busy=false;
+    function background(url){return 'url('+JSON.stringify(url)+')';}
+    function start(){
+      if(started)return;started=true;
+      Promise.all(stories[chapter].map(function(url){return new Promise(function(resolve){
+        var image=new Image();image.decoding='async';
+        image.onload=function(){resolve(url);};image.onerror=function(){resolve(null);};image.src=url;
+      });})).then(function(loaded){
+        scenes=loaded.filter(Boolean);if(!scenes.length)return;
+        base.style.backgroundImage=background(scenes[0]);holder.classList.add('has-photo');
+        section.dataset.storyScene='0';
+      });
+    }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        visible=entries[0].isIntersecting;if(visible)start();
+      },{threshold:0.05}).observe(section.querySelector('.hero'));
+    }else{visible=true;start();}
+    setInterval(function(){
+      if(!visible||busy||document.hidden||scenes.length<2)return;
+      busy=true;var next=(index+1)%scenes.length;
+      incoming.style.backgroundImage=background(scenes[next]);incoming.classList.add('visible');
+      setTimeout(function(){
+        base.style.backgroundImage=background(scenes[next]);
+        incoming.style.transition='none';incoming.classList.remove('visible');
+        incoming.getBoundingClientRect();incoming.style.transition='';
+        index=next;section.dataset.storyScene=String(index);busy=false;
+      },2600);
+    },12000);
+  });
 })();
 </script>

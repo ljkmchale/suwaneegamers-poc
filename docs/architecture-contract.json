@@ -26,6 +26,13 @@
     "audioRoute": "apps/web/app/media/session-audio/[...segments]/route.ts",
     "forbiddenGeneratedPrefixes": ["/images/"]
   },
+  "chronicles": {
+    "route": "apps/web/app/(site)/campaigns/[id]/chronicle/route.ts",
+    "htmlRoot": "content/chronicles",
+    "sync": "scripts/sync-chronicle.mjs",
+    "storyRenderer": "scripts/lib/chronicle-story.mjs",
+    "storyMaps": ["chronicle-poc/session-sequences.json", "sod-chronicle-poc/session-sequences.json"]
+  },
   "voice": {
     "client": "apps/web/components/livekit/ScheduleVoiceAssistant.tsx",
     "tokenRoute": "apps/web/app/api/livekit/token/route.ts",

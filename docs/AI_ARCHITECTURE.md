@@ -98,4 +98,14 @@ Before editing, identify every applicable row:
 
 ## Required completion rule
 
+Living Chronicle HTML is read directly from `content/chronicles/<campaign>.html`
+by `apps/web/app/(site)/campaigns/[id]/chronicle/route.ts`; it is not a
+`content_documents` row. `scripts/sync-chronicle.mjs` rebuilds it from each
+campaign's notes and builder. HOE and SoD additionally read their own
+`session-sequences.json` beside `session-images.json`, through
+`scripts/lib/chronicle-story.mjs`. Sequences cycle in the existing hero area
+without controls; the original single-image map remains the fallback. Keep
+accepted image assets in the canonical media directory. Draft previews in
+`artwork-drafts/` are separate from these scheduled and served files.
+
 A change is not complete until the writer has checked for other writers. Search the repository and scheduler for the field, URL prefix, filename, or table being changed. Run `pnpm arch:preflight` again after the edit, plus the domain-specific tests. Report any sign-in gate or service permission that prevents rendered verification.
