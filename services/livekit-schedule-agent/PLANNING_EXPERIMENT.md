@@ -133,3 +133,63 @@ with a regression test (five publisher tests total). The repeated publication
 and refresh are idempotent. All six active campaigns' latest-session endpoints
 were verified, and local/public production identities matched with dirty:false.
 
+## Adjacent conversation evaluation (2026-10-10 UTC)
+
+Real conversation-hook tests now cover clarification replies, replacement of a
+campaign after a correction, participant and calendar follow-ups, expiry on an
+unrelated turn, routing overrides, longer compound requests, timeout reporting,
+and a second conversation hook superseding a blocked lookup. The superseded
+answer cannot speak, record an answer, or overwrite the new campaign context.
+Context lasts only across adjacent recap exchanges and grants no permissions.
+
+The production four-turn smoke (`--conversation`) speaks an ambiguous compound
+request, answers the clarification with Souls of Destiny, asks who was involved,
+then corrects the campaign to A New Adventure. Each turn requires actual STT,
+the expected answer in received agent transcription, audible TTS, and matching
+SQLite analytics. It also checks that clarification retains the calendar part,
+the participant follow-up does not repeat the recap, and the correction excludes
+the previous campaign's participants. The first run exposed the repeated recap;
+the participant-only predicate now accepts an initial "And". Newer-session recap
+prompts request at most 60 words; approved dispatch summaries remain intact.
+
+The historical routing comparison remains 8/8 versus 5/8 for the modeled old
+recap-first baseline; the expanded single-turn resolver remains 35/35. A local
+sample measured median planning time 0.0134 ms, maximum 0.8691 ms across the eight
+fixtures. This measures Python routing only, with a small curated sample. It
+does not establish a live latency advantage over the previous worker or Lisp.
+
+The smoke reports handler latency, time to audible response after input playout,
+and full spoken completion time separately. Input includes two seconds of
+endpointing silence; audible replies can already be starting by its end. The
+initial non-silent counter accepted tiny sample noise and produced invalid
+negative first-audio timings; subsequent runs require sample amplitude >300 and
+start that timer after input playout. Do not use the earlier first-audio numbers.
+
+Cost boundary: plan construction itself makes no API calls. A newer recap and
+participant request can each make a selected-session knowledge call; the calendar
+uses dispatch data. The brain chat adapter currently discards provider token
+usage, so these reads cannot be assigned a measured dollar cost from voice
+analytics. LiveKit preemptive generation also emitted Claude usage during the
+deterministic exchanges. Consequently neither zero total inference cost nor
+production cost savings is established. No pricing estimate is invented, and
+the existing preemptive setting is retained pending a controlled model-turn
+latency comparison. A Lisp runtime or broader planner scope is not justified by
+these results.
+
+Final four-turn production smoke passed after worker activation:
+
+| Turn | Handler ms | Full completion seconds |
+| --- | ---: | ---: |
+| Ambiguous recap + calendar | 0 | 6.22 |
+| Souls of Destiny clarification | 2637 | 49.27 |
+| Participant follow-up only | 1054 | 12.77 |
+| A New Adventure correction | 996 | 13.74 |
+
+The correction returned Ridley, Fungus, Kaizo, Cerul, Relys, and Affy, with no
+Souls of Destiny participants. The clarification spoke session 15 plus November
+1 at 4:00 PM. The follow-up improved from 62.86 seconds in the first run to
+12.77 seconds by removing the unwanted recap; these are single observations,
+not a statistical latency benchmark. The 60-word recap instruction was not
+strictly honored by the model, so it is a prompt preference rather than an
+enforced length guarantee. No source summary was truncated to achieve it.
+

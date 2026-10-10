@@ -76,6 +76,10 @@ authorized visibility. The selected-session path skips broad retrieval and
 cached generic answers. Unknown, hidden, or mismatched sessions return no
 evidence. Voice name correction protects exact campaign phrases before fuzzy
 entity repair, so navigation labels cannot rewrite A New Adventure.
+The worker retains only adjacent recap context: a short campaign clarification
+resumes the pending request, a campaign correction replaces its scope, and a
+participant or recap follow-up keeps that scope. An unrelated turn clears it.
+This state does not grant access; every lookup retains the existing API checks.
 
 Passive usage-purpose learning is first-party analytics, not model training.
 `AnalyticsTracker.tsx` sends the existing interaction stream through

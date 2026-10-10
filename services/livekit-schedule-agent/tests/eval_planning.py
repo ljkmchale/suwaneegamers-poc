@@ -7,6 +7,7 @@ The baseline models recap-before-schedule routing, not full live conversations.
 import json
 import sys
 from pathlib import Path
+from statistics import median
 from time import perf_counter
 from types import SimpleNamespace
 
@@ -94,6 +95,10 @@ def main():
         "results": rows,
         "expanded_cases": len(expanded),
         "expanded_pass": sum(row["pass"] for row in expanded),
+        "routing_ms": {
+            "median": round(median(row["planning_ms"] for row in rows), 4),
+            "max": max(row["planning_ms"] for row in rows),
+        },
         "expanded_results": expanded,
         "limitation": "Curated offline routing cases; no answer quality, retrieval, live latency, or permission evaluation.",
     }

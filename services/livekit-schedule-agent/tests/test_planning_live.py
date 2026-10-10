@@ -323,3 +323,135 @@ def test_existing_search_keeps_unsourced_clarification(monkeypatch):
     assert agent.query_player_knowledge("who attended") == "Which campaign?"
     with pytest.raises(ValueError, match="attributable"):
         agent.query_player_knowledge_evidence("who attended")
+
+
+async def speak_turn(myra, question):
+    message = llm.ChatMessage(role="user", content=[question])
+    with pytest.raises(StopResponse):
+        await agent.Myra.on_user_turn_completed(myra, llm.ChatContext(), message)
+    return myra.session.say.call_args.args[0]
+
+
+@pytest.mark.asyncio
+async def test_clarification_reply_resumes_every_requested_part(monkeypatch):
+    monkeypatch.setattr(agent, "query_player_knowledge_evidence", Mock(return_value=Evidence(
+        "knowledge", "Aury was involved.", "wiki/Session 17 - Homecoming.md")))
+    myra = visitor(("Souls of Destiny", "Dungeons III"))
+    assert "Which campaign" in await speak_turn(myra,
+        "What happened last session, who was involved, and when do we play again?")
+    answer = await speak_turn(myra, "Souls of Destiny, please.")
+    assert all(part in answer for part in ["returned to town", "Aury", "7:00 PM"])
+
+
+@pytest.mark.asyncio
+async def test_campaign_correction_replaces_prior_scope():
+    myra = visitor(("Souls of Destiny", "Dungeons III"))
+    await speak_turn(myra, "What happened last session in Souls of Destiny?")
+    answer = await speak_turn(myra, "No, I meant night watch.")
+    assert "secured the gate" in answer and "returned to town" not in answer
+
+
+@pytest.mark.asyncio
+async def test_participant_followup_keeps_campaign_instead_of_profile(monkeypatch):
+    lookup = Mock(return_value=Evidence("knowledge", "Watch members were involved.",
+                                      "wiki/Session 18 - Watch.md"))
+    monkeypatch.setattr(agent, "query_player_knowledge_evidence", lookup)
+    myra = visitor()
+    myra.recaps[1]["title"] = "Session 18 - Watch"
+    await speak_turn(myra, "What happened last session in night watch?")
+    assert "Watch members" in await speak_turn(myra, "And who was involved?")
+    assert lookup.call_args.args[1] == "Dungeons III"
+    assert lookup.call_count == 1
+    assert "secured the gate" not in myra.session.say.call_args.args[0]
+
+
+@pytest.mark.asyncio
+async def test_unrelated_turn_expires_recap_scope():
+    myra = visitor(("Souls of Destiny", "Dungeons III"))
+    await speak_turn(myra, "What happened last session in night watch?")
+    assert agent.Myra.contextualize_recap_followup(myra, "Who is Diverra?") == "Who is Diverra?"
+    assert "Which campaign" in await speak_turn(myra, "What happened last session?")
+
+
+@pytest.mark.asyncio
+async def test_interrupted_lookup_does_not_speak_or_record(monkeypatch):
+    import threading
+
+    entered, release = threading.Event(), threading.Event()
+    myra = visitor()
+
+    def lookup(*args, **kwargs):
+        entered.set()
+        release.wait(3)
+        return Evidence("knowledge", "Stale participants", "wiki/Session 17 - Homecoming.md")
+
+    monkeypatch.setattr(agent, "query_player_knowledge_evidence", lookup)
+    message = llm.ChatMessage(role="user", content=["Who was involved last session?"])
+    task = asyncio.create_task(agent.Myra.on_user_turn_completed(myra, llm.ChatContext(), message))
+    try:
+        assert await asyncio.to_thread(entered.wait, 2)
+        myra._turn_revision += 1
+    finally:
+        release.set()
+    with pytest.raises(asyncio.CancelledError):
+        await task
+    myra.session.say.assert_not_called()
+    myra._record_analytics.assert_not_called()
+
+
+@pytest.mark.parametrize("question,operations", [
+    ("Before we start, recap last session in Souls of Destiny, tell me which characters were involved, and what time are we playing next?", ["recap", "knowledge", "schedule"]),
+    ("And who was involved last session in Souls of Destiny?", ["knowledge"]),
+    ("Please catch me up on Souls of Destiny and tell me when do we play again?", ["recap", "schedule"]),
+])
+def test_longer_requests_preserve_independent_intents(question, operations):
+    assert [step.operation for step in visitor().recap_plan(question).steps] == operations
+
+
+@pytest.mark.asyncio
+async def test_outer_timeout_reports_failure_without_claiming_a_recap(monkeypatch):
+    monkeypatch.setattr(agent, "execute_plan", Mock(side_effect=TimeoutError))
+    answer = await visitor().answer_recap_plan(visitor().recap_plan("What happened last session?"))
+    assert "too long" in answer and "returned to town" not in answer
+
+
+def test_followup_does_not_rewrite_routing_override():
+    myra = visitor()
+    myra._recap_campaign = "Dungeons III"
+    myra._recap_request = "What happened last session?"
+    myra.routing_overrides = {agent.normalize_question("And who was involved?")}
+    assert agent.Myra.contextualize_recap_followup(myra, "And who was involved?") == "And who was involved?"
+
+
+def test_schedule_followup_uses_adjacent_campaign():
+    myra = visitor()
+    myra._recap_campaign = "Dungeons III"
+    assert "Dungeons III" in agent.Myra.contextualize_recap_followup(myra, "When do we play again?")
+
+
+@pytest.mark.asyncio
+async def test_new_conversation_hook_supersedes_blocked_participant_turn(monkeypatch):
+    import threading
+
+    entered, release = threading.Event(), threading.Event()
+    myra = visitor()
+
+    def lookup(*args, **kwargs):
+        entered.set()
+        release.wait(3)
+        return Evidence("knowledge", "Stale participants", "wiki/Session 17 - Homecoming.md")
+
+    monkeypatch.setattr(agent, "query_player_knowledge_evidence", lookup)
+    old = asyncio.create_task(agent.Myra.on_user_turn_completed(myra, llm.ChatContext(),
+        llm.ChatMessage(role="user", content=["Who was involved last session?"])))
+    try:
+        assert await asyncio.to_thread(entered.wait, 2)
+        assert "secured the gate" in await speak_turn(myra,
+            "Actually, what happened last session in night watch?")
+    finally:
+        release.set()
+    with pytest.raises(asyncio.CancelledError):
+        await old
+    assert myra.session.say.call_count == 1
+    assert myra._record_analytics.call_count == 1
+    assert myra._recap_campaign == "Dungeons III"

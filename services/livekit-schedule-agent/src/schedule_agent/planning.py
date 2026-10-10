@@ -100,7 +100,7 @@ def build_plan(
     )
     participants_only = (
         participants
-        and bool(re.match(r"\s*(who|which)\b", question, re.I))
+        and bool(re.match(r"\s*(?:and\s+)?(who|which)\b", question, re.I))
         and not re.search(r"\b(recap|what happened|summarize|summary|catch up)\b", question, re.I)
     )
     if (
@@ -124,8 +124,7 @@ def build_plan(
         steps.append(
             Step(
                 "knowledge",
-                question + " Use documented session evidence. "
-                "Use documented session evidence; do not infer attendance from the roster.",
+                question + " Use documented session evidence; do not infer attendance from the roster.",
             )
         )
     if schedule:

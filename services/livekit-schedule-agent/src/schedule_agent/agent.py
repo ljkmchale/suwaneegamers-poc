@@ -3250,6 +3250,8 @@ class Myra(Agent):
         # local fallback can still miss a pronoun such as "her". Keep the most
         # recently named deity so the next referential turn is self-contained.
         self._conversation_subject: str | None = None
+        self._recap_campaign: str | None = None
+        self._recap_request: str | None = None
         facts = schedule_facts(schedule)
         knowledge_block = (
             textwrap.dedent(
@@ -3612,6 +3614,47 @@ class Myra(Agent):
             bypass=bypass,
         )
 
+    def contextualize_recap_followup(self, question: str) -> str:
+        """Carry only a narrow, immediately adjacent recap conversation forward."""
+        pending = getattr(self, "_recap_request", None)
+        previous = getattr(self, "_recap_campaign", None)
+        self._recap_request = None
+        self._recap_campaign = None
+        if normalize_question(question) in self.routing_overrides:
+            return question
+        plan = self.recap_plan(question)
+        explicit = "Explicit campaign" in plan.trace
+        # A clarification reply or correction must consist only of a campaign
+        # plus conversational filler; a new substantive question stays intact.
+        remainder = question
+        if explicit:
+            aliases = [plan.campaign, *BRAIN_CAMPAIGNS.get(plan.campaign, ())]
+            for recap in self.recaps:
+                if (map_campaign_to_brain(str(recap.get("name") or "")) or recap.get("name")) == plan.campaign:
+                    aliases.extend([str(recap.get("name") or ""), *(recap.get("aliases") or [])])
+            for alias in sorted(set(aliases), key=len, reverse=True):
+                if alias:
+                    remainder = re.sub(r"\b" + re.escape(alias) + r"\b", "", remainder, flags=re.I)
+            remainder = re.sub(r"\b(?:no|sorry|actually|i|meant|mean|please|the|one|instead|yes)\b|[^\w\s]", "", remainder, flags=re.I).strip()
+        if pending and explicit and not remainder:
+            # Remove the prior scope before applying a correction, including
+            # aliases from dispatch, so the old campaign cannot win resolution.
+            aliases = [alias for name, values in BRAIN_CAMPAIGNS.items() for alias in [name, *values]]
+            for recap in self.recaps:
+                aliases.extend([str(recap.get("name") or ""), *(recap.get("aliases") or [])])
+            for alias in sorted(set(aliases), key=len, reverse=True):
+                if alias:
+                    pending = re.sub(r"\b" + re.escape(alias) + r"\b", "", pending, flags=re.I)
+            return f"{pending} In {plan.campaign}."
+        if previous and not explicit:
+            if re.fullmatch(r"\s*(?:and\s+)?who (?:was involved|was there|were there|attended|played)[?.!]*\s*", question, re.I):
+                return f"{question.rstrip('?.!')} last session in {previous}?"
+            if re.fullmatch(r"\s*(?:and\s+)?(?:when do we play again|what time are we playing next)[?.!]*\s*", question, re.I):
+                return f"{question} In {previous}."
+            if is_recap_question(question):
+                return f"{question} In {previous}."
+        return question
+
     async def answer_recap_plan(self, plan: Plan) -> str:
         """Run bounded reads with existing server authorization and turn cancellation."""
         if plan.clarification:
@@ -3637,7 +3680,7 @@ class Myra(Agent):
                 title = current["title"]
                 try:
                     evidence = query_player_knowledge_evidence(
-                        f"Summarize the documented session titled {title} in at most three short sentences. "
+                        f"Summarize the documented session titled {title} in at most 60 words across three short sentences. "
                         "Use only that session's events and cite that session. Do not use earlier sessions.",
                         campaign, self.knowledge_visibility, self.brain_access_token, timeout=12,
                         session_title=title)
@@ -3704,7 +3747,7 @@ class Myra(Agent):
                 return Evidence("knowledge", "I couldn't verify who was involved in that session.",
                                 "lookup:unavailable")
 
-        logger.info("Myra plan v1: campaign=%s operations=%s trace=%s", plan.campaign,
+        logger.info("Myra plan v2: campaign=%s operations=%s trace=%s", plan.campaign,
                     [step.operation for step in plan.steps], plan.trace)
         try:
             results = await asyncio.wait_for(asyncio.to_thread(
@@ -3835,6 +3878,10 @@ class Myra(Agent):
             logger.info("Visitor accepted the greeting offer; treating turn as %r", offer)
             canonical_question = offer
             new_message.content = [offer]
+        contextual_question = Myra.contextualize_recap_followup(self, canonical_question)
+        if contextual_question != canonical_question:
+            canonical_question = contextual_question
+            new_message.content = [contextual_question]
         del turn_ctx
         started = time.perf_counter()
         question = canonical_question.casefold()
@@ -3876,6 +3923,8 @@ class Myra(Agent):
                 }
                 return
             answer = await self.answer_recap_plan(plan)
+            self._recap_request = canonical_question
+            self._recap_campaign = None if plan.clarification else plan.campaign
             category = "recap_clarify" if plan.clarification else "recap"
             self.session.say(answer, allow_interruptions=True)
             self._record_analytics(
