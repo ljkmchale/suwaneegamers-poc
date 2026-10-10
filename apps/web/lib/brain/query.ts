@@ -94,13 +94,14 @@ interface RelationshipTone {
 
 // ─── Campaign Data ────────────────────────────────────────────────────────────
 
-// Used by systemPrompt / acronym answers (mirrors campaigns.mjs — 5 campaigns)
+// Used by systemPrompt / acronym answers (mirrors campaigns.mjs).
 const campaignsForLine: CampaignDef[] = [
   { code: "HoE", name: "Heroes of Emberstran", indexName: "HoE", aliases: ["heroes of emberstran"] },
   { code: "SoD", name: "Souls of Destiny", indexName: "SoD", aliases: ["souls of destiny"] },
   { code: "TSV", name: "The Silent Vanguard", indexName: "The Silent Vanguard", aliases: ["the silent vanguard", "silent vanguard"] },
   { code: "WB", name: "Bloody Endeavor", indexName: "Bloody Endeavor", aliases: ["bloody endeavor", "wyrm bane"] },
   { code: "D3", name: "Dungeons III", indexName: "Dungeons III", aliases: ["dungeons iii", "dungeons 3", "d3"] },
+  { code: "ANA", name: "A New Adventure", indexName: "A New Adventure", aliases: ["a new adventure", "ana"] },
 ];
 
 function campaignLine(): string {
@@ -122,6 +123,7 @@ const campaignsByCode: Record<string, CampaignDef> = {
   WB: { code: "WB", name: "Bloody Endeavor", indexName: "Bloody Endeavor", aliases: ["bloody endeavor", "wyrm bane", "wb"] },
   D3: { code: "D3", name: "Dungeons III", indexName: "Dungeons III", aliases: ["dungeons iii", "dungeons 3", "d3"] },
   TCB: { code: "TCB", name: "The Crystal Bottle", indexName: "The Crystal Bottle", aliases: ["the crystal bottle", "crystal bottle", "tcb"] },
+  ANA: { code: "ANA", name: "A New Adventure", indexName: "A New Adventure", aliases: ["a new adventure", "ana"] },
 };
 
 const entityAliases: Record<string, string> = {
@@ -784,7 +786,7 @@ function answerScopedNameGuardQuestion(question: string, options: QueryOptions =
   const guardedName = ["lila", "zephyra"].find((name) => normalizedQuestion.includes(name));
   if (!guardedName) return null;
   const campaign = resolveQuestionCampaign(question, options);
-  if (!campaign || campaign.code === "SoD") return null;
+  if (!campaign || campaign.code !== "TSV") return null;
   const displayName = guardedName === "lila" ? "Lila" : "Zephyra";
   return {
     answer: `There is no ${displayName} in ${campaign.name} in the current campaign brain. ${campaign.name}'s documented party is Cletus, Lensworth, Jett Blackwood, and Axel Blackwood.`,
@@ -1660,11 +1662,11 @@ function namesWorldPage(question: string): boolean {
 
 function isWorldOnlyQuestion(question: string): boolean {
   if (isSuperlativeWorldQuestion(question)) return false;
-  const campaignNamed = /\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|The Crystal Bottle|Crystal Bottle|TCB)\b/i.test(question);
+  const campaignNamed = /\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|The Crystal Bottle|Crystal Bottle|TCB|A New Adventure|ANA)\b/i.test(question);
   if (namesWorldPage(question) && !campaignNamed) return true;
   const worldSubject = /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question);
   const pantheonSubject = /\b(god|gods|goddess|goddesses|deity|deities|pantheon|Addan|Amriel|Asmodeus|Brault|Celestine|Cembus|Coralei|Crael|Diverra|Diveria|Eredra|Fralee|Goldraen|Iuz'?Obal|Layeth|Muerg|Myrdris|Natafae|Nigrum|Ol'?Farium|Osanna|Phoe|Sylunara|Tornia|Tyvarion|Urlich|Utheri|Villari|Vo'?egurn|Athuel|Bellum|Disgar|Lyess|Neera|Smott|Tiash|Torec)\b/i.test(question);
-  return (worldSubject || pantheonSubject) && !/\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane)\b/i.test(question);
+  return (worldSubject || pantheonSubject) && !campaignNamed;
 }
 
 function isCrossCampaignWorldQuestion(question: string): boolean {
@@ -1739,14 +1741,15 @@ function isCampaignReferenceName(value: string): boolean {
 
 function resolveQuestionCampaign(question: string, options: QueryOptions = {}): CampaignDef | null {
   if (options.campaign && options.campaign !== "All") {
-    return Object.values(campaignsByCode).find((c) => c.code === options.campaign || c.name === options.campaign) ?? null;
+    return resolveCampaignSelection(options.campaign);
   }
-  const normalized = normalize(question);
-  return Object.values(campaignsByCode).find((c) => normalized.includes(normalize(c.name)) || normalized.includes(normalize(c.code)) || c.aliases.some((alias) => normalized.includes(normalize(alias)))) ?? null;
+  const normalized = ` ${normalize(question)} `;
+  return Object.values(campaignsByCode).find((c) => [c.name, c.code, ...c.aliases].some((alias) => normalized.includes(` ${normalize(alias)} `))) ?? null;
 }
 
 function resolveCampaignSelection(value: string): CampaignDef | null {
-  return Object.values(campaignsByCode).find((c) => c.code === value || c.name === value || c.indexName === value) ?? null;
+  const normalized = normalize(value);
+  return Object.values(campaignsByCode).find((c) => [c.code, c.name, c.indexName, ...c.aliases].some((alias) => normalize(alias) === normalized)) ?? null;
 }
 
 function extractRosterTargetName(question: string): string {

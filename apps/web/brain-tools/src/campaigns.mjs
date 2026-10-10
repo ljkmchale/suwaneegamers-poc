@@ -1,4 +1,9 @@
 export const campaigns = {
+  ANA: {
+    code: "ANA",
+    name: "A New Adventure",
+    aliases: ["a new adventure", "ana"]
+  },
   HoE: {
     code: "HoE",
     name: "Heroes of Emberstran",

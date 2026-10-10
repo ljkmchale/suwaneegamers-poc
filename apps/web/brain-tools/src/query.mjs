@@ -683,7 +683,7 @@ function answerScopedNameGuardQuestion(question, options = {}) {
   if (!guardedName) return null;
 
   const campaign = resolveQuestionCampaign(question, options);
-  if (!campaign || campaign.code === "SoD") return null;
+  if (!campaign || campaign.code !== "TSV") return null;
 
   const displayName = guardedName === "lila" ? "Lila" : "Zephyra";
   return {
@@ -1363,7 +1363,7 @@ function isWorldOnlyQuestion(question) {
   const worldSubject = /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question);
   const pantheonSubject = /\b(god|gods|goddess|goddesses|deity|deities|pantheon|Addan|Amriel|Asmodeus|Brault|Celestine|Cembus|Coralei|Crael|Diverra|Diveria|Eredra|Fralee|Goldraen|Iuz'?Obal|Layeth|Muerg|Myrdris|Natafae|Nigrum|Ol'?Farium|Osanna|Phoe|Sylunara|Tornia|Tyvarion|Urlich|Utheri|Villari|Vo'?egurn|Athuel|Bellum|Disgar|Lyess|Neera|Smott|Tiash|Torec)\b/i.test(question);
   return (worldSubject || pantheonSubject)
-    && !/\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane)\b/i.test(question);
+    && !/\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|A New Adventure|ANA)\b/i.test(question);
 }
 
 function isCrossCampaignWorldQuestion(question) {
@@ -1385,8 +1385,9 @@ function isSuperlativeWorldQuestion(question) {
 }
 
 function resolveCampaignSelection(value) {
+  const selected = normalize(value);
   return Object.values(campaignsByCode).find((campaign) => {
-    return campaign.code === value || campaign.name === value || campaign.indexName === value;
+    return [campaign.code, campaign.name, campaign.indexName, ...campaign.aliases].some((alias) => normalize(alias) === selected);
   }) ?? null;
 }
 
@@ -1719,18 +1720,21 @@ function characterDetailPhrase(member) {
 
 function resolveQuestionCampaign(question, options = {}) {
   if (options.campaign && options.campaign !== "All") {
-    return Object.values(campaignsByCode).find((campaign) => campaign.code === options.campaign || campaign.name === options.campaign) ?? null;
+    const selected = normalize(options.campaign);
+    return Object.values(campaignsByCode).find((campaign) => [campaign.code, campaign.name, campaign.indexName, ...campaign.aliases].some((alias) => normalize(alias) === selected)) ?? null;
   }
 
-  const normalized = normalize(question);
+  const normalized = ` ${normalize(question)} `;
   return Object.values(campaignsByCode).find((campaign) => {
-    return normalized.includes(normalize(campaign.name))
-      || normalized.includes(normalize(campaign.code))
-      || campaign.aliases.some((alias) => normalized.includes(normalize(alias)));
+    return [campaign.name, campaign.code, ...campaign.aliases].some((alias) => normalized.includes(` ${normalize(alias)} `));
   }) ?? null;
 }
 
 const campaignsByCode = {
+  ANA: {
+    code: "ANA", name: "A New Adventure", indexName: "A New Adventure",
+    aliases: ["a new adventure", "ana"]
+  },
   HoE: {
     code: "HoE",
     name: "Heroes of Emberstran",

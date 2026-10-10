@@ -1,6 +1,14 @@
 {
   "sources": [
     {
+      "id": "ana-player-notes",
+      "campaign": "A New Adventure",
+      "title": "A New Adventure - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit?usp=sharing",
+      "filename": "a-new-adventure-player-notes.md",
+      "enabled": true
+    },
+    {
       "id": "hoe-player-notes",
       "campaign": "HoE",
       "title": "HoE - Campaign Player Notes",

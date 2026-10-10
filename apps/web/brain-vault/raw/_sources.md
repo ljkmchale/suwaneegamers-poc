@@ -56,4 +56,5 @@ After raw material has been extracted into `wiki/`, write a processed receipt fr
 | The Crystal Bottle - Campaign Player Notes | Google Doc | https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit | raw/the-crystal-bottle-campaign-player-notes.md |
 | Myrdae Reference for DMs | Google Doc | https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit | (ingested directly; no raw file) |
 | The Silent Vanguard - Player's Reference & Tracking | Google Doc | https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit | raw/the-silent-vanguard-player-reference.md |
+| A New Adventure - Campaign Player Notes | Google Doc | https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit | raw/a-new-adventure-player-notes.md |
 - `worldofmyrdae-map-database.md` - structured map editor export from WorldofMyrdae with locations, coordinates, types, regions, and routes.

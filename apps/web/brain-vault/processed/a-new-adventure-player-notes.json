@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "rawFile": "raw/a-new-adventure-player-notes.md",
+  "rawContentHash": "9745db461ced8d8769c1bff7006b4328d60a86d5fca56f3b5e16ef94139b0a30",
+  "status": "processed",
+  "processedAt": "2026-10-10T01:35:36.432Z",
+  "pagesUpdated": [
+    "wiki/sources/A New Adventure/A New Adventure - Campaign Player Notes.md"
+  ],
+  "notes": "Automatically staged raw source into wiki/sources/A New Adventure/A New Adventure - Campaign Player Notes.md."
+}

@@ -8,6 +8,7 @@ import path from "node:path";
 import { config } from "./config.mjs";
 import { syncGoogleDocSources } from "./google-doc-sync.mjs";
 import { processPendingRawSources } from "./process-raw-sources.mjs";
+import { syncRuntimeSessionPages } from "./sync-session-pages.mjs";
 
 process.env.AUTO_PROCESS_RAW_SOURCES = "false";
 
@@ -35,12 +36,18 @@ for (const item of processResult.skipped) {
   console.log(`Skipped ${item.rawFile}: ${item.reason}`);
 }
 
+const sessions = await syncRuntimeSessionPages();
+console.log(`Session pages: ${sessions.written} created/updated.`);
+for (const campaign of sessions.campaigns) {
+  console.log(`${campaign.campaign}: notes ${campaign.latestNotes}; summaries ${campaign.latestSummary}; published ${campaign.latestPublished}${campaign.summaryBehindNotes ? " (summary source is behind notes)" : ""}.`);
+}
+
 // Rebuild when this run processed a source, OR when the vault holds pages newer
 // than the current index. Wiki pages arrive through channels other than the 6
 // Google Docs (hand-authored entities, other ingests); keying the rebuild only
 // on "did a doc change this run" let 150+ such pages accumulate unindexed for
 // months. Comparing the vault's newest page against the index catches all of it.
-if (processResult.processed.length > 0) {
+if (processResult.processed.length > 0 || sessions.written > 0) {
   console.log("Rebuilding index (sources changed this run)...");
   await runIndexer();
 } else if (indexIsStaleAgainstVault()) {

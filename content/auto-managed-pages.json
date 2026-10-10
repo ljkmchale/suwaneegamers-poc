@@ -83,6 +83,34 @@
         "section": "The Crystal Bottle",
         "role": "primary",
         "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "A New Adventure - Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit?usp=sharing",
+        "section": "A New Adventure",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Myrdae World Guide",
+        "url": "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit",
+        "section": "World",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Myrdae Stories and Tales",
+        "url": "https://docs.google.com/document/d/1cB30vxRCQXjrUt-JV4z8alDVZWvHtqFkYIwhoGlXYJ0/edit",
+        "section": "World",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Abbey of Light",
+        "url": "https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit",
+        "section": "World",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
       }
     ],
     "refreshLabel": "Pulls configured Chronicles Google Docs into the Brain Vault, processes stale raw sources, and rebuilds the index when needed.",

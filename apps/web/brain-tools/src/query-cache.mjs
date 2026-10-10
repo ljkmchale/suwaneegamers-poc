@@ -6,7 +6,7 @@ const CACHE_PATH = path.join(config.dataDir, "query-cache.json");
 const TTL_MS = 7 * 24 * 60 * 60 * 1000;
 // Keep in sync with lib/brain/query-cache.ts. v5 retired cached Groq answers
 // when answer generation moved to Claude Haiku 4.5.
-const QUERY_CACHE_VERSION = "v5";
+const QUERY_CACHE_VERSION = "v6"; // A New Adventure scope and corrected TSV-only guard.
 const queryExcludedSourcePaths = new Set(["log.md"]);
 
 let _cache = null;

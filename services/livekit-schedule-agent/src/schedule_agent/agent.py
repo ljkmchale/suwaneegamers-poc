@@ -44,6 +44,8 @@ from livekit.agents.llm import ToolFlag
 from livekit.agents.voice.agent_session import SessionConnectOptions
 from livekit.plugins import anthropic, openai, silero
 
+from schedule_agent.planning import Evidence, Plan, build_plan, execute_plan
+
 # ElevenLabs is optional (opt-in via MYRA_TTS). Import it at module load so the
 # plugin registers on the MAIN thread. LiveKit refuses plugin registration from
 # the job/worker thread where build_tts runs, so a lazy import there fails with
@@ -2110,6 +2112,7 @@ def wake_word_command(question: str) -> str | None:
 # vault refuse to answer ("name the campaign"), so a visitor in one of those
 # campaigns gets nothing. Normalize to the vault name before asking.
 BRAIN_CAMPAIGNS: dict[str, tuple[str, ...]] = {
+    "A New Adventure": ("a new adventure", "ana"),
     "Heroes of Emberstran": ("heroes of emberstran", "heart of emberstran"),
     "Souls of Destiny": ("souls of destiny",),
     "The Silent Vanguard": ("silent vanguard",),
@@ -2149,12 +2152,15 @@ def campaign_named_in_question(question: str) -> str:
     return ""
 
 
-def query_player_knowledge(
+def query_player_knowledge_evidence(
     question: str,
     campaign: str = "All",
     visibility: str = "players",
     access_token: str = "",
-) -> str:
+    *,
+    require_sources: bool = True,
+    timeout: float = 25,
+) -> Evidence:
     endpoint = os.getenv(
         "BRAIN_ASK_URL",
         "http://127.0.0.1:4652/api/brain/ask",
@@ -2189,14 +2195,64 @@ def query_player_knowledge(
         headers=headers,
         method="POST",
     )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        payload = json.loads(response.read().decode())
+    answer = str(payload.get("answer") or "").strip()
+    sources = payload.get("sources") or []
+    source = "; ".join(
+        str(item.get("path") or item.get("title") or "").strip()
+        for item in sources if isinstance(item, dict)
+    ).strip("; ")
+    if require_sources and (not answer or not source):
+        raise ValueError("Knowledge response has no attributable evidence")
+    return Evidence("knowledge", answer or "The knowledge base did not return an answer.", source)
+
+
+def query_player_knowledge(
+    question: str,
+    campaign: str = "All",
+    visibility: str = "players",
+    access_token: str = "",
+) -> str:
     try:
-        with urllib.request.urlopen(request, timeout=25) as response:
-            payload = json.loads(response.read().decode())
-        answer = str(payload.get("answer") or "").strip()
-        return answer or "The knowledge base did not return an answer."
+        return query_player_knowledge_evidence(
+            question, campaign, visibility, access_token, require_sources=False).text
     except Exception:
         logger.exception("Unable to query the player knowledge base")
         return "I couldn't reach the Suwanee Gamers knowledge base just now."
+
+
+def latest_indexed_session(campaign: str) -> dict[str, Any] | None:
+    """Only a confirmed indexed, player-safe session may supersede dispatch data."""
+    report_path = Path(os.getenv("BRAIN_DATA_DIR", str(REPO_ROOT / "apps/web/brain-data"))) / "session-freshness.json"
+    try:
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        for entry in report.get("campaigns", []):
+            if (map_campaign_to_brain(str(entry.get("campaign") or "")) or entry.get("campaign")) != campaign:
+                continue
+            session = entry.get("latestSession") or {}
+            if session.get("indexedAt") and session.get("visibility") == "players" and session.get("title"):
+                return {**session, "number": entry.get("latestPublished", 0)}
+    except (OSError, ValueError, TypeError):
+        logger.warning("Session freshness report unavailable")
+    return None
+
+
+def session_source_matches(title: str, source: str) -> bool:
+    def words(value: str) -> str:
+        return " " + " ".join(re.findall(r"\w+", value.casefold())) + " "
+    return any(words(title) in words(item) for item in source.split("; "))
+
+
+def session_number(title: str) -> float:
+    match = re.search(r"\bSession\s+(\d+(?:\.\d+)?)", title, re.I)
+    return float(match[1]) if match else 0
+
+
+def knowledge_for_speech(text: str) -> str:
+    text = re.split(r"sources used\s*:", text, flags=re.I)[0]
+    text = re.sub(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", lambda match: match[2] or match[1], text)
+    return " ".join(re.sub(r"[\*`#]", "", text).split())
 
 
 def apply_pronunciations(text: str, pronunciations: dict[str, str]) -> str:
@@ -2325,7 +2381,8 @@ RECAP_PHRASES = (
 
 def is_recap_question(question: str) -> bool:
     normalized = question.casefold()
-    return any(phrase in normalized for phrase in RECAP_PHRASES)
+    return any(phrase in normalized for phrase in RECAP_PHRASES) or bool(re.search(
+        r"\b(?:latest|most recent) (?:session|game)\b|\b(?:recap|summari[sz]e|summary)\b.{0,50}\b(?:session|game)\b|\bcatch me up\b", normalized))
 
 
 def recap_answer(recaps: list[dict[str, Any]], question: str) -> tuple[str, str] | None:
@@ -3519,6 +3576,136 @@ class Myra(Agent):
             return map_campaign_to_brain(games[0]) or "All"
         return "All"
 
+    def recap_plan(self, question: str, *, bypass: bool = False) -> Plan:
+        """Resolve all explicit aliases before using an authenticated profile default."""
+        named = []
+        text = question.casefold()
+        catalog = {name: list(aliases) for name, aliases in BRAIN_CAMPAIGNS.items()}
+        for recap in self.recaps:
+            name = str(recap.get("name") or "")
+            canonical = map_campaign_to_brain(name) or name
+            if canonical:
+                catalog.setdefault(canonical, []).extend([name, *(recap.get("aliases") or [])])
+        for name, aliases in catalog.items():
+            if any(alias and re.search(r"\b" + re.escape(str(alias).casefold()) + r"\b", text)
+                   for alias in [name, *aliases]):
+                named.append(name)
+        defaults = self.dm_default_campaigns if self.knowledge_visibility == "dm" and len(self.dm_default_campaigns) == 1 else self.user_profile.get("games") or []
+        return build_plan(
+            question, named_campaigns=tuple(named),
+            member_campaigns=tuple(map_campaign_to_brain(str(name)) or str(name) for name in defaults),
+            recap_intent=is_recap_question(question), schedule_intent=is_schedule_question(question),
+            bypass=bypass,
+        )
+
+    async def answer_recap_plan(self, plan: Plan) -> str:
+        """Run bounded reads with existing server authorization and turn cancellation."""
+        if plan.clarification:
+            return plan.clarification
+        revision = self._turn_revision
+        selected_session: dict[str, Any] | None = None
+
+        def session_context(campaign: str) -> dict[str, Any]:
+            nonlocal selected_session
+            if selected_session is None:
+                selected = next((item for item in self.recaps if
+                    (map_campaign_to_brain(str(item.get("name") or "")) or item.get("name")) == campaign), {})
+                fresh = latest_indexed_session(campaign)
+                old_number = session_number(str(selected.get("title") or ""))
+                selected_session = {**selected, "newer": False}
+                if fresh and fresh["number"] > old_number:
+                    selected_session = {**fresh, "newer": True}
+            return selected_session
+
+        def read_recap(_question: str, campaign: str) -> Evidence:
+            current = session_context(campaign)
+            if current.get("newer"):
+                title = current["title"]
+                try:
+                    evidence = query_player_knowledge_evidence(
+                        f"Summarize the documented session titled {title} in at most three short sentences. "
+                        "Use only that session's events and cite that session. Do not use earlier sessions.",
+                        campaign, self.knowledge_visibility, self.brain_access_token, timeout=12)
+                    if not session_source_matches(title, evidence.source):
+                        raise ValueError("Current recap session not cited")
+                    # The API's recap shortcut returns both short and long forms,
+                    # regardless of prompt length. Select its complete short form.
+                    short = re.split(r"\bStory recap\s*:", evidence.text, maxsplit=1, flags=re.I)[0]
+                    short = re.sub(r"^\s*Short version\s*:\s*", "", short, flags=re.I)
+                    sentences = re.split(r"(?<=[.!?])\s+", knowledge_for_speech(short))
+                    short = " ".join(sentences[:3])
+                    return Evidence("recap", f"Here's what happened in {campaign}, {title}. {short}", evidence.source)
+                except Exception:
+                    logger.exception("Current indexed recap lookup failed")
+                    return Evidence("recap", f"The latest documented session is {title}, but I couldn't verify its recap just now.", "lookup:unavailable")
+            # Filter first: a different campaign mentioned in a clause must never
+            # win because it happens to occur earlier in the dispatch snapshot.
+            recaps = [item for item in self.recaps if
+                      (map_campaign_to_brain(str(item.get("name") or "")) or item.get("name")) == campaign]
+            selected = str(recaps[0].get("name") or campaign) if recaps else campaign
+            result = recap_answer(recaps, selected)
+            text = result[0] if result else f"I don't have a session recap for {campaign} yet."
+            return Evidence("recap", text, f"dispatch:recaps:{campaign}")
+
+        def read_schedule(_question: str, campaign: str) -> Evidence:
+            events = [event for event in self.schedule.get("events", []) if
+                      (map_campaign_to_brain(str(event.get("title") or "")) or event.get("title")) == campaign]
+            snapshot = {**self.schedule, "events": events}
+            selected = str(events[0].get("title") or campaign) if events else campaign
+            result = campaign_schedule_answer(snapshot, selected)
+            text = result[0] if result else f"I don't have an upcoming game listed for {campaign}."
+            return Evidence("schedule", text, f"dispatch:calendar:{campaign}")
+
+        def read_knowledge(question: str, campaign: str) -> Evidence:
+            try:
+                selected = session_context(campaign)
+                title = str(selected.get("title") or "").strip()
+                if not title:
+                    raise ValueError("Current recap has no session title")
+                request = "Which players are explicitly recorded as attending?" if re.search(
+                    r"\b(players|attended|showed up)\b", question, re.I) else "Which party characters are explicitly involved in this chapter's events?"
+                evidence = query_player_knowledge_evidence(
+                    f"For the documented session titled {title}, answer in one short sentence: {request} "
+                    "List only explicitly documented participants. Use only that session as evidence and cite it. "
+                    "Do not infer player attendance from the roster or from characters mentioned in the narrative. "
+                    "Do not retell the session.",
+                    campaign, self.knowledge_visibility, self.brain_access_token, timeout=12)
+                # The vault may lag behind the dispatched recap. A cited older
+                # session or a roster cannot substantiate current participants.
+                if not session_source_matches(title, evidence.source):
+                    raise ValueError("Participant sources do not match current session")
+                # The API can append character biographies to its participant
+                # answer. Speak its opening answer, preserving the citation check.
+                opening = re.split(r"\n\s*---+\s*(?:\n|$)", evidence.text, maxsplit=1)[0]
+                opening = "\n".join(line for line in opening.splitlines()
+                                    if not re.match(r"^\s*#{1,6}\s", line))
+                short = re.split(r"(?<=[.!?])\s+", knowledge_for_speech(opening))[0]
+                return Evidence("knowledge", short, evidence.source)
+            except Exception:
+                logger.exception("Planned participant lookup failed")
+                return Evidence("knowledge", "I couldn't verify who was involved in that session.",
+                                "lookup:unavailable")
+
+        logger.info("Myra plan v1: campaign=%s operations=%s trace=%s", plan.campaign,
+                    [step.operation for step in plan.steps], plan.trace)
+        try:
+            results = await asyncio.wait_for(asyncio.to_thread(
+                execute_plan, plan,
+                {"recap": read_recap, "schedule": read_schedule, "knowledge": read_knowledge},
+                is_current=lambda: tool_result_is_current(revision, self._turn_revision),
+            ), timeout=28)
+        except RuntimeError as error:
+            if not tool_result_is_current(revision, self._turn_revision):
+                raise asyncio.CancelledError from error
+            raise
+        except TimeoutError:
+            if not tool_result_is_current(revision, self._turn_revision):
+                raise asyncio.CancelledError from None
+            return "That lookup took too long. Please try asking me again."
+        if not tool_result_is_current(revision, self._turn_revision):
+            raise asyncio.CancelledError
+        return " ".join(result.text for result in results)
+
     async def set_page_context(self, page: Any) -> None:
         """Point Myra at the page the visitor just navigated to.
 
@@ -3661,18 +3848,17 @@ class Myra(Agent):
             )
             logger.info("Self-diagnosis reported status: %s", status)
             raise StopResponse()
-        if is_recap_question(question):
+        if is_recap_question(question) and not route_to_model:
             # Recap intent ("what happened last time in X") must be handled before
             # the schedule matcher, which would otherwise fire on the campaign name.
-            recap = recap_answer(self.recaps, question)
-            if recap:
-                answer, category = recap
-            else:
-                answer = (
-                    "Hmm, which campaign would you like me to recap? "
-                    "You can also check Chronicles for the full story."
-                )
-                category = "recap_clarify"
+            plan = self.recap_plan(canonical_question)
+            if not plan.steps and not plan.clarification:
+                self._pending_llm_analytics = {
+                    "question": original_question, "category": "site_knowledge", "started": started,
+                }
+                return
+            answer = await self.answer_recap_plan(plan)
+            category = "recap_clarify" if plan.clarification else "recap"
             self.session.say(answer, allow_interruptions=True)
             self._record_analytics(
                 question=original_question,
@@ -4484,6 +4670,7 @@ async def schedule_agent(ctx: JobContext):
         page_tasks.add(task)
         task.add_done_callback(page_tasks.discard)
 
+    logger.info("Myra recap planner v2 with indexed-session freshness enabled")
     await session.start(agent=agent, room=ctx.room)
     await ctx.connect()
 

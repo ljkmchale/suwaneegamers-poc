@@ -224,8 +224,10 @@ def test_campaign_names_map_to_the_vault_index_names():
     assert map_campaign_to_brain("Bloody Endeavor II") == "Bloody Endeavor"
     # Names that already match pass through.
     assert map_campaign_to_brain("Heroes of Emberstran") == "Heroes of Emberstran"
-    # Campaigns with no vault source resolve to empty -> caller falls back to All.
-    assert map_campaign_to_brain("A New Adventure") == ""
+    assert map_campaign_to_brain("A New Adventure") == "A New Adventure"
+    assert map_campaign_to_brain("ANA") == "A New Adventure"
+    # Unknown campaign references remain unresolved.
+    assert map_campaign_to_brain("Unknown Campaign") == ""
     assert map_campaign_to_brain("Mad Mage") == ""
 
     # A campaign named in a question is detected; ordinary speech is not.

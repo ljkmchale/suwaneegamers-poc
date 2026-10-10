@@ -23,13 +23,19 @@ export async function saveIndex(chunks, embeddings, browseOnlyDocuments = [], fi
     items
   };
 
-  await fs.writeFile(config.indexPath, JSON.stringify(index, null, 2));
+  await writeAtomically(config.indexPath, JSON.stringify(index, null, 2));
   const libraryCatalogPath = path.join(path.dirname(config.indexPath), "library-catalog.json");
   const playerPages = Object.values(index.pages)
     .filter((page) => page.visibility !== "dm")
     .map(({ path, title, campaign, visibility }) => ({ path, title, campaign, visibility }));
-  await fs.writeFile(libraryCatalogPath, JSON.stringify({ version: 1, createdAt, pages: playerPages }, null, 2));
+  await writeAtomically(libraryCatalogPath, JSON.stringify({ version: 1, createdAt, pages: playerPages }, null, 2));
   return index;
+}
+
+async function writeAtomically(destination, content) {
+  const temporary = `${destination}.${process.pid}.tmp`;
+  await fs.writeFile(temporary, content, "utf8");
+  await fs.rename(temporary, destination);
 }
 
 function buildPageGraph(items, browseOnlyDocuments = []) {

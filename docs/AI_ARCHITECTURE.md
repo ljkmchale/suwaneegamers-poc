@@ -44,6 +44,33 @@ capability limited to campaigns currently assigned to them in
 `dungeon_masters` / `campaign_dms`; inactive or unrelated campaigns remain
 player-safe.
 
+Myra's recap turn handler uses `services/livekit-schedule-agent/src/schedule_agent/planning.py`
+to preserve recap, documented participant lookup, and upcoming-game requests in
+one bounded read plan. Campaign aliases resolve from the worker catalog and
+approved dispatch recaps; a single profile campaign may supply the default.
+Ambiguous campaigns require clarification. Recap/calendar reads use approved
+dispatch snapshots unless a verified newer player-safe session is indexed;
+newer recap and participant lookup use `/api/brain/ask` with the existing
+visibility and signed capability. Model routing overrides bypass this path.
+Reads run off the event loop with a 28-second outer timeout and stale-turn
+checks. Activate worker-only code with `scripts/restart-voice-agent.ps1`; the
+website slot does not need rebuilding for this Python-only change.
+
+The `chronicles-sources` scheduler runs `brain-tools/src/refresh-sources.mjs`.
+After pulling notes, `sync-session-pages.mjs` publishes missing dated session
+pages from exact source text, with approved SQLite summaries as fallback.
+Existing curated pages are preserved. `session-pages.mjs` writes coverage to
+`apps/web/brain-data/session-freshness.json`; the indexer stamps a latest session
+only when its body hash and player visibility match the successfully saved
+index. Index and catalog writes are atomic. Myra reads this manifest to detect
+dispatch lag, then uses the authenticated API for the actual answer. A failed
+newer lookup must never describe an older dispatch recap as the latest session.
+A New Adventure is supported in the web/tools campaign catalogs and worker
+aliases, with its player-notes document in the scheduled source configuration.
+Campaign abbreviations match whole words so ordinary words such as "analysis"
+cannot select ANA. Source notes can be newer than the separately authored DB
+summaries. Keep the source-managed Library row aligned with configured sources.
+
 Passive usage-purpose learning is first-party analytics, not model training.
 `AnalyticsTracker.tsx` sends the existing interaction stream through
 `/api/analytics/events`; `apps/web/lib/usagePurpose.ts` classifies meaningful

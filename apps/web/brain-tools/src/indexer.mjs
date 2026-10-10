@@ -6,6 +6,7 @@ import { config } from "./config.mjs";
 import { embedTexts } from "./ai-client.mjs";
 import { chunkDocuments, loadVaultDocuments } from "./vault.mjs";
 import { hasIndex, loadIndex, saveIndex } from "./vector-store.mjs";
+import { markSessionPagesIndexed } from "./session-pages.mjs";
 
 // Jina's throughput cap on this account is the real bottleneck: ~100k tokens/min
 // and only 2 concurrent requests. The old code (16 chunks, fixed 6s delay,
@@ -129,6 +130,8 @@ async function main() {
   }
 
   const saved = await saveIndex(chunks, embeddings, browseOnlyDocuments, currentFileHashes);
+  // Publish freshness only after the matching page bodies are in the new index.
+  await markSessionPagesIndexed({ dataDir: config.dataDir, index: saved });
   console.log(`Saved ${saved.chunkCount} chunks to ${config.indexPath}`);
 }
 
