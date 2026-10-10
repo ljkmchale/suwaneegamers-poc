@@ -124,3 +124,12 @@ composes from only that session's indexed chunks. It skips embeddings, broad
 retrieval, and generic cached answers. Twenty website scope/access tests include
 selected-session provenance, hidden-session denial, and cross-campaign denial.
 
+Final live validation passed: A New Adventure session 35 recap, Ridley/Fungus/
+Kaizo/Cerul/Relys/Affy, and Thursday October 15 at 6:15 PM were spoken together
+in 57.36 seconds, with 5,738 non-silent received frames and matching recognized
+question/analytics. The source's latest unfinished session had included an old
+Session Summary appendix; publication now stops before summary/goals appendices,
+with a regression test (five publisher tests total). The repeated publication
+and refresh are idempotent. All six active campaigns' latest-session endpoints
+were verified, and local/public production identities matched with dirty:false.
+

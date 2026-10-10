@@ -5,6 +5,15 @@ import path from "node:path";
 import os from "node:os";
 import { extractNoteSessions, syncSessionPages, markSessionPagesIndexed } from "../src/session-pages.mjs";
 
+test("unfinished latest sessions exclude summary and goals appendices", () => {
+  for (const appendix of ["Session Summary", "Session Summaries", "Goals", "# Session Summary"]) {
+    const sessions = extractNoteSessions(`35 - <Name>\nSession Date: October 1, 2026\nRidley fought the beast and the party continued southward without resting.\n${appendix}\nSession 15 – Earlier events\nOld unrelated summary must not appear.`);
+    assert.equal(sessions.length, 1);
+    assert.match(sessions[0].body, /Ridley fought/);
+    assert.doesNotMatch(sessions[0].body, /Earlier events|Old unrelated|Session Summar/);
+  }
+});
+
 test("only dated session headers are published; trailing reference material is excluded", () => {
   const result = extractNoteSessions("1 - Potion\nInventory entry\n15 – Aunts & Necromancers\nSession Date: September 26, 2026\nEscanor fought the creature. This is documented action.\n– The End of the Session –\nDM Brief\nSecret omitted");
   assert.equal(result.length, 1);

@@ -3,7 +3,7 @@ campaign: "Bloody Endeavor"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: 9e8b549f057e5728b608a43b434bd17faddefd8ba9a4b0e8a73346c76ff73ba2
+source_hash: 6bd9f6ff157421127b012397d7afb0581789ac8dd60325482954951a4d17e40b
 ---
 
 # Session 43 - Kibbit Needs A Bath
@@ -51,7 +51,4 @@ Pagern, Caelion and Kibbit take a bath.
 Everyone but Albross takes Option 2 … promoting Esadi as becoming a goddess.  We become, Wyrmbane, worshippers of Esadi.
 Rhody asks his monocle, speaking to Madam Mabel, asking if this will anger her. He casts See Invisibility, and sees her as he looks through the monocle. She’s there in the reflection, chuckling. Rhody also sees an invisible air elemental. We discuss the terms of the deal. All but Albross make the deal, and are all now worshippers of Esadi. She summons Albross with a tornado and asks him to make his choice. He casts banishment, and she disappears. We roll initiative. 
             * ROUND ONE:  The Air Elemental hidden in the room attacks Albross, losing concentration on Banishment. Esadi returns in her truer form as a Djinn. Kibbit hides behind Pagern and takes the dodge action. Pagern casts Polymorph on Albross, but Albross resists the spell. Albross casts Guardian of Faith, targeting Esadi and anyone who damages him. Caelion . Rhody attempts to grapple Albross but fails. Esadi knocks down Albross, and the Air elemental sucks all the wind out of his lungs, killing him. Combat ends. 
-Esadi gives us a bag of wind to leave and return to her domain. She shunts us back to the terrace and we put Albross’s body into the bag of holding. We ask Esadi how Maw will get out safely, and the wind tells us we can tell the dragon that the strait is fixed. We are shunted off the terrace and are sent down towards the ground, saved by the bag. The dragon arrives with Maw to greet us. We tell him the strait is fixed. He tells us we are ok to leave the island. If we ever return, he’ll make a point to visit us. Kibbit asks for some gold or gems in recompense. Zeldrigos says no. We say our goodbyes and take Maw with us. We use the bag again and return to the terrace, Maw in tow. Esadi is at the top again, and she sends us away to Gevakaln. She casts Wind Walk on us and we head to Gevakaln. We land on the outside of the city, returning to our physical forms. We revive Albross with Revivfy. We decide we’ll head towards Gevakaln to help save Albross’s brother. 
-
-
-🧑‍🤝‍🧑 Notable NPCs
+Esadi gives us a bag of wind to leave and return to her domain. She shunts us back to the terrace and we put Albross’s body into the bag of holding. We ask Esadi how Maw will get out safely, and the wind tells us we can tell the dragon that the strait is fixed. We are shunted off the terrace and are sent down towards the ground, saved by the bag. The dragon arrives with Maw to greet us. We tell him the strait is fixed. He tells us we are ok to leave the island. If we ever return, he’ll make a point to visit us. Kibbit asks for some gold or gems in recompense. Zeldrigos says no. We say our goodbyes and take Maw with us. We use the bag again and return to the terrace, Maw in tow. Esadi is at the top again, and she sends us away to Gevakaln. She casts Wind Walk on us and we head to Gevakaln. We land on the outside of the city, returning to our physical forms. We revive Albross with Revivfy. We decide we’ll head towards Gevakaln to help save Albross’s brother.

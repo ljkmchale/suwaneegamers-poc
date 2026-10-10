@@ -3,7 +3,7 @@ campaign: "The Silent Vanguard"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: 25d0873f1fba2f64599cb9311d5b34201b1a79e7957b623f8c7ca26bffe75e9f
+source_hash: 62ebd1d43047eaf81bf841d3c756d72f9c1f9b21ef769a9d05935715a3c5ce46
 ---
 
 # Session 4 - Secondary Characters
@@ -28,4 +28,3 @@ Lenny bets 10:80 on the Goblins against the Leopard
 
 
 We need a short rest
-NPCs

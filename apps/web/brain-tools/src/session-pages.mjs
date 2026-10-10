@@ -24,8 +24,10 @@ export function extractNoteSessions(markdown) {
   }
   return headers.map((header, offset) => {
     const block = lines.slice(header.index + 1, headers[offset + 1]?.index ?? lines.length);
-    const stop = block.findIndex((line) => /(?:The End of the Session|The Session Ends Here)|^\s*(?:[❕📜🫅]|DM Brief\b|Session 0\b|Quests\s*$|NPCs\s*$)/i.test(line));
-    const body = (stop < 0 ? block : block.slice(0, stop + 1)).join("\n").trim();
+    const endMarker = /(?:The End of the Session|The Session Ends Here)/i;
+    const appendix = /^\s*(?:#{1,6}\s*)?(?:[❕📜🫅]|DM Brief\b|Session 0\b|Session Summar(?:y|ies)\s*$|Goals\s*$|Quests\s*$|NPCs\s*$)/i;
+    const stop = block.findIndex(line => endMarker.test(line) || appendix.test(line));
+    const body = (stop < 0 ? block : block.slice(0, stop + (endMarker.test(block[stop]) ? 1 : 0))).join("\n").trim();
     return { ...header, body };
   }).filter((session) => session.body.length > 40);
 }
