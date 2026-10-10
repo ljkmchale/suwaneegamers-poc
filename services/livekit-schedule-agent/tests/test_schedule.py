@@ -229,12 +229,22 @@ def test_campaign_names_map_to_the_vault_index_names():
     # Unknown campaign references remain unresolved.
     assert map_campaign_to_brain("Unknown Campaign") == ""
     assert map_campaign_to_brain("Mad Mage") == ""
-
-    # A campaign named in a question is detected; ordinary speech is not.
     assert campaign_named_in_question("what happened in Dungeons three") == "Dungeons III"
     assert campaign_named_in_question("tell me about the silent vanguard") == "The Silent Vanguard"
     assert campaign_named_in_question("who is playing tonight") == ""
     assert campaign_named_in_question("what is my next game") == ""
+
+
+def test_campaign_name_survives_navigation_entity_correction():
+    catalog = ("Adventures", "Diverra")
+    for question in (
+        "What happened last time in a new adventure? Who was involved?",
+        "Tell me about A New Adventure.",
+        "What happened last session in ANA?",
+    ):
+        assert canonicalize_spoken_question(question, catalog) == question
+    assert "Diverra" in canonicalize_spoken_question(
+        "Tell me about Deveria in A New Adventure.", catalog)
 
 
 def test_open_character_sheet_resolves_to_the_right_campaign():

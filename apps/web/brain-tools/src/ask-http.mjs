@@ -61,6 +61,7 @@ export async function answerQuestion(question, options = {}) {
     answerMode: options.answerMode ?? "direct",
   };
   if (options.topK != null) body.topK = options.topK;
+  if (options.sessionTitle) body.sessionTitle = options.sessionTitle;
   // The route takes quality ("fast"/"deep"), not review (bool); translate.
   if (options.review === true) body.quality = "deep";
   else if (options.review === false) body.quality = "fast";

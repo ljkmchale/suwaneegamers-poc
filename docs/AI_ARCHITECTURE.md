@@ -70,6 +70,12 @@ aliases, with its player-notes document in the scheduled source configuration.
 Campaign abbreviations match whole words so ordinary words such as "analysis"
 cannot select ANA. Source notes can be newer than the separately authored DB
 summaries. Keep the source-managed Library row aligned with configured sources.
+Planner reads send `sessionTitle` to `/api/brain/ask`; both query engines select
+only that session's indexed page and chunks within the requested campaign and
+authorized visibility. The selected-session path skips broad retrieval and
+cached generic answers. Unknown, hidden, or mismatched sessions return no
+evidence. Voice name correction protects exact campaign phrases before fuzzy
+entity repair, so navigation labels cannot rewrite A New Adventure.
 
 Passive usage-purpose learning is first-party analytics, not model training.
 `AnalyticsTracker.tsx` sends the existing interaction stream through

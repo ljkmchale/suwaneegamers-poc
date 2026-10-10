@@ -1119,10 +1119,22 @@ def canonicalize_spoken_question(question: str, catalog: tuple[str, ...]) -> str
     The intent-phrase pass is permissive but narrowly scoped; the free-form pass
     is strict and applies everywhere else.
     """
-    return canonicalize_spoken_entities(
-        canonicalize_spoken_entity_question(question, catalog),
-        catalog,
-    )
+    def repair(fragment: str) -> str:
+        return canonicalize_spoken_entities(
+            canonicalize_spoken_entity_question(fragment, catalog), catalog,
+        )
+
+    # Campaign names are already exact references. Protect them from fuzzy
+    # navigation/entity matches, e.g. "A New Adventure" -> "a new Adventures".
+    aliases = {alias for name, names in BRAIN_CAMPAIGNS.items() for alias in (name, *names)}
+    pattern = r"\b(?:" + "|".join(re.escape(alias) for alias in sorted(aliases, key=len, reverse=True)) + r")\b"
+    parts = []
+    cursor = 0
+    for match in re.finditer(pattern, question, re.I):
+        parts.extend((repair(question[cursor:match.start()]), match.group()))
+        cursor = match.end()
+    parts.append(repair(question[cursor:]))
+    return "".join(parts)
 
 
 def pantheon_deity_answer(question: str, pantheon: str) -> str | None:
@@ -2160,6 +2172,7 @@ def query_player_knowledge_evidence(
     *,
     require_sources: bool = True,
     timeout: float = 25,
+    session_title: str = "",
 ) -> Evidence:
     endpoint = os.getenv(
         "BRAIN_ASK_URL",
@@ -2190,6 +2203,7 @@ def query_player_knowledge_evidence(
                 "visibility": "dm" if visibility == "dm" and access_token else "players",
                 "answerMode": "direct",
                 "quality": "fast",
+                **({"sessionTitle": session_title} if session_title else {}),
             }
         ).encode(),
         headers=headers,
@@ -3625,13 +3639,16 @@ class Myra(Agent):
                     evidence = query_player_knowledge_evidence(
                         f"Summarize the documented session titled {title} in at most three short sentences. "
                         "Use only that session's events and cite that session. Do not use earlier sessions.",
-                        campaign, self.knowledge_visibility, self.brain_access_token, timeout=12)
+                        campaign, self.knowledge_visibility, self.brain_access_token, timeout=12,
+                        session_title=title)
                     if not session_source_matches(title, evidence.source):
                         raise ValueError("Current recap session not cited")
                     # The API's recap shortcut returns both short and long forms,
                     # regardless of prompt length. Select its complete short form.
                     short = re.split(r"\bStory recap\s*:", evidence.text, maxsplit=1, flags=re.I)[0]
                     short = re.sub(r"^\s*Short version\s*:\s*", "", short, flags=re.I)
+                    short = "\n".join(line for line in short.splitlines()
+                                      if not re.match(r"^\s*#{1,6}\s", line))
                     sentences = re.split(r"(?<=[.!?])\s+", knowledge_for_speech(short))
                     short = " ".join(sentences[:3])
                     return Evidence("recap", f"Here's what happened in {campaign}, {title}. {short}", evidence.source)
@@ -3669,7 +3686,8 @@ class Myra(Agent):
                     "List only explicitly documented participants. Use only that session as evidence and cite it. "
                     "Do not infer player attendance from the roster or from characters mentioned in the narrative. "
                     "Do not retell the session.",
-                    campaign, self.knowledge_visibility, self.brain_access_token, timeout=12)
+                    campaign, self.knowledge_visibility, self.brain_access_token, timeout=12,
+                    session_title=title)
                 # The vault may lag behind the dispatched recap. A cited older
                 # session or a roster cannot substantiate current participants.
                 if not session_source_matches(title, evidence.source):

@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await answerQuestion(question, {
+      sessionTitle: typeof body.sessionTitle === "string" ? body.sessionTitle : undefined,
       campaign: String(body.campaign ?? "All"),
       topK,
       visibility,

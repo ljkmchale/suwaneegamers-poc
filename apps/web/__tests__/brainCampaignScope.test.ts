@@ -6,7 +6,9 @@ const fixtures = vi.hoisted(() => {
     path: `wiki/sessions/${campaign}/${number}.md`, campaign, visibility, links: [], backlinks: [],
   });
   const pages = [page("A New Adventure", 34), page("A New Adventure", 99, "dm"), page("SoD", 15)];
-  return { index: { pages: Object.fromEntries(pages.map(p => [p.path, p])), items: [] },
+  const items = pages.map((p, i) => ({id: String(i), text: ["Ridley struck the beast.", "Secret DM plan.", "Lila returned to town."][i], embedding: [],
+    metadata: {path: p.path, campaign: p.campaign, visibility: p.visibility, chunkIndex: 0}}));
+  return { index: { pages: Object.fromEntries(pages.map(p => [p.path, p])), items },
     search: vi.fn(() => []), chat: vi.fn(async () => "An answer.") };
 });
 vi.mock("@/lib/brain/vector-store", () => ({ loadIndex: async () => fixtures.index, searchIndex: fixtures.search }));
@@ -47,5 +49,23 @@ describe("campaign-scoped retrieval", () => {
   it("retains separate SoD latest-session scope", async () => {
     const result = await answerQuestion("What is the latest session?", { campaign: "SoD" });
     expect(result.sources.map(source => source.campaign)).toEqual(["SoD"]);
+  });
+  it("composes selected-session answers from only that session", async () => {
+    const result = await answerQuestion("Who was involved?", { campaign: "ANA", sessionTitle: "A New Adventure Session 34 - Recorded Events" });
+    const context = JSON.stringify(fixtures.chat.mock.calls);
+    expect(context).toContain("Ridley struck the beast");
+    expect(context).not.toContain("Lila returned");
+    expect(context).not.toContain("Secret DM plan");
+    expect(result.sources.map(source => source.campaign)).toEqual(["A New Adventure"]);
+    expect(fixtures.search).not.toHaveBeenCalled();
+  });
+  it.each([
+    ["ANA", "A New Adventure Session 99 - Recorded Events"],
+    ["SoD", "A New Adventure Session 34 - Recorded Events"],
+    ["All", "A New Adventure Session 34 - Recorded Events"],
+  ])("rejects hidden or out-of-campaign selected sessions", async (campaign, sessionTitle) => {
+    const result = await answerQuestion("Who was involved?", {campaign, sessionTitle, visibility: "players"});
+    expect(result.sources).toEqual([]);
+    expect(fixtures.chat).not.toHaveBeenCalled();
   });
 });

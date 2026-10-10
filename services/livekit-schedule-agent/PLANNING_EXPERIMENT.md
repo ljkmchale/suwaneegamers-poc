@@ -111,8 +111,16 @@ ANA aliases match whole words. The hardcoded Silent Vanguard name guard applies
 only to TSV, preventing its roster from leaking into other campaign answers.
 Query cache v6 retires answers generated under the old scope rules.
 
-Verification before activation: 169 Python tests passed (one environment-specific
+Verification before activation: 170 Python tests passed (one environment-specific
 skip), 35 real-resolver routing cases passed, four publisher tests passed, and
 website scope/access tests passed. `tests/smoke_planning.py --ana` verifies a live
 session 35 recap, documented participants, and calendar response in one turn.
+
+The ANA voice smoke exposed fuzzy entity correction rewriting the campaign to
+"a new Adventures", then broad retrieval timing out on participant lookup.
+Exact campaign spans are now protected during name repair. Planner requests use
+the API's `sessionTitle` selector, which verifies campaign and visibility and
+composes from only that session's indexed chunks. It skips embeddings, broad
+retrieval, and generic cached answers. Twenty website scope/access tests include
+selected-session provenance, hidden-session denial, and cross-campaign denial.
 
