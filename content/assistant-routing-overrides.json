@@ -1,4 +1,11 @@
 {
-  "forceModel": [],
-  "updatedAt": "2026-08-20T15:36:53.713Z"
+  "forceModel": [
+    {
+      "question": "And who was involved?",
+      "normalized": "and who was involved",
+      "reason": "misroute-from-recap",
+      "addedAt": "2026-10-10T15:25:48.639Z"
+    }
+  ],
+  "updatedAt": "2026-10-10T15:25:48.639Z"
 }

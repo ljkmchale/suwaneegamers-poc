@@ -1040,7 +1040,7 @@
       "id": "bloody-endeavor",
       "name": "Bloody Endeavor II",
       "color": "#ef6a67",
-      "status": "At Sciogost",
+      "status": "At Gevakaln",
       "campaignHref": "/campaigns/bloody-endeavor",
       "stops": [
         {
@@ -1522,6 +1522,40 @@
           },
           "sourceKey": "bloody-endeavor:session-42",
           "sourceHash": "85cb8a03016ab2ac1f6168196463b5cd09382409700c289eeb1dc65693edb22b",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-43",
+          "locationId": "gevakaln",
+          "location": "Gevakaln",
+          "x": 46.88,
+          "y": 64.68,
+          "session": "Session 43",
+          "title": "Kibbit Needs a Bath",
+          "summary": "The party sought to reunite within Esadi’s cloud tower, survive the Iron Golem, and find a way off Scidogost. They coordinated through the fountain, met Esadi in her bubbling bath, and learned she wanted Zeldrigos’ gem in exchange for aid against the storm. Most of the party agreed to worship her as Goddess of the Sky and spread her name, though Albross refused and was killed. Esadi released them with a bag of wind, they convinced Zeldrigos the strait was fixed so Maw could leave, and after a Wind Walk to Gevakaln they revived Albross and resolved to enter the city to save his brother.",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Gevakaln",
+            "description": "They coordinated through the fountain, met Esadi in her bubbling bath, and learned she wanted Zeldrigos’ gem in exchange for aid against the storm."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "direct",
+            "points": [
+              {
+                "x": 46.6,
+                "y": 63.8
+              },
+              {
+                "x": 46.88,
+                "y": 64.68
+              }
+            ],
+            "miles": 23.1
+          },
+          "sourceKey": "bloody-endeavor:session-43",
+          "sourceHash": "09165a70946c84a8e2c7c07cd93195e1ab45f7be01b1c6f913982684b4f0b288",
           "current": true
         }
       ],
@@ -3688,10 +3722,10 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-10-09T14:50:45.616Z",
+    "lastGeneratedAt": "2026-10-13T14:50:49.907Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 120,
+    "generatedStops": 121,
     "routedSegments": 8,
     "impactLocations": 33
   },
@@ -4725,6 +4759,36 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-gevakaln",
+      "locationId": "gevakaln",
+      "location": "Gevakaln",
+      "x": 46.88,
+      "y": 64.68,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 41",
+          "title": "Gevakaln's balance shifted",
+          "type": "political",
+          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 43",
+          "title": "Conflict reshaped Gevakaln",
+          "type": "battle",
+          "description": "They coordinated through the fountain, met Esadi in her bubbling bath, and learned she wanted Zeldrigos’ gem in exchange for aid against the storm."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-hathlao-swamp",
       "locationId": "hathlao-swamp",
       "location": "Hath'lao Swamp",
@@ -4975,28 +5039,6 @@
           "title": "Conflict reshaped Featherfall campsite",
           "type": "battle",
           "description": "They fought through charms, performed desperate leaps to catch falling campers, sent fireballs that lit both foes and trees, and used a dimension door to pursue the last harpy."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-gevakaln",
-      "locationId": "gevakaln",
-      "location": "Gevakaln",
-      "x": 46.88,
-      "y": 64.68,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 41",
-          "title": "Gevakaln's balance shifted",
-          "type": "political",
-          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
         }
       ],
       "crossCampaign": false

@@ -1,6 +1,35 @@
 {
   "entries": [
     {
+      "question": "Yeah, but I'm not part of those games.",
+      "category": "routing-correction",
+      "proposedCorrection": "Review this member correction and update the relevant profile or campaign routing rule before teaching an answer.",
+      "evidence": [
+        "Voice transcript"
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 1,
+      "id": "rem-d683c11e7e52aebd",
+      "normalized": "yeah but i m not part of those games",
+      "status": "pending",
+      "createdAt": "2026-10-11T15:25:58.705Z"
+    },
+    {
+      "question": "And who was involved?",
+      "category": "routing-correction",
+      "proposedCorrection": "Myra answered this from the \"recap\" shortcut, then the member corrected or re-asked (\"No, I meant a new adventure.\"). Review whether this intent is routed to the wrong handler; when in doubt it should fall through to the model.",
+      "evidence": [
+        "Answered as recap",
+        "Member follow-up: No, I meant a new adventure."
+      ],
+      "source": "voice-analytics",
+      "timesSeen": 2,
+      "id": "rem-07ef5be3a88852b6",
+      "normalized": "and who was involved",
+      "status": "pending",
+      "createdAt": "2026-10-10T15:25:48.637Z"
+    },
+    {
       "question": "No, I'm looking for information on the goddess Teldo, Tiash.",
       "category": "learned-answer",
       "proposedCorrection": "Approve this grounded answer so Myra can answer it instantly next time.",
@@ -1125,5 +1154,5 @@
       "reviewedAt": "2026-07-30T00:24:20.346Z"
     }
   ],
-  "updatedAt": "2026-09-29T15:25:20.945Z"
+  "updatedAt": "2026-10-12T15:25:41.517Z"
 }

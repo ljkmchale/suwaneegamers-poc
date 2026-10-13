@@ -1,6 +1,11 @@
 {
   "entries": [
     {
+      "healedAt": "2026-10-10T15:25:47.420Z",
+      "kind": "routing-override",
+      "question": "And who was involved?"
+    },
+    {
       "healedAt": "2026-09-29T15:25:09.142Z",
       "kind": "learned-answer",
       "question": "No, I'm looking for information on the goddess Teldo, Tiash."
@@ -86,5 +91,5 @@
       "question": "Hey Mara, what do you know about the Abbey of Light?"
     }
   ],
-  "updatedAt": "2026-09-29T15:25:09.142Z"
+  "updatedAt": "2026-10-10T15:25:47.420Z"
 }

@@ -2358,6 +2358,33 @@ window.SESSION_ART = {
   secs.forEach(function(s){if(s)io.observe(s);});
 })();
 </script><style>
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0}
+.hero-video.playing{opacity:1}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
+</style><script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var videos={"34":"/media/images/chronicles/heroes-of-emberstran/session-34-the-bellows-rigged-v1.mp4"};
+  Object.keys(videos).forEach(function(chapter){
+    var section=document.getElementById('s'+chapter);if(!section)return;
+    var holder=section.querySelector('.hero-art');if(!holder)return;
+    var video=document.createElement('video');video.className='hero-video';
+    video.muted=true;video.loop=true;video.playsInline=true;video.preload='none';
+    video.setAttribute('aria-hidden','true');holder.appendChild(video);
+    video.addEventListener('playing',function(){video.classList.add('playing');});
+    video.addEventListener('error',function(){video.classList.remove('playing');});
+    var visible=false;
+    function update(){
+      if(visible&&!document.hidden){if(!video.getAttribute('src'))video.src=videos[chapter];video.play().catch(function(){});}
+      else video.pause();
+    }
+    document.addEventListener('visibilitychange',update);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;update();},{threshold:0.05}).observe(section.querySelector('.hero'));
+    }else{visible=true;update();}
+  });
+})();
+</script><style>
 .hero-photo.story-incoming{opacity:0;transition:opacity 2.5s ease-in-out}
 .has-photo .hero-photo.story-incoming{opacity:0}
 .has-photo .hero-photo.story-incoming.visible{opacity:1}
