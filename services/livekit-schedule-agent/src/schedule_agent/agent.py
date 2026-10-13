@@ -27,6 +27,9 @@ from livekit.agents import (
     AgentServer,
     AgentSession,
     APIConnectOptions,
+    AudioConfig,
+    BackgroundAudioPlayer,
+    BuiltinAudioClip,
     JobContext,
     MetricsCollectedEvent,
     ModelSettings,
@@ -46,6 +49,7 @@ from livekit.plugins import anthropic, openai, silero
 
 from schedule_agent import claude_subscription as claude_sub
 from schedule_agent.planning import Evidence, Plan, build_plan, execute_plan
+from schedule_agent.spoken_text import spoken_cleanup
 
 # ElevenLabs is optional (opt-in via MYRA_TTS). Import it at module load so the
 # plugin registers on the MAIN thread. LiveKit refuses plugin registration from
@@ -2705,6 +2709,11 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
             effort=os.getenv("CLAUDE_SUBSCRIPTION_EFFORT") or None,
             prompt_suffix=SUBSCRIPTION_TOOL_NOTE,
             speaker_label="The visitor",
+            # Past CLAUDE_PLAN_DEGRADE_PCT the plan serves the fast model; past
+            # CLAUDE_PLAN_FALLBACK_PCT, with an API key present, turns go to the key.
+            fast_model=os.getenv("CLAUDE_FAST_MODEL", DEFAULT_CLAUDE_MODEL),
+            stop_at_critical=has_api_key,
+            on_usage=report_plan_usage,
         )
 
     api_llm: llm.LLM | None = None
@@ -2885,6 +2894,30 @@ def post_voice_feedback(payload: dict[str, Any]) -> None:
         logger.exception("Unable to record voice feedback")
 
 
+def report_plan_usage(usage: claude_sub.PlanUsage) -> None:
+    """Forward the plan's window utilisation to the website's health view.
+
+    One row per window, recorded as kind "plan_usage" with value_ms holding the
+    percent used times 100 (so 35.0% is 3500). Runs in a thread: the callback is
+    invoked from the event loop and post_voice_metric does blocking I/O.
+    """
+
+    def _send() -> None:
+        for name, window in (("five_hour", usage.five_hour), ("seven_day", usage.seven_day)):
+            if window is None:
+                continue
+            post_voice_metric(
+                {
+                    "kind": "plan_usage",
+                    "valueMs": round(window.utilization * 100),
+                    "provider": "claude-code-subscription",
+                    "model": name,
+                }
+            )
+
+    threading.Thread(target=_send, name="plan-usage-report", daemon=True).start()
+
+
 def post_voice_metric(payload: dict[str, Any]) -> None:
     secret = os.getenv("LIVEKIT_API_SECRET")
     endpoint = os.getenv(
@@ -3049,6 +3082,14 @@ PERSONA_INVARIANTS: tuple[str, ...] = (
     "No profanity, slurs, sexual content, or insults about a real person's "
     "appearance, family, beliefs, or ability. Teasing stays about dice, "
     "characters, and in-game decisions.",
+    # Spoken delivery is its own medium: a web address, file path or ID carries no
+    # meaning by ear. (spoken_text.spoken_cleanup also strips them before TTS.)
+    "Never read a web address, file path, or ID aloud. Name the thing instead, "
+    'like "the Pantheon page" or "the roster sheet". Say numbers and times the '
+    "way a person says them out loud.",
+    # Pacing: the knowledge search takes several seconds, so never leave dead air.
+    "Before you call search_knowledge_base, which can take several seconds, say one "
+    'short natural sentence first, such as "Let me check the archives.", then call it.',
 )
 
 
@@ -4695,6 +4736,9 @@ async def schedule_agent(ctx: JobContext):
         min_endpointing_delay=tuning_float(tuning, "minEndpointingDelay", "MIN_ENDPOINTING_DELAY", 0.4),
         max_endpointing_delay=tuning_float(tuning, "maxEndpointingDelay", "MAX_ENDPOINTING_DELAY", 5.0),
         preemptive_generation=True,
+        # Markdown and emoji first (LiveKit's defaults), then the spoken-delivery
+        # net: URLs, file paths, IDs and stage directions are never read aloud.
+        tts_text_transforms=["filter_markdown", "filter_emoji", spoken_cleanup],
         # Bound a stalled Claude call. With no fallback model left, the only thing
         # standing between a hung request and the visitor is this: cap each attempt
         # and cut the retry count so a bad turn fails to deterministic-only in a few
@@ -4823,6 +4867,29 @@ async def schedule_agent(ctx: JobContext):
     logger.info("Myra recap planner v2 with indexed-session freshness enabled")
     await session.start(agent=agent, room=ctx.room)
     await ctx.connect()
+
+    # OPT-IN: a soft working sound while she thinks, so a pause never reads as a
+    # dead line. Off by default because the sound is a second audio track from the
+    # agent participant, and a client that derives its orb from participant
+    # activity (rather than the agent-state attribute) would animate the orb
+    # during "thinking". Enable with MYRA_THINKING_SOUND=on once the orb is verified.
+    if (
+        not AVATAR_POC_ENABLED
+        and os.getenv("MYRA_THINKING_SOUND", "off").strip().casefold() in {"on", "1", "true", "yes"}
+    ):
+        try:
+            background_audio = BackgroundAudioPlayer(
+                thinking_sound=AudioConfig(
+                    BuiltinAudioClip.KEYBOARD_TYPING,
+                    volume=env_float("MYRA_THINKING_SOUND_VOLUME", 0.25),
+                    fade_in=0.35,
+                    fade_out=0.15,
+                )
+            )
+            await background_audio.start(room=ctx.room, agent_session=session)
+            ctx.add_shutdown_callback(background_audio.aclose)
+        except Exception:
+            logger.warning("Thinking sound unavailable; continuing without it", exc_info=True)
 
     # Subscription path only: have the Claude CLI spawned before the first turn.
     warm_task = asyncio.create_task(agent.warm_thinking())
