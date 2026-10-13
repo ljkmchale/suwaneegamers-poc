@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserSession, isSignedIn } from "@/lib/userSession";
 import { isMachineRequest } from "@/lib/machineAuth";
+import { isMemberBlocked } from "@/lib/memberBlocks";
 import { answerQuestion, retrieve } from "@/lib/brain/query";
 import { hasIndex } from "@/lib/brain/vector-store";
 import { brainConfig } from "@/lib/brain/config";
@@ -32,8 +33,17 @@ export async function POST(request: NextRequest) {
   // This route is exempt from the proxy's site-wide sign-in gate because it has
   // two kinds of caller: signed-in members in /advents_of_harmony, and the LiveKit voice
   // agent, which has no browser session. Authorization therefore happens here.
-  if (!isMachineRequest(request) && !isSignedIn(await getUserSession())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+  const machineRequest = isMachineRequest(request);
+  if (!machineRequest) {
+    const session = await getUserSession();
+    if (!isSignedIn(session)) {
+      return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+    }
+    // Machine-capable routes bypass the proxy's member gate, so a valid
+    // browser session must also be checked against current access restrictions.
+    if (isMemberBlocked(session.email!)) {
+      return NextResponse.json({ error: "Access revoked." }, { status: 403 });
+    }
   }
 
   try {
@@ -46,7 +56,7 @@ export async function POST(request: NextRequest) {
     // short-lived capability minted for an explicitly allowlisted Myra user.
     const requestedVisibility = String(body.visibility ?? "players");
     const hasAdminSession = (await getAdminSession()).isAdmin === true;
-    const myraAccess = isMachineRequest(request)
+    const myraAccess = machineRequest
       ? verifyMyraBrainAccessToken(request.headers.get("x-sg-myra-brain-access"))
       : null;
     const hasMyraDmAccess = tokenAllowsCampaign(myraAccess, String(body.campaign ?? "All"));

@@ -117,8 +117,11 @@ requests to suspicious paths block immediately. Never block Cloudflare's shared
 cross-zone Worker source `2a06:98c0:3600::103`; it is not a visitor identity.
 
 Member access restrictions are separate from Cloudflare IP blocks. The
-`member_blocks` table is enforced by `proxy.ts` on every authenticated request
-and by both OAuth callbacks. A rejected identity receives a short-lived sealed
+`member_blocks` table is enforced by `proxy.ts` on gated member requests
+and by both OAuth callbacks. `/api/brain/ask` checks browser sessions against
+the same table itself because machine callers bypass the proxy's member gate;
+authenticated machine requests retain their separate bearer authorization.
+A rejected identity at the sign-in gate receives a short-lived sealed
 review token; `/signin` uses it to submit a verified request into
 `member_unblock_requests`. Pending requests and the Unblock/Keep blocked
 decisions live at `/admin/members`. Internal block reasons are admin-only.
