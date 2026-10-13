@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/bloody-endeavor-campaign-player-notes.md"
 source_url: "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit"
-source_hash: "5b48cd5de4830414636c52590c77b090fee07469a5600f679e838a639b5d076c"
+source_hash: "b7025e01a2ece9fff9f7e78300a6abf577168b172bb274c076112547d97faf43"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-09-15T14:45:56.364Z"
-pulled_at: "2026-09-15T14:45:30.915Z"
+imported_at: "2026-10-13T14:46:37.447Z"
+pulled_at: "2026-10-13T14:46:12.023Z"
 ---
 
 # Bloody Endeavor - Campaign Player Notes
@@ -17,15 +17,15 @@ pulled_at: "2026-09-15T14:45:30.915Z"
 Campaign: Bloody Endeavor
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
 Raw source: [[raw/bloody-endeavor-campaign-player-notes.md]]
-Raw hash: `5b48cd5de4830414636c52590c77b090fee07469a5600f679e838a639b5d076c`
-Imported: 2026-09-15T14:45:56.364Z
+Raw hash: `b7025e01a2ece9fff9f7e78300a6abf577168b172bb274c076112547d97faf43`
+Imported: 2026-10-13T14:46:37.447Z
 
 ## Imported Notes
 
 # Bloody Endeavor - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
-Pulled: 2026-09-15T14:45:30.915Z
+Pulled: 2026-10-13T14:46:12.023Z
 
 🫅 Players
 Players
@@ -2371,7 +2371,8 @@ Caelion casts toll the dead on the golem, starting initiative:
          * ROUND ONE:  The golem turns toward Caelion and spews poisonous gas from his mask, nearly knocking out Caelion. His Death Ward saves him. Caelion just stands there waiting for the golem to reform in the middle. Combat ends with the golem looking towards Caelion.
 The fountain reactivates and the rest of the party touches it, returning them back to the painting room with Caelion. We discuss the nature of the room. Rhody will stand by the bedroom painting and plans to attack it, drawing its attention.  Rhody throws his pitchfork, (rolling like shit) and it takes him 5 times to hit the golem…
          * ROUND ONE:  The Iron Golem strikes towards Rhody but misses twice (also rolls like shit), and the rest of the party waits for the golem to freeze. Eventually it does and combat ends.
-The painting of the bedroom comes alive. On the left side of the painting is a massive bed with a canopy. On the right side is a bubbling bathtub. It’s looking lively. The party walks through the painting. It’s like opening a door, and we notice a door where the painting was when we enter the 40 x 40 room. The walls all have a scattering of paintings. Kibbit begins disrobing and heads toward the bubble bath when a bubble amalgamation. We ask if the amalgamation is Esadi, and the bubbles fall away to reveal the woman. She’s not wearing anything besides the jewelry. She magically commands wind to bring her a towel. Kibbit keeps asking if he can use the bath and she eventually says yes. Albross asks her about the storm around the island, asking her if she can stop the storm from bringing ships to the island. She tells us she really wants Zeldrigos’s gem. It's very powerful and she wants to study it. We tell her we want to make a deal to figure out a way to get off of the island. She summons a cloud of fog to give us a moment of privacy while we discuss our plan.
+Meeting Esadi
+The painting of the bedroom comes alive. On the left side of the painting is a massive bed with a canopy. On the right side is a bubbling bathtub. It’s looking lively. The party walks through the painting. It’s like opening a door, and we notice a door where the painting was when we enter the 40 x 40 room. The walls all have a scattering of paintings. Kibbit begins disrobing and heads toward the bubble bath when a bubble amalgamates. We ask if the amalgamation is Esadi, and the bubbles fall away to reveal the woman. She’s not wearing anything besides the jewelry. She magically commands wind to bring her a towel. Kibbit keeps asking if he can use the bath and she eventually says yes. Albross asks her about the storm around the island, asking her if she can stop the storm from bringing ships to the island. She tells us she really wants Zeldrigos’s gem. It's very powerful and she wants to study it. We tell her we want to make a deal to figure out a way to get off of the island. She summons a cloud of fog to give us a moment of privacy while we discuss our plan.
 We agree we shouldn’t give her the rimestone. We discuss our options: killing the dragon, convincing her to let one ship pass by, etc. The winds dissipate and Kibbit talks to her about spreading her name where we go and convincing others to worship her as the Goddess of the Sky Esadi. She seems to like this idea. Caelion brings up Maw and asks to ensure we make sure she gets off the island as well. She says she can also grant all of our wishes if we bring her the gem. 
 We have 3 options: 
          * Option 1 is to go get her the gem now and she gives us a tower and keeps the prisoners locked up.
@@ -2395,7 +2396,49 @@ Everyone but Albross takes Option 2 … promoting Esadi as becoming a goddess.  
 Rhody asks his monocle, speaking to Madam Mabel, asking if this will anger her. He casts See Invisibility, and sees her as he looks through the monocle. She’s there in the reflection, chuckling. Rhody also sees an invisible air elemental. We discuss the terms of the deal. All but Albross make the deal, and are all now worshippers of Esadi. She summons Albross with a tornado and asks him to make his choice. He casts banishment, and she disappears. We roll initiative. 
             * ROUND ONE:  The Air Elemental hidden in the room attacks Albross, losing concentration on Banishment. Esadi returns in her truer form as a Djinn. Kibbit hides behind Pagern and takes the dodge action. Pagern casts Polymorph on Albross, but Albross resists the spell. Albross casts Guardian of Faith, targeting Esadi and anyone who damages him. Caelion . Rhody attempts to grapple Albross but fails. Esadi knocks down Albross, and the Air elemental sucks all the wind out of his lungs, killing him. Combat ends. 
 Esadi gives us a bag of wind to leave and return to her domain. She shunts us back to the terrace and we put Albross’s body into the bag of holding. We ask Esadi how Maw will get out safely, and the wind tells us we can tell the dragon that the strait is fixed. We are shunted off the terrace and are sent down towards the ground, saved by the bag. The dragon arrives with Maw to greet us. We tell him the strait is fixed. He tells us we are ok to leave the island. If we ever return, he’ll make a point to visit us. Kibbit asks for some gold or gems in recompense. Zeldrigos says no. We say our goodbyes and take Maw with us. We use the bag again and return to the terrace, Maw in tow. Esadi is at the top again, and she sends us away to Gevakaln. She casts Wind Walk on us and we head to Gevakaln. We land on the outside of the city, returning to our physical forms. We revive Albross with Revivfy. We decide we’ll head towards Gevakaln to help save Albross’s brother. 
+– The Session Ends Here – 
+9
+	Character level at end of the session
+	7
+	Sessions played at that level
+	44 - Count On Your Fingers
+Session Date:  October 12th, 2026
+In-game Date:  30th of Paramor, 1246
+Starting Location:  Near Gavalkan
+Outside of Gevakaln
+We are just outside of the east side of Gevakaln. We make our way towards the gate behind a wagon, which is let in by some guards. The guards stop and ask our business, and we say we are worshippers of Esadi. They ask who Esadi is, Rhody says “Have you ever felt a gentle breeze that makes a day worth enjoying? That’s Esadi”. They agree to let us in, wary of Rhody and Albross’s gaunt frames from recent death. They tell us no funny business and we’re allowed in. We see a higher terraced part of the town, called the Brydove Heights to our left, and a lower terraced part of the town to the right covered in fog called the Fogwalk Underbelly. The terrace we’re on now is called the Mittler Ward, the middle class part of Gevakaln. 
+Nature of Wyrmbane, worshippers of Esdadi with Albross
+We are marked by Esadi, with a blue lightning bolt tattoo.  Whenever we announce who we are, there is lightning that appears. Esadi is content with being a Lesser Deity, goddess of the West Wind.
+Moving about Gevakaln
+Kibbit asks the guards what inn to stay at, the guards recommend the Salty Cat on the middle terrace, or the Pushing Crook on the lower terrace. We make our way towards the Salty Cat. As we go, Kibbit bumps into some people who look well off and attempts to pickpocket them while trying to ask where the inn is.  He grabs their coin bag, getting 1 gp and 12 sp. We follow the directions to the inn, a brown bow shaped building with salty wood and a cat face on the sign. 
+We enter and are welcomed by the sound of sea shanties. A host approaches named Reive, asking if we need a table or a room. Kibbit insisted on hassling the poor server and interrupting Albross. We pay 2 gp to get 2 private rooms for the 5 of us. A waitress holding 5 mugs with salted rims approaches, mistaking our short party members for children. She later brings the meal, roasted “parrot”. Our keys are given to us and we make our way to our rooms. There’s a double hammock room and a captain’s quarters room (Albross and Caelion go to the double hammock room, the rest go to the captain’s quarters room). 
+Albross and Caelion casts Sending:
+        
+With Albross. at Mittler Ward, Salty Cat. it's dangerous, are you safe? Come to us. Talk later. We will take down the Sable Shadows.
 
+Response: I messed up
+They receive no other message. Albross says they’ll need to find Jasper Five-Fingers. Caelion casts Sending again:
+        
+What happened? Where are you? Can you come or us to you?
+There is no response.
+Meanwhile, Kibbit is in a dressmaking shop. He picks a rudimentary lock and finds a small lockbox inside, with some funds. He finds funds that total 104 gp, taking 62 gp. While leaving, he sees a mugging occurring. He sneaks up from behind them and tries to listen in. The muggers are all wearing black, about Rhody sized, and are telling the guy to pay the Lieutenant what’s due. The victim says he doesn’t have the money yet. Eventually the sounds of guards can be heard, and the mugger slits his throat, and they flee. Kibbit follows after them sneakily, seeing them go to a manhole cover to escape. Kibbit throws a copper to attempt to distract the man and attempts to pick his pocket. Kibbit grabs one of the pouches that are on his person as he flees into the night.
+We take a long rest and level up. All of us have a peaceful sleep dreaming of clouds, except for Albross. He dreams of his past on the farm. He’s tending to the horses. It’s the end of Sultra, going into Garnest. He’s deep in his farmland with his horse Chestnut. He saw some wild animals in the distance, eventually getting to a bramble patch with some bunnies in the patch. One of the bunnies is stuck in the brambles. Albross gets off the horse and goes to help the bunny. Its body is shaped weirdly. Albross goes to gently remove the bunny from the thorns. As he does, he sees the rabbit has antlers, and as it escapes from his grasp it sprouts wings and bounds away. Albross feels sick, looking back at the farm and seeing a wagon pulling away. 
+It’s the 31st of Paramor
+We all wake up. Kibbit looks into the pouch he took, seeing 3 small balls. They appear to be mudlike and have poisonous properties. Rhody gives Kibbit the Clawed Glove. Caelion and Albross join the others in the Captain’s quarters and relay what they learned, and Kibbit relays what he learns. We leave the inn and make our way to the weapon’s smith, the Dragon Coal. There is a forge designed to be like a dragon breathing fire. A human about my size is at work. He does have crossbows in his shop, so Kibbit and Maw approach. Kibbit asks for one that can fit in his small and dainty hands. Kibbit wants Albross to help talk down the price for the 76 gold crossbow. We then remembered we took thousands of gold from Esadi.  We buy some bolts and make our way back to Pagern. 
+Kibbit asks if he should name his crossbow, Maw says yes. Her weapon is named Twinkie Death. Kibbit, Albross and Rhody make their way to the manhole cover, which is cordoned off by guards. There is still a body. There is no head on the body now. We talk to the guards at the crime scene, they don't know much going on. There’s evidence that his face was smashed into the wall. They don’t know who this person is, and can't talk.
+We see a cloaked individual wearing brown leathers and a red cloak. Kibbit breaks off and sneaks up behind him and Rhody and Albross also approach. He’s a member of the Cloak of Defiance, investigating the crime scene. He says the exploded head is a signature of the Sable Shadows. Albross reveals that Kibbit saw the crime, and the grunt says we should report it to the boss. He hands Caelion a special golden coin with an image on it of the Cloak of Defiance and says we should report at the Spiral, asking for Namys. We all head back to the Salty Cat. We start counting the gold. The other contents of the bag fall out as well, but the coins fall out and it’s all copper coins. It’s 23,350 copper pieces, 4670 each. We take it to Geva’s Trove, a vault to exchange coinage. Kibbit buys a disguise kit
+Pagern finishes inscribing Wall of Force into his Spellbook. Kibbit uses his disguise kit to disguise himself, and we head over to the Spiral. There are guards looking out over the terrace. We make the charisma checks to get through the checkpoint thanks to Albross and Rhody’s checks and Kibbit’s disguise. The spiral is a tall, 3 or 4 story tall building shaped like a lighthouse, with spirals of colored stone and turrets at the top. There is a finely dressed half-elven man at the door, opening the door for us as we enter. It’s an open room with a glittering chandelier lighting the establishment. It’s not too crowded currently. A female half-elf greets us inside, and when we show the coin we’re immediately pushed towards the corner. We see the same Cloak member. He points us to Namys, who’s sitting at a large table alone. He’s elvish, with slick long dark gold hair. His attire is all white, his face is well polished, and he has bright golden colored eyes. We approach, with Kibbit staying behind to ask the Cloak member if they’re recruiting. Namys stands and meets us. The table has been set with a lot of food catered to us: on one side there’s a fine meal, a simple and another fine meal, on the other side is meats and veg, an OCD meticulous plate, and 2 glasses of wine with the menu. 
+We get down to business with Namys. We tell him about Albross’s brother being mixed up with the Sable Shadows. Albross asks what the Cloak knows. Namys reports he’s seen him earlier this stretch. Gevakaln is a “cesspool of villany” according to Namys. The Cloak controls a good portion of the town, and the Sable Shadows have begun to grow in influence as of late. Kibbit asks if the mudballs had something to do with their heads exploding, and Namys assumes so after some inspection. We ask if there are any more leads on the Sable Shadows, and Namys says he’ll give us some information in exchange for gold or a favor.  The Sable Shadows have grown in the local drug trade, and he’d be happy to share information if the warehouse they work out of is destroyed. We agree to take out the warehouse and finish our meals. This will also be an initiation test for Kibbit to join the Cloak of Defiance. Rhody lets Namys know we’re capable, having escaped the island. This intrigues Namys, but we don’t reveal anything else. We head to the warehouse. 
+We head to the Mittler Ward and pass the Just Salt store by the Underbelly. A guard warns us that the area is dangerous, we assure we’re capable of handling ourselves. We enter the lower terrace. Rhody casts Pass Without Trace and we go to the Warehouse stealthily. It’s just off the main road with buildings on either side. We see 2 individuals who appear to be homeless wearing solid black clothes. There’s a second story built atop the warehouse. We sneak towards the back through a thin alley, with Maw on watch. Kibbit climbs up the side and sees a pale figure sitting in an office. Most of the building is wooden but this room is stone and the doors are metal. The windows are barred. He checks a window on the second floor, seeing what looks like a warehouse gutted of lumber supplies, theres a ladder inside going even further up to a third floor. The inside is lit by lanterns. Kibbit sees crates inside as well, with one individual not wearing black inspecting the contents of one of the crates. He opens up the window and sneaks inside. He’s counted roughly 6-7 people in the warehouse so far. Kibbit returns and reports what he’s seen. We tie a rope to the handles on the outside door and to another building to keep it taught. Kibbit returns to the window while the rest of the team heads to the other door. There are 2 guards, one smoking a weird pipe. Kibbit crosses to the other side of the warehouse and bumps into a small girl reading a book who was also hidden. As the party is about to jump the guards, the young girl screams. 
+Meanwhile… 3 days prior in Nurador
+Lucerion, Kotio and Armaros see orc encampments near the city. Armaros is confused as to why he was transported here. The orcs have set up a siege camp. Lucerion and the others of the Sacred Crows make their way to the town. A few hours pass, and as they get near the town a scouting group of orcs spots them. The town opens their gates for them as they’re being chased, and the orcs flee. They make their way into Nurador. 
+A day later, they’ve met with the leaders of Nurador, Lucerion explaining what he knows. Lucerion is told they’ve been besieged for a few days. He finds Lady Lightguard, who begrudgingly requests aid from Lucerion. They prepare defenses over the next few days, eventually hearing that a flying beast has been reported as heading to Nurador.
+– The Session Ends Here – 
+10
+	Character level at end of the session
+	1
+	Sessions played at that level
+	
 
 🧑‍🤝‍🧑 Notable NPCs
 

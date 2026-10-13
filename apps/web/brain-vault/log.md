@@ -872,3 +872,11 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 ## [2026-10-08] synthesis | Quick Reference auto-curation
 
 - Refreshed [[quick/The Silent Vanguard Quick Reference]] from current The Silent Vanguard notes (claude-sonnet-5).
+
+## [2026-10-10] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+
+## [2026-10-13] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
