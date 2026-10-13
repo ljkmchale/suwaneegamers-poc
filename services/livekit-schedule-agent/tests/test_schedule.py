@@ -1459,3 +1459,35 @@ def test_llm_short_name_maps_anthropic_to_claude():
     # Any non-Claude label falls through to a truncated label, not a name.
     assert llm_short_name("livekit.plugins.openai.llm.LLM") == "livekit.plugins.openai.llm.LLM"
     assert llm_short_name("") == "unknown"
+
+
+def test_assistant_info_serves_real_world_compartments_on_demand():
+    from schedule_agent.agent import ASSISTANT_INFO_TOPICS, assistant_info
+
+    fields = {
+        "updates": "Oct 12: Myra can now read plan usage.",
+        "roadmap": "Requested: name generator.",
+        "self_model": "I run on Claude through a subscription.",
+    }
+    assert "plan usage" in assistant_info("whats_new", **fields)
+    assert "name generator" in assistant_info("Roadmap", **fields)
+    how = assistant_info("how i work", **fields)
+    assert "subscription" in how and how.startswith("About yourself")
+    assert assistant_info("what's new", **fields) == fields["updates"]  # tolerant of wording
+    assert "Valid topics" in assistant_info("lore", **fields)
+    assert assistant_info("roadmap", updates="", roadmap="", self_model="") == (
+        "I don't have that in my notes."
+    )
+    assert set(ASSISTANT_INFO_TOPICS) == {"whats_new", "roadmap", "how_i_work"}
+
+
+def test_system_prompt_no_longer_carries_the_on_demand_compartments():
+    import inspect
+
+    from schedule_agent import agent as agent_module
+
+    source = inspect.getsource(agent_module.Myra.__init__)
+    # The three bodies are never interpolated into the prompt any more.
+    assert 'updates_block = ""' in source
+    assert 'self_model_block = ""' in source
+    assert "get_assistant_info" in source

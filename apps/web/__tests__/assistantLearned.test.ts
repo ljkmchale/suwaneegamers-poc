@@ -7,6 +7,7 @@ import {
   selectFaqForAgent,
   trimForVoice,
   withQuestionForgotten,
+  withoutUnservable,
   type LearnedStore,
 } from "@/lib/assistantLearned";
 
@@ -161,5 +162,43 @@ describe("selectFaqForAgent", () => {
     };
     const [entry] = selectFaqForAgent(big, 10, 40);
     expect(entry.answer.length).toBeLessThanOrEqual(41);
+  });
+});
+
+describe("what is never learned", () => {
+  it("rejects replies and stumbles that only make sense inside a conversation", () => {
+    for (const junk of [
+      "No, I'm looking for information on the goddess Teldo, Tiash.",
+      "No, I want to know what the bad gods are.",
+      "I mean, the campaign was the Crystal Bottle.",
+      "Hey, um Collective of Myrdae",
+      "I don't I don't know. Heroes of Emberstranc.",
+    ]) {
+      expect(isLearnableQuestion(junk), junk).toBe(false);
+    }
+    expect(isLearnableQuestion("Can you tell me about the gods?")).toBe(true);
+    expect(isLearnableQuestion("Who runs the Mad Mage campaign?")).toBe(true);
+  });
+
+  it("treats 'the excerpts do not contain' answers as refusals", () => {
+    expect(isRefusalAnswer("The excerpts do not contain information about a goddess named Teldo.")).toBe(true);
+    expect(isRefusalAnswer('The world notes do not yet name a "Collective of Myrdae."')).toBe(true);
+    expect(isRefusalAnswer("I need a name or identifier to introduce a character.")).toBe(true);
+    expect(isRefusalAnswer("Tiash is the goddess of balance.")).toBe(false);
+  });
+
+  it("stops serving already-learned entries that fail the rules", () => {
+    const store: LearnedStore = {
+      answers: [
+        { question: "No, I want the bad gods.", normalized: "no i want the bad gods", answer: "Pantheon index.", timesAsked: 9 },
+        { question: "Who runs the Mad Mage campaign?", normalized: "who runs the mad mage campaign", answer: "Chip runs it.", timesAsked: 2 },
+        { question: "What is the Collective of Myrdae?", normalized: "what is the collective of myrdae", answer: "The world notes do not yet name it.", timesAsked: 5 },
+      ],
+      gaps: [],
+      blocked: [],
+      updatedAt: "",
+    } as unknown as LearnedStore;
+    const faq = selectFaqForAgent(withoutUnservable(store));
+    expect(faq.map((f) => f.question)).toEqual(["Who runs the Mad Mage campaign?"]);
   });
 });

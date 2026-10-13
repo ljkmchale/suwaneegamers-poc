@@ -1,41 +1,6 @@
 {
   "answers": [
     {
-      "question": "No, I'm looking for information on the goddess Teldo, Tiash.",
-      "normalized": "no i m looking for information on the goddess teldo tiash",
-      "answer": "The excerpts do not contain information about a goddess named Teldo. However, they extensively document Tiash, the goddess of balance, one of the eight greater deities of the Assembly of Essence who oversaw Myrdae before the Awakening. Tiash's story is one of betrayal and impossible choice.",
-      "sources": [
-        "Myrdae Stories and Tales",
-        "Myrdae World Guide"
-      ],
-      "timesAsked": 1,
-      "learnedAt": "2026-09-29T15:25:20.945Z"
-    },
-    {
-      "question": "Hey, um Collective of Myrdae",
-      "normalized": "hey um collective of myrdae",
-      "answer": "The Collective of Myrdae The world notes do not yet name a \"Collective of Myrdae.\" The excerpt describes Myrdae as a continent divided into five major regions—Bathaes, Inverland, Jehsle, Orbansia, and Var'Shala—each with its own character and governance, but does not reference any unified collective body or organization bearing that name.",
-      "sources": [
-        "Myrdae"
-      ],
-      "timesAsked": 1,
-      "learnedAt": "2026-08-31T15:26:01.896Z"
-    },
-    {
-      "question": "I don't I don't know. Heroes of Emberstranc.",
-      "normalized": "i don t i don t know heroes of emberstranc",
-      "answer": "I need a name or identifier to introduce a character. The excerpts don't specify which person you'd like me to describe. Could you clarify who you're asking about? For example, are you asking about Ainslie, one of the party members, or a named NPC like Selvara Nendris (the Black Quill), Thalex, Lady Rook, Jerik, or someone else from Emberstran?",
-      "sources": [
-        "Emberstran",
-        "Our Exquisites / Etterset",
-        "Emberstran EGD And Civic Authority",
-        "Ainslie",
-        "Cloak of Defiance"
-      ],
-      "timesAsked": 1,
-      "learnedAt": "2026-08-31T15:25:59.514Z"
-    },
-    {
       "question": "Do you see the new guild structure in the Bloody Endeavor I",
       "normalized": "do you see the new guild structure in the bloody endeavor i",
       "answer": "Faction index for Bloody Endeavor: Wyrm Bane — the party itself; named in Session 15 after freeing the copper dragon Saildreith. Active members: Albross, Caelion, Lucerion, Pagern, Rhody Falco. Monks of Iohir (The Cold Breath Cult) — fanatical monks led by Master Huldi (The Cold Breath); seek to assemble the Rimestone and cause a new ice age, ostensibly to re-seal an eldritch aberration.",
@@ -57,26 +22,6 @@
       ],
       "timesAsked": 1,
       "learnedAt": "2026-08-30T15:26:07.625Z"
-    },
-    {
-      "question": "I mean, the campaign was the Crystal Bottle.",
-      "normalized": "i mean the campaign was the crystal bottle",
-      "answer": "The Crystal Bottle is the campaign documented in these excerpts. The party followed a map across a windswept desert, where visibility dropped to 30 feet due to powerful winds and stinging sand. They tracked petrified tree stumps from when the map was first made. The earth then split open, and Scarlytt, Sigil, and Yvaine fell into a chasm.",
-      "sources": [
-        "The Crystal Bottle - Campaign Player Notes"
-      ],
-      "timesAsked": 1,
-      "learnedAt": "2026-08-11T19:21:24.928Z"
-    },
-    {
-      "question": "No, I want to know what the bad gods are. Can you tell me who the bad gods are in our world?",
-      "normalized": "no i want to know what the bad gods are can you tell me who the bad gods are in our world",
-      "answer": "Pantheon index for World lore: Addan — The Eternal Guardian — Order, Protection Amriel — The Redeemer — Redemption, Atonement Asmodeus — The Prince of Darkness — Tyranny, Indulgence, Fire Brault — He Born Asunder — Battle, Might Celestine — The Night Whisperer — Dreams, Stars, Reflection, Prophecy Cembus — The Seeker — Exploration, Travel Coralei — The Tide Keeper — Seas, Oceans Crael — The…",
-      "sources": [
-        "Pantheon of Myrdae"
-      ],
-      "timesAsked": 1,
-      "learnedAt": "2026-08-09T16:25:20.209Z"
     },
     {
       "question": "Can you tell me a little bit about the 28 gods?",
@@ -123,5 +68,5 @@
   "blocked": [
     "is there any other questions you can ask be asked"
   ],
-  "updatedAt": "2026-10-13T15:25:22.867Z"
+  "updatedAt": "2026-10-13T16:04:43.769Z"
 }

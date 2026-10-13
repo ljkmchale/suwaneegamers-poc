@@ -3282,6 +3282,42 @@ def build_tts(persona: dict[str, Any]) -> tts.TTS:
     return tts.FallbackAdapter([eleven, kokoro])
 
 
+# On-demand real-world compartments. These used to ride in every turn's prompt
+# (~6-9K characters) although they are only needed when someone asks what is new,
+# what is planned, or how she works. They are fetched through get_assistant_info.
+ASSISTANT_INFO_TOPICS: tuple[str, ...] = ("whats_new", "roadmap", "how_i_work")
+
+
+def assistant_info(topic: str, *, updates: str, roadmap: str, self_model: str) -> str:
+    """Return one on-demand compartment, or a plain note when it is empty/unknown."""
+    key = re.sub(r"[^a-z]+", "_", topic.strip().casefold()).strip("_")
+    aliases = {
+        "whats_new": "whats_new",
+        "what_s_new": "whats_new",
+        "new": "whats_new",
+        "changelog": "whats_new",
+        "updates": "whats_new",
+        "roadmap": "roadmap",
+        "planned": "roadmap",
+        "how_i_work": "how_i_work",
+        "self": "how_i_work",
+        "about_myself": "how_i_work",
+        "about_yourself": "how_i_work",
+    }
+    resolved = aliases.get(key)
+    if resolved is None:
+        return "Unknown topic. Valid topics are: " + ", ".join(ASSISTANT_INFO_TOPICS) + "."
+    text = {"whats_new": updates, "roadmap": roadmap, "how_i_work": self_model}[resolved].strip()
+    if not text:
+        return "I don't have that in my notes."
+    if resolved == "how_i_work":
+        return (
+            "About yourself (how you work; real-world information about you, the "
+            "assistant, not the game world):\n" + text
+        )
+    return text
+
+
 class Myra(Agent):
     def __init__(self, schedule: dict[str, Any], room: rtc.Room) -> None:
         self.schedule = schedule
@@ -3410,14 +3446,27 @@ class Myra(Agent):
         # Kept as its own compartment, distinct from the in-world knowledge and
         # Pantheon blocks above. The text is already self-labeling as real-world
         # website-development information.
+        # (On demand now: see ASSISTANT_INFO_TOPICS / get_assistant_info.)
+        compartments = [
+            label
+            for label, text in (
+                ('"whats_new" (recent shipped site and Myra changes)', self.updates),
+                ('"roadmap" (planned, requested and finished site features)', self.roadmap),
+                ('"how_i_work" (a description of you and your systems)', self.self_model),
+            )
+            if text
+        ]
         roadmap_block = (
-            "\n" + self.roadmap + "\n" if self.roadmap else ""
+            "\nReal-world information, NOT in this prompt: fetch it with the "
+            "get_assistant_info tool, only when the visitor asks. Topics: "
+            + "; ".join(compartments)
+            + ".\n"
+            if compartments
+            else ""
         )
         # "What's new" changelog — self-labeling real-world block, same treatment
         # as the roadmap. Only surfaced when the visitor asks (see rules below).
-        updates_block = (
-            "\n" + self.updates + "\n" if self.updates else ""
-        )
+        updates_block = ""
         # Admin operations snapshot — only ever non-empty for a verified admin.
         # Self-labeling as admin-only; the rules below forbid sharing it otherwise.
         admin_block = (
@@ -3429,11 +3478,7 @@ class Myra(Agent):
         )
         # Self-model — how she works. Public overview for everyone; admin detail
         # already appended server-side for verified admins.
-        self_model_block = (
-            "\n\nAbout yourself (how you work — this is real-world information about\n"
-            "you, the assistant, not the game world):\n" + self.self_model + "\n"
-            if self.self_model else ""
-        )
+        self_model_block = ""
         chronicles_access_block = (
             "This authenticated visitor has full DM Chronicles access across campaigns."
             if self.dm_campaigns == "*"
@@ -3514,8 +3559,8 @@ class Myra(Agent):
               night". If nothing recent is recorded, say so plainly and give the most
               recent thing you do have — do not treat the question as unanswerable
               and do not turn it into the game schedule.
-            - The site roadmap block, when present, is real-world information about
-              the WEBSITE's development — features the group has requested, already
+            - The site roadmap (get_assistant_info, topic "roadmap") is real-world
+              information about the WEBSITE's development — features the group has requested, already
               built, or is considering. Use it ONLY to answer questions about what
               site features are planned, requested, in progress, or already done
               (e.g. "is a name generator planned?", "did search get added yet?").
@@ -3523,8 +3568,8 @@ class Myra(Agent):
               in-world Myrdae lore, and never treat lore, campaigns, or Chronicles
               content as roadmap. If it is absent or does not cover something, say
               you don't have that on the site's list rather than guessing.
-            - The "what's new" changelog block, when present, lists recent changes
-              that have actually SHIPPED — new website features and new Myra
+            - The "what's new" changelog (get_assistant_info, topic "whats_new") lists
+              recent changes that have actually SHIPPED — new website features and new Myra
               capabilities, each with the date it landed. Use it ONLY when the
               visitor asks what is new, what changed recently, what you added, or
               when the site or you were last updated. Lead with the most recent
@@ -3554,8 +3599,9 @@ class Myra(Agent):
               answer only when the admin asks. It is real-world site operations,
               never in-world lore.
             - When asked how you work, what models or systems run you, what your
-              architecture is, or to describe yourself, answer from the "About
-              yourself" self-model block. It is a maintained description of you —
+              architecture is, or to describe yourself, call get_assistant_info with
+              topic "how_i_work" and answer from what it returns. It is a maintained
+              description of you —
               accurate real-world information, not the game world. Every signed-in
               member gets the overview; a verified admin's block also carries a
               systems-detail section, so answer at the level of detail actually
@@ -4279,6 +4325,26 @@ class Myra(Agent):
             knowledge_ok=knowledge_ok,
             upcoming_count=upcoming_count,
         )
+
+    @function_tool(flags=ToolFlag.CANCELLABLE, on_duplicate="reject")
+    async def get_assistant_info(self, context: RunContext, topic: str) -> str:
+        """Fetch real-world information about the website or about Myra herself.
+
+        Call this ONLY when the visitor asks, never unprompted. It is not in-world
+        lore.
+
+        Args:
+            topic: "whats_new" for recent shipped site and Myra changes and when the
+                site was last updated; "roadmap" for planned, requested or finished
+                site features; "how_i_work" for how Myra works, what models or
+                systems run her, or to describe herself.
+        """
+        del context
+        answer = assistant_info(
+            topic, updates=self.updates, roadmap=self.roadmap, self_model=self.self_model
+        )
+        logger.info("get_assistant_info(%r) -> %d chars", topic, len(answer))
+        return answer
 
     @function_tool(flags=ToolFlag.CANCELLABLE, on_duplicate="reject")
     async def get_myra_health(

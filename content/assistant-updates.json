@@ -47,6 +47,18 @@
       "area": "myra",
       "title": "Myra knows the website roadmap",
       "detail": "Myra can now tell you what site features the group has requested, already built, or is considering, kept separate from in-world Myrdae lore."
+    },
+    {
+      "date": "2026-10-13",
+      "area": "myra",
+      "title": "Myra no longer reads web addresses or file paths aloud",
+      "detail": "She now names the page or file instead of spelling out the address."
+    },
+    {
+      "date": "2026-10-13",
+      "area": "myra",
+      "title": "Myra says a quick line before she searches the archives",
+      "detail": "There is no silent pause while she looks something up."
     }
   ]
 }

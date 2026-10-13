@@ -78,6 +78,25 @@ const REFUSAL_MARKERS = [
   "no record",
   "i'm not able to",
   "i am not able to",
+  // "Not found" phrased as a statement about the excerpts or world notes. These
+  // were being learned as FAQ answers ("The excerpts do not contain ...") and then
+  // served verbatim to anyone asking the same words.
+  "do not contain",
+  "does not contain",
+  "do not yet",
+  "does not yet",
+  "not yet name",
+  "do not specify",
+  "does not specify",
+  "don't specify",
+  "do not mention",
+  "does not mention",
+  "do not include",
+  "does not include",
+  "no information",
+  "i need a name",
+  "not covered",
+  "isn't covered",
 ];
 
 // Conversational filler and diagnostics that reach the log as "questions" —
@@ -110,6 +129,26 @@ const NON_CONTENT_WORDS = new Set([
   "for", "from", "here", "what", "s", "hi", "hey", "well", "just", "like", "know",
 ]);
 
+// A learned answer is replayed for the same words with NO conversation around it,
+// so a question that only makes sense as a reply ("No, I want the bad gods", "I
+// mean the Crystal Bottle") or that is a transcription stumble must never be
+// learned. Matched against the normalized text (apostrophes become spaces).
+const FOLLOW_UP_STARTS = [
+  "no ", "nope ", "yes ", "yeah ", "yep ", "i mean ", "i don t ", "i dont ", "i do not ",
+  "hey ", "um ", "uh ", "so ", "well ", "and ", "but ", "then ", "also ", "actually ",
+];
+
+function hasDisfluency(normalized: string): boolean {
+  const padded = ` ${normalized} `;
+  if (padded.includes(" um ") || padded.includes(" uh ") || padded.includes(" erm ")) return true;
+  const words = normalized.split(" ");
+  for (let i = 0; i + 3 < words.length; i++) {
+    // "i don t i don t": the same two words repeated back to back.
+    if (words[i] === words[i + 2] && words[i + 1] === words[i + 3]) return true;
+  }
+  return false;
+}
+
 /**
  * A question is learnable only if it's a real information request: at least three
  * words, not a known filler/diagnostic phrase, and containing at least one topic
@@ -119,6 +158,8 @@ export function isLearnableQuestion(question: string): boolean {
   const normalized = normalizeQuestion(question);
   if (!normalized) return false;
   if (FILLER_PHRASES.has(normalized)) return false;
+  if (FOLLOW_UP_STARTS.some((start) => `${normalized} `.startsWith(start))) return false;
+  if (hasDisfluency(normalized)) return false;
   const words = normalized.split(" ");
   if (words.length < 3) return false;
   return words.some((word) => word.length > 2 && !NON_CONTENT_WORDS.has(word));
@@ -216,9 +257,23 @@ export function writeLearned(store: LearnedStore): void {
   writeContent(LEARNED_FILE, store);
 }
 
+/**
+ * Drop learned entries that fail today's rules. The rules above only guard what
+ * is learned from now on; re-checking at read time stops entries learned before a
+ * rule existed from being served verbatim.
+ */
+export function withoutUnservable(store: LearnedStore): LearnedStore {
+  return {
+    ...store,
+    answers: store.answers.filter(
+      (entry) => isLearnableQuestion(entry.question) && !isRefusalAnswer(entry.answer),
+    ),
+  };
+}
+
 /** The FAQ the token route ships to the agent each session. */
 export function getLearnedFaqForAgent(): FaqEntry[] {
-  return selectFaqForAgent(readLearned());
+  return selectFaqForAgent(withoutUnservable(readLearned()));
 }
 
 export interface LearningCandidate {
