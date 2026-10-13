@@ -56,6 +56,14 @@ it with a timestamp and automatic-recovery note. The admin dashboard is always o
 `/admin/myra-health` shows every incident.
 
 Email alerts are wired through `lib/healthNotifier.ts`. When `reconcileIncidents`
+checks the public Cloudflare route, it requires three minutes of consecutive
+failure before opening an incident and two minutes of consecutive healthy
+checks before resolving it. A monitoring gap over 90 seconds, an unknown result,
+or a process restart resets confirmation. Brief failures still appear in current
+diagnostics, but do not generate DOWN/RECOVERED email pairs. Other services
+retain immediate incident transitions.
+
+For other services, when `reconcileIncidents`
 first opens a **critical** incident (a critical service is unavailable — the site,
 database, Cloudflare route, or local AI) or resolves one, `getMyraHealth` fires a
 fire-and-forget email. Because the alert triggers on the DB state *transition*, it

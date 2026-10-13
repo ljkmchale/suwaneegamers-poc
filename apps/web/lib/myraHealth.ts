@@ -222,6 +222,24 @@ function severityFor(check: HealthCheck, result: DiagnosticResult): IncidentReco
   return "warning";
 }
 
+// Confirm public-route changes across monitor cycles, not just two nearby probes.
+// A restart deliberately starts confirmation again; diagnostics remain immediate.
+const cloudflareConfirmation = new Map<string, { healthy: boolean; since: number; lastSeen: number }>();
+export function confirmedCloudflareTransition(status: HealthState, now: number): boolean {
+  if (status === "unknown") {
+    cloudflareConfirmation.clear();
+    return false;
+  }
+  const healthy = status === "healthy";
+  const previous = cloudflareConfirmation.get("cloudflare");
+  if (!previous || previous.healthy !== healthy || now - previous.lastSeen > 90_000 || now < previous.lastSeen) {
+    cloudflareConfirmation.set("cloudflare", { healthy, since: now, lastSeen: now });
+    return false;
+  }
+  previous.lastSeen = now;
+  return now - previous.since >= (healthy ? 2 : 3) * 60_000;
+}
+
 function reconcileIncidents(results: DiagnosticResult[]): IncidentTransition[] {
   const db = getDb();
   const active = db.prepare("SELECT id, service, severity, started_at AS startedAt FROM myra_health_incidents WHERE status = 'active'").all() as Array<{ id: string; service: string; severity: IncidentTransition["severity"]; startedAt: string }>;
@@ -233,6 +251,7 @@ function reconcileIncidents(results: DiagnosticResult[]): IncidentTransition[] {
   const resolve = db.prepare(`UPDATE myra_health_incidents SET status = 'resolved', resolved_at = ?, last_seen_at = ?, resolution = ? WHERE id = ?`);
   db.transaction(() => {
     for (const result of results) {
+      if (result.service === "cloudflare" && !confirmedCloudflareTransition(result.status, Date.now())) continue;
       const existing = activeByService.get(result.service);
       if (result.status === "healthy") {
         if (existing) {

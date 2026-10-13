@@ -1,5 +1,23 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { calculateOverall, cloudflareWebsiteCheck, conversationalSummary, type DiagnosticResult } from "@/lib/myraHealth";
+import { calculateOverall, cloudflareWebsiteCheck, confirmedCloudflareTransition, conversationalSummary, type DiagnosticResult } from "@/lib/myraHealth";
+
+describe("Cloudflare incident stability", () => {
+  afterEach(() => confirmedCloudflareTransition("unknown", 0));
+  it("ignores brief failures and requires three minutes of failure", () => {
+    expect(confirmedCloudflareTransition("unavailable", 0)).toBe(false);
+    expect(confirmedCloudflareTransition("healthy", 60_000)).toBe(false);
+    expect(confirmedCloudflareTransition("unavailable", 120_000)).toBe(false);
+    expect(confirmedCloudflareTransition("unavailable", 180_000)).toBe(false);
+    expect(confirmedCloudflareTransition("unavailable", 240_000)).toBe(false);
+    expect(confirmedCloudflareTransition("unavailable", 300_000)).toBe(true);
+  });
+  it("requires two minutes of stable recovery and resets after a monitoring gap", () => {
+    expect(confirmedCloudflareTransition("healthy", 0)).toBe(false);
+    expect(confirmedCloudflareTransition("healthy", 60_000)).toBe(false);
+    expect(confirmedCloudflareTransition("healthy", 120_000)).toBe(true);
+    expect(confirmedCloudflareTransition("healthy", 300_000)).toBe(false);
+  });
+});
 
 const result = (service: string, status: DiagnosticResult["status"]): DiagnosticResult => ({
   service, displayName: service, status, message: `${service} is ${status}`,
