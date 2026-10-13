@@ -3,6 +3,7 @@ import path from 'node:path';
 
 // Keep each campaign's sequence beside its image map so scheduled rebuilds preserve it.
 export function addChronicleStories(html, directory) {
+  html=addChronicleVideos(html, directory);
   const file=path.join(directory,'session-sequences.json');
   if(!fs.existsSync(file))return html;
   const stories=JSON.parse(fs.readFileSync(file,'utf8'));
@@ -57,6 +58,45 @@ export function addChronicleStories(html, directory) {
         index=next;section.dataset.storyScene=String(index);busy=false;
       },2600);
     },12000);
+  });
+})();
+</script>`;
+}
+
+function addChronicleVideos(html, directory) {
+  const file=path.join(directory,'session-videos.json');
+  if(!fs.existsSync(file))return html;
+  const videos=JSON.parse(fs.readFileSync(file,'utf8'));
+  for(const [chapter,video] of Object.entries(videos)) {
+    if(!/^\d{2}$/.test(chapter)||typeof video!=='string'||!/^\/media\/images\/[a-zA-Z0-9/_-]+\.mp4$/.test(video)) {
+      throw new Error(`Invalid Chronicle video: ${chapter}`);
+    }
+  }
+  return html+`<style>
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0}
+.hero-video.playing{opacity:1}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
+</style><script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var videos=${JSON.stringify(videos).replace(/</g,'\\u003c')};
+  Object.keys(videos).forEach(function(chapter){
+    var section=document.getElementById('s'+chapter);if(!section)return;
+    var holder=section.querySelector('.hero-art');if(!holder)return;
+    var video=document.createElement('video');video.className='hero-video';
+    video.muted=true;video.loop=true;video.playsInline=true;video.preload='none';
+    video.setAttribute('aria-hidden','true');holder.appendChild(video);
+    video.addEventListener('playing',function(){video.classList.add('playing');});
+    video.addEventListener('error',function(){video.classList.remove('playing');});
+    var visible=false;
+    function update(){
+      if(visible&&!document.hidden){if(!video.getAttribute('src'))video.src=videos[chapter];video.play().catch(function(){});}
+      else video.pause();
+    }
+    document.addEventListener('visibilitychange',update);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;update();},{threshold:0.05}).observe(section.querySelector('.hero'));
+    }else{visible=true;update();}
   });
 })();
 </script>`;

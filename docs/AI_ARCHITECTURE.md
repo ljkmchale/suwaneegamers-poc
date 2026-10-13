@@ -162,4 +162,10 @@ without controls; the original single-image map remains the fallback. Keep
 accepted image assets in the canonical media directory. Draft previews in
 `artwork-drafts/` are separate from these scheduled and served files.
 
+The same helper reads optional `session-videos.json` chapter-to-MP4 mappings.
+Accepted videos live alongside Chronicle artwork under `/media/images/` (the
+dynamic media handler supports `video/mp4`). They loop muted in the hero while
+visible, pause offscreen, and retain the original still on playback failure or
+when reduced motion is requested. These content-only changes need no app build.
+
 A change is not complete until the writer has checked for other writers. Search the repository and scheduler for the field, URL prefix, filename, or table being changed. Run `pnpm arch:preflight` again after the edit, plus the domain-specific tests. Report any sign-in gate or service permission that prevents rendered verification.
