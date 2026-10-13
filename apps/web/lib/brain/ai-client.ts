@@ -1,6 +1,11 @@
 import Anthropic from "@anthropic-ai/sdk";
 
 import { brainConfig } from "./config";
+import {
+  generateText as generateViaSubscription,
+  streamText as streamViaSubscription,
+  subscriptionStatus,
+} from "../claudeSubscription";
 
 // A message's content is plain text, or ordered parts when the caller wants a
 // prompt-cache breakpoint: `cache: true` marks the end of a prefix that a
@@ -149,7 +154,44 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
   }
 }
 
+// --- Claude via the owner's subscription ------------------------------------
+// Tried first when a login/token exists (see lib/claudeSubscription.ts); any
+// failure falls through to the API-key path below, then Groq. The CLI has no
+// `temperature` control, so options.temperature is ignored on this path.
+function subscriptionRequest(messages: ChatMessage[]) {
+  const system = messages
+    .filter((m) => m.role === "system")
+    .map((m) => flattenContent(m.content))
+    .join("\n\n");
+  const turns = messages.filter((m) => m.role !== "system");
+  const prompt =
+    turns.length === 1
+      ? flattenContent(turns[0].content)
+      : turns
+          .map((m) => `${m.role === "assistant" ? "Assistant" : "User"}: ${flattenContent(m.content)}`)
+          .join("\n\n");
+  return {
+    model: brainConfig.anthropicChatModel,
+    system: system || undefined,
+    prompt,
+    timeoutMs: brainConfig.chatTimeoutMs,
+  };
+}
+
+function subscriptionAvailable(): boolean {
+  return brainConfig.llmProvider === "claude" && subscriptionStatus().enabled;
+}
+
 export async function chat(messages: ChatMessage[], options: ChatOptions = {}): Promise<string> {
+  if (subscriptionAvailable()) {
+    try {
+      return await generateViaSubscription(subscriptionRequest(messages));
+    } catch (error) {
+      console.warn(
+        `[brain] Claude subscription failed (${describeError(error)}); falling back to the API key`,
+      );
+    }
+  }
   if (isClaudeConfigured()) {
     try {
       return await chatClaude(messages, options);
@@ -197,6 +239,21 @@ export async function* chatStream(
   messages: ChatMessage[],
   options: ChatOptions = {},
 ): AsyncGenerator<string> {
+  if (subscriptionAvailable()) {
+    let emitted = false;
+    try {
+      for await (const token of streamViaSubscription(subscriptionRequest(messages))) {
+        emitted = true;
+        yield token;
+      }
+      return;
+    } catch (error) {
+      if (emitted) throw error;
+      console.warn(
+        `[brain] Claude subscription stream failed before output (${describeError(error)}); falling back to the API key`,
+      );
+    }
+  }
   if (isClaudeConfigured()) {
     let emitted = false;
     try {
@@ -272,7 +329,7 @@ async function* chatStreamGroq(
 
 export async function aiHealth(): Promise<{ ok: boolean; chatModel?: string; embedModel?: string; error?: string }> {
   if (!brainConfig.jinaApiKey) return { ok: false, error: "JINA_API_KEY not set" };
-  if (isClaudeConfigured()) {
+  if (subscriptionAvailable() || isClaudeConfigured()) {
     // Groq may be blank when Claude is primary; that only removes the fallback.
     return { ok: true, chatModel: brainConfig.anthropicChatModel, embedModel: brainConfig.embedModel };
   }

@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["better-sqlite3"],
+  // The Agent SDK spawns the Claude Code binary, so it must stay un-bundled.
+  serverExternalPackages: ["better-sqlite3", "@anthropic-ai/claude-agent-sdk"],
   distDir: process.env.NEXT_DIST_DIR || ".next",
   devIndicators: false,
   experimental: {

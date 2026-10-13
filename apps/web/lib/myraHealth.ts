@@ -6,6 +6,20 @@ import { contentDir } from "@/lib/contentFiles";
 import { getDb } from "@/lib/db";
 import { getWebsiteUpdates, type WebsiteUpdateSnapshot } from "@/lib/websiteUpdates";
 import { dispatchHealthAlerts, type IncidentTransition } from "@/lib/healthNotifier";
+import { credentialKind } from "@/lib/claudeSubscription";
+
+// Myra reaches Claude through the owner's subscription when a login/token is
+// present (preferred), or an API key. Either counts as configured.
+function claudeConfigured(): boolean {
+  return Boolean(process.env.ANTHROPIC_API_KEY) || credentialKind() !== null;
+}
+
+function claudeSource(): string {
+  const parts: string[] = [];
+  if (credentialKind() !== null) parts.push("subscription");
+  if (process.env.ANTHROPIC_API_KEY) parts.push("API key");
+  return parts.join(" + ");
+}
 
 export type HealthState = "healthy" | "degraded" | "unavailable" | "unknown";
 export type DiagnosticDepth = "quick" | "full" | "component";
@@ -181,7 +195,7 @@ export const healthRegistry: HealthCheck[] = [
   { id: "website", name: "Local Suwanee Gamers website service", group: "website", critical: true, timeoutMs: 5_000, run: () => fetchCheck("website", "Local Suwanee Gamers website service", `${process.env.MYRA_WEBSITE_HEALTH_URL ?? "http://127.0.0.1:4652/signin"}`) },
   { id: "cloudflare", name: "Public website through Cloudflare", group: "website", critical: true, timeoutMs: 9_000, run: cloudflareWebsiteCheck },
   { id: "search", name: "Chronicles search index", group: "memory", critical: false, timeoutMs: 2_000, depths: ["full", "component"], run: () => localCheck("search", "Chronicles search index", () => { const fs = statfsSync(path.join(process.cwd(), "brain-data")); if (!fs.bavail) throw new Error("Search storage unavailable"); }) },
-  { id: "anthropic", name: "Claude thinking engine", group: "ai", critical: false, timeoutMs: 2_000, run: async () => ({ service: "anthropic", displayName: "Claude thinking engine", status: process.env.ANTHROPIC_API_KEY ? "healthy" : "unknown", message: process.env.ANTHROPIC_API_KEY ? "Claude credentials are configured; live use is tracked by the voice worker." : "Claude credentials are not configured in the web process (the voice worker loads its own key).", checkedAt: new Date().toISOString(), errorCode: process.env.ANTHROPIC_API_KEY ? undefined : "NOT_CONFIGURED" }) },
+  { id: "anthropic", name: "Claude thinking engine", group: "ai", critical: false, timeoutMs: 2_000, run: async () => ({ service: "anthropic", displayName: "Claude thinking engine", status: claudeConfigured() ? "healthy" : "unknown", message: claudeConfigured() ? `Claude credentials are configured (${claudeSource()}); live use is tracked by the voice worker.` : "Claude credentials are not configured in the web process (the voice worker loads its own).", checkedAt: new Date().toISOString(), errorCode: claudeConfigured() ? undefined : "NOT_CONFIGURED" }) },
   { id: "runtime", name: "Myra runtime", group: "runtime", critical: false, timeoutMs: 1_000, depths: ["full", "component"], run: async () => { const usage = process.memoryUsage(); const disk = statfsSync(contentDir()); const free = disk.bavail * disk.bsize; const status: HealthState = free < 512 * 1024 * 1024 ? "degraded" : "healthy"; return { service: "runtime", displayName: "Myra runtime", status, message: status === "healthy" ? "Runtime resources are within normal limits." : "Disk space is running low.", technicalDetails: `RSS ${Math.round(usage.rss / 1024 / 1024)} MB; free disk ${Math.round(free / 1024 / 1024 / 1024)} GB`, checkedAt: new Date().toISOString(), userImpact: status === "degraded" ? "Logs and new saved content may eventually fail." : undefined }; } },
 ];
 

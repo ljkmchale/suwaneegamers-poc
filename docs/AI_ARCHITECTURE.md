@@ -25,7 +25,7 @@ The machine-readable companion is `docs/architecture-contract.json`. If this gui
 | Main database | `content/suwaneegamers.db` | SQLite via `better-sqlite3` |
 | Scheduled rewrites | `scripts/content-scheduler.mjs` | Runs beside production Next.js |
 | Myra web client | `apps/web/components/livekit/ScheduleVoiceAssistant.tsx` | Requests `/api/livekit/token` |
-| Myra worker | `services/livekit-schedule-agent/src/schedule_agent/agent.py` | LiveKit 7880, Speaches 8000, Parakeet 8767, Claude (Anthropic API) |
+| Myra worker | `services/livekit-schedule-agent/src/schedule_agent/agent.py` | LiveKit 7880, Speaches 8000, Parakeet 8767, Claude (subscription via the Claude Agent SDK, `claude_subscription.py`; Anthropic API key as fallback) |
 | Myra diagnostics | `apps/web/lib/myraHealth.ts` | `/api/myra/health/*` and `/admin/myra-health` |
 | Security enforcement | `apps/web/lib/securityLog.ts`, `apps/web/lib/cloudflareSecurity.ts` | `/admin/security` -> zone-scoped Cloudflare IP Access rules |
 | Production build | inactive `.next-prod-a` or `.next-prod-b` | active slot selected by `.next-prod-active.json` |
@@ -36,6 +36,20 @@ version, Next build ID, Git commit/branch, dirty-worktree flag, and UTC build
 time. The same metadata is copied into the ready pointer, loaded by
 `start-prod.js`, and reported by `GET /api/version`. Treat that endpoint as the
 authoritative identity of the bundle actually running in production.
+
+Claude access runs through the owner's Claude subscription when a credential
+exists. The voice worker (`claude_subscription.py`) and the website
+(`apps/web/lib/claudeSubscription.ts`, used by `lib/brain/ai-client.ts`) drive
+the Claude Code CLI through the Claude Agent SDK with every built-in tool
+disabled and `ANTHROPIC_API_KEY` removed from the CLI's environment; the
+Anthropic API key remains the automatic fallback, then Groq for the brain.
+Credentials are `claude auth login` for the user that runs the voice stack, or
+`CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`) in `.env.local`, which is
+required for the NSSM website service because it runs as LocalSystem and cannot
+read a user's `~/.claude`. `LLM_AUTH=api` forces the API key everywhere. Voice
+metrics record the provider as `claude-code-subscription` (estimated API cost
+0). Activate worker changes with `scripts/restart-voice-agent.ps1`; website
+changes need a production build and slot activation.
 
 Myra searches Chronicles through `/api/brain/ask`. Voice searches default to
 player-safe sources. Larry and Chip are configured in `MYRA_FULL_DM_EMAILS` for
@@ -129,7 +143,7 @@ Before editing, identify every applicable row:
 | Image/media | stored URL, route handler, disk file, generator, optimizer | `pnpm images:audit-local` and exact asset HTTP content type |
 | Session audio | `session_summaries.audio_links`, cache file, audio sync, player | `pnpm audio:audit-local` and playable route |
 | Campaign content | `campaigns` table, campaign layout, archive layout, header/session/roster jobs | focused campaign/content-integrity tests |
-| Voice/Myra | client, token route, LiveKit, worker, Speaches, Claude (Anthropic), analytics | token, room/worker, transcription, non-silent TTS, analytics separately |
+| Voice/Myra | client, token route, LiveKit, worker, Speaches, Claude (subscription CLI, then API key), analytics | token, room/worker, transcription, non-silent TTS, analytics separately |
 | Production UI/code | source, inactive production slot, active pointer, NSSM process | distinctive live result on port 4652, not only HTTP 200 |
 | Security enforcement | proxy/login source, trusted Cloudflare headers, thresholds, provider rule id, admin recovery | focused security tests, configured-state UI, reversible provider operation |
 

@@ -135,7 +135,7 @@ export function getClaudeUsage(days: number) {
       COALESCE(SUM(cache_creation_tokens), 0) AS cache_creation_tokens,
       COALESCE(SUM(estimated_cost_microusd), 0) AS cost_microusd
     FROM voice_metrics
-    WHERE kind = 'llm_ttft' AND provider = 'anthropic' AND created_at >= ?
+    WHERE kind = 'llm_ttft' AND provider IN ('anthropic', 'claude-code-subscription') AND created_at >= ?
   `).get(sinceIso) as {
     requests: number;
     input_tokens: number;
@@ -152,7 +152,7 @@ export function getClaudeUsage(days: number) {
       COALESCE(SUM(cache_creation_tokens), 0) AS cache_creation_tokens,
       COALESCE(SUM(estimated_cost_microusd), 0) AS cost_microusd
     FROM voice_metrics
-    WHERE kind = 'llm_ttft' AND provider = 'anthropic' AND created_at >= ?
+    WHERE kind = 'llm_ttft' AND provider IN ('anthropic', 'claude-code-subscription') AND created_at >= ?
     GROUP BY model ORDER BY cost_microusd DESC
   `).all(sinceIso) as Array<{
     model: string;

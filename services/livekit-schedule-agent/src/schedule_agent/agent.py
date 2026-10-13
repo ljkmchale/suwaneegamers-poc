@@ -44,6 +44,7 @@ from livekit.agents.llm import ToolFlag
 from livekit.agents.voice.agent_session import SessionConnectOptions
 from livekit.plugins import anthropic, openai, silero
 
+from schedule_agent import claude_subscription as claude_sub
 from schedule_agent.planning import Evidence, Plan, build_plan, execute_plan
 
 # ElevenLabs is optional (opt-in via MYRA_TTS). Import it at module load so the
@@ -2642,13 +2643,37 @@ def page_context_block(page: Any) -> str:
 def llm_short_name(label: str) -> str:
     """Map a LiveKit LLM label to the short name recorded in analytics."""
     lowered = label.casefold()
-    if "anthropic" in lowered:
+    if "anthropic" in lowered or "claude" in lowered:
         return "claude"
     return label[:40] or "unknown"
 
 
+# Appended to the instructions of the subscription path only. The SDK exposes
+# in-process tools to the model under an MCP server prefix; the persona prompt
+# refers to them by their bare names.
+SUBSCRIPTION_TOOL_NOTE = (
+    "Tool naming: your tools are exposed with the prefix `mcp__voice__`. When these "
+    "instructions name a tool such as search_knowledge_base, call "
+    "`mcp__voice__search_knowledge_base`. You have no other tools. Never mention "
+    "tool prefixes aloud."
+)
+
+
 def build_llm(tuning: dict[str, Any]) -> llm.LLM:
-    """Claude Haiku, the sole thinking engine. Requires ANTHROPIC_API_KEY.
+    """Claude Haiku, the sole thinking engine.
+
+    Two ways to reach it, chosen at session start:
+
+    * **Subscription** (default when a Claude login or CLAUDE_CODE_OAUTH_TOKEN is
+      present and LLM_AUTH is not "api"): the Claude Code CLI via the Agent SDK,
+      so turns draw on the owner's plan instead of an API bill. See
+      claude_subscription.py.
+    * **API key**: the LiveKit Anthropic plugin with prompt caching, as before.
+
+    When both are available the subscription is tried first and the API key is
+    the automatic fallback, so an expired login or a rate-limited plan costs one
+    turn's latency, not the turn. With neither, this raises, exactly as the
+    API-only version did.
 
     Only questions that fall past every deterministic intercept in
     on_user_turn_completed reach a model at all, and the job they land on is
@@ -2657,54 +2682,82 @@ def build_llm(tuning: dict[str, Any]) -> llm.LLM:
 
     There is no local fallback model. Over the whole recorded history the retired
     local floor answered ~2 questions, shared the GPU with Parakeet, and owned
-    the worst LLM latency tail — so an API outage now degrades to deterministic
+    the worst LLM latency tail — so an outage now degrades to deterministic
     answers only (schedule, recap, navigation, learned) rather than falling
-    through to a rarely-right 3B model. A stalled Claude call is bounded by the
+    through to a rarely-right 3B model. A stalled call is bounded by the
     session's llm_conn_options (see AgentSession), not by a second provider.
     """
-    if not os.getenv("ANTHROPIC_API_KEY"):
+    claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
+    has_api_key = bool(os.getenv("ANTHROPIC_API_KEY"))
+    use_subscription, why = claude_sub.subscription_enabled()
+
+    if not has_api_key and not use_subscription:
         raise RuntimeError(
-            "ANTHROPIC_API_KEY is not set. Myra's thinking engine is Claude only "
-            "(the local model fallback was removed); set the key to enable it."
+            "Myra has no way to reach Claude: ANTHROPIC_API_KEY is not set and the "
+            f"subscription path is unavailable ({why}). Myra's thinking engine is "
+            "Claude only (the local model fallback was removed)."
         )
 
-    claude_model = os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
-    remote_kwargs: dict[str, Any] = {}
-    # Cache the system prompt, tool definitions, and chat history across turns.
-    # Myra's prefix is ~6.4k tokens (persona + pantheon roster + tool schemas)
-    # and was reprocessed cold on every turn — cache_read_tokens was 0 across
-    # every recorded session.
-    #
-    # This is a COST fix, not a latency fix. Measured A/B at this prompt size on
-    # 2026-08-01 (n=6 each, interleaved): median TTFT 0.876s cached vs 0.816s
-    # uncached — indistinguishable. What it does buy is ~5.7k of ~5.7k input
-    # tokens billed at the cache-read rate instead of full price.
-    # Set ANTHROPIC_CACHING=off to disable without a redeploy.
-    if os.getenv("ANTHROPIC_CACHING", "ephemeral").strip().casefold() not in {
-        "off",
-        "none",
-        "0",
-        "false",
-    }:
-        remote_kwargs["caching"] = "ephemeral"
+    sub_llm: llm.LLM | None = None
+    if use_subscription:
+        sub_llm = claude_sub.ClaudeSubscriptionLLM(
+            model=os.getenv("CLAUDE_SUBSCRIPTION_MODEL", claude_model),
+            effort=os.getenv("CLAUDE_SUBSCRIPTION_EFFORT") or None,
+            prompt_suffix=SUBSCRIPTION_TOOL_NOTE,
+            speaker_label="The visitor",
+        )
 
-    remote = CacheAwareAnthropicLLM(
-        # The plugin defaults to Sonnet. Haiku is the right tier for a voice
-        # turn, and it is the one current Claude model that still accepts
-        # `temperature` — Sonnet 5 and Opus 5 reject it with a 400, which would
-        # take the line below with them.
-        model=claude_model,
-        # A ceiling, not a target: Myra answers in one or two sentences, so this
-        # bounds a runaway response without truncating a normal one or a tool call.
-        max_tokens=int(env_float("ANTHROPIC_MAX_TOKENS", 512)),
-        # Haiku is the one current Claude model that still accepts `temperature`
-        # (Sonnet 5 and Opus 5 reject it with a 400).
-        temperature=env_float("ANTHROPIC_TEMPERATURE", 0.3),
-        **remote_kwargs,
-    )
+    api_llm: llm.LLM | None = None
+    if has_api_key:
+        remote_kwargs: dict[str, Any] = {}
+        # Cache the system prompt, tool definitions, and chat history across turns.
+        # Myra's prefix is ~6.4k tokens (persona + pantheon roster + tool schemas)
+        # and was reprocessed cold on every turn — cache_read_tokens was 0 across
+        # every recorded session.
+        #
+        # This is a COST fix, not a latency fix. Measured A/B at this prompt size on
+        # 2026-08-01 (n=6 each, interleaved): median TTFT 0.876s cached vs 0.816s
+        # uncached — indistinguishable. What it does buy is ~5.7k of ~5.7k input
+        # tokens billed at the cache-read rate instead of full price.
+        # Set ANTHROPIC_CACHING=off to disable without a redeploy.
+        if os.getenv("ANTHROPIC_CACHING", "ephemeral").strip().casefold() not in {
+            "off",
+            "none",
+            "0",
+            "false",
+        }:
+            remote_kwargs["caching"] = "ephemeral"
 
-    logger.info("Myra thinking with %s (Claude only)", claude_model)
-    return remote
+        api_llm = CacheAwareAnthropicLLM(
+            # The plugin defaults to Sonnet. Haiku is the right tier for a voice
+            # turn, and it is the one current Claude model that still accepts
+            # `temperature` — Sonnet 5 and Opus 5 reject it with a 400, which would
+            # take the line below with them.
+            model=claude_model,
+            # A ceiling, not a target: Myra answers in one or two sentences, so this
+            # bounds a runaway response without truncating a normal one or a tool call.
+            max_tokens=int(env_float("ANTHROPIC_MAX_TOKENS", 512)),
+            temperature=env_float("ANTHROPIC_TEMPERATURE", 0.3),
+            **remote_kwargs,
+        )
+
+    if sub_llm is not None and api_llm is not None:
+        logger.info(
+            "Myra thinking with Claude %s via the subscription (%s), API key as fallback",
+            getattr(sub_llm, "model", claude_model),
+            why,
+        )
+        return llm.FallbackAdapter(
+            [sub_llm, api_llm],
+            attempt_timeout=env_float("ANTHROPIC_ATTEMPT_TIMEOUT", 8.0),
+            max_retry_per_llm=0,
+        )
+    if sub_llm is not None:
+        logger.info("Myra thinking with Claude %s via the subscription only (%s)", claude_model, why)
+        return sub_llm
+    logger.info("Myra thinking with %s (API key; subscription off: %s)", claude_model, why)
+    assert api_llm is not None
+    return api_llm
 
 
 def probe_service(base_url: str, timeout: float = 2.5) -> bool:
@@ -3551,11 +3604,23 @@ class Myra(Agent):
         # them — that is what makes a silent fallback visible in analytics.
         self._served_by: str | None = None
         agent_llm = build_llm(tuning)
+        self._thinking_llm = agent_llm
         agent_llm.on("metrics_collected", self._note_serving_model)
         super().__init__(
             llm=agent_llm,
             instructions=self.system_prompt,
         )
+
+    async def warm_thinking(self) -> None:
+        """Spawn the subscription CLI session now, off the visitor's first turn.
+
+        A no-op on the API-key path. The adapter still rebuilds itself if the
+        instructions or tool set it sees on the first real turn differ.
+        """
+        candidates = getattr(self._thinking_llm, "_llm_instances", None) or [self._thinking_llm]
+        for candidate in candidates:
+            if isinstance(candidate, claude_sub.ClaudeSubscriptionLLM):
+                await candidate.warmup(str(self.instructions), list(self.tools))
 
     def _note_serving_model(self, metrics: Any) -> None:
         label = str(getattr(metrics, "label", "") or "")
@@ -4155,7 +4220,7 @@ class Myra(Agent):
         # reachable. probe_service treats an HTTP error (the 401 you get hitting
         # /models unauthenticated) as "reachable", so this checks the network
         # path without exposing the key.
-        has_key = bool(os.getenv("ANTHROPIC_API_KEY"))
+        has_key = bool(os.getenv("ANTHROPIC_API_KEY")) or claude_sub.subscription_enabled()[0]
         speech_ok, api_reachable = await asyncio.gather(
             asyncio.to_thread(probe_service, speech_base_url()),
             asyncio.to_thread(probe_service, anthropic_base_url()),
@@ -4433,6 +4498,24 @@ def _warm_claude() -> None:
     it up front. Discards the result, never raises — a failed warm-up just leaves
     the process to warm on its first real turn, exactly as before.
     """
+    use_subscription, _ = claude_sub.subscription_enabled()
+    if use_subscription:
+        started = time.perf_counter()
+        ok, detail = asyncio.run(
+            claude_sub.probe_subscription(
+                os.getenv(
+                    "CLAUDE_SUBSCRIPTION_MODEL", os.getenv("ANTHROPIC_MODEL", DEFAULT_CLAUDE_MODEL)
+                )
+            )
+        )
+        if ok:
+            logger.info(
+                "Claude subscription warm-up primed the process in %.2fs",
+                time.perf_counter() - started,
+            )
+        else:
+            logger.warning("Claude subscription warm-up failed (%s); API key will serve", detail)
+        return
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         return
@@ -4740,6 +4823,11 @@ async def schedule_agent(ctx: JobContext):
     logger.info("Myra recap planner v2 with indexed-session freshness enabled")
     await session.start(agent=agent, room=ctx.room)
     await ctx.connect()
+
+    # Subscription path only: have the Claude CLI spawned before the first turn.
+    warm_task = asyncio.create_task(agent.warm_thinking())
+    page_tasks.add(warm_task)
+    warm_task.add_done_callback(page_tasks.discard)
 
     # Give the visitor's browser time to subscribe, attach its audio renderer,
     # and finish autoplay unlocking before Myra begins the first sentence.

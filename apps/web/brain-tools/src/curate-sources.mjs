@@ -29,6 +29,7 @@ loadDotEnv();
 
 import fs from "node:fs/promises";
 import fsSync from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -74,6 +75,81 @@ function resolveAnthropicKey() {
 
 const ANTHROPIC_API_KEY = resolveAnthropicKey();
 
+// --- Subscription path -------------------------------------------------------
+// This is the owner's own scheduled job, so it runs on their Claude subscription
+// (through the Claude Agent SDK / Claude Code CLI) when a login or
+// CLAUDE_CODE_OAUTH_TOKEN exists, and falls back to the API key otherwise. Same
+// rules as lib/claudeSubscription.ts: LLM_AUTH=api forces the API key, built-in
+// tools are disabled, and API-billing variables are removed from the CLI's env.
+const STRIP_FROM_CLI_ENV = [
+  "ANTHROPIC_API_KEY",
+  "ANTHROPIC_AUTH_TOKEN",
+  "ANTHROPIC_BASE_URL",
+  "CLAUDE_CODE_USE_BEDROCK",
+  "CLAUDE_CODE_USE_VERTEX",
+  "CLAUDE_CODE_USE_FOUNDRY",
+];
+
+function subscriptionCredential() {
+  const mode = (process.env.LLM_AUTH || "subscription").trim().toLowerCase();
+  if (["api", "off", "false", "0"].includes(mode)) return null;
+  if ((process.env.CLAUDE_CODE_OAUTH_TOKEN || "").trim()) return "token";
+  try {
+    const dir = process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), ".claude");
+    const oauth = JSON.parse(fsSync.readFileSync(path.join(dir, ".credentials.json"), "utf8")).claudeAiOauth;
+    if (!oauth) return null;
+    if (oauth.refreshToken) return "login";
+    if (oauth.accessToken && oauth.expiresAt > Date.now() + 60_000) return "login";
+  } catch {
+    // no readable credentials file
+  }
+  return null;
+}
+
+let subscriptionDisabled = false;
+
+async function callClaudeViaSubscription({ campaign, title, notes }) {
+  const { query } = await import("@anthropic-ai/claude-agent-sdk");
+  const env = {};
+  for (const [key, value] of Object.entries(process.env)) {
+    if (value !== undefined && !STRIP_FROM_CLI_ENV.includes(key)) env[key] = value;
+  }
+  const cwd = path.join(os.tmpdir(), "claude-subscription-cwd");
+  fsSync.mkdirSync(cwd, { recursive: true });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 10 * 60_000);
+  let text = "";
+  try {
+    for await (const message of query({
+      prompt: buildUserPrompt({ campaign, title, notes }),
+      options: {
+        model: MODEL,
+        systemPrompt: SYSTEM_PROMPT,
+        tools: [],
+        allowedTools: [],
+        disallowedTools: ["Bash", "Read", "Write", "Edit", "WebFetch", "WebSearch"],
+        settingSources: [],
+        strictMcpConfig: true,
+        maxTurns: 1,
+        persistSession: false,
+        thinking: { type: "disabled" },
+        cwd,
+        env,
+        abortController: controller,
+      },
+    })) {
+      if (message.type !== "result") continue;
+      if (message.is_error) throw new Error(`subscription: ${String(message.result || "error").slice(0, 300)}`);
+      text = String(message.result || "");
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+  text = text.trim();
+  if (!text) throw new Error("empty completion");
+  return stripFences(text);
+}
+
 const SYSTEM_PROMPT = [
   "You maintain the Quick Reference synthesis page for ONE Dungeons & Dragons campaign in a campaign-isolated wiki.",
   "You are given that campaign's current player-notes source document. Produce a single, current, fast-lookup reference page.",
@@ -115,6 +191,17 @@ function buildUserPrompt({ campaign, title, notes }) {
 }
 
 async function callClaude({ campaign, title, notes }) {
+  if (!subscriptionDisabled && subscriptionCredential()) {
+    try {
+      return await callClaudeViaSubscription({ campaign, title, notes });
+    } catch (err) {
+      // A bad login or an exhausted plan will fail every campaign the same way;
+      // stop trying it for the rest of this run and use the API key if there is one.
+      subscriptionDisabled = true;
+      console.warn(`[curate] Claude subscription failed (${err.message}); ${ANTHROPIC_API_KEY ? "using the API key" : "no API key to fall back to"}`);
+      if (!ANTHROPIC_API_KEY) throw err;
+    }
+  }
   const body = {
     model: MODEL,
     max_tokens: MAX_OUTPUT_TOKENS,
@@ -235,8 +322,10 @@ async function runIndexer() {
 }
 
 async function main() {
-  if (!ANTHROPIC_API_KEY) {
-    console.error("[curate] ANTHROPIC_API_KEY not found (env or .env.local). Aborting.");
+  if (!ANTHROPIC_API_KEY && !subscriptionCredential()) {
+    console.error(
+      "[curate] No Claude access: set ANTHROPIC_API_KEY, or log in / set CLAUDE_CODE_OAUTH_TOKEN for the subscription. Aborting.",
+    );
     process.exit(2);
   }
 
