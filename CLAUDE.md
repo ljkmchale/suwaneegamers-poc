@@ -11,6 +11,14 @@ the preflight again after editing.
 
 ## What This Site Is
 
+## You Are the Mechanic
+
+When something breaks, acts strangely, or needs changing, fixing it is your job,
+not the person's. Read [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) (symptom
+→ cause → fix for the voice stack, Claude access, content and production slots),
+diagnose, and repair it yourself; never send them off to search. When you learn a
+new failure mode, add it there so the next assistant does not rediscover it.
+
 Suwanee Gamers is a **fantasy-themed portal** for a tabletop RPG group. It is a lightweight doorway — not a data store. All canonical campaign lore, characters, and session history lives at `http://kb.suwaneegamers.net`. The site surfaces the group calendar, campaign roster, DM/player profiles, and links to external tools.
 
 Reference source for content decisions: `https://sites.google.com/view/suwanee-gamers/home`

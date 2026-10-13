@@ -541,3 +541,43 @@ async def test_completed_turn_reports_plan_usage_through_the_callback():
         await asyncio.sleep(0.01)
     assert seen and seen[0].five_hour.utilization == 42
     assert cs.plan_usage() is not None
+
+
+@pytest.mark.asyncio
+async def test_warmup_primes_with_a_hidden_turn_the_first_real_turn_never_sees():
+    adapter = make_llm([[("text", "ready")], [("text", "Hello there.")]])
+    await adapter.warmup(SYSTEM, [lookup_thing])
+    client = FakeClient.instances[0]
+    assert client.prompts == ["(Voice line check. Reply with the single word: ready.)"]
+
+    text, _, _ = await drain(
+        adapter.chat(chat_ctx=ctx(("user", "hi")), tools=[lookup_thing], conn_options=opts())
+    )
+    assert text == "Hello there."  # nothing from the hidden turn leaked into the stream
+    assert len(FakeClient.instances) == 1  # the primed session was reused
+    assert client.prompts[1] == "hi"
+
+
+@pytest.mark.asyncio
+async def test_failed_prime_marks_the_session_for_rebuild():
+    class Hanging(FakeClient):
+        def receive_response(self):
+            async def never():
+                await asyncio.sleep(60)
+                yield None
+
+            return never()
+
+    adapter = make_llm([[("text", "x")]])
+    adapter._client_factory = lambda options, bridge: Hanging(options, bridge, [[("text", "x")]])
+    cs_wait = cs.asyncio.wait_for
+
+    async def fast(awaitable, timeout):  # shorten the 20 s prime bound for the test
+        return await cs_wait(awaitable, 0.2)
+
+    cs.asyncio.wait_for = fast
+    try:
+        await adapter.warmup(SYSTEM, [lookup_thing])
+    finally:
+        cs.asyncio.wait_for = cs_wait
+    assert adapter._session is not None and adapter._session.dead
