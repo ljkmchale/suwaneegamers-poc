@@ -70,6 +70,7 @@ class FakeClient:
         self.connected = False
         self.disconnected = False
         self.interrupts = 0
+        self.models: list[str] = []
         self.tool_results: list[str] = []
         self._turn: list[tuple] = []
         self._interrupted = asyncio.Event()
@@ -86,6 +87,9 @@ class FakeClient:
     async def interrupt(self) -> None:
         self.interrupts += 1
         self._interrupted.set()
+
+    async def set_model(self, model: str) -> None:
+        self.models.append(model)
 
     async def disconnect(self) -> None:
         self.disconnected = True
@@ -116,6 +120,23 @@ class FakeClient:
                 yield result(text="interrupted")
                 return
         yield result()
+
+
+@pytest.fixture(autouse=True)
+def _clean_plan_state(monkeypatch):
+    cs.reset_plan_state()
+    for name in ("CLAUDE_PLAN_DEGRADE_PCT", "CLAUDE_PLAN_FALLBACK_PCT", "CLAUDE_FAST_MODEL"):
+        monkeypatch.delenv(name, raising=False)
+    yield
+    cs.reset_plan_state()
+
+
+def set_usage(five: float, seven: float = 0.0) -> None:
+    cs._set_usage(
+        cs.PlanUsage(
+            five_hour=cs.PlanWindow(five), seven_day=cs.PlanWindow(seven), fetched_at=time.time()
+        )
+    )
 
 
 def make_llm(script: list[list[tuple]], **kwargs: Any) -> ClaudeSubscriptionLLM:
@@ -418,3 +439,105 @@ def test_mode_switch_forces_api(monkeypatch):
     assert enabled is False and "api" in why.lower()
     monkeypatch.setenv("LLM_AUTH", "subscription")
     assert cs.subscription_enabled()[0] is True
+
+
+def test_usage_parsing_and_pressure_levels():
+    raw = {
+        "rate_limits": {
+            "five_hour": {"utilization": 35, "resets_at": "2026-10-13T18:50:00.000Z"},
+            "seven_day": {"utilization": 6, "resets_at": "2026-10-19T01:00:00.000Z"},
+        }
+    }
+    usage = cs._parse_usage(raw)
+    assert usage is not None and usage.five_hour.utilization == 35 and usage.peak == 35
+    assert cs._parse_usage({"rate_limits": {}}) is None
+    assert cs._parse_usage(None) is None
+
+    assert cs.plan_pressure() == "ok"  # nothing known yet
+    set_usage(35)
+    assert cs.plan_pressure() == "ok"
+    set_usage(81)
+    assert cs.plan_pressure() == "high"
+    set_usage(10, seven=96)  # the weekly window counts too
+    assert cs.plan_pressure() == "critical"
+
+
+def test_stale_readings_are_ignored():
+    cs._set_usage(
+        cs.PlanUsage(cs.PlanWindow(99), None, fetched_at=time.time() - 3600)
+    )
+    assert cs.plan_pressure() == "ok"
+
+
+def test_rate_limit_rejection_blocks_until_reset(monkeypatch):
+    class Info:
+        status = "rejected"
+        resets_at = time.time() + 120
+
+    cs.note_rate_limit_event(Info())
+    assert cs.plan_pressure() == "critical"
+    assert cs.plan_pressure(now=time.time() + 400) == "ok"
+
+
+@pytest.mark.asyncio
+async def test_pressure_switches_the_live_session_to_the_fast_model():
+    adapter = make_llm([[("text", "A.")], [("text", "B.")]], fast_model="claude-haiku-4-5")
+    adapter._model = "claude-sonnet-5-5"
+    first = ctx(("user", "one"))
+    await drain(adapter.chat(chat_ctx=first, conn_options=opts()))
+    client = FakeClient.instances[0]
+    assert client.options.model == "claude-sonnet-5-5" and client.models == []
+
+    set_usage(85)  # the plan is now under pressure
+    second = ctx(("user", "one"), ("assistant", "A."), ("user", "two"))
+    second.items[1].id = first.items[1].id
+    await drain(adapter.chat(chat_ctx=second, conn_options=opts()))
+
+    assert client.models == ["claude-haiku-4-5"]
+    assert adapter.model == "claude-haiku-4-5"
+    assert len(FakeClient.instances) == 1  # same warm session, no rebuild
+
+
+@pytest.mark.asyncio
+async def test_critical_plan_hands_the_turn_to_the_api_key():
+    sub = make_llm([[("text", "never")]], stop_at_critical=True)
+    api = _ApiLLM()
+    chain = llm.FallbackAdapter([sub, api], attempt_timeout=5.0, max_retry_per_llm=0)
+    set_usage(97)
+    text, _, _ = await drain(chain.chat(chat_ctx=ctx(("user", "hi")), conn_options=opts()))
+    assert text == "from the API"
+    assert FakeClient.instances == []  # the CLI was never even started
+
+
+@pytest.mark.asyncio
+async def test_critical_without_a_fallback_still_serves_on_the_fast_model():
+    adapter = make_llm([[("text", "Still here.")]], stop_at_critical=False)
+    set_usage(97)
+    text, _, _ = await drain(adapter.chat(chat_ctx=ctx(("user", "hi")), conn_options=opts()))
+    assert text == "Still here."
+    assert FakeClient.instances[0].options.model == "claude-haiku-4-5"
+
+
+@pytest.mark.asyncio
+async def test_completed_turn_reports_plan_usage_through_the_callback():
+    seen: list[cs.PlanUsage] = []
+
+    class UsageClient(FakeClient):
+        class _Q:
+            async def _send_control_request(self, request):
+                assert request == {"subtype": "get_usage"}
+                return {"rate_limits": {"five_hour": {"utilization": 42}}}
+
+        _query = _Q()
+
+    adapter = make_llm([[("text", "ok")]], on_usage=seen.append)
+    adapter._client_factory = lambda options, bridge: UsageClient(
+        options, bridge, [[("text", "ok")]]
+    )
+    await drain(adapter.chat(chat_ctx=ctx(("user", "hi")), conn_options=opts()))
+    for _ in range(20):
+        if seen:
+            break
+        await asyncio.sleep(0.01)
+    assert seen and seen[0].five_hour.utilization == 42
+    assert cs.plan_usage() is not None

@@ -110,6 +110,46 @@ function neutralCwd(): string {
 export function resetSubscriptionCooldown(): void {
   unavailableUntil = 0;
   unavailableReason = "";
+  pressureUntil = 0;
+}
+
+
+// --- Plan pressure -----------------------------------------------------------
+// The CLI emits a rate_limit_event when the plan's status changes. A rejection
+// means the window is exhausted: stop using the subscription until it resets
+// (the API key serves meanwhile). A warning means it is filling up: prefer the
+// fast model until the next reading. Utilisation is a 0-1 fraction here.
+const FAST_MODEL_DEFAULT = "claude-haiku-4-5";
+const PRESSURE_FRACTION = 0.8;
+const PRESSURE_HOLD_MS = 10 * 60_000;
+let pressureUntil = 0;
+
+/** The model to use right now: `requested`, or the fast model under pressure. */
+export function effectiveModel(requested: string, env: EnvLike = process.env): string {
+  const pinned = env.CLAUDE_SUBSCRIPTION_MODEL?.trim();
+  const base = pinned || requested;
+  if (Date.now() < pressureUntil) return env.CLAUDE_FAST_MODEL?.trim() || FAST_MODEL_DEFAULT;
+  return base;
+}
+
+type RateLimitInfo = { status?: string; resetsAt?: number; utilization?: number };
+
+export function noteRateLimitInfo(info: RateLimitInfo | undefined): void {
+  if (!info) return;
+  if (info.status === "rejected") {
+    const resets = typeof info.resetsAt === "number" ? info.resetsAt : Date.now() / 1000 + 300;
+    // resetsAt is a unix timestamp in seconds.
+    unavailableUntil = Math.max(unavailableUntil, resets * 1000);
+    unavailableReason = "Claude plan limit reached";
+    return;
+  }
+  const warned = info.status === "allowed_warning";
+  const filling = typeof info.utilization === "number" && info.utilization >= PRESSURE_FRACTION;
+  if (warned || filling) pressureUntil = Date.now() + PRESSURE_HOLD_MS;
+}
+
+export function resetPlanPressure(): void {
+  pressureUntil = 0;
 }
 
 function classify(message: string): "auth" | "limit" | "failed" {
@@ -156,7 +196,7 @@ async function getQuery(): Promise<QueryFn> {
 
 function buildOptions(req: TextRequest, abortController: AbortController) {
   return {
-    model: req.model,
+    model: effectiveModel(req.model),
     systemPrompt: req.system,
     // [] disables every built-in tool; nothing here may reach a shell or disk.
     tools: [] as string[],
@@ -195,6 +235,7 @@ type SdkMessage = {
   result?: string;
   api_error_status?: number | null;
   event?: { type?: string; delta?: { type?: string; text?: string } };
+  rate_limit_info?: RateLimitInfo;
 };
 
 function failureFrom(message: SdkMessage): SubscriptionUnavailableError {
@@ -216,7 +257,9 @@ export async function* streamText(req: TextRequest): AsyncGenerator<string> {
     const stream = query({ prompt: req.prompt, options: buildOptions(req, controller) });
     for await (const raw of stream) {
       const message = raw as SdkMessage;
-      if (message.type === "stream_event") {
+      if (message.type === "rate_limit_event") {
+        noteRateLimitInfo(message.rate_limit_info);
+      } else if (message.type === "stream_event") {
         const delta = message.event?.delta;
         if (message.event?.type === "content_block_delta" && delta?.type === "text_delta" && delta.text) {
           yield delta.text;

@@ -160,6 +160,116 @@ def cli_environment(extra: dict[str, str] | None = None) -> dict[str, str]:
 
 
 # --------------------------------------------------------------------------- #
+# Plan usage: read how much of the subscription window is spent, and back off
+# --------------------------------------------------------------------------- #
+#
+# Everyone shares one plan, so exhausting it is the failure mode that subscription
+# auth adds. The CLI answers a `get_usage` control request with the five-hour and
+# weekly utilisation. That request is not part of the SDK's public surface (the
+# same trade backtalk makes), so every failure is swallowed and the readout simply
+# goes quiet: it must never cost a turn.
+
+_USAGE_MAX_AGE = 15 * 60.0  # a reading older than this is ignored
+_USAGE_MIN_INTERVAL = 45.0  # at most one get_usage round trip per this many seconds
+
+
+@dataclass(frozen=True)
+class PlanWindow:
+    utilization: float  # percent of the window used, 0-100
+    resets_at: str | None = None
+
+
+@dataclass(frozen=True)
+class PlanUsage:
+    five_hour: PlanWindow | None
+    seven_day: PlanWindow | None
+    fetched_at: float
+
+    @property
+    def peak(self) -> float:
+        values = [w.utilization for w in (self.five_hour, self.seven_day) if w is not None]
+        return max(values) if values else 0.0
+
+
+_USAGE: PlanUsage | None = None
+_REJECTED_UNTIL = 0.0
+
+
+def plan_usage() -> PlanUsage | None:
+    """The latest reading, or None when there is none or it is stale."""
+    if _USAGE is None or time.time() - _USAGE.fetched_at > _USAGE_MAX_AGE:
+        return None
+    return _USAGE
+
+
+def _set_usage(usage: PlanUsage) -> None:
+    global _USAGE
+    _USAGE = usage
+
+
+def reset_plan_state() -> None:
+    """Forget readings and rejections (tests, and a manual operator reset)."""
+    global _USAGE, _REJECTED_UNTIL
+    _USAGE = None
+    _REJECTED_UNTIL = 0.0
+
+
+def _threshold(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name, "") or default)
+    except ValueError:
+        return default
+
+
+def plan_pressure(now: float | None = None) -> str:
+    """``ok``, ``high`` (prefer the fast model) or ``critical`` (stop using the plan)."""
+    now = time.time() if now is None else now
+    if now < _REJECTED_UNTIL:
+        return "critical"
+    usage = plan_usage()
+    if usage is None:
+        return "ok"
+    if usage.peak >= _threshold("CLAUDE_PLAN_FALLBACK_PCT", 95.0):
+        return "critical"
+    if usage.peak >= _threshold("CLAUDE_PLAN_DEGRADE_PCT", 80.0):
+        return "high"
+    return "ok"
+
+
+def note_rate_limit_event(info: Any) -> None:
+    """React to the CLI's rate-limit event: a rejection blocks until the reset."""
+    global _REJECTED_UNTIL
+    if getattr(info, "status", None) != "rejected":
+        return
+    resets = getattr(info, "resets_at", None)
+    until = float(resets) if isinstance(resets, (int, float)) else time.time() + 300.0
+    _REJECTED_UNTIL = max(_REJECTED_UNTIL, until)
+
+
+def _parse_usage(raw: Any) -> PlanUsage | None:
+    limits = (raw or {}).get("rate_limits") if isinstance(raw, dict) else None
+    if not isinstance(limits, dict):
+        return None
+
+    def window(name: str) -> PlanWindow | None:
+        item = limits.get(name)
+        if not isinstance(item, dict):
+            return None
+        pct = item.get("utilization")
+        if pct is None:
+            pct = item.get("used_percentage")
+        if not isinstance(pct, (int, float)):
+            return None
+        resets = item.get("resets_at")
+        return PlanWindow(float(pct), str(resets) if resets else None)
+
+    five, seven = window("five_hour"), window("seven_day")
+    if five is None and seven is None:
+        return None
+    return PlanUsage(five_hour=five, seven_day=seven, fetched_at=time.time())
+
+
+# --------------------------------------------------------------------------- #
 # Tool bridge: SDK in-process MCP handlers <-> LiveKit function tools
 # --------------------------------------------------------------------------- #
 
@@ -284,6 +394,7 @@ class _Session:
     awaiting: set[str] = field(default_factory=set)
     expected_tools: int = 0
     dead: bool = False
+    model: str = ""
 
     def remember_emitted(self, text: str) -> None:
         text = _norm(text)
@@ -313,10 +424,21 @@ class ClaudeSubscriptionLLM(llm.LLM):
         cwd: str | None = None,
         speaker_label: str = "the user",
         client_factory: ClientFactory | None = None,
+        fast_model: str | None = None,
+        stop_at_critical: bool = False,
+        on_usage: Callable[[PlanUsage], None] | None = None,
     ) -> None:
         super().__init__()
         self._label = LABEL
         self._model = model
+        # Used instead of `model` while the plan is under pressure.
+        self._fast_model = fast_model or os.getenv("CLAUDE_FAST_MODEL", "claude-haiku-4-5")
+        # With an API-key fallback available, refuse (429) once the plan is
+        # critical so the FallbackAdapter serves the turn from the API instead.
+        self._stop_at_critical = stop_at_critical
+        self._on_usage = on_usage
+        self._last_usage_pull = 0.0
+        self._background: set[asyncio.Task[None]] = set()
         self._effort = effort or None
         self._thinking = thinking
         self._suffix = prompt_suffix.strip()
@@ -331,6 +453,11 @@ class ClaudeSubscriptionLLM(llm.LLM):
 
     @property
     def model(self) -> str:
+        return self._effective_model()
+
+    def _effective_model(self) -> str:
+        if self._fast_model and plan_pressure() != "ok":
+            return self._fast_model
         return self._model
 
     @property
@@ -365,6 +492,33 @@ class ClaudeSubscriptionLLM(llm.LLM):
                     self._session = await self._open(instructions, _tool_schemas(tools or []))
             except Exception as exc:
                 logger.warning("subscription warm-up failed: %s", exc)
+
+    # -- plan usage ----------------------------------------------------------- #
+
+    def _schedule_usage_refresh(self, session: _Session) -> None:
+        task = asyncio.ensure_future(self._refresh_usage(session))
+        self._background.add(task)
+        task.add_done_callback(self._background.discard)
+
+    async def _refresh_usage(self, session: _Session) -> None:
+        if time.monotonic() - self._last_usage_pull < _USAGE_MIN_INTERVAL:
+            return
+        self._last_usage_pull = time.monotonic()
+        try:
+            raw = await asyncio.wait_for(
+                session.client._query._send_control_request({"subtype": "get_usage"}), 5
+            )
+            usage = _parse_usage(raw)
+        except Exception:
+            return  # unsupported or unanswered: the readout just goes quiet
+        if usage is None:
+            return
+        _set_usage(usage)
+        if self._on_usage is not None:
+            try:
+                self._on_usage(usage)
+            except Exception:
+                logger.debug("plan usage callback failed", exc_info=True)
 
     # -- session lifecycle --------------------------------------------------- #
 
@@ -402,7 +556,7 @@ class ClaudeSubscriptionLLM(llm.LLM):
         if schemas and self._suffix:
             prompt = f"{prompt}\n\n{self._suffix}"
         kwargs: dict[str, Any] = {
-            "model": self._model,
+            "model": self._effective_model(),
             "system_prompt": prompt,
             # [] disables every built-in tool; only the bridged tools exist.
             "tools": [],
@@ -438,6 +592,7 @@ class ClaudeSubscriptionLLM(llm.LLM):
             bridge=bridge,
             system_text=system_text,
             tool_names=frozenset(s["name"] for s in schemas),
+            model=self._effective_model(),
         )
 
     async def _discard(self, session: _Session) -> None:
@@ -622,6 +777,13 @@ class _Stream(llm.LLMStream):
         names = frozenset(s["name"] for s in schemas)
         probe = not instructions and not schemas  # e.g. FallbackAdapter recovery ping
 
+        if owner._stop_at_critical and plan_pressure() == "critical":
+            raise APIStatusError(
+                "Claude plan limit reached; falling back to the API key",
+                status_code=429,
+                retryable=False,
+            )
+
         if probe:
             await self._run_ephemeral(items, started, timeout)
             return
@@ -690,6 +852,13 @@ class _Stream(llm.LLMStream):
         if not prompt:
             prompt = "Please continue."
         self._mark_calls_seen(session, items)
+
+        target_model = owner._effective_model()
+        if session.model and session.model != target_model:
+            # The plan is under pressure (or has recovered): switch live.
+            with contextlib.suppress(Exception):
+                await asyncio.wait_for(session.client.set_model(target_model), 5)
+                session.model = target_model
 
         await session.client.query(prompt)
         session.response = session.client.receive_response().__aiter__()
@@ -818,8 +987,11 @@ class _Stream(llm.LLMStream):
                 if error:
                     session.dead = True
                     raise _error_for(str(error))
+            elif kind == "RateLimitEvent":
+                note_rate_limit_event(getattr(message, "rate_limit_info", None))
             elif kind == "ResultMessage":
                 session.response = None
+                self._owner._schedule_usage_refresh(session)
                 usage = getattr(message, "usage", None) or {}
                 if getattr(message, "is_error", False):
                     session.dead = True
@@ -905,9 +1077,14 @@ async def probe_subscription(model: str, timeout: float = 20.0) -> tuple[bool, s
 
 __all__ = [
     "ClaudeSubscriptionLLM",
+    "PlanUsage",
+    "PlanWindow",
     "ToolBridge",
     "cli_environment",
+    "plan_pressure",
+    "plan_usage",
     "probe_subscription",
+    "reset_plan_state",
     "subscription_credential",
     "subscription_enabled",
     "subscription_mode",

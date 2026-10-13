@@ -19,6 +19,9 @@ const METRIC_KINDS = [
   "transcription_delay",
   "turn_completed_delay",
   "response_latency",
+  // Percent of a Claude subscription window used (value_ms = percent x 100),
+  // with the window name in `model`: "five_hour" or "seven_day".
+  "plan_usage",
 ] as const;
 type MetricKind = (typeof METRIC_KINDS)[number];
 

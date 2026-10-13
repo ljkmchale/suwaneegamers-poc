@@ -137,4 +137,25 @@ describe("claudeSubscription", () => {
     );
     expect(spy).not.toHaveBeenCalled();
   });
+
+  it("moves to the fast model under plan pressure and backs off when rejected", async () => {
+    process.env.CLAUDE_CODE_OAUTH_TOKEN = "tok";
+    const capture: { options?: Record<string, unknown> } = {};
+    const warn: Msg = { type: "rate_limit_event", rate_limit_info: { status: "allowed_warning", utilization: 0.85 } };
+    setQueryForTests(fakeQuery([warn, delta("ok"), { type: "result", subtype: "success", is_error: false }], capture));
+    await generateText({ model: "claude-sonnet-5-5", prompt: "one" });
+
+    setQueryForTests(fakeQuery([delta("ok"), { type: "result", subtype: "success", is_error: false }], capture));
+    await generateText({ model: "claude-sonnet-5-5", prompt: "two" });
+    expect(capture.options?.model).toBe("claude-haiku-4-5");
+
+    const reset = Math.floor(Date.now() / 1000) + 3600;
+    setQueryForTests(
+      fakeQuery([{ type: "rate_limit_event", rate_limit_info: { status: "rejected", resetsAt: reset } }, { type: "result", subtype: "success", is_error: false, result: "x" }]),
+    );
+    await generateText({ model: "m", prompt: "three" }).catch(() => undefined);
+    const status = subscriptionStatus();
+    expect(status.enabled).toBe(false);
+    expect(status.reason).toMatch(/plan limit/);
+  });
 });
