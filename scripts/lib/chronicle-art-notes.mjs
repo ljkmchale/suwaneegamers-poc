@@ -152,16 +152,21 @@ export function verifyBrief(brief, chapterBody) {
   });
   const people = Array.isArray(brief?.participants) ? brief.participants : [];
   if (people.length < 1) problems.push("no participants listed");
+  let named = 0;
   for (const person of people) {
     // The notes often use a nickname ("Affy") where the skill uses the full name.
     const tokens = normalise(person?.name ?? "")
       .split(/[^a-z0-9']+/)
       .filter((token) => token.length >= 3);
-    if (!tokens.length) problems.push("a participant has no name");
-    else if (!tokens.some((token) => haystack.includes(token))) {
+    // A name with no readable token (the shell turns "AEon" into "A+on") cannot
+    // be checked, so it is skipped; the verbatim quotes still anchor the scene.
+    if (!tokens.length) continue;
+    named += 1;
+    if (!tokens.some((token) => haystack.includes(token))) {
       problems.push(`participant "${person.name}" is never mentioned in the notes`);
     }
   }
+  if (people.length && named === 0) problems.push("no participant has a checkable name");
   for (const field of ["moment", "action", "location"]) {
     if (!String(brief?.[field] ?? "").trim()) problems.push(`brief is missing ${field}`);
   }

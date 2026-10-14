@@ -78,3 +78,14 @@ test("curly quotes in notes match the ASCII quotes Codex reads", () => {
   };
   assert.deepEqual(verifyBrief(brief, body), []);
 });
+
+test("an unreadable mangled name is skipped, not fatal, while others still verify", () => {
+  const body = "Meles lights his pipe while Dorin watches the fog and says nothing at all tonight.";
+  const brief = {
+    moment: "x", action: "x", location: "x",
+    evidence: ["Meles lights his pipe while Dorin watches the fog", "Dorin watches the fog and says nothing at all tonight"],
+    participants: [{ name: "Meles" }, { name: "A+on" }],
+  };
+  assert.deepEqual(verifyBrief(brief, body), []);
+  assert.match(verifyBrief({ ...brief, participants: [{ name: "A+on" }] }, body).join("|"), /checkable/);
+});
