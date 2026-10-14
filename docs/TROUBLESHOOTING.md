@@ -112,3 +112,30 @@ Claude Code CLI through the Agent SDK, using the owner's subscription.
 ### `pnpm arch:preflight` fails on session audio
 - A session has a remote Drive link in `audio_links`. Run the session-notes →
   session-audio → cards sync and revalidate; `pnpm audio:audit-local` shows which.
+
+## Chronicle art (Codex drafts)
+
+### A new session got no draft
+- Run `node scripts/chronicle-art.mjs scan`: it prints why each newer chapter
+  was skipped (notes under 400 words, still settling for 12h, declined because
+  the scene could not be verified, or blocked on a missing portrait).
+  `scan --no-settle` ignores the 12h wait; `run --campaign <id> --chapter <n>`
+  forces one. `retry <campaign> <n>` clears a declined/failed decision.
+- Chapters are found by the same notes files `sync-chronicle.mjs` refreshes, so
+  a failed notes sync (see `logssync-chronicle.log`) means nothing new to draw.
+
+### codex exec fails: "model not supported when using Codex with a ChatGPT account"
+- The npm `codex` (0.120) is too old and the user config's default model is not
+  allowed on a ChatGPT login. The script uses the desktop app's
+  `%LOCALAPPDATA%OpenAICodexincodex.exe` with `-m gpt-5.5`. If that model
+  is retired, set `CODEX_ART_MODEL`; if the app moved, set `CODEX_ART_BIN`.
+
+### codex exec fails: "windows sandbox: setup refresh failed"
+- The elevated Windows sandbox from `~/.codex/config.toml` cannot start from a
+  scheduled task. The script passes `-c windows.sandbox="unelevated"` per call;
+  do not edit the user's Codex config.
+
+### The task reports the ChatGPT plan limit
+- The run stops cleanly and the next day's run resumes. Drafts are capped at 2
+  per run (`CHRONICLE_ART_LIMIT`) and drafting pauses at 6 unreviewed
+  (`CHRONICLE_ART_MAX_WAITING`).

@@ -162,6 +162,24 @@ without controls; the original single-image map remains the fallback. Keep
 accepted image assets in the canonical media directory. Draft previews in
 `artwork-drafts/` are separate from these scheduled and served files.
 
+New-session hero art is drafted by `scripts/chronicle-art.mjs` (queue, gates
+and approval) with the pure helpers in `scripts/lib/chronicle-art-notes.mjs`. It
+runs as the user-level scheduled task "SuwaneeGamers Chronicle Art"
+(`scripts/chronicle-art.cmd`, after the 10:34 Chronicle Sync), **not** as a
+`content-scheduler.mjs` job: that scheduler runs as LocalSystem under NSSM and
+cannot see the Codex ChatGPT login in `~/.codex`. It drives the Codex desktop
+app's `codex.exe` (`CODEX_ART_BIN`, model `CODEX_ART_MODEL`, default gpt-5.5)
+with each campaign's skill in `~/.codex/skills/<campaign>-chronicle-scenes`.
+A chapter is drafted only when it is newer than the highest key in that
+campaign's `session-images.json`, has real notes (400+ words) unchanged for 12h,
+Codex's scene brief quotes the notes verbatim (verified by the script), and the
+skill reports no missing required portrait. Drafts, briefs and the ledger live in
+`artwork-drafts/chronicle-queue/` (git-ignored, never served); the only writer
+of served files is `approve`, which writes the WebP under
+`apps/web/media/images/chronicles/<campaign>/`, the chapter's key in
+`session-images.json`, then rebuilds and copies `content/chronicles/<campaign>.html`
+exactly as `sync-chronicle.mjs` does. Nothing publishes without approval.
+
 The same helper reads optional `session-videos.json` chapter-to-MP4 mappings.
 Accepted videos live alongside Chronicle artwork under `/media/images/` (the
 dynamic media handler supports `video/mp4`). They loop muted in the hero while

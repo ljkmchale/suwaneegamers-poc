@@ -8,7 +8,10 @@
     "productionVersionEndpoint": "/api/version",
     "productionBuildMetadata": "BUILD_METADATA.json",
     "productionSlotPointer": "apps/web/.next-prod-active.json",
-    "productionSlots": ["apps/web/.next-prod-a", "apps/web/.next-prod-b"]
+    "productionSlots": [
+      "apps/web/.next-prod-a",
+      "apps/web/.next-prod-b"
+    ]
   },
   "content": {
     "runtimeReader": "apps/web/lib/contentFiles.ts",
@@ -24,14 +27,22 @@
     "audioDiskRoot": "apps/web/media/session-audio",
     "audioUrlPrefix": "/media/session-audio/",
     "audioRoute": "apps/web/app/media/session-audio/[...segments]/route.ts",
-    "forbiddenGeneratedPrefixes": ["/images/"]
+    "forbiddenGeneratedPrefixes": [
+      "/images/"
+    ]
   },
   "chronicles": {
     "route": "apps/web/app/(site)/campaigns/[id]/chronicle/route.ts",
     "htmlRoot": "content/chronicles",
     "sync": "scripts/sync-chronicle.mjs",
     "storyRenderer": "scripts/lib/chronicle-story.mjs",
-    "storyMaps": ["chronicle-poc/session-sequences.json", "sod-chronicle-poc/session-sequences.json"]
+    "storyMaps": [
+      "chronicle-poc/session-sequences.json",
+      "sod-chronicle-poc/session-sequences.json"
+    ],
+    "artQueue": "scripts/chronicle-art.mjs",
+    "artQueueHelpers": "scripts/lib/chronicle-art-notes.mjs",
+    "artDraftRoot": "artwork-drafts/chronicle-queue"
   },
   "voice": {
     "client": "apps/web/components/livekit/ScheduleVoiceAssistant.tsx",
