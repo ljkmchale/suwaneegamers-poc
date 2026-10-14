@@ -175,10 +175,14 @@ campaign's `session-images.json`, has real notes (400+ words) unchanged for 12h,
 Codex's scene brief quotes the notes verbatim (verified by the script), and the
 skill reports no missing required portrait. Drafts, briefs and the ledger live in
 `artwork-drafts/chronicle-queue/` (git-ignored, never served); the only writer
-of served files is `approve`, which writes the WebP under
+of served files is the publish step (`approve`, or automatically after a draft
+whose Codex self-review passed; `CHRONICLE_ART_AUTO_APPROVE=0` disables that),
+which writes the WebP under
 `apps/web/media/images/chronicles/<campaign>/`, the chapter's key in
 `session-images.json`, then rebuilds and copies `content/chronicles/<campaign>.html`
-exactly as `sync-chronicle.mjs` does. Nothing publishes without approval.
+exactly as `sync-chronicle.mjs` does. A draft whose self-review failed stays
+queued for manual `approve`/`reject`. Auto-published files are working-tree
+changes: they are not committed or pushed by the task.
 
 The same helper reads optional `session-videos.json` chapter-to-MP4 mappings.
 Accepted videos live alongside Chronicle artwork under `/media/images/` (the

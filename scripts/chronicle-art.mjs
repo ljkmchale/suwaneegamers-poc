@@ -1,6 +1,7 @@
 // Chronicle art queue: drafts a session hero image for each new chapter of the
 // five Living Chronicles with Codex (ChatGPT subscription, per-campaign skill),
-// then waits for Larry's approval before anything reaches the site.
+// then publishes it automatically when Codex's own review of the bitmap passed
+// (CHRONICLE_ART_AUTO_APPROVE=0 holds everything for manual approval).
 //
 //   node scripts/chronicle-art.mjs scan                       what would be drafted (spends nothing)
 //   node scripts/chronicle-art.mjs run [--campaign id] [--chapter n] [--limit n] [--no-settle]
@@ -46,6 +47,7 @@ const SETTLE_HOURS = Number(process.env.CHRONICLE_ART_SETTLE_HOURS ?? 12);
 const DEFAULT_LIMIT = Number(process.env.CHRONICLE_ART_LIMIT ?? 2);
 const MAX_WAITING = Number(process.env.CHRONICLE_ART_MAX_WAITING ?? 6);
 const MAX_ATTEMPTS = 2;
+const AUTO_APPROVE = !["0", "false", "off"].includes(String(process.env.CHRONICLE_ART_AUTO_APPROVE ?? "1").toLowerCase());
 const CODEX_HOME = process.env.CODEX_HOME?.trim() || path.join(os.homedir(), ".codex");
 
 class LimitError extends Error {}
@@ -85,11 +87,17 @@ function withLock(fn) {
   }
   fs.writeSync(fd, String(process.pid));
   fs.closeSync(fd);
+  const release = () => fs.rmSync(LOCK, { force: true });
+  let result;
   try {
-    return fn();
-  } finally {
-    fs.rmSync(LOCK, { force: true });
+    result = fn();
+  } catch (error) {
+    release();
+    throw error;
   }
+  if (result && typeof result.then === "function") return result.finally(release);
+  release();
+  return result;
 }
 
 const itemKey = (campaign, key) => `${campaign.id}/${key}`;
@@ -462,8 +470,8 @@ function cmdScan(opts) {
   console.log(`Waiting for your approval: ${waitingCount(ledger)}`);
 }
 
-function cmdRun(opts) {
-  withLock(() => {
+async function cmdRun(opts) {
+  await withLock(async () => {
     const ledger = loadLedger();
     const limit = opts.limit ?? DEFAULT_LIMIT;
     if (waitingCount(ledger) >= MAX_WAITING && !opts.chapter) {
@@ -481,6 +489,17 @@ function cmdRun(opts) {
       try {
         ledger.items[key] = draftChapter(row.campaign, row.chapter, ledger);
         log(`${key}: ${ledger.items[key].status}${ledger.items[key].reason ? ` - ${ledger.items[key].reason}` : ""}`);
+        // Auto-approve only what Codex's own review of the bitmap passed; the
+        // scene was already verified against the notes. Anything else stays
+        // in the queue for a human.
+        if (AUTO_APPROVE && ledger.items[key].status === "drafted" && ledger.items[key].selfReview?.passed === true) {
+          saveLedger(ledger);
+          try {
+            await publishDraft(ledger, row.campaign.id, row.chapter.number);
+          } catch (error) {
+            log(`${key}: auto-approve failed, left in the queue - ${error.message}`);
+          }
+        }
       } catch (error) {
         if (error instanceof LimitError) {
           log(`${key}: ${error.message}; stopping until the next run.`);
@@ -516,11 +535,11 @@ function findItem(ledger, campaignId, number) {
   return { campaign, key, item: ledger.items[key] };
 }
 
-async function cmdApprove(campaignId, number, opts) {
+/** Publish one drafted image. The caller holds the queue lock and owns `ledger`. */
+async function publishDraft(ledger, campaignId, number, opts = {}) {
   const { default: sharp } = await import("sharp");
   sharp.cache(false);
-  await withLock(async () => {
-    const ledger = loadLedger();
+  {
     const { campaign, key, item } = findItem(ledger, campaignId, number);
     if (!item || item.status !== "drafted") throw new Error(`${key} is not a draft awaiting approval`);
     const chapterKey = key.split("/")[1];
@@ -562,7 +581,11 @@ async function cmdApprove(campaignId, number, opts) {
     const audit = spawnSync(process.execPath, [path.join(root, "scripts", "audit-local-images.mjs")], { cwd: root, encoding: "utf8" });
     console.log(`Published ${url}\nChronicle: /campaigns/${campaign.id}/chronicle (content/chronicles/${campaign.served})`);
     console.log(audit.status === 0 ? "Image audit passed." : `Image audit FAILED:\n${audit.stdout}${audit.stderr}`);
-  });
+  }
+}
+
+async function cmdApprove(campaignId, number, opts) {
+  await withLock(async () => publishDraft(loadLedger(), campaignId, number, opts));
 }
 
 function cmdReject(campaignId, number, opts) {
@@ -592,7 +615,7 @@ const [command, ...argv] = process.argv.slice(2);
 const { opts, rest } = parseArgs(argv);
 try {
   if (command === "scan") cmdScan(opts);
-  else if (command === "run") cmdRun(opts);
+  else if (command === "run") await cmdRun(opts);
   else if (command === "list") cmdList();
   else if (command === "approve") await cmdApprove(rest[0], Number(rest[1]), opts);
   else if (command === "reject") cmdReject(rest[0], Number(rest[1]), opts);
