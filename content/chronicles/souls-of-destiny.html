@@ -247,6 +247,20 @@ table.ledger td strong{color:var(--gilt)}
   .account{padding:6vh 22px 8vh}
   .account p{text-align:left;font-size:1.08rem}
 }
+
+/* song lyrics / verse */
+.song{margin:2.2em auto;max-width:44ch;text-align:center;padding:26px 30px;border-left:2px solid var(--gilt);background:rgba(255,255,255,.025);font-style:italic}
+.song-label{margin:1.4em 0 .4em;font-style:normal;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gilt);opacity:.85}
+.song-label:first-child{margin-top:0}
+.song-line{line-height:1.7}
+/* roster (flattened table) */
+.roster{margin:1.8em auto;max-width:36ch;padding:18px 26px;border:1px solid rgba(201,162,75,.35);background:rgba(255,255,255,.025)}
+.roster-title{font-variant:small-caps;letter-spacing:.12em;color:var(--gilt);text-align:center;margin-bottom:.6em}
+.roster ul{list-style:none;margin:0;padding:0}
+.roster li{padding:.25em 0;border-top:1px solid rgba(255,255,255,.06)}
+/* chapter footer stats */
+.chapter-stats{margin:2.2em auto 0;display:flex;gap:2em;justify-content:center;font-size:.85rem;opacity:.7;letter-spacing:.06em}
+.chapter-stats b{color:var(--gilt);margin-left:.3em}
 </style>
 
 <!-- ============================================================
@@ -622,11 +636,7 @@ window.SESSION_ART = {
 <p>Esylla asks him to clean up Kenton and she instantly does.  It seems cleaner than it was before and he smells like roses.  He gets dressed.  She looks at the amulet and thinks this is a lesser fiend holy symbol…not too powerful.  Now onto Ganon - “I have the ability to speak with the dead.”  This can be a learning moment.</p>
 <p>Therric drops out of the air and is told he is wanted downstairs.  He goes down the trap door and joins the group.  Zephyra asks where to put the body.  Mollywop gusts of wind everything off the table and Zephyra puts the body there.  Anyone who wants to take part can ask a question.</p>
 <p>The room dims and a greenish fog emanates from her robes.  She reaches her hand out and green strings come from her fingers and attach to the limbs of Ganon’s body.</p>
-<p>1. Who is the name of your Master?  He says Summoner Karranock will eat you alive.</p>
-<h2 class="scene">2. Where is the place you conduct the rituals? In Adsuren</h2>
-<p>3. What is the name of the specific building?  It is not in a building</p>
-<p>4. How would I get to the site from the Tanner’s shop? Go deeper into town.</p>
-<p>5. Name of the most prominent cult member in town?  Summoner Karranock</p>
+<ol class="log" start="1"><li>Who is the name of your Master?  He says Summoner Karranock will eat you alive.</li><li>Where is the place you conduct the rituals? In Adsuren</li><li>What is the name of the specific building?  It is not in a building</li><li>How would I get to the site from the Tanner’s shop? Go deeper into town.</li><li>Name of the most prominent cult member in town?  Summoner Karranock</li></ol>
 <p>The spell ends and the body catches fire.  Mollywop is startled.  We ask if she did it and she said no - this seems like it was a failsafe.  We ask her if she is familiar with Summoner Karranock.  She says it is likely a title.  Escanor tries to grab as many ashes as he can.</p>
 <p>We discuss that we need to flush out the cultist group, but can follow up on the monstrous roar and the uncatchable Bulas at some other time.</p>
 <p>We discuss that there are people in the town so we have to be careful who to trust.  We need to be careful who and how we question.  Mollywop warns that if an imp got away, they likely know we are on the trail. Esylla posits that maybe the imp would only associate Escanor, Zep, and her with being on the trail - and not Kenton, Lila, nor Therric.  Nothing has crossed over her barrier - so if the imp is up, it is in town.</p>
@@ -861,7 +871,7 @@ window.SESSION_ART = {
 <p>Zephyra tries to talk to the guards, but they are busy. Then heads back to the Grotto.</p>
 <p>We all meet back up at the Grotto. Esylla presents the whip to Kenton, tells Zephyra about the magic item, and then tells the group about committing to help with the entertainment at market day. The group shares their morning. Escanor looks dashing in his new armor.  The group then talks about Esylla’s errands with Mollywop - and why.  And about Zephyra’s mom and her unknown whereabouts.</p>
 <p>The group eats. Kenton brings up that talk of the robbery seems to have been squashed by the cultist take down.  After lunch, we head out and follow the path next to the Grotto, heading to the mines. It is 2PM.</p>
-<h2 class="scene">The End of the Session –</h2>
+<div class="endmark">The End of the Session –</div>
   </div>
 </section>
 
@@ -941,7 +951,7 @@ window.SESSION_ART = {
 <p>We see one of the apprentices (the rat one - male halfling).  The group tells why they are there and he says that she is inside eating breakfast.  He says that he just put the alarm spell in place.  Therric and Escanor mention the pickpocketing epidemic and ask if there is any cause for concern.  The group walks in and sees Mollywop.  She is in a casual, summer robe.  She looks tired, but better than the last time we saw her. She says that she was going to message the group, but since we are here, she would tell us know.  She asks for help with the finale - as Escanor mentions and demonstrates that he was planning to sing.  She says that she doesn’t specialize in evocation magic, but was hoping we could help with conduits to help lightning jump around during the finale.  She tells us that she will gather a storm and we will get a sign of when to throw the metal rods into the sky to chain the lightning.  She asks for ideas of what to convey.  We throw out bulas, dragons, beholders, angels, etc.  She tells us that she will message us later in the day to see if we have an idea.  As we are about to leave, she gets a twitch and tells the group that her town alarm was triggered to the north.  She asks us to check it out.  Therric seems a little scared and concerned.  She tells us that there is a fisherman’s hut up the coast where we might be able to intercept. She says that in case there is danger, this will help - and she wards the four of us (we get 30 temp hp each).  We then start out towards the coast.</p>
 <p>After a few minutes, Zephyra arrives at the tower.  They brief her and the apprentice casts a spell on Zephya. She now has haste on her for an hour. She should be able to catch up to the group easily.</p>
 <p>The group jogs and makes it to a fisherman’s hut on the coast with a small dock.  Esylla, Kenton, and Escanor notice there is a boat with supplies on the dock - thinking he was going to fish early for Market Day, but there is no sign of the fisherman.  Esylla goes to the hut and sees no one.  Escanor looks around the hut.  Therric goes to the dock to investigate.  Kenton looks around outside. Therric splashes a stone in the water at a distance to make a distraction. Esylla notices Zephrya running up the coast to catch up.  The boat shoots up from the water and drenches Kenton and Therric.  The sun is then immediately blotted out.</p>
-<h2 class="scene">The End of the Session –</h2>
+<div class="endmark">The End of the Session –</div>
   </div>
 </section>
 
@@ -986,7 +996,7 @@ window.SESSION_ART = {
 <p>The group asks Lila about the name that she was shouting out.  She tells everyone that she had a vision.  And Mollywop says that she knew of this dragon a couple of decades ago.  It was a young then.  Very friendly and explorative. She then tells about the vision and how it went to sleep in a tree and infected it. Escanor pushes her to message her cleric friend about helping with the dragon.  He says he can come soon and take care of the dragon. Mollywop moves the dragon back to the dock, hoping this will help with its protection.  She is going to put a ward around it until the friend can come. Escanor prays over the body.</p>
 <p>We discuss that the swamp is where the Sapcutts lived. We decide to go back to Market Day.  We start walking back to the town. Kenton asks if there are other gold dragons around.  She responds that she thinks there is another bigger gold dragon on Inverland.  She agrees to message that dragon to see if they can help with the fallen dragon.</p>
 <p>WE STOP HERE with a plan to walk to Market Day (then go to Caldwynn in a day or two)</p>
-<h2 class="scene">The End of the Session –</h2>
+<div class="endmark">The End of the Session –</div>
   </div>
 </section>
 
@@ -1057,10 +1067,7 @@ window.SESSION_ART = {
 <p>The priests come and take Mollywop’s body.  We follow the blood tracks to the stables and see that the assassin fled on horseback.  Plan is to follow him.  Group rides into the night until we can rest.  Arcane Executioner is the sword…Zephyra gets it.</p>
 <p>Esylla asks the dwarf to send a couple of messages:  to her Aunt Ree and to her “uncle Trey.”</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">4</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<ul class="log"><li></li></ul>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>4</b></span></div>
   </div>
 </section>
 
@@ -1107,10 +1114,7 @@ window.SESSION_ART = {
 <p>Still raging, Zephyra heads to the stables.  Therric and Escanor start down the stairs and see Esylla coming up.  They turn and head to the stables to help her. Zephyra goes to the doors of the stables and kicks them open, where she sees in a stable stall, a red, smoky figure of a horse.</p>
 <p>Meanwhile, Kenton and Lila went to investigate the chest. Kenton and Lila see a golden stick inside the chest.</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">5</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">1</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>5</b></span><span>Sessions at that level <b>1</b></span></div>
   </div>
 </section>
 
@@ -1168,10 +1172,7 @@ window.SESSION_ART = {
 <p>The objectives being considered:</p>
 <ul class="log"><li>Finish going through the Keep to make sure we leave no stone unturned.  </li><li>Go to Gibuldon to seek the Crimson Court and the family who owns the Keep.  </li><li>Go south to Caldwynn for Zephyra</li><li>Investigate the Necromancer crypt in Eustera Ridge</li></ul>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">5</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">2</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>5</b></span><span>Sessions at that level <b>2</b></span></div>
   </div>
 </section>
 
@@ -1234,10 +1235,7 @@ window.SESSION_ART = {
 <p>The group leaves the Keep and heads back, knowing we will have to take a long rest at night.  Therric looks around for signs of Ifryn’s horse…and finds tracks that lead north.  Kenton and Lila share a horse.  Therric and Esylla share a horse.  Escanor and Zephrya (with the dead body) each ride their own horse.  The group travels during the day.  Night falls.  We take watch:  Zephrya and Esylla first, Escanor and Therric second, and Lila and Kenton last.</p>
 <p>First watch:  uneventful. Esylla starts to read the scroll she got from her uncle and explains the effect (somewhat) to Escanor and Therric (as they wake them up) and Zephrya.  Second watch:  uneventful.  They brush their horses.  Therric carves the rune into his staff (earth carving of a panther) during this time. Escanor sees Therric in a trance, eyes closed, carving with an arrowhead.  He sees what Therric carves. Therric comments “this is interesting.”  And spends the last bit of his watch practicing with his staff. Last watch: uneventful.  Lila looks around and feels a warmth on her chest from her pendant.  She sees it is glowing with a darker, richer red color.  She looks into it and gets a greatest hits vision - previous images she has seen:  Graveyard, place under Adsuren center with Z’s mom, strange overgrown, ruined keep, bustling marketplace with a well, Kenton surrounded in an alley by thugs, large shadow in the night sky - the gold dragon with blighted belly.  She’s had all of these before, but they are all clearer.  She continues to look - and suddenly she hears, “Hello.”</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">5</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">3</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>5</b></span><span>Sessions at that level <b>3</b></span></div>
   </div>
 </section>
 
@@ -1269,15 +1267,7 @@ window.SESSION_ART = {
 <h2 class="scene">Zephyra &amp; Escanor at the Nature’s Oratory of Adsuren</h2>
 <p>Zephrya and Escanor ride further to drop off the body.  They notice that the market area has been roped off.  They notice it is not cleaned up - the stage is still present, debris, etc., but no dead bodies.  They notice a large crowd of people in front of the Oratory.  Folks make way for them to pass.  They both notice that there is a mix of people - rich, poor, young, and old.  Some notice who they are carrying and spit on the ground, while others ooh and ahh as they pass.  They make their way to the front doors.  Rotvori greets them at the entrance.  “There is a viewing of her body at the moment, but we can get you inside.  Who is that?”  And Zephyra tells him.  They decide to go around the back to take the body inside there so as not to disrupt the proceedings.  Rotvori expresses that he is unsure what to do with the body and Escanor comments that maybe an unmarked grave might be appropriate.  He agrees and asks them if they would like to see Mollywop’s body.   They consent.  As the walk, he comments how close she was to the goddess Myrdris.</p>
 <p>They go inside the room to see her and see an older man with long blond hair with streaks of gray standing over her body.  He is wearing blue robes, is probably in his 50’s, has a neatly trimmed, but thick beard.  He doesn’t notice them entering.  They don’t recognize him or the symbol on his robes.  Rotvori whispers to him that he is Bertholdt Yaseina - one of Mollywop's companions from some time in her past.  Escanor walks over and introduces himself and tells him that he brought in the dead body.  He apologizes that he doesn’t know them.  He comments that it is a shame that she was taken so young.  He asks about the disposition about them and their adventuring party - and finds out that the group is the party that the priest has been talking about.  He asks if the group is the one that advised Mollywop to contact him?  Escanor and Zephyra comment that they are.  The man comments that he was a follower of Athuel - before the connection to the world was severed - but he still tries to teach his ways (symbol on the robe was an eye).  He also says he follows Cembus.  He apologizes that he was not present to help Mollywop.  He also comments that he is not able to contact her body the way he would prefer (the poison that killed her made her unable to be helped with divine magic).  Escanor comments that “having faith in the gods” is all anyone can do.  He comments that “the rest of the members of the Concord couldn’t make it” and Escanor and Zephyra try to figure out who that is.  The Luminary Concord is an old adventuring group that Mollywop belonged to a long time ago.  Escanor asks about those members.  He comments that Ariah (the scoundrel) or Nashtil (the leader) are likely about but he hasn’t seen them for some time.  He is assuming they will see her at some point as her body is toured around Inverland.</p>
-<h2 class="scene">Luminary Concord</h2>
-<h2 class="scene">Nashtil</h2>
-<h2 class="scene">Leader</h2>
-<h2 class="scene">Mollywop</h2>
-<h2 class="scene">Magic User of Tegenwald Phet</h2>
-<h2 class="scene">Berthold Yaseina</h2>
-<h2 class="scene">Priest of Athuel</h2>
-<h2 class="scene">Ariah</h2>
-<h2 class="scene">Scoundrel (scout)</h2>
+<div class="roster"><div class="roster-title">Luminary Concord</div><ul><li>Nashtil</li><li>Leader</li><li>Mollywop</li><li>Magic User of Tegenwald Phet</li><li>Berthold Yaseina</li><li>Priest of Athuel</li><li>Ariah</li><li>Scoundrel (scout)</li></ul></div>
 <p>Escanor asks about the dragon and he hasn’t looked into it yet.  He wanted to take care of her first.  He invites the group to join him on his journey with Mollywop.  Zephyra asks if her apprentices had any strong feelings, to which he replies:</p>
 <ul class="log"><li>Alaric - who they don’t remember (he was one of Mollywop’s first apprentices).  </li><li>He comments that the dwarven apprentice, Sizzona Thundefall, was taken to Caldwyn.  </li><li>And Lix Oriororos (Lux) is taking over Mollywop’s tower for now.  </li><li>Dodery is the other apprentice (that he didn’t mention). </li></ul>
 <p>Alaric might be at the Tower.  Zephyra asks about him again - he was an apprentice almost three decades ago.  He was rescued from a demon attack and she trained him up - during her stint at the Tegenwal Phet and then once she came here.  He worked with her clone for a while, too.</p>
@@ -1298,56 +1288,7 @@ window.SESSION_ART = {
 <p>They offer their services to help.  And Alaric offers his services to help the town. They talk about the skeletal helpers walking around the town, how Mollywop had an alarm spell, and how her orb, now broken, was helpful to keep the town safe. He tells Therric that the Everdawn has asked the Phet for help so he won’t be joining on the Mollywop journey throughout Camburne. He mentions that he is going to help with a blight threat on the mainland.  Therric then mentions the dragon and the corruption of the nearby swamps.  He says that he had a chance to examine the dragon. He tells them that the dragon was hunting Mollywop’s killer.  He was reanimated by Alaric.  He says he has the power to control it now. He says he may use the dragon to help protect the town now, but he is unsure.  Therric is concerned about the regrowth of the trees and seems to be pacified by hearing that they will grow back quickly. More discussion about the new skeletal dragon.  They then leave to go to the Grotto.</p>
 <h2 class="scene">The Party Gathers at the Graying Grotto</h2>
 <p>Zephyra arrives at the Grotto first and sees Kenton performing a song to the patrons - he performs exceptionally well “Raise a Glass for Mollywop.”  The song reveals quite a bit…</p>
-<h2 class="scene">[Spoken]</h2>
-<p>Listen closely.</p>
-<p>This tale was paid for in blood.</p>
-<h2 class="scene">[Verse 1 – Slow]</h2>
-<h2 class="scene">Mollywop lit Market night</h2>
-<p>With dragon fire above.</p>
-<h2 class="scene">Then {Ifryn’s} [the assassin's] poisoned blade struck through</h2>
-<p>The friend we came to love.</p>
-<h2 class="scene">Still she shielded Adsuren’s lives</h2>
-<p>And burned away his arm.</p>
-<h2 class="scene">He fled the square beneath the moon;</h2>
-<p>We followed while blood was warm.</p>
-<h2 class="scene">[Chorus – Building]</h2>
-<h2 class="scene">Raise your glass for Mollywop,</h2>
-<p>Magnificent and bright.</p>
-<h2 class="scene">The Souls of Destiny now ride</h2>
-<p>To set the balance right.</p>
-<h2 class="scene">Run while shadows hide you—</h2>
-<p>You cannot outrun the flame.</p>
-<h2 class="scene">[Verse 2 – Faster]</h2>
-<h2 class="scene">The Crimson Court had bought her death;</h2>
-<p>No mercy filled his heart.</p>
-<h2 class="scene">We tracked him to the ancient keep</h2>
-<p>And found him torn apart.</p>
-<h2 class="scene">Esylla faced {her mother’s} [the assassin's] {kin} [down];</h2>
-<p>Escanor offered grace.</p>
-<h2 class="scene">He showed no sorrow for the dead—</h2>
-<p>So judgment took its place.</p>
-<h2 class="scene">[Battle Verse – Fast]</h2>
-<h2 class="scene">Therric’s staff brought thunder;</h2>
-<p>Zephyra raised her blade.</p>
-<h2 class="scene">Esylla struck with fury;</h2>
-<p>Escanor’s light remained.</p>
-<h2 class="scene">Lila called the guiding light;</h2>
-<p>I struck and slipped away.</p>
-<h2 class="scene">Radiance tore through {Ifryn’s} [the assassin's] chest—</h2>
-<p>The killer fell that day.</p>
-<h2 class="scene">[Final Refrain – Brief]</h2>
-<h2 class="scene">Raise your glass for Mollywop;</h2>
-<p>Let every lantern shine.</p>
-<h2 class="scene">She gave her life for Adsuren—</h2>
-<p>Her story now is mine.</p>
-<h2 class="scene">[Short Outro – Slow]</h2>
-<h2 class="scene">I’ve stolen glances, stolen hearts,</h2>
-<h2 class="scene">And slipped through many doors—</h2>
-<h2 class="scene">But Mollywop, wherever you are,</h2>
-<p>This song is only yours.</p>
-<h2 class="scene">[Spoken]</h2>
-<p>Kenton’s the name.</p>
-<p>Remember hers.</p>
+<div class="song"><div class="song-label">Spoken</div><div class="song-line">Listen closely.</div><div class="song-line">This tale was paid for in blood.</div><div class="song-label">Verse 1 – Slow</div><div class="song-line">Mollywop lit Market night</div><div class="song-line">With dragon fire above.</div><div class="song-line">Then {Ifryn’s} [the assassin's] poisoned blade struck through</div><div class="song-line">The friend we came to love.</div><div class="song-line">Still she shielded Adsuren’s lives</div><div class="song-line">And burned away his arm.</div><div class="song-line">He fled the square beneath the moon;</div><div class="song-line">We followed while blood was warm.</div><div class="song-label">Chorus – Building</div><div class="song-line">Raise your glass for Mollywop,</div><div class="song-line">Magnificent and bright.</div><div class="song-line">The Souls of Destiny now ride</div><div class="song-line">To set the balance right.</div><div class="song-line">Run while shadows hide you—</div><div class="song-line">You cannot outrun the flame.</div><div class="song-label">Verse 2 – Faster</div><div class="song-line">The Crimson Court had bought her death;</div><div class="song-line">No mercy filled his heart.</div><div class="song-line">We tracked him to the ancient keep</div><div class="song-line">And found him torn apart.</div><div class="song-line">Esylla faced {her mother’s} [the assassin's] {kin} [down];</div><div class="song-line">Escanor offered grace.</div><div class="song-line">He showed no sorrow for the dead—</div><div class="song-line">So judgment took its place.</div><div class="song-label">Battle Verse – Fast</div><div class="song-line">Therric’s staff brought thunder;</div><div class="song-line">Zephyra raised her blade.</div><div class="song-line">Esylla struck with fury;</div><div class="song-line">Escanor’s light remained.</div><div class="song-line">Lila called the guiding light;</div><div class="song-line">I struck and slipped away.</div><div class="song-line">Radiance tore through {Ifryn’s} [the assassin's] chest—</div><div class="song-line">The killer fell that day.</div><div class="song-label">Final Refrain – Brief</div><div class="song-line">Raise your glass for Mollywop;</div><div class="song-line">Let every lantern shine.</div><div class="song-line">She gave her life for Adsuren—</div><div class="song-line">Her story now is mine.</div><div class="song-label">Short Outro – Slow</div><div class="song-line">I’ve stolen glances, stolen hearts,</div><div class="song-line">And slipped through many doors—</div><div class="song-line">But Mollywop, wherever you are,</div><div class="song-line">This song is only yours.</div><div class="song-label">Spoken</div><div class="song-line">Kenton’s the name.</div><div class="song-line">Remember hers.</div></div>
 <p>The patrons like the performance.  Zephyra comments “quite a song, Kenton.”  She asks for his help.  The captain of the guard is exhausted and has no money to pay people to clean up. She wants him to help create a flyer or song or both to help solicit money and donations to help the town with law and order.  He counters that the town should charge a fee or a tax.  He says he will not help clean, but will perform to help raise money.</p>
 <p>The rest of the group comes in and Esylla looks around for her aunt and doesn’t see her.  But Therric notices someone that favors Esylla.  A half-elf with brown hair and platinum streaks, pretty, pale skin, a little older than Esylla. Therric jumps in to protect her, but Esylla finally sees her and runs up and hugs her. She comments that she heard Esylla’s name in Kenton’s song and was about to ask him when we walked in.  Esylla introduces her friends.  She immediately asks about Ifryn and they share that he was the assassin and she mentions not to speak about Ifryn in public.  Kenton takes offense, but Esylla and Therric pipe up that maybe she is right.</p>
 <p>The group shares everything they learned.  Then Zephyra shares that she asked Kenton for help to raise money. Discussion about the fundraising ideas, including Escanor walking about saying “Go Fund Me.” We then talk about our next steps - going to Gibuldon, Caldwyn, registering the Keep, etc.  Therric announces that he is going to speak with a friend and leaves - and heads to Alaric’s Tower.  Zephrya and Escanor leave to help raise money.  Esylla wants to catch up with her aunt.  And Kenton distributes keys to everyone then stays and eats and may perform again.</p>
@@ -1364,9 +1305,7 @@ window.SESSION_ART = {
 <p>Group meets back at the Grotto eventually.  Kenton performs a new song and uses his shadow motes to help him (two of them - they will play instruments to back him and be backing vocals).  This time he is good, but not as good. Therric, Escanor, and Zephyra walk in and catch the end.  Esylla and her aunt hear the song in its entirety, glad he changed the names in the song.</p>
 <p>Group talks of future plans:</p>
 <ul class="log"><li>To Gibuldon – </li></ul>
-<h2 class="scene">seek the Crimson Court who hired Ifryn</h2>
-<h2 class="scene">find the family who owns the Scyldgar Keep</h2>
-<h2 class="scene">follow up on those who attacked Kenton</h2>
+<ul class="log"><li>seek the Crimson Court who hired Ifryn</li><li>find the family who owns the Scyldgar Keep</li><li>follow up on those who attacked Kenton</li></ul>
 <ul class="log"><li>To Caldwynn – For Zephyra’s mother</li><li>To Eustera Ridge – Investigate the Jenku the Necromancer’s crypts (Therric has a Sending Stone for Alaric)</li><li>To Unstead - to investigate the scribe Kasi Um’cata who had been studying Ifryn</li></ul>
 <p>The plan is to get horses the next day and supplies and head on foot to Caldwyn.</p>
 <p>We go to our rooms and rest for the night.  Uneventful night.</p>
@@ -1377,330 +1316,7 @@ window.SESSION_ART = {
 <p>The group then leaves via the south road.  On the way out, an elf stops us.  This is the acting Intendant.  He says he wanted to see us before we left.  He thanks us for our help and hands us a crate of fruit and six potions (regular healing potions).  He also reminds Kenton that the message he sent to the Reyvennra family was sent ahead by a scribe. He tell him we will follow up if we find out more about the assassin’s origins -who hired him.</p>
 <p>We say our goodbyes and leave…headed to Caldywn via Tirncall.</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">5</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">4</h2>
-<h2 class="scene">Sessions played at that level</h2>
-<h2 class="scene">Campaign Prep Homework</h2>
-<h2 class="scene">Character Creation</h2>
-<p>Here are some things that players should consider when making their characters:</p>
-<p>1. vision – have a vision for your character to be renown throughout Myrdae when the campaign is over</p>
-<p>2. cooperation – play a character that wants to work with other players in the party</p>
-<p>don’t get hung up in “but that’s what my character would do” if it goes against the party</p>
-<p>3. role – consider one of the roles below that you want your character to play;  take initiative during gameplay to fill that role</p>
-<ul class="log"><li>defender (tank) - quick to stand between the biggest monsters and the party members that die easily</li><li>face - someone that helps in npc interaction that relies on skills like deception, persuasion and intimidation</li><li>healer - able to help restore hit points and maybe assist with debuffs (curses, poisons, etc.)</li><li>scholar - can handle the knowledge skills, like arcana, nature and religion</li><li>scout - interesting in moving forward to check the path is clear (stealth, perception, investigation, survival)</li><li>support / utility - controls the battlefield, debuffs enemies and helps get through obstacles</li></ul>
-<p>think of your character as playing a primary role, but also having a secondary role if possible</p>
-<p>4. progression – when your character accomplishes something, think about what else would be good to work towards</p>
-<p>make sure the dungeon master knows this and it goes with the flow of the campaign</p>
-<h2 class="scene">Type of Character for Next Session</h2>
-<h2 class="scene">Player</h2>
-<h2 class="scene">Role / Class / Species</h2>
-<p>Why you don’t want to play specific characters &amp; vision for your new character</p>
-<h2 class="scene">Brian</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<p>1.</p>
-<p>2.</p>
-<p>3.</p>
-<p>Thinking about playing …</p>
-<h2 class="scene">Chip</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">1. Tank / Defender</h2>
-<p>Have too many of those going on …</p>
-<p>2.</p>
-<p>3.</p>
-<p>Thinking about playing …</p>
-<h2 class="scene">Jenny</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">1. Ranger</h2>
-<p>Elora is a Hero / Already played one.</p>
-<h2 class="scene">2. Wizard</h2>
-<p>Already played one and obvious complications with spells and spell management</p>
-<p>3.</p>
-<p>Thinking about playing …</p>
-<h2 class="scene">fighter/Barbarian</h2>
-<h2 class="scene">Would be fun to be the tank delivering the damage</h2>
-<h2 class="scene">Larry</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">1. Barbarian</h2>
-<h2 class="scene">Class does not interest me</h2>
-<h2 class="scene">2. Paladin</h2>
-<h2 class="scene">Already have the best Paladin in Myrdae</h2>
-<h2 class="scene">3. Sorcerer</h2>
-<p>Thinking about playing …</p>
-<h2 class="scene">Rouge/Swashbuckler</h2>
-<p>Bunny Wigglesworth - based on Zorro the Gay Blade - Will even do the accent</p>
-<h2 class="scene">Lesley</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">1. Paladin</h2>
-<h2 class="scene">crystal bottle character</h2>
-<h2 class="scene">2. Wizard</h2>
-<h2 class="scene">treasure hunters character</h2>
-<h2 class="scene">3. Fighter or Rogue</h2>
-<h2 class="scene">playing both of these in current campaigns</h2>
-<p>Thinking about playing …</p>
-<h2 class="scene">Open to Ideas</h2>
-<h2 class="scene">I have played many things - happy to try something new</h2>
-<h2 class="scene">Tiff</h2>
-<p>I don’t want to play ...</p>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">1. Bard</h2>
-<h2 class="scene">Playing one now Dungeons III (Nova)</h2>
-<h2 class="scene">2. Ranger</h2>
-<h2 class="scene">Crystal bottle character (Ren)</h2>
-<h2 class="scene">3. Barbarian/Fighter</h2>
-<h2 class="scene">Mead Society (Lizbeth) &amp; Charlemagne’s Angels (Trinity)</h2>
-<p>Thinking about playing …</p>
-<h2 class="scene">Druid but open to any ideas</h2>
-<p>Happy trusting person.  I know clear departure from every other character I’ve ever played</p>
-<h2 class="scene">Barbarian</h2>
-<h2 class="scene">Bard</h2>
-<h2 class="scene">Cleric</h2>
-<h2 class="scene">Druid</h2>
-<h2 class="scene">Fighter</h2>
-<h2 class="scene">Monk</h2>
-<h2 class="scene">Paladin</h2>
-<h2 class="scene">Ranger</h2>
-<h2 class="scene">Rogue</h2>
-<h2 class="scene">Sorcerer</h2>
-<h2 class="scene">Warlock</h2>
-<h2 class="scene">Wizard</h2>
-<h2 class="scene">Defend</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Face</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Heal</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Scholar</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Scout</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Support / Utility</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">Yes</h2>
-<h2 class="scene">What Others Should Play</h2>
-<p>We’re hoping to have a brainstorming session to help players think about what they would like to play.</p>
-<p>Take a minute to consider what you would like to see the other players choose as their character.</p>
-<p>You could come up with a class, a role, a species … anything that you think would be neat to see the other player play.</p>
-<p>Each player has a section, where you can say what you would like to see them play and why.</p>
-<p>When coming up with the type of character you want to see the other player play …</p>
-<ul class="log"><li>do NOT prank them - come up with something you would really like to see</li><li>try not to pick something that they do not want to play as outlined above</li></ul>
-<p>Brian should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Chip</h2>
-<h2 class="scene">Heals</h2>
-<h2 class="scene">Gnome</h2>
-<h2 class="scene">Bard or Sorcerer</h2>
-<p>Oh, but not everyone is worthy of the power of saying who can live or die.  Yet I am.  I can determine your fate.  I don’t take that responsibility lightly.  I know i must live up to earning that ability.  And those that I don’t aid … well, there is a reason.</p>
-<h2 class="scene">Jenny</h2>
-<h2 class="scene">&lt;Role&gt; Face</h2>
-<p>&lt;Species&gt; Human?</p>
-<h2 class="scene">&lt;Class&gt;Bard</h2>
-<p>Would love to see Brian be the face using his charismatic entertainer side</p>
-<h2 class="scene">Larry</h2>
-<h2 class="scene">Face/Scholar</h2>
-<h2 class="scene">Gnome</h2>
-<h2 class="scene">Wizard -  Illusionist</h2>
-<p>I think Brian can really play up this type of character and it’s very flexible and scalable</p>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Defender/Face</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Paladin</h2>
-<p>I think he would enjoy the versatility of a pally and the ability to make it his own.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Tiffany</h2>
-<h2 class="scene">Utility</h2>
-<p>?</p>
-<h2 class="scene">Paladin</h2>
-<p>Brian could do a lot with this character.  He is good at maximizing a character’s abilities and this would give him a lot to work with</p>
-<p>Chip should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Brian</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Jenny</h2>
-<h2 class="scene">&lt;Role&gt; Scout</h2>
-<h2 class="scene">&lt;Species&gt;Tiefling</h2>
-<h2 class="scene">&lt;Class&gt;Rouge</h2>
-<p>Would be fun to see chip be the sneaky planner.</p>
-<h2 class="scene">Larry</h2>
-<h2 class="scene">Monk</h2>
-<h2 class="scene">Kalashtar</h2>
-<h2 class="scene">Psychic</h2>
-<p>I think this is the “Spock” of humans and will challenge Chip in both his player abilities and a new character Tone.</p>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Face/Support</h2>
-<h2 class="scene">Not sure - something new</h2>
-<h2 class="scene">Bard or Monk</h2>
-<p>I think he should give one of these a shot again - especially with the new rules.  Would like to see his creativity shine.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Tiffany</h2>
-<h2 class="scene">Face</h2>
-<p>?</p>
-<h2 class="scene">Bard</h2>
-<p>Chip would be very creative and entertaining in this role.  Maybe even a bit flamboyant!</p>
-<p>Jenny should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Brian</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Chip</h2>
-<h2 class="scene">Defender</h2>
-<h2 class="scene">Tiefling or Human</h2>
-<h2 class="scene">Barbarian - World Tree</h2>
-<p>The world is a beautiful place and love is everywhere.  I am a trained bodyguard and ruffian, but felt it was antithetical to her feelings.  The world should love and embrace. And if they don’t … Well, they have to leave.  It triggers me and I explode and they will suffer.</p>
-<h2 class="scene">Larry</h2>
-<h2 class="scene">Defender</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Barbarian - Wild Heart</h2>
-<p>This will give Jenny a “Nature Spirit Vibe” without the complexity.</p>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Defender</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Fighter or Barbarian</h2>
-<p>Would be fun to see her in a “tough” gal type of mode - especially if she could adopt a tough voice and persona and really play into character.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Tiffany</h2>
-<h2 class="scene">Defender</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Barbarian</h2>
-<p>like to see Jenny play a tough character and maybe with a darker side</p>
-<p>Larry should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Brian</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Chip</h2>
-<h2 class="scene">Defend</h2>
-<h2 class="scene">Dwarf or Half-orc</h2>
-<h2 class="scene">Fighter</h2>
-<p>Why wouldn’t Larry play a constructor?  Someone gruff and strong that can forge his path.  He has a vision for the way things should be (he gets it naturally, because things should be built or made in a certain way).  Spells are for cheaters…</p>
-<h2 class="scene">Jenny</h2>
-<h2 class="scene">&lt;Role&gt; Scholar</h2>
-<p>&lt;Species&gt; Human?</p>
-<h2 class="scene">&lt;Class&gt;Bard</h2>
-<h2 class="scene">Want to see him play something different and fun not roguish</h2>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Scout/Defender</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Ranger, Monk, or Rogue</h2>
-<p>Maybe a multi-class, but I think one of the scouting roles would be fun for him.  Would like to see him really get into a character’s role.  Like the idea of his Zorro-like character - especially if he will do the accent.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Tiffany</h2>
-<h2 class="scene">Defender</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Ranger</h2>
-<h2 class="scene">Men in Tights version</h2>
-<p>Lesley should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Brian</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Chip</h2>
-<h2 class="scene">Face</h2>
-<h2 class="scene">Human, Elf or Tiefling</h2>
-<h2 class="scene">Warlock</h2>
-<p>She owns the room.  Nobody is worthy … her patron is even so envious at times to where she might be hated by her patron, but gives in.  As arrogant as she can be, she’s not foolish and knows that part of her charm is convincing others to desire her.</p>
-<h2 class="scene">Jenny</h2>
-<h2 class="scene">&lt;Role&gt;Utility</h2>
-<h2 class="scene">&lt;Species&gt; Dwarf</h2>
-<h2 class="scene">&lt;Class&gt;Druid</h2>
-<h2 class="scene">Leslie could embrace her inner flower child</h2>
-<h2 class="scene">Larry</h2>
-<h2 class="scene">Support / Control Specialist</h2>
-<h2 class="scene">Aasimar</h2>
-<h2 class="scene">Trickery Cleric</h2>
-<p>This will give Lesley the battlefield and possibly direct flow while supporting others.  Plus this subclass avoids many others she does not want to play.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Tiffany</h2>
-<h2 class="scene">Face</h2>
-<p>?</p>
-<h2 class="scene">Rogue</h2>
-<p>Would love to see Chip and Lesley’s characters vying for leadership and to be Face of the group.  Think Lesley could make herself a very sly and captivating character</p>
-<p>Tiff should play a …</p>
-<h2 class="scene">Player / DM</h2>
-<h2 class="scene">Type</h2>
-<h2 class="scene">Reason you want to see them play this type of character</h2>
-<h2 class="scene">Brian</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
-<h2 class="scene">Chip</h2>
-<h2 class="scene">Support / Utility</h2>
-<h2 class="scene">Elf or Gnome</h2>
-<h2 class="scene">Sorcerer - Draconic or Spellfire</h2>
-<p>She’s blessed with innate powers and feels like she owes everyone … even the world.</p>
-<p>Can Tiff do humble?  How about a happy go lucky, love to see what the world can offer.  So happy to meet people.  Trusting to a fault.</p>
-<h2 class="scene">Jenny</h2>
-<h2 class="scene">&lt;RoleUtility/Heal</h2>
-<h2 class="scene">&lt;Species&gt;Tiefling</h2>
-<h2 class="scene">&lt;Class&gt;Drud</h2>
-<h2 class="scene">Would like to see Tiff play a fun loving character</h2>
-<h2 class="scene">Larry</h2>
-<h2 class="scene">Face/Support</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Bard -  College of War</h2>
-<p>This may be a fun class for Tiff – martial, weapon-using, damage-dealing bard</p>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Support/Face</h2>
-<h2 class="scene">Gnome or Halfling</h2>
-<h2 class="scene">Sorcerer</h2>
-<p>Would like to see Tiff as a “small” character…especially with a “smaller” and less “tough” persona.  Think she would enjoy trying something new as well.</p>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">&lt;Role&gt;</h2>
-<h2 class="scene">&lt;Species&gt;</h2>
-<h2 class="scene">&lt;Class&gt;</h2>
+<div class="chapter-stats"><span>Level at end <b>5</b></span><span>Sessions at that level <b>4</b></span></div>
   </div>
 </section>
     <footer class="pagefoot">Suwanee Gamers &middot; Souls of Destiny Chronicle</footer>

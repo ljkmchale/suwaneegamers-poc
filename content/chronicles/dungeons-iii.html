@@ -247,6 +247,20 @@ table.ledger td strong{color:var(--gilt)}
   .account{padding:6vh 22px 8vh}
   .account p{text-align:left;font-size:1.08rem}
 }
+
+/* song lyrics / verse */
+.song{margin:2.2em auto;max-width:44ch;text-align:center;padding:26px 30px;border-left:2px solid var(--gilt);background:rgba(255,255,255,.025);font-style:italic}
+.song-label{margin:1.4em 0 .4em;font-style:normal;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gilt);opacity:.85}
+.song-label:first-child{margin-top:0}
+.song-line{line-height:1.7}
+/* roster (flattened table) */
+.roster{margin:1.8em auto;max-width:36ch;padding:18px 26px;border:1px solid rgba(201,162,75,.35);background:rgba(255,255,255,.025)}
+.roster-title{font-variant:small-caps;letter-spacing:.12em;color:var(--gilt);text-align:center;margin-bottom:.6em}
+.roster ul{list-style:none;margin:0;padding:0}
+.roster li{padding:.25em 0;border-top:1px solid rgba(255,255,255,.06)}
+/* chapter footer stats */
+.chapter-stats{margin:2.2em auto 0;display:flex;gap:2em;justify-content:center;font-size:.85rem;opacity:.7;letter-spacing:.06em}
+.chapter-stats b{color:var(--gilt);margin-left:.3em}
 </style>
 
 <!-- ============================================================
@@ -332,9 +346,7 @@ window.SESSION_ART = {
 <h2 class="scene">(ada, yada, yada … “fall”)</h2>
 <h2 class="scene">Intro for Player 1 - Æon</h2>
 <p>Æon awakens at the Moonfern Sanctuary and discusses activities of the day with Ilyana, the masseuse.  As Æon mentions he is looking for something to do - and might be interested in speaking to others about their gods, Ilyana tells him about the temple in Hesfal named the “Hall of Many Hands”, which sounds promising to Æon.  She also mentions that Salvus is tomorrow and there are many people expected to arrive in Hesfal today - so he will need to pay his tab.  He goes to speak with Alarine (owner, Ilyana’s mother) and schedules a bath and massage and pays his bill for 2 more nights.  (Double full moon! What does it mean?)</p>
-<h2 class="scene">Intro for Players 2, 3 and 4</h2>
-<h2 class="scene">(the dorks are acquainted)</h2>
-<p>Draelith, Nixie, and Meles are acquainted at the Covered Hooch.</p>
+<div class="song"><div class="song-line">Intro for Players 2, 3 and 4</div><div class="song-line">(the dorks are acquainted)</div><div class="song-line">Draelith, Nixie, and Meles are acquainted at the Covered Hooch.</div></div>
 <p>Draelith, 6’ and skinny human, with fair skin, blonde hair.  He wears a muted blue pilgrim-like outfit, a steel headband and carries a short dark wood staff.  (alambre? Ambre? Inordinately fond of olives. Like, seriously)</p>
 <p>Nixie the svirneblin (gnome) is  3’10”, which is tall for a gnome, with big eyes.  He wears leather, and has a staff.  He is quiet, naive and awkward.  Since arriving on the surface, he appears to be starstruck.  (Reaching for the stars!)</p>
 <p>Meles is a Wood Elf, 5’11’, thin, gaunt, jade brown eyes, coppering blonde ponytail.  He wears dark leather armor (very nicely maintained armor), carries a short bow, scimitar with carefully placed leather ties to cover sound and reflection.  He’s very relaxed.  (Cute little ribbons everywhere)</p>
@@ -428,9 +440,7 @@ window.SESSION_ART = {
     </div>
   </header>
   <div class="account">
-    <h2 class="scene">In Hesfal:  8th of Evalee, 1246</h2>
-<h2 class="scene">Seraphine noticed Nova and Meles snatch some keys from the guard</h2>
-<h2 class="scene">IT IS INITIATIVE:  Combat vs. the Bandits freeing the Prisoners</h2>
+    <div class="song"><div class="song-line">In Hesfal:  8th of Evalee, 1246</div><div class="song-line">Seraphine noticed Nova and Meles snatch some keys from the guard</div><div class="song-line">IT IS INITIATIVE:  Combat vs. the Bandits freeing the Prisoners</div></div>
 <ul class="log"><li>ROUND ONE:  Nova busts out the Pocket Prism! Ta Da–Fiat Lux–3 guys blinded!!  Nova rushes inside and waits for Meles (Sadly, he goes last).  Someone shot Meles with his bow (JFC!) and he drops like a rock (He is unconscious).  He pops up again. (WTF?). The bad guys are trying to unblind each other and are fleeing.</li></ul>
 <p class="lead">Back to the Boar’s Best …Seraphine cleaning up the wounded.  Nixie does not notice the keys being stolen. He is looking inside the bar.  Seraphine asks Nixie where the other folks went. Mentions the slight of hand of the keys.  Nixie is curiouser and curiouser.  We don’t trust New Girl. She is probably going to bust him out.  We all go look for them.</p>
 <p>Nova touches Meles with her healing hands.  As we approach the Town Hall, we see people walking about.  The group is back together at the Town Hall.  Meles tells us that bandits broke out someone they call “Cap’n”.  An older elf (Salt’n’Peppa) shows up; he seems ungrateful.  It’s Estufus Windseek, the Mayor.  Nova confesses to robbing the bodies of the guards.  Meles says he left some alive (so that's good. Heroes!).  Nova is shifty in her answers.  “Koren” was the prisoner.  Meles says they were looking for more guards, “I was one of the heroes”.  Nova confronts the Mayor, “Where were you?!”  Two guards show up late.  Meles lures the guards inside.  Seraphine explains exactly how the guards died. “Intestines spilled out…”</p>
@@ -529,10 +539,7 @@ window.SESSION_ART = {
 <p>Ralli was worried the Cap’n and his boys were coming to get him to take back to Scarwatch Hold.  It was Ralli’s belongings that were left at the owlbears lair.  Ralli was asked to deliver a package to the Cap’n that he got from Iroesh.</p>
 <p>Draelith spends some time with Sherdin to make a map to get a physical copy of the lay of the land.  Draelith is particularly interested in a view to the sky for the coming of Salvus.</p>
 <p>The party prepares camp and Draelith establishes camp rules with the party:</p>
-<h2 class="scene">1. Don’t touch Seraphine while we’re sleeping</h2>
-<p>2. Don’t leave camp, particularly due to noises or when you see something</p>
-<h2 class="scene">3. Wake someone when there is danger</h2>
-<h2 class="scene">4. Don’t go to sleep</h2>
+<ol class="log" start="1"><li>Don’t touch Seraphine while we’re sleeping</li><li>Don’t leave camp, particularly due to noises or when you see something</li><li>Wake someone when there is danger</li><li>Don’t go to sleep</li></ol>
 <p>Draelith and ‘lil Niki (Draelith’s nickname for Nixie) go to a clearing the Sherdin mentioned on the map to observe Salvus.  After getting turned around, Draelith let’s lil Niki lead.  Lil Niki gets us back on track and we reach the clearing to see the moons out on Salvus.  Draelith is having a tough time getting the trail back to camp, but lil Niki makes it and the two get back to camp for a long rest.</p>
 <h2 class="scene">Sherdin’s Lean-to:  10th of Evalee</h2>
 <p>Back in camp, Æon is patrolling the camp and bumps into Sherdin who is also doing a perimeter sweep.  The group tells Sherdin that we are going to forage down the rugged trail.  Sherdin prepares breakfast before we set out.  Nova asks what we found at the owlbear lair, and we share the story and her part.</p>
@@ -772,11 +779,7 @@ window.SESSION_ART = {
     <p class="lead">We are riding out of Scarwatch Hold on horses:</p>
 <ul class="log"><li>the horse Blackburn has Nova and Draelith</li><li>the horse Mutton has Aeon and Seraphine</li><li>the horse Lucky has Meles and Nixie</li></ul>
 <p>We stop when we see the black horse that we once saw Isgo on.  We are about an hour outside of Scarwatch Hold. Meles hands the reins of Lucky to Draelith and hides in the woods.  Nixie casts Speak with Animals and approaches the horse.  The horse seems nervous and tells Nixie that someone took Isgo.  Looking around the nearby woods, Meles finds a scrap of cloth with yellow dye on it, leading him to believe that a cultist has been this way.  Seraphine notices that Isgo’s horse's reins were cut and she looks down and notices footprints.  Nixie continues to question the horse looking for answers:</p>
-<h2 class="scene">1. two people on horseback took Isgo</h2>
-<p>2. the horse didn’t recognize the people, but motions the direction that the people took Isgo</p>
-<h2 class="scene">3. the saddlebags are gone off of the horse</h2>
-<h2 class="scene">4. the horse’s name is “Bullseye”</h2>
-<h2 class="scene">5. the horse feels that Isgo was kind to the horse</h2>
+<ol class="log" start="1"><li>two people on horseback took Isgo</li><li>the horse didn’t recognize the people, but motions the direction that the people took Isgo</li><li>the saddlebags are gone off of the horse</li><li>the horse’s name is “Bullseye”</li><li>the horse feels that Isgo was kind to the horse</li></ol>
 <p>Seraphine notices that something heavy has been slid off of the road, near some horse dung.  Nixie mends the reins of the horse and introduces the horse to Draelith.  Draelith decides to ride the horse as we look for Isgo.</p>
 <p>We move on down the road.  It’s tough to find the tracks on the road, but we believe it moves on.  After some time, we notice a game trail off to the right.  Meles studies the path.  He uses his Longstrider feature and rushes off for 5 minutes to see where it goes.  He doesn’t see anything promising so we keep to the road.</p>
 <p>After the rest of the day’s travel, we reach the campsite that we rested at on the way down to Scarwatch Hold.  The evening is uneventful.</p>
@@ -899,11 +902,9 @@ window.SESSION_ART = {
     </div>
   </header>
   <div class="account">
-    <h2 class="scene">Inside a Cavern with Petrified Folk</h2>
-<p class="lead">The reptilian creature emerges from the path ahead.</p>
-<h2 class="scene">ITS INITIATIVE – Combat vs. the Reptile</h2>
+    <div class="song"><div class="song-line">Inside a Cavern with Petrified Folk</div><div class="song-line">The reptilian creature emerges from the path ahead.</div><div class="song-line">ITS INITIATIVE – Combat vs. the Reptile</div></div>
 <ul class="log"><li>ROUND ONE:  Most all hold our action, as the creature moves forward.  Nova uses the spell Dissonant Whispers, but the creature makes its Saving Throw, only doing half damage.  Nixie uses Starry Wisp and hits the creature.</li><li>ROUND TWO:  Draelith uses Mind Sliver and the reptile fails its Saving Throw.  Draelith moves to a rock next to Meles.  The reptile moves towards Draelith and Meles and uses its gaze.  As it does, Aeon releases a firebolt.  The gaze affected Draelith, causing Draeith to become restrained.  Seraphine moves forward and casts Bless on Nova, Aeon and Nixie.  Meles moves around to get into a strategic position.  Aeon uses his potion of Dragon Breath and breathes at the reptile.  Nova uses True Strike to hit with her crossbow.  Nixie uses Starry Wisp again, hitting it.  Nixie activates Luminous form (taking a shapeshift slot).</li><li>ROUND THEE:  Draelith uses Phantasmal Force, but the creature saves.  Draelith then uses Minor Illusion to create a noise behind it.  Draelith makes his Saving Throw.  The reptile moves forward and uses its gaze; Aeon, Nova and Nixie all make their saving throw.  Seraphine moves back a bit.  Meles uses Steady Shot, critically striking the beast and killing it.  Nova looks around.  Aeon checks on Draelith.  Nixie moves around looking.</li><li>ROUND FOUR:  Draelith moves to the dead beast, pulls out a dagger and starts trying to cut out its eyes.  Another reptile emerges from the same path.  Seraphine stays put.  Meles uses the Hide action.  Nova uses True Strike and hits the new creature.  Aeon uses the Dragon Breath weapon and then closes in and Attacks, Action Surges and Attacks again.  Nixie attacks with Starry Wisp and misses.  He then uses the Luminous Arrow to hit the reptile.</li><li>ROUND FIVE:  Draelith uses Silent Image to try and protect Aeon.  The reptile uses its gaze to restrain Aeon and Nixie.  It then bites Aeon and moves next to Draelith.  Nova, Seraphine and Meles all attack.  Aeon and Nixie become unrestrained and avoid petrification.</li></ul>
-<p>Draelith and Seraphine collect the bassilisk eyes.</p>
+<p class="lead">Draelith and Seraphine collect the bassilisk eyes.</p>
 <p>Nixie investigates one of the skeletons in an alcove and finds… male human with longish hair pulled back.  Scimitar in his hand (stone), pouch (stone). There's a pack next to him (not stone). Inside he finds:</p>
 <ul class="log"><li>50gp in a pouch - 8 each, but 9 for Draelith and Melles</li><li>long bow (BoH)</li><li>quiver with 12 arrows (Melles)</li><li>2 daggers (Aeon)</li><li>a reddish color potion (looks like healing potion) (Nixie)</li><li>a bedroll (Draelith)</li><li>50ft rope (BoH)</li><li>crude map mentions city Ahnassa and has directions from there to here and a note to Bauthek (this guy)</li><li>another bag – nothing in it, but I think it's a Bag of Holding (Nixie)</li></ul>
 <h2 class="scene">Bauthek,</h2>
@@ -995,9 +996,7 @@ window.SESSION_ART = {
 <p>Studying the area, the group thinks this could have been the main entrance to this area (there is some evidence of daylight in the distance, peering into the rubble pile through the rat tunnel).  Meles looks in the bag and finds various items associated with the excavation.  Meles finds a note that has something that occurred on the 9th day of Evalee, 1246.  This seems to be someone’s pack that was stolen and dragged here by the rat (evidence of bite marks in the leather, combined with slide marks in the dust).  Whoever the satchel belonged to was a meticulous note taker.  The map inside the satchel was crudely drawn, likely on the first day that someone first entered this area.</p>
 <p>Before following the map to the circular room that Aeon discovered earlier, Meles proceeds to the far end of this corridor to find another cave-in which makes this corridor “dead-ended” on both sides.</p>
 <p>The party now moves up the hall to the circular room we noticed on the map.  As they travel through the 60 foot hallway, there are some images that appear on the ceiling, thanks to magic from Draelith, Meles, and Nixie - having a bit of fun.  They enter the chamber coming through a broken portcullis and find a circular room with various symbols of the sky depicted on the tops of 4 hallways that lead from here.  The path that the group came from seemed to have a “shooting star” symbol, while the other halls are marked by a sun symbol, a group of stars, and a crescent moon.  There is a large round pedestal in the center of of this room that has those same symbols on it, as well as two “arms” (similar to a clock).  Nixie checks out this device.  Aeon begins casting Detect Magic.  Draelith moves up next to the pedestal and the Sending Stone pulses.  Draelith pulls up the stone and sees a vision in his head:</p>
-<h2 class="scene">Bronze rings turning beneath countless stars</h2>
-<h2 class="scene">Patient hands recording observations</h2>
-<h2 class="scene">Moonlight reflecting through a polished crystal</h2>
+<div class="song"><div class="song-line">Bronze rings turning beneath countless stars</div><div class="song-line">Patient hands recording observations</div><div class="song-line">Moonlight reflecting through a polished crystal</div></div>
 <p>He thinks this is likely a vision of the past, but isn’t sure.  Nixie determines that this device is mechanical, which Aeon supports since the only magic he senses are traces from the previous hallway and his companions' attempt at humor.  Nixie spends some time studying the pedestal, looks around for a tool to serve as a temporary crank since the pedestal mechanism is broken, and starts to move things and feels gears clicking.  This doesn’t work well so then Nixie removes the clockwork amulet that he found and was wearing and finds that it fits the center of the large device.  He, Draelith and Nova then try to move the pieces - and we find they only move clockwise (at least with the configuration we have been able to create).  The arms on the device move to the long arm to the sun and the short arm to the moon.  The portcullis under the moon opens to a passage.</p>
 <p>We move down a passage towards the sound of dripping water.  We move a ways down the passage and send Meles to scout ahead.  Meles comes to an archway on the left side, where there is a room that opens up into a chamber filled with names etched into the walls all over.  It appears very old.  Draelith is able to determine that the names seemed to have been carved into the walls over time starting on the left side and working around to the right.  Nova checks to see that the last name etched is Eustatus Glenleah, likely from the Glenleah vec in Inverland.  It’s clear from all of the names that the Osmanae brought forth people from all over Myrdae.  Draelith records names while Meles moves further down to search.</p>
 <p>Meles moves down the hall slightly to see another archway with a small chamber with water in a 6’ pale stone basin that is on the floor.  The ceiling in this room rises into a smooth dome that looks like at one time it opened to the skies (but is now collapsed).  The movement of all players seems to keep a ripple in the basin.  There is also a constant drip from one of the sides of the room - that might be contributing to the ripple.  Nixie plugs the water that is dripping using candle wax, everyone gets quiet and still, and then the water in the basin gets very still.  At that point, we notice objects carved into the bottom of the basin.  Nixie begins to draw the symbols (a sun, cluster of stars, a sun, with a crescent moon underneath) and notices a stone in a “voided” space that we move.</p>

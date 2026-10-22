@@ -247,6 +247,20 @@ table.ledger td strong{color:var(--gilt)}
   .account{padding:6vh 22px 8vh}
   .account p{text-align:left;font-size:1.08rem}
 }
+
+/* song lyrics / verse */
+.song{margin:2.2em auto;max-width:44ch;text-align:center;padding:26px 30px;border-left:2px solid var(--gilt);background:rgba(255,255,255,.025);font-style:italic}
+.song-label{margin:1.4em 0 .4em;font-style:normal;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gilt);opacity:.85}
+.song-label:first-child{margin-top:0}
+.song-line{line-height:1.7}
+/* roster (flattened table) */
+.roster{margin:1.8em auto;max-width:36ch;padding:18px 26px;border:1px solid rgba(201,162,75,.35);background:rgba(255,255,255,.025)}
+.roster-title{font-variant:small-caps;letter-spacing:.12em;color:var(--gilt);text-align:center;margin-bottom:.6em}
+.roster ul{list-style:none;margin:0;padding:0}
+.roster li{padding:.25em 0;border-top:1px solid rgba(255,255,255,.06)}
+/* chapter footer stats */
+.chapter-stats{margin:2.2em auto 0;display:flex;gap:2em;justify-content:center;font-size:.85rem;opacity:.7;letter-spacing:.06em}
+.chapter-stats b{color:var(--gilt);margin-left:.3em}
 </style>
 
 <!-- ============================================================
@@ -291,7 +305,8 @@ window.SESSION_ART = {
     "32": "/media/images/chronicles/a-new-adventure/session-32-adore-is-up-in-smoke.webp",
     "33": "/media/images/chronicles/a-new-adventure/session-33-two-heads-are-not-better-than-one.webp",
     "34": "/media/images/chronicles/a-new-adventure/session-34-cerul-radiant-wings-windbreak-v1.webp",
-    "35": "/media/images/chronicles/a-new-adventure/session-35-elder-balance-board-v1.webp"
+    "35": "/media/images/chronicles/a-new-adventure/session-35-elder-balance-board-v1.webp",
+    "36": ""
 };
 </script>
 
@@ -338,8 +353,9 @@ window.SESSION_ART = {
 <li class="on"><a href="#s32"><span class="rn">32</span><span class="rt">Adore Is Up In Smoke</span></a></li>
 <li class="on"><a href="#s33"><span class="rn">33</span><span class="rt">Two Heads Are Not Better Than One</span></a></li>
 <li class="on"><a href="#s34"><span class="rn">34</span><span class="rt">Signs of Vhaulmast</span></a></li>
-<li class="on"><a href="#s35"><span class="rn">35</span><span class="rt">&lt;Name&gt;</span></a></li></ol></nav>
-    <div class="rail-foot">35 chapters &middot; A New Adventure</div>
+<li class="on"><a href="#s35"><span class="rn">35</span><span class="rt">On It’s Trail</span></a></li>
+<li class="on"><a href="#s36"><span class="rn">36</span><span class="rt">Leave it Hanging (I’m Going to 20)</span></a></li></ol></nav>
+    <div class="rail-foot">36 chapters &middot; A New Adventure</div>
   </aside>
 
   <main class="scroll">
@@ -669,23 +685,7 @@ window.SESSION_ART = {
 <p>The group gathers before going to sleep.  Ro is going to write a note to the Captain - telling him what happened on the road (we found the dead courier, have the sealed scroll that we are planning to try to take to the king).  Kaizo talks to Fungus about the vials that he has.  Fungus feels a little bad, but isn’t sure he will say anything or do anything.  Affy thinks we should keep a watch as well, but most of the group wants to sleep.  Affy will keep watch part of the night.  Kaizo will meditate by the fire.  Ro and Jasper will sleep by the fire.  Night is fairly uneventful.</p>
 <h2 class="scene">Visit from Tanana</h2>
 <p>Not long after Fungus goes to sleep, he wakes up a little disoriented - having had a riddle in his head - see below.  And wakes up.  Hears fluttering.  More rhymes.  He looks around and everyone is asleep.  He feels a touch on his left and hears more rhymes in his head.  Then he looks to the right and hears more in his left.  Then hears more rhymes.  Then he sees a small fairy.  “I’m Tenonna, she sent me” and disappears.  Fungus knows this is related to his patron.</p>
-<p>These are the rhymes he hears from the fairy:</p>
-<h2 class="scene">“Dreamy Fungus, so overgrown,</h2>
-<p>Power's path is not your own.</p>
-<h2 class="scene">Come from grime and shadow-fed,</h2>
-<h2 class="scene">Shoddy’s secrets bloom ahead.”</h2>
-<h2 class="scene">“Witchlight fingers, borrowed breath—</h2>
-<p>You cast with gifts not truly left.</p>
-<h2 class="scene">A bargain blooms where roots entwine,</h2>
-<p>In feybound soil and warped design.</p>
-<h2 class="scene">“She weaves with twine and tattered thread,</h2>
-<p>A crooked crone with thoughts unread.</p>
-<h2 class="scene">She feels you so, dear mushroom child,</h2>
-<h2 class="scene">But love from hags? Now that’s wild.”</h2>
-<h2 class="scene">“She’ll ask you for a root once bound,</h2>
-<p>A glyph that grows in buried ground.</p>
-<h2 class="scene">But watch, dear Fungus, what you seek,</h2>
-<h2 class="scene">For glyphs may whisper when they speak…”</h2>
+<div class="song"><div class="song-line">These are the rhymes he hears from the fairy:</div><div class="song-line">“Dreamy Fungus, so overgrown,</div><div class="song-line">Power's path is not your own.</div><div class="song-line">Come from grime and shadow-fed,</div><div class="song-line">Shoddy’s secrets bloom ahead.”</div><div class="song-line">“Witchlight fingers, borrowed breath—</div><div class="song-line">You cast with gifts not truly left.</div><div class="song-line">A bargain blooms where roots entwine,</div><div class="song-line">In feybound soil and warped design.</div><div class="song-line">“She weaves with twine and tattered thread,</div><div class="song-line">A crooked crone with thoughts unread.</div><div class="song-line">She feels you so, dear mushroom child,</div><div class="song-line">But love from hags? Now that’s wild.”</div><div class="song-line">“She’ll ask you for a root once bound,</div><div class="song-line">A glyph that grows in buried ground.</div><div class="song-line">But watch, dear Fungus, what you seek,</div><div class="song-line">For glyphs may whisper when they speak…”</div></div>
 <p>When we all wake up, Kaizo just looks at Fungus (not knowing what happened) - just trying to make him feel guilty about the goods he has.  We got a long rest.  This area is the Cradlecrest…hills, low mountains.  We head towards Qal’dynn.  We travel for a few hours in the morning until we finally see the city start to come into view.  It is very Elven…mixed in with the natural surroundings (the city walls are beige and meld into the hills). We see tall spires behind the walls - adjusted for the hills inside the city.  “Beige” feel, very pretty and nice.  We approach on the river side - Raelura River.  Affy tries to study the map is is overwhelmed by the city.  She makes out the river and walls, but not much else.  Knows that we need to go to the southside of the city.  We approach in a valley between the hills and river.  Pass people who have been turned away.  We know it is going to be on the outside walls on the right, through the woods and forest.  The river cuts through the city.  We decide to go to the gates first - to try to get inside the city.  Fungus wants to go to the front of the line, but we end up waiting our turn.</p>
 <h2 class="scene">Qal’dynn</h2>
 <p>We finally make it to the front of the line and see the wardens with a swan symbol on their chests.  Fungus says, “You have a swan.”  Ham then steps forward and tries to talk to the gate keepers - saying we have a message for the king.  They claim that they have heard this all day.  They pull out messages…some look real, some not.  Ham then speaks in elven and introduces himself.  Ham tries - asks if they know who Ravus is.  They said they would pass on a message to him, but won’t let us in.  Affy then questions him since Ravus isn’t inside the walls.  Just tells them they shouldn’t name drop unless they know who is or is not in the town.  They call her an orc…she turns and walks away, spitting as she goes.</p>
@@ -920,18 +920,7 @@ window.SESSION_ART = {
   </header>
   <div class="account">
     <p class="lead">Ham is no longer with the group - he stayed in his new quarters. Group discusses that they will miss him.  Fungus stares into his cup - and a voice enters into his head (no one else hears).  Tananan (fairy)…who speaks in riddles.  Wants him to find a flask.  Petal now floats on his drink. He spills his drink, telling us there was a fairy in it.</p>
-<h2 class="scene">“One was lost, the grove gone still,</h2>
-<p>The charm you held has paid its will.</p>
-<h2 class="scene">Nell is watching, Nell is cross,</h2>
-<p>For time has stirred, and trees count loss.</p>
-<h2 class="scene">A bud of night, in hand you’ll take,</h2>
-<p>But charms need roots that do not wake.</p>
-<h2 class="scene">Seek the flask that stone does brew,</h2>
-<p>From hands that mix what gods once knew.</p>
-<h2 class="scene">In alchem’s house the essence sleeps,</h2>
-<p>Where fungus crawls and shadow weeps.</p>
-<h2 class="scene">You owe her craft, and blood, and breath,</h2>
-<h2 class="scene">Or bear the silence she calls death.”</h2>
+<div class="song"><div class="song-line">“One was lost, the grove gone still,</div><div class="song-line">The charm you held has paid its will.</div><div class="song-line">Nell is watching, Nell is cross,</div><div class="song-line">For time has stirred, and trees count loss.</div><div class="song-line">A bud of night, in hand you’ll take,</div><div class="song-line">But charms need roots that do not wake.</div><div class="song-line">Seek the flask that stone does brew,</div><div class="song-line">From hands that mix what gods once knew.</div><div class="song-line">In alchem’s house the essence sleeps,</div><div class="song-line">Where fungus crawls and shadow weeps.</div><div class="song-line">You owe her craft, and blood, and breath,</div><div class="song-line">Or bear the silence she calls death.”</div></div>
 <p>Meanwhile…Affy notices a cloaked half orc figure - he looks her way and summons her over.  She gestures “me” and he nods.  She tells the group not to look, but she will be right back.  She gets up to leave as the group discusses the fairy.</p>
 <p>Affy walks over.  He has heard of us.  Name is Borge.  He pulls out a parchment…and we see a charcoal drawing of an Orcish symbol.  It was burned into the chest of someone who was drowned in the Vaelura River.  She knows this is a symbol of someone who has been excommunicated from Affy’s clan.  Area was thick with brush and grasses. Might be clues there.  Realmwardens took the body.  He describes the area where we can look - and says we can’t miss it because there are Realmwarden all around.  She thanks him and asks if she can leave a message for him at the Lantern.  He says yes.</p>
 <p>Lorian sends a message to Cerul (sending spell) - (our) names were given at the Bladed Mouth.  He wants to meet because he has something else for our group (he’s seen something further).  Affy asks Borge what the Bladed Mouth is…and he says it is the Shaded Mantle.  She takes offense at the fact that there is a nickname that makes fun of the injured barkeep.</p>
@@ -1121,13 +1110,7 @@ window.SESSION_ART = {
 <h2 class="scene">40th of Talil</h2>
 <p>We get up and leave the next day - headed to the Abbey. Whispers are gone from Fungus and Affy.  Ridley hunts and finds a boar…and gets 30 days worth of rations (5 rations for all 6 of us - we will need to smoke them at night).  We know this will be a 4 day trip over hills.</p>
 <p>On Day 1, Fungus wants to roll the cube…and Affy and Ridley (dressing his pig) are close (she leaves her packs elsewhere).  He rolls [77 -FEY STEP].  Threads of light spiral and stutter…light flickers like dying candles.  Fungus can move through the ethereal plane…this is an instant misty step with each move.  A shape forms through the ripple and Taniana steps in.  We all see her.  She tilts her head, and a mischievous smile appears on her sweet face …</p>
-<h2 class="scene">"The master felt your borrowed spark,</h2>
-<h2 class="scene">And sent me dancing through the dark."</h2>
-<p>She flutters lightly around you:</p>
-<h2 class="scene">"Twice in sun and once in shade —</h2>
-<p>Such hunger makes the fabric fray.</p>
-<h2 class="scene">Let once per stretch be your creed,</h2>
-<h2 class="scene">Lest you starve the Feywoven feed."</h2>
+<div class="song"><div class="song-line">"The master felt your borrowed spark,</div><div class="song-line">And sent me dancing through the dark."</div><div class="song-line">She flutters lightly around you:</div><div class="song-line">"Twice in sun and once in shade —</div><div class="song-line">Such hunger makes the fabric fray.</div><div class="song-line">Let once per stretch be your creed,</div><div class="song-line">Lest you starve the Feywoven feed."</div></div>
 <p>She shifts to your other side, looks up with sudden seriousness, voice softening:</p>
 <p>"The charm you wield, a root now grows.</p>
 <p>A bond, a knot — the patron knows.</p>
@@ -1455,7 +1438,7 @@ window.SESSION_ART = {
 <p>Affy saw the guy and doesn’t think he is abyssal or infernal.  She thinks he is a yugoloth (neutral evil).  He seems to be keeping a toll/count of what is going on.  It is odd that people from another plane are here.</p>
 <h2 class="scene">The Mysterious Gate</h2>
 <p>The group decides to check the platform.  Affy and Fungus step up to open the doors.  It opens into a vast hallway…with smooth stone overhead.  Eyes twitch in/out focus on depth of stars/non-existence.  Strange we can’t see beyond.  We see black stone arches that create the dome of the ceiling.  As we get to the center of the room, it floats above the stone area below.  We can actually look down and see what is below (this area is rail-less).  We see an old gate above us with a stone circle around it.  The interior of it is shimmering (like a portal).  On either side of it, we see massive abacus-like contraptions with heavy stone beads.  The railing of the gate is obsidian. Before the gate, we see an obsidian pedestal.  We notice the abacus are positioned in specific points and the gate with the shimmering field…there is an image of a forest stretched out.  Relys knows that this forest is the Varenwood.  She thinks my people created a ritual and thinks that there is something going on with what her ancestors did.  She thinks if we step through it, we could go into the Varenwood.  Is this real or an illusion?  Relys thinks that if the Weaving Night goes wrong, corruption occurs.  She thinks the abacus has settings that allow us to dial in coordinates to send us to a certain place.  She memorizes this setting to know how to get to the Varenwood.  She thinks that the ritual in Varenwood made the Shadowfell travelers come here instead of to the Varenwood (and thinks the travelers from the Varenwood would come here with this setting).</p>
-<h2 class="scene">The End of the Session –</h2>
+<div class="endmark">The End of the Session –</div>
   </div>
 </section>
 
@@ -1645,9 +1628,7 @@ window.SESSION_ART = {
   <div class="account">
     <h2 class="scene">Escort for Three Wagons</h2>
 <p class="lead">There are 3 wagons:</p>
-<p>1. Wagon 1 - Mottlebrook Family (Pa, Leila, 2 teenage helpers) with Affy and Kaizo</p>
-<h2 class="scene">2. Wagon 2 - Kael’s Components, a tiefling wizard with Cerul</h2>
-<p>3. Wagon 3 - The Iron Cage, two city guards, a mysterious guard (with a full black executioner’s hood) and 5 prisoners with Ridley, Fungus and Relys (on Fungus’ shoulders)</p>
+<ol class="log" start="1"><li>Wagon 1 - Mottlebrook Family (Pa, Leila, 2 teenage helpers) with Affy and Kaizo</li><li>Wagon 2 - Kael’s Components, a tiefling wizard with Cerul</li><li>Wagon 3 - The Iron Cage, two city guards, a mysterious guard (with a full black executioner’s hood) and 5 prisoners with Ridley, Fungus and Relys (on Fungus’ shoulders)</li></ol>
 <p>Fungus talks to one of the guards about chopping off heads.  Ridley thinks one of the prisoners is familiar.</p>
 <p>Kaizo tries to climb on the second wagon…in stealth.  He sees one crate and several different small bags in the back.  There are runes on the posts that hold up the walls of the wagons.  The hair on his neck stands up.  He tries to discern what might be in the box and how the runes might be linked.</p>
 <p>Affy asks him about his cargo - do they make their ale or just distribute it?  They make it.  Pa encourages her to stay in Shademoor, and to visit the church there.  It is very special.  He comments about the lumber there - how they have a special person who makes things out of hardwood.  The Garden there is really a cemetery - they have a Gardenkeeper who watches the place.</p>
@@ -1898,10 +1879,7 @@ window.SESSION_ART = {
 <ul class="log"><li>ROUND ONE:  Affy sees Urovil getting ready to cast something and next to her she sees two guys holding glaives with tentacles for a beard.  She yells loudly what she sees, hoping her friends here her.  Then she attacks one of the bearded devils twice and hits both times. Urovil steps back and is holding a skull in his hand, but hasn’t cast anything...yet.  Ridley sees that the door is locked and uses his action to pick the lock and does, telling the group the door is unlocked.  He tells the bird to fly above him and take the dodge action as he moves to the side of the door.  Fungus opens the doors and a purple dot comes flying out of the skull’s eyes and lands in the middle of the party; he casts counterspell and the purple dot fizzles out.  Fungus recognizes that the skull is his pact focus.  He then uses poison spray at the warlock and hits, inflicting poison damage.  Cerul moves into the room and casts radiance of the dawn on the two bearded devils (one saves, one doesn’t), inflicting radiant damage.  Kaizo uses a bonus action step of the wind into the room, giving the bearded devil an opportunity attack, and makes it to Urovil.  Kaizo sees a shadow of a bulbous form over the docks. He attacks with unarmed strike, dealing force damage.  Then hits again, more force damage.  Rel runs and jumps forward to get to one of the bearded devils.  She then attacks and hits dealing radiant and lightning damage. She attacks again and hits, dealing more radiant damage. The bearded devils attack.  One goes after Affy - beard hits Affy, glaive misses Cerul. Affy takes damage and is poisoned.  The other devil attacks Rel and misses with both glaive and beard.  The two guys yell “we didn’t sign up for this at the docks” in infernal (that Ridley understands).</li><li>ROUND TWO:  Affy attacks the devil on her, killing him. She then moves over to the other devil and attacks it, killing it with her bonus attack and second attack. She looks at Urovil and says “You’re next unless you want to go back to the surface.”  Ridley yells, “we can’t kill him.”  Urovil moves around the room, Kaizo hits with an opportunity attack.  He sends out a bead of light from the skull which drops in the room.  Everyone but Kaizo needs to make a saving throw.  Ada the bird dies.  Everyone else takes necrotic damage (some half, some full).  Ridley moves forward and casts Hunter’s Mark on Urovil, then throws his dagger and hits.  He then draws this crossbow and shoots and hits.  Ridley sees the shadowy form at the end of the dock disappear.  Ridley then hits again from the nick property of his weapon. The group hears something behind Fungus.  This, this is what caused the shadow…A hulking, nightmarish figure— a grotesque parody of nobility wrapped in tattered finery appears. His mottled blue-green skin pulls tight over a skeletal face, lips peeled back in a perpetual, jagged grin full of razor teeth that gleam like wet bone. Glowing red eyes sweep the room and settle on Urovil.  One clawed hand grips a tall, ornate staff topped with a sinister finial, while the other rests lightly on his chest like he's savoring the moment.  The other reaches out towards Urovil. The skull in Urovil’s head crushes to ash.  Urovil’s eyes go blank and he falls to the ground.  The devil looks to the group, “Take this weakling and leave my realm or suffer my wrath.”  Fungus thinks this devil is likely Urovil’s patron, holder of this lair and in command of everything else we fought so far.  He tells everyone “he is dangerous - are we fighting or running?” and then goes invisible. The devil looks around and glances at Cerul.  Cerul says “RIdley - you got what you came for - can we go?”  Ridley says yes - I just thought you would hate devils.  Cerul says, “but they are in their domain - they can stay here.” Cerul looks at Urovil…and then sees that the skull that this devil is not holding is now Urovil’s skull covered in blood.  The devil then says “I suggest you leave.”  Kaizo asks if the devil has some nightbud.  The devil smirks and says “if you want to make a deal, I will get you some…I’ll make you the richest nightbud dealer.”  Kaizo says no - I have someone to meet at the tavern.  Kaizo starts to move and walks past the devil and out of the room and back onto the path - “c’mon guys, let’s go.”  The devil’s wings flutter and it flies to the other side of the group and looks at us.  Rel stays put and growls at the devil, but does nothing else.  The devil looks at Affy.</li><li>ROUND THREE:  Affy dashes over and picks up the limp form of Urovil and says “Your hell…I’ll take him.  I hope I never see you or any of yours ever again” and starts to carry him out of the room.  The devil takes flight and starts to fly out of the room.  Ridley is trying to figure out if the pact is broken or if this would keep the pact going with that noble family.  He doesn’t know.  Ridley moves to the balcony and looks up and sees him 20’ in the air.  He casts hunter’s mark on him and shoots the devil twice, fumbling with the first shot, losing his reaction, then hitting and inflicting some force and piercing damage.  He then stows his crossbow. The devil turns and looks at Ridley and takes HUGE damage, he can’t cast spells, he can’t talk, etc.  and he drops unconscious.  Fungus asks if he can grab Ridley’s body and the devil says no.  He then says “we are leaving and I feel you got your justice by harming him, can we leave?  I’d like to leave with him.”  The devil says “that is not happening.” Fungus then moves back to Ridley and picks him up and starts to move away with his body, shouting “we have to go, we have to go, we have to go.” Cerul says “we are leaving and Ridley is coming with us and that’s that” and heals Ridley for 19 points and then advances forward 15’.  The devil then looks at Affy and Fungus and both fail wisdom saves.  They are blinded and take damage.  Kaizo looks back and says “c’mon.” The devil then targets Rel with a wisdom saving throw…and she passes.  She hears a mumble, but it doesn’t do anything (Cerul and Fungus think this was a command spell).  She gets behind Fungus to nudge him forward.</li><li>ROUND FOUR:  Affy tries to persuade him to let us go and he asks if she is willing to give up her soul. She offers up Urovil’s body.  He says that he already has his soul.   She says no and moves forward.  She doesn’t persuade him.  Ridley is in Fungus’ arms and shoots his crossbow at the devil, but it hits Fungus, as the devil charms Ridley as he is about to shoot.  He then stands up and moves out of the room through the doors. The devil steps forward and pulls out a whip and lashes at Rel and hits twice.  She goes down.  Affy then has to make an intelligence saving throw and something creeps into her brain…and she is stunned and takes damage…and forgets the last 5 hours of activity.  He looks at Cerul and says which one are you leaving me?  And he says “Urovil”  And the devil says “I already have his soul.”  Fungus goes large form and picks up Rel and action dashes forward, slipping and falling, standing back up and moving forward again.  Kaizo sees icy spokes shooting out of the path ahead and breaking into chips on the path.  He thinks the path up will be trapped.  Cerul sprouts wings and turns into his divine form and casts beacon of hope (advantage of wisdom saving throws for the group), then moves forward 15’.  In front of Kaizo, an ice shard shoots up in front of him.  Kaizo moves back to Fungus and asks for the flask of blood and puts a drop on Fungus and Rel (and they both disappear).  He then moves to Affy and hands her the flask and there is a drop coming out that hits Kaizo and he leaves.  Rel has to make a death save.</li><li>ROUND FIVE:  Affy walks over to Ridley and says Kaizo says to take this. Then asks the devil “why do you need someone.” And he says after all the trouble you all have caused, I’m owed.  And she says “take me.” and a spike shoots up from the ground and knocks her to 0 hit points, but she doesn’t fall (relentless endurance).  Ridley takes the vial and pours it on Affy and Urovil and they disappear.  He then tries to shatter the vial on Cerul, but it crashes to the ground.  He then walks next to Cerul, but doesn’t touch the blood yet. Both Cerul and Ridley have to make wisdom saving throws.  Cerul saves, Ridley does not, taking necrotic damage and is blinded.  Fungus is in the cellar of the noble house.  He sees the prisoner, he sees Relys, Kaizo, and Affy.  He takes the healing potion out of Rel’s pack and feeds it to her.  Cerul grabs Ridley’s arm and pulls him to the ground then pulls his arm on the ground.  Ridley hears the fiend telepathically say “I will remember you - this is not the end” and they both disappear.</li></ul>
 <p>We are all in the cellar, sometime after midnight on the morning of the 14th of Paramor, 1246.</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">8</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">7</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>8</b></span><span>Sessions at that level <b>7</b></span></div>
   </div>
 </section>
 
@@ -1961,10 +1939,7 @@ window.SESSION_ART = {
 <p>They go to the stables.  They have a bulas, a horse, and another horse.   They find out the other horse was claimed by Eliyena.  Ridley tells them that the Rulendors will hear that he let her leave with a horse.  He doesn’t want to be threatened.  Affy tells him that we need three horses - that he could give us a horse and we could buy two more.  He only has 2 horses, 1 goat and 1 ass.  We then talk about a carriage.  He said he could make us a deal. He could sell it to us for 90gp.    Fungus agrees to buy the nice elven carriage with 4 bunks, seating for 6, doors in the back, a ladder that slides underneath for 100gp (the guy throws in a bunch of other food).   Ridley buys a riding horse.  The idea is that the bulas can pull the carriage during the day, but at night the 2 horses could pull the carriage and we could ride through the night.</p>
 <p>We leave Caelora early in the morning.</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">9</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">1</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>1</b></span></div>
   </div>
 </section>
 
@@ -2019,10 +1994,7 @@ window.SESSION_ART = {
 <ul class="log"><li>ROUND ONE:  We see emerging from the smoke some creatures.  Ridley runs over to the nearest monk casts hunters mark, and stabs it with his dagger, hitting.  He then attacks again, missing.  Then fires his crossbow and hits. Kaizo moves up into the bush and pops out to attack a monk.  He misses twice.  Then tries his flurry of blows and misses twice.  He then jumps inside the bush (half coverage). Affy dashes forward with a bonus action and then attacks, fumbling, losing her reaction.  She then attacks again and hits. The monk attacks Ridley and hits twice. Another monk runs up and attacks Affy and misses twice.  Another monk runs up to Fungus and attacks and hits.  Then attacks and crits, and Fungus loses half his hit points after the crit damage. Another monk runs forward to try to punch Kaizo and hits, stunning him. The second attack misses.  Cerul casts spirit guardian. Fungus moves away (giving the monk an opportunity attack that hits, imposing damage - as Fungus imposes damage from that hit) and then misty steps near the bush where Kaizo is (and gives another one an opportunity attack which hits, but also imposes damage back).  Suddenly another wave of monks crashes out of the smoke and runs forward.  One attacks Ridley and hits (and he drops hunters mark) then attacks again and misses. One runs forward to attack Affy and misses twice.  Another runs forward to hit Fungus and does (but also takes damage). The second attack hits as well. Another one tries to attack Kaizo (who imposes disadvantage) and misses twice.  Relys casts a spell and is now glowing and flies into the smoke. Suddenly another two monks join the fight.  One attacks Ridley and hits.  Another one attacks Fungus and hits.</li><li>ROUND TWO: Ridley hits one of the monks and hits once, misses twice.  He disengages and moves away toward Cerul.  Kaizo is stunned, but comes out of it at the end of his turn. Affy attacks one and crits, killing him.  She then attacks another and hits twice, inflicting some decent damage.  She stays put telling them “you guys missed the first time - you should stay here and try again.”  One of the monks tries to move out of Cerul’s spirit guardians and runs to attack Affy and misses twice. Another tries to attack her and misses twice.  Another monk attacks Kaizo and misses twice.  That one disengages and moves away from the bush.  The others disengage and move away from Affy. Cerul runs up, moving his spirit guardians, and four of the monks have to make WIS saving throws. He then casts radiance of the dawn and they must make CON saving throws.  Then he uses his bonus action and heals Ridley.  Fungus goes invisible and then drinks a healing potion.  One disengages and runs away, but Affy swings, misses, and it still takes damage.  He then attacks Ridley and misses twice.  Another one runs to Ridley and attacks and hits Ridley, despite Cerul’s warding flare.   Then moves away from Ridley.  One attacks Kaizo and misses, but then hits. He makes a save, but still takes damage. Another one attacks Kaizo and misses twice. Relys flies back from the smoke and to the bush and transitions into a scorpion from her owl position.  Then attacks one and hits it, grapples it and inflicts damage from her moonlight, then more damage from her elemental fury.  Then attacks the other one and hits it and he takes radiant damage and is grappled. Then uses her tail to attack the one on the left and inflicts piercing damage and poison damage, plus radiant damage. A monk close to Relys attacks and misses twice and disengages.  Then another moves in to attack Cerul and misses twice and misses twice.</li><li>ROUND THREE: Ridley attacks and hits, then moves and hits again.  Kaizo moves out of the bush and one gets an opportunity attack with disadvantage, and misses.  Kaizo then attacks one and hits.  Kaizo then attacks again and fumbles and falls prone, but stands up again.  Then tries flurry of blows and hits, but then misses.  Affy moves up and attacks one and misses, but then hits 3 times, using an action surge, and kills him. One monk enters Cerul’s spirit guardians circle and takes radiant damage.  It then attacks Cerul and hits, inflicting damage and it then disengages and moves away. One moves up to attack Kaizo and misses twice then disengages and moves away.  Cerul casts radiance of the dawn again and can go after four monks.  He then moves forward and his spirit guardians hit both. Fungus attacks a monk with poison spray and crits, killing it. He then uses a bonus action to heal himself. One disengages and moves and attacks Ridley and hits twice.  One then attacks Cerul and misses. Another moves up to attack Relys and misses.  Relys tries to squeeze the one in her claw and misses.  She then attacks with her tail and misses.  Then uses the other claw and hits, imposing radiant and lightning damage. The other monks attack.  One attacks Kaizo with disadvantage and misses twice and disengages. One moves up and attacks Ridley and hits twice.  Then it moves into the smoke as it disengages.</li><li>ROUND FOUR:  Ridley attacks the one on him and misses, then hits, then crits on his last hit. Kaizo attacks the monk in the claw and misses once, then hits. Then uses flurry of blows and misses, then hits and kills the monk. Affy attacks one and kills him, then attacks another and kills it.  Two monks run away.  Cerul moves forward and hits one with spirit of guardians and it takes damage, killing it. Fungus casts poison spray on the remaining monk and crits, killing her, melting her skin.</li></ul>
 <p>The smoke starts to drift away and a figure steps out into view.  He has a staff in one hand and he raises up another hand.  He is covered in soot and blood and he steps forward.  His face comes into view.  This is the prisoner from the wagon, Rueh’unar Heildove.  He says “Peace - I am not your enemy here.”</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">9</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">2</h2>
-<h2 class="scene">Sessions played at that level</h2>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>2</b></span></div>
   </div>
 </section>
 
@@ -2072,10 +2044,7 @@ window.SESSION_ART = {
 <p>The fight is over.  Fungus says “that was awesome,” as the rest of the party comments how it was crazy that he fell so high from above.  Cerul heals Ridley; Fungus heals himself; Affy uses second wind to heal herself.   The ettins have huge axes and Cerul throws two into the portable hole to sell in the future.  Kaizo speaks about hunger and the need to eat - words of wisdom.  Relys crawls back into the carriage to sleep. Cerul gives Fungus heroic inspiration for this day.</p>
 <p>We continue forward and spend the rest of the day traveling.  We stay on the road.  We travel through the forest.  There is light snow. At some point, we reach a crest in the road and see the river ahead.  We see a bridge crossing the span of the river.  The bridge is stone and there are giant runes carved on it.  There is a building on the other side.  The building looks like the one that Cerul saw when he scryed on Pa. Cerul reads the runes…and we stop here - at the Southern Arch.  It is twilight.</p>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">9</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">3</h2>
-<h2 class="scene">Sessions played at level</h2>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>3</b></span></div>
   </div>
 </section>
 
@@ -2134,24 +2103,21 @@ window.SESSION_ART = {
 <p>The group discusses needing to escort Pa at some point. But decides to investigate the campsite that Relys scouted earlier.  The group rounds the bend and sees that the ridge is blocking the winter breeze, but there is an eerie feeling.  We find evidence of a scorched camp - this is a burned campsite.  We find other dead bodies.  This is Windbreak Camp, but it is destroyed.  We see the windmill on the hill and shifting shadows.  As we step into the campsite, we see bears on the hills, two are injured.  IT IS INITIATIVE.</p>
 <ul class="log"><li>ROUND ONE: Ridley moves forward, casts hunter’s mark on the one he sees and shoots two arrows and misses twice.  Then he moves further away from the hill. That bear then moves along the ridge and charges the group and attacks Kaizo, knocking him prone. Fungus casts some armor on himself and casts poison spray on the bear that attacked Kaizo, hitting and inflicting damage, and knocking him prone. Kaizo stands up and attacks the bear with advantage, hitting with force damage. Then attacks again and hits with more force damage.  Then uses a flurry of blows with his bonus action and hits again two more times.  One of the new bears runs and dashes forward and charges Ridley on horseback.  The horse goes prone and Ridley is knocked off the horse but is not under the horse, and is on his feet. Cerul casts bless on Affy, Kaizo and Ridley and then sprouts wings and flies up 10’  The prone bear tries an opportunity attack on Cerul as he flies up and fumbles. The brown bear, wounded from before, runs forward, dropping down into the campsite.  The final bear runs along the top of the ridge, closing ground towards the party’s carriage.  Relys rides her horse near Fungus and wild shapes into a scorpion and casts bright light on herself.  Affy turns around and attacks the prone bear, hitting once and missing, then using action surge to hit twice again.</li><li>ROUND TWO:  Ridley is hit by the bear’s hollow gaze and has disadvantage and is frightened. He uses steady aim to attack the bear and misses and is cursed by the bear taking 22 points of necrotic damage. He then tries to shoot another arrow and hits, inflicting damage and pushing it back 10’.  He then tells his horse to stand up and run away, but he does not run away.  The white bear stands up and attacks Kaizo and Affy, who both have to make CON saving throws, but still take 14 points of psychic damage each. Fungus casts hold monster on the brown bear, but he saves. He dismounts from the bulas and moves forward, toward the brown bear and turns bigger.  Kaizo succeeds on a WIS save then attacks the white bear and hits with force damage.  Then hits again and does more damage then uses flurry of blows to hit again twice more.  A bear runs up to Ridley and attacks, grappling with a critical hit, also hitting the horse, killing it and damaging Ridley. He then walks up to Relys and hits her, with Ridley grappled in one hand taking a squeeze.  Relys takes a fair amount of damage.  The bear makes his CON throw against Relys.  Cerul has to make a WIS save and does.  He then tries to hit a bear with his sword and does, inflicting damage.  He uses a charge on his sword to heal Kaizo.  He uses a spell to heal Ridley. Brown bear runs up to Fungus and hits him, but takes 25 points of damage as he does. Fungus is grappled and takes bludgeoning damage.  He then bites Fungus, but takes another 25 points of damage as he does.  The last bear on the ridge jumps down and charges Affy, but she saves.  He then grapples her. He then bites Affy, but her damage is reduced by Cerul.  Relys makes her WIS save then moves to the other side of the bear near her.  She misses with the first claw and she has to make another WIS save and fails, as a chill runs down her spine and she takes 16 points of necrotic damage.  She then attacks with another claw and misses.  She then attacks with a stinger and hits. Affy makes both WIS saves then attacks the white bear, even though she has two on her.  She kills the white bear.  Then attacks the other bear, hitting it twice and sapping it, also inflicting acid damage.</li></ul>
 <div class="endmark">– The End of the Session –</div>
-<h2 class="scene">9</h2>
-<h2 class="scene">Character level at end of the session</h2>
-<h2 class="scene">4</h2>
-<h2 class="scene">Sessions played at level</h2>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>4</b></span></div>
   </div>
 </section>
 
-<section class="session" id="s35" data-theme-art="wine" style="--gx:44%;--gy:67%">
+<section class="session" id="s35" data-theme-art="wine" style="--gx:55%;--gy:44%">
   <header class="hero">
     <div class="hero-art" aria-hidden="true">
       <div class="hero-photo"></div>
-      <svg class="sigil" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M60 10 L104 84 H16 Z"/><path d="M60 110 L16 36 H104 Z"/><circle cx="60" cy="60" r="10"/></svg>
+      <svg class="sigil" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="60" cy="60" r="44"/><path d="M60 16 L96 78 H24 Z"/><circle cx="60" cy="60" r="14"/></svg>
       <div class="embers"></div>
     </div>
     <div class="hero-inner">
       <div class="kicker">A New Adventure · Chapter 35</div>
       <div class="numeral">35</div>
-      <h1>&lt;Name&gt;</h1>
+      <h1>On It’s Trail</h1>
       <div class="hero-meta">
         <span class="mi"><i>In-World</i>20th of Paramor, 1246</span>
         <span class="mi"><i>Where</i>Windbreak Camp</span>
@@ -2160,8 +2126,8 @@ window.SESSION_ART = {
     </div>
   </header>
   <div class="account">
-    <p class="lead">ROUND THREE:  Ridley moves his hunter’s mark to the beast in front of him and strikes one with his crossbow and inflicts damage.  Then hits again and pushes it back 10’ and then runs to the side 40’. Fungus then casts spirit guardians and two of them take 19 points of damage each.  Fungus failed his WIS save and now has the frightened condition and is now disadvantaged on his next turn from the creature’s gaze. Kaizo makes his WIS save.  He then attacks the one he stunned and misses with his first attack, then hits with the second attack and stuns him again, dealing force damage in the process. Then uses flurry of blows with a bonus action and hits and does this twice.  The one near Relys attacks her scorpion form and misses, then tries again and fumbles, falls, and stands back up. Cerul flies up and casts radiance of the dawn to try to hit all of them - they all make their CON saves.  All take damage (15 pts for one and 11pts for the other two).  The one on Fungus howls and he fails his CON saving throw and he takes 28pts of psychic damage and will have no reactions until the start of the bear’s next turn.  His spirit guardians drop because he loses concentration. The stunned bear just stands there looking around. Relys makes her WIS save.  She then attacks a beast with a claw and misses, then attacks again with a claw and hits and deals 17 pts of radiant damage and 1 point of fire damage and he is grappled.  Then she hits with the stinger and inflicts 18 points of radiant and a lot of poison damage.  Affy fails her WIS save and is disadvantaged, but hits twice and inflicts a fair amount of damage.</p>
-<p>ROUND FOUR:  Ridley attacks with a crossbow and hits dealing 31 points of damage, killing it by shooting it between the eyes “you’ll never howl again, beast!”  Then moves and hits the best of Fungus, dealing 9 points of damage. Fungus fails his WIS save and is frightened again, disadvantaged on his attacks. He uses his lucky to neutralize his disadvantage and fumbles, he falls prone and bonus action misty steps away, to the other side of the bulas. The beast takes 11 points of psychic damage as Fungus moves away (dread).  Kaizo makes his WIS save. He attacks and does 5 points of force damage, then hits again for 5 more points of damage.  Then uses flurry of blows and misses, then tries again and misses.  Cerul hits them with radiance of the dawn - one makes his save and one misses.  He also makes his WIS save.  The beast that was on Fungus moves forward and howls and Cerul, Kaizo and Affy all have to make CON saves.  Kaizo saves and takes 10 points of damage; Cerul takes full damage of 21 points; Affy saves and takes 10 points of damage.  The beast attacks Kaizo and he takes 15 points of damage and is grappled.  Kaizo deflects all of the damage with his reaction.  He then tries to bite Kaizo and hits and takes 22 points of piercing damage and is bloodied.  He takes another 6 points of necrotic damage. Relys scuttles over bodies in her scorpion form and attacks the beast that was on Fungus and misses with a claw, hits with a claw and grapples it, killing it, disintegrating it into dust.  Then attacks the other one with her stinger, missing.  Affy steps up and takes out the last creature with her first blow, taking off its jaw in the process.</p>
+    <p class="lead">Combat continued from the previous session …</p>
+<ul class="log"><li>ROUND THREE:  Ridley moves his hunter’s mark to the beast in front of him and strikes one with his crossbow and inflicts damage.  Then hits again and pushes it back 10’ and then runs to the side 40’. Fungus then casts spirit guardians and two of them take 19 points of damage each.  Fungus failed his WIS save and now has the frightened condition and is now disadvantaged on his next turn from the creature’s gaze. Kaizo makes his WIS save.  He then attacks the one he stunned and misses with his first attack, then hits with the second attack and stuns him again, dealing force damage in the process. Then uses flurry of blows with a bonus action and hits and does this twice.  The one near Relys attacks her scorpion form and misses, then tries again and fumbles, falls, and stands back up. Cerul flies up and casts radiance of the dawn to try to hit all of them - they all make their CON saves.  All take damage (15 pts for one and 11pts for the other two).  The one on Fungus howls and he fails his CON saving throw and he takes 28pts of psychic damage and will have no reactions until the start of the bear’s next turn.  His spirit guardians drop because he loses concentration. The stunned bear just stands there looking around. Relys makes her WIS save.  She then attacks a beast with a claw and misses, then attacks again with a claw and hits and deals 17 pts of radiant damage and 1 point of fire damage and he is grappled.  Then she hits with the stinger and inflicts 18 points of radiant and a lot of poison damage.  Affy fails her WIS save and is disadvantaged, but hits twice and inflicts a fair amount of damage.</li><li>ROUND FOUR:  Ridley attacks with a crossbow and hits dealing 31 points of damage, killing it by shooting it between the eyes “you’ll never howl again, beast!”  Then moves and hits the best of Fungus, dealing 9 points of damage. Fungus fails his WIS save and is frightened again, disadvantaged on his attacks. He uses his lucky to neutralize his disadvantage and fumbles, he falls prone and bonus action misty steps away, to the other side of the bulas. The beast takes 11 points of psychic damage as Fungus moves away (dread).  Kaizo makes his WIS save. He attacks and does 5 points of force damage, then hits again for 5 more points of damage.  Then uses flurry of blows and misses, then tries again and misses.  Cerul hits them with radiance of the dawn - one makes his save and one misses.  He also makes his WIS save.  The beast that was on Fungus moves forward and howls and Cerul, Kaizo and Affy all have to make CON saves.  Kaizo saves and takes 10 points of damage; Cerul takes full damage of 21 points; Affy saves and takes 10 points of damage.  The beast attacks Kaizo and he takes 15 points of damage and is grappled.  Kaizo deflects all of the damage with his reaction.  He then tries to bite Kaizo and hits and takes 22 points of piercing damage and is bloodied.  He takes another 6 points of necrotic damage. Relys scuttles over bodies in her scorpion form and attacks the beast that was on Fungus and misses with a claw, hits with a claw and grapples it, killing it, disintegrating it into dust.  Then attacks the other one with her stinger, missing.  Affy steps up and takes out the last creature with her first blow, taking off its jaw in the process.</li></ul>
 <p>The group finds themselves in the wreckage of the camp.  Everyone gathers close and Cerul heals everyone except Relys for 22 points of healing and the effect of a short rest. Relys checks out the corpses of the beasts.  They had patchy black fur, brown tufts of fur between plates of hardened hide, and eyes burning a dull red.  She is bothered by them because they give her a Shadowfel presence.</p>
 <p>The group searches the camp and sees bodies trampled into the ground.  We see a clay bottle with a stopper (red wine), a waterskin, rations (crushed, but edible), a copper ring with a river stone attached (Relys casts detect magic), stoppered vial of alchemist’s fire, pouch with 18gp and 22sp, tinkerer’s tools. There’s also a winter cloak, and another 27 gp, 64 sp, and 40 cp.  Fungus takes a swig of wine.</p>
 <p>We decide to check out the windmill.  Relys and Affy lead, followed by Ridley and Kaizo, then Fungus and Cerul.  The blades of the windmill are shattered, and aren’t moving, but the structure itself is very dangerous. We decide to stop and let Ridley fly up as a bat and Relys as an owl.  They fly up and see the windmill rocking back and forth.  They see a dead owl in front of the windmill on the ground. Relys sees a lot of claw and scratch marks around the windmill and notices that boards have been pushed out of it. They decide to fly inside and see an owl’s nest in the corner with dead babies and one that is alive. Relys flies over the baby owl - it is a barn owl.  She tries to befriend it - she thinks she could perch near it and work her way over (as Relys).  She thinks it is a fragile creature. She picks it up with her talons as gently as possible and flies with it outside.  Meanwhile, Fungus decides to walk into the windmill.  He thinks he will have to be very careful.  He goes inside and thinks the place has been picked over.  He sees a corpse in the corner and goes over to check it out. This is a dead orc. He thinks the guy was likely trying to hide from bears, but it didn’t work. He searches him and finds a small pouch with two vials of green liquid (poison) and a dagger. The dagger looks well made and looks like it was crafted to hold poison (not a dagger of venom).  Fungus and Ridley look around the place, but neither finds much. Ridley finds a trap door, however.  It was overgrown with debris. He clears brush and listens and hears nothing.   Affy comes in as Fungus and Ridley start to open the trap door. They see bags of grain down below and a ladder leading down.  Ridley tries to quietly go down the ladder (31 stealth).  He sees the bags moving (maggots, larvae, worms - not sure).  He lights up a torch and sees a box tucked behind one of the bags.  He is able to grab the box and it turns out to be long, ornate and cut - it is a wooden box. Ridley starts trying to open up the lock on the box and does so.  He opens it up and he sees a long rod with jagged blades on each end.  The blades are silver and the pole is blue-ish steel.  Affy leans down and pulls up the box.  Ridley empties a sack and scoops up a bag of larvae for Ridley’s owl.</p>
@@ -2170,275 +2136,107 @@ window.SESSION_ART = {
 <p>Ridley gives us goodberries and we all eat one (including the horse and bulas and owl baby).  Relys pulls out her magical board on her watch.  She studies the symbols and feels like they are elvish spiritual symbols.  Fungus polishes it up with wood oil and casts comprehend languages.  He feels like “yes and no” symbols are in the corners, various letters - and he thinks that three people are needed for the ritual.  They don’t think it is magical, but think there might be divination influence at play.  They ask for Affy’s help.  She agrees and they all start to look at the board.  Relys determines that the center piece pops out so they all need to touch this piece. Fungus asks “is there anyone out there” and the token moves to “yes.”  Affy asks “are there more of these corrupt beasts nearby” and the token moves to “no.” Relys asks “what is your name?”  And the token starts to spell out “E-L-D-E-R B-A-L-A-N-C-E.”  They decide to wake up Kaizo. He thinks this is the Elder of the spirit of balance.  He feels like this is the one who came to him in his vision.   Affy and Kaizo think that balance is the scales of justice, things are in harmony.  The opposite of balance is chaos and things out of order.  The old goddess of Chaos is Tornia.  Her pet is the one from the trinket.  This is validation that everything is connected.  Kaizo thinks this elder would not speak through a board unless things were bad.</p>
 <p>Affy then opens the box so that Fungus can study it.  It is a javelin of lightning. Affy takes it.  He then studies the dagger - this is called Eredra’s Sting.  Ridley gets the dagger. This  is Midnight’s Tear poison (1500gp) - no effect until midnight - but if not neutralized before midnight the creature will take 9d6 damage.  Fungus keeps this.  This is ingested poison.  Serpent’s Venom (200gp) is the poison in the other vial. This is an injury poison.  Ridley gets this and Fungus gives him Carrion Crawler mucus that he had.</p>
 <p>Now watch starts. First watch, Relys names her owl Soren.  Nothing else happens.  Then Ridley and Affy have watch.  Ridley climbs a tree.  He asks Affy if she signed off of the board and notices that her fingers are translucent now. Ridley thinks this means we need to say goodbye to a board.  Affy wakes up Relys and Fungus and they all agree to sign off (after some convincing - since all of their hands are glowing).  The rest of that watch is uneventful. On third watch, Kaizo and Fungus talk about balance. Kaizo is concerned about why the Elder contacted the party through the board. Fungus tells him it will be okay.  Fungus suggests getting the hookah out and they light up and drink the red wine (Fungus only - he fails a CON save - this causes him to be “whatever” for a while). They use a bag of Kaizo’s herbs. Kaizo notices a different look in Fungus’ eyes. He is more relaxed than ever (for the next 3 days he has advantage on every saving throw except wisdom, where he has disadvantage).  Group gets long rest.</p>
-<h2 class="scene">21st of Paramor, 1246</h2>
+<h2 class="scene">It’s the 21st of Paramor, 1246</h2>
 <p>We wake up and decide to head down the road to Bloodbeak.  It is eerily quiet.  Soren is trying to find his balance.  The bulas travels slowly.  We see destruction here and there - like where a tree has been knocked down or where we see big bear tracks.  After a half day’s travel, Cerul contacts Pa and says “Stay put.  We will be at Bloodbeak this evening.  Hang one more night and we will contact you tomorrow.”  Pa responds sarcastically, but agrees to stay.</p>
 <p>We travel and it is now dusk.  The road dips toward a shadow bowl-like valley.  This is Bloodbeak.  We see destruction, no vegetation (this place was known for berries and lush vegetation), remains of cottages, crushed structures.  We see enormous footprints in the earth.  These seem larger than they were at Relys’ home.  Kaizo thinks we should keep moving.  Relys checks the tracks to see if they continue. She sees they veer off the road.  She thinks they are a few stretches old.  Fungus yells “anyone out there?”  It is dead silence.  Ridley scouts around the buildings, Cerul looks around the campsite.  Relys starts a ritual to see if anything is close.  Ridley finds a crushed body on the side of a building.  He then sees other corpses and the smell hits him.  He realizes nothing has come through to scavenge the dead.  The corpse looks like something was just crushed - this is the nature of the injury.  Cerul sees bodies slung in the distance - a child was thrown, for example.  Inside of one of the walls he sees a horse half buried.  We see around the site a number of dead birds everywhere. Everything that lived here was destroyed/desecrated.</p>
 <p>Relys stops about halfway through her ritual and her arms splay out and she seems possessed.  She says “avenge me” in a low voice.  The words are a little different than last time.  She looks at Kaizo and he gets a visual of birds falling out of the sky and dropping to their deaths.  He sees a vision of the horse plowing into a building and dying.  She says “the balance has failed here.  The other two cannot steady while it roams.”  Then Relys falls and faceplants into the mud and debris. Affy runs over to pick Relys up.  They discuss what this means.  We feel like we are several days behind this creature.</p>
 <p>We discuss chasing it, but are concerned with Pa.  Cerul sends Pa a message “Found the danger and are tracking it south.  It is safe to Bloodbeak, but we can’t vouch past that.  We need to go after this beast.” Pa sends back “Um what about Pebblewash and Shademoor. You were supposed to get us home.  Do we stay here?” Cerul responds “Can’t vouch for those areas, but we need to go after this.  We will let you know what we find over the next few days.”  Pa says “Well shit, I guess the wine is delayed.  I’m not leaving here because I don’t know if it is safe beyond this.”</p>
-<p>Meanwhile, Fungus tries to connect to his patron.  He is able to make contact (makes his saving throw).  He describes what we have encountered and asks her if she knows of 1) what this creature might be.  She says yes.  2) Would it help you if we kill this thing and stop it from running through this land?  She says unsure. 3) It is not going to harm you if I hunt this down and kill it?  She says unsure.  4) But you won’t be upset with me?  She says no.  5) Is there any good food in the next day or two that I might come across - my belly is rumbling?  He then hears a pop and Tennana is next to him.  She says “where are you going?”  He points in that direction.  She says we don’t know what is in that direction.  Are you going to run through the woods?  And he asks her if there is a way to get good food.  She then says “did you see that red and blue-eyed guy?”  He is a thorn in her side.  Do you know where he is at?  She asks if he knows of Ashbarrel and tells him that he ran into Eliana in Ashbarrel.  She has me popping in and out - she thinks I like this world.  He says he will go with her to the Feywild if he can.  She says she can take him.  She is so happy that he did what he did for her.  He says that he will confront tde two-colored eye guy.  She wishes Fungus good luck and pops away.</p>
-<p>Fungus then pops up and tells the group that the two-colored eye guy is with Eliana in Ashbarrel.  Fungus would like to capture him - he promised his patron that he would.  Fungus cleans up Relys with prestidigitation.  We decide to travel through the night. Before we go, we see torchlight coming from the southeast. Affy starts to walk in that direction and she sees three brownish-black horses and a white horse.  The riders are wearing blue tabards.  They approach.  “Who goes there?”  Affy answers “The King’s Outlanders”  There is no king in Halesworth.  We have traveled a great distance.  A lady comes to the front.  “Hello - are the rumors true, have you come across it?”  Have you laid eyes on it?  No - but we are planning to travel that way.  Fungus asks if they have seen it.  She says they have been chasing it for some time.  Some say is comes across with more eyes than two as it sweeps the land and crushes everything.  Others say it is nightmarish and nothing but darkness.  I tell you that we represent the Meridian.  We are searching for this.  We have been to Ferndale, Murfield, and on the road since then.  I am Sera Vann.  I am responsible for this escort to ensure that the road is safe and it appears to be okay because the beast has gone south.  Cerul speaks up to tell her about the bears.  She asks their origins.  He tells her of Windbreak Camp.  She declares the roads clear from the Arch to Murfield based on her conversation.  We tell her of Pa and she agrees to help him.  She will escort Pa and his family to Shademoor and mentions an arcane waypoint that they can use to Basctdelm. Affy pipes up and asks if they could assist with future passage to Basctdelm. Ridley then jumps in and eventually shows him his Meridian badge.  They make introductions.  She makes a slight slur against Affy, but quickly overcomes it and confirms that she will help us with future passage to Basctdelm should we get to Shademoor.  Ridley asks if we can use the horses - we agree to give them the carriage as collateral. They agree to help - to give us two horses.  We tell them we would like to serve the Queen as well. We ask he names of the horses - Bugnut (Cerul) and Holespy (Affy to ride). Relys and Ridley will ride Anjou.  Fungus and Kaizo will ride the bulas.  She warns us that everything that has come across this creature has died.  Cerul will keep you updated with our travels.  And Cerul will let them know you are coming.  He agrees to tell them to start their travels.  They make camp and we head out.  They will go help Pa and his family.</p>
+<p>Meanwhile, Fungus tries to connect to his patron.  He is able to make contact (makes his saving throw).  He describes what we have encountered and asks her if she knows of 1) what this creature might be.  She says yes.  2) Would it help you if we kill this thing and stop it from running through this land?  She says unsure. 3) It is not going to harm you if I hunt this down and kill it?  She says unsure.  4) But you won’t be upset with me?  She says no.  5) Is there any good food in the next day or two that I might come across - my belly is rumbling?  He then hears a pop and Tennana is next to him.  She says “where are you going?”  He points in that direction.  She says we don’t know what is in that direction.  Are you going to run through the woods?  And he asks her if there is a way to get good food.  She then says “did you see that red and blue-eyed guy?”  He is a thorn in her side.  Do you know where he is at?  She asks if he knows of Ashbarrel and tells him that he ran into Eliana in Ashbarrel.  She has me popping in and out - she thinks I like this world.  He says he will go with her to the Feywild if he can.  She says she can take him.  She is so happy that he did what he did for her.  He says that he will confront the two-colored eye guy.  She wishes Fungus good luck and pops away.</p>
+<p>Fungus then pops up and tells the group that the two-colored eye guy is with Eliana in Ashbarrel.  Fungus would like to capture him - he promised his patron that he would.  Fungus cleans up Relys with prestidigitation.  We decide to travel through the night. Before we go, we see torchlight coming from the southeast. Affy starts to walk in that direction and she sees three brownish-black horses and a white horse.  The riders are wearing blue tabards.  They approach.  “Who goes there?”  Affy answers “The King’s Outlanders”  There is no king in Halesworth.  We have traveled a great distance.  A lady comes to the front.  “Hello - are the rumors true, have you come across it?”  Have you laid eyes on it?  No - but we are planning to travel that way.  Fungus asks if they have seen it.  She says they have been chasing it for some time.  Some say is comes across with more eyes than two as it sweeps the land and crushes everything.  Others say it is nightmarish and nothing but darkness.  I tell you that we represent the Meridian.  We are searching for this.  We have been to Ferndale, Murfield, and on the road since then.  I am Sera Vann.  I am responsible for this escort to ensure that the road is safe and it appears to be okay because the beast has gone south.  Cerul speaks up to tell her about the bears.  She asks their origins.  He tells her of Windbreak Camp.  She declares the roads clear from the Arch to Murfield based on her conversation.  We tell her of Pa and she agrees to help him.  She will escort Pa and his family to Shademoor and mentions an arcane waypoint that they can use to Basctdelm. Affy pipes up and asks if they could assist with future passage to Basctdelm. Ridley then jumps in and eventually shows him his Meridian badge.  They make introductions.  She makes a slight slur against Affy, but quickly overcomes it and confirms that she will help us with future passage to Basctdelm should we get to Shademoor.  Ridley asks if we can use the horses - we agree to give them the carriage as collateral. They agree to help - to give us two horses.  We tell them we would like to serve the Queen as well. We ask the names of the horses - Bugnut (Cerul) and Holespy (Affy to ride). Relys and Ridley will ride Anjou.  Fungus and Kaizo will ride the bulas.  She warns us that everything that has come across this creature has died.  Cerul will keep you updated with our travels.  And Cerul will let them know you are coming.  He agrees to tell them to start their travels.  They make camp and we head out.  They will go help Pa and his family.</p>
 <p>As we depart, Ridley comments how it was nice that he got the Meridian badge some time ago.</p>
-<h2 class="scene">22nd of Paramor, 1246</h2>
+<h2 class="scene">It’s the 22nd of Paramor, 1246</h2>
 <p>We don’t get a rest.</p>
-<h2 class="scene">Session 15 – New Friends, A Charm and the Ring – Talil 37, 1246</h2>
-<ul class="log"><li>Regrouped at the Pale Lantern in Qal’dynn and divided treasure and rewards.</li><li>Received a sealed invitation from Lorian Ormseer to tea at the Leaf Light in Cirandale, to discuss Abbey matters.</li><li>Fungus experimented with the Feywoven Glyphic, gaining a permanent effect that left him resistant to cold but unable to touch cloth or paper safely.</li><li>Met with Iofyr, who combined the Nightbud seed and Lusterbee wax into a golden-purple charm, explaining it must be empowered at a fey site such as the Ring of Sylunara.</li><li>Spoke with Lord Anceril in the Crescent Courts, who promised to review Kaizo’s petition for land to build a healing spa.</li><li>Traveled east into the Cirandale district, arriving near the Ring of Sylunara, preparing for the ritual to empower the charm.</li></ul>
-<h2 class="scene">Session 14 – Thinbrew and the Lusterbee Queen – Talil 36, 1246</h2>
-<ul class="log"><li>Party tracked Thinbrew, a rogue alchemical encampment of ex-students, goblins, and bugbears.</li><li>Fought spiders, warped alchemists, and a rogue mage.</li><li>Recovered Glimmerree, the stolen Lusterbee queen, housed in a manmade wooden hive.</li><li>Looted black-market potions, salves, and supplies.</li><li>Returned Glimmerree to Mistress Toilee Goldbinder, earning enough Lusterbee wax for Iofyr’s mixture.</li><li>Returned to Qal’dynn with Abbey of Light and Affy’s father as next hooks.</li></ul>
-<h2 class="scene">Session 13 – Orcish Shadows and Lorian’s Favor – Talil 34, 1246</h2>
-<ul class="log"><li>Affy warned by Borge of an orc corpse in the river, tied to her tribe’s excommunication.</li><li>Fungus given a new riddle by patron: a flask, petrification, and Nightbud.</li><li>Met Iofyr, who demanded rare Lusterbee wax for petrification mixture.</li><li>Lorian guided them beneath Moonroot Hollow to repair a ley-thread.</li><li>Fought corrupted energy eels; repaired thread successfully.</li><li>Rewarded with an Ioun Stone; learned Abbey waypoint is failing.</li></ul>
-<h2 class="scene">Session 12 – Audience with the King – Talil 32, 1246</h2>
-<ul class="log"><li>Escorted to King Artes Highvale with Keanus Evergaze as ally.</li><li>Presented proof of Rel’Udomina infiltration in Qal’dynn.</li><li>Hamalex named Ambassador, but required to remain in the city.</li><li>Party rewarded with gold and status.</li><li>Sent to Moonroot Hollow to investigate ley-thread disruption.</li><li>Met Lorian Ormseer, who revealed young Threadborn mages had destabilized the ley-thread.</li></ul>
-<h2 class="scene">Session 11 – Civisabul and Keanus Evergaze – Talil 31, 1246</h2>
-<ul class="log"><li>Emerged from Rel’Udomina hideout into university halls.</li><li>Battled Kyrenn Embersong, assassin disguised as Realmwarden.</li><li>Escaped into Civisabul university quad, encountering suspicious Realmwardens.</li><li>Brought Keanus to Pale Lantern Inn; he vouched for them.</li><li>Fungus experimented with Feywoven Glyphic (burning clothes incident).</li><li>Relys spoke with Pivric, learning of Weaving Night in Iparos.</li></ul>
-<h2 class="scene">Session 10 – Rel’Udomina Hideout II – Talil 30, 1246</h2>
-<ul class="log"><li>Explored torture chambers, disguise rooms, and corpse disposal pits.</li><li>Fought Rel’Udomina agents, blink dogs, and an illusionary dragon.</li><li>Killed female commander; looted mithril armor and venom dagger.</li><li>Freed prisoners, including Keanus Evergaze.</li><li>Realmwardens arrived—revealed traitors within their own ranks.</li><li>Escaped upward into Civisabul.</li></ul>
-<h2 class="scene">Session 9 – Rel’Udomina Hideout I – Talil 29, 1246</h2>
-<ul class="log"><li>Entered Rel’Udomina hideout.</li><li>Discovered documents naming Esinni Qadul “The Prominent.”</li><li>Fought spies, guards, and summoned creatures.</li><li>Recovered incriminating evidence, including encoded maps and disguises.</li><li>Confirmed Rel’Udomina infiltration of diplomatic circles.</li><li>Prepared to descend further into the hideout.</li></ul>
-<h2 class="scene">Session 8 – Whisperbend and the Hidden Gate – Talil 28, 1246</h2>
-<ul class="log"><li>Met the Disciples of the Wind, a nomadic group camped outside Qal’dynn after the gates were closed.</li><li>Encountered disguised Rel’Udomina assassins at a desecrated shrine, intent on killing Ambassador Vondrel.</li><li>Fought and defeated the agents, uncovering evidence including Abbey ties and a hidden passage map.</li><li>Found “Whisperbend,” a forgotten tunnel beneath the cliffs into Qal’dynn.</li><li>Inside, solved puzzles, defeated a guardian construct, and gained access with a heart-shaped gem.</li><li>Discovered incriminating documents and a scrying pedestal targeting King Highvale.</li></ul>
-<h2 class="scene">Session 7 – Ambassadors and Orcish Clues – Talil 27, 1246</h2>
-<ul class="log"><li>Returned to O’naren after Silent Circle; met Captain Salaal and noble Ravas Elorhen.</li><li>Learned Qal’dynn had closed its gates due to Rel’Udomina infiltration.</li><li>Ravas hinted at Hamalex’s possible redemption and value as a diplomat.</li><li>Affy confronted half-orc Tavrus at the Truffle Trap, who bore a pendant like her father’s.</li><li>Encountered Pinprick’s Peculiarities, a flamboyant gnome merchant with strange goods.</li><li>Fought Rel’Udomina agents posing as Elle’berian pilgrims at a shrine; clues pointed toward Whisperbend.</li></ul>
-<h2 class="scene">Session 6 – The Cackletongue Lair – Talil 26, 1246</h2>
-<ul class="log"><li>Ventured into gnoll caverns corrupted by spores and demonic influence.</li><li>Faced rust monsters, fungal oozes, and psychic threats.</li><li>Quasit revealed Cerul’s celestial heritage, calling him “angel blood.”</li><li>Cerul’s wings manifested, unleashing radiant destruction on gnolls.</li><li>Defeated Gnazex, gnoll leader of the Cackletongue tribe.</li><li>Recovered treasures including a Ring of Fire Resistance and Nightbud.</li></ul>
-<h2 class="scene">Session 5 – The Oracle and the Silent Circle – Talil 25, 1246</h2>
-<ul class="log"><li>Party split: Cerul, Ro, and Fungus visited Oracle Zanasee Tsal’daree; others dealt with Vrathin and realmwardens.</li><li>Oracle hinted that Fungus’ answers lay with Iofyr; gave him the Charm of the Slumbering Grove.</li><li>Returned to Silent Circle, finding Kosani corrupted by spores alongside gnoll spore-servants.</li><li>Defeated corrupted druid, gnolls, and wailing fungus in a brutal battle.</li><li>Secured Nightbud seeds, a Potion of Clairvoyance, and Boots of Elvenkind.</li><li>Learned Rel’Udomina is behind Vrathin’s maps and infiltration schemes.</li></ul>
-<h2 class="scene">Session 4 – O’naren and the Silent Circle – Talil 24, 1246</h2>
-<ul class="log"><li>Entered O’naren; townsfolk treated Affy with prejudice.</li><li>Investigated Vrathin the mapmaker, who claimed his wife Elryan was Cloak of Defiance.</li><li>Found evidence (half-burned map) contradicting his claims, tying him to Rel’Udomina.</li><li>Heard Kulak the mercenary drunkenly boast about silencing “woman and brat.”</li><li>Traveled to Silent Circle, finding signs of gnoll desecration and Nightbud corruption.</li><li>Encountered gnolls in sacred grove and recovered important clues.</li></ul>
-<h2 class="scene">Session 3 – The Feywoven Glyphic – Talil 23, 1246</h2>
-<ul class="log"><li>Experimented further with the Feywoven Glyphic, producing varied effects: exhaustion, riches, comprehension of Sylvan, and figurine of wondrous power.</li><li>Summoned the wanderer Ireron from cube manipulation.</li><li>Traveled eastward, camping with Nillian the elf and suffering a blight attack en route.</li><li>Encountered Elryan and Paridan, fleeing wife and adopted son of Vrathin; hired mercenaries pursued them.</li><li>Depending on outcome, party either found them dead (with map scrap) or alive but secretive.</li><li>Entered O’naren with growing suspicions of Vrathin’s ties to Rel’Udomina.</li></ul>
-<h2 class="scene">Session 2 – Beneath the Broken Citadel – Talil 22, 1246</h2>
-<ul class="log"><li>Explored subterranean labs and ruins under the citadel.</li><li>Fought skeletal guardians, oozes, and discovered an infernal summoning chamber linked to Asmodeus.</li><li>Found teleportation circle, broken Feywild portal, and cube later named Feywoven Glyphic.</li><li>Learned the site tied together fey magic, infernal power, teleportation, and underdark access.</li><li>Cube activated with dangerous random effects; party began experimenting.</li><li>Returned to Mossholde with pressing questions and a new artifact of concern.</li></ul>
-<h2 class="scene">Session 1 – Meeting in Mossholde – Talil 21, 1246</h2>
-<ul class="log"><li>Party assembled at Mossholde outpost, meeting Marlowe and Harva.</li><li>Night interrupted by wounded hunter Tabury Eillek, who reported ambush by strange creatures.</li><li>Party followed his trail, encountering gremlin-like fey and a mysterious skull-wielding leader.</li><li>Rescued a wolf pup from a cage; Ro adopted it.</li><li>Discovered stolen goods, alchemical supplies, and ominous powder.</li><li>Found hidden trapdoor in Broken Citadel, setting up deeper exploration.</li></ul>
-<h2 class="scene">Goals</h2>
-<p>What are the goals of the players that the party is aware of…</p>
-<h2 class="scene">Who</h2>
-<h2 class="scene">Goal</h2>
-<h2 class="scene">Reason, Status &amp; Notes</h2>
-<ul class="log"><li>Cerul</li></ul>
-<h2 class="scene">Uspar’s quest</h2>
-<p>Uspar the High Carver, leader of the 3 stone giant clans, revealed that he brought Cerul to Ada.  He gave Cerul a cryptic message:</p>
-<p>Something unresolved waits beneath where you were born, little one. The scar still dreams. Return there when the light within you grows steady… or the mountain may claim what the angel could not finish.</p>
-<p>Matron Mallow revealed that he came from a destroyed mountain village called Pekanon, on the road between the Abbey and the Bastion of Order.   She advises him to research at Uktali Monastery or Argent Halls to find information about this old city.</p>
-<ul class="log"><li>Kaizo</li></ul>
-<p>Wants to learn; in search of new info and new people.  Wants to teach - has a lot of experiences to share. Wants to open an herbal shop.</p>
-<p>Old and chill.  Not a fighter, but can/will.</p>
-<ul class="log"><li>Fungus</li></ul>
-<p>Find out where his powers come from.  Would like to open a potion shop.</p>
-<p>Followed Ham to Mossholde.  Met and spoke giant.</p>
-<p>They have known each other for a harmon.</p>
-<ul class="log"><li>Affy</li></ul>
-<p>To feel loved and valued and seeks companionship.  Trying to find her father.</p>
-<ul class="log"><li>Cerul (Party)</li></ul>
-<h2 class="scene">Root out the Rel’Uldomina from the Abbey</h2>
-<h2 class="scene">Rel'Udomina Maps show secret places at the Abbey</h2>
-<ul class="log"><li>Kaizo</li></ul>
-<h2 class="scene">Take care of remaining Nightbud seeds</h2>
-<ul class="log"><li>The Party</li></ul>
-<h2 class="scene">Uncover Vrathin’s (Mapmaker) secrets</h2>
-<p>Did he order his wife and adopted son (from the Abbey of light) to be murdered, and if so, why?  What does Kool Ok know?  Does it have to do with the Rel’Uldomina, and who are they?</p>
-<ul class="log"><li>The Party</li></ul>
-<h2 class="scene">Visit lofyr in Qal’dynn</h2>
-<p>Ro to seek knowledge about the powder.</p>
-<h2 class="scene">Fungus to ask about the Charm of the Slumbering Grove</h2>
-<ul class="log"><li>The Party</li></ul>
-<p>Determine the fate of the courier from O’naren, and discover why Qal’dynn has been closed.</p>
-<p>The courier was found dead.  Party has infiltrated the city in the lair of the Rel’Uldomina and the “Prominent”.  Still need to return the news to O'naren.</p>
-<ul class="log"><li>The Party</li></ul>
-<h2 class="scene">Solve Gnoll problem at the Silent Circle</h2>
-<p>And with the appearance of undead, it appears bigger than just a standard gnoll problem.</p>
-<h2 class="scene">Important NPCs</h2>
-<h2 class="scene">Hostile</h2>
-<h2 class="scene">Unfriendly</h2>
-<h2 class="scene">Neutral</h2>
-<h2 class="scene">Friendly</h2>
-<h2 class="scene">Helpful</h2>
-<h2 class="scene">Name</h2>
-<h2 class="scene">Reputation</h2>
-<h2 class="scene">Description</h2>
-<h2 class="scene">Notes</h2>
-<h2 class="scene">Marlowe Nald</h2>
-<h2 class="scene">Neutral</h2>
-<h2 class="scene">Owner of Mossholde</h2>
-<h2 class="scene">Malgri’n</h2>
-<h2 class="scene">Hostile</h2>
-<h2 class="scene">Keeps Fungus’s Patron in the Shadowfel</h2>
-<h2 class="scene">BlackRend</h2>
-<h2 class="scene">Hostile</h2>
-<p>Killed a bunch of Gnomes?</p>
-<h2 class="scene">*</h2>
-<h2 class="scene">DM Brief</h2>
-<h2 class="scene">Session 00/01 - 01/16</h2>
-<p>I plan on running a campaign that is driven by you.  To do this, Session 0 will be about working together on a few things, and here’s what you’ll need to be prepared for:</p>
-<p>1. Character Type - Have an idea of what type of character you want to play.  Many of you are way ahead on this and have already created the character.</p>
-<p>2. Goal(s) - Make sure that you have thought of at least one, if not more, goals for your character.  It is a good idea to have 3 to 4 goals for your character at any given time.  There is a caveat … make sure you are flexible to adjusting that goal during Session 0.  We will ensure that the goals align to party cohesion.</p>
-<h2 class="scene">Examples</h2>
-<p>Goals can be as complex or as simple as you would like.  Here are some examples:</p>
-<h2 class="scene">Goal</h2>
-<h2 class="scene">Reason</h2>
-<h2 class="scene">Win the heart of a certain person</h2>
-<h2 class="scene">A deep seated desire to be loved</h2>
-<h2 class="scene">Discover the true identity of an important person</h2>
-<h2 class="scene">The need to be appreciated</h2>
-<h2 class="scene">Slay a powerful monster</h2>
-<h2 class="scene">A promise to a dying family member</h2>
-<h2 class="scene">Discover the location of a fabled feature</h2>
-<h2 class="scene">A hunger for power</h2>
-<h2 class="scene">Obtain a magical artifact</h2>
-<h2 class="scene">The search for spiritual enlightenment</h2>
-<h2 class="scene">Prove the existence of a certain phenomenon</h2>
-<h2 class="scene">A prophecy</h2>
-<h2 class="scene">Interrupt a ritual of negative effect</h2>
-<h2 class="scene">Prove themselves worthy of a love interest</h2>
-<h2 class="scene">Session 02 - 01/24</h2>
-<p>Please review your character’s goals and update them if needed.</p>
-<h2 class="scene">Session 03 - 02/20</h2>
-<p>Everyone should be level 2.</p>
-<p>Review your Notebook.  Anything in Red should be new information from the DM</p>
-<h2 class="scene">Session 03 - 03/06</h2>
-<p>Everyone is still level 2 … careful about murdering the citizens!</p>
-<p>Review your Notebook … I totally jacked ‘em up!</p>
-<h2 class="scene">NOT USED ANYMORE … CHECK WITH DM</h2>
-<h2 class="scene">Character</h2>
-<h2 class="scene">Affy</h2>
-<h2 class="scene">Cerul</h2>
-<h2 class="scene">Fungus</h2>
-<h2 class="scene">Kaizo</h2>
-<h2 class="scene">Relys</h2>
-<h2 class="scene">Ridley</h2>
-<h2 class="scene">Player</h2>
-<h2 class="scene">Lesley</h2>
-<h2 class="scene">Ty</h2>
-<h2 class="scene">Michael</h2>
-<h2 class="scene">Mike</h2>
-<h2 class="scene">Emma</h2>
-<h2 class="scene">Sean</h2>
-<h2 class="scene">Class</h2>
-<h2 class="scene">Psi Fighter</h2>
-<h2 class="scene">Light Cleric</h2>
-<h2 class="scene">Archfey Warlock</h2>
-<h2 class="scene">Mercy Monk</h2>
-<h2 class="scene">Moon Druid</h2>
-<h2 class="scene">Hunter Ranger / Rogue</h2>
-<h2 class="scene">Species</h2>
-<h2 class="scene">Half-orc</h2>
-<h2 class="scene">Aasimar</h2>
-<h2 class="scene">Hill Goliath</h2>
-<h2 class="scene">Wood Elf</h2>
-<h2 class="scene">Forest Gnome</h2>
-<h2 class="scene">Human</h2>
-<h2 class="scene">Armor Class</h2>
-<h2 class="scene">19</h2>
-<h2 class="scene">17 / 19</h2>
-<h2 class="scene">14</h2>
-<h2 class="scene">18</h2>
-<h2 class="scene">14</h2>
-<h2 class="scene">17</h2>
-<h2 class="scene">Perception</h2>
-<h2 class="scene">13</h2>
-<h2 class="scene">15</h2>
-<h2 class="scene">9</h2>
-<h2 class="scene">17</h2>
-<h2 class="scene">13</h2>
-<h2 class="scene">18</h2>
-<h2 class="scene">Investigation</h2>
-<h2 class="scene">15</h2>
-<h2 class="scene">11</h2>
-<h2 class="scene">9</h2>
-<h2 class="scene">10</h2>
-<h2 class="scene">11</h2>
-<h2 class="scene">16</h2>
-<h2 class="scene">Insight</h2>
-<h2 class="scene">10</h2>
-<h2 class="scene">15</h2>
-<h2 class="scene">12</h2>
-<h2 class="scene">17</h2>
-<h2 class="scene">16</h2>
-<h2 class="scene">15</h2>
-<h2 class="scene">Senses</h2>
-<h2 class="scene">Darkvision 120’</h2>
-<h2 class="scene">Darkvision 60’</h2>
-<h2 class="scene">Darkvision 120’</h2>
-<h2 class="scene">Darkvision 60’</h2>
-<h2 class="scene">Darkvision 60’</h2>
-<h2 class="scene">Blindsight 10’</h2>
-<h2 class="scene">-</h2>
-<h2 class="scene">Defenses</h2>
-<h2 class="scene">-</h2>
-<h2 class="scene">Necrotic (R)</h2>
-<h2 class="scene">Radiant (R)</h2>
-<h2 class="scene">-</h2>
-<h2 class="scene">Mag. Sleep (I)</h2>
-<h2 class="scene">Poison (R)</h2>
-<h2 class="scene">Magic Mind Reading Stuff (I)</h2>
-<h2 class="scene">Languages</h2>
-<h2 class="scene">Goblin</h2>
-<h2 class="scene">Orc</h2>
-<h2 class="scene">Elvish</h2>
-<h2 class="scene">Giant</h2>
-<h2 class="scene">Giant</h2>
-<h2 class="scene">Orc</h2>
-<h2 class="scene">Sylvan</h2>
-<h2 class="scene">Elvish</h2>
-<h2 class="scene">Gnomish</h2>
-<h2 class="scene">Druidic</h2>
-<h2 class="scene">Elvish</h2>
-<h2 class="scene">Gnomish</h2>
-<h2 class="scene">Elvish</h2>
-<h2 class="scene">Orcish</h2>
-<h2 class="scene">Draconic</h2>
-<h2 class="scene">Infernal</h2>
-<h2 class="scene">Celestial</h2>
-<h2 class="scene">Thieves’ Cant</h2>
-<h2 class="scene">Deity</h2>
-<h2 class="scene">Phoe</h2>
-<h2 class="scene">“Light”</h2>
-<h2 class="scene">-</h2>
-<h2 class="scene">-</h2>
-<h2 class="scene">Sylunara</h2>
-<h2 class="scene">Primarily Cembus</h2>
-<h2 class="scene">Magic Items</h2>
-<h2 class="scene">Adamantine Plate</h2>
-<h2 class="scene">Band of Dunduar</h2>
-<h2 class="scene">Shortsword, +1</h2>
-<h2 class="scene">Ring of Mind Shielding</h2>
-<h2 class="scene">Trollspliter</h2>
-<h2 class="scene">Ioun Stone (WIS)</h2>
-<h2 class="scene">Lightbringer</h2>
-<h2 class="scene">Mithril Splint Mail</h2>
-<h2 class="scene">The Cube</h2>
-<h2 class="scene">Charm of Patron</h2>
-<h2 class="scene">Ring of Warmth</h2>
-<h2 class="scene">Dagger of Venom</h2>
-<h2 class="scene">Staff of the Adder</h2>
-<h2 class="scene">Nightbud</h2>
-<h2 class="scene">Boots of Elvenkind</h2>
-<h2 class="scene">Pigments</h2>
-<h2 class="scene">Chime of Opening</h2>
-<h2 class="scene">Leather, +1</h2>
-<h2 class="scene">Etew’s Wand</h2>
-<h2 class="scene">Quarterstaff +1</h2>
-<h2 class="scene">Cloak of the Bat</h2>
-<h2 class="scene">Ring of Protection</h2>
-<h2 class="scene">Band of Dunduar</h2>
-<h2 class="scene">Session 00 - 01/16/25</h2>
-<p>XP: Discussion about do we play someone else’s character if they can’t be there.  Pro/con.  No one seems to care if their character is played by someone else.  Therefore - XP will always be split evenly among the 6 characters since they will all be played even if the IRL person isn’t there.</p>
-<p>Check the site if you care and want to be invested.  If you don’t want to, that’s ok.  But DM will communicate with the group and with each character via the Google site.</p>
-<p>Look at the Session Notes (and EVERYONE is welcome to take them) but at a minimum, check the DM Brief.  Read during the 15 minutes before game time.</p>
-<p>Leveling will require a long rest.</p>
-<p>Review of changes in 2024 rules.  Lots of conversation about reactions - agreed it was from start of turn to start of next turn. Potions are now a bonus action.</p>
-<p>Discussion of what is an action - if DM asks us to make a check it will NOT burn an action.  If we elect to do something (skill check), it will.  DM will also try to make use of the Passive Perception quite a bit…</p>
-<p>Discussion about the party make up:</p>
-<p>Two full healers (Cleric, Bard), Scout (Monk), we don’t have a rogue (but Bard is rogue-ish), we have a lock picker, we have lots of magic.  Group seems to feel like everyone picked what they wanted and we have a decent mix of characters and proficiencies.</p>
-<p>Hit points - discussion about standard vs. rolling.   Group will pick standard.</p>
-<p>Surprise rules - combat starts; people who are surprised have disadvantage on initiative.</p>
-<p>Will need a Healer’s Kit to be able to use hit dice on a short rest.</p>
-<p>Death saves - first death save fail is a level of exhaustion; and only get exhaustion back on a long rest.  If you are healed and fall again, and make a fail, you get another level of exhaustion.</p>
-<p>Crafting magic items…seem a little overpowered in new 2024 rules. This is something you can work with the DM on to “work up to being able to make something”...but you can’t just make something every time you have downtime.</p>
-<p>Table chit chat - just don’t be distracting.  Keep it quiet.  You need to focus on the campaign itself and be ready when it is your turn on initiative…so know what you want to do.  Had a big discussion about moving down a slot in initiative order (permanently), but decided not to do it.  Decided to just follow the rolls and if you aren’t ready, you just do nothing or set a reaction (current mechanisms that already exist).</p>
-<p>Rules lawyers - if a player makes an error, just discuss.  If the DM screws up, players should feel comfortable to point out what happened.  If it is a rule that needs a ton of discussion, we will do the best we can and can take up the specifics after the game.</p>
-<p>In game - don’t look up a monster we are searching for and/or are fighting.  DMs will flavor monsters and they may NOT match the Monster Manual.</p>
-<p>Having character goals is important.  At some point during play in a session, you may find that the plot speaks to you/your character.  This is intentional.  DM goal is to have everyone invested in the campaign and he will try to pepper the campaign with everything we gave him/continue to give him.</p>
+<div class="endmark">– The End of the Session –</div>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>5</b></span></div>
+  </div>
+</section>
+
+<section class="session" id="s36" data-theme-art="wine" style="--gx:79%;--gy:39%">
+  <header class="hero">
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-photo"></div>
+      <svg class="sigil" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="60" cy="60" r="46"/><path d="M24 60 Q60 20 96 60 Q60 100 24 60 Z"/><circle cx="60" cy="60" r="7"/></svg>
+      <div class="embers"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="kicker">A New Adventure · Chapter 36</div>
+      <div class="numeral">36</div>
+      <h1>Leave it Hanging (I’m Going to 20)</h1>
+      <div class="hero-meta">
+        <span class="mi"><i>In-World</i>22nd of Paramor, 1246</span>
+        <span class="mi"><i>Where</i>The Beasts Trail</span>
+        <span class="mi"><i>Played</i>October 15, 2026</span>
+      </div>
+    </div>
+  </header>
+  <div class="account">
+    <h2 class="scene">Chasing the Beast</h2>
+<p class="lead">We are following the track of the beast through the night.   It is slow going because we often have to dismount and go around fallen and broken trees.  This is a dense forest. We find a clearing and decide to make camp just off the trail of the beast.  We smell death and realize there are likely dead animals around.</p>
+<p>As we set up camp, we see pairs of red eyes - evidence that animals have been turned by the creature.  These are likely smaller creatures - squirrels and the like.  They don’t approach.  It is cold so we make a fire with broken timbers. The skies are hazy and gray.  Ridley casts his alarm spell around the camp.  We decide not to have a watch - to get a rest and try to ride at first light.  The spell goes off a couple of times, but Ridley realizes they are small creatures and goes back to sleep.</p>
+<h2 class="scene">23 of Paramor, 1246</h2>
+<p>We rise at dawn.  Relys shifts into her owl form to scout ahead and Ridley is able to cast a spell to see through her eyes. Snow flurries start to fall, limiting her line of sight somewhat. Using her scouting and navigating to follow the tracks, we travel the entire day without incident.  We think we probably went 10-15 miles this day. At camp, we pull out the board and Affy, Relys, and Fungus ask a question:  what are the weaknesses of the creature we are hunting?  It answers: M-A-S-T-E-R  We then ask:  Is Tornia the master?  It answers NO.  Who is the Master?  No movement at first, then the board moves to M-O-O-N-S.  We sign off of the board.  Ridley sets the alarms, no watch again.  Plan to travel again at first light.  Kaizo, who is meditating, sees something near Relys - two little red eyes.  They get close to her and then disappear briefly.  He’s not sure where they disappeared.  He walks over to investigate and sees a small mouse bite her.  She immediately wakes up and the creature scurries away.</p>
+<p>Kaizo lets it flee and asks Relys how she is doing “How do you feel - do you feel different?”  They inspect the wound and determine they need to “Keep an eye on it.”  Kaizo positions next to her and she goes back to sleep.  He notices other red eyes outside of camp here and there.    We get a long rest.</p>
+<h2 class="scene">24th of Paramor, 1246</h2>
+<p>We pack up at first light and are all told of the mouse encounter.  Cerul checks Relys out and notices that the bite is ugly with some pus, perhaps this is a normal infection and not something more sinister?  Cerul decides to cure wounds on Relys.  The radiance from Cerul lights up and the puffiness and swelling disappears, as does the pus. She seems normal otherwise.  We remember that we were bitten by the bears and nothing happened, so we decide not to worry.</p>
+<p>We travel as we did the day before:  Relys in owl form and scouting ahead to lead the way, following the creature’s tracks. After a half a day’s travel, Relys loses sight of the tracks in the distance.  She decides to cast a ritual to try to determine if the creature is within three miles of the party - looking for portals, looking for a large creature, and a close settlement.  She finds no creature or settlement, but finds the residual effects of a portal.  She decides to scout ahead to see what that is.</p>
+<p>She travels 2 miles and finds that the ground is churned up a little bit.  She sees a series of bodies laying in a row.  These are humanoid bodies - probably 10 of them.   She goes back and tells the group and we all decide to investigate the scene.    Relys, in owl form, leads the group, but stays with the group.</p>
+<p>We arrive and see trees crashed, gouges in the earth.  These bodies are intact, seem fresh, and are ordered - as if someone counted them out.  Ridley checks the bodies out closely.  They appear to be dead.  One has a gash in his chest that looks like a cut, not from a claw.  They are all pale elves and we are reminded of the people we saw at the Blackstone Crucible.  They all have a cut on their necks - like a marking.  Ridley thinks this is a crude Orcish mark, but might be more of a fey marking.  Fungus decides to take a look.  He gets a sinking feeling and knows this marking represents the fey word for “moon.”  He says that this would represent the Moon King from the Feywild.  The cut was not made by a dagger, but a spear. It looks like the marks were made after death.  Ridley notices a piece of torn cloth near one of the dead bodies and we think it came from Kulv.  His patron is the Moon King.</p>
+<p>Is Kulv the creature - maybe he shifts?  Or is he working in league with the creature?  Relys tries to find tracks from either the beast and/or Kulv, but she’s unable to make out any tracks that lead from here.  She checks and senses conjuration magic in the air, but can’t make out exactly what happened.  She just knows that magic happened in two spots.  Maybe two portals?   We think the Shadar-Kai elves that are here were an elite fighting force.  We decide to thoroughly search the bodies to find any clues.</p>
+<p>The bodies have their Shadowfel blades, a mix of shortswords and daggers. We find a couple with a symbol similar to that we found in the Blackstone Crucible - a chain with the black shard.  Relys pulls out her book and studies this.  She thinks they are followers of Malgri’n.  We decide to rest here, planning to allow Cerul to talk to the dead tomorrow morning.</p>
+<p>Affy asks Cerul to communicate with Kulv - letting him know that she would like to meet with him. “This is Cerul on behalf of Affy.  She wants to meet if possible to continue your discussion.  Where and when can you meet her?”  He rolls well and the message lands. He responds “That may be difficult unless you are near Qal’dynn which I plan to be at tomorrow.  Eliana says hi.”  Affy recalls that wizards and warlocks have the ability to move around freely.  Cerul leaves the thread hanging.</p>
+<p>We decide to rest here.  Relys wants to try to communicate with her goddess.  Ridley and Affy cripple the dead bodies while others are busy. We continue to talk about the creature and the master.  Maybe Kulv is the creature’s master.  Relys wants to ask her goddess:  Is this creature going to be a continued threat to Myrdae?  But we decided to wait until the morning to cast that spell, too.</p>
+<p>The evening goes well.  Ridley casts alarm.  Nothing happens.</p>
+<h2 class="scene">25th of Paramor, 1246</h2>
+<p>In the morning, we hear the sounds of birds.  We think the creature is no longer around for sure - where it now is, we are not sure. Cerul casts a speak with the dead spell - finding the most important looking one. Ridley and Affy watch the surroundings, as Kaizo, Fungus, and Relys watch Cerul speak with the dead one.</p>
+<p>He asks:  Who were you fighting when you died?  The creature looks over at Affy and says “a half orc and Vhaulmast”.  As Cerul looked at Affy, he could have sworn her eyes were briefly red and blue, but just for a second.</p>
+<h2 class="scene">He asks:  Did you travel here to try to kill them?  Answer:  no</h2>
+<p>He asks:  Why were you here?  Answer:  He was to be bound.</p>
+<p>He asks:  How exactly did you travel here?  Answer:  Our colleague opened a portal to your material plane.</p>
+<p>He asks:  Who is your colleague?  Answer:  a wise one in the Shadowfel</p>
+<p>Cerul then finds another dead body and speaks with him.</p>
+<p>He asks:  Name of the wise one who opened the portal? Answer :  Veszven</p>
+<p>He asks:  Can Veszven help us get back to the Shadowfel?  Answer:  I don’t know</p>
+<p>He asks:  How were you planning on binding the creature?  Answer:  The magic is gone.</p>
+<p>He asks:  What does Veszven look like?  Answer:  Pale skin, white hair, gray robe, black eyes, pointy ears…</p>
+<h2 class="scene">He asks:  What was your captain’s name here?  Answer:  Solhrys</h2>
+<p>Kaizo points out that we need to figure out how to travel.  Ridley and Cerul talk about how and why we should track this further.</p>
+<p>Cerul wakes up another dead.</p>
+<p>He asks:  How were you able to wound The Vhaulmast?  Answer:  He can be cut.</p>
+<p>He asks:  Did you know the half orc would be here or were you ambushed?  Answer:  We were ambushed.</p>
+<p>He asks:  How would you like us to treat your dead?  Answer: Bury us at home.</p>
+<h2 class="scene">He asks:  How do we get your home? Answer: Idk - Veszven</h2>
+<p>He asks:  Did the halforc have any unusual abilities? Answer: Besides looking him her (Affy), he summoned Fey, Banished, he did some other things.</p>
+<p>Relys decides to communicate with her goddess.  Using divination, she asks her goddess if the Vhaulmast is going to be an immediate threat to Qal’dynn or the surrounding areas?  She hears:  In the world of Myrdae, surrounding areas can extend far and wide.  And yet, he will roam, but not near Qal’dynn.  Other threats may occur. Relys thanks her for the information, tears rolling down her face.</p>
+<p>Meanwhile, Ridley finds a shivering chickadee and uses animal handling to capture the bird.</p>
+<p>As we discuss reaching out to Veszven, Affy hears something.  A voice reaches out (slightly familiar).  “Odabrin will meet you in Basctdelm.  He gave no place.  Another asked the Halls about him.  My letter might not be the only one.”  Affy thinks this was Odaphi.   Affy replies:  “Thanks. Was this other like me but with red and blue eyes?  Been delayed. Tell Odabrin I will come as soon as I can.”  Affy hears:  “No, it was a woman.  Odabrin asked if you touched the glyphic and was curious of others (My goat) reaching out to him.  Find the unwalked path near Greenscape.”  Affy responds:  “Yes, I touched the glyphic but only a couple of times.  I wonder who the woman is - mother, someone else?  I will find the path.”</p>
+<p>Meanwhile, Kaizo hears:  “There is unfortunate news.  Realmwardens found dead monks on the road to Qal’dynn.  Their resources were gathered.  This is Lorien Ormseer from Qal’dynn.”  He responds:  “What happened to them and did the relics make it back to the Sanctuary?  Please secure their belongings and take them there. We need transport now: Bastdelm? Qal’dynn?” He doesn't get a response. Kaizo thinks we are out here away from everything, almost on purpose…</p>
+<p>Cerul casts a spell to Veszven.  “Greetings Vezven, I'm Cerul Slate and am with your fallen ones at the hand of our enemy Vhalmaus south of Bloodbeak.  Can we meet? ”  But he never gets a reply…and does not feel like he was blocked.</p>
+<p>The group decides to head to Shademoor.  We take two sets of the armor from the elves and leave.  We discuss, but decide not to contact Ham in Qal’dynn to let him know about Kulv.</p>
+<h2 class="scene">26th and 27th of Paramor, 1246</h2>
+<p>Fast track.  We head through the woods to Shademoor.</p>
+<p>Kaizo gets a message from Lorien.  “We have heard that there are threats made at your resort.  Are you aware of this?”  Kaizo answers:  “No, but beware of a half orc with red and blue eyes.”  He then hears:  “I’m not sure why someone would have raised a post that said “threaten me and see what happens.”  Kaizo realizes this is likely Eliana making waves at the Spa.  He replies “I think this is a wizard named Eliana who I had a run in with in Caelora.”  Relys asks why Eliyena is making waves and Kaizo tells everyone that he had insight that she was up to no good, that she was evil.  He responds “We are a day from Shademoor.  We hope to get there shortly.”</p>
+<p>We continue to move to Shademoor.  Cerul casts a spell to the Meridian members “We have news to report.  We are a day out of Shademoor and need to meet.”  He hears back:  “That’s good to hear.  Safe travels.  We cannot go to Basctdelm at dark so if we need to wait a day we can.”</p>
+<p>Cerul then contacts the Spa:  “Beware of a wizard named Eliyena.  Raise the guard” He hears back: “The Wizard is already here, and he has our back he says, I hope this isn't a distraction”</p>
+<p>We get a long rest.</p>
+<h2 class="scene">28th of Paramor, 1248</h2>
+<p>We finish our journey to Shademoor.   We arrive at dark in the snow. We stable the horses and head to the Hollow Root Inn, where we find the Meridian guards.  They are eating and wave.  We don’t immediately see Pa or his family. We are greeted by a young female human, late teens.  She comes out from behind the bar.  Pick any table….we just got our shipment in from Caelora.</p>
+<p>We settle in at a table.  One of the Meridian comes over to talk to us and shares that Pa and his family are here safely.  They say they can go to Basctdelm tomorrow.  The groundskeeper won’t let us into the Garden at night.  Meet you here in the morning.  Cerul, however, tells the news of tracking the creature, the battle with the binders from the Shadowfel, and how he disappeared with no trace.  We think this is not the end of this creature, but aren’t sure where he will pop up again.  They say they would like a full report in Basctdelm.</p>
+<p>We recall that the Garden area was dark and misty as we looked in that direction (it is a graveyard).</p>
+<p>The barkeep comes over to take orders - we ask for the wine and the stew - well all except Relys.  She asks for a vegetarian version if possible.  She is told she can and comments on how cute Relys’s owl is.  We also pay for the rooms for the night (a nice room for Kaizo/Fungus and Affy/Relys and a standard one for Cerul/Ridley). She also drops off a cup of wine and tells Cerul it is from a guy in the corner who would like to chat with Cerul if he has time.</p>
+<p>Cerul sees a guy dressed in dark clothes, a hood, smoking a pipe. He has salt/pepper hair, scruff on his face.  He shakes Cerul’s hand and says “You bring back some old memories from my childhood”  They introduce themselves.  He is Sengo. Cerul tells him where he is from and the guy questions that and mentions Pekanon.  Cerul and he discuss Pekanon.  He tells Cerul there was a tale of a boy born there with bright, radiant hair - and he thought it could be Cerul.  The timeline makes sense.  Cerul tells him he was an orphan.  The man shares that the tale was that “the child would be the last one to carry the light.”  He said he fled from there and it was destroyed by people who wanted to extinguish the light and never did we hear more of the child.  I ended up after many moons on the road in a place called A’erly in a place called the Tegenwald Phet.  Cerul says he was young then, too.  Cerul laughs and says this child was likely me…and what do I do with that information?  They laugh, unsure about the meaning.  He wishes Cerul the best.  Cerul says it would be a happy ending if all is light and good.  He thanks the man for the information and says he will research the town further. He asks if the man has anything to add.  He tells Cerul that he will let him know if he finds out anything as well.  Cerul tells him that maybe he will end up going to Pekanon at some point.  They toast and Cerul returns to the table.</p>
+<p>We eat our stew and biscuits, drink wine, and head to bed. We plan to meet in the morning to head to Basctdelm after Kaizo shops and we find Pa.</p>
+<h2 class="scene">29th of Paramor, 1246</h2>
+<p>The next morning the Meridian asks “shall we be off?”  We tell them we need a slight delay. We go to the Night’s Favor to find Pa.  The wood/construction here is dark, black wood.  This is where the name of the town comes from.</p>
+<p>We enter and notice two symbols:  the goddess Phoe and the goddess Sylunara.  Two priests walk around - one in purple (female) and one in blue (male).  Pa and his family are standing in front of the shrine to Sylunara.  He talks about his journey and what he might owe us and offers to get us a cask of his special wine.  He leaves and gets it and gives it to Fungus. Cerul assures him that we will continue to track the beast.  He says he will share our good name - The King’s Outlanders - and will hire us again, if needed.  He then asks about the woman and Kaizo says she was no good. We ask Pa if he will take care of the horse (anjou) and bulas for a while.  He says he can watch them for a stretch, but if we are not back, we can stable them.</p>
+<p>We head over to the Meridian and tell them we are ready to go.  They have validation that we are good to go to Basctdelm.  We see a document signed by “Countess” (scroll) - they say that they have to show this to the groundskeeper in order to gain passage.  And to never try to enter the Shademoor waypoint at night.  He asks if Cerul is familiar with Othwode?  He is the keeper of the Garden and ….how about you just see for yourself.</p>
+<p>We cross and go to the Garden.  The gates are closed.  Standing between us and the large old chapel in the distance we see an ethereal form that raises a hand and the gates part open.  The guard says - there is the groundskeeper.  Just be on good behavior.  You have permission from the Countess.  You should be okay.  The old chapel hasn’t been used since the war.  Stay away from the Old Chapel undercroft - there was some bad stuff that happened there in the past.”  He hands the scroll to the creature and the form opens it then it pops and vanishes.  He steps aside and points to the chapel door.  We walk in and see dust covered evidence of a battle here.  We go down and see the arcane waypoint that sits under sconces.  Cerul makes note of the sigil here (he now has four).  They tell him that we must give the Meridian a heads up before we travel to Basctdelm in the future.  They lead us to the circle and we go to the House of Myr in Basctdelm.</p>
+<p>We arrive in a small room atop a tower. This sigil used to be in the local magic shop, but they had it relocated. This is the HQ for the Meridian, there are16 Floors.</p>
+<p>We are taken to a room and they take down formal statements of what happened on the road. We stick with the Vhalmast story. They advise of the various districts - where to visit, where we would be comfortable, telling us to shy away from the Bellows.  Cerul asks where Sylvandor is - if they know of him.  He is told to talk to the Watch about his whereabouts.</p>
+<p>Affy tells the group she wants to find her father.  Relys agrees to travel with her, but not near her.</p>
+<p>Cerul, Fungus, Kaizo and Ridley try to find Sylvandor.  They ask the Watch.  They know of him, but aren’t sure where he is - or at least don’t want to reveal him to strangers.</p>
+<p>We get to the crossroads of the Greenscape and Central District.  We see a gabuk put his hands up to big people - two half orcs.  He points at Affy.  AND WE STOP HERE.</p>
+<div class="endmark">– The End of the Session –</div>
+<div class="chapter-stats"><span>Level at end <b>9</b></span><span>Sessions at that level <b>6</b></span></div>
   </div>
 </section>
     <footer class="pagefoot">Suwanee Gamers &middot; A New Adventure Chronicle</footer>

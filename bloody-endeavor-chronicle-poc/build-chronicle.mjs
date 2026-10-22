@@ -67,7 +67,40 @@ function parseSession(lines){
       blocks.push({t:'ul',v:items}); continue;
     }
     if(/^COMBAT\s*[–-]\s*IT IS INITIATIVE/i.test(line.trim())){blocks.push({t:'combat',v:line.trim()});i++;continue;}
-    if(/^[–\-]{1,2}\s*The End of the Session/i.test(line.trim())){blocks.push({t:'end',v:line.trim()});i++;continue;}
+    if(/^\s*[–\-—]{0,2}\s*(?:The )?(?:End of the Session|Session Ends Here)\s*[–\-—]*\s*$/i.test(line.trim())){blocks.push({t:'end',v:line.trim()});i++;continue;}
+    if(/^\[[^\]]{1,40}\]$/.test(line.trim())){
+      const song=[]; while(i<lines.length && (lines[i].trim()==='' || (/^\[[^\]]{1,40}\]$/.test(lines[i].trim()) || lines[i].trim().length<=80)) && !(lines[i].trim()==='' && lines.slice(i+1).find(l=>l.trim()!=='')?.trim().length>80)){ if(lines[i].trim()!=='') song.push(lines[i].trim()); i++; }
+      blocks.push({t:'song',v:song}); continue;
+    }
+    if(line.trim().length<=64 && /^\t\S/.test(lines[i+1]||'') && !blocks.some(b=>b.t==='end')){
+      const items=[]; let j=i+1;
+      while(j<lines.length && (/^\t/.test(lines[j]) || lines[j].trim()==='') && items.length<30){ if(lines[j].trim()!=='') items.push(lines[j].trim()); else if(!/^\t/.test(lines[j])) break; j++; }
+      if(items.length>=2){ blocks.push({t:'roster',title:line.trim(),v:items}); i=j; continue; }
+    }
+    // Footer table ("5 / Character level at end of the session / 4 / Sessions played at ...") ends the chapter;
+    // anything after it is DM appendix, not narrative.
+    if(/^\d+$/.test(line.trim())){
+      const nx=[]; for(let j=i+1;j<lines.length && nx.length<3;j++){ if(lines[j].trim()!=='') nx.push(lines[j].trim()); }
+      if(/Character level/i.test(nx[0]||'') && /Sessions played/i.test(nx[2]||'')){
+        blocks.push({t:'stats',level:line.trim(),sessions:/^\d+$/.test(nx[1]||'')?nx[1]:''}); i=lines.length; continue;
+      }
+    }
+    if(/^\s*\d{1,2}[.)]\s+\S/.test(line) && !blocks.some(b=>b.t==='end')){
+      const items=[]; let j=i; const first=parseInt(line.trim(),10);
+      while(j<lines.length && (/^\s*\d{1,2}[.)]\s+\S/.test(lines[j]) || lines[j].trim()==='')){ if(lines[j].trim()!=='') items.push(lines[j].trim().replace(/^\d{1,2}[.)]\s+/,'')); j++; if(items.length>40) break; }
+      if(items.length>=2 && items.some(x=>x.length<=64)){ blocks.push({t:'ol',start:first,v:items}); i=j; continue; }
+    }
+    if(line.trim().length<=64 && !/^[–\-]/.test(line.trim()) && !/^WE STOP HERE/i.test(line.trim()) && !blocks.some(b=>b.t==='end')){
+      const run=[]; let j=i;
+      while(j<lines.length && (lines[j].trim()==='' || (lines[j].trim().length<=64 && !/^\s*\d{1,2}[.)]\s/.test(lines[j]) && !/^\s*[-*]\s+/.test(lines[j]) && !/^[–\-]/.test(lines[j].trim())))){ if(lines[j].trim()!=='') run.push(lines[j].trim()); j++; if(run.length>60) break; }
+      const unpunct=run.filter(x=>!/[.!?…:]["”’]?$/.test(x)).length;
+      if(run.length>=3 && unpunct>=2){
+        const prev=blocks[blocks.length-1];
+        if(prev && prev.t==='ul' && /[–-]\s*$/.test(prev.v[prev.v.length-1]||'')) blocks.push({t:'ul',v:run});
+        else blocks.push({t:'song',v:run});
+        i=j; continue;
+      }
+    }
     if(line.trim().length<=64 && !/[.!?…:]$/.test(line.trim()) && !/^WE STOP HERE/i.test(line.trim())){blocks.push({t:'h2',v:line.trim()});i++;continue;}
     blocks.push({t:'p',v:line.trim(),drop:firstPara}); firstPara=false; i++;
   }
@@ -81,6 +114,10 @@ function renderBlocks(blocks){
     if(b.t==='p') return `<p${b.drop?' class="lead"':''}>${inline(b.v)}</p>`;
     if(b.t==='ul') return `<ul class="log">${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ul>`;
     if(b.t==='combat') return `<div class="combat"><span>${inline(b.v)}</span></div>`;
+    if(b.t==='song') return `<div class="song">${b.v.map(x=>/^\[.*\]$/.test(x)?`<div class="song-label">${esc(x.slice(1,-1))}</div>`:`<div class="song-line">${inline(x)}</div>`).join('')}</div>`;
+    if(b.t==='roster') return `<div class="roster"><div class="roster-title">${inline(b.title)}</div><ul>${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ul></div>`;
+    if(b.t==='ol') return `<ol class="log" start="${b.start}">${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ol>`;
+    if(b.t==='stats') return `<div class="chapter-stats"><span>Level at end <b>${esc(b.level)}</b></span>${b.sessions?`<span>Sessions at that level <b>${esc(b.sessions)}</b></span>`:''}</div>`;
     if(b.t==='end') return `<div class="endmark">${inline(b.v)}</div>`;
     if(b.t==='inscription') return `<figure class="inscription"><div class="insc-frame">${b.v.map(x=>`<p>${inline(x)}</p>`).join('')}</div></figure>`;
     if(b.t==='table'){
