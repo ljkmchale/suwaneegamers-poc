@@ -1,6 +1,6 @@
 import { readContent, writeContent } from "@/lib/contentFiles";
 
-export type WarcraftPlayer = { name: string; status: string; character: string; className: string; level: string };
+export type WarcraftPlayer = { name: string; character: string; className: string; level: string };
 export type WarcraftNight = { id: string; date: string; title: string; notes: string };
 export type WarcraftHub = { schedule: string; nextNight: string; realm: string; faction: string; objective: string; players: WarcraftPlayer[]; nights: WarcraftNight[] };
 
@@ -10,12 +10,12 @@ const initial: WarcraftHub = {
   realm: "To be decided", faction: "To be decided",
   objective: "Choose our realm and faction, create our characters, and begin the adventure together.",
   players: [
-    { name: "Chip", status: "Confirmed", character: "", className: "Paladin (tentative)", level: "" },
-    { name: "Lesley", status: "Confirmed", character: "", className: "Druid (tentative)", level: "" },
-    { name: "Sean", status: "Confirmed", character: "", className: "Undecided", level: "" },
-    { name: "Larry", status: "Confirmed", character: "", className: "Mage", level: "" },
-    { name: "Emma", status: "Confirmed", character: "", className: "Hunter or Rogue", level: "" },
-    { name: "Ty", status: "Maybe", character: "", className: "Undecided", level: "" },
+    { name: "Chip", character: "", className: "Paladin (tentative)", level: "" },
+    { name: "Lesley", character: "", className: "Druid (tentative)", level: "" },
+    { name: "Sean", character: "", className: "Undecided", level: "" },
+    { name: "Larry", character: "", className: "Mage", level: "" },
+    { name: "Emma", character: "", className: "Hunter or Rogue", level: "" },
+    { name: "Ty", character: "", className: "Undecided", level: "" },
   ],
   nights: [],
 };

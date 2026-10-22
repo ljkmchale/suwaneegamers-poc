@@ -7,42 +7,36 @@
   "players": [
     {
       "name": "Chip",
-      "status": "Confirmed",
       "character": "",
       "className": "Paladin (tentative)",
       "level": ""
     },
     {
       "name": "Lesley",
-      "status": "Confirmed",
       "character": "",
       "className": "Druid (tentative)",
       "level": ""
     },
     {
       "name": "Sean",
-      "status": "Confirmed",
       "character": "",
       "className": "Undecided",
       "level": ""
     },
     {
       "name": "Larry",
-      "status": "Confirmed",
       "character": "",
       "className": "Mage",
       "level": ""
     },
     {
       "name": "Emma",
-      "status": "Confirmed",
       "character": "",
       "className": "Hunter or Rogue",
       "level": ""
     },
     {
       "name": "Ty",
-      "status": "Maybe",
       "character": "",
       "className": "Undecided",
       "level": ""

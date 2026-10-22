@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/adminAuth";
 import { getWarcraftHub, saveWarcraftHub } from "@/lib/wowForever";
+import { isWarcraftDate } from "@/lib/warcraftDates";
 
 function field(data: FormData, key: string, max = 300) {
   return String(data.get(key) ?? "").trim().slice(0, max);
@@ -11,7 +12,10 @@ function field(data: FormData, key: string, max = 300) {
 export async function updateWarcraftHub(data: FormData) {
   await requireAdmin();
   const hub = getWarcraftHub();
-  for (const key of ["schedule", "nextNight", "realm", "faction", "objective"] as const) {
+  const nextNight = field(data, "nextNight");
+  if (nextNight && !isWarcraftDate(nextNight)) throw new Error("Choose a valid game-night date.");
+  hub.nextNight = nextNight || "First game night to be decided";
+  for (const key of ["schedule", "realm", "faction", "objective"] as const) {
     const value = field(data, key, 1000);
     if (value) hub[key] = value;
   }
@@ -20,7 +24,6 @@ export async function updateWarcraftHub(data: FormData) {
     character: field(data, `character-${index}`, 80),
     className: field(data, `class-${index}`, 80) || "Undecided",
     level: field(data, `level-${index}`, 20),
-    status: field(data, `status-${index}`) === "Maybe" ? "Maybe" : "Confirmed",
   }));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");

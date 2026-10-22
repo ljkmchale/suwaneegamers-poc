@@ -5,6 +5,7 @@ import { getAdminSession } from "@/lib/adminSession";
 import { getWarcraftHub } from "@/lib/wowForever";
 import { addWarcraftNight, updateWarcraftHub } from "./actions";
 import styles from "./warcraft.module.css";
+import { formatWarcraftDate, isWarcraftDate } from "@/lib/warcraftDates";
 
 export const metadata: Metadata = { title: "WoW Forever", description: "Our weekly World of Warcraft: Forever adventures, party roster, plans, and game-night Chronicles." };
 
@@ -21,7 +22,7 @@ function PaintedIcon({ kind, size = 32 }: { kind: IconKind; size?: number }) {
 export default async function WarcraftPage() {
   const hub = getWarcraftHub();
   const admin = (await getAdminSession()).isAdmin === true;
-  const confirmed = hub.players.filter(p => p.status === "Confirmed").length;
+
   return <div className={styles.page}>
     <div className={styles.worldBackdrop} aria-hidden="true" />
     <div className={styles.worldVeil} aria-hidden="true" />
@@ -37,16 +38,16 @@ export default async function WarcraftPage() {
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
       <div className={styles.actions}><a href="https://discord.com/channels/319954674188943362/325247957932834816" target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a><a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href="/wow-forever/chronicles">Chronicles <PaintedIcon kind="scroll" /></Link></div>
       </div>
-      <div className={styles.stats}><span><strong>{confirmed}</strong> adventurers{hub.players.length > confirmed ? ` + ${hub.players.length - confirmed} maybe` : ""}</span><span><strong>Weekly</strong> give or take real life</span><span><strong>{hub.nights.length}</strong> chapters in the Chronicles</span></div>
+      <div className={styles.stats}><span><strong>{hub.players.length}</strong> adventurers</span><span><strong>Weekly</strong> give or take real life</span><span><strong>{hub.nights.length}</strong> chapters in the Chronicles</span></div>
     </header>
 
     <div className={styles.planning}>
-      <section className={styles.card}><p className={styles.eyebrow}><PaintedIcon kind="calendar" /> Next time we log in</p><h2>{hub.nextNight}</h2><p>{hub.schedule}</p><div className={styles.objective}><PaintedIcon kind="crystal" /><p>{hub.objective}</p></div></section>
+      <section className={styles.card}><p className={styles.eyebrow}><PaintedIcon kind="calendar" /> Next time we log in</p><h2>{formatWarcraftDate(hub.nextNight)}</h2><p>{hub.schedule}</p><div className={styles.objective}><PaintedIcon kind="crystal" /><p>{hub.objective}</p></div></section>
       <section className={styles.card}><p className={styles.eyebrow}><PaintedIcon kind="compass" /> Our corner of Azeroth</p><dl className={styles.details}><div><dt>Realm</dt><dd>{hub.realm}</dd></div><div><dt>Faction</dt><dd>{hub.faction}</dd></div></dl><p className={styles.small}>One party, one shared adventure. We’ll fill in the details as the crew decides.</p></section>
     </div>
 
     <section id="party" className={styles.section}><p className={styles.eyebrow}><PaintedIcon kind="shield" /> The party roster</p><h2>Good company. Great adventures.</h2><p className={styles.subtitle}>The crew taking on Azeroth, one game night at a time.</p>
-      <div className={styles.roster}>{hub.players.map(player => <article className={`${styles.player} ${player.status === "Maybe" ? styles.maybe : ""}`} key={player.name}><div className={styles.playerTop}><span className={styles.initial} aria-hidden="true">{player.name.slice(0, 1)}</span><span className={styles.badge}>{player.status === "Maybe" ? "Maybe joining" : "In the party"}</span></div><h3>{player.name}</h3><p className={styles.className}>{player.className}</p><p>{player.character || "Character name to come"}</p><p className={styles.small}>{player.level ? `Level ${player.level}` : "Adventure starts here"}</p></article>)}</div>
+      <div className={styles.roster}>{hub.players.map(player => <article className={styles.player} key={player.name}><div className={styles.playerTop}><span className={styles.initial} aria-hidden="true">{player.name.slice(0, 1)}</span></div><h3>{player.name}</h3><p className={styles.className}>{player.className}</p><p>{player.character || "Character name to come"}</p><p className={styles.small}>{player.level ? `Level ${player.level}` : "Adventure starts here"}</p></article>)}</div>
     </section>
 
     <section id="chronicles" className={styles.chronicleEntrance}>
@@ -61,8 +62,9 @@ export default async function WarcraftPage() {
     </section>
 
     {admin && <section className={`${styles.section} ${styles.editor}`}><p className={styles.eyebrow}>Party management · Admin</p><h2>Set the course.</h2><details><summary>Edit plans & characters</summary><form action={updateWarcraftHub} className={styles.form}>
-      {([['nextNight', 'Next game night'], ['schedule', 'Weekly rhythm'], ['realm', 'Realm'], ['faction', 'Faction'], ['objective', 'Next-night goal']] as const).map(([key, label]) => <label key={key}>{label}<input name={key} defaultValue={hub[key]} required maxLength={1000} /></label>)}
-      {hub.players.map((player, index) => <fieldset key={player.name}><legend>{player.name}</legend><label>Attendance<select name={`status-${index}`} defaultValue={player.status}><option>Confirmed</option><option>Maybe</option></select></label><label>Character<input name={`character-${index}`} defaultValue={player.character} maxLength={80} /></label><label>Class / choice<input name={`class-${index}`} defaultValue={player.className} maxLength={80} /></label><label>Level<input name={`level-${index}`} defaultValue={player.level} maxLength={20} /></label></fieldset>)}
+      <label>Next game night<input name="nextNight" type="date" defaultValue={isWarcraftDate(hub.nextNight) ? hub.nextNight : ""} style={{ colorScheme: "dark" }} /><span className={styles.small}>Choose a date, or leave blank until the next night is decided.</span></label>
+      {([['schedule', 'Weekly rhythm'], ['realm', 'Realm'], ['faction', 'Faction'], ['objective', 'Next-night goal']] as const).map(([key, label]) => <label key={key}>{label}<input name={key} defaultValue={hub[key]} required maxLength={1000} /></label>)}
+      {hub.players.map((player, index) => <fieldset key={player.name}><legend>{player.name}</legend><label>Character<input name={`character-${index}`} defaultValue={player.character} maxLength={80} /></label><label>Class / choice<input name={`class-${index}`} defaultValue={player.className} maxLength={80} /></label><label>Level<input name={`level-${index}`} defaultValue={player.level} maxLength={20} /></label></fieldset>)}
       <button>Save party & plans</button>
     </form></details><details><summary>Add a Chronicles chapter</summary><form action={addWarcraftNight} className={styles.form}><label>Game-night date<input name="date" type="date" required /></label><label>Chapter title<input name="title" placeholder="Our first steps into Azeroth" maxLength={150} required /></label><label>What happened?<textarea name="notes" rows={7} maxLength={6000} placeholder="Who played, where we went, what we finished, loot worth remembering, and where we pick up next time…" required /></label><button>Publish chapter</button></form></details></section>}
     <footer className={styles.footnote}>Our unofficial group hub for World of Warcraft: Forever. Hero artwork © Blizzard Entertainment, from <a href="https://worldofwarcraft.blizzard.com/en-us/forever/" target="_blank" rel="noopener noreferrer">the official WoW Forever site ↗</a>. Chronicles illustration created for Suwanee Gamers.</footer>
