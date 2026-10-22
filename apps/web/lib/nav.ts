@@ -23,6 +23,8 @@ const DEFAULT_CONFIG: NavConfig = {
       label: "Primary Navigation",
       items: [
         { id: "campaigns", href: "/campaigns", label: "Campaigns" },
+        { id: "maps-of-myrdae", href: "/maps-of-myrdae", label: "Map" },
+        { id: "wow-forever", href: "/wow-forever", label: "WoW Forever" },
         { id: "campaign-journeys", href: "/campaign-journeys", label: "Journeys" },
         { id: "advents-of-harmony", href: "/advents_of_harmony", label: "Library" },
         { id: "dungeon-masters", href: "/dungeon-masters", label: "DMs" },

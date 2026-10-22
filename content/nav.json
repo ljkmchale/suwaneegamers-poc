@@ -15,6 +15,11 @@
           "label": "Map"
         },
         {
+          "id": "wow-forever",
+          "href": "/wow-forever",
+          "label": "WoW Forever"
+        },
+        {
           "id": "campaign-journeys",
           "href": "/campaign-journeys",
           "label": "Journeys"
