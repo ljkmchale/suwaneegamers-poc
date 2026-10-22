@@ -1,4 +1,8 @@
 .legacyAnchor{display:block;scroll-margin-top:90px}
+.characterPortrait{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border:1px solid #b38f5877;border-radius:6px;margin-bottom:12px}
+.player:has(.characterEditor[open]){grid-column:span 2;align-self:start}
+@media(max-width:400px){.player:has(.characterEditor[open]){grid-column:span 1}}
+.characterEditor{margin-top:20px;border-top:1px solid #b38f5844;padding-top:14px}.characterEditor summary{font-size:12px;color:#e1bf83;cursor:pointer}.characterEditor .form{gap:12px}.characterEditor input[type=file]{font-size:11px;padding:8px;overflow:hidden}.characterEditor .removeImage{display:flex;align-items:center;gap:8px}.characterEditor .removeImage input{width:auto}.characterEditor button:disabled{opacity:.6;cursor:wait}.characterEditor [role=alert]{color:#fca5a5}
 .page{position:relative;isolation:isolate;min-height:100vh;color:var(--color-text-secondary,#c8bda8);font-family:var(--font-body),var(--font-lora),Georgia,serif;padding-bottom:48px}
 .worldBackdrop{position:fixed;inset:0;z-index:-2;background:url('/media/images/wow-forever/azeroth-painted-road-v2.webp') center/cover no-repeat;pointer-events:none}
 .worldVeil{position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#08050fbf,#08050fc9 45%,#08050fee),linear-gradient(90deg,#08050f9c,transparent 55%,#08050fa8);pointer-events:none}

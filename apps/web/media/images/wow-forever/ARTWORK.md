@@ -29,3 +29,7 @@
 - Page code selects each cell through CSS background positions. Icons are decorative and hidden from assistive technology; adjacent text supplies the meaning.
 
 All files are served through `/media/images/wow-forever/`. No sync job owns or rewrites them. Page code and CSS control their placement; production activation requires rebuilding and activating the website slot.
+
+## Member character portraits
+
+Roster editors upload portraits through `updateWarcraftCharacter`, with server checks against the invited account-to-player mapping or an authenticated admin session. PNG/JPEG/WebP/AVIF uploads up to 5 MB are decoded, rotated, resized to at most 768px square, and re-encoded as WebP. Random filenames under `characters/` prevent collisions and stale replacement caching. The saved `/media/images/wow-forever/characters/...` URL lives on the roster's optional `image` field in DB-first `wow-forever.json`, mirrored to disk through `writeContent`. The planning form preserves these fields. No scheduler rewrites this roster. Removed/replaced portraits are unlinked from the roster; existing files are retained.
