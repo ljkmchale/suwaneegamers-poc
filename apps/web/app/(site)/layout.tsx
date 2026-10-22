@@ -21,6 +21,7 @@ import { SignInGate } from "@/components/auth/SignInGate";
 import { ScheduleVoiceAssistant } from "@/components/livekit/ScheduleVoiceAssistant";
 import { getOrCreateUserProfile } from "@/lib/userProfiles";
 import { isStorefrontEnabled } from "@/lib/store";
+import { isWarcraftInvitee, warcraftMenuForViewer } from "@/lib/warcraftInvitations";
 
 export default async function SiteLayout({
   children,
@@ -102,7 +103,7 @@ export default async function SiteLayout({
 
       {/* Navigation */}
       <Navbar
-        sections={navConfig.sections}
+        sections={warcraftMenuForViewer(navConfig.sections, isWarcraftInvitee(userSession.email))}
         isAdmin={isAdmin}
         editMode={editMode}
         user={navUser}
