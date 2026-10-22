@@ -42,6 +42,7 @@
     ],
     "artQueue": "scripts/chronicle-art.mjs",
     "artQueueHelpers": "scripts/lib/chronicle-art-notes.mjs",
+    "artRunnerResolver": "scripts/lib/chronicle-art-runner.mjs",
     "artDraftRoot": "artwork-drafts/chronicle-queue"
   },
   "voice": {

@@ -7,7 +7,7 @@
       "id": "a-new-adventure",
       "name": "A New Adventure",
       "color": "#f4c95d",
-      "status": "At Southern Arch",
+      "status": "At Basctdelm",
       "campaignHref": "/campaigns/a-new-adventure",
       "stops": [
         {
@@ -982,6 +982,84 @@
           },
           "sourceKey": "a-new-adventure:session-34",
           "sourceHash": "1ef4f5e03bc980899f434525b24cebee371bcc59f0634d18873033869e53022f",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-35",
+          "locationId": "basctdelm",
+          "location": "Basctdelm",
+          "x": 57.72,
+          "y": 31.66,
+          "session": "Session 35",
+          "title": "On Its Trail",
+          "summary": "The party finished the fight against the shadow-touched bears at Windbreak Camp, searched the ruins, and recovered a javelin of lightning, a poisoned dagger, and a living barn-owl chick that Relys named Soren. They used the strange board from Adore to contact Elder Balance, confirmed the creature’s link to Tornia’s chaos, and rode on to the destroyed blackberry compound of Bloodbeak, where Relys was briefly possessed and warned that the balance had failed while the beast still roamed. After messaging Pa to stay put and learning from Fungus’s patron that the two-colored-eye man was with Eliana at Ashbarrel, they met a Meridian escort led by Sera Vann.…",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Basctdelm",
+            "description": "They used the strange board from Adore to contact Elder Balance, confirmed the creature’s link to Tornia’s chaos, and rode on to the destroyed blackberry compound of Bloodbeak, where Relys was briefly possessed and warned that the balance had failed while the beast still roamed."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 54.9,
+                "y": 36.01
+              },
+              {
+                "x": 55.44,
+                "y": 36.86
+              },
+              {
+                "x": 55.94,
+                "y": 37.52
+              },
+              {
+                "x": 56.8,
+                "y": 37.8
+              },
+              {
+                "x": 56.51,
+                "y": 35.97
+              },
+              {
+                "x": 56.9,
+                "y": 34.8
+              },
+              {
+                "x": 57.07,
+                "y": 33.95
+              },
+              {
+                "x": 58.25,
+                "y": 32.97
+              },
+              {
+                "x": 58.2,
+                "y": 32.4
+              },
+              {
+                "x": 57.91,
+                "y": 31.83
+              },
+              {
+                "x": 57.72,
+                "y": 31.66
+              }
+            ],
+            "miles": 242.3,
+            "days": 12.1,
+            "roadIds": [
+              "shademoor-road-west",
+              "murfield-road-north",
+              "padstow-road-south",
+              "padstow-road-west"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "a-new-adventure:session-35",
+          "sourceHash": "dfc0827bdb7d9d6a2722e09cf1e4c3771a59d3457015017699d173d12475d682",
           "current": true
         }
       ],
@@ -3722,14 +3800,61 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-10-13T14:50:49.907Z",
+    "lastGeneratedAt": "2026-10-22T14:50:14.445Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 121,
-    "routedSegments": 8,
+    "generatedStops": 122,
+    "routedSegments": 9,
     "impactLocations": 33
   },
   "locationImpacts": [
+    {
+      "id": "surface-basctdelm",
+      "locationId": "basctdelm",
+      "location": "Basctdelm",
+      "x": 57.72,
+      "y": 31.66,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure",
+        "heroes-of-emberstran"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 35",
+          "title": "Conflict reshaped Basctdelm",
+          "type": "battle",
+          "description": "They used the strange board from Adore to contact Elder Balance, confirmed the creature’s link to Tornia’s chaos, and rode on to the destroyed blackberry compound of Bloodbeak, where Relys was briefly possessed and warned that the balance had failed while the beast still roamed."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 31",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 35",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
+        },
+        {
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 36",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Ky’tha took Rank Three and the halved locket in exchange for eyes, ears, and Phira’s protection; Hap would be paid when the book was found."
+        }
+      ],
+      "crossCampaign": true
+    },
     {
       "id": "surface-emberstran",
       "locationId": "emberstran",
@@ -4536,44 +4661,6 @@
           "title": "Danger remains at Tratta",
           "type": "warning",
           "description": "No session summary has been recorded for this session yet."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-basctdelm",
-      "locationId": "basctdelm",
-      "location": "Basctdelm",
-      "x": 57.72,
-      "y": 31.66,
-      "realm": "surface",
-      "campaignIds": [
-        "heroes-of-emberstran"
-      ],
-      "impacts": [
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 31",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "They met Qaddie and Burgomaster Elsie at the Oratory, learned the black carriage had carried Phira toward Harbok, and followed the trail south until they discovered Guigzien’s returned mire-shrine with papers confirming Phira had been secured and teleported to Basctdelm."
-        },
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 35",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "Hap found her free at the Terrible Terrasque with Vesper Sall of the Promissory, learned she wanted no vineyard and no return, and heard that Landra had asked about the Iron Brotherhood rather than the land."
-        },
-        {
-          "campaignId": "heroes-of-emberstran",
-          "campaignName": "Heroes of Emberstran",
-          "session": "Session 36",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "Ky’tha took Rank Three and the halved locket in exchange for eyes, ears, and Phira’s protection; Hap would be paid when the book was found."
         }
       ],
       "crossCampaign": false

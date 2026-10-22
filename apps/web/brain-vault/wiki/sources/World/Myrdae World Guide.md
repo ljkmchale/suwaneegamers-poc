@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/myrdae-world-guide.md"
 source_url: "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit"
-source_hash: "53a24b364ebd9eaee0c684064a5cc8b7a13657a1cd89296aa803d4f57df41bcd"
+source_hash: "c52db6be8c07cadba437222b765d206df5d5ecf944c3aa6a4bd5c07d014b0d88"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-10-09T14:46:22.526Z"
-pulled_at: "2026-10-09T14:46:19.912Z"
+imported_at: "2026-10-22T14:45:53.523Z"
+pulled_at: "2026-10-22T14:45:50.146Z"
 ---
 
 # Myrdae World Guide
@@ -17,15 +17,15 @@ pulled_at: "2026-10-09T14:46:19.912Z"
 Campaign: World
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
 Raw source: [[raw/myrdae-world-guide.md]]
-Raw hash: `53a24b364ebd9eaee0c684064a5cc8b7a13657a1cd89296aa803d4f57df41bcd`
-Imported: 2026-10-09T14:46:22.526Z
+Raw hash: `c52db6be8c07cadba437222b765d206df5d5ecf944c3aa6a4bd5c07d014b0d88`
+Imported: 2026-10-22T14:45:53.523Z
 
 ## Imported Notes
 
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-10-09T14:46:19.912Z
+Pulled: 2026-10-22T14:45:50.146Z
 
 Sections
   
@@ -1794,9 +1794,19 @@ Symbol
 	Diplomatic organization disguised as art lovers
 	  
 
+	Ashen Hand
+	Power & Magic
+	Seek power in order to rule by magic
+	  
+
 	Astereal Accord
 	Extra-planar Protection
 	Protect Myrdae from otherworldly threats
+	  
+
+	Bane of Nethyndria
+	Dragon Worship
+	Followers of dragons, wishing to bring them to power
 	  
 
 	Barrenscars
@@ -1997,6 +2007,11 @@ Beliefs and Values
 
   
 
+Bane of Nethyndria
+The Bane of Nethyndria is a decentralized cult that works to place one or more dragons in power over Myrdae. The living of the land gave it the name. They saw the group that rose in 1224 as a force that would wreck the realm if it succeeded in strengthening Nethyndria. Veinspear Darego stood the cult up for a narrower purpose: prove she had a following, and bring her home to rule with him. The mark is a bone-colored dragon skull with purple, bat-like wings. Cultists strike it on seals, hideouts, and personal tokens. The colors most associated with the group are bone, slate-gray, and deep purple.
+The cult began around the dracolich Nethyndria. After her body was destroyed in 1226 and the Awakening followed, the surviving cells kept the broader aim. Specific objectives vary by cell and are not widely known outside them. 
+Structure & Membership
+Since her fall, the Bane of Nethyndria does not answer to a single leader on Myrdae. It operates as independent cells. Each cell pursues its own reading of the goal that dragons shall rule, and each cell uses the same five-step ladder. Rank is local. Promotion and demotion stay inside the cell. There is no authority that crosses from one cell to another. Unmarked recruits sit below the ladder and carry no title until they are proven. 
 Barrenscars
 
 

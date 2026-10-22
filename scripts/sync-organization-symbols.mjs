@@ -67,14 +67,16 @@ function slugify(value) {
 }
 
 function pickSymbolFile(folderName, files) {
-  const pngSymbols = files.filter((file) =>
-    / - Symbol \(v\.[^)]+\)\.png$/i.test(file.title)
-    || / - Symbol \(v\.[^)]+ - \d+p\)\.png$/i.test(file.title)
-  );
-  const exact = pngSymbols.find((file) => / - Symbol \(v\.0\)\.png$/i.test(file.title));
+  // Match the organization name as well as its version suffix. Older folders
+  // omit " - Symbol" or the dot after "v"; both are valid source conventions.
+  const folderKey = canonicalNorm(folderName);
+  const pngSymbols = files.filter((file) => {
+    const match = /^(.*?) (?:- Symbol )?\(v\.?[^)]+\)\.png$/i.exec(file.title);
+    return match && canonicalNorm(match[1]) === folderKey;
+  });
+  const exact = pngSymbols.find((file) => /\(v\.?0\)\.png$/i.test(file.title));
   if (exact) return { file: exact, exact: true };
 
-  const folderKey = canonicalNorm(folderName);
   const matchingName = pngSymbols.find((file) => canonicalNorm(file.title.split(" - Symbol ")[0] ?? "") === folderKey);
   if (matchingName) return { file: matchingName, exact: false };
 

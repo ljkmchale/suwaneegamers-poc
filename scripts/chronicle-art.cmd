@@ -9,4 +9,6 @@ cd /d "%~dp0.."
 if not exist "logs" mkdir "logs"
 echo [%date% %time%] chronicle art starting >> "logs\chronicle-art.log"
 node scripts\chronicle-art.mjs run >> "logs\chronicle-art.log" 2>&1
-echo [%date% %time%] chronicle art finished (exit %errorlevel%) >> "logs\chronicle-art.log"
+set "art_exit=%errorlevel%"
+echo [%date% %time%] chronicle art finished (exit %art_exit%) >> "logs\chronicle-art.log"
+exit /b %art_exit%

@@ -168,7 +168,13 @@ runs as the user-level scheduled task "SuwaneeGamers Chronicle Art"
 (`scripts/chronicle-art.cmd`, after the 10:34 Chronicle Sync), **not** as a
 `content-scheduler.mjs` job: that scheduler runs as LocalSystem under NSSM and
 cannot see the Codex ChatGPT login in `~/.codex`. It drives the Codex desktop
-app's `codex.exe` (`CODEX_ART_BIN`, model `CODEX_ART_MODEL`, default gpt-5.5)
+app's newest installed `codex.exe`, including versioned bundle directories
+(`CODEX_ART_BIN` overrides selection; `CODEX_ART_MODEL` optionally overrides
+the user's configured Codex model, which is otherwise inherited).
+The resolver is `scripts/lib/chronicle-art-runner.mjs`; the old unversioned
+desktop executable can remain behind after updates and must not take priority.
+Failed chapter runs return a nonzero exit code, including exhausted failures
+on subsequent daily runs, so Task Scheduler exposes the stalled queue. It runs
 with each campaign's skill in `~/.codex/skills/<campaign>-chronicle-scenes`.
 A chapter is drafted only when it is newer than the highest key in that
 campaign's `session-images.json`, has real notes (400+ words) unchanged for 12h,

@@ -26,6 +26,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import { resolveArtRunner } from "./lib/chronicle-art-runner.mjs";
 import {
   CAMPAIGNS,
   readChapters,
@@ -42,7 +43,7 @@ const WORK = path.join(QUEUE, ".work");
 const LEDGER = path.join(QUEUE, "queue.json");
 const LOCK = path.join(QUEUE, ".lock");
 
-const MODEL = process.env.CODEX_ART_MODEL?.trim() || "gpt-5.5";
+const MODEL = process.env.CODEX_ART_MODEL?.trim();
 const SETTLE_HOURS = Number(process.env.CHRONICLE_ART_SETTLE_HOURS ?? 12);
 const DEFAULT_LIMIT = Number(process.env.CHRONICLE_ART_LIMIT ?? 2);
 const MAX_WAITING = Number(process.env.CHRONICLE_ART_MAX_WAITING ?? 6);
@@ -133,10 +134,7 @@ function usablePortrait(campaign, name) {
 
 // --- codex -------------------------------------------------------------------
 function codexBin() {
-  const fromEnv = process.env.CODEX_ART_BIN?.trim();
-  if (fromEnv) return fromEnv;
-  const app = path.join(process.env.LOCALAPPDATA ?? "", "OpenAI", "Codex", "bin", "codex.exe");
-  return fs.existsSync(app) ? app : "codex";
+  return resolveArtRunner({ override: process.env.CODEX_ART_BIN, localAppData: process.env.LOCALAPPDATA });
 }
 
 const BRIEF_SCHEMA = {
@@ -191,7 +189,7 @@ function runCodex({ prompt, schema, images = [], timeoutMs, tag }) {
   fs.writeFileSync(schemaFile, JSON.stringify(schema));
   fs.rmSync(outFile, { force: true });
   const args = [
-    "exec", "-m", MODEL,
+    "exec", ...(MODEL ? ["-m", MODEL] : []),
     // The elevated Windows sandbox from the user's config cannot start from a
     // scheduled task; the unelevated one still confines the run read-only.
     "-c", 'windows.sandbox="unelevated"',
@@ -212,6 +210,7 @@ function runCodex({ prompt, schema, images = [], timeoutMs, tag }) {
     windowsHide: true,
   });
   const transcript = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
+  fs.writeFileSync(path.join(WORK, `${tag}.log`), transcript);
   if (/usage limit|rate.?limit|quota|too many requests|429/i.test(transcript) && !fs.existsSync(outFile)) {
     throw new LimitError("Codex reports the ChatGPT plan limit is reached");
   }
@@ -256,6 +255,7 @@ function briefPrompt(campaign, chapter, chapterFile) {
     `The complete notes for this one session are in ${path.relative(root, chapterFile)} (an exact extract of the canonical player notes). Read it completely, and read the skill's references/character-and-review-rules.md completely, before answering.`,
     ``,
     `Select ONE visually strong moment that is explicitly documented in those notes, exactly as the skill's workflow step 1 requires. Rules:`,
+    `- Prefer a documented moment with a minimal cast whose required approved portraits already exist in the skill's assets/. Inspect that directory before selecting the scene. If a candidate needs unavailable portraits, first look for another well-supported moment using available references; never invent or promote a portrait.`,
     `- evidence: at least two quotes copied VERBATIM from the notes (each at least 8 words, exact wording) that establish the moment, who acts, and the held objects. Do not paraphrase.`,
     `- participants: a closed list of only the characters in the frame, each with species, what they are doing, and referencePortrait set to the exact file name from the skill's assets/ folder (or null when none exists). Never use files marked candidate or superseded.`,
     `- missingPortraits: ONLY characters for whom the skill's rules require an approved portrait reference that does not exist in assets/. Use [] when the skill allows drawing the character from the notes' described appearance.`,
@@ -474,6 +474,7 @@ async function cmdRun(opts) {
   await withLock(async () => {
     const ledger = loadLedger();
     const limit = opts.limit ?? DEFAULT_LIMIT;
+    log(`Codex runner: ${codexBin()}`);
     if (waitingCount(ledger) >= MAX_WAITING && !opts.chapter) {
       log(`${waitingCount(ledger)} drafts are already waiting for review; not drafting more.`);
       writeReviewPage(ledger);
@@ -498,9 +499,11 @@ async function cmdRun(opts) {
             await publishDraft(ledger, row.campaign.id, row.chapter.number);
           } catch (error) {
             log(`${key}: auto-approve failed, left in the queue - ${error.message}`);
+            process.exitCode = 1;
           }
         }
       } catch (error) {
+        process.exitCode = 1;
         if (error instanceof LimitError) {
           log(`${key}: ${error.message}; stopping until the next run.`);
           saveLedger(ledger);
@@ -517,7 +520,8 @@ async function cmdRun(opts) {
       saveLedger(ledger);
     }
     writeReviewPage(ledger);
-    log(`Drafted ${done}; ${waitingCount(ledger)} waiting. Review: artwork-drafts/chronicle-queue/review.html`);
+    if (Object.values(ledger.items).some(item => item.status === "failed")) process.exitCode = 1;
+    log(`Processed ${done}; ${waitingCount(ledger)} waiting. Review: artwork-drafts/chronicle-queue/review.html`);
   });
 }
 
