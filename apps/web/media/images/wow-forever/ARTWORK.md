@@ -20,7 +20,7 @@
 - Current file: `azeroth-painted-road-v2.webp`. Earlier `azeroth-gateway-v1.webp` is retained but no longer referenced by the page.
 - Generated with the built-in image generation tool on October 22, 2026; converted to WebP locally.
 - Generation prompt: Create a wide landscape for our World of Warcraft Forever adventure log using the attached official Blizzard Forever key art as the visual-style reference. Match traditional painted Warcraft illustration, visible broad brushstrokes, exaggerated architectural silhouettes, lavender atmospheric depth, peach sunset, rich greens, and stylized materials. Show a winding road past a timber roadside inn with massive roof beams and amber windows, tall pines, distant towers and mountains across a luminous lake valley. No characters, faction flags, text, or logos. Hopeful classic Azeroth exploration; imagined fan-art scenery, not a canonical location. Avoid photorealistic or generic cinematic dark-fantasy rendering.
-- Used as an atmospheric illustration above the adventure log, separate from the official hero.
+- Used as the illustrated opening of the separate `/wow-forever/chronicles` reader and the Chronicles entrance on the primary `/wow-forever` game-night page. The primary page retains its roster, planning details, Discord link, and full-background presentation. The reader lives outside the `(site)` route group to match campaign Chronicles' full-screen layout without the site navigation/footer; normal member access remains enforced by `proxy.ts`. Recorded nights become numbered chapters with a contents rail and narrative paragraphs; the cover is atmosphere, not a fabricated session scene.
 
 ## Painted UI icons
 

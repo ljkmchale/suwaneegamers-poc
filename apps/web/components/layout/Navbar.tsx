@@ -38,7 +38,7 @@ export function Navbar({ sections, isAdmin = false, editMode = false, user = nul
   const isActive = (href: string) =>
     !isExternal(href) && (pathname === href || pathname.startsWith(href + "/"));
 
-  // Convention: "primary" = flat links left, "tools" = flat links right, everything else = dropdown
+  // Primary/tools are flat links; ordered middle sections can be dropdowns or direct links.
   const primaryNav = sections.find((s) => s.id === "primary")?.items ?? [];
   const toolsNav = sections.find((s) => s.id === "tools")?.items ?? [];
   const dropdownSections = sections.filter((s) => s.id !== "primary" && s.id !== "tools");
@@ -84,7 +84,13 @@ export function Navbar({ sections, isAdmin = false, editMode = false, user = nul
           })}
 
           {/* Dropdown sections (everything except primary and tools) */}
-          {dropdownSections.map((section) => (
+          {dropdownSections.map((section) => section.presentation === "links" ? section.items.map((link) => (
+            <Link key={link.id} href={link.href}
+              className="px-3 py-2 rounded text-xs font-cinzel tracking-wider uppercase transition-colors"
+              style={{ color: isActive(link.href) ? "var(--color-accent-gold)" : "var(--color-text-secondary)" }}>
+              {link.label}
+            </Link>
+          )) : (
             <div
               key={section.id}
               className="relative"

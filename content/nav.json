@@ -15,11 +15,6 @@
           "label": "Map"
         },
         {
-          "id": "wow-forever",
-          "href": "/wow-forever",
-          "label": "WoW Forever"
-        },
-        {
           "id": "campaign-journeys",
           "href": "/campaign-journeys",
           "label": "Journeys"
@@ -110,6 +105,18 @@
           "id": "campaign-journal",
           "label": "Campaign Journal",
           "href": "/campaign-journeys"
+        }
+      ]
+    },
+    {
+      "id": "wow-forever-nav",
+      "label": "WoW Forever",
+      "presentation": "links",
+      "items": [
+        {
+          "id": "wow-forever",
+          "href": "/wow-forever",
+          "label": "WoW Forever"
         }
       ]
     },

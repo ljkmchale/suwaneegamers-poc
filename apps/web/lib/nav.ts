@@ -10,6 +10,7 @@ export interface NavSection {
   id: string;
   label: string;
   items: NavItem[];
+  presentation?: "links";
 }
 
 export interface NavConfig {
@@ -24,7 +25,6 @@ const DEFAULT_CONFIG: NavConfig = {
       items: [
         { id: "campaigns", href: "/campaigns", label: "Campaigns" },
         { id: "maps-of-myrdae", href: "/maps-of-myrdae", label: "Map" },
-        { id: "wow-forever", href: "/wow-forever", label: "WoW Forever" },
         { id: "campaign-journeys", href: "/campaign-journeys", label: "Journeys" },
         { id: "advents-of-harmony", href: "/advents_of_harmony", label: "Library" },
         { id: "dungeon-masters", href: "/dungeon-masters", label: "DMs" },
@@ -58,6 +58,12 @@ const DEFAULT_CONFIG: NavConfig = {
         { id: "territories", href: "/territories", label: "Territories" },
         { id: "previous-campaigns", href: "/previous-campaigns", label: "Previous Campaigns" },
       ],
+    },
+    {
+      id: "wow-forever-nav",
+      label: "WoW Forever",
+      presentation: "links",
+      items: [{ id: "wow-forever", href: "/wow-forever", label: "WoW Forever" }],
     },
   ],
 };

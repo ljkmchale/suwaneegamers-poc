@@ -24,6 +24,7 @@ export async function updateWarcraftHub(data: FormData) {
   }));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");
+  revalidatePath("/wow-forever/chronicles");
 }
 
 export async function addWarcraftNight(data: FormData) {
@@ -37,6 +38,7 @@ export async function addWarcraftNight(data: FormData) {
   hub.nights.sort((a, b) => b.date.localeCompare(a.date));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");
+  revalidatePath("/wow-forever/chronicles");
 }
 
 export async function deleteWarcraftNight(data: FormData) {
@@ -45,4 +47,5 @@ export async function deleteWarcraftNight(data: FormData) {
   hub.nights = hub.nights.filter(night => night.id !== field(data, "id"));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");
+  revalidatePath("/wow-forever/chronicles");
 }

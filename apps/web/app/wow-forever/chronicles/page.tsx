@@ -1,0 +1,16 @@
+import type { Metadata } from "next";
+import { getAdminSession } from "@/lib/adminSession";
+import { getWarcraftHub } from "@/lib/wowForever";
+import { WarcraftChronicles } from "@/app/(site)/wow-forever/WarcraftChronicles";
+import styles from "@/app/(site)/wow-forever/warcraft.module.css";
+
+export const metadata: Metadata = {
+  title: "The Azeroth Chronicles",
+  description: "The illustrated story of our World of Warcraft: Forever adventures.",
+};
+
+export default async function AzerothChroniclesPage() {
+  return <div className={`${styles.page} ${styles.chronicleStandalone}`}>
+    <WarcraftChronicles nights={getWarcraftHub().nights} admin={(await getAdminSession()).isAdmin === true} standalone />
+  </div>;
+}
