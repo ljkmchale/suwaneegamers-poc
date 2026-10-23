@@ -197,3 +197,16 @@ visible, pause offscreen, and retain the original still on playback failure or
 when reduced motion is requested. These content-only changes need no app build.
 
 A change is not complete until the writer has checked for other writers. Search the repository and scheduler for the field, URL prefix, filename, or table being changed. Run `pnpm arch:preflight` again after the edit, plus the domain-specific tests. Report any sign-in gate or service permission that prevents rendered verification.
+
+## WoW Forever groups
+
+`/wow-forever` and `/wow-forever/chronicles` resolve the signed-in profile ID
+against `groups[].members` in DB-first `wow-forever.json`. Group roster,
+Chronicles, and Discord URLs are scoped to that membership; `?group=` can
+select only an assigned group (admins can select all). Shared plans and art
+remain at the hub level. Legacy documents become Group A with the original
+six invited profile IDs and an empty Group B in memory. Admin group forms
+persist through `writeContent`, keeping SQLite and JSON aligned. Character
+and chapter actions target a group; character edits recheck membership on
+the server. No scheduler owns this document; the seed script preserves it.
+Website code requires a production build and slot activation.

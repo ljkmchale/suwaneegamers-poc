@@ -4,13 +4,13 @@ import type { WarcraftNight } from "@/lib/wowForever";
 import { deleteWarcraftNight } from "./actions";
 import styles from "./warcraft.module.css";
 
-export function WarcraftChronicles({ nights, admin, standalone = false }: { nights: WarcraftNight[]; admin: boolean; standalone?: boolean }) {
+export function WarcraftChronicles({ nights, admin, standalone = false, groupId = "group-a", groupName }: { nights: WarcraftNight[]; admin: boolean; standalone?: boolean; groupId?: string; groupName?: string }) {
   const chapters = [...nights].sort((a, b) => a.date.localeCompare(b.date));
   const Title = standalone ? "h1" : "h3";
   return <div className={styles.chronicleBook}>
     <aside className={styles.chronicleRail}>
-      {standalone && <Link href="/wow-forever" className={styles.chronicleBack}>← Back to game night</Link>}
-      <p className={styles.eyebrow}>World of Warcraft · Forever</p>
+      {standalone && <Link href={groupName ? `/wow-forever?group=${encodeURIComponent(groupId)}` : "/wow-forever"} className={styles.chronicleBack}>← Back to game night</Link>}
+      <p className={styles.eyebrow}>World of Warcraft · Forever{groupName && ` · ${groupName}`}</p>
       <Title>The Azeroth Chronicles</Title>
       <p className={styles.chronicleRailIntro}>The story of our party, one game night at a time.</p>
       <nav aria-label="Warcraft chronicle chapters">
@@ -28,7 +28,7 @@ export function WarcraftChronicles({ nights, admin, standalone = false }: { nigh
         <header className={styles.chapterHeading}><p className={styles.eyebrow}>The Azeroth Chronicles · Chapter {index + 1}</p><h3>{chapter.title}</h3><time dateTime={chapter.date}>{new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${chapter.date}T12:00:00Z`))}</time></header>
         <div className={styles.chapterProse}>{chapter.notes.trim().split(/\n\s*\n/).map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}</div>
         <nav aria-label={`Chapter ${index + 1} navigation`} className={styles.chapterNavigation}>{index > 0 && <a href={`#chapter-${chapters[index - 1].id}`}>← Previous chapter</a>}<a href="#chronicles-opening">Back to the beginning</a>{index < chapters.length - 1 && <a href={`#chapter-${chapters[index + 1].id}`}>Next chapter →</a>}</nav>
-        {admin && <form action={deleteWarcraftNight} className={styles.chapterAdmin}><input type="hidden" name="id" value={chapter.id} /><button className={styles.remove}>Remove chapter</button></form>}
+        {admin && <form action={deleteWarcraftNight} className={styles.chapterAdmin}><input type="hidden" name="groupId" value={groupId} /><input type="hidden" name="id" value={chapter.id} /><button className={styles.remove}>Remove chapter</button></form>}
       </article>)}
     </div>
   </div>;

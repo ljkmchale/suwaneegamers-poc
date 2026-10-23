@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/adminAuth";
-import { getWarcraftHub, saveWarcraftHub } from "@/lib/wowForever";
+import { getWarcraftHub, saveWarcraftHub, warcraftGroups } from "@/lib/wowForever";
 import { isWarcraftDate } from "@/lib/warcraftDates";
 import { getAdminSession } from "@/lib/adminSession";
 import { getUserSession } from "@/lib/userSession";
@@ -22,10 +22,11 @@ export async function updateWarcraftCharacter(_previous: CharacterSaveState, dat
   const admin = (await getAdminSession()).isAdmin === true;
   const user = await getUserSession();
   const playerName = field(data, "player", 80);
-  if (!admin && (!user.email || isMemberBlocked(user.email) || getWarcraftPlayerName(user.email) !== playerName)) {
+  const groupId = field(data, "groupId") || "group-a";
+  if (!admin && (!user.email || isMemberBlocked(user.email) || getWarcraftPlayerName(user.email, groupId) !== playerName)) {
     return { error: "You can only edit your own character." };
   }
-  if (!getWarcraftHub().players.some(player => player.name === playerName)) return { error: "Player not found." };
+  if (!warcraftGroups(getWarcraftHub()).find(group => group.id === groupId)?.players.some(player => player.name === playerName)) return { error: "Player not found." };
   const character = field(data, "character", 80);
   const className = field(data, "className", 80) || "Undecided";
   const level = field(data, "level", 10);
@@ -51,7 +52,8 @@ export async function updateWarcraftCharacter(_previous: CharacterSaveState, dat
   }
   // Re-read after processing the image so another player's recent edit is retained.
   const hub = getWarcraftHub();
-  const player = hub.players.find(player => player.name === playerName);
+  hub.groups = warcraftGroups(hub);
+  const player = hub.groups.find(group => group.id === groupId)?.players.find(player => player.name === playerName);
   if (!player) return { error: "Player not found." };
   Object.assign(player, { character, className, level });
   if (image) player.image = image;
@@ -83,8 +85,11 @@ export async function addWarcraftNight(data: FormData) {
   const notes = field(data, "notes", 6000);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !title || !notes) return;
   const hub = getWarcraftHub();
-  hub.nights.unshift({ id: crypto.randomUUID(), date, title, notes });
-  hub.nights.sort((a, b) => b.date.localeCompare(a.date));
+  hub.groups = warcraftGroups(hub);
+  const group = hub.groups.find(group => group.id === field(data, "groupId"));
+  if (!group) throw new Error("Group not found.");
+  group.nights.unshift({ id: crypto.randomUUID(), date, title, notes });
+  group.nights.sort((a, b) => b.date.localeCompare(a.date));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");
   revalidatePath("/wow-forever/chronicles");
@@ -93,8 +98,38 @@ export async function addWarcraftNight(data: FormData) {
 export async function deleteWarcraftNight(data: FormData) {
   await requireAdmin();
   const hub = getWarcraftHub();
-  hub.nights = hub.nights.filter(night => night.id !== field(data, "id"));
+  hub.groups = warcraftGroups(hub);
+  const group = hub.groups.find(group => group.id === field(data, "groupId"));
+  if (!group) throw new Error("Group not found.");
+  group.nights = group.nights.filter(night => night.id !== field(data, "id"));
   saveWarcraftHub(hub);
   revalidatePath("/wow-forever");
   revalidatePath("/wow-forever/chronicles");
+}
+
+export async function configureWarcraftGroup(data: FormData) {
+  await requireAdmin();
+  const name = field(data, "name", 80);
+  const discordUrl = field(data, "discordUrl", 300);
+  if (!name || (discordUrl && !/^https:\/\/discord\.com\/channels\/\d+\/\d+$/.test(discordUrl))) throw new Error("Enter a group name and a Discord channel URL.");
+  const { getDb } = await import("@/lib/db");
+  const members: Record<string, string> = {};
+  const names = new Set<string>();
+  for (const line of field(data, "members", 10000).split(/\r?\n/).filter(line => line.trim())) {
+    const [email, playerName] = line.split("|").map(value => value.trim());
+    const profile = getDb().prepare("SELECT id FROM user_profiles WHERE lower(email) = ?").get(email?.toLowerCase()) as { id: string } | undefined;
+    if (!profile || !playerName || names.has(playerName) || members[profile.id]) throw new Error("Use one registered email | unique player name per line.");
+    members[profile.id] = playerName;
+    names.add(playerName);
+  }
+  const hub = getWarcraftHub();
+  hub.groups = warcraftGroups(hub);
+  const id = field(data, "groupId");
+  const existing = id ? hub.groups.find(group => group.id === id) : undefined;
+  if (id && !existing) throw new Error("Group not found.");
+  const players = Object.values(members).map(name => existing?.players.find(player => player.name === name) ?? { name, character: "", className: "Undecided", level: "" });
+  if (existing) Object.assign(existing, { name, discordUrl, members, players });
+  else hub.groups.push({ id: crypto.randomUUID(), name, discordUrl, members, players, nights: [] });
+  saveWarcraftHub(hub);
+  revalidatePath("/", "layout");
 }

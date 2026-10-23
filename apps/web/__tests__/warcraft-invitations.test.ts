@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import type { NavSection } from "@/lib/nav";
 const lookup = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/db", () => ({ getDb: () => ({ prepare: () => ({ get: lookup }) }) }));
-import { isWarcraftInvitee, warcraftMenuForViewer } from "@/lib/warcraftInvitations";
+vi.mock("@/lib/contentFiles", () => ({ readContent: () => { throw new Error("Use initial data"); }, writeContent: vi.fn() }));
+import { warcraftGroups, getWarcraftHub } from "@/lib/wowForever";
+import { isWarcraftInvitee, warcraftMenuForViewer, selectWarcraftGroup } from "@/lib/warcraftInvitations";
 
 describe("Warcraft menu invitations", () => {
   it("accepts only the six invited account IDs, including Ty", () => {
@@ -27,5 +29,23 @@ describe("Warcraft menu invitations", () => {
     expect(warcraftMenuForViewer(sections, false)[0].items.map(i => i.id)).toEqual(["map"]);
     expect(warcraftMenuForViewer(sections, true)).toEqual(sections);
     expect(sections[0].items).toHaveLength(2);
+  });
+});
+
+describe("Warcraft group isolation", () => {
+  it("preserves Group A and starts Group B empty", () => {
+    const groups = warcraftGroups(getWarcraftHub());
+    expect(groups[0].players).toHaveLength(6);
+    expect(groups[1]).toMatchObject({ id: "group-b", players: [], nights: [], members: {}, discordUrl: "" });
+  });
+  it("selects only assigned groups and rejects forged group URLs", () => {
+    const groups = warcraftGroups(getWarcraftHub());
+    groups[1].members.other = "New player";
+    expect(selectWarcraftGroup(groups, "other", false).group?.id).toBe("group-b");
+    expect(selectWarcraftGroup(groups, "other", false, "group-a").group).toBeUndefined();
+    expect(selectWarcraftGroup(groups, undefined, false).group).toBeUndefined();
+    expect(selectWarcraftGroup(groups, undefined, true, "group-b").group?.id).toBe("group-b");
+    groups[0].members.other = "New player";
+    expect(selectWarcraftGroup(groups, "other", false).available).toHaveLength(2);
   });
 });

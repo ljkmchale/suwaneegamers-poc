@@ -5,11 +5,12 @@ import type { WarcraftPlayer } from "@/lib/wowForever";
 import { updateWarcraftCharacter, type CharacterSaveState } from "./actions";
 import styles from "./warcraft.module.css";
 
-export function CharacterEditor({ player }: { player: WarcraftPlayer }) {
+export function CharacterEditor({ player, groupId = "group-a" }: { player: WarcraftPlayer; groupId?: string }) {
   const [state, action, pending] = useActionState<CharacterSaveState, FormData>(updateWarcraftCharacter, {});
   return <details className={styles.characterEditor}>
     <summary>Edit character</summary>
     <form action={action} className={styles.form}>
+      <input type="hidden" name="groupId" value={groupId} />
       <input type="hidden" name="player" value={player.name} />
       <label>Character name<input name="character" defaultValue={player.character} maxLength={80} /></label>
       <label>Class / choice<input name="className" defaultValue={player.className} maxLength={80} /></label>

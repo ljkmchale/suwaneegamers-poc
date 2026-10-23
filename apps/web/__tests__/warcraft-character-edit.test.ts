@@ -7,13 +7,13 @@ vi.mock("@/lib/userSession", () => ({ getUserSession: async () => ({ email: "mem
 vi.mock("@/lib/warcraftInvitations", () => ({ getWarcraftPlayerName: () => mocks.owner }));
 vi.mock("@/lib/memberBlocks", () => ({ isMemberBlocked: () => false }));
 vi.mock("@/lib/adminAuth", () => ({ requireAdmin: vi.fn() }));
-vi.mock("@/lib/wowForever", () => ({ getWarcraftHub: () => structuredClone(mocks.hub), saveWarcraftHub: mocks.save }));
+vi.mock("@/lib/wowForever", async importOriginal => ({ ...await importOriginal<typeof import("@/lib/wowForever")>(), getWarcraftHub: () => structuredClone(mocks.hub), saveWarcraftHub: mocks.save }));
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
 vi.mock("node:fs/promises", async (importOriginal) => {
   const actual = await importOriginal<typeof import("node:fs/promises")>();
   return { ...actual, default: actual, mkdir: vi.fn(), writeFile: mocks.write };
 });
-import { updateWarcraftCharacter } from "@/app/(site)/wow-forever/actions";
+import { updateWarcraftCharacter, addWarcraftNight, deleteWarcraftNight } from "@/app/(site)/wow-forever/actions";
 
 function form(player: string) { const data = new FormData(); data.set("player", player); data.set("character", "Arcane friend"); data.set("className", "Mage"); data.set("level", "12"); return data; }
 beforeEach(() => {
@@ -56,5 +56,35 @@ describe("Warcraft character ownership", () => {
     expect((await updateWarcraftCharacter({}, data)).success).toBeTruthy();
     expect(mocks.write).toHaveBeenCalledOnce();
     expect(mocks.save.mock.calls[0][0].players[0].image).toMatch(/^\/media\/images\/wow-forever\/characters\/[a-f0-9-]+\.webp$/);
+  });
+});
+
+describe("Warcraft group writes", () => {
+  it("keeps a Group B character edit out of Group A", async () => {
+    mocks.admin = true;
+    const original = structuredClone(mocks.hub.players);
+    mocks.hub.groups = [
+      { id: "group-a", name: "Group A", members: {}, players: structuredClone(original), nights: [] },
+      { id: "group-b", name: "Group B", members: {}, players: [{ ...original[0], character: "B hero" }], nights: [] },
+    ];
+    const data = form("Larry"); data.set("groupId", "group-b");
+    expect((await updateWarcraftCharacter({}, data)).success).toBeTruthy();
+    const saved = mocks.save.mock.calls[0][0];
+    expect(saved.groups[0].players).toEqual(original);
+    expect(saved.groups[1].players[0].character).toBe("Arcane friend");
+  });
+  it("adds and removes chapters only in the targeted group", async () => {
+    mocks.hub.groups = [
+      { id: "group-a", members: {}, players: [], nights: [{ id: "shared-id", title: "A", date: "2026-10-23", notes: "A story" }] },
+      { id: "group-b", members: {}, players: [], nights: [{ id: "shared-id", title: "B", date: "2026-10-23", notes: "B story" }] },
+    ];
+    const data = new FormData(); data.set("groupId", "group-b"); data.set("date", "2026-10-23"); data.set("title", "New B chapter"); data.set("notes", "B adventure");
+    await addWarcraftNight(data);
+    expect(mocks.save.mock.calls[0][0].groups[0].nights).toHaveLength(1);
+    expect(mocks.save.mock.calls[0][0].groups[1].nights).toHaveLength(2);
+    mocks.save.mockClear(); data.set("id", "shared-id");
+    await deleteWarcraftNight(data);
+    expect(mocks.save.mock.calls[0][0].groups[0].nights).toHaveLength(1);
+    expect(mocks.save.mock.calls[0][0].groups[1].nights).toHaveLength(0);
   });
 });
