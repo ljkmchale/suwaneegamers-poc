@@ -46,9 +46,9 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       <div className={styles.heroContent}>
       <div className={styles.sigil}><PaintedIcon kind="swords" size={112} /></div>
       <p className={styles.eyebrow}>Suwanee Gamers · Our PC game night</p>
+      <h1>World of Warcraft<span>Forever</span></h1>
       <p className={styles.eyebrow}>{group.name}</p>
       {available.length > 1 && <nav aria-label="Your Warcraft groups" className={styles.actions}>{available.map(option => <Link key={option.id} href={`/wow-forever?group=${encodeURIComponent(option.id)}`} aria-current={option.id === group.id ? "page" : undefined}>{option.name}</Link>)}</nav>}
-      <h1>World of Warcraft<span>Forever</span></h1>
       <p className={styles.tagline}>New characters. Familiar friends. A whole world of trouble.</p>
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
       <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
