@@ -18,9 +18,18 @@ describe("Warcraft party switching", () => {
     expect(screen.getByRole("link", { name: "Azeroth Explorers" })).toHaveAttribute("href", "/wow-forever/chronicles?group=group-b");
     expect(screen.getByRole("link", { name: "Azeroth Explorers" })).toHaveAttribute("aria-current", "page");
   });
-  it("keeps internal group names for admins", () => {
+  it("moves the selected state when switching between parties", () => {
+    const { rerender } = render(<PartySwitcher groups={groups} selected="group-a" admin />);
+    rerender(<PartySwitcher groups={groups} selected="group-b" admin />);
+    expect(screen.getByRole("link", { name: "Azeroth Adventurers" })).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "Azeroth Explorers" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("navigation").className).toContain("partySwitcher");
+  });
+  it("uses party names for admins too", () => {
     render(<PartySwitcher groups={groups} selected="group-a" admin />);
-    expect(screen.getByRole("link", { name: "Group A" })).toHaveAttribute("aria-current", "page");
-    expect(screen.getByRole("link", { name: "Group B" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Azeroth Adventurers" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Azeroth Explorers" })).toBeInTheDocument();
+    expect(screen.queryByText("Group A")).not.toBeInTheDocument();
+    expect(screen.queryByText("Group B")).not.toBeInTheDocument();
   });
 });

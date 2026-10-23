@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getUserSession } from "@/lib/userSession";
 import { getWarcraftProfileId, selectWarcraftGroup } from "@/lib/warcraftInvitations";
-import { PartySwitcher } from "@/app/(site)/wow-forever/PartySwitcher";
+import { PartySwitcher, partyLabel } from "@/app/(site)/wow-forever/PartySwitcher";
 import type { Metadata } from "next";
 import { getAdminSession } from "@/lib/adminSession";
 import { getWarcraftHub, warcraftGroups } from "@/lib/wowForever";
@@ -19,6 +19,6 @@ export default async function AzerothChroniclesPage({ searchParams }: { searchPa
   if (!group) notFound();
   return <div className={`${styles.page} ${styles.chronicleStandalone}`}>
     <PartySwitcher groups={available} selected={group.id} admin={admin} chronicles />
-    <WarcraftChronicles nights={group.nights} admin={admin} groupId={group.id} groupName={admin ? group.name : undefined} backHref={admin || available.length > 1 ? `/wow-forever?group=${encodeURIComponent(group.id)}` : "/wow-forever"} standalone />
+    <WarcraftChronicles nights={group.nights} admin={admin} groupId={group.id} groupName={admin ? partyLabel(group, available.indexOf(group)) : undefined} backHref={admin || available.length > 1 ? `/wow-forever?group=${encodeURIComponent(group.id)}` : "/wow-forever"} standalone />
   </div>;
 }

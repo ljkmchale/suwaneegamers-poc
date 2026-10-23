@@ -213,6 +213,6 @@ Website code requires a production build and slot activation.
 
 Members assigned to multiple WoW parties receive a party-name switcher on the
 hub and reader. Single-party members see no group label or selector. Admins
-retain internal group names and can configure optional member-facing
+use the same party names in navigation and can configure optional member-facing
 `groups[].partyName`. Chronicle links and back links preserve the selected
 party; selection still passes the server-side membership filter.

@@ -85,3 +85,7 @@
 @media(max-width:400px){.roster{grid-template-columns:1fr}.hero h1 span{font-size:64px}.form fieldset{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.chronicleStandalone .chroniclePages{scroll-behavior:auto}}
 @media(max-width:700px){.chronicleBook{grid-template-columns:1fr}.chronicleRail{position:static;padding:24px}.chroniclePages{border-left:0;border-top:1px solid #69513766}.chronicleRailIntro{margin-bottom:16px}.chronicleRailFoot{margin-top:16px}.chapterIndex{grid-template-columns:repeat(2,minmax(0,1fr))}.chronicleCover{min-height:360px}.chronicleCoverText{padding:30px 24px}.chapterProse p{font-size:15px}}
+
+.partySwitcher.actions a{background:#100a18a6;border-color:#b9986377}
+.partySwitcher.actions a:hover{background:#6b4f2f70;border-color:#e1ba77}
+.partySwitcher.actions a[aria-current="page"]{background:#b58b3933;border-color:#c5a264;box-shadow:inset 0 0 0 1px #c5a264}

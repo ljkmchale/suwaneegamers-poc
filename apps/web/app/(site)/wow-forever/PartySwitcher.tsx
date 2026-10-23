@@ -9,7 +9,7 @@ export function partyLabel(group: WarcraftGroup, index: number) {
 export function PartySwitcher({ groups, selected, admin, chronicles = false }: { groups: WarcraftGroup[]; selected: string; admin: boolean; chronicles?: boolean }) {
   if (groups.length < 2) return null;
   const route = chronicles ? "/wow-forever/chronicles" : "/wow-forever";
-  return <nav aria-label={admin ? "Warcraft groups" : "Your adventure parties"} className={styles.actions}>
-    {groups.map((group, index) => <Link key={group.id} href={`${route}?group=${encodeURIComponent(group.id)}`} aria-current={group.id === selected ? "page" : undefined}>{admin ? group.name : partyLabel(group, index)}</Link>)}
+  return <nav aria-label={admin ? "Warcraft groups" : "Your adventure parties"} className={`${styles.actions} ${styles.partySwitcher}`}>
+    {groups.map((group, index) => <Link key={group.id} href={`${route}?group=${encodeURIComponent(group.id)}`} aria-current={group.id === selected ? "page" : undefined}>{partyLabel(group, index)}</Link>)}
   </nav>;
 }

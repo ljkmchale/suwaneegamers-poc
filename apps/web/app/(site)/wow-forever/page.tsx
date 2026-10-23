@@ -5,7 +5,7 @@ import { getAdminSession } from "@/lib/adminSession";
 import { getWarcraftHub, warcraftGroups } from "@/lib/wowForever";
 import { addWarcraftNight, updateWarcraftHub, configureWarcraftGroup } from "./actions";
 import styles from "./warcraft.module.css";
-import { PartySwitcher } from "./PartySwitcher";
+import { PartySwitcher, partyLabel } from "./PartySwitcher";
 import { CharacterEditor } from "./CharacterEditor";
 import { getUserSession } from "@/lib/userSession";
 import { getWarcraftPlayerName, getWarcraftProfileId, selectWarcraftGroup } from "@/lib/warcraftInvitations";
@@ -48,7 +48,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       <div className={styles.sigil}><PaintedIcon kind="swords" size={112} /></div>
       <p className={styles.eyebrow}>Suwanee Gamers · Our PC game night</p>
       <h1>World of Warcraft<span>Forever</span></h1>
-      {admin && <p className={styles.eyebrow}>{group.name}</p>}
+      {admin && <p className={styles.eyebrow}>{partyLabel(group, available.indexOf(group))}</p>}
       <PartySwitcher groups={available} selected={group.id} admin={admin} />
       <p className={styles.tagline}>New characters. Familiar friends. A whole world of trouble.</p>
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
@@ -82,9 +82,9 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       {([['schedule', 'Weekly rhythm'], ['realm', 'Realm'], ['faction', 'Faction'], ['objective', 'Next-night goal']] as const).map(([key, label]) => <label key={key}>{label}<input name={key} defaultValue={hub[key]} required maxLength={1000} /></label>)}
       <button>Save game-night plans</button>
     </form></details><details><summary>Add a Chronicles chapter</summary><form action={addWarcraftNight} className={styles.form}><input type="hidden" name="groupId" value={group.id} /><label>Game-night date<input name="date" type="date" required /></label><label>Chapter title<input name="title" placeholder="Our first steps into Azeroth" maxLength={150} required /></label><label>What happened?<textarea name="notes" rows={7} maxLength={6000} placeholder="Who played, where we went, what we finished, loot worth remembering, and where we pick up next time…" required /></label><button>Publish chapter</button></form></details></section>}
-    {admin && <section className={`${styles.section} ${styles.editor}`}><h2>Manage Warcraft groups</h2><p>Members use their registered account email. One email | player name per line. Game-night plans above are shared by all groups.</p>{[...warcraftGroups(stored), undefined].map(option => <details key={option?.id ?? "new"}><summary>{option ? `Edit ${option.name}` : "Add a group"}</summary><form action={configureWarcraftGroup} className={styles.form}>
+    {admin && <section className={`${styles.section} ${styles.editor}`}><h2>Manage Warcraft groups</h2><p>Members use their registered account email. One email | player name per line. Game-night plans above are shared by all groups.</p>{[...warcraftGroups(stored), undefined].map(option => <details key={option?.id ?? "new"}><summary>{option ? `Edit ${partyLabel(option, warcraftGroups(stored).findIndex(item => item.id === option.id))}` : "Add a group"}</summary><form action={configureWarcraftGroup} className={styles.form}>
       <input type="hidden" name="groupId" value={option?.id ?? ""} />
-      <label>Group name<input name="name" defaultValue={option?.name} required maxLength={80} /></label>
+      <label>Internal group name<input name="name" defaultValue={option?.name} required maxLength={80} /></label>
       <label>Party name shown to members<input name="partyName" defaultValue={option?.partyName} maxLength={80} placeholder="Azeroth Adventurers" /><span className={styles.small}>Used only for members who belong to multiple parties. Give each party a distinct name.</span></label>
       <label>Discord channel URL<input type="url" name="discordUrl" defaultValue={option?.discordUrl} /></label>
       <label>Members (email | player name)<textarea name="members" rows={7} defaultValue={option ? Object.entries(option.members).map(([id, name]) => `${profiles.find(profile => profile.id === id)?.email ?? ""} | ${name}`).join("\n") : ""} /></label>
