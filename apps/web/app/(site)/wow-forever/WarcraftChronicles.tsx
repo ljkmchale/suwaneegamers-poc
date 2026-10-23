@@ -4,13 +4,13 @@ import type { WarcraftNight } from "@/lib/wowForever";
 import { deleteWarcraftNight } from "./actions";
 import styles from "./warcraft.module.css";
 
-export function WarcraftChronicles({ nights, admin, standalone = false, groupId = "group-a", groupName }: { nights: WarcraftNight[]; admin: boolean; standalone?: boolean; groupId?: string; groupName?: string }) {
+export function WarcraftChronicles({ nights, admin, standalone = false, groupId = "group-a", groupName, backHref }: { nights: WarcraftNight[]; admin: boolean; standalone?: boolean; groupId?: string; groupName?: string; backHref?: string }) {
   const chapters = [...nights].sort((a, b) => a.date.localeCompare(b.date));
   const Title = standalone ? "h1" : "h3";
   return <div className={styles.chronicleBook}>
     <aside className={styles.chronicleRail}>
-      {standalone && <Link href={groupName ? `/wow-forever?group=${encodeURIComponent(groupId)}` : "/wow-forever"} className={styles.chronicleBack}>← Back to game night</Link>}
-      <p className={styles.eyebrow}>World of Warcraft · Forever{groupName && ` · ${groupName}`}</p>
+      {standalone && <Link href={backHref ?? (admin && groupName ? `/wow-forever?group=${encodeURIComponent(groupId)}` : "/wow-forever")} className={styles.chronicleBack}>← Back to game night</Link>}
+      <p className={styles.eyebrow}>World of Warcraft · Forever{admin && groupName && ` · ${groupName}`}</p>
       <Title>The Azeroth Chronicles</Title>
       <p className={styles.chronicleRailIntro}>The story of our party, one game night at a time.</p>
       <nav aria-label="Warcraft chronicle chapters">

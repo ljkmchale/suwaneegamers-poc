@@ -111,6 +111,7 @@ export async function configureWarcraftGroup(data: FormData) {
   await requireAdmin();
   const name = field(data, "name", 80);
   const discordUrl = field(data, "discordUrl", 300);
+  const partyName = field(data, "partyName", 80);
   if (!name || (discordUrl && !/^https:\/\/discord\.com\/channels\/\d+\/\d+$/.test(discordUrl))) throw new Error("Enter a group name and a Discord channel URL.");
   const { getDb } = await import("@/lib/db");
   const members: Record<string, string> = {};
@@ -128,8 +129,8 @@ export async function configureWarcraftGroup(data: FormData) {
   const existing = id ? hub.groups.find(group => group.id === id) : undefined;
   if (id && !existing) throw new Error("Group not found.");
   const players = Object.values(members).map(name => existing?.players.find(player => player.name === name) ?? { name, character: "", className: "Undecided", level: "" });
-  if (existing) Object.assign(existing, { name, discordUrl, members, players });
-  else hub.groups.push({ id: crypto.randomUUID(), name, discordUrl, members, players, nights: [] });
+  if (existing) Object.assign(existing, { name, partyName, discordUrl, members, players });
+  else hub.groups.push({ id: crypto.randomUUID(), name, partyName, discordUrl, members, players, nights: [] });
   saveWarcraftHub(hub);
   revalidatePath("/", "layout");
 }

@@ -210,3 +210,9 @@ persist through `writeContent`, keeping SQLite and JSON aligned. Character
 and chapter actions target a group; character edits recheck membership on
 the server. No scheduler owns this document; the seed script preserves it.
 Website code requires a production build and slot activation.
+
+Members assigned to multiple WoW parties receive a party-name switcher on the
+hub and reader. Single-party members see no group label or selector. Admins
+retain internal group names and can configure optional member-facing
+`groups[].partyName`. Chronicle links and back links preserve the selected
+party; selection still passes the server-side membership filter.

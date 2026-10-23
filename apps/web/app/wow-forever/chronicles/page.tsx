@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getUserSession } from "@/lib/userSession";
 import { getWarcraftProfileId, selectWarcraftGroup } from "@/lib/warcraftInvitations";
+import { PartySwitcher } from "@/app/(site)/wow-forever/PartySwitcher";
 import type { Metadata } from "next";
 import { getAdminSession } from "@/lib/adminSession";
 import { getWarcraftHub, warcraftGroups } from "@/lib/wowForever";
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
 
 export default async function AzerothChroniclesPage({ searchParams }: { searchParams: Promise<{ group?: string }> }) {
   const admin = (await getAdminSession()).isAdmin === true;
-  const { group } = selectWarcraftGroup(warcraftGroups(getWarcraftHub()), getWarcraftProfileId((await getUserSession()).email), admin, (await searchParams).group);
+  const { available, group } = selectWarcraftGroup(warcraftGroups(getWarcraftHub()), getWarcraftProfileId((await getUserSession()).email), admin, (await searchParams).group);
   if (!group) notFound();
   return <div className={`${styles.page} ${styles.chronicleStandalone}`}>
-    <WarcraftChronicles nights={group.nights} admin={admin} groupId={group.id} groupName={group.name} standalone />
+    <PartySwitcher groups={available} selected={group.id} admin={admin} chronicles />
+    <WarcraftChronicles nights={group.nights} admin={admin} groupId={group.id} groupName={admin ? group.name : undefined} backHref={admin || available.length > 1 ? `/wow-forever?group=${encodeURIComponent(group.id)}` : "/wow-forever"} standalone />
   </div>;
 }

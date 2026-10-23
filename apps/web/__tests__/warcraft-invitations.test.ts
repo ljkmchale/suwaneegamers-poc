@@ -36,7 +36,7 @@ describe("Warcraft group isolation", () => {
   it("preserves Group A and starts Group B empty", () => {
     const groups = warcraftGroups(getWarcraftHub());
     expect(groups[0].players).toHaveLength(6);
-    expect(groups[1]).toMatchObject({ id: "group-b", players: [], nights: [], members: {}, discordUrl: "" });
+    expect(groups[1]).toMatchObject({ id: "group-b", players: [], nights: [], members: {}, discordUrl: "https://discord.com/channels/319954674188943362/1562913577373925478" });
   });
   it("selects only assigned groups and rejects forged group URLs", () => {
     const groups = warcraftGroups(getWarcraftHub());

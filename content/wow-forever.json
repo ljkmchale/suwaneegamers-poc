@@ -42,5 +42,67 @@
       "level": ""
     }
   ],
-  "nights": []
+  "nights": [],
+  "groups": [
+    {
+      "id": "group-a",
+      "name": "Group A",
+      "discordUrl": "https://discord.com/channels/319954674188943362/325247957932834816",
+      "members": {
+        "390a0a45aadcfeb14b33989c": "Larry",
+        "b2f082fa8ccad583d3523435": "Chip",
+        "84a012426ea6409e052ac880": "Lesley",
+        "c71df713027bb52bfb23ac72": "Sean",
+        "a4ac974e235cb8705e5e2824": "Emma",
+        "3ef235a3385aca5bfff5f0e5": "Ty"
+      },
+      "players": [
+        {
+          "name": "Chip",
+          "character": "",
+          "className": "Paladin (tentative)",
+          "level": ""
+        },
+        {
+          "name": "Lesley",
+          "character": "",
+          "className": "Druid (tentative)",
+          "level": ""
+        },
+        {
+          "name": "Sean",
+          "character": "",
+          "className": "Undecided",
+          "level": ""
+        },
+        {
+          "name": "Larry",
+          "character": "",
+          "className": "Mage",
+          "level": ""
+        },
+        {
+          "name": "Emma",
+          "character": "",
+          "className": "Hunter or Rogue",
+          "level": ""
+        },
+        {
+          "name": "Ty",
+          "character": "",
+          "className": "Undecided",
+          "level": ""
+        }
+      ],
+      "nights": []
+    },
+    {
+      "id": "group-b",
+      "name": "Group B",
+      "discordUrl": "https://discord.com/channels/319954674188943362/1562913577373925478",
+      "members": {},
+      "players": [],
+      "nights": []
+    }
+  ]
 }

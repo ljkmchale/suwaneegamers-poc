@@ -5,6 +5,7 @@ import { getAdminSession } from "@/lib/adminSession";
 import { getWarcraftHub, warcraftGroups } from "@/lib/wowForever";
 import { addWarcraftNight, updateWarcraftHub, configureWarcraftGroup } from "./actions";
 import styles from "./warcraft.module.css";
+import { PartySwitcher } from "./PartySwitcher";
 import { CharacterEditor } from "./CharacterEditor";
 import { getUserSession } from "@/lib/userSession";
 import { getWarcraftPlayerName, getWarcraftProfileId, selectWarcraftGroup } from "@/lib/warcraftInvitations";
@@ -32,7 +33,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
   if (!group) notFound();
   const hub = { ...stored, players: group.players, nights: group.nights };
   const ownPlayer = getWarcraftPlayerName(email, group.id);
-  const chroniclesUrl = `/wow-forever/chronicles?group=${encodeURIComponent(group.id)}`;
+  const chroniclesUrl = admin || available.length > 1 ? `/wow-forever/chronicles?group=${encodeURIComponent(group.id)}` : "/wow-forever/chronicles";
   const profiles = admin ? getDb().prepare("SELECT id, email FROM user_profiles").all() as { id: string; email: string }[] : [];
 
 
@@ -47,8 +48,8 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       <div className={styles.sigil}><PaintedIcon kind="swords" size={112} /></div>
       <p className={styles.eyebrow}>Suwanee Gamers · Our PC game night</p>
       <h1>World of Warcraft<span>Forever</span></h1>
-      <p className={styles.eyebrow}>{group.name}</p>
-      {available.length > 1 && <nav aria-label="Your Warcraft groups" className={styles.actions}>{available.map(option => <Link key={option.id} href={`/wow-forever?group=${encodeURIComponent(option.id)}`} aria-current={option.id === group.id ? "page" : undefined}>{option.name}</Link>)}</nav>}
+      {admin && <p className={styles.eyebrow}>{group.name}</p>}
+      <PartySwitcher groups={available} selected={group.id} admin={admin} />
       <p className={styles.tagline}>New characters. Familiar friends. A whole world of trouble.</p>
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
       <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
@@ -84,6 +85,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
     {admin && <section className={`${styles.section} ${styles.editor}`}><h2>Manage Warcraft groups</h2><p>Members use their registered account email. One email | player name per line. Game-night plans above are shared by all groups.</p>{[...warcraftGroups(stored), undefined].map(option => <details key={option?.id ?? "new"}><summary>{option ? `Edit ${option.name}` : "Add a group"}</summary><form action={configureWarcraftGroup} className={styles.form}>
       <input type="hidden" name="groupId" value={option?.id ?? ""} />
       <label>Group name<input name="name" defaultValue={option?.name} required maxLength={80} /></label>
+      <label>Party name shown to members<input name="partyName" defaultValue={option?.partyName} maxLength={80} placeholder="Azeroth Adventurers" /><span className={styles.small}>Used only for members who belong to multiple parties. Give each party a distinct name.</span></label>
       <label>Discord channel URL<input type="url" name="discordUrl" defaultValue={option?.discordUrl} /></label>
       <label>Members (email | player name)<textarea name="members" rows={7} defaultValue={option ? Object.entries(option.members).map(([id, name]) => `${profiles.find(profile => profile.id === id)?.email ?? ""} | ${name}`).join("\n") : ""} /></label>
       <button>Save group</button>
