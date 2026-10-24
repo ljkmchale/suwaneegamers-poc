@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAdminSession } from "@/lib/adminSession";
-import { getWarcraftHub, warcraftGroups } from "@/lib/wowForever";
+import { getWarcraftHub, warcraftGroups, type WarcraftPlayer } from "@/lib/wowForever";
 import { addWarcraftNight, updateWarcraftHub, configureWarcraftGroup } from "./actions";
 import styles from "./warcraft.module.css";
 import { PartySwitcher, partyLabel } from "./PartySwitcher";
@@ -23,6 +23,11 @@ const iconPositions: Record<IconKind, string> = {
 
 function PaintedIcon({ kind, size = 32 }: { kind: IconKind; size?: number }) {
   return <span aria-hidden="true" className={styles.paintedIcon} style={{ width: size, height: size, backgroundPosition: iconPositions[kind] }} />;
+}
+
+function PlayerPortrait({ player, own }: { player: WarcraftPlayer; own: boolean }) {
+  const portrait = <>{player.image && <Image src={player.image} alt={`${player.name}'s character`} width={384} height={384} className={styles.characterPortrait} />}<span className={styles.initial} aria-hidden="true">{player.name.slice(0, 1)}</span></>;
+  return own ? <a className={`${styles.playerTop} ${styles.statsPortrait}`} href="https://timewalking.blizzard.com/" target="_blank" rel="noopener noreferrer" aria-label="View my Blizzard stats (opens in a new tab)" title="View my Blizzard stats — sign in with Battle.net">{portrait}</a> : <div className={styles.playerTop}>{portrait}</div>;
 }
 
 export default async function WarcraftPage({ searchParams }: { searchParams: Promise<{ group?: string }> }) {
@@ -52,7 +57,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       <PartySwitcher groups={available} selected={group.id} admin={admin} />
       <p className={styles.tagline}>New characters. Familiar friends. A whole world of trouble.</p>
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
-      <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="https://timewalking.blizzard.com/" target="_blank" rel="noopener noreferrer">My Blizzard stats ↗</a><a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
+      <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
       </div>
       <div className={styles.stats}><span><strong>{hub.players.length}</strong> adventurers</span><span><strong>Weekly</strong> give or take real life</span><span><strong>{hub.nights.length}</strong> chapters in the Chronicles</span></div>
     </header>
@@ -63,7 +68,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
     </div>
 
     <section id="party" className={styles.section}><p className={styles.eyebrow}><PaintedIcon kind="shield" /> The party roster</p><h2>Good company. Great adventures.</h2><p className={styles.subtitle}>The crew taking on Azeroth, one game night at a time.</p>
-      <div className={styles.roster}>{hub.players.map(player => <article className={styles.player} key={player.name}><div className={styles.playerTop}>{player.image && <Image src={player.image} alt={`${player.name}'s character`} width={384} height={384} className={styles.characterPortrait} />}<span className={styles.initial} aria-hidden="true">{player.name.slice(0, 1)}</span></div><h3>{player.name}</h3><p className={styles.className}>{player.className}</p><p>{player.character || "Character name to come"}</p><p className={styles.small}>{player.level ? `Level ${player.level}` : "Adventure starts here"}</p>{ownPlayer === player.name && <div className={styles.blizzardStats}><a href="https://timewalking.blizzard.com/" target="_blank" rel="noopener noreferrer">View my Blizzard stats ↗</a><p className={styles.small}>Sign in with your Battle.net account to see your personalized stats.</p></div>}{(admin || ownPlayer === player.name) && <CharacterEditor player={player} groupId={group.id} />}</article>)}</div>
+      <div className={styles.roster}>{hub.players.map(player => <article className={styles.player} key={player.name}><PlayerPortrait player={player} own={ownPlayer === player.name} /><h3>{player.name}</h3><p className={styles.className}>{player.className}</p><p>{player.character || "Character name to come"}</p><p className={styles.small}>{player.level ? `Level ${player.level}` : "Adventure starts here"}</p>{(admin || ownPlayer === player.name) && <CharacterEditor player={player} groupId={group.id} />}</article>)}</div>
     </section>
 
     <section id="chronicles" className={styles.chronicleEntrance}>
