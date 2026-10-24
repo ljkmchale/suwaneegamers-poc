@@ -89,3 +89,5 @@
 .partySwitcher.actions a{background:#100a18a6;border-color:#b9986377}
 .partySwitcher.actions a:hover{background:#6b4f2f70;border-color:#e1ba77}
 .partySwitcher.actions a[aria-current="page"]{background:#b58b3933;border-color:#c5a264;box-shadow:inset 0 0 0 1px #c5a264}
+
+.blizzardStats{margin-top:16px}.blizzardStats a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #b9986377;border-radius:4px;background:#100a18a6;color:#efd29a;font-size:12px}.blizzardStats a:hover{background:#6b4f2f70;border-color:#e1ba77}.blizzardStats p{margin-top:8px}
