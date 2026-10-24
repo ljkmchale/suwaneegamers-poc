@@ -52,7 +52,7 @@ export default async function WarcraftPage({ searchParams }: { searchParams: Pro
       <PartySwitcher groups={available} selected={group.id} admin={admin} />
       <p className={styles.tagline}>New characters. Familiar friends. A whole world of trouble.</p>
       <p className={styles.intro}>Our own little corner of Azeroth. Gather the party, make a plan, and keep the stories from every game night here.</p>
-      <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
+      <div className={styles.actions}>{group.discordUrl && <a href={group.discordUrl} target="_blank" rel="noopener noreferrer">Join us on Discord ↗</a>}<a href="https://timewalking.blizzard.com/" target="_blank" rel="noopener noreferrer">My Blizzard stats ↗</a><a href="#party">Meet the party <PaintedIcon kind="shield" size={28} /></a><Link href={chroniclesUrl}>Chronicles <PaintedIcon kind="scroll" /></Link></div>
       </div>
       <div className={styles.stats}><span><strong>{hub.players.length}</strong> adventurers</span><span><strong>Weekly</strong> give or take real life</span><span><strong>{hub.nights.length}</strong> chapters in the Chronicles</span></div>
     </header>
