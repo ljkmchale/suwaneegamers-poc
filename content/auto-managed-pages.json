@@ -111,6 +111,13 @@
         "section": "World",
         "role": "primary",
         "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "MoD - Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit",
+        "section": "Might of Dragons",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
       }
     ],
     "refreshLabel": "Pulls configured Chronicles Google Docs into the Brain Vault, processes stale raw sources, and rebuilds the index when needed.",
@@ -613,5 +620,27 @@
     ],
     "refreshLabel": "Campaign detail content is generated from Campaign Tracking, campaign notes, session summaries, and campaign header assets.",
     "editNote": "Update the campaign source docs and resource links to change this page. The detail layout is derived from the campaign record."
+  },
+  {
+    "path": "/campaigns/might-of-dragons",
+    "label": "Might of Dragons",
+    "sourceName": "Campaign Docs",
+    "sourceUrl": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit",
+    "managedSources": [
+      {
+        "label": "Campaign Player Notes",
+        "url": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit",
+        "role": "primary",
+        "syncJobId": "chronicles-sources"
+      },
+      {
+        "label": "Campaign Header",
+        "url": "https://drive.google.com/drive/folders/1CO41lbUbsmym2-Q8IVaDxGlorODyUGar",
+        "role": "supporting",
+        "syncJobId": "campaign-headers"
+      }
+    ],
+    "refreshLabel": "Player notes and Chronicles refresh from the campaign Google Doc.",
+    "generated": false
   }
 ]

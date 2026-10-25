@@ -2274,5 +2274,91 @@
         "sessionDate": "2026-05-19"
       }
     ]
+  },
+  {
+    "id": "might-of-dragons",
+    "name": "Might of Dragons",
+    "dm": "Sean Poole",
+    "schedule": "Wednesdays, 5:30–9:00 p.m.",
+    "startDate": "2026-09-05",
+    "description": "Hired by Izesin Olorie, the party arrives in Kelaad as raiders attack, then follows their trail to the raiders’ camp and hatchery caves.",
+    "headerImage": "/media/images/campaigns/might-of-dragons.webp",
+    "headerImagePosition": "center",
+    "headerImageSourceFolder": "1DOw_M3cldvFOS8E-e0A-ba0TvMm3PCjy",
+    "headerImageSourceFileId": "1HB234-aPwDVs04hkT3yXaxWy9SwovBUQ",
+    "headerImageSourceFileName": "Might of Dragons - Header (v.0).jpg",
+    "official": true,
+    "playerNotesUrl": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit",
+    "aliases": [
+      "MoD"
+    ],
+    "resources": [
+      {
+        "label": "D&D Beyond",
+        "url": ""
+      },
+      {
+        "label": "Notes",
+        "url": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit"
+      },
+      {
+        "label": "Chronicles",
+        "url": "/campaigns/might-of-dragons/chronicle"
+      }
+    ],
+    "party": [
+      {
+        "name": "Annabella"
+      },
+      {
+        "name": "Daimon"
+      },
+      {
+        "name": "Glain"
+      },
+      {
+        "name": "Onog"
+      },
+      {
+        "name": "Lycrus"
+      }
+    ],
+    "sessionSummaries": [
+      {
+        "title": "Session 7 - Ambush: Into the Cave",
+        "summary": "The group adventures into the hatchery caves.",
+        "sessionDate": "2026-10-21"
+      },
+      {
+        "title": "Session 6 - Ambush: Not So Abandoned Nursery",
+        "summary": "There appears to be a nearby cave that the party must investigate.",
+        "sessionDate": "2026-10-10"
+      },
+      {
+        "title": "Session 5 - Avenging Kelaad: Night at Camp",
+        "summary": "The party works through the camp by various means to see what the raiders were up to.",
+        "sessionDate": "2026-10-03"
+      },
+      {
+        "title": "Session 4 - Avenging Kelaad: Following the Raiders",
+        "summary": "The group follows the trail of those that raided Kelaad.",
+        "sessionDate": "2026-09-26"
+      },
+      {
+        "title": "Session 3 - The Beginnings: Next Morning",
+        "summary": "A dragon attacks Kelaad and the party helps the town fight it off.",
+        "sessionDate": "2026-09-19"
+      },
+      {
+        "title": "Session 2 - The Beginnings: That Night",
+        "summary": "The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog. They discussed what was going on in Kelaad, the deal with the raiders, and what to do.",
+        "sessionDate": "2026-09-12"
+      },
+      {
+        "title": "Session 1 - The Beginnings: That Day",
+        "summary": "The party arrived in Kelaad after being hired by Izesin Olorie. After arriving in the local inn/tavern, the town was soon under a raid. They quickly fled to the keep as it seemed to be the only safe spot.",
+        "sessionDate": "2026-09-05"
+      }
+    ]
   }
 ]

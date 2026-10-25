@@ -54,6 +54,14 @@
   },
   {
     "kind": "block",
+    "id": "cc-might-of-dragons",
+    "type": "campaign-card",
+    "props": {
+      "id": "might-of-dragons"
+    }
+  },
+  {
+    "kind": "block",
     "id": "cc-souls-of-destiny",
     "type": "campaign-card",
     "props": {

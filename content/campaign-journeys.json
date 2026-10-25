@@ -3796,16 +3796,224 @@
       "mapStatus": "No shared journey yet",
       "stops": [],
       "locationHints": []
+    },
+    {
+      "id": "might-of-dragons",
+      "name": "Might of Dragons",
+      "color": "#be6850",
+      "status": "Raiders Camp: Hatchery Caves · beyond the mapped world",
+      "campaignHref": "/campaigns/might-of-dragons",
+      "stops": [
+        {
+          "id": "auto-might-of-dragons-session-1",
+          "locationId": "kelaad",
+          "location": "Kelaad",
+          "x": 41.85,
+          "y": 35.52,
+          "session": "Session 1",
+          "realDate": "2026-09-05",
+          "title": "The Beginnings: That Day",
+          "summary": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie. After arriving in the local inn/tavern, the town was soon under a raid. They quickly fled to the keep as it seemed to be the only safe spot. (Can add more description later) – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Kelaad",
+            "description": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "sourceKey": "might-of-dragons:session-1",
+          "sourceHash": "1571304f61979ab72754d9bbab31d4f65ee905493593cb9f04c369f40b7cd363",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-2",
+          "locationId": "kelaad",
+          "location": "Kelaad",
+          "x": 41.85,
+          "y": 35.52,
+          "session": "Session 2",
+          "realDate": "2026-09-12",
+          "title": "The Beginnings: That Night",
+          "summary": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog. They discussed what was going on in Kelaad, the deal with the raiders, and what to do. (Can add more description later) – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Kelaad",
+            "description": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "might-of-dragons:session-2",
+          "sourceHash": "507005dd72f2c4e6a94003a2ff2257928d936c12188572d7bdff1c9b0791df7a",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-3",
+          "locationId": "kelaad",
+          "location": "Kelaad",
+          "x": 41.85,
+          "y": 35.52,
+          "session": "Session 3",
+          "realDate": "2026-09-19",
+          "title": "The Beginnings: The Morning",
+          "summary": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Kelaad",
+            "description": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –"
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "might-of-dragons:session-3",
+          "sourceHash": "3353dea489d7f070c40603525369357c3260077529420026f3d6726fb5e1b16b",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-4",
+          "locationId": "kelaad",
+          "location": "Kelaad",
+          "x": 41.85,
+          "y": 35.52,
+          "session": "Session 4",
+          "realDate": "2026-09-26",
+          "title": "Avenging Kelaad: Following the Raiders",
+          "summary": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Kelaad",
+            "description": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –"
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "might-of-dragons:session-4",
+          "sourceHash": "3839f1f98486d2cba25eff261ccd52c2689244aea782c0c0485dbc68f9ee6531",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-5",
+          "location": "Raiders Camp",
+          "x": 41.85,
+          "y": 35.52,
+          "precision": "off-map",
+          "session": "Session 5",
+          "realDate": "2026-10-03",
+          "title": "Avenging Kelaad: Night at Camp",
+          "summary": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Raiders Camp",
+            "description": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –"
+          },
+          "automatic": true,
+          "confidence": 0.79,
+          "route": {
+            "mode": "off-map",
+            "points": [
+              {
+                "x": 41.85,
+                "y": 35.52
+              },
+              {
+                "x": 41.85,
+                "y": 35.52
+              }
+            ]
+          },
+          "sourceKey": "might-of-dragons:session-5",
+          "sourceHash": "a236e1f9d2e898f74e38a7249f81779333e3f064dd0d9734c0fa541c9811ca13",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-6",
+          "location": "Raiders Camp",
+          "x": 41.85,
+          "y": 35.52,
+          "precision": "off-map",
+          "session": "Session 6",
+          "realDate": "2026-10-10",
+          "title": "Ambush: Not So Abandoned Nursery",
+          "summary": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli. – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Raiders Camp",
+            "description": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli."
+          },
+          "automatic": true,
+          "confidence": 0.79,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "might-of-dragons:session-6",
+          "sourceHash": "82b016fc3face3ef1dfe822d39cec2efa9c4245b182c3bc93cbab11d2c5dbf73",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-7",
+          "location": "Raiders Camp: Hatchery Caves",
+          "x": 41.85,
+          "y": 35.52,
+          "precision": "off-map",
+          "session": "Session 7",
+          "realDate": "2026-10-21",
+          "title": "Ambush: Into the Cave",
+          "summary": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ??? Everything must go south to berphar, someone let them keep some stuff (Mayrro?) TBD TBD TBD TBD – The End of the Session –",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Raiders Camp: Hatchery Caves",
+            "description": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ???"
+          },
+          "automatic": true,
+          "confidence": 0.72,
+          "route": {
+            "mode": "off-map",
+            "points": [
+              {
+                "x": 41.85,
+                "y": 35.52
+              },
+              {
+                "x": 41.85,
+                "y": 35.52
+              }
+            ]
+          },
+          "sourceKey": "might-of-dragons:session-7",
+          "sourceHash": "e7017454886aae9e7c1269c38057ead4591e9d9f9fa96362dbcb512131e176fa",
+          "current": true
+        }
+      ],
+      "locationHints": [
+        {
+          "id": "mod-hatchery-caves",
+          "location": "Raiders Camp: Hatchery Caves",
+          "session": "Session 7",
+          "x": 41.85,
+          "y": 35.52,
+          "precision": "off-map"
+        }
+      ]
     }
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-10-22T14:50:14.445Z",
+    "lastGeneratedAt": "2026-10-25T14:15:43.288Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 122,
+    "generatedStops": 129,
     "routedSegments": 9,
-    "impactLocations": 33
+    "impactLocations": 36
   },
   "locationImpacts": [
     {
@@ -4574,6 +4782,52 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-kelaad",
+      "locationId": "kelaad",
+      "location": "Kelaad",
+      "x": 41.85,
+      "y": 35.52,
+      "realm": "surface",
+      "campaignIds": [
+        "might-of-dragons"
+      ],
+      "impacts": [
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 1",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 2",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 3",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –"
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 4",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –"
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -4935,6 +5189,35 @@
       "crossCampaign": false
     },
     {
+      "id": "name-raiderscamp",
+      "location": "Raiders Camp",
+      "x": 41.85,
+      "y": 35.52,
+      "realm": "surface",
+      "campaignIds": [
+        "might-of-dragons"
+      ],
+      "impacts": [
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 5",
+          "title": "Danger remains at Raiders Camp",
+          "type": "warning",
+          "description": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –"
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 6",
+          "title": "Danger remains at Raiders Camp",
+          "type": "warning",
+          "description": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-southern-arch",
       "locationId": "southern-arch",
       "location": "Southern Arch",
@@ -5170,6 +5453,27 @@
           "title": "Nurador's balance shifted",
           "type": "political",
           "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "name-raiderscamphatcherycaves",
+      "location": "Raiders Camp: Hatchery Caves",
+      "x": 41.85,
+      "y": 35.52,
+      "realm": "surface",
+      "campaignIds": [
+        "might-of-dragons"
+      ],
+      "impacts": [
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 7",
+          "title": "Danger remains at Raiders Camp: Hatchery Caves",
+          "type": "warning",
+          "description": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ???"
         }
       ],
       "crossCampaign": false
