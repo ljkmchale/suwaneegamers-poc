@@ -9,3 +9,16 @@ The people are illustrative and do not represent actual members.
 Calendar title matching is owned by `apps/web/lib/calendarArtwork.ts`.
 No scheduled content writer manages this mapping or image. Campaign headers
 continue to use the existing campaign data and Drive synchronization.
+
+## Published replacement
+
+`ladies-poker-v3-photocraft.webp` is the approved five-player replacement,
+published November 4, 2026. Generated as a revised composition, then finished
+in PhotoCraft with Shadows/Highlights (shadow 12, highlight 5) and Unsharp Mask
+(amount 30, radius 0.6, threshold 3). The near-right card suit index was
+retouched directly in PhotoCraft. Exported as WebP quality 90.
+
+Reviewed at full size and 208px calendar size for five distinct players,
+varied poses and clothing, card orientation, scale, and thumbnail framing.
+Editable master and review notes remain in artwork-drafts/ladies-poker/.
+The versioned URL prevents cached v1 artwork from masking the replacement.
