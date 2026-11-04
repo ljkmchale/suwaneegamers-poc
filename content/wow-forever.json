@@ -78,7 +78,7 @@
         {
           "name": "Larry",
           "character": "Xypher Wingfeather",
-          "className": "Mage · Alliance",
+          "className": "Mage · Alliance · Tailoring / Enchanting",
           "level": ""
         },
         {
@@ -91,6 +91,12 @@
           "name": "Ty",
           "character": "",
           "className": "Undecided",
+          "level": ""
+        },
+        {
+          "name": "Evelyn",
+          "character": "",
+          "className": "Druid",
           "level": ""
         }
       ],
