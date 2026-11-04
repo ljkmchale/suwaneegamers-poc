@@ -9,37 +9,37 @@
       "name": "Chip",
       "character": "",
       "className": "Paladin (tentative)",
-      "level": ""
+      "level": "1"
     },
     {
       "name": "Lesley",
       "character": "",
       "className": "Druid (tentative)",
-      "level": ""
+      "level": "1"
     },
     {
       "name": "Sean",
       "character": "",
       "className": "Undecided",
-      "level": ""
+      "level": "1"
     },
     {
       "name": "Larry",
       "character": "Xypher Wingfeather",
       "className": "Mage · Alliance",
-      "level": ""
+      "level": "1"
     },
     {
       "name": "Emma",
       "character": "",
-      "className": "Hunter or Rogue",
-      "level": ""
+      "className": "Rogue · Leatherworking / Skinning",
+      "level": "1"
     },
     {
       "name": "Ty",
       "character": "",
       "className": "Undecided",
-      "level": ""
+      "level": "1"
     }
   ],
   "nights": [],
@@ -74,31 +74,31 @@
           "name": "Sean",
           "character": "",
           "className": "Undecided",
-          "level": ""
+          "level": "1"
         },
         {
           "name": "Larry",
           "character": "Xypher Wingfeather",
           "className": "Mage · Alliance · Tailoring / Enchanting",
-          "level": ""
+          "level": "1"
         },
         {
           "name": "Emma",
           "character": "",
-          "className": "Hunter or Rogue",
-          "level": ""
+          "className": "Rogue · Leatherworking / Skinning",
+          "level": "1"
         },
         {
           "name": "Ty",
           "character": "",
           "className": "Undecided",
-          "level": ""
+          "level": "1"
         },
         {
           "name": "Evelyn",
           "character": "",
           "className": "Druid",
-          "level": ""
+          "level": "1"
         }
       ],
       "nights": [],
