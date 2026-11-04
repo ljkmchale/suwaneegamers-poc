@@ -374,6 +374,7 @@ export default async function CalendarPage() {
                   href={campaign || adventure ? undefined : googleCalendarEmbedUrl()}
                   headerImage={campaign?.headerImage ?? adventure?.headerImage ?? calendarArtwork(event?.title ?? "")?.image}
                   headerImagePosition={campaign?.headerImagePosition ?? adventure?.headerImagePosition ?? calendarArtwork(event?.title ?? "")?.position}
+                  headerImageFit={!campaign && !adventure ? calendarArtwork(event?.title ?? "")?.fit : undefined}
                   nextDateLabel={event ? dateFormatter.format(new Date(event.start)) : undefined}
                   nextTimeLabel={event ? eventTimeLabel(event) : undefined}
                   isToday={event ? isEventToday(event) : false}

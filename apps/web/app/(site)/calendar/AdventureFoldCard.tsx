@@ -13,6 +13,7 @@ export interface AdventureFoldCardProps {
   href?: string;
   headerImage?: string;
   headerImagePosition?: string;
+  headerImageFit?: "cover" | "contain";
   dateLabel?: string;
   nextDateLabel?: string;
   nextTimeLabel?: string;
@@ -29,6 +30,7 @@ export function AdventureFoldCard({
   href = `/campaigns/${campaignId}`,
   headerImage,
   headerImagePosition,
+  headerImageFit = "cover",
   dateLabel,
   nextDateLabel,
   nextTimeLabel,
@@ -59,7 +61,7 @@ export function AdventureFoldCard({
         {headerImage && (
           <Link
             href={href}
-            className="relative block min-h-28 sm:min-h-full"
+            className={`relative block ${headerImageFit === "contain" ? "aspect-[3/2]" : "min-h-28 sm:min-h-full"}`}
             aria-label={`Open ${campaignName}`}
           >
             <Image
@@ -67,7 +69,7 @@ export function AdventureFoldCard({
               alt={`${campaignName} artwork`}
               fill
               sizes="(min-width: 640px) 13rem, 100vw"
-              className="object-cover"
+              className={headerImageFit === "contain" ? "object-contain" : "object-cover"}
               style={{ objectPosition: headerImagePosition ?? "center" }}
             />
             <div
