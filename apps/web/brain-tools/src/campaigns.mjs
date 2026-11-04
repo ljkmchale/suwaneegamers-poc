@@ -1,4 +1,5 @@
 export const campaigns = {
+  MoD: { code: "MoD", name: "Might of Dragons", aliases: ["might of dragons", "mod"] },
   ANA: {
     code: "ANA",
     name: "A New Adventure",

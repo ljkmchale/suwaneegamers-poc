@@ -348,7 +348,10 @@ describe("Stored page layouts", () => {
       .filter((item): item is BlockItem => item.kind === "block" && item.type === "campaign-card")
       .map((item) => item.props.id);
 
-    for (const campaign of campaigns.filter((campaign) => campaign.official !== false)) {
+    const hiatusIds = getPageLayout("/previous-campaigns")
+      .filter((item): item is BlockItem => item.kind === "block" && item.type === "archived-campaign-card" && item.props.status === "On Hiatus")
+      .map((item) => item.props.id);
+    for (const campaign of campaigns.filter((campaign) => campaign.official !== false && !hiatusIds.includes(campaign.id))) {
       expect(campaignCardIds, `${campaign.name} should be visible on /campaigns`).toContain(campaign.id);
     }
   });
@@ -687,10 +690,11 @@ describe("Previous campaign archive", () => {
       "Treasure Hunters",
       "Tyranny of Dragons",
       "Uldrea",
+      "Mad Mage",
     ]);
     expect(cards.every((card) => card.props.id)).toBe(true);
-    expect(cards.filter((card) => card.props.referenceUrl).length).toBe(4);
-    expect(cards.filter((card) => card.props.image).length).toBe(23);
+    expect(cards.filter((card) => card.props.referenceUrl).length).toBe(5);
+    expect(cards.filter((card) => card.props.image).length).toBe(24);
   });
 });
 

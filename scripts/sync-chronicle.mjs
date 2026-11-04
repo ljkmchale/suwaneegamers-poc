@@ -17,6 +17,17 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const chronicles = [
   {
+    id: "might-of-dragons",
+    name: "Might of Dragons",
+    dir: path.join(root, "mod-chronicle-poc"),
+    source: "might-of-dragons-chronicle.md",
+    output: "might-of-dragons-chronicle.html",
+    served: "might-of-dragons.html",
+    exportUrl: "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/export?format=txt",
+    isSessionHead: (line) => /^\d+\s*[–-]\s*\S/.test(line.trim()),
+    minimumChapters: 7,
+  },
+  {
     id: "heroes-of-emberstran",
     name: "Heroes of Emberstran",
     dir: path.join(root, "chronicle-poc"),

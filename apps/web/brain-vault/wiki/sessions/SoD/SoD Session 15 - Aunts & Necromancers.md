@@ -3,7 +3,7 @@ campaign: "SoD"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: 186e92378b320f8b1db190020fa32961255856e0e017eff0e318c73d8d9078b9
+source_hash: c68efa108732ce8ec704b739c3c2fa8379f8e86f3a1659ed0f6002407e96d8d4
 ---
 
 # Session 15 - Aunts & Necromancers
@@ -160,6 +160,6 @@ It’s the 4th of Baegrum in Adsuren
 Before dawn, one of the McLunge children wakes up Esylla and she meets her aunt to visit the body.  They go to the Oratory and notice that the gentle repose did not take hold on Ifryn.  He is decaying.  She asks Esylla to help her take the body to burn it.  Esylla advises her to talk to Rotvari and she does.  They take the body to the woods and burn it. They hug and part ways after she drops her off at the Grotto.
 Therric - who goes outside to conduct his routine - sees Esylla dropped off.  Aunt Ree walks over to Therric and tries to cast a spell that fails.  She says I would prefer discretion of what you saw be kept a secret.  You can talk to Esylla, but please no one else. She comments that Therric has a strong will.  He agrees to keep her secret and she leaves.  No hug?  He says “safe travels.” 
 Esylla goes up to the room to wake up Lila.  She then opens up the bag and it looks like fishmeat and then it forms into 40 gemstones (10gp each).   They go to the Stables to purchase 2 horses and a wagon (Esylla persuades him to sell it for 110gp).  They group buys rations.  Esylla then buys horse feed.
-The group then leaves via the south road.  On the way out, an elf stops us.  This is the acting Intendant.  He says he wanted to see us before we left.  He thanks us for our help and hands us a crate of fruit and six potions (regular healing potions).  He also reminds Kenton that the message he sent to the Reyvennra family was sent ahead by a scribe. He tell him we will follow up if we find out more about the assassin’s origins -who hired him.
+The group then leaves via the south road.  On the way out, an elf stops us.  This is the acting Intendant.  He says he wanted to see us before we left.  He thanks us for our help and hands us a crate of fruit and six potions (regular healing potions).  He also reminds Kenton that the message he sent to the Reyvennra family was sent ahead by a scribe. He tells him we will follow up if we find out more about the assassin’s origins -who hired him.
 We say our goodbyes and leave…headed to Caldywn via Tirncall. 
  – The End of the Session –

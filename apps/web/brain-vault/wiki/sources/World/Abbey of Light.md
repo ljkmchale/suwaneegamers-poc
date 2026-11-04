@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/abbey-of-light.md"
 source_url: "https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit"
-source_hash: "73b03c6a004195700665d0a5ba345bcd0e9e0ee270f288c3d87b4174367aeb82"
+source_hash: "0a157d228296f25722eb9eb44506e6adb0403d2812ce36d6ade8e9416ae5440b"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-08-30T18:41:04.077Z"
-pulled_at: "2026-08-30T18:40:43.710Z"
+imported_at: "2026-10-27T14:45:35.184Z"
+pulled_at: "2026-10-27T14:45:34.166Z"
 ---
 
 # Abbey of Light
@@ -17,20 +17,15 @@ pulled_at: "2026-08-30T18:40:43.710Z"
 Campaign: World
 Source: [Google Doc](https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit)
 Raw source: [[raw/abbey-of-light.md]]
-Raw hash: `73b03c6a004195700665d0a5ba345bcd0e9e0ee270f288c3d87b4174367aeb82`
-Imported: 2026-08-30T18:41:04.077Z
+Raw hash: `0a157d228296f25722eb9eb44506e6adb0403d2812ce36d6ade8e9416ae5440b`
+Imported: 2026-10-27T14:45:35.184Z
 
 ## Imported Notes
 
 # Abbey of Light
 
 Source: [Google Doc](https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit)
-Pulled: 2026-08-30T18:40:43.710Z
-
-Sections
-  
-
-
+Pulled: 2026-10-27T14:45:34.166Z
 
 ________________
 

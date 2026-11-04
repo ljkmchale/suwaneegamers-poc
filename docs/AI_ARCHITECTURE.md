@@ -216,3 +216,10 @@ hub and reader. Single-party members see no group label or selector. Admins
 use the same party names in navigation and can configure optional member-facing
 `groups[].partyName`. Chronicle links and back links preserve the selected
 party; selection still passes the server-side membership filter.
+
+Might of Dragons uses `mod-chronicle-poc/build-chronicle.mjs`, its player-notes
+source in `google-doc-sources.json`, and the `might-of-dragons` Chronicle sync
+configuration. Its five documented characters have no inferred player identities.
+The campaign page reads the shared Session Summaries Google Doc, like other campaigns.
+Raw player notes remain in Chronicles and the Brain Vault rather than being copied into
+`session_summaries`. Sparse chapters remain verbatim; artwork is not queued without an approved campaign skill.

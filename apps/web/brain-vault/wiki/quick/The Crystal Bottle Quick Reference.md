@@ -4,97 +4,93 @@ campaign: "The Crystal Bottle"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "The Crystal Bottle - Campaign Player Notes"
-source_hash: "ced539439ba04e8870c9a2a8a5f547bdb335195903c0955d6cc6c68c731f91c4"
-curated_at: "2026-08-30T13:31:31.065Z"
+source_hash: "4112fa612d309a661764ede302ae6e2d5c897212af394e9213c5784f078dd0e5"
+curated_at: "2026-10-27T14:55:55.536Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
 # The Crystal Bottle Quick Reference
 
 Campaign: The Crystal Bottle
 
-*This is a living quick-reference page, kept current with the campaign's session notes.*
+*This is a living quick-reference synthesized from the campaign's player notes and kept current with the latest session.*
 
 ## Current Status
 
-As of Session 7.3 (November 2025), the party has defeated Malik (the entity that had consumed Kaldar's identity after the djinn "hollowed" him out) in a portal chamber beneath the Lost City in the Blustery Wastes/Sunlit Haven. They freed the celestial being Aurelion (Yvaine's patron) from imprisonment, and stepped through a stabilized golden-white portal into the celestial realm, where they reunited with Gwyneth and Fizban (Tsuul'physs Bhan). There, they witnessed the departure of the old gods and the arrival of a new divine order (including Muerg and Ashe), watching the Blustery Wastes and the wider world of Oberra begin to heal. Fizban has told the party there is "still work to do."
+As of Session 7.3 (November 1, 2025), the party has defeated Malik (the entity that arose from Kal'dar's hollowed-out body after his attempted cheat of death) in a ruined temple chamber beneath the Lost City in the Blustery Waste. They freed the celestial angel Aurelion, bound for ages at a broken portal, who healed the party and opened a portal to the celestial city. The party has now stepped through that portal and been greeted by Gwyneth and Fizban (Tsuul'physs Bhan), who are showing them the "Observation Hall" — witnessing the old gods departing and new gods (born of will, not divinity) igniting new constellations and reshaping the world below, including the healing of the great crevasse. Fizban says "there is still work to do."
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
-| Scarlytt Amyran | - | Elf | Paladin | Worships Fralee; carries a phoenix-feather shield gifted by Fizban |
-| Sigil | - | Half-Orc | Fighter | Guided by "mama's friend" (Morith); tasked by Fizban to find his mother's sword |
-| Yvaine | - | Aasimar | Wizard/Warlock | Transformed into a warlock by Fizban/Gwyneth/Lothim; patron is the angel Aurelion, chose the domain of Layeth the Selfless One |
-| Ren | - | Elf | Ranger | Sister Angela rescued from Witch Harlowe; seeking her missing parents |
-| Narris | - | (Human, likely) | Bladesinger | Joined at Talbasar after Kaldar's siege; tied to a prophecy involving "the mirror void" and Sigil as his anchor |
-| Galtrelon (Gal) | - | Elf | Archdruid | Archdruid of the Howling Grotto; joined party in Everlite as replacement after Tass's death |
+| Scarlytt Amyran | — | Elf | Paladin | Worships Fralee; carries a phoenix-feather shield gifted by a blue dragon (Indryss), linked to Galtrelon's great-grandfather |
+| Sigil | — | Half-Orc | Fighter | Tasked by Fizban to recover his mother's sword; designated "anchor" for Narris's extraplanar travels |
+| Yvaine | — | Aasimar | Wizard/Warlock | Formerly devoted to Lyess; transformed into a warlock of Layeth the Selfless One, patron is the celestial Aurelion |
+| Ren | Elven Ranger | Elf | Ranger | Sister Angela was rescued from Witch Harlowe; seeking parents, now believed in the Bathaen Empire |
+| Narris | — | Human (likely) | Bladesinger/Wizard | Former ALM student; tied to the shadow seer Morith and a prophesied "walk between two worlds" |
+| Galtrelon (Gal) | — | Elf | Archdruid | Archdruid of the Howling Grotto; joined party in Everlite as Tass's replacement; companion to Lothim |
 
 ## Former Party Members (Deceased / Departed)
 
-- **Opal Creekbed** (Human Paladin) - left the party after Session 2.1
-- **Dalbyre Bramblesage** (Elf Bard) - left the party at Talbasar (Session 5.2), siding with Kaldar's viewpoint ("Kal'dar was transparent and truthful and I think you are misguided")
-- **Tassarion Ranges** (Eladrin Cleric) - died in Kravwynhold defeating Witch Harlowe to save Angela (~Session 6.2); given funeral rites in Everlite (Session 6.3); his body is intended to be returned to his parents in the Mahruud
-- **Alteya (Alt)** - Elven Ranger who joined after Session 5.6; stayed behind in Everlite (Session 6.5) to reunite with her rescued husband and child after her bond with Lothim dissolved
+- **Tassarion (Tass) Ranges** — Elven Cleric; died in the Harlowe confrontation in Kravwynhold (Session 6.2) saving Angela; given a temple funeral in Everlite (Session 6.3); his soul was claimed and seen departing by most of the party; his body preserved to eventually be returned to his parents in the Mahruud.
+- **Dalbyre Bramblesage** — Elf Bard; left the party during the siege of Tal'basar, declaring Kal'dar "transparent and truthful" and the party "misguided" (Session 5.2).
+- **Opal Creekbed** — Human Paladin; left the party after Session 2.1.
+- **Alteya (Alt)** — Elven Ranger; joined Session 5.6, reunited with her long-lost husband and child in Everlite (Session 6.5); chose to stay behind with her family rather than continue adventuring (end of Session 6.5/start of Session 7).
 
 ## Key NPCs
 
-- **Fizban (Tsuul'physs Bhan)** - Ancient alchemist/artificer, father of Gwyneth, creator of many magic items; revealed to be far older than believed; guiding the party's quest against Kaldar
-- **Gwyneth** - Dryad, Fizban's daughter, liaison to the Council of Six; has a "special purpose" coming, per Fizban
-- **Kal'dar** - Fizban's former apprentice turned cult leader; his identity/body was ultimately revealed to have been consumed and replaced by Malik
-- **Malik** - Air genasi who freed the djinn and was "hollowed" out to become the entity behind Kaldar's later actions; defeated by the party in the Lost City (Session 7.3)
-- **The Djinn (unnamed)** - Master of Kaldar/Malik, trapped in the Crystal Bottle; recalled Kaldar to answer for failure
-- **Witch Harlowe** - Human trafficker who ruled Kravwynhold and imprisoned Ren's sister Angela; revealed to be Yvaine's mother; banished through a portal, last known to be in the Bathaen Empire
-- **Aurelion** - Celestial angel, Yvaine's patron, freed from imprisonment in the Lost City; sacrificed remaining strength to heal and empower the party before they entered the celestial portal
-- **Lothim** - Silver dragon (wyrmling when first met); ally of the party and guardian of Everlite; later shown able to take human form
-- **Grisha Thornhand** - Blacksmith in Kravwynhold, given leadership of the town's survivors after Harlowe's fall
-- **Cornelius Woodrift** - Father of executed Sillian Woodrift; made a deal with the party, later betrayed and killed after his true nature was revealed
-- **Muerg** and **Ashe** - Newly ascendant deities who appeared at Everlite, claiming dominion as "the old gods" retreat; Ashe gifted Yvaine magical armor
-- **Angela** - Ren's sister, held captive by Harlowe for what was subjectively 10 years; rescued and left in Everlite for healing, deeply traumatized
+- **Fizban (Tsuul'physs Bhan)** — Ancient alchemist/artificer, Gwyneth's father, creator of many magic items; revealed to be alive and active in the celestial city; guiding the party against Kal'dar/Malik.
+- **Gwyneth** — Dryad, Fizban's daughter, centuries old (Elixir of Timelessness), longtime party contact/spy via Yvaine's amulet; has an unrevealed "special purpose" coming.
+- **Malik** — Air genasi, original Aure'a'Pura cult leader; died freeing the djinn; his hollowed essence became the entity that possessed/drove "Kal'dar"; killed by the party in the Lost City (Session 7.3).
+- **Kal'dar** — Former apprentice of Fizban, led the Aure'a'Pura cult and the siege of Tal'basar; revealed to have been "already dead," truly embodying Malik.
+- **Harlowe (the Witch)** — Yvaine's mother; human trafficker who ran Kravwynhold and held Ren's sister Angela captive for a decade; banished through a portal, whereabouts unknown, possibly tied to the Bathaen Empire.
+- **Lothim** — Silver dragon wyrmling from Session 2.1, now a recurring ally/guardian of Everlite; can shift to human-like form (Ymec).
+- **Aurelion** — Celestial angel, Yvaine's warlock patron, freed from imprisonment in the Lost City's portal chamber; sacrificed his strength to stabilize the portal for the party.
+- **Muerg & Ashe** — New deities who manifested at Everlite, cleaving open the mountain pass and freeing the town from its time-warp; Muerg claims Everlite under his protection as the "new order."
+- **Grisha Thornhand** — Blacksmith in Kravwynhold, given leadership of the town's survivors by the party.
+- **Angela (Angel)** — Ren's sister, held captive by Harlowe for 10 subjective years; rescued, left in Everlite's care to heal from trauma.
 
 ## Factions & Organizations
 
-- **A'urea'Pura Cult** - Air genasi cult worshipping the trapped djinn; responsible for the siege of Talbasar and excavation efforts in the Blustery Wastes
-- **The Council of Six** - Governing body of Arbescar/Talbasar; based at ALM; down to 4 members after losses in the siege
-- **ALM (Arbescar Light and Magic)** - Magic academy/school in Talbasar; suffered heavy losses (library destroyed, Carl injured) during Kaldar's siege
-- **Kravwynhold** - Child-trafficking settlement in the Blustery Wastes controlled by Witch Harlowe, now liberated and leaderless save for Grisha
+- **The A'urea'Pura Cult** — Air genasi-led cult worshipping the freed djinn; splintered into factions; responsible for the Tal'basar siege and the excavation in the Blustery Waste.
+- **Council of Six (Talbasar)** — Governing body of Talbasar/Arbescar; lost two members in the war with Kal'dar; the party fought alongside them.
+- **Arbescar Light and Magic (ALM)** — Magical academy in Talbasar; suffered heavy losses (library destroyed, Carl injured) during the siege.
+- **Kravwynhold** — Slaver town on an island, formerly ruled by Witch Harlowe; liberated by the party; destroyed by Muerg's "Awakening."
+- **Everlite** — Hidden, formerly time-frozen town within the Blustery Waste; protected historically by the old gods, now under Muerg's protection and reconnected to normal time/Arbescar.
 
 ## Key Locations
 
-- **Talbasar** - Major town, site of the battle against Kaldar's army; heavily damaged, rebuilding
-- **Scarbrook** - Town where Erick the Alchemist operated a cult lab beneath his shop
-- **Fizban's Tower** (Longwood Forest) - Contains a vault of magic items and a magical telescope pointed at the Blustery Wastes excavation site
-- **The Blustery Wastes / Sunlit Haven** - Once-lush desert region, formerly the city of Athralis/Thal'astyr; site of the Lost City and ongoing cultist excavation
-- **Thal'astyr** - Ancient underground ruin city beneath the Blustery Wastes, suburb of the greater city of Arthrelleus
-- **Everlite** - Time-displaced snowy town beneath the Blustery Wastes, protected historically by the old gods; recently thawed and reconnected to normal time and the surface world
-- **Frostbite Mountain** - Ice fortress lair of the wraith Frostbite, defeated by the party; source of the Frostbite Portal Stone
-- **Kravwynhold** - Ruined, dark settlement controlled by Witch Harlowe; since collapsed after her defeat and the fall of its protective shield
-- **The Lost City** - Ancient ruin in the Blustery Wastes containing the temple/portal chamber where Malik was defeated
+- **The Blustery Wastes (Sunlit Haven)** — Once-fertile region, now desert; home to the buried city of Thal'astyr, the Lost City (Athralis), and Everlite.
+- **Fizban's Tower (Longwood Forest)** — Contains a vault of magic items and a telescope revealing the Lost City's excavation site.
+- **Thal'astyr** — 5,000-year-old sunken holy city beneath the Blustery Waste; gateway to Everlite found here.
+- **Everlite** — Snow-bound (now thawing/spring-like) town beyond a magical gate; home of Lothim, the Priestess/Temple, and now reconnected to the surface world.
+- **Kravwynhold** — Grim slaver town on an island; site of Harlowe's defeat and the children's rescue; now destroyed.
+- **The Lost City (Athralis/Thal'astyr's "sister" ruin)** — Site of the ancient portal chamber where Aurelion was imprisoned and Malik was slain; excavation site sought by the cult.
+- **Talbasar** — Major town; site of the climactic battle against Kal'dar's forces (Session 5.2).
 
 ## Active Quests & Objectives
 
-- Return the Crystal Bottle/djinn to proper containment ("put the D'jinn back in the bottle")
-- Find and deal with Kaldar/the djinn's master, tied to Zaprock's Crown island off Arbescar's coast
-- Locate Alteya's missing husband and child (partially resolved - reunited in Everlite, Session 6.5)
-- Retrieve Sigil's mother's sword, from a cave in Nesbit's Grove east of Devil's Fork
-- Return Tass's body to his family in the Mahruud
-- Investigate the excavation site in the northern Blustery Wastes tied to the celestial portal
-- Find Ren's parents, last known to be with Harlowe, now believed to be in the Bathaen Empire
-- Continue whatever task Fizban has in mind following the witnessing of the new divine order
+- Witness/learn from the "changing of the gods" in the celestial city alongside Fizban and Gwyneth (current, Session 7.3).
+- Find Fizban's whereabouts and intentions — now resolved, in contact with the party.
+- Recover Sigil's mother's sword (tasked by Fizban, Session 6.3; location in a cave in Nesbit's Grove, east of Devil's Fork).
+- Return Tassarion's body to his parents in the Mahruud.
+- Locate Ren's parents / the Witch Harlowe, now believed to be in the Bathaen Empire.
+- Return the Crystal Bottle to Belzander / put the djinn back in the bottle (long-standing, unresolved).
+- Determine the fate/whereabouts of the djinn now that Malik/Kal'dar is dead.
 
 ## Open Threads
 
-- What exactly happened to cause the Blustery Wastes to form, and why the old gods caused it
-- The true extent and nature of Fizban's age and power
-- What became of Sigil while separated from the party via the magic card box, and his ongoing mystical connection to Morith and "the mirror void"
-- The nature and future demands of Yvaine's patron Aurelion and her goddess Layeth
-- Whether Ren's parents can be found and what happened to them 25 years ago
-- The fate of Grisha and the Kravwynhold survivors traveling to Talbasar
-- What role Gwyneth's "special purpose" (hinted at by Fizban) will play
-- The ultimate outcome/redemption question around Kaldar (now revealed as consumed by Malik)
+- The true identity and current status of "the djinn" who originally hollowed out Kal'dar — never named, status after Malik's death unknown.
+- What is Gwyneth's "special purpose" that Fizban alluded to (Session 6.3)?
+- Why is Kal'dar/Fizban's "son" young in appearance despite 40+ years of planning?
+- What exactly happened to the Blustery Waste/Athralis thousands of years ago to turn it into desert, and the gods' role in that catastrophe.
+- The fate of Grisha and the Kravwynhold refugees traveling to Talbasar.
+- Unresolved personal visions from the Blustery Waste canyon (Ren's parents, Yvaine's father/mother, Scarlytt's sister, Sigil's mother) — implied to be thematically or magically connected.
+- What the "keys" taken from Erick ultimately unlock (two keys remain unexplained).
+- The full significance of the plaque bearing the party's names in the Lost City portal chamber.
 
 ## Recent Developments
 
-- **Session 6.5:** Party freed multiple people (including Alteya's family) preserved for centuries in an enchanted grove beneath Everlite after a ritual sacrifice of memories; encountered an angry, time-displaced ancient druid.
-- **Session 7 (Aug 2025):** New gods Muerg and Ashe appeared at Everlite, cleaving a new pass through the mountain and ending its time distortion; Yvaine received magical armor as a divine gift; Sigil vanished with Fizban to pursue his mother's sword quest.
-- **Session 7.2:** Party fought their way through the Lost City's temple complex, battling guards, wights, and a chain-golem, and located the portal chamber where Aurelion was imprisoned; discovered "Kaldar" is being controlled/replaced by an entity calling itself Malik.
-- **Session 7.3 (Nov 2025):** Party defeated Malik in an illusion-heavy battle, freed Aurelion from his bonds, and stepped through the stabilizing portal into the celestial realm, witnessing the transition from the old gods to a new divine order alongside Fizban and Gwyneth.
+- **Session 6.5:** Party freed Alteya's long-lost husband and child (and others trapped across centuries) from a frozen druidic grove in Everlite; confronted an ancient, time-displaced druid; leveled up.
+- **Session 7 (The Lost City):** Muerg and Ashe manifested at Everlite, ending its time-warp and claiming it under new divine protection; Yvaine received upgraded (+2) armor; Sigil was spirited away by Fizban to pursue his mother's sword quest; party traveled six days to the Lost City, fighting scorpions and discovering the aftermath of Kal'dar's army's destruction en route.
+- **Session 7.2:** Party infiltrated the Lost City at night, rescued a captured and unconscious Sigil from cultist guards, fought through animated statue-guardians and undead wights beneath a buried temple, and reached the chamber housing the imprisoned angel Aurelion.
+- **Session 7.3:** Party battled Malik (the entity behind "Kal'dar") amid illusions and a collapsing portal; defeated him, recovered the key to Aurelion's chains, and freed the angel. Aurelion healed the party, opened a stable portal to the celestial city, and sacrificed his remaining strength. The party emerged to find Fizban and Gwyneth waiting, now witnessing the transition from the old gods to a new divine order firsthand.

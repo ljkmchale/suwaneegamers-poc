@@ -1,9 +1,8 @@
 # The Crystal Bottle - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit)
-Pulled: 2026-06-18T16:50:09.931Z
+Pulled: 2026-10-27T14:45:23.523Z
 
-Quest Log
 QUEST LOG        
 
 
@@ -60,7 +59,6 @@ Quest
 * Found letter from Erick to ‘ruler of Elemental realm’ - said cult is excavating resources to harness power for elemental army
 	
 
-Session Notes
 Session 0 - Test
 (May 27, 2023)
 Marrowdale
@@ -1316,7 +1314,6 @@ WE END HERE
 
 
 
-NPCs
 NPCs        
 Reputation Level
 Hostile
@@ -1420,7 +1417,6 @@ Barmaid
 	Talked to Dalbrye about rumors 
 	
 
-Players
 ID' OBSCURA        
  Alteya
 	Narris
@@ -1466,7 +1462,6 @@ ID' OBSCURA
 
 
 
-Rumors
 RUMORS        
 
 
@@ -1498,12 +1493,10 @@ Rumor
 
 
 
-Map of Arbescar
   
 
   
 
-Loot
 RESOURCES / GROUP LOOT        
 
 
@@ -1531,7 +1524,6 @@ Resource
 
 
 
-References
         REFERENCES        
 Tips
    1. This document is set up to work best when viewing as “Print Layout”
@@ -1546,7 +1538,6 @@ Tips
    * D&D Session Calendar
 	
 
-Spell Considerations
 
 
 
@@ -1647,7 +1638,6 @@ Level
 
 	
 
-Chip's Notes
 Session Summary
 Session 0 - Test (May 27, 2023)
 In Marrowdale, the party (Dalbyre Bramblesage - Elf Bard, Opal Creekbed - Human Paladin, Scarlytt Amyran - Elf Paladin, Sigil - Half-Orc Fighter, Tassarion Ranges - Elf Cleric) forms at Arbescar Light and Magic (ALM). They encounter L’idoneus Obscurado and begin their adventure, though details are sparse.

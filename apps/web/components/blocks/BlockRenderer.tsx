@@ -2110,7 +2110,20 @@ function CardLayoutItemRenderer({ item }: { item: CardLayoutItem }) {
       const label = item.props.label as string | undefined;
       const href = item.props.href as string | undefined;
       const variant = (item.props.variant as string | undefined) ?? "primary";
-      if (!label || !href) return null;
+      if (!label) return null;
+      if (!href) return (
+        <div style={style} className="flex items-end">
+          <button
+            type="button"
+            disabled
+            title="Link coming soon"
+            className="inline-flex cursor-not-allowed rounded-md border px-4 py-2 font-cinzel text-xs tracking-widest uppercase opacity-50"
+            style={{ borderColor: "var(--color-bg-border)", color: "var(--color-accent-gold)" }}
+          >
+            {label}
+          </button>
+        </div>
+      );
       const newTab = opensInNewTab(href);
 
       return (

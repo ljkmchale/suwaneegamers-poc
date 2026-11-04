@@ -2130,6 +2130,7 @@ def wake_word_command(question: str) -> str | None:
 # campaigns gets nothing. Normalize to the vault name before asking.
 BRAIN_CAMPAIGNS: dict[str, tuple[str, ...]] = {
     "A New Adventure": ("a new adventure", "ana"),
+    "Might of Dragons": ("might of dragons", "mod"),
     "Heroes of Emberstran": ("heroes of emberstran", "heart of emberstran"),
     "Souls of Destiny": ("souls of destiny",),
     "The Silent Vanguard": ("silent vanguard",),

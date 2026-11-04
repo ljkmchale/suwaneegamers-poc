@@ -133,7 +133,7 @@ export function applyCampaignTrackingToActiveCampaigns(
     if (!entry) return [campaign];
     if (entry.status !== "Active") return [];
 
-    return [{ ...campaign, name: entry.name, dm: entry.dm }];
+    return [{ ...campaign, name: entry.name.toLowerCase() === "might of dragons" ? "Might of Dragons" : entry.name, dm: entry.dm }];
   });
 }
 

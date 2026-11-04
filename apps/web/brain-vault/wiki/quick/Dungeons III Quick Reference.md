@@ -4,74 +4,83 @@ campaign: "Dungeons III"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "Dungeons III - Campaign Player Notes"
-source_hash: "ee0f41ea7edea9f8c038c45c8140f8ea23a8b4f35a726ca13628d3bd892339b6"
-curated_at: "2026-09-29T14:50:58.492Z"
+source_hash: "2aa1f93d06d3963f1d4a96ac963ec191c6c832a279a1f370e5dbb36eab1ebab2"
+curated_at: "2026-10-27T14:55:14.278Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
 # Dungeons III Quick Reference
 
 Campaign: Dungeons III
 
-This is a living quick-reference synthesized from the current campaign player notes and updated as new sessions occur.
+*This is a living quick-reference page, kept current with the Dungeons III campaign notes.*
 
 ## Current Status
-It is the 22nd of Evalee, 1246. The party is deep inside the newly-uncovered Osmanae ruin "Khelar Watch Eastern Observation Point II," in the Jagged Waste Crags east of Scarwatch Hold. After a bloody fight that wiped out the Radiant Eye excavation crew (led by Selris and Garamond), the party opened a great inner door using stone/gear mechanisms tied to sun/moon/star iconography. They now stand before a bronze pedestal with a glowing crystal reading PLACE, SKY, WITNESS, with floor markings indicating the pedestal rotates. Two Radiant Eye members (Mira and Dorin) were spared and sent off with the bodies of their dead companions, while one Radiant Eye survivor stayed behind before events overtook the group. Several parallel quests (map-making for Umlin, recovering a celestial instrument for Embryl, and questions about the fugitive Isgo and the Scorpion) remain open.
+As of the morning of the 28th of Evalee, 1246 (end of Session 18), the party is at Scarwatch Hold, having just met with Warden Naevaris Haliun. They delivered the rescued Isgo, reported the destruction of the Radiant Eye excavation team at the ruined Osmanae watchtower in the Jagged Waste Crags, and were paid for the map (Umlin), for Isgo, and a bonus from the Warden for securing the Hold. The ancient Osmanae observatory ("Khelar Watch Eastern Observation Point II") has collapsed behind them after they retrieved a mysterious celestial instrument (the "Cogspinner") for Embryl. The party's next destination is **Ahnassa**, reportedly the Radiant Eye's base of operations.
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
-| Æon | Player 1 | High elf (possibly half-elf) | Fighter | Sell-sword/ex-soldier; searching for a god to follow (considered Osanna, warned off Muerg, recently pointed toward Amriel the Redeemer); healed 10 years ago by a mysterious "angel" |
-| Draelith | Player 2 | Human | Arcane caster (Starbolt/Firebolt, illusions) | Devotee of Celestine (harp-shaped birthmark); carries the K9 Crew's blue sending stone, which reacts near Osmanae sites |
-| Nixie | Player 3 | Svirneblin (deep gnome) | Circle of the Stars Druid | Naive, starstruck since reaching the surface; skilled cartographer/tinkerer; wears a Clockwork Amulet |
-| Meles | Player 4 | Wood Elf | Rogue (scout/sneak attack) | Expert tracker and scout; carries moonweed pipe; past tied to Dempsey and Gurimond (Varenwood) |
-| Seraphine "Sera" Veyne | Player 5 | Aasimar | Cleric/Healer | Worships Natafae; fascinated by wounds and pain; runed shield references Natafae |
-| Nova | Later addition | Aasimar | Bard | Joined the caravan into Hesfal; owns Pequin's Pocket Prism and a Dunduar-gold brooch with a cryptic warning inscription |
+| Æon | — | Half-elf/High elf (ambiguous) | Fighter (sell-sword) | Seeking a deity; rejected Osanna, intrigued by the angel who once healed him, told to consider Amriel the Redeemer |
+| Draelith | — | Human | Arcane caster (Starbolt/Firebolt, illusion magic) | Devotee of Celestine; bears a harp-shaped birthmark; identified as "Skytouched" by Embryl |
+| Nixie | — | Svirneblin (deep gnome) | Druid (Circle of the Stars-type; wild shape, Starry Wisp, Guiding Bolt) | Also bears a harp mark (on his foot); identified as "Skytouched" |
+| Meles | — | Wood elf | Rogue (scout/sneak attack) | Skilled tracker and scout; haunted past involving Gurimond and a tortured pet squirrel |
+| Seraphine "Sera" Veyne | — | Aasimar | Cleric/healer | Worships Natafae; unusually fascinated by wounds, injuries, and pain |
+| Nova | — | Aasimar | Bard | Joined the party in Hesfal (Session 2); carries Pequin's Pocket Prism and a magical Dunduar brooch |
 
 ## Key NPCs
-- **Mayor Estufus Windseek ("Stu")** - Mayor of Hesfal, former Realmwarden, dispatched the party after the bandits/K9 Crew.
-- **Ravina Rool** - Camp leader of the Covered Hooch in Hesfal.
-- **Kadella Tenbrook** - Halfling artist at the Hall of Many Hands, devotee of Osanna, tried to recruit Æon.
-- **Laestrik** - Potter/follower of Goldraen met at the Hall of Many Hands.
-- **Ilyana Joest** - Masseuse at Moonfern Sanctuary; friendly with Æon.
-- **Mexson Tam** - Traveling bard/tracker investigating the Hesfal murder, headed toward Tratta.
-- **Sherdin** - Woodsman who tends horses for the K9 Crew near the game trail; brother of Ireosh.
-- **Ralli** - Deserted inner gate guard from Scarwatch Hold; smitten with Nova; delivered a package to the Cap'n.
-- **Kinrik ("The Cap'n")** - Leader of the K9 Crew; lost family to "the Scorpion"; sentenced to conscription at Scarwatch Hold.
-- **Koren Lonsit ("Kolo")** - K9 Crew member/escaped prisoner; sentenced to hard labor.
-- **The Scorpion** - Unseen figure who hired/paid the K9 Crew via a magic sending stone; identity unknown.
-- **Nikalia** - Head guard at Scarwatch Hold, possibly retiring.
-- **Warden Naevaris Haliun** - Warden of Scarwatch Hold; judged the K9 Crew.
-- **Umlin Stonewatch** - Dwarven scribe; commissioned the party to complete a regional map (20gp).
-- **Nambra Maerth** - Drow advisor to the Warden; tasked the party with investigating the Radiant Eye cult.
-- **Embryl Lonfren** - Scholar at Scarwatch House; seeks a lost Osmanae celestial instrument for the Advents of Harmony at Argent Halls.
-- **Isgo** - Wanted half-orc bandit; horse Bullseye recovered; Isgo himself found unconscious in cult-controlled caves, stabilized, and left in hobgoblin custody pending return.
-- **Fikrak & Brumelynn Blackshield** - Dwarven smiths relocating to Scarwatch Hold; identified Nova's brooch as Dunduar gold.
-- **Dempsey ("Demp")** - Inner gate guard and old friend of Meles from Varenwood.
-- **Gurimond/Garamond** - Man from Meles's past (tortured his pet squirrel); reappeared as a Radiant Eye enforcer at the Osmanae site and was killed in the ensuing battle.
-- **Selris** - Leader of the Radiant Eye excavation team (same name as a former Scarwatch Hold curate suspected of cult ties); killed by the party.
-- **Mira & Dorin** - Radiant Eye members spared by the party and sent off with their dead.
-- **Thiddle** - Scarwatch Hold banker; suspicious of a burglar (later identified by the party as guard Bryth).
+- **Mayor Estufus "Stu" Windseek** - Mayor of Hesfal; former Realmwarden; hired the party to pursue bandits and the Radiant Eye.
+- **Ilyana Joest** - Masseuse at Moonfern Sanctuary in Hesfal; Æon's recurring romantic interest.
+- **Kadella Tenbrook** - Halfling artist at Boar's Best; devotee of Osanna who has tried to convert Æon.
+- **Captain Kinrik ("the Cap'n")** - Leader of the K9 Crew bandits; captured, sentenced to conscription at Scarwatch Hold; lost his wife and child to "the Scorpion."
+- **Koren Lonsit ("Kolo")** - K9 Crew member/escaped prisoner; recaptured, sentenced to hard labor.
+- **The Scorpion** - Unseen figure who hired the K9 Crew via a magic sending stone; identity unknown.
+- **Sherdin** - Woodsman who tends travelers' horses near the Jagged Waste Crags; brother of Ireosh.
+- **Nikalia** - Head Inner Gate guard at Scarwatch Hold.
+- **Warden Naevaris Haliun** - Warden of Scarwatch Hold.
+- **Nambra Maerth** - Drow telepathic advisor to the Warden; tasked the party with investigating the Radiant Eye cult.
+- **Umlin Stonewatch** - Dwarven scribe at Scarwatch Hold who commissioned the party's regional map (paid in full).
+- **Embryl Lonfren** - Scholar at Scarwatch Hold studying the Osmanae; sent the party to retrieve the celestial instrument for the Advents of Harmony; named Draelith and Nixie "Skytouched."
+- **Isgo** - Half-orc bandit/criminal, wanted at Scarwatch Hold; captured by the Radiant Eye, rescued by the party, afflicted with an unexplained illness from the caves.
+- **Selris** - Radiant Eye leader/priest at the Osmanae dig site; killed in combat (Session 16); her journal hints at Ahnassa funding and a contact named "Gas."
+- **Garamond** - Selris's muscular enforcer; killed in combat; bore a scar from Meles' and Dempsey's shared past (via Gurimond).
+- **Gurimond** - Mercenary/assassin from Meles' past, hired in Tratta for 100gp by an unknown "handler" marked with an insect sigil; tortured Meles' pet squirrel as a child.
+- **Mira & Dorin** - Surviving Radiant Eye members who fled the collapsed dig after the party's fight with Selris's team.
+- **Mexson Tam** - Traveling bard/tracker investigating the Hesfal murder; headed to Tratta.
+- **Dempsey "Demp"** - Inner Gate guard at Scarwatch Hold, childhood friend of Meles from Varenwood.
+- **Fikrak & Brumelynn Blackshield** - Dwarven smiths relocating to Scarwatch Hold; examined Nova's magical Dunduar brooch.
+- **Lavoruud Wrescot** - Boastful self-styled "Traveller"; caught stealing Nova's brooch, revealed to be compelled by its magic.
 
 ## Factions & Organizations
-- **The K9 Crew** - Bandit gang responsible for the Hesfal robbery and murder frame-up; hired by "the Scorpion"; leadership captured and sentenced.
-- **The Radiant Eye** - A cult defacing the Sanctuary at Scarwatch Hold and secretly excavating an Osmanae ruin in the Jagged Waste Crags; most of the on-site excavation team was killed by the party; survivors fled toward Ahnassa/Raise Reef Harbor.
-- **The Osmanae** - Ancient order of celestial observers who once maintained coordinated eastern/western "watchtower" observatories; their ruined outpost is currently being explored.
-- **Advents of Harmony** - Collectors of history and lore based at the Argent Halls; Embryl intends to deliver the recovered celestial instrument to them.
-- **Scarwatch Hold Guard / Realmwardens** - Local authority and military order; several NPCs (Dempsey, Nikalia) are affiliated.
+- **The K9 Crew** - Bandit gang led by Captain Kinrik; hired by "the Scorpion" to terrorize Hesfal during Salvus; defeated and handed over to Scarwatch Hold.
+- **The Radiant Eye** - A cult studying (and seeking power from) Osmanae ruins and "magic rocks" tied to the Broken Moon; defaced the Sanctuary at Scarwatch Hold; excavation team wiped out by the party at the Jagged Waste Crags watchtower; base of operations believed to be in Ahnassa (Raise Reef Harbor), funded by an unknown wealthy patron.
+- **The Osmanae** - Ancient order of astronomers/star-watchers who built observation towers (including the "Last Watchtower"/Khelar Watch Eastern Observation Point II) across Myrdae; studied celestial phenomena using engineering, not magic.
+- **The Advents of Harmony** - Collectors of lore and history housed at the Argent Halls; destination for the recovered celestial instrument.
+- **Scarwatch Hold Guard / Realmwardens** - Military/order force at Scarwatch Hold; Dempsey is training to become a Realmwarden.
 
 ## Key Locations
-- **Hesfal** - Hamlet in the Yearning Vale Territory where the campaign began; site of Salvus festival, the Covered Hooch, Boar's Best Inn & Tavern, Hall of Many Hands, and Moonfern Sanctuary.
-- **Scarwatch Hold** - Fortified hold with the Citadel, Watchtower Inn, Hoot & Howl Tavern, Sanctuary, bank, and gem/smith shops; seat of Warden Haliun.
-- **Sherdin's Lean-to** - Waystation on the Tor March/rugged trail south toward the Jagged Waste Crags.
-- **Jagged Waste Crags** - Rugged region south of Scarwatch Hold containing bandit hideouts, hobgoblin/gnoll caves, and the Osmanae ruin.
-- **Watch Eastern Observation Point II** - Newly-excavated Osmanae observatory ruin; site of the current expedition and final battle with the Radiant Eye crew.
-- **Tratta** - Town with an Arcane Waypoint (Anchored Spire); Mexson's destination.
-- **Ahnassa / Raise Reef Harbor** - Distant city referenced in a recovered map and named as a Radiant Eye gathering point.
-- **Basctdelm, Dunduar, Boneforge, Mahruud** - Other named regions/settlements referenced in travel and lore.
+- **Hesfal** - Hamlet in the Yearning Vale Territory; starting location; home to the Covered Hooch camp, Moonfern Sanctuary, Hall of Many Hands temple, and Boar's Best Inn & Tavern.
+- **Scarwatch Hold** - Fortified hold with a craggy moat; includes the Citadel, Watchtower Inn, Hoot & Howl Tavern, the Sanctuary, and the Bank; current party base.
+- **Tor March** - Main road connecting Hesfal and Scarwatch Hold.
+- **Jagged Waste Crags** - Rocky crag region southeast of Scarwatch Hold; site of bandit hideouts, hobgoblin/gnoll lairs, a basilisk cavern, and the ruined Osmanae watchtower ("Khelar Watch Eastern Observation Point II"), now collapsed.
+- **The Mahruud** - Coastal region to the southeast, home to the "Mahruudian Raiders" encountered en route.
+- **Tratta** - Town with the Anchored Spire arcane waypoint; destination for Mexson Tam.
+- **Ahnassa** - City with the Raise Reef Harbor; believed Radiant Eye base of operations; the party's next destination.
 
 ## Active Quests & Objectives
-- **Chart the surrounding lands for Umlin** at Scarwatch Hold (10gp paid upfront, 10gp more on completion).
-- **Recover the Osmanae celestial instrument for Embryl** to deliver to the Advents of Harmony at Argent Halls (payment/reward not yet finalized).
-- **Investigate/neutralize the Radiant Eye cult** for Nambra - largely accomplished at the excavation site, though other cultists escaped toward Ahnassa.
-- **
+- Travel to **Ahnassa** to investigate the Radiant Eye's base of operations and funding source.
+- Deliver the recovered **celestial instrument** (the "Cogspinner") to Embryl/the Advents of Harmony at the Argent Halls.
+- Æon continues searching for a deity to follow (currently considering Amriel the Redeemer).
+
+## Open Threads
+- The true identity of **"the Scorpion"**, who hired the K9 Crew and communicated via the magic sending stone.
+- The meaning and source of being **"Skytouched"** (Draelith and Nixie both bear matching harp-shaped marks linked to the Osmanae ruins).
+- The nature and origin of the **"magic rocks"** tied to the Broken Moon (connected to Draelith's sending stone and Nova's brooch).
+- Who is funding the Radiant Eye's operations in Ahnassa ("deep pockets").
+- The identity of the "handler" (insect sigil) who hired Gurimond.
+- The cause of **Isgo's unexplained illness** contracted in the caves.
+- The full meaning of the warning inscribed on Nova's Dunduar brooch ("Bound against inner fracture...").
+- The mystery of **Seraphine's self-inflicted wounds/bandages**, which she has declined to fully explain.
+- Disagreements within the ancient Osmanae order between a "Director" pursuing a risky "Radiant Trial" and dissenting assembly members — unresolved historical mystery from recovered documents.
+
+## Rec

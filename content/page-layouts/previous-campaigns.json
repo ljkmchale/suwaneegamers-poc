@@ -412,5 +412,23 @@
       "party": "[]",
       "sections": "[]"
     }
+  },
+  {
+    "kind": "block",
+    "id": "archive-mad-mage",
+    "type": "archived-campaign-card",
+    "props": {
+      "id": "mad-mage",
+      "title": "Mad Mage",
+      "status": "On Hiatus",
+      "dm": "Michael Hewson",
+      "image": "/media/images/campaigns/mad-mage.webp",
+      "imagePosition": "center",
+      "description": "A campaign of arcane mysteries, unstable power, hidden agendas, and strange discoveries beneath the surface of Myrdae.",
+      "referenceUrl": "/campaigns/mad-mage",
+      "resources": "[{\"label\":\"Player's Notes\",\"url\":\"https://docs.google.com/document/d/1gNn6_TzYdtrK05cOMK_GLfOGrhcMgK3LE9cDwqqgOI0/edit?usp=sharing\"}]",
+      "party": "[]",
+      "sections": "[]"
+    }
   }
 ]

@@ -57,4 +57,5 @@ After raw material has been extracted into `wiki/`, write a processed receipt fr
 | Myrdae Reference for DMs | Google Doc | https://docs.google.com/document/d/1BGx_-fz7LsgElP6Lk2RFbh2-RRFTnOhx7RJ15ymoShs/edit | (ingested directly; no raw file) |
 | The Silent Vanguard - Player's Reference & Tracking | Google Doc | https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit | raw/the-silent-vanguard-player-reference.md |
 | A New Adventure - Campaign Player Notes | Google Doc | https://docs.google.com/document/d/1tZbBbjOzgCiUSmUuepCE_qpsuOJpawrAia0nxYHTtjA/edit | raw/a-new-adventure-player-notes.md |
+| MoD - Campaign Player Notes | Google Doc | https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit | raw/might-of-dragons-player-notes.md |
 - `worldofmyrdae-map-database.md` - structured map editor export from WorldofMyrdae with locations, coordinates, types, regions, and routes.

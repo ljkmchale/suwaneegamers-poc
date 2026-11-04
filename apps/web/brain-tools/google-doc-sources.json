@@ -82,6 +82,14 @@
       "filename": "abbey-of-light.md",
       "enabled": true,
       "curate": false
+    },
+    {
+      "id": "mod-player-notes",
+      "campaign": "Might of Dragons",
+      "title": "MoD - Campaign Player Notes",
+      "url": "https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit",
+      "filename": "might-of-dragons-player-notes.md",
+      "enabled": true
     }
   ]
 }

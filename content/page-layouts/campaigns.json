@@ -14,6 +14,14 @@
   },
   {
     "kind": "block",
+    "id": "cc-might-of-dragons",
+    "type": "campaign-card",
+    "props": {
+      "id": "might-of-dragons"
+    }
+  },
+  {
+    "kind": "block",
     "id": "cc-a-new-adventure",
     "type": "campaign-card",
     "props": {
@@ -42,22 +50,6 @@
     "type": "campaign-card",
     "props": {
       "id": "heroes-of-emberstran"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "cc-mad-mage",
-    "type": "campaign-card",
-    "props": {
-      "id": "mad-mage"
-    }
-  },
-  {
-    "kind": "block",
-    "id": "cc-might-of-dragons",
-    "type": "campaign-card",
-    "props": {
-      "id": "might-of-dragons"
     }
   },
   {

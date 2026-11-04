@@ -1,9 +1,8 @@
 # HoE - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1ENCKlQLCpkjefs8AgZYXn0_89OgUmJx5ssIFMuOKut4/edit)
-Pulled: 2026-10-15T14:45:14.872Z
+Pulled: 2026-10-27T14:45:08.108Z
 
-📖 Session Notes
 Ky’tha is also referred to as Ky
 Ainslie is also referred to as Ains
 Aurelius is also referred to as Aury
@@ -1470,7 +1469,6 @@ Hap thinks back to his hometown.  There was a swamp and a raised area in the mid
 Meanwhile, Zymve is hanging outside flipping a dagger and looking around.  She realizes that a horse is missing. This was the riderless horse.  She doesn’t see it riding off.  She gets off to search for prints.  They walk right up to the horse and then away and she sees a little horse figurine laying on the ground. It looks like the horse that we are missing.  She picks up the horse figurine. The group comes out and Ains makes it a horse again and then a figure again.  Ky’tha takes it, calling it the Sovereign, and puts it away. She gives Zymve a bag of biscuits and a mug of ale (that she pocketed).  
 We decide to leave the town now, following the south road to Padstow. Aury pulls out his pipe and smokes it as he travels.   This is Biddlebon tobacco and Zymve loves the smell and follows behind Aury.  The sky is gray and overcast.  There are some snow flurries.  We see a river and work our way into Padstow.  We see a large building known as the Heavy Loaf.  
 WE END HERE.
-❕ Quests
 Quests
 What are the quests of the players that the party is aware of…
 
@@ -1513,7 +1511,6 @@ Found.
 
 
 
-🧑‍🤝‍🧑 NPCs
 Important NPCs
 
 
@@ -1596,7 +1593,6 @@ Name
 
 
 
-Leads
 
 
 Leads
@@ -1613,7 +1609,6 @@ THIS IS THE MIND MAP THAT LARRY CREATED:
 https://notebooklm.google.com/notebook/f73a3176-ea94-475b-89fa-692fe4216c30
   
 
-Campaign Prep
 DM Brief
 Session 00 - 03/19/25
 I plan on running a campaign that is driven by you.  To do this, Session 0 will be about working together on a few things, and here’s what you’ll need to be prepared for:
@@ -1822,7 +1817,6 @@ Defender
 
 
 
-🎲 Player Summary
 
 
 
@@ -1950,7 +1944,6 @@ Thornleaf
 
 
 
-Session 0
 Session 00 - 3/16/25
 
 

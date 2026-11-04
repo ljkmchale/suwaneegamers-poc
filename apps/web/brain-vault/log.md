@@ -888,3 +888,50 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 ## [2026-10-16] synthesis | Quick Reference auto-curation
 
 - Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+
+## [2026-10-23] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+
+## [2026-10-24] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+
+## [2026-10-25] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Might of Dragons Quick Reference]] from current Might of Dragons notes (claude-sonnet-5).
+
+## [2026-10-27] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
+- Refreshed [[quick/Dungeons III Quick Reference]] from current Dungeons III notes (claude-sonnet-5).
+- Refreshed [[quick/The Crystal Bottle Quick Reference]] from current The Crystal Bottle notes (claude-sonnet-5).
+- Refreshed [[quick/Might of Dragons Quick Reference]] from current Might of Dragons notes (claude-sonnet-5).
+
+## [2026-10-29] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
+- Refreshed [[quick/Might of Dragons Quick Reference]] from current Might of Dragons notes (claude-sonnet-5).
+
+## [2026-10-30] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+
+## [2026-10-31] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/The Silent Vanguard Quick Reference]] from current The Silent Vanguard notes (claude-sonnet-5).
+
+## [2026-11-03] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/A New Adventure Quick Reference]] from current A New Adventure notes (claude-sonnet-5).
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).
+
+## [2026-11-04] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).

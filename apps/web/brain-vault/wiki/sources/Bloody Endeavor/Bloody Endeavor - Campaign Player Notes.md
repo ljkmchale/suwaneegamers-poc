@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/bloody-endeavor-campaign-player-notes.md"
 source_url: "https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit"
-source_hash: "b7025e01a2ece9fff9f7e78300a6abf577168b172bb274c076112547d97faf43"
+source_hash: "0fce78e95d1cae4da37d73f2ce106668090e9b83ea3036d0ddc80747069da139"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-10-13T14:46:37.447Z"
-pulled_at: "2026-10-13T14:46:12.023Z"
+imported_at: "2026-11-03T15:45:54.780Z"
+pulled_at: "2026-11-03T15:45:33.114Z"
 ---
 
 # Bloody Endeavor - Campaign Player Notes
@@ -17,17 +17,16 @@ pulled_at: "2026-10-13T14:46:12.023Z"
 Campaign: Bloody Endeavor
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
 Raw source: [[raw/bloody-endeavor-campaign-player-notes.md]]
-Raw hash: `b7025e01a2ece9fff9f7e78300a6abf577168b172bb274c076112547d97faf43`
-Imported: 2026-10-13T14:46:37.447Z
+Raw hash: `0fce78e95d1cae4da37d73f2ce106668090e9b83ea3036d0ddc80747069da139`
+Imported: 2026-11-03T15:45:54.780Z
 
 ## Imported Notes
 
 # Bloody Endeavor - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
-Pulled: 2026-10-13T14:46:12.023Z
+Pulled: 2026-11-03T15:45:33.114Z
 
-🫅 Players
 Players
 
 
@@ -154,7 +153,6 @@ Mabel’s Monocle
 	Alive
 	* 	* 	* 	* 	* 	Party Inventory Magic Items:
 Bag of Holding, Thornfeeder, Clawed Glove
-📜 Sessions
 01 - Prisoners
 Session Date:  September 9, 2024
 In-game Date:  Uncertain - Year 1246
@@ -2411,7 +2409,7 @@ Nature of Wyrmbane, worshippers of Esdadi with Albross
 We are marked by Esadi, with a blue lightning bolt tattoo.  Whenever we announce who we are, there is lightning that appears. Esadi is content with being a Lesser Deity, goddess of the West Wind.
 Moving about Gevakaln
 Kibbit asks the guards what inn to stay at, the guards recommend the Salty Cat on the middle terrace, or the Pushing Crook on the lower terrace. We make our way towards the Salty Cat. As we go, Kibbit bumps into some people who look well off and attempts to pickpocket them while trying to ask where the inn is.  He grabs their coin bag, getting 1 gp and 12 sp. We follow the directions to the inn, a brown bow shaped building with salty wood and a cat face on the sign. 
-We enter and are welcomed by the sound of sea shanties. A host approaches named Reive, asking if we need a table or a room. Kibbit insisted on hassling the poor server and interrupting Albross. We pay 2 gp to get 2 private rooms for the 5 of us. A waitress holding 5 mugs with salted rims approaches, mistaking our short party members for children. She later brings the meal, roasted “parrot”. Our keys are given to us and we make our way to our rooms. There’s a double hammock room and a captain’s quarters room (Albross and Caelion go to the double hammock room, the rest go to the captain’s quarters room). 
+We enter and are welcomed by the sound of sea shanties. A host approaches named Reive, asking if we need a table or a room. Kibbit insisted on hassling the poor server and interrupting Albross. We pay 2 gp to get 2 private rooms for the 5 of us. A waitress holding 5 mugs with salted rims approaches, mistaking our short party members for children. She later brings the meal, a roasted “parrot”. Our keys are given to us and we make our way to our rooms. There’s a double hammock room and a captain’s quarters room (Albross and Caelion go to the double hammock room, the rest go to the captain’s quarters room). 
 Albross and Caelion casts Sending:
         
 With Albross. at Mittler Ward, Salty Cat. it's dangerous, are you safe? Come to us. Talk later. We will take down the Sable Shadows.
@@ -2429,7 +2427,7 @@ Kibbit asks if he should name his crossbow, Maw says yes. Her weapon is named Tw
 We see a cloaked individual wearing brown leathers and a red cloak. Kibbit breaks off and sneaks up behind him and Rhody and Albross also approach. He’s a member of the Cloak of Defiance, investigating the crime scene. He says the exploded head is a signature of the Sable Shadows. Albross reveals that Kibbit saw the crime, and the grunt says we should report it to the boss. He hands Caelion a special golden coin with an image on it of the Cloak of Defiance and says we should report at the Spiral, asking for Namys. We all head back to the Salty Cat. We start counting the gold. The other contents of the bag fall out as well, but the coins fall out and it’s all copper coins. It’s 23,350 copper pieces, 4670 each. We take it to Geva’s Trove, a vault to exchange coinage. Kibbit buys a disguise kit
 Pagern finishes inscribing Wall of Force into his Spellbook. Kibbit uses his disguise kit to disguise himself, and we head over to the Spiral. There are guards looking out over the terrace. We make the charisma checks to get through the checkpoint thanks to Albross and Rhody’s checks and Kibbit’s disguise. The spiral is a tall, 3 or 4 story tall building shaped like a lighthouse, with spirals of colored stone and turrets at the top. There is a finely dressed half-elven man at the door, opening the door for us as we enter. It’s an open room with a glittering chandelier lighting the establishment. It’s not too crowded currently. A female half-elf greets us inside, and when we show the coin we’re immediately pushed towards the corner. We see the same Cloak member. He points us to Namys, who’s sitting at a large table alone. He’s elvish, with slick long dark gold hair. His attire is all white, his face is well polished, and he has bright golden colored eyes. We approach, with Kibbit staying behind to ask the Cloak member if they’re recruiting. Namys stands and meets us. The table has been set with a lot of food catered to us: on one side there’s a fine meal, a simple and another fine meal, on the other side is meats and veg, an OCD meticulous plate, and 2 glasses of wine with the menu. 
 We get down to business with Namys. We tell him about Albross’s brother being mixed up with the Sable Shadows. Albross asks what the Cloak knows. Namys reports he’s seen him earlier this stretch. Gevakaln is a “cesspool of villany” according to Namys. The Cloak controls a good portion of the town, and the Sable Shadows have begun to grow in influence as of late. Kibbit asks if the mudballs had something to do with their heads exploding, and Namys assumes so after some inspection. We ask if there are any more leads on the Sable Shadows, and Namys says he’ll give us some information in exchange for gold or a favor.  The Sable Shadows have grown in the local drug trade, and he’d be happy to share information if the warehouse they work out of is destroyed. We agree to take out the warehouse and finish our meals. This will also be an initiation test for Kibbit to join the Cloak of Defiance. Rhody lets Namys know we’re capable, having escaped the island. This intrigues Namys, but we don’t reveal anything else. We head to the warehouse. 
-We head to the Mittler Ward and pass the Just Salt store by the Underbelly. A guard warns us that the area is dangerous, we assure we’re capable of handling ourselves. We enter the lower terrace. Rhody casts Pass Without Trace and we go to the Warehouse stealthily. It’s just off the main road with buildings on either side. We see 2 individuals who appear to be homeless wearing solid black clothes. There’s a second story built atop the warehouse. We sneak towards the back through a thin alley, with Maw on watch. Kibbit climbs up the side and sees a pale figure sitting in an office. Most of the building is wooden but this room is stone and the doors are metal. The windows are barred. He checks a window on the second floor, seeing what looks like a warehouse gutted of lumber supplies, theres a ladder inside going even further up to a third floor. The inside is lit by lanterns. Kibbit sees crates inside as well, with one individual not wearing black inspecting the contents of one of the crates. He opens up the window and sneaks inside. He’s counted roughly 6-7 people in the warehouse so far. Kibbit returns and reports what he’s seen. We tie a rope to the handles on the outside door and to another building to keep it taught. Kibbit returns to the window while the rest of the team heads to the other door. There are 2 guards, one smoking a weird pipe. Kibbit crosses to the other side of the warehouse and bumps into a small girl reading a book who was also hidden. As the party is about to jump the guards, the young girl screams. 
+We head to the Mittler Ward and pass the Just Salt store by the Underbelly. A guard warns us that the area is dangerous, we assure we’re capable of handling ourselves. We enter the lower terrace. Rhody casts Pass Without Trace and we go to the Warehouse stealthily. It’s just off the main road with buildings on either side. We see 2 individuals who appear to be homeless wearing solid black clothes. There’s a second story built atop the warehouse. We sneak towards the back through a thin alley, with Maw on watch. Kibbit climbs up the side and sees a pale haired figure sitting in an office. Most of the building is wooden but this room is stone and the doors are metal. The windows are barred. He checks a window on the second floor, seeing what looks like a warehouse gutted of lumber supplies, there's a ladder inside going even further up to a third floor. The inside is lit by lanterns. Kibbit sees crates inside as well, with one individual not wearing black inspecting the contents of one of the crates. He opens up the window and sneaks inside. He’s counted roughly 6-7 people in the warehouse so far. Kibbit returns and reports what he’s seen. We tie a rope to the handles on the outside door and to another building to keep it taught. Kibbit returns to the window while the rest of the team heads to the other door. There are 2 guards, one smoking a weird pipe. Kibbit crosses to the other side of the warehouse and bumps into a small girl reading a book who was also hidden. As the party is about to jump the guards, the young girl screams. 
 Meanwhile… 3 days prior in Nurador
 Lucerion, Kotio and Armaros see orc encampments near the city. Armaros is confused as to why he was transported here. The orcs have set up a siege camp. Lucerion and the others of the Sacred Crows make their way to the town. A few hours pass, and as they get near the town a scouting group of orcs spots them. The town opens their gates for them as they’re being chased, and the orcs flee. They make their way into Nurador. 
 A day later, they’ve met with the leaders of Nurador, Lucerion explaining what he knows. Lucerion is told they’ve been besieged for a few days. He finds Lady Lightguard, who begrudgingly requests aid from Lucerion. They prepare defenses over the next few days, eventually hearing that a flying beast has been reported as heading to Nurador.
@@ -2438,10 +2436,35 @@ A day later, they’ve met with the leaders of Nurador, Lucerion explaining what
 	Character level at end of the session
 	1
 	Sessions played at that level
+	45 - Warehouse Clash
+Session Date:  November 2nd, 2026
+In-game Date:  31st of Paramor, 1246
+Starting Location:  Underbelly, Gevakaln (Gibblecon)
+In the building is one guy in leather and two in hoods (Ne’er do wells).  With the guards on alert after the little girl’s scream, we roll initiative:
+            * ROUND ONE: The girl (human, young adult, strawberry blonde hair)  shouts, “How did you find me?”, goes to grab Kibbit, and misses before climbing up the nearby ladder. (we all argue about ladder speed).  Kibbit looks down at the figures below looking at him, says, “I found my babysitter,” then climbs up the wall after the girl. He reaches for a hidden trapdoor and pushes the door open. He climbs through and turns around to reach a hand towards her. The one in leathers says “we’ve been compromised”, pulls out a dagger, and stabs the men next to him. He used their blood to create a blood golem, which appears behind the girl. Albross casts Eldritch Blast towards one of the guards by the door, hitting twice. Pagern casts Telekinesis, moving guard that was shot 30 ft into the air, restraining him. Caelion moves forward and casts Toll the Dead on the guard (who fails) restrained by Pagern’s spell; he then casts a spiritual weapon next to the same person 30 feet in the air, but it doesn’t seem to get past his thick armor. Rhody moves forward to the back door and casts hunter’s mark on the other guard. He attacks him with Orc Reaver, dealing lots of damage. One of the two outside uses his staff to make a string and attaches it to Albross, Caelion and Rhody, causing them to Slow.  The other drops his pipe and has a magical ability that causes exhaustion to Albross and Caelion.
+            * ROUND TWO: The girl comes onto the roof with Kibbit and pulls out a scroll and begins reading it. It burns up as she finishes reading it. Kibbit asks her “which way do we go?” and closes the trapdoor, standing on it and readying his action to shoot anything that comes through the trapdoor. She responds “I don’t even know who you are”.  The blood golem, now with more tan colored skin, climbs out of the trapdoor, which Kibbit shoots. It takes the hit, but reforms around the bolt. The creature suddenly looks exactly like Kibbit, pulling out a dagger and stabbing Kibbit once, and swapping places with him. Albross casts Eldritch Blast on the guy on the ground, hitting once. Pagern uses Telekinesis to attempt to pull the staff out of the air, but fails. The man falls. Caelion casts Dispel Magic on the rope effect, causing the string to burn away. Rhody goes to attack Braeden twice and gets the killing blow, slicing his arms off. The other brother, Ardeus, stands up and makes everyone (except Kibbit) roll a Constitution save. He then grabs his fallen brother’s staff and hits Rhody with it in a fit of vengeance. Isfrit, the other man, comes out the door dressed in all black armor with a glowing blue aura. He attacks Rhody with a dagger.
+            * ROUND THREE: The girl long jumps over the alleyway to the next building. Kibbit tells the girl to jump, and she does. Kibbit disengages and moves 5 feet, shoots the crossbow, then moves down the wall.  The doppleganger looking creature pulls ooze from his gut and slings it at Kibbit, hitting Kibbit and slowing Kibbit down. Albross casts Eldritch Blast on Ardeus again, almost killing him. Pagern telekinetically launches Isfrit into the air 30 ft. Caelion casts healing word on Rhody, healing for 22 hp. Rhody then kills Adreus, sending him to hell with his brother. He walks into the warehouse, looking at a covered wagon with crates inside. Isfrit, floating 30 feet in the air, throws a shard of glass at Pagern and Albross, blinding both of them and dealing radiant damage.
+            * ROUND FOUR: The girl jumps back across and stabs the not-Kibbit. Real Kibbit goes to shoot the not-Kibbit while yelling, “The other guy is coming,” to the girl. The shot connects, but the creature still clings to life. The creature then turns into a copy of the girl as it goes to attack her, slashing across her chest. Albross, blinded, stumbles about. He grips his eyes, “Noo!!!” He casts “Armor of Agathys” He dodges. Pagern casts Dispel Magic to remove his blindness, melting the ice on his eyes. He releases Isfrid, who drops to the ground. Caelion swings at him with his Spiritual Weapon but misses. Rhody throws his axe at Isfrit, then runs forward to pick it up and strike him again. Isfrit’s glowing armor flashes back at Rhody. He then attacks Rhody twice, critting once.  A dark colored figure appears around the corner with an arrow in his side. He pulls out a scroll, reading it and causing it to burn up; mirrors appear in front of Pager, Caelion and Albross, stunning Caelion and Albross. 
+            * ROUND FIVE: The girl misses her next stab at the monster, and she jumps away in response. Kibbit sees two civilians holding vials filled with fire, but they don’t have markings or symbols on them. He climbs up onto the roof, shooting at the copycat creature, killing it as it melts to the floor. Kibbit climbs around the building and finds the front door wide open with one of the guards slouched dead at their post. Kibbit climbs down and glances at a spell scroll clutched in the corpse’s hands before dashing just inside the front doors of the warehouse. It read “Reduce”. The strange man then starts turning Pagern into cubes with a wave of his hand. Albross is stunned and remains stunned. Pagern casts Wall of Ice on the man on the roof, putting him inside a small sphere of ice. He loses concentration on the spell afflicting Pagern. Caelion is stunned and remains stunned. Rhody misty steps away from Isfrit and towards Albross, finally drawing his pitchfork to go for a pair of ranged attacks on the enemy combatant. Orc Reaver gets stuck in Isfrit while the Pitchfork knocks him prone and returns to his hands. Rhody then drags Albross back to use him as a shield. Isfrit reads a spell, skating towards the group before turning around and dashing back to cover. 
+            * ROUND SIX: The injured guard shoots at Caelion, landing two hits. The girl runs to the end of the building on the main road. She says, “Salistay, Dortris, not yet!”. Kibbit then grabs the scroll and looks towards Maul. He tries to signal Maw to not kill the girl and her friends with the alchemist’s fire. Then he runs back to hide behind one of the many crates on the floor. The enemy on the roof is trapped in an ice orb. Albross is stunned and remains stunned. Pagern casts fireball down the alleyway and turns the remaining guard to ash, ending the mirror spells on Caelion and Albross. Caelion moves back to the party and casts Mass Cure Wounds on Pagern, Rhody, Albross, and himself, giving everyone 33 hp. Rhody, newly refreshed, charges back towards the back entrance to get Isfrit. He throws his pitchfork at him twice at an odd angle, granting the foe partial cover. The pitchfork connects with its target twice. Rhody then tactically misty steps yet again. Isfrit skates back out in pursuit and strikes Rhody again. 
+            * ROUND SEVEN: The girl has left combat at this point. Looking around for foes, Kibbit shoots and misses the guy that ran after the group. Albross hits him with two Eldritch blasts, pushing him back. A white haired figure steps out of the room inside which had the rope locking the other door, summoning a metal guardian. It attacks Kibbit after yelling “Attack my metal guardian!” Pagern casts Fireball on Isfrid, who’s still standing. Caelion casts Dispel Magic on the Steel Guardian, who isn’t affected. Rhody finally finishes off Isfrit with a strike from the pitchfork right between his eyes. Orc Reaver is not still lodged in his body. Using his other attack, Rhody moves forward and hits the giant metal man in the loading area. 
+            * ROUND EIGHT: Kibbit climbs up the wall towards the ceiling, telling everyone the man in the office has come out to join the fight. He attacks the construct, but misses.. Albross shifts his hex to the summoned monster and hits him once with an Eldritch blast. The construct shoves the cart to the side with one of its attacks, and uses its other attack to strike Rhody, knocking him unconscious with a heavy blow. The drow that summoned the creature runs forward, exacerbated, summons a dagger, and throws it at Albross, but it does not connect. He then stabs Rhody with his other attack, giving him 2 failed death saves. Pagern casts Fireball on the golem and the drow. Caelion heals Rhody from afar with his Channel Divinity, saving him from death. He then casts Healing Word on Kibbit.  Rhody stands, pulling up the pitchfork, hitting twice and knocking him down. 
+            * ROUND NINE:  Kibbit runs into a corner and hides, applying his mudball poison. Albross disengages and runs back towards Caelion. He uses his healing light to heal Rhody. The Metal Guardian casts dimension door on itself and the drow, who stabs Rhody and knocks him down again. Pagern casts fireball.  Caelion uses Healing Word on Rhody, then he casts Toll the Dead on the drow.  Rhody disengages and misty steps down a narrow alleyway to get away from the drow and the big construct.
+            * ROUND TEN: Kibbit shoots at the drow above, but his bolt is stopped by the metal guardian. Albross uses Eldritch blast to knock the guardian into the wall. The drow throws his magic knife at Pagern, hitting him and forcing him to drop the Wall of Ice.  The golem comes at Albross and hits. Albross armor of Agathys and Hellish Rebuke kills the golem.  The drow runs down an alley.  Pagern steps up and casts Wall of Force to stop the drow.  Caelion runs up and casts Toll the Dead on the drow. He then uses his Channel Divinity to invoke duplicity. 
+            * ROUND ELEVEN:  Kibbit runs up close and holds his action to shoot the drow if it gets closer. The man previously trapped in Ice runs into the warehouse and we lose line of sight. Albross runs toward the drow, shooting the wall of force with Eldritch Blast. The drow attempts to leave and runs into the wall of force. Caelion casts Toll the Dead on the drow. (We discuss the wording and subsequent consequences of Wall of Force) Rhody dashes towards the cart.
+            * ROUND TWELVE:  Kibbit dashes to the building.  Albross casts Sacred Flame on the drow trapped in the sphere that’s a Wall of Force.  Pagern puts out fire on a nearby building.  Caelion uses Toll the Dead on the drow.  Rhody goes to pick up his axe.
+            * ROUND THIRTEEN: Kibbit runs into the warehouse and loads his crossbow with his poisonous bolt. The Sable Shadow member runs towards Kibbit. Albross casts Eldritch Blast on the guy. Pagern just points at the man trapped in the wall. Caelion uses his Invoke Duplicity again to create a copy of himself in the force sphere. Rhody dashes towards the man and gets right up on him. 
+            * ROUND FOURTEEN: Kibbit shoots the man with his crossbow. The man attempts to stab Rhody but misses three times. Albross finishes him off with Eldritch Blast. Pagern tries to talk with the drow again. Caelion casts Spirit Guardians through the Duplicate, but it appears the man is not actually in the Wall of Force. Rhody loots a rapier off the man and runs to help move the drug wagon out of the building.
+            * Kibbit looks around the warehouse for things to steal from the warehouse, like a ledger. Albross goes to help Rhody move the wagon. The man in the Wall of Force waves farewell to Pagern and vanishes. Combat Ends
+The girl walks into the warehouse and we begin talking her. She’s with a half orc man and a weefolk man. They say they’re with Dissent Ablation, not the Cloak of Defiance. Albross opens up a crate within the cart and sees jars filled with a clear liquid. We decide to leave the cart inside and we put the vials into the bag of holding. The girl asks us if we have lodging here, we tell her no. She invites us her the inn she’s staying at and introduces herself as Adelaide Teufel. 
+We take 12 jars of clear liquid from the 2 crates in the cart. We let the Dissent burn the rest of them with the building.
+The poison the Sable Shadows use seems to explode the victims’ heads 1 minute after they perish. 
+– The Session Ends Here – 
+10
+	Character level at end of the session
+	2
+	Sessions played at that level
 	
-
-🧑‍🤝‍🧑 Notable NPCs
-
 
 Name
 	Importance
@@ -2803,7 +2826,6 @@ Encounter when looking for 7th Co. (Session 21)
 
 
 
-📍 Quests
 Primary Quests
 
 
@@ -2910,7 +2932,6 @@ After a couple stretches, stake out the warehouse to see if the smuggling operat
 	The Orcs must pay
 	
 
-💀 Characters - Live or Dead
 
 
 Character
@@ -3000,7 +3021,6 @@ Character
 
 
 
-📑 Old Name Table
 Important Names
             * Caifir Family
 Trustworthy family in the city of Climbor
@@ -3219,7 +3239,6 @@ She was in the company
 
 
 
-🎓 Lessons Learned (2)
 Total Lessons Learned: 4
 
 
@@ -3271,7 +3290,6 @@ Lesson 4: How oil lanterns work:
 
 
 Look Up!
-Group Name
 Party Name Suggestions:
                * High Society (Hi!)
                * Wyrm Bane ™

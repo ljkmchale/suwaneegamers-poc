@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/the-silent-vanguard-player-reference.md"
 source_url: "https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit"
-source_hash: "8672401b85682b5aaf443a2c52b272e07b480393be426f337b7ca62a757af40e"
+source_hash: "e3897b68ef6854c2ab06f0c7ecb3799ed33fa380fe8c5cd2d1e08d7390c3f2ec"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-10-08T14:46:15.570Z"
-pulled_at: "2026-10-08T14:45:46.031Z"
+imported_at: "2026-10-27T14:45:35.239Z"
+pulled_at: "2026-10-27T14:45:12.475Z"
 ---
 
 # The Silent Vanguard - Player's Reference & Tracking
@@ -17,22 +17,17 @@ pulled_at: "2026-10-08T14:45:46.031Z"
 Campaign: The Silent Vanguard
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
 Raw source: [[raw/the-silent-vanguard-player-reference.md]]
-Raw hash: `8672401b85682b5aaf443a2c52b272e07b480393be426f337b7ca62a757af40e`
-Imported: 2026-10-08T14:46:15.570Z
+Raw hash: `e3897b68ef6854c2ab06f0c7ecb3799ed33fa380fe8c5cd2d1e08d7390c3f2ec`
+Imported: 2026-10-27T14:45:35.239Z
 
 ## Imported Notes
 
 # The Silent Vanguard - Player's Reference & Tracking
 
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
-Pulled: 2026-10-08T14:45:46.031Z
+Pulled: 2026-10-27T14:45:12.475Z
 
-Players
-
-
-
-
-	Brian
+Brian
 	Tom
 	Susan
 	Larry
@@ -450,7 +445,6 @@ ________________
 
 
 
-Session Notes
 01 – We Meet (05.19.26)
 18th of Ezale – Tratta
 Meeting Day
@@ -710,7 +704,6 @@ Lenny bets 10:80 on the Goblins against the Leopard
 
 
 We need a short rest
-NPCs
 
 
 Name

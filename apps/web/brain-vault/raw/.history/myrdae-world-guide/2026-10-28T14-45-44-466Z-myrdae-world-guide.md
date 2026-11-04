@@ -1,15 +1,9 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-05-13T17:55:35.178Z
-
-Sections
-  
-
-
+Pulled: 2026-10-27T14:45:31.159Z
 
 ________________
-
 
 
 
@@ -22,58 +16,26 @@ Table of Contents
 Welcome to Myrdae        1
 What’s Different        2
 Characters        3
-Species        3
-Restricted Species        6
-The Land of Myrdae        8
-Oberra        8
-The Moons        8
-Regions of Myrdae        9
-Languages - Common Dialects        11
-Calendar        12
-Seasons        12
-Pantheon        14
-The Assembly of Essence (Old Gods)        14
-Deities of the New Order        14
-Addan, the Eternal Guardian        16
-Amriel, the Redeemer        16
-Asmodeus, the Prince of Darkness        17
-Brault, He Born Asunder        19
-Celestine, the Night Whisperer        20
-Cembus, the Seeker        21
-Coralei, the Tide Keeper        22
-Crael, the Soulbearer        23
-Divera, the Ardent One        24
-Eredra, the Spider Queen        25
-Fralee, the Sister of Solace        26
-Goldraen, the Evercast        27
-Iuz’Obal, the Eyes Beyond        27
-Layeth, the Selfless One        28
-Muerg, the Earth Father        30
-Myrdris, the Grand Weaver        31
-Natafae, the Mistress of Pain        32
-Nigrum, the Netherlord        33
-Ol’farium, Crowned Glory        33
-Osanna, the Smiling Dutchess        35
-Phoe, the Hooded Lady        35
-Sylunara, the Evening Radiance        36
-Tornia, the Deceiver        38
-Tyvarion, the Master of Masks        39
-Urlich, the Regent of Ice        40
-Utheri, the Truth Bringer        41
-Villari, the Dawn Princess        42
-Vo’egurn, the High Tempest        43
-Factions        44
-Advents of Harmony        46
-Andërs, The        47
-Cloak of Defiance        48
-Everdawn        49
-Meridian        50
-Tegenwald Phet        51
-Appendicies        53
-Recommended Species Table        53
-Territories        54
-Settlements        59
-Areas        77
+Classes        3
+Species        6
+The Land        17
+Oberra        17
+The Moons        17
+Regions of Myrdae        18
+Underdark        20
+Languages - Common Dialects        21
+Time & History        22
+The Harmon Order (Calendar)        22
+Chronology        24
+Faith & Beliefs        30
+The Assembly of Essence (Old Gods)        30
+Deities of the New Order        31
+Organizations        61
+Well Known Organizations        61
+Appendicies        79
+Content Review        79
+Geography Reference        82
+Glossary        107
 
 
 
@@ -108,17 +70,204 @@ ________________
 
 chapter 1
 Characters  
-Myrdae is home to many peoples who shape its lands, weave its magic, and carry its stories. From the ancient elves who first stepped through the shimmering Daefar pools of the Borealian Sway, to the hardy humans who built empires across the fractured continents, each species brings its own heartbeat to the world.
-Some arrived as wanderers from distant planes or forgotten realms. Others have walked Myrdae’s soil since the elder days, their blood and traditions tied to its rivers, forests, and skies. Humans remain the most numerous and widespread, yet elves, dwarves, halflings, gnomes, and rarer kin all leave their mark—some through towering cities of grace and song, others through quiet villages, mountain forges, or hidden groves.
+Myrdae is home to many peoples who shape its lands, weave its magic, and carry its stories. Some arrived as wanderers from distant planes or forgotten realms. Others have walked Myrdae’s soil since the elder days, their blood and traditions tied to its rivers, forests, and skies.
+Classes
+<Need a blurb about classes that are available, and point to the ones that are not in the Appendix>
+Artificer
+
+
+Barbarians
+
+
+Bards
+
+
+Colleges
+
+
+Clerics
+
+
+Druids
+
+
+Fighters
+
+
+Monks
+<Work in Progress>
+
+
+Subclass
+	Prominent Monasteries
+	Warrior of Mercy
+	Abbey of Light
+	Warrior of Shadow
+	
+
+	Warrior of Silent Echoes
+	Uktali
+	Warrior of the Elements
+	
+
+	Warrior of the Open Hand
+	
+
+	
+
+Paladins
+
+
+Rangers
+
+
+Rogues
+
+
+Thieves’ Guilds
+
+
+Sorcerers
+
+
+Warlocks
+
+
+Wizards
+
+
+
+
+________________
+
+
 Species 
-This section offers a brief overview of the major species as they exist in Myrdae. It highlights their origins in this world, the ways they differ from or echo the common tales told across the multiverse, and the threads that bind them to the living Weave and the gods who watch over all. Use it as inspiration when creating your character, so that your hero feels rooted in Myrdae’s soil, its history, and its still-unfolding legends.
+This section offers a brief overview of the major species as they exist in Myrdae. It highlights their origins in this world, the ways they differ from or echo the common tales told across the multiverse, and the threads that bind them to this living world. Use it as inspiration when creating your character, so that your hero feels rooted in Myrdaen soil, its history, and its still-unfolding legends.
+Humans remain the most numerous and widespread, yet elves, dwarves, halflings, gnomes, and rarer kin all leave their mark—some through towering cities of grace and song, others through quiet villages, mountain forges, or hidden groves.  This is a list of species recommended for player characters along with their how common they are found:
+Species
+	Prevalence
+	Consideration
+	Aasimar
+	Rare
+	The people of Myrdae accept aasimar, but since they are rarely encountered, aasimar might be met with awe or distrust.
+	Dragonborn
+	Uncommon
+	Although the player chooses to play good, neutral or evil characters, dragonborns clans tend to represent the alignment of their dragon type, with metallics being seen as good and chromatic being viewed with skepticism.
+	Dwarf
+	Common
+	Dwarves are common all around Myrdae, although duergar are often shunned on the surface.
+	Elf
+	Common
+	High and wood elves are common, where eladrin, sea are more rare.  For drow, see the restricted species section.
+	Firbolg
+	Rare
+	They are not known for frequenting large civilized areas.
+	Gabük
+	Rare
+	Cross between halfling and goblin that is generally accepted across Myrdae even though they have been known to carry the nasty attitude coming from their goblin bloodline.
+	Genasi
+	Rare
+	Genasi’s visible elemental traits often draw curiosity or unease; many feel a restless pull toward places that match their element.
+	Gnome
+	Common
+	Gnomes are liked for their cheerful curiosity and cleverness, but their experiments and endless tinkering can test the patience of neighbors.
+	Goliath
+	Uncommon
+	Goliaths earn respect for their strength and honor, yet their competitive nature and nomadic ways sometimes clash with settled societies.
+	Half-elf
+	Common
+	Half-elves move freely between human and elven worlds, though some traditional elves quietly view them as diluting pure elven blood.
+	Half-orc
+	Uncommon
+	Half-orcs command respect for their martial prowess, but many Myrdaens still treat them with suspicion because of their fearsome reputation from the Great War.
+	Hafling
+	Common
+	Halflings are welcomed almost everywhere for their friendly practicality, though they are sometimes underestimated because of their small stature.
+	Human
+	Very Common
+	Humans are the most widespread and adaptable people of Myrdae, making them natural bridges between other cultures.
+	Satyr
+	Rare
+	Satyrs are known for their mischievous behavior and are often treated as such.
+	Tiefling
+	Rare
+	Infernal tieflings are often welcomed for their ancestors’ aid in the Blood Wars, while abyssal tieflings face deep suspicion and fear.
+	Ulbin
+	Uncommon
+	Ulbin integrate easily into most communities, but their uncommon origins and distinctive traits can still invite occasional curiosity or wariness.
+	
+
+
+
+
+
+Aasimar
+For long centuries after the Fracturing, aasimar were among the rarest of Myrdae’s peoples. Occasionally a human would be chosen by a celestial patron and blessed with angelic power, giving birth to a child touched by the heavens—an aasimar. These rare individuals almost never formed communities of their own. Instead they lived concealed lives among humans, revealing their heritage only when necessary.
+Since the Awakening, however, aasimar have appeared with growing frequency across the land. Many sages believe this rise is tied to the surge of new gods, whose greater presence in the world has allowed more celestial servants to reach across the Weave and bestow their favor upon mortals.
+Aasimar typically favor their angelic parent in appearance, bearing subtle marks of otherworldly grace—luminous eyes, skin that catches the light like polished marble, or hair that seems to shimmer with its own inner glow. Those of good heart who reveal their nature are often revered as living saints or protectors, while those who turn their gifts toward darkness are feared all the more deeply. Most still walk quietly among humans, carrying the weight of the heavens in an age when the gods themselves walk more boldly upon the world.
+Dragonborn
+Dragonborn clans are scattered across Myrdae, though it is not common to see one living long among the other peoples of the world.  It is believed that their roots began when Ol’farium (recognized as Bahamut on other planes) and Tiamat chose to bless a clutch of dragon eggs from select ancient wyrms.  From these sacred eggs hatched the first dragonborn, each carrying the blood and power of their specific ancestor.
+Those born of metallic lineage often find themselves welcomed in the cities, towns, and villages of Myrdae, their noble bearing earning them respect. Dragonborn of chromatic descent, however, carry a heavier reputation. Some clans have turned to barbaric or ruthless ways, causing many Myrdaens to regard chromatic dragonborn with suspicion and unease.
+The following table shows the origin and clans associated with each dragonborn type on Myrdae:
+Type
+	Dragon Origin
+	Clan(s)
+	Core Belief & Duty
+	Black
+	Aternox the Drowned
+	Noxari, Miferak (Seameet Marsh)
+	“Buried things are never truly gone.”  Duty:  to endure ruin, remember what others bury, and keep dangerous things from rising again.
+	Blue
+	Caerulith the Fulminant
+	Caerath (Dragonstone)
+	“Power must be mastered before it can be rightfully wielded.” Duty: to master power before wielding it, to command without becoming tyrants, and to prove that authority is earned by discipline rather than fear alone.
+	Brass
+	Aesratha the Waykeeper
+	Aesvar (Sutherford Vec)
+	“Words are water when the road is dry.”  Duty: to keep the routes alive, preserve the stories of those who pass along them, and offer warmth where the world gives only distance, salt wind, and uncertain horizons.
+	Bronze
+	Annagos the Revered
+	Annagos (Gaelscape)
+	“A true shield does not seek praise: it stands where the danger is greatest.” Duty: to defend the vulnerable, hold the line against danger, and ensure that strength is never mistaken for the right to rule over those it was meant to protect.
+	Copper
+	Kaelykk the Daring
+	Kaendune (Blistered Highland)
+	“The cliff does not yield to strength; it yields to the daring hand.”  Duty: to challenge fear with courage, break oppression with cleverness, and never mistake the obvious path for the only path.
+	Gold
+	Òryzhael the Radiant
+	Òrhael (Caelora)
+	“What is sacred must be guarded before it can be inherited.”Duty: to guard beauty, truth, and order from corruption before claiming them as their own.
+	Green
+	Theldratha the Bitter
+	Drathag (Edgerest Forest)
+	“Poison is only a truth the body cannot deny.” Duty: to understand what others hide, survive what others deny, and know when a bitter truth must be spoken before it poisons everything around it.
+	Red
+	Rutylaxarion the Molten
+	Tyralax (Mount Wick, Jehsle)
+	“What cannot endure the flame was never worthy of the crown.” Duty: to become worthy of the fire they inherited, rather than be consumed by it.
+	Silver
+	Nelcradia the Bright
+	Nelcrath (Dunduar)
+	“Mercy is not weakness - it is strength that refuses to become cruel.” Duty: to protect without pride, show mercy without surrendering justice, and stand beside those who suffer rather than above them.
+	White
+	Leukozhar the Deadwing
+	Kozhakuun (Deadwing Mountains)
+	“The cold does not hate; it reveals what cannot survive.” Duty: to endure the long winter, preserve what would otherwise be lost beneath it, and survive without begging the world to become kinder.
+	
+
 Dwarves
 In the deep elder days, centuries before the Fracturing, Muerg the Earth Father felt the young world’s bones shifting and cracking. He called forth a champion to anchor the land. From among early peoples he chose Goldraen, a master smith of unmatched skill. Muerg granted him primordial earth essence, and for long years Goldraen labored in the mountain hearts, shaping the first dwarves from living stone—each forged with unyielding resilience, the soul of the earth, and the fire of creation. When the last clan awakened, Goldraen ascended through that divine labor to become the immortal Evercast, god of craft and creation.
 Muerg shaped the dwarves for different purposes, calling each type with distinct intent:
 * Mountain Dwarves (traditional stubborn guardians): Muerg called them to fortify the high peaks and hold the world’s surface bones. Stout, resolute, and unmovable, they became the backbone of strongholds and deep mines.
-* Barren Dwarves, also known as Crag  Hill Dwarves (more natural skin tones, excitable): Muerg summoned them to wander the crags, hills, and open lands, binding the surface with lively energy and quick hands. Their warmer tones reflect the sunlit stone; their spirited nature drives trade, brewing, and adaptation.
+* Barren Dwarves, also known as Crag or Hill Dwarves (more natural skin tones, excitable): Muerg summoned them to wander the crags, hills, and open lands, binding the surface with lively energy and quick hands. Their warmer tones reflect the sunlit stone; their spirited nature drives trade, brewing, and adaptation.
 * Duergar, also known as Gray Dwarves: Muerg called them specifically to tend the Underdark’s depths, sealing hidden rifts and guarding the world’s underbelly from primordial threats.
-The dwarves emerged already organized into clans (Orebane among the oldest), spread across Myrdae to mend, build, and fortify the land. Their forges and strongholds continue that first divine labor.
+The dwarves emerged already organized into clans (Orebane among the oldest), spread across Myrdae to mend, build, and fortify the land. As these clans took root, six major dwarven kingdoms rose:
+* Dunduar (Stubborn Resilience) – founded by the Cragfury and Umberfist clans in southwestern portion of the Severed Crease in the Distancion Mountains.
+* Bonfaduhr (Treasure Avarice) – meaning “Oreguard” in the dwarven tongue; founded by the Stonetoe clan in the Eustera Ridge in Inverland.
+* Gur Madihl (Master Craftmanship) – founded by the Ironbrow and Blackshield clans on the northern side of the Distancion Mountains near Stonewood.
+* Khagdaruhl (Loyalty & Honor) – founded by the 
+* Naurkhad (Gruff Bluntness)– founded by the Blaregut clan in the Blistered Highland of the Mahruud.
+* Thel Kholdur (Brewing & Ale) – founded by the Orebane clan that built the first passage through the Distancion Mountains between Orbansia and the Bathaen Empire.
 Here is a list of well known dwarven clan names:
 Name
 	Type
@@ -152,6 +301,11 @@ Name
 	Barren
 	Dragonspine Mountains
 	Known as being very welcoming
+	Stonetoe
+	Mountain
+	Eustera Ridge
+	
+
 	Umberfist
 	Mountain
 	Dunduar
@@ -159,17 +313,19 @@ Name
 	
 
 Elves
-In the elder days, the first elves stepped from the Feywild through the sacred Daefar—living pools that shimmered as gateways between realms. They entered the ancient wilds of the Borealian Sway, drawn by the vibrant song of a new world.
-Those who gravitated toward beauty, artistry, and refinement became the Qal’daefar, known as High Elves. Their oldest known settlement, and the elven city that still holds the steepest traditions, is Caelora.
-Elves who clung to their untamed natural spirits became the Wood Elves. They settled deep in the forests, hills, and wooded lands, remaining closest to the wild heart of Myrdae.
-Over the long years, elves wandered far across the land yet never lost their kinship with the Borealian Sway. A small group followed the waters flowing from what would later be called Lake Tribathe out into the open seas. These became the Sea Elves, who feel the Daefar’s liveliness most keenly in the pulse of the oceans.
-In time, the magnificent city of Qal’dynn rose as the greatest of all elven realms—a place of towering grace that welcomes not only elves but all people of Myrdae.
-A shadowed branch marks elven history: a faction of High Elves, seduced by Eredra the Spider Queen, attempted to overthrow their kin. Defeated and exiled to the Underdark, prolonged shadow and isolation transformed them into the Drow, or Dark Elves. Surface elves regard the drow with wariness and disdain.
+In the elder days, the first elves stepped from the Feywild through the sacred Daefar—living pools that shimmered as gateways between realms. They entered the ancient wilds of the Borealian Sway, drawn by the vibrant song of a new world, and built gorgeous settlements.  The magnificent city of Qal’dynn rose as the greatest of all elven realms—a place of towering grace that welcomes not only elves but all people of Myrdae.
+* High Elves, known as Qal’daefar:  Elves who gravitated toward beauty, artistry, and refinement.  Their oldest known settlement, and the elven city that still holds the steepest traditions, is Caelora.
+* Wood Elves: Elves who clung to their untamed natural spirits.  They settled deep in the forests, hills, and wooded lands, remaining closest to the wild heart of Myrdae.
+* Sea Elves:  Elves who feel the Daefar’s liveliness most keenly in the pulse of the oceans.  They wandered far across the land and followed the waters flowing from what would later be called Lake Tribathe out into the open seas.  Surface elves regard the drow with wariness and disdain.
+* Drow, also known as dark elves:  A faction of High Elves, seduced by Eredra the Spider Queen, that attempted to overthrow their kin.  Defeated and exiled to the Underdark, prolonged shadow and isolation transformed them.  
 Here is a list of well known elven names:
 Name
+	Type
 	Roots
 	About
 	Elle’neros
+	
+
 	Borealian Sway / O’naren
 	Noble family
 	
@@ -178,7 +334,11 @@ Name
 
 	
 
+	
+
 	Tu’osaar
+	
+
 	Borealian Sway
 	Specialize in working with stone and ores (smiths, jewelers, etc.)
 	
@@ -207,17 +367,36 @@ Name
 
 	
 
+	
+
+	
+
+	
+
+	
+
+Firbolg
+Firbolgs are gentle giants who stand seven to eight feet tall, known across Myrdae for their soft and kind personalities. They possess an undying love for nature and dedicate their long lives to preserving and protecting it.  In Myrdae, firbolgs are believed to have originated on Inverland, where they remain most common. Smaller communities also dwell in the deep forests of Bathaes, Orbasnia, and Var’Shala. They tend to shy away from crowded cities and towns, preferring a peaceful and secluded existence deep in the green wilds.
+To play a firbolg in Myrdae is to walk as a living guardian of the world’s ancient forests, carrying their heartbeat and their secrets in your blood.
+Gabük
+The gabük, also known as half-goblins, are believed to have been around since 500 PF, when harsh times struck the Mahruud. During that time, goblins, orcs, humans, and weefolk banned together for survival. It wasn’t uncommon for a goblin to bed a weefolk, or vice-versa. So shortly thereafter, a generation of half-goblins were born, taking on the name gabük. Even though gabük live all over Myrdae, they are most common in the Mahruud. From time to time, you may come across a gabük who did not descend from this original bloodline, but who might be a first generation gabük whose parents are a goblin and a weefolk.
+Gabük are generally accepted across Myrdae even though they have been known to carry the nasty attitude coming from their goblin bloodline. They stand about three feet tall and have a soft dirty-green color to their skin. Their hair is often dark, although they have been known to dye it and wear it in wild stylings. Their eyes can be brown or black, but occasionally are bright red or yellow.
+Players that want to use the gabük species should select the halfling species when creating their character.
+Genasi
+Gorn from the union of a genie and a mortal, inheriting the raw elemental power of their otherworldly parent, genasi are rare across Myrdae. They may be met with skepticism or acceptance as they are traveling or settling in nearly any corner of the land, following wherever their elemental nature and personal desires lead them. Many feel a constant, restless pull toward places that resonate with their blood: fire genasi to volcanic slopes and great forges, water genasi to coastlines and mighty rivers, earth genasi to mountain roots and ancient stone halls, and air genasi to high peaks and windswept plains.
+The Awakening and the greater presence of new gods may have stirred the Weave in ways that make such unions between genies and mortals slightly more frequent than in centuries past. A genasi almost always displays clear physical traits of their elemental heritage—skin like living stone or flickering flame, hair that moves as if stirred by unseen winds, eyes the color of storm-tossed seas, or a voice that carries the rumble of distant thunder.
+To play a genasi in Myrdae is to embody the living fury and beauty of the elements themselves, a mortal vessel for primal forces in a world where the gods and the Weave grow ever more active. Your blood sings with the same power that shaped the mountains, carved the seas, and lifts the winds—making you equally at home as a wandering storm, a steadfast guardian of the deep earth, or a blazing force for change.
 Gnome
+Gnomes have dwelled quietly in Myrdae since the elder days, though they have never been among its most numerous peoples. Small in stature but boundless in curiosity and cleverness, they possess a natural affinity for the subtle and wondrous flows of the Weave.
+Two distinct kindreds of gnomes are found across the land:
+* Forest Gnomes make their homes in secluded glades and ancient woodlands, living in close harmony with nature. Masters of illusion and quiet magic, they speak with the creatures of the forest and guard their hidden communities with subtle wards. They are most common in the deep woods of Bathaes, Inverland and Orbansia.
+* Rock Gnomes, also called Dartwise or Tinker Gnomes, are more gregarious and inventive. They establish lively workshops and small settlements in hilly regions and near other civilized areas, devoting themselves to mechanics, alchemy, and endless experimentation. Their clever inventions bring both amazement and occasional frustration to those around them.
+Gnomes of both kinds are generally viewed with fondness across Myrdae for their cheerful demeanor and helpful spirits, even if their insatiable curiosity sometimes tests the patience of their neighbors.
+To play a gnome in Myrdae is to see the world as a place full of wonder waiting to be understood—whether through gentle communion with the wilds or through the joyful spark of invention and discovery.
 Here is a list of well known gnome surnames:
 Name
 	Roots
 	About
-	
-
-	
-
-	
-
 	
 
 	
@@ -241,19 +420,28 @@ Name
 
 	
 
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
+Goliaths
+Goliaths are the living descendants of that remnant—towering, powerful folk who carry within their blood the primordial echo of the Great Molding. Though smaller than the true giants of old, they still stand head and shoulders above most other races, their bodies marked by the same unyielding strength that once raised the world’s bones.
+Proud nomadic clans wander the high passes, remote peaks, and rugged wilds of Myrdae. Competitive, honorable, and driven by trials of strength and endurance, goliaths measure themselves against the land and one another, believing that only through constant challenge does the world their ancestors shaped remain strong. They live by a simple creed: the mountain does not yield, and neither do they.
+To play a goliath in Myrdae is to walk as a living echo of the world’s own creation. You carry the primordial might of the Assembly’s first children in your blood and the unyielding duty to prove that the land your forebears raised will never break.
+Half-elves
+Given the long presence and close interaction of humans and elves across Myrdae, half-elves are the most common and widely accepted of all half-blooded peoples. They are rarely shunned or shamed solely for their mixed heritage, allowing them to move freely between human towns and elven lands.
+Many half-elves find a natural place in cosmopolitan cities. Their dual nature often gifts them with a unique perspective, making them skilled diplomats, traders, mediators, and adventurers who can bridge the ancient traditions of the elves with the drive and versatility of humanity.
+Half-elves vary greatly in appearance. Some clearly favor their elven parent with graceful features and slightly pointed ears, while others lean more toward human looks or blend both lineages in subtle and beautiful ways. A few show almost no obvious trace of their dual blood at all.
+Though generally accepted, certain highly traditional elven families—particularly in the ancient city of Caelora—may view half-elves with quiet reservation, seeing their shorter lives as a lessening of pure elven blood. In rare cases, specific family bloodlines can still cause local tension or anxiety.
+To play a half-elf in Myrdae is to embody the living connection between two great kindreds. You carry the echoes of the Daefar in   your veins alongside the bold spirit of humanity, perfectly suited for stories where old and new worlds meet.
+Half-orcs
+Today two distinct lines of half-orcs walk the land, the clan-blood and the new-blood. 
+The Clan-blood are half-orcs that first made their mark on Myrdae during the Great War, where they formed a large and formidable portion of the Mahruud’s forces that clashed against the Bathaen Empire. Their strength and ferocity turned many battles and forged a lasting legacy of martial excellence that still endures.  Many of these clans have spread throughout Myrdae over the years, claiming new lands as their home.
+The New-blood are more recent half-orcs, born from direct unions between humans and orcs. Their upbringings vary sharply: some are raised within orc clans, others by a human parent, and many are regarded as bastards or outcasts forced to carve their own path with no deep clan ties.
+For all their imposing strength, half-orcs of both kinds are still frequently shunned by many Myrdaens, who view them through the lens of their fearsome history and reputed brutish nature. Yet their resilience and raw might allow many to earn respect wherever iron will and power of arm are demanded.
+To play a half-orc in Myrdae is to carry either the proud warrior legacy of the clan-blood or the uncertain road of the new-blood, while bearing the weight of a world slow to accept your kind.
 Halflings
+<Need Info>
+Tudarn Halflings
+Tudaran weefolk (stout halflings) are from the moon Tudara, where many still live.  Shortly after the formation of the Crungess, tudaran travelled through moon gates opened by the Osmanae, to the surface of Myrdae.  Since they prefer a colder climate that is like their homeland, they originally created settlements in the Distancion Mountains.  Years after arriving, they also settled in the Eustera Ridge of Inverland. 
+Their appearance is quite different from other weefolk.  First and foremost, tudaran are more stout and rugged than other weefolk.  Their skin is usually white to pale blue, with white, blond, or frosty blue colored hair.  Most have white or blue eyes.
+Surnames
 Here is a list of well known halfling surnames:
 Name
 	Roots
@@ -284,6 +472,7 @@ Name
 	
 
 Humans
+Easily the most common race in Myrdae, humans also tend to be the most diverse population in personality and appearance.  While usually five feet to just over six feet tall, humans can be shorter or taller.  Some humans are thin and toned, while others could be stout or heavy-set.  Their skin ranges from a pale color to a soft peach to a darker brown tone.  They also have a wide range of hair and eye colors.
 Here is a list of well known human surnames:
 Name
 	Roots
@@ -307,15 +496,17 @@ Name
 	Family of sages and historians
 	
 
-________________
-
-
-Unique Species
-There are two species that are unique to the Myrdae setting and can be considered for play:
-Gabük
-The gabük, also known as half-goblins, are believed to have been around since 500 PF, when harsh times struck the Mahruud. During that time, goblins, orcs, humans, and weefolk banned together for survival. It wasn’t uncommon for a goblin to bed a weefolk, or vice-versa. So shortly thereafter, a generation of half-goblins were born, taking on the name gabük. Even though gabük live all over Myrdae, they are most common in the Mahruud. From time to time, you may come across a gabük who did not descend from this original bloodline, but who might be a first generation gabük whose parents are a goblin and a weefolk.
-Gabük are generally accepted across Myrdae even though they have been known to carry the nasty attitude coming from their goblin bloodline. They stand about three feet tall and have a soft dirty-green color to their skin. Their hair is often dark, although they have been known to dye it and wear it in wild stylings. Their eyes can be brown or black, but occasionally are bright red or yellow.
-Players that want to use the gabük species should select the halfling species when creating their character.
+Satyr (Faun)
+Satyr, commonly known as fauns in Myrdae, are curious and exuberant folk renowned for their deep love of the forested outdoors. They carry a well-earned reputation as the most festive-loving beings across the land, thriving on music, dance, drink, and joyous celebration. While they can enjoy revelry indoors, nothing pleases them more than grand outdoor jubilees held beneath the open sky and ancient trees.
+From the waist up, fauns appear much like humans, often with slightly pointed ears and highly expressive faces. Their lower bodies are distinctly goat-like, covered in thick fur with powerful legs ending in cloven hooves. As they age, their horns grow long and impressive, curling like those of a ram. Many fauns carry finely carved pan flutes, and their wild, enchanting melodies are capable of lifting even the heaviest hearts.
+Fauns are most common and deeply beloved in Inverland, where their joyful and free spirit is embraced as a natural part of the land’s vibrant soul. In other parts of Myrdae, however, opinions are more divided. While many appreciate their company and beautiful music, others eye them with suspicion, wary of their mischievous and unrestrained ways. Some view fauns as unpredictable tricksters who delight in upsetting social order or leading the overly serious into wild abandon.
+To play a satyr in Myrdae is to live as a walking celebration of life and nature. You carry the wild heart of the forest and the gift of bringing joy and music wherever you wander, even as you navigate the suspicion and prejudice your free-spirited nature sometimes provokes outside Inverland.
+Tiefling
+Tieflings bear the blood of fiends in their veins, marked by horns, tails, unusual skin tones, and other striking infernal traits. Though never numerous, they have left a lasting mark on Myrdae’s history. During the Blood Wars, when demonic hordes tore open the world and threatened all of Myrdae, many devils and their descendants fought alongside the mortal races against the abyssal invasion. This alliance forever shaped how tieflings are perceived.
+* Infernal tieflings, descended from devils, are widely welcomed across the land. Many Myrdaens still honor the memory of their ancestors who stood as allies in the world’s darkest hour, and these tieflings often find respect and opportunity in cities and strongholds throughout Myrdae.
+* Abyssal tieflings, born of demonic blood, face deep suspicion and prejudice. They are often viewed as chaotic and deadly—living echoes of the very forces that once nearly destroyed the world. Many must constantly prove themselves to overcome the fear their heritage inspires.
+* Chthonic tieflings, whose fiendish ancestry stems from rarer and more mysterious sources, remain uncommon. They are typically met with wary curiosity rather than open welcome or hostility, as they had little involvement in the wars that still color perceptions of tieflingkind.
+To play a tiefling in Myrdae is to walk with the visible legacy of the lower planes. You may be celebrated as a descendant of saviors, shunned as a child of chaos, or regarded as an enigmatic stranger whose blood whispers of ancient and unknowable pacts.
 Ulbin
 Ulbi (plural for ulbin) are a race that have lived for centuries in the Underdark, present on Myrdae before the fracturing. The ulbi were subjects of the demons’ chaotic ways, often tortured and killed as the demons’ chaos spread, nearly wiping out their numbers and their civilizations destroyed. However, several groups of ulbi were able to escape and fled to corners of the Underdark where they survived and their populations have been on the rise ever since.  Ulbi are seen much more frequently on the surface since the Awakening.
 Ulbin are a human sized goblinoid race with a pale or grayish skin.  Their hair is usually an unsaturated color, such as black, white or gray.  Most male ulbin lose their hair early.  Similar to their other unsaturated features, their eyes are usually a blue or gray color, although there are instances where an ulbin has violet, red, amber or yellow eyes.
@@ -323,7 +514,7 @@ Players that want to use the ulbin species should select the human species when 
 ________________
 
 
-Restricted Species
+Other Species
 Many of the species available for play by the Dungeons & Dragons ruleset do not fit well as an easily playable species in the Myrdae setting.  If you want to play one of the species in the table below, please work with your DM before selecting the species for your character.
 Species
 	Recommendation
@@ -346,7 +537,7 @@ Species
 	Dueger
 	Consider carefully
 	Historically seen as evil by the people of Myrdae.
-	Fairy
+	Fairy / Faerie
 	Avoid
 	Very rarely, if ever, seen in Myrdaen civilized areas.
 	Gith
@@ -361,6 +552,9 @@ Species
 	Hobgoblin
 	Consider carefully
 	Historically seen as evil by people outside of the Mahruud; see Ulbin.
+	Kender
+	Avoid
+	Not part of the Myrdae Setting
 	Kenku
 	Consider carefully
 	Rarely seen in Myrdaen civilized areas.
@@ -375,6 +569,9 @@ Species
 	A very rare species that is not ever seen in Myrdaen civilized areas.
 	Minotaur
 	Avoid
+	Historically seen as evil by the people of Myrdae.
+	Orc
+	Consider carefully
 	Historically seen as evil by the people of Myrdae.
 	Shadar-kai
 	Consider carefully
@@ -407,7 +604,7 @@ ________________
 
 
 chapter 2
-The Land
+ The Land
 Oberra
 The planet Oberra has the following continents:  Myrdae, Taragoh, Ekruthe, Subesrias, Ah’nurra.
 The Moons
@@ -488,12 +685,12 @@ Bathaes is made of many territories, with some of them aligned together to form 
 * The Bathaen Empire is made up of the Borealian Sway, Wheldrake, Halesworth and the Crimson March territories.
 * Vanlaug is the realm formed from the two northernmost island territories Esgaar and the Tundra of Nalscour.
 Bathaen Empire
-The territories in the Bathaen Empire operate as Each empire has a structured hierarchy and guiding rules for the land. 
+The Bathaen Empire is the oldest governed civilization in Myrdae, originally made up of three ruling kingdoms:  Halesworth, the Borealian Kingdom and the Kingdom of the North Coast.  Each territory in the empire has the following structured hierarchy: 
 Ranks
 Title
 	Position
 	King / Queen
-	Ruler of a kingdom
+	Ruler of a territory in the Bathaen Empire
 	Archduke
 	Reports to king or queen
 	Duke
@@ -509,11 +706,13 @@ Title
 	
 
 Inverland
-As mentioned, Inverland’s domains (territories) are known as a Vec, which originated as a clan in Inverland.  Vecs have representatives that sit on a board known as a Dichotomous Convocation, or more shortly called “Dicon”.
+Inverland is the second largest landmass in Myrdae and divided from the Mainland by the Tideless Span.  Characterized by populous towns and villages, Inverland is a land with abundant natural resources.  Rich in tradition and religion, the people of Inverland are called “Invess” and enjoy a fair balance of hard work and leisure time.  
+Vecs and Dicons
+Years ago, clans ruled “Vecs”, a defined territory they claimed to control.  As these clans, or Vecs, formed alliances and treaties, they became known as the Dichotomon Empire.  They established a governing body with representation from the Vecs, which they called the Dichotomous Convocation, or Dicon for short.  The Dicon is made up of representatives known as Vecsi, one one representative from each Vec and four to represent the major beliefs followed across the land.  Vecsi are chosen every two years and can serve a maximum of 20 years.  The Dicon gather in Gibuldon for ten days on every other Salvus, during the harmons of Kesero and Evalee, to consult on governing topics of the empire.
 Ranks
 Title
 	Position
-	Chief
+	Elder
 	Ruler of a Vec, usually determined by bloodline
 	Dean
 	Presides over the Vesci; changes every few years or so
@@ -525,16 +724,19 @@ Title
 	Presides over the Vesci; changes every few years or so
 	Doyenne
 	Eldest members service the Vesci
-	Elder
+	Provost
 	Ruler of a city
 	Intendant
 	Ruler of town or village
 	
 Jehsle
-Pronounced JES-LEE
+Jehsle (Pronounced JES-LEE) is a large land in southwestern Myrdae that is across the Sea of Marilia from Orbansia.
 
 
 Orbansia
+Orbansia is recognized as the land south of the Distancion Mountains on the mainland.
+Malithea Empire
+The Malithea Empire makes up several small areas that combined to form the Dalasor Coast territory.
 
 
 Var’Shala
@@ -549,6 +751,19 @@ Title
 	Tor
 	Dictator-ruler of the Mahruud territory only. All Thulans in Mahruud report directly to the Tor with limited autonomy.
 	
+
+Underdark
+Beneath the surface of Myrdae, far below forests, mountains, and cities, lies a vast and ancient world known simply as the Underdark. It is not a single cavern, nor a uniform expanse of tunnels, but a layered realm of subterranean seas, fungal forests, abyssal chasms, and long-forgotten ruins. Some regions lie only a few hundred feet below the surface, reachable through collapsed mines or sinkholes. Others descend into lightless depths so remote that surface-dwellers speak of them only in legend.
+Environment and Ecology
+The Underdark is a realm without sun, but not without life.  Bioluminescent fungi cling to cavern ceilings like inverted constellations. Vast subterranean lakes glow with mineral-rich waters. Petrified mushroom forests stand like fossilized cathedrals. In some regions, spores drift constantly through the air, creating hazy bioluminescent fog. In others, dry stone tunnels descend into oppressive silence broken only by the echo of dripping water.
+Peoples of the Underdark
+The Underdark is not empty. It is home to cultures that see the surface as alien and unpredictable.
+Drow enclaves, duergar strongholds, svirfneblin burrows, wandering myconid colonies, and more obscure peoples such as genlings and ulbin carve out existence in this lightless realm. Some settlements are hidden trade hubs built atop underground lakes. Others cling to cavern walls or spiral around petrified fungal towers. 
+Many Underdark societies value secrecy, resource control, and controlled passage through known routes. Maps are closely guarded. Safe tunnels are worth more than gold.
+Threat and Opportunity
+For surface-dwellers, the Underdark is often synonymous with danger. It has birthed invasions, harbored cults, and concealed relics best left forgotten. Yet it is also a realm of lost knowledge, rare alchemical reagents, ancient ruins, and untouched resources.
+Heroes descend into the Underdark seeking answers, power, or redemption. Few return unchanged.
+
 
 Languages - Common Dialects
 The common human language of Myrdae was first developed from communications with the wood elves of the Bathaen Empire, before they left the land. The human version is cruder and has spawned into many dialects that align with the major regions of the land. (See table below)
@@ -573,14 +788,14 @@ Language
 
 
 
-________________
 
 
+  
 chapter 3
 Time & History
 The Harmon Order (Calendar)
 Long before the Fracturing, mortals marked time by the sun alone. It was Asterin Thornage, the revered sage of the early years, who first charted the subtle dance of Myrdae’s two moons—Endelo’ar and Tudara—and their shifting Lunar Facets. Through years of meticulous observation he discovered the rare alignment called Harmony, when both moons shine together in the sky. From this celestial harmony he forged the Harmon Order, the calendar now used across the known world.
-A Myrdae year contains 384 days, each named by the Harbiter at its dawn. The year is divided into eight Harmons of 48 days apiece. Within every Harmon lie six Stretches of exactly eight days. The days of a Stretch carry no special names; folk simply say “the third day of the Stretch” or “fifth Stretch of the second Harmon, Year of the Shattered Crown.” Many still speak in looser terms: “two Stretches from today” or “the day after All-bright.” 
+A Myrdae year contains 384 days, each named by the Harbiter at its dawn. The year is divided into eight Harmons of 48 days apiece. Within every harmon lie six stretches of exactly eight days. The days of a stretch carry no special names; folk simply say “the third day of the Stretch” or “fifth Stretch of the second Harmon, Year of the Shattered Crown.” Many still speak in looser terms: “two stretches from today” or “the day after All-bright.” 
 Period
 	Description
 	Year
@@ -591,10 +806,8 @@ Period
 	6 periods in a harmon, made up of 8 days
 	Day
 	24 hours
-	  
-________________
+	
 
-Here are the eight harmons:
 Harmon
 	Observed Days & Celebrations
 	1
@@ -626,9 +839,7 @@ Harmon
 	Paramor
 	
 
-	
-
-Seasons
+	Seasons
 Myrdae knows four seasons—Natali (spring), Sultra (summer), Garnest (autumn), and Briscarn (winter)—yet they drift across the rigid framework of Harmons much as they do in any living world. All-bright, the long day of unbroken sunlight, falls at the height of Sultra; Nocturn, the deep night of unbroken darkness, claims the heart of Briscarn. Travelers quickly learn that a given Harmon may begin in late summer in one region and early autumn in another.
 Season
 	Known As
@@ -667,14 +878,19 @@ Year
 	* The Anchored Spire has completed construction, marking the founding of Trade Town. 
 	777 PF
 	* Three arcane groups, the Runic Brotherhood, the Leybearers and the Nightweave, join together to create the Tegenwald Phet. 
+	711PF
+	* The last known year that there were three moons; known as the time “The Sky Went Dark” or “The Shattering
+* Through Torec’s blessings, Coralei rose to demi-god to save Ahnassa.
+* Concern of the lost moon pulled sages together to study night sky, who became known as the Osmanae
 	600 PF
-	* Tratta joins the Tor Alliance         and gains Torguard support. 
+	* Tratta joins the Tor Alliance and gains Torguard support. 
 	500 PF
 	* Harsh times strike the Mahruud, transforming it into a barbaric land.
 * Goblins, orcs, humans, and weefolk united for survival. 
 * Gabük (half-goblins) emerge as a species of Myrdae.
 	100 PF
-	* The beginning of the War of Might, between the Bathaen Empire and the Mahruud. 
+	* Brault learns that Layeth is his sister, sending him into a rage and initiating the War of Might.
+* The War of Might, often called the Great War, is between the Bathaen Empire and the Mahruud. 
 	77 PF
 	* The Tor of the Mahruud (ruler), Threan Maul, dies during the War of Might. 
 	51 PF
@@ -692,10 +908,14 @@ Year
 	Year of Fracturing
 	* It is said that Neera threw Brault from the heavens (known as the Fracturing) and The Crungess, also known as Great Crevasse was created.
 * The neighboring areas were destroyed and buried in rubble.
-* It is also believed to have ended the Great War.
+* It is also believed to have ended the War of Might.
+* The Osmanae completed the Moon Gate, bringing Tudaran halflings to Myrdae.
 	2
-	Year of Breaking
-	* The fissure in the third moon caused by being grazed from Brault thrown from the heavens finally collapses the third moon, naming it the Broken One 
+	Year of Dissolution
+	* In conspiratorial fashion, the fanatical Osmanae are blamed for causing  the Fracturing.
+* Leaders across Myrdae create a select force meant to dissolve the Osmanae.
+* Near the end of the year, the Osmanae are dismantled.
+* The group that dismantled the Osmanae became known as the Astereal Accord.
 	3
 	Year of Marking
 	* The harmon calendar, corresponding to the Fracturing as the first year is created by Asterin Thornage. 
@@ -705,7 +925,7 @@ Year
 * The Harbiter prophecizes of things to come and names the years accordingly. 
 	5
 	Year of Deceit
-	* The demon De’Belgi fools the angel Amriel, and together they steal the Crown of Lyess. 
+	* The demon Di'Belgi fools the angel Amriel, and together they steal the Crown of Lyess. 
 	15
 	Year of Runes
 	* Di’Belgi develops the arcane art of Rune Weaving.
@@ -721,15 +941,15 @@ Year
 	Year of Endurance
 	* Monstrosities arise from the Crungess.
 * Provinces send forces to protect the surface.
-* The Meridian, leads the defense into the depths of the Underdark.
-* The Meridian that stayed behind and were cursed and referred to as the Revenir. 
+* The Meridian, leads the defense into the depths of the Underdark against the demons.
+* Members of the Meridian that refused to go were cast out and called the “Revenir”.
 	329
 	Year of Dignity
 	* The Bathaen Empire recognizes three empires in its land and the wild elves slowly began returning to the civilized areas.
 * Inverland recognizes Vecs as representatives. 
 	373
 	Year of Form
-	* Basctdelm becomes the capital o the Bathaen Empire.
+	* Basctdelm becomes the capital of the Bathaen Empire.
 * Gibuldon becomes the capital of Inverland.
 * Thrargael becomes the capital of the Mahruud. 
 	450
@@ -855,7 +1075,7 @@ Year
 	1224
 	Year of Being
 	* Suthrin is released from the hells through the Laztyr.
-* Thalex Stormvigor consults with Avant Sinestia Thornage and the Astereal Accord is reformed. 
+* Thaelex Stormvigor consults with Avant Sinestia Thornage and the Astereal Accord is reformed. 
 	1225
 	Year of Rising
 	* The year that several key villains rose to take over the land: Di’Belgi the demon lord, Itoro the chronomancer, Nethyndria the dracolich, Suthrin and Tol’behgekt.
@@ -869,7 +1089,7 @@ Year
 * The Tegenwald Phet come back into prominence as a faction to assist in pushing back the threats surfaced the previous year. 
 * 22nd of Luros - Di’Belgi summons Meresse Noakes, influencing the outcome of the Rising Harmony.
 * 30th of Evalee - Nethyndria captures the Regulators 
-	
+	  
 
 The Awakening
 The Awakening is the current age defined by cataclysmic geological upheaval. Massive landscape changes—including new land connections, rising isles, volcanic activity, and shifting seas—have reshaped Myrdae and revived ancient organizations such as the Tegenwald Phet.
@@ -887,30 +1107,29 @@ Year
 	1228
 	Year of Enlightenment
 	* Several additional deities rose to prominence in the world of Myrdae.
-* Torn settlements were rebuilt and people relocated to form new hamlets and towns.
+* Ley-threads (conduits of the Weave) become more active.
 * Vallari blesses the land and plants grow at double the rate/speed for the next 10 years. 
 	1229
-	Year of Convergence
-	* The major eastern land is now recognized as Var'shala, and is known as New territories began to take shape
-* Empowered by the magical weave of Myrdae, Tegenwald is re-established as a prominent land in the Bathaen Empire. 
+	Year of the Verge
+	* The major eastern land once called the Mahruud is now recognized as Var'shala
+* Territories change and new territories emerge in regions across Myrdae
+* Tegenwald is re-established as a prominent land in the Bathaen Empire. 
 	1230
 	Year of New Heights
 	*  Iannan Rambibur of Tarnsport discovers the power of Lodestones.
 * The Argent Halls agree to assist Iannan in Lodestone research
 	1231
-	
-
-	*  
+	Year of Echoes
+	* Residual Weave tears from the 1227 cataclysmic land events cause widespread magic instability all over Myrdae.
+* The Tegenwald Phet begin mapping unstable Ley-threads.
 	1232
 	Year of Attainment
 	* The Cloak of Defiance supplanted leadership in the Malfease, raising it to one of Myrdae’s most powerful networks. 
 	1233
-	
-
-	*  
+	Year of the Great Wyrms
+	* Zovaesdria was unable to maintain balance for dragonkind and a war erupted between the chromatic and metallic dragons, resulting in the death of many infamous dragons. 
 	1234
-	
-
+	Year of
 	*  
 	1235
 	Year of the Skyward Call
@@ -921,39 +1140,35 @@ Year
 	Year of Emergence
 	* Denizens (drow, duergar, svirfneblin and ulbin) of the Underdark are found more frequently on the surface. 
 	1237
-	Year of Harboring
-	* The Soul Reaper gathers the souls lost during the Awakening under his command. 
+	Year of Haunting
+	* A decade after many lost their lives during the events of the Awakening, the Netherlord saw that the dead walked again, becoming a haunting threat.
 	1238
-	
-
-	*  
+	Year of Waning
+	* Vallari’s decade-long blessing ends abruptly.
+* Crop failures and famines strike territories all over Myrdae.
+* <New Faction> establish partnership with the Meridian for continent-wide aid. 
 	1239
-	
-
-	*  
+	Year of 
+	*   
 	1240
-	
-
+	Year of
 	*  
 	1241
-	
-
+	Year of
 	*  
 	1242
 	Year of Stewardship
 	*  The Astereal Accord assumes responsibility of all Lodestone knowledge and shards.
 	1243
-	
-
+	Year of 
 	*  
 	1244
-	
-
-	*  
+	Year of Deviation
+	* The northern lands were unnaturally warm, causing the thawing and release of frozen monstrosities thought to be extinct.
 	1245
-	
-
-	*  
+	Year of Summoning
+	* Cultist activities become more prominent across Myrdae.
+*  
 	1246
 	Year of Discovery
 (present)
@@ -970,8 +1185,8 @@ Faith & Beliefs
 There is belief and evidence in the world of Myrdae that there is a supreme reality manifested in the forms of many gods and goddesses.  This has brought about a pantheon, where it is common for one to align their goals and behaviors towards one or more of the deities.  
 The Assembly of Essence (Old Gods)
 Many, many harmons ago, in the days when the deities visited the realms of Oberra in their human avatars – back even before the lands had their current names – the gods and goddesses lived a mostly peaceful coexistence.  Yes, they argued – you don’t reach that stature without a bit of stubbornness – but they were able to compromise and find solutions when disagreements occurred, however rare that was.  Most of their time when they dwelt among civilizations was spent in luxurious accommodations, basking in the light of the three moons at night, eating rich foods and consuming excellent wines derived from the abundant lands.  Some would enjoy the company of the local inhabitants – their innocence and nativity could be entertaining – while others enjoyed the tranquility of the chambers they crafted specifically for that purpose.
-During this period, there were eight greater deities overseeing the prime domains that were called the Assembly of Essence.  It wasn’t uncommon in those days for these deities to find favor with geographical areas outside of the heavenly realms where they usually dwelt.  Oberra, and especially Myrdae, was a favorite among the eight greater deities – so much so that they built a great hall and luxurious manor there to meet in with some regularity.  In addition, it wasn’t uncommon for each to frolic in other geographic areas of their choosing – assuming the form of various avatars, of course. For example, Lyess, the goddess of magic had an affinity for certain regions of the area that would eventually become Inverland, while Disgar, god of death, favored the rough terrain of the Mahruud.  There are countless stories that have been told about the fun that Torec, god of the elements, had while playing in Orbansia.  It seemed everyone had a favorite destination or two that they would frequent when traveling in these lands.
-It is said that these old gods no longer answer the prayers of the people of Myrdae since the Awakening.  This is a list of these old gods known as the Assembly of Essence: 
+During this period, there were eight greater deities overseeing the prime domains that were called the Assembly of Essence.  It wasn’t uncommon in those days for these deities to find favor with geographical areas outside of the heavenly realms where they usually dwelt.  Oberra, and especially Myrdae, was a favorite among the eight greater deities – so much so that they built a great hall and luxurious manor there to meet in with some regularity, giving it the same name “Assembly of Essence”.  In addition, it wasn’t uncommon for each to frolic in other geographic areas of their choosing – assuming the form of various avatars, of course. For example, Lyess, the goddess of magic had an affinity for certain regions of the area that would eventually become Inverland, while Disgar, god of death, favored the rough terrain of the Mahruud.  There are countless stories that have been told about the fun that Torec, god of the elements, had while playing in Orbansia.  It seemed everyone had a favorite destination or two that they would frequent when traveling in these lands.
+It is said that these old gods no longer answer the prayers of the people of Myrdae since the Awakening: 
 Name
 	Domain
 	Symbol
@@ -999,9 +1214,7 @@ Name
 	Torec
 	Elements
 	The merging elements
-	
-
-Deities of the New Order
+	Deities of the New Order
 After the Awakening, when the eight greater deities were believed to have abandoned Myrdae, there were new gods that rose to power, known as the New Order.  While many of these gods were once lesser deities previously worshiped, there were many others that rose to prominence as outlined below:
 Name
 	Title
@@ -1113,21 +1326,15 @@ ________________
 
 
 Amriel, the Redeemer  
-Amriel is the god of redemption, resilience, and divine justice, representing the path to atonement and the strength to rise again after a fall. Once a celestial angel, Amriel was deceived by the demoness Di'Belgi into betraying the goddess of magic, Lyess, by stealing her powerful crown. Upon realizing his grave mistake, Amriel sought redemption by waging a relentless battle against Di'Belgi's demonic forces in the Underdark, helping to stem the tides of the Blood Wars. His selfless acts of penance, bravery, and resolve ultimately earned him a place among the divine, where he now stands as a beacon of hope for those seeking redemption from past wrongdoings.
+God of Redemption and Atonement
+Amriel is the god of redemption, resilience, and divine justice, representing the path to atonement and the strength to rise again after a fall. Once a celestial angel, Amriel was deceived by the demoness Di'Belgi into betraying the goddess of magic, Lyess, and stealing her powerful crown. Upon realizing his grave mistake, Amriel sought redemption by battling Di'Belgi's demonic forces in the Underdark, helping to stem the tides of the Blood Wars. His selfless acts of penance, bravery, and resolve ultimately earned him a place among the divine, where he now stands as a beacon of hope for those seeking redemption from past wrongdoings.
 Worshippers of Amriel follow him for his unwavering commitment to redemption and justice. His followers believe in the power of transformation, that anyone, no matter how far they have fallen, can find a path to salvation by committing to self-improvement, courage, and standing against evil. Amriel’s teachings encourage his devotees to confront their own failures and embrace the struggle for atonement. 
 Depiction
 Amriel is often depicted to mortals as a radiant celestial figure, adorned in gleaming white mail armor accented with golden highlights. He has long, flowing blonde hair that cascades over his shoulders and he wields a morning star.
-Domains
-Redemption and Atonement
 Rite
 The Dawn of Redemption is a sacred ritual performed by worshippers of Amriel once per harmon, symbolizing his divine role as both protector and redeemer. As the first rays of the sun break over the horizon, worshippers gather in an open space, facing east to greet the dawn. As the sun fully rises, participants raise their heads skyward, pledging to follow Amriel’s teachings of forgiveness. The rite concludes with a symbolic washing of hands in blessed water to cleanse themselves of past wrongdoings.
 Commandment(s)
-Seek Redemption through Justice and Light - His followers are called to protect the innocent, confront darkness wherever it resides, and guide the wayward back toward the light, just as Amriel himself redeemed his past transgressions by becoming a divine champion of good.
-
-
-________________
-
-
+Seek Redemption through Justice and Light - His followers are called to protect the innocent, confront darkness wherever it resides, and guide the wayward back toward the light, just as Amriel himself redeemed his past transgressions by becoming a divine   champion of good.
 Asmodeus, the Prince of Darkness  
 Asmodeus, the infernal overlord and ruler of the Nine Hells, embodies the relentless pursuit of power, dominance, and indulgence. As the god of tyranny, he champions the belief that strength grants authority, and those who possess the will to rule deserve to impose their desires upon others. His fiery nature reflects both the consuming ambition of his followers and the punishment that awaits those who defy his rule. Devotees of Asmodeus often seek his favor to gain power over others, indulge in their deepest desires, or secure protection in exchange for loyalty and servitude. For those who embrace his creed, submission to his will promises not only rewards but a path to ascend beyond mere mortals, mastering the forces of the world through sheer strength and unwavering ambition.
 Depiction
@@ -1537,7 +1744,7 @@ ________________
 
 
 chapter 5
-Factions
+Organizations
 A player can choose to be a part of any of the organizations above or one they create themselves by working with the DM.  However, there are some organizations that heavily recruit adventurers and are commonly referred to as “factions”:  Advents of Harmony, Cloak of Defiance, Everdawn, Meridian and Tegenwald Phet.
 Well Known Organizations
 While not a complete list, here are some of the most well known organizations in Myrdae:
@@ -1557,22 +1764,37 @@ Symbol
 	Diplomatic organization disguised as art lovers
 	  
 
+	Ashen Hand
+	Power & Magic
+	Seek power in order to rule by magic
+	  
+
 	Astereal Accord
 	Extra-planar Protection
 	Protect Myrdae from otherworldly threats
-	
+	  
+
+	Bane of Nethyndria
+	Dragon Worship
+	Followers of dragons, wishing to bring them to power
+	  
 
 	Barrenscars
 	Slave Trade
 	Mercenaries that traffic people
-	
+	  
 
-	Bastille, the
-	
-
+	Bastille
 	
 
 	
+
+	  
+
+	Blindhilt
+	Thieves’ Guild
+	Broke off of the Malfease during the rise of the Cloak of Defiance.
+	  
 
 	Bloodhand
 	Hired sellswords
@@ -1583,22 +1805,22 @@ Symbol
 	Cloak of Defiance
 	Power & Influence
 	Mercenaries and large thieves’ guild
-	
-
-	Ebonhand
-	Dealing in Artifacts
-	Funds adventurers to acquire hard to find goods
-	
+	  
 
 	Empyrean Ascendants
 	Non-believers
 	Believe the gods are a farce
-	
+	  
 
 	Eradic of Ghone
 	Worshipping a Lich
 	Cult doing the bidding of Si’julous Ghone 
-	
+	  
+
+	Eternal Binding
+	Binding Judgement
+	Cult followers of Malgri’n
+	  
 
 	Etterset
 	Thieves’ Guild
@@ -1608,36 +1830,51 @@ Symbol
 	Everdawn
 	Balance & Preservation
 	Nature loving group seeking coexistence
-	
+	  
 
 	Howling Meek
 	Bounty Hunting
 	Hunt other for sport or profit
-	
+	  
 
-	Malfease
-	Control & Secrecy
-	Largely disbanded worldwide thieves’ guild
+	MEAD Society
+	Justice & Stability
+	Secretive organization posing as makers and traders of mead.
 	  
 
 	Meridian
 	Alliance & Order
 	Create alliances among people and protect them
-	
+	  
+
+	Osmanae
+	Knowledge & Exploration
+	Ancient order, largely diminished.  Relics and artifacts still in existence, but mostly undiscovered.
+	  
 
 	Paragon Tear
 	Pain & Discipline
 	Growth through experiencing pain (Natafae)
-	
+	  
 
 	Populi Verde
 	Nature Fanatics
 	Enthusiasts obsessed with Mother Nature
 	  
 
-	Rel’Udomina
+	Promissory
+	Dealing in Artifacts
+	Funds adventurers to acquire hard to find goods
+	  
+
+	Radiant Eye
+	Gaining Power
 	
 
+	  
+
+	Rel’Udomina
+	Anarchy
 	
 
 	  
@@ -1645,7 +1882,12 @@ Symbol
 	Tegenwald Phet
 	Secrecy & Magic
 	Seekers of knowledge and power through magic
-	
+	  
+
+	Umbral Order
+	Thieves' Guild
+	Once known as the Featherblade, broke away from the Malfease and reformed in Batheas
+	  
 
 	Venomtips
 	Assassins
@@ -1654,7 +1896,7 @@ Symbol
 
 
 Advents of Harmony
-The Advents of Harmony is the oldest organization in Myrdae.  They originally started as adventurers and explorers, but soon became known as more of a historical faction.  Today, the Advents of Harmony maintain the largest historical archive on Myrdae and are sought out by many leaders as advisors, sages, and the like.
+The Advents of Harmony originally started as adventurers and explorers, but soon became known as more of a historical faction.  Today, the Advents of Harmony maintain the largest historical archive on Myrdae and are sought out by many leaders as advisors, sages, and the like.
 Given their immense depth of knowledge, the Advents of Harmony have strong contacts throughout the land.  They often have connections with town and city leaders, although they are often reluctant to reveal those connections without just cause.  
 The Advents of Harmony have the following Goals:
    * Adventure into the unexplored
@@ -1708,6 +1950,55 @@ The network of the Andërs connects members to influential figures across Myrdae
 ________________
 
 
+Ashen Hand
+The Ashen Hand began while the Bathaen Empire had the Tegenwald Phet under fire. Four rogue wizards left that order and went east, as far from the empire as the land allowed, then settled in the Range of Otesurr under a single promise: no queen or king would rule them. The four Spirens who lead the Hand today are not those founders. They rose to the posts later, and the promise still binds the order they inherited.
+The Hand seeks power in order to rule by magic. Members are told that outright. Outsiders hear rumors, and what a city is actually offered is use. The Hand does not plant enclaves across Myrdae. It holds Otestein, and it moves four Skykeeps, so a region invites a finger in when the work is worth the price. The Tegenwald Phet still holds that knowledge is power, and it still acts ethically. The Hand does not. Its allies change from year to year, though the Barrenscars remain the standing large ally and the source of the slaves the Hand takes.
+The Hand has no formal tenets, and it requires no deity. Members follow who they choose. What is recognized inside the order is magical supremacy, personal ambition, hierarchy, and the pursuit of power, held together by the founding promise that the Hand will not be ruled by a queen or king.
+Four Spirens rule together, and no one sits above them. Each Spiren leads one finger, built on a diametrically opposed pair of schools of magic:
+   * Divination and Conjuration
+   * Evocation and Enchantment
+   * Necromancy and Illusion
+   * Transmutation and Abjuration
+Four Hicusps are second in command, aligned to the other school of magic opposed to the Spiren’s school.  There is also a Castellan, aligned to each Skykeep. There is no standard recruitment and no rank ladder. A bound member is brought in by someone already of that school, and is known by the work they do rather than by a title.  
+The seat is Otestein, a large cold city on the eastern foothills of the Otesurr Mountains, between the summit and the eastern coast, built of muted black ebony stone with platinum accents. A steward runs the city and is not a fifth leader. Four natural spires were used to build the Skykeeps, and each spire is the anchor that keep returns to: Darkvist for Necromancy and Illusion, Oathbrand for Evocation and Enchantment, Farcall for Divination and Conjuration, and Turnward for Transmutation and Abjuration. Four cloud giants, cast out of their clan, aligned with the Hand to increase their own power, and that there were four is treated as fate. One giant stands to a finger.  A Skykeep does not sail. A destination is chosen and the keep teleports, then it must remain in place for a stretch, eight days, before it can jump again.
+The mark of the Ashen Hand is a slate-gray diamond with a white handprint burned into the center, the ash forming the border of the print rather than the fill. Members carry no single required token. The mark is struck on a clasp, a gate, or a Skykeep hull.
+________________
+Astereal Accord
+The Astereal Accord was founded years ago, when threats from the skies, unstable planar breaches, and corrupted magic endangered Myrdae. Unlike the Meridian, who focus on law, order, and protection against the Crungess and terrestrial dangers, the Accord looks outward and upward, safeguarding Myrdae from threats beyond its borders and balance. Over the decades, the Accord became recognized as the foremost organization against extraplanar dangers, unstable magical resonance, and abuses of Lodestone technology.
+The Astereal Accord have the following Goals:
+   * Guard Myrdae against extraplanar incursions and breaches.
+   * Preserve balance in the use of magic and prevent its corruption.
+   * Protect the skies through stewardship of Lodestones and airship fleets.
+Beliefs and Values
+   * Diplomacy – every force must be countered with harmony, never dominance.
+   * Vigilance – the skies, planes, and weave are fragile; constant watch is required.
+   * Unity – only through equal voice between divisions can Myrdae remain safe.
+
+
+  
+
+Bane of Nethyndria
+The Bane of Nethyndria is a decentralized cult that works to place one or more dragons in power over Myrdae. The living of the land gave it the name. They saw the group that rose in 1224 as a force that would wreck the realm if it succeeded in strengthening Nethyndria. Veinspear Darego stood the cult up for a narrower purpose: prove she had a following, and bring her home to rule with him. The mark is a bone-colored dragon skull with purple, bat-like wings. Cultists strike it on seals, hideouts, and personal tokens. The colors most associated with the group are bone, slate-gray, and deep purple.
+The cult began around the dracolich Nethyndria. After her body was destroyed in 1226 and the Awakening followed, the surviving cells kept the broader aim. Specific objectives vary by cell and are not widely known outside them. 
+Structure & Membership
+Since her fall, the Bane of Nethyndria does not answer to a single leader on Myrdae. It operates as independent cells. Each cell pursues its own reading of the goal that dragons shall rule, and each cell uses the same five-step ladder. Rank is local. Promotion and demotion stay inside the cell. There is no authority that crosses from one cell to another. Unmarked recruits sit below the ladder and carry no title until they are proven. 
+Barrenscars
+
+
+Bastille
+
+
+Blindhilt
+
+
+
+
+Bloodhand
+The Bloodhand is the largest and most accessible assassin’s guild. The guild are astute negotiators. The minimum for a assassination contract (or “kill contract”) is 100 gp, plus required expenses. Additionally, kill contracts are negotiated with objective bonuses so that the assassin is challenged further than just the death of the victim and can make more off the agreement.
+For example, the assassination of a nobleman might be 250 gp, plus 50 gp for expenses. The contract might be negotiated that If the assassination occurs in half the time allotted, there be a 50% bonus. Or it might be negotiated that if the assassination was made to appear as the person died from a freak accident, then maybe a bonus for that as well. The terms always vary, but they are always negotiated with at least one bonus.
+The Bloodhand were originally a subsidiary of the Ebonhand, who still provide a majority of their jobs, but they are self-run organization now.
+
+
 Cloak of Defiance
 For decades, the Cloak of Defiance have fought to replace the Malfease as the most powerful organization that works behind the shadows.  In 1232, the Cloak of Defiance were able to supplant the leadership within the Malfease, raising them to one of the most powerfully connected networks in Myrdae.
 The leadership of the Cloak of Defiance spreads far and wide, holding key positions in the largest cities.  Their roots come from a loose network of thieves’ guilds and have spawned into a unity of many thieves’ guilds all over the land.  
@@ -1740,6 +2031,30 @@ Rank
 The following assets are available to members:
    1. Forgery services in a town or major city
    2. Access to purchase poisons in a town or city
+
+
+________________
+
+
+Empyrean Ascendants
+Empyrean Ascendants, a cult following also known as League of the Sky, believe that you can enter a higher plane of existence, which can only occur during Absentia (when the two moons are new).  By performing various rituals during the time when both moons are in their new moon phase, the followers believe worthy souls elevate to an Absent Transition.
+The symbol of the Empyrean Ascendants is a perfectly round black star sapphire, with the star shining brightly across the surface of the black orb.
+There are those who claim that they have ascended into an Absent Transition, returning with various thoughts and feelings on the matter:
+   * Higher Truth – leaders of Empyrean Ascendants feel they have gone, only to return as a guide to lead others who are worthy.
+   * Insanity – some speak of entering a realm of demonic presence, where they believe to be possessed or overcome by demons.
+   * Denial – Some that return say that it is like a dream state woven into reality.  They feel that they have lived an existence that seemed no different until they returned.  Over time, they claim to have seen evidence their actions have had some impact on things that really occurred on Myrdae, though only in pieces and parts.
+
+
+Eradic of Ghone
+Pronounced [ERA-DIK]
+This group of cultists named the Eradic of Ghone, are followers of the Soul Reaper, lich-demigod Si’julous Ghone, spread all over Myrdae.  The cult believes that death frees the soul from false identity—and that Si’julous Ghone will soon usher in a “Great Unbinding.”  Many members are former healers, caretakers, or grieving families who were seduced into believing that death is purity.  
+
+
+Eternal Binding
+
+
+Etterset
+The Etterset is a thieves’ guild formed around 1240.  The Etterset usually only have pragmatic members that are profit-driven, focusing on theft, smuggling and control of underground trade.  The Etterset tend to compete against the Cloak of Defiance for power and control of underground networks. 
 ________________
 
 
@@ -1777,9 +2092,20 @@ The following assets are available to members:
    2. You get Advantage on survival checks for tracking in the wilderness
 
 
+Howling Meek
+The Howling Meek offers a unique service to its clients, an ability to hunt other individuals as sport. For a price, someone can spend a stretch on one of their islands, hunting people that have been kidnapped and placed on the island. A bizarre sports like this typically costs 150 gp per trip and the Howling Meek is not responsible for your well being.
+Individuals captured and placed on the island to be hunted are stripped of their belongings.
+These victims have typically been drugged or placed under some hypnotic spell, such they they don’t know how they go to this place. The victims are then notified by a letter that a game is about to begin and they have a limited period of time before they are hunted.
+It is a daunting task to survive such an event, since the people that are hunting these individuals are usually outfitted with weapons and rations. And since they are on an unknown island, surviving the passage off the island is near impossible.
 ________________
-
-
+MEAD Society
+The Mead Society is an elite, clandestine order of adventurers tasked with rooting out evil, exposing corruption, and bringing dangerous wrongdoers to justice across the lands of Inverland and beyond.
+To the public, the Society appears to be little more than the distribution and marketing arm of a popular mead brewed in Gibuldon, the capital city of Inverland. This clever disguise allows its members to travel, gather information, make contacts, and move goods without drawing suspicion. The name MEAD is more than a reference to the drink they supposedly represent -  it reflects the Society’s true purpose: to Meet, Expose, Ascertain, and Discover those who would harm, exploit, or destroy others.
+The Mead Society operates in service to the Dicon of Inverland, maintaining a direct and trusted connection to the current Dean. Its membership is usually small, consisting of five to eight capable individuals chosen for their discretion, skill, and moral resolve.
+Their headquarters is Ms. V’s Cottage, a modest bakery and boarding house on the outskirts of Gibuldon. To most visitors, it is a warm and unassuming place known for fresh bread, sweet pastries, and comfortable rooms. Beneath the cottage, however, lies a hidden underground level containing private meeting chambers, secure storage, an arcane waypoint, and other resources used by the Society.
+The cottage grounds are tended by a small group of pallas — green-skinned goblins who outwardly serve as caretakers, groundskeepers, and household helpers. In truth, they are trusted allies of the Mead Society, assisting with messages, maintenance, concealment, and other quiet tasks as needed.
+Membership within the Mead Society is intentionally limited, with new seats opening only when a member withdraws from service, enters retirement, or passes from this world. In times of need, however, the Dicon retains the authority to convene additional circles of the Society to meet the demands before them.
+________________
 Meridian
 The Meridian originated as the Halesworth Charge, a select force for order guided by the ruler of Halesworth in the Bathaen Empire. They grew in name and numbers, and many of the people of Myrdae adopted their mission and referred to them as the “Meridian.” Today, the Meridian is the main organization recognized by most of Myrdae that helps to bring law and order across the land.
 Almost all of the large cities in Myrdae have Meridian representatives who are well connected to important figures in the city.  They work with other representatives to flush out chaos and other nefarious activities.  
@@ -1791,7 +2117,7 @@ Beliefs and Values
    * Order – you are responsible for honor and order
    * Never Fear – meet threats head on, don’t wait for them to have an advantage
 Structure & Membership
-The Meridian organization is led by an Ambassador who is aligned with each major region in Myrdae.  There is also one Templar who has the responsibility of mediating decisions.  There are embassies in each region in Myrdae, with an Ambassador heading up each location (Adamont, Basctdelm, Gibuldon, and Thrargael). Leaders of the Meridian gather every harmon to review threats on the land.
+The Meridian organization is led by Templars, one appointed to each region (Bathaes, Inverland, Jehsle, Orbansia and Var’Shala).  Next in line are Ambassadors (Rank 4) who represent a specific territory and Champions (Rank 4) who are given responsibilities not tied to a territory.  Templars are elected into position by the Ambassadors covering territories within the region the Templar is responsible for.  The Meridian hasn’t grown to cover every territory, but many of the most prominent territories are likely to have Meridian representation.  Although Templars aren’t always stationary, they do hold authority over an embassy within their region, which are located at the following:  Adamont for Orbansia, Basctdelm for Batheas, Gibuldon for Inverland Qaethyra for Jehsle and Ulkef for Var’Shala.
 Members of the Meridian grasp their silver amulet insignia in their right hand and place it over their heart with a nod of their head. 
 Rank
 	Renown
@@ -1807,19 +2133,97 @@ Rank
 	Gallant
 	4
 	25+
+	Ambassador / Champion
+	5
+	-
 	Templar
 	Benefits
 The following assets are available to members:
    1. Issued preferred weapon, if they do not own one
    2. Recognition by local guards
    3. Access to defense training grounds and barracks
+
+
 ________________
 
 
-Tegenwald Phet
+Osmanae
+Known For: Celestial Observation (later went fanatical)
+The Osmanae are an ancient order that began studying the sky out of concern that the Shattering was an early warning of greater cataclysm. They captured hundreds of years of studies, writings, and important historical pieces of Oberra.  They operated from celestial watchtowers and observatories (including the Last Watchtower).  They developed instruments for charting the skies, tracking Lunar Facets, and recalibrating celestial records disrupted by the Shattering/Fracturing.
+Asterin Thornage was a dedicated member for five decades (joined at age 20). He left in Year 1 (age 70) after the Fracturing, fearing the organization’s growing fanaticism. He took many scholarly documents and tomes with him. His children — explorer Eilathor Thornage and monk Talyn Thornage (Warriors of Silent Echos, Uktali) — later helped establish protective institutions for these records: the Uktali Monastery (primary vault, high in the Distancion Mountains, with Talyn’s involvement) and the Argent Halls (replicated archives, tied to Eilathor’s role in the Advents of Harmony).
+They started to become fanatical around the year 10 Pre-Fracturing, advancing their cause to develop tools and methods for reaching “the heavens”.  Observations from the people of Myrdae led to conspiracies as watchtowers were built across Myrdae by the Osmanae to further their cause.  Eventually the leaders of Mydae created a task force to dissolve the Osmanae and erase their history.  That group later became the Astereal Accord and a part of its order was to disassemble anything associated with the Osmanae that they came across.  What wasn’t destroyed, the Astereal Accord took to repurpose.
+Today, it is believed that the Osmanae is all but dissolved.  The organization is now largely diminished. Relics and artifacts (including sky-charting instruments) still exist but are mostly undiscovered.
+Goals
+   * Track and interpret Lunar Facets and celestial phenomena as warnings of cataclysm.
+   * Preserve (and later control) ancient celestial and historical knowledge of Oberra.
+During their fanatical phase, enforce extreme interpretations of heavenly signs and protect hoarded records at all costs.
+Beliefs and Values
+   * The heavens and Lunar Facets reveal early signs of cataclysm (Shattering as warning; Fracturing as confirmation).
+   * Rigorous, long-term study and safeguarding of celestial/historical records is essential for survival and understanding.
+During their fanatical phase, adherence to their interpretations; resistance to outside influence or dilution of their findings.
+Structure & Membership
+Centered on remote observatories and watchtowers. Led by senior interpreters and sky-watchers. Members committed to decades of observation, recording, and analysis. Recognized by specialized celestial tools, observation journals, or marks of study.  The fanatical turn and loss of key records (taken by Asterin) led to internal fracture and sharp decline.
+Ranks (inferred from historical structure)
+   1. Observer / Recorder
+   2. Analyst / Interpreter
+   3. High Watcher / Interpreter (fanatical leadership core)
+Benefits 
+None – They are disbanded.
+Current Status
+Largely diminished ancient order. Their foundational work on Lunar Facets directly informed Asterin Thornage’s creation of the Harmon Order (completed when he was 73). Many of their most important records are now safeguarded in the Uktali Monastery and Argent Halls. Relics such as the celestial calibration instrument remain scattered and mostly undiscovered.
+
+
+Paragon Tear
+Paragon Tear is a well-known order of Natafae worshipers—the Mistress of Pain—rooted in Paendly. Its members teach that true strength and growth come only through iron discipline and the deliberate embrace of pain and suffering, viewing hardship as the only forge worthy of forging resilience and wisdom. They maintain recruiters and trainers who seek out those who can endure, and they keep these individuals in towns and cities. While their public face centers on personal fortitude and self-mastery, rumors persist of deeper costs, strange visions of blood and chains, and unorthodox methods that blur the line between guidance and infliction.
+Beliefs and Values
+   * Endurance - embrace pain and suffering as the essential forge for personal growth and unbreakable strength
+   * Discipline - break weakness through rigorous trials to reforge the self into something more resilient and worthy
+   * Purpose - channel the strength gained to serve and defend the militant order and defense of civilization
+The name is not poetic. Advancement requires a “Tearing”: the aspirant must survive the death or total breaking of a bonded mentor/peer. The survivor is literally torn from their old self, bound by chains of purpose, and reforged as a Paragon ready to serve as elite soldier, guard, or enforcer. 
+Paragon Tear markets itself as the forge that turns flawed or weak individuals into assets a civilization can actually use. Desperate lords, city watches, or generals send recruits (or condemned criminals) to be “remade.” Successful Paragons are then placed in key military or guard positions, giving the organization quiet influence across borders. 
+Members do grow stronger, more disciplined, and more resilient—but the process frequently severs old loyalties, empathy, or moral flexibility. 
+
+
+Populi Verde
+This group of environmental enthusiasts worships Madre Verde – who everyone assumes is their somewhat questionable personification of mother nature. They are reviled by most of the people in the towns who have heard of them. They are a force of good and bad depending on the day and viewpoint. They can help or hinder travelers, but gravitate to nature lovers.
+Near the city of Dhá Chaomhnóir, they were led by Ainran, a very powerful and charismatic leader. He was the subject of a bounty reward from the Cur family of Dhá. He has not been seen since leaving for the most recent All Bright ceremony. It is assumed he has been killed for the reward, but the Greens insist he has been taken by the Mother to become a god. After a few incursions into the city that were rebuffed by the Cur family, the Greens have returned to patrolling the roads and hassling merchants who do not show proper respect to Madre Verde.
+Promissory
+The Ebonhand are a secretive group that deals in the acquisition and trade of hard to find goods, such as artifacts.  They use the alias “The Promissory” as an official business and trade organization, in an attempt to cover any illegal activity they are involved in.
+
+
+Radiant Eye  
+
+
+
+
+Rel’Udomina
+Rel’Udomina is a secretive organization that seeks to undermine the ruling elites of Myrdae by manipulating local governance and destabilizing political structures.  Unlike the Andërs, who work within the system to promote diplomacy and balance, Rel’Udomina believes that the established order must be broken to free Myrdae from the dominance of entrenched power. Their ultimate goal is to replace the region’s rulers with those who align with their philosophy, gaining control from the shadows. 
+The symbol of the Rel’Udomina is a stern plain mask over a flame, which is often tattooed on their forearm in a place that can be easily covered.
+The Rel’Udomina operates in the shadows, infiltrating political circles and gathering intelligence to use as leverage. Its agents are well-trained in deception, subterfuge, and manipulation, often positioning themselves as trusted advisors, scholars, or merchants. They prioritize secrecy, and only a select few know the full extent of their influence.
+When the Rel’Udomina establish themselves in a town or city, they appoint a leader they refer to as “The Prominent”.
+Structure & Membership
+   * Udomina – The hidden ruling head of the organization.
+   * Archon – Mystical and deadly hands to the Udomina.
+   * Voice – Regional commanders responsible for entire territories or spheres of influence. Each Archon directs numerous Ministers of Threads, coordinating operations ranging from political subversion to religious corruption. They ensure the Udomina’s unseen hand controls the flow of information and power.
+Rank
+	Renown
+	Title
+	1
+	0 - 1
+	Incipient
+	2
+	2 - 9
+	Agent
+	3
+	10 - 24
+	Minister
+	4
+	25+
+	Voice
+	Tegenwald Phet
 In 777 PF, the Runic Brotherhood (Prong), the Leybearers (Swift), and the Nightweave (Veil) merged in Tratta to form the Tegenwald Phet. The new organization blended the Brotherhood’s contingency planning with the Leybearers’ confident, decisive use of magic and the Nightweave’s emphasis on covert action to protect freedom.
 For centuries the Tegenwald Phet worked in secrecy, scattered across Myrdae. During the Year of Fending, the people and leaders of Myrdae turned to them for aid against existential threats. Their crucial support re-established the Tegenwald Phet as a powerful and respected organization.
-Today, the Tegenwald Phet is seen as very knowledgeable and have become influential advisors to many leaders.  It is very common for city leaders to have Tegenwald Phet members as part of their council.  
+Today, the Tegenwald Phet is seen as very knowledgeable and has become influential advisors to many leaders.  It is very common for city leaders to have Tegenwald Phet members as part of their council.  
 The Tegenwald Phet have the following Goals:
    * Learn and advance magic.
    * One should be free to live and die as they see fit.
@@ -1828,7 +2232,7 @@ Beliefs and Values
    * Prong – Contingency plans improve success
    * Veil – Covert means can be the best promoter of freedom
 Structure & Membership
-The Tegenwald Phet are run by a council known as the Phet’extant who are made up of a head member of highest rank, Master Arcanum, and of ranked members representing these areas of magic: arcane, divine, primal, psychic, ritual, and versatile.  The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
+The Tegenwald Phet are run by a council known as the Phet’extant who are made  up of the head member of highest rank, Master Arcanum, and the eight Grand Magisters. Grand Magisters are the highest ranked members representing the eight schools of magic: Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion, Necromancy, and Transmutation. The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
 Tegenwald Phet members are recruited by other members who have an eye for noticing those in alignment with the faction’s goals and values. Members receive a tattoo of the faction symbol that not only identifies the member can be leveraged by upper-ranking members to locate them. 
 Rank
 	Renown
@@ -1845,6 +2249,9 @@ Rank
 	4
 	25+
 	Magister
+	5
+	*
+	Master Arcanum
 	Benefits
 The following assets are available to members:
    1. Spell components in a city
@@ -1852,2598 +2259,569 @@ The following assets are available to members:
    3. Access to defense training grounds and barracks
 
 
+Umbral Order
+The Umbral Order was born centuries ago, when a group of disenfranchised elves in the Bathaen Empire were exiled for defying noble decrees. Instead of dissolving, they went underground—literally—into the crypts, catacombs, and sewers beneath Basctdelm and other imperial cities. Over time, the Order transformed into a thieves’ guild that operates not with brute force, but with precision, patience, and a strict code of loyalty. They see themselves as shadows balancing the empire’s light—taking what is owed, ensuring secrets remain hidden, and maintaining influence behind the scenes.
+Operations
+Unlike common thieves, the Umbral Order prioritizes secrets. Blackmail, coded ledgers, stolen treaties, and intercepted correspondence are more valuable than gold.  They do engage in smuggling, extortion, and theft, but always with precision. Their marks are chosen carefully—corrupt officials, bloated guilds, or those who broke bargains with them.  Members see themselves not as brigands but as keepers of balance, trimming corruption where they see fit and redistributing wealth and secrets to ensure no one faction in the empire grows too powerful. In this way, they are thieves, but thieves with a cause—and their loyalty to one another is absolute.
+Hideouts (Glooms)
+Hideouts are called Glooms, dim sanctuaries beneath taverns, sewers, and ruins. Each Gloom is marked with a sigil only visible under moonlight.
+Structure & Membership
+One figure leads the Umbral Order, the Eclipse.  They are always masked, whose true identity is known only to a handful. They are chosen not by blood or power but through unanimous consensus of the Shadows.
+Rank
+	Renown
+	Title
+	1
+	0 - 1
+	Initiate
+	2
+	2 - 9
+	Silhouette
+	3
+	10 - 24
+	Umbral
+	4
+	25+
+	Shadow
+	
+
+Venomtips
+The Venomtips guild is arguably one of the most effective assassination guilds in all of Myrdae. All of their kills are symbolized by a piercing, that appears similar to a vampire’s bite. This piercing is caused by a thin twin bladed dagger with poisonous tips.
+When a Venomtip assassin enters a contract, they are expected to be successful, or die trying. If a Venomtip is not successful and does not die carrying out the assassination, the unsuccessful assassin becomes the target for another Venomtip and the gold is refunded to the person that hired the Venomtips. Additionally a second attempt is made to fulfill the contract for free.
 ________________
 
 
-
-
-
-
+ 
 Appendicies
+Content Review
+This section contains an assessment of how well various Dungeons & Dragons sourcebooks and expansions fit into a Myrdae Campaign.  Options captured here are either:
+   1. prohibited – designated by the red font, or 
+   2. not recommended – designated by orange font; see explanation.
+Background Options
+Background
+	Source
+	Assessment / Explanation
+	Aberrant Heir
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Agent of the Ninth Quill
+	Arcana Unleashed
+	Still under review; ask your DM
+	Bejeweled Conclave Spy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Chondathan Freebooter
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cosmic Dawn Experiment
+	Arcana Unleashed
+	Still under review; ask your DM
+	Covenant of the Grave Rec
+	Arcana Unleashed
+	Still under review; ask your DM
+	Crucible Storm Chaser
+	Arcana Unleashed
+	Still under review; ask your DM
+	Dead Magic Dweller
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Dragon Cultist
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Emerald Enclave Caretaker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Familiar Trainer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Flaming Fist Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Genie Touched
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Harper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Horizon Weaver Initiate
+	Arcana Unleashed
+	Still under review; ask your DM
+	House Agent
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	House Backgrounds
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Ice Fisher
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Knight of the Gauntlet
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lord’s Alliance Vassal
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lorwyn Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Mist Wanderer
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting
+	Moonwell Pilgrim
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mulhorandi Tomb Raider
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mythalkeeper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Pact Seeker
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Phantasmic Circus Trouper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Purple Dragon Squire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rashemi Wanderer
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Seer Apprentice
+	Arcana Unleashed
+	Still under review; ask your DM
+	Shadowmasters Exile
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Shadowmoor Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Spellfire Initiate
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Ward of Sheltering Hands
+	Arcana Unleashed
+	Still under review; ask your DM
+	Zhentarim Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	
 
+Class / Subclass Options
+Class / Subclass
+	Source
+	Assessment / Explanation
+	Artificer: Armorer
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Artillerist
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Battle Smith
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Reanimator
+	Ravenloft: The Horrors Within
+	Provides combat companion; will slow game play 
+	Barbarian: Glacier
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Barbarian: Spell Scorned
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Barbarian: Titan
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Choreography
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Bard: Drama
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Bard: Skald
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Spirits
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Bard: the Moon
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Apocalypse
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Cleric: Arcana
+	Arcana Unleashed
+	Still under review; ask your DM
+	Cleric: Astral
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Cleric: Grave
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Cleric: Knowledge
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Nornbound
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: Fenris
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: the Symbiote
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Druid: Unbroken Circle
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Arcane Archer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fighter: Banneret
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Fighter: Couatl Herald
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Hero
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Fighter: Viking
+	Northlands Worldbook
+	Still under review; ask your DM
+	Monk: Celestial
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Monk: Cosmic Balance
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Monk: Mystic Arts
+	Arcana Unleashed
+	Still under review; ask your DM
+	Paladin: Guardian
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Paladin: Noble Genies
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Paladin: Hearth
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Paladin: Valhalla
+	Northlands Worldbook
+	Still under review; ask your DM
+	Ranger: Beast Master
+	Player’s Handbook
+	Provides combat companion; will slow game play 
+	Ranger: Hollow Warden
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Ranger: Trail Warden
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Ranger: Winter Trapper
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Ranger:  Winter Walker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rogue: Phantom
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Rogue: Runetagger
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Rogue: Scion of the Three
+	Forgotten Realms: Heroes of Faerûn
+	Does not fit Myrdae setting
+	Rogue: Shadow Stalker
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Clockwork
+	Player’s Handbook
+	Does not fit Myrdae setting
+	Sorcerer: Frost
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Sorcerer: Hungering Dark
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Shadow
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Sorcerer: Spellfire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Sorcerer: Spirit Caller
+	Northlands Worldbook
+	Still under review; ask your DM
+	Warlock: Astral Griffon
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Warlock: Exalted Assembly
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Warlock: Undead
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Warlock: Vestige
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Bibliomancy
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Wizard: Bladesinger
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Wizard: Conjuerer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Enchanter
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Materilizer
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Wizard: Necromancer
+	Arcana Unleashed
+	Provides combat companion; will slow game play 
+	Wizard: Transmuter
+	Arcana Unleashed
+	Still under review; ask your DM
+	
 
-Recommended Species Table
-The species in this section can be selected by players for their character.
+Feat Options
+Feat
+	Source
+	Assessment / Explanation
+	Abjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Aberrant Anatomy
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Arcane Artist
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Eloquence
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Infiltrator
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Omens
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Overload
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Safeguard
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Undertaker
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Warrior
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Erupting Spellpower
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Magic School Master.
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of the Iron Mind
+	Arcana Unleashed
+	Still under review; ask your DM
+	Conjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Divination Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Echoing Soul
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Elemental Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Enchantment Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Evocation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Familiar Friend
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fey Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Sentinel
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Tormentor
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Gathered Whispers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Illusion Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Infernal Bulwark
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Dragoon
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Living Shadow
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Magic Connoisseur
+	Arcana Unleashed
+	Still under review; ask your DM
+	Mist Walker
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Necromancy Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Otherworldly Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Pack Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Portal Jumper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Prone Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Second Skin
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Soothing Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Resistant
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Subterfuge
+	Arcana Unleashed
+	Still under review; ask your DM
+	Symbiotic Being
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Shifting Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Tactical Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Transmutation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Transmuted Anatomy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Touch of Death
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Warlike Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Watchers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	
+
+Species Options
 Species
-	Prevalence
-	Consideration
-	Aasimar
-	Very Rare
-	The people of Myrdae accept aasimar, but since they are so rarely encountered, aasimar might be met with awe or distrust.
-	Dragonborn
-	Uncommon
-	Although the player chooses to play good, neutral or evil characters, dragonborns clans tend to represent the alignment of their dragon type, with metallics being seen as good and chromatic being viewed with skepticism.
-	Dwarf
-	Common
-	
-
-	Elf
-	Common
-	High and wood elves are common, where eladrin, sea are more rare.  For drow, see the restricted species section.
-	Firbolg
-	Uncommon
-	
-
-	Genasi
-	Rare
-	Genasi are often approached by others with caution, due to how infrequently they are encountered.
-	Gnome
-	Common
-	
-
-	Goliath
-	Uncommon
-	
-
-	Hafling
-	Common
-	
-
-	Human
-	Very Common
-	
-
-	Kender
-	Rare
-	While kenders adventure all over Myrdae, their roots are from Jehsle and are more frequently seen in their and Orbansia.
-	Orc
-	Common
-	Orcs are popular in the Mahruud.  However, other regions tend to distrust full blooded orcs.
-	Satyr
-	Rare
-	Satyrs are known for their mischievous behavior and are often treated as such.
-	Tiefling
-	Rare
+	Source
+	Assessment / Explanation
+	Boggart
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Changeling
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Faeries
+	Lorwyn: First Light
+	Does not fit Myrdae setting;considered a monster in civilized areas
+	Flamekin
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Kitkin
+	Lorwyn: First Light
+	Does not fit Myrdae setting; a reskin of halflings
+	Lupin
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Reborn
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Rimekin
+	Lorwyn: First Light
+	Still under review; ask your DM
 	
 
 	
 
-________________
-
-
-Territories
-This is a comprehensive list of all of the territories in the land of Myrdae.
-Area
-	Type
-	Location
-	Description
-	Aelbon
-	Dhá Chaomhnóir
-	Inverland
-	Aelbon is a lush territory nestled in southern Inverland, known for its rich natural resources, fertile fields, and thriving wildlife. The territory is home to the enigmatic Populi Verde, a nature-worshipping group with a troubled history. Aelbon is known as home to two grand cities, Dhá Chaomhnóir on the coast and Blackfield in the northeastern hills.
-	Aikshaw Descent
-	Bonfaduhr
-	Inverland
-	Stretching along the southern face of the Eustera Ridge Mountains, Aikshaw Descent offers a variety of landscapes, ranging from towering peaks to forested valleys. The territory is home to the fishing city of Abereth on the shores of Loch Cerule and Bonfaduhr, stronghold of the Oreguard dwarves.
-	Aravae
 	
 
-	Orbansia
-	Tucked along the southeastern edge of Orbansia, Aravae is a rugged land with dense forests that are green through much of the year. Its steep cliffs rise above the crashing waves of the Embueril Ocean, formed in part by the distant presence of the smoldering Mount Feutagne. Most of the settlements in Aravae are scattered and often secluded, separated by vast woods and accessible only by winding paths.
-	Arbescar
-	Marrowdale
-	Var'Shala
-	Arbescar is a land of striking contrasts, where the scorching winds of the Blustery Waste give way to lush, emerald forests and sparkling river valleys. Once isolated from the mainland, it was joined to Myrdae by the Awakening’s upheaval, now connected through the southernmost stretch of the Dragonspine Mountains. The territory bears the lasting mark of the archmage Tsuul’physs Bhan, whose legacy still echoes in the land’s shifting magic, ancient ruins, and whispered lore.
-	Baltwood
-	Emberstran
-	Orbansia
-	Baltwood is a rugged territory in eastern Orbansia, nestled between the northern reaches of the Glimmering Sea and the southeastern edge of the Distancion Mountains. The territory is dominated by the vast and ancient Baltwood Forest and shadowed by the mildly active Mount Emberstran, a volcanic peak. The territory's most prominent settlements include Emberstran, and the dwarven city Dunduar.
-	Barrford
-	Stinson
-	Inverland
-	Far to the east of Inverland, where the Tideless Span gives way to the open High Sea, lies Barrford—a quiet territory defined by rugged foothills and wide coastal plains. The northeastern reaches of the Eustera Ridge Mountains fall off into rolling hills, while the coastal lands provide rich fishing waters and windswept grasslands. Barrford is sparsely settled, with the modest city of Stinson serving as its capital and primary hub of trade, governance, and seafaring life.
-	Blisterfel
-	Avelvein
-	Inverland
-	Blisterfel is a cold territory where the land is frozen three harmons out of the year. The land is in the northernmost reaches of Inverland, where icy winds sweep across jagged ridgelines and snow-covered valleys. Most of the hardy people of this frigid land live in Avelvein, Blisterfel’s largest city. Perpetually shrouded in frost, the land is home to ancient ruins of long-lost civilizations buried beneath glacial sheets.
-	Borealian Sway
-	Qal'dynn
-	Bathaen Empire
-	The Borealian Sway is a territory rich with ancient groves, cascading rivers, and terraced foothills. It is most known for being home to the Elle'berian, the first elven settlers and the founders of the territory's capital city, Qal’dynn. Settlements in the territory are guarded and watched by the elven watch known as the Realmwardens. Though the land is welcoming to outsiders, its rulers ensure that foreign influences do not disrupt the region’s balance.
-	Camburne
-	Leoning
-	Inverland
-	Camburne spans the western edge of Inverland, where lush plains, vibrant wetlands, and dense forests meet the crashing waves of the Delisnor Ocean. The territory is known for its strikingly colorful flora and the native gertot—wooly, horned ungulates whose prized fleece drives Camburne’s thriving wool trade.
-	Caristone
-	Edgewind
-	Var'Shala
-	Caristone is a largely untamed land between the Distancion Mountains and Dragonspine Mountains, with rolling hills, rich forests, and glimmering rivers. One of the areas most well known features is the Starlight Cradle, a wide valley studded with luminous crystal outcroppings believed to be from the Broken Moon and home to the town of Boldshire. Once the site of the original eastern gate to the dwarven stronghold of Dunduar, the Awakening sealed the mountain passage, shifting all access to the other side of the summit.
-	Corse of Veinspear
 	
 
-	Jehsle
-	A land defined by it's numerous islands on the northwest coast of Jeshle, the Corse of Veinspear can be a dangerous place. Pirates and merchants alike seek “Drift Keys,” rare magical compasses attuned to a shifting seabed where arcane tides and magical currents shift the islands’ positions. Navigation often demands tide-lore, ancient star charts, or specialized relics.
-	Crimson March
-	Stouhg
-	Bathaen Empire
-	The Crimson March rose from the filled chasm of the Crungess during the Awakening, now blanketed by towering evergreens known as Crimson Pines—named for their blood-red needles said to grow from soil soaked by centuries of warfare. Once a battleground for countless conflicts, the land pulses with memory, its woods haunted by the restless spirits of warriors who died without honor or purpose. Travelers speak of ghostly figures stalking the mist and whispers that echo like battle cries deep among the trees.
-	Dalasor Coast
+Spell Options
+Spell
+	Source
+	Assessment / Explanation
 	
 
-	Orbansia
-	The Dalasor Coast forms the southernmost edge of Orbansia, set between the warm waters of the Dalasor Strait and the border of Aravae. Its landscape shifts from dense woodlands and sprawling wetlands to arid coastal hills.
-	Dunmoore
-	Oldport
-	Inverland
-	In southeastern Inverland, Dunmoore is full of rolling grasslands and low hills that stretch to the Tideless Span and the Sea of Sondera. Its most striking feature, the Bluffs of Dunmoore, have steep plateaus surrounded by a series of floating isles that drift above the land—separated from the land during the Awakening and becoming home to numerous Aarakocra settlements.
-	Esgaar
 	
 
-	Bathaes
-	Esgaar is a frigid territory in southern Nalscour, hemmed in by mountains to the north and the waters of the Broken Deep to the south. Jagged ice fields and rugged fjords define the land, but its most iconic feature is the Nalscour Runs—deep, ancient channels carved through rock and glacier, said to mark the paths of primordial beasts that once shaped the land.
-	Frystarian Strand
-	Palason
-	Bathaen Empire
-	The Frystarian Strand is the northernmost reach of the Bathaen Empire, where cliffs and forests meet the waves of the Broken Deep and High Sea. Centuries ago, the mages of the Tegenwald ignited the Shroudburn—vast magical blazes that scorched away the dense wilderness and drove out the shadowy creatures that lurked within. The land still bears the scars and blessings of that fire, with warm mist rising from the land and ancient stones said to whisper remnants of forgotten spells.
-	Flarebane Isles
 	
 
-	Bathaes
-	Scattered across the heart of the Broken Deep, the Flarebane Isles are jagged remnants of divine ruin—born when the god Brault was cast from the heavens during the Fracturing. One of the larger isles is said to have the Flarebane Sigil, a once-radiant celestial seal now cracked and dark, leaking demonic energy that twists the sea and land of the isles whenever prayers are offered to the new gods. The isles are home to many pirate strongholds, monstrous sea beasts, and cursed ruins.
-	Gaelscape
-	Ulkef
-	Var'Shala
-	Gaelscape is a wild and vibrant territory east of the Distancion Mountains, where the Awakening drove back the Mahruud and a deep connection to the Feywild was reborn. Dense forests and radiant meadows now teem with fey creatures. Scattered throughout the land are the ancient Oathcourts—mystic sites where ancestral bargains with the fey were once forged, and where old promises now stir back to life.
-	Glenleah
-	Gibuldon
-	Inverland
-	Glenleah is a fertile and mist-veiled heartland in central Inverland, stretching from rolling green hills to the shores of the great Loch Cerule. The city of Gibuldon, Inverland’s largest, sits at the lake’s edge—its stone halls and ivy-wrapped towers steeped in tradition, music, and old magic. Atop sacred Draebaen plateau in the Glenleah Woods burns the Fire of Ahln'Drae, an eternal flame rekindled each Salvus through storm-born lightning, said to guard Glenleah’s soul.
-	Graelaug
 	
 
-	Var'Shala
-	Graelaug is a cold, low-lying coastal territory on the eastern edge of the Broken Sea, blanketed in icy forests. Its people are hardy seafarers and warriors, shaped by ancient traditions. Scattered across the land of Graelaug are the Frostmarks—mystic stones of unknown age that are said to glow faintly only for those in favor of the gods.
-	Halesworth
-	Basctdelm
-	Bathaen Empire
-	Halesworth is the heart of the Bathaen Empire and the most populous territory in Myrdae, centered around the grand city of Basctdelm—a hub of commerce, politics, and imperial power. From the lowlands, to the coast, to the high passes of the Distancion Mountains, the land is known for it's structured rule and a deep-rooted legacy of the high perched Uktali Monastery.
-	Hillock Torn
 	
 
-	Orbansia
-	Hillock Torn is a quiet, rugged territory shaped by two wide valleys nestled among the foothill ridgelines that stretch from the Distancion Mountains. It's known for its Standing Folds—towering stone formations shaped by ancient tectonic force, whose curved faces carry echoes and songs with distinct clarity. The Dalerun and Northern Stoneflow Rivers cut through the center of the large valleys.
-	Khasvadia
 	
 
-	Var'Shala
-	Khasvadia is a shadowed, mist-laden territory on the eastern edge of Myrdae where crumbling manors cling to hillsides and ancient woods conceal secrets. The land is ruled in fear by Countess Riah Nas Verdidra, a figure whose presence haunts the people more than any law or throne. It is said that those who die in terror within Khasvadia become Mistbound—silent, lingering spirits drawn to her darkness, unable to pass on until the Countess herself is unmade.
-	Kholdur
-	Thel Kholdur
-	Orbansia
-	Kholdur, located in northern Orbansia, is full of foothills and rivers that flow from the Distancion Mountains to meet the Sea of Sondera. The land is known for Thel Kholdur, a grand dwarven city carved deep into the mountains with a long underground pass that leads to the Bathaen Empire beneath.
-	Lyewell Stretch
-	Porpen
-	Inverland
-	Lyewell Stretch marks the westernmost edge of Inverland, where jagged landmasses known as the Tidewoven Rise extend into the Delisnor Ocean like coral-formed fingers, lifted during the Awakening. Beneath these high bluffs, bone-colored reefs shaped from wreckage and sailor’s remains form eerie underwater forests. The port city of Porpen stands as Myrdae’s western gateway, where traders, mystics, and wanderers arrive from distant shores.
-	Mahruud
-	Thrargael
-	Var'Shala
-	The Mahruud is a scorched and craggy territory in northeastern Myrdae, where blighted winds howl through ravines and broken plateaus. Long shaped by dark magic and violent coups, its capital Thrargael stands as its center of ruthless ambition. The desolate Mahruud is known for its harsh conditions and dangersous inhabitants.
-	Matahal Valley
 	
 
-	Orbansia
-	Matahal Valley lies at the heart of Orbansia, cradled between two mountain ranges and known for the wetlands that dominate its southeastern expanse. Mist-laden lowlands give way to fertile highland ridges. Though rich in resources, the valley remains elusive—its hidden paths protecting it from outsiders.
-	Mulshear
-	Mulshear
-	Orbansia
-	Resting along the eastern coast of Orbansia, where the Saltbay Sea meets the Embueril Ocean, is the territory of Mulshear. Its northern reaches offer rolling grasslands, wooded hills, and scattered settlements. But to the south, the land sinks into dense swamps and murky wetlands, perpetually veiled in heavy fog. Dark tales warn travelers to avoid these southern marshes, for it is said that the undead roam under the will of a sinister figure known only as the Soul Reaper.
-	Nandahere
 	
 
-	Jehsle
-	Nandahere is the southernmost territory in Myrdae, a land of dense, vibrant tropical forests full of rare flora. The territory is situated in Jehsle just south of Mount Wick and separated from Orbansia by the shimmering waters of the Dalasor Strait.
-	Okodia
-	Skrettel
-	Orbansia
-	Okodia sits along the northwestern edge of Orbansia, where the Tideless Span widens into the Sea of Sondera. Towering in the north are the Wayward Crest of the Distancion Mountains, while the sweeping Bay of Visions dominates the southern coastline. Rolling hills, forests, open plains, and rocky shores make up the rest of the Okodian landscape. Skrettel, the weefolk city, is the capital perched high on a plateau beneath the looming Grand Peaks.
-	Qae'thesvorin
 	
 
-	Jehsle
-	Qae’thesvorin is the largest territory in Jehsle, stretching along the Sea of Sondera and the Sea of Marilia. Towering mesas, volcanic ridges, and wind-carved highlands dominate the landscape. Revered and feared across Myrdae, Qae'thesvorin is home to the revered and feared draconian ancestries.
-	Range of Otesurr
 	
 
-	Var'Shala
-	The Range of Otesurr is a rugged northeastern territory of Myrdae, defined by the towering Otesurr Mountains that run from north to south, cleaving the land between the churning Broken Sea and the vast Embueril Ocean. The mountains are steep and jagged teeth with only a handful of ancient passes link the two sides of the territory.
-	Roaring Hollow
-	Fjord'nahl
-	Inverland
-	The Roaring Hollow is a snowbound coastal territory northeast of Eustera Ridge and the Deadwing Mountains, and reaching out to the High Sea. In the far north lies the Manus Peninsula, a rugged expanse of sea cliffs and frost-slick caves where salt-laced crystals hum with ancient resonance—believed to hold echoes of the land’s forgotten past.
-	Rostiena Foothills
-	Stoneshore
-	Orbansia
-	The Rostiena Foothills is a territory in Orbansia, defined by its hills, forests and the mighty Stoneflow River that carves a path between the Glimmering Sea and the Sea of Sondera. At the river’s mouth sits Stoneshore, the bustling capital whose harbors open into Greywater Bay—making it a vital hub of trade and travel.
-	Sarbaugh
 	
 
-	Bathaes
-	A frigid, icebound island in the High Sea, home to the Ghecbaurg Clan (Whitebear in common), a brutal and war-hardened orc tribe that endures the relentless cold within craggy settlements and frozen caves.
-	Severed Bend
 	
 
-	Orbansia
-	Tucked between the Glimmering Sea and Siltbay, the Severed Bend is a territory in northeastern Orbansia where the Severed Crease range descends rolling hills and rocky coastal flats. Lacking grand cities, the Severed Bend carries a quiet resilience—its people preferring smaller towns and villages.
-	Serriveil
 	
 
-	Orbansia
-	The serene territory of Serriveil, in northern Orbansia, is known for its lush, expansive forest called of Shademeadow that sits in the shadow of the Meadowgarde ridge line. The land is protected by an ancient covenant between druids and nature itself, upheld by the Elderoot—sentient trees that watch in silence and defend the balance of the forest.
-	Sutherford
-	Morrey
-	Inverland
-	Sutherland is a southern Inverland territory that stretches from the Delisnor Ocean to the inland waters of Lake Celemere. The southern coast thrives on fishing and maritime trade, while the northern Gilburough Timbers offer dense, hardy woodland known for its lumber and game. Between the Midram Basin and the forested uplands, Sutherford is a land balanced between industry and wilderness.
-	Tegenwald
-	A'erley
-	Bathaes
-	Recently re-established as a recognized territory, Tegenwald is a land where nature and magic seem deeply intertwined. Thick forests, lakes, and rugged coastlines stretch out across the land, but none dominate the skyline like the towering Mount Everbloom, a vast dormant volcano. Long whispered to be one of the strongest nexuses of the Weave in all of Myrdae, many believe the land itself hums with ancient arcane energy.
-	Theamis
 	
 
-	Orbansia
-	Theamis is a varied and resource-rich territory bounded by the Glimmering Sea to the north and the Kaltera Mountains to the west. The cities of Glimmerstone and Adamont stand as its well known large cities. Theamis shares it's southern border with Aravae and its eastern border with Mulshear.
-	Tundra of Nalscour
 	
 
-	Bathaes
-	The Tundra of Nalscour Tundra is the northernmost and harshest land in Myrdae, sealed off from Esgaar by the jagged Frowning Spine. Scattered across the wastes stand the Ice-shard Cairns—towering, crystalline burial sites of forgotten clans that shimmer beneath the moonlight said to absorb the light and call forth spectral spirit-beasts tied to the old clan bloodlines.
-	Uldrea
-	Sulura
-	Var'Shala
-	A northern territory once cut off from the rest of Myrdae by mysterious elemental forces Uldrea's southern border is shared with the Mahruud. Though its landscape varies, much of the region is marked by arid plains and the port city of Sulura now serves as a vital gateway into the reclaimed land.
-	Wheldrake
 	
 
-	Bathaes
-	Wheldrake is the northeasternmost territory of the Bathaen Empire, a land of hills and marshes. Wheldrake is home to the legend of the Order of the Blade—a once-revered brotherhood of knights who upheld honor above imperial decree and vanished after defying a old corrupt king of the Bathaen Empire. Their final fortress is said to be hidden in the Wheldrake Hills, guarded by spectral sentinels and relics that await the return of a worthy bearer to restore their broken vow.
-	Yag'vur
 	
 
-	Orbansia
-	Yag’vur is a small territory nestled against the southwestern slopes of the Vanapur Mountains. The territory shares borders with the Rostiena Foothills, the Dalasor Coast, and Aravae.
-	Yearning Vale
-	Tratta
-	Var'Shala
-	The Yearning Vale is an area northwest of the Mahruud, where sluggish rivers and swamplands stretch across from the southeast to feed into the Broken Sea with the great port city of Tratta. In the Yearning Slough, humanoids and monstrosities live in harmony under the watchful eye of the ancient grey dragon Zovraesdria.
+	
+
 	
 
 ________________
 
 
-Settlements
-This is a list of settlements in Myrdae.
-Heraldry
-	Settlement
-	Size
-	Coord.
-	Region
-	Description
-	
-
-	A'erly
-	Medium
-
-
-
-
-	F - 23
-	Bathaen Empire
-	A’erly is a newly founded arcane town built after the Awakening on the northeast shore of Soulmire that serves as the capital of the Tegenwald territory. The town was shaped through, with a circular design and lake-facing terraces. To outsiders, A’erly feels quiet, precise, and purposeful—a place built to endure, not to impress.
-	  
-
-	Abbey of Light
-	Small
-
-
-
-
-	I - 23
-	Bathaen Empire
-	The Abbey of Mont Rest, recently renamed the Abbey of Light, sits atop the tall foothills where the Distancion Mountains descend into the Borealian Sway. The abbey has expanded its studies to include all gods of Myrdae and is well-known for an unusual alliance with a group of Stone Giants, who have protected the abbey for 150 years.
-	
-
-	Abereth
-	Medium
-
-
-
-
-	G - 13
-	Inverland
-	
-
-	  
-
-	Adsuren
-	Small
-
-
-
-
-	G - 11
-	Inverland
-	Resting between Mount Eathea and the Wehgyn River, Adsuren is a humble village that has seen great prosperity over the past many years, its people are kind and there is always a great sense of community with a thriving market that is in constant use.
-	
-
-	Aesenfall
-	Small
-
-
-
-
-	E - 11
-	Inverland
-	
-
-	
-
-	Ahnassa
-	Small
-
-
-
-
-	J - 35
-	Var'Shala
-	
-
-	  
-
-	Ahndashere
-	Small
-
-
-
-
-	O - 27
-	Orbansia
-	Ahndashere is a resilient river–sea town built half on stilts over swampy waters and half upon a rare rise of dry hills at its center. Lantern-lit boardwalks, weathered docks, and the hum of both riverfolk and hillstead life give the settlement a rugged charm.
-	  
-
-	Alburest
-	Medium
-	K - 32
-	Var'Shala
-	Alburest sits on the eastern edge of Lochlorn, where the Deep Route road meets the water’s edge and disappears beneath the lake. Once an inland trade hub, it’s now a lakeside city of smokehouses, boats, and drowned roads—known for its rich smoked eel and the shimmering mystery of the loch that reshaped it.
-	
-
-	Alconny
-	Small
-
-
-
-
-	E - 14
-	Inverland
-	
-
-	
-
-	Amberleen
-	Medium
-
-
-
-
-	L - 21
-	Orbansia
-	
-
-	
-
-	Argent Halls
-	Small
-
-
-
-
-	P - 26
-	Orbansia
-	
-
-	
-
-	Arguldeep
-	Medium
-
-
-
-
-	-
-	Underdark
-	
-
-	
-
-	Ashindel
-	Small
-
-
-
-
-	G - 15
-	Inverland
-	
-
-	
-
-	Avelvein
-	Large
-
-
-
-
-	B - 13
-	Inverland
-	
-
-	
-
-	Babbleglen
-	Small
-
-
-
-
-	I - 10
-	Inverland
-	Built on the smaller of the two great lakes of Camburne, Babbleglen is the home of many of the more exotic humanoids that wish to hold themselves in a civilized manner.
-	
-
-	Baryn
-	Small
-
-
-
-
-	G - 28
-	Bathaen Empire
-	A small village in Wheldrake on Dibaryn River that has a history of dealing with yuan-ti and cults worshiping serpent gods.
-	  
-
-	Basctdelm
-	Large
-
-
-
-
-	H - 27
-	Bathaen Empire
-	The largest city in Myrdae, a thriving and fortified metropolis on the Dabaryn River, serving as the capital of Halesworth and ruled by Queen Breya Talward.
-	
-
-	Bastion of Order
-	Small
-
-
-
-
-	J - 23
-	Bathaen Empire
-	This ancient walled citadel sits on the edge of Mount Macrae and is the most historical landmark paying homage to the Addan (previously to Neera).
-	
-
-	Berest
-	Small
-
-
-
-
-	F - 12
-	Inverland
-	Sitting at the base of mountains that make up the Eustera Ridge, Berest resides as a high-functioning trading town for people going into the frozen north or towards the Lyewell Peninsula.
-	
-
-	Beveress
-	Small
-
-
-
-
-	P - 25
-	Orbansia
-	
-
-	
-
-	Bimblefol
-	Small
-
-
-
-
-	-
-	Underdark
-	Bimblefol is a small Genling settlement located within the southern reaches of Thallgrove constructed atop seven massive petrified mushroom towers rising from a shallow, glowing subterranean lake. Each tower has been hollowed and carved into functional dwellings. Rope bridges connect the towers above the water, forming an interconnected settlement suspended between cavern walls.
-	
-
-	Bindwatch
-	Small
-
-
-
-
-	K - 10
-	Inverland
-	
-
-	
-
-	Bistron
-	Small
-
-
-
-
-	Q - 32
-	Orbansia
-	A small mining village on the southeastern tip of the Severed Crease
-	
-
-	Blackfield
-	Large
-
-
-
-
-	J - 15
-	Inverland
-	
-
-	
-
-	Boldshire
-	Small
-
-
-
-
-	P - 32
-	Var'Shala
-	
-
-	
-
-	Bonegate
-	Medium
-
-
-
-
-	K - 19
-	Orbansia
-	
-
-	
-
-	Bonfaduhr
-(Oreguard)
-	Medium
-
-
-
-
-	F - 15
-	Inverland
-	Dwarven city in the mountains
-	
-
-	Braelin
-	Small
-
-
-
-
-	K - 17
-	Inverland
-	
-
-	
-
-	Brekka
-	Small
-
-
-
-
-	D - 23
-	Bathaen Empire
-	
-
-	
-
-	Caelora
-	Medium
-
-
-
-
-	I - 25
-	Bathaen Empire
-	
-
-	
-
-	Carnsby
-	Small
-
-
-
-
-	L - 11
-	Inverland
-	
-
-	
-
-	Castle Montavein
-	Small
-
-
-
-
-	M - 27
-	Orbansia
-	
-
-	  
-
-	Clador
-	Small
-
-
-
-
-	I - 37
-	Var'Shala
-	
-
-	
-
-	Claymere
-	Small
-
-
-
-
-	E - 8
-	Inverland
-	
-
-	  
-
-	Climbor
-	Large
-
-
-
-
-	R - 24
-	Orbansia
-	A city in the Rostiena Foothills at the base of the Vanapur Mountains, governed by a council of four influential families and known for its strict social order, including the enforced confinement of the gabüks to a subterranean district beneath the city.
-	
-
-	Corebb Keep
-	Small
-
-
-
-
-	P - 24
-	Orbansia
-	
-
-	
-
-	Corilas
-	Medium
-
-
-
-
-	F - 29
-	Bathaen Empire
-	
-
-	
-
-	Cragflight
-	Small
-
-
-
-
-	M - 36
-	Var'Shala
-	Cragflight is a dwarven citadel located in the harsh barren lands in the Mahruud
-	
-
-	Crosswind
-	Small
-
-
-
-
-	O - 27
-	
-
-	
-
-	
-
-	Crulfeld
-	Small
-
-
-
-
-	K - 31
-	Var'Shala
-	Village sitting on Lochlorn
-	
-
-	Darafee
-	Small
-
-
-
-
-	I - 25
-	Bathaen Empire
-	Darafee is a small waystation village nestled in the Borealian Sway on the forested road between Qal’dynn and Caelora. It serves as a quiet rest point for merchants, Realmwardens, and adventurers; maintains harmonious balance with the surrounding Lye’darin Weald forest without drawing larger attention
-	
-
-	Del'bris
-	Small
-
-
-
-
-	J - 33
-	Var'Shala
-	Once a riverside fort guarding travelers from the monsters of the Yearning Slough, Del’bris has grown into a quiet lowland town steeped in herbal trade and whispered superstition.
-	
-
-	Deterahn
-	Small
-
-
-
-
-	K - 20
-	Orbansia
-	
-
-	  
-
-	Dhá Chaomhnóir
-	Large
-
-
-
-
-	L - 13
-	Inverland
-	A wealthy and bustling coastal city on the southern shores of Inverland, home to the largest Vaults of the Reserve, with a thriving port, and an exaggerated class system that distinguishes the wealthy.
-	
-
-	Dreghye
-	Small
-
-
-
-
-	F - 8
-	Inverland
-	
-
-	
-
-	Dryrock
-	Small
-
-
-
-
-	G - 13
-	Inverland
-	
-
-	
-
-	Dunduar
-	Large
-
-
-
-
-	O - 31
-	Orbansia
-	Dunduar is an ancient dwarven city carved deep into the stone beneath the Baltwood, long regarded as one of the great strongholds of dwarven endurance and craft. Built along the roots of the Distancion Mountains, the city is famed for its disciplined clans, master smiths, and vast stone halls.
-	
-
-	Eastmare
-	Small
-
-
-
-
-	H - 19
-	Inverland
-	Eastmare is a coastal fishing village on the Eastern side of Inverland, overlooking the Tideless Span
-	
-
-	Edgewind
-	Medium
-
-
-
-
-	P - 33
-	Var'Shala
-	
-
-	
-
-	Elondale
-	Small
-
-
-
-
-	I - 15
-	Inverland
-	
-
-	
-
-	Elspire
-	Small
-
-
-
-
-	L - 15
-	Inverland
-	
-
-	  
-
-	Emberstran
-	Large
-
-
-
-
-	O - 29
-	Orbansia
-	The city of Emberstran stands on the Glimmering Sea, south of the Severed Crease mountain range. During the Awakening, there was fear that the city would be destroyed, as it was trapped between the expanding Glimmering Sea and by the eruption of Mount Emberstran, but the city survived and prospered.
-	
-
-	Eravic
-	Medium
-
-
-
-
-	E - 22
-	Bathaen Empire
-	
-
-	
-
-	Eringere
-	Small
-
-
-
-
-	G - 24
-	Bathaen Empire
-	
-
-	
-
-	Everlight
-	Small
-	Q - 35
-	Var'Shala
-	Nestled in a hidden valley, this village emerged from a cataclysm that reshaped the land centuries ago during the formation of the Blustery Waste in Arbescar. Opposing the barren expanse of the surrounding land, Everlight was shielded by Urlich, the Regent of Ice, who brought a perpetual winter to insulate the village.
-	
-
-	Everlown Lodge
-	Small
-
-
-
-
-	K - 19
-	Orbansia
-	
-
-	
-
-	Evostihl
-	Small
-
-
-
-
-	M - 23
-	Orbansia
-	
-
-	
-
-	Evyndar
-	Medium
-
-
-
-
-	H - 9
-	Inverland
-	Sitting on Whistlebay in the western coast of Inverland, Evyndar was once known as home to the elves of Inverland. Since that time, Evyndar has seen much change and adoption of other races into its domain. The city is home to many ancient structures and libraries and is believed to be watched over by some fey spirit.
-	
-
-	Fa'wrese
-	Small
-
-
-
-
-	E - 7
-	Inverland
-	
-
-	  
-
-	Fal'Thalor
-	Medium
-
-
-
-
-	J - 25
-	Bathaen Empire
-	An elven settlement in the Borealian Sway in the lower foothills of the Distancion Mountains nestled deep in the forest. The town often welcomes travellers entering the Bathaen Empire from the dwarven city Thel Kohldur.
-	
-
-	Farnsby Port
-	Small
-
-
-
-
-	Q - 30
-	Orbansia
-	
-
-	  
-
-	Felden
-	Medium
-
-
-
-
-	R - 24
-	Orbansia
-	The town of Felden sits high on a large hill in the eastern Rostiena Foothills. The most commercial and prosperous residence occupy the most elevated parts surrounded by numerous farmlands. There are several cave entrances that lead to protective areas and mines within the hill the town rests upon.
-	  
-
-	Ferndale
-	Medium
-
-
-
-
-	I - 28
-	Bathaen Empire
-	One of the most well known towns in Halesworth, Ferndale sits in a valley on the Seaglow river and is known for it's luminescent wildlife. The town has always strived for peace and tranquility, but has been constantly plagued attacks from orc and unseelie fey emerging from the surrounding woodlands.
-	
-
-	Flatgarde
-	Small
-
-
-
-
-	O - 26
-	Orbansia
-	
-
-	
-
-	Fjord'nahl
-	Medium
-
-
-
-
-	C - 16
-	Inverland
-	
-
-	
-
-	Frostwell Port
-	Small
-
-
-
-
-	E - 10
-	Inverland
-	
-
-	  
-
-	Gevakaln
-	Large
-
-
-
-
-	Q - 22
-	Orbansia
-	A prosperous city sitting on the coast of the Sea of Sondera in the western Rostiena Foothills. Gevakaln is know for it's three districts that are divided by the class structure of its citizens.
-	
-
-	Ghogam
-	Small
-
-
-
-
-	K - 31
-	Var'Shala
-	
-
-	
-
-	Gibuldon
-	Large
-
-
-
-
-	G - 13
-	Inverland
-	One of the largest cities and centrally located in Inverland, Gibuldon is a the capital of Inverland. It is a lively and diverse settlement on Loch Cerule.
-	
-
-	Glimmerstone
-	Large
-
-
-
-
-	Q - 27
-	Orbansia
-	
-
-	
-
-	Glimmerwohl
-	Medium
-
-
-
-
-	-
-	Underdark
-	
-
-	
-
-	Glöfdale
-	Small
-
-
-
-
-	O - 27
-	Orbansia
-	
-
-	
-
-	Graeton
-	Small
-
-
-
-
-	N - 23
-	Orbansia
-	
-
-	
-
-	Greenvale
-	Small
-
-
-
-
-	J - 33
-	Var'Shala
-	Greenvale is a lush farming town between the Yearning Slough and the Edgecrest Forest, known for its burnt olive groves that yield a rich, earthy oil found nowhere else.
-	
-
-	Greymill
-	Small
-
-
-
-
-	G - 19
-	Inverland
-	
-
-	
-
-	Gristavel
-	Small
-
-
-
-
-	E - 24
-	Bathaen Empire
-	
-
-	
-
-	Gristlow
-	Small
-
-
-
-
-	K - 10
-	Inverland
-	This mill town on the Caldwell River is known for its grains and cotton crops, and is one of the few small towns on the river that boast a proper B&B.
-	
-
-	Grobh
-	Small
-
-
-
-
-	E - 7
-	Inverland
-	
-
-	
-
-	Gulward
-	Small
-
-
-
-
-	M - 20
-	Orbansia
-	
-
-	  
-
-	Habadin
-	Large
-
-
-
-
-	-
-	Underdark
-	Known for it's predominate ulbin population, Habadin is one of the most well known cities in the Underdark. The city was at the center of many battles of the Blood Wars that came to Myrdae.
-	
-
-	Habell
-	Small
-
-
-
-
-	F - 11
-	Inverland
-	Habell resides as a small hamlet on the Eustera Ridge. The settlement is built as if it is hanging off of the sheer sides of the cliff and two large caves reside as the only ways into and out of the hamlet.
-	
-
-	Haern
-	Small
-
-
-
-
-	G - 28
-	Bathaen Empire
-	
-
-	
-
-	Harbok
-	Small
-
-
-
-
-	Q - 29
-	Orbansia
-	A small town overlooking the Glimmering Sea in Orbansia.
-	
-
-	Harelbek
-	Medium
-
-
-
-
-	M - 17
-	Inverland
-	
-
-	
-
-	Hasfen
-	Small
-
-
-
-
-	P - 24
-	Orbansia
-	
-
-	
-
-	Hemmil
-	Small
-
-
-
-
-	H - 26
-	Bathaen Empire
-	A popular fishing village on Lake Tribathe.
-	  
-
-	Hesfal
-	Small
-
-
-
-
-	J - 34
-	Var'Shala
-	Is a village known for it's artisans and crafts, located halfway between Deadfield and Tratta on the Tor March on the western edge of the Yearning Vale.
-	
-
-	Hinnibon
-	Small
-
-
-
-
-	J - 16
-	Inverland
-	
-
-	
-
-	Icespring
-	Medium
-
-
-
-
-	D - 15
-	Inverland
-	
-
-	
-
-	Ingriss
-	Large
-
-
-
-
-	H - 18
-	Inverland
-	
-
-	
-
-	Inshire
-	Small
-
-
-
-
-	M - 24
-	Orbansia
-	Innshire village sits on the Kholdur River.
-	
-
-	Insloe
-	Small
-
-
-
-
-	F - 10
-	Inverland
-	A calm refuge before traversing the cave ridden path that follows along the side of the Eustera Ridge, Insloe is a safe spot for meeting all sorts of different creatures and frequently trades with those who reside on or in the ridge.
-	
-
-	Jordarr
-	Small
-
-
-
-
-	G - 24
-	Bathaen Empire
-	
-
-	
-
-	Kaldaros
-	Small
-
-
-
-
-	G - 21
-	Bathaen Empire
-	
-
-	
-
-	Kelaad
-(Featherwell)
-	Small
-
-
-
-
-	I - 20
-	Orbansia
-	A coastal village nestled on the southern end of Holder’s Cove, that thrives on fishing, trade, boatwright and the wisdom of its healers and mystics.
-	
-
-	Kelmouth
-	Small
-
-
-
-
-	L - 11
-	Inverland
-	
-
-	
-
-	Khagdaruhl
-	Large
-
-
-
-
-	
-
-	Orbansia
-	
-
-	
-
-	Kilgrenny
-	Small
-
-
-
-
-	K - 15
-	Inverland
-	Located south of the city Blackfield, Kilgrenney is a village with limited accommodations for travelers on the Trace of Aelbon.
-	
-
-	Kilnock
-	Small
-
-
-
-
-	I - 11
-	Inverland
-	This small village on the Caldwell River is known for its exports of pickled fish and woolen linens.
-	
-
-	Kith
-	Small
-
-
-
-
-	L - 12
-	Inverland
-	
-
-	
-
-	Kodderl
-	Medium
-
-
-
-
-	F - 10
-	Inverland
-	A large trading hub for the people of the Lyewell Stretch, Kodderl serves almost as the barrier between them, Camburne, and Aikshaw Descent.
-	
-
-	Larnwik
-	Small
-
-
-
-
-	K - 16
-	Inverland
-	
-
-	
-
-	Lasborin
-	Small
-
-
-
-
-	F - 22
-	Bathaen Empire
-	
-
-	
-
-	Lasdale
-	Medium
-
-
-
-
-	N - 27
-	Orbansia
-	Lasdale began as gathering location for various festivities, but grew as word spread across Orbansia and is now home to many nature loving people.
-	
-
-	Layden
-	Small
-	J - 11
-	Inverland
-	Known for its exports of root vegetables and eggs, this small village is another stop for traders on the Caldwell River.
-	  
-
-	Lehnthru'akk
-	Medium
-
-
-
-
-	J - 33
-	Var'Shala
-	A town set deep in the Yearning Slough, Lehnthru'akk is known for it's very unusual citizenry that is made up mostly of monsters that are feared elsewhere in Myrdae. While difficult to get to, the town welcomes the occasional outsider and is protected by the renown wyrm, Zovraesdria.
-	
-
-	Lendahlee
-	Small
-
-
-
-
-	F - 28
-	Bathaen Empire
-	
-
-	
-
-	Lenshur
-	Small
-
-
-
-
-	E - 25
-	Bathaen Empire
-	
-
-	
-
-	Leoning
-	Large
-
-
-
-
-	I - 9
-	Inverland
-	A major city that sees far into the Delisnor Ocean, Leoning is a massive hub for all sorts of people to meet and trade. Leoning also functions as the “capital” of sorts for those who deem themselves proud people of Camburne.
-	
-
-	Leterboun
-	Small
-
-
-
-
-	H - 21
-	Bathaen Empire
-	A grand, ornately built stone lodge atop a hill on the border of Borealian Sway and Tegenwald, operated by the Grendel family as a resort and outpost for travelers journeying between Raselle and Qal'dynn.
-	
-
-	Lullin
-	Small
-
-
-
-
-	F - 12
-	Inverland
-	Forming from building around where the ground is rich from the runoff that is pouring down from up the Eustera Ridge, Lullin is a town known for its scenic beauty.
-	
-
-	Mablihod
-	Medium
-
-
-
-
-	I - 14
-	Inverland
-	
-
-	
-
-	Mah'ralkal
-	Small
-
-
-
-
-	B - 14
-	Inverland
-	
-
-	
-
-	Menm’ythorn
-	Small
-
-
-
-
-	H - 11
-	Inverland
-	Overlooking Lake Miremantle, Menm’ythorn serves as a home to many elves who worship Sylunara, as they believe her light casts away the foulness of the Wetlands of Camburne and made it a suitable home for their heritage.
-	
-
-	Mirstone
-	Small
-
-
-
-
-	K - 30
-	Var'Shala
-	A beautiful mountainside village that overlooks the lush Stonewood and has a few renown hunting lodges.
-	
-
-	Mistforge
-	Small
-
-
-
-
-	M - 28
-	Orbansia
-	This village is in a valley in northern Orbansia that is across the Distancion Mountains from where the Crungess was once.
-	
-
-	Morrey
-	Large
-
-
-
-
-	L - 10
-	Inverland
-	
-
-	
-
-	Mossholde
-	Small
-
-
-
-
-	H - 23
-	Bathaen Empire
-	A fortified traveler’s and hunter’s outpost nestled within the dense forest north of the Y’allona Sacred Valley, serving as a key rest stop along the route between Raselle and Qal’dynn.
-	
-
-	Mulshear
-	Medium
-
-
-
-
-	T - 31
-	Orbansia
-	Mulshear is full of weefolk that have created a quaint village on the edge of a river feeding the Multear swamps.
-	
-
-	Murcomb
-	Small
-
-
-
-
-	F - 28
-	Bathaen Empire
-	
-
-	
-
-	Murfield
-	Small
-
-
-
-
-	I - 27
-	Bathaen Empire
-	
-
-	
-
-	Nalt
-	Small
-
-
-
-
-	K - 37
-	Var'Shala
-	Once a large town with possibilities of becoming the capital of the Mahruud, it has suffered from ill-managed over-used pit-fighting.
-	  
-
-	Nauldeaus
-(Wave's Edge)
-	Large
-
-
-
-
-	G - 29
-	Bathaen Empire
-	Starting out simply as the port town “Wave’s Edge” before becoming the large city it is today, Nauldeaus is the gateway to Lake Tribathe, the large body of water that is known as the hub of the Bathaen Empire.
-	
-
-	Nebendie
-	Small
-
-
-
-
-	C - 12
-	Inverland
-	
-
-	
-
-	Nesbit
-	Small
-
-
-
-
-	G - 18
-	Inverland
-	
-
-	
-
-	Nesulport
-	Small
-
-
-
-
-	G - 9
-	Inverland
-	A simple town that rests between the Daerswell Inlet and a lush forest, Nesulport is the poster for a growing settlement that has great access to all over the west of Inverland.
-	
-
-	New Brimhaven
-	Small
-
-
-
-
-	J - 29
-	Bathaen Empire
-	
-
-	
-
-	Nunglthil
-	Small
-
-
-
-
-	-
-	Underdark
-	Nunglthil is a rare neutral trading outpost in the Underdark, where surface folk and subterranean peoples can barter safely. It is a crooked crescent of docks, shanties, and cavern-carved halls clinging to the edge of a vast black lake.
-	
-
-	Nulvara
-	Small
-
-
-
-
-	M - 22
-	Orbansia
-	
-
-	
-
-	Nurador
-	Small
-
-
-
-
-	R - 26
-	Orbansia
-	The village of Nurador sits at the northwestern tip of the Kaltera Mountains in Orbansia. The village has been a hotbed of conflict between the local elven and orc population.
-	  
-
-	O'naren
-	Medium
-
-
-
-
-	I - 23
-	Bathaen Empire
-	A tranquil elven settlement nestled in the wooded foothills west of Qal'dynn, where finely carved stone structures blend harmoniously with the natural gray, green, and brown landscape.
-	  
-
-	Ol'Morrey
-	Large
-
-
-
-
-	K - 10
-	Inverland
-	One of the oldest town on the southern coast of Inverland, Ol'Morrey is a proud port town whose primary exports are fish, shellfish, and pearls.
-	
-
-	Old Uktali
-	Small
-
-
-
-
-	K - 28
-	Bathaen Empire
-	Old Uktali sits as the village that leads to great path to the Uktali Monastery
-	  
-
-	Oldport
-	Medium
-
-
-
-
-	I - 18
-	Inverland
-	A historic harbor town on the stormy eastern coast of Inverland, renowned for its rich maritime trade, perilous waters, and deep-rooted seafaring traditions along the Tideless Span.
-	
-
-	Ormsdal
-	Small
-
-
-
-
-	F - 24
-	Bathaen Empire
-	
-
-	
-
-	Padstow
-	Small
-
-
-
-
-	H - 28
-	Bathaen Empire
-	
-
-	
-
-	Paendley
-	Medium
-
-
-
-
-	Q - 25
-	Orbansia
-	
-
-	  
-
-	Palason
-	Large
-
-
-
-
-	E - 25
-	Bathaen Empire
-	Capital of the Frystarian Strand, Palason is a large city in the north of the Bathaen Empire. Being north, the winters can be harsh, but the lands are fertile with woods and farmlands being plentiful around the city.
-	
-
-	Peak of Tibul
-	Small
-
-
-
-
-	F - 17
-	Inverland
-	The Peak of Tibul is a a monestary with great halls and passageways carved high up Mount Tibul on the eastern span of the Eustera Ridge mountain range in Inverland. Those seeking to master unarmed combat spend years here under the guidance of Myrdae's most notable monk warriors.
-	
-
-	Porpen
-	Large
-
-
-
-
-	E - 6
-	Inverland
-	Sitting on the most west coast portion of the Coulee Peninsula in the Lyewell Stretch, Porpen is the larges trading hub in all of Inverland. Porpen is known for it's navigators of the Delisnor Ocean that extend to the continent of Taragoh.
-	
-
-	Proth
-	Small
-
-
-
-
-	J - 10
-	Inverland
-	
-
-	
-
-	Puckett
-	Small
-
-
-
-
-	E - 12
-	Inverland
-	
-
-	  
-
-	Qal'dynn
-	Large
-
-
-
-
-	H - 24
-	Bathaen Empire
-	The largest city in the Borealian Sway, a serene and orderly elven establishment built among dense wooded foothills, where cascading rivers and lakes blend seamlessly with tall, ornate spires and natural forested beauty.
-	
-
-	Raselle
-	Medium
-
-
-
-
-	H - 20
-	Bathaen Empire
-	
-
-	
-
-	Riverside
-	Medium
-
-
-
-
-	G - 26
-	Bathaen Empire
-	Riverside is a historic town hub at the crossroads of the Borealian Sway, Wheldrake, and Frystarian Strand territories, where fertile lands, well-traveled roads, and the Blustari River converge make it a great place for trade.
-	
-
-	Rosevale
-	Small
-
-
-
-
-	M - 33
-	Var'Shala
-	
-
-	
-
-	Sahvall
-	Small
-
-
-
-
-	F - 21
-	Bathaen Empire
-	
-
-	
-
-	Sandgrave
-	Small
-
-
-
-
-	M - 34
-	Var'Shala
-	
-
-	
-
-	Scar Den
-	Small
-
-
-
-
-	J - 20
-	Orbansia
-	A rugged goliath settlement nestled in the southern foothills of the Wayward Crest mountains, where a hardy people—distant descendants of hill giants—live among timbered lodges, stone structures, and cavernous dwellings carved into the rocky terrain.
-	  
-
-	Scarwatch Hold
-	Medium
-
-
-
-
-	K - 34
-	Var'Shala
-	This old keep that was damaged during the awakening is now renovated. It sits atop the Jagged Waste Crags on the western border of the Yearning Vale, overlooking the Mahruud.
-	
-
-	Seaway Harbor
-	Small
-
-
-
-
-	O - 22
-	Orbansia
-	
-
-	
-
-	Seornisor
-(Sterwood)
-	Medium
-
-
-
-
-	B - 14
-	Inverland
-	
-
-	
-
-	Severdale
-	Small
-
-
-
-
-	M - 26
-	Orbansia
-	
-
-	
-
-	Shademoor
-	Medium
-
-
-
-
-	J - 27
-	Bathaen Empire
-	A mist-laden town in Halesworth, known for its tragic past, the sprawling Garden cemetery, and its famed Mottleberry harvest, where fog drifts through its streets each twilight, cloaking its mysteries in shadow.
-	
-
-	Sharsley
-	Small
-
-
-
-
-	G - 27
-	Bathaen Empire
-	
-
-	
-
-	Silvermead
-	Small
-
-
-
-
-	R - 30
-	Orbansia
-	
-
-	
-
-	Skrettel
-	Large
-
-
-
-
-	K - 23
-	Orbansia
-	Sitting on plateaus and carved into the mountainside, Skrettel is a magnificent city built for the likings of weefolk
-	
-
-	Slag'erum
-	Small
-
-
-
-
-	L - 26
-	Orbansia
-	
-
-	
-
-	Solwind Glaes
-	Small
-
-
-
-
-	D - 12
-	Inverland
-	
-
-	
-
-	Sparkwhisper
-	Small
-
-
-
-
-	O - 30
-	Orbansia
-	
-
-	
-
-	Sren Esari
-	Medium
-
-
-
-
-	H - 24
-	Bathaen Empire
-	
-
-	
-
-	Staghand
-	Small
-
-
-
-
-	F - 25
-	Bathaen Empire
-	Staghand is one of the more popular hunting villages sitting on the southern edge of the Kolgrafell Thicket.
-	  
-
-	Staghaven
-	Small
-
-
-
-
-	N - 33
-	Var'Shala
-	Nestled in one of the densest forested areas of Kilgreen is the small hamlet of Staghaven. Its modest buildings, developed by newcomers from Ulkef, are spread out along a tributary that feeds into the Tossing Run River.
-	
-
-	Stinson
-	Medium
-
-
-
-
-	F - 20
-	Inverland
-	
-
-	
-
-	Stoneshore
-	Large
-
-
-
-
-	P - 23
-	Orbansia
-	Sitting on the coast of the Sea of Sondera on the western portions of the Rostiena Foothills, Stoneshore is the premier city of trade in Orbansia.
-	
-
-	Stonetrace
-	Small
-
-
-
-
-	O - 28
-	Orbansia
-	
-
-	
-
-	Stouhg
-	Large
-
-
-
-
-	K - 30
-	Var'Shala
-	
-
-	
-
-	Strolsworth
-	Medium
-
-
-
-
-	G - 14
-	Inverland
-	This working class town sits across Loch Cerule from Gibuldon where the Tariat River ends, and has been subject to harboring organized crime over the past few decades.
-	
-
-	Sulport
-	Medium
-
-
-
-
-	J - 34
-	Var'Shala
-	Sulport is a rough-edged port town on Ripshod Bay, where pirates, smugglers, and mercenaries gather. The northern docks are notorious for danger and lawlessness after dark, while the southern quarter along the trade road offers a safer haven for travelers and merchants passing through.
-	
-
-	Syori
-	Small
-
-
-
-
-	E - 23
-	Bathaen Empire
-	
-
-	
-
-	Tal'basar
-	Medium
-
-
-
-
-	Q - 35
-	Var'Shala
-	Tal'basar, once a small mining village, has grown into a mid-sized town in the Arbescar territory
-	  
-
-	Tarnsport
-	Medium
-
-
-
-
-	H - 26
-	Bathaen Empire
-	Known as the home to Thalex Stormvigor, this small town is on the northeastern edge of the Borealian Sway on the Blustari River.
-	
-
-	Thaelshore
-	Small
-
-
-
-
-	D - 7
-	Inverland
-	
-
-	
-
-	Thel Kohldur
-	Large
-
-
-
-
-	L - 26
-	Orbansia
-	Thel Kholdur is the largest dwarven town in Myrdae, full of mining tunnels that stretch into the Underdark and acting as the southern gate to the Kholdur passage.
-	  
-
-	Thrargael
-	Large
-
-
-
-
-	L - 36
-	Var'Shala
-	
-
-	
-
-	Tibbers
-	Small
-
-
-
-
-	F - 26
-	Bathaen Empire
-	
-
-	
-
-	Tiriat
-	Small
-
-
-
-
-	G - 14
-	Inverland
-	
-
-	
-
-	Tirncall
-	Small
-
-
-
-
-	H - 11
-	Inverland
-	Sometimes overshadowed by Caldwynn, Tirncall is a small town that is home to many mercenaries and those who wish to hide from the reaches of the law.
-	
-
-	Toolukutooga
-	Small
-
-
-
-
-	-
-	Underdark
-	
-
-	
-
-	Tovar
-	Small
-
-
-
-
-	F - 12
-	Inverland
-	
-
-	  
-
-	Trailpoint
-	Medium
-
-
-
-
-	Q - 31
-	Orbansia
-	This crossroad town lies in the center of the Severed Bend territory on the eastern side of Orbansia and is known for horse racing and huge varieties of gourds.
-	  
-
-	Tratta
-	Large
-
-
-
-
-	I - 33
-	Var'Shala
-	A grand city on the coast of the Broken Deep, known for its bustling sea trade, impressive sandstone architecture with domes and arches, a renowned arena, a grand theater, and an ancient mage tower.
-	  
-
-	Tyne’valé
-	Medum
-
-
-
-
-	N - 32
-	Var'Shala
-	This small town sits on the borders of the Gaelscape and Caristone territories along the Tossing Run river.
-	  
-
-	Tyrynder
-	Medium
-
-
-
-
-	S - 22
-	Orbansia
-	A small town in the southern Rostiena Foothills set deep in the woods off the coast of the Sea of Marilia.
-	
-
-	Uktali Monastery
-	Small
-
-
-
-
-	K - 28
-	Bathaen Empire
-	Uktali Monastery is known for its monks dedicated to exploration, history and knowledge. Founded in practicing the way of the Shadow, Uktali monks protect and preserve copies of Avantee journals prior to their archival in the Argent Halls.
-	
-
-	Uldun Kholdur
-	Medium
-
-
-
-
-	-
-	Underdark
-	
-
-	
-
-	Ulgrey
-	Small
-
-
-
-
-	P - 30
-	Orbansia
-	Ulgrey is an old village sitting at the fork in on Greyrun river.
-	  
-
-	Ulkef
-	Large
-
-
-
-
-	M - 33
-	Var'Shala
-	Located in the Gaelscape territory, Ulkef is a small city that has prospered since the Awakening. Ulkef gained its reputation as home to resilient people due to their strength and fortitude in holding off the dead of the Witherwoods prior to the Awakening.
-	
-
-	Unstead
-	Small
-
-
-
-
-	I - 11
-	Inverland
-	Small village with farmlands, one B&B, exports dairy products
-	
-
-	Urbank
-	Small
-
-
-
-
-	E - 12
-	Inverland
-	
-
-	
-
-	Valenlun
-	Small
-
-
-
-
-	R - 22
-	Orbansia
-	A small farm hamlet that has not grown more than 50 members in the past century, Valenlun is comprised of a few buildings on a main road and farms and woods surrounding it for many miles.
-	
-
-	Varrivir
-	Medium
-
-
-
-
-	-
-	Underdark
-	
-
-	
-
-	Vel'Drezadon
-	Large
-
-
-
-
-	-
-	Underdark
-	The largest drow city in the Underdark
-	
-
-	Vernun
-	Small
-
-
-
-
-	F - 26
-	Bathaen Empire
-	
-
-	
-
-	Waypoint
-	Small
-
-
-
-
-	L - 14
-	Inverland
-	This village sits in the heart of the Aelbon territory in southern Inverland and is a common stopping point for those travelling between Blackfield and Dhá Chaomhnóir.
-	
-
-	Wellen
-	Small
-
-
-
-
-	G - 29
-	Bathaen Empire
-	
-
-	  
-
-	Wheldrake
-	Medium
-
-
-
-
-	G - 26
-	Bathaen Empire
-	This well known village in the Bathaen Empire sits between Basctdelm and Palason and is responsible for the newly defined territory of Wheldrake after the Awakening.
-	
-
-	Witguard
-	Medium
-
-
-
-
-	S - 23
-	Orbansia
-	This small settlement is located on the southern edge of the Rostiena Foothills.
-	
-
-	Ys'Nonterien
-	Medium
-
-
-
-
-	-
-	Underdark
-	Drow settlement on Rothenloch in the Underdark
-	
-
-	Yunberr
-	Medium
-
-
-
-
-	N - 24
-	Orbansia
-	
-
-	
-
-________________
-
-
+Geography Reference
 Areas
 The following is a table of various featured areas around the land of Myrdae.
 Area
@@ -4499,7 +2877,7 @@ former home to passaria (Assembly of Essence which was destroyed in 1226)
 	Crimson Pines
 	forest
 	Var'Shala
-	The dark red needles on the evergreens of this forest are said to come from the blood of great war before that took place here the Fracturing.
+	The dark red needles on the evergreens of this forest are said to come from the blood from warriors that fought here during the War of Might, before  the Fracturing.
 	Crystal Bluffs
 	crags
 	Underdark
@@ -4700,3 +3078,2555 @@ After the blight that is said to have occurred in the Mahruud when it became des
 	swamps
 	Var'Shala
 	Huge area of swamp land found southwest of Tratta and home to the ancient gray dragon Zovahesdria
+	
+
+________________
+
+
+Settlements
+This is a list of settlements in Myrdae.
+Heraldry
+	Settlement
+	Size
+	Coord.
+	Region
+	Description
+	  
+
+	A'erly
+	Medium
+
+
+
+
+	F - 23
+	Bathaes
+	A’erly is a newly founded arcane town built after the Awakening on the northeast shore of Soulmire that serves as the capital of the Tegenwald territory. The town was shaped through, with a circular design and lake-facing terraces. To outsiders, A’erly feels quiet, precise, and purposeful—a place built to endure, not to impress.
+	  
+
+	Abbey of Light
+	Small
+
+
+
+
+	I - 23
+	Bathaes
+	The Abbey of Mont Rest, recently renamed the Abbey of Light, sits atop the tall foothills where the Distancion Mountains descend into the Borealian Sway. The abbey has expanded its studies to include all gods of Myrdae and is well-known for an unusual alliance with a group of Stone Giants, who have protected the abbey for 150 years.
+	
+
+	Abereth
+	Medium
+
+
+
+
+	G - 13
+	Inverland
+	
+
+	  
+
+	Adsuren
+	Small
+
+
+
+
+	G - 11
+	Inverland
+	Resting between Mount Eathea and the Wehgyn River, Adsuren is a humble village that has seen great prosperity over the past many years, its people are kind and there is always a great sense of community with a thriving market that is in constant use.
+	
+
+	Aesenfall
+	Small
+
+
+
+
+	E - 11
+	Inverland
+	
+
+	  
+
+	Ahnassa
+	Small
+
+
+
+
+	J - 35
+	Var'Shala
+	
+
+	  
+
+	Ahndashere
+	Small
+
+
+
+
+	O - 27
+	Orbansia
+	Ahndashere is a resilient river–sea town built half on stilts over swampy waters and half upon a rare rise of dry hills at its center. Lantern-lit boardwalks, weathered docks, and the hum of both riverfolk and hillstead life give the settlement a rugged charm.
+	  
+
+	Alburest
+	Medium
+	K - 32
+	Var'Shala
+	Alburest sits on the eastern edge of Lochlorn, where the Deep Route road meets the water’s edge and disappears beneath the lake. Once an inland trade hub, it’s now a lakeside city of smokehouses, boats, and drowned roads—known for its rich smoked eel and the shimmering mystery of the loch that reshaped it.
+	
+
+	Alconny
+	Small
+
+
+
+
+	E - 14
+	Inverland
+	
+
+	
+
+	Amberleen
+	Medium
+
+
+
+
+	L - 21
+	Orbansia
+	
+
+	
+
+	Argent Halls
+	Small
+
+
+
+
+	P - 26
+	Orbansia
+	The Argent Halls is an academy of historical study and is the headquarters for the Advents of Harmony.  It contains replicated copies of all archived history (originals are kept in the Uktali Monastery) and widely visited for research.
+	
+
+	Arguldeep
+	Medium
+
+
+
+
+	-
+	Underdark
+	
+
+	
+
+	Ashindel
+	Small
+
+
+
+
+	G - 15
+	Inverland
+	
+
+	
+
+	Avelvein
+	Large
+
+
+
+
+	B - 13
+	Inverland
+	
+
+	
+
+	Babbleglen
+	Small
+
+
+
+
+	I - 10
+	Inverland
+	Built on the smaller of the two great lakes of Camburne, Babbleglen is the home of many of the more exotic humanoids that wish to hold themselves in a civilized manner.
+	
+
+	Baryn
+	Small
+
+
+
+
+	G - 28
+	Bathaes
+	A small village in Wheldrake on Dibaryn River that has a history of dealing with yuan-ti and cults worshiping serpent gods.
+	  
+
+	Basctdelm
+	Large
+
+
+
+
+	H - 27
+	Bathaes
+	The largest city in Myrdae, a thriving and fortified metropolis on the Dabaryn River, serving as the capital of Halesworth and ruled by Queen Breya Talward.
+	
+
+	Bastion of Order
+	Small
+
+
+
+
+	J - 23
+	Bathaes
+	This ancient walled citadel sits on the edge of Mount Macrae and is the most historical landmark paying homage to the Addan (previously to Neera).
+	
+
+	Berest
+	Small
+
+
+
+
+	F - 12
+	Inverland
+	Sitting at the base of mountains that make up the Eustera Ridge, Berest resides as a high-functioning trading town for people going into the frozen north or towards the Lyewell Peninsula.
+	
+
+	Beveress
+	Small
+
+
+
+
+	P - 25
+	Orbansia
+	
+
+	
+
+	Bimblefol
+	Small
+
+
+
+
+	-
+	Underdark
+	Bimblefol is a small Genling settlement located within the southern reaches of Thallgrove constructed atop seven massive petrified mushroom towers rising from a shallow, glowing subterranean lake. Each tower has been hollowed and carved into functional dwellings. Rope bridges connect the towers above the water, forming an interconnected settlement suspended between cavern walls.
+	
+
+	Bindwatch
+	Small
+
+
+
+
+	K - 10
+	Inverland
+	
+
+	
+
+	Bistron
+	Small
+
+
+
+
+	Q - 32
+	Orbansia
+	A small mining village on the southeastern tip of the Severed Crease
+	
+
+	Blackfield
+	Large
+
+
+
+
+	J - 15
+	Inverland
+	
+
+	
+
+	Boldshire
+	Small
+
+
+
+
+	P - 32
+	Var'Shala
+	
+
+	
+
+	Bonegate
+	Medium
+
+
+
+
+	K - 19
+	Orbansia
+	
+
+	
+
+	Bonfaduhr
+(Oreguard)
+	Medium
+
+
+
+
+	F - 15
+	Inverland
+	Dwarven city in the mountains
+	
+
+	Braelin
+	Small
+
+
+
+
+	K - 17
+	Inverland
+	
+
+	
+
+	Brekka
+	Small
+
+
+
+
+	D - 23
+	Bathaes
+	
+
+	
+
+	Caelora
+	Medium
+
+
+
+
+	I - 25
+	Bathaes
+	
+
+	  
+
+	Caldwynn
+	Medium
+	
+
+	Inverland
+	
+
+	
+
+	Carnsby
+	Small
+
+
+
+
+	L - 11
+	Inverland
+	
+
+	
+
+	Castle Montavein
+	Small
+
+
+
+
+	M - 27
+	Orbansia
+	
+
+	  
+
+	Clador
+	Small
+
+
+
+
+	I - 37
+	Var'Shala
+	
+
+	
+
+	Claymere
+	Small
+
+
+
+
+	E - 8
+	Inverland
+	
+
+	  
+
+	Climbor
+	Large
+
+
+
+
+	R - 24
+	Orbansia
+	A city in the Rostiena Foothills at the base of the Vanapur Mountains, governed by a council of four influential families and known for its strict social order, including the enforced confinement of the gabüks to a subterranean district beneath the city.
+	
+
+	Corebb Keep
+	Small
+
+
+
+
+	P - 24
+	Orbansia
+	
+
+	
+
+	Corilas
+	Medium
+
+
+
+
+	F - 29
+	Bathaes
+	
+
+	
+
+	Cragflight
+	Small
+
+
+
+
+	M - 36
+	Var'Shala
+	Cragflight is a dwarven citadel located in the harsh barren lands in the Mahruud
+	
+
+	Crosswind
+	Small
+
+
+
+
+	O - 27
+	
+
+	
+
+	
+
+	Crulfeld
+	Small
+
+
+
+
+	K - 31
+	Var'Shala
+	Village sitting on Lochlorn
+	
+
+	Darafee
+	Small
+
+
+
+
+	I - 25
+	Bathaes
+	Darafee is a small waystation village nestled in the Borealian Sway on the forested road between Qal’dynn and Caelora. It serves as a quiet rest point for merchants, Realmwardens, and adventurers; maintains harmonious balance with the surrounding Lye’darin Weald forest without drawing larger attention
+	  
+
+	Deadfield
+	Medium
+	
+
+	Var’Shala
+	Deadfield is a brutal, sun-scorched city of black rune-carved stone walls in the heart of the Mahruud, centered on its vast square fighting pit known as The Field. Ruled by the red dragonborn Mahl, it offers desert-hardened markets, and hidden sub-level tunnels as refuge from heat and sandstorms.
+	
+
+	Del'bris
+	Small
+
+
+
+
+	J - 33
+	Var'Shala
+	Once a riverside fort guarding travelers from the monsters of the Yearning Slough, Del’bris has grown into a quiet lowland town steeped in herbal trade and whispered superstition.
+	
+
+	Deterahn
+	Small
+
+
+
+
+	K - 20
+	Orbansia
+	
+
+	  
+
+	Dhá Chaomhnóir
+	Large
+
+
+
+
+	L - 13
+	Inverland
+	A wealthy and bustling coastal city on the southern shores of Inverland, home to the largest Vaults of the Reserve, with a thriving port, and an exaggerated class system that distinguishes the wealthy.
+	
+
+	Dreghye
+	Small
+
+
+
+
+	F - 8
+	Inverland
+	
+
+	
+
+	Dryrock
+	Small
+
+
+
+
+	G - 13
+	Inverland
+	
+
+	  
+
+	Dunduar
+	Large
+
+
+
+
+	O - 31
+	Orbansia
+	Dunduar is an ancient dwarven city carved deep into the stone beneath the Baltwood, long regarded as one of the great strongholds of dwarven endurance and craft. Built along the roots of the Distancion Mountains, the city is famed for its disciplined clans, master smiths, and vast stone halls.
+	
+
+	Eastmare
+	Small
+
+
+
+
+	H - 19
+	Inverland
+	Eastmare is a coastal fishing village on the Eastern side of Inverland, overlooking the Tideless Span
+	
+
+	Edgewind
+	Medium
+
+
+
+
+	P - 33
+	Var'Shala
+	
+
+	
+
+	Elondale
+	Small
+
+
+
+
+	I - 15
+	Inverland
+	
+
+	
+
+	Elspire
+	Small
+
+
+
+
+	L - 15
+	Inverland
+	
+
+	  
+
+	Emberstran
+	Large
+
+
+
+
+	O - 29
+	Orbansia
+	The city of Emberstran stands on the Glimmering Sea, south of the Severed Crease mountain range. During the Awakening, there was fear that the city would be destroyed, as it was trapped between the expanding Glimmering Sea and by the eruption of Mount Emberstran, but the city survived and prospered.
+	
+
+	Eravic
+	Medium
+
+
+
+
+	E - 22
+	Bathaes
+	
+
+	
+
+	Eringere
+	Small
+
+
+
+
+	G - 24
+	Bathaes
+	
+
+	
+
+	Everlight
+	Small
+	Q - 35
+	Var'Shala
+	Nestled in a hidden valley, this village emerged from a cataclysm that reshaped the land centuries ago during the formation of the Blustery Waste in Arbescar. Opposing the barren expanse of the surrounding land, Everlight was shielded by Urlich, the Regent of Ice, who brought a perpetual winter to insulate the village.
+	
+
+	Everlown Lodge
+	Small
+
+
+
+
+	K - 19
+	Orbansia
+	
+
+	
+
+	Evostihl
+	Small
+
+
+
+
+	M - 23
+	Orbansia
+	
+
+	
+
+	Evyndar
+	Medium
+
+
+
+
+	H - 9
+	Inverland
+	Sitting on Whistlebay in the western coast of Inverland, Evyndar was once known as home to the elves of Inverland. Since that time, Evyndar has seen much change and adoption of other races into its domain. The city is home to many ancient structures and libraries and is believed to be watched over by some fey spirit.
+	
+
+	Fa'wrese
+	Small
+
+
+
+
+	E - 7
+	Inverland
+	
+
+	  
+
+	Fal'Thalor
+	Medium
+
+
+
+
+	J - 25
+	Bathaes
+	An elven settlement in the Borealian Sway in the lower foothills of the Distancion Mountains nestled deep in the forest. The town often welcomes travellers entering the Bathaen Empire from the dwarven city Thel Kohldur.
+	
+
+	Farnsby Port
+	Small
+
+
+
+
+	Q - 30
+	Orbansia
+	
+
+	  
+
+	Felden
+	Medium
+
+
+
+
+	R - 24
+	Orbansia
+	The town of Felden sits high on a large hill in the eastern Rostiena Foothills. The most commercial and prosperous residence occupy the most elevated parts surrounded by numerous farmlands. There are several cave entrances that lead to protective areas and mines within the hill the town rests upon.
+	  
+
+	Ferndale
+	Medium
+
+
+
+
+	I - 28
+	Bathaes
+	One of the most well known towns in Halesworth, Ferndale sits in a valley on the Seaglow river and is known for it's luminescent wildlife. The town has always strived for peace and tranquility, but has been constantly plagued attacks from orc and unseelie fey emerging from the surrounding woodlands.
+	
+
+	Flatgarde
+	Small
+
+
+
+
+	O - 26
+	Orbansia
+	
+
+	
+
+	Fjord'nahl
+	Medium
+
+
+
+
+	C - 16
+	Inverland
+	
+
+	
+
+	Frostwell Port
+	Small
+
+
+
+
+	E - 10
+	Inverland
+	
+
+	  
+
+	Gevakaln
+	Large
+
+
+
+
+	Q - 22
+	Orbansia
+	A prosperous city sitting on the coast of the Sea of Sondera in the western Rostiena Foothills. Gevakaln is know for it's three districts that are divided by the class structure of its citizens.
+	
+
+	Ghogam
+	Small
+
+
+
+
+	K - 31
+	Var'Shala
+	
+
+	  
+
+	Gibuldon
+	Large
+
+
+
+
+	G - 13
+	Inverland
+	One of the largest cities and centrally located in Inverland, Gibuldon is a the capital of Inverland. It is a lively and diverse settlement on Loch Cerule.
+	
+
+	Glimmerstone
+	Large
+
+
+
+
+	Q - 27
+	Orbansia
+	
+
+	
+
+	Glimmerwohl
+	Medium
+
+
+
+
+	-
+	Underdark
+	
+
+	
+
+	Glöfdale
+	Small
+
+
+
+
+	O - 27
+	Orbansia
+	
+
+	
+
+	Graeton
+	Small
+
+
+
+
+	N - 23
+	Orbansia
+	
+
+	
+
+	Greenvale
+	Small
+
+
+
+
+	J - 33
+	Var'Shala
+	Greenvale is a lush farming town between the Yearning Slough and the Edgecrest Forest, known for its burnt olive groves that yield a rich, earthy oil found nowhere else.
+	
+
+	Greymill
+	Small
+
+
+
+
+	G - 19
+	Inverland
+	
+
+	
+
+	Gristavel
+	Small
+
+
+
+
+	E - 24
+	Bathaes
+	
+
+	
+
+	Gristlow
+	Small
+
+
+
+
+	K - 10
+	Inverland
+	This mill town on the Caldwell River is known for its grains and cotton crops, and is one of the few small towns on the river that boast a proper B&B.
+	
+
+	Grobh
+	Small
+
+
+
+
+	E - 7
+	Inverland
+	
+
+	
+
+	Gulward
+	Small
+
+
+
+
+	M - 20
+	Orbansia
+	
+
+	  
+
+	Habadin
+	Large
+
+
+
+
+	-
+	Underdark
+	Known for it's predominate ulbin population, Habadin is one of the most well known cities in the Underdark. The city was at the center of many battles of the Blood Wars that came to Myrdae.
+	
+
+	Habell
+	Small
+
+
+
+
+	F - 11
+	Inverland
+	Habell resides as a small hamlet on the Eustera Ridge. The settlement is built as if it is hanging off of the sheer sides of the cliff and two large caves reside as the only ways into and out of the hamlet.
+	
+
+	Haern
+	Small
+
+
+
+
+	G - 28
+	Bathaes
+	
+
+	
+
+	Harbok
+	Small
+
+
+
+
+	Q - 29
+	Orbansia
+	A small town overlooking the Glimmering Sea in Orbansia.
+	
+
+	Harelbek
+	Medium
+
+
+
+
+	M - 17
+	Inverland
+	
+
+	
+
+	Hasfen
+	Small
+
+
+
+
+	P - 24
+	Orbansia
+	
+
+	
+
+	Hemmil
+	Small
+
+
+
+
+	H - 26
+	Bathaes
+	A popular fishing village on Lake Tribathe.
+	  
+
+	Hesfal
+	Small
+
+
+
+
+	J - 34
+	Var'Shala
+	Is a village known for it's artisans and crafts, located halfway between Deadfield and Tratta on the Tor March on the western edge of the Yearning Vale.
+	
+
+	Hinnibon
+	Small
+
+
+
+
+	J - 16
+	Inverland
+	
+
+	
+
+	Icespring
+	Medium
+
+
+
+
+	D - 15
+	Inverland
+	
+
+	
+
+	Ingriss
+	Large
+
+
+
+
+	H - 18
+	Inverland
+	
+
+	
+
+	Inshire
+	Small
+
+
+
+
+	M - 24
+	Orbansia
+	Innshire village sits on the Kholdur River.
+	
+
+	Insloe
+	Small
+
+
+
+
+	F - 10
+	Inverland
+	A calm refuge before traversing the cave ridden path that follows along the side of the Eustera Ridge, Insloe is a safe spot for meeting all sorts of different creatures and frequently trades with those who reside on or in the ridge.
+	
+
+	Jordarr
+	Small
+
+
+
+
+	G - 24
+	Bathaes
+	
+
+	
+
+	Kaldaros
+	Small
+
+
+
+
+	G - 21
+	Bathaes
+	
+
+	  
+
+	Kelaad
+	Small
+
+
+
+
+	I - 20
+	Orbansia
+	Also known as Featherwell, Kelaad is a coastal village nestled on the southern end of Holder’s Cove, that thrives on fishing, trade, boatwright and the wisdom of its healers and mystics.
+	
+
+	Kelmouth
+	Small
+
+
+
+
+	L - 11
+	Inverland
+	
+
+	
+
+	Khagdaruhl
+	Large
+
+
+
+
+	
+
+	Orbansia
+	
+
+	
+
+	Kilgrenny
+	Small
+
+
+
+
+	K - 15
+	Inverland
+	Located south of the city Blackfield, Kilgrenney is a village with limited accommodations for travelers on the Trace of Aelbon.
+	
+
+	Kilnock
+	Small
+
+
+
+
+	I - 11
+	Inverland
+	This small village on the Caldwell River is known for its exports of pickled fish and woolen linens.
+	
+
+	Kith
+	Small
+
+
+
+
+	L - 12
+	Inverland
+	
+
+	
+
+	Kodderl
+	Medium
+
+
+
+
+	F - 10
+	Inverland
+	A large trading hub for the people of the Lyewell Stretch, Kodderl serves almost as the barrier between them, Camburne, and Aikshaw Descent.
+	
+
+	Larnwik
+	Small
+
+
+
+
+	K - 16
+	Inverland
+	
+
+	
+
+	Lasborin
+	Small
+
+
+
+
+	F - 22
+	Bathaes
+	
+
+	
+
+	Lasdale
+	Medium
+
+
+
+
+	N - 27
+	Orbansia
+	Lasdale began as gathering location for various festivities, but grew as word spread across Orbansia and is now home to many nature loving people.
+	
+
+	Layden
+	Small
+	J - 11
+	Inverland
+	Known for its exports of root vegetables and eggs, this small village is another stop for traders on the Caldwell River.
+	  
+
+	Lehnthru'akk
+	Medium
+
+
+
+
+	J - 33
+	Var'Shala
+	A town set deep in the Yearning Slough, Lehnthru'akk is known for it's very unusual citizenry that is made up mostly of monsters that are feared elsewhere in Myrdae. While difficult to get to, the town welcomes the occasional outsider and is protected by the renown wyrm, Zovraesdria.
+	
+
+	Lendahlee
+	Small
+
+
+
+
+	F - 28
+	Bathaes
+	
+
+	
+
+	Lenshur
+	Small
+
+
+
+
+	E - 25
+	Bathaes
+	
+
+	
+
+	Leoning
+	Large
+
+
+
+
+	I - 9
+	Inverland
+	A major city that sees far into the Delisnor Ocean, Leoning is a massive hub for all sorts of people to meet and trade. Leoning also functions as the “capital” of sorts for those who deem themselves proud people of Camburne.
+	
+
+	Leterboun
+	Small
+
+
+
+
+	H - 21
+	Bathaes
+	A grand, ornately built stone lodge atop a hill on the border of Borealian Sway and Tegenwald, operated by the Grendel family as a resort and outpost for travelers journeying between Raselle and Qal'dynn.
+	
+
+	Lullin
+	Small
+
+
+
+
+	F - 12
+	Inverland
+	Forming from building around where the ground is rich from the runoff that is pouring down from up the Eustera Ridge, Lullin is a town known for its scenic beauty.
+	
+
+	Lurdoba
+	Medium
+	
+
+	Var’Shala
+	
+
+	
+
+	Mablihod
+	Medium
+
+
+
+
+	I - 14
+	Inverland
+	
+
+	
+
+	Mah'ralkal
+	Small
+
+
+
+
+	B - 14
+	Inverland
+	
+
+	
+
+	Menm’ythorn
+	Small
+
+
+
+
+	H - 11
+	Inverland
+	Overlooking Lake Miremantle, Menm’ythorn serves as a home to many elves who worship Sylunara, as they believe her light casts away the foulness of the Wetlands of Camburne and made it a suitable home for their heritage.
+	
+
+	Mirstone
+	Small
+
+
+
+
+	K - 30
+	Var'Shala
+	A beautiful mountainside village that overlooks the lush Stonewood and has a few renown hunting lodges.
+	
+
+	Mistforge
+	Small
+
+
+
+
+	M - 28
+	Orbansia
+	This village is in a valley in northern Orbansia that is across the Distancion Mountains from where the Crungess was once.
+	
+
+	Morrey
+	Large
+
+
+
+
+	L - 10
+	Inverland
+	
+
+	
+
+	Mossholde
+	Small
+
+
+
+
+	H - 23
+	Bathaes
+	A fortified traveler’s and hunter’s outpost nestled within the dense forest north of the Y’allona Sacred Valley, serving as a key rest stop along the route between Raselle and Qal’dynn.
+	
+
+	Mulshear
+	Medium
+
+
+
+
+	T - 31
+	Orbansia
+	Mulshear is full of weefolk that have created a quaint village on the edge of a river feeding the Multear swamps.
+	
+
+	Murcomb
+	Small
+
+
+
+
+	F - 28
+	Bathaes
+	
+
+	
+
+	Murfield
+	Small
+
+
+
+
+	I - 27
+	Bathaes
+	
+
+	
+
+	Nalt
+	Small
+
+
+
+
+	K - 37
+	Var'Shala
+	Once a large town with possibilities of becoming the capital of the Mahruud, it has suffered from ill-managed over-used pit-fighting.
+	  
+
+	Nauldeaus
+	Large
+
+
+
+
+	G - 29
+	Bathaes
+	Starting out simply as the port town “Wave’s Edge” before becoming the large city it is today, Nauldeaus is the gateway to Lake Tribathe, the large body of water that is known as the hub of the Bathaen Empire.
+	
+
+	Nebendie
+	Small
+
+
+
+
+	C - 12
+	Inverland
+	
+
+	
+
+	Nesbit
+	Small
+
+
+
+
+	G - 18
+	Inverland
+	
+
+	
+
+	Nesulport
+	Small
+
+
+
+
+	G - 9
+	Inverland
+	A simple town that rests between the Daerswell Inlet and a lush forest, Nesulport is the poster for a growing settlement that has great access to all over the west of Inverland.
+	
+
+	New Brimhaven
+	Small
+
+
+
+
+	J - 29
+	Bathaes
+	
+
+	  
+
+	Nunglthil
+	Small
+
+
+
+
+	-
+	Underdark
+	Nunglthil is a rare neutral trading outpost in the Underdark, where surface folk and subterranean peoples can barter safely. It is a crooked crescent of docks, shanties, and cavern-carved halls clinging to the edge of a vast black lake.
+	
+
+	Nulvara
+	Small
+
+
+
+
+	M - 22
+	Orbansia
+	
+
+	
+
+	Nurador
+	Small
+
+
+
+
+	R - 26
+	Orbansia
+	The village of Nurador sits at the northwestern tip of the Kaltera Mountains in Orbansia. The village has been a hotbed of conflict between the local elven and orc population.
+	  
+
+	O'naren
+	Medium
+
+
+
+
+	I - 23
+	Bathaes
+	A tranquil elven settlement nestled in the wooded foothills west of Qal'dynn, where finely carved stone structures blend harmoniously with the natural gray, green, and brown landscape.
+	  
+
+	Ol'Morrey
+	Large
+
+
+
+
+	K - 10
+	Inverland
+	One of the oldest town on the southern coast of Inverland, Ol'Morrey is a proud port town whose primary exports are fish, shellfish, and pearls.
+	
+
+	Old Uktali
+	Small
+
+
+
+
+	K - 28
+	Bathaes
+	Old Uktali sits as the village that leads to great path to the Uktali Monastery
+	  
+
+	Oldport
+	Medium
+
+
+
+
+	I - 18
+	Inverland
+	A historic harbor town on the stormy eastern coast of Inverland, renowned for its rich maritime trade, perilous waters, and deep-rooted seafaring traditions along the Tideless Span.
+	
+
+	Ormsdal
+	Small
+
+
+
+
+	F - 24
+	Bathaes
+	
+
+	
+
+	Padstow
+	Small
+
+
+
+
+	H - 28
+	Bathaes
+	
+
+	
+
+	Paendley
+	Medium
+
+
+
+
+	Q - 25
+	Orbansia
+	
+
+	  
+
+	Palason
+	Large
+
+
+
+
+	E - 25
+	Bathaes
+	Capital of the Frystarian Strand, Palason is a large city in the north of the Bathaen Empire. Being north, the winters can be harsh, but the lands are fertile with woods and farmlands being plentiful around the city.
+	
+
+	Peak of Tibul
+	Small
+
+
+
+
+	F - 17
+	Inverland
+	The Peak of Tibul is a a monestary with great halls and passageways carved high up Mount Tibul on the eastern span of the Eustera Ridge mountain range in Inverland. Those seeking to master unarmed combat spend years here under the guidance of Myrdae's most notable monk warriors.
+	
+
+	Porpen
+	Large
+
+
+
+
+	E - 6
+	Inverland
+	Sitting on the most west coast portion of the Coulee Peninsula in the Lyewell Stretch, Porpen is the larges trading hub in all of Inverland. Porpen is known for it's navigators of the Delisnor Ocean that extend to the continent of Taragoh.
+	
+
+	Proth
+	Small
+
+
+
+
+	J - 10
+	Inverland
+	
+
+	
+
+	Puckett
+	Small
+
+
+
+
+	E - 12
+	Inverland
+	
+
+	  
+
+	Qal'dynn
+	Large
+
+
+
+
+	H - 24
+	Bathaes
+	The largest city in the Borealian Sway, a serene and orderly elven establishment built among dense wooded foothills, where cascading rivers and lakes blend seamlessly with tall, ornate spires and natural forested beauty.
+	
+
+	Raselle
+	Medium
+
+
+
+
+	H - 20
+	Bathaes
+	
+
+	
+
+	Riverside
+	Medium
+
+
+
+
+	G - 26
+	Bathaes
+	Riverside is a historic town hub at the crossroads of the Borealian Sway, Wheldrake, and Frystarian Strand territories, where fertile lands, well-traveled roads, and the Blustari River converge make it a great place for trade.
+	
+
+	Rosevale
+	Small
+
+
+
+
+	M - 33
+	Var'Shala
+	
+
+	
+
+	Sahvall
+	Small
+
+
+
+
+	F - 21
+	Bathaes
+	
+
+	
+
+	Sandgrave
+	Small
+
+
+
+
+	M - 34
+	Var'Shala
+	
+
+	
+
+	Scar Den
+	Small
+
+
+
+
+	J - 20
+	Orbansia
+	A rugged goliath settlement nestled in the southern foothills of the Wayward Crest mountains, where a hardy people—distant descendants of hill giants—live among timbered lodges, stone structures, and cavernous dwellings carved into the rocky terrain.
+	  
+
+	Scarwatch Hold
+	Medium
+
+
+
+
+	K - 34
+	Var'Shala
+	This old keep that was damaged during the awakening is now renovated. It sits atop the Jagged Waste Crags on the western border of the Yearning Vale, overlooking the Mahruud.
+	
+
+	Seaway Harbor
+	Small
+
+
+
+
+	O - 22
+	Orbansia
+	
+
+	
+
+	Seornisor
+(Sterwood)
+	Medium
+
+
+
+
+	B - 14
+	Inverland
+	
+
+	
+
+	Severdale
+	Small
+
+
+
+
+	M - 26
+	Orbansia
+	
+
+	
+
+	Shademoor
+	Medium
+
+
+
+
+	J - 27
+	Bathaes
+	A mist-laden town in Halesworth, known for its tragic past, the sprawling Garden cemetery, and its famed Mottleberry harvest, where fog drifts through its streets each twilight, cloaking its mysteries in shadow.
+	
+
+	Sharsley
+	Small
+
+
+
+
+	G - 27
+	Bathaes
+	
+
+	
+
+	Silvermead
+	Small
+
+
+
+
+	R - 30
+	Orbansia
+	
+
+	
+
+	Skrettel
+	Large
+
+
+
+
+	K - 23
+	Orbansia
+	Sitting on plateaus and carved into the mountainside, Skrettel is a magnificent city built for the likings of weefolk
+	
+
+	Slag'erum
+	Small
+
+
+
+
+	L - 26
+	Orbansia
+	
+
+	
+
+	Solwind Glaes
+	Small
+
+
+
+
+	D - 12
+	Inverland
+	
+
+	
+
+	Sparkwhisper
+	Small
+
+
+
+
+	O - 30
+	Orbansia
+	
+
+	
+
+	Sren Esari
+	Medium
+
+
+
+
+	H - 24
+	Bathaes
+	
+
+	
+
+	Staghand
+	Small
+
+
+
+
+	F - 25
+	Bathaes
+	Staghand is one of the more popular hunting villages sitting on the southern edge of the Kolgrafell Thicket.
+	  
+
+	Staghaven
+	Small
+
+
+
+
+	N - 33
+	Var'Shala
+	Nestled in one of the densest forested areas of Kilgreen is the small hamlet of Staghaven. Its modest buildings, developed by newcomers from Ulkef, are spread out along a tributary that feeds into the Tossing Run River.
+	
+
+	Stinson
+	Medium
+
+
+
+
+	F - 20
+	Inverland
+	
+
+	
+
+	Stoneshore
+	Large
+
+
+
+
+	P - 23
+	Orbansia
+	Sitting on the coast of the Sea of Sondera on the western portions of the Rostiena Foothills, Stoneshore is the premier city of trade in Orbansia.
+	
+
+	Stonetrace
+	Small
+
+
+
+
+	O - 28
+	Orbansia
+	
+
+	
+
+	Stouhg
+	Large
+
+
+
+
+	K - 30
+	Var'Shala
+	
+
+	
+
+	Strolsworth
+	Medium
+
+
+
+
+	G - 14
+	Inverland
+	This working class town sits across Loch Cerule from Gibuldon where the Tariat River ends, and has been subject to harboring organized crime over the past few decades.
+	
+
+	Sulport
+	Medium
+
+
+
+
+	J - 34
+	Var'Shala
+	Sulport is a rough-edged port town on Ripshod Bay, where pirates, smugglers, and mercenaries gather. The northern docks are notorious for danger and lawlessness after dark, while the southern quarter along the trade road offers a safer haven for travelers and merchants passing through.
+	
+
+	Sulura
+	Large
+	
+
+	Var’Shala
+	
+
+	
+
+	Syori
+	Small
+
+
+
+
+	E - 23
+	Bathaes
+	
+
+	  
+
+	Tarnsport
+	Medium
+
+
+
+
+	H - 26
+	Bathaes
+	Known as the home to Thaelex Stormvigor, this small town is on the northeastern edge of the Borealian Sway on the Blustari River.
+	
+
+	Thaelshore
+	Small
+
+
+
+
+	D - 7
+	Inverland
+	
+
+	
+
+	Thel Kohldur
+	Large
+
+
+
+
+	L - 26
+	Orbansia
+	Thel Kholdur is the largest dwarven town in Myrdae, full of mining tunnels that stretch into the Underdark and acting as the southern gate to the Kholdur passage.
+	  
+
+	Thrargael
+	Large
+
+
+
+
+	L - 36
+	Var'Shala
+	
+
+	
+
+	Tibbers
+	Small
+
+
+
+
+	F - 26
+	Bathaes
+	
+
+	
+
+	Tiriat
+	Small
+
+
+
+
+	G - 14
+	Inverland
+	
+
+	
+
+	Tirncall
+	Small
+
+
+
+
+	H - 11
+	Inverland
+	Sometimes overshadowed by Caldwynn, Tirncall is a small town that is home to many mercenaries and those who wish to hide from the reaches of the law.
+	
+
+	Toolukutooga
+	Small
+
+
+
+
+	-
+	Underdark
+	
+
+	
+
+	Tovar
+	Small
+
+
+
+
+	F - 12
+	Inverland
+	
+
+	  
+
+	Trailpoint
+	Medium
+
+
+
+
+	Q - 31
+	Orbansia
+	This crossroad town lies in the center of the Severed Bend territory on the eastern side of Orbansia and is known for horse racing and huge varieties of gourds.
+	  
+
+	Tratta
+	Large
+
+
+
+
+	I - 33
+	Var'Shala
+	A grand city on the coast of the Broken Deep, known for its bustling sea trade, impressive sandstone architecture with domes and arches, a renowned arena, a grand theater, and an ancient mage tower.
+	  
+
+	Tyne’valé
+	Medum
+
+
+
+
+	N - 32
+	Var'Shala
+	This small town sits on the borders of the Gaelscape and Caristone territories along the Tossing Run river.
+	  
+
+	Tyrynder
+	Medium
+
+
+
+
+	S - 22
+	Orbansia
+	A small town in the southern Rostiena Foothills set deep in the woods off the coast of the Sea of Marilia.
+	
+
+	Uktali Monastery
+	Small
+
+
+
+
+	K - 28
+	Bathaes
+	Uktali Monastery is known for its monks dedicated to exploration, history and knowledge. Uktali monks protect and preserve original text, tomes, scroll and Avantee journals with a second archival in the Argent Halls.
+	
+
+	Uldun Kholdur
+	Medium
+
+
+
+
+	-
+	Underdark
+	
+
+	  
+
+	Ulgrey
+	Small
+
+
+
+
+	P - 30
+	Orbansia
+	Ulgrey is an old village sitting at the fork in on Greyrun river.
+	  
+
+	Ulkef
+	Large
+
+
+
+
+	M - 33
+	Var'Shala
+	Located in the Gaelscape territory, Ulkef is a small city that has prospered since the Awakening. Ulkef gained its reputation as home to resilient people due to their strength and fortitude in holding off the dead of the Witherwoods prior to the Awakening.
+	
+
+	Unstead
+	Small
+
+
+
+
+	I - 11
+	Inverland
+	Small village with farmlands, one B&B, exports dairy products
+	
+
+	Urbank
+	Small
+
+
+
+
+	E - 12
+	Inverland
+	
+
+	
+
+	Valenlun
+	Small
+
+
+
+
+	R - 22
+	Orbansia
+	A small farm hamlet that has not grown more than 50 members in the past century, Valenlun is comprised of a few buildings on a main road and farms and woods surrounding it for many miles.
+	
+
+	Varrivir
+	Medium
+
+
+
+
+	-
+	Underdark
+	
+
+	
+
+	Vel'Drezadon
+	Large
+
+
+
+
+	-
+	Underdark
+	The largest drow city in the Underdark
+	
+
+	Vernun
+	Small
+
+
+
+
+	F - 26
+	Bathaes
+	
+
+	
+
+	Waypoint
+	Small
+
+
+
+
+	L - 14
+	Inverland
+	This village sits in the heart of the Aelbon territory in southern Inverland and is a common stopping point for those travelling between Blackfield and Dhá Chaomhnóir.
+	
+
+	Wellen
+	Small
+
+
+
+
+	G - 29
+	Bathaes
+	
+
+	  
+
+	Wheldrake
+	Medium
+
+
+
+
+	G - 26
+	Bathaes
+	This well known village in the Bathaen Empire sits between Basctdelm and Palason and is responsible for the newly defined territory of Wheldrake after the Awakening.
+	
+
+	Witguard
+	Medium
+
+
+
+
+	S - 23
+	Orbansia
+	This small settlement is located on the southern edge of the Rostiena Foothills.
+	
+
+	Ys'Nonterien
+	Medium
+
+
+
+
+	-
+	Underdark
+	Drow settlement on Rothenloch in the Underdark
+	
+
+	Yunberr
+	Medium
+
+
+
+
+	N - 24
+	Orbansia
+	
+
+	
+
+________________
+
+
+Territories
+This is a comprehensive list of all of the territories in the land of Myrdae.
+Territory
+	Capital
+	Region
+	Description
+	Aelbon
+	Dhá Chaomhnóir
+	Inverland
+	Aelbon is a lush territory nestled in southern Inverland, known for its rich natural resources, fertile fields, and thriving wildlife. The territory is home to the enigmatic Populi Verde, a nature-worshipping group with a troubled history. Aelbon is known as home to two grand cities, Dhá Chaomhnóir on the coast and Blackfield in the northeastern hills.
+	Aikshaw Descent
+	Bonfaduhr
+	Inverland
+	Stretching along the southern face of the Eustera Ridge Mountains, Aikshaw Descent offers a variety of landscapes, ranging from towering peaks to forested valleys. The territory is home to the fishing city of Abereth on the shores of Loch Cerule and Bonfaduhr, stronghold of the Oreguard dwarves.
+	Aravae
+	none
+	Orbansia
+	Tucked along the southeastern edge of Orbansia, Aravae is a rugged land with dense forests that are green through much of the year. Its steep cliffs rise above the crashing waves of the Embueril Ocean, formed in part by the distant presence of the smoldering Mount Feutagne. Most of the settlements in Aravae are scattered and often secluded, separated by vast woods and accessible only by winding paths.
+	Arbescar
+	Marrowdale
+	Var'Shala
+	Arbescar is a land of striking contrasts, where the scorching winds of the Blustery Waste give way to lush, emerald forests and sparkling river valleys. Once isolated from the mainland, it was joined to Myrdae by the Awakening’s upheaval, now connected through the southernmost stretch of the Dragonspine Mountains. The territory bears the lasting mark of the archmage Tsuul’physs Bhan, whose legacy still echoes in the land’s shifting magic, ancient ruins, and whispered lore.
+	Baltwood
+	Emberstran
+	Orbansia
+	Baltwood is a rugged territory in eastern Orbansia, nestled between the northern reaches of the Glimmering Sea and the southeastern edge of the Distancion Mountains. The territory is dominated by the vast and ancient Baltwood Forest and shadowed by the mildly active Mount Emberstran, a volcanic peak. The territory's most prominent settlements include Emberstran, and the dwarven city Dunduar.
+	Barrford
+	Stinson
+	Inverland
+	Far to the east of Inverland, where the Tideless Span gives way to the open High Sea, lies Barrford—a quiet territory defined by rugged foothills and wide coastal plains. The northeastern reaches of the Eustera Ridge Mountains fall off into rolling hills, while the coastal lands provide rich fishing waters and windswept grasslands. Barrford is sparsely settled, with the modest city of Stinson serving as its capital and primary hub of trade, governance, and seafaring life.
+	Blisterfel
+	Avelvein
+	Inverland
+	Blisterfel is a cold territory where the land is frozen three harmons out of the year. The land is in the northernmost reaches of Inverland, where icy winds sweep across jagged ridgelines and snow-covered valleys. Most of the hardy people of this frigid land live in Avelvein, Blisterfel’s largest city. Perpetually shrouded in frost, the land is home to ancient ruins of long-lost civilizations buried beneath glacial sheets.
+	Borealian Sway
+	Qal'dynn
+	Bathaes
+	The Borealian Sway is a territory rich with ancient groves, cascading rivers, and terraced foothills. It is most known for being home to the Elle'berian, the first elven settlers and the founders of the territory's capital city, Qal’dynn. Settlements in the territory are guarded and watched by the elven watch known as the Realmwardens. Though the land is welcoming to outsiders, its rulers ensure that foreign influences do not disrupt the region’s balance.
+	Camburne
+	Leoning
+	Inverland
+	Camburne spans the western edge of Inverland, where lush plains, vibrant wetlands, and dense forests meet the crashing waves of the Delisnor Ocean. The territory is known for its strikingly colorful flora and the native gertot—wooly, horned ungulates whose prized fleece drives Camburne’s thriving wool trade.
+	Caristone
+	Edgewind
+	Var'Shala
+	Caristone is a largely untamed land between the Distancion Mountains and Dragonspine Mountains, with rolling hills, rich forests, and glimmering rivers. One of the area's most well known features is the Starlight Cradle, a wide valley studded with luminous crystal outcroppings believed to be from the Broken Moon and home to the town of Boldshire. Once the site of the original eastern gate to the dwarven stronghold of Dunduar, the Awakening sealed the mountain passage, shifting all access to the other side of the summit.
+	Corse of Veinspear
+	none
+	Jehsle
+	A land defined by its numerous islands on the northwest coast of Jeshle, the Corse of Veinspear can be a dangerous place. Pirates and merchants alike seek “Drift Keys,” rare magical compasses attuned to a shifting seabed where arcane tides and magical currents shift the islands’ positions. Navigation often demands tide-lore, ancient star charts, or specialized relics.
+	Crimson March
+	Stouhg
+	Bathaes
+	The Crimson March rose from the filled chasm of the Crungess during the Awakening, now blanketed by towering evergreens known as Crimson Pines—named for their blood-red needles said to grow from soil soaked by centuries of warfare. Once a battleground for countless conflicts, the land pulses with memory, its woods haunted by the restless spirits of warriors who died without honor or purpose. Travelers speak of ghostly figures stalking the mist and whispers that echo like battle cries deep among the trees.
+	Dalasor Coast
+	none
+	Orbansia
+	The Dalasor Coast forms the southernmost edge of Orbansia, set between the warm waters of the Dalasor Strait and the border of Aravae. Its landscape shifts from dense woodlands and sprawling wetlands to arid coastal hills.
+	Dunmoore
+	Oldport
+	Inverland
+	In southeastern Inverland, Dunmoore is full of rolling grasslands and low hills that stretch to the Tideless Span and the Sea of Sondera. Its most striking feature, the Bluffs of Dunmoore, have steep plateaus surrounded by a series of floating isles that drift above the land—separated from the land during the Awakening and becoming home to numerous Aarakocra settlements.
+	Esgaar
+	none
+	Bathaes
+	Esgaar is a frigid territory in southern Nalscour, hemmed in by mountains to the north and the waters of the Broken Deep to the south. Jagged ice fields and rugged fjords define the land, but its most iconic feature is the Nalscour Runs—deep, ancient channels carved through rock and glacier, said to mark the paths of primordial beasts that once shaped the land.
+	Frystarian Strand
+	Palason
+	Bathaes
+	The Frystarian Strand is the northernmost reach of the Bathaes, where cliffs and forests meet the waves of the Broken Deep and High Sea. Centuries ago, the mages of the Tegenwald ignited the Shroudburn—vast magical blazes that scorched away the dense wilderness and drove out the shadowy creatures that lurked within. The land still bears the scars and blessings of that fire, with warm mist rising from the land and ancient stones said to whisper remnants of forgotten spells.
+	Flarebane Isles
+	none
+	Bathaes
+	Scattered across the heart of the Broken Deep, the Flarebane Isles are jagged remnants of divine ruin—born when the god Brault was cast from the heavens during the Fracturing. One of the larger isles is said to have the Flarebane Sigil, a once-radiant celestial seal now cracked and dark, leaking demonic energy that twists the sea and land of the isles whenever prayers are offered to the new gods. The isles are home to many pirate strongholds, monstrous sea beasts, and cursed ruins.
+	Gaelscape
+	Ulkef
+	Var'Shala
+	Gaelscape is a wild and vibrant territory east of the Distancion Mountains, where the Awakening drove back the Mahruud and a deep connection to the Feywild was reborn. Dense forests and radiant meadows now teem with fey creatures. Scattered throughout the land are the ancient Oathcourts—mystic sites where ancestral bargains with the fey were once forged, and where old promises now stir back to life.
+	Glenleah
+	Gibuldon
+	Inverland
+	Glenleah is a fertile and mist-veiled heartland in central Inverland, stretching from rolling green hills to the shores of the great Loch Cerule. The city of Gibuldon, Inverland’s largest, sits at the lake’s edge—its stone halls and ivy-wrapped towers steeped in tradition, music, and old magic. Atop sacred Draebaen plateau in the Glenleah Woods burns the Fire of Ahln'Drae, an eternal flame that is rekindled each Salvus through storm-born lightning, said to guard Glenleah’s soul.
+	Graelaug
+	none
+	Var'Shala
+	Graelaug is a cold, low-lying coastal territory on the eastern edge of the Broken Sea, blanketed in icy forests. Its people are hardy seafarers and warriors, shaped by ancient traditions. Scattered across the land of Graelaug are the Frostmarks—mystic stones of unknown age that are said to glow faintly only for those in favor of the gods.
+	Halesworth
+	Basctdelm
+(shared)
+	Bathaes
+	Halesworth is the heart of the Bathaen Empire and the most populous territory in Myrdae, centered around the grand city of Basctdelm—a hub of commerce, politics, and imperial power. From the lowlands, to the coast, to the high passes of the Distancion Mountains, the land is known for its structured rule and a deep-rooted legacy of the high perched Uktali Monastery.
+Halesworth and Wheldrake share Basctdelm as a capital.
+	Hillock Torn
+	none
+	Orbansia
+	Hillock Torn is a quiet, rugged territory shaped by two wide valleys nestled among the foothill ridgelines that stretch from the Distancion Mountains. It's known for its Standing Folds—towering stone formations shaped by ancient tectonic force, whose curved faces carry echoes and songs with distinct clarity. The Dalerun and Northern Stoneflow Rivers cut through the center of the large valleys.
+	Khasvadia
+	none
+	Var'Shala
+	Khasvadia is a shadowed, mist-laden territory on the eastern edge of Myrdae where crumbling manors cling to hillsides and ancient woods conceal secrets. The land is ruled in fear by Countess Riah Nas Verdidra, a figure whose presence haunts the people more than any law or throne. It is said that those who die in terror within Khasvadia become Mistbound—silent, lingering spirits drawn to her darkness, unable to pass on until the Countess herself is unmade.
+	Kholdur
+	Thel Kholdur
+	Orbansia
+	Kholdur, located in northern Orbansia, is full of foothills and rivers that flow from the Distancion Mountains to meet the Sea of Sondera. The land is known for Thel Kholdur, a grand dwarven city carved deep into the mountains with a long underground pass that leads to the Bathaes beneath.
+	Lyewell Stretch
+	Porpen
+	Inverland
+	Lyewell Stretch marks the westernmost edge of Inverland, where jagged landmasses known as the Tidewoven Rise extend into the Delisnor Ocean like coral-formed fingers, lifted during the Awakening. Beneath these high bluffs, bone-colored reefs shaped from wreckage and sailor’s remains form eerie underwater forests. The port city of Porpen stands as Myrdae’s western gateway, where traders, mystics, and wanderers arrive from distant shores.
+	Mahruud
+	Thrargael
+	Var'Shala
+	The Mahruud is a scorched and craggy territory in northeastern Myrdae, where blighted winds howl through ravines and broken plateaus. Long shaped by dark magic and violent coups, its capital Thrargael stands as its center of ruthless ambition. The desolate Mahruud is known for its harsh conditions and dangersous inhabitants.
+	Matahal Valley
+	none
+	Orbansia
+	Matahal Valley lies at the heart of Orbansia, cradled between two mountain ranges and known for the wetlands that dominate its southeastern expanse. Mist-laden lowlands give way to fertile highland ridges. Though rich in resources, the valley remains elusive—its hidden paths protecting it from outsiders.
+	Mulshear
+	Mulshear
+	Orbansia
+	Resting along the eastern coast of Orbansia, where the Saltbay Sea meets the Embueril Ocean, is the territory of Mulshear. Its northern reaches offer rolling grasslands, wooded hills, and scattered settlements. But to the south, the land sinks into dense swamps and murky wetlands, perpetually veiled in heavy fog. Dark tales warn travelers to avoid these southern marshes, for it is said that the undead roam under the will of a sinister figure known only as the Soul Reaper.
+	Nandahere
+	none
+	Jehsle
+	Nandahere is the southernmost territory in Myrdae, a land of dense, vibrant tropical forests full of rare flora. The territory is situated in Jehsle just south of Mount Wick and separated from Orbansia by the shimmering waters of the Dalasor Strait.
+	Okodia
+	Skrettel
+	Orbansia
+	Okodia sits along the northwestern edge of Orbansia, where the Tideless Span widens into the Sea of Sondera. Towering in the north are the Wayward Crest of the Distancion Mountains, while the sweeping Bay of Visions dominates the southern coastline. Rolling hills, forests, open plains, and rocky shores make up the rest of the Okodian landscape. Skrettel, the weefolk city, is the capital perched high on a plateau beneath the looming Grand Peaks.
+	Qae'thesvorin
+	none
+	Jehsle
+	Qae’thesvorin is the largest territory in Jehsle, stretching along the Sea of Sondera and the Sea of Marilia. Towering mesas, volcanic ridges, and wind-carved highlands dominate the landscape. Revered and feared across Myrdae, Qae'thesvorin is home to the revered and feared draconian ancestries.
+	Range of Otesurr
+	none
+	Var'Shala
+	The Range of Otesurr is a rugged northeastern territory of Myrdae, defined by the towering Otesurr Mountains that run from north to south, cleaving the land between the churning Broken Sea and the vast Embueril Ocean. The mountains are steep and jagged with teeth and only a handful of ancient passes link the two sides of the territory.
+	Roaring Hollow
+	Fjord'nahl
+	Inverland
+	The Roaring Hollow is a snowbound coastal territory northeast of Eustera Ridge and the Deadwing Mountains, and reaching out to the High Sea. In the far north lies the Manus Peninsula, a rugged expanse of sea cliffs and frost-slick caves where salt-laced crystals hum with ancient resonance—believed to hold echoes of the land’s forgotten past.
+	Rostiena Foothills
+	Stoneshore
+	Orbansia
+	The Rostiena Foothills is a territory in Orbansia, defined by its hills, forests and the mighty Stoneflow River that carves a path between the Glimmering Sea and the Sea of Sondera. At the river’s mouth sits Stoneshore, the bustling capital whose harbors open into Greywater Bay—making it a vital hub of trade and travel.
+	Sarbaugh
+	none
+	Bathaes
+	A frigid, icebound island in the High Sea, home to the Ghecbaurg Clan (Whitebear in common), a brutal and war-hardened orc tribe that endures the relentless cold within craggy settlements and frozen caves.
+	Severed Bend
+	none
+	Orbansia
+	Tucked between the Glimmering Sea and Siltbay, the Severed Bend is a territory in northeastern Orbansia where the Severed Crease range descends rolling hills and rocky coastal flats. Lacking grand cities, the Severed Bend carries a quiet resilience—its people preferring smaller towns and villages.
+	Serriveil
+	none
+	Orbansia
+	The serene territory of Serriveil, in northern Orbansia, is known for its lush, expansive forest called Shademeadow that sits in the shadow of the Meadowgarde ridge line. The land is protected by an ancient covenant between druids and nature itself, upheld by the Elderoot—sentient trees that watch in silence and defend the balance of the forest.
+	Sutherford
+	Morrey
+	Inverland
+	Sutherland is a southern Inverland territory that stretches from the Delisnor Ocean to the inland waters of Lake Celemere. The southern coast thrives on fishing and maritime trade, while the northern Gilburough Timbers offer dense, hardy woodland known for its lumber and game. Between the Midram Basin and the forested uplands, Sutherford is a land balanced between industry and wilderness.
+	Tegenwald
+	A'erley
+	Bathaes
+	Recently re-established as a recognized territory, Tegenwald is a land where nature and magic seem deeply intertwined. Thick forests, lakes, and rugged coastlines stretch out across the land, but none dominate the skyline like the towering Mount Everbloom, a vast dormant volcano. Long whispered to be one of the strongest nexuses of the Weave in all of Myrdae, many believe the land itself hums with ancient arcane energy.
+	Theamis
+	none
+	Orbansia
+	Theamis is a varied and resource-rich territory bounded by the Glimmering Sea to the north and the Kaltera Mountains to the west. The cities of Glimmerstone and Adamont stand as its well known large cities. Theamis shares its southern border with Aravae and its eastern border with Mulshear.
+	Tundra of Nalscour
+	none
+	Bathaes
+	The Tundra of Nalscour Tundra is the northernmost and harshest land in Myrdae, sealed off from Esgaar by the jagged Frowning Spine. Scattered across the wastes stand the Ice-shard Cairns—towering, crystalline burial sites of forgotten clans that shimmer beneath the moonlight said to absorb the light and call forth spectral spirit-beasts tied to the old clan bloodlines.
+	Uldrea
+	Sulura
+	Var'Shala
+	A northern territory once cut off from the rest of Myrdae by mysterious elemental forces Uldrea's southern border is shared with the Mahruud. Though its landscape varies, much of the region is marked by arid plains and the port city of Sulura now serves as a vital gateway into the reclaimed land.
+	Wheldrake
+	Basctdelm
+(shared)
+	Bathaes
+	Wheldrake is the northeasternmost territory of the Bathaes, a land of hills and marshes. Wheldrake is home to the legend of the Order of the Blade—a once-revered brotherhood of knights who upheld honor above imperial decree and vanished after defying an old corrupt king of the Bathaen Empire. Their final fortress is said to be hidden in the Wheldrake Hills, guarded by spectral sentinels and relics that await the return of a worthy bearer to restore their broken vow.
+Wheldrake and Halesworth share Basctdelm as a capital.
+	Yag'vur
+	none
+	Orbansia
+	Yag’vur is a small territory nestled against the southwestern slopes of the Vanapur Mountains. The territory shares borders with the Rostiena Foothills, the Dalasor Coast, and Aravae.
+	Yearning Vale
+	Tratta
+	Var'Shala
+	The Yearning Vale is an area northwest of the Mahruud, where sluggish rivers and swamplands stretch across from the southeast to feed into the Broken Sea with the great port city of Tratta. In the Yearning Slough, humanoids and monstrosities live in harmony under the watchful eye of the ancient grey dragon Zovraesdria.
+	
+
+________________
+
+
+Glossary
+Ascension Tree – Rooted in the Bloomrest, a hidden sacred grove in northern Shademeadow, Orbansia, the Ascension Tree is the heart of the Alferumn.
+Alferumn – The word “Alferumn”, is celestial for the Axis of Perpetuum—the natural, divine cycle of life, decay, and rebirth.
+Amberstone – An Amberstone is an amber gemstone that has the ability to change into a color that represents an old god by merely praying to that god while cusping the gemstone.
+Arcane Waypoint – A magical transportation network that uses teleportation circles, each identified by a rune that specifies the location.
+Crungess – Also known as the Great Crevasse, the Crungess is a large chasm in the Mainland that was believed to have been formed as part of the Fracturing.  The Crungess was filled as part of the Awakening.
+Daefar – Living pools that shimmered as gateways between the Feywild and the material plane from which the original elves arrived to the land
+Elle’berian – A term representing the people of the Borealian Sway that originate from the first elven settlers of the territory and the founders of the city Qal’dynn.  There is a symbol that the Elle’berian use that is a pearl white orb resting in a crescent that faces upward.
+Harbiter – The Harbiter is a member of the Advents of Harmony, who is considered a prophet and names each year.  Pandora Fallowood was the first Harbiter to be named
+Ley-thread – Ley-threads are ancient magical conduits, strands of concentrated arcane energy that run through the land like hidden veins. Scholars believe they are part of the Weave itself, focused streams of magical essence left behind by the shaping of Myrdae. Most are dormant, inert beneath stone or soil, but some still carry power. Settlements like Qal’dynn were built above these threads on purpose — to draw upon their strength.  Ley-threads are not just magical reservoirs — they respond to presence and intention. If disturbed, they can amplify or unravel spellcasting nearby, especially if engaged without care. 
+Lodestones – Magically empowered fragments from the Broken One moon that have been scattered about Myrdae.  When properly tuned, these fragments provide the ability to levitate very large objects.
+Passaria – A passaria is an arcane teleportation mechanism that is used to reach the floating hall known as the Assembly of Essence where the old gods would meet.  This mechanism has eight small gemstone sized depressions, used to hold one of each gemstone to represent the Old Gods.  Placing them in the depression would teleport nearby members to the infamous Assembly of Essence floating hall.
+Qal’daefar – Qal’daefer are the original elves of Myrdae.
+Realmwarden(s) – The Borealian Sway has a trained militia group known as Realmwardens, that are protectors of the territory and predominantly positioned as guards for major elven settlements within the territory.
+Runeweaving – Rune weaving is a ritual tattooing ability requiring skill and magic, taking time to perfect.  Rune weaving can consist of one or more rune shaped tattoos that once applied can provide special powers or curses based on the rune and ritual used.  These magical runes become one with the person tattooed with the rune for a lifetime unless the rune is scarred, disfigured, or the rune is removed by some other means (i.e. wish spell, loss of limb, etc.). 
+Some of the abilities given through the magical properties of the rune weave tattoo require attunement, while others do not.  If using the power granted by the rune weave tattoo requires attunement, the attunement can occur much quicker than with a normal magic item, only taking an action to attune the power of the rune weave tattoo.  Un-attuning to a rune weave tattoo can be done instantaneously and does not require an action or bonus action.  Being attuned to a rune weave tattoo counts towards the maximum number of magical items a character can be attuned to.
+A person can have as many rune weave tattoos as their body will hold as long as the rune weave tattoos do not overlap.  Rune weave tattoos are considered magical and can be detected with a detect magic spell.
+Skyships – Sky faring vessels (ships) that are constructed with mounted stabilized shards of Lodestones that allow them to fly.

@@ -1,0 +1,312 @@
+// The Might of Dragons Chronicle builder — turns might-of-dragons-chronicle.md into a self-contained HTML page.
+// Usage:  node build-chronicle.mjs            (reads/writes this folder)
+//         node build-chronicle.mjs <dir> <out.html>
+// Inputs (same folder): might-of-dragons-chronicle.md, chronicle.css, session-images.json
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const DIR = process.argv[2] || HERE;
+const OUT = process.argv[3] || path.join(DIR, 'might-of-dragons-chronicle.html');
+
+function themeFor(title, body){
+  // Title carries the chapter's identity, so match on it first; fall back to the body.
+  const tt=title.toLowerCase(), bb=body.toLowerCase();
+  const pick=(src)=>{
+    const has=(...k)=>k.some(w=>src.includes(w));
+    if(has('wine')) return 'wine';
+    if(has('blood','boil','bodies','murder','gross','grave','centipede','mimic')) return 'crypt';
+    if(has('fire','hots','wax','forge','burn','raider')) return 'ember';
+    if(has('dock','prism','rain','river','lake','water')) return 'sea';
+    if(has('wolf','wolves','horse','forest','crags','stone')) return 'grove';
+    if(has('eye','star','brooch','rope','cart','scorpion','radiant','cult')) return 'arcane';
+    return null;
+  };
+  return pick(tt) || pick(bb) || 'ember';
+}
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0);}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function inline(s){let x=esc(s);x=x.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');x=x.replace(/\*([^*]+)\*/g,'<em>$1</em>');x=x.replace(/\\([!\[\]()#.\-+>~`_])/g,'$1');return x;}
+
+const SIGILS=[
+ '<circle cx="60" cy="60" r="46" /><circle cx="60" cy="60" r="30" /><path d="M60 14V106 M14 60H106 M28 28 92 92 M92 28 28 92"/>',
+ '<circle cx="60" cy="60" r="44"/><path d="M60 16 L96 78 H24 Z"/><circle cx="60" cy="60" r="14"/>',
+ '<circle cx="60" cy="60" r="46"/><path d="M60 14 L74 50 L112 50 L82 74 L94 110 L60 88 L26 110 L38 74 L8 50 L46 50 Z" transform="scale(.72) translate(23 23)"/>',
+ '<circle cx="60" cy="60" r="46"/><circle cx="60" cy="42" r="18"/><circle cx="60" cy="78" r="18"/><path d="M60 6V114"/>',
+ '<path d="M60 10 L104 84 H16 Z"/><path d="M60 110 L16 36 H104 Z"/><circle cx="60" cy="60" r="10"/>',
+ '<circle cx="60" cy="60" r="46"/><path d="M24 60 Q60 20 96 60 Q60 100 24 60 Z"/><circle cx="60" cy="60" r="7"/>',
+];
+
+function parseSession(lines){
+  const head=lines[0].trim().match(/^(\d+)\s*[–-]\s*(.+?)\s*$/);
+  const num=head[1].padStart(2,'0'); const title=head[2].trim();
+  let sdate='',idate='',loc=''; const blocks=[]; let i=1; let firstPara=true;
+  while(i<lines.length){
+    let line=lines[i]; let m;
+    if(/^\s*$/.test(line)){i++;continue;}
+    if((m=line.match(/^Session Date:\s*(.+)/))){sdate=m[1].trim();i++;continue;}
+    if((m=line.match(/^In-game Date:\s*(.+)/))){idate=m[1].trim();i++;continue;}
+    if((m=line.match(/^(?:Session )?Starting Location:\s*(.+)/))){loc=m[1].trim();i++;continue;}
+    if((m=line.match(/^##\s+(.+)/))){blocks.push({t:'h2',v:m[1].replace(/\*\*/g,'').trim()});i++;continue;}
+    if((m=line.match(/^###\s+(.+)/))){blocks.push({t:'h3',v:m[1].replace(/\*\*/g,'').trim()});i++;continue;}
+    if(/^\s*\|/.test(line)){
+      const tb=[]; while(i<lines.length && /^\s*\|/.test(lines[i])){tb.push(lines[i]);i++;}
+      const rows=tb.map(r=>r.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim()));
+      const body=rows.filter(r=>!r.every(c=>/^:?-+:?$/.test(c)));
+      const maxCols=Math.max(...body.map(r=>r.length));
+      if(maxCols<=1){
+        const flat=body.flat().filter(c=>c!==''); if(flat.length) blocks.push({t:'inscription',v:flat});
+      } else {
+        const headerHasText=body.length && body[0].some(c=>c!=='');
+        blocks.push({t:'table',head: headerHasText?body[0]:null, rows: headerHasText?body.slice(1):body});
+      }
+      continue;
+    }
+    if(/^\s*[-*]\s+/.test(line)){
+      const items=[]; while(i<lines.length && /^\s*[-*]\s+/.test(lines[i])){items.push(lines[i].replace(/^\s*[-*]\s+/,''));i++;}
+      blocks.push({t:'ul',v:items}); continue;
+    }
+    if(/^COMBAT\s*[–-]\s*IT IS INITIATIVE/i.test(line.trim())){blocks.push({t:'combat',v:line.trim()});i++;continue;}
+    if(/^[–\-]{1,2}\s*(?:The End of the Session|The Session Ends Here)\b/i.test(line.trim())){
+      blocks.push({t:'end',v:line.trim()});
+      break;
+    }
+    if(/^\[[^\]]{1,40}\]$/.test(line.trim())){
+      const song=[]; while(i<lines.length && (lines[i].trim()==='' || (/^\[[^\]]{1,40}\]$/.test(lines[i].trim()) || lines[i].trim().length<=80)) && !(lines[i].trim()==='' && lines.slice(i+1).find(l=>l.trim()!=='')?.trim().length>80)){ if(lines[i].trim()!=='') song.push(lines[i].trim()); i++; }
+      blocks.push({t:'song',v:song}); continue;
+    }
+    if(line.trim().length<=64 && /^\t\S/.test(lines[i+1]||'') && !blocks.some(b=>b.t==='end')){
+      const items=[]; let j=i+1;
+      while(j<lines.length && (/^\t/.test(lines[j]) || lines[j].trim()==='') && items.length<30){ if(lines[j].trim()!=='') items.push(lines[j].trim()); else if(!/^\t/.test(lines[j])) break; j++; }
+      if(items.length>=2){ blocks.push({t:'roster',title:line.trim(),v:items}); i=j; continue; }
+    }
+    // Footer table ("5 / Character level at end of the session / 4 / Sessions played at ...") ends the chapter;
+    // anything after it is DM appendix, not narrative.
+    if(/^\d+$/.test(line.trim())){
+      const nx=[]; for(let j=i+1;j<lines.length && nx.length<3;j++){ if(lines[j].trim()!=='') nx.push(lines[j].trim()); }
+      if(/Character level/i.test(nx[0]||'') && /Sessions played/i.test(nx[2]||'')){
+        blocks.push({t:'stats',level:line.trim(),sessions:/^\d+$/.test(nx[1]||'')?nx[1]:''}); i=lines.length; continue;
+      }
+    }
+    if(/^\s*\d{1,2}[.)]\s+\S/.test(line) && !blocks.some(b=>b.t==='end')){
+      const items=[]; let j=i; const first=parseInt(line.trim(),10);
+      while(j<lines.length && (/^\s*\d{1,2}[.)]\s+\S/.test(lines[j]) || lines[j].trim()==='')){ if(lines[j].trim()!=='') items.push(lines[j].trim().replace(/^\d{1,2}[.)]\s+/,'')); j++; if(items.length>40) break; }
+      if(items.length>=2 && items.some(x=>x.length<=64)){ blocks.push({t:'ol',start:first,v:items}); i=j; continue; }
+    }
+    if(line.trim().length<=64 && !/^[–\-]/.test(line.trim()) && !/^WE STOP HERE/i.test(line.trim()) && !blocks.some(b=>b.t==='end')){
+      const run=[]; let j=i;
+      while(j<lines.length && (lines[j].trim()==='' || (lines[j].trim().length<=64 && !/^\s*\d{1,2}[.)]\s/.test(lines[j]) && !/^\s*[-*]\s+/.test(lines[j]) && !/^[–\-]/.test(lines[j].trim())))){ if(lines[j].trim()!=='') run.push(lines[j].trim()); j++; if(run.length>60) break; }
+      const unpunct=run.filter(x=>!/[.!?…:]["”’]?$/.test(x)).length;
+      if(run.length>=3 && unpunct>=2){
+        const prev=blocks[blocks.length-1];
+        if(prev && prev.t==='ul' && /[–-]\s*$/.test(prev.v[prev.v.length-1]||'')) blocks.push({t:'ul',v:run});
+        else blocks.push({t:'song',v:run});
+        i=j; continue;
+      }
+    }
+    if(line.trim().length<=64 && !/[.!?…:]$/.test(line.trim()) && !/^WE STOP HERE/i.test(line.trim())){blocks.push({t:'h2',v:line.trim()});i++;continue;}
+    blocks.push({t:'p',v:line.trim(),drop:firstPara}); firstPara=false; i++;
+  }
+  return {num,title,sdate,idate,loc,blocks};
+}
+
+function renderBlocks(blocks){
+  return blocks.map(b=>{
+    if(b.t==='h2') return `<h2 class="scene">${inline(b.v)}</h2>`;
+    if(b.t==='h3') return `<h3 class="subscene">${inline(b.v)}</h3>`;
+    if(b.t==='p') return `<p${b.drop?' class="lead"':''}>${inline(b.v)}</p>`;
+    if(b.t==='ul') return `<ul class="log">${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ul>`;
+    if(b.t==='combat') return `<div class="combat"><span>${inline(b.v)}</span></div>`;
+    if(b.t==='song') return `<div class="song">${b.v.map(x=>/^\[.*\]$/.test(x)?`<div class="song-label">${esc(x.slice(1,-1))}</div>`:`<div class="song-line">${inline(x)}</div>`).join('')}</div>`;
+    if(b.t==='roster') return `<div class="roster"><div class="roster-title">${inline(b.title)}</div><ul>${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ul></div>`;
+    if(b.t==='ol') return `<ol class="log" start="${b.start}">${b.v.map(x=>`<li>${inline(x)}</li>`).join('')}</ol>`;
+    if(b.t==='stats') return `<div class="chapter-stats"><span>Level at end <b>${esc(b.level)}</b></span>${b.sessions?`<span>Sessions at that level <b>${esc(b.sessions)}</b></span>`:''}</div>`;
+    if(b.t==='end') return `<div class="endmark">${inline(b.v)}</div>`;
+    if(b.t==='inscription') return `<figure class="inscription"><div class="insc-frame">${b.v.map(x=>`<p>${inline(x)}</p>`).join('')}</div></figure>`;
+    if(b.t==='table'){
+      const thead=b.head?`<thead><tr>${b.head.map(c=>`<th>${inline(c)}</th>`).join('')}</tr></thead>`:'';
+      const tbody=`<tbody>${b.rows.map(r=>`<tr>${r.map(c=>`<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+      return `<div class="tablewrap"><table class="ledger">${thead}${tbody}</table></div>`;
+    }
+    return '';
+  }).join('\n');
+}
+
+function renderSession(s){
+  const theme=themeFor(s.title, s.blocks.map(b=>b.v||'').join(' '));
+  const h=hash(s.title+s.num); const sigil=SIGILS[h%SIGILS.length];
+  const gx=18+(h%64), gy=58+((h>>4)%34);
+  return `
+<section class="session" id="s${s.num}" data-theme-art="${theme}" style="--gx:${gx}%;--gy:${gy}%">
+  <header class="hero">
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-photo"></div>
+      <svg class="sigil" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4">${sigil}</svg>
+      <div class="embers"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="kicker">Might of Dragons · Chapter ${parseInt(s.num,10)}</div>
+      <div class="numeral">${parseInt(s.num,10)}</div>
+      <h1>${inline(s.title)}</h1>
+      <div class="hero-meta">
+        ${s.idate?`<span class="mi"><i>In-World</i>${esc(s.idate)}</span>`:''}
+        ${s.loc?`<span class="mi"><i>Where</i>${esc(s.loc)}</span>`:''}
+        ${s.sdate?`<span class="mi"><i>Played</i>${esc(s.sdate)}</span>`:''}
+      </div>
+    </div>
+  </header>
+  <div class="account">
+    ${renderBlocks(s.blocks)}
+  </div>
+</section>`;
+}
+
+// ---- split master doc into sessions ----
+const md=fs.readFileSync(DIR+'/might-of-dragons-chronicle.md','utf8');
+const lines=md.split('\n');
+const isSessionHead=l=>/^\d+\s*[–-]\s*\S/.test(l.trim());
+const starts=[]; const seenSessionNumbers=new Set(); let duplicateSessionStart=-1;
+lines.forEach((l,i)=>{
+  if(!isSessionHead(l)) return;
+  const sessionNumber=l.trim().match(/^(\d+)/)?.[1].padStart(2,'0');
+  if(!sessionNumber) return;
+  if(seenSessionNumbers.has(sessionNumber)){
+    if(duplicateSessionStart<0) duplicateSessionStart=i;
+    return;
+  }
+  seenSessionNumbers.add(sessionNumber);
+  starts.push(i);
+});
+// The doc ends each session run with a DM appendix (Quests / Campaign Prep / Session 0);
+// stop chapters at the first top-level heading that is not a numbered session.
+let appendix=lines.findIndex((line,index)=>index>starts[0] && /^Reputation:\s*$/.test(line.trim()));
+if(appendix<0) appendix=lines.length;
+if(duplicateSessionStart>-1) appendix=duplicateSessionStart;
+for(let i=starts[0]+1;i<lines.length;i++){ if(/^#\s/.test(lines[i]) && !isSessionHead(lines[i])){appendix=i;break;} }
+const preCampaignAppendix=lines.findIndex((line,index)=>index>starts[0] && /^(Pre-Campaign|Campaign Prep) Homework\s*$/.test(line.trim()));
+if(preCampaignAppendix>-1) appendix=Math.min(appendix,preCampaignAppendix);
+const sessions=starts.map((st,k)=>parseSession(lines.slice(st, Math.min(starts[k+1]??lines.length, appendix))));
+
+const rail=sessions.map(s=>`<li class="on"><a href="#s${s.num}"><span class="rn">${parseInt(s.num,10)}</span><span class="rt">${inline(s.title)}</span></a></li>`).join('\n');
+const css=fs.readFileSync(DIR+'/chronicle.css','utf8');
+
+// Persistent per-session art. Seed the in-file editable map from session-images.json (if present)
+// so images survive every regeneration. Keys are chapter numbers ("01".."33"); values are image URLs.
+let seedImages={};
+try{ seedImages=JSON.parse(fs.readFileSync(DIR+'/session-images.json','utf8')); }catch{}
+const artSeed=sessions.map(s=>`    "${s.num}": ${JSON.stringify(seedImages[s.num]||"")}`).join(',\n');
+
+const html=`<title>Might of Dragons · Chronicle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>${css}</style>
+
+<!-- ============================================================
+     SESSION ART  —  EDIT THIS BLOCK TO SET EACH CHAPTER'S HERO IMAGE
+     Paste an image URL (https://...) or a path next to a chapter number.
+     Leave "" to keep the procedural themed backdrop for that chapter.
+     This is the ONLY place you need to touch to add art. Nothing else.
+     ============================================================ -->
+<script>
+window.SESSION_ART = {
+${artSeed}
+};
+</script>
+
+<div class="scrollbar"><div class="scrollbar-fill" id="pbar"></div></div>
+
+<div class="chronicle">
+  <aside class="rail">
+    <a class="rail-back" href="/campaigns/might-of-dragons" aria-label="Back to Might of Dragons campaign">&larr; <span>Might of Dragons</span></a>
+    <div class="rail-head">
+      <div class="rail-title">Might of Dragons<br>Chronicle</div>
+      <div class="rail-sub">A living account, as the party tells it</div>
+    </div>
+    <nav><ol class="rail-list">${rail}</ol></nav>
+    <div class="rail-foot">${sessions.length} chapters &middot; Might of Dragons</div>
+  </aside>
+
+  <main class="scroll">
+${sessions.map(renderSession).join('\n')}
+    <footer class="pagefoot">Suwanee Gamers &middot; Might of Dragons Chronicle</footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('pbar');
+  var scroller=document.querySelector('.scroll');
+
+  // Load only nearby chapter art. Assigning every background URL at startup
+  // makes the browser download the full chronicle gallery before it is needed.
+  var art=window.SESSION_ART||{};
+  var artEntries=[];
+  Object.keys(art).forEach(function(n){
+    var url=art[n]; if(!url) return;
+    var sec=document.getElementById('s'+n); if(!sec) return;
+    var photo=sec.querySelector('.hero-photo'), holder=sec.querySelector('.hero-art');
+    if(photo) artEntries.push({sec:sec,photo:photo,holder:holder,url:url,loaded:false});
+  });
+  function loadArt(entry){
+    if(entry.loaded) return;
+    entry.loaded=true;
+    var img=new Image();
+    img.decoding='async';
+    img.onload=function(){
+      entry.photo.style.backgroundImage="url('"+entry.url.replace(/'/g,"%27")+"')";
+      entry.holder.classList.add('has-photo');
+    };
+    img.onerror=function(){entry.loaded=false;};
+    img.src=entry.url;
+  }
+  if('IntersectionObserver' in window){
+    var artObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(observed){
+        if(!observed.isIntersecting) return;
+        var entry=artEntries.find(function(candidate){return candidate.sec===observed.target;});
+        if(entry){loadArt(entry);artObserver.unobserve(entry.sec);}
+      });
+    },{root:scroller,rootMargin:'125% 0px',threshold:0.01});
+    artEntries.forEach(function(entry){artObserver.observe(entry.sec);});
+  }else{
+    artEntries.forEach(loadArt);
+  }
+  function upd(){var h=scroller.scrollHeight-scroller.clientHeight;bar.style.transform='scaleX('+(h>0?scroller.scrollTop/h:0)+')';}
+  scroller.addEventListener('scroll',upd,{passive:true});upd();
+
+  // Deep links (e.g. #s43) target a <section> inside the custom .scroll container
+  // rather than the document body. The browser's built-in "scroll to fragment on
+  // load" step is unreliable for a non-document scrolling box once web fonts and
+  // hero art finish loading and shift layout height beneath it — on a cold load it
+  // can leave the page sitting at scrollTop 0 (or drift mid-chapter) instead of the
+  // requested chapter. Drive the scroll ourselves and re-assert it as the async
+  // layout-affecting work (fonts, art) settles, but stop the moment a visitor
+  // takes the wheel/keyboard/touch themselves.
+  if(location.hash){
+    var hashTarget=document.getElementById(location.hash.slice(1));
+    if(hashTarget){
+      var userTookControl=false;
+      ['wheel','touchstart','keydown'].forEach(function(evt){
+        scroller.addEventListener(evt,function(){userTookControl=true;},{passive:true,once:true});
+      });
+      var jumpToHash=function(){
+        if(userTookControl) return;
+        hashTarget.scrollIntoView({block:'start',behavior:'auto'});
+      };
+      jumpToHash();
+      window.addEventListener('load',jumpToHash);
+      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(jumpToHash);
+      setTimeout(jumpToHash,400);
+    }
+  }
+
+  var links=[].slice.call(document.querySelectorAll('.rail-list a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);if(i>-1){links.forEach(function(a){a.parentElement.classList.remove('active');});links[i].parentElement.classList.add('active');links[i].scrollIntoView({block:'nearest'});}}});},{root:scroller,threshold:0,rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(function(s){if(s)io.observe(s);});
+})();
+</script>`;
+
+fs.writeFileSync(OUT, html);
+console.log('wrote', OUT, (html.length/1024).toFixed(0)+'KB', '·', sessions.length, 'chapters');

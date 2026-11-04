@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { calendarArtwork } from "@/lib/calendarArtwork";
 import Image from "next/image";
 import {
   type CalendarEvent,
@@ -370,8 +371,9 @@ export default async function CalendarPage() {
                   key={key}
                   campaignId={campaign?.id ?? adventure?.campaignId ?? "calendar"}
                   campaignName={campaign?.name ?? adventure?.campaignName ?? event?.title ?? "Adventure"}
-                  headerImage={campaign?.headerImage ?? adventure?.headerImage}
-                  headerImagePosition={campaign?.headerImagePosition ?? adventure?.headerImagePosition}
+                  href={campaign || adventure ? undefined : googleCalendarEmbedUrl()}
+                  headerImage={campaign?.headerImage ?? adventure?.headerImage ?? calendarArtwork(event?.title ?? "")?.image}
+                  headerImagePosition={campaign?.headerImagePosition ?? adventure?.headerImagePosition ?? calendarArtwork(event?.title ?? "")?.position}
                   nextDateLabel={event ? dateFormatter.format(new Date(event.start)) : undefined}
                   nextTimeLabel={event ? eventTimeLabel(event) : undefined}
                   isToday={event ? isEventToday(event) : false}

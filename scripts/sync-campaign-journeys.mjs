@@ -65,6 +65,8 @@ const IMPACT_TITLES = {
 };
 
 const OFF_MAP_NAMES = [
+  "Raiders Camp: Hatchery Caves",
+  "Raiders Camp",
   "Stygia",
   "Shadowfell",
   "Undermountain",

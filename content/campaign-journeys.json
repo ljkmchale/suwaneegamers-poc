@@ -1060,6 +1060,136 @@
           },
           "sourceKey": "a-new-adventure:session-35",
           "sourceHash": "dfc0827bdb7d9d6a2722e09cf1e4c3771a59d3457015017699d173d12475d682",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-36",
+          "locationId": "shademoor",
+          "location": "Shademoor",
+          "x": 56.8,
+          "y": 37.8,
+          "session": "Session 36",
+          "title": "Leave it Hanging",
+          "summary": "The party followed Vhaulmast’s trail through the forest by night and day, seeking to learn who or what guided the beast and whether the road could still be made safe. They discovered ten pale elven bodies marked for the Moon King, learned through Speak with Dead that the elves had come to bind Vhaulmast and been ambushed by a half-orc and the creature itself, and received word that the beast would roam but not near Qal’dynn. After hard travel they reached Shademoor, where Pa and his family were safe, Cerul heard an old tale of Pekanon and the last child to carry the light, and the Meridian escorted them through the Garden’s arcane waypoint to the House of Myr in Basctdelm.…",
+          "impact": {
+            "type": "political",
+            "title": "Shademoor's balance shifted",
+            "description": "They discovered ten pale elven bodies marked for the Moon King, learned through Speak with Dead that the elves had come to bind Vhaulmast and been ambushed by a half-orc and the creature itself, and received word that the beast would roam but not near Qal’dynn."
+          },
+          "automatic": true,
+          "confidence": 0.97,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 57.72,
+                "y": 31.66
+              },
+              {
+                "x": 57.91,
+                "y": 31.83
+              },
+              {
+                "x": 58.2,
+                "y": 32.4
+              },
+              {
+                "x": 58.25,
+                "y": 32.97
+              },
+              {
+                "x": 57.07,
+                "y": 33.95
+              },
+              {
+                "x": 56.9,
+                "y": 34.8
+              },
+              {
+                "x": 56.51,
+                "y": 35.97
+              },
+              {
+                "x": 56.8,
+                "y": 37.8
+              }
+            ],
+            "miles": 173.8,
+            "days": 8.7,
+            "roadIds": [
+              "padstow-road-west",
+              "padstow-road-south",
+              "murfield-road-north"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "a-new-adventure:session-36",
+          "sourceHash": "6340f0a8a038344faf8259751d3629cafc8605319e6f4d8e3937b309ded85a4a",
+          "current": false
+        },
+        {
+          "id": "auto-a-new-adventure-session-37",
+          "locationId": "basctdelm",
+          "location": "Basctdelm",
+          "x": 57.72,
+          "y": 31.66,
+          "session": "Session 37",
+          "title": "Halloween Treats",
+          "summary": "The party stood at the Greenscape crossroads in Basctdelm seeking Affy’s father when a goblin from her homeland appeared with two half-orcs, only for Relys to become possessed by an elder of Iparos who warned them they hunted the wrong blood and that the balance had already failed. The possession led Relys through the city and into The Bellows, then through a portal into a forest that felt like a mash of the Feywild and the Shadowfell under a white moon. There the party fought a dark rider on a flaming horse and a vast witch who tried to drag them into her cauldron; Affy beheaded the rider, Relys overturned the pot, and Kaizo tore out the witch’s heart.…",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Basctdelm",
+            "description": "There the party fought a dark rider on a flaming horse and a vast witch who tried to drag them into her cauldron; Affy beheaded the rider, Relys overturned the pot, and Kaizo tore out the witch’s heart."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 56.8,
+                "y": 37.8
+              },
+              {
+                "x": 56.51,
+                "y": 35.97
+              },
+              {
+                "x": 56.9,
+                "y": 34.8
+              },
+              {
+                "x": 57.07,
+                "y": 33.95
+              },
+              {
+                "x": 58.25,
+                "y": 32.97
+              },
+              {
+                "x": 58.2,
+                "y": 32.4
+              },
+              {
+                "x": 57.91,
+                "y": 31.83
+              },
+              {
+                "x": 57.72,
+                "y": 31.66
+              }
+            ],
+            "miles": 173.8,
+            "days": 8.7,
+            "roadIds": [
+              "murfield-road-north",
+              "padstow-road-south",
+              "padstow-road-west"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "a-new-adventure:session-37",
+          "sourceHash": "b125395428c23e717ca4b06a59e1c0968c51141b5d4f8ab9b1911968867f3f0b",
           "current": true
         }
       ],
@@ -1634,6 +1764,238 @@
           },
           "sourceKey": "bloody-endeavor:session-43",
           "sourceHash": "09165a70946c84a8e2c7c07cd93195e1ab45f7be01b1c6f913982684b4f0b288",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-44",
+          "locationId": "nurador",
+          "location": "Nurador",
+          "x": 55.21,
+          "y": 67.71,
+          "session": "Session 44",
+          "title": "Count On Your Fingers",
+          "summary": "The party sought to enter Gevakaln, locate Albross’s brother among the Sable Shadows, and free him without drawing more attention than their new Esadi marks already carried. They passed the gates as worshippers of the West Wind goddess, took rooms at the Salty Cat, and received a single Sending reply of “I messed up” before tracing a headless body and a Cloak of Defiance coin to Namys at the Spiral. Namys confirmed the brother had been seen recently and offered information on the growing Sable Shadows drug trade in exchange for destroying their warehouse, a job that would also serve as Kibbit’s initiation into the Cloak.…",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "Three days earlier Lucerion’s group had reached Nurador under orc siege, secured Lady Lightguard’s reluctant acceptance of aid, and learned a flying beast was heading toward the city as the session ended."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 46.88,
+                "y": 64.68
+              },
+              {
+                "x": 46.63,
+                "y": 65.14
+              },
+              {
+                "x": 47.3,
+                "y": 65.53
+              },
+              {
+                "x": 47.39,
+                "y": 67.36
+              },
+              {
+                "x": 47.93,
+                "y": 68.2
+              },
+              {
+                "x": 48.19,
+                "y": 68.87
+              },
+              {
+                "x": 47.73,
+                "y": 70.8
+              },
+              {
+                "x": 48.18,
+                "y": 70.67
+              },
+              {
+                "x": 48.43,
+                "y": 71.13
+              },
+              {
+                "x": 49.31,
+                "y": 70.8
+              },
+              {
+                "x": 49.9,
+                "y": 70.9
+              },
+              {
+                "x": 50.21,
+                "y": 70.85
+              },
+              {
+                "x": 50.82,
+                "y": 70
+              },
+              {
+                "x": 51.6,
+                "y": 69.97
+              },
+              {
+                "x": 52.09,
+                "y": 70.3
+              },
+              {
+                "x": 53.02,
+                "y": 69.69
+              },
+              {
+                "x": 54.06,
+                "y": 69.9
+              },
+              {
+                "x": 54.36,
+                "y": 69.42
+              },
+              {
+                "x": 54.48,
+                "y": 67.48
+              },
+              {
+                "x": 55.21,
+                "y": 67.71
+              }
+            ],
+            "miles": 438.6,
+            "days": 21.9,
+            "roadIds": [
+              "valenlun-road-northwest",
+              "tyrynder-road-north",
+              "witguard-road-west",
+              "climbor-road-northwest",
+              "unknown-road-10",
+              "nurador-road-west"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "bloody-endeavor:session-44",
+          "sourceHash": "8d0cebcf8b1de0f782c68896845cd36f40d3b2a9c1d558fc53b459680b5c17b4",
+          "current": false
+        },
+        {
+          "id": "auto-bloody-endeavor-session-45",
+          "locationId": "gevakaln",
+          "location": "Gevakaln",
+          "x": 46.88,
+          "y": 64.68,
+          "session": "Session 45",
+          "title": "Warehouse Clash",
+          "summary": "The party entered the Sable Shadows warehouse in Gevakaln’s Fogwalk Underbelly to destroy it and its drug stores as agreed with Namys. A hidden girl’s scream turned the approach into a running fight against blood golems that copied faces, armored defenders, and a white-haired drow who summoned a metal guardian. Rhody was driven down more than once, Isfrit blinded several companions with glass shards, and the last of the warehouse forces fell only after fireballs, misty steps, and a wall of force trapped and then lost the drow.…",
+          "impact": {
+            "type": "discovery",
+            "title": "A new truth surfaced",
+            "description": "When the smoke cleared, the girl introduced herself as Adelaide Teufel of Dissent Ablation, the party claimed twelve jars of the clear liquid from the cart, and they learned the Shadows’ poison explodes a victim’s head one minute after death before leaving the rest to burn with the building."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 55.21,
+                "y": 67.71
+              },
+              {
+                "x": 54.48,
+                "y": 67.48
+              },
+              {
+                "x": 54.36,
+                "y": 69.42
+              },
+              {
+                "x": 54.06,
+                "y": 69.9
+              },
+              {
+                "x": 53.02,
+                "y": 69.69
+              },
+              {
+                "x": 52.09,
+                "y": 70.3
+              },
+              {
+                "x": 51.6,
+                "y": 69.97
+              },
+              {
+                "x": 50.82,
+                "y": 70
+              },
+              {
+                "x": 50.21,
+                "y": 70.85
+              },
+              {
+                "x": 49.9,
+                "y": 70.9
+              },
+              {
+                "x": 49.31,
+                "y": 70.8
+              },
+              {
+                "x": 48.43,
+                "y": 71.13
+              },
+              {
+                "x": 48.18,
+                "y": 70.67
+              },
+              {
+                "x": 47.73,
+                "y": 70.8
+              },
+              {
+                "x": 48.19,
+                "y": 68.87
+              },
+              {
+                "x": 47.93,
+                "y": 68.2
+              },
+              {
+                "x": 47.39,
+                "y": 67.36
+              },
+              {
+                "x": 47.3,
+                "y": 65.53
+              },
+              {
+                "x": 46.63,
+                "y": 65.14
+              },
+              {
+                "x": 46.88,
+                "y": 64.68
+              }
+            ],
+            "miles": 438.6,
+            "days": 21.9,
+            "roadIds": [
+              "nurador-road-west",
+              "unknown-road-10",
+              "climbor-road-northwest",
+              "witguard-road-west",
+              "tyrynder-road-north",
+              "valenlun-road-northwest"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "bloody-endeavor:session-45",
+          "sourceHash": "627a73dcd04aa62ba5514dbde0e2da2cb22a9de015b6ff3f31fcec15a7e3c056",
           "current": true
         }
       ],
@@ -2132,6 +2494,30 @@
           },
           "sourceKey": "dungeons-iii:session-17",
           "sourceHash": "8cc984793fc28c941c0e2e053597efa5f0348384914db44880aa4f95eb67dc29",
+          "current": false
+        },
+        {
+          "id": "auto-dungeons-iii-session-18",
+          "locationId": "ahnassa",
+          "location": "Ahnassa",
+          "x": 72.9,
+          "y": 38.2,
+          "session": "Session 18",
+          "title": "Did I Do Thaaat?",
+          "summary": "The party stayed in the bronze chamber at Khelar Watch to finish the Osmanae work and claim the celestial instrument. They filled the basin, aligned the reflector, and watched a sun-ring light form a harp that warmed Draelith’s birthmark and a matching mark on Nixie’s left foot; a sealed side chamber then yielded the instrument itself, made in the Underdark city of Snarbaac. After the dials were set the observatory collapsed, the party exited through a service tunnel, recovered Isgo from the hobgoblins, and read journals that tied the Radiant Eye to Ahnassa funding and a handler’s mark. They leveled to fifth, Embryl named Draelith and Nixie skytouched, and the session closed with Ahnassa as their destination.",
+          "impact": {
+            "type": "warning",
+            "title": "Danger remains at Ahnassa",
+            "description": "After the dials were set the observatory collapsed, the party exited through a service tunnel, recovered Isgo from the hobgoblins, and read journals that tied the Radiant Eye to Ahnassa funding and a handler’s mark."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "dungeons-iii:session-18",
+          "sourceHash": "552e06a30d2b98bc106940b2544df74e9027f84d97d34cb2ace467b7f4e77728",
           "current": true
         }
       ],
@@ -2166,7 +2552,7 @@
       "id": "heroes-of-emberstran",
       "name": "Heroes of Emberstran",
       "color": "#ff9f43",
-      "status": "At Basctdelm",
+      "status": "At Padstow",
       "campaignHref": "/campaigns/heroes-of-emberstran",
       "stops": [
         {
@@ -3189,6 +3575,49 @@
           },
           "sourceKey": "heroes-of-emberstran:session-36",
           "sourceHash": "d1c6c0d39e5f239a1c04bcef0a835bf98a3f3265c2fa9bba99841c0e94ec7c5b",
+          "current": false
+        },
+        {
+          "id": "auto-heroes-of-emberstran-session-37",
+          "locationId": "padstow",
+          "location": "Padstow",
+          "x": 58.2,
+          "y": 32.4,
+          "session": "Session 37",
+          "title": "The Iron Star",
+          "summary": "The heroes went to the House of Myr to answer Meren Bahndoso’s invitation and decide whether the blight or the Iron Ledger would take them out of Basctdelm first. At the House, Hap accepted membership in his father’s memory and took Meren’s plate, while Ogmund learned the Ascension Tree he had bonded to was injured and had been for a long time. Before they left, Ky’tha and Zymve joined the locket halves, Ainslie visited the Ingriss waypoint under a false name, and Neris at the Iron Star told Hap the ledger had never left his hometown. They rode south under gray skies and reached Padstow at the Heavy Loaf.",
+          "impact": {
+            "type": "arcane",
+            "title": "Arcane consequences at Padstow",
+            "description": "At the House, Hap accepted membership in his father’s memory and took Meren’s plate, while Ogmund learned the Ascension Tree he had bonded to was injured and had been for a long time."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "road",
+            "points": [
+              {
+                "x": 57.72,
+                "y": 31.66
+              },
+              {
+                "x": 57.91,
+                "y": 31.83
+              },
+              {
+                "x": 58.2,
+                "y": 32.4
+              }
+            ],
+            "miles": 22.4,
+            "days": 1.1,
+            "roadIds": [
+              "padstow-road-west"
+            ],
+            "roadNames": []
+          },
+          "sourceKey": "heroes-of-emberstran:session-37",
+          "sourceHash": "4612a841f5b75281edb2047dc10de517bb6db6bff570c0921e98477cbf0c410e",
           "current": true
         }
       ],
@@ -3585,6 +4014,30 @@
           },
           "sourceKey": "souls-of-destiny:session-14",
           "sourceHash": "e2077a659ad075efa803f0b94d90dadbf3b52f232bad224f5f776820af901cd9",
+          "current": false
+        },
+        {
+          "id": "auto-souls-of-destiny-session-15",
+          "locationId": "adsuren",
+          "location": "Adsuren",
+          "x": 24.1,
+          "y": 28.6,
+          "session": "Session 15",
+          "title": "Aunts & Necromancers",
+          "summary": "After leaving the ruined keep with Ifryn’s body, the party rode for Adsuren to deliver the assassin who had slain Mollywop and report that her killer had been brought to justice. They arrived to a town in mourning and carried the body to Nature’s Oratory, where they met Berthold Yaseina of the old Luminary Concord and learned that Lix now held Mollywop’s tower while Alaric, her first apprentice, had arrived with a reanimated dragon under his control. At the tower they also discovered Esylla’s aunt was already in town, and later at the Graying Grotto Kenton performed a song for Mollywop while the party reunited, shared what they had learned, and began planning the roads ahead to Gibuldon and Caldwynn.…",
+          "impact": {
+            "type": "battle",
+            "title": "Conflict reshaped Adsuren",
+            "description": "They arrived to a town in mourning and carried the body to Nature’s Oratory, where they met Berthold Yaseina of the old Luminary Concord and learned that Lix now held Mollywop’s tower while Alaric, her first apprentice, had arrived with a reanimated dragon under his control."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "local",
+            "points": []
+          },
+          "sourceKey": "souls-of-destiny:session-15",
+          "sourceHash": "a5f2ef600c6952bb322c9bfc76e60fddd348ea36988f9990ea71085836035462",
           "current": true
         }
       ],
@@ -3801,7 +4254,7 @@
       "id": "might-of-dragons",
       "name": "Might of Dragons",
       "color": "#be6850",
-      "status": "Raiders Camp: Hatchery Caves · beyond the mapped world",
+      "status": "At Kelaad",
       "campaignHref": "/campaigns/might-of-dragons",
       "stops": [
         {
@@ -3813,16 +4266,16 @@
           "session": "Session 1",
           "realDate": "2026-09-05",
           "title": "The Beginnings: That Day",
-          "summary": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie. After arriving in the local inn/tavern, the town was soon under a raid. They quickly fled to the keep as it seemed to be the only safe spot. (Can add more description later) – The End of the Session –",
+          "summary": "The party arrived in Kelaad after being hired by Izesin Olorie. After arriving in the local inn/tavern, the town was soon under a raid. They quickly fled to the keep as it seemed to be the only safe spot.",
           "impact": {
             "type": "warning",
             "title": "Danger remains at Kelaad",
-            "description": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie."
+            "description": "The party arrived in Kelaad after being hired by Izesin Olorie."
           },
           "automatic": true,
           "confidence": 1,
           "sourceKey": "might-of-dragons:session-1",
-          "sourceHash": "1571304f61979ab72754d9bbab31d4f65ee905493593cb9f04c369f40b7cd363",
+          "sourceHash": "ca56f677d6b8bab68a664ab028993a0e0309fcd89acb3ad7dd0ac2de80a14162",
           "current": false
         },
         {
@@ -3834,11 +4287,11 @@
           "session": "Session 2",
           "realDate": "2026-09-12",
           "title": "The Beginnings: That Night",
-          "summary": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog. They discussed what was going on in Kelaad, the deal with the raiders, and what to do. (Can add more description later) – The End of the Session –",
+          "summary": "The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog. They discussed what was going on in Kelaad, the deal with the raiders, and what to do.",
           "impact": {
             "type": "warning",
             "title": "Danger remains at Kelaad",
-            "description": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
+            "description": "The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
           },
           "automatic": true,
           "confidence": 1,
@@ -3847,7 +4300,7 @@
             "points": []
           },
           "sourceKey": "might-of-dragons:session-2",
-          "sourceHash": "507005dd72f2c4e6a94003a2ff2257928d936c12188572d7bdff1c9b0791df7a",
+          "sourceHash": "90fa51d25082999b84d28891230591def076e46a99c84c3abf9f8d3bb5070a0d",
           "current": false
         },
         {
@@ -3858,12 +4311,12 @@
           "y": 35.52,
           "session": "Session 3",
           "realDate": "2026-09-19",
-          "title": "The Beginnings: The Morning",
-          "summary": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –",
+          "title": "The Beginnings: Next Morning",
+          "summary": "A dragon attacks Kelaad and the party helps the town fight it off.",
           "impact": {
             "type": "warning",
             "title": "Danger remains at Kelaad",
-            "description": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –"
+            "description": "A dragon attacks Kelaad and the party helps the town fight it off."
           },
           "automatic": true,
           "confidence": 1,
@@ -3872,7 +4325,7 @@
             "points": []
           },
           "sourceKey": "might-of-dragons:session-3",
-          "sourceHash": "3353dea489d7f070c40603525369357c3260077529420026f3d6726fb5e1b16b",
+          "sourceHash": "870eaf0e7cb698bf7699c48deabf4e0921779bb4e025b0b212349c489ea40448",
           "current": false
         },
         {
@@ -3884,11 +4337,11 @@
           "session": "Session 4",
           "realDate": "2026-09-26",
           "title": "Avenging Kelaad: Following the Raiders",
-          "summary": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –",
+          "summary": "The group follows the trail of those that raided Kelaad.",
           "impact": {
             "type": "warning",
             "title": "Danger remains at Kelaad",
-            "description": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –"
+            "description": "The group follows the trail of those that raided Kelaad."
           },
           "automatic": true,
           "confidence": 1,
@@ -3897,66 +4350,57 @@
             "points": []
           },
           "sourceKey": "might-of-dragons:session-4",
-          "sourceHash": "3839f1f98486d2cba25eff261ccd52c2689244aea782c0c0485dbc68f9ee6531",
+          "sourceHash": "111bec809e8d02677b1a621ca6093e67d0ea6e4598541dc665e754979ad7e225",
           "current": false
         },
         {
           "id": "auto-might-of-dragons-session-5",
-          "location": "Raiders Camp",
+          "locationId": "kelaad",
+          "location": "Kelaad",
           "x": 41.85,
           "y": 35.52,
-          "precision": "off-map",
           "session": "Session 5",
           "realDate": "2026-10-03",
           "title": "Avenging Kelaad: Night at Camp",
-          "summary": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –",
+          "summary": "The party works through the camp by various means to see what the raiders were up to.",
           "impact": {
             "type": "warning",
-            "title": "Danger remains at Raiders Camp",
-            "description": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –"
+            "title": "Danger remains at Kelaad",
+            "description": "The party works through the camp by various means to see what the raiders were up to."
           },
           "automatic": true,
-          "confidence": 0.79,
+          "confidence": 1,
           "route": {
-            "mode": "off-map",
-            "points": [
-              {
-                "x": 41.85,
-                "y": 35.52
-              },
-              {
-                "x": 41.85,
-                "y": 35.52
-              }
-            ]
+            "mode": "local",
+            "points": []
           },
           "sourceKey": "might-of-dragons:session-5",
-          "sourceHash": "a236e1f9d2e898f74e38a7249f81779333e3f064dd0d9734c0fa541c9811ca13",
+          "sourceHash": "0c3b5514fdad6910a5ccea55d77df08448c07428bcb711e8d95edce860571502",
           "current": false
         },
         {
           "id": "auto-might-of-dragons-session-6",
-          "location": "Raiders Camp",
+          "locationId": "kelaad",
+          "location": "Kelaad",
           "x": 41.85,
           "y": 35.52,
-          "precision": "off-map",
           "session": "Session 6",
           "realDate": "2026-10-10",
           "title": "Ambush: Not So Abandoned Nursery",
-          "summary": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli. – The End of the Session –",
+          "summary": "There appears to be a nearby cave that the party must investigate.",
           "impact": {
             "type": "warning",
-            "title": "Danger remains at Raiders Camp",
-            "description": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli."
+            "title": "Danger remains at Kelaad",
+            "description": "There appears to be a nearby cave that the party must investigate."
           },
           "automatic": true,
-          "confidence": 0.79,
+          "confidence": 0.68,
           "route": {
             "mode": "local",
             "points": []
           },
           "sourceKey": "might-of-dragons:session-6",
-          "sourceHash": "82b016fc3face3ef1dfe822d39cec2efa9c4245b182c3bc93cbab11d2c5dbf73",
+          "sourceHash": "324e8869e1e79ced62beb443718a0301dc13f42f7f79234e784a216d0d11c914",
           "current": false
         },
         {
@@ -3968,11 +4412,11 @@
           "session": "Session 7",
           "realDate": "2026-10-21",
           "title": "Ambush: Into the Cave",
-          "summary": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ??? Everything must go south to berphar, someone let them keep some stuff (Mayrro?) TBD TBD TBD TBD – The End of the Session –",
+          "summary": "The group adventures into the hatchery caves.",
           "impact": {
             "type": "warning",
             "title": "Danger remains at Raiders Camp: Hatchery Caves",
-            "description": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ???"
+            "description": "The group adventures into the hatchery caves."
           },
           "automatic": true,
           "confidence": 0.72,
@@ -3990,7 +4434,40 @@
             ]
           },
           "sourceKey": "might-of-dragons:session-7",
-          "sourceHash": "e7017454886aae9e7c1269c38057ead4591e9d9f9fa96362dbcb512131e176fa",
+          "sourceHash": "efc39b26fefcaa91af8157a4e8e36771515cd2db2857176ff660a03603cc913d",
+          "current": false
+        },
+        {
+          "id": "auto-might-of-dragons-session-8",
+          "locationId": "kelaad",
+          "location": "Kelaad",
+          "x": 41.85,
+          "y": 35.52,
+          "session": "Session 8",
+          "title": "Traveling with a Cannibal",
+          "summary": "The party arrived in Kelaad. After debriefing the harbor master, they picked up horses from the rescued monk and travelled to Raselle. On the way, they met a fortune teller (or unfortunate teller) and came across a standoff between a group of bounty hunters that were trying to get a group of thieves. They killed the bounty hunters and let the thieves get away.",
+          "impact": {
+            "type": "rescue",
+            "title": "Lives changed at Kelaad",
+            "description": "After debriefing the harbor master, they picked up horses from the rescued monk and travelled to Raselle."
+          },
+          "automatic": true,
+          "confidence": 1,
+          "route": {
+            "mode": "off-map",
+            "points": [
+              {
+                "x": 41.85,
+                "y": 35.52
+              },
+              {
+                "x": 41.85,
+                "y": 35.52
+              }
+            ]
+          },
+          "sourceKey": "might-of-dragons:session-8",
+          "sourceHash": "4ac9e9dac446ecac2308d64291832f16f57368ccaf918883c556ee8bb6be6f4a",
           "current": true
         }
       ],
@@ -4008,12 +4485,12 @@
   ],
   "sync": {
     "mode": "automatic",
-    "lastGeneratedAt": "2026-10-25T14:15:43.288Z",
+    "lastGeneratedAt": "2026-11-04T15:50:24.199Z",
     "sessionSource": "content/suwaneegamers.db#session_summaries",
     "mapSource": "https://mapeditor.suwaneegamers.net/api/world-data",
-    "generatedStops": 129,
-    "routedSegments": 9,
-    "impactLocations": 36
+    "generatedStops": 137,
+    "routedSegments": 14,
+    "impactLocations": 37
   },
   "locationImpacts": [
     {
@@ -4035,6 +4512,14 @@
           "title": "Conflict reshaped Basctdelm",
           "type": "battle",
           "description": "They used the strange board from Adore to contact Elder Balance, confirmed the creature’s link to Tornia’s chaos, and rode on to the destroyed blackberry compound of Bloodbeak, where Relys was briefly possessed and warned that the balance had failed while the beast still roamed."
+        },
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 37",
+          "title": "Conflict reshaped Basctdelm",
+          "type": "battle",
+          "description": "There the party fought a dark rider on a flaming horse and a vast witch who tried to drag them into her cauldron; Affy beheaded the rider, Relys overturned the pot, and Kaizo tore out the witch’s heart."
         },
         {
           "campaignId": "heroes-of-emberstran",
@@ -4335,6 +4820,14 @@
           "title": "Adsuren's balance shifted",
           "type": "political",
           "description": "Escanor broke the curse, though Kenton’s strength stayed diminished, while the party cleared rats, put lingering shadows to rest, and learned from a slain priest that a pale Mystic had once animated the courtyard tree against the lord’s men."
+        },
+        {
+          "campaignId": "souls-of-destiny",
+          "campaignName": "Souls of Destiny",
+          "session": "Session 15",
+          "title": "Conflict reshaped Adsuren",
+          "type": "battle",
+          "description": "They arrived to a town in mourning and carried the body to Nature’s Oratory, where they met Berthold Yaseina of the old Luminary Concord and learned that Lix now held Mollywop’s tower while Alaric, her first apprentice, had arrived with a reanimated dragon under his control."
         }
       ],
       "crossCampaign": false
@@ -4499,6 +4992,76 @@
           "title": "Danger remains at Jagged Waste Crags",
           "type": "warning",
           "description": "The kNight Watch climbed into Khelar Watch, Eastern Observation Point II, to learn what the Radiant Eye wanted in the last Osmanae watchtower and to take the celestial instrument before the cult could."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-kelaad",
+      "locationId": "kelaad",
+      "location": "Kelaad",
+      "x": 41.85,
+      "y": 35.52,
+      "realm": "surface",
+      "campaignIds": [
+        "might-of-dragons"
+      ],
+      "impacts": [
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 1",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "The party arrived in Kelaad after being hired by Izesin Olorie."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 2",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 3",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "A dragon attacks Kelaad and the party helps the town fight it off."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 4",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "The group follows the trail of those that raided Kelaad."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 5",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "The party works through the camp by various means to see what the raiders were up to."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 6",
+          "title": "Danger remains at Kelaad",
+          "type": "warning",
+          "description": "There appears to be a nearby cave that the party must investigate."
+        },
+        {
+          "campaignId": "might-of-dragons",
+          "campaignName": "Might of Dragons",
+          "session": "Session 8",
+          "title": "Lives changed at Kelaad",
+          "type": "rescue",
+          "description": "After debriefing the harbor master, they picked up horses from the rescued monk and travelled to Raselle."
         }
       ],
       "crossCampaign": false
@@ -4782,52 +5345,6 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-kelaad",
-      "locationId": "kelaad",
-      "location": "Kelaad",
-      "x": 41.85,
-      "y": 35.52,
-      "realm": "surface",
-      "campaignIds": [
-        "might-of-dragons"
-      ],
-      "impacts": [
-        {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 1",
-          "title": "Danger remains at Kelaad",
-          "type": "warning",
-          "description": "Session Date: 9/5/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Kelaad Travel and Arrival The party arrived in Kelaad after being hired by Izesin Olorie."
-        },
-        {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 2",
-          "title": "Danger remains at Kelaad",
-          "type": "warning",
-          "description": "Session Date: 9/12/2026 In-game Date: 14th of Nessare 1246 Session Starting Location: Keep of Kelaad Planning and Strategy The party arrived at Kelaad’s keep and met with Harbormaster Fanson Edgelow and Sergeant Raug Morley… they were also joined by Onog."
-        },
-        {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 3",
-          "title": "Danger remains at Kelaad",
-          "type": "warning",
-          "description": "Session Date: 9/19/2026 In-game Date: Early morning of the 15th of Nessare 1246 Session Starting Location: Kelaad Attack of A Dragon (Can add more description later) – The End of the Session –"
-        },
-        {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 4",
-          "title": "Danger remains at Kelaad",
-          "type": "warning",
-          "description": "Session Date: 9/26/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Kelaad Heading Out (Can add more description later) – The End of the Session –"
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
       "id": "surface-mount-emberstran",
       "locationId": "mount-emberstran",
       "location": "Mount Emberstran",
@@ -4915,6 +5432,44 @@
           "title": "Danger remains at Tratta",
           "type": "warning",
           "description": "No session summary has been recorded for this session yet."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-gevakaln",
+      "locationId": "gevakaln",
+      "location": "Gevakaln",
+      "x": 46.88,
+      "y": 64.68,
+      "realm": "surface",
+      "campaignIds": [
+        "bloody-endeavor"
+      ],
+      "impacts": [
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 41",
+          "title": "Gevakaln's balance shifted",
+          "type": "political",
+          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 43",
+          "title": "Conflict reshaped Gevakaln",
+          "type": "battle",
+          "description": "They coordinated through the fountain, met Esadi in her bubbling bath, and learned she wanted Zeldrigos’ gem in exchange for aid against the storm."
+        },
+        {
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 45",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "When the smoke cleared, the girl introduced herself as Adelaide Teufel of Dissent Ablation, the party claimed twelve jars of the clear liquid from the cart, and they learned the Shadows’ poison explodes a victim’s head one minute after death before leaving the rest to burn with the building."
         }
       ],
       "crossCampaign": false
@@ -5070,6 +5625,36 @@
       "crossCampaign": false
     },
     {
+      "id": "surface-ahnassa",
+      "locationId": "ahnassa",
+      "location": "Ahnassa",
+      "x": 72.9,
+      "y": 38.2,
+      "realm": "surface",
+      "campaignIds": [
+        "dungeons-iii"
+      ],
+      "impacts": [
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 17",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "They opened the doors, found a bronze pedestal and a glowing crystal marked Place, Sky, Witness, and the session ended when radiant light struck Nova with the balance of Endelo’ar and Tudar while the pedestal turned."
+        },
+        {
+          "campaignId": "dungeons-iii",
+          "campaignName": "Dungeons III – kNight Watch",
+          "session": "Session 18",
+          "title": "Danger remains at Ahnassa",
+          "type": "warning",
+          "description": "After the dials were set the observatory collapsed, the party exited through a service tunnel, recovered Isgo from the hobgoblins, and read journals that tied the Radiant Eye to Ahnassa funding and a handler’s mark."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
       "id": "surface-brokencitadel",
       "locationId": "brokencitadel",
       "location": "Broken Citadel",
@@ -5095,36 +5680,6 @@
           "title": "Lives changed at Broken Citadel",
           "type": "rescue",
           "description": "After splitting briefly to ensure the rescued wolf pup and the strange powder were returned safely to Mossholde, the remaining adventurers descended into the ruins below and found evidence of layered, ancient uses, including alchemical work, undead guardians, and infernal summoning."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-gevakaln",
-      "locationId": "gevakaln",
-      "location": "Gevakaln",
-      "x": 46.88,
-      "y": 64.68,
-      "realm": "surface",
-      "campaignIds": [
-        "bloody-endeavor"
-      ],
-      "impacts": [
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 41",
-          "title": "Gevakaln's balance shifted",
-          "type": "political",
-          "description": "Albross’s patron pointed them toward the jungle while chatty Jamaican trees spoke of a Lord of the Jungle who had brought them to life."
-        },
-        {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 43",
-          "title": "Conflict reshaped Gevakaln",
-          "type": "battle",
-          "description": "They coordinated through the fountain, met Esadi in her bubbling bath, and learned she wanted Zeldrigos’ gem in exchange for aid against the storm."
         }
       ],
       "crossCampaign": false
@@ -5189,30 +5744,31 @@
       "crossCampaign": false
     },
     {
-      "id": "name-raiderscamp",
-      "location": "Raiders Camp",
-      "x": 41.85,
-      "y": 35.52,
+      "id": "surface-nurador",
+      "locationId": "nurador",
+      "location": "Nurador",
+      "x": 55.21,
+      "y": 67.71,
       "realm": "surface",
       "campaignIds": [
-        "might-of-dragons"
+        "bloody-endeavor"
       ],
       "impacts": [
         {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 5",
-          "title": "Danger remains at Raiders Camp",
-          "type": "warning",
-          "description": "Session Date: 10/3/2026 In-game Date: 15th of Nessare 1246 Session Starting Location: Raiders Camp Information Gathering (Can add more description later) – The End of the Session –"
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 40",
+          "title": "Nurador's balance shifted",
+          "type": "political",
+          "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
         },
         {
-          "campaignId": "might-of-dragons",
-          "campaignName": "Might of Dragons",
-          "session": "Session 6",
-          "title": "Danger remains at Raiders Camp",
-          "type": "warning",
-          "description": "Session Date: 10/10/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp Discussing Plans Go meet alvalora in reselli."
+          "campaignId": "bloody-endeavor",
+          "campaignName": "Bloody Endeavor II",
+          "session": "Session 44",
+          "title": "A new truth surfaced",
+          "type": "discovery",
+          "description": "Three days earlier Lucerion’s group had reached Nurador under orc siege, secured Lady Lightguard’s reluctant acceptance of aid, and learned a flying beast was heading toward the city as the session ended."
         }
       ],
       "crossCampaign": false
@@ -5302,28 +5858,6 @@
           "title": "Conflict reshaped Varenwood",
           "type": "battle",
           "description": "In the Shadowfell, waves of shadowy assailants and an avatar of Malgri'n assailed them, nearly claiming Fungus before the group rallied before defeated the avatar."
-        }
-      ],
-      "crossCampaign": false
-    },
-    {
-      "id": "surface-ahnassa",
-      "locationId": "ahnassa",
-      "location": "Ahnassa",
-      "x": 72.9,
-      "y": 38.2,
-      "realm": "surface",
-      "campaignIds": [
-        "dungeons-iii"
-      ],
-      "impacts": [
-        {
-          "campaignId": "dungeons-iii",
-          "campaignName": "Dungeons III – kNight Watch",
-          "session": "Session 17",
-          "title": "A new truth surfaced",
-          "type": "discovery",
-          "description": "They opened the doors, found a bronze pedestal and a glowing crystal marked Place, Sky, Witness, and the session ended when radiant light struck Nova with the balance of Endelo’ar and Tudar while the pedestal turned."
         }
       ],
       "crossCampaign": false
@@ -5436,23 +5970,23 @@
       "crossCampaign": false
     },
     {
-      "id": "surface-nurador",
-      "locationId": "nurador",
-      "location": "Nurador",
-      "x": 55.21,
-      "y": 67.71,
+      "id": "surface-padstow",
+      "locationId": "padstow",
+      "location": "Padstow",
+      "x": 58.2,
+      "y": 32.4,
       "realm": "surface",
       "campaignIds": [
-        "bloody-endeavor"
+        "heroes-of-emberstran"
       ],
       "impacts": [
         {
-          "campaignId": "bloody-endeavor",
-          "campaignName": "Bloody Endeavor II",
-          "session": "Session 40",
-          "title": "Nurador's balance shifted",
-          "type": "political",
-          "description": "The party fought to place the Rimestone on its pedestal and reseal the eldritch threat beneath the throne room."
+          "campaignId": "heroes-of-emberstran",
+          "campaignName": "Heroes of Emberstran",
+          "session": "Session 37",
+          "title": "Arcane consequences at Padstow",
+          "type": "arcane",
+          "description": "At the House, Hap accepted membership in his father’s memory and took Meren’s plate, while Ogmund learned the Ascension Tree he had bonded to was injured and had been for a long time."
         }
       ],
       "crossCampaign": false
@@ -5473,7 +6007,7 @@
           "session": "Session 7",
           "title": "Danger remains at Raiders Camp: Hatchery Caves",
           "type": "warning",
-          "description": "Session Date: 10/21/2026 In-game Date: 16th of Nessare 1246 Session Starting Location: Raiders Camp: Hatchery Caves Got a bunch of papers Arrow south to skarden Arrow south west from Skarden to ???"
+          "description": "The group adventures into the hatchery caves."
         }
       ],
       "crossCampaign": false
@@ -5496,6 +6030,28 @@
           "title": "Conflict reshaped Sciogost",
           "type": "battle",
           "description": "A great flowering vine rose, swallowed Rhody, Albross, and Kibbit, and was finally destroyed by Maw’s arrows, sending the companions tumbling into the tunnels below where they rested and learned of Kibbit’s tragic past."
+        }
+      ],
+      "crossCampaign": false
+    },
+    {
+      "id": "surface-shademoor",
+      "locationId": "shademoor",
+      "location": "Shademoor",
+      "x": 56.8,
+      "y": 37.8,
+      "realm": "surface",
+      "campaignIds": [
+        "a-new-adventure"
+      ],
+      "impacts": [
+        {
+          "campaignId": "a-new-adventure",
+          "campaignName": "A New Adventure",
+          "session": "Session 36",
+          "title": "Shademoor's balance shifted",
+          "type": "political",
+          "description": "They discovered ten pale elven bodies marked for the Moon King, learned through Speak with Dead that the elves had come to bind Vhaulmast and been ambushed by a half-orc and the creature itself, and received word that the beast would roam but not near Qal’dynn."
         }
       ],
       "crossCampaign": false

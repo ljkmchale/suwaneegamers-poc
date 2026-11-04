@@ -225,7 +225,11 @@ async function main() {
   console.log(`Fetching session summaries from ${docUrl}`);
 
   const markdown = await fetchGoogleDocAsMarkdown(docUrl);
-  const parsed = parseSessionSummariesDoc(markdown);
+  const requestedCampaign = process.argv.includes("--campaign")
+    ? process.argv[process.argv.indexOf("--campaign") + 1] : undefined;
+  if (process.argv.includes("--campaign") && !requestedCampaign) throw new Error("--campaign requires a campaign name");
+  const parsed = parseSessionSummariesDoc(markdown).filter((campaign) =>
+    !requestedCampaign || norm(campaign.name) === norm(requestedCampaign));
 
   if (parsed.length === 0) {
     console.error("No campaign sections found in doc — check the document format.");

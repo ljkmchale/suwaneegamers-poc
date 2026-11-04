@@ -10,6 +10,7 @@ import { recordUsageEvent } from "@/components/analytics/AnalyticsTracker";
 export interface AdventureFoldCardProps {
   campaignId: string;
   campaignName: string;
+  href?: string;
   headerImage?: string;
   headerImagePosition?: string;
   dateLabel?: string;
@@ -25,6 +26,7 @@ export interface AdventureFoldCardProps {
 export function AdventureFoldCard({
   campaignId,
   campaignName,
+  href = `/campaigns/${campaignId}`,
   headerImage,
   headerImagePosition,
   dateLabel,
@@ -56,13 +58,13 @@ export function AdventureFoldCard({
       <div className={headerImage ? "grid sm:grid-cols-[13rem_1fr]" : undefined}>
         {headerImage && (
           <Link
-            href={`/campaigns/${campaignId}`}
+            href={href}
             className="relative block min-h-28 sm:min-h-full"
-            aria-label={`${campaignName} campaign page`}
+            aria-label={`Open ${campaignName}`}
           >
             <Image
               src={headerImage}
-              alt={`${campaignName} campaign art`}
+              alt={`${campaignName} artwork`}
               fill
               sizes="(min-width: 640px) 13rem, 100vw"
               className="object-cover"
@@ -122,7 +124,7 @@ export function AdventureFoldCard({
               style={{ color: "var(--color-text-primary)" }}
             >
               <Link
-                href={`/campaigns/${campaignId}`}
+                href={href}
                 className="hover:underline"
                 onClick={(event) => event.stopPropagation()}
               >

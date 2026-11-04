@@ -3,7 +3,7 @@ campaign: "A New Adventure"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: f7122c05d329834abd44ef956ef05903342c2d1ad65ccff66d7365871347ee6a
+source_hash: facb6446deb58dc17cff3bf8b1205238a50dcfe23d31da01368fc4fbe8609f76
 ---
 
 # Session 36 - Leave it Hanging (I’m Going to 20)
@@ -15,8 +15,8 @@ Source: raw/a-new-adventure-player-notes.md / https://docs.google.com/document/d
 Session Date: October 15, 2026
 In-game Date:  22nd of Paramor, 1246
 Starting Location:  The Beasts Trail
-Chasing the Beast
-We are following the track of the beast through the night.   It is slow going because we often have to dismount and go around fallen and broken trees.  This is a dense forest. We find a clearing and decide to make camp just off the trail of the beast.  We smell death and realize there are likely dead animals around. 
+Chasing the Beast (Vhaulmast)
+We are following the track of the beast through the night.   It is slow going because we often have to dismount and go around fallen and broken trees.  This is a dense forest. We find a clearing and decide to make camp just off the trail of the beast.  We smell death and realize there are likely dead  animals around. 
 As we set up camp, we see pairs of red eyes - evidence that animals have been turned by the creature.  These are likely smaller creatures - squirrels and the like.  They don’t approach.  It is cold so we make a fire with broken timbers. The skies are hazy and gray.  Ridley casts his alarm spell around the camp.  We decide not to have a watch - to get a rest and try to ride at first light.  The spell goes off a couple of times, but Ridley realizes they are small creatures and goes back to sleep.
 23 of Paramor, 1246
 We rise at dawn.  Relys shifts into her owl form to scout ahead and Ridley is able to cast a spell to see through her eyes. Snow flurries start to fall, limiting her line of sight somewhat. Using her scouting and navigating to follow the tracks, we travel the entire day without incident.  We think we probably went 10-15 miles this day. At camp, we pull out the board and Affy, Relys, and Fungus ask a question:  what are the weaknesses of the creature we are hunting?  It answers: M-A-S-T-E-R  We then ask:  Is Tornia the master?  It answers NO.  Who is the Master?  No movement at first, then the board moves to M-O-O-N-S.  We sign off of the board.  Ridley sets the alarms, no watch again.  Plan to travel again at first light.  Kaizo, who is meditating, sees something near Relys - two little red eyes.  They get close to her and then disappear briefly.  He’s not sure where they disappeared.  He walks over to investigate and sees a small mouse bite her.  She immediately wakes up and the creature scurries away.
@@ -50,12 +50,12 @@ He asks:  How were you able to wound The Vhaulmast?  Answer:  He can be cut.
 He asks:  Did you know the half orc would be here or were you ambushed?  Answer:  We were ambushed.
 He asks:  How would you like us to treat your dead?  Answer: Bury us at home.
 He asks:  How do we get your home? Answer: Idk - Veszven
-He asks:  Did the halforc have any unusual abilities? Answer: Besides looking him her (Affy), he summoned Fey, Banished, he did some other things.
+He asks:  Did the half-orc have any unusual abilities? Answer: Besides looking him her (Affy), he summoned Fey, Banished, he did some other things.
 Relys decides to communicate with her goddess.  Using divination, she asks her goddess if the Vhaulmast is going to be an immediate threat to Qal’dynn or the surrounding areas?  She hears:  In the world of Myrdae, surrounding areas can extend far and wide.  And yet, he will roam, but not near Qal’dynn.  Other threats may occur. Relys thanks her for the information, tears rolling down her face. 
 Meanwhile, Ridley finds a shivering chickadee and uses animal handling to capture the bird.
 As we discuss reaching out to Veszven, Affy hears something.  A voice reaches out (slightly familiar).  “Odabrin will meet you in Basctdelm.  He gave no place.  Another asked the Halls about him.  My letter might not be the only one.”  Affy thinks this was Odaphi.   Affy replies:  “Thanks. Was this other like me but with red and blue eyes?  Been delayed. Tell Odabrin I will come as soon as I can.”  Affy hears:  “No, it was a woman.  Odabrin asked if you touched the glyphic and was curious of others (My goat) reaching out to him.  Find the unwalked path near Greenscape.”  Affy responds:  “Yes, I touched the glyphic but only a couple of times.  I wonder who the woman is - mother, someone else?  I will find the path.”
 Meanwhile, Kaizo hears:  “There is unfortunate news.  Realmwardens found dead monks on the road to Qal’dynn.  Their resources were gathered.  This is Lorien Ormseer from Qal’dynn.”  He responds:  “What happened to them and did the relics make it back to the Sanctuary?  Please secure their belongings and take them there. We need transport now: Bastdelm? Qal’dynn?” He doesn't get a response. Kaizo thinks we are out here away from everything, almost on purpose… 
-Cerul casts a spell to Veszven.  “Greetings Vezven, I'm Cerul Slate and am with your fallen ones at the hand of our enemy Vhalmaus south of Bloodbeak.  Can we meet? ”  But he never gets a reply…and does not feel like he was blocked. 
+Cerul casts a spell to Veszven.  “Greetings Vezven, I'm Cerul Slate and am with your fallen ones at the hand of our enemy Vhaulmast south of Bloodbeak.  Can we meet? ”  But he never gets a reply…and does not feel like he was blocked. 
 The group decides to head to Shademoor.  We take two sets of the armor from the elves and leave.  We discuss, but decide not to contact Ham in Qal’dynn to let him know about Kulv.
 26th and 27th of Paramor, 1246
 Fast track.  We head through the woods to Shademoor.
@@ -76,10 +76,8 @@ We enter and notice two symbols:  the goddess Phoe and the goddess Sylunara.  Tw
 We head over to the Meridian and tell them we are ready to go.  They have validation that we are good to go to Basctdelm.  We see a document signed by “Countess” (scroll) - they say that they have to show this to the groundskeeper in order to gain passage.  And to never try to enter the Shademoor waypoint at night.  He asks if Cerul is familiar with Othwode?  He is the keeper of the Garden and ….how about you just see for yourself.
 We cross and go to the Garden.  The gates are closed.  Standing between us and the large old chapel in the distance we see an ethereal form that raises a hand and the gates part open.  The guard says - there is the groundskeeper.  Just be on good behavior.  You have permission from the Countess.  You should be okay.  The old chapel hasn’t been used since the war.  Stay away from the Old Chapel undercroft - there was some bad stuff that happened there in the past.”  He hands the scroll to the creature and the form opens it then it pops and vanishes.  He steps aside and points to the chapel door.  We walk in and see dust covered evidence of a battle here.  We go down and see the arcane waypoint that sits under sconces.  Cerul makes note of the sigil here (he now has four).  They tell him that we must give the Meridian a heads up before we travel to Basctdelm in the future.  They lead us to the circle and we go to the House of Myr in Basctdelm. 
 We arrive in a small room atop a tower. This sigil used to be in the local magic shop, but they had it relocated. This is the HQ for the Meridian, there are16 Floors. 
-We are taken to a room and they take down formal statements of what happened on the road. We stick with the Vhalmast story. They advise of the various districts - where to visit, where we would be comfortable, telling us to shy away from the Bellows.  Cerul asks where Sylvandor is - if they know of him.  He is told to talk to the Watch about his whereabouts.  
+We are taken to a room and they take down formal statements of what happened on the road. We stick with the Vhaulmast story. They advise of the various districts - where to visit, where we would be comfortable, telling us to shy away from the Bellows.  Cerul asks where Sylvandor is - if they know of him.  He is told to talk to the Watch about his whereabouts.  
 Affy tells the group she wants to find her father.  Relys agrees to travel with her, but not near her.
 Cerul, Fungus, Kaizo and Ridley try to find Sylvandor.  They ask the Watch.  They know of him, but aren’t sure where he is - or at least don’t want to reveal him to strangers.  
-We get to the crossroads of the Greenscape and Central District.  We see a gabuk put his hands up to big people - two half orcs.  He points at Affy.  AND WE STOP HERE. 
-
-
+We get to the crossroads of the Greenscape and Central District.  We see a gabük put his hands up to big people - two half orcs.  He points at Affy.  
 – The End of the Session –

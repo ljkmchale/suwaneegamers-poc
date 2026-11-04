@@ -1,12 +1,7 @@
 # Abbey of Light
 
 Source: [Google Doc](https://docs.google.com/document/d/14hX4cryRE61O6wLcZ26qFtsAXACJzqU60rwIgFkQYjQ/edit)
-Pulled: 2026-08-30T18:40:43.710Z
-
-Sections
-  
-
-
+Pulled: 2026-10-27T14:45:34.166Z
 
 ________________
 

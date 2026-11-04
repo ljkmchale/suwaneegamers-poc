@@ -97,6 +97,7 @@ interface RelationshipTone {
 
 // Used by systemPrompt / acronym answers (mirrors campaigns.mjs).
 const campaignsForLine: CampaignDef[] = [
+  { code: "MoD", name: "Might of Dragons", indexName: "Might of Dragons", aliases: ["might of dragons", "mod"] },
   { code: "HoE", name: "Heroes of Emberstran", indexName: "HoE", aliases: ["heroes of emberstran"] },
   { code: "SoD", name: "Souls of Destiny", indexName: "SoD", aliases: ["souls of destiny"] },
   { code: "TSV", name: "The Silent Vanguard", indexName: "The Silent Vanguard", aliases: ["the silent vanguard", "silent vanguard"] },
@@ -118,6 +119,7 @@ function resolveCampaignAcronym(value: string): CampaignDef | undefined {
 
 // Full lookup map including TCB (used by routing / roster / scope resolution)
 const campaignsByCode: Record<string, CampaignDef> = {
+  MoD: { code: "MoD", name: "Might of Dragons", indexName: "Might of Dragons", aliases: ["might of dragons", "mod"] },
   HoE: { code: "HoE", name: "Heroes of Emberstran", indexName: "HoE", aliases: ["heroes of emberstran", "heart of emberstran", "hoe"] },
   SoD: { code: "SoD", name: "Souls of Destiny", indexName: "SoD", aliases: ["souls of destiny", "sod"] },
   TSV: { code: "TSV", name: "The Silent Vanguard", indexName: "The Silent Vanguard", aliases: ["the silent vanguard", "silent vanguard", "tsv"] },
@@ -1685,7 +1687,7 @@ function namesWorldPage(question: string): boolean {
 
 function isWorldOnlyQuestion(question: string): boolean {
   if (isSuperlativeWorldQuestion(question)) return false;
-  const campaignNamed = /\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|The Crystal Bottle|Crystal Bottle|TCB|A New Adventure|ANA)\b/i.test(question);
+  const campaignNamed = /\b(in|for|from|during)\s+(HoE|SoD|Dungeons III|Dungeons 3|D3|The Silent Vanguard|Silent Vanguard|Bloody Endeavor|Wyrm Bane|The Crystal Bottle|Crystal Bottle|TCB|A New Adventure|ANA|Might of Dragons|MoD)\b/i.test(question);
   if (namesWorldPage(question) && !campaignNamed) return true;
   const worldSubject = /\b(Oberra|Myrdae|Pantheon of Myrdae|Territories of Myrdae|History of Myrdae|Regions of Myrdae|Calendar of Myrdae|Species of Myrdae|Languages of Myrdae|Factions of Myrdae|Myths and Tales of Myrdae|Myrdae Stories and Tales|Abbey of Light|Abbey of Mont Rest|O'?naren Gazetteer|O'?naren|Qal'dynn|Driftglow Pond|Emberstran Gazetteer|Emberstran|Winbalt|Ahndashere Gazetteer|Ahndashere|Basctdelm Gazetteer|Basctdelm|Lake Tribathe|Halesworth|Bathaen Empire|Queen Breya|Breya Talward|Scarwatch Hold Gazetteer|Nunglthil Gazetteer|Nunglthil|Rothenloch|Pact Council|Crown of Lyess|Affirmation of Strife|Laztyr|Dunduar|Oldport|Bistron|Ulgreer|Lunar Facets|Harmon Order|Endelo'?ar|Tudara|Broken One)\b/i.test(question);
   const pantheonSubject = /\b(god|gods|goddess|goddesses|deity|deities|pantheon|Addan|Amriel|Asmodeus|Brault|Celestine|Cembus|Coralei|Crael|Diverra|Diveria|Eredra|Fralee|Goldraen|Iuz'?Obal|Layeth|Muerg|Myrdris|Natafae|Nigrum|Ol'?Farium|Osanna|Phoe|Sylunara|Tornia|Tyvarion|Urlich|Utheri|Villari|Vo'?egurn|Athuel|Bellum|Disgar|Lyess|Neera|Smott|Tiash|Torec)\b/i.test(question);

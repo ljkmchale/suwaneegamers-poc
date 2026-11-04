@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/the-crystal-bottle-campaign-player-notes.md"
 source_url: "https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit"
-source_hash: "ced539439ba04e8870c9a2a8a5f547bdb335195903c0955d6cc6c68c731f91c4"
+source_hash: "4112fa612d309a661764ede302ae6e2d5c897212af394e9213c5784f078dd0e5"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-06-18T16:50:39.476Z"
-pulled_at: "2026-06-18T16:50:09.931Z"
+imported_at: "2026-10-27T14:45:35.233Z"
+pulled_at: "2026-10-27T14:45:23.523Z"
 ---
 
 # The Crystal Bottle - Campaign Player Notes
@@ -17,17 +17,16 @@ pulled_at: "2026-06-18T16:50:09.931Z"
 Campaign: The Crystal Bottle
 Source: [Google Doc](https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit)
 Raw source: [[raw/the-crystal-bottle-campaign-player-notes.md]]
-Raw hash: `ced539439ba04e8870c9a2a8a5f547bdb335195903c0955d6cc6c68c731f91c4`
-Imported: 2026-06-18T16:50:39.476Z
+Raw hash: `4112fa612d309a661764ede302ae6e2d5c897212af394e9213c5784f078dd0e5`
+Imported: 2026-10-27T14:45:35.233Z
 
 ## Imported Notes
 
 # The Crystal Bottle - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1beYmLQBe8qQCM1_DzLCMo1H-6vFN1FeQ5fU6Y5lc43o/edit)
-Pulled: 2026-06-18T16:50:09.931Z
+Pulled: 2026-10-27T14:45:23.523Z
 
-Quest Log
 QUEST LOG        
 
 
@@ -84,7 +83,6 @@ Quest
 * Found letter from Erick to ‘ruler of Elemental realm’ - said cult is excavating resources to harness power for elemental army
 	
 
-Session Notes
 Session 0 - Test
 (May 27, 2023)
 Marrowdale
@@ -1340,7 +1338,6 @@ WE END HERE
 
 
 
-NPCs
 NPCs        
 Reputation Level
 Hostile
@@ -1444,7 +1441,6 @@ Barmaid
 	Talked to Dalbrye about rumors 
 	
 
-Players
 ID' OBSCURA        
  Alteya
 	Narris
@@ -1490,7 +1486,6 @@ ID' OBSCURA
 
 
 
-Rumors
 RUMORS        
 
 
@@ -1522,12 +1517,10 @@ Rumor
 
 
 
-Map of Arbescar
   
 
   
 
-Loot
 RESOURCES / GROUP LOOT        
 
 
@@ -1555,7 +1548,6 @@ Resource
 
 
 
-References
         REFERENCES        
 Tips
    1. This document is set up to work best when viewing as “Print Layout”
@@ -1570,7 +1562,6 @@ Tips
    * D&D Session Calendar
 	
 
-Spell Considerations
 
 
 
@@ -1671,7 +1662,6 @@ Level
 
 	
 
-Chip's Notes
 Session Summary
 Session 0 - Test (May 27, 2023)
 In Marrowdale, the party (Dalbyre Bramblesage - Elf Bard, Opal Creekbed - Human Paladin, Scarlytt Amyran - Elf Paladin, Sigil - Half-Orc Fighter, Tassarion Ranges - Elf Cleric) forms at Arbescar Light and Magic (ALM). They encounter L’idoneus Obscurado and begin their adventure, though details are sparse.

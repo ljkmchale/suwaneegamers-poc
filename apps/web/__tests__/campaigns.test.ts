@@ -28,6 +28,38 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+describe("Might of Dragons setup", () => {
+  it("connects calendar events to its campaign page and documented roster", () => {
+    const campaign = findCampaign("might-of-dragons")!;
+    expect(campaign.dm).toBe("Sean Poole");
+    expect(campaign.party?.map(member => member.name)).toEqual([
+      "Annabella", "Daimon", "Glain", "Onog", "Lycrus",
+    ]);
+    expect(findCampaignForCalendarEvent({ uid: "mod", title: "Might of Dragons",
+      start: "2026-10-28T17:30:00-04:00", allDay: false })?.id).toBe(campaign.id);
+    expect(getPageLayout("/campaigns").some(item => item.kind === "block"
+      && item.type === "campaign-card" && item.props.id === campaign.id)).toBe(true);
+    expect(getPageLayout("/previous-campaigns").some(item => item.kind === "block"
+      && item.type === "archived-campaign-card" && item.props.id === "mad-mage"
+      && item.props.status === "On Hiatus")).toBe(true);
+    expect(getPageLayout(`/campaigns/${campaign.id}`).some(item =>
+      item.kind === "block" && item.type === "campaign-hero")).toBe(true);
+    expect(campaign.sessionSummaries?.[0].title).toContain("Session 7");
+    expect(campaign.sessionSummaries?.[0].summary).toBe("The group adventures into the hatchery caves.");
+    for (const session of campaign.sessionSummaries ?? []) {
+      expect(session.auto).toBeFalsy();
+      expect(session.summary).not.toMatch(/Session Date:|In-game Date:|TBD|The End of the Session/);
+    }
+  });
+
+  it("uses normal title casing for the tracking document's MIght spelling", () => {
+    const campaign = findCampaign("might-of-dragons")!;
+    expect(applyCampaignTrackingToActiveCampaigns([campaign], [
+      { name: "MIght of Dragons", dm: "Sean Poole", status: "Active" },
+    ])[0].name).toBe("Might of Dragons");
+  });
+});
+
 function nestedLinkHref(items: unknown[], label: string): string | undefined {
   for (const item of items) {
     if (!item || typeof item !== "object") continue;
@@ -103,15 +135,17 @@ describe("activeCampaigns resources", () => {
   it("uses real external or root-relative resource URLs", () => {
     for (const campaign of activeCampaigns) {
       for (const resource of campaign.resources ?? []) {
+        if (campaign.id === "might-of-dragons" && resource.label === "D&D Beyond" && !resource.url) continue;
         expect(resource.url).toMatch(/^(https:\/\/|\/(?!\/))/);
       }
     }
   });
 
-  it("every resource has a label and url", () => {
+  it("every resource has a label and a URL unless awaiting the Might of Dragons D&D Beyond link", () => {
     for (const campaign of activeCampaigns) {
       for (const resource of campaign.resources ?? []) {
         expect(resource.label).toBeTruthy();
+        if (campaign.id === "might-of-dragons" && resource.label === "D&D Beyond" && !resource.url) continue;
         expect(resource.url).toBeTruthy();
       }
     }

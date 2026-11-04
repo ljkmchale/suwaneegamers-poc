@@ -1,9 +1,9 @@
 {
-  "schedule": "About once a week · day and time to be decided",
+  "schedule": "Considering Tuesday nights · time to be decided",
   "nextNight": "First game night to be decided",
   "realm": "To be decided",
   "faction": "To be decided",
-  "objective": "Choose our realm and faction, create our characters, and begin the adventure together.",
+  "objective": "WoW Forever launches November 4, 2026. Choose our realm and faction, create our characters, and begin the adventure together.",
   "players": [
     {
       "name": "Chip",
@@ -25,8 +25,8 @@
     },
     {
       "name": "Larry",
-      "character": "",
-      "className": "Mage",
+      "character": "Xypher Wingfeather",
+      "className": "Mage · Alliance",
       "level": ""
     },
     {
@@ -65,9 +65,9 @@
         },
         {
           "name": "Lesley",
-          "character": "",
-          "className": "Druid (tentative)",
-          "level": ""
+          "character": "Gunnhilde Bronzebelly",
+          "className": "Shaman",
+          "level": "1"
         },
         {
           "name": "Sean",
@@ -77,8 +77,8 @@
         },
         {
           "name": "Larry",
-          "character": "",
-          "className": "Mage",
+          "character": "Xypher Wingfeather",
+          "className": "Mage · Alliance",
           "level": ""
         },
         {
@@ -94,7 +94,8 @@
           "level": ""
         }
       ],
-      "nights": []
+      "nights": [],
+      "partyName": "Azeroth Adventurers"
     },
     {
       "id": "group-b",
@@ -102,7 +103,8 @@
       "discordUrl": "https://discord.com/channels/319954674188943362/1562913577373925478",
       "members": {},
       "players": [],
-      "nights": []
+      "nights": [],
+      "partyName": "Azeroth Explorers"
     }
   ]
 }

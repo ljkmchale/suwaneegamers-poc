@@ -1,14 +1,9 @@
 # The Silent Vanguard - Player's Reference & Tracking
 
 Source: [Google Doc](https://docs.google.com/document/d/141DTlKtOn2AgpWzEpUsey6YlLSfK1hRU36Rk5_cSuJY/edit)
-Pulled: 2026-10-08T14:45:46.031Z
+Pulled: 2026-10-27T14:45:12.475Z
 
-Players
-
-
-
-
-	Brian
+Brian
 	Tom
 	Susan
 	Larry
@@ -426,7 +421,6 @@ ________________
 
 
 
-Session Notes
 01 – We Meet (05.19.26)
 18th of Ezale – Tratta
 Meeting Day
@@ -686,7 +680,6 @@ Lenny bets 10:80 on the Goblins against the Leopard
 
 
 We need a short rest
-NPCs
 
 
 Name

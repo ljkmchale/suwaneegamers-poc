@@ -3,7 +3,7 @@ campaign: "A New Adventure"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: ed5ba42cacbcac38cda661c4dfe4cd8c27264f69260da59743f3212ceb689c5b
+source_hash: cc22256db074b90c514e9e40447375a4408b563949c926de6ad73a2e77821f3e
 ---
 
 # Session 13 - Qal’dynn Mysteries
@@ -15,7 +15,7 @@ Source: raw/a-new-adventure-player-notes.md / https://docs.google.com/document/d
 Session Date:  August 7th, 2025
 In-game Date:  34th of Talil, 1246
 Starting Location:  The Pale Lantern, Qal’dynn 
-Ham is no longer with the group - he stayed in his new quarters. Group discusses that they will miss him.  Fungus stares into his cup - and a voice enters into his head (no one else hears).  Tananan (fairy)…who speaks in riddles.  Wants him to find a flask.  Petal now floats on his drink. He spills his drink, telling us there was a fairy in it.  
+Ham is no longer with the group - he stayed in his new quarters. Group discusses that they will miss him.  Fungus stares into his cup - and a voice enters into his head (no one else hears).  Tanana (fairy)…who speaks in riddles.  Wants him to find a flask.  Petal now floats on his drink. He spills his drink, telling us there was a fairy in it.  
 “One was lost, the grove gone still,
 The charm you held has paid its will.
 Nell is watching, Nell is cross,
