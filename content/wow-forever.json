@@ -59,10 +59,9 @@
       "players": [
         {
           "name": "Chip",
-          "character": "Brek",
+          "character": "Theron Bahndoso",
           "className": "Paladin",
-          "level": "1",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/worldsoul/us/armory/character/aegwynn/brek/"
+          "level": "1"
         },
         {
           "name": "Lesley",
