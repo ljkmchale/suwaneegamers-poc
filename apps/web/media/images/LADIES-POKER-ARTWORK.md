@@ -22,3 +22,12 @@ Reviewed at full size and 208px calendar size for five distinct players,
 varied poses and clothing, card orientation, scale, and thumbnail framing.
 Editable master and review notes remain in artwork-drafts/ladies-poker/.
 The versioned URL prevents cached v1 artwork from masking the replacement.
+
+## Card-scale correction
+
+`ladies-poker-v4-card-scale.webp` is the approved replacement for v3.
+In PhotoCraft, the five community cards were isolated and reduced to 65%
+of their previous dimensions; the exposed felt was repaired and the card
+layer masked. People, held cards and the rest of the composition remain.
+Reviewed at full resolution and 208px calendar size, approved November 4, 2026.
+Master: artwork-drafts/ladies-poker/ladies-poker-v4-card-scale.pcraft.

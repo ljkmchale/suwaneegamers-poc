@@ -3,7 +3,7 @@
 export function calendarArtwork(title: string): { image: string; position?: string; fit?: "contain" } | undefined {
   const normalized = title.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   if (/\bladies poker\b/.test(normalized)) {
-    return { image: "/media/images/ladies-poker-v3-photocraft.webp", fit: "contain" };
+    return { image: "/media/images/ladies-poker-v4-card-scale.webp", fit: "contain" };
   }
   if (/\b(?:world of warcraft|wow) forever\b/.test(normalized)) {
     return { image: "/media/images/wow-forever/azeroth-painted-road-v2.webp" };
@@ -13,4 +13,3 @@ export function calendarArtwork(title: string): { image: string; position?: stri
   }
   return undefined;
 }
-
