@@ -1,6 +1,6 @@
 import { readContent, writeContent } from "@/lib/contentFiles";
 
-export type WarcraftPlayer = { name: string; character: string; className: string; level: string; image?: string };
+export type WarcraftPlayer = { name: string; character: string; className: string; level: string; image?: string; armoryUrl?: string };
 export type WarcraftNight = { id: string; date: string; title: string; notes: string };
 export type WarcraftGroup = { id: string; name: string; partyName?: string; discordUrl: string; members: Record<string, string>; players: WarcraftPlayer[]; nights: WarcraftNight[] };
 export type WarcraftHub = { groups?: WarcraftGroup[]; schedule: string; nextNight: string; realm: string; faction: string; objective: string; players: WarcraftPlayer[]; nights: WarcraftNight[] };

@@ -27,7 +27,9 @@ function PaintedIcon({ kind, size = 32 }: { kind: IconKind; size?: number }) {
 
 function PlayerPortrait({ player, own }: { player: WarcraftPlayer; own: boolean }) {
   const portrait = <>{player.image && <Image src={player.image} alt={`${player.name}'s character`} width={384} height={384} className={styles.characterPortrait} />}<span className={styles.initial} aria-hidden="true">{player.name.slice(0, 1)}</span></>;
-  return own ? <a className={`${styles.playerTop} ${styles.statsPortrait}`} href="https://timewalking.blizzard.com/" target="_blank" rel="noopener noreferrer" aria-label="View my Blizzard stats (opens in a new tab)" title="View my Blizzard stats — sign in with Battle.net">{portrait}</a> : <div className={styles.playerTop}>{portrait}</div>;
+  const href = player.armoryUrl || (own ? "https://timewalking.blizzard.com/" : undefined);
+  const label = player.armoryUrl ? `View ${player.character || player.name} on Blizzard Armory` : "View my Blizzard stats";
+  return href ? <a className={`${styles.playerTop} ${styles.statsPortrait}`} href={href} target="_blank" rel="noopener noreferrer" aria-label="View my Blizzard stats (opens in a new tab)" title="View my Blizzard stats — sign in with Battle.net">{portrait}</a> : <div className={styles.playerTop}>{portrait}</div>;
 }
 
 export default async function WarcraftPage({ searchParams }: { searchParams: Promise<{ group?: string }> }) {
