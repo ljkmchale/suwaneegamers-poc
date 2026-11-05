@@ -27,7 +27,8 @@
       "name": "Larry",
       "character": "Xypher Wingfeather",
       "className": "Mage · Alliance",
-      "level": "1"
+      "level": "1",
+      "race": "Skyborne"
     },
     {
       "name": "Emma",
@@ -67,8 +68,9 @@
         {
           "name": "Lesley",
           "character": "Gunnhilde Bronzebelly",
-          "className": "Dwarf Shaman · Female",
-          "level": "1"
+          "className": "Shaman · Female",
+          "level": "1",
+          "race": "Dwarf"
         },
         {
           "name": "Sean",
@@ -81,7 +83,8 @@
           "character": "Xypher Wingbrow",
           "className": "Mage · Alliance · Tailoring / Enchanting",
           "level": "6",
-          "image": "/media/images/wow-forever/characters/943d3924-8fb5-462e-9dbc-30df6d272da1.webp"
+          "image": "/media/images/wow-forever/characters/943d3924-8fb5-462e-9dbc-30df6d272da1.webp",
+          "race": "Skyborne"
         },
         {
           "name": "Emma",
