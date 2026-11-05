@@ -78,9 +78,10 @@
         },
         {
           "name": "Larry",
-          "character": "Xypher Wingfeather",
+          "character": "Xypher Wingbrow",
           "className": "Mage · Alliance · Tailoring / Enchanting",
-          "level": "1"
+          "level": "6",
+          "image": "/media/images/wow-forever/characters/943d3924-8fb5-462e-9dbc-30df6d272da1.webp"
         },
         {
           "name": "Emma",
