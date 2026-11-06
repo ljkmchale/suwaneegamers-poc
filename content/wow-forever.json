@@ -26,17 +26,15 @@
     {
       "name": "Larry",
       "character": "Xypher Wingfeather",
-      "className": "Mage",
+      "className": "Mage · Alliance",
       "level": "1",
-      "race": "Skyborne",
-      "faction": "Alliance"
+      "race": "Skyborne"
     },
     {
       "name": "Emma",
       "character": "",
-      "className": "Rogue",
-      "level": "1",
-      "professions": "Leatherworking / Skinning"
+      "className": "Rogue · Leatherworking / Skinning",
+      "level": "1"
     },
     {
       "name": "Ty",
@@ -70,10 +68,9 @@
         {
           "name": "Lesley",
           "character": "Gunnhilde Bronzebelly",
-          "className": "Shaman",
+          "className": "Shaman · Female",
           "level": "1",
-          "race": "Dwarf",
-          "gender": "Female"
+          "race": "Dwarf"
         },
         {
           "name": "Sean",
@@ -84,19 +81,16 @@
         {
           "name": "Larry",
           "character": "Xypher Wingbrow",
-          "className": "Mage",
+          "className": "Mage · Alliance · Tailoring / Enchanting",
           "level": "11",
           "image": "/media/images/wow-forever/characters/943d3924-8fb5-462e-9dbc-30df6d272da1.webp",
-          "race": "Skyborne",
-          "faction": "Alliance",
-          "professions": "Tailoring / Enchanting"
+          "race": "Skyborne"
         },
         {
           "name": "Emma",
           "character": "",
-          "className": "Rogue",
-          "level": "1",
-          "professions": "Leatherworking / Skinning"
+          "className": "Rogue · Leatherworking / Skinning",
+          "level": "1"
         },
         {
           "name": "Ty",
