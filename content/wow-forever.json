@@ -19,13 +19,15 @@
       "name": "Lesley",
       "character": "",
       "className": "Druid (tentative)",
-      "level": "1"
+      "level": "1",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly"
     },
     {
       "name": "Sean",
-      "character": "",
+      "character": "Victoria Visconti",
       "className": "Undecided",
-      "level": "1"
+      "level": "1",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti"
     },
     {
       "name": "Larry",
@@ -81,13 +83,15 @@
           "character": "Gunnhilde Bronzebelly",
           "className": "Shaman · Female",
           "level": "1",
-          "race": "Dwarf"
+          "race": "Dwarf",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly"
         },
         {
           "name": "Sean",
-          "character": "",
+          "character": "Victoria Visconti",
           "className": "Undecided",
-          "level": "1"
+          "level": "1",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti"
         },
         {
           "name": "Larry",
@@ -113,9 +117,12 @@
         },
         {
           "name": "Evelyn",
-          "character": "",
+          "character": "Eve Everlast",
           "className": "Druid",
-          "level": "1"
+          "level": "11",
+          "race": "High Order Skyborne",
+          "professions": "Alchemy / Herbalism",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/eve-everlast"
         }
       ],
       "nights": [],
