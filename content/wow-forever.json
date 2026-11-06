@@ -7,9 +7,13 @@
   "players": [
     {
       "name": "Chip",
-      "character": "",
-      "className": "Paladin (tentative)",
-      "level": "1"
+      "character": "Theron Bahndoso",
+      "className": "Paladin",
+      "level": "11",
+      "race": "Human",
+      "professions": "Mining / Blacksmithing",
+      "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso"
     },
     {
       "name": "Lesley",
@@ -25,10 +29,13 @@
     },
     {
       "name": "Larry",
-      "character": "Xypher Wingfeather",
-      "className": "Mage · Alliance",
-      "level": "1",
-      "race": "Skyborne"
+      "character": "Xypher Wingbrow",
+      "className": "Mage",
+      "level": "11",
+      "race": "High Order Skyborne",
+      "professions": "Tailoring / Enchanting",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
+      "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp"
     },
     {
       "name": "Emma",
@@ -63,7 +70,11 @@
           "name": "Chip",
           "character": "Theron Bahndoso",
           "className": "Paladin",
-          "level": "1"
+          "level": "11",
+          "race": "Human",
+          "professions": "Mining / Blacksmithing",
+          "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso"
         },
         {
           "name": "Lesley",
@@ -81,10 +92,12 @@
         {
           "name": "Larry",
           "character": "Xypher Wingbrow",
-          "className": "Mage · Alliance · Tailoring / Enchanting",
+          "className": "Mage",
           "level": "11",
-          "image": "/media/images/wow-forever/characters/943d3924-8fb5-462e-9dbc-30df6d272da1.webp",
-          "race": "Skyborne"
+          "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
+          "race": "High Order Skyborne",
+          "professions": "Tailoring / Enchanting",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow"
         },
         {
           "name": "Emma",
@@ -106,7 +119,8 @@
         }
       ],
       "nights": [],
-      "partyName": "Azeroth Adventurers"
+      "partyName": "Azeroth Adventurers",
+      "objective": "Get everyone to level 13–18 so we’re ready for Hall of Thanes on Tuesday, November 10."
     },
     {
       "id": "group-b",
