@@ -9,7 +9,7 @@
       "name": "Chip",
       "character": "Theron Bahndoso",
       "className": "Paladin",
-      "level": "11",
+      "level": "14",
       "race": "Human",
       "professions": "Mining / Blacksmithing",
       "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
@@ -17,23 +17,27 @@
     },
     {
       "name": "Lesley",
-      "character": "",
-      "className": "Druid (tentative)",
-      "level": "1",
-      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly"
+      "character": "Gunnhilde Bronzebelly",
+      "className": "Shaman",
+      "level": "14",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly",
+      "professions": "Leatherworking / Skinning",
+      "race": "Dwarf"
     },
     {
       "name": "Sean",
       "character": "Victoria Visconti",
-      "className": "Undecided",
-      "level": "1",
-      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti"
+      "className": "Warrior",
+      "level": "11",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti",
+      "professions": "Mining / Blacksmithing",
+      "race": "Human"
     },
     {
       "name": "Larry",
       "character": "Xypher Wingbrow",
       "className": "Mage",
-      "level": "11",
+      "level": "14",
       "race": "High Order Skyborne",
       "professions": "Tailoring / Enchanting",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
@@ -41,15 +45,21 @@
     },
     {
       "name": "Emma",
-      "character": "",
-      "className": "Rogue · Leatherworking / Skinning",
-      "level": "1"
+      "character": "Cerenia Shadethorn",
+      "className": "Rogue",
+      "level": "13",
+      "race": "Night Elf",
+      "professions": "Alchemy / Herbalism",
+      "image": "/media/images/wow-forever/characters/cerenia-shadethorn-armory-v1.webp",
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn"
     },
     {
       "name": "Ty",
       "character": "",
       "className": "Undecided",
-      "level": "1"
+      "level": "1",
+      "professions": "",
+      "hidden": true
     }
   ],
   "nights": [],
@@ -72,7 +82,7 @@
           "name": "Chip",
           "character": "Theron Bahndoso",
           "className": "Paladin",
-          "level": "11",
+          "level": "14",
           "race": "Human",
           "professions": "Mining / Blacksmithing",
           "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
@@ -81,23 +91,27 @@
         {
           "name": "Lesley",
           "character": "Gunnhilde Bronzebelly",
-          "className": "Shaman · Female",
-          "level": "1",
+          "className": "Shaman",
+          "level": "14",
           "race": "Dwarf",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly"
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly",
+          "professions": "Leatherworking / Skinning",
+          "gender": "Female"
         },
         {
           "name": "Sean",
           "character": "Victoria Visconti",
-          "className": "Undecided",
-          "level": "1",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti"
+          "className": "Warrior",
+          "level": "11",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti",
+          "professions": "Mining / Blacksmithing",
+          "race": "Human"
         },
         {
           "name": "Larry",
           "character": "Xypher Wingbrow",
           "className": "Mage",
-          "level": "11",
+          "level": "14",
           "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
           "race": "High Order Skyborne",
           "professions": "Tailoring / Enchanting",
@@ -105,24 +119,31 @@
         },
         {
           "name": "Emma",
-          "character": "",
-          "className": "Rogue · Leatherworking / Skinning",
-          "level": "1"
+          "character": "Cerenia Shadethorn",
+          "className": "Rogue",
+          "level": "13",
+          "race": "Night Elf",
+          "professions": "Alchemy / Herbalism",
+          "image": "/media/images/wow-forever/characters/cerenia-shadethorn-armory-v1.webp",
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn"
         },
         {
           "name": "Ty",
           "character": "",
           "className": "Undecided",
-          "level": "1"
+          "level": "1",
+          "professions": "",
+          "hidden": true
         },
         {
           "name": "Evelyn",
           "character": "Eve Everlast",
           "className": "Druid",
-          "level": "11",
+          "level": "15",
           "race": "High Order Skyborne",
           "professions": "Alchemy / Herbalism",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/eve-everlast"
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/eve-everlast",
+          "image": "/media/images/wow-forever/characters/eve-everlast-armory-v1.webp"
         }
       ],
       "nights": [],
