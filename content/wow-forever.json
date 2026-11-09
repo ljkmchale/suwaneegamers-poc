@@ -9,49 +9,59 @@
       "name": "Chip",
       "character": "Theron Bahndoso",
       "className": "Paladin",
-      "level": "14",
+      "level": "17",
       "race": "Human",
       "professions": "Mining / Blacksmithing",
       "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
-      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso"
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso",
+      "specialization": "Protection (6 pts)",
+      "professionRanks": "Mining 95 / 150\nBlacksmithing 75 / 150\nCooking 75 / 75\nFishing 81 / 150\nFirst Aid 36 / 75"
     },
     {
       "name": "Lesley",
       "character": "Gunnhilde Bronzebelly",
       "className": "Shaman",
-      "level": "14",
+      "level": "17",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly",
       "professions": "Leatherworking / Skinning",
-      "race": "Dwarf"
+      "race": "Dwarf",
+      "specialization": "Elemental Combat (7 pts)",
+      "professionRanks": "Leatherworking 76 / 150\nSkinning 124 / 150\nCooking 124 / 150\nFishing 117 / 150\nFirst Aid 43 / 75"
     },
     {
       "name": "Sean",
       "character": "Victoria Visconti",
       "className": "Warrior",
-      "level": "11",
+      "level": "16",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti",
       "professions": "Mining / Blacksmithing",
-      "race": "Human"
+      "race": "Human",
+      "specialization": "Arms (5 pts)",
+      "professionRanks": "Mining 76 / 150\nBlacksmithing 50 / 75\nCooking 1 / 75\nFishing 1 / 75"
     },
     {
       "name": "Larry",
       "character": "Xypher Wingbrow",
       "className": "Mage",
-      "level": "14",
+      "level": "17",
       "race": "High Order Skyborne",
       "professions": "Tailoring / Enchanting",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
-      "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp"
+      "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
+      "specialization": "Arcane (2 pts) / Frost (5 pts)",
+      "professionRanks": "Tailoring 51 / 150\nEnchanting 41 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 31 / 75"
     },
     {
       "name": "Emma",
       "character": "Cerenia Shadethorn",
       "className": "Rogue",
-      "level": "13",
+      "level": "17",
       "race": "Night Elf",
       "professions": "Alchemy / Herbalism",
       "image": "/media/images/wow-forever/characters/cerenia-shadethorn-armory-v1.webp",
-      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn"
+      "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn",
+      "specialization": "Assassination (2 pts) / Combat (2 pts) / Subtlety (4 pts)",
+      "professionRanks": "Alchemy 81 / 150\nHerbalism 89 / 150\nCooking 83 / 150\nFishing 112 / 150\nFirst Aid 83 / 150"
     },
     {
       "name": "Ty",
@@ -82,50 +92,60 @@
           "name": "Chip",
           "character": "Theron Bahndoso",
           "className": "Paladin",
-          "level": "14",
+          "level": "17",
           "race": "Human",
           "professions": "Mining / Blacksmithing",
           "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso"
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso",
+          "specialization": "Protection (6 pts)",
+          "professionRanks": "Mining 95 / 150\nBlacksmithing 75 / 150\nCooking 75 / 75\nFishing 81 / 150\nFirst Aid 36 / 75"
         },
         {
           "name": "Lesley",
           "character": "Gunnhilde Bronzebelly",
           "className": "Shaman",
-          "level": "14",
+          "level": "17",
           "race": "Dwarf",
           "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/gunnhilde-bronzebelly",
           "professions": "Leatherworking / Skinning",
-          "gender": "Female"
+          "gender": "Female",
+          "specialization": "Elemental Combat (7 pts)",
+          "professionRanks": "Leatherworking 76 / 150\nSkinning 124 / 150\nCooking 124 / 150\nFishing 117 / 150\nFirst Aid 43 / 75"
         },
         {
           "name": "Sean",
           "character": "Victoria Visconti",
           "className": "Warrior",
-          "level": "11",
+          "level": "16",
           "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/Victoria-Visconti",
           "professions": "Mining / Blacksmithing",
-          "race": "Human"
+          "race": "Human",
+          "specialization": "Arms (5 pts)",
+          "professionRanks": "Mining 76 / 150\nBlacksmithing 50 / 75\nCooking 1 / 75\nFishing 1 / 75"
         },
         {
           "name": "Larry",
           "character": "Xypher Wingbrow",
           "className": "Mage",
-          "level": "14",
+          "level": "17",
           "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
           "race": "High Order Skyborne",
           "professions": "Tailoring / Enchanting",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow"
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
+          "specialization": "Arcane (2 pts) / Frost (5 pts)",
+          "professionRanks": "Tailoring 51 / 150\nEnchanting 41 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 31 / 75"
         },
         {
           "name": "Emma",
           "character": "Cerenia Shadethorn",
           "className": "Rogue",
-          "level": "13",
+          "level": "17",
           "race": "Night Elf",
           "professions": "Alchemy / Herbalism",
           "image": "/media/images/wow-forever/characters/cerenia-shadethorn-armory-v1.webp",
-          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn"
+          "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/cerenia-shadethorn",
+          "specialization": "Assassination (2 pts) / Combat (2 pts) / Subtlety (4 pts)",
+          "professionRanks": "Alchemy 81 / 150\nHerbalism 89 / 150\nCooking 83 / 150\nFishing 112 / 150\nFirst Aid 83 / 150"
         },
         {
           "name": "Ty",
@@ -139,11 +159,13 @@
           "name": "Evelyn",
           "character": "Eve Everlast",
           "className": "Druid",
-          "level": "15",
+          "level": "16",
           "race": "High Order Skyborne",
           "professions": "Alchemy / Herbalism",
           "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/eve-everlast",
-          "image": "/media/images/wow-forever/characters/eve-everlast-armory-v1.webp"
+          "image": "/media/images/wow-forever/characters/eve-everlast-armory-v1.webp",
+          "specialization": "Restoration (7 pts)",
+          "professionRanks": "Alchemy 94 / 150\nHerbalism 102 / 150\nCooking 146 / 150\nFishing 147 / 150"
         }
       ],
       "nights": [],
