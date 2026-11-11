@@ -1,10 +1,10 @@
 .legacyAnchor{display:block;scroll-margin-top:90px}
-.characterPortrait{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border:1px solid #b38f5877;border-radius:6px;margin-bottom:12px}
+.characterPortrait,.initial{display:block;width:72px;height:88px;max-width:100%;flex-shrink:0;object-fit:cover;border:4px double #e5bf73;border-radius:50%;padding:3px;background:linear-gradient(135deg,#fff0b5 0%,#ad782f 24%,#f4d491 48%,#795020 73%,#e2bb6b 100%);box-shadow:0 0 0 1px #66451f,0 0 0 3px #b58a4555,inset 0 0 0 1px #fff0bc88,0 4px 10px #0009;margin:4px 4px 16px}
 .player:has(.characterEditor[open]){grid-column:span 2;align-self:start}
 @media(max-width:400px){.player:has(.characterEditor[open]){grid-column:span 1}}
 .characterEditor{margin-top:20px;border-top:1px solid #b38f5844;padding-top:14px}.characterEditor summary{font-size:12px;color:#e1bf83;cursor:pointer}.characterEditor .form{gap:12px}.characterEditor input[type=file]{font-size:11px;padding:8px;overflow:hidden}.characterEditor .removeImage{display:flex;align-items:center;gap:8px}.characterEditor .removeImage input{width:auto}.characterEditor button:disabled{opacity:.6;cursor:wait}.characterEditor [role=alert]{color:#fca5a5}
 .page{position:relative;isolation:isolate;min-height:100vh;color:var(--color-text-secondary,#c8bda8);font-family:var(--font-body),var(--font-lora),Georgia,serif;padding-bottom:48px}
-.worldBackdrop{position:fixed;inset:0;z-index:-2;background:url('/media/images/wow-forever/azeroth-painted-road-v2.webp') center/cover no-repeat;pointer-events:none}
+.worldBackdrop{position:fixed;inset:0;z-index:-2;background:url('/media/images/wow-forever/azeroth-road-cinematic-v1.webp') center/cover no-repeat;pointer-events:none}
 .worldVeil{position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#08050fbf,#08050fc9 45%,#08050fee),linear-gradient(90deg,#08050f9c,transparent 55%,#08050fa8);pointer-events:none}
 .page h1,.page h2,.page h3{font-family:var(--font-heading),var(--font-cinzel),serif;color:var(--color-text-primary,#e8dfc8)}
 .page h2{font-size:clamp(27px,3vw,40px);line-height:1.35;margin:0 0 18px}
@@ -29,7 +29,7 @@
 .details{margin:0}.details div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid #b38f5833}.details dt{font-size:13px;color:#b3a3bc}.details dd{margin:0;color:#e9dcc5;font-size:15px}
 .small{font-size:12px!important;color:#c1b2ca}
 .section{position:relative;max-width:1560px;margin:auto;padding:65px max(5vw,24px) 80px;scroll-margin-top:75px}.subtitle{font-size:15px;line-height:1.9;max-width:65ch;margin:0 0 36px}
-.roster{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px;margin-top:40px}.player{padding:24px 0;border-top:1px solid #c4a16a88;background:linear-gradient(180deg,#1f142a55,transparent);min-width:0}.maybe{border-top-style:dashed}.playerTop{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.initial{display:grid;place-items:center;width:46px;height:46px;border:1px solid #b38f5877;border-radius:50%;font-family:var(--font-heading),var(--font-cinzel),serif;font-size:26px;color:#e1b978;background:#b58a3215}.badge{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:#d0bdd8}.player p{font-size:13px;margin:10px 0;overflow-wrap:anywhere}.player .className{color:#e7c58c}.player h3{font-size:26px}
+.roster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:40px}.player{padding:24px 0;border-top:1px solid #c4a16a88;background:linear-gradient(180deg,#1f142a55,transparent);min-width:0}.maybe{border-top-style:dashed}.playerTop{display:flex;align-items:flex-start;width:80px;height:108px}.initial{display:grid;place-items:center;font-family:var(--font-heading),var(--font-cinzel),serif;font-size:30px;color:#f1d396;background:radial-gradient(ellipse at 40% 25%,#493049,#17101f 75%)}.badge{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:#d0bdd8}.player p{font-size:14px;line-height:1.65;margin:10px 0;overflow-wrap:anywhere;color:#e5d9c6}.player .className{color:#f0ce96}.player .small{color:#d8cce0}.player h3{font-size:26px;margin:0 0 14px;min-height:37px}
 .editor{max-width:1280px}.editor details{border-top:1px solid #b38f5866;padding:22px 0;margin-top:18px}.editor summary{cursor:pointer;color:#e1bf83}.form{display:grid;gap:18px;margin-top:24px}.form label{display:grid;gap:7px;font-size:13px}.form input,.form select,.form textarea{width:100%;min-width:0;background:#0d0914bb;color:#f0e4d4;border:1px solid #6b5277;border-radius:4px;padding:12px;font:inherit}.form fieldset{border:1px solid #584163;padding:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.form legend{padding:0 8px;color:#dfbb7c}.form button{justify-self:start;cursor:pointer}.remove{font-size:12px;text-decoration:underline;color:#c9b2d7;margin-top:18px;cursor:pointer}
 .footnote{max-width:1100px;padding:32px 24px;margin:auto;font-size:11px;line-height:1.9;text-align:center;color:#b3a3bc}.footnote a{color:#d9b87b}.page a:focus-visible,.page button:focus-visible,.page summary:focus-visible{outline:2px solid #e8c284;outline-offset:5px}
 .chronicleBook{display:grid;grid-template-columns:230px minmax(0,1fr);border:1px solid #695137;border-radius:14px;background:#100c18;overflow:clip;box-shadow:0 20px 65px #0004}
@@ -92,3 +92,244 @@
 
 
 .statsPortrait{display:block;color:inherit;text-decoration:none;cursor:pointer}.statsPortrait:focus-visible{outline:2px solid #efd29a;outline-offset:4px}.statsPortrait:hover{filter:brightness(1.12)}
+
+.factionValue{display:flex;align-items:center;gap:10px}.factionEmblem{display:block;width:30px;height:32px;object-fit:contain;flex-shrink:0}
+
+.player .race{min-height:1.65em;color:#d8cce0}
+
+/* Torn parchment separates plans from the quiet roster. */
+.planning{position:relative;isolation:isolate;color:#392b1e;margin-top:18px;margin-bottom:36px}
+.planning::before{content:"";position:absolute;z-index:-1;top:-22px;bottom:-22px;left:50%;width:100vw;transform:translateX(-50%);background:radial-gradient(ellipse at 20% 30%,#e3c99c70,transparent 65%),repeating-linear-gradient(12deg,#5a3e1610 0 1px,transparent 1px 5px),linear-gradient(100deg,#b99a68,#d3b887 48%,#b79765);clip-path:polygon(0 2%,3% 3%,5% 1%,9% 2%,13% 0,17% 3%,22% 1%,27% 2%,32% 0,37% 3%,42% 1%,48% 2%,53% 0,58% 3%,64% 1%,70% 2%,75% 0,81% 3%,86% 1%,92% 2%,97% 0,100% 2%,100% 98%,96% 97%,91% 100%,86% 98%,81% 99%,76% 97%,71% 100%,65% 98%,60% 99%,55% 97%,49% 100%,44% 98%,38% 99%,33% 97%,27% 100%,22% 98%,17% 99%,12% 97%,7% 100%,3% 98%,0 99%)}
+.planning .card{border-color:#70512488}.planning h2{color:#302216}.planning .eyebrow,.planning .small,.planning .details dt{color:#59402a}.planning .details dd{color:#302216}.planning .details div{border-color:#70512444}
+.chronicleEntrance{min-height:620px;clip-path:polygon(0 2%,4% 1%,8% 3%,13% 0,18% 2%,24% 1%,30% 3%,36% 0,42% 2%,48% 1%,54% 3%,60% 0,66% 2%,72% 1%,78% 3%,84% 0,90% 2%,96% 1%,100% 2%,100% 98%,96% 99%,91% 97%,85% 100%,79% 98%,73% 99%,67% 97%,61% 100%,55% 98%,49% 99%,43% 97%,37% 100%,31% 98%,25% 99%,19% 97%,13% 100%,7% 98%,0 99%)}
+.landscapeBackdrop{position:absolute;inset:0;z-index:0;background:#132732 url('/media/images/wow-forever/zephras-landscape-poster.webp') center/cover no-repeat}
+.landscapeVideo{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.landscapeToggle{position:absolute;right:24px;bottom:35px;z-index:3;border:1px solid #e1bf8388;border-radius:3px;padding:9px 13px;background:#100a18d9;color:#f0dfbd;font-size:11px;cursor:pointer}
+.chronicleEntrance::after{z-index:1;pointer-events:none}
+.chronicleEntranceText{position:relative;z-index:2;pointer-events:none}.chronicleEntranceText a{pointer-events:auto}
+@media(max-width:700px){.chronicleEntrance{min-height:500px}.landscapeToggle{right:24px;bottom:28px}}
+.page{overflow-x:clip}
+.planning::before,.chronicleEntrance{clip-path:none;mask-image:url('/media/images/wow-forever/torn-fiber-mask-v3.svg');mask-size:100% 100%;mask-repeat:no-repeat}
+
+/* Calendar details belong on the parchment, with Azeroth visible around it. */
+.sigil img{width:76px;height:90px;object-fit:contain;filter:drop-shadow(0 4px 12px #0008)}
+.planning{padding-top:60px;padding-bottom:60px;gap:70px}
+.planning .card{border:0;padding-top:12px}
+.planning .nextNightTime{font-size:23px;color:#493019;margin:0 0 10px}
+.planning .small{margin-top:8px}
+.planning .actions a{background:#49301912;border-color:#70512499;color:#392617;font-weight:600}
+.planning .actions a:hover{background:#49301925;border-color:#493019}
+.upcomingNights{display:flex;flex-wrap:wrap;gap:16px 28px;border-top:1px solid #70512455;padding-top:20px;margin-top:24px}
+.upcomingNights>span{width:100%;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#59402a}
+.upcomingNights time{font-size:14px;color:#392617}.upcomingNights small{display:block;margin-top:6px;font-size:11px;color:#59402a}
+.realmCard .objective p{font-size:14px}.details div{align-items:center}.factionEmblem{width:42px;height:50px}
+.roster{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 42px}
+.player{border:0;border-top:1px solid #c4a16a66;border-radius:0;background:linear-gradient(180deg,#20152c44,transparent 85%);padding:24px 12px}
+.characterPortrait,.initial{width:96px;height:116px}.playerTop{width:108px;height:136px}
+.chronicleEntrance{min-height:680px;margin-top:10px;margin-bottom:0}
+.chronicleEntranceText{padding-top:140px;padding-bottom:140px}
+.chronicleEntrance::after{background:linear-gradient(90deg,#08050fc9,#08050f55 48%,#08050f05),linear-gradient(0deg,#08050f55,transparent 30%,transparent 80%,#08050f55)}
+.chronicleEntranceText h2,.chronicleEntranceText p{text-shadow:0 2px 18px #000}
+@media(max-width:1100px){.roster{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}.planning{gap:40px}}
+@media(max-width:700px){.hero{min-height:780px;padding-bottom:70px}.planning{padding:48px 24px;gap:28px}.roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.player{padding:22px 0}.player h3{font-size:23px}.chronicleEntrance{min-height:540px}.chronicleEntranceText{padding:110px 24px}.upcomingNights{gap:18px}.planning .nextNightTime{font-size:21px}}
+@media(max-width:400px){.roster{grid-template-columns:1fr}}
+
+/* Preserve the painted scenery; local shading keeps the roster legible. */
+.worldVeil{background:linear-gradient(180deg,#08050f88,#08050f99 42%,#08050fcc),linear-gradient(90deg,#08050f66,transparent 55%,#08050f77)}
+#party.section{background:radial-gradient(ellipse at center,#08050f88,transparent 76%)}
+.hero{padding-bottom:80px}
+.player{box-shadow:none}.player h3{text-shadow:0 2px 14px #000}.player>p{text-shadow:0 1px 8px #000}
+
+/* Forged gold surrounds recessed enamel; motion follows interaction only. */
+.actions a,.form button{position:relative;isolation:isolate;overflow:hidden;min-height:52px;padding:14px 28px;border:1px solid #c09a59;border-radius:0;background:linear-gradient(180deg,#293744ee,#101921f5 55%,#090e16);color:#f3dbac;font-family:var(--font-heading),var(--font-cinzel),serif;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;box-shadow:inset 0 0 0 2px #382719,inset 0 0 0 3px #a27d4566,inset 0 5px 10px #fff1ba0c,0 4px 0 #09080b,0 6px 14px #0006;text-shadow:0 2px 3px #000;transition:transform .18s,box-shadow .18s,border-color .18s,filter .18s}
+.actions a:first-child,.form button{background:linear-gradient(180deg,#32605be8,#183d3de8 45%,#102827f5);border-color:#e0bc77}
+.actions a::before{content:"";position:absolute;inset:5px;border-top:1px solid #f7dda944;border-bottom:1px solid #0009;pointer-events:none}
+.actions a::after{content:"";position:absolute;inset:-30% -80%;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 42%,#ffdfa324 49%,#fff4cf44 50%,transparent 58%);transform:translateX(-42%);transition:transform .65s ease}
+.actions a:hover,.form button:hover{transform:translateY(-2px);border-color:#ffe3a2;filter:brightness(1.13);box-shadow:inset 0 0 0 2px #382719,inset 0 0 0 3px #d1af7666,0 5px 0 #09080b,0 8px 22px #0007,0 0 18px #d0a35022}
+.actions a:hover::after{transform:translateX(42%)}.actions a:active,.form button:active{transform:translateY(2px);box-shadow:inset 0 2px 8px #0008,0 1px 0 #09080b}
+.actions .paintedIcon{order:-1;filter:drop-shadow(0 2px 3px #0008)}
+.planning .actions a{background:linear-gradient(180deg,#f0d39e,#c4a06b);border-color:#69451f;color:#3a2513;text-shadow:0 1px #ffe8b555;box-shadow:inset 0 0 0 2px #c5a06c,inset 0 0 0 3px #7c552c88,0 3px 0 #7b542b55,0 5px 12px #49301922}
+.planning .actions a:first-child{background:linear-gradient(180deg,#34514b,#19342f);color:#f7dfb0;text-shadow:0 1px 3px #000}
+.planning .actions a:hover{filter:brightness(1.08)}
+.landscapeToggle{background:linear-gradient(#23342ddb,#101c19ed);border:1px solid #d8b97b;padding:12px 18px;font-family:var(--font-heading),serif;letter-spacing:.06em;box-shadow:inset 0 0 0 2px #49362488,0 3px 12px #0005}
+@media(prefers-reduced-motion:reduce){.actions a,.actions a::after,.form button{transition:none}.actions a::after{display:none}.actions a:hover,.form button:hover{transform:none}}
+@media(max-width:700px){.actions a,.form button{padding:12px 19px;font-size:10px;min-height:50px}.hero .actions{gap:12px}.hero{padding-bottom:70px}}
+
+/* Adjacent artwork underlaps each solid torn edge; no displaced alpha pinholes. */
+.heroArtwork{bottom:-90px}
+.planning{margin-top:-16px;margin-bottom:12px;z-index:1}
+.planning::before{width:calc(100vw + 4px);top:-24px;bottom:-24px}
+.chronicleEntrance{margin-top:-24px;margin-bottom:-24px;padding-top:24px;padding-bottom:24px}
+.hero .logoTitle{margin:0 0 22px;width:min(100%,440px);line-height:0}
+.foreverLogo{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 20px #0007)}
+.heroContent{padding-top:0;padding-bottom:0}
+.hero .eyebrow{margin-bottom:12px}
+@media(max-width:700px){.hero{padding-top:160px;min-height:820px}.hero .logoTitle{width:min(80vw,380px);margin-bottom:18px}.heroContent{width:100%}.planning{margin-top:-16px}.chronicleEntrance{margin-top:-24px;margin-bottom:-24px}}
+
+/* Broad weathered tears with long paper fibers, as on the Forever reference. */
+.planning::before{top:-70px;bottom:-70px}
+.planning{padding-top:56px;padding-bottom:56px}
+.heroArtwork{bottom:-150px}
+.chronicleEntrance{padding-top:80px;padding-bottom:80px;min-height:720px;margin-top:-58px;margin-bottom:-58px}
+.landscapeToggle{bottom:85px}
+@media(max-width:700px){.planning{padding-top:44px;padding-bottom:44px}.planning::before{top:-54px;bottom:-54px}.chronicleEntrance{padding-top:55px;padding-bottom:55px;min-height:580px}.landscapeToggle{bottom:70px}}
+
+/* PhotoCraft-extracted reference silhouette: fixed-height fibers, solid center. */
+.planning::before,.chronicleEntrance{mask-image:url('/media/images/wow-forever/torn-reference-top.png'),linear-gradient(#fff,#fff),url('/media/images/wow-forever/torn-reference-bottom.png');mask-size:100% 150px,100% calc(100% - 296px),100% 150px;mask-position:center top,center center,center bottom;mask-repeat:no-repeat;mask-mode:alpha}
+.hero .actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;max-width:720px;align-items:stretch}
+.hero .actions a{display:flex;justify-content:center;align-items:center;gap:10px;min-height:62px;height:100%;width:100%;padding:12px 14px;box-sizing:border-box;white-space:nowrap;font-size:10px;line-height:1.4}
+.hero .actions .paintedIcon{width:28px!important;height:28px!important}
+@media(min-width:1101px){.heroContent{width:min(56%,760px)}}
+@media(max-width:1100px) and (min-width:701px){.hero .actions{grid-template-columns:1fr}.hero .actions a{justify-content:flex-start;padding-left:24px;min-height:56px}}
+@media(max-width:700px){.hero .actions{grid-template-columns:1fr;gap:12px;max-width:380px}.hero .actions a{min-height:56px;padding:12px 20px;font-size:11px}.planning::before,.chronicleEntrance{mask-size:100% 110px,100% calc(100% - 216px),100% 110px}}
+
+.characterFacts{display:grid;gap:12px;margin:18px 0 24px}.characterFacts>div{display:grid;gap:3px}.characterFacts dt{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#c4a16a}.characterFacts dd{margin:0;font-size:14px;line-height:1.55;overflow-wrap:anywhere;color:#e5d9c6}
+.guildSection{border-top:1px solid #c4a16a66}.guildVoting{max-width:850px}.guildVoting>.form{max-width:540px}.guildEmpty{margin-top:24px;line-height:1.8;color:#e5d9c6}.guildNames{list-style:none;margin:28px 0 0;padding:0}.guildNames li{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;border-top:1px solid #c4a16a66}.guildNames h3{font-size:22px;overflow-wrap:anywhere;margin:0 0 8px}.guildNames p{font-size:13px;line-height:1.6;margin:4px 0;color:#e5d9c6}.guildVoting button{padding:10px 16px;border:1px solid #b38f58;background:#27182e;color:#f1d396;cursor:pointer;border-radius:4px;font:inherit}.guildVoting button:disabled{opacity:.65;cursor:default}.guildNames li>div{min-width:0}@media(max-width:600px){.guildNames li{align-items:flex-start;flex-direction:column;gap:12px}}
+
+.professionRanks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dungeonSection h2 { color: #ffe8b5; }
+.dungeonFrame {
+  margin-top: 1.75rem;
+  border: 1px solid #8e6d3e;
+  background: #111918;
+  box-shadow: 0 9px 22px #0004;
+}
+.dungeonScroll {
+  overflow-x: auto;
+  scroll-padding-inline: 10rem 1rem;
+}
+.dungeonTable {
+  width: 100%;
+  border-spacing: 0;
+  color: #f0e2c6;
+  font-variant-numeric: tabular-nums;
+}
+.dungeonTable tr { --dungeon-row: #161e1c; }
+.dungeonTable tbody tr:nth-child(even) { --dungeon-row: #1b2522; }
+.dungeonTable tbody tr[data-coming-later="true"] { --dungeon-row: #242126; }
+.dungeonTable tbody tr[data-cleared="true"] { --dungeon-row: #20362d; }
+.dungeonTable thead tr { --dungeon-row: #29251d; }
+.dungeonTable th, .dungeonTable td {
+  padding: .65rem .55rem;
+  border-bottom: 1px solid #d9b67538;
+  background: var(--dungeon-row);
+  text-align: center;
+}
+.dungeonTable th { font-weight: 600; }
+.dungeonTable thead th {
+  border-bottom-color: #9b7745;
+  color: #e2c286;
+  font-family: var(--font-heading), var(--font-cinzel), Georgia, serif;
+  font-size: .78rem;
+}
+.dungeonTable th:first-child {
+  position: sticky;
+  z-index: 1;
+  inset-inline-start: 0;
+  min-width: 8.75rem;
+  padding-inline-start: .9rem;
+  text-align: start;
+  box-shadow: 1px 0 #d9b67535;
+}
+.dungeonTable tr > :nth-child(3) {
+  min-width: 8rem;
+  text-align: start;
+}
+.dungeonRelease { display: block; margin-top: .25rem; color: #e5bd74; font-size: .75rem; font-weight: 400; }
+.dungeonTable tr[data-coming-later="true"] .dungeonRelease { color: #e1c6e8; }
+.dungeonLevel {
+  display: inline-block;
+  padding: .2rem .4rem;
+  border: 1px solid #a8864f80;
+  border-radius: 3px;
+  background: #342b20;
+  color: #f3d496;
+  white-space: nowrap;
+}
+.dungeonCheck, .dungeonMark {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 4px;
+  color: #d1c4ae;
+}
+.dungeonCheck {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid #a8864f9c;
+  background: #141c19;
+  font: inherit;
+  cursor: pointer;
+}
+.dungeonMark { min-width: 28px; min-height: 28px; border: 1px solid transparent; }
+.dungeonCheck[aria-checked="true"], .dungeonMark[data-completed="true"] {
+  border-color: #b69960;
+  background: #244637;
+  color: #ffe3a8;
+}
+.dungeonCheck:hover:not(:disabled) { border-color: #f7d68c; }
+.dungeonCheck:focus-visible { outline: 2px solid #f7d68c; outline-offset: 2px; }
+.dungeonCheck:disabled { opacity: .6; cursor: wait; }
+.dungeonStatus { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.dungeonLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  margin: 0;
+  padding: .7rem .9rem;
+  color: #d1c4ae;
+  font-size: .85rem;
+}
+.dungeonLegend strong { color: #ffe3a8; }
+
+
+.dungeonTable .dungeonNameCell {
+  isolation: isolate;
+  width: 14.5rem;
+  min-width: 14.5rem;
+  padding: .7rem .9rem;
+}
+.dungeonTable tbody td { height: 4.5rem; }
+.dungeonArtwork {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.dungeonArtwork img { object-fit: cover; object-position: center; }
+.dungeonArtwork::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, #121715f5, #121715a8 69%, #12171545);
+}
+.dungeonName {
+  color: #fff0ce;
+  font-family: var(--font-heading), var(--font-cinzel), Georgia, serif;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px #000, 0 1px 7px #000;
+}
+.dungeonName .dungeonRelease { font-family: var(--font-body), var(--font-lora), Georgia, serif; }
+.dungeonScroll { scroll-padding-inline-start: 15rem; }
+@media (max-width: 600px) {
+  .dungeonTable .dungeonNameCell { width: 8.5rem; min-width: 8.5rem; }
+  .dungeonScroll { scroll-padding-inline-start: 9rem; }
+  .dungeonArtwork::after { background: linear-gradient(90deg, #121715ed, #1217159e); }
+}
+
+.dungeonTable .dungeonLocationCell {
+  position: relative;
+  isolation: isolate;
+  width: 11.25rem;
+  padding-inline: .8rem;
+}
+.dungeonLocationCell .dungeonArtwork::after {
+  background: linear-gradient(90deg, #17170fee, #17170fa8 70%, #17170f55);
+}
+@media (max-width: 600px) {
+  .dungeonTable .dungeonLocationCell { width: 8rem; }
+}

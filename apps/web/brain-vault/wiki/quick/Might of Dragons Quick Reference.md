@@ -4,77 +4,72 @@ campaign: "Might of Dragons"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "MoD - Campaign Player Notes"
-source_hash: "9466d4db80c57dbc1985fa2d16edcea91fb8ed105bcd6cd30f019e03e19d5278"
-curated_at: "2026-10-29T14:53:58.815Z"
+source_hash: "ce771432369f91b9bd07a7bae6e839b91f84724800bb2d5b47f167ab4e54e03f"
+curated_at: "2026-11-06T15:48:12.863Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
 # Might of Dragons Quick Reference
 
 Campaign: Might of Dragons
 
-*This is a living quick-reference page, kept current with the latest campaign notes.*
+*This page is a living quick-reference synthesized from the campaign's player notes and kept current with the latest session.*
 
 ## Current Status
-As of Session 07 ("Ambush: Into the Cave"), in-game date 16th of Nessare 1246, the party is inside the Raiders Camp's Hatchery Caves. They recovered a cache of papers suggesting raider supply/movement routes: an arrow pointing south to Skarden, another arrow pointing southwest from Skarden to an unknown destination, and indications that "everything must go south to Berphar." Notes suggest someone — possibly Mayrro — allowed the raiders to keep some of their goods.
+As of Session 08 ("Farther Roads: Raselle"), in-game date 22nd of Nessare 1246, the party is in Raselle. They have met with Alvalora, reported on the cult and the destroyed dragon eggs, split into factions with local contacts, and received a ship from Hehlem to sail south toward BoneGate near StoneShore.
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
-| Annabella | Player 1 | Tiefling | Cleric | Soulbearer; Scribe background; has adopted/protects Seven/Allan |
-| Daimon | Player 2 | Human | Rogue | Criminal background; knows Thieves' Cant |
-| Glain | Player 3 | Human | Artificer | Scribe background |
-| Onog | Player 4 | Half-orc | Warlock | Wayfarer background; joined the party in Session 02 at Kelaad's keep |
-| Lycrus | Player 5 | Human | Paladin | Amriel; Soldier background; wields Longsword +1 |
+| Annabella | Player 1 | Tiefling | Cleric | Soulbearer; recruited as an informant for Advence of Harmony |
+| Daimon | Player 2 | Human | Rogue | — |
+| Glain | Player 3 | Human | Artificer | Invited to join The Meridian; has not yet pledged |
+| Onog | Player 4 | Half-orc | Warlock | Joined the party in Session 02; recruited as an informant for Advence of Harmony |
+| Lycrus | Player 5 | Human | Paladin | Deity: Amriel; pledged to The Meridian; wields a Longsword +1 |
 
 ## Key NPCs
-- **Izesin Olorie** – Male elf, original hirer who brought the party to Kelaad.
-- **Annoel'ue Olorie** – Female elf, daughter of Izesin; currently in Bonegate.
-- **Harbormaster Fanson Edgelow** – Male human, de facto "mayor" of Kelaad.
-- **Sergeant Raug Morley** – Male human, head of Kelaad's defense.
-- **Unknown Green Dragon** – Evil dragon behind the raid on Kelaad; identity still unconfirmed.
-- **Yghartovo Mossrage** – Male green half-dragon, champion of the raiders and right hand to Uthcha in the Cult of Nethyndria; defeated badly by Lycrus.
-- **Walben Jamhorn** – Male human monk, returning to Mosshold.
-- **Alvalora Xavdos** – Female half-elf monk encountered at the Raider Camp; was tortured by Mayrro.
-- **Uthcha Soruth** – Female human, "Orange Adorned" of the Cult of Nethyndria; badly wounded by Glain.
-- **Tyrcoril Sunwalker** – Male half-elf mercenary, member of the Sunken Eye; killed by Lycrus before he could repent.
-- **Mayrro** – Half-blue dragon, high-ranking Cult of Nethyndria member who tortured Alvalora and left camp under Uthcha's care.
-- **Nethyndria** – Red dragon draco-lich who founded the Cult of Nethyndria; reportedly vanquished with her phylactery destroyed, but her blue dragon consort remains.
-- **Seven/Allan** – A winged kobold, leader/lackey type, owner of a talking stick; an evil creature adopted and protected by Annabella.
-- **Hehlem Valig** – Friend of Alvalora.
-- **Madam Maelis** – Fortune teller from the Marrood.
+- **Izesin Olorie** – Male Elf; the original hirer who brought the party to Kelaad.
+- **Annoel'ue Olorie** – Female Elf; daughter of Izesin, currently in Bonegate.
+- **Harbormaster Fanson Edgelow** – Male Human; de facto "Mayor" of Kelaad.
+- **Sergeant Raug Morley** – Male Human; head of Kelaad's defense.
+- **Yghartovo Mossrage** – Male Green Half-dragon; Champion of the Raiders and right hand to Uthcha in the Cult of Nethyndria; defeated badly ("dog-walked") by Lycrus.
+- **Alvalora Xavdos** – Female Half-elf Monk, based in Raselle; tortured by Mayrro; connected to the Advence of Harmony.
+- **Uthcha Soruth** – Female Human, "Orange Adorned" of the Cult of Nethyndria; left with heavy wounds from Glain.
+- **Tyrcoril Sunwalker** – Male Half-elf mercenary, member of the Sunken Eye's; killed by Lycrus before he could repent.
+- **Mayrro** – Half-Piss Blue Dragon, high-ranking cult member who tortured Alvalora; left the raider camp under Uthcha's care.
+- **Nethyndria** – Red Dragon, "dead" founder of the Cult of Nethyndria; a Draco-Lich vanquished with her phylactery destroyed; has a blue dragon consort.
+- **Seven/Allan** – Winged kobold, leader/lackey adopted and protected by Annabella; owner of a talking stick.
+- **Hehlem Valig** – Friend of Alvalora and member of The Meridian; provided armor upgrades and a ship to the party.
+- **Madam Maelis** – Traveling fortune teller from the marrood, accompanied by a halfling butler; read the party's fortunes on the road.
 
 ## Factions & Organizations
-- **Cult of Nethyndria** – Dragon-worshiping cult founded by the draco-lich Nethyndria; led in the field by Uthcha Soruth and Yghartovo Mossrage, with Mayrro as a high-ranking member.
-- **Sunken Eye** – Mercenary group; Tyrcoril Sunwalker was a member.
-- **Kelaad Defense/Keep Leadership** – Harbormaster Fanson Edgelow and Sergeant Raug Morley lead Kelaad's response to the raid.
+- **Cult of Nethyndria (Bane of Nethyndria)** – Antagonist faction using dragons in attacks as a new tactic during their recent rebuilding; led historically by the draco-lich Nethyndria; current notable members include Uthcha Soruth, Yghartovo Mossrage, and Mayrro.
+- **Advence of Harmony** – Organization focused on collecting information in pursuit of peace; recruited Annabella and Onog as informants, giving them owl pendants for communication.
+- **The Meridian** – A group of knights with a combative approach to problems; invited Lycrus and Glain to join; Lycrus has pledged, Glain remains undecided.
+- **Sunken Eye's** – Faction that included mercenary Tyrcoril Sunwalker.
 
 ## Key Locations
-- **Kelaad** – Starting town of the campaign; raided by dragon-aligned forces.
-- **Keep of Kelaad** – Safehold the party fled to during the raid; site of planning with Edgelow and Morley.
-- **Raiders Camp** – Base of the raiders who attacked Kelaad.
-- **Raiders Camp: Hatchery Caves** – Cave system within the Raiders Camp, current party location.
-- **Resel** – Location where the party was directed to meet Alvalora.
-- **Skarden** – Destination indicated by recovered raider documents.
-- **Berphar** – Southern destination where raider goods are being routed.
-- **Bonegate** – Current location of Annoel'ue Olorie.
-- **Mosshold** – Destination Walben Jamhorn is returning to.
-- **The Marrood** – Home region of fortune teller Madam Maelis.
+- **Kelaad** – Starting town of the campaign; site of a raid and dragon attack; home to Harbormaster Fanson Edgelow and Sergeant Raug Morley.
+- **Raiders Camp / Hatchery Caves** – Camp followed from Kelaad; contained a nursery/hatchery with dragon eggs, later destroyed.
+- **Raselle** – City visited by the party, called "City of the Setting Sun"; location of the inn's fight pit, The Black Deer restaurant, and meeting with Alvalora and Hehlem.
+- **BoneGate (near StoneShore)** – Destination the cult is heading toward; party departs south by ship to pursue.
+- **Skarden** – Location south along a route marked on recovered papers, direction continuing southwest from there.
+- **Berphar** – Southern destination where cult goods ("everything") are being routed, possibly aided by an inside contact (Mayrro suspected).
 
 ## Active Quests & Objectives
-- Investigate and avenge the raid on Kelaad.
-- Track the raiders' movements south, following clues pointing toward Skarden and Berphar.
-- Meet with Alvalora in Resel.
-- Uncover the identity and plans of the unknown green dragon behind the attacks.
+- Track the Cult of Nethyndria (Bane of Nethyndria) and stop their use of dragons in attacks.
+- Travel south to BoneGate near StoneShore via the ship provided by Hehlem.
+- Serve as informants for the Advence of Harmony (Annabella, Onog).
+- Decide on formal allegiance to The Meridian (Glain still undecided).
 
 ## Open Threads
-- The true identity of the evil green dragon behind the Kelaad raid remains unknown.
-- Where the arrow pointing southwest from Skarden actually leads.
-- Why someone (possibly Mayrro) allowed the raiders to keep certain goods.
-- The fate and current activity of Nethyndria's blue dragon consort, given her phylactery was destroyed.
-- The full nature and intentions of Seven/Allan, the kobold adopted by Annabella.
+- The identity and fate of the Green Dragon responsible for the Kelaad attack remain only partially known ("Unknown," Hostile, Hotness 10).
+- Who exactly facilitated the Cult's shipments south to Berphar (suspected to be Mayrro) is unconfirmed.
+- The ultimate fate/whereabouts of Mayrro after leaving the raider camp under Uthcha's care.
+- Full consequences of Lycrus killing Tyrcoril Sunwalker before he could repent.
+- Whereabouts and current activity of Annoel'ue Olorie in Bonegate.
 
 ## Recent Developments
-- **Session 05** – At the Raiders Camp, the party focused on gathering information from captives/surroundings.
-- **Session 06** – Continued planning at the Raiders Camp; directed to go meet Alvalora in Resel.
-- **Session 07** – Party pushed into the Hatchery Caves, recovered documents revealing raider supply routes south to Skarden and Berphar, with signs that someone (possibly Mayrro) let raiders keep some stock.
+- **Session 07 ("Ambush: Into the Cave")** – Party found documents hinting at supply routes heading south through Skarden, then southwest, with goods ultimately moving to Berphar, possibly with inside help.
+- **Session 08 ("Farther Roads: Questioning Morals")** – Party met fortune teller Madam Maelis on the road; later resolved a caravan conflict between orc criminals and bounty hunters, resulting in the orcs fleeing and the hunters defeated.
+- **Session 08 ("Farther Roads: Raselle")** – Party reunited with Alvalora in Raselle, reported on the cult and destroyed dragon eggs; fought the captured beast Snappy for armor upgrades; split into cliques and were recruited separately by the Advence of Harmony (Annabella, Onog) and The Meridian (Lycrus, Glain); learned the cult's name is Bane of Nethyndria and their destination is BoneGate near StoneShore; departed south by ship provided by Hehlem.

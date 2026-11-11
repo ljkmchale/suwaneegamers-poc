@@ -8,6 +8,7 @@ import { disableEditModeAction, enableEditModeAction } from "@/app/admin/login/a
 import type { NavSection } from "@/lib/nav";
 import { SearchPalette } from "@/components/layout/SearchPalette";
 import { UserMenu, type NavUser } from "@/components/auth/UserMenu";
+import { AdminPresence } from "@/components/layout/AdminPresence";
 
 interface NavProps {
   sections: NavSection[];
@@ -257,6 +258,7 @@ export function Navbar({ sections, isAdmin = false, editMode = false, user = nul
             </svg>
           )}
         </button>
+        {isAdmin && <AdminPresence />}
       </div>
 
       {/* Mobile menu */}

@@ -1,7 +1,7 @@
 # Bloody Endeavor - Campaign Player Notes
 
 Source: [Google Doc](https://docs.google.com/document/d/1p35JgGjlsAk6Ul8Y3cJC5P6Jdedr3pHSQQ29Y0ljBuc/edit)
-Pulled: 2026-11-03T15:45:33.114Z
+Pulled: 2026-11-10T15:45:52.824Z
 
 Players
 
@@ -129,6 +129,368 @@ Mabel’s Monocle
 	Alive
 	* 	* 	* 	* 	* 	Party Inventory Magic Items:
 Bag of Holding, Thornfeeder, Clawed Glove
+
+
+Name
+	Importance
+	Description
+	Notes
+	Alasfolen - The Slave Camp
+	Mylaerla (My-leer-la)
+	Slave Keeper
+	Female Elf
+	The Mistress
+	Sitmus Runegrip
+	Slave
+	Male Dwarf
+	Male Dwarf
+His tribe sent him to find help
+	Lagakh Morn
+	Slave
+	Female Orc
+	Worships The One-Eye
+Lucerion’s babe
+	Oskard
+	Slave
+	Male Bugbear
+	Loner / wood hermit
+	Azer Launce
+	Slave
+	Male Human
+	Guard in Gevakaln
+	Halynor Caifir
+	Slave
+	Female Half-elf
+	Noble’s daughter from Climbor
+	Lyeneru Olokas
+	Slave
+	Female Wood Elf
+	Speaks a language from a different land
+	Caifir Family of Climbor
+	Elderman Heilcaena Caifir
+	Climbor
+	Female Elf
+	Elderman
+Halynor’s mom
+	Inriel 
+	Climbor
+	Male
+	Trusted Ally
+Lurch, too tall to tell race
+The Caifir’s butler
+	Alavara
+	Climbor
+	Female Elf
+	Maid at the Caifir Estate
+Lucerion talked her up a bit
+	City of Climbor
+	Cud Thongen
+	The Hole in Climbor
+	Male Half-Orc
+	
+
+	Colet 
+	The Two Moons
+	Male Human
+	
+
+	Amelnia
+	The Two Moons
+	Female Human
+	Bar wench
+	Lady Roysia Coarsepetal
+	The Drunk Doves
+	Female Half Elf
+	Wannabe Adventurer and young Noble. Hired us to find a sword in the Hole of Climbor 
+	Rober Gerbold
+	P’n’S
+	Male Human
+	Owner of the P’n’S leathershop
+	Colbath’s Keep 
+	Noble family that has a keep outside of Climbor
+	Victor Colbath
+	Noble
+	Male Elf
+	Keep southeast near mountains
+Lost wife and sons to some disease
+	Eva Colbath
+	Noble’s daughter
+	Female Elf
+	Victor’s daughter and last remaining family member. Currently dying of an unknown disease.
+	Neha
+	Wizard
+	Female
+	Wizard keeping Eva Colbath alive by freezing her in ice (Cold Breath disciple probably). Fled into the mountains (east).
+	Vallen Greensill
+	Priest
+	Male Human
+
+
+	Priest for Lord Colbath
+loyal to the Lord and does not like the Cold Breath cult. Informed us about the Bone Marigold. 
+	Abdule
+	Colbath’s Keep
+	Male Human
+	He’s dead
+	Raymond Barta
+	Colbath’s Keep
+	Male
+	The “champion” bound to Eva
+	Paramond
+	Colbath’s Keep
+	Monk
+	Follower of the Cold Breath
+	Volmer Qiharice
+	
+
+	Elf
+	Flower Hunter (Dead)
+	The Winged One’s Group (Flower Cave) 
+	Sirn Zuss
+	
+
+	Kobold
+	Sent the other kobolds to scout around outside the cave. Which we killed most of. Is now dead.
+	Aishka The Brazen
+	Took treasure
+	Blue Halfdragon
+	Much tougher looking than our dragonborn. Lots of Breath weapon (NO REALLY … A LOT). 
+We weren’t able to kill him and let him go.
+	Cult of Verander 
+	Cult that tends to be underneath cities, worshipping an elf named Verander
+	Peargrain Crawbert
+	
+
+	Male Human
+	Cousin of the Daeloris. Scrawny
+Hiring muscle
+Met his end being thrown from the bridge
+	Lilian 
+	
+
+	Female
+	CV Hunter
+	Orc Fort
+	Chief Sharpmire
+	Orc Leader
+	
+
+	
+
+	Knight Ligart
+	
+
+	Male
+	Met on way to Witguard
+	Saildreith (Blair)
+	Dragon
+	Adult copper dragon
+	
+
+	Ana Belen Sandoval
+	
+
+	
+
+	Agent from Pelveron, the Dalasor Coast territory
+	Witguard
+	Ola Gretel
+	Witguard
+	Half Elf Female Guard
+	Charisma 19
+	Gregory Gregorson
+	
+
+	Little kid
+	He is taking us for a hike
+	Raul Nebe
+	
+
+	
+
+	Ola’s Boss
+	Vilihame Oddnel
+	Magistrate of Witguard
+	
+
+	
+
+	Sable Shadows
+	Jasper “Five-Fingers”
+	Hunting Lozire
+	Tiefling (rogue?) 
+	Mercenary hired to hunt down and collect from Lozire for her debts. His posse was killed and he escaped ‘promising’ to send the boss off our trail
+	Seventh Company of Paendley
+	Miss Ade
+	
+
+	
+
+	Member of the Paragon Tear
+	Ralajyre
+	
+
+	
+
+	Member of the Paragon Tear - Recruiter / Trainer
+Miss Ade’s tutor
+	Tralar
+	South of Witguard
+	
+
+	Went crazy and fled into the encampment’s cave
+	Captain Dorralei
+	->
+	Captain of the 7th
+	
+
+	Other … 
+	Masked Man
+	
+
+	
+
+	First met at cabin (Session 3)
+Encounter when looking for 7th Co. (Session 21)
+	Elzz Ebme
+	Magic item merchant
+	Little Wizard (Goblin)
+	Found on the way to find 7th Co.
+	Nomadic Tribes of Yag’vur
+	Hol’gardur
+	Crabuld & Ondus Runegrip
+	
+
+	Young cousins, dwarves
+	
+
+	Fomeck Runegrip
+	Elder of Hol’gardur
+	dwarf
+	
+
+	Presagiath
+	Predator of the Sierra
+	Adult(?)  White Dragon, female
+	
+
+	Monks of Iohir
+	
+
+	
+
+	
+
+	The Cold Breath (Huldi)
+	Leader of the Monks of Iohir
+	Human(?), male. 
+	Looking for the Rimestone shards to cause a new ice age.
+	The Sacred Crows
+	
+
+	
+
+	
+
+	Armaros Eligor
+	
+
+	Male High Elf Wizard
+
+
+	
+
+	Rina Sarthona
+	
+
+	Female Half-elf Rogue
+
+
+	
+
+	Hefeic Icehelm
+	
+
+	Male Mountain Dwarf Cleric
+
+
+	Chainmail - scarred, cracks; Tattoos on his bald head
+
+
+	Mhaenal “Maw” Cargwyn
+	
+
+	Female Tiefling Ranger
+	
+
+	Kotio Etric
+	
+
+	Male Copper Dragonborn Barbarian
+
+
+	
+
+	Khagdaruhl
+	
+
+	
+
+	
+
+	Ambassador Udohi Greythane
+	Sponsor of the Party
+	
+
+	Sent the Sacred Crows on the Blind Goat Quest
+	High Justice Flintfall
+	Jester/Announcer
+	
+
+	
+
+	Lord Emperor Thundermaw VI
+	Emperor of Khagdaruhl
+	
+
+	
+
+	Ambassador Nym Perxidor
+	Ambassador to Dalasar Coast
+	
+
+	Chatty one
+	Colorful Wizards
+	
+
+	
+
+	
+
+	The Celadon Wizard
+	Mentor
+	
+
+	Mentor to Pagern (Not nice) 
+	Zhis’ta The Purple
+	Ring of Respect Champion
+	
+
+	Half drow… half spider…
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+
 01 - Prisoners
 Session Date:  September 9, 2024
 In-game Date:  Uncertain - Year 1246
@@ -2432,7 +2794,7 @@ In the building is one guy in leather and two in hoods (Ne’er do wells).  With
             * ROUND THIRTEEN: Kibbit runs into the warehouse and loads his crossbow with his poisonous bolt. The Sable Shadow member runs towards Kibbit. Albross casts Eldritch Blast on the guy. Pagern just points at the man trapped in the wall. Caelion uses his Invoke Duplicity again to create a copy of himself in the force sphere. Rhody dashes towards the man and gets right up on him. 
             * ROUND FOURTEEN: Kibbit shoots the man with his crossbow. The man attempts to stab Rhody but misses three times. Albross finishes him off with Eldritch Blast. Pagern tries to talk with the drow again. Caelion casts Spirit Guardians through the Duplicate, but it appears the man is not actually in the Wall of Force. Rhody loots a rapier off the man and runs to help move the drug wagon out of the building.
             * Kibbit looks around the warehouse for things to steal from the warehouse, like a ledger. Albross goes to help Rhody move the wagon. The man in the Wall of Force waves farewell to Pagern and vanishes. Combat Ends
-The girl walks into the warehouse and we begin talking her. She’s with a half orc man and a weefolk man. They say they’re with Dissent Ablation, not the Cloak of Defiance. Albross opens up a crate within the cart and sees jars filled with a clear liquid. We decide to leave the cart inside and we put the vials into the bag of holding. The girl asks us if we have lodging here, we tell her no. She invites us her the inn she’s staying at and introduces herself as Adelaide Teufel. 
+The girl walks into the warehouse and we begin talking her. She’s with a half orc man and a weefolk man. They say they’re with Dissent Ablation, not the Cloak of Defiance. Albross opens up a crate within the cart and sees jars filled with a clear liquid. We decide to leave the cart inside and we put the vials into the bag of holding. The girl asks us if we have lodging here, we tell her no. She invites us to the inn she’s staying at and introduces herself as Adelaide Teufel. 
 We take 12 jars of clear liquid from the 2 crates in the cart. We let the Dissent burn the rest of them with the building.
 The poison the Sable Shadows use seems to explode the victims’ heads 1 minute after they perish. 
 – The Session Ends Here – 
@@ -2440,369 +2802,31 @@ The poison the Sable Shadows use seems to explode the victims’ heads 1 minute 
 	Character level at end of the session
 	2
 	Sessions played at that level
-	
-
-Name
-	Importance
-	Description
-	Notes
-	Alasfolen - The Slave Camp
-	Mylaerla (My-leer-la)
-	Slave Keeper
-	Female Elf
-	The Mistress
-	Sitmus Runegrip
-	Slave
-	Male Dwarf
-	Male Dwarf
-His tribe sent him to find help
-	Lagakh Morn
-	Slave
-	Female Orc
-	Worships The One-Eye
-Lucerion’s babe
-	Oskard
-	Slave
-	Male Bugbear
-	Loner / wood hermit
-	Azer Launce
-	Slave
-	Male Human
-	Guard in Gevakaln
-	Halynor Caifir
-	Slave
-	Female Half-elf
-	Noble’s daughter from Climbor
-	Lyeneru Olokas
-	Slave
-	Female Wood Elf
-	Speaks a language from a different land
-	Caifir Family of Climbor
-	Elderman Heilcaena Caifir
-	Climbor
-	Female Elf
-	Elderman
-Halynor’s mom
-	Inriel 
-	Climbor
-	Male
-	Trusted Ally
-Lurch, too tall to tell race
-The Caifir’s butler
-	Alavara
-	Climbor
-	Female Elf
-	Maid at the Caifir Estate
-Lucerion talked her up a bit
-	City of Climbor
-	Cud Thongen
-	The Hole in Climbor
-	Male Half-Orc
-	
-
-	Colet 
-	The Two Moons
-	Male Human
-	
-
-	Amelnia
-	The Two Moons
-	Female Human
-	Bar wench
-	Lady Roysia Coarsepetal
-	The Drunk Doves
-	Female Half Elf
-	Wannabe Adventurer and young Noble. Hired us to find a sword in the Hole of Climbor 
-	Rober Gerbold
-	P’n’S
-	Male Human
-	Owner of the P’n’S leathershop
-	Colbath’s Keep 
-	Noble family that has a keep outside of Climbor
-	Victor Colbath
-	Noble
-	Male Elf
-	Keep southeast near mountains
-Lost wife and sons to some disease
-	Eva Colbath
-	Noble’s daughter
-	Female Elf
-	Victor’s daughter and last remaining family member. Currently dying of an unknown disease.
-	Neha
-	Wizard
-	Female
-	Wizard keeping Eva Colbath alive by freezing her in ice (Cold Breath disciple probably). Fled into the mountains (east).
-	Vallen Greensill
-	Priest
-	Male Human
-
-
-	Priest for Lord Colbath
-loyal to the Lord and does not like the Cold Breath cult. Informed us about the Bone Marigold. 
-	Abdule
-	Colbath’s Keep
-	Male Human
-	He’s dead
-	Raymond Barta
-	Colbath’s Keep
-	Male
-	The “champion” bound to Eva
-	Paramond
-	Colbath’s Keep
-	Monk
-	Follower of the Cold Breath
-	Volmer Qiharice
-	
-
-	Elf
-	Flower Hunter (Dead)
-	The Winged One’s Group (Flower Cave) 
-	Sirn Zuss
-	
-
-	Kobold
-	Sent the other kobolds to scout around outside the cave. Which we killed most of. Is now dead.
-	Aishka The Brazen
-	Took treasure
-	Blue Halfdragon
-	Much tougher looking than our dragonborn. Lots of Breath weapon (NO REALLY … A LOT). 
-We weren’t able to kill him and let him go.
-	Cult of Verander 
-	Cult that tends to be underneath cities, worshipping an elf named Verander
-	Peargrain Crawbert
-	
-
-	Male Human
-	Cousin of the Daeloris. Scrawny
-Hiring muscle
-Met his end being thrown from the bridge
-	Lilian 
-	
-
-	Female
-	CV Hunter
-	Orc Fort
-	Chief Sharpmire
-	Orc Leader
-	
-
-	
-
-	Knight Ligart
-	
-
-	Male
-	Met on way to Witguard
-	Saildreith (Blair)
-	Dragon
-	Adult copper dragon
-	
-
-	Ana Belen Sandoval
-	
-
-	
-
-	Agent from Pelveron, the Dalasor Coast territory
-	Witguard
-	Ola Gretel
-	Witguard
-	Half Elf Female Guard
-	Charisma 19
-	Gregory Gregorson
-	
-
-	Little kid
-	He is taking us for a hike
-	Raul Nebe
-	
-
-	
-
-	Ola’s Boss
-	Vilihame Oddnel
-	Magistrate of Witguard
-	
-
-	
-
-	Sable Shadows
-	Jasper “Five-Fingers”
-	Hunting Lozire
-	Tiefling (rogue?) 
-	Mercenary hired to hunt down and collect from Lozire for her debts. His posse was killed and he escaped ‘promising’ to send the boss off our trail
-	Seventh Company of Paendley
-	Miss Ade
-	
-
-	
-
-	Member of the Paragon Tear
-	Ralajyre
-	
-
-	
-
-	Member of the Paragon Tear - Recruiter / Trainer
-Miss Ade’s tutor
-	Tralar
-	South of Witguard
-	
-
-	Went crazy and fled into the encampment’s cave
-	Captain Dorralei
-	->
-	Captain of the 7th
-	
-
-	Other … 
-	Masked Man
-	
-
-	
-
-	First met at cabin (Session 3)
-Encounter when looking for 7th Co. (Session 21)
-	Elzz Ebme
-	Magic item merchant
-	Little Wizard (Goblin)
-	Found on the way to find 7th Co.
-	Nomadic Tribes of Yag’vur
-	Hol’gardur
-	Crabuld & Ondus Runegrip
-	
-
-	Young cousins, dwarves
-	
-
-	Fomeck Runegrip
-	Elder of Hol’gardur
-	dwarf
-	
-
-	Presagiath
-	Predator of the Sierra
-	Adult(?)  White Dragon, female
-	
-
-	Monks of Iohir
-	
-
-	
-
-	
-
-	The Cold Breath (Huldi)
-	Leader of the Monks of Iohir
-	Human(?), male. 
-	Looking for the Rimestone shards to cause a new ice age.
-	The Sacred Crows
-	
-
-	
-
-	
-
-	Armaros Eligor
-	
-
-	Male High Elf Wizard
-
-
-	
-
-	Rina Sarthona
-	
-
-	Female Half-elf Rogue
-
-
-	
-
-	Hefeic Icehelm
-	
-
-	Male Mountain Dwarf Cleric
-
-
-	Chainmail - scarred, cracks; Tattoos on his bald head
-
-
-	Mhaenal “Maw” Cargwyn
-	
-
-	Female Tiefling Ranger
-	
-
-	Kotio Etric
-	
-
-	Male Copper Dragonborn Barbarian
-
-
-	
-
-	Khagdaruhl
-	
-
-	
-
-	
-
-	Ambassador Udohi Greythane
-	Sponsor of the Party
-	
-
-	Sent the Sacred Crows on the Blind Goat Quest
-	High Justice Flintfall
-	Jester/Announcer
-	
-
-	
-
-	Lord Emperor Thundermaw VI
-	Emperor of Khagdaruhl
-	
-
-	
-
-	Ambassador Nym Perxidor
-	Ambassador to Dalasar Coast
-	
-
-	Chatty one
-	Colorful Wizards
-	
-
-	
-
-	
-
-	The Celadon Wizard
-	Mentor
-	
-
-	Mentor to Pagern (Not nice) 
-	Zhis’ta The Purple
-	Ring of Respect Champion
-	
-
-	Half drow… half spider…
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-
-
-Primary Quests
+	46 - We Definitely Both Have 15 Intelligence & We Assassinate a Count
+Session Date:  November 9th, 2026
+In-game Date:  31st of Paramor, 1246
+Starting Location:  Underbelly, Gevakaln (Gibblecon(?))
+We’re led to a tavern closer to the edge of the city, the Pushing Crook. It’s the worst establishment we’ve been in since we came to Gevakaln, with vagabonds and homeless around. We’re traveling with the weefolk and the half-orc from the Dissent, led into the basement. We’re greeted by a human, 2 half-elves, and another half-orc. On the far wall is a tapestry of Gevakaln and another door on the opposite wall. They look unusually optimistic and jovial.
+The human asks the half-orc we came in with, “Gunurk, who are these people?” We introduce ourselves to the group and we evangelize Esadi. We learn about Dissent Ablation, who want wealth distribution around the world. We let him know that we’re looking for Albross’s Brother. He introduces us to the members of the Dissent:  JB (The leader), Danfinas Palen, Vinynore (Viny), Jniddwun Dortris , Gnurk Salistay, Paabris Salistay, as well as Adelaide Teufel who we already met. We give the Dissent credit for destroying the warehouse, and explain the situation we’re in. Pagern attempts to sus him out, he seems truthful. Adelaide’s dad runs the Sable Shadows. They have a lot of connections to the sewers, kidnapping people and bringing them there. The guards have been occupying the area, guarding the entrances to the Sewers and in the sewers themselves.
+We ask for information on the Sable Shadows. They keep their prisoners in the Sewers, which are connected to The Villa of Passion, Adelaide’s dad’s villa. Count Tetravin Teufel is his name. We discuss our plan to find Albross’s brother, who we assume is in the tunnels. JB lets us know that the fire at the warehouse will likely prevent us from leaving (unless we work for him) We take a long rest here
+We meet the blue sea-elf bartender, he’s unbearably depressed and tired of life. He’s also good at killing people. We leave at the ramp, paying the guards way too much (2 platinum each) to get out. Kibbit offers potatoes to the guard, who declines. We make our way to the upper district. The guard goes with Kibbit, who's in disguise, to deliver the potatoes to “her nephew”. She leads him on a wild goose chase for a while. Kibbit drops the potatoes, and sneaks away while the guard is picking them up. We make our way over to the Spiral in the meantime.  We speak with Namys about what happened. He gives us the information he knows. The prisoners and fight clubs of the Sable Shadows are underneath the Villa of Passion. The brother was researching about Gods and angels in the library when he was taken. 
+We make the deal to kill the count for the Cloak. Namys will get us to the villa at night. Kibbit is pulled aside and welcomed into the Cloak. He’s given the red cloak as well as a magical silver hand crossbow called The Never Missa. It keeps humming. Pagern recognizes the silver of the weapon is good against shapeshifter-like creatures. We wait until later, and a cloak member takes us to the Passionate Villa. 
+There are 2 sets of guards patrolling the main area, as well as guards outside to the eastern and southern entrance to the land. We try going from the southern side first, but the horses in a stable spooks Rhody. We make our way to the Northern side instead. We get over the wall so we get into the main area right behind the guards. Kibbit investigates the doors we see and goes to pick the lock. His lock picking kit breaks but the door opens. We enter the room, where there's a 20x20 staircase with lanterns lighting the area, with a door across the way and one upstairs. We go through the 1st floor door, dimly lit with candles. There's a door at the far end of the hallway, one that goes to the 2 story structure, and one that goes to the courtyard. We also see a dumbwaiter, and we investigate it. We make sure a bell doesn't ring as we open it. There's a deep pit going down, Kibbit and Pagern go down. Kibbit finds a crude kitchen, a fight ring, and a hallway. One of the guards is awoken, but an invisible Albross knocks him out. Rhody tucks him into bed and gives him a kiss. 
+Meanwhile Kibbit and Pagern explore the basement, which is revealed to be an underground colosseum. They keep searching for a stairway back up but keep running into more and more doors and rooms. It’s a real House of Leaves scenario. 
+Kibbit comes across a small spiral staircase and walks up it with Pagern. They find a door at the top. He opens the door to see an individual reading a book. He’s dressed as a noble, with dark gray hair. KIBBIT SNEAKS INSIDE THE ROOM AND LOOKS AT WHAT HE'S READING AND STARTS PICKPOCKETING HIM. He reaches into the right pocket and pulls out a key. He sneaks out successfully
+After 15 minutes, Caelion casts Sending
+You Ok?
+
+Response: We’re ok, found the count’s right hand man, stairwell behind the lift.
+Kibbit continues upward and finds a door. He hears the large crackle of fire and wind. They go back down to the basement fighting ring. The go through the back right door, hearing talking through one of 4 doors, private meeting rooms. They go back to the fighting ring room and go through the back left door. It's a set of stairs going down. They find a room where someone can talk to a fighter safely. Pagern goes back to meet with the group. Kibbit steals an Apron from the kitchen to disguise himself as a cook and attempts to sneak past the sleeping guard. It’s just a sleeping quarters, so he leaves him alone. Kibbit goes to floor 2 and looks for a hidden door. He finds where he’s level with the rest of the party. He makes his way to the meeting rooms and investigates the first door where he hears noises, he opens the door and sees stairs going up and down. 
+Kibbit goes up the stairs, leading to a well lit double door. He attempts to pick the lock but fails, instead using the key he stole from the man. It opens. There's a well lit area with chairs and tables, a stairwell going up, and a door across the way. There are 6 guards in the room. He manages to sneak past and make his way to the rest of the group. Kibbit explores further above where we originally entered, hearing rain through a door. He opens it, and finds a lounge area with an open courtyard getting rained on. There's a door 
+Rhody cast barkskin on Albross. Kibbit disguises himself as a messenger and forges a letter to get Albross’s brother out. Rhody knocks on the door acting as a guard, we’re welcomed in. Lightning strikes as the door opens.
+– The Session Ends Here – 
+10
+	Character level at end of the session
+	3
+	Sessions played at that level
+	Primary Quests
 
 
 	Quest

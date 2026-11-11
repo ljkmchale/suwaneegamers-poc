@@ -2,14 +2,25 @@
 campaign: "Might of Dragons"
 visibility: players
 generated_by: session-pages-v1
-source_kind: approved-session-summary
-source_hash: e16690e61e5c5f1906df4c9b6636e49d709f6d6474816073a5504d7be471e5b7
+source_kind: verbatim-player-notes
+source_hash: f7ae3411e244932381608c166c315d4aef2e1cc928f31a4117df23486044bd95
 ---
 
-# Session 8 - Traveling with a Cannibal
+# Session 08 - Farther Roads: Raselle
 
-Source: SQLite session_summaries / might-of-dragons / Session 8 - Traveling with a Cannibal
+Source: raw/might-of-dragons-player-notes.md / https://docs.google.com/document/d/1SnaAoT3QroSE480rDqjxJKr5yqdJoo_fJwS9hKN1-LU/edit
 
-## Approved Session Summary
+## Verbatim Session Notes
 
-The party arrived in Kelaad.  After debriefing the harbor master, they picked up horses from the rescued monk and travelled to Raselle.  On the way, they met a fortune teller (or unfortunate teller) and came across a standoff between a group of bounty hunters that were trying to get a group of thieves.  They killed the bounty hunters and let the thieves get away.
+Session Date:  11/04/2026
+In-game Date:  22nd of Nessare 1246
+Session Starting Location:  Outside Raselle
+Players missing this Session: Daimon (Nick)
+City of the Setting Sun
+The group met up with Alvaora in Raselle, informing her about the cult and their (now destroyed) batch of dragon eggs and where the raiders are heading. While she goes over the info the party spends time in the inn's fight pit in exchange for armor upgrades provided by Hehlem. They defeat the captured beast, Snappy.
+Black Deer, Back Deals
+Meeting in the back of The Black Deer restaurant, The party split into cliques to talk about what to do moving forward.
+Alvaora reveals to Annabella and O-nog she is part of an organization called Advence of Harmony, a group interested in the collection of information in the pursuit of peace. She recruits them as informants, giving them owl pendants to communicate via.
+Hehlem talks with Lycrus and Glain about his group The Meridian, they have a more combative approach to issues and asks the two to join. They were given armor for their pledge (Well Lycrus pledged, Glain wants to stay open for now).
+The cult's proper name is Bane of Nethyndria. Their methods of using dragons in attacks is a rather new tactic used by the cult during their rebuilding these past few years. They are heading towards BoneGate near StoneShore. Hehlem has prepared a ship for the party to depart south.
+ – The End of the Session –

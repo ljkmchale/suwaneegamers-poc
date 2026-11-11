@@ -26,6 +26,9 @@ Player star ratings (1 to 5) from the Advents Guide to Myrdae, grouped by settle
 - Covered Hooch (business): 5.0 out of 5 from 1 review(s).
 - Town Hall (business): 2.0 out of 5 from 1 review(s).
 
+## Padstow
+- Heavy Loaf (business): 4.0 out of 5 from 1 review(s).
+
 ## Qal'dynn
 - The Pale Lantern (business): 5.0 out of 5 from 1 review(s).
 

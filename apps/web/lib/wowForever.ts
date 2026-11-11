@@ -1,8 +1,9 @@
 import { readContent, writeContent } from "@/lib/contentFiles";
 
-export type WarcraftPlayer = { name: string; character: string; className: string; level: string; image?: string; armoryUrl?: string };
+export type WarcraftPlayer = { name: string; hidden?: boolean; character: string; className: string; race?: string; specialization?: string; professions?: string; professionRanks?: string; faction?: string; gender?: string; level: string; image?: string; armoryUrl?: string };
 export type WarcraftNight = { id: string; date: string; title: string; notes: string };
-export type WarcraftGroup = { id: string; name: string; partyName?: string; discordUrl: string; members: Record<string, string>; players: WarcraftPlayer[]; nights: WarcraftNight[] };
+export type WarcraftGuild = { nominations: { id: string; name: string; nominatedBy: string }[]; votes: Record<string, string> };
+export type WarcraftGroup = { dungeonCompletions?: Record<string, string[]>; id: string; name: string; partyName?: string; objective?: string; guild?: WarcraftGuild; discordUrl: string; members: Record<string, string>; players: WarcraftPlayer[]; nights: WarcraftNight[] };
 export type WarcraftHub = { groups?: WarcraftGroup[]; schedule: string; nextNight: string; realm: string; faction: string; objective: string; players: WarcraftPlayer[]; nights: WarcraftNight[] };
 
 const initial: WarcraftHub = {
@@ -21,8 +22,28 @@ const initial: WarcraftHub = {
   nights: [],
 };
 
+// Read old combined class strings without requiring a live-data migration.
+export function separateWarcraftDetails(player: WarcraftPlayer): WarcraftPlayer {
+  const [className, ...details] = player.className.split(" · ");
+  const professions = details.filter(value => /Tailoring|Enchanting|Leatherworking|Skinning/.test(value));
+  const faction = details.find(value => /^(Alliance|Horde)$/.test(value));
+  const gender = details.find(value => /^(Female|Male)$/.test(value));
+  const other = details.filter(value => value !== faction && value !== gender && !professions.includes(value));
+  return { ...player, className: [className, ...other].join(" · "), professions: player.professions ?? professions.join(" / "), faction: player.faction ?? faction, gender: player.gender ?? gender };
+}
+
+// Presentation only: keep hidden players and their memberships in stored data.
+export function visibleWarcraftPlayers(players: WarcraftPlayer[]): WarcraftPlayer[] {
+  return players.filter(player => !player.hidden);
+}
+
 export function getWarcraftHub(): WarcraftHub {
-  try { return readContent<WarcraftHub>("wow-forever.json"); }
+  try {
+    const hub = readContent<WarcraftHub>("wow-forever.json");
+    hub.players = hub.players.map(separateWarcraftDetails);
+    if (hub.groups) hub.groups = hub.groups.map(group => ({ ...group, players: group.players.map(separateWarcraftDetails) }));
+    return hub;
+  }
   catch { return structuredClone(initial); }
 }
 export function saveWarcraftHub(hub: WarcraftHub) { writeContent("wow-forever.json", hub); }

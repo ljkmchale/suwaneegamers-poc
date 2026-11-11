@@ -2,7 +2,8 @@ Ky’tha is also referred to as Ky
 
 Ainslie is also referred to as Ains
 
-Aurelius is also referred to as Aury
+Aurelius is also referred to as Aury  
+Ogmund is also referred to Og
 
 # **01 \- Dock Troubles**
 
@@ -2671,7 +2672,7 @@ Aury wakes up to pray and kneels and hears a piece of paper slipped under the do
 | :---: | :---- |
 | **2** | *Sessions played at that level* |
 
-# **37 \- \<Name\>**
+# **37 \- The Iron Star**
 
 **Session Date**: October 14, 2026
 
@@ -2709,7 +2710,7 @@ They go. They land in a field of erected standing stones.  There are 8 stones.  
 
 Ains rejoins the group and notices Hap’s suit of armor. The group leaves and discusses going to get horses courtesy of Ky’tha, and then stopping to see Hap’s lead on the way out.  Ains tells them about his brief trip to Ingriss. He tells about disguising himself and assuming a new name and new voice. He tells what he learned about the “revival of the Tree.”  Og then tells him about how the Ascension Tree is not at full power.  
 
-They get to the stable and Ky’tha uses thieves cant to communicate and realizes this is a Cloak contact.  He tells her that the 6 horses, including one that is bigger, are ready and saddled and will require the full payment “I don’t make the rules.”  Ky’tha tries to pay less for 6 horses, but he says you can take fewer but you need to leave the money.  She takes all 6 horses.  One is dark brown and Zymve asks if she could trade it for a black one.  There are a couple of black ones to choose from.  She chooses the solid black \- but it leaves no trail and will cost her an additional 50gp (Veldrin).  Ains asks for the black one with white stars \- this is an equal trade (Chanson). Og has the large horse that is white and brown (Alfie).  Aury collects his horse (Gyft).  Hap’s horse (Gertrude), Ky’tha’s horse (Vertigo) and the extra horse (Sovereign) are all various shades of brown. 
+They get to the stable and Ky’tha uses thieves' cant to communicate and realizes this is a Cloak contact.  He tells her that the 6 horses, including one that is bigger, are ready and saddled and will require the full payment “I don’t make the rules.”  Ky’tha tries to pay less for 6 horses, but he says you can take fewer but you need to leave the money.  She takes all 6 horses.  One is dark brown and Zymve asks if she could trade it for a black one.  There are a couple of black ones to choose from.  She chooses the solid black \- but it leaves no trail and will cost her an additional 50gp (Veldrin).  Ains asks for the black one with white stars \- this is an equal trade (Chanson). Og has the large horse that is white and brown (Alfie).  Aury collects his horse (Gyft).  Hap’s horse (Gertrude), Ky’tha’s horse (Vertigo) and the extra horse (Sovereign) are all various shades of brown. 
 
 Aury buys some pipe tobacco as they pass through town to the South Gate. The group rides through the town.  Hap hears “I think we are being followed.”  His sword is talking to him.  He asks, “by whom?”  And the sword can’t answer. He then whispers to Aury and Ky’tha. Ains casts the spell where we are all in each other’s head \- except Aury.  Ky’tha hears hooves in front and underneath and behind \- but doesn’t hear the horse next to her. She asks Og and Ains who are following us.  Og tries to look and doesn’t see anything but he feels something.  He thinks there are eyes everywhere.  We make our way to the Iron Star near the Southwest Gate.  There is a symbol that looks similar to the Meridian symbol, but is a little different.  It is silver.  There is a large clearing where we can rest the horses so Hap can have a talk.  
 
@@ -2723,7 +2724,123 @@ Meanwhile, Zymve is hanging outside flipping a dagger and looking around.  She r
 
 We decide to leave the town now, following the south road to Padstow. Aury pulls out his pipe and smokes it as he travels.   This is Biddlebon tobacco and Zymve loves the smell and follows behind Aury.  The sky is gray and overcast.  There are some snow flurries.  We see a river and work our way into Padstow.  We see a large building known as the Heavy Loaf.  
 
-WE END HERE.
+– The End of the Session –
+
+| 10 | *Character level at end of the session* |
+| :---: | :---- |
+| **3** | *Sessions played at that level* |
+
+# **38 \- \<Name\>**
+
+**Session Date**: November 7, 2026
+
+**In-game Date**:  7th of Paramor, 1246
+
+**Starting Location**:  Padstow
+
+### **Arriving in Padstow**
+
+We stable the horses and walk into the Heavy Loaf.  This is a part tavern, part inn, part mill kind of place.  It is warm inside \- leaving the snow outside.  There is a bard playing a large stringed stick-like instrument.  We take the only open table near the door. A big-bellied human male walks up \- Gillan Hearn \- he welcomes the group. 
+
+We talk about the town \- how this is the warmest place in town.  We ask if the bard ever takes a break \- since we have a player.  He says the guy would get his feelings hurt.  Ains and Og then ask if there is a plight, or blight…or anything else in town that might need fixing.  He offers a free night to anyone who could fix his wheel in the morning.  Zymve says we can do this. 
+
+The group discusses the need for money \- or maybe we don’t need the money.  Gillan brings the ale, wine for Aury, and bread and cheese.  We all consider that as we mentioned the blight before that some of the nearby tables got quiet. Gillan comes back with his handful of butter and drops it on the table.
+
+Ains casts detect thoughts. He then says “I’m glad there is no blight around.”  And catches a nearby person mentioning “Talenwood.”  The door opens and a man who looks like he shouldn’t be standing comes in (skin like wet bark, boils, with a wound in his side) \- “the woods will kill us all” and collapses.  He has a satchel in his hands.  Aury tries to cure him, but he is dead.
+
+Ky’tha drops to the floor to check him out and tries to slight of hand the satchel from him.  Someone noticed it. Ains mentions this and Ky’tha says “I’m trying to find out who is his \- does anyone recognize him?” as Gillan walks up and says we need to move him outside before he infects the place.   Zymve palms the marrowstone to see if it reacts to this person and it warms a little.  She says “yes \- this is the blight.”  Ky’tha asks if she can suck it out of him, as she starts to look in the satchel.  There is a leather pin with a crescent moon with vines on it.  She asks if anyone recognizes it \- and Hap knows this is the mark of the Everdawn.  She then opens it.  There are several loose wrinkled parchments \- torn pages from something bigger. Two small scrollcases are in the bottom. Zymve looks at the scrolls and Ky’tha asks Hap to help her go through the pages.
+
+The pages are ripped and the two try to piece together the pages.  The first one they make out the word “embers” but can’t quite get the other pieces.  Then they see a sigil of some sort.  The second page says “Circle of Whispers” and we see a sigil very clearly.  The third one we make out the sigil very well, but the words are unclear “...of Talons.”  
+
+Zymve looks at the scrolls.  She thinks the first one is “barkskin” scroll.  The second case contains a “blink” scroll.  The group will run this all by Og and Ains when they come back in.  A guy wearing thick layered clothes \- scarf, jacket, robes (scarf has a symbol of weighted scales and a woman) \- walks up to Ky’tha and says I will be back to you in a few minutes and then walks outside.
+
+Og and Ains take the guy outside.  The walk to the oratory that they see next door.  They notice someone trailing them as they walk there.  They discuss what to do with the body.  As they get to the oratory door he stops and watches them.  The door is closed and locked. “You need a hand with that?”  And Ains says sure.  They guy takes out a key and walks up and unlocks the door.   He says I have mixed feelings about this one.  He was a good guy, but I’m not sure if I want to infect the church.  Og says that they were considering burning him.  He says “I wonder if ol Harl would have wanted to be burned?”  They then decide to put him somewhere else.  He says “I hate to do this to Mr. Finn, but we have to do this.”  They go up to a shed and empty an area where they can house and cover the body.
+
+He was carrying a backpack, a bedroll, standard rations, standard stuff.  The man says “Harl Finn didn’t have much of a family \- he was a woodsman and liked to travel a lot.  Think he got caught up in those rumors in Talonwood and decided to check them out for himself.”  What are the rumors?  Rumors of trees knocked down, destructive whirlwinds, lots of damage in the forest.  They look at the wounds and perform an autopsy onsite \- taking a chunk of the diseased skin and putting it in a pouch.  Og studies the thorns on him.  One of his three looks normal, one looks rotten and black, and one is dark and starts to pierce him \- somehow linked to the blight this man had.  Og thanks the man for his help and introduces himself.  The man is Bosbel (a priest).  Ains casually asks if he has heard of the Gilded Vultures and he has not.  They man thinks that is a terrible sounding name.   He says he is going to go talk to the dwarf who got the satchel.  He asks her name and Ains says “Lady Fawnborn” and mentions that she is a “servant” of his.  Og joins in and says that he is his bodyguard.  He asks for everyone’s name:  Lydia Linda the entertainer, Happenstance the bodyguard, and the drunken priest called Brother.
+
+He walks back inside and introduces himself using the names and titles Ains called us.  He says he is “the Father of Padstow.”  Zymve pipes up asking why this was his business.  And Hap says he thought no one else knew him.  He comments that he wasn’t really well-liked in town. We tell him that we are planning to show these documents to Ains when he comes back in.
+
+Ains comes in and he looks over Ains’ shoulder.  He shares that these look like writings of the Woodbound Order \- who worshipped the Everdawn.  They are from the Talenwood area.  He says that we can keep the papers and leaves to finish his bread.
+
+Ains knows these are teleportation sigils.  We are trying to figure out where and how.  Aury thinks these names are associated with wooded areas and druids.  We think the last one might be associated with Talonwood. We discuss having Aury “speak with the dead” to determine if our guesses are correct before using the sigil to travel to that area. He decides to pray to Diverra for strength to talk to the dead man.
+
+We talk to the guy about getting rooms \- they are 5sp/night per person for their own room.  We find out more about fixing the wheel \- and determine it is too much. We agree to get six rooms.  Then walk to the shed.  We study the body.  The gash looks like it could have been a sword or a large claw.  We discuss what to ask the dead  guy.  As Aury prays, Zymve draws out the marrowstone and starts to try to pull the blight from the dead man.  A dark, foggy mist starts to rise from the body (necrotic weave) and into the stone.  The darkness drains from the man. This takes a minute or so.  The stone now has a grayish, purple hue to it.  Aury then prays to Diverra asking for help to find the truth.  Then casts divine intervention and casts the speak with dead spell.  The man sits up and opens his eyes.
+
+1) Ains holds up the paper, where do these go?  Maybe back in the bag.  
+2) Where specifically do these sigils take you?  I don’t know \- I’m a hunter.  
+3) Where did you die?  In the inn.  
+4) Where did you get these?  I found them in Talonwood off a dead body.  
+5) What attacked you in Talonwood?  A black tree.
+
+We go back to the inn and finish our meal.  A few at the table stop and say “that’s not something you see everyday?”  We ask them what they knew of Harl.  They tell the group how he is known for walking the woods. Some back and forth about the man and random tales. Ky’tha asks specifically if there were any stories about problems in the woods.  They mention problems in Murfield, but don’t know too much.
+
+Aury talks to Og about his personal thorns and the connection to the blights.  He thinks that we know of three blights and how one of the thorns is better since we took out that blight.  We decide to rest and leave the next morning.    Aury decides to prepare his spells as we discuss making the trip via the sigil or via horses.
+
+During the night, Ains writes in his journal.  
+
+Hap talks to his sword. It says “we will get them back \- we will avenge that.  You felt it, didn’t you?”  Hap says he did feel it.  “Will you help me out a little?”  It says “I think we are destined for great things.  We are going to make tall tales.  It all starts when we find out what killed this man and seek vengeance on this world.”  
+
+Zymve takes a room next to Ains.  She attunes to her amulet.  In the middle of the night, she casts minor illusion and says “you should be afraid, Ainslee Ainarian” and recasts it to then make a zombie illusion next to him.  In response, he casts lightning bolt at the zombie and his door and his door both get blasted off and are in the hallway.  He knows it was an illusion. He is standing up in his room and looks across the hall at Zymve.  He says “we can’t leave tomorrow \- there is a wizard to track down.”  She casts mending on her door and wall.
+
+Og opens his door and steps out in the hall, as do the rest of the group.  But they intuit what is going on and go back to bed.  The innkeeper comes upstairs and asks what happened.  Ains says “there is a wizard afoot \- I’m going to need to look at your ledgers.”  He agrees to help, but says he doesn’t take down all names.  Ains says that he is from the EGD and needs to make a report to the Meridian.  The innkeeper says he will not charge him for the door if he doesn’t make a report about not keeping good records.  They have a conversation about this for a bit.  Ains then tells him the name “Zymve, the Anarchist” and agrees to leave the next day.  Ains then goes to Og’s room to sleep for the night.
+
+**8th of Paramore, 1246**
+
+Aury rises early to do his prayers in your room.  Ains casts sending to his Basctdelm Avantee contact to try to find out about the Circle of Whispers.  He hears “Circle of Whispers \- property of Woodbound Order, the original Everdawn, it resides in Whistgrove.  Thanks for reaching out.  I hope you are keeping the journal updated.”
+
+We meet downstairs.  There is a very nice table set for the group with food, stoppered wine, etc.  A note that says take this with you with the items.  And he says please tell me Zymve the Anarchist before you come back.
+
+We decide to leave.  Aury walks back into the inn and goes up to the innkeeper and tries to give him money.  I am so sorry for what this crew has brought.  The innkeeper declines to take the money, but Aury tries to persuade him and can’t.  But is glad for them to leave.  Aury shakes his head and leaves.
+
+Outside the group discusses travel plans. We decide to ride south on our horses.  We ride all day.  No one is coming in our direction. 
+
+At some point, Ains reaches out again.  “Hoo.  What is Whistgrove?  Any contacts in that location.  If so, can you describe to me?  Also any contacts in Murfield?  Thanks for help. Hoo.”  He hears back “Whistgrove, is south of Eustera Ridge in Inverland.  We do not have a base there.  Murfield has stayed secluded.”
+
+We ride all day and make camp.  The road follows a creek until the water widens and bank flattens out.  We see stones that build up to a fjord in the area.  There are fire rings and a rail for horses. This is Stoneward Bank Camp.  
+
+The air is cold.  We eat rations. Then set up a watch.  Ains and Og first. None of the rest of the party is able to fall asleep– there’s an eeriness to the air. Ains and Og spend their time complimenting and  gossiping about the party, not knowing that everyone else is eavesdropping. 
+
+Ains and Og then walk over to wake Ky’tha and Zymve up and realize they were not asleep.  They, too, can’t fall asleep.  Ky’tha walks around to try to figure out why it is eerie.  She notices no fish in water.  She comments to Zymve.  Aury comments that he can hear us.  Ky’tha asks if everyone else is awake \- and they are, except Ains.  We decide, knowing we have exhaustion, that we should travel forward and not fake sleeping.  Hap comments, asking Og if this is related to the blight.  He then hears from his sword “Oh yes \- this is the blight” and now Hap is “aware status” with his sword.
+
+We decide to cast invisibility on Ky’tha and send she and Fleur through the circle with her horse figurine.  She is going to see if it is safe to travel with the horses.  The plan is the Ains will cast sending after 2 minutes of her going. 
+
+Ky’tha steps through.  Snow does not melt when it lands.  There is an area where it is leaning and tilted to one side 20 degrees.  There are several circle stones that have toppled.  The area is dark and absent of color.  There are dead trees and it is foggy. She hears a low groan and sees these large tree “hands” grasp and pound.  IT IS INITIATIVE
+
+ROUND ONE:  One of trees moves forward and swipes at Fleur and fumbles and falls prone.  He will then try to attack him again and hits and is gone.  Ky’tha sees vines create a barrier on the plateau that grow up around the sides.  One of the vines tries to lash at Fleur.  Ky’tha looks around to see if she is on a ridge surrounded by cliffs or if there is a path down. There are two ways off this ridge.  One way down with roots and vines.  And one that goes up and sees that there is evidence of destruction.  She moves to the side 30’.  One of the trees moves around and starts patrolling.  Vines climb up higher, lashing out in the air.
+
+ROUND TWO:  Vines lash, trees patrol. Ky’tha will dodge and move and watch them.  
+
+At some point, the vines enclose the space.  At some point she hears “hunger \- bring them, “ as the trees patrol.  Something about this feels more powerful than Blackrend. 
+
+After a minute, the vines lower down the cliff and the treants part ways and climb down into the mist. Ky’tha then starts to traverse up the path off of this ridge.  She sees holes and sees wooden huts at the bottom where buildings fell \- probably buildings of the Woodbound Order. It leads to a clearing, but no trail.  From this vantage point, roots and soil have been built back up. 
+
+Off in the distance, she sees varying red eyes of woodland creatures.  But she is on ground level.  The area she was in was a pit \- and may have fallen through to the underdark (maybe to a lake).  She has no idea of the depth of the pit.   She finds a place to hunker down.
+
+After a total of two minutes, a message comes in from Ains.  She replies “Ravaged pit with blighted treants, shaky ground but 60’ across.  I’m safe, but evil maybe Guigazen near.  If come, prepare combat magical vines, trees, evil.” 
+
+Ains tells them what is going on. He connects their minds to speak. Og feels a calling to go to the space. Discuss plans to get the group rested \- have the four go to Padstow and Ains come to get Ky’tha.  Aury reaches out Ky’tha with sending. “Can you get to safe spot that sees circle? Find distance within 500’ that would be safe to teleport. Any other information?  She says “I’m safe, could flee. Can find spot.  You coming to fight or me flee or something else? If come, ready spells, surprise, they react circle.”  Aury asks “Ky’tha number of enemies, number of vines, location you are at, N/S/E/W of circle.”  She says back “2 treants, infinite vine growth create dome, 2 paths one down, one up….that’s where I’m at which is ground level.  I can flee away.” 
+
+Group discusses options. Zymve going with Ains to get Ky’tha. Decide that Ains and Zymve will go get Ky’tha and Og, Hap, and Aury will take 6 horses and go to Padstow.  Ains casts sending to House of Myr \- letting them know of an arrival soon.  They say they look forward.  Aury casts sending to Ky’tha \- “be line of sight, up path, within 500’, Zymve and Ains arriving, protect Ains.”  She says “Heard. Not sure if reacted to circle or fleur, didn’t see me. Will be on up path as asked. Act quickly.” 
+
+They hold hands and go.  The other 3 ride off, heading to Padstow.
+
+Upon arrival, they run through the circle.  Ky’tha sees it activate \- and hears a grumble, the trees start to go up.  IT IS INITIATIVE.
+
+ROUND ONE:  Ains and Zymve land, invisible. Ains drops invisibility on Ky’tha and sees her. He casts dimension door on he and Zymve and go to Ky’tha. He then runs 30’ ahead.  The vines start to rise up on the side.  Zymve grabs Ky’tha and casts DD and they go 500’ in the direction she pointed.  They see red eyes.   Woodland creatures lunge in our direction. The trees climb up and start looking toward Ains and one moves that way. Ky’tha fends off the creatures with her dagger.
+
+ROUND TWO:  Ains dimension doors to Zymve and Ky’tha \- within 5’.  The vines climb higher. Zymve gives Ky’tha an inspiration and then casts a spell to make all 3 invisible.  We all hear groaning and then see something step out of the blighted woods and onto the path.   The group walks 30’ forward and notice smaller blights.   Ky’tha looks for an area that might be safe and nothing looks safe. 
+
+ROUND THREE, etc.:  We see the forest looking for us.  As we move forward, we never feel that the woods have retreated.  They walk for 30 minutes \- about 2 miles and feel no change.  We decide to stop here to draw the circle, with Ains summoning a distraction 90’ behind us, telling it to defend us.  Zymve casts darkness on Ains, with she and Ky’tha on the outside. When invisibility drops, blights step out of the path and head to the dark circle.  Ky’tha and Zymve have to fend off the blights.  After a minute, they jump in and they teleport to the House of Myr. 
+
+The others work their way to Padstow.  They are exhausted.  They walk in and Aury places the money down for the rooms and he goes upstairs to rest.  The innkeeper asks what is going on.  Hap explains that they need rest and now we know what we are up against. 
+
+Ky’tha, Ains, and Zymve gather materials while in Basctdelm before resting, including selling the barkskin scroll for 150gp.  Ains casts sending to let them know that we are heading out on foot tomorrow.  Don’t bring the horses \- stable them Padstow (3gp/night for all 6 horses; we pay for 2 days). 
+
+All get a long rest.
+
+9th of Paramore, 1246
+
+We all wake up and start travel on foot, trying to meet each other.  We meet halfway between Padstow and Basctdelm.  And stop here. 
 
 # Quests
 

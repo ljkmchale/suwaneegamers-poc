@@ -5,7 +5,8 @@ import { analyticsAudience } from "@/lib/analyticsFilters";
 export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   if ((await getAdminSession()).isAdmin !== true) return NextResponse.json({ error: "Admin sign-in required" }, { status: 401 });
-  return NextResponse.json(getLiveAnalytics(analyticsAudience(request.nextUrl.searchParams.get("audience") ?? undefined)), {
+  const audience = request.nextUrl.searchParams.get("audience");
+  return NextResponse.json(getLiveAnalytics(audience === "all" ? "all" : analyticsAudience(audience ?? undefined)), {
     headers: { "Cache-Control": "private, no-store" },
   });
 }

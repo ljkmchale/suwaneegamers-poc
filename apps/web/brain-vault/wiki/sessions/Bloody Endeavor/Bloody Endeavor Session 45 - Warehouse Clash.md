@@ -3,7 +3,7 @@ campaign: "Bloody Endeavor"
 visibility: players
 generated_by: session-pages-v1
 source_kind: verbatim-player-notes
-source_hash: 241d5bd630b1b0a3389ed0996c29e7e3b06fb25d1c6954b662d51c4edd42bb55
+source_hash: 83cefada770fa980029e0f3a967fe8512d4bd1ae7bf05ca874617f27a22ecffb
 ---
 
 # Session 45 - Warehouse Clash
@@ -31,7 +31,7 @@ In the building is one guy in leather and two in hoods (Ne’er do wells).  With
             * ROUND THIRTEEN: Kibbit runs into the warehouse and loads his crossbow with his poisonous bolt. The Sable Shadow member runs towards Kibbit. Albross casts Eldritch Blast on the guy. Pagern just points at the man trapped in the wall. Caelion uses his Invoke Duplicity again to create a copy of himself in the force sphere. Rhody dashes towards the man and gets right up on him. 
             * ROUND FOURTEEN: Kibbit shoots the man with his crossbow. The man attempts to stab Rhody but misses three times. Albross finishes him off with Eldritch Blast. Pagern tries to talk with the drow again. Caelion casts Spirit Guardians through the Duplicate, but it appears the man is not actually in the Wall of Force. Rhody loots a rapier off the man and runs to help move the drug wagon out of the building.
             * Kibbit looks around the warehouse for things to steal from the warehouse, like a ledger. Albross goes to help Rhody move the wagon. The man in the Wall of Force waves farewell to Pagern and vanishes. Combat Ends
-The girl walks into the warehouse and we begin talking her. She’s with a half orc man and a weefolk man. They say they’re with Dissent Ablation, not the Cloak of Defiance. Albross opens up a crate within the cart and sees jars filled with a clear liquid. We decide to leave the cart inside and we put the vials into the bag of holding. The girl asks us if we have lodging here, we tell her no. She invites us her the inn she’s staying at and introduces herself as Adelaide Teufel. 
+The girl walks into the warehouse and we begin talking her. She’s with a half orc man and a weefolk man. They say they’re with Dissent Ablation, not the Cloak of Defiance. Albross opens up a crate within the cart and sees jars filled with a clear liquid. We decide to leave the cart inside and we put the vials into the bag of holding. The girl asks us if we have lodging here, we tell her no. She invites us to the inn she’s staying at and introduces herself as Adelaide Teufel. 
 We take 12 jars of clear liquid from the 2 crates in the cart. We let the Dissent burn the rest of them with the building.
 The poison the Sable Shadows use seems to explode the victims’ heads 1 minute after they perish. 
 – The Session Ends Here –

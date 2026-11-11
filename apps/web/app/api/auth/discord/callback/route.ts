@@ -7,6 +7,8 @@ import { RETURN_TO_COOKIE, safeReturnPath } from "@/lib/authRedirect";
 import { clientIpFromHeaders } from "@/lib/securityLog";
 import { recordMemberSignin } from "@/lib/memberSignins";
 import { isMemberBlocked } from "@/lib/memberBlocks";
+import { mayStartGeoSession } from "@/lib/geoAccess";
+import { isVerifiedCloudflareRequest } from "@/lib/cloudflareSecurity";
 import {
   createMemberBlockReviewToken,
   MEMBER_BLOCK_REVIEW_COOKIE,
@@ -71,6 +73,11 @@ export async function GET(request: NextRequest) {
   }
 
   if (isMemberBlocked(identity.email)) return blockedFailure(request, identity.email);
+
+  if (!mayStartGeoSession(request.headers.get("cf-ipcountry"),
+    isVerifiedCloudflareRequest(request.headers), identity.email, identity.emailVerified)) {
+    return new NextResponse("This account is not approved to sign in from your country.", { status: 403 });
+  }
 
   recordMemberSignin({
     provider: "discord",

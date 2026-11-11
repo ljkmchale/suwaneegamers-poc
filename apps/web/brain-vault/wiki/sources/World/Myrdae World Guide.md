@@ -5,11 +5,11 @@ visibility: players
 tags: [source, google-doc, player-notes]
 source_raw: "raw/myrdae-world-guide.md"
 source_url: "https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit"
-source_hash: "ea50d16fa9e7e3e98dd1fd7c612f68a0ea5bf632e04645c68db55729f55bec4e"
+source_hash: "4ba74fd00259c9fdae2ab9d9e6397f05e4b339fe8cdd92b408394b3c3dcd69c2"
 source_status: processed
 raw_status_before_import: "stale"
-imported_at: "2026-11-04T15:46:11.549Z"
-pulled_at: "2026-11-04T15:46:05.938Z"
+imported_at: "2026-11-05T15:46:15.086Z"
+pulled_at: "2026-11-05T15:46:11.323Z"
 ---
 
 # Myrdae World Guide
@@ -17,15 +17,15 @@ pulled_at: "2026-11-04T15:46:05.938Z"
 Campaign: World
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
 Raw source: [[raw/myrdae-world-guide.md]]
-Raw hash: `ea50d16fa9e7e3e98dd1fd7c612f68a0ea5bf632e04645c68db55729f55bec4e`
-Imported: 2026-11-04T15:46:11.549Z
+Raw hash: `4ba74fd00259c9fdae2ab9d9e6397f05e4b339fe8cdd92b408394b3c3dcd69c2`
+Imported: 2026-11-05T15:46:15.086Z
 
 ## Imported Notes
 
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-11-04T15:46:05.938Z
+Pulled: 2026-11-05T15:46:11.323Z
 
 ________________
 
@@ -816,7 +816,7 @@ Language
 
   
 chapter 3
-KTime & History
+Time & History
 The Harmon Order (Calendar)
 Long before the Fracturing, mortals marked time by the sun alone. It was Asterin Thornage, the revered sage of the early years, who first charted the subtle dance of Myrdae’s two moons—Endelo’ar and Tudara—and their shifting Lunar Facets. Through years of meticulous observation he discovered the rare alignment called Harmony, when both moons shine together in the sky. From this celestial harmony he forged the Harmon Order, the calendar now used across the known world.
 A Myrdae year contains 384 days, each named by the Harbiter at its dawn. The year is divided into eight Harmons of 48 days apiece. Within every harmon lie six stretches of exactly eight days. The days of a stretch carry no special names; folk simply say “the third day of the Stretch” or “fifth Stretch of the second Harmon, Year of the Shattered Crown.” Many still speak in looser terms: “two stretches from today” or “the day after All-bright.” 

@@ -1,7 +1,7 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-11-04T15:46:05.938Z
+Pulled: 2026-11-05T15:46:11.323Z
 
 ________________
 
@@ -792,7 +792,7 @@ Language
 
   
 chapter 3
-KTime & History
+Time & History
 The Harmon Order (Calendar)
 Long before the Fracturing, mortals marked time by the sun alone. It was Asterin Thornage, the revered sage of the early years, who first charted the subtle dance of Myrdae’s two moons—Endelo’ar and Tudara—and their shifting Lunar Facets. Through years of meticulous observation he discovered the rare alignment called Harmony, when both moons shine together in the sky. From this celestial harmony he forged the Harmon Order, the calendar now used across the known world.
 A Myrdae year contains 384 days, each named by the Harbiter at its dawn. The year is divided into eight Harmons of 48 days apiece. Within every harmon lie six stretches of exactly eight days. The days of a stretch carry no special names; folk simply say “the third day of the Stretch” or “fifth Stretch of the second Harmon, Year of the Shattered Crown.” Many still speak in looser terms: “two stretches from today” or “the day after All-bright.” 

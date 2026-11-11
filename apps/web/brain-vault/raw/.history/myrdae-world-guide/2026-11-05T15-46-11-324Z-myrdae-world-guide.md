@@ -1,14 +1,8 @@
 # Myrdae World Guide
 
 Source: [Google Doc](https://docs.google.com/document/d/1PGWzoocfjPNQ69Q-JsVmNXCFo76a3Z_IkcBuBeDj4yQ/edit)
-Pulled: 2026-08-30T18:40:41.530Z
+Pulled: 2026-11-04T15:46:05.938Z
 
-Sections
-  
-
-
-
-  
 ________________
 
 
@@ -78,208 +72,9 @@ chapter 1
 Characters  
 Myrdae is home to many peoples who shape its lands, weave its magic, and carry its stories. Some arrived as wanderers from distant planes or forgotten realms. Others have walked Myrdae’s soil since the elder days, their blood and traditions tied to its rivers, forests, and skies.
 Classes
-All classes from the Player’s Handbook (along with the Artificer) are available when creating your character to adventure in Myrdae.  Your choice of class and subclass equips you with powerful skills to explore forgotten ruins, battle dark forces, advance personal causes, and leave your mark on this living land.  Some subclasses are restricted. See the table of approved subclasses below. If the subclass you want to play isn’t listed, consult your Dungeon Master before selecting it for your character.
+<Need a blurb about classes that are available, and point to the ones that are not in the Appendix>
+Artificer
 
-
-CLASS
-	SUBCLASS
-	Artificer
-	Alchemist
-	Artificer
-	Cartographer
-	
-
-	
-
-	Barbarian
-	Path of the Berserker
-	Barbarian
-	Path of the Wild Heart
-	Barbarian
-	Path of the World Tree
-	Barbarian
-	Path of the Zeolot
-	
-
-	
-
-	Bard
-	College of Dance
-	Bard
-	College of Glamour
-	Bard
-	College of Lore
-	Bard
-	College of Valor
-	
-
-	
-
-	Cleric
-	Life Domain
-	Cleric
-	Light Domain
-	Cleric
-	Trickery Domain
-	Cleric
-	War Domain
-	
-
-	
-
-	Druid
-	Circle of the Land
-	Druid
-	Circle of the Moon
-	Druid
-	Circle of the Sea
-	Druid
-	Circle of the Stars
-	
-
-	
-
-	
-
-________________
-
-
-
-
-CLASS
-	SUBCLASS
-	Fighter
-	Battle Master
-	Fighter
-	Champion
-	Fighter
-	Eldritch Knight
-	Fighter
-	Psi Warrior
-	
-
-	
-
-	Monk
-	Warrior of Mercy
-	Monk
-	Warrior of Shadow
-	Monk
-	Warrior of the Elements
-	Monk
-	Warrior of the Open Hand
-	
-
-	
-
-	Paladin
-	Oath of Devotion
-	Paladin
-	Oath of Glory
-	Paladin
-	Oath of the Ancients
-	Paladin
-	Oath of Vengeance
-	
-
-	
-
-	Ranger
-	Beast Master
-	Ranger
-	Fey Wanderer
-	Ranger
-	Gloom Stalker
-	Ranger
-	Hunter
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-________________
-
-
-
-
-CLASS
-	SUBCLASS
-	Rogue
-	Arcane Trickster
-	Rogue
-	Assassin
-	Rogue
-	Soulknife
-	Rogue
-	Thief
-	
-
-	
-
-	Sorcerer
-	Aberrant Sorcery
-	Sorcerer
-	Clockwork Sorcery
-	Sorcerer
-	Draconic Sorcery
-	Sorcerer
-	Wild Magic Sorcery
-	
-
-	
-
-	Warlock
-	Archfey Patron
-	Warlock
-	Celestial Patron
-	Warlock
-	Fiend Patron
-	Warlock
-	Great Old One Patron
-	
-
-	
-
-	Wizard
-	Abjurer
-	Wizard
-	Diviner
-	Wizard
-	Evoker
-	Wizard
-	Illusionist
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 
 Barbarians
 
@@ -467,7 +262,7 @@ Muerg shaped the dwarves for different purposes, calling each type with distinct
 * Barren Dwarves, also known as Crag or Hill Dwarves (more natural skin tones, excitable): Muerg summoned them to wander the crags, hills, and open lands, binding the surface with lively energy and quick hands. Their warmer tones reflect the sunlit stone; their spirited nature drives trade, brewing, and adaptation.
 * Duergar, also known as Gray Dwarves: Muerg called them specifically to tend the Underdark’s depths, sealing hidden rifts and guarding the world’s underbelly from primordial threats.
 The dwarves emerged already organized into clans (Orebane among the oldest), spread across Myrdae to mend, build, and fortify the land. As these clans took root, six major dwarven kingdoms rose:
-* Dunduar (Stubborn Resilience) – founded by the Cragfury and Umberfist clans in southwestern portion of the Severed Crease in the Distancion Mountains.
+* Dunduar (Stubborn Resilience) – founded by the Cragfury and Umberfist clans as a mining village in the eastern foothills of the Distancion Mountains, on the southern half of the Severed Crease, and later rebuilt as a stronghold within the mountains.
 * Bonfaduhr (Treasure Avarice) – meaning “Oreguard” in the dwarven tongue; founded by the Stonetoe clan in the Eustera Ridge in Inverland.
 * Gur Madihl (Master Craftmanship) – founded by the Ironbrow and Blackshield clans on the northern side of the Distancion Mountains near Stonewood.
 * Khagdaruhl (Loyalty & Honor) – founded by the 
@@ -489,7 +284,7 @@ Name
 	Cragfury
 	Barren
 	Dunduar
-	Known for the discovery of Dundaur, with the Umberfist
+	Known for the discovery of Dunduar, with the Umberfist
 	Ironbrow
 	Mountain
 	Distancion Mountains
@@ -514,7 +309,7 @@ Name
 	Umberfist
 	Mountain
 	Dunduar
-	Known for the discovery of Dundaur, with the Cragfury
+	Known for the discovery of Dunduar, with the Cragfury
 	
 
 Elves
@@ -692,7 +487,7 @@ Name
 	
 
 	Family of magic users that were loyal defenders
-	Taldwell
+	Talward
 	Bathaen Empire
 	Royal family of Halesworth
 	Thornage
@@ -997,7 +792,7 @@ Language
 
   
 chapter 3
-Time & History
+KTime & History
 The Harmon Order (Calendar)
 Long before the Fracturing, mortals marked time by the sun alone. It was Asterin Thornage, the revered sage of the early years, who first charted the subtle dance of Myrdae’s two moons—Endelo’ar and Tudara—and their shifting Lunar Facets. Through years of meticulous observation he discovered the rare alignment called Harmony, when both moons shine together in the sky. From this celestial harmony he forged the Harmon Order, the calendar now used across the known world.
 A Myrdae year contains 384 days, each named by the Harbiter at its dawn. The year is divided into eight Harmons of 48 days apiece. Within every harmon lie six stretches of exactly eight days. The days of a stretch carry no special names; folk simply say “the third day of the Stretch” or “fifth Stretch of the second Harmon, Year of the Shattered Crown.” Many still speak in looser terms: “two stretches from today” or “the day after All-bright.” 
@@ -1130,11 +925,11 @@ Year
 * The Harbiter prophecizes of things to come and names the years accordingly. 
 	5
 	Year of Deceit
-	* The demon Di'Belgi fools the angel Amriel, and together they steal the Crown of Lyess. 
+	* The demon Di'Belgi fools the angel Amriel, who steals the Crown of Lyess. 
 	15
 	Year of Runes
 	* Di’Belgi develops the arcane art of Rune Weaving.
-* Her apprentice, Yibrix captures the are in a tome called "Rune Weave. 
+* Her apprentice, Yibrix captures the art in a tome called "Affirmation of Strife. 
 	27
 	Year of Emergence
 	* Demons begin to appear prevalently in the Underdark 
@@ -1340,7 +1135,7 @@ Year
 	Year of the Skyward Call
 	* Iannan and Argent Halls scholars weave Lodestones into ley-thread lattices synchronized with Lunar Facets.
 * Iannan is lost in an implosion, but his colleagues complete the binding.
-* The Argent Halls lift into the sky—the first floating settlement in Myrdae.  
+* The Argent Halls lift into the sky—the first man made floating settlement in Myrdae.  
 	1236
 	Year of Emergence
 	* Denizens (drow, duergar, svirfneblin and ulbin) of the Underdark are found more frequently on the surface. 
@@ -1448,7 +1243,7 @@ Name
 	Crael
 	The Soul Bearer
 	Death, Fate
-	Divera
+	Diverra
 	The Ardent One
 	Love, Beauty
 	Eredra
@@ -1516,7 +1311,7 @@ ________________
 
 
 Addan, the Eternal Guardian  
-Addan, known as the Eternal Guardian, is a god of order and protection. He represents the ideals of safeguarding the vulnerable and maintaining peace by opposing harm, neglect, and chaos. His followers are drawn to him for his unwavering commitment to justice and defense, seeking his guidance to protect those in need and to bring structure to a chaotic world. Worshippers of Addan view him as the ultimate protector, and they honor him by upholding his values of shielding the weak and maintaining societal order.
+Addan, known as the Eternal Guardian, is a god of order and protection. Before the Awakening, Addan was a demigod known as the Protector; he rose to full godhood with the New Order. He represents the ideals of safeguarding the vulnerable and maintaining peace by opposing harm, neglect, and chaos. His followers are drawn to him for his unwavering commitment to justice and defense, seeking his guidance to protect those in need and to bring structure to a chaotic world. Worshippers of Addan view him as the ultimate protector, and they honor him by upholding his values of shielding the weak and maintaining societal order.
 Depiction
 Addan is often depicted as a towering, resolute figure clad in gleaming silvery plate armor with royal blue accents. He carries an ornate tower shield and wears a helm with intricate designs.  
 Domains
@@ -1638,7 +1433,7 @@ Seek Balance in Choices - Act with integrity and avoid manipulating fate for sel
 ________________
 
 
-Divera, the Ardent One  
+Diverra, the Ardent One  
 Diverra embodies the ideals of love, beauty, passion, and pleasure, inspiring her followers to seek out joy, embrace their desires, and find beauty in all aspects of life. She is revered as a symbol of devotion and self-expression, promoting the pursuit of romantic love and the appreciation of aesthetic pleasures. Her worshipers are drawn to her because she encourages them to follow their hearts, cherish intimate connections, and celebrate the vibrancy of existence.
 Followers of Diverra often look to her for guidance in matters of the heart, whether seeking romance, resolving emotional conflicts, or enhancing the beauty in their surroundings. They believe that honoring her brings deeper fulfillment and allows them to experience life's delights to the fullest. For them, Diverra represents a source of inspiration to love fiercely, express themselves boldly, and indulge in life's pleasures without shame.
 Depiction
@@ -1806,7 +1601,7 @@ Commandments to Crowned Glory differ among his followers, but all align to princ
 ________________
 
 
-Osanna, the Smiling Dutchess  
+Osanna, the Smiling Duchess  
 Osanna, known as the Smiling Duchess, is the goddess of Luck and Fortune. She embodies the promise of hope, serendipity, and the gentle guidance of fate that leads to prosperity and success. Osanna opposes fear and neglect, believing that courage and care open the paths to opportunity. Depicted with a serene smile and an air of quiet confidence, Osanna is often seen as a beacon of light for sailors, traders, and those seeking a change in their fortunes. Her followers celebrate her through the Festival of Fair Winds, where tales of unexpected luck and daring escapes are shared in her honor.
 Depiction
 Osanna is often depicted as a radiant woman with a warm, inviting presence. Her golden blonde hair cascades in gentle waves down her back. She has soft, delicate features with a serene and confident expression that exudes calm and assurance. Her eyes are a bright, sparkling blue. She often wears flowing robes in shades of white and gold, adorned with subtle patterns that resemble the swirling currents of the sea. 
@@ -1969,9 +1764,19 @@ Symbol
 	Diplomatic organization disguised as art lovers
 	  
 
+	Ashen Hand
+	Power & Magic
+	Seek power in order to rule by magic
+	  
+
 	Astereal Accord
 	Extra-planar Protection
 	Protect Myrdae from otherworldly threats
+	  
+
+	Bane of Nethyndria
+	Dragon Worship
+	Followers of dragons, wishing to bring them to power
 	  
 
 	Barrenscars
@@ -2145,6 +1950,19 @@ The network of the Andërs connects members to influential figures across Myrdae
 ________________
 
 
+Ashen Hand
+The Ashen Hand began while the Bathaen Empire had the Tegenwald Phet under fire. Four rogue wizards left that order and went east, as far from the empire as the land allowed, then settled in the Range of Otesurr under a single promise: no queen or king would rule them. The four Spirens who lead the Hand today are not those founders. They rose to the posts later, and the promise still binds the order they inherited.
+The Hand seeks power in order to rule by magic. Members are told that outright. Outsiders hear rumors, and what a city is actually offered is use. The Hand does not plant enclaves across Myrdae. It holds Otestein, and it moves four Skykeeps, so a region invites a finger in when the work is worth the price. The Tegenwald Phet still holds that knowledge is power, and it still acts ethically. The Hand does not. Its allies change from year to year, though the Barrenscars remain the standing large ally and the source of the slaves the Hand takes.
+The Hand has no formal tenets, and it requires no deity. Members follow who they choose. What is recognized inside the order is magical supremacy, personal ambition, hierarchy, and the pursuit of power, held together by the founding promise that the Hand will not be ruled by a queen or king.
+Four Spirens rule together, and no one sits above them. Each Spiren leads one finger, built on a diametrically opposed pair of schools of magic:
+   * Divination and Conjuration
+   * Evocation and Enchantment
+   * Necromancy and Illusion
+   * Transmutation and Abjuration
+Four Hicusps are second in command, aligned to the other school of magic opposed to the Spiren’s school.  There is also a Castellan, aligned to each Skykeep. There is no standard recruitment and no rank ladder. A bound member is brought in by someone already of that school, and is known by the work they do rather than by a title.  
+The seat is Otestein, a large cold city on the eastern foothills of the Otesurr Mountains, between the summit and the eastern coast, built of muted black ebony stone with platinum accents. A steward runs the city and is not a fifth leader. Four natural spires were used to build the Skykeeps, and each spire is the anchor that keep returns to: Darkvist for Necromancy and Illusion, Oathbrand for Evocation and Enchantment, Farcall for Divination and Conjuration, and Turnward for Transmutation and Abjuration. Four cloud giants, cast out of their clan, aligned with the Hand to increase their own power, and that there were four is treated as fate. One giant stands to a finger.  A Skykeep does not sail. A destination is chosen and the keep teleports, then it must remain in place for a stretch, eight days, before it can jump again.
+The mark of the Ashen Hand is a slate-gray diamond with a white handprint burned into the center, the ash forming the border of the print rather than the fill. Members carry no single required token. The mark is struck on a clasp, a gate, or a Skykeep hull.
+________________
 Astereal Accord
 The Astereal Accord was founded years ago, when threats from the skies, unstable planar breaches, and corrupted magic endangered Myrdae. Unlike the Meridian, who focus on law, order, and protection against the Crungess and terrestrial dangers, the Accord looks outward and upward, safeguarding Myrdae from threats beyond its borders and balance. Over the decades, the Accord became recognized as the foremost organization against extraplanar dangers, unstable magical resonance, and abuses of Lodestone technology.
 The Astereal Accord have the following Goals:
@@ -2159,6 +1977,11 @@ Beliefs and Values
 
   
 
+Bane of Nethyndria
+The Bane of Nethyndria is a decentralized cult that works to place one or more dragons in power over Myrdae. The living of the land gave it the name. They saw the group that rose in 1224 as a force that would wreck the realm if it succeeded in strengthening Nethyndria. Veinspear Darego stood the cult up for a narrower purpose: prove she had a following, and bring her home to rule with him. The mark is a bone-colored dragon skull with purple, bat-like wings. Cultists strike it on seals, hideouts, and personal tokens. The colors most associated with the group are bone, slate-gray, and deep purple.
+The cult began around the dracolich Nethyndria. After her body was destroyed in 1226 and the Awakening followed, the surviving cells kept the broader aim. Specific objectives vary by cell and are not widely known outside them. 
+Structure & Membership
+Since her fall, the Bane of Nethyndria does not answer to a single leader on Myrdae. It operates as independent cells. Each cell pursues its own reading of the goal that dragons shall rule, and each cell uses the same five-step ladder. Rank is local. Promotion and demotion stay inside the cell. There is no authority that crosses from one cell to another. Unmarked recruits sit below the ladder and carry no title until they are proven. 
 Barrenscars
 
 
@@ -2294,7 +2117,7 @@ Beliefs and Values
    * Order – you are responsible for honor and order
    * Never Fear – meet threats head on, don’t wait for them to have an advantage
 Structure & Membership
-The Meridian organization is led by an Ambassador who is aligned with each major region in Myrdae.  There is also one Templar who has the responsibility of mediating decisions.  There are embassies in each region in Myrdae, with an Ambassador heading up each location (Adamont, Basctdelm, Gibuldon, and Thrargael). Leaders of the Meridian gather every harmon to review threats on the land.
+The Meridian organization is led by Templars, one appointed to each region (Bathaes, Inverland, Jehsle, Orbansia and Var’Shala).  Next in line are Ambassadors (Rank 4) who represent a specific territory and Champions (Rank 4) who are given responsibilities not tied to a territory.  Templars are elected into position by the Ambassadors covering territories within the region the Templar is responsible for.  The Meridian hasn’t grown to cover every territory, but many of the most prominent territories are likely to have Meridian representation.  Although Templars aren’t always stationary, they do hold authority over an embassy within their region, which are located at the following:  Adamont for Orbansia, Basctdelm for Batheas, Gibuldon for Inverland Qaethyra for Jehsle and Ulkef for Var’Shala.
 Members of the Meridian grasp their silver amulet insignia in their right hand and place it over their heart with a nod of their head. 
 Rank
 	Renown
@@ -2310,6 +2133,9 @@ Rank
 	Gallant
 	4
 	25+
+	Ambassador / Champion
+	5
+	-
 	Templar
 	Benefits
 The following assets are available to members:
@@ -2406,7 +2232,7 @@ Beliefs and Values
    * Prong – Contingency plans improve success
    * Veil – Covert means can be the best promoter of freedom
 Structure & Membership
-The Tegenwald Phet are run by a council known as the Phet’extant who are made up of a head member of highest rank, Master Arcanum, and of ranked members representing these areas of magic: arcane, divine, primal, psychic, ritual, and versatile.  The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
+The Tegenwald Phet are run by a council known as the Phet’extant who are made  up of the head member of highest rank, Master Arcanum, and the eight Grand Magisters. Grand Magisters are the highest ranked members representing the eight schools of magic: Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion, Necromancy, and Transmutation. The Phet’extant run the organization from a fortification in an extra dimensional plane known as Lyedin (a nod to the all-powerful old goddess of magic, Lyess).
 Tegenwald Phet members are recruited by other members who have an eye for noticing those in alignment with the faction’s goals and values. Members receive a tattoo of the faction symbol that not only identifies the member can be leveraged by upper-ranking members to locate them. 
 Rank
 	Renown
@@ -2423,6 +2249,9 @@ Rank
 	4
 	25+
 	Magister
+	5
+	*
+	Master Arcanum
 	Benefits
 The following assets are available to members:
    1. Spell components in a city
@@ -2464,257 +2293,532 @@ ________________
  
 Appendicies
 Content Review
-This section contains an assessment of how well various Dungeons & Dragons sourcebooks fit into this setting.
-Astarion’s Book of Hunger
-Accepted
-All of the content from this sourcebook is acceptable.
-
-
-Cthulhu by Torchlight (by Chaosium)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Dungeons of Drakkenheim (by Ghostfire Gaming)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Eberron:  Forge of the Artificer
-Under Review – Accepted with Exceptions
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Subclass
-	Armorer
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	Subclass
-	Artillerist
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	Subclass
-	Battle Smith
-	This subclass is more steampunk and does not fit well with Myrdae cannon
-	
-
-Forgotten Realms: Heroes of Faerûn
-Accepted with Exceptions
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Lorwyn: First Light
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Northlands Worldbook (by Kobold Press)
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Class
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
-	
-
-	
-
-	Spells
-	
-
-	
-
-	Monsters
-	
-
-	
-
-	
-
-Ravenloft
-Under Review
-Options in this sourcebook are generally accepted, with the following exceptions:
-Type
-	Content
-	Assessment
-	Subclass
-	
-
-	
-
-	Background
-	
-
-	
-
-	Feat
-	
-
-	
-
-	Species
+This section contains an assessment of how well various Dungeons & Dragons sourcebooks and expansions fit into a Myrdae Campaign.  Options captured here are either:
+   1. prohibited – designated by the red font, or 
+   2. not recommended – designated by orange font; see explanation.
+Background Options
+Background
+	Source
+	Assessment / Explanation
+	Aberrant Heir
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Agent of the Ninth Quill
+	Arcana Unleashed
+	Still under review; ask your DM
+	Bejeweled Conclave Spy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Chondathan Freebooter
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cosmic Dawn Experiment
+	Arcana Unleashed
+	Still under review; ask your DM
+	Covenant of the Grave Rec
+	Arcana Unleashed
+	Still under review; ask your DM
+	Crucible Storm Chaser
+	Arcana Unleashed
+	Still under review; ask your DM
+	Dead Magic Dweller
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Dragon Cultist
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Emerald Enclave Caretaker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Familiar Trainer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Flaming Fist Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Genie Touched
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Harper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Horizon Weaver Initiate
+	Arcana Unleashed
+	Still under review; ask your DM
+	House Agent
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	House Backgrounds
+	Eberron: Forge of the Artificer
+	Does not fit Myrdae setting
+	Ice Fisher
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Knight of the Gauntlet
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lord’s Alliance Vassal
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Lorwyn Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Mist Wanderer
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting
+	Moonwell Pilgrim
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mulhorandi Tomb Raider
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Mythalkeeper
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Pact Seeker
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Phantasmic Circus Trouper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Purple Dragon Squire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rashemi Wanderer
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Seer Apprentice
+	Arcana Unleashed
+	Still under review; ask your DM
+	Shadowmasters Exile
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Shadowmoor Expert
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Spellfire Initiate
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Ward of Sheltering Hands
+	Arcana Unleashed
+	Still under review; ask your DM
+	Zhentarim Mercenary
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	
+
+Class / Subclass Options
+Class / Subclass
+	Source
+	Assessment / Explanation
+	Artificer: Armorer
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Artillerist
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Battle Smith
+	Eberron:  Forge of the Artificer
+	Does not fit Myrdae setting; steampunk
+	Artificer: Reanimator
+	Ravenloft: The Horrors Within
+	Provides combat companion; will slow game play 
+	Barbarian: Glacier
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Barbarian: Spell Scorned
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Barbarian: Titan
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Choreography
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Bard: Drama
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Bard: Skald
+	Northlands Worldbook
+	Still under review; ask your DM
+	Bard: Spirits
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Bard: the Moon
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Apocalypse
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Cleric: Arcana
+	Arcana Unleashed
+	Still under review; ask your DM
+	Cleric: Astral
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Cleric: Grave
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Cleric: Knowledge
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Cleric: Nornbound
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: Fenris
+	Northlands Worldbook
+	Still under review; ask your DM
+	Druid: the Symbiote
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Druid: Unbroken Circle
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Arcane Archer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fighter: Banneret
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Fighter: Couatl Herald
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Fighter: Hero
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Fighter: Viking
+	Northlands Worldbook
+	Still under review; ask your DM
+	Monk: Celestial
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Monk: Cosmic Balance
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Monk: Mystic Arts
+	Arcana Unleashed
+	Still under review; ask your DM
+	Paladin: Guardian
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Paladin: Noble Genies
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Paladin: Hearth
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Paladin: Valhalla
+	Northlands Worldbook
+	Still under review; ask your DM
+	Ranger: Beast Master
+	Player’s Handbook
+	Provides combat companion; will slow game play 
+	Ranger: Hollow Warden
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Ranger: Trail Warden
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Ranger: Winter Trapper
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Ranger:  Winter Walker
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Rogue: Phantom
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Rogue: Runetagger
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Rogue: Scion of the Three
+	Forgotten Realms: Heroes of Faerûn
+	Does not fit Myrdae setting
+	Rogue: Shadow Stalker
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Clockwork
+	Player’s Handbook
+	Does not fit Myrdae setting
+	Sorcerer: Frost
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Sorcerer: Hungering Dark
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Sorcerer: Shadow
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Sorcerer: Spellfire
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Sorcerer: Spirit Caller
+	Northlands Worldbook
+	Still under review; ask your DM
+	Warlock: Astral Griffon
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Warlock: Exalted Assembly
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Warlock: Undead
+	Ravenloft: The Horrors Within
+	Still under review; ask your DM
+	Warlock: Vestige
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Bibliomancy
+	Cthulhu by Torchlight
+	Still under review; ask your DM
+	Wizard: Bladesinger
+	Forgotten Realms: Heroes of Faerûn
+	Still under review; ask your DM
+	Wizard: Conjuerer
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Enchanter
+	Arcana Unleashed
+	Still under review; ask your DM
+	Wizard: Materilizer
+	The Griffon’s Saddlebag: Book One
+	Still under review; ask your DM
+	Wizard: Necromancer
+	Arcana Unleashed
+	Provides combat companion; will slow game play 
+	Wizard: Transmuter
+	Arcana Unleashed
+	Still under review; ask your DM
+	
+
+Feat Options
+Feat
+	Source
+	Assessment / Explanation
+	Abjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Aberrant Anatomy
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Arcane Artist
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Eloquence
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Infiltrator
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Omens
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Overload
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Safeguard
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Undertaker
+	Arcana Unleashed
+	Still under review; ask your DM
+	Arcane Warrior
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Erupting Spellpower
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of Magic School Master.
+	Arcana Unleashed
+	Still under review; ask your DM
+	Boon of the Iron Mind
+	Arcana Unleashed
+	Still under review; ask your DM
+	Conjuration Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Divination Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Echoing Soul
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Elemental Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Enchantment Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Evocation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Familiar Friend
+	Arcana Unleashed
+	Still under review; ask your DM
+	Fey Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Sentinel
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Fey Tormentor
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Gathered Whispers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Illusion Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Infernal Bulwark
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Dragoon
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Infernal Pact
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Living Shadow
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Magic Connoisseur
+	Arcana Unleashed
+	Still under review; ask your DM
+	Mist Walker
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Necromancy Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Otherworldly Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Pack Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Portal Jumper
+	Arcana Unleashed
+	Still under review; ask your DM
+	Prone Fighting
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Second Skin
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Soothing Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Resistant
+	Arcana Unleashed
+	Still under review; ask your DM
+	Spell Subterfuge
+	Arcana Unleashed
+	Still under review; ask your DM
+	Symbiotic Being
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Shifting Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Tactical Combatant
+	D&D Beyond Drops
+	Still under review; ask your DM
+	Transmutation Adept
+	Arcana Unleashed
+	Still under review; ask your DM
+	Transmuted Anatomy
+	Arcana Unleashed
+	Still under review; ask your DM
+	Touch of Death
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	Warlike Familiar
+	Arcana Unleashed
+	Still under review; ask your DM
+	Watchers
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; requires Ravenloft campaign
+	
+
+Species Options
+Species
+	Source
+	Assessment / Explanation
+	Boggart
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Changeling
+	Lorwyn: First Light
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Faeries
+	Lorwyn: First Light
+	Does not fit Myrdae setting;considered a monster in civilized areas
+	Flamekin
+	Lorwyn: First Light
+	Still under review; ask your DM
+	Kitkin
+	Lorwyn: First Light
+	Does not fit Myrdae setting; a reskin of halflings
 	Lupin
-	Would be considered a monster
-	Species
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
 	Reborn
-	Doesn’t fit the Myrdae campaign setting theme
-	Spells
+	Ravenloft: The Horrors Within
+	Does not fit Myrdae setting; considered a monster in civilized areas
+	Rimekin
+	Lorwyn: First Light
+	Still under review; ask your DM
 	
 
 	
 
-	Monsters
 	
 
 	
 
-	________________
+Spell Options
+Spell
+	Source
+	Assessment / Explanation
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+________________
 
 
 Geography Reference
@@ -2772,7 +2876,7 @@ former home to passaria (Assembly of Essence which was destroyed in 1226)
 	One of the largest forests in all of Myrdae covers a huge valley that sits between extensions of the Distancion Mountains.
 	Crimson Pines
 	forest
-	Var'Shala
+	Bathaes
 	The dark red needles on the evergreens of this forest are said to come from the blood from warriors that fought here during the War of Might, before  the Fracturing.
 	Crystal Bluffs
 	crags
@@ -3188,7 +3292,7 @@ Heraldry
 
 	J - 23
 	Bathaes
-	This ancient walled citadel sits on the edge of Mount Macrae and is the most historical landmark paying homage to the Addan (previously to Neera).
+	This ancient walled citadel sits on the edge of Mount Macrae and is the most historical landmark paying homage to Addan (previously to Neera).
 	
 
 	Berest
@@ -5366,7 +5470,7 @@ Territory
 	Crimson March
 	Stouhg
 	Bathaes
-	The Crimson March rose from the filled chasm of the Crungess during the Awakening, now blanketed by towering evergreens known as Crimson Pines—named for their blood-red needles said to grow from soil soaked by centuries of warfare. Once a battleground for countless conflicts, the land pulses with memory, its woods haunted by the restless spirits of warriors who died without honor or purpose. Travelers speak of ghostly figures stalking the mist and whispers that echo like battle cries deep among the trees.
+	Once a battleground for countless conflicts, the Crimson March is now blanketed by towering evergreens known as Crimson Pines—named for their blood-red needles said to grow from soil soaked by centuries of warfare.  The great battlefield was once separated by the Crungess, but was filled in during the Awakening.  Travelers speak of ghostly figures stalking the mist and whispers that echo like battle cries deep among the trees.
 	Dalasor Coast
 	none
 	Orbansia

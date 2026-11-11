@@ -4,107 +4,95 @@ campaign: "HoE"
 visibility: players
 tags: [quick-reference, synthesis, auto-curated]
 source_title: "HoE - Campaign Player Notes"
-source_hash: "08ad00182a96c7f56d2efcfd2094162bf1c1918a1d862286fa59bf85e3f5df74"
-curated_at: "2026-10-27T14:48:40.911Z"
+source_hash: "6b99a48638def1a3c5bdff757f6d469718dc57bfd29ef5ca0cda881342007233"
+curated_at: "2026-11-08T15:48:05.005Z"
 curated_by: "curate-sources.mjs (claude-sonnet-5)"
 ---
+I don't have access to the full source document content in a way that lets me verify every detail beyond what's in the notes provided, but based on the extensive campaign notes given, here is the regenerated Quick Reference page.
+
 # HoE Quick Reference
 
 Campaign: HoE
 
-*This is a living quick-reference page, kept current with the campaign's chronological play notes — updated through Session 37.*
+*This is a living quick-reference page, kept current from the campaign's player notes as of the most recent session.*
 
 ## Current Status
-
-As of the 7th of Paramor, 1246, the party has left Basctdelm and is traveling south along the road toward Padstow, having just arrived at a large building known as the Heavy Loaf. Hap has formally joined the Meridian (given Meren Bahndoso's own platemail) and is seeking his father Benoit's lost Iron Brotherhood ledger, last known to be hidden somewhere in Hap's home swamp-town. Ky'tha has (ostensibly) joined the Cloak of Defiance as a high-ranking double agent for the Shadow Sovereign, Landra, in exchange for the other half of her family locket. The party is riding six horses provided by Cloak contacts, aware they may be followed/watched. Phira (Hap's sister) has settled safely in Basctdelm with Vesper Sall of the Promissory. The party previously defeated Blackrend and a group of slaadi at the Lost Shrine to Guigzien near Ulgrey (losing Zabeek the gnome, and briefly losing Hap, who was revived by Aurelius). Og is bonded to the Ascension Tree/Alferumn as its guardian (E'erspan) and seeking the druid Dandelia of the Veil. Ainslie carries the Emberheart gem and has learned he may be the current vessel of Ahn'tsuel, tied to the legendary dragon rider Moganna/Tsulanan and the bronze dragon Irragosa.
+The party (now widely known as the "Heroes of Emberstran," unofficially acting as the "EGD" — Emberstran Guard Department) is traveling on foot between Padstow and Basctdelm, having just regrouped after fleeing a corrupted, blighted stretch of Talonwood/Whistgrove accessed via a teleportation sigil (Session 38, 9th of Paramor, 1246). The group is investigating a growing blight tied to Blackrend and possibly Guigzien's lingering corruption, while also pursuing the lost Iron Ledger of the Iron Brotherhood (needed to satisfy the Cloak of Defiance's Shadow Sovereign, Landra) and seeking a silver dragon (Karalafene) in Inverland. Ky'tha has been inducted into the Cloak of Defiance at high rank as a double agent; Hap has joined the Meridian, inheriting Meren Bahndoso's mantle and platemail. The group recently reunited Hap with his sister Phira, now living safely in Basctdelm with a Promissory agent named Vesper Sall. Zabeek the gnome companion died in combat and was cremated with a ritual.
 
 ## Active Party Members
 
 | Character | Player | Species | Class | Deity/Notes |
 |---|---|---|---|---|
-| Ainslie Anaerin | Sean | Human | Sorcerer | Descendant of dragon rider Tsulanan; possible current vessel of Ahn'tsuel; bonded to bronze dragon Irragosa |
-| Aurelius "Aury" Valeheart | Larry | Aasimar | Cleric | Diverra (the Ardent One); carries the original, unabridged tome of Diverra's teachings; on the "Shattered Hearts" quest |
-| Hap (Hapenstance) Garemon | Ty | Tiefling | Fighter (Battle Master) | Diverra; son of Benoit Garemon; new member of the Meridian; wields the sentient sword Shadowtrail |
-| Ky'tha Fawnborn | Lesley | Dwarf | Rogue | Goldraen; of the Umberfist/Cragfury lineage; double agent within the Cloak of Defiance (Etterset loyalties) |
-| Ogmund "Og" Crag | Josh | Goliath | Barbarian (Path of the World Tree) | Layeth; bonded guardian (E'erspan) of the Alferumn/Ascension Tree; wears the Thornleaf |
-| Zymve | Emma | Drow | Bard (College of Glamour) | Fled the Underdark/House Maerth years ago; being pursued by drow agents seeking the Emberheart/Marrowstone relics |
+| Ainslie "Ains" Anaerin | Sean | Human | Sorcerer (Aberrant Mind) | Descendant of dragonrider Tsulanan; current vessel of Ahn'tsuel; bonded to Emberheart gem |
+| Aurelius "Aury" Valeheart | Larry | Aasimar | Cleric (Light) | Diverra (the Ardent One); carries original celestial tome *Bloom Aeterna*; sworn celibate |
+| Hap(penstance) Garemon | Ty | Tiefling | Fighter (Battle Master) | Wields sentient sword Shadowtrail; heir to Benoit Garemon; joined the Meridian |
+| Ky'tha "Ky" Fawnborn | Lesley | Dwarf | Rogue (Thief) | Of the Umberfist clan; inducted into Cloak of Defiance (Rank/special status) |
+| Ogmund "Og" Crag | Josh | Goliath (Hill) | Barbarian (Path of the World Tree) | Bonded "E'erspan" guardian of the Ascension Tree/Alferumn; wears Thornleaf |
+| Zymve | Emma | Drow | Bard (Glamour) | Fled the Underdark (house Maerth ties); carries family necklace/shadow thread gem; being hunted by her matron's agents |
 
 ## Former Party Members (Deceased / Departed)
-
-- **Zabeek Fibbergoan** – Rock gnome companion/apprentice picked up at Mount Emberstran; killed (crushed) by a disguised slaad at the Lost Shrine to Guigzien (Session 31).
-- **Arnol** – Former acolyte of the Temple of Diverra, entangled with the Eradic of Ghone cult; sent away to Stoneshore (and later Paendley) for a fresh start; not an adventuring party member but a recurring ally.
+- **Zabeek Fibbergoan** – Rock gnome companion picked up in Sparkwhisper; killed by a disguised slaad creature at the Lost Shrine to Guigzien (Session 31); cremated with a pyre.
+- **Arnol** – Former Temple of Diverra acolyte; sent away to Stoneshore/Paendley by Aury after entanglement with the Eradic of Ghone cult; alive and safe as of last contact.
 
 ## Key NPCs
-
-- **Lady Rook (Bodiva Rook)** – Ambitious noblewoman who successfully displaced Lady Tarathial as head of the Vintner's Guild; secretly absorbed/sought the Marrowstone; maintains complicated alliance with the party.
-- **Lady Tarathial Rulendor ("Lady T")** – Former head of the Vintner's Guild; allowed to remain in a reduced role after Rook's ascension.
-- **Landra, the Shadow Sovereign** – New leader of the Cloak of Defiance in Emberstran/Basctdelm; recruited Ky'tha; holds half of Ky'tha's family locket; seeks the Iron Brotherhood's ledger.
-- **Jerik Varmond (deceased)** – Former Cloak leader in Emberstran, Phira's brother-in-law; killed by Landra's agents; his severed finger (with Hap's family ring) was sent to Hap.
-- **Phira Garemond** – Hap's long-lost sister; formerly of Trailpoint, now settled safely in Basctdelm with Vesper Sall.
-- **Vesper Sall** – Tiefling member of the Promissory (an artifact-seeking organization), partner to Phira.
-- **Priestess Meladra** – High Priestess of the Temple of Diverra in Emberstran; close confidant of Aury.
-- **Tessa / Belavie "Bella" Lightstrider** – Etterset contacts in Emberstran; Ky'tha's primary handlers before her Cloak recruitment.
-- **Imonorra (Immonara)** – Reclusive wizard of the Tower in Emberstran, the Lord's Magistrate; ally to the party.
-- **Thaelex** – Powerful traveling wizard of the Meridian, befriended the party in Ulgrey; gave Zymve a sending stone.
-- **Meren Bahndoso** – High-ranking Meridian official in Basctdelm; recruited Hap and gave him platemail; knew Benoit Garemond.
-- **Neris** – Former Iron Brotherhood member, runs the Iron Star tavern in Basctdelm; pointed Hap toward Myranda Fenberry.
-- **Irragosa** – Ancient bronze dragon/former dragon rider's mount, guardian of the Emberheart Vault in Mount Emberstran; ally to Ainslie.
-- **Blackrend (deceased)** – Corrupted undead druid responsible for spreading blight across Myrdae; defeated at the Lost Shrine to Guigzien.
-- **Vilmuss** – Blue dragonborn leader of the mercenary group the Gilded Vultures, hunting Og and Ainslie.
-- **Zymve's unnamed drow pursuers (incl. "Bitter"/Phryzn Inni)** – Agents of House Maerth seeking Zymve and dragon-related relics.
+- **Lady Rook (Bodiva Rook)** – Ambitious noblewoman, now head of the Vintner's Guild in Emberstran after a political campaign the party endorsed; connected to Imonarra and various factions.
+- **Lady Tarathial "Lady T" Rulendor** – Former head of the Vintner's Guild, allowed to remain in Emberstran after Rook's rise.
+- **Imonarra (Imonorra)** – Reclusive Tabaxi wizard/Magistrate of Emberstran, ally of Lady Rook.
+- **Landra, the Shadow Sovereign** – New leader of the Cloak of Defiance; recruited Ky'tha; holds leverage over Hap via Phira.
+- **Phira Garemon** – Hap's long-lost sister, now living in Basctdelm with Vesper Sall; former Trailpoint innkeeper.
+- **Vesper Sall** – Tiefling agent of "the Promissory," Phira's new partner; knows of the Emberheart and Marrowstone.
+- **Irragosa** – Bronze dragon guardian of the Emberheart Vault in Mount Emberstran; former dragonrider partner of Ains' ancestor Tsulanan.
+- **Priestess Meladra** – High Priestess of the Temple of Diverra in Emberstran.
+- **Thaelex** – Powerful traveling wizard of the Meridian, ally to the party.
+- **Meren Bahndoso** – High-ranking Meridian official in Basctdelm who recruited Hap and gave him his armor.
+- **Neris** – Former Iron Brotherhood member, runs The Iron Star tavern in Basctdelm; knows of the missing Iron Ledger.
+- **Tessa / Belavie "Bella" Lightstrider** – Etterset (thieves' guild) contacts for Ky'tha.
+- **Blackrend** – Corrupted undead druid responsible for spreading blight across Myrdae; destroyed by Zymve at the Lost Shrine to Guigzien.
+- **Guigzien** – A demigod of swamp/muck, recently released from captivity; whereabouts currently unknown.
 
 ## Factions & Organizations
-
-- **The Cloak of Defiance** – Shadowy criminal/political organization with city-wide reach; now led by Landra the Shadow Sovereign; Ky'tha is a planted double agent.
-- **The Etterset** – Thieves' guild/rebel faction opposing the Cloak, based out of "Our Exquisites" in Emberstran; led by Tessa and Belavie Lightstrider.
-- **The Vintner's Guild** – Controls Emberstran's wine trade; now under Lady Rook's leadership after Lady T's ousting.
-- **The Meridian** – A continent-spanning order of knights/agents dedicated to keeping the peace and tracking threats; Hap is now a member.
-- **The Advents of Harmony** – A networking/information organization connected to the Argent Halls; Ainslie was personally invited to join.
-- **The Eradic of Ghone** – Cult devoted to the immortal wizard Sijulous Ghone; largely destroyed by the party in Emberstran's sewers/hideout.
-- **The Gilded Vultures** – Mercenary company led by Vilmuss; previously held Og and Ainslie captive; actively hunting them.
-- **The Promissory** – Organization that seeks rare and powerful artifacts; Vesper Sall is a member.
-- **The Iron Brotherhood** – Defunct order once tied to the Meridian; kept a magical ledger of names; Benoit Garemond was its ledger-keeper.
-- **House Maerth / the drow of Ys'nonterien** – Zymve's former home; actively pursuing her and dragon-relic knowledge.
+- **The Cloak of Defiance** – Criminal/political shadow organization; Ky'tha now embedded as a double agent; led by the Shadow Sovereign (Landra).
+- **The Etterset** – Rival thieves' guild/spy network; based at "Our Exquisites" in Emberstran; allies of Ky'tha.
+- **The Vintner's Guild** – Emberstran's wine trade authority; recently changed leadership from Lady T to Lady Rook.
+- **The Meridian** – Powerful, continent-spanning knightly/intelligence organization; Hap has joined; operates from the House/Tower of Myr.
+- **The Advents of Harmony** – Scholarly/informational network connected to the Oratory in Ulgrey; Ains has been formally invited (journal received).
+- **The Eradic of Ghone** – Cult of Sijulous Ghone; largely destroyed by the party (Session 26-27), including a zombie beholder and vampire "Whisper."
+- **The Gilded Vultures** – Mercenary group that once held Og and Ains captive; still actively tracking them.
+- **The Promissory** – Mysterious artifact-seeking organization Vesper Sall belongs to.
 
 ## Key Locations
-
-- **Emberstran** – Port/vineyard city built on old volcanic ruins (formerly Winbalt); the party's home base.
-- **Mount Emberstran** – Active volcano containing the Emberheart Vault, guarded by Irragosa; also home to the gnome hamlet Sparkwhisper.
-- **Bloomrest (the Lost Sanctuary of Diverra)** – Ancient underwater/undersea temple and grove containing the original tome of Diverra and the Alferumn (Ascension/Life Tree); accessible via arcane waypoint.
-- **Nunglthil** – Underdark trading hamlet on the lake Rothenloch, reached via an arcane waypoint beneath the sea.
-- **Thallgrove / Bimblefol** – Fungal Underdark region inhabited by genlings; site of the Thall Mound and Aniba's Sanctum.
-- **Kahlbit's Veil / the Baltwood Forest** – Woods near Emberstran, home to Diverra's Grove and (previously) the druid Dandelia; now corrupted and dangerous.
-- **Ulgrey** – River town where Phira and her husband disappeared; home of the Oratory (Advents of Harmony chapter) and the Riverdog Inn.
-- **Lost Shrine to Guigzien** – Swamp ruin southwest of Ulgrey where Blackrend was destroyed and Zabeek died.
-- **Tower of Myr / House of Myr** – Meridian waypoint hubs connecting Ulgrey and Basctdelm.
-- **Basctdelm** – The great capital city; home to the Bellows (Cloak territory, including the Crimson Seat), the Temple of Roses (Diverra), the Grey Fiddle Inn, and the Iron Star tavern.
+- **Emberstran** – Party's home base; volcanic port city built after Mount Emberstran's eruption.
+- **Mount Emberstran / The Emberheart Vault** – Dwarven-constructed vault deep within the volcano; held the Emberheart gem, guarded by Irragosa.
+- **Bloomrest (Lost Sanctuary of Diverra)** – Ancient, underwater-accessed sanctuary containing the Tree of Life (Alferumn) and the true, original temple of Diverra.
+- **Nunglthil** – Underdark trade hamlet on Rothenloch; access point to Thallgrove.
+- **Thallgrove / Bimblefol** – Fungal Underdark region home to genling people; passage point to Bloomrest.
+- **Ulgrey** – River town; home to the Oratory (Advents of Harmony), Riverdog Inn, and Imonorra-linked Tower of Paeris (Gilded Vulture ties).
+- **Basctdelm** – Capital city; home to the Cloak's Crimson Seat/The Bellows, the Meridian's House/Tower of Myr, and the Temple of Roses (Diverra).
+- **Kahlbit's Veil / Talonwood / Whistgrove** – Blighted, dangerous forest regions linked to Blackrend and Guigzien corruption.
+- **Padstow** – Small town where the party recently rested; site of Harl Finn's blight-death and recovery of teleportation sigils.
+- **Sparkwhisper** – Gnome hamlet inside Mount Emberstran.
 
 ## Active Quests & Objectives
-
-- **The Shattered Hearts** – Aury must locate scattered fragments of Diverra's broken heart and return each to a shrine/temple of Diverra (one already restored at the Temple of Roses in Basctdelm).
-- **Find the dragon Karalafene (Whiteflare)** – Silver dragon tied to the lost relic Soulroot, believed to be near the Peak of Tibol/Eustera Ridge in Inverland.
-- **Recover the second hidden relic piece (Starvein)** – Held by the drow-rider's lineage (Vhurkirr Inni/Zymve's family).
-- **Find the Iron Brotherhood's ledger** – Hidden by Benoit Garemond, likely in Hap's home swamp-town; sought by Hap (for Phira's safety) and Landra.
-- **Heal/strengthen the Ascension Tree (Alferumn)** – Og's ongoing duty as E'erspan; find and consult the druid Dandelia of the Veil.
-- **Investigate the blight near Murfield/Shademoor** – Reported by Weftirin travelers and the Meridian in Basctdelm.
-- **Clear the mist/threat in Kahlbit's Veil** – Reported by hunters in Ulgrey; tied to the vanished Druid of the Vale.
-- **Deliver intelligence to the Shadow Sovereign** – Ky'tha's new obligation as a Cloak double agent, balanced against Etterset loyalties.
+- Locate and recover the **Iron Ledger** (Benoit Garamond's hidden tome) to satisfy the Shadow Sovereign and secure Phira's safety.
+- Investigate and cleanse the spreading **blight** (tied to Blackrend's death and Guigzien's release) across multiple regions (Murfield, Talonwood/Whistgrove).
+- Find the silver dragon **Karalafene** near the Peak of Tibul/Eustera Ridge in Inverland, to recover the second piece of the Ahn'tsuel relic (Soulroot or Starvein).
+- Continue Aury's divine mission to recover and restore the **Shattered Hearts** of Diverra at temples/shrines across Myrdae (one already restored at River Ring Rest).
+- Maintain Ky'tha's double-agent balancing act between the Cloak of Defiance and the Etterset.
+- Investigate Zymve's pursuers from House Maerth and the drow agent Nindrol/"Bitter" (Phryzn Inni), her cousin.
+- Decide whether/how to deal with Lady Rook's ambitions and the political fallout of backing her in Emberstran.
 
 ## Open Threads
-
-- Who or what corrupted the Ascension Tree long before Blackrend's involvement — an older wound tied to the Awakening?
-- What became of Starvein and Soulroot, the other two fragments of Moganna's relic, and what happens if all three are reunited in Ainslie?
-- What is the full nature/agenda of Lady Rook, and what did she actually do with the Marrowstone's power?
-- Who sent the mysterious finger and note (the "new Cloak leader" who delivered it in Emberstran) and what is their relationship to Landra?
-- What really happened to Zymve's family and the Cragfury clan, as hinted by Ky'tha's and Zymve's shared visions?
-- Why do Ky'tha's and Ainslie's family pendants match a dragon motif — and is there a third, unrevealed pendant tied to Zymve?
-- Who is Paeris, and what are her true motives regarding the party and the Gilded Vultures?
-- What is the full truth behind Benoit Garemond's death and the Iron Brotherhood ledger's current location?
-- What is the Promissory, and what interest do they ultimately have in the Emberheart/Marrowstone artifacts?
+- What happened to the previous "E'erspan" (Chosen guardian) before Og, and how/when did the Ascension Tree first become corrupted (seemingly predating Blackrend, possibly tied to the Awakening)?
+- The true nature and goals of Imonorra, and her relationship to Lady Rook.
+- The identity and intentions of Paeris, the wizard in Ulgrey's tower, and her ties to the Gilded Vultures.
+- Who is hunting Ains and Og on behalf of the Gilded Vultures (D'Arcy Fol mentioned)?
+- The fate/location of White Flare, the silver dragon once ridden by Ky'tha's ancestor Orah Nelcrath.
+- What exactly Oedabrin Thornage of the Promissory knows about the Emberheart and Marrowstone.
+- The full significance of the combined Umberfist/Cragfury locket and its connection to a Muerg ring/gate Ky'tha saw in visions.
+- Where Guigzien has gone after being freed, and what threat he now poses.
 
 ## Recent Developments
-
-- **Session 34–35:** Hap was slain and resurrected at the Lost Shrine to Guigzien; the party defeated Blackrend and a group of slaadi; traveled to Basctdelm via the Tower/House of Myr; Hap reunited with his sister Phira, now safely settled with Vesper Sall.
-- **Session 35–36:** The party learned of the Promissory and the mysterious Oedabrin Thornage; dined with the Shadow Sovereign Landra at the Crimson Seat; Ky'tha accepted induction into the Cloak of Defiance as a high-ranking double agent in exchange for her family locket's missing half.
-- **Session 36:** Ky'tha and Zymve reunited the two locket halves, revealing ties to Dunduar's Cragfury and Umberfist clans and a silver dragon motif matching Ainslie's own pendant.
-- **Session 37:** Hap formally joined the Meridian, received Meren's platemail, and learned his father's Iron Brotherhood ledger is likely still hidden in his home swamp-town; the party acquired six horses (likely monitored by the Cloak) and departed Basctdelm, stopping at the Iron Star tavern before heading toward Padstow.
+- **Session 35–36:** Hap reunited with his sister Phira in Basctdelm; Ky'tha was recruited into the Cloak of Defiance at high rank by the Shadow Sovereign (Landra) in exchange for the other half of her family locket.
+- **Session 36–37:** Hap formally joined the Meridian, inheriting Meren's platemail armor; learned of the missing Iron Ledger and was pointed toward Neris at The Iron Star.
+- **Session 37–38:** The party acquired horses via Cloak resources, investigated a dead woodsman (Harl Finn) in Padstow carrying teleportation sigils to blighted druidic sites, and discovered Guigzien's lingering corruption active in Talonwood.
+- **Session 38:** Ky'tha scouted a severely blighted, treant-infested pit (likely a portal to the Underdark) alone via teleportation sigil; the party extracted her under pressure and regrouped, now traveling on foot between Padstow and Basctdelm to resupply and plan their next move against the spreading blight.

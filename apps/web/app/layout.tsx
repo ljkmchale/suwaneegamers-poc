@@ -1,26 +1,7 @@
 import type { Metadata } from "next";
 import { loadTheme, type Theme } from "@/lib/theme";
-import {
-  Cinzel,
-  Lora,
-  IM_Fell_English,
-  Uncial_Antiqua,
-  Spectral,
-  Playfair_Display,
-  Crimson_Text,
-  MedievalSharp,
-} from "next/font/google";
+import "./fonts/fonts.css";
 import "./globals.css";
-
-// ── Curated font set (all pre-loaded at build; theme.json picks which is active) ──
-const cinzel = Cinzel({ subsets: ["latin"], variable: "--font-cinzel", weight: ["400", "600", "700", "900"] });
-const lora = Lora({ subsets: ["latin"], variable: "--font-lora", style: ["normal", "italic"] });
-const imFell = IM_Fell_English({ subsets: ["latin"], variable: "--font-im-fell", weight: "400", style: ["normal", "italic"] });
-const uncial = Uncial_Antiqua({ subsets: ["latin"], variable: "--font-uncial", weight: "400" });
-const spectral = Spectral({ subsets: ["latin"], variable: "--font-spectral", weight: ["400", "600", "700"] });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", weight: ["400", "600", "700"] });
-const crimson = Crimson_Text({ subsets: ["latin"], variable: "--font-crimson", weight: ["400", "600"] });
-const medieval = MedievalSharp({ subsets: ["latin"], variable: "--font-medieval", weight: "400" });
 
 const FONT_VAR_MAP: Record<string, string> = {
   Cinzel: "--font-cinzel",
@@ -101,10 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const theme = loadTheme();
   const themeStyle = buildThemeStyle(theme);
 
-  const fontClasses = [
-    cinzel.variable, lora.variable, imFell.variable, uncial.variable,
-    spectral.variable, playfair.variable, crimson.variable, medieval.variable,
-  ].join(" ");
+  const fontClasses = "";
 
   return (
     <html lang="en" className={fontClasses}>

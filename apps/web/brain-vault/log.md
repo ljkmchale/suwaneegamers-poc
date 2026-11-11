@@ -935,3 +935,23 @@ Chronological record of ingests, queries, lint passes, and major wiki changes.
 ## [2026-11-04] synthesis | Quick Reference auto-curation
 
 - Refreshed [[quick/SoD Quick Reference]] from current SoD notes (claude-sonnet-5).
+
+## [2026-11-05] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Might of Dragons Quick Reference]] from current Might of Dragons notes (claude-sonnet-5).
+
+## [2026-11-06] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Might of Dragons Quick Reference]] from current Might of Dragons notes (claude-sonnet-5).
+
+## [2026-11-07] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+
+## [2026-11-08] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/HoE Quick Reference]] from current HoE notes (claude-sonnet-5).
+
+## [2026-11-10] synthesis | Quick Reference auto-curation
+
+- Refreshed [[quick/Bloody Endeavor Quick Reference]] from current Bloody Endeavor notes (claude-sonnet-5).

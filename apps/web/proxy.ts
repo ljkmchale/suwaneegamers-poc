@@ -11,6 +11,7 @@ import {
   MEMBER_BLOCK_REVIEW_TTL_SECONDS,
 } from "@/lib/memberBlockReviewIdentity";
 import { ACQUISITION_COOKIE } from "@/lib/authRedirect";
+import { isCanadianSignInPath } from "@/lib/geoAccess";
 
 // Reachable without a signed-in visitor. Everything else — pages and APIs alike
 // — requires Google sign-in.
@@ -97,6 +98,7 @@ async function shouldGeoBlock(request: NextRequest): Promise<boolean> {
   const country = request.headers.get("cf-ipcountry");
   if (!country || country === GEO_BLOCK_ALLOWED_COUNTRY) return false;
   if (!isVerifiedCloudflareRequest(request.headers)) return false;
+  if (country === "CA" && isCanadianSignInPath(request.nextUrl.pathname)) return false;
 
   const probe = NextResponse.next();
   const [userSession, adminSession] = await Promise.all([

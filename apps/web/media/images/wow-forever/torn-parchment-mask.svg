@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="none">
+  <defs>
+    <filter id="torn" x="-5%" y="-10%" width="110%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".038 .13" numOctaves="3" seed="17" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="32" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <path fill="white" filter="url(#torn)" d="M-30 18 Q120 6 240 19 T480 16 T720 21 T960 14 T1200 20 T1440 13 L1630 18 V682 Q1500 694 1380 680 T1140 687 T900 678 T660 686 T420 679 T180 687 L-30 682Z"/>
+</svg>

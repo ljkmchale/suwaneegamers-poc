@@ -116,6 +116,14 @@ Credential/secret-file probes, installer or web-shell paths, and non-read
 requests to suspicious paths block immediately. Never block Cloudflare's shared
 cross-zone Worker source `2a06:98c0:3600::103`; it is not a visitor identity.
 
+The anonymous country gate in `proxy.ts` allows U.S. traffic; Canada may reach
+the root redirect, sign-in page, and Google/Discord authentication routes.
+Both OAuth callbacks use `lib/geoAccess.ts` to require the explicitly approved,
+provider-verified Canadian email allowlist before creating a session. Other Canadian
+accounts remain denied. Existing authenticated members retain worldwide access.
+This code-owned exception has no content sync writer and requires a production
+build and slot activation.
+
 Member access restrictions are separate from Cloudflare IP blocks. The
 `member_blocks` table is enforced by `proxy.ts` on gated member requests
 and by both OAuth callbacks. `/api/brain/ask` checks browser sessions against
@@ -200,6 +208,16 @@ A change is not complete until the writer has checked for other writers. Search 
 
 ## WoW Forever groups
 
+The hub's `LandscapeBackdrop.tsx` serves the locally stored
+`/media/images/wow-forever/zephras-landscape.mp4` and its WebP poster.
+The clip is sourced from the Zephras Isle landscape on Blizzard's official
+`https://worldofwarcraft.blizzard.com/en-us/forever/` page. It loads only
+when visible and motion is allowed, pauses offscreen, and exposes a pause
+control. Reduced-motion and data-saving visitors start on the still and can
+explicitly opt into playback with Play landscape; playback failure uses the still.
+The hub layout is styled in `warcraft.module.css`; no sync job rewrites
+these assets or styles. Changes require website build and slot activation.
+
 `/wow-forever` and `/wow-forever/chronicles` resolve the signed-in profile ID
 against `groups[].members` in DB-first `wow-forever.json`. Group roster,
 Chronicles, and Discord URLs are scoped to that membership; `?group=` can
@@ -208,7 +226,7 @@ remain at the hub level. Legacy documents become Group A with the original
 six invited profile IDs and an empty Group B in memory. Admin group forms
 persist through `writeContent`, keeping SQLite and JSON aligned. Character
 and chapter actions target a group; character edits recheck membership on
-the server. No scheduler owns this document; the seed script preserves it.
+the server. No scheduler owns this document; the seed script preserves it. A player with hidden: true remains stored with membership intact but is excluded from the displayed roster and crew count. Clearing the flag restores their entry; roster hiding does not change access.
 Website code requires a production build and slot activation.
 
 Members assigned to multiple WoW parties receive a party-name switcher on the
@@ -223,3 +241,70 @@ configuration. Its five documented characters have no inferred player identities
 The campaign page reads the shared Session Summaries Google Doc, like other campaigns.
 Raw player notes remain in Chronicles and the Brain Vault rather than being copied into
 `session_summaries`. Sparse chapters remain verbatim; artwork is not queued without an approved campaign skill.
+
+The WoW hub schedule reads `fetchUpcomingCalendarEvents()` from `lib/calendar.ts`
+(the same public Google Calendar feed and five-minute cache as `/calendar`).
+`lib/warcraftSchedule.ts` selects WoW/World of Warcraft event titles, excludes
+ended nights, and formats dates in the configured calendar timezone. No scheduler
+copies calendar dates into `wow-forever.json`; legacy `schedule` and `nextNight`
+fields are not rendered or edited. Feed failure shows an explicit calendar link,
+never stale manual plans. Party-specific goals use groups[].objective with the shared objective as fallback; realm and faction remain shared and DB-first. The game-night plans form saves the goal only to its selected group through writeContent.
+The hub retains its full-width painted world background, torn parchment planning
+band and full-width animated Chronicles landscape. The torn mask lives at
+`/media/images/wow-forever/torn-fiber-mask-v3.svg`; roster entries remain open
+and unboxed against the world backdrop. The Alliance emblem is locally stored as
+`/media/images/wow-forever/blizzard-alliance-logo.png`, sourced from Blizzard's
+`https://worldofwarcraft.blizzard.com/en-us/game/races/` page.
+
+The painted world background uses `azeroth-road-cinematic-v1.webp`, graded with
+editable Curves and Color Balance layers in PhotoCraft. Its native working file
+is `artwork-drafts/wow-azeroth-cinematic.pcraft`; the source remains intact.
+
+Hub action buttons use a forged gold/enamel CSS treatment with hover-only light
+sweep, pressed and focus states, and reduced-motion support. The EffectCraft
+visual study is `artwork-drafts/wow-forged-action-study_00000.png`; buttons stay semantic
+links/buttons rather than raster images. Landscape media is retained at its full
+composition, with a pause control; FilmCraft inspection confirms a 15.55s clip.
+
+The hero title uses Blizzard's transparent `blizzard-forever-logo.png` from the
+official Forever page (alt text supplies the accessible h1). Torn seams use a
+continuous polygon mask with no displaced alpha islands; hero artwork underlaps
+the parchment by 150px and the full-width landscape overlaps adjacent sections.
+This keeps the fixed world background from leaking through the hero/parchment seam.
+
+The v3 tear silhouette follows the Forever reference: broad uneven coastlines
+and sparse long fibers rather than a uniform fine zigzag. Its continuous SVG
+path has no isolated alpha holes. Extra vertical bleed and safe text padding
+keep the deeper tears over adjoining artwork and outside readable content.
+
+The final torn edges use PhotoCraft color-range isolation from the user-provided
+Forever reference, saved in `artwork-drafts/torn-reference.pcraft` and exported as
+`torn-reference-top.png` / `torn-reference-bottom.png` under the WoW media folder.
+CSS combines fixed-height alpha edge strips with an opaque center so fibers keep
+their shape regardless of section height. Hero actions share equal grid columns,
+minimum height, icon size and spacing; narrow layouts stack equally sized actions.
+
+Theme fonts are vendored under apps/web/app/fonts/ (WOFF2, OFL licenses and fonts.css), imported by app/layout.tsx. Webpack emits them into the selected build slot; Google Fonts is not contacted during builds. Preserve font families, weights, styles, Unicode subsets and fallback metrics when updating. Font changes require a production build and slot activation.
+
+Guild naming is party-scoped in groups[].guild (nominations and one mutable vote per profile ID). GuildVoting.tsx renders totals and forms; actions.ts rechecks signed-in, unblocked party membership and valid candidates before saving through writeContent. No scheduler owns guild votes. These UI changes require build and activation.
+
+Dungeon progress on `/wow-forever` uses `DungeonProgress.tsx` and the catalog in
+`lib/warcraftDungeons.ts`. Checks are party-scoped in
+`groups[].dungeonCompletions` in DB-first `wow-forever.json`, keyed by dungeon ID
+with completed player names. Missing values mean completion is unrecorded.
+`updateWarcraftDungeon` validates the catalog, visible roster, and current party
+membership after session lookup. Players may set or clear only their own checks;
+admins may update any visible player. Saves use `writeContent` for DB/file parity.
+The dungeon name cells load decorative WebP crops from
+`/media/images/wow-forever/dungeons/<dungeon-id>.webp`. The Forever dungeon
+screenshots are from Blizzard's official dungeon guide. Classic dungeon art
+comes from Blizzard's Encounter Journal assets. The filenames match the catalog
+IDs, and no scheduler rewrites the artwork or owns the checks. UI changes
+require build and slot activation.
+
+
+The Location column uses decorative WebP crops under
+`/media/images/wow-forever/locations/`. Rows with the same location share an
+image. Classic location art uses the in-game world maps, including regional map
+crops for Alterac Mountains, Blackrock Mountain, and Alcaz Island. Riverglades
+uses a still from Blizzard's official WoW Forever zone preview.
