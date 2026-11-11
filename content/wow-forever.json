@@ -9,13 +9,13 @@
       "name": "Chip",
       "character": "Theron Bahndoso",
       "className": "Paladin",
-      "level": "18",
+      "level": "19",
       "race": "Human",
       "professions": "Mining / Blacksmithing",
       "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso",
       "specialization": "Protection (8 pts)",
-      "professionRanks": "Mining 108 / 150\nBlacksmithing 88 / 150\nCooking 124 / 150\nFishing 115 / 150\nFirst Aid 36 / 75"
+      "professionRanks": "Mining 121 / 150\nBlacksmithing 88 / 150\nCooking 124 / 150\nFishing 116 / 150\nFirst Aid 47 / 75"
     },
     {
       "name": "Lesley",
@@ -45,13 +45,13 @@
       "name": "Larry",
       "character": "Xypher Wingbrow",
       "className": "Mage",
-      "level": "18",
+      "level": "19",
       "race": "High Order Skyborne",
       "professions": "Tailoring / Enchanting",
       "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
       "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
       "specialization": "Arcane (2 pts) / Frost (5 pts)",
-      "professionRanks": "Tailoring 51 / 150\nEnchanting 45 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 41 / 75"
+      "professionRanks": "Tailoring 51 / 150\nEnchanting 48 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 50 / 75"
     },
     {
       "name": "Emma",
@@ -94,13 +94,13 @@
           "name": "Chip",
           "character": "Theron Bahndoso",
           "className": "Paladin",
-          "level": "18",
+          "level": "19",
           "race": "Human",
           "professions": "Mining / Blacksmithing",
           "image": "/media/images/wow-forever/characters/theron-bahndoso-armory-v1.webp",
           "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/theron-bahndoso",
           "specialization": "Protection (8 pts)",
-          "professionRanks": "Mining 108 / 150\nBlacksmithing 88 / 150\nCooking 124 / 150\nFishing 115 / 150\nFirst Aid 36 / 75"
+          "professionRanks": "Mining 121 / 150\nBlacksmithing 88 / 150\nCooking 124 / 150\nFishing 116 / 150\nFirst Aid 47 / 75"
         },
         {
           "name": "Lesley",
@@ -131,13 +131,13 @@
           "name": "Larry",
           "character": "Xypher Wingbrow",
           "className": "Mage",
-          "level": "18",
+          "level": "19",
           "image": "/media/images/wow-forever/characters/xypher-wingbrow-armory-v1.webp",
           "race": "High Order Skyborne",
           "professions": "Tailoring / Enchanting",
           "armoryUrl": "https://worldofwarcraft.blizzard.com/en-us/forever/us/armory/character/xypher-wingbrow",
           "specialization": "Arcane (2 pts) / Frost (5 pts)",
-          "professionRanks": "Tailoring 51 / 150\nEnchanting 45 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 41 / 75"
+          "professionRanks": "Tailoring 51 / 150\nEnchanting 48 / 75\nCooking 119 / 150\nFishing 150 / 150\nFirst Aid 50 / 75"
         },
         {
           "name": "Emma",
@@ -181,9 +181,24 @@
             "id": "1cfa1993-b667-4f85-a561-48ead30e44f1",
             "name": "Myrdaen March",
             "nominatedBy": "b2f082fa8ccad583d3523435"
+          },
+          {
+            "id": "d32d9dd9-802f-48d4-9aa6-179a5ec3f8e5",
+            "name": "Harbingers of Chaos",
+            "nominatedBy": "390a0a45aadcfeb14b33989c"
           }
         ],
         "votes": {}
+      },
+      "dungeonCompletions": {
+        "hall-of-thanes": [
+          "Larry",
+          "Chip",
+          "Lesley",
+          "Sean",
+          "Emma",
+          "Evelyn"
+        ]
       }
     },
     {
